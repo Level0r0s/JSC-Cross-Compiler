@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6B5E30B0-A3A4-4E3D-9407-003FF76195F6}</ProjectGuid>
+    <ProjectGuid>{D0816360-0927-4E6F-8809-B4E30DC078E5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HeatZeekerRTS</RootNamespace>
-    <AssemblyName>HeatZeekerRTS</AssemblyName>
+    <RootNamespace>StairsByDila</RootNamespace>
+    <AssemblyName>StairsByDila</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>HeatZeekerRTS.Program</StartupObject>
+    <StartupObject>StairsByDila.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -37,12 +37,6 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Chrome Web Server">
-      <HintPath>..\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll</HintPath>
-    </Reference>
-    <Reference Include="Chrome Web Server Styled Form">
-      <HintPath>..\packages\Chrome.Web.Server.StyledForm.1.0.0.0\lib\Chrome Web Server Styled Form.dll</HintPath>
-    </Reference>
     <Reference Include="Chrome Web Store">
       <HintPath>..\packages\Chrome.Web.Store.1.0.0.0\lib\Chrome Web Store.dll</HintPath>
     </Reference>
@@ -63,6 +57,7 @@
     <Reference Include="ScriptCoreLib">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\ScriptCoreLib.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ScriptCoreLib.Avalon">
       <SpecificVersion>False</SpecificVersion>
@@ -100,9 +95,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\ScriptCoreLibA.dll</HintPath>
     </Reference>
+    <Reference Include="ScriptCoreLibAndroid, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLibAndroid.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="ScriptCoreLibJava">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>c:\util\jsc\bin\ScriptCoreLibJava.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -117,26 +118,29 @@
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="WebGL ShaderToy">
+      <HintPath>..\packages\WebGL.ShaderToy.1.0.0.0\lib\WebGL ShaderToy.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="HeatZeekerRTS.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\HeatZeekerRTS.AssetsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="SakuraByFMSCat.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\SakuraByFMSCat.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="StairsByDila.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\StairsByDila.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Audio\buzzer.mp3" />
-    <Content Include="Audio\crickets.mp3" />
-    <Content Include="Audio\flag.mp3" />
-    <Content Include="Audio\snd_dooropen.mp3" />
-    <Content Include="Audio\tick.mp3" />
+    <None Include="app.config" />
+    <None Include="Shaders\Program.frag" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />
     <Compile Include="ApplicationWebService.cs" />
@@ -144,29 +148,11 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <Content Include="Design\stats.png" />
-    <Content Include="Screenshots\capture_001_11092014_183919.png" />
-    <Content Include="staging\HeatZeekerRTS.Application\web\Promotion3D_iso1_tiltshift_128.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Textures\cursor1.svg" />
-    <Content Include="Design\Promotion3D_daytime_isometric_q80.jpg" />
-    <Content Include="Design\hud_look.svg" />
-    <Content Include="Design\hud_look_building.svg" />
-    <Content Include="Textures\MyCursor.svg">
-      <SubType>Designer</SubType>
-    </Content>
-    <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="staging\HeatZeekerRTS.Application\web\manifest.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /AssociateDriveForChrome:A /InferChromeAppManifest:true
-</PostBuildEvent>
+    <PostBuildEvent>start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /AssociateDriveForChrome:A /InferChromeAppManifest:true  /FilterTo:$(SolutionDir)</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
 		            </PreBuildEvent>
   </PropertyGroup>

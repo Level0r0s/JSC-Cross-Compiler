@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Web
-VisualStudioVersion = 12.0.30324.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22609.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeatZeekerRTS", "HeatZeekerRTS\HeatZeekerRTS.csproj", "{6B5E30B0-A3A4-4E3D-9407-003FF76195F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeUDPSendAsync", "..\..\chrome\apps\ChromeUDPSendAsync\ChromeUDPSendAsync\ChromeUDPSendAsync.csproj", "{426A9419-9287-4880-979F-29F29D3F2A22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeTCPServer", "..\..\chrome\apps\ChromeTCPServer\ChromeTCPServer\ChromeTCPServer.csproj", "{9672D112-D806-49D3-B5C8-3B3A2278AD18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{6B5E30B0-A3A4-4E3D-9407-003FF76195F6}.Debug|x86.Build.0 = Debug|x86
 		{6B5E30B0-A3A4-4E3D-9407-003FF76195F6}.Release|x86.ActiveCfg = Release|x86
 		{6B5E30B0-A3A4-4E3D-9407-003FF76195F6}.Release|x86.Build.0 = Release|x86
+		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.ActiveCfg = Debug|x86
+		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.Build.0 = Debug|x86
+		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.ActiveCfg = Release|x86
+		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.Build.0 = Release|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Debug|x86.ActiveCfg = Debug|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Debug|x86.Build.0 = Debug|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Release|x86.ActiveCfg = Release|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

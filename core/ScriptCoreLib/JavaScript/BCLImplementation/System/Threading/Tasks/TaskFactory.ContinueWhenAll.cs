@@ -14,7 +14,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 {
     // http://referencesource.microsoft.com/#mscorlib/system/threading/Tasks/TaskFactory.cs
 
-    internal partial class __TaskFactory
+    public partial class __TaskFactory
     {
         public Task ContinueWhenAll(Task[] tasks, Action<Task[]> continuationAction)
         {

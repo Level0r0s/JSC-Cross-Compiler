@@ -18,8 +18,8 @@ using HeatZeekerRTSOrto.Design;
 using HeatZeekerRTSOrto.HTML.Pages;
 using System.Diagnostics;
 using System.Windows.Forms;
-using WebGLRah66Comanche.Library;
-using WebGLRah66Comanche;
+//using WebGLRah66Comanche.Library;
+//using WebGLRah66Comanche;
 
 namespace HeatZeekerRTSOrto
 {
@@ -350,55 +350,55 @@ namespace HeatZeekerRTSOrto
             //window.addEventListener( 'resize', onWindowResize, false );
 
 
-            #region Comanche
-            new Comanche().Source.Task.ContinueWithResult(
-                Comanche =>
-                {
+            //#region Comanche
+            //new Comanche().Source.Task.ContinueWithResult(
+            //    Comanche =>
+            //    {
 
-                    Comanche.position.y = 200;
+            //        Comanche.position.y = 200;
 
-                    //dae.position.z = 280;
+            //        //dae.position.z = 280;
 
-                    Comanche.AttachTo(scene);
+            //        Comanche.AttachTo(scene);
 
-                    //scene.add(dae);
-                    //oo.Add(Comanche);
+            //        //scene.add(dae);
+            //        //oo.Add(Comanche);
 
-                    // wont do it
-                    //dae.castShadow = true;
+            //        // wont do it
+            //        //dae.castShadow = true;
 
-                    // http://stackoverflow.com/questions/15492857/any-way-to-get-a-bounding-box-from-a-three-js-object3d
-                    //var helper = new THREE.BoundingBoxHelper(dae, 0xff0000);
-                    //helper.update();
-                    //// If you want a visible bounding box
-                    //scene.add(helper);
+            //        // http://stackoverflow.com/questions/15492857/any-way-to-get-a-bounding-box-from-a-three-js-object3d
+            //        //var helper = new THREE.BoundingBoxHelper(dae, 0xff0000);
+            //        //helper.update();
+            //        //// If you want a visible bounding box
+            //        //scene.add(helper);
 
-                    Comanche.children[0].children[0].children.WithEach(x => x.castShadow = true);
-
-
-                    // the rotors?
-                    Comanche.children[0].children[0].children.Last().children.WithEach(x => x.castShadow = true);
+            //        Comanche.children[0].children[0].children.WithEach(x => x.castShadow = true);
 
 
-                    Comanche.scale.set(0.5, 0.5, 0.5);
-                    //helper.scale.set(0.5, 0.5, 0.5);
+            //        // the rotors?
+            //        Comanche.children[0].children[0].children.Last().children.WithEach(x => x.castShadow = true);
 
-                    var sw = Stopwatch.StartNew();
 
-                    Native.window.onframe += delegate
-                    {
-                        //dae.children[0].children[0].children.Last().al
-                        //dae.children[0].children[0].children.Last().rotation.z = sw.ElapsedMilliseconds * 0.01;
-                        //dae.children[0].children[0].children.Last().rotation.x = sw.ElapsedMilliseconds * 0.01;
-                        //rotation.y = sw.ElapsedMilliseconds * 0.01;
+            //        Comanche.scale.set(0.5, 0.5, 0.5);
+            //        //helper.scale.set(0.5, 0.5, 0.5);
 
-                        Comanche.children[0].children[0].children.Last().rotation.y = sw.ElapsedMilliseconds * 0.001;
+            //        var sw = Stopwatch.StartNew();
 
-                        //dae.children[0].children[0].children.Last().app
-                    };
-                }
-            );
-            #endregion
+            //        Native.window.onframe += delegate
+            //        {
+            //            //dae.children[0].children[0].children.Last().al
+            //            //dae.children[0].children[0].children.Last().rotation.z = sw.ElapsedMilliseconds * 0.01;
+            //            //dae.children[0].children[0].children.Last().rotation.x = sw.ElapsedMilliseconds * 0.01;
+            //            //rotation.y = sw.ElapsedMilliseconds * 0.01;
+
+            //            Comanche.children[0].children[0].children.Last().rotation.y = sw.ElapsedMilliseconds * 0.001;
+
+            //            //dae.children[0].children[0].children.Last().app
+            //        };
+            //    }
+            //);
+            //#endregion
 
 
             //#region ee
@@ -457,15 +457,15 @@ namespace HeatZeekerRTSOrto
                     //effect.render(scene, camera);
                 };
 
-            var ze = new ZeProperties();
+            //var ze = new ZeProperties();
 
-            ze.Show();
-            ze.treeView1.Nodes.Clear();
+            //ze.Show();
+            //ze.treeView1.Nodes.Clear();
 
-            ze.Add(() => renderer);
-            //ze.Add(() => controls);
-            ze.Add(() => scene);
-            ze.Left = 0;
+            //ze.Add(() => renderer);
+            ////ze.Add(() => controls);
+            //ze.Add(() => scene);
+            //ze.Left = 0;
 
             // view-source:http://mrdoob.github.io/three.js/examples/webgl_interactive_voxelpainter.html
             //var mouse2D = new THREE.Vector3(0, 10000, 0.5);

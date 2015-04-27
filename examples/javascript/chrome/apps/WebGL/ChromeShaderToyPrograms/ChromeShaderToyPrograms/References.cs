@@ -427,6 +427,7 @@ namespace ChromeShaderToyPrograms
 			["SpiningRingsBySquid"] = () => new SpiningRingsBySquid.Shaders.ProgramFragmentShader(),
 			["SpoutByPMalin"] = () => new SpoutByPMalin.Shaders.ProgramFragmentShader(),
 			["SpriteEncodingByNikos"] = () => new SpriteEncodingByNikos.Shaders.ProgramFragmentShader(),
+			["StairsByDila"] = () => new StairsByDila.Shaders.ProgramFragmentShader(),
 			["StairwayToHeavenByEiffie"] = () => new StairwayToHeavenByEiffie.Shaders.ProgramFragmentShader(),
 			["StarMapByMorgan"] = () => new StarMapByMorgan.Shaders.ProgramFragmentShader(),
 			["SteamLogoByYakoudbz"] = () => new SteamLogoByYakoudbz.Shaders.ProgramFragmentShader(),

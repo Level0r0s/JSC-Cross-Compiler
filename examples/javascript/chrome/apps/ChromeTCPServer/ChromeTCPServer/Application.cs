@@ -503,8 +503,8 @@ namespace ChromeTCPServer
 			//Func<string, Func<string, Task<chrome.WriteInfo>>, Func<byte[], Task<chrome.WriteInfo>>, Task<object>> Handler =
 
 			#region Handler
-			Func<string, chrome.socketId, Task<string>> Handler =
-				(RequestLine, socketId) =>
+			Func<string, chrome.socketId, Task<string>> doaccept_Handler =
+				async (RequestLine, socketId) =>
 				{
 					//var x = new TaskCompletionSource<object>();
 
@@ -533,8 +533,8 @@ namespace ChromeTCPServer
 					//Console.WriteLine("before StartNewWithProgress: " + new { path, Thread.CurrentThread.ManagedThreadId });
 
 					var yyy = new TaskCompletionSource<string>();
+					//var worker = default(Task);
 
-					var worker = default(Task);
 
 					#region progress
 					IProgress<x> progress = new Progress<x>(
@@ -547,7 +547,7 @@ namespace ChromeTCPServer
 								yyy.SetResult(state.path);
 
 								// can we terminate our thread?
-								worker.Dispose();
+								//worker.Dispose();
 
 								return;
 							}
@@ -574,33 +574,43 @@ namespace ChromeTCPServer
 					//9:55056ms inside worker RequestLine: { { path =  } }
 					//9:55059ms at zApplicationHandler: { { path = , ManagedThreadId = 10 } }
 
-					worker = Task.Run(
-								delegate
-					{
-						// X:\jsc.svn\core\ScriptCoreLib\JavaScript\DOM\Worker.cs
+
+					//worker = 
+					Task.Run(
+							   async delegate
+					   {
+						   // X:\jsc.svn\core\ScriptCoreLib\JavaScript\DOM\Worker.cs
 
 
 
-						// wtf? where is my path?
-						Console.WriteLine(
-							"inside worker RequestLine: " + new { path }
-						);
+						   // wtf? where is my path?
+						   Console.WriteLine(
+							  "inside worker RequestLine: " + new { path }
+						  );
 
-						// rebuild the scope.
-						var scope = Tuple.Create(
-							progress,
-							new x { path = path, PageSource = PageSource, write = default(byte[]) }
-						);
+						   // rebuild the scope.
+						   var scope = Tuple.Create(
+							  progress,
+							  new x { path = path, PageSource = PageSource, write = default(byte[]) }
+						  );
 
-						return TheServer.zApplicationHandler(scope);
-					}
-						   );
+						   //return TheServer.zApplicationHandler(scope);
+						   TheServer.zApplicationHandler(scope);
+
+						   // Uncaught Error: bugcheck TaskExtensions.Unwrap Task<Task> {{ xResultTask = [object Object], t = ?function Object() { [native code] } }}
+					   }
+						  );
+
+					var result = await yyy.Task;
+
 
 					// obsolete?
 					// Error	115	'System.Threading.Tasks.TaskAsyncIProgressExtensions.StartNewWithProgress<TSource>(System.Threading.Tasks.TaskFactory, TSource, System.Func<System.Tuple<System.IProgress<TSource>, TSource>, TSource>, System.Action<TSource>)' is obsolete: 'we now support scope sharing!'	X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServer\ChromeTCPServer\Application.cs	503	30	ChromeTCPServer
 
 					/// what will be done by this task? socketId.disconnect
-					return yyy.Task;
+					// this is not working anymore?
+					// why we need to return a task anyways?
+					return result;
 				};
 			#endregion
 
@@ -666,7 +676,7 @@ namespace ChromeTCPServer
 
 
 						//Console.WriteLine("accept before handler " + new { accept.socketId });
-						var xxx = Handler(RequestLine, accept.socketId);
+						var xxx = doaccept_Handler(RequestLine, accept.socketId);
 						await xxx;
 					}
 

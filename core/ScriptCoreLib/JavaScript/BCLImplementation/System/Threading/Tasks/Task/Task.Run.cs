@@ -35,18 +35,23 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 
 		public static Task Run<TResult>(Func<Task> function)
 		{
+			Console.WriteLine("enter __Task Run <- Task, then Unwrap");
 			// X:\jsc.svn\examples\javascript\async\test\TestWorkerScopeProgress\TestWorkerScopeProgress\Application.cs
 
-			return Task.Factory.StartNew(function).Unwrap();
+			return __Task.InternalFactory.StartNew(function).Unwrap();
 		}
 
 		public static Task<TResult> Run<TResult>(Func<Task<TResult>> function)
 		{
-			return Task.Factory.StartNew(function).Unwrap();
+			Console.WriteLine("enter __Task Run <- Task<TResult>, then Unwrap");
+
+			return __Task.InternalFactory.StartNew(function).Unwrap();
 		}
 
 		public static Task<TResult> Run<TResult>(Func<TResult> function)
 		{
+			Console.WriteLine("enter __Task Run");
+
 			// X:\jsc.svn\examples\javascript\WorkerMD5Experiment\WorkerMD5Experiment\Application.cs
 
 			//new Task(

@@ -103,7 +103,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 
 
 		#region Factory
-		public static TaskFactory InternalFactory
+		public static __TaskFactory InternalFactory
 		{
 			get
 			{
