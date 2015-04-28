@@ -112,6 +112,7 @@
     <Compile Include="JavaScript\BCLImplementation\System\Threading\ExecutionContext.cs" />
     <Compile Include="JavaScript\BCLImplementation\System\Threading\SemaphoreSlim.cs" />
     <Compile Include="JavaScript\BCLImplementation\System\Threading\Interlocked.cs" />
+    <Compile Include="JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.Start.cs" />
     <Compile Include="JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.FromException.cs" />
     <Compile Include="JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.WhenAny.cs" />
     <Compile Include="JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.FromResult.cs" />

@@ -138,7 +138,6 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 			};
 		}
 
-		public Action InternalStart;
 
 
 
@@ -158,19 +157,6 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 		public Action InternalYield;
 
 
-
-
-		// called by Run
-		public void Start()
-		{
-			//Console.WriteLine("__Task.Start");
-
-			if (InternalStart == null)
-				throw new InvalidOperationException("Start may not be called on a continuation task.");
-
-
-			InternalStart();
-		}
 
 
 
