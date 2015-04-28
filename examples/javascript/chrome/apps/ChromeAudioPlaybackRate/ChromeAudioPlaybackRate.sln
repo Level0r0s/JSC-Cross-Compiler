@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeAudioPlaybackRate", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoosterAudioExample", "..\..\..\audio\RoosterAudioExample\RoosterAudioExample\RoosterAudioExample.csproj", "{895271BA-FAA8-4763-A1FB-1E9C7525D130}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AARPMartialLawLoop", "..\..\..\audio\AARPMartialLawLoop\AARPMartialLawLoop\AARPMartialLawLoop.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{2F904972-36FA-4650-A714-E5B2BFFE3C10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -21,8 +25,16 @@ Global
 		{895271BA-FAA8-4763-A1FB-1E9C7525D130}.Debug|x86.Build.0 = Debug|x86
 		{895271BA-FAA8-4763-A1FB-1E9C7525D130}.Release|x86.ActiveCfg = Release|x86
 		{895271BA-FAA8-4763-A1FB-1E9C7525D130}.Release|x86.Build.0 = Release|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.ActiveCfg = Debug|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.Build.0 = Debug|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.ActiveCfg = Release|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{895271BA-FAA8-4763-A1FB-1E9C7525D130} = {2F904972-36FA-4650-A714-E5B2BFFE3C10}
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8} = {2F904972-36FA-4650-A714-E5B2BFFE3C10}
 	EndGlobalSection
 EndGlobal

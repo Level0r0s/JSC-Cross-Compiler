@@ -21,213 +21,217 @@ using ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms;
 
 namespace ChromeAppWindowForm
 {
-    /// <summary>
-    /// Your client side code running inside a web browser as JavaScript.
-    /// </summary>
-    public sealed class Application : ApplicationWebService
-    {
-        /// <summary>
-        /// This is a javascript application.
-        /// </summary>
-        /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
-        public Application(IApp page)
-        {
-            // can we get the resize grip to work?
-            // X:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowMouseCapture\ChromeAppWindowMouseCapture\Application.cs
+	/// <summary>
+	/// Your client side code running inside a web browser as JavaScript.
+	/// </summary>
+	public sealed class Application : ApplicationWebService
+	{
+		//488: { SourceMethod = Void.ctor(ChromeAppWindowForm.HTML.Pages.IApp), i = [0x02f9]
+		//		brtrue.s   +0 -1 }
+		//248c:02:01:1e RewriteToAssembly error: System.ArgumentException: Value does not fall within the expected range.
 
-            #region += Launched chrome.app.window
-            dynamic self = Native.self;
-            dynamic self_chrome = self.chrome;
-            object self_chrome_socket = self_chrome.socket;
+		/// <summary>
+		/// This is a javascript application.
+		/// </summary>
+		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
+		public Application(IApp page)
+		{
+			// can we get the resize grip to work?
+			// X:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowMouseCapture\ChromeAppWindowMouseCapture\Application.cs
 
-            if (self_chrome_socket != null)
-            {
-                if (!(Native.window.opener == null && Native.window.parent == Native.window.self))
-                {
-                    Console.WriteLine("chrome.app.window.create, is that you?");
+			#region += Launched chrome.app.window
+			dynamic self = Native.self;
+			dynamic self_chrome = self.chrome;
+			object self_chrome_socket = self_chrome.socket;
 
-                    // X:\jsc.svn\examples\javascript\chrome\apps\ChromeFormsWebBrowserExperiment\ChromeFormsWebBrowserExperiment\Application.cs
+			if (self_chrome_socket != null)
+			{
+				if (!(Native.window.opener == null && Native.window.parent == Native.window.self))
+				{
+					Console.WriteLine("chrome.app.window.create, is that you?");
 
+					// X:\jsc.svn\examples\javascript\chrome\apps\ChromeFormsWebBrowserExperiment\ChromeFormsWebBrowserExperiment\Application.cs
 
-                    #region __WebBrowser.InitializeInternalElement
-                    __WebBrowser.InitializeInternalElement = that =>
-                    {
-                        var webview = Native.document.createElement("webview");
-                        // You do not have permission to use <webview> tag. Be sure to declare 'webview' permission in your manifest. 
-                        webview.setAttribute("partition", "p1");
 
-                        that.InternalElement = (IHTMLIFrame)(object)webview;
+					#region __WebBrowser.InitializeInternalElement
+					__WebBrowser.InitializeInternalElement = that =>
+					{
+						var webview = Native.document.createElement("webview");
+						// You do not have permission to use <webview> tag. Be sure to declare 'webview' permission in your manifest. 
+						webview.setAttribute("partition", "p1");
 
-                    };
-                    #endregion
+						that.InternalElement = (IHTMLIFrame)(object)webview;
 
+					};
+					#endregion
 
-                    // pass thru
-                    return;
 
-                }
-                // should jsc send a copresence udp message?
+					// pass thru
+					return;
 
+				}
+				// should jsc send a copresence udp message?
 
-                chrome.app.runtime.Launched += async delegate
-                {
-                    // 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
-                    Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
 
-                    new chrome.Notification(title: "Launched2");
+				chrome.app.runtime.Launched += async delegate
+				{
+					// 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
+					Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
 
-                    // https://code.google.com/p/chromium/issues/detail?id=177706
+					new chrome.Notification(title: "Launched2");
 
-                    var o = new object();
-                    var hidden = o == o;
-                    var alphaEnabled = o == o;
-                    var alwaysOnTop = o == o;
+					// https://code.google.com/p/chromium/issues/detail?id=177706
 
+					var o = new object();
+					var hidden = o == o;
+					var alphaEnabled = o == o;
+					var alwaysOnTop = o == o;
 
-                    var options = new
-                    {
-                        //allow webkitAppRegion
-                        frame = "none",
-                        hidden,
-                        alphaEnabled,
-                        alwaysOnTop
-                    };
 
-                    // The URL used for window creation must be local for security reasons.
+					var options = new
+					{
+						//allow webkitAppRegion
+						frame = "none",
+						hidden,
+						alphaEnabled,
+						alwaysOnTop
+					};
 
-                    var xappwindow = await chrome.app.window.create(
-                           Native.document.location.pathname,
-                           //Native.document.location.pathname + "#http://example.com", 
-                           options
-                    );
+					// The URL used for window creation must be local for security reasons.
 
-                    //xappwindow.set
+					var xappwindow = await chrome.app.window.create(
+						   Native.document.location.pathname,
+						   //Native.document.location.pathname + "#http://example.com", 
+						   options
+					);
 
-                    // can we prevent the white page from appearing?
-                    await xappwindow.contentWindow.async.onload;
+					//xappwindow.set
 
-                    xappwindow.contentWindow.document.title = "http://example.com";
+					// can we prevent the white page from appearing?
+					await xappwindow.contentWindow.async.onload;
 
-                    await Task.Delay(100);
-                    //await Task.Delay(200);
+					xappwindow.contentWindow.document.title = "http://example.com";
 
-                    xappwindow.show();
+					await Task.Delay(100);
+					//await Task.Delay(200);
 
-                    Console.WriteLine("chrome.app.window loaded!");
-                };
+					xappwindow.show();
 
+					Console.WriteLine("chrome.app.window loaded!");
+				};
 
-                return;
-            }
-            #endregion
 
-            // subst b: X:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowForm\ChromeAppWindowForm\bin\Debug\staging\ChromeAppWindowForm.Application\web
+				return;
+			}
+			#endregion
 
-            // X:\jsc.svn\core\ScriptCoreLib.Windows.Forms\ScriptCoreLib.Windows.Forms\JavaScript\BCLImplementation\System\Windows\Forms\Form\Form..ctor.cs
-            //CaptionForeground.className = "caption";
+			// subst b: X:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowForm\ChromeAppWindowForm\bin\Debug\staging\ChromeAppWindowForm.Application\web
 
-            // Could not load file or assembly 'ScriptCoreLib' or one of its dependencies. The parameter is incorrect. (Exception from HRESULT: 0x80070057 (E_INVALIDARG))
+			// X:\jsc.svn\core\ScriptCoreLib.Windows.Forms\ScriptCoreLib.Windows.Forms\JavaScript\BCLImplementation\System\Windows\Forms\Form\Form..ctor.cs
+			//CaptionForeground.className = "caption";
 
-            var css = Native.css[typeof(Form)][" .caption"];
-            //var css = IStyleSheet.all[" .caption"];
+			// Could not load file or assembly 'ScriptCoreLib' or one of its dependencies. The parameter is incorrect. (Exception from HRESULT: 0x80070057 (E_INVALIDARG))
 
+			var css = Native.css[typeof(Form)][" .caption"];
+			//var css = IStyleSheet.all[" .caption"];
 
-            //new IHTMLPre { new { css.rule.selectorText } }.AttachToDocument();
 
+			//new IHTMLPre { new { css.rule.selectorText } }.AttachToDocument();
 
-            // https://code.google.com/p/chromium/issues/detail?id=229330
-            (css.style as dynamic).webkitAppRegion = "drag";
 
-            //(ff.CaptionForeground.style as dynamic).webkitAppRegion = "drag";
+			// https://code.google.com/p/chromium/issues/detail?id=229330
+			(css.style as dynamic).webkitAppRegion = "drag";
 
-            FormStyler.AtFormCreated = FormStylerLikeFloat.LikeFloat;
+			//(ff.CaptionForeground.style as dynamic).webkitAppRegion = "drag";
 
-            var ShadowRightBottom = 8;
+			FormStyler.AtFormCreated = FormStylerLikeFloat.LikeFloat;
 
-            var f = new Form
-            {
+			var ShadowRightBottom = 8;
 
-                ShowIcon = false,
+			var f = new Form
+			{
 
-                Text = Native.document.title,
+				ShowIcon = false,
 
-                //Text = Native.document.location.hash,
-                StartPosition = FormStartPosition.Manual
-            };
+				Text = Native.document.title,
 
+				//Text = Native.document.location.hash,
+				StartPosition = FormStartPosition.Manual
+			};
 
-            f.MoveTo(0, 0).SizeTo(
-                    Native.window.Width - ShadowRightBottom,
-                    Native.window.Height - ShadowRightBottom
-                );
 
-            //f.Opacity = 0.5;
+			f.MoveTo(0, 0).SizeTo(
+					Native.window.Width - ShadowRightBottom,
+					Native.window.Height - ShadowRightBottom
+				);
 
-            f.Show();
+			//f.Opacity = 0.5;
 
+			f.Show();
 
-            var t = new TrackBar
-            {
 
-                Maximum = 100,
-                Minimum = 40,
+			var t = new TrackBar
+			{
 
-                Dock = DockStyle.Top
-            };
-            t.AttachTo(f);
-            t.ValueChanged += delegate
-            {
-                f.Opacity = (double)t.Value / (double)t.Maximum;
+				Maximum = 100,
+				Minimum = 40,
 
-            };
-            f.Opacity = 0.8;
+				Dock = DockStyle.Top
+			};
+			t.AttachTo(f);
+			t.ValueChanged += delegate
+			{
+				f.Opacity = (double)t.Value / (double)t.Maximum;
 
-            var w = new WebBrowser
-            {
+			};
+			f.Opacity = 0.8;
 
-                // this wont work?
-                //Dock = DockStyle.Fill
+			var w = new WebBrowser
+			{
 
-            }.AttachTo(f);
+				// this wont work?
+				//Dock = DockStyle.Fill
 
-            w.Navigate(
-                Native.document.title
-            );
+			}.AttachTo(f);
 
+			w.Navigate(
+				Native.document.title
+			);
 
 
-            f.FormClosed +=
-                delegate
-            {
-                // close the appwindow
 
-                // DWM animates the close.
-                Native.window.close();
-            };
+			f.FormClosed +=
+				delegate
+			{
+				// close the appwindow
 
-            f.SizeChanged +=
-                delegate
-            {
-                Native.window.resizeTo(
-                    f.Width + ShadowRightBottom,
-                    f.Height + ShadowRightBottom
-                );
+				// DWM animates the close.
+				Native.window.close();
+			};
 
-            };
+			f.SizeChanged +=
+				delegate
+			{
+				Native.window.resizeTo(
+					f.Width + ShadowRightBottom,
+					f.Height + ShadowRightBottom
+				);
 
-            Native.window.onresize +=
-                delegate
-            {
-                // outer frame is resized
-                f.SizeTo(
-                    Native.window.Width - ShadowRightBottom,
-                    Native.window.Height - ShadowRightBottom
-                );
+			};
 
-            };
+			Native.window.onresize +=
+				delegate
+			{
+				// outer frame is resized
+				f.SizeTo(
+					Native.window.Width - ShadowRightBottom,
+					Native.window.Height - ShadowRightBottom
+				);
 
-            // activate resize grip to window width?
-        }
+			};
 
-    }
+			// activate resize grip to window width?
+		}
+
+	}
 }

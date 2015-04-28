@@ -12,6 +12,8 @@ namespace ScriptCoreLib.JavaScript.WebVR
 	[Script(HasNoPrototype = true)]
 	public class VRDevice
 	{
+		// https://github.com/tparisi/WebVR/blob/master/examples/cube-cardboard.html
+
 		// https://developers.google.com/cardboard/android/
 		// https://developers.google.com/cardboard/android/download
 		// https://github.com/googlesamples/cardboard-java

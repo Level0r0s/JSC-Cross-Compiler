@@ -126,6 +126,9 @@
     <Reference Include="RoosterAudioExample.AssetsLibrary">
       <HintPath>..\..\..\..\audio\RoosterAudioExample\RoosterAudioExample\bin\staging.AssetsLibrary\RoosterAudioExample.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="AARPMartialLawLoop.AssetsLibrary">
+      <HintPath>..\..\..\..\audio\AARPMartialLawLoop\AARPMartialLawLoop\bin\staging.AssetsLibrary\AARPMartialLawLoop.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,6 +143,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\audio\AARPMartialLawLoop\AARPMartialLawLoop\AARPMartialLawLoop.csproj">
+      <Project>{a5de484d-54a0-4418-ad41-84b77f5ae4e8}</Project>
+      <Name>AARPMartialLawLoop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\audio\RoosterAudioExample\RoosterAudioExample\RoosterAudioExample.csproj">
       <Project>{895271ba-faa8-4763-a1fb-1e9c7525d130}</Project>
       <Name>RoosterAudioExample</Name>

@@ -79,6 +79,7 @@ namespace ChromeAudioPlaybackRate
 			}
 			#endregion
 
+			#region rooster
 			new IHTMLButton { "new rooster" }.AttachToDocument().onclick +=
 				async delegate
 				{
@@ -116,6 +117,48 @@ namespace ChromeAudioPlaybackRate
 
 
 				};
+			#endregion
+
+			#region rooster
+			new IHTMLButton { "new AARPMartialLawLoop" }.AttachToDocument().onclick +=
+				async delegate
+				{
+					// https://developer.mozilla.org/en-US/Apps/Build/Audio_and_video_delivery/WebAudio_playbackRate_explained
+
+					// in flash we had to work with samples
+					// in chrome we get an api. nice can we loop it ?
+
+
+					var a = new global::AARPMartialLawLoop.HTML.Audio.FromAssets.loop
+					{
+
+					};
+
+					a.load();
+
+					var rate = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0, max = 200 }.AttachToDocument();
+					var play = new IHTMLButton { "play" }.AttachToDocument();
+
+					Native.window.onframe += delegate
+					{
+						// cannot go lower than 0.5 it seems?
+						a.playbackRate = Math.Max(0.5, rate.GetDouble() * 0.01);
+
+						play.innerText = "play " + new { a.playbackRate };
+
+					};
+
+					while (await play.async.onclick)
+					{
+						a.currentTime = 0;
+
+						a.play();
+					}
+
+
+
+				};
+			#endregion
 		}
 
 	}
