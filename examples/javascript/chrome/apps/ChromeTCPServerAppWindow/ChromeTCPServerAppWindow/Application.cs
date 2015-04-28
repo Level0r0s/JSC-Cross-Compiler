@@ -38,13 +38,6 @@ namespace ChromeTCPServer
 	public static class TheServerWithAppWindow
 	{
 
-		//        script: error JSC1000: *** stack is empty, invalid pop?
-		//script: error JSC1000: error at ChromeTCPServer.TheServerWithAppWindow+<>c__DisplayClass8+<<Invoke>b__13>d__0+<MoveNext>06000022.<008a> ldloca.s.try,
-		// assembly: W:\ChromeTCPServerAppWindow.Application.exe
-		// type: ChromeTCPServer.TheServerWithAppWindow+<>c__DisplayClass8+<<Invoke>b__13>d__0+<MoveNext>06000022, ChromeTCPServerAppWindow.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-		// offset: 0x0036
-		//  method:Int32<008a> ldloca.s.try(<MoveNext>06000022, <<Invoke>b__13>d__0 ByRef, System.Runtime.CompilerServices.TaskAwaiter ByRef, System.Runtime.CompilerServices.TaskAwaiter`1[ScriptCoreLib.JavaScript.DOM.MessageEvent] ByRef)
-
 
 		public static void Invoke(
 			string AppSource
@@ -207,6 +200,7 @@ namespace ChromeTCPServer
 
 				// FormStyler.AtFormCreated = FormStylerLikeFloat.LikeFloat;
 
+				// only if the host does alpha?
 				var ShadowRightBottom = 8;
 
 				#region Form
@@ -324,8 +318,9 @@ namespace ChromeTCPServer
 			}
 
 			// looks like alpha is still not available for chrome, nor is it available if aero is disabled, red.
-			var alphaEnabled = false;
-
+			// Unchecked runtime.lastError while running app.window.create: The alphaEnabled option requires dev channel or newer
+			var alphaEnabled = true;
+			//chrome.AppWindow
 
 			Console.WriteLine("before invoke ChromeTCPServer.TheServer.InvokeAsync " + new { alphaEnabled });
 
@@ -333,7 +328,7 @@ namespace ChromeTCPServer
 			{
 				var o = new object();
 				var hidden = o == o;
-				//var alphaEnabled = o == o;
+
 
 				var alwaysOnTop = o == o;
 
@@ -343,7 +338,7 @@ namespace ChromeTCPServer
 					//allow webkitAppRegion
 					frame = "none",
 					//hidden,
-					//alphaEnabled,
+					alphaEnabled,
 					alwaysOnTop
 				};
 
