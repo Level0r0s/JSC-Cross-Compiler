@@ -22,700 +22,708 @@ using System.Xml.Linq;
 
 namespace ChromeTCPServer
 {
-    // http://www.snip2code.com/Snippet/19734/Visual-studio-intellisense-file-for-chro
-    [Script(HasNoPrototype = true)]
-    class xPointerLockPermissionRequest
-    {
-        // https://developer.chrome.com/apps/tags/webview#type-PointerLockPermissionRequest
+	// http://www.snip2code.com/Snippet/19734/Visual-studio-intellisense-file-for-chro
+	[Script(HasNoPrototype = true)]
+	class xPointerLockPermissionRequest
+	{
+		// https://developer.chrome.com/apps/tags/webview#type-PointerLockPermissionRequest
 
-        // tested by ?
-        public void allow()
-        {
-        }
-    }
+		// tested by ?
+		public void allow()
+		{
+		}
+	}
 
-    public static class TheServerWithStyledForm
-    {
-        public static void Invoke(
-            string AppSource,
-            int DefaultWidth = 640,
-            int DefaultHeight = 480,
-            Action<FormStyler> AtFormCreated = null,
+	public static class TheServerWithStyledForm
+	{
+		public static void Invoke(
+			string AppSource,
+			int DefaultWidth = 640,
+			int DefaultHeight = 480,
+			Action<FormStyler> AtFormCreated = null,
 
-            // X:\jsc.svn\examples\javascript\chrome\apps\ChomeAlphaAppWindow\ChomeAlphaAppWindow\Application.cs
-            // X:\jsc.svn\examples\javascript\chrome\apps\ChromeEarth\ChromeEarth\Application.cs
-            bool transparentBackground = false,
-            bool resizable = true
-            )
-        {
-            #region  AtFormCreated
-            if (AtFormCreated == null)
-                AtFormCreated = AtFormCreated = s =>
-                {
-                    // X:\jsc.svn\examples\javascript\IsometricTycoonViewWithToolbar\IsometricTycoonViewWithToolbar\Application.cs
-                    // X:\jsc.internal.svn\core\com.abstractatech.web\com.abstractatech.web\Domains\discover.xavalon.net\discover_xavalon_net.cs
+			// X:\jsc.svn\examples\javascript\chrome\apps\ChomeAlphaAppWindow\ChomeAlphaAppWindow\Application.cs
+			// X:\jsc.svn\examples\javascript\chrome\apps\ChromeEarth\ChromeEarth\Application.cs
+			bool transparentBackground = false,
+			bool resizable = true
+			)
+		{
+			Console.WriteLine("enter TheServerWithStyledForm.Invoke");
 
-                    // browser popup will use this color
-                    ((__Form)s.Context).HTMLTargetContainerRef.style.backgroundColor = JSColor.FromRGB(0, 0, 0);
 
-                    s.Caption.style.backgroundColor = JSColor.FromRGB(0, 0, 0);
-                    s.TargetOuterBorder.style.boxShadow = "rgba(0, 0, 0, 0.3) 0px 0px 6px 3px";
-                    s.TargetOuterBorder.style.borderColor = JSColor.FromRGB(0, 0, 0);
+			#region  AtFormCreated
+			if (AtFormCreated == null)
+				AtFormCreated = AtFormCreated = s =>
+				{
+					// X:\jsc.svn\examples\javascript\IsometricTycoonViewWithToolbar\IsometricTycoonViewWithToolbar\Application.cs
+					// X:\jsc.internal.svn\core\com.abstractatech.web\com.abstractatech.web\Domains\discover.xavalon.net\discover_xavalon_net.cs
 
-                    s.TargetInnerBorder.style.borderWidth = "0px";
+					// browser popup will use this color
+					((__Form)s.Context).HTMLTargetContainerRef.style.backgroundColor = JSColor.FromRGB(0, 0, 0);
 
-                    s.CloseButton.style.color = JSColor.White;
-                    s.CloseButton.style.backgroundColor = JSColor.None;
-                    s.CloseButton.style.borderWidth = "0px";
-                    s.CloseButtonContent.style.borderWidth = "0px";
+					s.Caption.style.backgroundColor = JSColor.FromRGB(0, 0, 0);
+					s.TargetOuterBorder.style.boxShadow = "rgba(0, 0, 0, 0.3) 0px 0px 6px 3px";
+					s.TargetOuterBorder.style.borderColor = JSColor.FromRGB(0, 0, 0);
 
-                    s.TargetResizerPadding.style.left = "0px";
-                    s.TargetResizerPadding.style.top = "0px";
-                    s.TargetResizerPadding.style.right = "0px";
-                    s.TargetResizerPadding.style.bottom = "0px";
+					s.TargetInnerBorder.style.borderWidth = "0px";
 
-                };
+					s.CloseButton.style.color = JSColor.White;
+					s.CloseButton.style.backgroundColor = JSColor.None;
+					s.CloseButton.style.borderWidth = "0px";
+					s.CloseButtonContent.style.borderWidth = "0px";
 
+					s.TargetResizerPadding.style.left = "0px";
+					s.TargetResizerPadding.style.top = "0px";
+					s.TargetResizerPadding.style.right = "0px";
+					s.TargetResizerPadding.style.bottom = "0px";
 
-            FormStyler.AtFormCreated = AtFormCreated;
-            #endregion
+				};
 
 
+			FormStyler.AtFormCreated = AtFormCreated;
+			#endregion
 
-            var windowsForm = new Dictionary<Form, AppWindow>();
-            var windows = new List<AppWindow>();
 
-            #region __Form
-            {
 
+			var windowsForm = new Dictionary<Form, AppWindow>();
+			var windows = new List<AppWindow>();
 
-                __Form.InternalHTMLTargetAttachToDocument =
-                   async (that, yield) =>
-                   {
-                       // --enable-logging --v=1
-                       // http://stackoverflow.com/questions/12219058/how-to-debug-a-chrome-browser-extension-which-is-crashing
-                       // "C:\Users\Arvo\AppData\Local\Google\Chrome SxS\Application\debug.log"
-                       // "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+			#region __Form
+			{
 
 
-                       // X:\jsc.svn\examples\javascript\chrome\apps\ChomeAlphaAppWindow\ChomeAlphaAppWindow\Application.cs
-                       // X:\jsc.svn\examples\javascript\android\com.abstractatech.gamification.craft\com.abstractatech.gamification.craft\Application.cs
+				__Form.InternalHTMLTargetAttachToDocument =
+				   async (that, yield) =>
+				   {
+					   // --enable-logging --v=1
+					   // http://stackoverflow.com/questions/12219058/how-to-debug-a-chrome-browser-extension-which-is-crashing
+					   // "C:\Users\Arvo\AppData\Local\Google\Chrome SxS\Application\debug.log"
+					   // "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 
-                       Console.WriteLine("enter InternalHTMLTargetAttachToDocument");
 
-                       //Error in event handler for app.runtime.onLaunched: Error: Invalid value for argument 2. Property 'transparentBackground': Expected 'boolean' but got 'integer'.
-                       //var transparentBackground = true;
+					   // X:\jsc.svn\examples\javascript\chrome\apps\ChomeAlphaAppWindow\ChomeAlphaAppWindow\Application.cs
+					   // X:\jsc.svn\examples\javascript\android\com.abstractatech.gamification.craft\com.abstractatech.gamification.craft\Application.cs
 
+					   Console.WriteLine("enter InternalHTMLTargetAttachToDocument");
 
-                       #region options
-                       // jsc does not use bool literals correctly
-                       var ztransparentBackground = false;
+					   //Error in event handler for app.runtime.onLaunched: Error: Invalid value for argument 2. Property 'transparentBackground': Expected 'boolean' but got 'integer'.
+					   //var transparentBackground = true;
 
 
+					   #region options
+					   // jsc does not use bool literals correctly
+					   var ztransparentBackground = false;
 
-                       object options = new
-                       {
-                           frame = "none",
-                       };
 
-                       if (transparentBackground)
-                       {
-                           ztransparentBackground = true;
-                           options = new
-                           {
-                               frame = "none",
-                               //transparentBackground = ztransparentBackground
 
-                               // X:\jsc.svn\examples\javascript\chrome\apps\ChomeAlphaAppWindow\ChomeAlphaAppWindow\Application.cs
+					   object options = new
+					   {
+						   frame = "none",
+					   };
 
-                               // even if false, permission is checked. why?
-                               alphaEnabled = ztransparentBackground
+					   if (transparentBackground)
+					   {
+						   ztransparentBackground = true;
+						   options = new
+						   {
+							   frame = "none",
+							   //transparentBackground = ztransparentBackground
 
-                           };
+							   // X:\jsc.svn\examples\javascript\chrome\apps\ChomeAlphaAppWindow\ChomeAlphaAppWindow\Application.cs
 
-                       }
+							   // even if false, permission is checked. why?
+							   alphaEnabled = ztransparentBackground
 
-                       Console.WriteLine(new { options });
-                       #endregion
+						   };
 
-                       // http://src.chromium.org/viewvc/chrome/trunk/src/chrome/common/extensions/api/app_window.idl
-                       var xappwindow = await chrome.app.window.create(
-                             Native.document.location.pathname,
-                            options
-                        );
+					   }
 
+					   Console.WriteLine(new { options });
+					   #endregion
 
-                       // webview needs special attention later!
-                       windowsForm[that] = xappwindow;
+					   // http://src.chromium.org/viewvc/chrome/trunk/src/chrome/common/extensions/api/app_window.idl
+					   var xappwindow = await chrome.app.window.create(
+							 Native.document.location.pathname,
+							options
+						);
 
-                       // Uncaught TypeError: Cannot read property 'contentWindow' of undefined 
 
-                       //Console.WriteLine("appwindow loading... " + new { xappwindow });
-                       //Console.WriteLine("appwindow loading... " + new { xappwindow.contentWindow });
+					   // webview needs special attention later!
+					   windowsForm[that] = xappwindow;
 
-                       // our window frame non client area plus inner body margin
+					   // Uncaught TypeError: Cannot read property 'contentWindow' of undefined 
 
-                       #region resizeTo
-                       if (that.FormBorderStyle == FormBorderStyle.None)
-                       {
-                           xappwindow.resizeTo(
-                              DefaultWidth,
-                              DefaultHeight
-                             );
-                       }
-                       else
-                       {
-                           xappwindow.resizeTo(
-                            DefaultWidth + 32,
-                            DefaultHeight + 64
-                           );
-                       }
-                       #endregion
+					   //Console.WriteLine("appwindow loading... " + new { xappwindow });
+					   //Console.WriteLine("appwindow loading... " + new { xappwindow.contentWindow });
 
+					   // our window frame non client area plus inner body margin
 
+					   #region resizeTo
+					   if (that.FormBorderStyle == FormBorderStyle.None)
+					   {
+						   xappwindow.resizeTo(
+							  DefaultWidth,
+							  DefaultHeight
+							 );
+					   }
+					   else
+					   {
+						   xappwindow.resizeTo(
+							DefaultWidth + 32,
+							DefaultHeight + 64
+						   );
+					   }
+					   #endregion
 
 
-                       await xappwindow.contentWindow.async.onload;
 
-                       #region onload
-                       var c = that;
-                       var f = (Form)that;
-                       var ff = c;
 
-                       windows.Add(xappwindow);
+					   await xappwindow.contentWindow.async.onload;
+
+					   #region onload
+					   var c = that;
+					   var f = (Form)that;
+					   var ff = c;
 
-                       // http://sandipchitale.blogspot.com/2013/03/tip-webkit-app-region-css-property.html
+					   windows.Add(xappwindow);
 
-                       (ff.CaptionForeground.style as dynamic).webkitAppRegion = "drag";
-
-                       //(ff.ResizeGripElement.style as dynamic).webkitAppRegion = "drag";
-                       // cant have it yet
-                       //ff.ResizeGripElement.Orphanize();
-
-                       f.StartPosition = FormStartPosition.Manual;
+					   // http://sandipchitale.blogspot.com/2013/03/tip-webkit-app-region-css-property.html
+
+					   (ff.CaptionForeground.style as dynamic).webkitAppRegion = "drag";
+
+					   //(ff.ResizeGripElement.style as dynamic).webkitAppRegion = "drag";
+					   // cant have it yet
+					   //ff.ResizeGripElement.Orphanize();
+
+					   f.StartPosition = FormStartPosition.Manual;
+
+
+					   f.Left = 0;
+					   f.Top = 0;
+
+					   #region FormClosing
+					   f.FormClosing +=
+						   delegate
+					   {
+						   Console.WriteLine("FormClosing");
+						   xappwindow.close();
+					   };
+					   #endregion
+
+
+
+					   // jsc can you generate instance events too?
+					   #region  onRestored
+					   xappwindow.onRestored.addListener(
+						   new Action(
+							   delegate
+					   {
+						   that.CaptionShadow.Hide();
+
+					   }
+						   )
+					   );
+					   #endregion
+
+
+					   #region onMaximized
+					   xappwindow.onMaximized.addListener(
+					   new Action(
+							   delegate
+					   {
+						   that.CaptionShadow.Show();
+
+					   }
+					   )
+					   );
+					   #endregion
 
 
-                       f.Left = 0;
-                       f.Top = 0;
+					   #region onClosed
+					   xappwindow.onClosed.addListener(
+								new Action(
+									delegate
+					   {
+						   Console.WriteLine("onClosed");
+						   windows.Remove(xappwindow);
 
-                       #region FormClosing
-                       f.FormClosing +=
-                           delegate
-                       {
-                           Console.WriteLine("FormClosing");
-                           xappwindow.close();
-                       };
-                       #endregion
-
-
-
-                       // jsc can you generate instance events too?
-                       #region  onRestored
-                       xappwindow.onRestored.addListener(
-                           new Action(
-                               delegate
-                       {
-                           that.CaptionShadow.Hide();
-
-                       }
-                           )
-                       );
-                       #endregion
-
-
-                       #region onMaximized
-                       xappwindow.onMaximized.addListener(
-                       new Action(
-                               delegate
-                       {
-                           that.CaptionShadow.Show();
-
-                       }
-                       )
-                       );
-                       #endregion
+						   f.Close();
+					   }
+							)
+							);
+					   #endregion
 
+					   // wont fire yet
+					   //appwindow.contentWindow.onbeforeunload +=
+					   //    delegate
+					   //    {
+					   //        Console.WriteLine("onbeforeunload");
+					   //    };
 
-                       #region onClosed
-                       xappwindow.onClosed.addListener(
-                                new Action(
-                                    delegate
-                       {
-                           Console.WriteLine("onClosed");
-                           windows.Remove(xappwindow);
+					   //appwindow.onBoundsChanged.addListener(
+					   //        new Action(
+					   //        delegate
+					   //        {
+					   //            Console.WriteLine("appwindow.onBoundsChanged");
 
-                           f.Close();
-                       }
-                            )
-                            );
-                       #endregion
+					   //            f.SizeTo(
+					   //                appwindow.contentWindow.Width,
+					   //                appwindow.contentWindow.Height
+					   //            );
+					   //        }
+					   //    )
+					   //);
 
-                       // wont fire yet
-                       //appwindow.contentWindow.onbeforeunload +=
-                       //    delegate
-                       //    {
-                       //        Console.WriteLine("onbeforeunload");
-                       //    };
+					   f.SizeChanged +=
+					   delegate
+					   {
+						   // who is changing our size?
+						   Console.WriteLine(
+							   "SizeChanged  " + new { f.Width, f.Height }
+							   );
+					   };
 
-                       //appwindow.onBoundsChanged.addListener(
-                       //        new Action(
-                       //        delegate
-                       //        {
-                       //            Console.WriteLine("appwindow.onBoundsChanged");
 
-                       //            f.SizeTo(
-                       //                appwindow.contentWindow.Width,
-                       //                appwindow.contentWindow.Height
-                       //            );
-                       //        }
-                       //    )
-                       //);
+					   Action SizeFormToAppWindow = delegate
+					   {
+						   // not called?
+						   // why not use appwindow resize/bounds instead?
+						   Console.WriteLine("SizeFormToAppWindow " + new { transparentBackground, xappwindow.contentWindow.Width, xappwindow.contentWindow.Height });
+						   // transparentBackground
 
-                       f.SizeChanged +=
-                       delegate
-                       {
-                           // who is changing our size?
-                           Console.WriteLine(
-                               "SizeChanged  " + new { f.Width, f.Height }
-                               );
-                       };
+						   // x:\jsc.svn\examples\javascript\chrome\apps\chromenexus7\chromenexus7\application.cs
+						   // do we need to show our own shadow?
+						   // how will it play with resize
 
+						   if (transparentBackground)
+						   {
+							   // how much does the shadow need?
 
-                       Action SizeFormToAppWindow = delegate
-                       {
-                           // not called?
-                           // why not use appwindow resize/bounds instead?
-                           Console.WriteLine("SizeFormToAppWindow " + new { transparentBackground, xappwindow.contentWindow.Width, xappwindow.contentWindow.Height });
-                           // transparentBackground
+							   // if we ale in fullscreen this would not be the right thing to do
+							   // also, when can we have resizeable working correctly on chrome?
 
-                           // x:\jsc.svn\examples\javascript\chrome\apps\chromenexus7\chromenexus7\application.cs
-                           // do we need to show our own shadow?
-                           // how will it play with resize
+							   f.Width = xappwindow.contentWindow.Width - 8;
+							   f.Height = xappwindow.contentWindow.Height - 8;
+						   }
+						   else
+						   {
+							   f.Width = xappwindow.contentWindow.Width;
+							   f.Height = xappwindow.contentWindow.Height;
+						   }
+					   };
 
-                           if (transparentBackground)
-                           {
-                               // how much does the shadow need?
+					   #region resize
+					   xappwindow.contentWindow.onresize +=
+									delegate
+					   {
 
-                               // if we ale in fullscreen this would not be the right thing to do
-                               // also, when can we have resizeable working correctly on chrome?
+						   //Console.WriteLine("appwindow.contentWindow.onresize SizeTo " +
+						   //    new
+						   //    {
+						   //        appwindow.contentWindow.Width,
+						   //        appwindow.contentWindow.Height
+						   //    }
+						   //    );
 
-                               f.Width = xappwindow.contentWindow.Width - 8;
-                               f.Height = xappwindow.contentWindow.Height - 8;
-                           }
-                           else
-                           {
-                               f.Width = xappwindow.contentWindow.Width;
-                               f.Height = xappwindow.contentWindow.Height;
-                           }
-                       };
 
-                       #region resize
-                       xappwindow.contentWindow.onresize +=
-                                    delegate
-                       {
+						   SizeFormToAppWindow();
 
-                           //Console.WriteLine("appwindow.contentWindow.onresize SizeTo " +
-                           //    new
-                           //    {
-                           //        appwindow.contentWindow.Width,
-                           //        appwindow.contentWindow.Height
-                           //    }
-                           //    );
+					   }
+							;
+					   #endregion
 
 
-                           SizeFormToAppWindow();
+					   SizeFormToAppWindow();
 
-                       }
-                            ;
-                       #endregion
 
 
-                       SizeFormToAppWindow();
+					   Console.WriteLine("appwindow contentWindow onload");
 
 
+					   that.HTMLTarget.AttachTo(
+						   xappwindow.contentWindow.document.body
+					   );
 
-                       Console.WriteLine("appwindow contentWindow onload");
 
+					   if (transparentBackground)
+					   {
+						   // seems like windows7 dwm wont provide fadein animation for us
+						   // the shadowdom flip does not yet work for us
+						   // can we reuse the css transition instead?
 
-                       that.HTMLTarget.AttachTo(
-                           xappwindow.contentWindow.document.body
-                       );
+						   // x:\jsc.svn\examples\javascript\chrome\apps\chromenexus7\chromenexus7\application.cs
 
+						   // cant see it. cpu not idle enough to animate?
+						   // or animation block another by trigger?
+						   yield(true);
+					   }
+					   else
+					   {
+						   yield(false);
+					   }
 
-                       if (transparentBackground)
-                       {
-                           // seems like windows7 dwm wont provide fadein animation for us
-                           // the shadowdom flip does not yet work for us
-                           // can we reuse the css transition instead?
+					   //Console.WriteLine("appwindow contentWindow onload done");
+					   #endregion
 
-                           // x:\jsc.svn\examples\javascript\chrome\apps\chromenexus7\chromenexus7\application.cs
 
-                           // cant see it. cpu not idle enough to animate?
-                           // or animation block another by trigger?
-                           yield(true);
-                       }
-                       else
-                       {
-                           yield(false);
-                       }
 
-                       //Console.WriteLine("appwindow contentWindow onload done");
-                       #endregion
+					   Console.WriteLine("exit InternalHTMLTargetAttachToDocument");
 
 
 
-                       Console.WriteLine("exit InternalHTMLTargetAttachToDocument");
+				   };
 
 
+			}
+			#endregion
 
-                   };
+			#region __WebBrowser
+			{
+				// X:\jsc.svn\examples\javascript\chrome\ChromeFormsWebBrowserExperiment\ChromeFormsWebBrowserExperiment\Application.cs
+				__WebBrowser.InitializeInternalElement = that =>
+				{
+					// the other option is to have Native to point the AppWindow this is supposed to run in?
 
 
-            }
-            #endregion
+					Console.WriteLine("[413165] new webview for current AppWindow " + new { windows.Count });
 
-            #region __WebBrowser
-            {
-                // X:\jsc.svn\examples\javascript\chrome\ChromeFormsWebBrowserExperiment\ChromeFormsWebBrowserExperiment\Application.cs
-                __WebBrowser.InitializeInternalElement = that =>
-                {
-                    // the other option is to have Native to point the AppWindow this is supposed to run in?
 
+					// since we do not have a ref to the new AppWindow
+					// lets create a placeholder until wo do know.
+					that.InternalElement = (IHTMLIFrame)(object)Native.document.createElement("no-webview");
 
-                    Console.WriteLine("[413165] new webview for current AppWindow " + new { windows.Count });
+					// <no-webview class=" WebBrowser" style="position: absolute; left: 0px; top: 0px; width: 640px; height: 480px;"></no-webview>
 
+					// what is supposed to trigger it?
+					that.InternalAtAfterVisibleChanged +=
+						delegate
+					{
+						var form = that.FindForm();
 
-                    // since we do not have a ref to the new AppWindow
-                    // lets create a placeholder until wo do know.
-                    that.InternalElement = (IHTMLIFrame)(object)Native.document.createElement("no-webview");
+						Console.WriteLine(" __WebBrowser.InternalAtAfterVisibleChanged " + new
+						{
+							windows.Count,
+							windowsForm = windowsForm.Count,
+							form
+						});
 
-                    // <no-webview class=" WebBrowser" style="position: absolute; left: 0px; top: 0px; width: 640px; height: 480px;"></no-webview>
+						// 9:16907ms  __WebBrowser.InternalAtAfterVisibleChanged { Count = 1, f = <Namespace>.Form }
+						var w = windowsForm[form];
 
-                    // what is supposed to trigger it?
-                    that.InternalAtAfterVisibleChanged +=
-                        delegate
-                    {
-                        var form = that.FindForm();
+						//  9:5642ms  __WebBrowser.InternalAtAfterVisibleChanged { w = [object Object] }
+						//Console.WriteLine(" __WebBrowser.InternalAtAfterVisibleChanged " + new { w });
 
-                        Console.WriteLine(" __WebBrowser.InternalAtAfterVisibleChanged " + new
-                        {
-                            windows.Count,
-                            windowsForm = windowsForm.Count,
-                            form
-                        });
+						// time to replace it?
 
-                        // 9:16907ms  __WebBrowser.InternalAtAfterVisibleChanged { Count = 1, f = <Namespace>.Form }
-                        var w = windowsForm[form];
+						//that.InternalElement = (IHTMLIFrame)(object)webview;
 
-                        //  9:5642ms  __WebBrowser.InternalAtAfterVisibleChanged { w = [object Object] }
-                        //Console.WriteLine(" __WebBrowser.InternalAtAfterVisibleChanged " + new { w });
 
-                        // time to replace it?
+						// https://code.google.com/p/chromium/issues/detail?id=413165#c2
 
-                        //that.InternalElement = (IHTMLIFrame)(object)webview;
+						// X:\jsc.svn\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\android\webkit\WebView.cs
 
+						//var webview = Native.document.createElement("webview");
 
-                        // https://code.google.com/p/chromium/issues/detail?id=413165#c2
 
-                        // X:\jsc.svn\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\android\webkit\WebView.cs
+						// which AppWindow?
+						// 9:4271ms [413165] new webview for current AppWindow { Count = 0 }
 
-                        //var webview = Native.document.createElement("webview");
 
+						var webview = w.contentWindow.document.createElement("webview");
 
-                        // which AppWindow?
-                        // 9:4271ms [413165] new webview for current AppWindow { Count = 0 }
+						// copy old attributes to the new webview element! src  n friends 
+						that.InternalElement.attributes.WithEach(
+							a =>
+								{
+									Console.WriteLine(" __WebBrowser" + new { a.name, a.value });
 
+									webview.setAttribute(
+										a.name,
+										a.value
+									);
 
-                        var webview = w.contentWindow.document.createElement("webview");
+								}
+						);
 
-                        // copy old attributes to the new webview element! src  n friends 
-                        that.InternalElement.attributes.WithEach(
-                            a =>
-                                {
-                                    Console.WriteLine(" __WebBrowser" + new { a.name, a.value });
+						// 9:4866ms  __WebBrowser{ name = class, value =  WebBrowser }
+						//view-source:42999 9:4870ms  __WebBrowser{ name = style, value = position: absolute; left: 0px; top: 0px; width: 512px; height: 384px; }
 
-                                    webview.setAttribute(
-                                        a.name,
-                                        a.value
-                                    );
 
-                                }
-                        );
 
-                        // 9:4866ms  __WebBrowser{ name = class, value =  WebBrowser }
-                        //view-source:42999 9:4870ms  __WebBrowser{ name = style, value = position: absolute; left: 0px; top: 0px; width: 512px; height: 384px; }
+						// You do not have permission to use <webview> tag. Be sure to declare 'webview' permission in your manifest. 
+						webview.setAttribute("partition", "p1");
+						webview.setAttribute("allowtransparency", "true");
+						webview.setAttribute("allowfullscreen", "true");
 
 
+						// ?
+						webview.style.Opacity = 0.0;
 
-                        // You do not have permission to use <webview> tag. Be sure to declare 'webview' permission in your manifest. 
-                        webview.setAttribute("partition", "p1");
-                        webview.setAttribute("allowtransparency", "true");
-                        webview.setAttribute("allowfullscreen", "true");
 
+						//webview.style.display = IStyle.DisplayEnum.none;
 
-                        // ?
-                        webview.style.Opacity = 0.0;
+						// none wont start loading.. empty will..
+						//webview.style.display = IStyle.DisplayEnum.empty;
 
+						// https://developer.chrome.com/apps/tags/webview#event-contentload
+						webview.addEventListener("contentload",
+							e =>
+								{
+									Console.WriteLine("contentload");
+									// prevent showing white while loading...
+									//webview.style.display = IStyle.DisplayEnum.block;
+								}
+						);
 
-                        //webview.style.display = IStyle.DisplayEnum.none;
 
-                        // none wont start loading.. empty will..
-                        //webview.style.display = IStyle.DisplayEnum.empty;
+						webview.addEventListener("loadstop",
+						 async
+						 e =>
+							 {
+								 Console.WriteLine("loadstop");
+								 // prevent showing white while loading...
 
-                        // https://developer.chrome.com/apps/tags/webview#event-contentload
-                        webview.addEventListener("contentload",
-                            e =>
-                                {
-                                    Console.WriteLine("contentload");
-                                    // prevent showing white while loading...
-                                    //webview.style.display = IStyle.DisplayEnum.block;
-                                }
-                        );
+								 await Task.Delay(100);
 
+								 //webview.style.display = IStyle.DisplayEnum.block;
+								 webview.style.Opacity = 1.0;
+							 }
+						 );
 
-                        webview.addEventListener("loadstop",
-                         async
-                         e =>
-                             {
-                                 Console.WriteLine("loadstop");
-                                 // prevent showing white while loading...
+						#region permissionrequest
+						// https://github.com/GoogleChrome/chromium-webview-samples
+						// permissionrequest
+						// https://developer.chrome.com/apps/tags/webview#type-WebRequestEventInteface
+						webview.addEventListener("permissionrequest",
+							(e) =>
+								{
+									// https://code.google.com/p/chromium/issues/detail?id=141198
 
-                                 await Task.Delay(100);
+									//% c9:176376ms permissionrequest { { permission = pointerLock } }
+									//Uncaught TypeError: Cannot read property 'allow' of undefined
+									//< webview >: The permission request for "pointerLock" has been denied.
 
-                                 //webview.style.display = IStyle.DisplayEnum.block;
-                                 webview.style.Opacity = 1.0;
-                             }
-                         );
+									// X:\jsc.internal.git\market\chrome\ChromeMyJscSolutionsNet\ChromeMyJscSolutionsNet\Application.cs
 
-                        #region permissionrequest
-                        // https://github.com/GoogleChrome/chromium-webview-samples
-                        // permissionrequest
-                        // https://developer.chrome.com/apps/tags/webview#type-WebRequestEventInteface
-                        webview.addEventListener("permissionrequest",
-                            (e) =>
-                                {
-                                    // https://code.google.com/p/chromium/issues/detail?id=141198
+									// https://chromium.googlesource.com/chromium/src/+/git-svn/chrome/common/extensions/api/webview_tag.json
+									// https://bugzilla.mozilla.org/show_bug.cgi?id=896143
+									// https://developer.chrome.com/apps/tags/webview#event-permissionrequest
+									// https://code.google.com/p/chromium/issues/detail?id=153540
 
-                                    //% c9:176376ms permissionrequest { { permission = pointerLock } }
-                                    //Uncaught TypeError: Cannot read property 'allow' of undefined
-                                    //< webview >: The permission request for "pointerLock" has been denied.
+									//  The permission request for "pointerLock" has been denied.
+									// http://stackoverflow.com/questions/16302627/geolocation-in-a-webview-inside-a-chrome-packaged-app
+									// http://git.chromium.org/gitweb/?p=chromium.git;a=commitdiff;h=e1d226c0ea739adaed36cc4b617f7a387d44eca0
 
-                                    // X:\jsc.internal.git\market\chrome\ChromeMyJscSolutionsNet\ChromeMyJscSolutionsNet\Application.cs
+									string permission = (e as dynamic).permission;
+									xPointerLockPermissionRequest e_request = (e as dynamic).request;
 
-                                    // https://chromium.googlesource.com/chromium/src/+/git-svn/chrome/common/extensions/api/webview_tag.json
-                                    // https://bugzilla.mozilla.org/show_bug.cgi?id=896143
-                                    // https://developer.chrome.com/apps/tags/webview#event-permissionrequest
-                                    // https://code.google.com/p/chromium/issues/detail?id=153540
+									Console.WriteLine("permissionrequest " + new
+									{
+										permission,
+										e,
+										e_request
+									});
+									//% c9:167409ms permissionrequest { { permission = pointerLock } }
+									//Uncaught TypeError: Cannot read property 'allow' of undefined
 
-                                    //  The permission request for "pointerLock" has been denied.
-                                    // http://stackoverflow.com/questions/16302627/geolocation-in-a-webview-inside-a-chrome-packaged-app
-                                    // http://git.chromium.org/gitweb/?p=chromium.git;a=commitdiff;h=e1d226c0ea739adaed36cc4b617f7a387d44eca0
+									e.preventDefault();
 
-                                    string permission = (e as dynamic).permission;
-                                    xPointerLockPermissionRequest e_request = (e as dynamic).request;
 
-                                    Console.WriteLine("permissionrequest " + new
-                                    {
-                                        permission,
-                                        e,
-                                        e_request
-                                    });
-                                    //% c9:167409ms permissionrequest { { permission = pointerLock } }
-                                    //Uncaught TypeError: Cannot read property 'allow' of undefined
+									//9:122010ms permissionrequest { { permission = pointerLock, e = [object Event], e_request = [object Object] } }
+									//9:122028ms delay permissionrequest { { permission = pointerLock, e = [object Event], delay_e_request = [object Object] } }
+									//Uncaught Error: < webview >: Permission has already been decided for this "permissionrequest" event. 
 
-                                    e.preventDefault();
+									//Expando.
 
+									if (e_request != null)
+										e_request.allow();
 
-                                    //9:122010ms permissionrequest { { permission = pointerLock, e = [object Event], e_request = [object Object] } }
-                                    //9:122028ms delay permissionrequest { { permission = pointerLock, e = [object Event], delay_e_request = [object Object] } }
-                                    //Uncaught Error: < webview >: Permission has already been decided for this "permissionrequest" event. 
+									//Task.Delay(1).ContinueWith(
+									//    delegate
+									//{
+									//    xPointerLockPermissionRequest delay_e_request = (e as dynamic).request;
 
-                                    //Expando.
+									//    Console.WriteLine("delay permissionrequest " + new { permission, e, delay_e_request });
 
-                                    if (e_request != null)
-                                        e_request.allow();
 
-                                    //Task.Delay(1).ContinueWith(
-                                    //    delegate
-                                    //{
-                                    //    xPointerLockPermissionRequest delay_e_request = (e as dynamic).request;
+									//    if (delay_e_request != null)
+									//        delay_e_request.allow();
+									//}
+									//);
+								}
+						);
+						#endregion
 
-                                    //    Console.WriteLine("delay permissionrequest " + new { permission, e, delay_e_request });
 
 
-                                    //    if (delay_e_request != null)
-                                    //        delay_e_request.allow();
-                                    //}
-                                    //);
-                                }
-                        );
-                        #endregion
+						// X:\jsc.svn\examples\javascript\WebGL\WebGLYomotsuTPS\WebGLYomotsuTPS\Application.cs
+						// http://src.chromium.org/viewvc/chrome/trunk/src/chrome/test/data/extensions/platform_apps/web_view/pointer_lock/main.js
 
 
 
-                        // X:\jsc.svn\examples\javascript\WebGL\WebGLYomotsuTPS\WebGLYomotsuTPS\Application.cs
-                        // http://src.chromium.org/viewvc/chrome/trunk/src/chrome/test/data/extensions/platform_apps/web_view/pointer_lock/main.js
 
 
 
 
 
+						that.InternalElement.parentNode.replaceChild(webview, that.InternalElement);
 
+						that.InternalElement = (IHTMLIFrame)(object)webview;
 
+						// src was not copied for some reason. force it.
+						that.Size = that.Size;
+						that.Refresh();
 
-                        that.InternalElement.parentNode.replaceChild(webview, that.InternalElement);
 
-                        that.InternalElement = (IHTMLIFrame)(object)webview;
+						Console.WriteLine("[413165] new webview ready " + new { that.Url });
 
-                        // src was not copied for some reason. force it.
-                        that.Size = that.Size;
-                        that.Refresh();
+					};
 
+					return;
 
-                        Console.WriteLine("[413165] new webview ready " + new { that.Url });
 
-                    };
+				};
 
-                    return;
+			}
+			#endregion
 
 
-                };
+			Console.WriteLine("will enter TheServer.InvokeAsync");
+			ChromeTCPServer.TheServer.InvokeAsync(AppSource,
 
-            }
-            #endregion
+				open:
 
+				async uri =>
+				{
+					// x:\jsc.svn\examples\javascript\webgl\heatZeekerrts\heatZeekerrts\application.cs
+					Console.WriteLine("enter TheServer.InvokeAsync open");
 
-            ChromeTCPServer.TheServer.InvokeAsync(AppSource,
+					var f = new Form
+					{
 
-                async uri =>
-                {
+						Text = chrome.Notification.DefaultTitle,
+						ShowIcon = false
+					};
 
-                    var f = new Form
-                    {
 
-                        Text = chrome.Notification.DefaultTitle,
-                        ShowIcon = false
-                    };
 
+					//Refused to frame 'http://192.168.43.252:8877/' because it violates the following Content Security Policy directive: "frame-src 'self' data: chrome-extension-resource:"
 
+					var w = new WebBrowser { }.AttachTo(f);
 
-                    //Refused to frame 'http://192.168.43.252:8877/' because it violates the following Content Security Policy directive: "frame-src 'self' data: chrome-extension-resource:"
 
-                    var w = new WebBrowser { }.AttachTo(f);
 
+					#region SizeChanged
+					f.SizeChanged +=
+						delegate
+					{
+						//Console.WriteLine("SizeChanged");
 
+						var ClientSize = f.ClientSize;
 
-                    #region SizeChanged
-                    f.SizeChanged +=
-                        delegate
-                    {
-                        //Console.WriteLine("SizeChanged");
 
-                        var ClientSize = f.ClientSize;
+						w.Width = ClientSize.Width;
+						w.Height = ClientSize.Height;
 
+					};
+					#endregion
 
-                        w.Width = ClientSize.Width;
-                        w.Height = ClientSize.Height;
 
-                    };
-                    #endregion
+					w.Navigate(uri);
 
+					f.Load +=
+						delegate
+					{
+						Console.WriteLine("f.Load, // InternalAtAfterVisibleChanged ?");
+					};
 
-                    w.Navigate(uri);
+					f.Shown +=
+						delegate
+					{
+						Console.WriteLine("f.Shown, // InternalAtAfterVisibleChanged ?");
 
-                    f.Load +=
-                        delegate
-                    {
-                        Console.WriteLine("f.Load, // InternalAtAfterVisibleChanged ?");
-                    };
+					};
 
-                    f.Shown +=
-                        delegate
-                    {
-                        Console.WriteLine("f.Shown, // InternalAtAfterVisibleChanged ?");
+					Console.WriteLine(" f.Show(), will it trigger // InternalAtAfterVisibleChanged ?");
 
-                    };
+					f.Show();
 
-                    Console.WriteLine(" f.Show(), will it trigger // InternalAtAfterVisibleChanged ?");
+					var x = new TaskCompletionSource<object>();
 
-                    f.Show();
+					f.FormClosed +=
+						delegate
+					{
+						x.SetResult(f);
+					};
 
-                    var x = new TaskCompletionSource<object>();
+					await x.Task;
 
-                    f.FormClosed +=
-                        delegate
-                    {
-                        x.SetResult(f);
-                    };
+					// Error	8	Since 'System.Func<string,System.Threading.Tasks.Task>' is an async method that returns 'Task', a return keyword must not be followed by an object expression. Did you intend to return 'Task<T>'?	X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone\Application.cs	311	21	ChromeTCPServerWithFrameNone
+				}
 
-                    await x.Task;
 
-                    // Error	8	Since 'System.Func<string,System.Threading.Tasks.Task>' is an async method that returns 'Task', a return keyword must not be followed by an object expression. Did you intend to return 'Task<T>'?	X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone\Application.cs	311	21	ChromeTCPServerWithFrameNone
-                }
+			);
 
-
-            );
-
-        }
-    }
+		}
+	}
 }
 
 namespace ChromeTCPServerWithFrameNone
 {
-    /// <summary>
-    /// Your client side code running inside a web browser as JavaScript.
-    /// </summary>
-    public sealed class Application
-    {
-        public readonly ApplicationWebService service = new ApplicationWebService();
+	/// <summary>
+	/// Your client side code running inside a web browser as JavaScript.
+	/// </summary>
+	public sealed class Application
+	{
+		public readonly ApplicationWebService service = new ApplicationWebService();
 
-        /// <summary>
-        /// This is a javascript application.
-        /// </summary>
-        /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
-        public Application(IApp page)
-        {
-            //{ trace = X:\jsc.internal.svn\compiler\jsc\Languages\IL\ILTranslationExtensions.EmitToArguments.cs, TargetMethod = Void InvokeAsync(System.String, System.Func`2[System.String,System.Threading.Tasks.Task]), DeclaringType = ChromeTCPServer.TheServer, Location =
-            // assembly: X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone\bin\Debug\ChromeTCPServerWithFrameNone.exe
-            // type: ChromeTCPServer.TheServerWithStyledForm, ChromeTCPServerWithFrameNone, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-            // offset: 0x00bb
-            //  method:Void Invoke(System.String, Int32, Int32, System.Action`1[ScriptCoreLib.JavaScript.Extensions.FormStyler]), ex = System.NullReferenceException: Object reference not set to an instance of an object.
-            //   at jsc.ILInstruction.GetExpectedType(Int32 StackBeforeIndex) in x:\jsc.internal.svn\compiler\jsc\CodeModel\ILInstruction.Stack.cs:line 64
-            //   at jsc.ILInstruction.GetExpectedType() in x:\jsc.internal.svn\compiler\jsc\CodeModel\ILInstruction.Stack.cs:line 20
-            //   at jsc.meta.Commands.Rewrite.RewriteToAssembly.<>c__DisplayClass11b.<WriteSwitchRewrite>b__b4(ILRewriteContext e) in x:\jsc.internal.svn\compiler\jsc.meta\jsc.meta\Commands\Rewrite\RewriteToAssembly\RewriteToAssembly.WriteSwitchRewrite.cs:line 465
-            //   at jsc.Languages.IL.ILTranslationExtensions.EmitToArguments.<>c__DisplayClassc3.<set_Item>b__c1(ILRewriteContext e) in x:\jsc.internal.svn\compiler\jsc\Languages\IL\ILTranslationExtensions.EmitToArguments.cs:line 1132
-            //   at jsc.meta.Commands.Rewrite.RewriteToAssembly.<>c__DisplayClass130.<>c__DisplayClass140.<WriteSwitchRewrite>b__e6(ILGenerator flow_il) in x:\jsc.internal.svn\compiler\jsc.meta\jsc.meta\Commands\Rewrite\RewriteToAssembly\RewriteToAssembly.WriteSwitchRewrite.cs:line 1353
-
-
-            dynamic self = Native.self;
-            dynamic self_chrome = self.chrome;
-            object self_chrome_socket = self_chrome.socket;
-
-            if (self_chrome_socket != null)
-            {
-                chrome.Notification.DefaultTitle = "ChromeTCPServerWithFrameNone";
-
-                //Action<string> open =
-                //      async uri =>
-                //      {
-                //                // Error	25	Cannot await 'chrome.Notification'	X:\jsc.svn\examples\javascript\chrome\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone\Application.cs	202	25	ChromeTCPServerWithFrameNone
-                //                //Error	26	Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement	X:\jsc.svn\examples\javascript\chrome\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone\Application.cs	204	25	ChromeTCPServerWithFrameNone
-
-                //                await (Task)"Make me a window!".ToNotification();
-
-                //                open(uri);
-                //      };
+		/// <summary>
+		/// This is a javascript application.
+		/// </summary>
+		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
+		public Application(IApp page)
+		{
+			//{ trace = X:\jsc.internal.svn\compiler\jsc\Languages\IL\ILTranslationExtensions.EmitToArguments.cs, TargetMethod = Void InvokeAsync(System.String, System.Func`2[System.String,System.Threading.Tasks.Task]), DeclaringType = ChromeTCPServer.TheServer, Location =
+			// assembly: X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone\bin\Debug\ChromeTCPServerWithFrameNone.exe
+			// type: ChromeTCPServer.TheServerWithStyledForm, ChromeTCPServerWithFrameNone, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+			// offset: 0x00bb
+			//  method:Void Invoke(System.String, Int32, Int32, System.Action`1[ScriptCoreLib.JavaScript.Extensions.FormStyler]), ex = System.NullReferenceException: Object reference not set to an instance of an object.
+			//   at jsc.ILInstruction.GetExpectedType(Int32 StackBeforeIndex) in x:\jsc.internal.svn\compiler\jsc\CodeModel\ILInstruction.Stack.cs:line 64
+			//   at jsc.ILInstruction.GetExpectedType() in x:\jsc.internal.svn\compiler\jsc\CodeModel\ILInstruction.Stack.cs:line 20
+			//   at jsc.meta.Commands.Rewrite.RewriteToAssembly.<>c__DisplayClass11b.<WriteSwitchRewrite>b__b4(ILRewriteContext e) in x:\jsc.internal.svn\compiler\jsc.meta\jsc.meta\Commands\Rewrite\RewriteToAssembly\RewriteToAssembly.WriteSwitchRewrite.cs:line 465
+			//   at jsc.Languages.IL.ILTranslationExtensions.EmitToArguments.<>c__DisplayClassc3.<set_Item>b__c1(ILRewriteContext e) in x:\jsc.internal.svn\compiler\jsc\Languages\IL\ILTranslationExtensions.EmitToArguments.cs:line 1132
+			//   at jsc.meta.Commands.Rewrite.RewriteToAssembly.<>c__DisplayClass130.<>c__DisplayClass140.<WriteSwitchRewrite>b__e6(ILGenerator flow_il) in x:\jsc.internal.svn\compiler\jsc.meta\jsc.meta\Commands\Rewrite\RewriteToAssembly\RewriteToAssembly.WriteSwitchRewrite.cs:line 1353
 
 
+			dynamic self = Native.self;
+			dynamic self_chrome = self.chrome;
+			object self_chrome_socket = self_chrome.socket;
 
-                ChromeTCPServer.TheServerWithStyledForm.Invoke(AppSource.Text);
+			if (self_chrome_socket != null)
+			{
+				chrome.Notification.DefaultTitle = "ChromeTCPServerWithFrameNone";
+
+				//Action<string> open =
+				//      async uri =>
+				//      {
+				//                // Error	25	Cannot await 'chrome.Notification'	X:\jsc.svn\examples\javascript\chrome\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone\Application.cs	202	25	ChromeTCPServerWithFrameNone
+				//                //Error	26	Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement	X:\jsc.svn\examples\javascript\chrome\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone\Application.cs	204	25	ChromeTCPServerWithFrameNone
+
+				//                await (Task)"Make me a window!".ToNotification();
+
+				//                open(uri);
+				//      };
 
 
 
-                return;
-            }
+				ChromeTCPServer.TheServerWithStyledForm.Invoke(AppSource.Text);
 
-        }
 
-    }
+
+				return;
+			}
+
+		}
+
+	}
 }

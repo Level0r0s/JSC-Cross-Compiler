@@ -226,6 +226,7 @@ namespace ChromeTCPServer
 
 		//static Dictionary<string, byte[]> CachedFiles = new Dictionary<string, byte[]>();
 
+			// why return anything?
 		static x zApplicationHandler(Tuple<IProgress<x>, x> scope)
 		{
 			var path = scope.Item2.path;
@@ -517,7 +518,7 @@ namespace ChromeTCPServer
 
 					// 9:60202ms RequestLine: {{ path = /, RequestLine = GET / HTTP/1.1 }} 
 					Console.WriteLine(
-						"RequestLine: " + new { path, RequestLine }
+						"doaccept_Handler RequestLine: " + new { path, RequestLine }
 					);
 
 					//{ RequestLine = GET /view-source HTTP/1.1, path = /view-source } 
@@ -576,8 +577,14 @@ namespace ChromeTCPServer
 
 
 					//worker = 
+
+					// "X:\jsc.svn\examples\javascript\async\Test\TestUnwrap\TestUnwrap.sln"
+					// func Task will blow up?
+
+					Console.WriteLine("doaccept_Handler will hop to worker");
+
 					Task.Run(
-							   async delegate
+							    delegate
 					   {
 						   // X:\jsc.svn\core\ScriptCoreLib\JavaScript\DOM\Worker.cs
 
@@ -631,14 +638,14 @@ namespace ChromeTCPServer
 					var read = await accept.socketId.read();
 
 					// { read = { resultCode = 370 } } 
-					Console.WriteLine(new { read = new { read.resultCode } });
+					Console.WriteLine("doaccept " + new { read = new { read.resultCode } });
 
 
 
 					var u = new Uint8ClampedArray(read.data, 0, (uint)read.data.byteLength);
 					var input = Encoding.UTF8.GetString(u);
 
-					Console.WriteLine(new { input });
+					Console.WriteLine("doaccept " + new { input });
 
 					//                       { input = GET / HTTP/1.1
 					//Host: 192.168.43.252:8763

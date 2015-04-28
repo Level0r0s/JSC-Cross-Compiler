@@ -84,6 +84,7 @@ namespace HeatZeekerRTS
 				 };
 				#endregion
 
+				Console.WriteLine("will enter TheServerWithStyledForm.Invoke");
 				ChromeTCPServer.TheServerWithStyledForm.Invoke(
 					AppSource.Text,
 					AtFormCreated: FormStyler.AtFormCreated
@@ -477,20 +478,4 @@ namespace HeatZeekerRTS
 	}
 }
 
-
-
-//{ src_value0 = hud_look_building.svg }
-//048c:02:01:1c RewriteToAssembly error: System.Xml.XmlException: Data at the root level is invalid.Line 1, position 1.
-
-// wtf?
-//0948:02:01:1c RewriteToAssembly error: System.Xml.XmlException: Data at the root level is invalid.Line 1, position 1.
-//   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
-//   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-//   at System.Xml.XmlTextReaderImpl.ParseRootLevelWhitespace()
-//   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-//   at System.Xml.XmlTextReaderImpl.Read()
-//   at System.Xml.XmlReader.MoveToContent()
-//   at System.Xml.Linq.XElement.Load(XmlReader reader, LoadOptions options)
-//   at System.Xml.Linq.XElement.Parse(String text, LoadOptions options)
-//   at System.Xml.Linq.XElement.Parse(String text)
-//   at jsc.meta.Commands.Reference.ReferenceUltraSource.ReferenceUltraSource.DefineNamedElements.Define() in X:\jsc.internal.git\compiler\jsc.meta\jsc.meta\Commands\Reference\ReferenceUltraSource\ReferenceUltraSource.DefineNamedElements.cs:line 235
+ 
