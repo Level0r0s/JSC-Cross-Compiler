@@ -658,6 +658,10 @@ namespace WebGLTiltShift
 
 
 			var loader = new THREE.JSONLoader();
+
+			// Severity	Code	Description	Project	File	Line
+			//Error CS0122  'Application.md2frames' is inaccessible due to its protection level WebGLTiltShift  X:\jsc.svn\examples\javascript\WebGL\WebGLTiltShift\WebGLTiltShift\Application.cs   661
+			// wtf?
 			var md2frames = new WebGLYomotsuTPS.Application.md2frames();
 
 			var moveState_moving = false;

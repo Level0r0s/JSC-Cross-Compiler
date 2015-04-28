@@ -300,7 +300,7 @@ namespace HeatZeekerRTSOrto
 
             // can we get our shadows?
             {
-                var directionalLight = new THREE.DirectionalLight((int)(random() * 0xffffff));
+                var directionalLight = new THREE.DirectionalLight((int)(random() * 0xffffff), 0.5);
 
                 directionalLight.position.x = random() - 0.5;
                 directionalLight.position.y = 400;
@@ -310,8 +310,8 @@ namespace HeatZeekerRTSOrto
             }
 
             {
-                var directionalLight = new THREE.DirectionalLight((int)(random() * 0xffffff));
-                directionalLight.position.x = random() - 0.5;
+                var directionalLight = new THREE.DirectionalLight((int)(random() * 0xffffff), 0.5);
+				directionalLight.position.x = random() - 0.5;
                 directionalLight.position.y = 400;
                 directionalLight.position.z = random() - 0.5;
                 directionalLight.position.normalize();

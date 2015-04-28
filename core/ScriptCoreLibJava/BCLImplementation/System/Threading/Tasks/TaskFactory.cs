@@ -20,6 +20,19 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
             return (TaskFactory)(object)e;
         }
 
+        // X:\jsc.svn\examples\java\hybrid\async\Test\JVMCLRFactoryRun\JVMCLRFactoryRun\Program.cs
+
+        public Task<TResult> StartNew<TResult>(Func<TResult> function)
+        {
+            // public Task(Func<TResult> function);
+
+            var t = new Task<TResult>(function);
+            //var t = new __Task<TResult>(function);
+
+            t.Start();
+
+            return t;
+        }
 
         //Implementation not found for type import :
         //type: System.Threading.Tasks.TaskFactory

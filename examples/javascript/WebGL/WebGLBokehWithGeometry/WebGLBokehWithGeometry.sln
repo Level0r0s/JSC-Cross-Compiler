@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22310.1
+VisualStudioVersion = 14.0.22609.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLBokehWithGeometry", "WebGLBokehWithGeometry\WebGLBokehWithGeometry.csproj", "{76843B5B-EB0A-4E49-8B36-037969E0545F}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLSpeedBlendCharacter", "..\WebGLSpeedBlendCharacter\WebGLSpeedBlendCharacter\WebGLSpeedBlendCharacter.csproj", "{890F6FDF-577B-4100-9FE1-D0F228175984}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "THREE", "..\..\..\..\market\synergy\THREE\THREE\THREE.csproj", "{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLHeatZeekerColladaExperiment", "..\WebGLHeatZeekerColladaExperiment\WebGLHeatZeekerColladaExperiment\WebGLHeatZeekerColladaExperiment.csproj", "{8C170164-C4E6-4BEE-9C24-D1E4CCC28665}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeatZeekerRTSOrto", "..\HeatZeekerRTSOrto\HeatZeekerRTSOrto\HeatZeekerRTSOrto.csproj", "{29947AAD-0B14-4FB0-A3C3-A51322BE2EDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Debug|x86.Build.0 = Debug|x86
 		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Release|x86.ActiveCfg = Release|x86
 		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Release|x86.Build.0 = Release|x86
+		{8C170164-C4E6-4BEE-9C24-D1E4CCC28665}.Debug|x86.ActiveCfg = Debug|x86
+		{8C170164-C4E6-4BEE-9C24-D1E4CCC28665}.Debug|x86.Build.0 = Debug|x86
+		{8C170164-C4E6-4BEE-9C24-D1E4CCC28665}.Release|x86.ActiveCfg = Release|x86
+		{8C170164-C4E6-4BEE-9C24-D1E4CCC28665}.Release|x86.Build.0 = Release|x86
+		{29947AAD-0B14-4FB0-A3C3-A51322BE2EDA}.Debug|x86.ActiveCfg = Debug|x86
+		{29947AAD-0B14-4FB0-A3C3-A51322BE2EDA}.Debug|x86.Build.0 = Debug|x86
+		{29947AAD-0B14-4FB0-A3C3-A51322BE2EDA}.Release|x86.ActiveCfg = Release|x86
+		{29947AAD-0B14-4FB0-A3C3-A51322BE2EDA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

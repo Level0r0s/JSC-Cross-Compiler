@@ -53,7 +53,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
         }
         #endregion
 
+        // X:\jsc.svn\examples\java\hybrid\async\Test\JVMCLRFactoryRun\JVMCLRFactoryRun\Program.cs
 
+        public TaskStatus Status { get; set; }
 
         public bool IsCompleted { get; set; }
 
@@ -135,18 +137,6 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
     [Script(Implements = typeof(global::System.Threading.Tasks.Task<>))]
     internal partial class __Task<TResult> : __Task
     {
-        public TResult InternalResult;
-        public TResult Result
-        {
-            get
-            {
-
-                // in js we cannot wait, throw instead?
-                this.Wait();
-                return this.InternalResult;
-            }
-            set { this.InternalResult = value; }
-        }
 
 
 
@@ -205,32 +195,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
         #endregion
 
 
-        public void SetResult(TResult result)
-        {
-            //Console.WriteLine("enter __Task SetResult, WaitEvent.Set " + new { __Environment.CurrentManagedThreadId });
-
-
-            // do we have to pay attention to threads?
-
-            this.Result = result;
-            this.IsCompleted = true;
-
-            if (InvokeWhenCompleteLater != null)
-            {
-                InvokeWhenCompleteLater();
-                InvokeWhenCompleteLater = null;
-            }
-
-            // does Wait event get raised after descendant actions are done or just started?
-
-            //Y:\staging\web\java\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\__Task_1.java:121: error: cannot find symbol
-            //        this.WaitEvent.Set();
-            //                      ^
-            //  symbol:   method Set()
-            //  location: variable WaitEvent of type __AutoResetEvent
-
-            this.WaitEvent.Set();
-        }
+       
 
 
 
