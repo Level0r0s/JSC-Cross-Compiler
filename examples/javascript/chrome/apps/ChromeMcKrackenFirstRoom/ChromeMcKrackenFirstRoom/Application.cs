@@ -86,6 +86,7 @@ namespace ChromeMcKrackenFirstRoom
 			}
 			#endregion
 
+			// wtf_
 			new McKrackenFirstRoom.Application(null);
 
 		}

@@ -117,9 +117,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="ChromeAppWindowMouseCapture.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\ChromeAppWindowMouseCapture.AssetsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
     </Reference>
@@ -127,7 +124,7 @@
       <HintPath>bin\staging.AssetsLibrary\ChromeMcKrackenFirstRoom.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="McKrackenFirstRoom.AssetsLibrary">
-      <HintPath>..\..\..\McKrackenFirstRoom\McKrackenFirstRoom\bin\staging.AssetsLibrary\McKrackenFirstRoom.AssetsLibrary.dll</HintPath>
+      <HintPath>..\..\..\..\McKrackenFirstRoom\McKrackenFirstRoom\bin\staging.AssetsLibrary\McKrackenFirstRoom.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -144,7 +141,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\McKrackenFirstRoom\McKrackenFirstRoom\McKrackenFirstRoom.csproj">
+    <ProjectReference Include="..\..\..\..\McKrackenFirstRoom\McKrackenFirstRoom\McKrackenFirstRoom.csproj">
       <Project>{7de9714d-6403-4e7c-a1a1-10e7206df46a}</Project>
       <Name>McKrackenFirstRoom</Name>
     </ProjectReference>
