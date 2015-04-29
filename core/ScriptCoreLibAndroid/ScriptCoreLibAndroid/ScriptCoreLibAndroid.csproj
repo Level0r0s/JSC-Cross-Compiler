@@ -328,6 +328,9 @@
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.cs">
       <Link>BCLImplementation\System\Threading\Tasks\Task\Task.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.ctor.cs">
+      <Link>BCLImplementation\System\Threading\Tasks\Task\Task.ctor.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.Delay.cs">
       <Link>BCLImplementation\System\Threading\Tasks\Task\Task.Delay.cs</Link>
     </Compile>
@@ -337,8 +340,14 @@
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.GetAwaiter.cs">
       <Link>BCLImplementation\System\Threading\Tasks\Task\Task.GetAwaiter.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.Result.cs">
+      <Link>BCLImplementation\System\Threading\Tasks\Task\Task.Result.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.Run.cs">
       <Link>BCLImplementation\System\Threading\Tasks\Task\Task.Run.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.Start.cs">
+      <Link>BCLImplementation\System\Threading\Tasks\Task\Task.Start.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.WhenAll.cs">
       <Link>BCLImplementation\System\Threading\Tasks\Task\Task.WhenAll.cs</Link>

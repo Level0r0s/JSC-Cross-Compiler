@@ -126,3 +126,11 @@ namespace AndroidAccelerometerActivity.Activities
 
 
 }
+
+
+//Implementation not found for type import :
+// type: System.Threading.Tasks.TaskExtensions
+// method: System.Threading.Tasks.Task`1[TResult]
+//Unwrap[TResult](System.Threading.Tasks.Task`1[System.Threading.Tasks.Task`1[TResult]])
+// Did you forget to add the[Script] attribute?
+//Please double check the signature!

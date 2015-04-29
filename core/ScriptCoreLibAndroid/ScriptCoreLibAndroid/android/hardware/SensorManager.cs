@@ -13,7 +13,10 @@ namespace android.hardware
     [Script(IsNative = true)]
     public class SensorManager
     {
-        public static readonly int SENSOR_DELAY_NORMAL;
+		public static readonly int SENSOR_DELAY_FASTEST = 0;
+		public static readonly int SENSOR_DELAY_GAME = 1;
+
+		public static readonly int SENSOR_DELAY_NORMAL;
 
         public Sensor getDefaultSensor(int type)
         {

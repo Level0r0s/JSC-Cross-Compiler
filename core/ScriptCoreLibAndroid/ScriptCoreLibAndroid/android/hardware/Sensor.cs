@@ -15,8 +15,9 @@ namespace android.hardware
         // X:\jsc.svn\examples\java\android\AndroidAccelerometerActivity\AndroidAccelerometerActivity\ApplicationActivity.cs
 
         public static readonly int TYPE_ORIENTATION;
+		public static readonly int TYPE_ACCELEROMETER;
 
-        public int getType()
+		public int getType()
         {
             return default(int);
 
