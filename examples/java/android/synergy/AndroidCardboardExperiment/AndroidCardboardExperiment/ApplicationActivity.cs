@@ -13,6 +13,7 @@ using ScriptCoreLib.Android.Extensions;
 using ScriptCoreLib.Android.Manifest;
 using android.opengl;
 using java.nio;
+using android.content;
 
 namespace AndroidCardboardExperiment.Activities
 {
@@ -95,7 +96,7 @@ namespace AndroidCardboardExperiment.Activities
         private float floorDepth = 20f;
 
         private Vibrator vibrator;
-        //private CardboardOverlayView overlayView;
+        private CardboardOverlayView overlayView;
 
         public void onDrawEye(Eye eye)
         {
@@ -338,6 +339,21 @@ namespace AndroidCardboardExperiment.Activities
 
             cardboardView.setRenderer(this);
             setCardboardView(cardboardView);
+
+
+            modelCube = new float[16];
+            camera = new float[16];
+            view = new float[16];
+            modelViewProjection = new float[16];
+            modelView = new float[16];
+            modelFloor = new float[16];
+            headView = new float[16];
+            vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+
+
+            overlayView = new CardboardOverlayView(this, null);
+            overlayView.show3DToast("Pull the magnet when you find an object.");
+
         }
 
         private static void checkGLError(String label)

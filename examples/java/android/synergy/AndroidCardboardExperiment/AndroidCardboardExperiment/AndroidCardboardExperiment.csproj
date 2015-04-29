@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="ApplicationActivity.cs">
     </Compile>
+    <Compile Include="CardboardOverlayView.cs" />
     <Compile Include="Program.cs">
       <DependentUpon>ApplicationActivity.cs</DependentUpon>
     </Compile>
