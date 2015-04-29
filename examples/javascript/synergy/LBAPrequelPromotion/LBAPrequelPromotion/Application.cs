@@ -49,7 +49,6 @@ namespace LBAPrequelPromotion
             //            .Try ommiting the return, break or continue instruction.
             // not ready for roslyn!
 
-#if false
 
             #region AtFormCreated
             FormStyler.AtFormCreated =
@@ -81,7 +80,6 @@ namespace LBAPrequelPromotion
                 return;
             }
             #endregion
-#endif
 
 
             // https://docs.google.com/a/jsc-solutions.net/spreadsheet/ccc?key=0AjBm0oHdZ3DwdFhMb2UxVnBYUnNnUE16LUNiUzJJSVE#gid=0
