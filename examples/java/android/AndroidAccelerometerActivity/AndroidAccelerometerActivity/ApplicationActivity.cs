@@ -15,7 +15,8 @@ using android.content.pm;
 
 namespace AndroidAccelerometerActivity.Activities
 {
-
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     [Description("inspired by http://webhole.net/2011/08/20/android-sdk-accelerometer-example-tutorial/")]
     public class AndroidAccelerometerActivity : Activity
     {
@@ -127,10 +128,4 @@ namespace AndroidAccelerometerActivity.Activities
 
 }
 
-
-//Implementation not found for type import :
-// type: System.Threading.Tasks.TaskExtensions
-// method: System.Threading.Tasks.Task`1[TResult]
-//Unwrap[TResult](System.Threading.Tasks.Task`1[System.Threading.Tasks.Task`1[TResult]])
-// Did you forget to add the[Script] attribute?
-//Please double check the signature!
+ 
