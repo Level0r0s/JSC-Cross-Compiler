@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLSpeedBlendCharacter", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeTCPServer", "..\..\chrome\apps\ChromeTCPServer\ChromeTCPServer\ChromeTCPServer.csproj", "{9672D112-D806-49D3-B5C8-3B3A2278AD18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abstractatech.JavaScript.Forms.FloatStyler", "..\..\..\..\market\javascript\Abstractatech.JavaScript.Forms.FloatStyler\Abstractatech.JavaScript.Forms.FloatStyler\Abstractatech.JavaScript.Forms.FloatStyler.csproj", "{7E3E19CE-5998-41A5-8475-37B61FC63A64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Android|Any CPU = Android|Any CPU
@@ -273,6 +275,20 @@ Global
 		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Release|Any CPU.ActiveCfg = Release|x86
 		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Release|x86.ActiveCfg = Release|x86
 		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Release|x86.Build.0 = Release|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.Android|Any CPU.ActiveCfg = Release|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.Android|Any CPU.Build.0 = Release|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.Android|x86.ActiveCfg = Release|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.Android|x86.Build.0 = Release|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.Debug|x86.ActiveCfg = Debug|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.Debug|x86.Build.0 = Debug|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.PHP|Any CPU.ActiveCfg = Release|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.PHP|Any CPU.Build.0 = Release|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.PHP|x86.ActiveCfg = Release|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.PHP|x86.Build.0 = Release|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.Release|Any CPU.ActiveCfg = Release|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.Release|x86.ActiveCfg = Release|x86
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -294,5 +310,6 @@ Global
 		{5D093F42-02CC-4ED6-BD9F-3AC636479FB9} = {9CFE83CE-833C-463F-A68A-2FF926459B66}
 		{890F6FDF-577B-4100-9FE1-D0F228175984} = {9CFE83CE-833C-463F-A68A-2FF926459B66}
 		{9672D112-D806-49D3-B5C8-3B3A2278AD18} = {9CFE83CE-833C-463F-A68A-2FF926459B66}
+		{7E3E19CE-5998-41A5-8475-37B61FC63A64} = {9CFE83CE-833C-463F-A68A-2FF926459B66}
 	EndGlobalSection
 EndGlobal

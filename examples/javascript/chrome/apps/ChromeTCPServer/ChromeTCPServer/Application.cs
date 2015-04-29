@@ -132,6 +132,18 @@ namespace ChromeTCPServer
 		public byte[] write;
 	}
 
+	// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150429
+	// http://www.snip2code.com/Snippet/19734/Visual-studio-intellisense-file-for-chro
+	[Script(HasNoPrototype = true)]
+	public sealed class xwebviewPointerLockPermissionRequest
+	{
+		// https://developer.chrome.com/apps/tags/webview#type-PointerLockPermissionRequest
+
+		// tested by ?
+		public void allow()
+		{
+		}
+	}
 
 
 
