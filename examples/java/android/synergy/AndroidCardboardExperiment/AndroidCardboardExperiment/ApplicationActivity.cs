@@ -22,6 +22,7 @@ namespace AndroidCardboardExperiment.Activities
 	public class ApplicationActivity :
 		 com.google.vrtoolkit.cardboard.CardboardActivity, com.google.vrtoolkit.cardboard.CardboardView.StereoRenderer
 	{
+        // https://github.com/gkortsaridis/GoogleCardboardPhotoSphere-VR-/blob/master/CardboardPhotoSphere/src/main/AndroidManifest.xml
 		// https://github.com/pollux-/GoogleCardboardPhotoSphere-VR-
 
 		//		D/HeadMountedDisplayManager( 3942): Cardboard screen parameters file not found: java.io.FileNotFoundException: /storage/emulated/0/Cardboard/phone_params: open failed: ENOENT(No such file or directory)
