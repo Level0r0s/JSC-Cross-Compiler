@@ -107,7 +107,6 @@ namespace WebGLYomotsuTPS
             { THREE.SpeedBlendCharacter ref0; }
 
 
-#if FCHROME
             #region AtFormCreated
             FormStyler.AtFormCreated =
                  s =>
@@ -138,7 +137,6 @@ namespace WebGLYomotsuTPS
                 return;
             }
             #endregion
-#endif
 
 
             var fov = 40;

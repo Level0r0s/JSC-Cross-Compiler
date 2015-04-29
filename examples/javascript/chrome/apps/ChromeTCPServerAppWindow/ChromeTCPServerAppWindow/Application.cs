@@ -22,7 +22,7 @@ using System.Windows.Forms;
 namespace ChromeTCPServer
 {
 
-
+	// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150429
 	// http://www.snip2code.com/Snippet/19734/Visual-studio-intellisense-file-for-chro
 	[Script(HasNoPrototype = true)]
 	class xPointerLockPermissionRequest

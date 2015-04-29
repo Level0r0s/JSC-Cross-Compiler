@@ -59,7 +59,6 @@ namespace WebGLTiltShift
 
 			// http://stackoverflow.com/questions/21673278/three-js-error-when-applying-texture
 
-#if FCHROME
 			#region += Launched chrome.app.window
             // X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerAppWindow\ChromeTCPServerAppWindow\Application.cs
             dynamic self = Native.self;
@@ -86,7 +85,6 @@ namespace WebGLTiltShift
 
             }
 			#endregion
-#endif
 
 			Native.document.body.style.margin = "0px";
 			Native.document.body.style.overflow = IStyle.OverflowEnum.hidden;
