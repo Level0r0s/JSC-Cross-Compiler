@@ -95,7 +95,7 @@ namespace NatureBoyTestPadExperiment
             }
             #endregion
 
-            global::DiagnosticsConsole.ApplicationContent.BindKeyboardToDiagnosticsConsole();
+            //global::DiagnosticsConsole.ApplicationContent.BindKeyboardToDiagnosticsConsole();
 
 
             #region music
