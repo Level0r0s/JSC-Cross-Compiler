@@ -42,11 +42,14 @@ namespace ChromeGalaxyS6Edge
 				//chrome.Notification.DefaultTitle = "Nexus7";
 				//chrome.Notification.DefaultIconUrl = new x128().src;
 
-				ChromeTCPServer.TheServerWithAppWindow.Invoke(AppSource.Text);
+				ChromeTCPServer.TheServer.Invoke(AppSource.Text);
+				//ChromeTCPServer.TheServerWithAppWindow.Invoke(AppSource.Text);
 
 				return;
 			}
 			#endregion
+
+			Native.body.Clear();
 
 			var oo = new List<THREE.Object3D>();
 
@@ -227,6 +230,8 @@ namespace ChromeGalaxyS6Edge
 				};
 			#endregion
 
+			// THREE.WebGLProgram: gl.getProgramInfoLog() (79,3-98): warning X3557: loop only executes for 1 iteration(s), forcing loop to unroll
+
 			new Models.ColladaS6Edge().Source.Task.ContinueWithResult(
 				   dae =>
 				   {
@@ -240,9 +245,9 @@ namespace ChromeGalaxyS6Edge
 
 
 					   // jsc, do we have ILObserver available yet?
-					   dae.scale.x = 13.5;
-					   dae.scale.y = 13.5;
-					   dae.scale.z = 13.5;
+					   dae.scale.x = 0.5;
+					   dae.scale.y = 0.5;
+					   dae.scale.z = 0.5;
 
 					   //dae.position.y = -80;
 

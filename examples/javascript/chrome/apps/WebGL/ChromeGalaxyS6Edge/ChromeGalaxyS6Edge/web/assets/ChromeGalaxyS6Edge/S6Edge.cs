@@ -21,8 +21,10 @@ namespace ChromeGalaxyS6Edge.Models
 
         public ColladaS6Edge()
             : base(
-				// EmbeddedResource !
-				"assets/ChromeGalaxyS6Edge.Application/S6Edge.dae"
+				  // EmbeddedResource !
+
+				  //http://192.168.1.199:8374/assets/ChromeGalaxyS6Edge.Application/S6Edge.dae Failed to load resource: the server 
+				"assets/ChromeGalaxyS6Edge/S6Edge.dae"
 				)
         {
 
