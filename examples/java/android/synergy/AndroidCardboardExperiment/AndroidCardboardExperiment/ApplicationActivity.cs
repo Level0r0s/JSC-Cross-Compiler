@@ -98,83 +98,79 @@ namespace AndroidCardboardExperiment.Activities
         private Vibrator vibrator;
         private CardboardOverlayView overlayView;
 
-        public void onDrawEye(Eye eye)
+
+
+
+
+        private static void checkGLError(String label)
         {
-            GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-
-            checkGLError("colorParam");
-
-            // Apply the eye transformation to the camera.
-            Matrix.multiplyMM(view, 0, eye.getEyeView(), 0, camera, 0);
-
-            // Set the position of the light
-            Matrix.multiplyMV(lightPosInEyeSpace, 0, view, 0, LIGHT_POS_IN_WORLD_SPACE, 0);
-
-            // Build the ModelView and ModelViewProjection matrices
-            // for calculating cube position and light.
-            float[] perspective = eye.getPerspective(Z_NEAR, Z_FAR);
-            Matrix.multiplyMM(modelView, 0, view, 0, modelCube, 0);
-            Matrix.multiplyMM(modelViewProjection, 0, perspective, 0, modelView, 0);
-            drawCube();
-
-            // Set modelView for the floor, so we draw floor in the correct location
-            Matrix.multiplyMM(modelView, 0, view, 0, modelFloor, 0);
-            Matrix.multiplyMM(modelViewProjection, 0, perspective, 0,
-              modelView, 0);
-            drawFloor();
+            int error = GLES20.glGetError();
+            if (error != GLES20.GL_NO_ERROR)
+            {
+                throw new Exception(label + ": glError " + error);
+            }
         }
 
-        public void drawFloor()
+
+        protected override void onCreate(Bundle savedInstanceState)
         {
-            GLES20.glUseProgram(floorProgram);
+            Console.WriteLine("enter AndroidCardboardExperiment onCreate");
+            // https://github.com/googlesamples/cardboard-java/blob/master/CardboardSample/src/main/res/layout/common_ui.xml
 
-            // Set ModelView, MVP, position, normals, and color.
-            GLES20.glUniform3fv(floorLightPosParam, 1, lightPosInEyeSpace, 0);
-            GLES20.glUniformMatrix4fv(floorModelParam, 1, false, modelFloor, 0);
-            GLES20.glUniformMatrix4fv(floorModelViewParam, 1, false, modelView, 0);
-            GLES20.glUniformMatrix4fv(floorModelViewProjectionParam, 1, false,
-                modelViewProjection, 0);
-            GLES20.glVertexAttribPointer(floorPositionParam, COORDS_PER_VERTEX, GLES20.GL_FLOAT,
-                false, 0, floorVertices);
-            GLES20.glVertexAttribPointer(floorNormalParam, 3, GLES20.GL_FLOAT, false, 0,
-                floorNormals);
-            GLES20.glVertexAttribPointer(floorColorParam, 4, GLES20.GL_FLOAT, false, 0, floorColors);
+            base.onCreate(savedInstanceState);
 
-            GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 6);
+            //this.setRequestedOrientation(LAN
+            // [javac]
+            //		W:\src\AndroidCardboardExperiment\Activities\ApplicationActivity.java:23: error: FullscreenMode is not public in com.google.vrtoolkit.cardboard; cannot be accessed from outside package
+            //[javac] import com.google.vrtoolkit.cardboard.FullscreenMode;
+            //		[javac]                                      ^
+            //{ com.google.vrtoolkit.cardboard.FullscreenMode ref0; }
 
-            checkGLError("drawing floor");
-        }
+            //var sv = new ScrollView(this);
+            var ll = new RelativeLayout(this);
+            //ll.setOrientation(LinearLayout.VERTICAL);
+            //sv.addView(ll);
+            ll.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT));
 
-        public void onFinishFrame(Viewport value)
-        {
-        }
 
-        public void onNewFrame(HeadTransform headTransform)
-        {
-            Console.WriteLine("AndroidCardboardExperiment onNewFrame");
+            this.setContentView(ll);
 
-            // Build the Model part of the ModelView matrix.
-            Matrix.rotateM(modelCube, 0, TIME_DELTA, 0.5f, 0.5f, 1.0f);
+            var cardboardView = new com.google.vrtoolkit.cardboard.CardboardView(this).AttachTo(ll);
+            cardboardView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT));
+            cardboardView.setRenderer(this);
+            setCardboardView(cardboardView);
 
-            // Build the camera matrix and apply it to the ModelView.
-            Matrix.setLookAtM(camera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
-            headTransform.getHeadView(headView, 0);
+            modelCube = new float[16];
+            camera = new float[16];
+            view = new float[16];
+            modelViewProjection = new float[16];
+            modelView = new float[16];
+            modelFloor = new float[16];
+            headView = new float[16];
+            vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
 
-            checkGLError("onReadyToDraw");
+
+            overlayView = new CardboardOverlayView(this, null);
+            overlayView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT));
+            overlayView.show3DToast("Pull the magnet when you find an object.");
+
+            Console.WriteLine("exit AndroidCardboardExperiment onCreate");
         }
 
         public void onRendererShutdown()
         {
+            Console.WriteLine("AndroidCardboardExperiment onRendererShutdown");
         }
 
         public void onSurfaceChanged(int arg0, int arg1)
         {
+            Console.WriteLine("AndroidCardboardExperiment onSurfaceChanged");
         }
 
         public void onSurfaceCreated(javax.microedition.khronos.egl.EGLConfig value)
         {
-            Console.WriteLine("AndroidCardboardExperiment onSurfaceCreated");
+            Console.WriteLine("enter AndroidCardboardExperiment onSurfaceCreated");
 
             GLES20.glClearColor(0.1f, 0.1f, 0.1f, 0.5f); // Dark background so text shows up well.
 
@@ -225,30 +221,30 @@ namespace AndroidCardboardExperiment.Activities
 
             #region loadGLShader
             Func<int, string, int> loadGLShader = (int type, string code) =>
-           {
-               int shader = GLES20.glCreateShader(type);
-               GLES20.glShaderSource(shader, code);
-               GLES20.glCompileShader(shader);
+            {
+                int shader = GLES20.glCreateShader(type);
+                GLES20.glShaderSource(shader, code);
+                GLES20.glCompileShader(shader);
 
-               // Get the compilation status.
-               int[] compileStatus = new int[1];
-               GLES20.glGetShaderiv(shader, GLES20.GL_COMPILE_STATUS, compileStatus, 0);
+                // Get the compilation status.
+                int[] compileStatus = new int[1];
+                GLES20.glGetShaderiv(shader, GLES20.GL_COMPILE_STATUS, compileStatus, 0);
 
-               // If the compilation failed, delete the shader.
-               if (compileStatus[0] == 0)
-               {
-                   Console.WriteLine("Error compiling shader: " + GLES20.glGetShaderInfoLog(shader));
-                   GLES20.glDeleteShader(shader);
-                   shader = 0;
-               }
+                // If the compilation failed, delete the shader.
+                if (compileStatus[0] == 0)
+                {
+                    Console.WriteLine("Error compiling shader: " + GLES20.glGetShaderInfoLog(shader));
+                    GLES20.glDeleteShader(shader);
+                    shader = 0;
+                }
 
-               if (shader == 0)
-               {
-                   throw new Exception("Error creating shader.");
-               }
+                if (shader == 0)
+                {
+                    throw new Exception("Error creating shader.");
+                }
 
-               return shader;
-           };
+                return shader;
+            };
             #endregion
 
 
@@ -312,57 +308,57 @@ namespace AndroidCardboardExperiment.Activities
             Matrix.translateM(modelFloor, 0, 0, -floorDepth, 0); // Floor appears below user.
 
             checkGLError("onSurfaceCreated");
+
+            Console.WriteLine("exit AndroidCardboardExperiment onSurfaceCreated");
         }
 
-        protected override void onCreate(Bundle savedInstanceState)
+
+
+        public void onNewFrame(HeadTransform headTransform)
         {
-            Console.WriteLine("AndroidCardboardExperiment onCreate");
+            Console.WriteLine("AndroidCardboardExperiment onNewFrame");
 
-            base.onCreate(savedInstanceState);
+            // Build the Model part of the ModelView matrix.
+            Matrix.rotateM(modelCube, 0, TIME_DELTA, 0.5f, 0.5f, 1.0f);
 
-            //this.setRequestedOrientation(LAN
-            // [javac]
-            //		W:\src\AndroidCardboardExperiment\Activities\ApplicationActivity.java:23: error: FullscreenMode is not public in com.google.vrtoolkit.cardboard; cannot be accessed from outside package
-            //[javac] import com.google.vrtoolkit.cardboard.FullscreenMode;
-            //		[javac]                                      ^
-            //{ com.google.vrtoolkit.cardboard.FullscreenMode ref0; }
+            // Build the camera matrix and apply it to the ModelView.
+            Matrix.setLookAtM(camera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
-            var sv = new ScrollView(this);
-            var ll = new LinearLayout(this);
-            //ll.setOrientation(LinearLayout.VERTICAL);
-            sv.addView(ll);
+            headTransform.getHeadView(headView, 0);
 
-
-            this.setContentView(sv);
-
-            var cardboardView = new com.google.vrtoolkit.cardboard.CardboardView(this).AttachTo(ll);
-
-            cardboardView.setRenderer(this);
-            setCardboardView(cardboardView);
-
-
-            modelCube = new float[16];
-            camera = new float[16];
-            view = new float[16];
-            modelViewProjection = new float[16];
-            modelView = new float[16];
-            modelFloor = new float[16];
-            headView = new float[16];
-            vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-
-
-            overlayView = new CardboardOverlayView(this, null);
-            overlayView.show3DToast("Pull the magnet when you find an object.");
-
+            checkGLError("onReadyToDraw");
         }
 
-        private static void checkGLError(String label)
+        // Error	3	'AndroidCardboardExperiment.Activities.ApplicationActivity.onDrawEye(com.google.vrtoolkit.cardboard.Eye)': no suitable method found to override	X:\jsc.svn\examples\java\android\synergy\AndroidCardboardExperiment\AndroidCardboardExperiment\ApplicationActivity.cs	328	31	AndroidCardboardExperiment
+        // StereoRenderer
+        public void onDrawEye(Eye eye)
         {
-            int error = GLES20.glGetError();
-            if (error != GLES20.GL_NO_ERROR)
-            {
-                throw new Exception(label + ": glError " + error);
-            }
+            GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+
+            checkGLError("colorParam");
+
+            // Apply the eye transformation to the camera.
+            Matrix.multiplyMM(view, 0, eye.getEyeView(), 0, camera, 0);
+
+            // Set the position of the light
+            Matrix.multiplyMV(lightPosInEyeSpace, 0, view, 0, LIGHT_POS_IN_WORLD_SPACE, 0);
+
+            // Build the ModelView and ModelViewProjection matrices
+            // for calculating cube position and light.
+            float[] perspective = eye.getPerspective(Z_NEAR, Z_FAR);
+            Matrix.multiplyMM(modelView, 0, view, 0, modelCube, 0);
+            Matrix.multiplyMM(modelViewProjection, 0, perspective, 0, modelView, 0);
+            drawCube();
+
+            // Set modelView for the floor, so we draw floor in the correct location
+            Matrix.multiplyMM(modelView, 0, view, 0, modelFloor, 0);
+            Matrix.multiplyMM(modelViewProjection, 0, perspective, 0,
+              modelView, 0);
+            drawFloor();
+        }
+
+        public void onFinishFrame(Viewport value)
+        {
         }
 
         // called by onDrawEye
@@ -399,6 +395,52 @@ namespace AndroidCardboardExperiment.Activities
             GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 36);
             checkGLError("Drawing cube");
         }
+
+
+        // called by onDrawEye
+        public void drawFloor()
+        {
+            GLES20.glUseProgram(floorProgram);
+
+            // Set ModelView, MVP, position, normals, and color.
+            GLES20.glUniform3fv(floorLightPosParam, 1, lightPosInEyeSpace, 0);
+            GLES20.glUniformMatrix4fv(floorModelParam, 1, false, modelFloor, 0);
+            GLES20.glUniformMatrix4fv(floorModelViewParam, 1, false, modelView, 0);
+            GLES20.glUniformMatrix4fv(floorModelViewProjectionParam, 1, false,
+                modelViewProjection, 0);
+            GLES20.glVertexAttribPointer(floorPositionParam, COORDS_PER_VERTEX, GLES20.GL_FLOAT,
+                false, 0, floorVertices);
+            GLES20.glVertexAttribPointer(floorNormalParam, 3, GLES20.GL_FLOAT, false, 0,
+                floorNormals);
+            GLES20.glVertexAttribPointer(floorColorParam, 4, GLES20.GL_FLOAT, false, 0, floorColors);
+
+            GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 6);
+
+            checkGLError("drawing floor");
+        }
+
+
+        public override void onCardboardTrigger()
+        {
+            //Log.i(TAG, "onCardboardTrigger");
+
+            if (isLookingAtObject())
+            {
+                score++;
+                overlayView.show3DToast("Found it! Look around for another one.\nScore = " + score);
+                //hideObject();
+            }
+            else
+            {
+                overlayView.show3DToast("Look around to find the object!");
+            }
+
+            // Always give user feedback.
+            vibrator.vibrate(50);
+        }
+
+
+
 
         private bool isLookingAtObject()
         {
