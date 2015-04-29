@@ -11,7 +11,8 @@ namespace android.widget
     // https://github.com/android/platform_frameworks_base/blob/master/core/java/android/widget/AbsSpinner.java
     // http://developer.android.com/reference/android/widget/AbsSpinner.html
     [Script(IsNative = true)]
-    public abstract class AbsSpinner : AdapterView<SpinnerAdapter>
+    //public abstract class AbsSpinner : AdapterView<SpinnerAdapter>
+    public abstract class AbsSpinner : AdapterView 
     {
         // members and types are to be extended by jsc at release build
         public AbsSpinner(Context c)

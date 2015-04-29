@@ -25,7 +25,8 @@ namespace android.widget
 
         // members and types are to be extended by jsc at release build
 
-        public override void setAdapter(SpinnerAdapter adapter)
+        //public override void setAdapter(SpinnerAdapter adapter)
+        public void setAdapter(SpinnerAdapter adapter)
         {
         }
     }
