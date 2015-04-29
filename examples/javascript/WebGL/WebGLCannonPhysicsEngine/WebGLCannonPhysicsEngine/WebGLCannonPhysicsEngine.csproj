@@ -62,6 +62,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\ScriptCoreLib.dll</HintPath>
     </Reference>
+    <Reference Include="ScriptCoreLib.Async">
+      <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
+    </Reference>
     <Reference Include="ScriptCoreLib.Avalon">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\ScriptCoreLib.Avalon.dll</HintPath>
@@ -128,9 +131,6 @@
     <Reference Include="WebGLCannonPhysicsEngine.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\WebGLCannonPhysicsEngine.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="WebGLRah66Comanche.AssetsLibrary">
-      <HintPath>..\..\collada\WebGLRah66Comanche\WebGLRah66Comanche\bin\staging.AssetsLibrary\WebGLRah66Comanche.AssetsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="WebGLColladaExperiment.AssetsLibrary">
       <HintPath>..\..\WebGLColladaExperiment\WebGLColladaExperiment\bin\staging.AssetsLibrary\WebGLColladaExperiment.AssetsLibrary.dll</HintPath>
     </Reference>
@@ -152,12 +152,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\collada\WebGLRah66Comanche\WebGLRah66Comanche\WebGLRah66Comanche.csproj">
-      <Project>{5a75fa08-3af1-4d27-a726-20b58b6cd608}</Project>
-      <Name>WebGLRah66Comanche</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

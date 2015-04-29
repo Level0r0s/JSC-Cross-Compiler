@@ -20,7 +20,7 @@ using static THREE;
 
 namespace WebGLCannonPhysicsEngine
 {
-    using WebGLRah66Comanche.Library;
+    //using WebGLRah66Comanche.Library;
     using f = Single;
     using gl = ScriptCoreLib.JavaScript.WebGL.WebGLRenderingContext;
     using Math = System.Math;
@@ -414,15 +414,15 @@ namespace WebGLCannonPhysicsEngine
 
 
 
-            var ze = new ZeProperties();
+            //var ze = new ZeProperties();
 
-            ze.Show();
+            //ze.Show();
 
-            ze.Left = 0;
+            //ze.Left = 0;
 
-            ze.Add(() => renderer);
-            ze.Add(() => controls);
-            ze.Add(() => scene);
+            //ze.Add(() => renderer);
+            //ze.Add(() => controls);
+            //ze.Add(() => scene);
         }
 
     }
