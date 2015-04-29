@@ -47,6 +47,20 @@ namespace com.abstractatech.vr
 
 		public Application(com.abstractatech.apps.vr.HTML.Pages.IApp page)
 		{
+			#region += Launched chrome.app.window
+			// X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerAppWindow\ChromeTCPServerAppWindow\Application.cs
+			dynamic self = Native.self;
+			dynamic self_chrome = self.chrome;
+			object self_chrome_socket = self_chrome.socket;
+
+			if (self_chrome_socket != null)
+			{
+				ChromeTCPServer.TheServerWithAppWindow.Invoke(com.abstractatech.apps.vr.HTML.Pages.AppSource.Text);
+
+				return;
+			}
+			#endregion
+
 			// https://play.google.com/store/apps/details?id=com.abstractatech.vr
 			// could we display LAN UDP notifications too. like
 			// which youtube video is playing?

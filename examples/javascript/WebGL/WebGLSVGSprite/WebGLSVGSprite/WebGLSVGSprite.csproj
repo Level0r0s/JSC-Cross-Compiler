@@ -123,9 +123,6 @@
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
     </Reference>
-    <Reference Include="ChromeUDPNotification.AssetsLibrary">
-      <HintPath>..\..\..\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\bin\staging.AssetsLibrary\ChromeUDPNotification.AssetsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="WebGLSpeedBlendCharacter.AssetsLibrary">
       <HintPath>..\..\WebGLSpeedBlendCharacter\WebGLSpeedBlendCharacter\bin\staging.AssetsLibrary\WebGLSpeedBlendCharacter.AssetsLibrary.dll</HintPath>
     </Reference>
@@ -158,10 +155,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\ChromeUDPNotification.csproj">
-      <Project>{76843b5b-eb0a-4e49-8b36-037969e0545f}</Project>
-      <Name>ChromeUDPNotification</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\synergy\webgl\WebGLEquirectangularPanorama\WebGLEquirectangularPanorama\WebGLEquirectangularPanorama.csproj">
       <Project>{afb54cd6-f4ff-4c30-a983-5bb45be818d8}</Project>
       <Name>WebGLEquirectangularPanorama</Name>

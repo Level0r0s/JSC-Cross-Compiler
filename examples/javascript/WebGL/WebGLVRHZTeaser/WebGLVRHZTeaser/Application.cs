@@ -38,6 +38,26 @@ namespace WebGLVRHZTeaser
 		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
 		public Application(IApp page)
 		{
+
+
+			#region += Launched chrome.app.window
+			// X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerAppWindow\ChromeTCPServerAppWindow\Application.cs
+			dynamic self = Native.self;
+			dynamic self_chrome = self.chrome;
+			object self_chrome_socket = self_chrome.socket;
+
+			if (self_chrome_socket != null)
+			{
+
+				chrome.Notification.DefaultTitle = "HZ";
+				chrome.Notification.DefaultIconUrl = new HTML.Images.FromAssets.Preview().src;
+
+				ChromeTCPServer.TheServerWithAppWindow.Invoke(AppSource.Text);
+
+				return;
+			}
+			#endregion
+
 			// 
 			Native.document.body.style.margin = "0px";
 			Native.document.body.style.overflow = IStyle.OverflowEnum.hidden;
