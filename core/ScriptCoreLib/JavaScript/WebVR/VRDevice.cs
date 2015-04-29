@@ -12,6 +12,8 @@ namespace ScriptCoreLib.JavaScript.WebVR
 	[Script(HasNoPrototype = true)]
 	public class VRDevice
 	{
+		// https://dodocase.zendesk.com/hc/en-us/articles/203453464-Will-Cardboard-work-with-my-phone-
+
 		// https://wemo.io/google-chrome-and-the-future-of-virtual-reality-interview-with-531
 
 		// https://github.com/tparisi/WebVR/blob/master/examples/cube-cardboard.html

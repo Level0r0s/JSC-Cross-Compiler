@@ -52,6 +52,11 @@ namespace TestEIDPIN2
             // https://code.google.com/p/chromium/issues/detail?id=412681
             // X:\jsc.svn\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\Extensions\TcpListenerExtensions.cs
 
+            // I/chromium(11925): [INFO:CONSOLE(62)] "probe() detected application/x-digidoc", source: 
+            // https://id.swedbank.ee/shared/digisign/hwcrypto.js?1429603200000 (62)
+            // view-source:https://id.swedbank.ee/shared/digisign/hwcrypto.js?1429603200000
+            // view-source:https://id.swedbank.ee/shared/digisign/idcard.js?1429520400000
+
             // view-source:https://id.lhv.ee/gfxv79/js/ibank/hwcrypto-lhv.js
 
             //if (navigator.mimeTypes && navigator.mimeTypes.length)
