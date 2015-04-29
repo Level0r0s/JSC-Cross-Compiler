@@ -52,7 +52,6 @@ namespace WebGLHZBlendCharacter
 
             Console.WriteLine("enter WebGLHZBlendCharacter");
 
-#if !DEBUG
             #region += Launched chrome.app.window
             // X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerAppWindow\ChromeTCPServerAppWindow\Application.cs
             dynamic self = Native.self;
@@ -67,7 +66,6 @@ namespace WebGLHZBlendCharacter
                 return;
             }
             #endregion
-#endif
 
 
             { TexturesImages ref0; }

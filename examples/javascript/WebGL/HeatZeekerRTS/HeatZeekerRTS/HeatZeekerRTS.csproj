@@ -158,9 +158,7 @@
     </Content>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="staging\HeatZeekerRTS.Application\web\manifest.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="staging\HeatZeekerRTS.Application\web\manifest.json" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
