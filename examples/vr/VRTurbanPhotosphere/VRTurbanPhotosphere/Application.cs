@@ -18,8 +18,8 @@ using VRTurbanPhotosphere.Design;
 using VRTurbanPhotosphere.HTML.Pages;
 
 // did we have an analyzer to auto import the nuget yet?
-using THREE;
-using ScriptCoreLib.JavaScript.Native;
+using static THREE;
+using static ScriptCoreLib.JavaScript.Native;
 
 
 namespace VRTurbanPhotosphere
@@ -39,22 +39,37 @@ namespace VRTurbanPhotosphere
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
-            // would a device be able to stream photos from one device
-            // into other over rtc?
+			#region += Launched chrome.app.window
+			// X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerAppWindow\ChromeTCPServerAppWindow\Application.cs
+			dynamic self = Native.self;
+			dynamic self_chrome = self.chrome;
+			object self_chrome_socket = self_chrome.socket;
+
+			if (self_chrome_socket != null)
+			{
+
+				ChromeTCPServer.TheServerWithAppWindow.Invoke(AppSource.Text);
+
+				return;
+			}
+			#endregion
+
+			// would a device be able to stream photos from one device
+			// into other over rtc?
 
 
 
-            // should the first frame of the async app to be loaded
-            // be a load progress screen to prepare the service worker?
+			// should the first frame of the async app to be loaded
+			// be a load progress screen to prepare the service worker?
 
-            // this project is the first
-            // template for hybrid vr apps.
-            // it is based on webview/javascript/threejs for android
+			// this project is the first
+			// template for hybrid vr apps.
+			// it is based on webview/javascript/threejs for android
 
-            // will future C# allow virtual code inheritance?
-            // for now lets do copy n paste?
+			// will future C# allow virtual code inheritance?
+			// for now lets do copy n paste?
 
-            body.style.margin = "0px";
+			body.style.margin = "0px";
             body.style.overflow = IStyle.OverflowEnum.hidden;
             body.Clear();
 
