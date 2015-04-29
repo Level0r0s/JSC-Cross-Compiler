@@ -1296,6 +1296,21 @@
     <Reference Include="VRMazeByNrx.AssetsLibrary">
       <HintPath>..\..\synergy\VRMazeByNrx\VRMazeByNrx\bin\staging.AssetsLibrary\VRMazeByNrx.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="MantaRayByDakrunch.AssetsLibrary">
+      <HintPath>..\..\synergy\MantaRayByDakrunch\MantaRayByDakrunch\bin\staging.AssetsLibrary\MantaRayByDakrunch.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="MirrorBoxByPurton.AssetsLibrary">
+      <HintPath>..\..\synergy\MirrorBoxByPurton\MirrorBoxByPurton\bin\staging.AssetsLibrary\MirrorBoxByPurton.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ParkingGarageByHamneggs.AssetsLibrary">
+      <HintPath>..\..\synergy\ParkingGarageByHamneggs\ParkingGarageByHamneggs\bin\staging.AssetsLibrary\ParkingGarageByHamneggs.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftShadowTestByDila.AssetsLibrary">
+      <HintPath>..\..\synergy\SoftShadowTestByDila\SoftShadowTestByDila\bin\staging.AssetsLibrary\SoftShadowTestByDila.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="StairsByDila.AssetsLibrary">
+      <HintPath>..\..\synergy\StairsByDila\StairsByDila\bin\staging.AssetsLibrary\StairsByDila.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2276,6 +2291,10 @@
       <Project>{bcf21b7a-99fd-4ec8-beb9-5bf4085952d2}</Project>
       <Name>MaggotsByKig</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\MantaRayByDakrunch\MantaRayByDakrunch\MantaRayByDakrunch.csproj">
+      <Project>{aab4c7f6-2f43-463b-b19c-faad241854c1}</Project>
+      <Name>MantaRayByDakrunch</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\MarbleFantasies\MarbleFantasies\MarbleFantasies.csproj">
       <Project>{60cfdf0b-80f4-4955-b6b0-8e65f9fbf68d}</Project>
       <Name>MarbleFantasies</Name>
@@ -2311,6 +2330,10 @@
     <ProjectReference Include="..\..\synergy\MikeByIq\MikeByIq\MikeByIq.csproj">
       <Project>{0ae0c5b7-d71a-4cd5-896c-dd38a4f655ab}</Project>
       <Name>MikeByIq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\MirrorBoxByPurton\MirrorBoxByPurton\MirrorBoxByPurton.csproj">
+      <Project>{4cda760a-2206-4927-8733-3683edb877ab}</Project>
+      <Name>MirrorBoxByPurton</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\MirrorRoomByDiLemming\MirrorRoomByDiLemming\MirrorRoomByDiLemming.csproj">
       <Project>{6d1fc992-fb8c-4ec6-90a0-9115fef4d1f3}</Project>
@@ -2383,6 +2406,10 @@
     <ProjectReference Include="..\..\synergy\ParallaxMappingByNimitz\ParallaxMappingByNimitz\ParallaxMappingByNimitz.csproj">
       <Project>{e4f34bdf-585b-46c7-87de-9606589218e4}</Project>
       <Name>ParallaxMappingByNimitz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\ParkingGarageByHamneggs\ParkingGarageByHamneggs\ParkingGarageByHamneggs.csproj">
+      <Project>{929b036f-0005-42ac-8d79-0088891badd0}</Project>
+      <Name>ParkingGarageByHamneggs</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\PlanetShadertoyByReinder\PlanetShadertoyByReinder\PlanetShadertoyByReinder.csproj">
       <Project>{bd7c48e1-240a-46e5-936b-724ac7f620b5}</Project>
@@ -2584,6 +2611,10 @@
       <Project>{f492126c-9e4e-4c4e-860a-e257f516e21c}</Project>
       <Name>SnowBallByIapafoto</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\SoftShadowTestByDila\SoftShadowTestByDila\SoftShadowTestByDila.csproj">
+      <Project>{edf5f161-aef4-4b36-a039-20bf85855502}</Project>
+      <Name>SoftShadowTestByDila</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\SomedayByEiffie\SomedayByEiffie\SomedayByEiffie.csproj">
       <Project>{8b358dde-78dd-46f5-a544-66b1807e372a}</Project>
       <Name>SomedayByEiffie</Name>
@@ -2635,6 +2666,10 @@
     <ProjectReference Include="..\..\synergy\SpriteEncodingByNikos\SpriteEncodingByNikos\SpriteEncodingByNikos.csproj">
       <Project>{0d892c86-a39b-43bb-bd8e-df8f8666988a}</Project>
       <Name>SpriteEncodingByNikos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\StairsByDila\StairsByDila\StairsByDila.csproj">
+      <Project>{d0816360-0927-4e6f-8809-b4e30dc078e5}</Project>
+      <Name>StairsByDila</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\StairwayToHeavenByEiffie\StairwayToHeavenByEiffie\StairwayToHeavenByEiffie.csproj">
       <Project>{84da417b-0b7a-4f25-b61a-d05598f1979c}</Project>

@@ -846,6 +846,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MirrorBoxByPurton", "..\syn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StairsByDila", "..\synergy\StairsByDila\StairsByDila\StairsByDila.csproj", "{D0816360-0927-4E6F-8809-B4E30DC078E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MantaRayByDakrunch", "..\synergy\MantaRayByDakrunch\MantaRayByDakrunch\MantaRayByDakrunch.csproj", "{AAB4C7F6-2F43-463B-B19C-FAAD241854C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftShadowTestByDila", "..\synergy\SoftShadowTestByDila\SoftShadowTestByDila\SoftShadowTestByDila.csproj", "{EDF5F161-AEF4-4B36-A039-20BF85855502}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingGarageByHamneggs", "..\synergy\ParkingGarageByHamneggs\ParkingGarageByHamneggs\ParkingGarageByHamneggs.csproj", "{929B036F-0005-42AC-8D79-0088891BADD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -2424,6 +2430,18 @@ Global
 		{D0816360-0927-4E6F-8809-B4E30DC078E5}.Debug|x86.Build.0 = Debug|x86
 		{D0816360-0927-4E6F-8809-B4E30DC078E5}.Release|x86.ActiveCfg = Release|x86
 		{D0816360-0927-4E6F-8809-B4E30DC078E5}.Release|x86.Build.0 = Release|x86
+		{AAB4C7F6-2F43-463B-B19C-FAAD241854C1}.Debug|x86.ActiveCfg = Debug|x86
+		{AAB4C7F6-2F43-463B-B19C-FAAD241854C1}.Debug|x86.Build.0 = Debug|x86
+		{AAB4C7F6-2F43-463B-B19C-FAAD241854C1}.Release|x86.ActiveCfg = Release|x86
+		{AAB4C7F6-2F43-463B-B19C-FAAD241854C1}.Release|x86.Build.0 = Release|x86
+		{EDF5F161-AEF4-4B36-A039-20BF85855502}.Debug|x86.ActiveCfg = Debug|x86
+		{EDF5F161-AEF4-4B36-A039-20BF85855502}.Debug|x86.Build.0 = Debug|x86
+		{EDF5F161-AEF4-4B36-A039-20BF85855502}.Release|x86.ActiveCfg = Release|x86
+		{EDF5F161-AEF4-4B36-A039-20BF85855502}.Release|x86.Build.0 = Release|x86
+		{929B036F-0005-42AC-8D79-0088891BADD0}.Debug|x86.ActiveCfg = Debug|x86
+		{929B036F-0005-42AC-8D79-0088891BADD0}.Debug|x86.Build.0 = Debug|x86
+		{929B036F-0005-42AC-8D79-0088891BADD0}.Release|x86.ActiveCfg = Release|x86
+		{929B036F-0005-42AC-8D79-0088891BADD0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2846,5 +2864,8 @@ Global
 		{D1009903-0589-48C0-8D69-455D19670F93} = {B91E1304-B675-4951-B645-6052898BD729}
 		{4CDA760A-2206-4927-8733-3683EDB877AB} = {A51F8D8D-236B-4EC4-9BB3-745BB19F6404}
 		{D0816360-0927-4E6F-8809-B4E30DC078E5} = {6FFB21C5-17AB-4499-948A-AA2F6B43C352}
+		{AAB4C7F6-2F43-463B-B19C-FAAD241854C1} = {A51F8D8D-236B-4EC4-9BB3-745BB19F6404}
+		{EDF5F161-AEF4-4B36-A039-20BF85855502} = {6FFB21C5-17AB-4499-948A-AA2F6B43C352}
+		{929B036F-0005-42AC-8D79-0088891BADD0} = {F938B933-5FAD-41D4-8813-7F51CEFF1B8E}
 	EndGlobalSection
 EndGlobal
