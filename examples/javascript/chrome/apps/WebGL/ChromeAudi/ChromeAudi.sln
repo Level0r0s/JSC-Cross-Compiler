@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeTCPServerAppWindow", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeTCPServer", "..\..\ChromeTCPServer\ChromeTCPServer\ChromeTCPServer.csproj", "{9672D112-D806-49D3-B5C8-3B3A2278AD18}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{5E26B1E3-6FD9-4EDA-926B-0651D1D0EE79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -42,5 +44,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6B03ABE7-4457-43D8-8F25-CD3A91DF0988} = {5E26B1E3-6FD9-4EDA-926B-0651D1D0EE79}
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC} = {5E26B1E3-6FD9-4EDA-926B-0651D1D0EE79}
+		{0DC6D7DF-0B3B-4EA4-BF8E-66B98B89F51F} = {5E26B1E3-6FD9-4EDA-926B-0651D1D0EE79}
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18} = {5E26B1E3-6FD9-4EDA-926B-0651D1D0EE79}
 	EndGlobalSection
 EndGlobal

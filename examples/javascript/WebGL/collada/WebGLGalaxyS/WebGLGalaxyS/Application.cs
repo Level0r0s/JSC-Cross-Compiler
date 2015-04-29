@@ -63,7 +63,7 @@ namespace WebGLGalaxyS
             var ambient = new THREE.AmbientLight(0x303030);
             scene.add(ambient);
 
-            var directionalLight = new THREE.DirectionalLight(0xffffff);
+            var directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
             directionalLight.position.set(0, 0, 1);
             scene.add(directionalLight);
 

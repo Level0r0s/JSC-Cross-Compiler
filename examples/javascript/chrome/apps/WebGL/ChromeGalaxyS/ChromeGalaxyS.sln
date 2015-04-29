@@ -14,9 +14,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLEarthByBjorn", "..\..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeAppWindowFrameNoneExperiment", "..\ChromeAppWindowFrameNoneExperiment\ChromeAppWindowFrameNoneExperiment\ChromeAppWindowFrameNoneExperiment.csproj", "{0EDDC8EE-B098-4C59-BDE4-9B27823D53A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeTCPServerWithFrameNone", "..\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone.csproj", "{DF763FAD-6D74-47A6-80C3-EA7B444C81BF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLGalaxyS", "..\..\..\..\WebGL\collada\WebGLGalaxyS\WebGLGalaxyS\WebGLGalaxyS.csproj", "{0214B1F1-E85E-4939-B952-F64DB0C0A658}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeTCPServerWithFrameNone", "..\..\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone.csproj", "{DF763FAD-6D74-47A6-80C3-EA7B444C81BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,14 +36,14 @@ Global
 		{0EDDC8EE-B098-4C59-BDE4-9B27823D53A0}.Debug|x86.Build.0 = Debug|x86
 		{0EDDC8EE-B098-4C59-BDE4-9B27823D53A0}.Release|x86.ActiveCfg = Release|x86
 		{0EDDC8EE-B098-4C59-BDE4-9B27823D53A0}.Release|x86.Build.0 = Release|x86
-		{DF763FAD-6D74-47A6-80C3-EA7B444C81BF}.Debug|x86.ActiveCfg = Debug|x86
-		{DF763FAD-6D74-47A6-80C3-EA7B444C81BF}.Debug|x86.Build.0 = Debug|x86
-		{DF763FAD-6D74-47A6-80C3-EA7B444C81BF}.Release|x86.ActiveCfg = Release|x86
-		{DF763FAD-6D74-47A6-80C3-EA7B444C81BF}.Release|x86.Build.0 = Release|x86
 		{0214B1F1-E85E-4939-B952-F64DB0C0A658}.Debug|x86.ActiveCfg = Debug|x86
 		{0214B1F1-E85E-4939-B952-F64DB0C0A658}.Debug|x86.Build.0 = Debug|x86
 		{0214B1F1-E85E-4939-B952-F64DB0C0A658}.Release|x86.ActiveCfg = Release|x86
 		{0214B1F1-E85E-4939-B952-F64DB0C0A658}.Release|x86.Build.0 = Release|x86
+		{DF763FAD-6D74-47A6-80C3-EA7B444C81BF}.Debug|x86.ActiveCfg = Debug|x86
+		{DF763FAD-6D74-47A6-80C3-EA7B444C81BF}.Debug|x86.Build.0 = Debug|x86
+		{DF763FAD-6D74-47A6-80C3-EA7B444C81BF}.Release|x86.ActiveCfg = Release|x86
+		{DF763FAD-6D74-47A6-80C3-EA7B444C81BF}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,7 +51,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B23791BC-BBED-49D9-9808-08B230B69C55} = {2457563D-E755-4240-95C7-A3FB2FBBCC37}
 		{0EDDC8EE-B098-4C59-BDE4-9B27823D53A0} = {2457563D-E755-4240-95C7-A3FB2FBBCC37}
-		{DF763FAD-6D74-47A6-80C3-EA7B444C81BF} = {2457563D-E755-4240-95C7-A3FB2FBBCC37}
 		{0214B1F1-E85E-4939-B952-F64DB0C0A658} = {2457563D-E755-4240-95C7-A3FB2FBBCC37}
+		{DF763FAD-6D74-47A6-80C3-EA7B444C81BF} = {2457563D-E755-4240-95C7-A3FB2FBBCC37}
 	EndGlobalSection
 EndGlobal
