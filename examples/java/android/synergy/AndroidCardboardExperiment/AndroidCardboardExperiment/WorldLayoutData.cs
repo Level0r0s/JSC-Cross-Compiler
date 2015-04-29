@@ -8,6 +8,8 @@ namespace AndroidCardboardExperiment
 {
 	class WorldLayoutData
 	{
+        // https://github.com/googlesamples/cardboard-java/blob/master/CardboardSample/src/main/java/com/google/vrtoolkit/cardboard/samples/treasurehunt/WorldLayoutData.java
+
 		public static   float[] CUBE_COORDS = new float[] {
 			// Front face
 			-1.0f, 1.0f, 1.0f,
