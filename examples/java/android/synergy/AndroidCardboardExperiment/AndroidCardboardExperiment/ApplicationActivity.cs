@@ -14,6 +14,7 @@ using ScriptCoreLib.Android.Manifest;
 using android.opengl;
 using java.nio;
 using android.content;
+using android.content.pm;
 
 namespace AndroidCardboardExperiment.Activities
 {
@@ -119,17 +120,11 @@ namespace AndroidCardboardExperiment.Activities
 
             base.onCreate(savedInstanceState);
 
-            //this.setRequestedOrientation(LAN
-            // [javac]
-            //		W:\src\AndroidCardboardExperiment\Activities\ApplicationActivity.java:23: error: FullscreenMode is not public in com.google.vrtoolkit.cardboard; cannot be accessed from outside package
-            //[javac] import com.google.vrtoolkit.cardboard.FullscreenMode;
-            //		[javac]                                      ^
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
             //{ com.google.vrtoolkit.cardboard.FullscreenMode ref0; }
 
-            //var sv = new ScrollView(this);
             var ll = new RelativeLayout(this);
-            //ll.setOrientation(LinearLayout.VERTICAL);
-            //sv.addView(ll);
             ll.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT));
 
 
@@ -316,7 +311,7 @@ namespace AndroidCardboardExperiment.Activities
 
         public void onNewFrame(HeadTransform headTransform)
         {
-            Console.WriteLine("AndroidCardboardExperiment onNewFrame");
+            //Console.WriteLine("AndroidCardboardExperiment onNewFrame");
 
             // Build the Model part of the ModelView matrix.
             Matrix.rotateM(modelCube, 0, TIME_DELTA, 0.5f, 0.5f, 1.0f);
