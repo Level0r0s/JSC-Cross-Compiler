@@ -453,8 +453,10 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 
 							if (IsString)
 							{
+								// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150428
+
 								// see path yet?
-								Console.WriteLine("string: " + new { MemberName, scope2 });
+								//Console.WriteLine("string: " + new { MemberName, scope2 });
 							}
 							else if (xSemaphoreSlim != null)
 							{
@@ -818,6 +820,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 							 dynamic xyield = zdata.yield;
 							 if ((object)xyield != null)
 							 {
+								 Console.WriteLine("worker sent a yield signal?");
 
 								 object value = xyield.value;
 

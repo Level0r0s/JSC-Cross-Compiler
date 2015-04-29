@@ -185,7 +185,12 @@ interface chrome.runtime
 	// http://stackoverflow.com/questions/2963260/how-do-i-auto-reload-a-chrome-extension-im-developing
 	static void reload();
 
+	// X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServer\ChromeTCPServer\Application.cs
+
 	async static void getPackageDirectoryEntry(function<any> callback);
+	
+	static string getURL(string path);
+
 	//async static void postMessage(string id, any message, function<any> callback);
 
 	 static chrome.Port connect(string id);

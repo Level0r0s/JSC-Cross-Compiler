@@ -464,7 +464,9 @@ namespace ScriptCoreLib.JavaScript.DOM
 
 					// X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServer\ChromeTCPServer\Application.cs
 					// does our chrome tcp server get the damn path?
-					Console.WriteLine(new { xMember, xMethodTargetObjectDataTypeIndex, xObjectData, xIsProgress });
+					// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150428
+					//Console.WriteLine(new { xMember, xMethodTargetObjectDataTypeIndex, xObjectData, xIsProgress });
+					Console.WriteLine(new { xMember, xMethodTargetObjectDataTypeIndex, xIsProgress });
 
 					// need to resurrect the semaphores!
 					// X:\jsc.svn\examples\javascript\async\Test\TestSemaphoreSlim\TestSemaphoreSlim\ApplicationControl.cs
@@ -855,8 +857,7 @@ namespace ScriptCoreLib.JavaScript.DOM
 				}
 				else if (MethodType == typeof(FuncOfObjectToObject).Name)
 				{
-
-					//Console.WriteLine("worker Task Run function call");
+					Console.WriteLine("worker Task Run function call, FuncOfObjectToObject, will invoke MethodTokenReference");
 
 
 					#region FuncOfObjectToObject
@@ -866,6 +867,9 @@ namespace ScriptCoreLib.JavaScript.DOM
 
 
 					var value = MethodTokenReference.apply(MethodTarget, xstate);
+
+					Console.WriteLine("worker Task Run function call, FuncOfObjectToObject, will invoke MethodTokenReference " + new { value });
+
 
 					// X:\jsc.svn\examples\javascript\async\test\TaskAsyncTaskRun\TaskAsyncTaskRun\Application.cs
 
@@ -953,6 +957,8 @@ namespace ScriptCoreLib.JavaScript.DOM
 
 							//Console.WriteLine(new { yield });
 
+							Console.WriteLine("worker Task Run function call, FuncOfObjectToObject, will yield? " + new { value_Task, value_TaskOfT });
+
 							zdata.yield = yield;
 						}
 					}
@@ -961,6 +967,8 @@ namespace ScriptCoreLib.JavaScript.DOM
 				}
 				else if (MethodType == typeof(FuncOfTaskToObject).Name)
 				{
+					Console.WriteLine("bugcheck FuncOfTaskToObject ?");
+
 					// tested by?
 					#region FuncOfTaskToObject
 					// need to reconstruct the caller task?

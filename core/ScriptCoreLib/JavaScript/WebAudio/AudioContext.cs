@@ -14,6 +14,8 @@ namespace ScriptCoreLib.JavaScript.WebAudio
     [Script(HasNoPrototype = true, ExternalTarget = "AudioContext")]
     public class AudioContext
     {
+		// http://www.w3.org/2011/audio/wiki/Basic-Examples#Looping_Sounds_Without_Gaps
+
 		// doppler!
 		// https://www.shadertoy.com/view/4sfSDX#
 		// https://www.shadertoy.com/view/ldlXD2

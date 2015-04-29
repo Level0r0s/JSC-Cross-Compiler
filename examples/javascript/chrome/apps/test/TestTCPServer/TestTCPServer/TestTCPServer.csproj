@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{29947AAD-0B14-4FB0-A3C3-A51322BE2EDA}</ProjectGuid>
+    <ProjectGuid>{426A9419-9287-4880-979F-29F29D3F2A22}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HeatZeekerRTSOrto</RootNamespace>
-    <AssemblyName>HeatZeekerRTSOrto</AssemblyName>
+    <RootNamespace>TestTCPServer</RootNamespace>
+    <AssemblyName>TestTCPServer</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>HeatZeekerRTSOrto.Program</StartupObject>
+    <StartupObject>TestTCPServer.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -39,9 +39,6 @@
   <ItemGroup>
     <Reference Include="Chrome Web Server">
       <HintPath>..\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll</HintPath>
-    </Reference>
-    <Reference Include="Chrome Web Server Styled Form">
-      <HintPath>..\packages\Chrome.Web.Server.StyledForm.1.0.0.0\lib\Chrome Web Server Styled Form.dll</HintPath>
     </Reference>
     <Reference Include="Chrome Web Store">
       <HintPath>..\packages\Chrome.Web.Store.1.0.0.0\lib\Chrome Web Store.dll</HintPath>
@@ -117,26 +114,17 @@
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="THREE">
-      <HintPath>..\packages\THREE.1.0.0.0\lib\THREE.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="HeatZeekerRTSOrto.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\HeatZeekerRTSOrto.AssetsLibrary.dll</HintPath>
+    <Reference Include="TestTCPServer.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\TestTCPServer.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
-    </Reference>
-    <Reference Include="WebGLRah66Comanche.AssetsLibrary">
-      <HintPath>..\..\collada\WebGLRah66Comanche\WebGLRah66Comanche\bin\staging.AssetsLibrary\WebGLRah66Comanche.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="WebGLColladaExperiment.AssetsLibrary">
-      <HintPath>..\..\WebGLColladaExperiment\WebGLColladaExperiment\bin\staging.AssetsLibrary\WebGLColladaExperiment.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -148,43 +136,13 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <Content Include="Screenshots\capture_003_11092014_185442.png" />
-    <Content Include="Screenshots\capture_004_11092014_185527.png" />
-    <Content Include="staging\HeatZeekerRTSOrto.Application\web\Promotion3D_iso1_tiltshift_128.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EmbeddedResource Include="web\assets\HeatZeekerRTSOrto\HZCannon_capture_009_04032013_192834.png" />
     <None Include="app.config" />
     <None Include="packages.config" />
-    <EmbeddedResource Include="web\assets\HeatZeekerRTSOrto\HZCannon.dae" />
-    <EmbeddedResource Include="web\assets\HeatZeekerRTSOrto\HZCannon.skp" />
-    <EmbeddedResource Include="web\assets\HeatZeekerRTSOrto\HZWaterTower.dae">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="web\assets\HeatZeekerRTSOrto\HZBunker.dae">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <None Include="staging\HeatZeekerRTSOrto.Application\web\manifest.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="web\assets\HeatZeekerRTSOrto\Promotion3D_daytime_isometric.skp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\collada\WebGLRah66Comanche\WebGLRah66Comanche\WebGLRah66Comanche.csproj">
-      <Project>{5a75fa08-3af1-4d27-a726-20b58b6cd608}</Project>
-      <Name>WebGLRah66Comanche</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WebGLColladaExperiment\WebGLColladaExperiment\WebGLColladaExperiment.csproj">
-      <Project>{5d093f42-02cc-4ed6-bd9f-3ac636479fb9}</Project>
-      <Name>WebGLColladaExperiment</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /AssociateDriveForChrome:A /InferChromeAppManifest:true  /FilterTo:$(SolutionDir)
-
-rem c:/util/jsc/bin/jsc.bc.exe $(ProjectPath) /xrewrite /clear /run $(TargetPath) "C:\util\jsc\bin\ScriptCoreLib.Extensions.dll"</PostBuildEvent>
+    <PostBuildEvent>start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /AssociateDriveForChrome:A /InferChromeAppManifest:true
+</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
 		            </PreBuildEvent>
   </PropertyGroup>

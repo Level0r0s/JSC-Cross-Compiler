@@ -122,9 +122,11 @@ namespace ChromeTCPServer
 
 	}
 
-
+	// created at?
 	sealed class x
 	{
+		public string chromePath;
+
 		public string path;
 		public string PageSource;
 		public byte[] write;
@@ -226,8 +228,8 @@ namespace ChromeTCPServer
 
 		//static Dictionary<string, byte[]> CachedFiles = new Dictionary<string, byte[]>();
 
-			// why return anything?
-		static x zApplicationHandler(Tuple<IProgress<x>, x> scope)
+		// why return anything?
+		static void WorkerApplicationHandler(Tuple<IProgress<x>, x> scope)
 		{
 			var path = scope.Item2.path;
 
@@ -236,13 +238,14 @@ namespace ChromeTCPServer
 
 
 			// 9:31827ms at StartNewWithProgress: {{ path = , ManagedThreadId = 10 }} 
-			Console.WriteLine("at zApplicationHandler: " + new { scope.Item2.path, Thread.CurrentThread.ManagedThreadId });
+			Console.WriteLine("enter WorkerApplicationHandler: " + new { scope.Item2.path, Thread.CurrentThread.ManagedThreadId });
 
 
 			#region WriteBytes
 			Action<byte[]> WriteBytes =
 				bytes =>
 				{
+					// worker is leting Main thread know to write bytes to socket?
 					scope.Item1.Report(
 						new x { path = scope.Item2.path, PageSource = default(string), write = bytes }
 					);
@@ -252,8 +255,8 @@ namespace ChromeTCPServer
 
 
 
-			#region y
-			Func<Task> y = async delegate
+			#region WorkerApplicationHandlerDoResponse
+			Func<Task> WorkerApplicationHandlerDoResponse = async delegate
 			{
 				//nn.Title = "before bytes";
 
@@ -267,13 +270,26 @@ namespace ChromeTCPServer
 				//else
 				//{
 
-				//Console.WriteLine(new { path } + " before bytes");
+				//var xasset = chrome.runtime.getPackageDirectoryEntry
+
+				// https://developer.chrome.com/extensions/runtime#method-getURL
+
+				// ReferenceError: chrome is not defined at MwEABsZ41Dm4ljl54p7Rzg (blob:chrome-extension%3A//aemlnmcokphbneegoefdckonejmknohh/4a544517-ef14-420b-bfb0-58dc68aa4069:81197:30)
+				// we have sandboxed ourselves out of chrome api?
+
+				//var xasset = chrome.runtime.getURL(asset);
+
+				// http://stackoverflow.com/questions/13832251/how-to-read-and-display-file-in-a-chrome-extension
+				// 17989ms [11] WorkerApplicationHandlerDoResponse{{ asset = assets/TestTCPServer/App.css }} before bytes
+				Console.WriteLine("WorkerApplicationHandlerDoResponse" + new { scope.Item2.chromePath } + " before bytes");
+
 				var xhr = new IXMLHttpRequest();
 				//Console.WriteLine(new { asset });
 
-
+				// what if we are in a blob nowadays and this disconnects our ability to load?
 				// can we stream our assets instead?
-				xhr.open(ScriptCoreLib.Shared.HTTPMethodEnum.GET, asset);
+				xhr.open(ScriptCoreLib.Shared.HTTPMethodEnum.GET, scope.Item2.chromePath);
+
 				xbytes = await xhr.bytes;
 
 				//    CachedFiles[asset] = xbytes;
@@ -282,6 +298,8 @@ namespace ChromeTCPServer
 
 				if (xbytes == null)
 				{
+					Console.WriteLine("WorkerApplicationHandlerDoResponse worker did not find the asset? " + new { scope.Item2.chromePath });
+
 					var outputString = "HTTP/1.0 404 go away\r\nConnection: close\r\n\r\n";
 
 					var bytes = Encoding.UTF8.GetBytes(outputString);
@@ -291,7 +309,7 @@ namespace ChromeTCPServer
 					return;
 				}
 
-				Console.WriteLine(new { asset, xbytes.Length, Thread.CurrentThread.ManagedThreadId } + " after bytes");
+				Console.WriteLine("WorkerApplicationHandlerDoResponse " + new { asset, xbytes.Length, Thread.CurrentThread.ManagedThreadId } + " after bytes");
 				//nn.Title = "after bytes";
 
 				{
@@ -363,12 +381,12 @@ namespace ChromeTCPServer
 			else
 			{
 				// explicit;ly serve view-source instead?
-				y();
+				WorkerApplicationHandlerDoResponse();
 			}
 
 			// jsc cannot return task just yet, use progress instead
 			// 20140607 now we can.
-			return scope.Item2;
+			//return scope.Item2;
 		}
 
 		public static void Invoke(
@@ -514,11 +532,13 @@ namespace ChromeTCPServer
 					// 9:138973ms {{ input = GET /favicon.ico HTTP/1.1
 					var path = RequestLine.SkipUntilIfAny(" ").TakeUntilIfAny(" ");
 
-
+					// we can do it over here on UI thead, not in the sandboxed worker below, yet the input data is the same..
+					// would jsc be able to move around such method use in time?
+					var xpath = chrome.runtime.getURL(path);
 
 					// 9:60202ms RequestLine: {{ path = /, RequestLine = GET / HTTP/1.1 }} 
 					Console.WriteLine(
-						"doaccept_Handler RequestLine: " + new { path, RequestLine }
+						"doaccept_Handler RequestLine: " + new { path, xpath, RequestLine }
 					);
 
 					//{ RequestLine = GET /view-source HTTP/1.1, path = /view-source } 
@@ -534,7 +554,7 @@ namespace ChromeTCPServer
 					//Console.WriteLine("before StartNewWithProgress: " + new { path, Thread.CurrentThread.ManagedThreadId });
 
 					var yyy = new TaskCompletionSource<string>();
-					//var worker = default(Task);
+					var worker = default(Task);
 
 
 					#region progress
@@ -548,7 +568,7 @@ namespace ChromeTCPServer
 								yyy.SetResult(state.path);
 
 								// can we terminate our thread?
-								//worker.Dispose();
+								worker.Dispose();
 
 								return;
 							}
@@ -581,32 +601,39 @@ namespace ChromeTCPServer
 					// "X:\jsc.svn\examples\javascript\async\Test\TestUnwrap\TestUnwrap.sln"
 					// func Task will blow up?
 
-					Console.WriteLine("doaccept_Handler will hop to worker");
+					Console.WriteLine("doaccept_Handler will hop to worker " + new { Thread.CurrentThread.ManagedThreadId });
 
-					Task.Run(
-							    delegate
+					worker = Task.Run(
+								delegate
 					   {
+						   Console.WriteLine("doaccept_Handler will hop to worker, done " + new { Thread.CurrentThread.ManagedThreadId });
+
 						   // X:\jsc.svn\core\ScriptCoreLib\JavaScript\DOM\Worker.cs
 
 
 
 						   // wtf? where is my path?
 						   Console.WriteLine(
-							  "inside worker RequestLine: " + new { path }
+							  "doaccept_Handler inside worker RequestLine: " + new { path }
 						  );
 
 						   // rebuild the scope.
 						   var scope = Tuple.Create(
 							  progress,
-							  new x { path = path, PageSource = PageSource, write = default(byte[]) }
+							  new x { chromePath = xpath, path = path, PageSource = PageSource, write = default(byte[]) }
 						  );
 
 						   //return TheServer.zApplicationHandler(scope);
-						   TheServer.zApplicationHandler(scope);
+						   TheServer.WorkerApplicationHandler(scope);
 
 						   // Uncaught Error: bugcheck TaskExtensions.Unwrap Task<Task> {{ xResultTask = [object Object], t = ?function Object() { [native code] } }}
+
+						   Console.WriteLine("doaccept_Handler will hop to worker, exit, return sync void?");
+
+						   // return void?
+						   // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150428
 					   }
-						  );
+					);
 
 					var result = await yyy.Task;
 
@@ -682,13 +709,14 @@ namespace ChromeTCPServer
 
 
 
-						//Console.WriteLine("accept before handler " + new { accept.socketId });
+						Console.WriteLine("doaccept will call doaccept_Handler " + new { accept.socketId });
 						var xxx = doaccept_Handler(RequestLine, accept.socketId);
 						await xxx;
+						Console.WriteLine("doaccept will call doaccept_Handler done " + new { accept.socketId });
 					}
 
 					// https://code.google.com/p/chromium/issues/detail?id=170595
-					Console.WriteLine("accept exit " + new { accept.socketId, HandlerStopwatch.ElapsedMilliseconds });
+					Console.WriteLine("doaccept exit " + new { accept.socketId, HandlerStopwatch.ElapsedMilliseconds });
 					accept.socketId.disconnect();
 					accept.socketId.destroy();
 				};
