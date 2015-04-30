@@ -22,6 +22,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
 	[Script(Implements = typeof(global::System.Environment))]
 	internal static class __Environment
 	{
+		// https://github.com/jooink/ndk-cpuid/blob/master/CPUIdApp/jni/com_jooink_experiments_android_ndk_cpuid_CPUIdApp.c
+		// http://stackoverflow.com/questions/8407001/how-portable-is-get-cpuid
 
 		// by
 		// X:\jsc.svn\examples\javascript\forms\AsyncTaskYieldViaProgress\AsyncTaskYieldViaProgress\ApplicationControl.cs
