@@ -14,7 +14,7 @@ namespace AndroidCardboardExperiment
 		public static void Main(string[] e)
 		{
 			global::jsc.AndroidLauncher.Launch(
-				 typeof(AndroidCardboardExperiment.Activities.ApplicationActivity)
+				 typeof(xandroidcardboardcxperiment.xactivities.ApplicationActivity)
 			);
 		}
 	}

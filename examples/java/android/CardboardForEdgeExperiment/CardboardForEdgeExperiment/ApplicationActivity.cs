@@ -6,30 +6,30 @@ using android.app;
 using android.os;
 using android.view;
 using android.widget;
-using com.google.vrtoolkit.cardboard;
-using javax.microedition.khronos.egl;
 using ScriptCoreLib;
 using ScriptCoreLib.Android.Extensions;
 using ScriptCoreLib.Android.Manifest;
-using android.opengl;
 using java.nio;
-using android.content;
+using AndroidCardboardExperiment;
+using android.opengl;
 using android.content.pm;
+using android.content;
+using xandroidCardboardExperiment.xactivities;
 
-//namespace AndroidCardboardExperiment.Activities
-
-//xandroidCardboardExperiment
-
-namespace xandroidcardboardcxperiment.xactivities
+namespace CardboardForEdgeExperiment.Activities
 {
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "16")]
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "16")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "10")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
-    public class ApplicationActivity :
+    public class XApplicationActivity :
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150430
          com.google.vrtoolkit.cardboard.CardboardActivity,
         com.google.vrtoolkit.cardboard.CardboardView.StereoRenderer
     {
+        xandroidCardboardExperiment.xactivities.ApplicationActivity ref0;
+
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" install -r "r:\jsc.svn\examples\java\android\CardboardForEdgeExperiment\CardboardForEdgeExperiment\bin\Debug\staging\apk\bin\CardboardForEdgeExperiment.Activities-debug.apk"
+
         // https://github.com/googlesamples/cardboard-java/blob/master/CardboardSample/src/main/java/com/google/vrtoolkit/cardboard/samples/treasurehunt/MainActivity.java
 
         // http://www.engadget.com/2014/06/25/google-vr-cardboard/
@@ -101,7 +101,7 @@ namespace xandroidcardboardcxperiment.xactivities
         private float floorDepth = 20f;
 
         private Vibrator vibrator;
-        private CardboardOverlayView overlayView;
+        private xandroidCardboardExperiment.xactivities.CardboardOverlayView overlayView;
 
 
 
@@ -150,7 +150,7 @@ namespace xandroidcardboardcxperiment.xactivities
             vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
 
 
-            overlayView = new CardboardOverlayView(this, null);
+            overlayView = new xandroidCardboardExperiment.xactivities.CardboardOverlayView(this, null);
             overlayView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT));
             overlayView.show3DToast("Pull the magnet when you find an object.");
 
@@ -313,7 +313,7 @@ namespace xandroidcardboardcxperiment.xactivities
 
 
 
-        public void onNewFrame(HeadTransform headTransform)
+        public void onNewFrame(com.google.vrtoolkit.cardboard.HeadTransform headTransform)
         {
             //Console.WriteLine("AndroidCardboardExperiment onNewFrame");
 
@@ -330,7 +330,7 @@ namespace xandroidcardboardcxperiment.xactivities
 
         // Error	3	'AndroidCardboardExperiment.Activities.ApplicationActivity.onDrawEye(com.google.vrtoolkit.cardboard.Eye)': no suitable method found to override	X:\jsc.svn\examples\java\android\synergy\AndroidCardboardExperiment\AndroidCardboardExperiment\ApplicationActivity.cs	328	31	AndroidCardboardExperiment
         // StereoRenderer
-        public void onDrawEye(Eye eye)
+        public void onDrawEye(com.google.vrtoolkit.cardboard.Eye eye)
         {
             GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
@@ -356,7 +356,7 @@ namespace xandroidcardboardcxperiment.xactivities
             drawFloor();
         }
 
-        public void onFinishFrame(Viewport value)
+        public void onFinishFrame(com.google.vrtoolkit.cardboard.Viewport value)
         {
         }
 
@@ -386,7 +386,7 @@ namespace xandroidcardboardcxperiment.xactivities
 
 
             var cc = cubeFoundColors;
-            if (isLookingAtObject()) cc = cubeColors;
+            if (!isLookingAtObject()) cc = cubeColors;
 
             GLES20.glVertexAttribPointer(cubeColorParam, 4, GLES20.GL_FLOAT, false, 0,
                 cc);
@@ -458,15 +458,8 @@ namespace xandroidcardboardcxperiment.xactivities
                     return true;
             return false;
         }
+
     }
 
 
 }
-
-//-dex:
-//      [dex] input: W:\bin\classes
-//      [dex] input: W:\libs\cardboard.jar
-//      [dex] Pre-Dexing W:\libs\cardboard.jar -> cardboard-794edd550a067d637de3eed4ac7ff6f3.jar
-//      [dex] Found Deleted Target File
-//      [dex] Converting compiled files and external libraries into W:\bin\classes.dex...
-//       [dx] Merged dex A (682 defs/622.3KiB) with dex B (110 defs/160.6KiB). Result is 792 defs/954.0KiB. Took 0.1s

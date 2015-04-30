@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AndroidCardboardExperiment
+//namespace AndroidCardboardExperiment
+namespace xandroidcardboardcxperiment.xactivities
 {
-	class WorldLayoutData
+	public class WorldLayoutData
 	{
         // https://github.com/googlesamples/cardboard-java/blob/master/CardboardSample/src/main/java/com/google/vrtoolkit/cardboard/samples/treasurehunt/WorldLayoutData.java
 
