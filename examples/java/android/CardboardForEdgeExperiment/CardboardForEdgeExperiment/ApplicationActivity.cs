@@ -14,7 +14,8 @@ using AndroidCardboardExperiment;
 using android.opengl;
 using android.content.pm;
 using android.content;
-using xandroidCardboardExperiment.xactivities;
+using xandroidcardboardcxperiment.xactivities;
+using System.Diagnostics;
 
 namespace CardboardForEdgeExperiment.Activities
 {
@@ -26,7 +27,7 @@ namespace CardboardForEdgeExperiment.Activities
          com.google.vrtoolkit.cardboard.CardboardActivity,
         com.google.vrtoolkit.cardboard.CardboardView.StereoRenderer
     {
-        xandroidCardboardExperiment.xactivities.ApplicationActivity ref0;
+        xandroidcardboardcxperiment.xactivities.ApplicationActivity ref0;
 
         // "x:\util\android-sdk-windows\platform-tools\adb.exe" install -r "r:\jsc.svn\examples\java\android\CardboardForEdgeExperiment\CardboardForEdgeExperiment\bin\Debug\staging\apk\bin\CardboardForEdgeExperiment.Activities-debug.apk"
 
@@ -101,7 +102,7 @@ namespace CardboardForEdgeExperiment.Activities
         private float floorDepth = 20f;
 
         private Vibrator vibrator;
-        private xandroidCardboardExperiment.xactivities.CardboardOverlayView overlayView;
+        private CardboardOverlayView overlayView;
 
 
 
@@ -150,7 +151,7 @@ namespace CardboardForEdgeExperiment.Activities
             vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
 
 
-            overlayView = new xandroidCardboardExperiment.xactivities.CardboardOverlayView(this, null);
+            overlayView = new CardboardOverlayView(this, null);
             overlayView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT));
             overlayView.show3DToast("Pull the magnet when you find an object.");
 
@@ -313,8 +314,53 @@ namespace CardboardForEdgeExperiment.Activities
 
 
 
+
+        long FrameCounter = 0;
+        Stopwatch FrameWatch = Stopwatch.StartNew();
+        Stopwatch FrameOne = Stopwatch.StartNew();
+
         public void onNewFrame(com.google.vrtoolkit.cardboard.HeadTransform headTransform)
         {
+            // http://stackoverflow.com/questions/11851343/raise-fps-on-android-tablet-above-60-for-opengl-game
+            // http://gafferongames.com/game-physics/fix-your-timestep/
+
+            if (FrameWatch.ElapsedMilliseconds >= 1000)
+            {
+                var codeFPS = 1000.0 / FrameOne.ElapsedMilliseconds;
+
+                // we now know how many frames did fit into it
+                // need 60 or more!
+                Console.WriteLine("CardboardForEdgeExperiment " + new
+                {
+                    // static
+                    System.Environment.ProcessorCount,
+
+                    android.os.Build.MODEL,
+
+                    System.Environment.CurrentManagedThreadId,
+
+                    FrameCounter,
+
+                    // dynamic
+                    LastFrameMilliseconds = FrameOne.ElapsedMilliseconds,
+                    codeFPS,
+
+                    // very dynamic
+                    pitch,
+                    yaw
+                });
+
+                // I/System.Console(28117): CardboardForEdgeExperiment { ProcessorCount = 2, MODEL = Nexus 9, CurrentManagedThreadId = 1647, FrameCounter = 60, LastFrameMilliseconds = 6, codeFPS = 166.66666666666666, pitch = 1.5978987, yaw = -2.0770574 }
+
+                FrameWatch.Restart();
+                FrameCounter = 0;
+            }
+
+            // GPU thread starts now..
+            FrameOne.Restart();
+            FrameCounter++;
+
+
             //Console.WriteLine("AndroidCardboardExperiment onNewFrame");
 
             // Build the Model part of the ModelView matrix.
@@ -326,6 +372,15 @@ namespace CardboardForEdgeExperiment.Activities
             headTransform.getHeadView(headView, 0);
 
             checkGLError("onReadyToDraw");
+
+            // I/System.Console(27769): CardboardForEdgeExperiment { FrameCounter = 61, LastFrameMilliseconds = 0, codeFPS = Infinity, CurrentManagedThreadId = 1637, ProcessorCount = 2, MODEL = Nexus 9 }
+
+            // add placeholder slowdown
+            System.Threading.Thread.Sleep(5);
+            // I/System.Console(27840): CardboardForEdgeExperiment { FrameCounter = 60, LastFrameMilliseconds = 6, codeFPS = 166.66666666666666, CurrentManagedThreadId = 1642, ProcessorCount = 2, MODEL = Nexus 9 }
+
+            // GPU thread stops now..
+            FrameOne.Stop();
         }
 
         // Error	3	'AndroidCardboardExperiment.Activities.ApplicationActivity.onDrawEye(com.google.vrtoolkit.cardboard.Eye)': no suitable method found to override	X:\jsc.svn\examples\java\android\synergy\AndroidCardboardExperiment\AndroidCardboardExperiment\ApplicationActivity.cs	328	31	AndroidCardboardExperiment
@@ -363,6 +418,10 @@ namespace CardboardForEdgeExperiment.Activities
         // called by onDrawEye
         public void drawCube()
         {
+            // the cube rotates in front of us.
+            // do we need to use a special program to draw a cube?
+            // how can we make it bigger?
+
             GLES20.glUseProgram(cubeProgram);
 
             GLES20.glUniform3fv(cubeLightPosParam, 1, lightPosInEyeSpace, 0);
@@ -374,8 +433,7 @@ namespace CardboardForEdgeExperiment.Activities
             GLES20.glUniformMatrix4fv(cubeModelViewParam, 1, false, modelView, 0);
 
             // Set the position of the cube
-            GLES20.glVertexAttribPointer(cubePositionParam, COORDS_PER_VERTEX, GLES20.GL_FLOAT,
-                false, 0, cubeVertices);
+            GLES20.glVertexAttribPointer(cubePositionParam, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, 0, cubeVertices);
 
             // Set the ModelViewProjection matrix in the shader.
             GLES20.glUniformMatrix4fv(cubeModelViewProjectionParam, 1, false, modelViewProjection, 0);
@@ -440,6 +498,8 @@ namespace CardboardForEdgeExperiment.Activities
 
 
 
+        float pitch;
+        float yaw;
 
         private bool isLookingAtObject()
         {
@@ -450,8 +510,8 @@ namespace CardboardForEdgeExperiment.Activities
             Matrix.multiplyMM(modelView, 0, headView, 0, modelCube, 0);
             Matrix.multiplyMV(objPositionVec, 0, modelView, 0, initVec, 0);
 
-            float pitch = (float)Math.Atan2(objPositionVec[1], -objPositionVec[2]);
-            float yaw = (float)Math.Atan2(objPositionVec[0], -objPositionVec[2]);
+            pitch = (float)Math.Atan2(objPositionVec[1], -objPositionVec[2]);
+            yaw = (float)Math.Atan2(objPositionVec[0], -objPositionVec[2]);
 
             if (Math.Abs(pitch) < PITCH_LIMIT)
                 if (Math.Abs(yaw) < YAW_LIMIT)

@@ -871,3 +871,13 @@ namespace AndroidOpenGLESLesson6Activity.Shaders
 		}
 	}
 }
+
+//-compile:
+//    [javac] Compiling 688 source files to W:\bin\classes
+//    [javac] W:\src\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\__Task.java:248: error: cannot find symbol
+//    [javac]         return  __TaskExtensions.<TResult>Unwrap_060009d2(__Task.get_InternalFactory().<__Task_1<TResult>>StartNew(function));
+//    [javac]                                 ^
+//    [javac]   symbol:   method <TResult>Unwrap_060009d2(__Task_1<__Task_1<TResult>>)
+//    [javac]   location: class __TaskExtensions
+//    [javac]   where TResult is a type-variable:
+//    [javac]     TResult extends Object declared in method <TResult>Run(__Func_1<__Task_1<TResult>>)
