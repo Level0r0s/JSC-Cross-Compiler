@@ -142,7 +142,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
         }
 
 
-        public TreeNodeCollection Nodes { get; }
+        public TreeNodeCollection Nodes { get; set; }
 
         // what do we have to do to implement it?
         // 01. clear media/capture for new screenshots

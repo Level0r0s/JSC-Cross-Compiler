@@ -124,3 +124,15 @@ namespace IsometricTycoonViewWithToolbar
 
     }
 }
+
+
+//compiled! launching server! please wait...
+//17121 -> 20031
+//{ url = https://192.168.1.199:17121 }
+//{ ElapsedMilliseconds = 1134, cpuInfo = BFEBFBFF00040651 }
+//{ makecert = , args = -r -cy authority -a SHA1 -n "CN=peer integrity authority for cpu BFEBFBFF00040651"  -len 2048 -m 72 -ss Root -sr currentuser }
+
+//Unhandled Exception: System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.InvalidOperationException: Cannot start process because a file name has not been provided.
+//   at System.Diagnostics.Process.Start()
+//   at System.Diagnostics.Process.Start(ProcessStartInfo startInfo)
+//   at ScriptCoreLib.Extensions.TcpListenerExtensions.BridgeConnectionToPort(TcpListener x, Int32 port, String rx, String tx)

@@ -17,8 +17,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
 
         }
 
-        public MouseButtons Button { get; }
-        public object Item { get; }
+        public MouseButtons Button { get; set; }
+        public object Item { get; set; }
 
 
 

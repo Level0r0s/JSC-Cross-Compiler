@@ -122,27 +122,38 @@ namespace ScriptCoreLib.Extensions
 		}
 
 		// called by?
+		public static string makecert
+		{
+			get
+			{
+				var makecert70A = "c:/program files/microsoft sdks/windows/v7.0A/bin/makecert.exe";
+				var makecert80 = @"C:\Program Files (x86)\Windows Kits\8.0\bin\x64\makecert.exe";
+
+				// http://stackoverflow.com/questions/589834/what-rsa-key-length-should-i-use-for-my-ssl-certificates
+				// ENISA recommends 15360 Bit. Have a look to the PDF (page 35)
+				// Industry standards set by the Certification Authority/Browser (CA/B) Forum require that certificates issued after January 1, 2014 MUST be at least 2048-bit key length.
+				// http://stackoverflow.com/questions/589834/what-rsa-key-length-should-i-use-for-my-ssl-certificates
+
+				// X:\jsc.svn\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\Extensions\TcpListenerExtensions.cs
+				// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201410/20141018-ssl
+				// X:\jsc.svn\examples\java\hybrid\JVMCLRTCPMultiplex\JVMCLRTCPMultiplex\Program.cs
+
+				// Error: There is no matching certificate in the issuer's Root cert store
+				//Error: There are more than one matching certificate in the issuer's Root cert store
+				var makecert = new[] { makecert70A, makecert80 }.FirstOrDefault(File.Exists);
+
+				return makecert;
+			}
+		}
+
+		// called by?
 		public static void BridgeConnectionToPort(this TcpListener x, int port, string rx, string tx)
 		{
 			// X:\jsc.svn\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\Extensions\TcpListenerExtensions.cs
 
 			// http://stackoverflow.com/questions/5510063/makecert-exe-missing-in-windows-7-how-to-get-it-and-use-it
 
-			var makecert70A = "c:/program files/microsoft sdks/windows/v7.0A/bin/makecert.exe";
-			var makecert80 = @"C:\Program Files (x86)\Windows Kits\8.0\bin\x64\makecert.exe";
 
-			// http://stackoverflow.com/questions/589834/what-rsa-key-length-should-i-use-for-my-ssl-certificates
-			// ENISA recommends 15360 Bit. Have a look to the PDF (page 35)
-			// Industry standards set by the Certification Authority/Browser (CA/B) Forum require that certificates issued after January 1, 2014 MUST be at least 2048-bit key length.
-			// http://stackoverflow.com/questions/589834/what-rsa-key-length-should-i-use-for-my-ssl-certificates
-
-			// X:\jsc.svn\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\Extensions\TcpListenerExtensions.cs
-			// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201410/20141018-ssl
-			// X:\jsc.svn\examples\java\hybrid\JVMCLRTCPMultiplex\JVMCLRTCPMultiplex\Program.cs
-
-			// Error: There is no matching certificate in the issuer's Root cert store
-			//Error: There are more than one matching certificate in the issuer's Root cert store
-			var makecert = new[] { makecert70A, makecert80 }.FirstOrDefault(File.Exists);
 
 			// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201501/20150119
 
@@ -315,6 +326,8 @@ namespace ScriptCoreLib.Extensions
 			//---------------------------
 
 
+			var r = default(X509Certificate);
+
 			#region CertificateRootFromCurrentUser
 			Func<X509Certificate> CertificateRootFromCurrentUser =
 				delegate
@@ -354,31 +367,34 @@ namespace ScriptCoreLib.Extensions
 
 
 			#region authority
-			var r = CertificateRootFromCurrentUser();
-
-			if (r == null)
+			if (makecert != null)
 			{
+				 r = CertificateRootFromCurrentUser();
 
-				var args = "-r -cy authority -a SHA1 -n \"CN=" + rootCN + "\"  -len 2048 -m 72 -ss Root -sr currentuser";
+				if (r == null)
+				{
 
-				Console.WriteLine(new { makecert, args });
+					var args = "-r -cy authority -a SHA1 -n \"CN=" + rootCN + "\"  -len 2048 -m 72 -ss Root -sr currentuser";
 
-				var p = Process.Start(
-					new ProcessStartInfo(
-						makecert,
-					   // this cert is constant
-					   args
-					)
-					{
-						UseShellExecute = false
-					}
+					Console.WriteLine(new { makecert, args });
 
-				);
+					var p = Process.Start(
+						new ProcessStartInfo(
+							makecert,
+						   // this cert is constant
+						   args
+						)
+						{
+							UseShellExecute = false
+						}
 
-				p.WaitForExit();
+					);
 
-				Console.WriteLine(new { p.ExitCode });
+					p.WaitForExit();
 
+					Console.WriteLine(new { p.ExitCode });
+
+				}
 			}
 			#endregion
 
