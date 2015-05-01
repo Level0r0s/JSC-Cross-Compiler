@@ -173,3 +173,18 @@ hello world. jvm clr android async tcp? udp?<iframe  sandbox='allow-forms' src='
 
 
 }
+
+
+//[javac]
+//W:\src\__AnonymousTypes__AndroidTCPServerAsync_AndroidActivity\__f__AnonymousType_57_2_2.java:41: error: reference to Format is ambiguous, both method Format(String, Object, Object) in __String and method Format(__IFormatProvider, String, Object[]) in __String match
+//[javac]         return __String.Format(null, "{{ c = {0}, ManagedThreadId = {1} }}", objectArray4);
+//    [javac]                        ^
+//    [javac]
+//W:\src\__AnonymousTypes__AndroidTCPServerAsync_AndroidActivity\__f__AnonymousType_78_3_2.java:44: error: reference to Format is ambiguous, both method Format(String, Object, Object) in __String and method Format(__IFormatProvider, String, Object[]) in __String match
+//[javac]         return __String.Format(null, "{{ ManagedThreadId = {0}, input = {1} }}", objectArray4);
+
+
+//[javac] Compiling 683 source files to W:\bin\classes
+//[javac] W:\src\ScriptCoreLib\Extensions\LinqExtensions.java:227: error: incompatible types
+//[javac]             if ((enumerator_10))
+//[javac]                  ^

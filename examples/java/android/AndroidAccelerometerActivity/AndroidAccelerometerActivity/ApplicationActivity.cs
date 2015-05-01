@@ -127,5 +127,15 @@ namespace AndroidAccelerometerActivity.Activities
 
 
 }
+//BUILD FAILED
+//x:\util\android-sdk-windows\tools\ant\build.xml:483: SDK does not have any Build Tools installed.
 
- 
+//BUILD FAILED
+//x:\util\android-sdk-windows\tools\ant\build.xml:542: Unable to resolve project target 'Google Inc.:Google APIs:21'
+
+//BUILD FAILED
+//x:\util\android-sdk-windows\tools\ant\build.xml:720: The following error occurred while executing this line:
+//x:\util\android-sdk-windows\tools\ant\build.xml:734: Unable to find a javac compiler;
+//com.sun.tools.javac.Main is not on the classpath.
+//Perhaps JAVA_HOME does not point to the JDK.
+//It is currently set to "X:\Program Files\java8"
