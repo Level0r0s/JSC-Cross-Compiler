@@ -34,11 +34,13 @@ namespace AndroidGLSpiralActivity.Activities
 
         ScriptCoreLib.Android.IAssemblyReferenceToken ref1;
 
+        // http://stackoverflow.com/questions/14111052/adding-multi-window-support-to-android-application
+
         protected override void onCreate(Bundle savedInstanceState)
         {
             base.onCreate(savedInstanceState);
 
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
             //this.ToFullscreen();
 

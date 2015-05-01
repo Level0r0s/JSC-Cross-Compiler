@@ -18,7 +18,7 @@ namespace AndroidVibrationActivity.Activities
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
-
+        // http://stackoverflow.com/questions/17513502/support-for-multi-window-app-development
 
         protected override void onCreate(global::android.os.Bundle savedInstanceState)
         {
