@@ -1311,6 +1311,9 @@
     <Reference Include="StairsByDila.AssetsLibrary">
       <HintPath>..\..\synergy\StairsByDila\StairsByDila\bin\staging.AssetsLibrary\StairsByDila.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="ExovoidLogoByRoberto.AssetsLibrary">
+      <HintPath>..\..\synergy\ExovoidLogoByRoberto\ExovoidLogoByRoberto\bin\staging.AssetsLibrary\ExovoidLogoByRoberto.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2042,6 +2045,10 @@
     <ProjectReference Include="..\..\synergy\EscherPlanariaByMattz\EscherPlanariaByMattz\EscherPlanariaByMattz.csproj">
       <Project>{4c0d57b6-6859-485f-9f11-7d7340be456e}</Project>
       <Name>EscherPlanariaByMattz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\ExovoidLogoByRoberto\ExovoidLogoByRoberto\ExovoidLogoByRoberto.csproj">
+      <Project>{0e8755c0-c084-4357-b903-c8ee03cc6937}</Project>
+      <Name>ExovoidLogoByRoberto</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\FakeGlobalIlluminationByTz\FakeGlobalIlluminationByTz\FakeGlobalIlluminationByTz.csproj">
       <Project>{2031f1b7-e70c-4a59-959e-8ef7036b8559}</Project>

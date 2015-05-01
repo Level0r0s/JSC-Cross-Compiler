@@ -27,6 +27,8 @@ namespace WebGLVRHZTeaser
 	/// </summary>
 	public sealed class Application : ApplicationWebService
 	{
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" install -r "r:\jsc.svn\examples\javascript\WebGL\WebGLVRHZTeaser\WebGLVRHZTeaser\bin\Debug\staging\WebGLVRHZTeaser.ApplicationWebService\staging.apk\staging\apk\bin\WebGLVRHZTeaser.Activities-release.apk"
+
 		//I/Web Console(25108): 0ms NewInstanceConstructor restore fields.. at http://10.144.157.179:23222/view-source:50800
 		//I/Web Console(25108): THREE.WebGLRenderer at http://10.144.157.179:23222/view-source:90370
 		//E/Web Console(25108): Error creating WebGL context. at http://10.144.157.179:23222/view-source:90581
@@ -39,7 +41,7 @@ namespace WebGLVRHZTeaser
 		public Application(IApp page)
 		{
 
-
+#if false
 			#region += Launched chrome.app.window
 			// X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerAppWindow\ChromeTCPServerAppWindow\Application.cs
 			dynamic self = Native.self;
@@ -57,6 +59,7 @@ namespace WebGLVRHZTeaser
 				return;
 			}
 			#endregion
+#endif
 
 			// 
 			Native.document.body.style.margin = "0px";

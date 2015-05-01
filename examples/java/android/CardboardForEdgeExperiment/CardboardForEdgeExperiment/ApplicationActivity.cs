@@ -29,6 +29,8 @@ namespace CardboardForEdgeExperiment.Activities
     {
         xandroidcardboardcxperiment.xactivities.ApplicationActivity ref0;
 
+        // I/System.Console(24261): CardboardForEdgeExperiment { ProcessorCount = 8, MODEL = SM-G925F, CurrentManagedThreadId = 17028, FrameCounter = 60, LastFrameMilliseconds = 5, codeFPS = 200.0, pitch = -1.8509252, yaw = 1.5846334 }
+
         // "x:\util\android-sdk-windows\platform-tools\adb.exe" install -r "r:\jsc.svn\examples\java\android\CardboardForEdgeExperiment\CardboardForEdgeExperiment\bin\Debug\staging\apk\bin\CardboardForEdgeExperiment.Activities-debug.apk"
 
         // https://github.com/googlesamples/cardboard-java/blob/master/CardboardSample/src/main/java/com/google/vrtoolkit/cardboard/samples/treasurehunt/MainActivity.java
