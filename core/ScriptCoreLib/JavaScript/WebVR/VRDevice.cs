@@ -12,6 +12,9 @@ namespace ScriptCoreLib.JavaScript.WebVR
 	[Script(HasNoPrototype = true)]
 	public class VRDevice
 	{
+		// https://www.khronos.org/registry/gles/extensions/OVR/multiview2.txt
+		// https://www.khronos.org/registry/gles/extensions/OVR/multiview.txt
+
 		// https://dodocase.zendesk.com/hc/en-us/articles/203453464-Will-Cardboard-work-with-my-phone-
 
 		// https://wemo.io/google-chrome-and-the-future-of-virtual-reality-interview-with-531
