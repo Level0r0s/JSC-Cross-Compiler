@@ -37,6 +37,7 @@ namespace AndroidWebViewActivity.Activities
 
             //this.progressBar = ProgressDialog.show(this, "look here!", "Loading...");
             this.webview = new WebView(this);
+            // http://googlechromereleases.blogspot.com/2015/03/android-webview-update.html
 
 			//LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(300, 300);
 			//this.getWindow().setLayoutParams(layoutParams);

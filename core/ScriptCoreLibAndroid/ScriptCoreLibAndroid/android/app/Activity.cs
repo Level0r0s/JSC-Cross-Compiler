@@ -38,6 +38,13 @@ namespace android.app
         // X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Android\CoreAndroidWebServiceActivity.cs
         // X:\jsc.svn\examples\javascript\android\com.abstractatech.dcimgalleryapp\com.abstractatech.dcimgalleryapp\ApplicationWebService.cs
 
+        public virtual bool onOptionsItemSelected(MenuItem item)
+        {
+            // X:\jsc.svn\examples\java\android\AndroidMenuActivity\AndroidMenuActivity\ApplicationActivity.cs
+
+            return true;
+        }
+
         public Looper getMainLooper()
         {
             // X:\jsc.svn\core\ScriptCoreLibAndroid.Windows.Forms\ScriptCoreLibAndroid.Windows.Forms\Android\BCLImplementation\System\Windows\Forms\MessageBox.cs

@@ -15,6 +15,12 @@ using android.content;
 namespace AndroidMenuActivity.Activities
 {
 
+
+
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "21")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "8")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "8")]
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
         public event Action<MenuItem> AtOption;
@@ -83,7 +89,8 @@ namespace AndroidMenuActivity.Activities
                         (java.lang.CharSequence)(object)"http://jsc-solutions.net"
                     );
 
-                    item2.setIcon(android.R.drawable.ic_menu_edit);
+                    //item2.setIcon(android.R.drawable.ic_menu_edit);
+                    item2.setIcon(android.R.drawable.ic_menu_view);
 
                     var i = new Intent(Intent.ACTION_VIEW,
                         android.net.Uri.parse("http://jsc-solutions.net")
@@ -102,7 +109,8 @@ namespace AndroidMenuActivity.Activities
                 item =>
                 {
 
-                    b.WithText("menu was clicked!" + (string)(object)item.getTitle());
+                    //b.WithText("menu was clicked!" + (string)(object)item.getTitle());
+                    b.WithText("menu was clicked!" + new { item });
                 };
 
             var b2 = new Button(this);
