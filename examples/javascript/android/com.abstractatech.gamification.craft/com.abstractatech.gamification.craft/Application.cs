@@ -91,10 +91,15 @@ namespace com.abstractatech.gamification.craft
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+
+            //            will skip DefineVersionInfoResource
+            //2b5c:02:01:1e RewriteToAssembly error: System.NotSupportedException: Type 'xchrome.BCLImplementation.System.Net.Sockets.__TcpListener' was not completed.
+
             // Uncaught ReferenceError: kvYlVNrcg0qBT40xR_bUt6Q is not defined 
 
             // it does work, yet chrome server is a slow asset server for now..
 
+#if false
             #region AtFormCreated
             FormStyler.AtFormCreated =
                  s =>
@@ -128,6 +133,7 @@ namespace com.abstractatech.gamification.craft
 
 
 
+#endif
 
 
 

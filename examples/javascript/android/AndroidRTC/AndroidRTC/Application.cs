@@ -72,7 +72,8 @@ namespace AndroidRTC
                         // X:\jsc.svn\examples\javascript\css\test\TestBackgroundBlu\TestBackgroundBlu\Application.cs
                         var rgb = new { r = 0x74, g = 0x7d, b = 0x9c };
 
-                        var background = "rgba(\{rgb.r}, \{rgb.g}, \{rgb.b}, 1.0)";
+                        //var background = "rgba(\{rgb.r}, \{rgb.g}, \{rgb.b}, 1.0)";
+                        var background = "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", 1.0)";
                         new IHTMLPre { new { background } }.AttachToDocument();
 
                         //Native.body.style.background = "rgb(\{(0x‎74)}, \{0x7D}, \{0x9C})‬";

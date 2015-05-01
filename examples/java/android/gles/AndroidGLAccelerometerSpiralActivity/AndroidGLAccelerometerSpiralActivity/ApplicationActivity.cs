@@ -26,7 +26,7 @@ namespace AndroidGLAccelerometerSpiralActivity.Activities
 
     //using opengl = GLES20;
 
-
+    
     public class ApplicationActivity : Activity
     {
         ScriptCoreLib.Android.IAssemblyReferenceToken ref1;
@@ -36,8 +36,8 @@ namespace AndroidGLAccelerometerSpiralActivity.Activities
         {
             base.onCreate(savedInstanceState);
 
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            //this.ToFullscreen();
+            //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            ////this.ToFullscreen();
 
             var v = new RenderingContextView(this);
 
