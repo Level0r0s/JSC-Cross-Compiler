@@ -241,3 +241,10 @@ namespace FlashHeatZeeker.PlayerIOIntegrationBeta2
 
 // chrome part needs to be built with 2015?
 //Uncaught DataCloneError: Failed to execute 'postMessage' on 'Worker': An object could not be cloned.
+
+
+// trace = X:\jsc.internal.svn\compiler\jsc\Languages\IL\ILTranslationExtensions.EmitToArguments.cs, TargetMethod = Void Invoke(System.String, Int32, Int32, System.Action`1[ScriptCoreLib.JavaScript.Extensions.FormStyler], Boolean, Boolean, System.Action`1[System.Windows.Forms.Form]), DeclaringType = Chr
+//assembly: X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\bin\Debug\FlashHeatZeeker.PlayerIOIntegrationBeta2.exe
+//type: FlashHeatZeeker.PlayerIOIntegrationBeta2.Application, FlashHeatZeeker.PlayerIOIntegrationBeta2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+//offset: 0x0142
+// method:Void .ctor(FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Pages.IXApp), ex = System.TypeLoadException: Could not load type 'ChromeTCPServer.TheServer' from assembly 'Chrome Web Server, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
