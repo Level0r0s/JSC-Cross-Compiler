@@ -93,6 +93,13 @@ namespace StarlingRotationExperiment
 
             var ii = 0;
 
+
+
+
+            var content_rot = new Sprite();
+            var xsw = new Stopwatch();
+            xsw.Start();
+
             maxframe.Start();
             ApplicationSprite.__stage.enterFrame +=
                 delegate
@@ -117,8 +124,21 @@ namespace StarlingRotationExperiment
                         return;
                     }
 
+                    //content_rot.rotation += 0.0001 * xsw.ElapsedMilliseconds;
+
                     // Nan?
-                    info.text = new { fps = ii, maxframe_elapsed, sw.ElapsedMilliseconds }.ToString();
+                    info.text = new
+                    {
+                        fps = ii,
+                        maxframe_elapsed,
+
+
+                        sw = sw.ElapsedMilliseconds,
+
+                        // why the duck is it Nan?
+                        xsw = xsw.ElapsedMilliseconds,
+                        content_rot.rotation
+                    }.ToString();
 
                     //if (fps != null)
                     //    fps("" + ii);
@@ -130,10 +150,8 @@ namespace StarlingRotationExperiment
             #endregion
 
             var xinfo = new TextField(400, 300, "Welcome to StarlingRotationExperiment!");
-            var xsw = new Stopwatch();
-            xsw.Start();
 
-            var content_rot = new Sprite();
+
 
             var texture0 = Texture.fromBitmap(new ActionScript.Images.jsc());
 
@@ -174,14 +192,17 @@ namespace StarlingRotationExperiment
                 {
                     // https://www.adobe.com/support/flashplayer/downloads.html#fp15
 
-                    content_rot.rotation += 0.0001 * xsw.ElapsedMilliseconds;
+                    // Nan??
+                    //content_rot.rotation += 0.0001 * xsw.ElapsedMilliseconds;
+                    //content_rot.rotation = 0.0001 * xsw.ElapsedMilliseconds;
+                    content_rot.rotation = 0.0001 * sw.ElapsedMilliseconds;
 
 
                     //var v = 0.0001 * xsw.ElapsedMilliseconds;
                     //content_rot.rotation += 0.02;
 
 
-                    xsw.Restart();
+                    //xsw.Restart();
                 };
 
 
