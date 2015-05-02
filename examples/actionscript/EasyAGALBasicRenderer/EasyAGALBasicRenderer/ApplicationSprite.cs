@@ -1,3 +1,4 @@
+// defined at?
 using com.adobe.utils;
 using EasyAGALBasicRenderer.Library;
 using ScriptCoreLib.ActionScript;

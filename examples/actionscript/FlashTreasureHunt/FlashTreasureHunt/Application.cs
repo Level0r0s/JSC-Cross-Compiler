@@ -1,4 +1,4 @@
-using chrome;
+//using chrome;
 using FlashTreasureHunt.Design;
 using FlashTreasureHunt.HTML.Pages;
 using ScriptCoreLib;

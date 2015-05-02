@@ -16,7 +16,7 @@ using ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms;
 using ScriptCoreLib.JavaScript.Runtime;
 using ScriptCoreLib.JavaScript.Windows.Forms;
 using System.Collections.Generic;
-using chrome;
+//using chrome;
 using System.Windows.Forms;
 
 namespace FlashTowerDefenseApp

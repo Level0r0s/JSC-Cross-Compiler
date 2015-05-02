@@ -1,4 +1,4 @@
-using chrome;
+//using chrome;
 using FlashSpaceInvadersApp.Design;
 using FlashSpaceInvadersApp.HTML.Pages;
 using ScriptCoreLib;
