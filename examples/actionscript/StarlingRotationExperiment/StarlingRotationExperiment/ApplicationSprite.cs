@@ -194,8 +194,8 @@ namespace StarlingRotationExperiment
 
                     // Nan??
                     //content_rot.rotation += 0.0001 * xsw.ElapsedMilliseconds;
-                    //content_rot.rotation = 0.0001 * xsw.ElapsedMilliseconds;
-                    content_rot.rotation = 0.0001 * sw.ElapsedMilliseconds;
+                    content_rot.rotation = 0.0001 * xsw.ElapsedMilliseconds;
+                    //content_rot.rotation = 0.0001 * sw.ElapsedMilliseconds;
 
 
                     //var v = 0.0001 * xsw.ElapsedMilliseconds;

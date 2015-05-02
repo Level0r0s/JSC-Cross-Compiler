@@ -14,6 +14,11 @@ namespace TestStopwatch
 
 		public ApplicationSprite()
 		{
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150502
+            //         public var InternalOffsetMilliseconds:Number;
+            // hello { InternalStart = 02.05.2015 11:54:23, diff = 00:00:00.0, InternalOffsetMilliseconds = NaN, offset = 00:00:00.NaN, Elapsed = 00:00:00.NaN, IsRunning = true, ElapsedMilliseconds = NaN }
+            // didnt we fix it already?
+
 			// jsc needs to init long fields!
 			//InternalOffsetMilliseconds = 0
 			//	;
