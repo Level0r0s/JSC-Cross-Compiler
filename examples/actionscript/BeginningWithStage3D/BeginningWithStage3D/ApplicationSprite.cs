@@ -57,6 +57,7 @@ mov op, vt0";
                     var program = context3D.createProgram();
                     // Assemble vertex shader from its code
                     var vertexAssembler = new AGALMiniAssembler();
+                    // partial?
                     vertexAssembler.assemble(Context3DProgramType.VERTEX, vertexShader);
                     // Assemble fragment shader from its code
                     var fragmentAssembler = new AGALMiniAssembler();

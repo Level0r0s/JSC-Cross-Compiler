@@ -5,4 +5,4 @@ rem call build.bat
 
 
 :: https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201501/20150110
-C:\util\air16_sdk_win\bin\adl  air-descriptor.xml  -profile mobileDevice -screensize 680x762:680x800
+x:\util\air17_sdk_sa_win\bin\adl  air-descriptor.xml  -profile mobileDevice -screensize 680x762:680x800

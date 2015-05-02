@@ -26,4 +26,4 @@ rem http://forum.starling-framework.org/topic/wrong-wmode-with-adobeair-32-deskt
 rem call createapk.bat
 
 echo install
-"C:\util\android-sdk-windows\platform-tools\adb.exe"  install -r air.apk
+"x:\util\android-sdk-windows\platform-tools\adb.exe"  install -r air.apk

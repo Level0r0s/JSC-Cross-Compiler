@@ -13,6 +13,8 @@ namespace ScriptCoreLib.GLSL
     /// </summary>
     public class VertexShader : Shader
     {
+        // https://github.com/adobe/glsl2agal/tree/master/src/glsl
+
         [highp]
         protected vec4 gl_Position; // should be written to
         [mediump]

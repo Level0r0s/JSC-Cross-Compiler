@@ -29,12 +29,12 @@ namespace BeginningWithStage3D
         /// This is a javascript application.
         /// </summary>
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
-        public Application(IDefaultPage page)
+        public Application(IDefault page)
         {
             // Initialize ApplicationSprite
             //new IHTMLDiv { innerText = "wmode set" }.AttachToDocument();
 
-            sprite.wmode();
+            //sprite.wmode();
             //sprite.AtMessage +=
             //    e =>
             //    {
@@ -52,22 +52,22 @@ namespace BeginningWithStage3D
 
     }
 
-    static class X
-    {
-        public static void wmode(this Sprite s, string value = "direct")
-        {
-            var x = s.ToHTMLElement();
+    //static class X
+    //{
+    //    public static void wmode(this Sprite s, string value = "direct")
+    //    {
+    //        var x = s.ToHTMLElement();
 
-            var p = x.parentNode;
-            if (p != null)
-            {
-                // if we continue, element will be reloaded!
-                return;
-            }
+    //        var p = x.parentNode;
+    //        if (p != null)
+    //        {
+    //            // if we continue, element will be reloaded!
+    //            return;
+    //        }
 
-            x.setAttribute("wmode", value);
+    //        x.setAttribute("wmode", value);
 
 
-        }
-    }
+    //    }
+    //}
 }
