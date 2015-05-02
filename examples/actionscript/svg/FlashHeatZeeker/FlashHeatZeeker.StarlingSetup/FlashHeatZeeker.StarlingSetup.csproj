@@ -153,10 +153,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="staging\FlashHeatZeeker.StarlingSetup.ApplicationSprite\web\air.com.abstractatech.gamification.starling-build.bat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="staging\FlashHeatZeeker.StarlingSetup.ApplicationSprite\web\air.com.abstractatech.gamification.starling-install.bat">
+    <None Include="staging\FlashHeatZeeker.StarlingSetup.ApplicationSprite\web\air-android.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="staging\FlashHeatZeeker.StarlingSetup.ApplicationSprite\web\air.com.abstractatech.gamification.starling-test.bat">
