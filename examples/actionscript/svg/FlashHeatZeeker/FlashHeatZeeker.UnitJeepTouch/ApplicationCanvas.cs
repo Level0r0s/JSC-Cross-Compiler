@@ -31,7 +31,10 @@ namespace FlashHeatZeeker.UnitJeepTouch
             control,
             left, right;
 
-        public int fingersize = 96;
+        // edge has a large screen now!
+        //public int fingersize = 96;
+        public int fingersize = 256;
+
         public ApplicationCanvas()
         {
             r.Fill = Brushes.Red;

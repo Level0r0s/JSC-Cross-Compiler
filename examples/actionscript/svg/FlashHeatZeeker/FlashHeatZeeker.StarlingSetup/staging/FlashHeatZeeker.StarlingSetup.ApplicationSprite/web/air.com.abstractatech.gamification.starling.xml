@@ -16,7 +16,6 @@
 
     <autoOrients>false</autoOrients>
     <renderMode>direct</renderMode>
-    <depthAndStencil>true</depthAndStencil>
     <fullScreen>false</fullScreen>
     <visible>true</visible>
     <aspectRatio>landscape</aspectRatio>

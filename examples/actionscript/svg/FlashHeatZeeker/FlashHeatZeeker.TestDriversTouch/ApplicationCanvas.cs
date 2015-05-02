@@ -26,7 +26,7 @@ namespace FlashHeatZeeker.TestDriversTouch
             control,
             left, right;
 
-        public int fingersize = 96;
+        public int fingersize = 256;
         public ApplicationCanvas()
         {
             r.Fill = Brushes.Red;

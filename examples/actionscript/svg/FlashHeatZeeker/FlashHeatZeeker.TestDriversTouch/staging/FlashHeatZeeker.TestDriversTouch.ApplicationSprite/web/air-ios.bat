@@ -14,7 +14,7 @@ echo build
 :: ipad ? FPS
 rem call "X:\jsc.internal.svn\keystore\carlo-lenovo\air13.com.abstractatech-package.and.sign.ios.bat" %e% %swf% %ipa% %xml%
 :: rem ipad 5 fps
-call "X:\jsc.internal.git\keystore\carlo-lenovo\air16.com.abstractatech-package.and.sign.ios.aot.bat" %e% %swf% %ipa% %xml%
+call "X:\jsc.internal.git\keystore\carlo-lenovo\air17.com.abstractatech-package.and.sign.ios.aot.bat" %e% %swf% %ipa% %xml%
 
 
 
@@ -27,6 +27,6 @@ rem http://blogs.adobe.com/airodynamics/2012/07/17/installinguninstalling-ios-ai
 rem https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201403/20140301
 
 echo install
-C:\util\air16_sdk_win\bin\adt -installApp -platform ios -package air.ipa
+x:\util\air17_sdk_sa_win\bin\adt -installApp -platform ios -package air.ipa
 
 rem No Devices Detected
