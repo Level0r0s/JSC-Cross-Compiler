@@ -76,21 +76,17 @@
     <Reference Include="box2dflash">
       <HintPath>..\packages\box2dflash.1.0.0.0\lib\box2dflash.dll</HintPath>
     </Reference>
-    <Reference Include="Chrome Web Server">
-      <HintPath>..\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll</HintPath>
-    </Reference>
     <Reference Include="Chrome Web Server Styled Form, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Chrome.Web.Server.StyledForm.1.0.0.0\lib\Chrome Web Server Styled Form.dll</HintPath>
     </Reference>
-    <Reference Include="Chrome Web Store">
+    <Reference Include="Chrome Web Server, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll</HintPath>
+    </Reference>
+    <Reference Include="Chrome Web Store, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Chrome.Web.Store.1.0.0.0\lib\Chrome Web Store.dll</HintPath>
-    </Reference>
-    <Reference Include="Facebook API">
-      <HintPath>..\packages\Facebook.API.1.0.0.0\lib\Facebook API.dll</HintPath>
-    </Reference>
-    <Reference Include="FaceBook API Service">
-      <HintPath>..\packages\FaceBook.API.Service.1.0.0.0\lib\FaceBook API Service.dll</HintPath>
     </Reference>
     <Reference Include="FlashHeatZeeker.Core">
       <HintPath>..\packages\FlashHeatZeeker.Core.1.0.0.0\lib\FlashHeatZeeker.Core.dll</HintPath>
@@ -161,9 +157,6 @@
     <Reference Include="FlashHeatZeeker.UnitTankControl">
       <HintPath>..\packages\FlashHeatZeeker.UnitTankControl.1.0.0.0\lib\FlashHeatZeeker.UnitTankControl.dll</HintPath>
     </Reference>
-    <Reference Include="HerokuFacebookLogin.ActionScriptViaLocalConnection">
-      <HintPath>..\packages\HerokuFacebookLogin.ActionScriptViaLocalConnection.1.0.0.0\lib\HerokuFacebookLogin.ActionScriptViaLocalConnection.dll</HintPath>
-    </Reference>
     <Reference Include="jsc.meta">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\jsc.meta.exe</HintPath>
@@ -174,9 +167,6 @@
     </Reference>
     <Reference Include="net.hires.debug">
       <HintPath>..\packages\net.hires.debug.1.0.0.0\lib\net.hires.debug.dll</HintPath>
-    </Reference>
-    <Reference Include="Player.IO GameLibrary">
-      <HintPath>..\packages\PlayerIO.GameLibrary.1.0.0.0\lib\Player.IO GameLibrary.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -251,11 +241,12 @@
     <Reference Include="UIAutomationTypes" />
     <Reference Include="FlashHeatZeeker.PlayerIOIntegrationBeta2.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\FlashHeatZeeker.PlayerIOIntegrationBeta2.AssetsLibrary.dll</HintPath>
+      <Aliases>global,xassets</Aliases>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Design\App.css" />
-    <Content Include="Design\App.htm" />
+    <Content Include="Design\XApp.htm" />
     <Compile Include="ApplicationSpriteWithConnection.cs" />
     <Compile Include="Library\StarlingGameSpriteBeta2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -307,7 +298,7 @@
   <PropertyGroup>
     <PostBuildEvent>start /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe ConfigurationCreateNuGetPackage /AssemblyMerge:$(TargetPath) /AssemblyMerge:$(TargetName).AssetsLibrary.dll /OutputDirectory:C:\util\jsc\nuget /PackageID:"Chrome.Web.Server" /OutputName:"Chrome Web Server" /ProjectFileName:"$(ProjectPath)"
 
-</PostBuildEvent>
+start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /AssociateDriveForChrome:A /InferChromeAppManifest:true  /FilterTo:$(SolutionDir)</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget</PreBuildEvent>
   </PropertyGroup>
 </Project>

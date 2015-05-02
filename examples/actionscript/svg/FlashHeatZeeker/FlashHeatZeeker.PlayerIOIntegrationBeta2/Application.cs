@@ -1,3 +1,5 @@
+extern alias xassets;
+
 using Abstractatech.ConsoleFormPackage.Library;
 using Abstractatech.JavaScript.FormAsPopup;
 using chrome;
@@ -60,12 +62,21 @@ namespace FlashHeatZeeker.PlayerIOIntegrationBeta2
         // * New packaged apps are currently able to be searched and browsed in the Chrome Web Store by Windows and Chrome OS users on Chrome's developer channel. Users on other OSs and Chrome channels can view and install the app via a direct link.
 
 
+//Error	13	The type 'FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Pages.IApp' exists in both 
+//    'x:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll' and 
+//        'x:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\bin\staging.AssetsLibrary\FlashHeatZeeker.PlayerIOIntegrationBeta2.AssetsLibrary.dll'	X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\Application.cs	67	28	FlashHeatZeeker.PlayerIOIntegrationBeta2
+//Error	14	The type 'FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Images.FromAssets.Preview' exists in both 'X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\bin\staging.AssetsLibrary\FlashHeatZeeker.PlayerIOIntegrationBeta2.AssetsLibrary.dll' and 'X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll'	X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\Application.cs	123	81	FlashHeatZeeker.PlayerIOIntegrationBeta2
+//Error	15	The type 'FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Pages.AppSource' exists in both 'X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\bin\staging.AssetsLibrary\FlashHeatZeeker.PlayerIOIntegrationBeta2.AssetsLibrary.dll' and 'X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll'	X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\Application.cs	126	21	FlashHeatZeeker.PlayerIOIntegrationBeta2
+
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
-        public Application(IApp page)
+        public Application(xassets::FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Pages.IXApp page)
         {
+            //method:Void .ctor(FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Pages.IXApp), ex = System.TypeLoadException: Could not load type 'ChromeTCPServer.TheServer' from assembly 'Chrome Web Server, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+
             // https://code.google.com/p/chromium/issues/detail?can=2&start=0&num=100&q=&colspec=ID%20Pri%20M%20Iteration%20ReleaseBlock%20Cr%20Status%20Owner%20Summary%20OS%20Modified&groupby=&sort=&id=313673
             // https://code.google.com/p/chromium/issues/detail?can=2&start=0&num=100&q=&colspec=ID%20Pri%20M%20Iteration%20ReleaseBlock%20Cr%20Status%20Owner%20Summary%20OS%20Modified&groupby=&sort=&id=317352&thanks=317352&ts=1384094600
 
@@ -120,10 +131,10 @@ namespace FlashHeatZeeker.PlayerIOIntegrationBeta2
                 Console.WriteLine("FlashHeatZeeker shall run as a chrome app as server");
 
                 chrome.Notification.DefaultTitle = "Operation «Heat Zeeker»";
-                chrome.Notification.DefaultIconUrl = new HTML.Images.FromAssets.Preview().src;
+                chrome.Notification.DefaultIconUrl = new xassets::FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Images.FromAssets.Preview().src;
 
                 ChromeTCPServer.TheServerWithStyledForm.Invoke(
-                    AppSource.Text,
+                    xassets::FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Pages.XAppSource.Text,
                     AtFormCreated: FormStyler.AtFormCreated
                 );
 
