@@ -138,9 +138,6 @@
     </Compile>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="staging\ChromeTCPServer.Application\web\manifest.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

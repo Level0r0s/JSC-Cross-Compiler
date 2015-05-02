@@ -39,7 +39,7 @@ namespace FlashHeatZeeker.PlayerIOIntegrationBeta2
     //#if false
     [Frame(typeof(XApplicationSpritePreloader))]
     //#endif
-    [SWF(backgroundColor = 0, width = 800, height = 600, frameRate = 60)]
+    [SWF(backgroundColor = 0, width = 800, height = 600, frameRate = 120)]
     public sealed class ApplicationSprite : ApplicationSpriteWithConnection, IAlternator
     {
         public string Alternate { get; set; }
@@ -87,7 +87,7 @@ namespace FlashHeatZeeker.PlayerIOIntegrationBeta2
 //Error	16	The type 'FlashHeatZeeker.PlayerIOIntegrationBeta2.ActionScript.Images.MyCursor' exists in both 'x:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll' and 'x:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\bin\staging.AssetsLibrary\FlashHeatZeeker.PlayerIOIntegrationBeta2.AssetsLibrary.dll'	X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\ApplicationSprite.cs	83	45	FlashHeatZeeker.PlayerIOIntegrationBeta2
 
 
-                    // new ActionScript.Images.MyCursor().ToMouseCursor();
+                    new ActionScript.Images.MyCursor().ToMouseCursor();
 
 
                     var lasterror = 0;

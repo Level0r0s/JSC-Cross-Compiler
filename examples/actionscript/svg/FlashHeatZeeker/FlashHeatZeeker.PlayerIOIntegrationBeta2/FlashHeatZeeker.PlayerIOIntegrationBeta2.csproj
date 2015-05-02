@@ -289,7 +289,9 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="staging\FlashHeatZeeker.PlayerIOIntegrationBeta2.ApplicationWebService\staging.net.debug\manifest.webapp" />
-    <None Include="staging\FlashHeatZeeker.PlayerIOIntegrationBeta2.Application\web\manifest.json" />
+    <None Include="staging\FlashHeatZeeker.PlayerIOIntegrationBeta2.Application\web\manifest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Cursors\" />

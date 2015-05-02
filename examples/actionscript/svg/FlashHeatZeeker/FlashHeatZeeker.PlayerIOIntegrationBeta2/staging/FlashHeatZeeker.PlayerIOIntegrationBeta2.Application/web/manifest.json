@@ -3,8 +3,8 @@
 "manifest_version": 2,
   "name": "Heat Zeeker",
   "description": "Operation \xabHeat Zeeker\xbb",
-  "version": "42",
- "minimum_chrome_version": "38",
+  "version": "44",
+ "minimum_chrome_version": "39",
   "offline_enabled": true,
 
 

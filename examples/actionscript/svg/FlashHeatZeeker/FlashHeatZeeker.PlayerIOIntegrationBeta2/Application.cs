@@ -62,11 +62,11 @@ namespace FlashHeatZeeker.PlayerIOIntegrationBeta2
         // * New packaged apps are currently able to be searched and browsed in the Chrome Web Store by Windows and Chrome OS users on Chrome's developer channel. Users on other OSs and Chrome channels can view and install the app via a direct link.
 
 
-//Error	13	The type 'FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Pages.IApp' exists in both 
-//    'x:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll' and 
-//        'x:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\bin\staging.AssetsLibrary\FlashHeatZeeker.PlayerIOIntegrationBeta2.AssetsLibrary.dll'	X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\Application.cs	67	28	FlashHeatZeeker.PlayerIOIntegrationBeta2
-//Error	14	The type 'FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Images.FromAssets.Preview' exists in both 'X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\bin\staging.AssetsLibrary\FlashHeatZeeker.PlayerIOIntegrationBeta2.AssetsLibrary.dll' and 'X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll'	X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\Application.cs	123	81	FlashHeatZeeker.PlayerIOIntegrationBeta2
-//Error	15	The type 'FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Pages.AppSource' exists in both 'X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\bin\staging.AssetsLibrary\FlashHeatZeeker.PlayerIOIntegrationBeta2.AssetsLibrary.dll' and 'X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll'	X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\Application.cs	126	21	FlashHeatZeeker.PlayerIOIntegrationBeta2
+        //Error	13	The type 'FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Pages.IApp' exists in both 
+        //    'x:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll' and 
+        //        'x:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\bin\staging.AssetsLibrary\FlashHeatZeeker.PlayerIOIntegrationBeta2.AssetsLibrary.dll'	X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\Application.cs	67	28	FlashHeatZeeker.PlayerIOIntegrationBeta2
+        //Error	14	The type 'FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Images.FromAssets.Preview' exists in both 'X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\bin\staging.AssetsLibrary\FlashHeatZeeker.PlayerIOIntegrationBeta2.AssetsLibrary.dll' and 'X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll'	X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\Application.cs	123	81	FlashHeatZeeker.PlayerIOIntegrationBeta2
+        //Error	15	The type 'FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Pages.AppSource' exists in both 'X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\bin\staging.AssetsLibrary\FlashHeatZeeker.PlayerIOIntegrationBeta2.AssetsLibrary.dll' and 'X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll'	X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.PlayerIOIntegrationBeta2\Application.cs	126	21	FlashHeatZeeker.PlayerIOIntegrationBeta2
 
 
         /// <summary>
@@ -135,7 +135,16 @@ namespace FlashHeatZeeker.PlayerIOIntegrationBeta2
 
                 ChromeTCPServer.TheServerWithStyledForm.Invoke(
                     xassets::FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Pages.XAppSource.Text,
-                    AtFormCreated: FormStyler.AtFormCreated
+                    AtFormCreated: FormStyler.AtFormCreated,
+
+                    AtFormConstructor:
+                        f =>
+                        {
+//arg[0] is typeof System.Int32
+//script: error JSC1000: No implementation found for this native method, please implement [static System.Drawing.Color.FromArgb(System.Int32)]
+
+                            f.BackColor = System.Drawing.Color.FromArgb(0xA26D41);
+                        }
                 );
 
                 return;
@@ -160,7 +169,8 @@ namespace FlashHeatZeeker.PlayerIOIntegrationBeta2
                        // show thumbnail
                        // or click to enable plugin?
                        embed.style.SetLocation(0, 0);
-                       embed.style.SetSize(Native.window.Width, 96);
+                       //embed.style.SetSize(Native.window.Width, 96);
+                       embed.style.SetSize(Native.window.Width, Native.window.Height);
 
                        //embed.style.transition = "height 200ms linear";
 
@@ -226,3 +236,6 @@ namespace FlashHeatZeeker.PlayerIOIntegrationBeta2
 
 
 }
+
+// chrome part needs to be built with 2015?
+//Uncaught DataCloneError: Failed to execute 'postMessage' on 'Worker': An object could not be cloned.

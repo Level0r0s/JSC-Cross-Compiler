@@ -45,7 +45,11 @@ namespace ChromeTCPServer
 			// X:\jsc.svn\examples\javascript\chrome\apps\ChomeAlphaAppWindow\ChomeAlphaAppWindow\Application.cs
 			// X:\jsc.svn\examples\javascript\chrome\apps\ChromeEarth\ChromeEarth\Application.cs
 			bool transparentBackground = false,
-			bool resizable = true
+			bool resizable = true,
+
+
+
+			Action<Form> AtFormConstructor = null
 			)
 		{
 			Console.WriteLine("enter TheServerWithStyledForm.Invoke");
@@ -59,7 +63,9 @@ namespace ChromeTCPServer
 					// X:\jsc.internal.svn\core\com.abstractatech.web\com.abstractatech.web\Domains\discover.xavalon.net\discover_xavalon_net.cs
 
 					// browser popup will use this color
-					((__Form)s.Context).HTMLTargetContainerRef.style.backgroundColor = JSColor.FromRGB(0, 0, 0);
+
+					// FormBackgroundColor
+					//((__Form)s.Context).HTMLTargetContainerRef.style.backgroundColor = JSColor.FromRGB(0, 0, 0);
 
 					s.Caption.style.backgroundColor = JSColor.FromRGB(0, 0, 0);
 					s.TargetOuterBorder.style.boxShadow = "rgba(0, 0, 0, 0.3) 0px 0px 6px 3px";
@@ -453,6 +459,9 @@ namespace ChromeTCPServer
 						// You do not have permission to use <webview> tag. Be sure to declare 'webview' permission in your manifest. 
 						webview.setAttribute("partition", "p1");
 						webview.setAttribute("allowtransparency", "true");
+
+						// 0xA26D41
+
 						webview.setAttribute("allowfullscreen", "true");
 
 
@@ -606,6 +615,11 @@ namespace ChromeTCPServer
 					};
 
 
+					if (AtFormConstructor != null)
+						AtFormConstructor(f);
+
+					//f.BackColor = System.Drawing.Color.Yellow;
+
 
 					//Refused to frame 'http://192.168.43.252:8877/' because it violates the following Content Security Policy directive: "frame-src 'self' data: chrome-extension-resource:"
 
@@ -683,16 +697,6 @@ namespace ChromeTCPServerWithFrameNone
 		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
 		public Application(IApp page)
 		{
-			//{ trace = X:\jsc.internal.svn\compiler\jsc\Languages\IL\ILTranslationExtensions.EmitToArguments.cs, TargetMethod = Void InvokeAsync(System.String, System.Func`2[System.String,System.Threading.Tasks.Task]), DeclaringType = ChromeTCPServer.TheServer, Location =
-			// assembly: X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone\bin\Debug\ChromeTCPServerWithFrameNone.exe
-			// type: ChromeTCPServer.TheServerWithStyledForm, ChromeTCPServerWithFrameNone, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-			// offset: 0x00bb
-			//  method:Void Invoke(System.String, Int32, Int32, System.Action`1[ScriptCoreLib.JavaScript.Extensions.FormStyler]), ex = System.NullReferenceException: Object reference not set to an instance of an object.
-			//   at jsc.ILInstruction.GetExpectedType(Int32 StackBeforeIndex) in x:\jsc.internal.svn\compiler\jsc\CodeModel\ILInstruction.Stack.cs:line 64
-			//   at jsc.ILInstruction.GetExpectedType() in x:\jsc.internal.svn\compiler\jsc\CodeModel\ILInstruction.Stack.cs:line 20
-			//   at jsc.meta.Commands.Rewrite.RewriteToAssembly.<>c__DisplayClass11b.<WriteSwitchRewrite>b__b4(ILRewriteContext e) in x:\jsc.internal.svn\compiler\jsc.meta\jsc.meta\Commands\Rewrite\RewriteToAssembly\RewriteToAssembly.WriteSwitchRewrite.cs:line 465
-			//   at jsc.Languages.IL.ILTranslationExtensions.EmitToArguments.<>c__DisplayClassc3.<set_Item>b__c1(ILRewriteContext e) in x:\jsc.internal.svn\compiler\jsc\Languages\IL\ILTranslationExtensions.EmitToArguments.cs:line 1132
-			//   at jsc.meta.Commands.Rewrite.RewriteToAssembly.<>c__DisplayClass130.<>c__DisplayClass140.<WriteSwitchRewrite>b__e6(ILGenerator flow_il) in x:\jsc.internal.svn\compiler\jsc.meta\jsc.meta\Commands\Rewrite\RewriteToAssembly\RewriteToAssembly.WriteSwitchRewrite.cs:line 1353
 
 
 			dynamic self = Native.self;
