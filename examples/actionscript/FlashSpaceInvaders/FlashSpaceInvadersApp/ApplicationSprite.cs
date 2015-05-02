@@ -5,6 +5,7 @@ using ScriptCoreLib.Extensions;
 
 namespace FlashSpaceInvadersApp
 {
+    [ScriptCoreLib.ActionScript.SWF(backgroundColor = 0x0, width = Game.DefaultWidth, height = Game.DefaultHeight)]
     public sealed class ApplicationSprite : Sprite
     {
         public const int DefaultWidth = Game.DefaultWidth;

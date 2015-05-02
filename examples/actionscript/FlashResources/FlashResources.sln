@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entrypoints", "Entrypoints", "{2ADE7FC2-F78F-4147-BF61-38E162A5CA37}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashResources", "FlashResources\FlashResources.csproj", "{01980960-70E0-4CBC-A9FC-A5356EBBA794}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashResources.AvalonCode", "FlashResources.AvalonCode\FlashResources.AvalonCode.csproj", "{106EAF47-AFC4-4C55-BFC3-C899A4FB30E8}"
@@ -10,8 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashResources.Assets", "FlashResources.Assets\FlashResources.Assets.csproj", "{686210D4-B24F-47C3-999E-476F53A232FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashResources.AvalonXBAP", "FlashResources.AvalonXBAP\FlashResources.AvalonXBAP.csproj", "{2A7DA2CC-93CB-453B-8433-D4FC8CE1D88F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entrypoints", "Entrypoints", "{2ADE7FC2-F78F-4147-BF61-38E162A5CA37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,8 +44,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{01980960-70E0-4CBC-A9FC-A5356EBBA794} = {2ADE7FC2-F78F-4147-BF61-38E162A5CA37}
 		{698102AD-2A60-44DA-8F1C-692B560BAD97} = {2ADE7FC2-F78F-4147-BF61-38E162A5CA37}
 		{2A7DA2CC-93CB-453B-8433-D4FC8CE1D88F} = {2ADE7FC2-F78F-4147-BF61-38E162A5CA37}
-		{01980960-70E0-4CBC-A9FC-A5356EBBA794} = {2ADE7FC2-F78F-4147-BF61-38E162A5CA37}
 	EndGlobalSection
 EndGlobal
