@@ -61,8 +61,17 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Drawing
             return e.B + (e.G << 8) + (e.R << 16);
         }
 
-        // [static System.Drawing.Color.FromArgb(System.Int32, System.Int32, System.Int32)
-        public static Color FromArgb(int red, int green, int blue)
+		public static Color FromArgb(int argb)
+		{
+			// X:\jsc.svn\examples\javascript\forms\Test\TestFromArgb\TestFromArgb\ApplicationControl.cs
+			// 2015!
+
+			return new __Color { Value = argb };
+
+		}
+
+		// [static System.Drawing.Color.FromArgb(System.Int32, System.Int32, System.Int32)
+		public static Color FromArgb(int red, int green, int blue)
         {
             return new __Color { Value = Shared.Drawing.Color.FromRGB(red, green, blue) };
         }
