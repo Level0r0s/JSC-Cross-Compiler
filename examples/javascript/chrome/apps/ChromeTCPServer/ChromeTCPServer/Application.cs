@@ -546,6 +546,8 @@ namespace ChromeTCPServer
 
 					// we can do it over here on UI thead, not in the sandboxed worker below, yet the input data is the same..
 					// would jsc be able to move around such method use in time?
+
+                    // did we rebuild chrome with 2015 yet?
 					var xpath = chrome.runtime.getURL(path);
 
 					// 9:60202ms RequestLine: {{ path = /, RequestLine = GET / HTTP/1.1 }} 

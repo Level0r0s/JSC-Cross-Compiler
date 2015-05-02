@@ -168,6 +168,7 @@
     </Compile>
     <Content Include="staging\FlashHeatZeeker.UnitJeepTouch.ApplicationSprite\web\air-descriptor.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Textures\Preview.png" />
   </ItemGroup>

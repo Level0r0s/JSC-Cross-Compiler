@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using ScriptCoreLib.Extensions;
 using ScriptCoreLib.ActionScript.Extensions;
+
+// X:\jsc.svn\examples\actionscript\svg\FlashHeatZeeker\FlashHeatZeeker.CoreAudio\Library\Soundboard.cs
+// X:\jsc.svn\market\Abstractatech.ActionScript.Audio\Abstractatech.ActionScript.Audio\Library\MP3PitchLoop.cs
+// defined at?
 using Abstractatech.ActionScript.Audio;
 using ScriptCoreLib.ActionScript.flash.media;
 

@@ -145,6 +145,7 @@
     </Compile>
     <Content Include="staging\FlashHeatZeeker.StarlingSetup.ApplicationSprite\web\air.com.abstractatech.gamification.starling.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Textures\white-jsc.png" />
   </ItemGroup>
