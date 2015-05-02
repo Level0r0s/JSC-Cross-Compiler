@@ -52,7 +52,9 @@ namespace ChromeTCPServer
 			Action<Form> AtFormConstructor = null
 			)
 		{
-			Console.WriteLine("enter TheServerWithStyledForm.Invoke");
+			Console.WriteLine("enter TheServerWithStyledForm.Invoke " + new { AtFormConstructor });
+
+
 
 
 			#region  AtFormCreated
