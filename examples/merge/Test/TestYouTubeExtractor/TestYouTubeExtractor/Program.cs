@@ -69,7 +69,11 @@ namespace TestYouTubeExtractor
              */
 			//VideoInfo video = mp4audio.OrderByDescending(info => info.Resolution).First();
 			// 300MB?
-			VideoInfo video = mp4audio.OrderBy(info => info.Resolution).First();
+			//VideoInfo video = mp4audio.OrderBy(info => info.Resolution).First();
+			//VideoInfo video = mp4video.OrderBy(info => info.Resolution).Last();
+			//VideoInfo video = videoInfos.FirstOrDefault(k => k.FormatCode == 315)
+			VideoInfo video = //videoInfos.FirstOrDefault(k => k.FormatCode == 299)
+				mp4audio.OrderBy(info => info.Resolution).Last();
 
 
 			video.DecryptDownloadUrl();
@@ -196,9 +200,12 @@ namespace TestYouTubeExtractor
 
 				Console.WriteLine("TagLib... " + new { new FileInfo(px).Length });
 
+				// what about webm?
 				TagLib.File videoFile = TagLib.File.Create(px);
 				//TagLib.Mpeg4.AppleTag customTag = (TagLib.Mpeg4.Comm)videoFile.GetTag(TagLib.TagTypes.Apple);
 				TagLib.Mpeg4.AppleTag customTag = (TagLib.Mpeg4.AppleTag)videoFile.GetTag(TagLib.TagTypes.Apple);
+
+				
 				//customTag.SetDashBox("Producer", "Producer1",link);
 				//customTag.Comment = link;
 				customTag.Album = link;
@@ -241,6 +248,11 @@ namespace TestYouTubeExtractor
 
 		static void Main(string[] args)
 		{
+			DoVideo(
+				"https://www.youtube.com/watch?v=8myYyMg1fFE"
+			);
+
+			#region WNetRestoreSingleConnection
 			try
 			{
 				var ee = Directory.GetFileSystemEntries("r:\\");
@@ -270,6 +282,7 @@ namespace TestYouTubeExtractor
 				IntPtr hWnd = new IntPtr(0);
 				int res = WNetRestoreSingleConnection(hWnd, "r:", true);
 			}
+			#endregion
 
 			// or what if debugger starts asking for developer license and clicking ok kills to downloads in progress?
 			// what if device looses power.
@@ -288,7 +301,7 @@ namespace TestYouTubeExtractor
 			for (int p = 1; p < 96; p++)
 				foreach (var src in new[] {
 					$"http://consciousresonance.net/?page_id=1587&paged={p}",
-                    $"https://faustuscrow.wordpress.com/page/{p}/",
+					$"https://faustuscrow.wordpress.com/page/{p}/",
 					$"https://hiddenlighthouse.wordpress.com/page/{p}/",
 					$"https://zproxy.wordpress.com/page/{p}/"
 
@@ -459,6 +472,8 @@ namespace TestYouTubeExtractor
 
 		}
 
+
+		// CALLED BY?
 		public static void DoVideo(string link)
 		{
 			try

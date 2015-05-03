@@ -84,7 +84,7 @@ namespace ExampleApplication
             // x:\jsc.svn\market\synergy\github\youtubeextractor\external\exampleapplication\program.cs
 
             // Our test youtube link
-            const string link = "https://www.youtube.com/watch?v=SYM-RJwSGQ8";
+            const string link = "https://www.youtube.com/watch?v=SXZ3qWAvbVs";
             Debugger.Break();
 
       
