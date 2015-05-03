@@ -106,9 +106,12 @@ namespace WebGLYomotsuTPS
             { THREE.SkinnedMesh ref0; }
             { THREE.SpeedBlendCharacter ref0; }
 
+//			will skip DefineVersionInfoResource
+//102c: 02:01:1e RewriteToAssembly error: System.NotSupportedException: Type 'xchrome.BCLImplementation.System.Net.Sockets.__TcpListener' was not completed.
 
-            #region AtFormCreated
-            FormStyler.AtFormCreated =
+
+			#region AtFormCreated
+			FormStyler.AtFormCreated =
                  s =>
                  {
                      s.Context.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -116,10 +119,11 @@ namespace WebGLYomotsuTPS
                      // this is working?
                      var x = new ChromeTCPServerWithFrameNone.HTML.Pages.AppWindowDrag().AttachTo(s.Context.GetHTMLTarget());
                  };
-            #endregion
+			#endregion
 
-            #region ChromeTCPServer
-            dynamic self = Native.self;
+#if false
+			#region ChromeTCPServer
+			dynamic self = Native.self;
             dynamic self_chrome = self.chrome;
             object self_chrome_socket = self_chrome.socket;
 
@@ -136,10 +140,10 @@ namespace WebGLYomotsuTPS
 
                 return;
             }
-            #endregion
+			#endregion
+#endif
 
-
-            var fov = 40;
+			var fov = 40;
 
             #region container
             Native.document.body.style.overflow = IStyle.OverflowEnum.hidden;

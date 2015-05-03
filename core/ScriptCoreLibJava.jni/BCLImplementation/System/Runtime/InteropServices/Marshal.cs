@@ -14,6 +14,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Runtime.InteropServices
     [Script(Implements = typeof(global::System.Runtime.InteropServices.Marshal))]
     internal class __Marshal
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150503/udp
+
         // X:\jsc.svn\examples\java\hybrid\JVMCLRLoadLibrary\JVMCLRLoadLibrary\Program.cs
 
         public static IntPtr StringToHGlobalAnsi(string s)
@@ -42,6 +44,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Runtime.InteropServices
 
         public static IntPtr AllocHGlobal(int cb)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150503/udp
             var p = new CMalloc(cb);
 
             return (IntPtr)p;

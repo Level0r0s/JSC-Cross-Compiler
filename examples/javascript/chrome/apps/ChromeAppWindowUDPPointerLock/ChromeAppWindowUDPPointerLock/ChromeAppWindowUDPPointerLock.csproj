@@ -1,20 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4D221D4E-654D-4AE4-89AA-98D35EB70778}</ProjectGuid>
+    <ProjectGuid>{6B03ABE7-4457-43D8-8F25-CD3A91DF0988}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebGLYomotsuTPS</RootNamespace>
-    <AssemblyName>WebGLYomotsuTPS</AssemblyName>
+    <RootNamespace>ChromeAppWindowUDPPointerLock</RootNamespace>
+    <AssemblyName>ChromeAppWindowUDPPointerLock</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>WebGLYomotsuTPS.Program</StartupObject>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\My.Solutions.Pages.Templates\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <StartupObject>ChromeAppWindowUDPPointerLock.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -27,7 +25,6 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -38,15 +35,8 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Chrome Web Server">
-      <HintPath>..\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll</HintPath>
-    </Reference>
-    <Reference Include="Chrome Web Server Styled Form">
-      <HintPath>..\packages\Chrome.Web.Server.StyledForm.1.0.0.0\lib\Chrome Web Server Styled Form.dll</HintPath>
-    </Reference>
     <Reference Include="Chrome Web Store">
       <HintPath>..\packages\Chrome.Web.Store.1.0.0.0\lib\Chrome Web Store.dll</HintPath>
     </Reference>
@@ -54,10 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\jsc.meta.exe</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="FSharp.Core">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -67,9 +57,6 @@
     <Reference Include="ScriptCoreLib">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\ScriptCoreLib.dll</HintPath>
-    </Reference>
-    <Reference Include="ScriptCoreLib.Async">
-      <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Avalon">
       <SpecificVersion>False</SpecificVersion>
@@ -116,14 +103,13 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="THREE">
-      <HintPath>..\packages\THREE.1.0.0.0\lib\THREE.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -131,34 +117,33 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="WebGLYomotsuTPS.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\WebGLYomotsuTPS.AssetsLibrary.dll</HintPath>
+    <Reference Include="ChromeAppWindowMouseCapture.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeAppWindowMouseCapture.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Async">
+      <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeAppWindowUDPPointerLock.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeAppWindowUDPPointerLock.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Textures\1.png" />
-    <Content Include="Textures\bg.jpg" />
-    <Content Include="Design\Preview.png" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Design\MyShadow.htm" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ApplicationWebService.cs" />
     <Compile Include="Application.cs" />
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <Content Include="Design\droid.js" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="staging\WebGLYomotsuTPS.Application\web\manifest.json" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:false /DisableWebServiceChrome:true /AssociateDriveForChrome:A /InferChromeAppManifest:true  /FilterTo:$(SolutionDir)</PostBuildEvent>
-    <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget</PreBuildEvent>
+    <PostBuildEvent>start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /AssociateDriveForChrome:A /InferChromeAppManifest:true  /FilterTo:$(SolutionDir)</PostBuildEvent>
+    <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
+		            </PreBuildEvent>
   </PropertyGroup>
 </Project>

@@ -22,6 +22,10 @@ namespace AndroidIMEIActivity.Activities
 	[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
 	public class ApplicationActivity : Activity
 	{
+		//		BUILD FAILED
+		//x:\util\android-sdk-windows\tools\ant\build.xml:542: Unable to resolve project target 'Google Inc.:Google APIs:21'
+
+		// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150503/udp
 		// http://www.happygeek.in/programmatically-get-device-imei-in-android
 
 

@@ -186,6 +186,7 @@ namespace jni
 
         static CPtr()
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150503/udp
             // http://support.teamdev.com/thread/405
             InternalTryLoadLibrary();
 
