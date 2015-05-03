@@ -20,6 +20,8 @@ namespace ScriptCoreLib.JavaScript.WebGL
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public class WebGL2RenderingContext
 	{
+		// https://code.google.com/p/chromium/issues/detail?id=483890
+
 		// http://toji.github.io/webgl2-particles/
 
 		// http://www.pcworld.com/article/2900814/tested-directx-12s-potential-performance-leap-is-insane.html
