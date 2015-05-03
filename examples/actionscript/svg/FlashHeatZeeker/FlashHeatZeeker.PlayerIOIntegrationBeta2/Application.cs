@@ -181,6 +181,7 @@ namespace FlashHeatZeeker.PlayerIOIntegrationBeta2
 
                        //embed.style.transition = "height 200ms linear";
 
+                       // after preloader or can we chime in before too?
                        sprite.WhenReady(
                            async delegate
                            {

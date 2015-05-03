@@ -31,6 +31,21 @@ namespace ChromeGalaxyS6Edge
 		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
 		public Application(IApp page)
 		{
+            FormStyler.AtFormCreated =
+            s =>
+            {
+                s.Context.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+
+                //var x = new ChromeTCPServerWithFrameNone.HTML.Pages.AppWindowDrag().AttachTo(s.Context.GetHTMLTarget());
+                var x = new ChromeTCPServerWithFrameNone.HTML.Pages.AppWindowDragWithShadow().AttachTo(s.Context.GetHTMLTarget());
+
+
+
+                s.Context.GetHTMLTarget().style.backgroundColor = "#efefef";
+                //s.Context.GetHTMLTarget().style.backgroundColor = "#A26D41";
+
+            };
+
 			#region += Launched chrome.app.window
 			// X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerAppWindow\ChromeTCPServerAppWindow\Application.cs
 			dynamic self = Native.self;
@@ -41,10 +56,21 @@ namespace ChromeGalaxyS6Edge
 			{
 				//chrome.Notification.DefaultTitle = "Nexus7";
 				//chrome.Notification.DefaultIconUrl = new x128().src;
+                ChromeTCPServer.TheServerWithStyledForm.Invoke(
+                     AppSource.Text,
+                    AtFormCreated: FormStyler.AtFormCreated
 
-				ChromeTCPServer.TheServer.Invoke(AppSource.Text);
-				//ChromeTCPServer.TheServerWithAppWindow.Invoke(AppSource.Text);
+                    //AtFormConstructor:
+                    //    f =>
+                    //    {
+                    //        //arg[0] is typeof System.Int32
+                    //        //script: error JSC1000: No implementation found for this native method, please implement [static System.Drawing.Color.FromArgb(System.Int32)]
 
+                    //        // X:\jsc.svn\examples\javascript\forms\Test\TestFromArgb\TestFromArgb\ApplicationControl.cs
+
+                    //        f.BackColor = System.Drawing.Color.FromArgb(0xA26D41);
+                    //    }
+                );
 				return;
 			}
 			#endregion
@@ -243,11 +269,12 @@ namespace ChromeGalaxyS6Edge
 					   //dae.scale.z = 30;
 					   dae.position.z = 65;
 
+                       var scale = 0.7;
 
 					   // jsc, do we have ILObserver available yet?
-					   dae.scale.x = 0.5;
-					   dae.scale.y = 0.5;
-					   dae.scale.z = 0.5;
+                       dae.scale.x = scale;
+                       dae.scale.y = scale;
+                       dae.scale.z = scale;
 
 					   //dae.position.y = -80;
 
@@ -263,3 +290,8 @@ namespace ChromeGalaxyS6Edge
 
 	}
 }
+
+//{ Message = Could not load file or assembly 'Chrome Web Store, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies. The system cannot find the file specified. }
+//1c48:02:01:14 after worker yield...
+
+//Unhandled Exception: System.IO.FileNotFoundException: Could not load file or assembly 'Chrome Web Server Styled Form, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies. The system cannot find the file specified.
