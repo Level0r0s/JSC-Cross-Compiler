@@ -235,31 +235,32 @@
     <Compile Include="Program.cs">
       <DependentUpon>ApplicationCanvas.cs</DependentUpon>
     </Compile>
-    <Content Include="Textures\Promotion3D_iso1_tiltshift_128.png" />
-    <EmbeddedResource Include="staging\FlashHeatZeeker.TestGamePad.ApplicationSprite\web\air.com.abstractatech.gamification.fhzpad.xml">
+    <Content Include="staging\FlashHeatZeeker.TestGamePad.ApplicationSprite\web\air-descriptor.xml">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Content>
+    <Content Include="Textures\Promotion3D_iso1_tiltshift_128.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <EmbeddedResource Include="staging\FlashHeatZeeker.TestGamePad.ApplicationSprite\web\air.com.abstractatech.gamification.fhzpad-build.bat">
+    <None Include="staging\FlashHeatZeeker.TestGamePad.ApplicationSprite\web\air-android.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="staging\FlashHeatZeeker.TestGamePad.ApplicationSprite\web\air.com.abstractatech.gamification.fhzpad-install.bat">
+    </None>
+    <None Include="staging\FlashHeatZeeker.TestGamePad.ApplicationSprite\web\air-ios.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="staging\FlashHeatZeeker.TestGamePad.ApplicationSprite\web\air.com.abstractatech.gamification.fhzpad-test.bat">
+    </None>
+    <None Include="staging\FlashHeatZeeker.TestGamePad.ApplicationSprite\web\air-test.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>start /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe ConfigurationCreateNuGetPackage /AssemblyMerge:$(TargetPath) /AssemblyMerge:$(TargetName).AssetsLibrary.dll /OutputDirectory:C:\util\jsc\nuget  /PackageID:$(ProjectName)   /OutputName:$(ProjectName) /ProjectFileName:"$(ProjectPath)" 
 
-if $(ConfigurationName)==Release (
-rem start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true
-)</PostBuildEvent>
+
+start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true
+</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget</PreBuildEvent>
   </PropertyGroup>
 </Project>

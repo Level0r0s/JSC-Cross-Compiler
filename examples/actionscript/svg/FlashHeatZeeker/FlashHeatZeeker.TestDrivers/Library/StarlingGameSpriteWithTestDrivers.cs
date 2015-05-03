@@ -27,6 +27,8 @@ using FlashHeatZeeker.CoreMap.Library;
 using starling.display;
 using ScriptCoreLib.ActionScript.flash.geom;
 using FlashHeatZeeker.UnitRocket.Library;
+
+// what the fk? why aint the ref working?
 using FlashHeatZeeker.UnitHindWeaponized.Library;
 
 namespace FlashHeatZeeker.TestDrivers.Library
@@ -56,6 +58,9 @@ namespace FlashHeatZeeker.TestDrivers.Library
 
             this.disablephysicsdiagnostics = true;
 
+
+
+            // ????
             this.onbeforefirstframe += (stage, s) =>
             {
                 var hud = new Image(textures_ped.hud_look()).AttachTo(this);

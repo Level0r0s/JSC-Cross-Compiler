@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<application xmlns="http://ns.adobe.com/air/application/3.6">
+<application xmlns="http://ns.adobe.com/air/application/17.0">
   <id>com.abstractatech.gamification.fhzpad</id>
-  <versionNumber>1.0.1</versionNumber>
+  <versionNumber>2</versionNumber>
   <filename>Heat Zeeker Control</filename>
   <name>Heat Zeeker Control</name>
   <description>
@@ -16,7 +16,7 @@
 
     <autoOrients>false</autoOrients>
     <renderMode>direct</renderMode>
-    <fullScreen>false</fullScreen>
+    <fullScreen>true</fullScreen>
     <visible>true</visible>
     <aspectRatio>landscape</aspectRatio>
 
