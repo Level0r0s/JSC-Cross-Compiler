@@ -547,7 +547,7 @@ namespace ChromeTCPServer
 					// we can do it over here on UI thead, not in the sandboxed worker below, yet the input data is the same..
 					// would jsc be able to move around such method use in time?
 
-                    // did we rebuild chrome with 2015 yet?
+					// did we rebuild chrome with 2015 yet?
 					var xpath = chrome.runtime.getURL(path);
 
 					// 9:60202ms RequestLine: {{ path = /, RequestLine = GET / HTTP/1.1 }} 
@@ -567,7 +567,8 @@ namespace ChromeTCPServer
 
 					//Console.WriteLine("before StartNewWithProgress: " + new { path, Thread.CurrentThread.ManagedThreadId });
 
-					var yyy = new TaskCompletionSource<string>();
+					//var yyy = new TaskCompletionSource<string>();
+					var yyy = default(TaskCompletionSource<string>);
 					var worker = default(Task);
 
 
@@ -617,6 +618,7 @@ namespace ChromeTCPServer
 
 					Console.WriteLine("doaccept_Handler will hop to worker " + new { Thread.CurrentThread.ManagedThreadId });
 
+					// clone data to the other thrad.
 					worker = Task.Run(
 								delegate
 					   {
@@ -648,6 +650,9 @@ namespace ChromeTCPServer
 						   // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150428
 					   }
 					);
+
+					// TaskCompletionSource is incorrectly sent to the worker.. need to assign it after data was cloned...
+					yyy = new TaskCompletionSource<string>();
 
 					var result = await yyy.Task;
 

@@ -117,6 +117,11 @@ namespace FlashHeatZeeker.PlayerIOIntegrationBeta2
 
                      //var x = new ChromeTCPServerWithFrameNone.HTML.Pages.AppWindowDrag().AttachTo(s.Context.GetHTMLTarget());
                      var x = new ChromeTCPServerWithFrameNone.HTML.Pages.AppWindowDragWithShadow().AttachTo(s.Context.GetHTMLTarget());
+
+
+
+                     s.Context.GetHTMLTarget().style.backgroundColor = "#A26D41";
+
                  };
 
 
@@ -135,18 +140,18 @@ namespace FlashHeatZeeker.PlayerIOIntegrationBeta2
 
                 ChromeTCPServer.TheServerWithStyledForm.Invoke(
                     xassets::FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Pages.XAppSource.Text,
-                    AtFormCreated: FormStyler.AtFormCreated,
+                    AtFormCreated: FormStyler.AtFormCreated
 
-                    AtFormConstructor:
-                        f =>
-                        {
-                            //arg[0] is typeof System.Int32
-                            //script: error JSC1000: No implementation found for this native method, please implement [static System.Drawing.Color.FromArgb(System.Int32)]
+                    //AtFormConstructor:
+                    //    f =>
+                    //    {
+                    //        //arg[0] is typeof System.Int32
+                    //        //script: error JSC1000: No implementation found for this native method, please implement [static System.Drawing.Color.FromArgb(System.Int32)]
 
-                            // X:\jsc.svn\examples\javascript\forms\Test\TestFromArgb\TestFromArgb\ApplicationControl.cs
+                    //        // X:\jsc.svn\examples\javascript\forms\Test\TestFromArgb\TestFromArgb\ApplicationControl.cs
 
-                            f.BackColor = System.Drawing.Color.FromArgb(0xA26D41);
-                        }
+                    //        f.BackColor = System.Drawing.Color.FromArgb(0xA26D41);
+                    //    }
                 );
 
                 return;

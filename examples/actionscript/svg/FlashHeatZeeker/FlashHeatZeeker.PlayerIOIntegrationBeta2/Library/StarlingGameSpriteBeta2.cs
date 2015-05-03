@@ -1,4 +1,6 @@
-﻿using FlashHeatZeeker.Core.Library;
+﻿// project forgot dependencies?
+
+using FlashHeatZeeker.Core.Library;
 using FlashHeatZeeker.CoreMap.Library;
 using FlashHeatZeeker.CorePhysics.Library;
 using FlashHeatZeeker.UnitBunkerControl.Library;
