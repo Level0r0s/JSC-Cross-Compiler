@@ -214,10 +214,38 @@ namespace CardboardForEdgeExperiment.Activities
             floorNormals.put(WorldLayoutData.FLOOR_NORMALS);
             floorNormals.position(0);
 
+            var fcolors = 0xA26D41;
+            // rgb to float
+
+            //[javac]         return  __Enumerable.<Float>AsEnumerable(__SZArrayEnumerator_1.<Float>Of(x));
+            //[javac]                                                                       ^
+            //[javac]   required: T#1[]
+            //[javac]   found: float[]
+            //[javac]   reason: actual argument float[] cannot be converted to Float[] by method invocation conversion
+
+            //          var FLOOR_COLORS = (
+            //              from i in Enumerable.Range(0, 6)
+            //              select new float[] { 0xA2 / 1.0f, 0x6D / 1.0f, 0x41 / 1.0f, 1.0f }
+            //).SelectMany(x => x).ToArray();
+
+            var FLOOR_COLORS = new float[4 * 6];
+
+            for (int i = 0; i < FLOOR_COLORS.Length; i += 4)
+            {
+                FLOOR_COLORS[i + 0] = 0xA2 / 255.0f;
+                FLOOR_COLORS[i + 1] = 0x6D / 255.0f;
+                FLOOR_COLORS[i + 2] = 0x41 / 255.0f;
+                FLOOR_COLORS[i + 3] = 1.0f;
+            }
+
+
+
+
             ByteBuffer bbFloorColors = ByteBuffer.allocateDirect(WorldLayoutData.FLOOR_COLORS.Length * 4);
             bbFloorColors.order(ByteOrder.nativeOrder());
             floorColors = bbFloorColors.asFloatBuffer();
-            floorColors.put(WorldLayoutData.FLOOR_COLORS);
+            //floorColors.put(WorldLayoutData.FLOOR_COLORS);
+            floorColors.put(FLOOR_COLORS);
             floorColors.position(0);
 
 
@@ -326,6 +354,7 @@ namespace CardboardForEdgeExperiment.Activities
             // http://stackoverflow.com/questions/11851343/raise-fps-on-android-tablet-above-60-for-opengl-game
             // http://gafferongames.com/game-physics/fix-your-timestep/
 
+            #region FrameWatch
             if (FrameWatch.ElapsedMilliseconds >= 1000)
             {
                 var codeFPS = 1000.0 / FrameOne.ElapsedMilliseconds;
@@ -358,6 +387,7 @@ namespace CardboardForEdgeExperiment.Activities
                 FrameCounter = 0;
             }
 
+            #endregion
             // GPU thread starts now..
             FrameOne.Restart();
             FrameCounter++;
@@ -404,79 +434,110 @@ namespace CardboardForEdgeExperiment.Activities
             float[] perspective = eye.getPerspective(Z_NEAR, Z_FAR);
             Matrix.multiplyMM(modelView, 0, view, 0, modelCube, 0);
             Matrix.multiplyMM(modelViewProjection, 0, perspective, 0, modelView, 0);
-            drawCube();
+
+
+
+
+
+            #region drawCube
+            Action<float, float, float> drawCube = (tx, ty, tz) =>
+            {
+                var modelCube1 = new float[16];
+
+                // http://developer.android.com/reference/android/opengl/Matrix.html#translateM(float[], int, float, float, float)
+                //Matrix.translateM(
+                //    modelCube1,
+                //    0,
+                //    modelCube,
+                //    0,
+                //    tx,
+                //    ty,
+                //    tz
+                //);
+
+                // the cube rotates in front of us.
+                // do we need to use a special program to draw a cube?
+                // how can we make it bigger?
+
+                GLES20.glUseProgram(cubeProgram);
+
+                GLES20.glUniform3fv(cubeLightPosParam, 1, lightPosInEyeSpace, 0);
+
+                // Set the Model in the shader, used to calculate lighting
+                //GLES20.glUniformMatrix4fv(cubeModelParam, 1, false, modelCube1, 0);
+
+                // Set the ModelView in the shader, used to calculate lighting
+                GLES20.glUniformMatrix4fv(cubeModelViewParam, 1, false, modelView, 0);
+
+                // Set the position of the cube
+                GLES20.glVertexAttribPointer(cubePositionParam, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, 0, cubeVertices);
+
+                // Set the ModelViewProjection matrix in the shader.
+                GLES20.glUniformMatrix4fv(cubeModelViewProjectionParam, 1, false, modelViewProjection, 0);
+
+                // Set the normal positions of the cube, again for shading
+                GLES20.glVertexAttribPointer(cubeNormalParam, 3, GLES20.GL_FLOAT, false, 0, cubeNormals);
+
+
+
+                var cc = cubeFoundColors;
+                if (!isLookingAtObject()) cc = cubeColors;
+
+                GLES20.glVertexAttribPointer(cubeColorParam, 4, GLES20.GL_FLOAT, false, 0,
+                    cc);
+
+                GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 36);
+                checkGLError("Drawing cube");
+            };
+
+            //drawCube(10, 0, 0);
+            //drawCube(20, 0, 0);
+            //drawCube(30, 0, 0);
+            #endregion
+
 
             // Set modelView for the floor, so we draw floor in the correct location
             Matrix.multiplyMM(modelView, 0, view, 0, modelFloor, 0);
             Matrix.multiplyMM(modelViewProjection, 0, perspective, 0,
               modelView, 0);
+
+            #region drawFloor
+            // called by onDrawEye
+            Action drawFloor = delegate
+            {
+                GLES20.glUseProgram(floorProgram);
+
+                // Set ModelView, MVP, position, normals, and color.
+                GLES20.glUniform3fv(floorLightPosParam, 1, lightPosInEyeSpace, 0);
+                GLES20.glUniformMatrix4fv(floorModelParam, 1, false, modelFloor, 0);
+                GLES20.glUniformMatrix4fv(floorModelViewParam, 1, false, modelView, 0);
+                GLES20.glUniformMatrix4fv(floorModelViewProjectionParam, 1, false,
+                    modelViewProjection, 0);
+                GLES20.glVertexAttribPointer(floorPositionParam, COORDS_PER_VERTEX, GLES20.GL_FLOAT,
+                    false, 0, floorVertices);
+                GLES20.glVertexAttribPointer(floorNormalParam, 3, GLES20.GL_FLOAT, false, 0,
+                    floorNormals);
+                GLES20.glVertexAttribPointer(floorColorParam, 4, GLES20.GL_FLOAT, false, 0, floorColors);
+
+                GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 6);
+
+                checkGLError("drawing floor");
+            };
+
             drawFloor();
+            #endregion
+
+
         }
 
         public void onFinishFrame(com.google.vrtoolkit.cardboard.Viewport value)
         {
         }
 
-        // called by onDrawEye
-        public void drawCube()
-        {
-            // the cube rotates in front of us.
-            // do we need to use a special program to draw a cube?
-            // how can we make it bigger?
-
-            GLES20.glUseProgram(cubeProgram);
-
-            GLES20.glUniform3fv(cubeLightPosParam, 1, lightPosInEyeSpace, 0);
-
-            // Set the Model in the shader, used to calculate lighting
-            GLES20.glUniformMatrix4fv(cubeModelParam, 1, false, modelCube, 0);
-
-            // Set the ModelView in the shader, used to calculate lighting
-            GLES20.glUniformMatrix4fv(cubeModelViewParam, 1, false, modelView, 0);
-
-            // Set the position of the cube
-            GLES20.glVertexAttribPointer(cubePositionParam, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, 0, cubeVertices);
-
-            // Set the ModelViewProjection matrix in the shader.
-            GLES20.glUniformMatrix4fv(cubeModelViewProjectionParam, 1, false, modelViewProjection, 0);
-
-            // Set the normal positions of the cube, again for shading
-            GLES20.glVertexAttribPointer(cubeNormalParam, 3, GLES20.GL_FLOAT, false, 0, cubeNormals);
 
 
 
-            var cc = cubeFoundColors;
-            if (!isLookingAtObject()) cc = cubeColors;
 
-            GLES20.glVertexAttribPointer(cubeColorParam, 4, GLES20.GL_FLOAT, false, 0,
-                cc);
-
-            GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 36);
-            checkGLError("Drawing cube");
-        }
-
-
-        // called by onDrawEye
-        public void drawFloor()
-        {
-            GLES20.glUseProgram(floorProgram);
-
-            // Set ModelView, MVP, position, normals, and color.
-            GLES20.glUniform3fv(floorLightPosParam, 1, lightPosInEyeSpace, 0);
-            GLES20.glUniformMatrix4fv(floorModelParam, 1, false, modelFloor, 0);
-            GLES20.glUniformMatrix4fv(floorModelViewParam, 1, false, modelView, 0);
-            GLES20.glUniformMatrix4fv(floorModelViewProjectionParam, 1, false,
-                modelViewProjection, 0);
-            GLES20.glVertexAttribPointer(floorPositionParam, COORDS_PER_VERTEX, GLES20.GL_FLOAT,
-                false, 0, floorVertices);
-            GLES20.glVertexAttribPointer(floorNormalParam, 3, GLES20.GL_FLOAT, false, 0,
-                floorNormals);
-            GLES20.glVertexAttribPointer(floorColorParam, 4, GLES20.GL_FLOAT, false, 0, floorColors);
-
-            GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 6);
-
-            checkGLError("drawing floor");
-        }
 
 
         public override void onCardboardTrigger()
