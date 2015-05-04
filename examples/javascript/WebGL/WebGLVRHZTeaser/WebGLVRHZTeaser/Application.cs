@@ -61,11 +61,15 @@ namespace WebGLVRHZTeaser
 			#endregion
 #endif
 
-			// 
+			// https://code.google.com/p/chromium/issues/detail?id=483890
+
 			Native.document.body.style.margin = "0px";
 			Native.document.body.style.overflow = IStyle.OverflowEnum.hidden;
 			Native.body.style.backgroundColor = "black";
 			Native.document.body.Clear();
+
+			// what dto do if webgl not supported?
+
 
 			double SCREEN_WIDTH = Native.window.Width;
 			double SCREEN_HEIGHT = Native.window.Height;

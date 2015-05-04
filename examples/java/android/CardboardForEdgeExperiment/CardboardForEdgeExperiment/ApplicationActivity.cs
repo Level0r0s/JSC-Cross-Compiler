@@ -48,7 +48,8 @@ namespace CardboardForEdgeExperiment.Activities
         // X:\jsc.svn\core\ScriptCoreLib\JavaScript\WebVR\VRDevice.cs
 
         private static float Z_NEAR = 0.1f;
-        private static float Z_FAR = 100.0f;
+        //private static float Z_FAR = 100.0f;
+        private static float Z_FAR = 400.0f;
 
         private static float CAMERA_Z = 0.01f;
         private static float TIME_DELTA = 0.3f;
@@ -418,6 +419,7 @@ namespace CardboardForEdgeExperiment.Activities
             #region vDrawEye
             vDrawEye = (com.google.vrtoolkit.cardboard.Eye eye) =>
             {
+                // VIDEO via "X:\util\android-sdk-windows\tools\ddms.bat"
 
                 var camera = new float[16];
 
@@ -450,12 +452,26 @@ namespace CardboardForEdgeExperiment.Activities
                 var view = new float[16];
 
                 // can we strafe?
-                //Matrix.translateM(view, 0, objectDistance, 0, 0);
 
 
 
                 // Apply the eye transformation to the camera.
                 Matrix.multiplyMM(view, 0, eye.getEyeView(), 0, camera, 0);
+
+
+                // we tapped into it. this strafes ius!
+                Matrix.translateM(view, 0,
+
+                    (float)Math.Sin(TotalTime.ElapsedMilliseconds * 0.0001f) * objectDistance * 2.5f,
+
+
+                    // up down
+                    //(float)Math.Sin(TotalTime.ElapsedMilliseconds * 0.001f) * floorDepth * 0.5f,
+                    (float)Math.Cos(TotalTime.ElapsedMilliseconds * 0.001f) * floorDepth * 0.1f,
+
+                    0
+                    );
+
 
                 // Set the position of the light
                 Matrix.multiplyMV(lightPosInEyeSpace, 0, view, 0, LIGHT_POS_IN_WORLD_SPACE, 0);
@@ -477,12 +493,17 @@ namespace CardboardForEdgeExperiment.Activities
                     Func<bool> isLookingAtObject = () =>
                     {
                         float[] initVec = { 0, 0, 0, 1.0f };
+
+
+
                         float[] objPositionVec = new float[4];
 
                         // Convert object space to camera space. Use the headView from onNewFrame.
                         Matrix.multiplyMM(modelView, 0, headView, 0, modelCube, 0);
                         Matrix.multiplyMV(objPositionVec, 0, modelView, 0, initVec, 0);
 
+
+        
                         pitch = (float)Math.Atan2(objPositionVec[1], -objPositionVec[2]);
                         yaw = (float)Math.Atan2(objPositionVec[0], -objPositionVec[2]);
 
@@ -575,15 +596,17 @@ namespace CardboardForEdgeExperiment.Activities
 
                 // looks like an airstrip
 
-                var endOfMatrix = 16;
+                // low fps?
+                //var endOfMatrix = 64;
+                var endOfMatrix = 20;
                 for (int i = -endOfMatrix; i < endOfMatrix; i++)
                 {
-                    drawCube(objectDistance, -floorDepth, objectDistance * -1.0f * i);
-                    drawCube(-objectDistance, -floorDepth, objectDistance * -1.0f * i);
+                    drawCube(objectDistance, -floorDepth, objectDistance * -2.0f * i);
+                    drawCube(-objectDistance, -floorDepth, objectDistance * -2.0f * i);
 
 
-                    drawCube(objectDistance * 0.5f, 0, objectDistance * -1.0f * i);
-                    drawCube(objectDistance * -0.5f, 0, objectDistance * -1.0f * i);
+                    drawCube(objectDistance * 0.5f, 0, objectDistance * -2.0f * i);
+                    drawCube(objectDistance * -0.5f, 0, objectDistance * -2.0f * i);
                 }
                 #endregion
 
@@ -596,7 +619,9 @@ namespace CardboardForEdgeExperiment.Activities
                 Matrix.setIdentityM(modelFloor, 0);
                 Matrix.translateM(modelFloor, 0,
 
-                    TotalTime.ElapsedMilliseconds * 0.01f, -floorDepth, 0); // Floor appears below user.
+                    // the floor escapes!
+                    //TotalTime.ElapsedMilliseconds * 0.01f,
+                    0, -floorDepth, 0); // Floor appears below user.
 
                 // Set modelView for the floor, so we draw floor in the correct location
                 Matrix.multiplyMM(modelView, 0, view, 0, modelFloor, 0);

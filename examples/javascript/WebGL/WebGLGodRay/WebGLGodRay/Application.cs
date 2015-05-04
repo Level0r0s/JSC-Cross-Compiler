@@ -504,16 +504,16 @@ namespace WebGLGodRay
                 }
             );
 
-            var ze = new ZeProperties();
+            //var ze = new ZeProperties();
 
-            ze.Show();
+            //ze.Show();
 
-            ze.treeView1.Nodes.Clear();
+            //ze.treeView1.Nodes.Clear();
 
-            ze.Add(() => renderer);
-            ze.Add(() => controls);
-            ze.Add(() => scene);
-            ze.Left = 0;
+            //ze.Add(() => renderer);
+            //ze.Add(() => controls);
+            //ze.Add(() => scene);
+            //ze.Left = 0;
 
 
         }
