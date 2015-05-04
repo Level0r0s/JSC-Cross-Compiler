@@ -229,7 +229,11 @@ namespace xandroidcardboardcxperiment.xactivities
 	  0.0f, 1.0f, 0.0f,
   };
 
+
+        // x:\jsc.svn\examples\java\test\TestFloatArray\TestFloatArray\Class1.cs
 		public static   float[] FLOOR_COLORS = new float[] {
+            // 0f, 0,3398f, 0,9023f, 1f, 0f, 0,3398f, 0,9023f, 1f, 0f, 0,3398f, 0,9023f, 1f, 0f, 0,3398f, 0,9023f, 1f, 0f, 0,3398f, 0,9023f, 1f, 0f, 0,3398f, 0,9023f, 1f  
+
 	  0.0f, 0.3398f, 0.9023f, 1.0f,
 	  0.0f, 0.3398f, 0.9023f, 1.0f,
 	  0.0f, 0.3398f, 0.9023f, 1.0f,

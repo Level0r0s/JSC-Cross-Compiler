@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ModelViewerActivity</RootNamespace>
     <AssemblyName>ModelViewerActivity</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -69,9 +72,6 @@
     <Reference Include="ScriptCoreLibAndroid.Windows.Forms">
       <HintPath>C:\util\jsc\bin\ScriptCoreLibAndroid.Windows.Forms.dll</HintPath>
     </Reference>
-    <Reference Include="ScriptCoreLibAndroid.XLinq">
-      <HintPath>C:\util\jsc\bin\ScriptCoreLibAndroid.XLinq.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />
@@ -93,32 +93,34 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Design\Images.htm" />
     <Content Include="Design\jsc.png" />
     <Content Include="org\jtb\modelview\R.java" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Y:\opensource\googlecode\modelview-android\graphics\**\*.*">
+    <Content Include="r:\opensource\googlecode\modelview-android\graphics\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\graphics/%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Y:\opensource\googlecode\modelview-android\assets\**\*.*">
+    <Content Include="r:\opensource\googlecode\modelview-android\assets\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\assets/%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Y:\opensource\googlecode\modelview-android\res\**\*.*">
+    <Content Include="r:\opensource\googlecode\modelview-android\res\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\res/%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Y:\opensource\googlecode\modelview-android\src\**\*.*">
+    <Content Include="r:\opensource\googlecode\modelview-android\src\**\*.*">
       <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
   </ItemGroup>

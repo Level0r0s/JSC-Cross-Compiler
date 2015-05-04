@@ -12,6 +12,12 @@ using org.jtb.modelview.ui;
 
 namespace org.jtb.modelview
 {
+
+
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "10")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
+
     public class ApplicationActivity : BrowseActivity
     {
         ScriptCoreLib.Android.IAssemblyReferenceToken ref1;
