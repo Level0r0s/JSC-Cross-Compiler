@@ -64,7 +64,6 @@ namespace CardboardForEdgeExperiment.Activities
         private float[] lightPosInEyeSpace = new float[4];
 
         private FloatBuffer floorVertices;
-        private FloatBuffer floorColors;
         private FloatBuffer floorNormals;
 
         private FloatBuffer cubeVertices;
@@ -91,7 +90,6 @@ namespace CardboardForEdgeExperiment.Activities
         private int floorModelViewProjectionParam;
         private int floorLightPosParam;
 
-        private float[] modelCube;
         private float[] camera;
         private float[] view;
         private float[] headView;
@@ -143,7 +141,6 @@ namespace CardboardForEdgeExperiment.Activities
             setCardboardView(cardboardView);
 
 
-            modelCube = new float[16];
             camera = new float[16];
             view = new float[16];
             modelViewProjection = new float[16];
@@ -228,18 +225,20 @@ namespace CardboardForEdgeExperiment.Activities
             //              select new float[] { 0xA2 / 1.0f, 0x6D / 1.0f, 0x41 / 1.0f, 1.0f }
             //).SelectMany(x => x).ToArray();
 
+            #region floorColors
             var FLOOR_COLORS = new float[4 * 6];
 
             for (int i = 0; i < FLOOR_COLORS.Length; i += 4)
             {
-                FLOOR_COLORS[i + 0] = 0xA2 / 255.0f;
-                FLOOR_COLORS[i + 1] = 0x6D / 255.0f;
-                FLOOR_COLORS[i + 2] = 0x41 / 255.0f;
+                FLOOR_COLORS[i + 0] = 0xA2 / 100.0f;
+                FLOOR_COLORS[i + 1] = 0x6D / 100.0f;
+                FLOOR_COLORS[i + 2] = 0x41 / 100.0f;
                 FLOOR_COLORS[i + 3] = 1.0f;
             }
 
 
 
+            FloatBuffer floorColors;
 
             ByteBuffer bbFloorColors = ByteBuffer.allocateDirect(WorldLayoutData.FLOOR_COLORS.Length * 4);
             bbFloorColors.order(ByteOrder.nativeOrder());
@@ -247,11 +246,14 @@ namespace CardboardForEdgeExperiment.Activities
             //floorColors.put(WorldLayoutData.FLOOR_COLORS);
             floorColors.put(FLOOR_COLORS);
             floorColors.position(0);
+            #endregion
 
 
             #region loadGLShader
-            Func<int, string, int> loadGLShader = (int type, string code) =>
+            Func<int, ScriptCoreLib.GLSL.Shader, int> loadGLShader = (type, xshader) =>
             {
+                var code = xshader.ToString();
+
                 int shader = GLES20.glCreateShader(type);
                 GLES20.glShaderSource(shader, code);
                 GLES20.glCompileShader(shader);
@@ -278,9 +280,9 @@ namespace CardboardForEdgeExperiment.Activities
             #endregion
 
 
-            int vertexShader = loadGLShader(GLES20.GL_VERTEX_SHADER, new AndroidCardboardExperiment.Shaders.light_vertexVertexShader().ToString());
-            int gridShader = loadGLShader(GLES20.GL_FRAGMENT_SHADER, new AndroidCardboardExperiment.Shaders.grid_fragmentFragmentShader().ToString());
-            int passthroughShader = loadGLShader(GLES20.GL_FRAGMENT_SHADER, new AndroidCardboardExperiment.Shaders.passthrough_fragmentFragmentShader().ToString());
+            int vertexShader = loadGLShader(GLES20.GL_VERTEX_SHADER, new AndroidCardboardExperiment.Shaders.light_vertexVertexShader());
+            int gridShader = loadGLShader(GLES20.GL_FRAGMENT_SHADER, new AndroidCardboardExperiment.Shaders.grid_fragmentFragmentShader());
+            int passthroughShader = loadGLShader(GLES20.GL_FRAGMENT_SHADER, new AndroidCardboardExperiment.Shaders.passthrough_fragmentFragmentShader());
 
             cubeProgram = GLES20.glCreateProgram();
             GLES20.glAttachShader(cubeProgram, vertexShader);
@@ -329,205 +331,275 @@ namespace CardboardForEdgeExperiment.Activities
             checkGLError("Floor program params");
 
             GLES20.glEnable(GLES20.GL_DEPTH_TEST);
+            //GLES20.glEnable(GLES20.GL_FOG);
 
-            // Object first appears directly in front of user.
-            Matrix.setIdentityM(modelCube, 0);
-            Matrix.translateM(modelCube, 0, 0, 0, -objectDistance);
 
-            Matrix.setIdentityM(modelFloor, 0);
-            Matrix.translateM(modelFloor, 0, 0, -floorDepth, 0); // Floor appears below user.
+   
 
             checkGLError("onSurfaceCreated");
 
             Console.WriteLine("exit AndroidCardboardExperiment onSurfaceCreated");
+
+            #region vNewFrame
+            vNewFrame = (com.google.vrtoolkit.cardboard.HeadTransform headTransform) =>
+            {
+                // http://stackoverflow.com/questions/11851343/raise-fps-on-android-tablet-above-60-for-opengl-game
+                // http://gafferongames.com/game-physics/fix-your-timestep/
+
+                #region FrameWatch
+                if (FrameWatch.ElapsedMilliseconds >= 1000)
+                {
+                    var codeFPS = 1000.0 / FrameOne.ElapsedMilliseconds;
+
+                    // we now know how many frames did fit into it
+                    // need 60 or more!
+                    Console.WriteLine("CardboardForEdgeExperiment " + new
+                    {
+                        // static
+                        System.Environment.ProcessorCount,
+
+                        android.os.Build.MODEL,
+
+                        System.Environment.CurrentManagedThreadId,
+
+                        FrameCounter,
+
+                        // dynamic
+                        LastFrameMilliseconds = FrameOne.ElapsedMilliseconds,
+                        codeFPS,
+
+                        // very dynamic
+                        pitch,
+                        yaw
+                    });
+
+                    // I/System.Console(28117): CardboardForEdgeExperiment { ProcessorCount = 2, MODEL = Nexus 9, CurrentManagedThreadId = 1647, FrameCounter = 60, LastFrameMilliseconds = 6, codeFPS = 166.66666666666666, pitch = 1.5978987, yaw = -2.0770574 }
+
+                    FrameWatch.Restart();
+                    FrameCounter = 0;
+                }
+
+                #endregion
+                // GPU thread starts now..
+                FrameOne.Restart();
+                FrameCounter++;
+
+
+                //Console.WriteLine("AndroidCardboardExperiment onNewFrame");
+
+
+
+
+
+                headTransform.getHeadView(headView, 0);
+
+                checkGLError("onReadyToDraw");
+
+                // I/System.Console(27769): CardboardForEdgeExperiment { FrameCounter = 61, LastFrameMilliseconds = 0, codeFPS = Infinity, CurrentManagedThreadId = 1637, ProcessorCount = 2, MODEL = Nexus 9 }
+
+                // add placeholder slowdown
+                System.Threading.Thread.Sleep(5);
+                // I/System.Console(27840): CardboardForEdgeExperiment { FrameCounter = 60, LastFrameMilliseconds = 6, codeFPS = 166.66666666666666, CurrentManagedThreadId = 1642, ProcessorCount = 2, MODEL = Nexus 9 }
+
+                // GPU thread stops now..
+                FrameOne.Stop();
+            };
+            #endregion
+
+            // if we define it here, we get to see it in vr...
+            var modelCube = new float[16];
+
+            vDrawEye = (com.google.vrtoolkit.cardboard.Eye eye) =>
+            {
+
+
+
+
+                // Build the camera matrix and apply it to the ModelView.
+                Matrix.setLookAtM(camera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+
+
+                GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+
+                checkGLError("colorParam");
+
+                // Apply the eye transformation to the camera.
+                Matrix.multiplyMM(view, 0, eye.getEyeView(), 0, camera, 0);
+
+                // Set the position of the light
+                Matrix.multiplyMV(lightPosInEyeSpace, 0, view, 0, LIGHT_POS_IN_WORLD_SPACE, 0);
+
+                // Build the ModelView and ModelViewProjection matrices
+                // for calculating cube position and light.
+                float[] perspective = eye.getPerspective(Z_NEAR, Z_FAR);
+
+
+
+
+
+
+                #region drawCube
+                Action<float, float, float> drawCube = (tx, ty, tz) =>
+                {
+
+                    #region isLookingAtObject
+                    Func<bool> isLookingAtObject = () =>
+                    {
+                        float[] initVec = { 0, 0, 0, 1.0f };
+                        float[] objPositionVec = new float[4];
+
+                        // Convert object space to camera space. Use the headView from onNewFrame.
+                        Matrix.multiplyMM(modelView, 0, headView, 0, modelCube, 0);
+                        Matrix.multiplyMV(objPositionVec, 0, modelView, 0, initVec, 0);
+
+                        pitch = (float)Math.Atan2(objPositionVec[1], -objPositionVec[2]);
+                        yaw = (float)Math.Atan2(objPositionVec[0], -objPositionVec[2]);
+
+                        if (Math.Abs(pitch) < PITCH_LIMIT)
+                            if (Math.Abs(yaw) < YAW_LIMIT)
+                                return true;
+                        return false;
+                    };
+                    #endregion
+
+
+
+
+                    // Object first appears directly in front of user.
+                    Matrix.setIdentityM(modelCube, 0);
+                    // cant see it?
+                    Matrix.scaleM(modelCube, 0, 2f, 2f, 2f);
+
+                    Matrix.translateM(modelCube, 0, tx, ty, tz);
+
+
+                    Matrix.multiplyMM(modelView, 0, view, 0, modelCube, 0);
+                    Matrix.multiplyMM(modelViewProjection, 0, perspective, 0, modelView, 0);
+
+
+                    // public static void scaleM (float[] m, int mOffset, float x, float y, float z)
+
+                    // Build the Model part of the ModelView matrix.
+                    //Matrix.rotateM(modelCube, 0, TIME_DELTA, 0.5f, 0.5f, 1.0f);
+                    Matrix.rotateM(modelCube, 0, TotalTime.ElapsedMilliseconds * 0.01f,
+                        // upwards rot.
+                        //0.5f, 
+
+                        0f,
+
+                        // sideways, left to right
+                        0.5f
+                        , 0.0f);
+
+
+                    // http://developer.android.com/reference/android/opengl/Matrix.html#translateM(float[], int, float, float, float)
+
+
+                    // the cube rotates in front of us.
+                    // do we need to use a special program to draw a cube?
+                    // how can we make it bigger?
+
+                    GLES20.glUseProgram(cubeProgram);
+
+                    GLES20.glUniform3fv(cubeLightPosParam, 1, lightPosInEyeSpace, 0);
+
+                    // Set the Model in the shader, used to calculate lighting
+                    GLES20.glUniformMatrix4fv(cubeModelParam, 1, false, modelCube, 0);
+
+                    // Set the ModelView in the shader, used to calculate lighting
+                    GLES20.glUniformMatrix4fv(cubeModelViewParam, 1, false, modelView, 0);
+
+                    // Set the position of the cube
+                    GLES20.glVertexAttribPointer(cubePositionParam, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, 0, cubeVertices);
+
+                    // Set the ModelViewProjection matrix in the shader.
+                    GLES20.glUniformMatrix4fv(cubeModelViewProjectionParam, 1, false, modelViewProjection, 0);
+
+                    // Set the normal positions of the cube, again for shading
+                    GLES20.glVertexAttribPointer(cubeNormalParam, 3, GLES20.GL_FLOAT, false, 0, cubeNormals);
+
+
+                    #region cubeColors
+                    var cc = cubeFoundColors;
+                    if (!isLookingAtObject()) cc = cubeColors;
+
+                    GLES20.glVertexAttribPointer(cubeColorParam, 4, GLES20.GL_FLOAT, false, 0, cc);
+                    #endregion
+
+                    GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 36);
+                    checkGLError("Drawing cube");
+                };
+
+
+                #endregion
+
+                drawCube(0, 0, objectDistance * -2.0f);
+                drawCube(objectDistance, 0, objectDistance * -2.0f);
+                drawCube(0, objectDistance, objectDistance * -1.0f);
+                drawCube(-objectDistance, 0, objectDistance * -2.0f);
+
+
+
+
+                Matrix.setIdentityM(modelFloor, 0);
+                Matrix.translateM(modelFloor, 0, 0, -floorDepth, 0); // Floor appears below user.
+
+                // Set modelView for the floor, so we draw floor in the correct location
+                Matrix.multiplyMM(modelView, 0, view, 0, modelFloor, 0);
+                Matrix.multiplyMM(modelViewProjection, 0, perspective, 0,
+                  modelView, 0);
+
+                #region drawFloor
+                // called by onDrawEye
+                Action drawFloor = delegate
+                {
+                    GLES20.glUseProgram(floorProgram);
+
+                    // Set ModelView, MVP, position, normals, and color.
+                    GLES20.glUniform3fv(floorLightPosParam, 1, lightPosInEyeSpace, 0);
+                    GLES20.glUniformMatrix4fv(floorModelParam, 1, false, modelFloor, 0);
+                    GLES20.glUniformMatrix4fv(floorModelViewParam, 1, false, modelView, 0);
+                    GLES20.glUniformMatrix4fv(floorModelViewProjectionParam, 1, false,
+                        modelViewProjection, 0);
+                    GLES20.glVertexAttribPointer(floorPositionParam, COORDS_PER_VERTEX, GLES20.GL_FLOAT,
+                        false, 0, floorVertices);
+                    GLES20.glVertexAttribPointer(floorNormalParam, 3, GLES20.GL_FLOAT, false, 0,
+                        floorNormals);
+                    GLES20.glVertexAttribPointer(floorColorParam, 4, GLES20.GL_FLOAT, false, 0, floorColors);
+
+                    GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 6);
+
+                    checkGLError("drawing floor");
+                };
+
+                drawFloor();
+                #endregion
+
+
+            };
         }
 
 
 
+        Stopwatch TotalTime = Stopwatch.StartNew();
 
         long FrameCounter = 0;
         Stopwatch FrameWatch = Stopwatch.StartNew();
         Stopwatch FrameOne = Stopwatch.StartNew();
 
+        public Action<com.google.vrtoolkit.cardboard.HeadTransform> vNewFrame;
         public void onNewFrame(com.google.vrtoolkit.cardboard.HeadTransform headTransform)
         {
-            // http://stackoverflow.com/questions/11851343/raise-fps-on-android-tablet-above-60-for-opengl-game
-            // http://gafferongames.com/game-physics/fix-your-timestep/
-
-            #region FrameWatch
-            if (FrameWatch.ElapsedMilliseconds >= 1000)
-            {
-                var codeFPS = 1000.0 / FrameOne.ElapsedMilliseconds;
-
-                // we now know how many frames did fit into it
-                // need 60 or more!
-                Console.WriteLine("CardboardForEdgeExperiment " + new
-                {
-                    // static
-                    System.Environment.ProcessorCount,
-
-                    android.os.Build.MODEL,
-
-                    System.Environment.CurrentManagedThreadId,
-
-                    FrameCounter,
-
-                    // dynamic
-                    LastFrameMilliseconds = FrameOne.ElapsedMilliseconds,
-                    codeFPS,
-
-                    // very dynamic
-                    pitch,
-                    yaw
-                });
-
-                // I/System.Console(28117): CardboardForEdgeExperiment { ProcessorCount = 2, MODEL = Nexus 9, CurrentManagedThreadId = 1647, FrameCounter = 60, LastFrameMilliseconds = 6, codeFPS = 166.66666666666666, pitch = 1.5978987, yaw = -2.0770574 }
-
-                FrameWatch.Restart();
-                FrameCounter = 0;
-            }
-
-            #endregion
-            // GPU thread starts now..
-            FrameOne.Restart();
-            FrameCounter++;
-
-
-            //Console.WriteLine("AndroidCardboardExperiment onNewFrame");
-
-            // Build the Model part of the ModelView matrix.
-            Matrix.rotateM(modelCube, 0, TIME_DELTA, 0.5f, 0.5f, 1.0f);
-
-            // Build the camera matrix and apply it to the ModelView.
-            Matrix.setLookAtM(camera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-
-            headTransform.getHeadView(headView, 0);
-
-            checkGLError("onReadyToDraw");
-
-            // I/System.Console(27769): CardboardForEdgeExperiment { FrameCounter = 61, LastFrameMilliseconds = 0, codeFPS = Infinity, CurrentManagedThreadId = 1637, ProcessorCount = 2, MODEL = Nexus 9 }
-
-            // add placeholder slowdown
-            System.Threading.Thread.Sleep(5);
-            // I/System.Console(27840): CardboardForEdgeExperiment { FrameCounter = 60, LastFrameMilliseconds = 6, codeFPS = 166.66666666666666, CurrentManagedThreadId = 1642, ProcessorCount = 2, MODEL = Nexus 9 }
-
-            // GPU thread stops now..
-            FrameOne.Stop();
+            vNewFrame(headTransform);
         }
 
         // Error	3	'AndroidCardboardExperiment.Activities.ApplicationActivity.onDrawEye(com.google.vrtoolkit.cardboard.Eye)': no suitable method found to override	X:\jsc.svn\examples\java\android\synergy\AndroidCardboardExperiment\AndroidCardboardExperiment\ApplicationActivity.cs	328	31	AndroidCardboardExperiment
         // StereoRenderer
+        public Action<com.google.vrtoolkit.cardboard.Eye> vDrawEye;
+
         public void onDrawEye(com.google.vrtoolkit.cardboard.Eye eye)
         {
-            GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-
-            checkGLError("colorParam");
-
-            // Apply the eye transformation to the camera.
-            Matrix.multiplyMM(view, 0, eye.getEyeView(), 0, camera, 0);
-
-            // Set the position of the light
-            Matrix.multiplyMV(lightPosInEyeSpace, 0, view, 0, LIGHT_POS_IN_WORLD_SPACE, 0);
-
-            // Build the ModelView and ModelViewProjection matrices
-            // for calculating cube position and light.
-            float[] perspective = eye.getPerspective(Z_NEAR, Z_FAR);
-            Matrix.multiplyMM(modelView, 0, view, 0, modelCube, 0);
-            Matrix.multiplyMM(modelViewProjection, 0, perspective, 0, modelView, 0);
-
-
-
-
-
-            #region drawCube
-            Action<float, float, float> drawCube = (tx, ty, tz) =>
-            {
-                var modelCube1 = new float[16];
-
-                // http://developer.android.com/reference/android/opengl/Matrix.html#translateM(float[], int, float, float, float)
-                //Matrix.translateM(
-                //    modelCube1,
-                //    0,
-                //    modelCube,
-                //    0,
-                //    tx,
-                //    ty,
-                //    tz
-                //);
-
-                // the cube rotates in front of us.
-                // do we need to use a special program to draw a cube?
-                // how can we make it bigger?
-
-                GLES20.glUseProgram(cubeProgram);
-
-                GLES20.glUniform3fv(cubeLightPosParam, 1, lightPosInEyeSpace, 0);
-
-                // Set the Model in the shader, used to calculate lighting
-                //GLES20.glUniformMatrix4fv(cubeModelParam, 1, false, modelCube1, 0);
-
-                // Set the ModelView in the shader, used to calculate lighting
-                GLES20.glUniformMatrix4fv(cubeModelViewParam, 1, false, modelView, 0);
-
-                // Set the position of the cube
-                GLES20.glVertexAttribPointer(cubePositionParam, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, 0, cubeVertices);
-
-                // Set the ModelViewProjection matrix in the shader.
-                GLES20.glUniformMatrix4fv(cubeModelViewProjectionParam, 1, false, modelViewProjection, 0);
-
-                // Set the normal positions of the cube, again for shading
-                GLES20.glVertexAttribPointer(cubeNormalParam, 3, GLES20.GL_FLOAT, false, 0, cubeNormals);
-
-
-
-                var cc = cubeFoundColors;
-                if (!isLookingAtObject()) cc = cubeColors;
-
-                GLES20.glVertexAttribPointer(cubeColorParam, 4, GLES20.GL_FLOAT, false, 0,
-                    cc);
-
-                GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 36);
-                checkGLError("Drawing cube");
-            };
-
-            //drawCube(10, 0, 0);
-            //drawCube(20, 0, 0);
-            //drawCube(30, 0, 0);
-            #endregion
-
-
-            // Set modelView for the floor, so we draw floor in the correct location
-            Matrix.multiplyMM(modelView, 0, view, 0, modelFloor, 0);
-            Matrix.multiplyMM(modelViewProjection, 0, perspective, 0,
-              modelView, 0);
-
-            #region drawFloor
-            // called by onDrawEye
-            Action drawFloor = delegate
-            {
-                GLES20.glUseProgram(floorProgram);
-
-                // Set ModelView, MVP, position, normals, and color.
-                GLES20.glUniform3fv(floorLightPosParam, 1, lightPosInEyeSpace, 0);
-                GLES20.glUniformMatrix4fv(floorModelParam, 1, false, modelFloor, 0);
-                GLES20.glUniformMatrix4fv(floorModelViewParam, 1, false, modelView, 0);
-                GLES20.glUniformMatrix4fv(floorModelViewProjectionParam, 1, false,
-                    modelViewProjection, 0);
-                GLES20.glVertexAttribPointer(floorPositionParam, COORDS_PER_VERTEX, GLES20.GL_FLOAT,
-                    false, 0, floorVertices);
-                GLES20.glVertexAttribPointer(floorNormalParam, 3, GLES20.GL_FLOAT, false, 0,
-                    floorNormals);
-                GLES20.glVertexAttribPointer(floorColorParam, 4, GLES20.GL_FLOAT, false, 0, floorColors);
-
-                GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 6);
-
-                checkGLError("drawing floor");
-            };
-
-            drawFloor();
-            #endregion
-
-
+            vDrawEye(eye);
         }
 
         public void onFinishFrame(com.google.vrtoolkit.cardboard.Viewport value)
@@ -540,47 +612,10 @@ namespace CardboardForEdgeExperiment.Activities
 
 
 
-        public override void onCardboardTrigger()
-        {
-            //Log.i(TAG, "onCardboardTrigger");
-
-            if (isLookingAtObject())
-            {
-                score++;
-                overlayView.show3DToast("Found it! Look around for another one.\nScore = " + score);
-                //hideObject();
-            }
-            else
-            {
-                overlayView.show3DToast("Look around to find the object!");
-            }
-
-            // Always give user feedback.
-            vibrator.vibrate(50);
-        }
-
-
 
         float pitch;
         float yaw;
 
-        private bool isLookingAtObject()
-        {
-            float[] initVec = { 0, 0, 0, 1.0f };
-            float[] objPositionVec = new float[4];
-
-            // Convert object space to camera space. Use the headView from onNewFrame.
-            Matrix.multiplyMM(modelView, 0, headView, 0, modelCube, 0);
-            Matrix.multiplyMV(objPositionVec, 0, modelView, 0, initVec, 0);
-
-            pitch = (float)Math.Atan2(objPositionVec[1], -objPositionVec[2]);
-            yaw = (float)Math.Atan2(objPositionVec[0], -objPositionVec[2]);
-
-            if (Math.Abs(pitch) < PITCH_LIMIT)
-                if (Math.Abs(yaw) < YAW_LIMIT)
-                    return true;
-            return false;
-        }
 
     }
 
