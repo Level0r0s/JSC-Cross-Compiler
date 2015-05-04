@@ -18,23 +18,23 @@ namespace com.oculusvr.vrlib.Activities
 {
 	public class ApplicationActivity : Activity
 	{
-		// X:\opensource\ovr_mobile_sdk_0.5.0
-		// https://developer.oculus.com/downloads/#version=mobile-0.5.0
+        // X:\opensource\ovr_mobile_sdk_0.5.0
+        // https://developer.oculus.com/downloads/#version=mobile-0.5.0
 
-		//<ItemGroup>
-		//  <Content Include="X:\opensource\ovr_mobile_sdk_20141111\VRLib\src\**\*.*">
-		//    <Link>opensource\ovr_mobile_sdk_20141111\VRLib\src\%(RecursiveDir)%(FileName)%(Extension)</Link>
-		//  </Content>
-		//</ItemGroup>
+        //<ItemGroup>
+        //  <Content Include="X:\opensource\ovr_mobile_sdk_20141111\VRLib\src\**\*.*">
+        //    <Link>opensource\ovr_mobile_sdk_20141111\VRLib\src\%(RecursiveDir)%(FileName)%(Extension)</Link>
+        //  </Content>
+        //</ItemGroup>
 
-		// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150402
-		// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20141127
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150402
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20141127
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150504/dae
 
+        // http://stackoverflow.com/questions/9821875/where-is-buildconfig-debug
+        // tested by?
 
-		// http://stackoverflow.com/questions/9821875/where-is-buildconfig-debug
-		// tested by?
-
-		protected override void onCreate(global::android.os.Bundle savedInstanceState)
+        protected override void onCreate(global::android.os.Bundle savedInstanceState)
 		{
 			// cmd /K c:\util\android-sdk-windows\platform-tools\adb.exe logcat
 			// Camera PTP

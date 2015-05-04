@@ -79,7 +79,7 @@
     <Content Include="web\OvrApp.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="X:\opensource\ovr_mobile_sdk_0.5.0\VRLib\jni\**\*.*">
+    <Content Include="X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\jni\**\*.*">
       <Link>staging\jni\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -91,6 +91,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="staging\assets\oculussig_02157df2d5d4e70b">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="staging\bin\android-install.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -103,11 +106,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="X:\opensource\ovr_mobile_sdk_0.5.0\VRLib\src\**\*.*">
+    <Content Include="X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\src\**\*.*">
       <Link>staging\src\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="X:\opensource\ovr_mobile_sdk_0.5.0\VRLib\res\raw\**\*.*">
+    <Content Include="X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\res\raw\**\*.*">
       <Link>staging\res\raw\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

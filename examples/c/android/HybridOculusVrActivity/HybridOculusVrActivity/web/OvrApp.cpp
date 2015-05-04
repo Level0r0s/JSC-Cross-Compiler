@@ -18,18 +18,18 @@ char* cxxGetString()
 	// http://en.wikibooks.org/wiki/GCC_Debugging/g%2B%2B/Warnings/deprecated_conversion_from_string_constant
 
 	//return "from cxxGetString";
-	return  (char *) "from cxxGetString";
+	return  (char *) "from cxxGetString, with oculussig, vr_dual";
 }
 
 // "X:\opensource\ovr_mobile_sdk_0.5.0\VrNative\VrTemplate\jni\OvrApp.cpp"
 jlong cxxSetAppInterface(JNIEnv *jni, jclass clazz, jobject activity,
 						 jstring javaFromPackageNameString, jstring javaCommandString, jstring javaUriString )
 {
-       LOG( "cxxSetAppInterface");
-	   
+	   LOG("enter OvrApp::cxxSetAppInterface");
 
 
 
+	   // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150504/dae
 	   // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150402/android-mk
 	   // return (new JavaSample())->SetActivity( jni, clazz, activity, javaFromPackageNameString, javaCommandString, javaUriString );
        //return (new OvrApp())->SetActivity( jni, clazz, activity );
@@ -53,6 +53,9 @@ OvrApp::~OvrApp()
 
 void OvrApp::OneTimeInit( const char * fromPackage, const char * launchIntentJSON, const char * launchIntentURI )
 {
+	// called by_
+	LOG("enter OvrApp::OneTimeInit");
+
 	// This is called by the VR thread, not the java UI thread.
 	MaterialParms materialParms;
 	materialParms.UseSrgbTextureFormats = false;
@@ -70,6 +73,7 @@ void OvrApp::OneTimeInit( const char * fromPackage, const char * launchIntentJSO
 
 	if ( GetFullPath( SearchPaths, scenePath, SceneFile ) )
 	{
+		LOG("invoke Scene.LoadWorldModel");
 		Scene.LoadWorldModel( SceneFile , materialParms );
 	}
 	else
@@ -86,6 +90,7 @@ void OvrApp::OneTimeShutdown()
 
 void OvrApp::Command( const char * msg )
 {
+	LOG("enter OvrApp::Command");
 }
 
 Matrix4f OvrApp::DrawEyeView( const int eye, const float fovDegrees )
@@ -97,6 +102,8 @@ Matrix4f OvrApp::DrawEyeView( const int eye, const float fovDegrees )
 
 Matrix4f OvrApp::Frame(const VrFrame vrFrame)
 {
+	LOG("enter OvrApp::Frame");
+
 	// Player movement
     Scene.Frame( app->GetVrViewParms(), vrFrame, app->GetSwapParms().ExternalVelocity );
 

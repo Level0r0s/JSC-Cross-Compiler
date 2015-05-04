@@ -58,7 +58,7 @@ call "x:\util\apache-ant-1.9.2\bin\ant.bat" debug
 
 pushd bin
 
-start /WAIT cmd /C android-install.bat
+echo start /WAIT cmd /C android-install.bat
  
 popd
 popd

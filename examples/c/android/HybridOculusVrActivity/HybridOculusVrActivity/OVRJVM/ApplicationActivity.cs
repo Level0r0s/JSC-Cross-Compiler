@@ -37,9 +37,11 @@ namespace HybridOculusVrActivity.OVRJVM
 
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "19")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : com.oculusvr.vrlib.VrActivity, ScriptCoreLib.Android.IAssemblyReferenceToken
     {
+        // https://forums.oculus.com/viewtopic.php?f=67&t=22886
+
         // 
         // Just as a side note, you can actually run the app on the Note 4 without having a VR Gear.
         // Just change the manifest android:value="vr_only" to android:value="vr_dual" and the message will be gone. You still need to have a valid signature file nevertheless.
@@ -88,8 +90,16 @@ namespace HybridOculusVrActivity.OVRJVM
 
         protected override void onCreate(android.os.Bundle value)
         {
+            Console.WriteLine("enter  HybridOculusVrActivity.OVRJVM ApplicationActivity onCreate");
+            getWindow().requestFeature(android.view.Window.FEATURE_NO_TITLE);
+            setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+            Console.WriteLine("invoke base  HybridOculusVrActivity.OVRJVM ApplicationActivity onCreate");
             base.onCreate(value);
 
+
+
+            // http://through-the-interface.typepad.com/through_the_interface/2015/01/building-a-gear-vr-app-using-the-oculus-mobile-sdk.html
             //E/AndroidRuntime(13031): android.util.SuperNotCalledException: Activity {HybridOculusVrActivity.OVRJVM/HybridOculusVrActivity.OVRJVM.ApplicationActivity} did not call through to super.onCreate()
             //E/AndroidRuntime(13031):        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2150)
             //E/AndroidRuntime(13031):        at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2233)
@@ -101,11 +111,27 @@ namespace HybridOculusVrActivity.OVRJVM
 
             // why call the base?
 
-            Console.WriteLine("enter  HybridOculusVrActivity.OVRJVM ApplicationActivity onCreate");
 
-            var tv = new TextView(this);
-            tv.setText(stringFromJNI());
-            setContentView(tv);
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150504/dae
+
+            //var tv = new TextView(this);
+            //tv.setText(stringFromJNI());
+            //setContentView(tv);
+
+            //this.ShowToast(
+            //    stringFromJNI()
+            //    );
+
+
+            //<meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_dual"/>
+            // 
+
+            Toast.makeText(
+                this,
+                stringFromJNI() + " can you see it?",
+                Toast.LENGTH_LONG
+          ).show();
+
 
             // if we do not set it we are going to crash.
             //var appPtr = nativeSetAppInterface(ref0);
@@ -117,13 +143,19 @@ namespace HybridOculusVrActivity.OVRJVM
             // why are we roundtriping intent details?
 
 
+            Console.WriteLine("invoke base  HybridOculusVrActivity.OVRJVM ApplicationActivity nativeSetAppInterface");
             // https://forums.oculus.com/viewtopic.php?f=67&t=17790
             this.appPtr = nativeSetAppInterface(this,
-                    fromPackageNameString, commandString, uriString                
+                    fromPackageNameString, commandString, uriString
                 );
 
             //nativeResume(appPtr);
         }
+
+
+        //05-04 16:08:04.181: D/VrActivity(22305): HybridOculusVrActivity.OVRJVM.ApplicationActivity@39e41f23 surfaceCreated()
+        //05-04 16:08:04.181: D/VrActivity(22305): HybridOculusVrActivity.OVRJVM.ApplicationActivity@39e41f23 surfaceChanged() format: 4 width: 1440 height: 2460
+
 
         // X:\opensource\ovr_mobile_sdk_20141111\VRLib\jni\GlGeometry.cpp
 
@@ -137,6 +169,7 @@ namespace HybridOculusVrActivity.OVRJVM
 
         protected override void onResume()
         {
+            Console.WriteLine("enter  HybridOculusVrActivity.OVRJVM ApplicationActivity onResume");
             base.onResume();
         }
 
@@ -158,8 +191,9 @@ namespace HybridOculusVrActivity.OVRJVM
         //public static native long nativeSetAppInterface( VrActivity act ); 
 
         [Script(IsPInvoke = true)]
-        public static long nativeSetAppInterface(com.oculusvr.vrlib.VrActivity act, 
-            string fromPackageNameString, string commandString, string uriString) { return default(long); }
+        public static long nativeSetAppInterface(com.oculusvr.vrlib.VrActivity act,
+            string fromPackageNameString, string commandString, string uriString)
+        { return default(long); }
 
 
 
@@ -185,8 +219,9 @@ namespace HybridOculusVrActivity.OVRNDK
 
         public static string cxxGetString() { return default(string); }
         //jlong cxxSetAppInterface(JNIEnv* jni, jclass clazz, jobject activity);
-        public static jlong cxxSetAppInterface(ref JNIEnv jni, jclass c, jobject activity, 
-            jstring fromPackageNameString, jstring commandString, jstring uriString) { return (jlong)(object)0; }
+        public static jlong cxxSetAppInterface(ref JNIEnv jni, jclass c, jobject activity,
+            jstring fromPackageNameString, jstring commandString, jstring uriString)
+        { return (jlong)(object)0; }
     }
 
     public partial class xNativeActivity
@@ -203,7 +238,7 @@ namespace HybridOculusVrActivity.OVRNDK
             jclass clazz,
             jobject activity,
 
-            jstring fromPackageNameString, jstring commandString, jstring uriString            
+            jstring fromPackageNameString, jstring commandString, jstring uriString
             )
         {
             log.__android_log_print(log.android_LogPriority.ANDROID_LOG_INFO, "xNativeActivity", "enter Java_HybridOculusVrActivity_OVRJVM_ApplicationActivity_nativeSetAppInterface");
