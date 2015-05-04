@@ -90,12 +90,8 @@ namespace CardboardForEdgeExperiment.Activities
         private int floorModelViewProjectionParam;
         private int floorLightPosParam;
 
-        private float[] camera;
-        private float[] view;
         private float[] headView;
         private float[] modelViewProjection;
-        private float[] modelView;
-        private float[] modelFloor;
 
         private int score = 0;
         private float objectDistance = 12f;
@@ -141,11 +137,11 @@ namespace CardboardForEdgeExperiment.Activities
             setCardboardView(cardboardView);
 
 
-            camera = new float[16];
-            view = new float[16];
+
+
             modelViewProjection = new float[16];
-            modelView = new float[16];
-            modelFloor = new float[16];
+
+
             headView = new float[16];
             vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -281,7 +277,7 @@ namespace CardboardForEdgeExperiment.Activities
 
 
             int vertexShader = loadGLShader(GLES20.GL_VERTEX_SHADER, new AndroidCardboardExperiment.Shaders.light_vertexVertexShader());
-            int gridShader = loadGLShader(GLES20.GL_FRAGMENT_SHADER, new AndroidCardboardExperiment.Shaders.grid_fragmentFragmentShader());
+            int gridShader = loadGLShader(GLES20.GL_FRAGMENT_SHADER, new Shaders.xgrid_fragmentFragmentShader());
             int passthroughShader = loadGLShader(GLES20.GL_FRAGMENT_SHADER, new AndroidCardboardExperiment.Shaders.passthrough_fragmentFragmentShader());
 
             cubeProgram = GLES20.glCreateProgram();
@@ -334,11 +330,21 @@ namespace CardboardForEdgeExperiment.Activities
             //GLES20.glEnable(GLES20.GL_FOG);
 
 
-   
+
 
             checkGLError("onSurfaceCreated");
 
             Console.WriteLine("exit AndroidCardboardExperiment onSurfaceCreated");
+
+
+            vFinishFrame = (com.google.vrtoolkit.cardboard.Viewport v) =>
+            {
+
+                // GPU thread stops now..
+                FrameOne.Stop();
+            };
+
+            // I/System.Console(28103): CardboardForEdgeExperiment { ProcessorCount = 8, MODEL = SM-G925F, CurrentManagedThreadId = 11305, FrameCounter = 28, LastFrameMilliseconds = 40, codeFPS = 25.0, pitch = 1.579644, yaw = 1.6225219 }
 
             #region vNewFrame
             vNewFrame = (com.google.vrtoolkit.cardboard.HeadTransform headTransform) =>
@@ -398,30 +404,55 @@ namespace CardboardForEdgeExperiment.Activities
                 // I/System.Console(27769): CardboardForEdgeExperiment { FrameCounter = 61, LastFrameMilliseconds = 0, codeFPS = Infinity, CurrentManagedThreadId = 1637, ProcessorCount = 2, MODEL = Nexus 9 }
 
                 // add placeholder slowdown
-                System.Threading.Thread.Sleep(5);
+                //System.Threading.Thread.Sleep(5);
                 // I/System.Console(27840): CardboardForEdgeExperiment { FrameCounter = 60, LastFrameMilliseconds = 6, codeFPS = 166.66666666666666, CurrentManagedThreadId = 1642, ProcessorCount = 2, MODEL = Nexus 9 }
 
-                // GPU thread stops now..
-                FrameOne.Stop();
             };
             #endregion
 
             // if we define it here, we get to see it in vr...
             var modelCube = new float[16];
 
+            // I/System.Console(19917): CardboardForEdgeExperiment { ProcessorCount = 8, MODEL = SM-G925F, CurrentManagedThreadId = 9959, FrameCounter = 46, LastFrameMilliseconds = 6, codeFPS = 166.66666666666666, pitch = 0.9070491, yaw = -0.3660261 }
+
+            #region vDrawEye
             vDrawEye = (com.google.vrtoolkit.cardboard.Eye eye) =>
             {
 
+                var camera = new float[16];
 
 
-
+                // static void	setLookAtM(float[] rm, int rmOffset, float eyeX, float eyeY, float eyeZ, float centerX, float centerY, float centerZ, float upX, float upY, float upZ)
                 // Build the camera matrix and apply it to the ModelView.
-                Matrix.setLookAtM(camera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+                Matrix.setLookAtM(camera, 0,
 
+                    0.0f, 0.0f, CAMERA_Z,
+
+                   0f, 0.0f, 0.0f,
+
+                    0.0f, 1.0f, 0.0f);
+
+
+                #region glClearColor
+                // skybox/video instead?
+                GLES20.glClearColor(
+                    0x87 / 255f,
+                    0xCE / 255f,
+                    0xEB / 255f, 1.0f
+                );
 
                 GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+                #endregion
 
-                checkGLError("colorParam");
+
+
+
+                var view = new float[16];
+
+                // can we strafe?
+                //Matrix.translateM(view, 0, objectDistance, 0, 0);
+
+
 
                 // Apply the eye transformation to the camera.
                 Matrix.multiplyMM(view, 0, eye.getEyeView(), 0, camera, 0);
@@ -434,11 +465,11 @@ namespace CardboardForEdgeExperiment.Activities
                 float[] perspective = eye.getPerspective(Z_NEAR, Z_FAR);
 
 
+                // just a buffer?
+                var modelView = new float[16];
 
 
-
-
-                #region drawCube
+                #region drawCube()
                 Action<float, float, float> drawCube = (tx, ty, tz) =>
                 {
 
@@ -468,7 +499,8 @@ namespace CardboardForEdgeExperiment.Activities
                     // Object first appears directly in front of user.
                     Matrix.setIdentityM(modelCube, 0);
                     // cant see it?
-                    Matrix.scaleM(modelCube, 0, 2f, 2f, 2f);
+                    var scale = 5.0f;
+                    //Matrix.scaleM(modelCube, 0, scale, scale, scale);
 
                     Matrix.translateM(modelCube, 0, tx, ty, tz);
 
@@ -481,6 +513,8 @@ namespace CardboardForEdgeExperiment.Activities
 
                     // Build the Model part of the ModelView matrix.
                     //Matrix.rotateM(modelCube, 0, TIME_DELTA, 0.5f, 0.5f, 1.0f);
+
+                    // cant see rotation?
                     Matrix.rotateM(modelCube, 0, TotalTime.ElapsedMilliseconds * 0.01f,
                         // upwards rot.
                         //0.5f, 
@@ -520,8 +554,8 @@ namespace CardboardForEdgeExperiment.Activities
 
 
                     #region cubeColors
-                    var cc = cubeFoundColors;
-                    if (!isLookingAtObject()) cc = cubeColors;
+                    var cc = cubeColors;
+                    if (!isLookingAtObject()) cc = cubeFoundColors;
 
                     GLES20.glVertexAttribPointer(cubeColorParam, 4, GLES20.GL_FLOAT, false, 0, cc);
                     #endregion
@@ -533,21 +567,40 @@ namespace CardboardForEdgeExperiment.Activities
 
                 #endregion
 
-                drawCube(0, 0, objectDistance * -2.0f);
-                drawCube(objectDistance, 0, objectDistance * -2.0f);
+                #region drawCube
                 drawCube(0, objectDistance, objectDistance * -1.0f);
-                drawCube(-objectDistance, 0, objectDistance * -2.0f);
+
+
+                drawCube(0, 0, objectDistance * -2.0f);
+
+                // looks like an airstrip
+
+                var endOfMatrix = 16;
+                for (int i = -endOfMatrix; i < endOfMatrix; i++)
+                {
+                    drawCube(objectDistance, -floorDepth, objectDistance * -1.0f * i);
+                    drawCube(-objectDistance, -floorDepth, objectDistance * -1.0f * i);
+
+
+                    drawCube(objectDistance * 0.5f, 0, objectDistance * -1.0f * i);
+                    drawCube(objectDistance * -0.5f, 0, objectDistance * -1.0f * i);
+                }
+                #endregion
 
 
 
+
+
+                var modelFloor = new float[16];
 
                 Matrix.setIdentityM(modelFloor, 0);
-                Matrix.translateM(modelFloor, 0, 0, -floorDepth, 0); // Floor appears below user.
+                Matrix.translateM(modelFloor, 0,
+
+                    TotalTime.ElapsedMilliseconds * 0.01f, -floorDepth, 0); // Floor appears below user.
 
                 // Set modelView for the floor, so we draw floor in the correct location
                 Matrix.multiplyMM(modelView, 0, view, 0, modelFloor, 0);
-                Matrix.multiplyMM(modelViewProjection, 0, perspective, 0,
-                  modelView, 0);
+                Matrix.multiplyMM(modelViewProjection, 0, perspective, 0, modelView, 0);
 
                 #region drawFloor
                 // called by onDrawEye
@@ -577,6 +630,8 @@ namespace CardboardForEdgeExperiment.Activities
 
 
             };
+            #endregion
+
         }
 
 
@@ -602,8 +657,10 @@ namespace CardboardForEdgeExperiment.Activities
             vDrawEye(eye);
         }
 
+        public Action<com.google.vrtoolkit.cardboard.Viewport> vFinishFrame;
         public void onFinishFrame(com.google.vrtoolkit.cardboard.Viewport value)
         {
+            vFinishFrame(value);
         }
 
 

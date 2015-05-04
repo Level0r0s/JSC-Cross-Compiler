@@ -99,6 +99,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Shaders\xgrid_fragment.frag" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Design\Preview.png" />
