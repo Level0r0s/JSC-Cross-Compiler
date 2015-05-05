@@ -20,6 +20,7 @@ namespace ScriptCoreLib.JavaScript.WebGL
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public class WebGL2RenderingContext
 	{
+		// https://code.google.com/p/chromium/issues/detail?id=288731
 		// https://code.google.com/p/chromium/issues/detail?id=483890
 
 		// http://toji.github.io/webgl2-particles/

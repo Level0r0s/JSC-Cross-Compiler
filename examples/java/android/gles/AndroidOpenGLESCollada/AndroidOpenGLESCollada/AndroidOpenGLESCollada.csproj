@@ -103,6 +103,7 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Shaders\" />
+    <Folder Include="staging\apk\assets\assets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Design\Images.htm" />
@@ -110,12 +111,6 @@
     <Content Include="opensource\ckt\projects\acl\AndroidColladaLoader.java" />
     <Content Include="opensource\ckt\projects\acl\ColladaHandler.java" />
     <Content Include="opensource\ckt\projects\acl\ColladaObject.java" />
-    <Content Include="staging\apk\assets\assets\AndroidOpenGLESLesson6Activity\noisy_grass_public_domain.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="staging\apk\assets\assets\AndroidOpenGLESLesson6Activity\stone_wall_public_domain.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -54,8 +54,31 @@ namespace ScriptCoreLib.JavaScript.DOM
 
 
 
-        #region event onmessage
-        public event System.Action<MessageEvent> onmessage
+
+		// http://caniuse.com/deviceorientation
+		#region event orientationchange
+		// X:\jsc.svn\examples\javascript\test\TestRequestFullscreen\TestRequestFullscreen\Application.cs
+
+		public event System.Action<IEvent> onorientationchange
+		{
+			[Script(DefineAsStatic = true)]
+			add
+			{
+				base.InternalEvent(true, value, "orientationchange");
+			}
+			[Script(DefineAsStatic = true)]
+			remove
+			{
+				base.InternalEvent(false, value, "orientationchange");
+			}
+		}
+		#endregion
+
+		public int orientation;	  // updates the angle: 0, 90, 180, or -90
+
+
+		#region event onmessage
+		public event System.Action<MessageEvent> onmessage
         {
             [Script(DefineAsStatic = true)]
             add

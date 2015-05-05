@@ -50,24 +50,7 @@ namespace ScriptCoreLib.JavaScript.DOM
         // https://developer.mozilla.org/en-US/docs/Web/API/window.performance
         public Performance performance;
 
-        // http://caniuse.com/deviceorientation
-        #region event orientationchange
-        public event Action<IEvent> onorientationchange
-        {
-            [Script(DefineAsStatic = true)]
-            add
-            {
-                base.InternalEvent(true, value, "orientationchange");
-            }
-            [Script(DefineAsStatic = true)]
-            remove
-            {
-                base.InternalEvent(false, value, "orientationchange");
-            }
-        }
-        #endregion
-
-        public int orientation;   // updates the angle: 0, 90, 180, or -90
+	
 
 
 
