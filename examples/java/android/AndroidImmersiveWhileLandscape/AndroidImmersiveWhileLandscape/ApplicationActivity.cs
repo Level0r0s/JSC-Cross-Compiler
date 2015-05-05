@@ -12,7 +12,7 @@ using ScriptCoreLib.Android.Extensions;
 using ScriptCoreLib.Android.Manifest;
 using android.content;
 
-namespace AndroidMenuActivity.Activities
+namespace AndroidImmersiveWhileLandscape.Activities
 {
 
 
@@ -144,7 +144,7 @@ namespace AndroidMenuActivity.Activities
 
 
 }
-//java.lang.RuntimeException: Unable to start activity ComponentInfo{AndroidMenuActivity.Activities/AndroidMenuActivity.Activities.ApplicationActivity}: java.lang.NullPointerException:
+//java.lang.RuntimeException: Unable to start activity ComponentInfo{AndroidImmersiveWhileLandscape.Activities/AndroidImmersiveWhileLandscape.Activities.ApplicationActivity}: java.lang.NullPointerException:
 //       at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2814)
 //       at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2879)
 //       at android.app.ActivityThread.access$900(ActivityThread.java:182)
@@ -162,7 +162,7 @@ namespace AndroidMenuActivity.Activities
 //       at com.android.internal.app.WindowDecorActionBar.<init>(WindowDecorActionBar.java:175)
 //       at android.app.Activity.initWindowDecorActionBar(Activity.java:2261)
 //       at android.app.Activity.setContentView(Activity.java:2299)
-//       at AndroidMenuActivity.Activities.ApplicationActivity.onCreate(ApplicationActivity.java:154)
+//       at AndroidImmersiveWhileLandscape.Activities.ApplicationActivity.onCreate(ApplicationActivity.java:154)
 //       at android.app.Activity.performCreate(Activity.java:6374)
 //       at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1119)
 //       at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2767)
