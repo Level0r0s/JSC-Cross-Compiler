@@ -33,6 +33,7 @@ namespace FlashHeatZeeker.PlayerIOIntegrationBeta2
     /// </summary>
     public sealed class Application
     {
+        // https://chrome.google.com/webstore/developer/dashboard/
 
         //FlashHeatZeeker.PlayerIOIntegrationBeta2.HTML.Pages.TexturesImages
         //rewriting... done

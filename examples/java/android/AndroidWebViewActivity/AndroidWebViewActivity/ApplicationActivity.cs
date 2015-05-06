@@ -1,6 +1,7 @@
 
 using android.app;
 using android.content;
+using android.content.res;
 //using android.database;
 //using android.database.sqlite;
 //using android.provider;
@@ -16,9 +17,12 @@ using System;
 
 namespace AndroidWebViewActivity.Activities
 {
-	[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "21")]
-	//[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
-	public class AndroidWebViewActivity : Activity
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.DeviceDefault")]
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.DeviceDefault.Light")]
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
+    public class AndroidWebViewActivity : Activity
     {
         public WebView webview;
         //public ProgressDialog progressBar;
@@ -39,10 +43,10 @@ namespace AndroidWebViewActivity.Activities
             this.webview = new WebView(this);
             // http://googlechromereleases.blogspot.com/2015/03/android-webview-update.html
 
-			//LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(300, 300);
-			//this.getWindow().setLayoutParams(layoutParams);
+            //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(300, 300);
+            //this.getWindow().setLayoutParams(layoutParams);
 
-			getWindow().setFlags(
+            getWindow().setFlags(
                 WindowManager_LayoutParams.FLAG_HARDWARE_ACCELERATED,
                 WindowManager_LayoutParams.FLAG_HARDWARE_ACCELERATED);
 
@@ -51,7 +55,7 @@ namespace AndroidWebViewActivity.Activities
             //webview.getSettings().setSupportZoom(true); 
             //webview.getSettings().setLoadsImagesAutomatically(true);
             webview.getSettings().setJavaScriptEnabled(true);
-            //webview.getSettings().setBuiltInZoomControls(true);
+            webview.getSettings().setBuiltInZoomControls(true);
             //webview.setInitialScale(1);
 
             webview.setWebViewClient(new MyWebViewClient { __this = this });
@@ -106,7 +110,81 @@ namespace AndroidWebViewActivity.Activities
                 };
             #endregion
 
+            vConfigurationChanged = e =>
+            {
+                var orientation = getScreenOrientation();
 
+                var SystemUiVisibility = getWindow().getDecorView().getSystemUiVisibility();
+
+
+                // X:\jsc.svn\examples\java\android\AndroidImmersiveWhileLandscape\AndroidImmersiveWhileLandscape\ApplicationActivity.cs
+
+
+
+                if (orientation == Configuration.ORIENTATION_LANDSCAPE)
+                {
+                    hideSystemUI();
+                }
+                else
+                {
+                    showSystemUI();
+                }
+            };
+
+            vConfigurationChanged(null);
+        }
+
+        Action<android.content.res.Configuration> vConfigurationChanged;
+
+        public override void onConfigurationChanged(android.content.res.Configuration value)
+        {
+            base.onConfigurationChanged(value);
+
+            vConfigurationChanged(value);
+        }
+
+        public int getScreenOrientation()
+        {//http://stackoverflow.com/questions/3663665/how-can-i-get-the-current-screen-orientation
+            Display getOrient = this.getWindowManager().getDefaultDisplay();
+            int orientation = Configuration.ORIENTATION_UNDEFINED;
+            if (getOrient.getWidth() == getOrient.getHeight())
+            {
+                orientation = Configuration.ORIENTATION_SQUARE;
+            }
+            else
+            {
+                if (getOrient.getWidth() < getOrient.getHeight())
+                {
+                    orientation = Configuration.ORIENTATION_PORTRAIT;
+                }
+                else
+                {
+                    orientation = Configuration.ORIENTATION_LANDSCAPE;
+                }
+            }
+            return orientation;
+        }
+
+        // This snippet hides the system bars.
+        private void hideSystemUI()
+        {
+            // Set the IMMERSIVE flag.
+            // Set the content to appear under the system bars so that the content
+            // doesn't resize when the system bars hide and show.
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+
+        // This snippet shows the system bars. It does this by removing all the flags
+        // except for the ones that make the content appear under the system bars.
+        private void showSystemUI()
+        {
+            getWindow().getDecorView().setSystemUiVisibility(0);
         }
 
         #region AtPrepareOptions
