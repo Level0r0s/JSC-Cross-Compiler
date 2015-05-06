@@ -100,8 +100,12 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Shaders\xgrid_fragment.frag" />
+    <None Include="Tools\android-install.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Design\cardboard.svg" />
     <Content Include="Design\Preview.png" />
     <Content Include="Design\Images.htm" />
     <Content Include="Design\jsc.png" />
