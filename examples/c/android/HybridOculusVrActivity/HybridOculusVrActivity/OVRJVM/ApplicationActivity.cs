@@ -97,6 +97,18 @@ namespace HybridOculusVrActivity.OVRJVM
             Console.WriteLine("invoke base  HybridOculusVrActivity.OVRJVM ApplicationActivity onCreate");
             base.onCreate(value);
 
+            var ll = new LinearLayout(this);
+            ll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+
+
+            this.setContentView(ll);
+
+            var leftSurface = new android.view.SurfaceView(this, null);
+            leftSurface.setLayoutParams(new LinearLayout.LayoutParams(1, LinearLayout.LayoutParams.MATCH_PARENT) { weight = 1.0f });
+            //leftSurface.setId();
+
+            var rightSurface = new android.view.SurfaceView(this, null);
+            rightSurface.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT) { weight = 1.0f });
 
 
             // http://through-the-interface.typepad.com/through_the_interface/2015/01/building-a-gear-vr-app-using-the-oculus-mobile-sdk.html

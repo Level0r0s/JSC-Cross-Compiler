@@ -248,9 +248,9 @@ namespace TestYouTubeExtractor
 
 		static void Main(string[] args)
 		{
-			DoVideo(
-				"https://www.youtube.com/watch?v=8myYyMg1fFE"
-			);
+			//DoVideo(
+			//	"https://www.youtube.com/watch?v=8myYyMg1fFE"
+			//);
 
 			#region WNetRestoreSingleConnection
 			try
