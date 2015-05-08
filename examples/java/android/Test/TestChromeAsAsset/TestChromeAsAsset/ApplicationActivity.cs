@@ -105,13 +105,15 @@ namespace TestChromeAsAsset.Activities
 
             b.WithText("base: "
                 + typeof(global::org.chromium.@base.BaseChromiumApplication)
-
-                + " " + typeof(global::org.chromium.ui.gfx.DeviceDisplayInfo)
-
                 + " " + typeof(global::org.chromium.content.app.ContentApplication)
-                + " " + typeof(global::org.chromium.chrome.shell.ContentApplication)
-                + " " + typeof(global::org.chromium.net.GURLUtils)
-                + " " + typeof(global::org.chromium.content.browser.LocationProviderAdapter)
+                + " " + typeof(global::org.chromium.chrome.browser.ChromiumApplication)
+
+                // this one wont be from the jar files...
+                + " " + typeof(global::org.chromium.chrome.shell.ChromeShellApplication)
+
+                //+ " " + typeof(global::org.chromium.ui.gfx.DeviceDisplayInfo)
+                //+ " " + typeof(global::org.chromium.net.GURLUtils)
+                //+ " " + typeof(global::org.chromium.content.browser.LocationProviderAdapter)
 
                  //[javac] W:\src\TestChromeAsAsset\Activities\ApplicationActivity.java:22: error: AudioManagerAndroid is not public in org.chromium.media; cannot be accessed from outside package
                 //+ " " + typeof(global::org.chromium.media.AudioManagerAndroid)

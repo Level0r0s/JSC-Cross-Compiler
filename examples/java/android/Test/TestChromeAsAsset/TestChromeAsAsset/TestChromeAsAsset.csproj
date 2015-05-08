@@ -105,7 +105,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\..\..\..\..\util\android-sdk-windows\extras\android\support\v7\mediarouter\libs\android-support-v7-mediarouter.jar">
+    <Content Include="x:\util\android-sdk-windows\extras\android\support\v7\appcompat\libs\android-support-v7-appcompat.jar">
+      <Link>References\android-support-v7-appcompat.jar</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellActivity.java">
+      <Link>org\chromium\chrome\shell\ChromeShellActivity.java</Link>
+    </Content>
+    <Content Include="x:\util\android-sdk-windows\extras\android\support\v4\android-support-v4.jar">
+      <Link>References\android-support-v4.jar</Link>
+    </Content>
+    <Content Include="x:\util\android-sdk-windows\extras\android\support\v7\mediarouter\libs\android-support-v7-mediarouter.jar">
       <Link>References\android-support-v7-mediarouter.jar</Link>
     </Content>
     <Content Include="Design\Preview.png" />
@@ -123,9 +132,9 @@
     <None Include="U:\chromium\src\media\base\android\java\src\org\chromium\media\AudioManagerAndroid.java">
       <Link>chromium\src\media\base\android\java\src\org\chromium\media\AudioManagerAndroid.java</Link>
     </None>
-    <Content Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\ChromiumApplication.java">
+    <None Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\ChromiumApplication.java">
       <Link>chromium\src\chrome\android\java\src\org\chromium\chrome\browser\ChromiumApplication.java</Link>
-    </Content>
+    </None>
     <None Include="U:\chromium\src\content\public\android\java\src\org\chromium\content\app\ContentApplication.java">
       <Link>chromium\src\content\public\android\java\src\org\chromium\content\app\ContentApplication.java</Link>
     </None>
@@ -140,6 +149,18 @@
     </None>
     <None Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\TransportControl.java">
       <Link>chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\TransportControl.java</Link>
+    </None>
+    <None Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\document\DocumentTabModelImpl.java">
+      <Link>chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\document\DocumentTabModelImpl.java</Link>
+    </None>
+    <None Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabModelJniBridge.java">
+      <Link>chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabModelJniBridge.java</Link>
+    </None>
+    <None Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabModel.java">
+      <Link>chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabModel.java</Link>
+    </None>
+    <None Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabList.java">
+      <Link>chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabList.java</Link>
     </None>
     <Content Include="U:\chromium\src\out\Release\lib.java\chrome_java.jar">
       <Link>References\chrome_java.jar</Link>
@@ -159,11 +180,20 @@
       <Link>staging\apk\libs\mojo_public_java.jar</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="U:\chromium\src\out\Release\lib.java\content_shell_java.jar">
+      <Link>References\content_shell_java.jar</Link>
+    </Content>
+    <Content Include="U:\chromium\src\out\Release\lib.java\document_tab_model_info_proto_java.jar">
+      <Link>References\document_tab_model_info_proto_java.jar</Link>
+    </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\media_java.jar">
       <Link>References\media_java.jar</Link>
     </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\net_java.jar">
       <Link>References\net_java.jar</Link>
+    </Content>
+    <Content Include="U:\chromium\src\out\Release\lib.java\protobuf_nano_javalib.jar">
+      <Link>References\protobuf_nano_javalib.jar</Link>
     </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\ui_java.jar">
       <Link>References\ui_java.jar</Link>
@@ -177,9 +207,9 @@
     <None Include="U:\chromium\src\base\android\java\src\org\chromium\base\CpuFeatures.java">
       <Link>chromium\src\base\android\java\src\org\chromium\base\CpuFeatures.java</Link>
     </None>
-    <None Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellApplication.java">
-      <Link>chromium\src\base\android\java\src\org\chromium\chrome\shell\ChromeShellApplication.java</Link>
-    </None>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellApplication.java">
+      <Link>org\chromium\chrome\shell\ChromeShellApplication.java</Link>
+    </Content>
     <Content Include="U:\chromium\src\base\android\cpu_features.cc">
       <Link>chromium\src\base\android\cpu_features.cc</Link>
     </Content>
@@ -207,6 +237,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Diagnostics\" />
+    <Folder Include="References\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
