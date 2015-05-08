@@ -17,6 +17,16 @@ namespace TestChromeAsAsset.Activities
 {
 
 
+    public class LocalApplication : Application
+    {
+        public override void onCreate()
+        {
+            base.onCreate();
+
+            Console.WriteLine("enter LocalApplication onCreate, first time?");
+        }
+ 
+    }
 
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "8")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "8")]
