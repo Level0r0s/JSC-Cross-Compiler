@@ -28,6 +28,13 @@ namespace TestChromeAsAsset.Activities
 
         public override void onCreate()
         {
+            // nested type optimized out?
+
+            { android.support.v4.widget.DrawerLayout.ViewDragCallback ref0; }
+            //{ android.support.v7.widget.ActionMenuPresenter.ActionMenuPopupCallback ref0; }
+
+            // https://github.com/android/platform_frameworks_base/blob/master/core/java/android/widget/ActionMenuPresenter.java
+            { android.support.v7.widget.ActionMenuPresenter ref0; }
 
             Console.WriteLine("enter LocalApplication onCreate, first time? "
                 // chrome java
@@ -41,6 +48,14 @@ namespace TestChromeAsAsset.Activities
             base.onCreate();
         }
 
+        //static ApplicationActivity()
+        //{
+        //    Console.WriteLine("should we prefetch our .so for JNI_OnLoad?");
+        //    // U:\chromium\src\chrome\android\shell\chrome_shell_entry_point.cc
+
+        //    // couldn't find "liblibchromeshell.so"
+        //    java.lang.System.loadLibrary("chromeshell");
+        //}
     }
 
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "8")]
@@ -50,19 +65,15 @@ namespace TestChromeAsAsset.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
-    public class ApplicationActivity : Activity
+    public class ApplicationActivity : 
+        // Activity
+        global::org.chromium.chrome.shell.ChromeShellActivity
+
     {
         // https://groups.google.com/forum/#!topic/android-developers/Y5wnstMT5Lo
 
 
-        static ApplicationActivity()
-        {
-            Console.WriteLine("should we prefetch our .so for JNI_OnLoad?");
-            // U:\chromium\src\chrome\android\shell\chrome_shell_entry_point.cc
 
-            // couldn't find "liblibchromeshell.so"
-            java.lang.System.loadLibrary("chromeshell");
-        }
 
         protected override void onCreate(Bundle savedInstanceState)
         {
@@ -84,43 +95,43 @@ namespace TestChromeAsAsset.Activities
             //activity.getWindow().setLayout(850, 850);
             base.onCreate(savedInstanceState);
 
-            var sv = new ScrollView(this);
-            var ll = new LinearLayout(this);
-            ll.setOrientation(LinearLayout.VERTICAL);
-            sv.addView(ll);
+            //var sv = new ScrollView(this);
+            //var ll = new LinearLayout(this);
+            //ll.setOrientation(LinearLayout.VERTICAL);
+            //sv.addView(ll);
 
-            var b = new Button(this).AttachTo(ll);
+            //var b = new Button(this).AttachTo(ll);
 
 
 
-            b.WithText("base: "
-                + typeof(global::org.chromium.@base.BaseChromiumApplication)
-                + " " + typeof(global::org.chromium.content.app.ContentApplication)
-                + " " + typeof(global::org.chromium.chrome.browser.ChromiumApplication)
+            //b.WithText("base: "
+            //    + typeof(global::org.chromium.@base.BaseChromiumApplication)
+            //    + " " + typeof(global::org.chromium.content.app.ContentApplication)
+            //    + " " + typeof(global::org.chromium.chrome.browser.ChromiumApplication)
 
-                // this one wont be from the jar files...
-                + " " + typeof(global::org.chromium.chrome.shell.ChromeShellApplication)
+            //    // this one wont be from the jar files...
+            //    + " " + typeof(global::org.chromium.chrome.shell.ChromeShellApplication)
 
-                //+ " " + typeof(global::org.chromium.ui.gfx.DeviceDisplayInfo)
-                //+ " " + typeof(global::org.chromium.net.GURLUtils)
-                //+ " " + typeof(global::org.chromium.content.browser.LocationProviderAdapter)
+            //    //+ " " + typeof(global::org.chromium.ui.gfx.DeviceDisplayInfo)
+            //    //+ " " + typeof(global::org.chromium.net.GURLUtils)
+            //    //+ " " + typeof(global::org.chromium.content.browser.LocationProviderAdapter)
 
-                 //[javac] W:\src\TestChromeAsAsset\Activities\ApplicationActivity.java:22: error: AudioManagerAndroid is not public in org.chromium.media; cannot be accessed from outside package
-                //+ " " + typeof(global::org.chromium.media.AudioManagerAndroid)
-                //+ " " + typeof(global::org.chromium.mojo.system.impl.CoreImpl)
+            //     //[javac] W:\src\TestChromeAsAsset\Activities\ApplicationActivity.java:22: error: AudioManagerAndroid is not public in org.chromium.media; cannot be accessed from outside package
+            //    //+ " " + typeof(global::org.chromium.media.AudioManagerAndroid)
+            //    //+ " " + typeof(global::org.chromium.mojo.system.impl.CoreImpl)
 
                 
-                //+ " " + global::org.chromium.@base.BaseChromiumApplication.__hello()
-                //+ " nativeGetCoreCount: " + org.chromium.@base.CpuFeatures.getCount()
-                );
+            //    //+ " " + global::org.chromium.@base.BaseChromiumApplication.__hello()
+            //    //+ " nativeGetCoreCount: " + org.chromium.@base.CpuFeatures.getCount()
+            //    );
 
 
-            b.AtClick(
-                v =>
-                {
-                    b.setText("AtClick");
-                }
-            );
+            //b.AtClick(
+            //    v =>
+            //    {
+            //        b.setText("AtClick");
+            //    }
+            //);
 
 
           
