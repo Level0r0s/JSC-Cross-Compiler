@@ -114,8 +114,29 @@
     <None Include="U:\chromium\src\content\public\android\java\src\org\chromium\content\browser\LocationProviderAdapter.java">
       <Link>chromium\src\content\public\android\java\src\org\chromium\content\browser\LocationProviderAdapter.java</Link>
     </None>
+    <None Include="U:\chromium\src\mojo\android\system\src\org\chromium\mojo\system\impl\CoreImpl.java">
+      <Link>chromium\src\mojo\android\system\src\org\chromium\mojo\system\impl\CoreImpl.java</Link>
+    </None>
+    <None Include="U:\chromium\src\media\base\android\java\src\org\chromium\media\AudioManagerAndroid.java">
+      <Link>chromium\src\media\base\android\java\src\org\chromium\media\AudioManagerAndroid.java</Link>
+    </None>
     <Content Include="U:\chromium\src\out\Release\lib.java\content_java.jar">
       <Link>References\content_java.jar</Link>
+    </Content>
+    <None Include="U:\chromium\src\out\Release\lib.java\mojo_bindings_java.jar">
+      <Link>staging\apk\libs\mojo_bindings_java.jar</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\out\Release\lib.java\mojo_system_java.jar">
+      <Link>staging\apk\libs\mojo_system_java.jar</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\out\Release\lib.java\mojo_public_java.jar">
+      <Link>staging\apk\libs\mojo_public_java.jar</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="U:\chromium\src\out\Release\lib.java\media_java.jar">
+      <Link>References\media_java.jar</Link>
     </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\net_java.jar">
       <Link>References\net_java.jar</Link>
@@ -125,7 +146,6 @@
     </Content>
     <None Include="U:\chromium\src\ui\android\java\src\org\chromium\ui\gfx\DeviceDisplayInfo.java">
       <Link>chromium\src\ui\android\java\src\org\chromium\ui\gfx\DeviceDisplayInfo.java</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="U:\chromium\src\base\android\java\src\org\chromium\base\BaseChromiumApplication.java">
       <Link>chromium\src\base\android\java\src\org\chromium\base\BaseChromiumApplication.java</Link>

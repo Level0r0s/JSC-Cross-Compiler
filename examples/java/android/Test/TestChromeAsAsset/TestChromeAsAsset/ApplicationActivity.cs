@@ -108,6 +108,10 @@ namespace TestChromeAsAsset.Activities
                 + " " + typeof(global::org.chromium.ui.gfx.DeviceDisplayInfo)
                 + " " + typeof(global::org.chromium.net.GURLUtils)
                 + " " + typeof(global::org.chromium.content.browser.LocationProviderAdapter)
+                + " " + typeof(global::org.chromium.media.AudioManagerAndroid)
+                //+ " " + typeof(global::org.chromium.mojo.system.impl.CoreImpl)
+
+                
                 + " " + global::org.chromium.@base.BaseChromiumApplication.__hello()
 
                 + " nativeGetCoreCount: " + org.chromium.@base.CpuFeatures.getCount()
