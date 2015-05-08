@@ -129,7 +129,7 @@ namespace ScriptCoreLib.Android
         }
         #endregion
 
-           #region AtTouchOutside
+        #region AtTouchOutside
         public event Action AtTouchOutside;
         public override bool onTouchEvent(MotionEvent e)
         {
@@ -144,5 +144,15 @@ namespace ScriptCoreLib.Android
             return x;
         }
         #endregion
+
+
+        //public int AtWindowFocusChanged<bool>; 
+        public event Action<bool> AtWindowFocusChanged;
+        public override void onWindowFocusChanged(bool value)
+        {
+            base.onWindowFocusChanged(value);
+            if (AtWindowFocusChanged != null)
+                AtWindowFocusChanged(value);
+        }
     }
 }

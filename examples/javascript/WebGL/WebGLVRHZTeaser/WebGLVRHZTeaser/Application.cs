@@ -176,6 +176,7 @@ namespace WebGLVRHZTeaser
 
 				);
 			renderer.setSize(1920, 1080);
+			//renderer.setSize(2560, 1440);
 			renderer.domElement.AttachToDocument();
 			renderer.shadowMapEnabled = true;
 			renderer.shadowMapType = THREE.PCFSoftShadowMap;
@@ -238,6 +239,7 @@ namespace WebGLVRHZTeaser
 				);
 
 			effect.setSize(1920, 1080);
+			//effect.setSize(2560, 1440);
 
 			#region WebGLRah66Comanche
 			// why isnt it being found?
@@ -703,7 +705,10 @@ namespace WebGLVRHZTeaser
 					 {
 						 retry:
 
-						 var s = (double)Native.window.Width / 1920.0;
+                         //var s = (double)Native.window.Width / 1920.0;
+                         //var s = (double)Native.window.Height / Native.screen.height;
+                         //var s = (double)Native.window.Height / 1440;
+                         var s = (double)Native.window.Height / 1080;
 
 
 						 Native.document.body.style.transform = "scale(" + s + ")";

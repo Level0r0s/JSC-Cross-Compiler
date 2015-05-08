@@ -76,6 +76,9 @@ namespace HybridOculusVrActivity.OVRJVM
 
         // if we were to include AssetsLibrary,
         // how can we force non merge/ script ?
+        // how can we force non merge/ script ?
+        // how can we force non merge/ script ?
+        // how can we force non merge/ script ?
 
 
         // VrActivity
@@ -92,7 +95,14 @@ namespace HybridOculusVrActivity.OVRJVM
         {
             Console.WriteLine("enter  HybridOculusVrActivity.OVRJVM ApplicationActivity onCreate");
             getWindow().requestFeature(android.view.Window.FEATURE_NO_TITLE);
-            setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            getWindow().addFlags(WindowManage_LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+            PowerManager powerManager = (PowerManager)getSystemService(POWER_SERVICE);
+            Wakelock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                    "MyWakelockTag");
+            wakeLock.acquire();
+
+            //setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
             Console.WriteLine("invoke base  HybridOculusVrActivity.OVRJVM ApplicationActivity onCreate");
             base.onCreate(value);

@@ -192,9 +192,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\chrome\apps\ChromeCreativeLeadership\ChromeCreativeLeadership\ChromeCreativeLeadership.csproj">
+    <ProjectReference Include="..\..\HeatZeekerRTSOrto\HeatZeekerRTSOrto\HeatZeekerRTSOrto.csproj">
       <Project>{29947aad-0b14-4fb0-a3c3-a51322be2eda}</Project>
-      <Name>ChromeCreativeLeadership</Name>
+      <Name>HeatZeekerRTSOrto</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\collada\WebGLAudi\WebGLAudi\WebGLAudi.csproj">
       <Project>{6b03abe7-4457-43d8-8f25-cd3a91df0988}</Project>
