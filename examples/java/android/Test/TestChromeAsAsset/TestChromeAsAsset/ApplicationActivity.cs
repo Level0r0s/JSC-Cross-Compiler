@@ -108,7 +108,9 @@ namespace TestChromeAsAsset.Activities
                 + " " + typeof(global::org.chromium.ui.gfx.DeviceDisplayInfo)
                 + " " + typeof(global::org.chromium.net.GURLUtils)
                 + " " + typeof(global::org.chromium.content.browser.LocationProviderAdapter)
-                + " " + typeof(global::org.chromium.media.AudioManagerAndroid)
+
+                 //[javac] W:\src\TestChromeAsAsset\Activities\ApplicationActivity.java:22: error: AudioManagerAndroid is not public in org.chromium.media; cannot be accessed from outside package
+                //+ " " + typeof(global::org.chromium.media.AudioManagerAndroid)
                 //+ " " + typeof(global::org.chromium.mojo.system.impl.CoreImpl)
 
                 
