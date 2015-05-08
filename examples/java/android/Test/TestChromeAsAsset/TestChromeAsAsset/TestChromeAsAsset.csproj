@@ -105,6 +105,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\..\..\..\..\..\util\android-sdk-windows\extras\android\support\v7\mediarouter\libs\android-support-v7-mediarouter.jar">
+      <Link>References\android-support-v7-mediarouter.jar</Link>
+    </Content>
     <Content Include="Design\Preview.png" />
     <Content Include="Design\Images.htm" />
     <Content Include="Design\jsc.png" />
@@ -120,6 +123,27 @@
     <None Include="U:\chromium\src\media\base\android\java\src\org\chromium\media\AudioManagerAndroid.java">
       <Link>chromium\src\media\base\android\java\src\org\chromium\media\AudioManagerAndroid.java</Link>
     </None>
+    <Content Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\ChromiumApplication.java">
+      <Link>chromium\src\chrome\android\java\src\org\chromium\chrome\browser\ChromiumApplication.java</Link>
+    </Content>
+    <None Include="U:\chromium\src\content\public\android\java\src\org\chromium\content\app\ContentApplication.java">
+      <Link>chromium\src\content\public\android\java\src\org\chromium\content\app\ContentApplication.java</Link>
+    </None>
+    <None Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\DefaultMediaRouteController.java">
+      <Link>chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\DefaultMediaRouteController.java</Link>
+    </None>
+    <None Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\AbstractMediaRouteController.java">
+      <Link>chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\AbstractMediaRouteController.java</Link>
+    </None>
+    <None Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\MediaRouteController.java">
+      <Link>chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\MediaRouteController.java</Link>
+    </None>
+    <None Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\TransportControl.java">
+      <Link>chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\TransportControl.java</Link>
+    </None>
+    <Content Include="U:\chromium\src\out\Release\lib.java\chrome_java.jar">
+      <Link>References\chrome_java.jar</Link>
+    </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\content_java.jar">
       <Link>References\content_java.jar</Link>
     </Content>

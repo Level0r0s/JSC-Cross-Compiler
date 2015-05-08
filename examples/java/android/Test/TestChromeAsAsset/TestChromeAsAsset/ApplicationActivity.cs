@@ -105,7 +105,11 @@ namespace TestChromeAsAsset.Activities
 
             b.WithText("base: "
                 + typeof(global::org.chromium.@base.BaseChromiumApplication)
+
                 + " " + typeof(global::org.chromium.ui.gfx.DeviceDisplayInfo)
+
+                + " " + typeof(global::org.chromium.content.app.ContentApplication)
+                + " " + typeof(global::org.chromium.chrome.shell.ContentApplication)
                 + " " + typeof(global::org.chromium.net.GURLUtils)
                 + " " + typeof(global::org.chromium.content.browser.LocationProviderAdapter)
 
