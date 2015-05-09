@@ -123,6 +123,10 @@
     <Content Include="staging\apk\gen\android\support\v7\appcompat\aapt-placeholder.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="U:\chromium\src\out\Release\gen\chrome\java\res\values\generated_resources.xml">
+      <Link>staging\apk\res\values\generated_resources.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="U:\chromium\src\out\Release\lib.java\chromium_apk_chrome_shell_apk.jar">
       <Link>References\chromium_apk_chrome_shell_apk.jar</Link>
     </Content>
@@ -157,6 +161,10 @@
     <Content Include="U:\chromium\src\out\Release\lib.java\web_contents_delegate_android_java.jar">
       <Link>References\web_contents_delegate_android_java.jar</Link>
     </Content>
+    <None Include="U:\chromium\src\out\Release\obj\chrome\chrome_strings_grd.gen\chrome_strings_grd\res_grit\values\android_chrome_strings.xml">
+      <Link>staging\apk\res\values\android_chrome_strings.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="x:\util\android-sdk-windows\extras\android\support\v7\appcompat\libs\android-support-v7-appcompat.jar">
       <Link>References\android-support-v7-appcompat.jar</Link>
     </Content>
@@ -287,28 +295,48 @@
       <Link>References\base_java.jar</Link>
     </Content>
     <None Include="X:\util\android-sdk-windows\extras\android\support\v7\appcompat\res\**\*.*">
-      <Link>staging\apk\res\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <Link>staging\apk\res-android.support.v7.appcompat.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-
-    <None Include="U:\chromium\src\content\shell\android\shell_apk\res\**\*.*">
-      <Link>staging\apk\res\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    <None Include="X:\util\android-sdk-windows\extras\android\support\v7\mediarouter\res\**\*.*">
+      <Link>staging\apk\res-android.support.v7.mediarouter.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    
+    <!--<None Include="U:\chromium\src\content\shell\android\shell_apk\res\**\*.*">
+      <Link>staging\apk\res-content\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>-->
+    <None Include="U:\chromium\src\chrome\android\java\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.chrome.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\ui\android\java\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.ui.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\components\web_contents_delegate_android\android\java\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.components.web_contents_delegate_android.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include=" U:\chromium\src\content\public\android\java\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.content.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\chrome\android\shell\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.chrome.shell.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="U:\chromium\src\out\assets\chrome_shell_apk\**\*.*">
       <Link>staging\apk\assets\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Diagnostics\" />
-    <Folder Include="staging\apk\assets\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>start /MIN /WAIT cmd /C X:\util\android-sdk-windows\build-tools\22.0.1\aapt.exe  package -v -f -m -S X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\res -M "X:\util\android-sdk-windows\extras\android\support\v7\appcompat\AndroidManifest.xml" -I "X:\util\android-sdk-windows\platforms\android-22\android.jar" -J X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\gen\ 
+    <PostBuildEvent>rem start /MIN /WAIT cmd /C X:\util\android-sdk-windows\build-tools\22.0.1\aapt.exe  package -v -f -m -S X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\res -M "X:\util\android-sdk-windows\extras\android\support\v7\appcompat\AndroidManifest.xml" -I "X:\util\android-sdk-windows\platforms\android-22\android.jar" -J X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\gen\ 
 
 start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
 </PostBuildEvent>

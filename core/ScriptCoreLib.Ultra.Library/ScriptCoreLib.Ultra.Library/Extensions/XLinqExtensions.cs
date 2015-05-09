@@ -8,6 +8,7 @@ namespace ScriptCoreLib.Extensions
 {
 	public static class XLinqExtensions
 	{
+        // used by?
 		public static IEnumerable<XElement> Add(this IEnumerable<XElement> source, params object[] content)
 		{
 			return source.WithEach(item => item.Add(content));
