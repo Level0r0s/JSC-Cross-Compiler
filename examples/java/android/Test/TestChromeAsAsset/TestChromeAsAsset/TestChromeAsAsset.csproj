@@ -117,6 +117,9 @@
     <None Include="U:\chromium\src\content\public\android\java\src\org\chromium\content_public\browser\LoadUrlParams.java">
       <Link>References\chromium\src\content\public\android\java\src\org\chromium\content_public\browser\LoadUrlParams.java</Link>
     </None>
+    <Content Include="staging\apk\gen\android\support\v7\appcompat\aapt-placeholder.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\chromium_apk_chrome_shell_apk.jar">
       <Link>References\chromium_apk_chrome_shell_apk.jar</Link>
     </Content>
@@ -265,9 +268,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"X:\util\android-sdk-windows\build-tools\22.0.1\aapt.exe"  package -v -f -m -S X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\res -M "X:\util\android-sdk-windows\extras\android\support\v7\appcompat\AndroidManifest.xml" -I "X:\util\android-sdk-windows\platforms\android-22\android.jar" -J X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\gen 
+    <PostBuildEvent>start /MIN /WAIT cmd /K X:\util\android-sdk-windows\build-tools\22.0.1\aapt.exe  package -v -f -m -S X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\res -M "X:\util\android-sdk-windows\extras\android\support\v7\appcompat\AndroidManifest.xml" -I "X:\util\android-sdk-windows\platforms\android-22\android.jar" -J X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\gen\ 
 
-start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
+start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
 </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>

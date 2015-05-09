@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using ScriptCoreLib.Android.Extensions;
 using ScriptCoreLib;
 using android.widget;
+using System.Diagnostics;
+using android.view;
+using android.os;
 
 [assembly: ScriptTypeFilter(ScriptType.Java, typeof(HybridOculusVrActivity.OVRJVM.ApplicationActivity))]
 
@@ -76,9 +79,6 @@ namespace HybridOculusVrActivity.OVRJVM
 
         // if we were to include AssetsLibrary,
         // how can we force non merge/ script ?
-        // how can we force non merge/ script ?
-        // how can we force non merge/ script ?
-        // how can we force non merge/ script ?
 
 
         // VrActivity
@@ -91,34 +91,49 @@ namespace HybridOculusVrActivity.OVRJVM
         // X:\jsc.svn\core\ScriptCoreLibJava.jni\BCLImplementation\ScriptCoreLib\Shared\PlatformInvocationServices.cs
         // could we load any .so on will?
 
+        // X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\jni\Integrations\PureJava\PureJava.cpp
+
         protected override void onCreate(android.os.Bundle value)
         {
-            Console.WriteLine("enter  HybridOculusVrActivity.OVRJVM ApplicationActivity onCreate");
-            getWindow().requestFeature(android.view.Window.FEATURE_NO_TITLE);
-            getWindow().addFlags(WindowManage_LayoutParams.FLAG_KEEP_SCREEN_ON);
+            // E/AndroidRuntime(27462): Caused by: java.lang.SecurityException: Neither user 10249 nor current process has android.permission.WAKE_LOCK.
 
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150607
+
+            Console.WriteLine("enter  HybridOculusVrActivity.OVRJVM ApplicationActivity onCreate");
+            //getWindow().requestFeature(android.view.Window.FEATURE_NO_TITLE);
+            //setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            getWindow().requestFeature(android.view.Window.FEATURE_NO_TITLE);
+            getWindow().addFlags(WindowManager_LayoutParams.FLAG_KEEP_SCREEN_ON);
+            // https://developer.android.com/reference/android/os/PowerManager.WakeLock.html#release()
             PowerManager powerManager = (PowerManager)getSystemService(POWER_SERVICE);
-            Wakelock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+            var wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK,
                     "MyWakelockTag");
             wakeLock.acquire();
 
-            //setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            Toast.makeText(
+                this,
+                stringFromJNI() + " can you see it?",
+                Toast.LENGTH_LONG
+          ).show();
 
             Console.WriteLine("invoke base  HybridOculusVrActivity.OVRJVM ApplicationActivity onCreate");
             base.onCreate(value);
 
-            var ll = new LinearLayout(this);
-            ll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+            ////var ll = new LinearLayout(this);
+            ////ll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
 
 
-            this.setContentView(ll);
+            ////this.setContentView(ll);
 
-            var leftSurface = new android.view.SurfaceView(this, null);
-            leftSurface.setLayoutParams(new LinearLayout.LayoutParams(1, LinearLayout.LayoutParams.MATCH_PARENT) { weight = 1.0f });
-            //leftSurface.setId();
-
-            var rightSurface = new android.view.SurfaceView(this, null);
-            rightSurface.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT) { weight = 1.0f });
+            ////var leftSurface = new android.opengl.GLSurfaceView(this, null);
+            ////leftSurface.setLayoutParams(new LinearLayout.LayoutParams(1, LinearLayout.LayoutParams.MATCH_PARENT) { weight = 1.0f });
+            //////leftSurface.setId();
+            //////leftSurface.AttachTo(ll);
+            ////ll.addView(leftSurface);
+            ////var rightSurface = new android.opengl.GLSurfaceView(this, null);
+            ////rightSurface.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT) { weight = 1.0f });
+            //////rightSurface.AttachTo(ll);
+            ////ll.addView(rightSurface);
 
 
             // http://through-the-interface.typepad.com/through_the_interface/2015/01/building-a-gear-vr-app-using-the-oculus-mobile-sdk.html
@@ -148,28 +163,48 @@ namespace HybridOculusVrActivity.OVRJVM
             //<meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_dual"/>
             // 
 
-            Toast.makeText(
-                this,
-                stringFromJNI() + " can you see it?",
-                Toast.LENGTH_LONG
-          ).show();
 
 
             // if we do not set it we are going to crash.
             //var appPtr = nativeSetAppInterface(ref0);
 
             android.content.Intent intent = getIntent();
+
+            // we are vr_dual arent we
+            Console.WriteLine("invoke HybridOculusVrActivity.OVRJVM ApplicationActivity onCreate logApplicationVrType");
+            com.oculusvr.vrlib.VrLib.logApplicationVrType(this);
+
             var commandString = com.oculusvr.vrlib.VrLib.getCommandStringFromIntent(intent);
             var fromPackageNameString = com.oculusvr.vrlib.VrLib.getPackageStringFromIntent(intent);
             var uriString = com.oculusvr.vrlib.VrLib.getUriStringFromIntent(intent);
             // why are we roundtriping intent details?
 
 
-            Console.WriteLine("invoke base  HybridOculusVrActivity.OVRJVM ApplicationActivity nativeSetAppInterface");
+            //assembly: X:\jsc.svn\examples\c\android\HybridOculusVrActivity\HybridOculusVrActivity\bin\Debug\HybridOculusVrActivity.dll at
+            //type: <>f__AnonymousType0`3, HybridOculusVrActivity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+            //method: ToString
+            //type not supported: System.Text.StringBuilder ; consider adding [ScriptAttribute]
+
+
+            // I/System.Console(11661): invoke base  HybridOculusVrActivity.OVRJVM ApplicationActivity nativeSetAppInterface  fromPackageNameString: 
+            // empty why?
+            Console.WriteLine("invoke base  HybridOculusVrActivity.OVRJVM ApplicationActivity nativeSetAppInterface " +
+                //new
+                //{
+                 " fromPackageNameString: " + fromPackageNameString
+                //commandString,
+                //uriString
+                //}
+            );
+
             // https://forums.oculus.com/viewtopic.php?f=67&t=17790
             this.appPtr = nativeSetAppInterface(this,
                     fromPackageNameString, commandString, uriString
                 );
+
+            Console.WriteLine("invoke base  HybridOculusVrActivity.OVRJVM ApplicationActivity nativeSetAppInterface done");
+
+
 
             //nativeResume(appPtr);
         }
@@ -189,6 +224,16 @@ namespace HybridOculusVrActivity.OVRJVM
         //I/DEBUG   (  122):     #05  pc 000bdbf0  /data/app-lib/HybridOculusVrActivity.OVRJVM-2/libHybridOculusVrActivity.so (OVR::AppLocal::VrThreadFunction()+48)
         //I/DEBUG   (  122):     #06  pc 000be48c  /data/app-lib/HybridOculusVrActivity.OVRJVM-2/libHybridOculusVrActivity.so (OVR::AppLocal::ThreadStarter(void*)+4)
 
+        protected override void onPause()
+        {
+            Console.WriteLine("enter  HybridOculusVrActivity.OVRJVM ApplicationActivity onPause, why?");
+            base.onPause();
+
+            //var StackTrace = new StackTrace().ToString();
+            //Console.WriteLine(new { StackTrace });
+
+            //throw new Exception("no pause!");
+        }
         protected override void onResume()
         {
             Console.WriteLine("enter  HybridOculusVrActivity.OVRJVM ApplicationActivity onResume");
@@ -200,13 +245,15 @@ namespace HybridOculusVrActivity.OVRJVM
 
         static ApplicationActivity()
         {
-            Console.WriteLine("enter  HybridOculusVrActivity.OVRJVM ApplicationActivity cctor");
+            Console.WriteLine("enter  HybridOculusVrActivity.OVRJVM ApplicationActivity cctor, loadLibrary HybridOculusVrActivity");
 
             // LOCAL_MODULE    := HybridOculusVrActivity
             // X:\jsc.svn\examples\c\android\Test\HybridOculusVrActivity\HybridOculusVrActivity\staging\jni\Android.mk
 
             // PInvoke wont load implictly? 
             java.lang.System.loadLibrary("HybridOculusVrActivity");
+
+            Console.WriteLine("enter  HybridOculusVrActivity.OVRJVM ApplicationActivity cctor, loadLibrary HybridOculusVrActivity done");
         }
 
         //appPtr = nativeSetAppInterface( this );       

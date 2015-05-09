@@ -31,6 +31,8 @@ public:
 						OvrApp();
     virtual				~OvrApp();
 
+	virtual void 		ConfigureVrMode( ovrModeParms & modeParms );
+
 	virtual void		OneTimeInit( const char * fromPackage, const char * launchIntentJSON, const char * launchIntentURI );
 	virtual void		OneTimeShutdown();
 	virtual Matrix4f 	DrawEyeView( const int eye, const float fovDegrees );
