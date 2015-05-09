@@ -14,7 +14,12 @@ namespace ScriptCoreLib.Android.Manifest
         public string value;
 
         // http://stackoverflow.com/questions/16510140/android-nfc-intent-filter-to-show-my-application-when-nfc-discover-a-tag
-        public string resource;   
+        public string resource;
+
+
+        // X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\ApplicationActivity.cs
+        // allows to target library services..
+        //public Type target;
 
     }
 }

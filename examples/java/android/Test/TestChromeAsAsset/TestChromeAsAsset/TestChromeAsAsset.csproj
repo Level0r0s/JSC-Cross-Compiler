@@ -133,6 +133,18 @@
     <None Include="U:\chromium\src\base\android\java\src\org\chromium\base\CommandLine.java">
       <Link>References\chromium\src\base\android\java\src\org\chromium\base\CommandLine.java</Link>
     </None>
+    <None Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\TabManager.java">
+      <Link>References\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\TabManager.java</Link>
+    </None>
+    <Content Include="U:\chromium\src\content\app\android\child_process_service.cc">
+      <Link>References\chromium\src\content\app\android\child_process_service.cc</Link>
+    </Content>
+    <None Include="U:\chromium\src\content\public\android\java\src\org\chromium\content\app\ChildProcessService.java">
+      <Link>References\chromium\src\content\public\android\java\src\org\chromium\content\app\ChildProcessService.java</Link>
+    </None>
+    <None Include="U:\chromium\src\content\public\android\java\src\org\chromium\content\app\SandboxedProcessService.java">
+      <Link>References\chromium\src\content\public\android\java\src\org\chromium\content\app\SandboxedProcessService.java</Link>
+    </None>
     <Content Include="U:\chromium\src\out\Release\lib.java\chromium_apk_chrome_shell_apk.jar">
       <Link>References\chromium_apk_chrome_shell_apk.jar</Link>
     </Content>
