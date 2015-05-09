@@ -165,6 +165,10 @@
       <Link>staging\apk\res\values\android_chrome_strings.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="U:\chromium\src\out\Release\obj\ui\android\ui_strings_grd.gen\ui_strings_grd\res_grit\values\android_ui_strings.xml">
+      <Link>staging\apk\res\values\android_ui_strings.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="x:\util\android-sdk-windows\extras\android\support\v7\appcompat\libs\android-support-v7-appcompat.jar">
       <Link>References\android-support-v7-appcompat.jar</Link>
     </Content>
@@ -294,6 +298,19 @@
     <Content Include="U:\chromium\src\out\Release\lib.java\base_java.jar">
       <Link>References\base_java.jar</Link>
     </Content>
+
+
+    <None Include="U:\chromium\src\third_party\android_data_chart\java\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.third_party.android.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    
+
+    <None Include="U:\chromium\src\third_party\android_media\java\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.third_party.android.media.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    
     <None Include="X:\util\android-sdk-windows\extras\android\support\v7\appcompat\res\**\*.*">
       <Link>staging\apk\res-android.support.v7.appcompat.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
