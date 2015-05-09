@@ -150,3 +150,40 @@ namespace TestChromeAsAsset.Activities
 
 
 }
+
+
+
+//E/DID     (28806): enter ChromeShellActivity onCreate
+//E/DID     (28806): enter ChromeShellApplication initCommandLine
+//W/System.err(28806): stat failed: ENOENT (No such file or directory) : /data/local/tmp/chrome-shell-command-line
+//I/BrowserStartupController(28806): Initializing chromium process, singleProcess=false
+//W/chromium_android_linker(28806): Couldn't load libchromium_android_linker.so, trying libchromium_android_linker.cr.so
+//E/ChromeShellActivity(28806): Unable to load native library.
+//E/ChromeShellActivity(28806): org.chromium.base.library_loader.ProcessInitException
+//E/ChromeShellActivity(28806):   at org.chromium.base.library_loader.LibraryLoader.loadAlreadyLocked(LibraryLoader.java:410)
+//E/ChromeShellActivity(28806):   at org.chromium.base.library_loader.LibraryLoader.ensureInitialized(LibraryLoader.java:154)
+//E/ChromeShellActivity(28806):   at org.chromium.content.browser.BrowserStartupController.prepareToStartBrowserProcess(BrowserStartupController.java:285)
+//E/ChromeShellActivity(28806):   at org.chromium.content.browser.BrowserStartupController.startBrowserProcessesAsync(BrowserStartupController.java:170)
+//E/ChromeShellActivity(28806):   at org.chromium.chrome.shell.ChromeShellActivity.onCreate(ChromeShellActivity.java:156)
+//E/ChromeShellActivity(28806):   at TestChromeAsAsset.Activities.ApplicationActivity.onCreate(ApplicationActivity.java:37)
+//E/ChromeShellActivity(28806):   at android.app.Activity.performCreate(Activity.java:6374)
+//E/ChromeShellActivity(28806):   at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1119)
+//E/ChromeShellActivity(28806):   at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2767)
+//E/ChromeShellActivity(28806):   at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2879)
+//E/ChromeShellActivity(28806):   at android.app.ActivityThread.access$900(ActivityThread.java:182)
+//E/ChromeShellActivity(28806):   at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1475)
+//E/ChromeShellActivity(28806):   at android.os.Handler.dispatchMessage(Handler.java:102)
+//E/ChromeShellActivity(28806):   at android.os.Looper.loop(Looper.java:145)
+//E/ChromeShellActivity(28806):   at android.app.ActivityThread.main(ActivityThread.java:6141)
+//E/ChromeShellActivity(28806):   at java.lang.reflect.Method.invoke(Native Method)
+//E/ChromeShellActivity(28806):   at java.lang.reflect.Method.invoke(Method.java:372)
+//E/ChromeShellActivity(28806):   at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1399)
+//E/ChromeShellActivity(28806):   at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1194)
+//E/ChromeShellActivity(28806): Caused by: java.lang.UnsatisfiedLinkError: dalvik.system.PathClassLoader[DexPathList[[zip file "/system/framework/multiwindow.jar", zip f
+//E/ChromeShellActivity(28806):   at java.lang.Runtime.loadLibrary(Runtime.java:366)
+//E/ChromeShellActivity(28806):   at java.lang.System.loadLibrary(System.java:989)
+//E/ChromeShellActivity(28806):   at org.chromium.base.library_loader.Linker.ensureInitializedLocked(Linker.java:237)
+//E/ChromeShellActivity(28806):   at org.chromium.base.library_loader.Linker.isUsed(Linker.java:371)
+//E/ChromeShellActivity(28806):   at org.chromium.base.library_loader.LibraryLoader.loadAlreadyLocked(LibraryLoader.java:278)
+//E/ChromeShellActivity(28806):   ... 18 more
+//I/art     (28806): System.exit called, status: -1

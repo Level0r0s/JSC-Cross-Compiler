@@ -99,6 +99,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="staging\apk\bin\android-install.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="U:\chromium\src\out\Release\chrome_shell_apk\libs\armeabi-v7a\libchromeshell.so">
       <Link>staging\apk\libs\armeabi-v7a\libchromeshell.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -123,9 +126,16 @@
     <Content Include="U:\chromium\src\out\Release\lib.java\chromium_apk_chrome_shell_apk.jar">
       <Link>References\chromium_apk_chrome_shell_apk.jar</Link>
     </Content>
+    <None Include="U:\chromium\src\out\Release\chrome_shell_apk\libs\armeabi-v7a\libchromium_android_linker.so">
+      <Link>staging\apk\libs\armeabi-v7a\libchromium_android_linker.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="U:\chromium\src\sync\android\java\src\org\chromium\sync\notifier\InvalidationClientNameGenerator.java">
       <Link>References\chromium\src\sync\android\java\src\org\chromium\sync\notifier\InvalidationClientNameGenerator.java</Link>
     </None>
+    <Content Include="U:\chromium\src\out\Release\lib.java\dom_distiller_java.jar">
+      <Link>References\dom_distiller_java.jar</Link>
+    </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\sync_java.jar">
       <Link>References\sync_java.jar</Link>
     </Content>
@@ -268,7 +278,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>start /MIN /WAIT cmd /K X:\util\android-sdk-windows\build-tools\22.0.1\aapt.exe  package -v -f -m -S X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\res -M "X:\util\android-sdk-windows\extras\android\support\v7\appcompat\AndroidManifest.xml" -I "X:\util\android-sdk-windows\platforms\android-22\android.jar" -J X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\gen\ 
+    <PostBuildEvent>start /MIN /WAIT cmd /C X:\util\android-sdk-windows\build-tools\22.0.1\aapt.exe  package -v -f -m -S X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\res -M "X:\util\android-sdk-windows\extras\android\support\v7\appcompat\AndroidManifest.xml" -I "X:\util\android-sdk-windows\platforms\android-22\android.jar" -J X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\gen\ 
 
 start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
 </PostBuildEvent>
