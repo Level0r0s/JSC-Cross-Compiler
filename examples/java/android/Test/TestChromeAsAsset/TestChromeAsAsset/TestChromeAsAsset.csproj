@@ -127,6 +127,12 @@
       <Link>staging\apk\res\values\generated_resources.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellToolbar.java">
+      <Link>References\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellToolbar.java</Link>
+    </None>
+    <None Include="U:\chromium\src\base\android\java\src\org\chromium\base\CommandLine.java">
+      <Link>References\chromium\src\base\android\java\src\org\chromium\base\CommandLine.java</Link>
+    </None>
     <Content Include="U:\chromium\src\out\Release\lib.java\chromium_apk_chrome_shell_apk.jar">
       <Link>References\chromium_apk_chrome_shell_apk.jar</Link>
     </Content>
@@ -169,16 +175,20 @@
       <Link>staging\apk\res\values\android_ui_strings.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="x:\util\android-sdk-windows\extras\android\support\v7\appcompat\libs\android-support-v7-appcompat.jar">
-      <Link>References\android-support-v7-appcompat.jar</Link>
-    </Content>
+    <None Include="U:\chromium\src\out\Release\obj\content\content_strings_grd.gen\content_strings_grd\res_grit\values\android_content_strings.xml">
+      <Link>staging\apk\res\values\android_content_strings.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellActivity.java">
       <Link>References\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellActivity.java</Link>
     </None>
-    <Content Include="x:\util\android-sdk-windows\extras\android\support\v4\android-support-v4.jar">
+    <Content Include="U:\chromium\src\third_party\android_tools\sdk\extras\android\support\v4\android-support-v4.jar">
       <Link>References\android-support-v4.jar</Link>
     </Content>
-    <Content Include="x:\util\android-sdk-windows\extras\android\support\v7\mediarouter\libs\android-support-v7-mediarouter.jar">
+    <Content Include="U:\chromium\src\third_party\android_tools\sdk\extras\android\support\v7\appcompat\libs\android-support-v7-appcompat.jar">
+      <Link>References\android-support-v7-appcompat.jar</Link>
+    </Content>
+    <Content Include="U:\chromium\src\third_party\android_tools\sdk\extras\android\support\v7\mediarouter\libs\android-support-v7-mediarouter.jar">
       <Link>References\android-support-v7-mediarouter.jar</Link>
     </Content>
     <Content Include="Design\Preview.png" />
@@ -298,24 +308,19 @@
     <Content Include="U:\chromium\src\out\Release\lib.java\base_java.jar">
       <Link>References\base_java.jar</Link>
     </Content>
-
-
     <None Include="U:\chromium\src\third_party\android_data_chart\java\res\**\*.*">
       <Link>staging\apk\res-org.chromium.third_party.android.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    
-
     <None Include="U:\chromium\src\third_party\android_media\java\res\**\*.*">
       <Link>staging\apk\res-org.chromium.third_party.android.media.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    
-    <None Include="X:\util\android-sdk-windows\extras\android\support\v7\appcompat\res\**\*.*">
+    <None Include="U:\chromium\src\third_party\android_tools\sdk\extras\android\support\v7\appcompat\res\**\*.*">
       <Link>staging\apk\res-android.support.v7.appcompat.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="X:\util\android-sdk-windows\extras\android\support\v7\mediarouter\res\**\*.*">
+    <None Include="U:\chromium\src\third_party\android_tools\sdk\extras\android\support\v7\mediarouter\res\**\*.*">
       <Link>staging\apk\res-android.support.v7.mediarouter.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

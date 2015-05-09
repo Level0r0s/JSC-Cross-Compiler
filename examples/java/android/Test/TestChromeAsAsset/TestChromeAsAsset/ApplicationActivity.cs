@@ -17,7 +17,7 @@ namespace TestChromeAsAsset.Activities
 {
 
 
-    public class LocalApplication : 
+    public class LocalApplication :
         //Application
 
         global::org.chromium.chrome.shell.ChromeShellApplication
@@ -35,11 +35,11 @@ namespace TestChromeAsAsset.Activities
 
             var appc = android.support.v7.appcompat.R.style.Theme_AppCompat;
 
-            { android.support.v4.widget.DrawerLayout.ViewDragCallback ref0; }
-            //{ android.support.v7.widget.ActionMenuPresenter.ActionMenuPopupCallback ref0; }
+            //{ android.support.v4.widget.DrawerLayout.ViewDragCallback ref0; }
+            ////{ android.support.v7.widget.ActionMenuPresenter.ActionMenuPopupCallback ref0; }
 
-            // https://github.com/android/platform_frameworks_base/blob/master/core/java/android/widget/ActionMenuPresenter.java
-            { android.support.v7.widget.ActionMenuPresenter ref0; }
+            //// https://github.com/android/platform_frameworks_base/blob/master/core/java/android/widget/ActionMenuPresenter.java
+            //{ android.support.v7.widget.ActionMenuPresenter ref0; }
 
             Console.WriteLine("enter LocalApplication onCreate, first time? "
                 // chrome java
@@ -53,7 +53,7 @@ namespace TestChromeAsAsset.Activities
             base.onCreate();
         }
 
-        //static ApplicationActivity()
+        //static LocalApplication()
         //{
         //    Console.WriteLine("should we prefetch our .so for JNI_OnLoad?");
         //    // U:\chromium\src\chrome\android\shell\chrome_shell_entry_point.cc
@@ -65,9 +65,9 @@ namespace TestChromeAsAsset.Activities
 
 
 
-        //    {% set num_sandboxed_services = 20 %}
-        //<meta-data android:name="org.chromium.content.browser.NUM_SANDBOXED_SERVICES"
-        //           android:value="{{ num_sandboxed_services }}"/>
+    //    {% set num_sandboxed_services = 20 %}
+    //<meta-data android:name="org.chromium.content.browser.NUM_SANDBOXED_SERVICES"
+    //           android:value="{{ num_sandboxed_services }}"/>
 
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "org.chromium.content.browser.NUM_SANDBOXED_SERVICES", value = "20")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "org.chromium.content.browser.NUM_PRIVILEGED_SERVICES", value = "3")]
@@ -77,25 +77,76 @@ namespace TestChromeAsAsset.Activities
 
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@style/Theme.AppCompat")]
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@style/Theme.AppCompat")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@style/MainTheme")]
+
+
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
-    public class ApplicationActivity : 
+    public class ApplicationActivity :
         // Activity
 
-        // public class ChromeShellActivity extends ActionBarActivity
-        global::org.chromium.chrome.shell.ChromeShellActivity
+        // public class ChromeShellActivity extends 
+        //android.support.v7.app.ActionBarActivity
+        // https://github.com/android/platform_frameworks_support/blob/master/v7/appcompat/src/android/support/v7/app/ActionBarActivity.java
+        // https://github.com/android/platform_frameworks_support/blob/master/v7/appcompat/src/android/support/v7/app/AppCompatActivity.java
+        // https://github.com/android/platform_frameworks_support/blob/master/v7/appcompat/src/android/support/v7/app/AppCompatDelegateImplV7.java
 
+    global::org.chromium.chrome.shell.ChromeShellActivity
     {
         // https://groups.google.com/forum/#!topic/android-developers/Y5wnstMT5Lo
 
-
+        // (mSubDecor == null) {
+        //        E/AndroidRuntime(26170): Caused by: java.lang.IllegalArgumentException: AppCompat does not support the current theme features
+        //E/AndroidRuntime(26170):        at android.support.v7.app.AppCompatDelegateImplV7.ensureSubDecor(AppCompatDelegateImplV7.java:360)
+        //E/AndroidRuntime(26170):        at android.support.v7.app.AppCompatDelegateImplV7.setContentView(AppCompatDelegateImplV7.java:246)
+        //E/AndroidRuntime(26170):        at android.support.v7.app.AppCompatActivity.setContentView(AppCompatActivity.java:106)
+        //E/AndroidRuntime(26170):        at TestChromeAsAsset.Activities.ApplicationActivity.onCreate(ApplicationActivity.java:55)
 
 
         protected override void onCreate(Bundle savedInstanceState)
         {
             // can we make chrome into a nuget?
 
-            var activity = this;
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150509/appcompat
+            Console.WriteLine(" ");
+            Console.WriteLine("enter ApplicationActivity, enableNativeProxy ");
+            Console.WriteLine(" ");
+
+            //org.chromium.@base.CommandLine.enableNativeProxy();
+
+            //LayoutInflater inflater = LayoutInflater.from(this);
+
+            //var x = (ViewGroup)inflater.inflate(org.chromium.chrome.shell.R.layout.chrome_shell_activity, null);
+            //Console.WriteLine("enter ApplicationActivity " + new { x });
+            Console.WriteLine("enter ApplicationActivity " + new { org.chromium.chrome.shell.R.layout.chrome_shell_activity });
+
+            // U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellActivity.java
+            //var mTabManager = (org.chromium.chrome.shell.TabManager)x.findViewById(org.chromium.chrome.shell.R.id.tab_manager);
+            //Console.WriteLine("enter ApplicationActivity " + new { mTabManager });
+            Console.WriteLine("enter ApplicationActivity " + new { org.chromium.chrome.shell.R.id.tab_manager });
+            // U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellToolbar.java
+            //var mUrlTextView = (EditText)x.findViewById(org.chromium.chrome.shell.R.id.url);
+            //Console.WriteLine("enter ApplicationActivity " + new { mUrlTextView });
+            Console.WriteLine("enter ApplicationActivity " + new { org.chromium.chrome.shell.R.id.url });
+
+            System.Threading.Thread.Sleep(500);
+
+            base.onCreate(savedInstanceState);
+
+            //   Console.WriteLine(
+            //       "enter ApplicationActivity , " +
+
+            //       new { org.chromium.chrome.shell.R.layout.chrome_shell_activity }
+            //       + ", " + new { org.chromium.chrome.shell.R.id.tab_manager });
+
+            //   setContentView(org.chromium.chrome.shell.R.layout.chrome_shell_activity);
+
+
+            //   Console.WriteLine(
+            //"enter ApplicationActivity , " +
+            //new { mTabManager });
+
+            //   var activity = this;
             // http://stackoverflow.com/questions/11425020/actionbar-in-a-dialogfragment
             //To show activity as dialog and dim the background, you need to declare android:theme="@style/PopupTheme" on for the chosen activity on the manifest
             //activity.requestWindowFeature(Window.FEATURE_ACTION_BAR);
@@ -109,7 +160,6 @@ namespace TestChromeAsAsset.Activities
             //@params.dimAmount = 0.5f;
             //activity.getWindow().setAttributes(@params);
             //activity.getWindow().setLayout(850, 850);
-            base.onCreate(savedInstanceState);
 
             //var sv = new ScrollView(this);
             //var ll = new LinearLayout(this);
@@ -136,7 +186,7 @@ namespace TestChromeAsAsset.Activities
             //    //+ " " + typeof(global::org.chromium.media.AudioManagerAndroid)
             //    //+ " " + typeof(global::org.chromium.mojo.system.impl.CoreImpl)
 
-                
+
             //    //+ " " + global::org.chromium.@base.BaseChromiumApplication.__hello()
             //    //+ " nativeGetCoreCount: " + org.chromium.@base.CpuFeatures.getCount()
             //    );
@@ -150,10 +200,10 @@ namespace TestChromeAsAsset.Activities
             //);
 
 
-          
+
         }
 
-      
+
 
     }
 
