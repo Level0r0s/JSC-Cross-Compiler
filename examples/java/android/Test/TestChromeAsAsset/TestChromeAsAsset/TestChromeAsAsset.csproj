@@ -136,8 +136,26 @@
     <Content Include="U:\chromium\src\out\Release\lib.java\dom_distiller_java.jar">
       <Link>References\dom_distiller_java.jar</Link>
     </Content>
+    <Content Include="U:\chromium\src\out\Release\lib.java\gcm_driver_java.jar">
+      <Link>References\gcm_driver_java.jar</Link>
+    </Content>
+    <Content Include="U:\chromium\src\out\Release\lib.java\invalidation_java.jar">
+      <Link>References\invalidation_java.jar</Link>
+    </Content>
+    <Content Include="U:\chromium\src\out\Release\lib.java\printing_java.jar">
+      <Link>References\printing_java.jar</Link>
+    </Content>
+    <Content Include="U:\chromium\src\out\Release\lib.java\service_tab_launcher_java.jar">
+      <Link>References\service_tab_launcher_java.jar</Link>
+    </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\sync_java.jar">
       <Link>References\sync_java.jar</Link>
+    </Content>
+    <Content Include="U:\chromium\src\out\Release\lib.java\variations_java.jar">
+      <Link>References\variations_java.jar</Link>
+    </Content>
+    <Content Include="U:\chromium\src\out\Release\lib.java\web_contents_delegate_android_java.jar">
+      <Link>References\web_contents_delegate_android_java.jar</Link>
     </Content>
     <Content Include="x:\util\android-sdk-windows\extras\android\support\v7\appcompat\libs\android-support-v7-appcompat.jar">
       <Link>References\android-support-v7-appcompat.jar</Link>
@@ -272,9 +290,21 @@
       <Link>staging\apk\res\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+
+    <None Include="U:\chromium\src\content\shell\android\shell_apk\res\**\*.*">
+      <Link>staging\apk\res\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    
+    <None Include="U:\chromium\src\out\assets\chrome_shell_apk\**\*.*">
+      <Link>staging\apk\assets\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Diagnostics\" />
+    <Folder Include="staging\apk\assets\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

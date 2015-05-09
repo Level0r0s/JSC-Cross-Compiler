@@ -63,6 +63,15 @@ namespace TestChromeAsAsset.Activities
         //}
     }
 
+
+
+        //    {% set num_sandboxed_services = 20 %}
+        //<meta-data android:name="org.chromium.content.browser.NUM_SANDBOXED_SERVICES"
+        //           android:value="{{ num_sandboxed_services }}"/>
+
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "org.chromium.content.browser.NUM_SANDBOXED_SERVICES", value = "20")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "org.chromium.content.browser.NUM_PRIVILEGED_SERVICES", value = "3")]
+
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "18")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "8")]
 
