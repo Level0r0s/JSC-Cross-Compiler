@@ -30,6 +30,11 @@ namespace TestChromeAsAsset.Activities
         {
             // nested type optimized out?
 
+            // https://stackoverflow.com/questions/30093998/java-lang-nosuchfielderror-android-support-v7-appcompat-rstyleable-theme-windo
+            //var appcw = android.R.style.the;
+
+            var appc = android.support.v7.appcompat.R.style.Theme_AppCompat;
+
             { android.support.v4.widget.DrawerLayout.ViewDragCallback ref0; }
             //{ android.support.v7.widget.ActionMenuPresenter.ActionMenuPopupCallback ref0; }
 
@@ -58,15 +63,17 @@ namespace TestChromeAsAsset.Activities
         //}
     }
 
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "8")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "18")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "8")]
 
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@style/Theme.AppCompat")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : 
         // Activity
+
+        // public class ChromeShellActivity extends ActionBarActivity
         global::org.chromium.chrome.shell.ChromeShellActivity
 
     {

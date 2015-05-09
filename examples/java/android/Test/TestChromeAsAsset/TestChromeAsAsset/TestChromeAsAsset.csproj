@@ -117,6 +117,9 @@
     <None Include="U:\chromium\src\content\public\android\java\src\org\chromium\content_public\browser\LoadUrlParams.java">
       <Link>References\chromium\src\content\public\android\java\src\org\chromium\content_public\browser\LoadUrlParams.java</Link>
     </None>
+    <Content Include="U:\chromium\src\out\Release\chrome_shell_apk\gen\android\support\v7\appcompat\R.java">
+      <Link>staging\apk\gen\android\support\v7\appcompat\R.java</Link>
+    </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\chromium_apk_chrome_shell_apk.jar">
       <Link>References\chromium_apk_chrome_shell_apk.jar</Link>
     </Content>
@@ -220,7 +223,7 @@
       <Link>References\ui_java.jar</Link>
     </Content>
     <None Include="U:\chromium\src\ui\android\java\src\org\chromium\ui\gfx\DeviceDisplayInfo.java">
-      <Link>chromium\src\ui\android\java\src\org\chromium\ui\gfx\DeviceDisplayInfo.java</Link>
+      <Link>References\chromium\src\ui\android\java\src\org\chromium\ui\gfx\DeviceDisplayInfo.java</Link>
     </None>
     <None Include="U:\chromium\src\base\android\java\src\org\chromium\base\BaseChromiumApplication.java">
       <Link>chromium\src\base\android\java\src\org\chromium\base\BaseChromiumApplication.java</Link>
@@ -255,8 +258,13 @@
     <Content Include="U:\chromium\src\out\Release\lib.java\base_java.jar">
       <Link>References\base_java.jar</Link>
     </Content>
+    <None Include="X:\util\android-sdk-windows\extras\android\support\v7\appcompat\res\**\*.*">
+      <Link>staging\apk\res\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="chromium\src\ui\android\java\src\org\chromium\ui\gfx\" />
     <Folder Include="Diagnostics\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
