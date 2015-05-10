@@ -33,7 +33,7 @@ namespace TestChromeAsAsset.Activities
             // https://stackoverflow.com/questions/30093998/java-lang-nosuchfielderror-android-support-v7-appcompat-rstyleable-theme-windo
             //var appcw = android.R.style.the;
 
-            var appc = android.support.v7.appcompat.R.style.Theme_AppCompat;
+            //var appc = android.support.v7.appcompat.R.style.Theme_AppCompat;
 
             //{ android.support.v4.widget.DrawerLayout.ViewDragCallback ref0; }
             ////{ android.support.v7.widget.ActionMenuPresenter.ActionMenuPopupCallback ref0; }
@@ -41,14 +41,101 @@ namespace TestChromeAsAsset.Activities
             //// https://github.com/android/platform_frameworks_base/blob/master/core/java/android/widget/ActionMenuPresenter.java
             //{ android.support.v7.widget.ActionMenuPresenter ref0; }
 
-            Console.WriteLine("enter LocalApplication onCreate, first time? "
+            Console.WriteLine("enter LocalApplication onCreate "
                 // chrome java
                 // U:\chromium\src\out\Release\lib.java\chrome_java.jar\org\chromium\chrome\browser\invalidation\
-                + " " + typeof(global::org.chromium.chrome.browser.invalidation.UniqueIdInvalidationClientNameGenerator)
+                //+ " " + typeof(global::org.chromium.chrome.browser.invalidation.UniqueIdInvalidationClientNameGenerator)
                 );
 
             // https://stackoverflow.com/questions/7686482/when-does-applications-oncreate-method-is-called-on-android
             Toast.makeText(this, "LocalApplication", Toast.LENGTH_LONG).show();
+
+            // jsc background compiler may have detected by now that the referenced jar
+            // files were update on the build server,
+            // and we would be happy to see new intellisense!
+
+            // initonly?
+            // public static int progress;
+
+
+            //var x = (ViewGroup)inflater.inflate(org.chromium.chrome.shell.R.layout.chrome_shell_activity, null);
+            //Console.WriteLine("enter ApplicationActivity " + new { x });
+            Console.WriteLine("enter LocalApplication R.layout.chrome_shell_activity=0x" + org.chromium.chrome.shell.R.layout.chrome_shell_activity.ToString("x8") + " " + new { org.chromium.chrome.shell.R.layout.chrome_shell_activity });
+            Console.WriteLine("enter LocalApplication R.id.progress=0x" + org.chromium.chrome.shell.R.id.progress.ToString("x8") + " " + new { org.chromium.chrome.shell.R.id.progress });
+            //Console.WriteLine("enter ApplicationActivity " + new { org.chromium.chrome.shell.R.layout.chrome_shell_activity });
+
+            // U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellActivity.java
+            ////var mTabManager = (org.chromium.chrome.shell.TabManager)x.findViewById(org.chromium.chrome.shell.R.id.tab_manager);
+            ////Console.WriteLine("enter ApplicationActivity " + new { mTabManager });
+            //Console.WriteLine("enter ApplicationActivity " + new { org.chromium.chrome.shell.R.id.tab_manager });
+            //// U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellToolbar.java
+            ////var mUrlTextView = (EditText)x.findViewById(org.chromium.chrome.shell.R.id.url);
+            ////Console.WriteLine("enter ApplicationActivity " + new { mUrlTextView });
+            //Console.WriteLine("enter ApplicationActivity " + new { org.chromium.chrome.shell.R.id.url });
+
+
+
+
+            //var dumpAllViews = default(View, int);
+
+            #region dumpAllViews
+            var dumpAllViews = default(Action<View, int>);
+
+            dumpAllViews = (View v, int indent) =>
+            {
+                // Java doesn't support variable width format code -- "%*c"
+                // Fake it with string concatenation.  Lame!
+                //Log.d(tag, String.format("%" + (indent * 4 + 1) + "c%s %d", ' ', v.toString(), v.getId()));
+
+                // U:\chromium\src\chrome\android\shell\res\layout\chrome_shell_activity.xml
+
+                Console.WriteLine("".PadLeft(indent) + v + " id=0x" + v.getId().ToString("x8") + " (" + v.getId() + ")");
+
+                if (v is ViewGroup)
+                {
+                    ViewGroup vg = (ViewGroup)v;
+                    for (int i = 0; i < vg.getChildCount(); i++)
+                    {
+                        dumpAllViews(vg.getChildAt(i), indent + 1);
+                    }
+                }
+            };
+            #endregion
+
+
+            org.chromium.chrome.shell.ChromeShellToolbar.vFinishInflate =
+                new xRunnable
+                {
+                    yield = delegate
+                    {
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150510
+
+                        //Console.WriteLine("vFinishInflate " + new { org.chromium.chrome.shell.ChromeShellToolbar.vFinishInflateArg0 });
+                        Console.WriteLine("vFinishInflate R.layout.chrome_shell_activity=0x" + org.chromium.chrome.shell.R.layout.chrome_shell_activity.ToString("x8"));
+                        Console.WriteLine("vFinishInflate R.id.progress=0x" + org.chromium.chrome.shell.R.id.progress.ToString("x8") + " " + new { org.chromium.chrome.shell.R.id.progress });
+
+                        // lets inspect the xml layout we were loaded to
+
+                        // http://stackoverflow.com/questions/12925521/findviewbyid-returning-null-for-views-from-another-fragment-views-have-id-1
+                        // this is somewhat like html custom elements isnt it.
+                        // delete bin to force refresh?
+
+                        // is it possible we updated some layouts and did not regenerate R files?
+                        dumpAllViews(org.chromium.chrome.shell.ChromeShellToolbar.vFinishInflateArg0, 0);
+                    }
+                };
+
+            org.chromium.chrome.shell.ChromeShellActivity.vfinishInitialization =
+                new xRunnable
+                {
+                    yield = delegate
+                    {
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150510
+
+
+                    }
+                };
+
 
             base.onCreate();
         }
@@ -63,6 +150,16 @@ namespace TestChromeAsAsset.Activities
         //}
     }
 
+
+    class xRunnable : java.lang.Runnable
+    {
+
+        public Action yield;
+        public void run()
+        {
+            yield();
+        }
+    }
 
 
     //    {% set num_sandboxed_services = 20 %}
@@ -116,25 +213,13 @@ namespace TestChromeAsAsset.Activities
 
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150509/appcompat
             Console.WriteLine(" ");
-            Console.WriteLine("enter ApplicationActivity, enableNativeProxy ");
+            Console.WriteLine("enter ApplicationActivity ");
             Console.WriteLine(" ");
 
             //org.chromium.@base.CommandLine.enableNativeProxy();
 
             //LayoutInflater inflater = LayoutInflater.from(this);
 
-            //var x = (ViewGroup)inflater.inflate(org.chromium.chrome.shell.R.layout.chrome_shell_activity, null);
-            //Console.WriteLine("enter ApplicationActivity " + new { x });
-            Console.WriteLine("enter ApplicationActivity " + new { org.chromium.chrome.shell.R.layout.chrome_shell_activity });
-
-            // U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellActivity.java
-            //var mTabManager = (org.chromium.chrome.shell.TabManager)x.findViewById(org.chromium.chrome.shell.R.id.tab_manager);
-            //Console.WriteLine("enter ApplicationActivity " + new { mTabManager });
-            Console.WriteLine("enter ApplicationActivity " + new { org.chromium.chrome.shell.R.id.tab_manager });
-            // U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellToolbar.java
-            //var mUrlTextView = (EditText)x.findViewById(org.chromium.chrome.shell.R.id.url);
-            //Console.WriteLine("enter ApplicationActivity " + new { mUrlTextView });
-            Console.WriteLine("enter ApplicationActivity " + new { org.chromium.chrome.shell.R.id.url });
 
             System.Threading.Thread.Sleep(500);
 
