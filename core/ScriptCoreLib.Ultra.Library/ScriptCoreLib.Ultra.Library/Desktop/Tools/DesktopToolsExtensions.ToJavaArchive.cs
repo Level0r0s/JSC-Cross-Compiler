@@ -50,8 +50,10 @@ namespace ScriptCoreLib.Desktop.Tools
                        jar cvfm classes.jar mymanifest -C foo/ .             
              */
 
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150511/javac
             var proccess_jar_args =
-                "cvfM"
+                "cvf0M"
                 // foo.jar
                 + " \"" + target + "\""
                 // root of class files

@@ -82,9 +82,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="AndroidImmersiveWhileLandscape.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\AndroidImmersiveWhileLandscape.AssetsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="TestChromeAsAsset.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\TestChromeAsAsset.AssetsLibrary.dll</HintPath>
     </Reference>
@@ -198,6 +195,9 @@
     <None Include="U:\chromium\src\sync\android\java\src\org\chromium\sync\notifier\InvalidationClientNameGenerator.java">
       <Link>References\chromium\src\sync\android\java\src\org\chromium\sync\notifier\InvalidationClientNameGenerator.java</Link>
     </None>
+    <Content Include="U:\chromium\src\out\Release\lib.java\android_swipe_refresh_java.jar">
+      <Link>References\android_swipe_refresh_java.jar</Link>
+    </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\dom_distiller_java.jar">
       <Link>References\dom_distiller_java.jar</Link>
     </Content>
@@ -351,9 +351,9 @@
     <Content Include="U:\chromium\src\base\android\cpu_features.h">
       <Link>References\chromium\src\base\android\cpu_features.h</Link>
     </Content>
-    <Content Include="U:\chromium\src\base\android\java\src\org\chromium\base\library_loader\LibraryLoader.java">
+    <None Include="U:\chromium\src\base\android\java\src\org\chromium\base\library_loader\LibraryLoader.java">
       <Link>org\chromium\base\library_loader\LibraryLoader.java</Link>
-    </Content>
+    </None>
     <Content Include="U:\chromium\src\base\android\library_loader\library_loader_hooks.cc">
       <Link>References\chromium\src\base\android\library_loader\library_loader_hooks.cc</Link>
     </Content>
@@ -428,7 +428,7 @@ start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /E
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
-start /MIN /WAIT cmd /K C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true
+start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true
 
 </PreBuildEvent>
   </PropertyGroup>

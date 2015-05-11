@@ -228,7 +228,7 @@ namespace TestChromeAsAsset.Activities
             //LayoutInflater inflater = LayoutInflater.from(this);
 
 
-            System.Threading.Thread.Sleep(500);
+            //System.Threading.Thread.Sleep(500);
 
             base.onCreate(savedInstanceState);
 
