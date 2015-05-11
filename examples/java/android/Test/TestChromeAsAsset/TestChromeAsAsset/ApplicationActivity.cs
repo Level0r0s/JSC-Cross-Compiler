@@ -103,6 +103,9 @@ namespace TestChromeAsAsset.Activities
             #endregion
 
 
+
+            org.chromium.chrome.shell.ChromeShellActivity.__marker marker;
+
             org.chromium.chrome.shell.ChromeShellToolbar.vFinishInflate =
                 new xRunnable
                 {
@@ -125,6 +128,7 @@ namespace TestChromeAsAsset.Activities
                     }
                 };
 
+            //org.chromium.chrome.shell.ChromeShellActivity.vf =
             org.chromium.chrome.shell.ChromeShellActivity.vfinishInitialization =
                 new xRunnable
                 {

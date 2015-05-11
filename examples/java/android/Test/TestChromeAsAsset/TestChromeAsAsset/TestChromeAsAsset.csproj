@@ -127,15 +127,60 @@
       <Link>staging\apk\res\values\generated_resources.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellToolbar.java">
-      <Link>References\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellToolbar.java</Link>
-    </None>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellApplicationObserver.java">
+      <Link>org\chromium\shell\ChromeShellApplicationObserver.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellServiceTabLauncher.java">
+      <Link>org\chromium\shell\ChromeShellServiceTabLauncher.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellSwitches.java">
+      <Link>org\chromium\shell\ChromeShellSwitches.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellTab.java">
+      <Link>org\chromium\shell\ChromeShellTab.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellTabModel.java">
+      <Link>org\chromium\shell\ChromeShellTabModel.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellTabModelSelector.java">
+      <Link>org\chromium\shell\ChromeShellTabModelSelector.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellToolbar.java">
+      <Link>org\chromium\shell\ChromeShellToolbar.java</Link>
+    </Content>
     <None Include="U:\chromium\src\base\android\java\src\org\chromium\base\CommandLine.java">
       <Link>References\chromium\src\base\android\java\src\org\chromium\base\CommandLine.java</Link>
     </None>
-    <None Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\TabManager.java">
-      <Link>References\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\TabManager.java</Link>
-    </None>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\omnibox\SuggestionArrayAdapter.java">
+      <Link>org\chromium\shell\omnibox\SuggestionArrayAdapter.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\omnibox\SuggestionPopup.java">
+      <Link>org\chromium\shell\omnibox\SuggestionPopup.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\preferences\ChromeShellMainPreferences.java">
+      <Link>org\chromium\shell\preferences\ChromeShellMainPreferences.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\preferences\ChromeShellPreferences.java">
+      <Link>org\chromium\shell\preferences\ChromeShellPreferences.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\signin\AccountsChangedReceiver.java">
+      <Link>org\chromium\shell\signin\AccountsChangedReceiver.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\sync\AccountChooserFragment.java">
+      <Link>org\chromium\shell\sync\AccountChooserFragment.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\sync\ChromeShellSyncAdapter.java">
+      <Link>org\chromium\shell\sync\ChromeShellSyncAdapter.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\sync\ChromeShellSyncAdapterService.java">
+      <Link>org\chromium\shell\sync\ChromeShellSyncAdapterService.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\sync\SignoutFragment.java">
+      <Link>org\chromium\shell\sync\SignoutFragment.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\TabManager.java">
+      <Link>org\chromium\shell\TabManager.java</Link>
+    </Content>
     <Content Include="U:\chromium\src\content\app\android\child_process_service.cc">
       <Link>References\chromium\src\content\app\android\child_process_service.cc</Link>
     </Content>
@@ -188,9 +233,9 @@
       <Link>staging\apk\res\values\android_content_strings.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellActivity.java">
-      <Link>References\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellActivity.java</Link>
-    </None>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellActivity.java">
+      <Link>org\chromium\shell\ChromeShellActivity.java</Link>
+    </Content>
     <Content Include="U:\chromium\src\third_party\android_tools\sdk\extras\android\support\v4\android-support-v4.jar">
       <Link>References\android-support-v4.jar</Link>
     </Content>
@@ -293,18 +338,18 @@
     <None Include="U:\chromium\src\base\android\java\src\org\chromium\base\CpuFeatures.java">
       <Link>References\chromium\src\base\android\java\src\org\chromium\base\CpuFeatures.java</Link>
     </None>
-    <None Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellApplication.java">
-      <Link>References\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellApplication.java</Link>
-    </None>
+    <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellApplication.java">
+      <Link>org\chromium\shell\ChromeShellApplication.java</Link>
+    </Content>
     <Content Include="U:\chromium\src\base\android\cpu_features.cc">
       <Link>References\chromium\src\base\android\cpu_features.cc</Link>
     </Content>
     <Content Include="U:\chromium\src\base\android\cpu_features.h">
       <Link>References\chromium\src\base\android\cpu_features.h</Link>
     </Content>
-    <None Include="U:\chromium\src\base\android\java\src\org\chromium\base\library_loader\LibraryLoader.java">
-      <Link>References\chromium\src\base\android\java\src\org\chromium\base\library_loader\LibraryLoader.java</Link>
-    </None>
+    <Content Include="U:\chromium\src\base\android\java\src\org\chromium\base\library_loader\LibraryLoader.java">
+      <Link>org\chromium\base\library_loader\LibraryLoader.java</Link>
+    </Content>
     <Content Include="U:\chromium\src\base\android\library_loader\library_loader_hooks.cc">
       <Link>References\chromium\src\base\android\library_loader\library_loader_hooks.cc</Link>
     </Content>
@@ -371,6 +416,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Diagnostics\" />
+    <Folder Include="References\chromium\src\base\android\java\src\org\chromium\base\library_loader\" />
+    <Folder Include="References\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -381,7 +428,7 @@ rem start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivit
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
-start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true
+start /MIN /WAIT cmd /K C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true
 
 </PreBuildEvent>
   </PropertyGroup>
