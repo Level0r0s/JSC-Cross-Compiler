@@ -120,6 +120,7 @@
     <None Include="U:\chromium\src\content\public\android\java\src\org\chromium\content_public\browser\LoadUrlParams.java">
       <Link>References\chromium\src\content\public\android\java\src\org\chromium\content_public\browser\LoadUrlParams.java</Link>
     </None>
+    <Content Include="org\chromium\base\library_loader\NativeLibraries.java" />
     <Content Include="staging\apk\gen\android\support\v7\appcompat\aapt-placeholder.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -205,6 +206,9 @@
     </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\invalidation_java.jar">
       <Link>References\invalidation_java.jar</Link>
+    </Content>
+    <Content Include="U:\chromium\src\out\Release\lib.java\jsr_305_javalib.jar">
+      <Link>References\jsr_305_javalib.jar</Link>
     </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\printing_java.jar">
       <Link>References\printing_java.jar</Link>
@@ -385,10 +389,6 @@
       <Link>staging\apk\res-com.google.android.gms.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <!--<None Include="U:\chromium\src\content\shell\android\shell_apk\res\**\*.*">
-      <Link>staging\apk\res-content\%(RecursiveDir)%(FileName)%(Extension)</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>-->
     <None Include="U:\chromium\src\chrome\android\java\res\**\*.*">
       <Link>staging\apk\res-org.chromium.chrome.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -423,7 +423,7 @@
   <PropertyGroup>
     <PostBuildEvent>rem start /MIN /WAIT cmd /C X:\util\android-sdk-windows\build-tools\22.0.1\aapt.exe  package -v -f -m -S X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\res -M "X:\util\android-sdk-windows\extras\android\support\v7\appcompat\AndroidManifest.xml" -I "X:\util\android-sdk-windows\platforms\android-22\android.jar" -J X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\gen\ 
 
-rem start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
+start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
 </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>

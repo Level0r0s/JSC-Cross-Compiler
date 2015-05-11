@@ -72,7 +72,8 @@ namespace jsc.meta.Library
         public static readonly XName nsHintPath = ns + "HintPath";
         public static readonly XName nsAssemblyName = ns + "AssemblyName";
         public static readonly XName nsLink = ns + "Link";
-
+        public static readonly XName nsCopyToOutputDirectory = ns + "CopyToOutputDirectory";
+        
         public XDocument Document;
 
         public static MSVSProjectFile FromFile(string filepath)

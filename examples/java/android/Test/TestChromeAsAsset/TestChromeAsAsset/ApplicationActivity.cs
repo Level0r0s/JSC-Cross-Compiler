@@ -106,6 +106,19 @@ namespace TestChromeAsAsset.Activities
 
             org.chromium.chrome.shell.ChromeShellActivity.__marker marker;
 
+            //org.chromium.chrome.shell.ChromeShellActivity
+            //org.chromium.chrome.shell.ChromeShellActivity.vf =
+            //org.chromium.chrome.shell.ChromeShellActivity.vfinishInitialization =
+            //    new xRunnable
+            //    {
+            //        yield = delegate
+            //        {
+            //            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150510
+
+
+            //        }
+            //    };
+
             org.chromium.chrome.shell.ChromeShellToolbar.vFinishInflate =
                 new xRunnable
                 {
@@ -128,17 +141,7 @@ namespace TestChromeAsAsset.Activities
                     }
                 };
 
-            //org.chromium.chrome.shell.ChromeShellActivity.vf =
-            org.chromium.chrome.shell.ChromeShellActivity.vfinishInitialization =
-                new xRunnable
-                {
-                    yield = delegate
-                    {
-                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150510
-
-
-                    }
-                };
+      
 
 
             base.onCreate();
