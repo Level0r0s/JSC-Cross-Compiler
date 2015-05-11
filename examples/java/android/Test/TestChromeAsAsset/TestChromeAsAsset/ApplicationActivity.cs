@@ -63,7 +63,7 @@ namespace TestChromeAsAsset.Activities
             Console.WriteLine("enter LocalApplication R.layout.chrome_shell_activity=0x" + org.chromium.chrome.shell.R.layout.chrome_shell_activity.ToString("x8") + " " + new { org.chromium.chrome.shell.R.layout.chrome_shell_activity });
             Console.WriteLine("enter LocalApplication R.id.progress=0x" + org.chromium.chrome.shell.R.id.progress.ToString("x8") + " " + new { org.chromium.chrome.shell.R.id.progress });
             //Console.WriteLine("enter ApplicationActivity " + new { org.chromium.chrome.shell.R.layout.chrome_shell_activity });
-
+             //org.chromium.chrome.R
             // U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellActivity.java
             ////var mTabManager = (org.chromium.chrome.shell.TabManager)x.findViewById(org.chromium.chrome.shell.R.id.tab_manager);
             ////Console.WriteLine("enter ApplicationActivity " + new { mTabManager });
