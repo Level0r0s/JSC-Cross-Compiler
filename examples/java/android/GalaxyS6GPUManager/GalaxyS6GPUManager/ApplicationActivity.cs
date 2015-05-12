@@ -67,6 +67,8 @@ namespace GalaxyS6GPUManager.Activities
 
         protected override void onCreate(Bundle savedInstanceState)
         {
+            // https://forums.oculus.com/viewtopic.php?f=67&t=22766
+
             var activity = this;
             // http://stackoverflow.com/questions/11425020/actionbar-in-a-dialogfragment
             //To show activity as dialog and dim the background, you need to declare android:theme="@style/PopupTheme" on for the chosen activity on the manifest

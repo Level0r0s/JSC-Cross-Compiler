@@ -23,7 +23,8 @@ namespace com.abstractatech.hzlauncher.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@style/Theme.AppCompat")]
     public class LocalApplicationActivity : 
-        android.support.v7.app.ActionBarActivity
+        //android.support.v7.app.ActionBarActivity
+        com.oculusvr.vrlib.VrActivity 
     {
         // X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\src\com\oculusvr\vrlib\VrActivity.java
         // com.oculusvr.vrlib
@@ -38,21 +39,48 @@ namespace com.abstractatech.hzlauncher.Activities
 
         protected override void onCreate(Bundle savedInstanceState)
         {
-            base.onCreate(savedInstanceState);
+            // https://forums.oculus.com/viewtopic.php?f=67&t=22886&p=266775#p266775
 
-            var sv = new ScrollView(this);
-            var ll = new LinearLayout(this);
-            //ll.setOrientation(LinearLayout.VERTICAL);
-            sv.addView(ll);
+            //base.onCreate(savedInstanceState);
 
-            var b = new Button(this).AttachTo(ll);
+            //var sv = new ScrollView(this);
+            //var ll = new LinearLayout(this);
+            ////ll.setOrientation(LinearLayout.VERTICAL);
+            //sv.addView(ll);
+
+            //var b = new Button(this).AttachTo(ll);
 
 
 
-            b.WithText("can we show chrome and vr?");
+            //b.WithText("can we show chrome and vr?");
   
 
-            this.setContentView(sv);
+            //this.setContentView(sv);
+
+            base.onCreate(savedInstanceState);
+
+            android.content.Intent intent = getIntent();
+
+            // we are vr_dual arent we
+            Console.WriteLine("invoke HybridOculusVrActivity.OVRJVM ApplicationActivity onCreate logApplicationVrType");
+            com.oculusvr.vrlib.VrLib.logApplicationVrType(this);
+
+            var commandString = com.oculusvr.vrlib.VrLib.getCommandStringFromIntent(intent);
+            var fromPackageNameString = com.oculusvr.vrlib.VrLib.getPackageStringFromIntent(intent);
+            var uriString = com.oculusvr.vrlib.VrLib.getUriStringFromIntent(intent);
+            // why are we roundtriping intent details?
+
+
+            Console.WriteLine("invoke base  HybridOculusVrActivity.OVRJVM ApplicationActivity nativeSetAppInterface "  );
+
+            // https://forums.oculus.com/viewtopic.php?f=67&t=17790
+            this.appPtr = HybridOculusVrActivity.OVRJVM.ApplicationActivity.nativeSetAppInterface(
+                this,
+                fromPackageNameString, commandString, uriString
+            );
+
+            Console.WriteLine("invoke base  HybridOculusVrActivity.OVRJVM ApplicationActivity nativeSetAppInterface done");
+
         }
 
 

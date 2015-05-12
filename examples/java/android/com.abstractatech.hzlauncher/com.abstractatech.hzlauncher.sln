@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HybridOculusVrActivity", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestActionBarActivity", "..\Test\TestActionBarActivity\TestActionBarActivity\TestActionBarActivity.csproj", "{B6D6947C-EABD-4B15-BF90-594F34109A86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalaxyS6GPUManager", "..\GalaxyS6GPUManager\GalaxyS6GPUManager\GalaxyS6GPUManager.csproj", "{B7021883-D6A7-4569-9B4C-0414BDC47719}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{B6D6947C-EABD-4B15-BF90-594F34109A86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6D6947C-EABD-4B15-BF90-594F34109A86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6D6947C-EABD-4B15-BF90-594F34109A86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7021883-D6A7-4569-9B4C-0414BDC47719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7021883-D6A7-4569-9B4C-0414BDC47719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7021883-D6A7-4569-9B4C-0414BDC47719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7021883-D6A7-4569-9B4C-0414BDC47719}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
