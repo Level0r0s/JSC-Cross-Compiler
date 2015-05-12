@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9D280B94-A86D-496D-940A-7C0C1C270590}</ProjectGuid>
+    <ProjectGuid>{15D952CB-2409-456E-A3CB-0F37AFE6AFE1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestChromeAsAsset</RootNamespace>
@@ -198,6 +198,9 @@
     <Content Include="U:\chromium\src\out\Release\lib.java\android_swipe_refresh_java.jar">
       <Link>References\android_swipe_refresh_java.jar</Link>
     </Content>
+    <Content Include="U:\chromium\src\out\Release\lib.java\device_battery_java.jar">
+      <Link>References\device_battery_java.jar</Link>
+    </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\dom_distiller_java.jar">
       <Link>References\dom_distiller_java.jar</Link>
     </Content>
@@ -369,6 +372,7 @@
     <Content Include="U:\chromium\src\out\Release\lib.java\base_java.jar">
       <Link>References\base_java.jar</Link>
     </Content>
+    
     <None Include="U:\chromium\src\third_party\android_data_chart\java\res\**\*.*">
       <Link>staging\apk\res-org.chromium.third_party.android.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -401,7 +405,7 @@
       <Link>staging\apk\res-org.chromium.components.web_contents_delegate_android.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include=" U:\chromium\src\content\public\android\java\res\**\*.*">
+    <None Include="U:\chromium\src\content\public\android\java\res\**\*.*">
       <Link>staging\apk\res-org.chromium.content.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

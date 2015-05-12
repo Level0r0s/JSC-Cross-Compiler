@@ -223,6 +223,8 @@ namespace TestChromeAsAsset.Activities
             Console.WriteLine("enter ApplicationActivity ");
             Console.WriteLine(" ");
 
+            org.chromium.chrome.shell.TabManager.DEFAULT_URL = "https://explore.xavalon.net";
+
             //org.chromium.@base.CommandLine.enableNativeProxy();
 
             //LayoutInflater inflater = LayoutInflater.from(this);
