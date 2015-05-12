@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9D280B94-A86D-496D-940A-7C0C1C270590}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>com.abstractatech.hzlauncher</RootNamespace>
+    <AssemblyName>com.abstractatech.hzlauncher</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="jsc.meta">
+      <HintPath>C:\util\jsc\bin\jsc.meta.exe</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ScriptCoreLib">
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Avalon">
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Avalon.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Extensions">
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Ultra">
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Ultra.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Ultra.Library">
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Ultra.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLibA">
+      <HintPath>C:\util\jsc\bin\ScriptCoreLibA.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLibAndroid">
+      <HintPath>C:\util\jsc\bin\ScriptCoreLibAndroid.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLibAndroid.Drawing">
+      <HintPath>C:\util\jsc\bin\ScriptCoreLibAndroid.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLibAndroid.Windows.Forms">
+      <HintPath>C:\util\jsc\bin\ScriptCoreLibAndroid.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="com.abstractatech.hzlauncher.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\com.abstractatech.hzlauncher.AssetsLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationActivity.cs">
+    </Compile>
+    <Compile Include="Program.cs">
+      <DependentUpon>ApplicationActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="staging\apk\bin\android-install.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\res\**\*.*">
+      <Link>staging\apk\res-com.oculusvr.vrlib.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\third_party\android_data_chart\java\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.third_party.android.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\third_party\android_media\java\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.third_party.android.media.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\third_party\android_tools\sdk\extras\android\support\v7\appcompat\res\**\*.*">
+      <Link>staging\apk\res-android.support.v7.appcompat.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\third_party\android_tools\sdk\extras\android\support\v7\mediarouter\res\**\*.*">
+      <Link>staging\apk\res-android.support.v7.mediarouter.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\third_party\android_tools\sdk\extras\google\google_play_services\libproject\google-play-services_lib\res\**\*.*">
+      <Link>staging\apk\res-com.google.android.gms.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\chrome\android\java\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.chrome.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\ui\android\java\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.ui.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\components\web_contents_delegate_android\android\java\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.components.web_contents_delegate_android.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\content\public\android\java\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.content.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\chrome\android\shell\res\**\*.*">
+      <Link>staging\apk\res-org.chromium.chrome.shell.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\out\assets\chrome_shell_apk\**\*.*">
+      <Link>staging\apk\assets\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="org\chromium\base\library_loader\NativeLibraries.java" />
+    <Content Include="u:\chromium\src\base\android\cpu_features.cc">
+      <Link>References\chromium\src\base\android\cpu_features.cc</Link>
+    </Content>
+    <Content Include="u:\chromium\src\base\android\cpu_features.h">
+      <Link>References\chromium\src\base\android\cpu_features.h</Link>
+    </Content>
+    <None Include="u:\chromium\src\base\android\java\src\org\chromium\base\BaseChromiumApplication.java">
+      <Link>References\chromium\src\base\android\java\src\org\chromium\base\BaseChromiumApplication.java</Link>
+    </None>
+    <None Include="u:\chromium\src\base\android\java\src\org\chromium\base\CommandLine.java">
+      <Link>References\chromium\src\base\android\java\src\org\chromium\base\CommandLine.java</Link>
+    </None>
+    <None Include="u:\chromium\src\base\android\java\src\org\chromium\base\CpuFeatures.java">
+      <Link>References\chromium\src\base\android\java\src\org\chromium\base\CpuFeatures.java</Link>
+    </None>
+    <None Include="u:\chromium\src\base\android\java\src\org\chromium\base\library_loader\LibraryLoader.java">
+      <Link>org\chromium\base\library_loader\LibraryLoader.java</Link>
+    </None>
+    <Content Include="u:\chromium\src\base\android\library_loader\library_loader_hooks.cc">
+      <Link>References\chromium\src\base\android\library_loader\library_loader_hooks.cc</Link>
+    </Content>
+    <Content Include="u:\chromium\src\base\android\library_loader\library_loader_hooks.h">
+      <Link>References\chromium\src\base\android\library_loader\library_loader_hooks.h</Link>
+    </Content>
+    <Content Include="u:\chromium\src\base\android\library_loader\library_load_from_apk_status_codes.h">
+      <Link>References\chromium\src\base\android\library_loader\library_load_from_apk_status_codes.h</Link>
+    </Content>
+    <None Include="u:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\ChromiumApplication.java">
+      <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\ChromiumApplication.java</Link>
+    </None>
+    <None Include="u:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\invalidation\UniqueIdInvalidationClientNameGenerator.java">
+      <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\invalidation\UniqueIdInvalidationClientNameGenerator.java</Link>
+    </None>
+    <None Include="u:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\AbstractMediaRouteController.java">
+      <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\AbstractMediaRouteController.java</Link>
+    </None>
+    <None Include="u:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\DefaultMediaRouteController.java">
+      <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\DefaultMediaRouteController.java</Link>
+    </None>
+    <None Include="u:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\MediaRouteController.java">
+      <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\MediaRouteController.java</Link>
+    </None>
+    <None Include="u:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\TransportControl.java">
+      <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\media\remote\TransportControl.java</Link>
+    </None>
+    <None Include="u:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\Tab.java">
+      <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\Tab.java</Link>
+    </None>
+    <None Include="u:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\document\DocumentTabModelImpl.java">
+      <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\document\DocumentTabModelImpl.java</Link>
+    </None>
+    <None Include="u:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabList.java">
+      <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabList.java</Link>
+    </None>
+    <None Include="u:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabModel.java">
+      <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabModel.java</Link>
+    </None>
+    <None Include="u:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabModelJniBridge.java">
+      <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabModelJniBridge.java</Link>
+    </None>
+    <None Include="u:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabModelSelector.java">
+      <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\tabmodel\TabModelSelector.java</Link>
+    </None>
+    <Content Include="u:\chromium\src\chrome\android\shell\chrome_shell_entry_point.cc">
+      <Link>References\chromium\src\chrome\android\shell\chrome_shell_entry_point.cc</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellActivity.java">
+      <Link>org\chromium\shell\ChromeShellActivity.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellApplication.java">
+      <Link>org\chromium\shell\ChromeShellApplication.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellApplicationObserver.java">
+      <Link>org\chromium\shell\ChromeShellApplicationObserver.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellServiceTabLauncher.java">
+      <Link>org\chromium\shell\ChromeShellServiceTabLauncher.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellSwitches.java">
+      <Link>org\chromium\shell\ChromeShellSwitches.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellTab.java">
+      <Link>org\chromium\shell\ChromeShellTab.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellTabModel.java">
+      <Link>org\chromium\shell\ChromeShellTabModel.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellTabModelSelector.java">
+      <Link>org\chromium\shell\ChromeShellTabModelSelector.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellToolbar.java">
+      <Link>org\chromium\shell\ChromeShellToolbar.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\omnibox\SuggestionArrayAdapter.java">
+      <Link>org\chromium\shell\omnibox\SuggestionArrayAdapter.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\omnibox\SuggestionPopup.java">
+      <Link>org\chromium\shell\omnibox\SuggestionPopup.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\preferences\ChromeShellMainPreferences.java">
+      <Link>org\chromium\shell\preferences\ChromeShellMainPreferences.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\preferences\ChromeShellPreferences.java">
+      <Link>org\chromium\shell\preferences\ChromeShellPreferences.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\signin\AccountsChangedReceiver.java">
+      <Link>org\chromium\shell\signin\AccountsChangedReceiver.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\sync\AccountChooserFragment.java">
+      <Link>org\chromium\shell\sync\AccountChooserFragment.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\sync\ChromeShellSyncAdapter.java">
+      <Link>org\chromium\shell\sync\ChromeShellSyncAdapter.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\sync\ChromeShellSyncAdapterService.java">
+      <Link>org\chromium\shell\sync\ChromeShellSyncAdapterService.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\sync\SignoutFragment.java">
+      <Link>org\chromium\shell\sync\SignoutFragment.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\TabManager.java">
+      <Link>org\chromium\shell\TabManager.java</Link>
+    </Content>
+    <Content Include="u:\chromium\src\content\app\android\child_process_service.cc">
+      <Link>References\chromium\src\content\app\android\child_process_service.cc</Link>
+    </Content>
+    <None Include="u:\chromium\src\content\public\android\java\src\org\chromium\content\app\ChildProcessService.java">
+      <Link>References\chromium\src\content\public\android\java\src\org\chromium\content\app\ChildProcessService.java</Link>
+    </None>
+    <None Include="u:\chromium\src\content\public\android\java\src\org\chromium\content\app\ContentApplication.java">
+      <Link>References\chromium\src\content\public\android\java\src\org\chromium\content\app\ContentApplication.java</Link>
+    </None>
+    <None Include="u:\chromium\src\content\public\android\java\src\org\chromium\content\app\SandboxedProcessService.java">
+      <Link>References\chromium\src\content\public\android\java\src\org\chromium\content\app\SandboxedProcessService.java</Link>
+    </None>
+    <None Include="u:\chromium\src\content\public\android\java\src\org\chromium\content\browser\LocationProviderAdapter.java">
+      <Link>References\chromium\src\content\public\android\java\src\org\chromium\content\browser\LocationProviderAdapter.java</Link>
+    </None>
+    <None Include="u:\chromium\src\content\public\android\java\src\org\chromium\content_public\browser\LoadUrlParams.java">
+      <Link>References\chromium\src\content\public\android\java\src\org\chromium\content_public\browser\LoadUrlParams.java</Link>
+    </None>
+    <None Include="u:\chromium\src\media\base\android\java\src\org\chromium\media\AudioManagerAndroid.java">
+      <Link>References\chromium\src\media\base\android\java\src\org\chromium\media\AudioManagerAndroid.java</Link>
+    </None>
+    <None Include="u:\chromium\src\mojo\android\system\src\org\chromium\mojo\system\impl\CoreImpl.java">
+      <Link>References\chromium\src\mojo\android\system\src\org\chromium\mojo\system\impl\CoreImpl.java</Link>
+    </None>
+    <None Include="u:\chromium\src\net\android\java\src\org\chromium\net\GURLUtils.java">
+      <Link>References\chromium\src\net\android\src\org\chromium\net\GURLUtils.java</Link>
+    </None>
+    <None Include="u:\chromium\src\out\release\gen\chrome\java\res\values\generated_resources.xml">
+      <Link>staging\apk\res\values\generated_resources.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="u:\chromium\src\out\release\lib.java\android_swipe_refresh_java.jar">
+      <Link>References\android_swipe_refresh_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\base_java.jar">
+      <Link>References\base_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\chrome_java.jar">
+      <Link>References\chrome_java.jar</Link>
+    </Content>
+    <None Include="u:\chromium\src\sync\android\java\src\org\chromium\sync\notifier\InvalidationClientNameGenerator.java">
+      <Link>References\chromium\src\sync\android\java\src\org\chromium\sync\notifier\InvalidationClientNameGenerator.java</Link>
+    </None>
+    <Content Include="u:\chromium\src\out\release\lib.java\content_java.jar">
+      <Link>References\content_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\content_shell_java.jar">
+      <Link>References\content_shell_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\device_battery_java.jar">
+      <Link>References\device_battery_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\document_tab_model_info_proto_java.jar">
+      <Link>References\document_tab_model_info_proto_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\dom_distiller_java.jar">
+      <Link>References\dom_distiller_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\gcm_driver_java.jar">
+      <Link>References\gcm_driver_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\invalidation_java.jar">
+      <Link>References\invalidation_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\jsr_305_javalib.jar">
+      <Link>References\jsr_305_javalib.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\media_java.jar">
+      <Link>References\media_java.jar</Link>
+    </Content>
+    <None Include="U:\chromium\src\out\Release\lib.java\mojo_bindings_java.jar">
+      <Link>staging\apk\libs\mojo_bindings_java.jar</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\out\Release\lib.java\mojo_public_java.jar">
+      <Link>staging\apk\libs\mojo_public_java.jar</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\out\Release\lib.java\mojo_system_java.jar">
+      <Link>staging\apk\libs\mojo_system_java.jar</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="u:\chromium\src\out\release\lib.java\net_java.jar">
+      <Link>References\net_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\printing_java.jar">
+      <Link>References\printing_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\protobuf_nano_javalib.jar">
+      <Link>References\protobuf_nano_javalib.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\service_tab_launcher_java.jar">
+      <Link>References\service_tab_launcher_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\sync_java.jar">
+      <Link>References\sync_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\ui_java.jar">
+      <Link>References\ui_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\variations_java.jar">
+      <Link>References\variations_java.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\out\release\lib.java\web_contents_delegate_android_java.jar">
+      <Link>References\web_contents_delegate_android_java.jar</Link>
+    </Content>
+    <None Include="u:\chromium\src\out\release\obj\chrome\chrome_strings_grd.gen\chrome_strings_grd\res_grit\values\android_chrome_strings.xml">
+      <Link>staging\apk\res\values\android_chrome_strings.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="u:\chromium\src\out\release\obj\content\content_strings_grd.gen\content_strings_grd\res_grit\values\android_content_strings.xml">
+      <Link>staging\apk\res\values\android_content_strings.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="u:\chromium\src\out\release\obj\ui\android\ui_strings_grd.gen\ui_strings_grd\res_grit\values\android_ui_strings.xml">
+      <Link>staging\apk\res\values\android_ui_strings.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="u:\chromium\src\third_party\android_tools\sdk\extras\android\support\v4\android-support-v4.jar">
+      <Link>References\android-support-v4.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\third_party\android_tools\sdk\extras\android\support\v7\appcompat\libs\android-support-v7-appcompat.jar">
+      <Link>References\android-support-v7-appcompat.jar</Link>
+    </Content>
+    <Content Include="u:\chromium\src\third_party\android_tools\sdk\extras\android\support\v7\mediarouter\libs\android-support-v7-mediarouter.jar">
+      <Link>References\android-support-v7-mediarouter.jar</Link>
+    </Content>
+    <None Include="u:\chromium\src\ui\android\java\src\org\chromium\ui\gfx\DeviceDisplayInfo.java">
+      <Link>References\chromium\src\ui\android\java\src\org\chromium\ui\gfx\DeviceDisplayInfo.java</Link>
+    </None>
+    <Content Include="u:\chromium\src\third_party\android_tools\sdk\extras\google\google_play_services\libproject\google-play-services_lib\libs\google-play-services.jar">
+      <Link>References\google-play-services.jar</Link>
+    </Content>
+    <Content Include="X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\src\**\*.*">
+      <Link>VRLib\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\c\android\HybridOculusVrActivity\HybridOculusVrActivity\bin\Debug\staging\libs\armeabi-v7a\libHybridOculusVrActivity.so">
+      <Link>staging\apk\libs\armeabi-v7a\libHybridOculusVrActivity.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\out\Release\chrome_shell_apk\libs\armeabi-v7a\libchromeshell.so">
+      <Link>staging\apk\libs\armeabi-v7a\libchromeshell.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\out\Release\chrome_shell_apk\libs\armeabi-v7a\libchromium_android_linker.so">
+      <Link>staging\apk\libs\armeabi-v7a\libchromium_android_linker.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Design\Preview.png" />
+    <Content Include="Design\Images.htm" />
+    <Content Include="Design\jsc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="References\chromium\src\base\android\java\src\org\chromium\base\library_loader\" />
+    <Folder Include="References\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName)==Debug (
+start /WAIT /MIN c:\util\jsc\bin\jsc.meta.exe SkipRewriteToMVSProjectTemplate /ProjectFileName:"$(ProjectPath)" /Assembly:"$(TargetPath)" /AttachDebugger:false  /DefaultToDev11:true
+)
+start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
+</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true
+
+</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

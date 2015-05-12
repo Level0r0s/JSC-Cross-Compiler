@@ -20,8 +20,10 @@ namespace com.abstractatech.hzlauncher.Activities
 
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "10")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
-    public class ApplicationActivity : Activity
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@style/Theme.AppCompat")]
+    public class LocalApplicationActivity : 
+        android.support.v7.app.ActionBarActivity
     {
         // X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\src\com\oculusvr\vrlib\VrActivity.java
         // com.oculusvr.vrlib
@@ -57,4 +59,47 @@ namespace com.abstractatech.hzlauncher.Activities
     }
 
 
+}
+
+namespace HybridOculusVrActivity.OVRJVM
+{
+    // X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\src\android\app\IVRManager.java
+
+    // type name linked to NDK implementation
+    public static class ApplicationActivity
+    {
+        static ApplicationActivity()
+        {
+            Console.WriteLine("enter  HybridOculusVrActivity.OVRJVM ApplicationActivity cctor, loadLibrary HybridOculusVrActivity");
+
+            // LOCAL_MODULE    := HybridOculusVrActivity
+            // X:\jsc.svn\examples\c\android\Test\HybridOculusVrActivity\HybridOculusVrActivity\staging\jni\Android.mk
+
+            // PInvoke wont load implictly? 
+            java.lang.System.loadLibrary("HybridOculusVrActivity");
+
+            Console.WriteLine("enter  HybridOculusVrActivity.OVRJVM ApplicationActivity cctor, loadLibrary HybridOculusVrActivity done");
+        }
+
+        //appPtr = nativeSetAppInterface( this );       
+        //public static native long nativeSetAppInterface( VrActivity act ); 
+
+
+
+
+
+        // X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\jni\App.cpp
+        // OVR::VrAppInterface* SetActivity
+
+        [Script(IsPInvoke = true)]
+        public static long nativeSetAppInterface(object act,
+            string fromPackageNameString, string commandString, string uriString)
+        { return default(long); }
+
+
+
+        [Script(IsPInvoke = true)]
+        //private long find(string lib, string fname) { return default(long); }
+        public static string stringFromJNI() { return default(string); }
+    }
 }
