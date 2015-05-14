@@ -23,7 +23,13 @@ namespace android.content
         public Intent addFlags(int flags) { return null; }
 
         // X:\jsc.svn\examples\javascript\android\com.abstractatech.battery\com.abstractatech.battery\ApplicationWebService.cs
-        public static readonly string ACTION_BATTERY_CHANGED = "android.intent.action.BATTERY_CHANGED";
+        public const string ACTION_BATTERY_CHANGED = "android.intent.action.BATTERY_CHANGED";
+        public const string ACTION_PACKAGE_REPLACED = "android.intent.action.PACKAGE_REPLACED";
+        public const string ACTION_PACKAGE_INSTALL = "android.intent.action.PACKAGE_INSTALL";
+
+
+
+        public Uri getData() { return null; }
 
         public sbyte[] getByteArrayExtra(string name)
         {

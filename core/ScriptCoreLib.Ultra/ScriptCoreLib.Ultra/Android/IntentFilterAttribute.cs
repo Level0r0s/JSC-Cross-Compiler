@@ -5,6 +5,8 @@ using System.Text;
 
 namespace ScriptCoreLib.Android.Manifest
 {
+    // X:\jsc.svn\examples\javascript\android\com.abstractatech.appmanager\com.abstractatech.appmanager\AtInstall.cs
+
     // move to .Manifest
     #region IntentFilter
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]

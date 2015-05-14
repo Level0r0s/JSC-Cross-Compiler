@@ -33,9 +33,9 @@ namespace com.abstractatech.appmanager
 
         public readonly ApplicationWebService service = new ApplicationWebService();
 
-        com.abstractatech.appmanager.Assets.Publish ref0;
+        //com.abstractatech.appmanager.Assets.Publish ref0;
 
-        FormAsPopupExtensionsForConsoleFormPackageMediator ref_allow_webview_to_talk;
+        //FormAsPopupExtensionsForConsoleFormPackageMediator ref_allow_webview_to_talk;
 
 
         /// <summary>
@@ -138,13 +138,13 @@ namespace com.abstractatech.appmanager
                 Console.WriteLine("click!");
 
 
-                control.nfc.onnfc +=
-                 nfcid =>
-                 {
-                     var xpage = new BeforeLogin.FromDocument();
+                //control.nfc.onnfc +=
+                // nfcid =>
+                // {
+                //     var xpage = new BeforeLogin.FromDocument();
 
-                     xpage.username.value = nfcid;
-                 };
+                //     xpage.username.value = nfcid;
+                // };
 
                 page.go.WhenClicked(
                    delegate
@@ -160,6 +160,7 @@ namespace com.abstractatech.appmanager
                                button.style.Opacity = 0.5;
 
                                {
+                                   await typeof(a).GetAwaiter()
                                    var source = await typeof(a);
                                    var restore = source.eval();
 
@@ -224,7 +225,7 @@ namespace com.abstractatech.appmanager
             public a(IBeforeLogin ee)
             {
                 //FormStyler.AtFormCreated = FormStyler.LikeVisualStudioMetro;
-                FormStyler.AtFormCreated = FormStylerLikeFloat.LikeFloat;
+                //FormStyler.AtFormCreated = FormStylerLikeFloat.LikeFloat;
 
                 var ff = new Form { FormBorderStyle = FormBorderStyle.None };
 
@@ -266,7 +267,7 @@ namespace com.abstractatech.appmanager
                 iii.SidebarText.className = "AppPreviewText";
                 //iii.SidebarText.innerText = "My Appz";
                 //iii.SidebarText.innerText = "Synchronizing...";
-                var finish = iii.SidebarText.ToASCIIStyledLoadAnimation("My Appz");
+                //var finish = iii.SidebarText.ToASCIIStyledLoadAnimation("My Appz");
 
 
                 //Native.Document.body.style.backgroundColor = "#105070";
@@ -422,34 +423,34 @@ namespace com.abstractatech.appmanager
                             f.Show();
 
 
-                            FormAsPopupExtensionsForConsoleFormPackage.PopupInsteadOfClosing(
-                                f,
-                                HandleFormClosing: false,
+                            //FormAsPopupExtensionsForConsoleFormPackage.PopupInsteadOfClosing(
+                            //    f,
+                            //    HandleFormClosing: false,
 
-                                NotifyDocked:
-                                    delegate
-                                    {
-                                        (__ff.HTMLTarget.style as dynamic).webkitFilter = "blur(4px) brightness(0.8)";
-                                    },
+                            //    NotifyDocked:
+                            //        delegate
+                            //        {
+                            //            (__ff.HTMLTarget.style as dynamic).webkitFilter = "blur(4px) brightness(0.8)";
+                            //        },
 
-                                    NotifyFloat:
-                                     delegate
-                                     {
-                                         (__ff.HTMLTarget.style as dynamic).webkitFilter = "blur(0px)  brightness(1.0)";
-                                     },
-                                SpecialCloseOnLeft: delegate
-                                {
-                                    Console.WriteLine("SpecialCloseOnLeft");
+                            //        NotifyFloat:
+                            //         delegate
+                            //         {
+                            //             (__ff.HTMLTarget.style as dynamic).webkitFilter = "blur(0px)  brightness(1.0)";
+                            //         },
+                            //    SpecialCloseOnLeft: delegate
+                            //    {
+                            //        Console.WriteLine("SpecialCloseOnLeft");
 
-                                    service.Launch(
-                                        packageName,
-                                        name,
-                                        DisableCallbackToken: "true"
-                                    );
+                            //        service.Launch(
+                            //            packageName,
+                            //            name,
+                            //            DisableCallbackToken: "true"
+                            //        );
 
-                                    //f.Close();
-                                }
-                            );
+                            //        //f.Close();
+                            //    }
+                            //);
 
                             if (CanAutoLaunch && IsCoreAndroidWebServiceActivity)
                             {
@@ -514,11 +515,11 @@ namespace com.abstractatech.appmanager
                                 content.Label.Text = label;
                                 content.Package.Text = packageName;
 
-                                a.Icon.cloneNode(true).AttachTo(
+                                //a.Icon.cloneNode(true).AttachTo(
 
-                                    ScriptCoreLib.JavaScript.Windows.Forms.Extensions.GetHTMLTargetContainer(content.Icon)
+                                //    ScriptCoreLib.JavaScript.Windows.Forms.Extensions.GetHTMLTargetContainer(content.Icon)
 
-                                );
+                                //);
 
                                 content.Uninstall.Click +=
                                     delegate
@@ -668,7 +669,7 @@ namespace com.abstractatech.appmanager
                         }
                         else
                         {
-                            finish();
+                            //finish();
                             yield_BringToFront = true;
 
                             service.oninstall(yield);
@@ -743,29 +744,29 @@ namespace com.abstractatech.appmanager
                 return;
             }
 
-            var p = new com.abstractatech.appmanager.Assets.Publish();
+            //var p = new com.abstractatech.appmanager.Assets.Publish();
             //var p2 = new WithClickOnceLANLauncher.Assets.Publish2();
 
-            if (path == "/download")
-            {
-                //I/System.Console( 3016):        at ScriptCoreLibJava.BCLImplementation.System.Collections.Generic.__Dictionary_2___KeyCollection.System_Collections_ICollection_get_Count(__Dictionary_2___KeyCollection.java:83)
-                //I/System.Console( 3016):        at ScriptCoreLib.Extensions.IEnumerableExtensions.AsEnumerable(IEnumerableExtensions.java:25)
-                //I/System.Console( 3016):        at WithClickOnceLANLauncher.DownloadSDKFunction.DownloadSDK(DownloadSDKFunction.java:73)
-                //I/System.Console( 3016):        at WithClickOnceLANLauncher.ApplicationWebService.DownloadSDK(ApplicationWebService.java:44)
+            //if (path == "/download")
+            //{
+            //    //I/System.Console( 3016):        at ScriptCoreLibJava.BCLImplementation.System.Collections.Generic.__Dictionary_2___KeyCollection.System_Collections_ICollection_get_Count(__Dictionary_2___KeyCollection.java:83)
+            //    //I/System.Console( 3016):        at ScriptCoreLib.Extensions.IEnumerableExtensions.AsEnumerable(IEnumerableExtensions.java:25)
+            //    //I/System.Console( 3016):        at WithClickOnceLANLauncher.DownloadSDKFunction.DownloadSDK(DownloadSDKFunction.java:73)
+            //    //I/System.Console( 3016):        at WithClickOnceLANLauncher.ApplicationWebService.DownloadSDK(ApplicationWebService.java:44)
 
-                var key = p.Keys.ICollectionAsEnumerable().Select(k => p[(string)k]).First(k => k.EndsWith(".application")).SkipUntilLastIfAny("/");
+            //    var key = p.Keys.ICollectionAsEnumerable().Select(k => p[(string)k]).First(k => k.EndsWith(".application")).SkipUntilLastIfAny("/");
 
-                Console.WriteLine(
-                    new
-                    {
-                        key
-                    }
-                );
+            //    Console.WriteLine(
+            //        new
+            //        {
+            //            key
+            //        }
+            //    );
 
-                h.Context.Response.Redirect("/download/" + key);
-                h.CompleteRequest();
-                return;
-            }
+            //    h.Context.Response.Redirect("/download/" + key);
+            //    h.CompleteRequest();
+            //    return;
+            //}
 
 
 
@@ -817,54 +818,54 @@ namespace com.abstractatech.appmanager
             // 	- Exception reading manifest from http://192.168.1.100:24257/#/download/Application%20Files/WithClickOnceLANLauncherClient_1_0_0_2/WithClickOnceLANLauncherClient.exe.manifest: the manifest may not be valid or the file could not be opened.
             // did publish work and were it compiled into AssetsLibrary correctly?
 
-            if (p.ContainsKey(publish))
-            {
-                var f = p[publish];
+            //if (p.ContainsKey(publish))
+            //{
+            //    var f = p[publish];
 
 
-                var ext = "." + f.SkipUntilLastOrEmpty(".").ToLower();
+            //    var ext = "." + f.SkipUntilLastOrEmpty(".").ToLower();
 
-                // http://en.wikipedia.org/wiki/Mime_type
-                // http://msdn.microsoft.com/en-us/library/ms228998.aspx
+            //    // http://en.wikipedia.org/wiki/Mime_type
+            //    // http://msdn.microsoft.com/en-us/library/ms228998.aspx
 
-                var ContentType = "application/octet-stream";
+            //    var ContentType = "application/octet-stream";
 
-                if (ext == ".application")
-                {
-                    ContentType = "application/x-ms-application";
-                }
-                else if (ext == ".manifest")
-                {
-                    ContentType = "application/x-ms-manifest";
-                }
-                else if (ext == ".htm")
-                {
-                    ContentType = "text/html";
-                }
-                else if (ext == ".crx")
-                {
-                    // http://feedback.livereload.com/knowledgebase/articles/85889-chrome-extensions-apps-and-user-scripts-cannot
-                    // http://stackoverflow.com/questions/12049366/re-enabling-extension-installs
+            //    if (ext == ".application")
+            //    {
+            //        ContentType = "application/x-ms-application";
+            //    }
+            //    else if (ext == ".manifest")
+            //    {
+            //        ContentType = "application/x-ms-manifest";
+            //    }
+            //    else if (ext == ".htm")
+            //    {
+            //        ContentType = "text/html";
+            //    }
+            //    else if (ext == ".crx")
+            //    {
+            //        // http://feedback.livereload.com/knowledgebase/articles/85889-chrome-extensions-apps-and-user-scripts-cannot
+            //        // http://stackoverflow.com/questions/12049366/re-enabling-extension-installs
 
-                    ContentType = "application/x-chrome-extension";
-                    // Resource interpreted as Document but transferred with MIME type application/x-chrome-extension: "http://192.168.1.106:16507/download/foo.crx".
+            //        ContentType = "application/x-chrome-extension";
+            //        // Resource interpreted as Document but transferred with MIME type application/x-chrome-extension: "http://192.168.1.106:16507/download/foo.crx".
 
-                    //h.Context.Response.AddHeader(
-                    //    "Content-Disposition", "attachment; filename=\"xfoo.crx\"");
-
-
-                }
+            //        //h.Context.Response.AddHeader(
+            //        //    "Content-Disposition", "attachment; filename=\"xfoo.crx\"");
 
 
-                h.Context.Response.ContentType = ContentType;
+            //    }
+
+
+            //    h.Context.Response.ContentType = ContentType;
 
 
 
 
-                DownloadSDKFile(h, f);
+            //    DownloadSDKFile(h, f);
 
 
-            }
+            //}
 
 
 

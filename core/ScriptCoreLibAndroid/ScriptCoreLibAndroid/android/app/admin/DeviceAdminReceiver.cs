@@ -16,5 +16,9 @@ namespace android.app.admin
         // https://developer.android.com/guide/topics/admin/device-admin.html
 
         // members and types are to be extended by jsc at release build
+        public override void onReceive(Context context, Intent intent)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

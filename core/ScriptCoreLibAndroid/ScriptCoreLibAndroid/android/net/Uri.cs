@@ -13,6 +13,8 @@ namespace android.net
     [Script(IsNative = true)]
     public abstract class Uri
     {
+        public abstract string getEncodedSchemeSpecificPart();
+        public abstract string getSchemeSpecificPart();
         public static Uri parse(string value)
         {
             return default(Uri);

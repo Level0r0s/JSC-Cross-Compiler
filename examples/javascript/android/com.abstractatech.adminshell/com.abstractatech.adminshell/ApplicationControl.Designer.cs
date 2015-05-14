@@ -12,13 +12,13 @@ namespace com.abstractatech.adminshell
         private void InitializeComponent()
         {
             this.applicationWebService1 = new com.abstractatech.adminshell.ApplicationWebService();
-            this.nfc = new AndroidNFCEvents.ApplicationControl_onnfc();
+            //this.nfc = new AndroidNFCEvents.ApplicationControl_onnfc();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // nfc
             // 
-            this.nfc.service = this.applicationWebService1;
+            //this.nfc.service = this.applicationWebService1;
             // 
             // label1
             // 
@@ -41,6 +41,6 @@ namespace com.abstractatech.adminshell
 
         private ApplicationWebService applicationWebService1;
         private System.Windows.Forms.Label label1;
-        public AndroidNFCEvents.ApplicationControl_onnfc nfc;
+        //public AndroidNFCEvents.ApplicationControl_onnfc nfc;
     }
 }

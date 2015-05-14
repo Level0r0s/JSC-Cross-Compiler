@@ -15,5 +15,6 @@ namespace android.content
         // members and types are to be extended by jsc at release build
 
         // tested by ?
+        public abstract void onReceive(Context context, Intent intent);
     }
 }

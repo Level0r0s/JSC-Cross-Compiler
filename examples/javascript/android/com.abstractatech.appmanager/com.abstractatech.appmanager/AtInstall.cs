@@ -12,11 +12,14 @@ using System.Xml.Linq;
 
 namespace com.abstractatech.appmanager
 {
-    [IntentFilter(Action = Intent.ACTION_PACKAGE_REPLACED)]
-    [IntentFilter(Action = Intent.ACTION_PACKAGE_INSTALL)]
-    [IntentFilterData(scheme = "package")]
+    // defined at?
+
+    [ScriptCoreLib.Android.Manifest.ApplicationIntentFilter(Action = Intent.ACTION_PACKAGE_REPLACED)]
+    [ScriptCoreLib.Android.Manifest.ApplicationIntentFilter(Action = Intent.ACTION_PACKAGE_INSTALL)]
+    [ScriptCoreLib.Android.Manifest.ApplicationIntentFilterData(scheme = "package")]
     public class AtInstall : BroadcastReceiver
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150514
         // http://stackoverflow.com/questions/8680874/created-broadcastreceiver-which-displays-application-name-and-version-number-on
 
         public static List<string> History = new List<string>();

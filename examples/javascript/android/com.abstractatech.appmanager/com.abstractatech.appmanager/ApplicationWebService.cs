@@ -30,9 +30,9 @@ namespace com.abstractatech.appmanager
 
 
 
-    [DesignerCategory("code")]
-    public sealed class ApplicationWebService : Component,
-        AndroidNFCEvents.IApplicationWebService_poll_onnfc
+    [System.ComponentModel.DesignerCategory("code")]
+    public sealed class ApplicationWebService : Component
+        //, AndroidNFCEvents.IApplicationWebService_poll_onnfc
     {
         //      at ScriptCoreLibJava.BCLImplementation.System.Net.Sockets.__NetworkStream.get_Length(__NetworkStream.java:84)
         //at ScriptCoreLibJava.BCLImplementation.System.IO.__FileStream.get_Length(__FileStream.java:27)
@@ -47,9 +47,9 @@ namespace com.abstractatech.appmanager
 
             var c = new TaskCompletionSource<string>();
 
-            AndroidNFCEvents.ApplicationWebService_poll_onnfc.poll_onnfc(
-                last_id, yield, c.SetResult
-            );
+            //AndroidNFCEvents.ApplicationWebService_poll_onnfc.poll_onnfc(
+            //    last_id, yield, c.SetResult
+            //);
 
             return c.Task;
 #endif
@@ -162,7 +162,7 @@ namespace com.abstractatech.appmanager
             i.setFlags(
                 Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
-                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                //| Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
             );
 
             i.setComponent(c);
@@ -661,7 +661,7 @@ namespace com.abstractatech.appmanager
     }
 
     // http://developer.android.com/reference/android/content/BroadcastReceiver.html
-    [IntentFilter(Action = "ScriptCoreLib.Android.CoreAndroidWebServiceActivity.AtWebServiceDiscovery")]
+    [ScriptCoreLib.Android.Manifest.ApplicationIntentFilter (Action = "ScriptCoreLib.Android.CoreAndroidWebServiceActivity.AtWebServiceDiscovery")]
     public class AtWebServiceDiscovery : BroadcastReceiver
     {
         public static Thread XCallback;

@@ -114,6 +114,8 @@ namespace ScriptCoreLib.JavaScript.Experimental
     [Obsolete("This wont work when rewritten. Why? Workaround is to link it in as source.")]
     public static class X
     {
+        // X:\jsc.svn\examples\javascript\android\com.abstractatech.appmanager\com.abstractatech.appmanager\Application.cs
+
         // tested by
         // X:\jsc.svn\examples\javascript\android\com.abstractatech.adminshell\com.abstractatech.adminshell\Application.cs
 

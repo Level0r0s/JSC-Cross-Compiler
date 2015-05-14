@@ -11,6 +11,8 @@ namespace android.content.pm
     [Script(IsNative = true)]
     public class PackageItemInfo
     {
+        public android.os.Bundle metaData;
+
         public ApplicationInfo applicationInfo;
 
         // X:\jsc.svn\examples\javascript\android\AndroidListApplications\AndroidListApplications\ApplicationWebService.cs

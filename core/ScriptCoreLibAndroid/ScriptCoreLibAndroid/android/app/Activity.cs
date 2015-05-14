@@ -38,6 +38,11 @@ namespace android.app
         // X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Android\CoreAndroidWebServiceActivity.cs
         // X:\jsc.svn\examples\javascript\android\com.abstractatech.dcimgalleryapp\com.abstractatech.dcimgalleryapp\ApplicationWebService.cs
 
+        // X:\jsc.svn\examples\javascript\android\com.abstractatech.appmanager\com.abstractatech.appmanager\ApplicationWebService.cs
+        public void startActivityForResult(Intent intent, int requestCode)
+        {
+        }
+
         public virtual bool onOptionsItemSelected(MenuItem item)
         {
             // X:\jsc.svn\examples\java\android\AndroidMenuActivity\AndroidMenuActivity\ApplicationActivity.cs
@@ -189,6 +194,10 @@ namespace android.app
         {
             return false;
 
+        }
+
+        public virtual void onWindowFocusChanged(bool hasFocus)
+        {
         }
     }
 }

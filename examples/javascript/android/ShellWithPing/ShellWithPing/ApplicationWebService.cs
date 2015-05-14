@@ -14,12 +14,10 @@ using System.Xml.Linq;
 namespace ShellWithPing
 {
 
-    /// <summary>
-    /// Methods defined in this type can be used from JavaScript. The method calls will seamlessly be proxied to the server.
-    /// </summary>
+    [System.ComponentModel.DesignerCategory("code")]
     public sealed partial class ApplicationWebService : Component, PING
     {
-    
+
         // jsc cannot see explicit interfaces just yet.
         public void PING_InvokeAsync(string host, Action<string> y)
         {
@@ -242,7 +240,7 @@ Options:
 
                 var ww = new AutoResetEvent(false);
 
-            #region timeout
+                #region timeout
                 var rr = new System.Threading.Thread(
                     delegate()
                     {
@@ -254,10 +252,10 @@ Options:
                 );
 
                 rr.Start();
-            #endregion
+                #endregion
 
 
-            #region timeout
+                #region timeout
                 new System.Threading.Thread(
                     delegate()
                     {
@@ -279,7 +277,7 @@ Options:
                         p.Kill();
                     }
                 ).Start();
-            #endregion
+                #endregion
 
                 System.Threading.Thread.Yield();
 

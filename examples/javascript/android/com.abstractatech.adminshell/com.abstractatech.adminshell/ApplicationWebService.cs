@@ -23,8 +23,8 @@ namespace com.abstractatech.adminshell
     /// </summary>
     /// 
     [System.ComponentModel.DesignerCategory("code")]
-    public sealed class ApplicationWebService :
-        AndroidNFCEvents.IApplicationWebService_poll_onnfc
+    public sealed class ApplicationWebService 
+        //: AndroidNFCEvents.IApplicationWebService_poll_onnfc
     {
  //      at ScriptCoreLibJava.BCLImplementation.System.Net.Sockets.__NetworkStream.get_Length(__NetworkStream.java:84)
  //at ScriptCoreLibJava.BCLImplementation.System.IO.__FileStream.get_Length(__FileStream.java:27)
@@ -39,9 +39,9 @@ namespace com.abstractatech.adminshell
 
             var c = new TaskCompletionSource<string>();
 
-            AndroidNFCEvents.ApplicationWebService_poll_onnfc.poll_onnfc(
-                last_id, yield, c.SetResult
-            );
+            //AndroidNFCEvents.ApplicationWebService_poll_onnfc.poll_onnfc(
+            //    last_id, yield, c.SetResult
+            //);
 
             return c.Task;
 #endif

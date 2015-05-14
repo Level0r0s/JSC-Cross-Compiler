@@ -14,5 +14,9 @@ namespace android.appwidget
     [Script(IsNative = true)]
     public class AppWidgetProvider : BroadcastReceiver
     {
+        public override void onReceive(Context context, Intent intent)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
