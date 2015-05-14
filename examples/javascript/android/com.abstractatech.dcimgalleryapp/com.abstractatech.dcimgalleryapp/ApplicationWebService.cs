@@ -1,5 +1,5 @@
 using android.content;
-using android.graphics;
+//using android.graphics;
 using android.net.wifi;
 using android.view;
 //using com.drew.imaging;
@@ -45,7 +45,7 @@ namespace com.abstractatech.dcimgalleryapp
         //C:\util\android-sdk-windows\tools\ant\build.xml:1151: X:\jsc.internal.svn\keystore\asus\my-release-key.keystore (The system cannot find the path specified)
 
 
-        public static File InternalTakePicture(int num = 0)
+        public static java.io.File InternalTakePicture(int num = 0)
         {
             // do we have a special test for this?
             // X:\jsc.svn\examples\javascript\android\AndroidEnvironmentWebActivity\AndroidEnvironmentWebActivity\ApplicationWebService.cs
@@ -92,6 +92,10 @@ namespace com.abstractatech.dcimgalleryapp
 
             //camera.stopFaceDetection();
 
+            //public List<Camera.Size> getSupportedPictureSizes();
+            //public virtual List getSupportedPictureSizes();
+
+            //Camera
             var s = p.getSupportedPictureSizes();
 
             var min = default(global::android.hardware.Camera.Size);
@@ -119,8 +123,10 @@ namespace com.abstractatech.dcimgalleryapp
             //E/CameraHardwareSec(   84): android::status_t android::CameraHardwareSec::setSceneModeParameter(const android::CameraParameters&): unmatched focus_mode(continuous-picture)
             //E/CameraHardwareSec(   84): virtual android::status_t android::CameraHardwareSec::setParameters(const android::CameraParameters&): Failed to setting scene mode
 
-
-            var focusModes = p.getSupportedFocusModes();
+            //public List<string> getSupportedFocusModes();
+            // 
+            //java.util.List<android.hardware.Camera.Size> focusModes = p.getSupportedFocusModes();
+            java.util.List<string> focusModes = p.getSupportedFocusModes();
             var NextFocus = global::android.hardware.Camera.Parameters.FOCUS_MODE_FIXED;
 
             for (int i = 0; i < focusModes.size(); i++)
@@ -453,7 +459,7 @@ namespace com.abstractatech.dcimgalleryapp
 
                         if (data.Length > 0)
                         {
-                            var bmp = BitmapFactory.decodeByteArray(data, 0, data.Length);
+                            var bmp = android.graphics.BitmapFactory.decodeByteArray(data, 0, data.Length);
 
 
 
@@ -461,7 +467,7 @@ namespace com.abstractatech.dcimgalleryapp
                             directory.mkdirs();
 
                             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                            bmp.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                            bmp.compress(android.graphics.Bitmap.CompressFormat.JPEG, 100, bytes);
 
 
                             try
@@ -521,9 +527,9 @@ namespace com.abstractatech.dcimgalleryapp
 
     }
 
-    /// <summary>
-    /// Methods defined in this type can be used from JavaScript. The method calls will seamlessly be proxied to the server.
-    /// </summary>
+    //[DesignerCategory("code")]
+    // http://stackoverflow.com/questions/567606/disable-designer-in-visual-studio
+    [System.ComponentModel.DesignerCategory("")]
     public class ApplicationWebService
     {
         public void TakePicture(string e, Action<string> y)
@@ -567,7 +573,7 @@ namespace com.abstractatech.dcimgalleryapp
             // ?
 
             var sw = Stopwatch.StartNew();
-            Console.WriteLine("enter File_list " + new { sw.ElapsedMilliseconds });
+            System.Console.WriteLine("enter File_list " + new { sw.ElapsedMilliseconds });
 
             var skip = this.skip;
             var take = this.take;
@@ -589,11 +595,11 @@ namespace com.abstractatech.dcimgalleryapp
                 select new { fname, ff, LastWriteTime }
             );
 
-            Console.WriteLine("File_list " + new { AllFiles = AllFiles.Length, sw.ElapsedMilliseconds });
+            System.Console.WriteLine("File_list " + new { AllFiles = AllFiles.Length, sw.ElapsedMilliseconds });
 
             var FilesAfterSkipAndTake = AllFiles.Skip(skip).Take(take).ToArray();
 
-            Console.WriteLine("File_list " + new { FilesAfterSkipAndTake = FilesAfterSkipAndTake.Length, sw.ElapsedMilliseconds });
+            System.Console.WriteLine("File_list " + new { FilesAfterSkipAndTake = FilesAfterSkipAndTake.Length, sw.ElapsedMilliseconds });
 
             FilesAfterSkipAndTake.WithEach(
                 item =>
@@ -602,7 +608,7 @@ namespace com.abstractatech.dcimgalleryapp
                 }
             );
 
-            Console.WriteLine("exit File_list " + new { sw.ElapsedMilliseconds });
+            System.Console.WriteLine("exit File_list " + new { sw.ElapsedMilliseconds });
 
 
             return "".AsResult();
@@ -708,7 +714,7 @@ namespace com.abstractatech.dcimgalleryapp
             //I/System.Console(28925):        at com.abstractatech.dcimgalleryapp.ApplicationWebService.Handler(ApplicationWebService.java:197)
 
             var sw = Stopwatch.StartNew();
-            Console.WriteLine("enter InternalReadBytes " + new { filepath, thumb, sw.ElapsedMilliseconds });
+            System.Console.WriteLine("enter InternalReadBytes " + new { filepath, thumb, sw.ElapsedMilliseconds });
 
             //var mImageData = (sbyte[])(object)System.IO.File.ReadAllBytes(filepath);
 
@@ -762,11 +768,11 @@ namespace com.abstractatech.dcimgalleryapp
 
                 //int THUMBNAIL_WIDTH = 66;
 
-                var imageBitmap = BitmapFactory.decodeByteArray(smImageData, 0, smImageData.Length);
+                var imageBitmap = android.graphics.BitmapFactory.decodeByteArray(smImageData, 0, smImageData.Length);
                 float width = imageBitmap.getWidth();
                 float height = imageBitmap.getHeight();
                 float ratio = width / height;
-                imageBitmap = Bitmap.createScaledBitmap(imageBitmap, (int)(THUMBNAIL_HEIGHT * ratio), THUMBNAIL_HEIGHT, false);
+                imageBitmap = android.graphics.Bitmap.createScaledBitmap(imageBitmap, (int)(THUMBNAIL_HEIGHT * ratio), THUMBNAIL_HEIGHT, false);
 
                 //int padding = (THUMBNAIL_WIDTH - imageBitmap.getWidth()) / 2;
                 //imageView.setPadding(padding, 0, padding, 0);
@@ -776,7 +782,7 @@ namespace com.abstractatech.dcimgalleryapp
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 // http://developer.android.com/reference/android/graphics/Bitmap.html
-                imageBitmap.compress(Bitmap.CompressFormat.PNG, 0, baos);
+                imageBitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 0, baos);
                 mImageData = (byte[])(object)baos.toByteArray();
             }
 
@@ -784,7 +790,12 @@ namespace com.abstractatech.dcimgalleryapp
             //I/System.Console(29677): exit InternalReadBytes {{ filepath = //storage/emulated/0/DCIM/Camera/IMG_20150111_110950.jpg, thumb = true, ElapsedMilliseconds = 453 }}
             //I/System.Console(29677): exit InternalReadBytes {{ filepath = //storage/emulated/0/DCIM/Camera/IMG_20150111_110957.jpg, thumb = true, ElapsedMilliseconds = 508 }}
             //I/System.Console(29677): exit InternalReadBytes {{ filepath = //storage/emulated/0/DCIM/Camera/IMG_20150110_160140.jpg, thumb = true, ElapsedMilliseconds = 478 }}
-            Console.WriteLine("exit InternalReadBytes " + new { filepath, thumb, sw.ElapsedMilliseconds });
+            System.Console.WriteLine("exit InternalReadBytes " + new { filepath, thumb, sw.ElapsedMilliseconds });
+
+//Error	112	'Console' is an ambiguous reference between 'java.io.Console' and 'System.Console'	X:\jsc.svn\examples\javascript\android\com.abstractatech.dcimgalleryapp\com.abstractatech.dcimgalleryapp\ApplicationWebService.cs	711	13	com.abstractatech.dcimgalleryapp
+//Error	113	'java.io.Console' does not contain a definition for 'WriteLine'	X:\jsc.svn\examples\javascript\android\com.abstractatech.dcimgalleryapp\com.abstractatech.dcimgalleryapp\ApplicationWebService.cs	711	21	com.abstractatech.dcimgalleryapp
+
+
             return mImageData;
         }
 

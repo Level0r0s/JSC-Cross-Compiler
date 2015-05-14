@@ -13,7 +13,7 @@ using System.Xml.Linq;
 using com.abstractatech.dcimgalleryapp.Design;
 using com.abstractatech.dcimgalleryapp.HTML.Pages;
 using ScriptCoreLib.JavaScript.Runtime;
-using DiagnosticsConsole;
+//using DiagnosticsConsole;
 using ScriptCoreLib.Ultra.WebService;
 
 namespace com.abstractatech.dcimgalleryapp
@@ -579,3 +579,31 @@ namespace com.abstractatech.dcimgalleryapp
 	}
 
 }
+
+
+//-compile:
+//    [javac] Compiling 809 source files to V:\bin\classes
+//    [javac] V:\src\ScriptCoreLib\Shared\BCLImplementation\System\Threading\Tasks\__TaskExtensions.java:34: error: cannot find symbol
+//    [javac]         task.ContinueWith_06002310(new __Action_1<__Task_1<__Task_1<TResult>>>(class2_10,
+//    [javac]             ^
+//    [javac]   symbol:   method ContinueWith_06002310(__Action_1<__Task_1<__Task_1<TResult>>>)
+//    [javac]   location: variable task of type __Task_1<__Task_1<TResult>>
+//    [javac]   where TResult is a type-variable:
+//    [javac]     TResult extends Object declared in method <TResult>Unwrap_06001882(__Task_1<__Task_1<TResult>>,String)
+//    [javac] V:\src\ScriptCoreLib\Shared\BCLImplementation\System\Threading\Tasks\__TaskExtensions.java:59: error: cannot find symbol
+//    [javac]         task.ContinueWith_06002310(new __Action_1<__Task_1<__Task>>(class60,
+//    [javac]             ^
+//    [javac]   symbol:   method ContinueWith_06002310(__Action_1<__Task_1<__Task>>)
+//    [javac]   location: variable task of type __Task_1<__Task>
+//    [javac] V:\src\ScriptCoreLib\Shared\BCLImplementation\System\Threading\Tasks\__TaskExtensions___c__DisplayClass2_1.java:38: error: cannot find symbol
+//    [javac]         task_10.ContinueWith_06002310(new __Action_1<__Task_1<TResult>>(this,
+//    [javac]                ^
+//    [javac]   symbol:   method ContinueWith_06002310(__Action_1<__Task_1<TResult>>)
+//    [javac]   location: variable task_10 of type __Task_1<TResult>
+//    [javac]   where TResult is a type-variable:
+//    [javac]     TResult extends Object declared in class __TaskExtensions___c__DisplayClass2_1
+//    [javac] Note: Some input files use or override a deprecated API.
+//    [javac] Note: Recompile with -Xlint:deprecation for details.
+//    [javac] Note: Some input files use unchecked or unsafe operations.
+//    [javac] Note: Recompile with -Xlint:unchecked for details.
+//    [javac] 3 errors

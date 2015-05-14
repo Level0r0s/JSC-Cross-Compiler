@@ -65,8 +65,13 @@ namespace android.content
             throw null;
         }
 
+        // const for attributes?
         public const string ACTION_VIEW = "android.intent.action.VIEW";
         public static string ACTION_MAIN;
+        public static string ACTION_DELETE;
+        // X:\jsc.svn\examples\javascript\android\AndroidListApplications\AndroidListApplications\ApplicationWebService.cs
+
+
         public static string CATEGORY_LAUNCHER;
         public static int FLAG_ACTIVITY_NEW_TASK;
         public static int FLAG_ACTIVITY_RESET_TASK_IF_NEEDED;

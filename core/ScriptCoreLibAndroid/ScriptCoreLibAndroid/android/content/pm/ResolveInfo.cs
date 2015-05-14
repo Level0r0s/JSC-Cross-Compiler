@@ -11,6 +11,6 @@ namespace android.content.pm
     [Script(IsNative = true)]
     public class ResolveInfo 
     {
-
+        public ActivityInfo activityInfo;
     }
 }

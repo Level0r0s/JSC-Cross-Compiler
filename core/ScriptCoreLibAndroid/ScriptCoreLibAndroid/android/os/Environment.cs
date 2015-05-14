@@ -21,6 +21,9 @@ namespace android.os
 
         public static string DIRECTORY_DCIM = "DCIM";
 
+        // X:\jsc.svn\examples\javascript\android\AndroidListApplications\AndroidListApplications\ApplicationWebService.cs
+        public static string DIRECTORY_DOWNLOADS;
+        
         public static string DIRECTORY_PICTURES = "Pictures";
 
         public static File getExternalStoragePublicDirectory(string type)

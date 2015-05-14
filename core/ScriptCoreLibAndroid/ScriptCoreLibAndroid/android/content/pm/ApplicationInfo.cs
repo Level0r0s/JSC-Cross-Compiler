@@ -6,16 +6,12 @@ using ScriptCoreLib;
 
 namespace android.content.pm
 {
-    // http://developer.android.com/reference/android/content/pm/PackageInfo.html
-    // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/content/pm/PackageInfo.java
+    // http://developer.android.com/reference/android/content/pm/ApplicationInfo.html
+    // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/content/pm/ApplicationInfo.java
     [Script(IsNative = true)]
-    public  class PackageInfo
+    public class ApplicationInfo : PackageItemInfo 
     {
-        public ActivityInfo[] activities;
-
         // X:\jsc.svn\examples\javascript\android\AndroidListApplications\AndroidListApplications\ApplicationWebService.cs
-
-        public int versionCode;
 
     }
 }

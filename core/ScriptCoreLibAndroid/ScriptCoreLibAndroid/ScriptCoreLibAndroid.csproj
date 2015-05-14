@@ -945,6 +945,10 @@
     <Compile Include="android\content\ContentResolver.cs" />
     <Compile Include="android\content\DialogInterface.cs" />
     <Compile Include="android\content\IntentFilter.cs" />
+    <Compile Include="android\content\pm\ActivityInfo.cs" />
+    <Compile Include="android\content\pm\ComponentInfo.cs" />
+    <Compile Include="android\content\pm\ApplicationInfo.cs" />
+    <Compile Include="android\content\pm\PackageItemInfo.cs" />
     <Compile Include="android\content\pm\PackageInfo.cs" />
     <Compile Include="android\content\pm\LauncherApps.cs" />
     <Compile Include="android\content\pm\ResolveInfo.cs" />
@@ -961,6 +965,7 @@
     <Compile Include="android\graphics\Color.cs" />
     <Compile Include="android\graphics\Bitmap.cs" />
     <Compile Include="android\graphics\BitmapFactory.cs" />
+    <Compile Include="android\graphics\drawable\BitmapDrawable.cs" />
     <Compile Include="android\graphics\drawable\Drawable.cs" />
     <Compile Include="android\graphics\PixelFormat.cs" />
     <Compile Include="android\hardware\CameraInfo.cs" />

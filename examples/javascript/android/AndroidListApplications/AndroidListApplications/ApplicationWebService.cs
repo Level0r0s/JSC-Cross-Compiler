@@ -62,7 +62,7 @@ namespace AndroidListApplications
             var pm = context.getPackageManager();
 
             var pkgAppsList = pm.queryIntentActivitiesEnumerable(mainIntent)
-                .OrderBy(k => k.activityInfo.packageName)
+                .OrderBy((android.content.pm.ResolveInfo k) => k.activityInfo.packageName)
                 .WithEach(
                 r =>
                 {
@@ -149,7 +149,9 @@ namespace AndroidListApplications
             var context = ThreadLocalContextReference.CurrentContext;
             // http://stackoverflow.com/questions/8228365/how-do-i-remove-any-app-from-a-device-using-my-app-in-android
             // http://stackoverflow.com/questions/6049622/action-delete-android
-            Intent intent = new Intent(Intent.ACTION_DELETE);
+
+            // partial core?
+            Intent intent = new Intent(android.content.Intent.ACTION_DELETE);
             intent.setData(android.net.Uri.parse("package:" + packageName));
             context.startActivity(intent);
         }
