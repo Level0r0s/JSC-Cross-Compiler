@@ -81,7 +81,7 @@ namespace android.app
         {
         }
 
-        protected virtual void onDestory()
+        protected virtual void onDestroy()
         {
         }
 

@@ -88,7 +88,8 @@ namespace AndroidListApplications
                             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                             var bitmapByte = (byte[])(object)stream.toByteArray();
 
-                            icon_base64 = Convert.ToBase64String(bitmapByte);
+                            // this will take forever
+                            //icon_base64 = Convert.ToBase64String(bitmapByte);
 
                             //bitmapByte = Base64.encode(bitmapByte,Base64.DEFAULT);
                             //System.out.println("..length of image..."+bitmapByte.length);
