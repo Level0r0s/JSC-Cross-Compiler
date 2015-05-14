@@ -22,7 +22,7 @@ namespace com.abstractatech.adminshell
     /// Methods defined in this type can be used from JavaScript. The method calls will seamlessly be proxied to the server.
     /// </summary>
     /// 
-    [DesignerCategory("code")]
+    [System.ComponentModel.DesignerCategory("code")]
     public sealed class ApplicationWebService :
         AndroidNFCEvents.IApplicationWebService_poll_onnfc
     {
