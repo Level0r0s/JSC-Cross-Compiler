@@ -39,3 +39,7 @@ using System.Runtime.InteropServices;
 
 // so AssetLibrary
 [assembly: Obfuscation(Feature = "merge")]
+
+// jsc, how do we add assets?
+
+[assembly: ScriptCoreLib.Shared.ScriptResourcesAttribute("libs/armeabi-v7a")]
