@@ -18,9 +18,11 @@ namespace TestNDKAsAsset
     using ScriptCoreLib;
     using ScriptCoreLibNative.SystemHeaders;
 
+    [Obfuscation(StripAfterObfuscation = true)]
     class Program
     {
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150518
+        // X:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\staging\jni\Application.mk
         //├───arm64-v8a
         //├───armeabi
         //├───armeabi-v7a
@@ -45,16 +47,15 @@ namespace TestNDKAsAsset
     //Added file X:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\bin\Debug\staging\proguard-project.txt
 
     // to be used by nuget user
-    public static class xActivity
+    partial class xActivity
     {
-        [Script(IsPInvoke = true)]
-        //private long find(string lib, string fname) { return default(long); }
-        public static string stringFromJNI() { return default(string); }
+
     }
 
 
     // [armeabi-v7a] Install        : libTestNDKAsAsset.so => libs/armeabi-v7a/libTestNDKAsAsset.so
     // "X:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\bin\Debug\staging\libs\armeabi-v7a\libTestNDKAsAsset.so"
+    [Obfuscation(StripAfterObfuscation = true)]
     partial class xNativeActivity
     {
         [Script(NoDecoration = true)]
@@ -73,6 +74,9 @@ namespace TestNDKAsAsset
             var v = n(ref env, "from Java_TestHybridOVR_OVRJVM_ApplicationActivity_stringFromJNI");
 
             return v;
+
+
+            // ConfigurationCreateNuGetPackage.cs
         }
     }
 }
