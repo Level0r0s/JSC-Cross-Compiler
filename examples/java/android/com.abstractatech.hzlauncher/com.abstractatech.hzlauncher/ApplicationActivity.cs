@@ -18,13 +18,23 @@ namespace com.abstractatech.hzlauncher.Activities
     
     }
 
+
+
+
+
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "org.chromium.content.browser.NUM_SANDBOXED_SERVICES", value = "5")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "org.chromium.content.browser.NUM_PRIVILEGED_SERVICES", value = "3")]
+
+
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "10")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@style/Theme.AppCompat")]
     public class LocalApplicationActivity : 
         //android.support.v7.app.ActionBarActivity
-        com.oculusvr.vrlib.VrActivity 
+        //com.oculusvr.vrlib.VrActivity 
+
+        global::org.chromium.chrome.shell.ChromeShellActivity
     {
         // X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\src\com\oculusvr\vrlib\VrActivity.java
         // com.oculusvr.vrlib
@@ -39,6 +49,13 @@ namespace com.abstractatech.hzlauncher.Activities
 
         protected override void onCreate(Bundle savedInstanceState)
         {
+            //org.chromium.chrome.shell.TabManager.DEFAULT_URL = "https://explore.xavalon.net";
+            org.chromium.chrome.shell.TabManager.DEFAULT_URL = "http://192.168.1.126:27535";
+            base.onCreate(savedInstanceState);
+            return;
+
+#if xgearvr
+
             // https://forums.oculus.com/viewtopic.php?f=67&t=22886&p=266775#p266775
 
             //base.onCreate(savedInstanceState);
@@ -57,7 +74,6 @@ namespace com.abstractatech.hzlauncher.Activities
 
             //this.setContentView(sv);
 
-            base.onCreate(savedInstanceState);
 
             android.content.Intent intent = getIntent();
 
@@ -80,6 +96,7 @@ namespace com.abstractatech.hzlauncher.Activities
             );
 
             Console.WriteLine("invoke base  HybridOculusVrActivity.OVRJVM ApplicationActivity nativeSetAppInterface done");
+#endif
 
         }
 

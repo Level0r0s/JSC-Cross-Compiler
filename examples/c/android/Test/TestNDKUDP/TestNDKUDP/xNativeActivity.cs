@@ -240,6 +240,19 @@ namespace TestNDKUDP
     }
 }
 
+
+//I/xNativeActivity(19757): X:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs:203 recvfrom:  52 errno: 0 Success
+//I/xNativeActivity(19757): X:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs:210 <string c = "1" n="hello world">Visit me at :</string>
+//I/xNativeActivity(19757): X:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs:194 before recvfrom
+
+
+//I/xNativeActivity(15095): X:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs:103 enter TestNDKUDP
+//I/xNativeActivity(15095): X:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs:114 socket  35 errno: 0 Success
+//I/xNativeActivity(15095): X:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs:139 setsockopt IP_MULTICAST_IF:  0 errno: 0 Success
+//I/xNativeActivity(15095): X:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs:155 setsockopt IP_ADD_MEMBERSHIP:  0 errno: 0 Success
+//I/xNativeActivity(15095): X:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs:180 bind:  0 errno: 0 Success
+//I/xNativeActivity(15095): X:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs:194 before recvfrom
+
 //E/AndroidRuntime(12919): Caused by: java.lang.IllegalArgumentException: Unable to find native library: TestNDKUDP
 //E/AndroidRuntime(12919):        at android.app.NativeActivity.onCreate(NativeActivity.java:170)
 //E/AndroidRuntime(12919):        at android.app.Activity.performCreate(Activity.java:6374)

@@ -29,13 +29,15 @@ namespace ChromeTCPServerAsync
 	/// </summary>
 	public sealed class Application : ApplicationWebService
 	{
-		// This extension requires Maelstrom version 38 or greater. 
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150513
 
-		/// <summary>
-		/// This is a javascript application.
-		/// </summary>
-		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
-		public Application(IApp page)
+        // This extension requires Maelstrom version 38 or greater. 
+
+        /// <summary>
+        /// This is a javascript application.
+        /// </summary>
+        /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
+        public Application(IApp page)
 		{
 			// Permission 'app.window.alpha' is unknown or URL pattern is malformed.
 

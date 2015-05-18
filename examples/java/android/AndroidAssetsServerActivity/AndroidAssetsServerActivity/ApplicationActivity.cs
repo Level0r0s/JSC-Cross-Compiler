@@ -18,6 +18,8 @@ namespace AndroidAssetsServerActivity.Activities
 {
     public class ApplicationActivity : Activity
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150513
+
         // see also: y:\jsc.svn\examples\java\android\AndroidLacasCameraServerActivity\AndroidLacasCameraServerActivity\com\lacas\testsocket\TestSocketActivity.java
 
         ScriptCoreLib.Android.IAssemblyReferenceToken ref1;
@@ -192,13 +194,14 @@ namespace AndroidAssetsServerActivity.Activities
 
         ServerThread serverThread;
 
-        protected override void onDestroy()
-        {
-            base.onDestroy();
+        //protected override void onDestroy()
+        //{
+        //    //  protected virtual void onDestory();
+        //    //base.onDestroy();
 
-            if (serverThread.serversocket != null)
-                serverThread.closeConnections();
-        }
+        //    if (serverThread.serversocket != null)
+        //        serverThread.closeConnections();
+        //}
         public class ServerThread : Runnable
         {
             public int port = 1111;
@@ -405,30 +408,30 @@ namespace AndroidAssetsServerActivity.Activities
         }
     }
 
-    [Script(Implements = typeof(global::System.Random))]
-    internal class __Random
-    {
-        public virtual int Next()
-        {
-            return Next(0, int.MaxValue);
-        }
+    //[Script(Implements = typeof(global::System.Random))]
+    //internal class __Random
+    //{
+    //    public virtual int Next()
+    //    {
+    //        return Next(0, int.MaxValue);
+    //    }
 
-        public virtual int Next(int min, int max)
-        {
-            var len = max - min;
-            var r = global::java.lang.Math.floor(java.lang.Math.random() * len);
+    //    public virtual int Next(int min, int max)
+    //    {
+    //        var len = max - min;
+    //        var r = global::java.lang.Math.floor(java.lang.Math.random() * len);
 
-            int ri = (int)r;
-            return ri + min;
-        }
+    //        int ri = (int)r;
+    //        return ri + min;
+    //    }
 
-        public virtual double NextDouble()
-        {
-            return java.lang.Math.random();
-        }
+    //    public virtual double NextDouble()
+    //    {
+    //        return java.lang.Math.random();
+    //    }
 
 
-    }
+    //}
 
 
 

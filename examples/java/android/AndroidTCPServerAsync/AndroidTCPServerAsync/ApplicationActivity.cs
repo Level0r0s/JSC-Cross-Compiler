@@ -23,6 +23,8 @@ namespace AndroidTCPServerAsync.Activities
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150513
+
 
         protected override void onCreate(Bundle savedInstanceState)
         {
@@ -174,17 +176,46 @@ hello world. jvm clr android async tcp? udp?<iframe  sandbox='allow-forms' src='
 
 }
 
+// <activity android:name="ApplicationActivity" android:label="@string/app_name" android:launchMode="singleInstance" android:configChanges="orientation|screenSize" android:theme="@android:style/Theme.Holo.Dialog">
+//  [aapt] P:\bin\AndroidManifest.xml:14: error: Error: No resource found that matches the given name (at 'label' with value '@string/app_name').
+
 
 //[javac]
-//W:\src\__AnonymousTypes__AndroidTCPServerAsync_AndroidActivity\__f__AnonymousType_57_2_2.java:41: error: reference to Format is ambiguous, both method Format(String, Object, Object) in __String and method Format(__IFormatProvider, String, Object[]) in __String match
+//P:\src\AndroidTCPServerAsync\Activities\ApplicationActivity___c__DisplayClass0_0___onCreate_b__1_d__MoveNext_06000025.java:53: error: cannot find symbol
+//[javac] ApplicationActivity___c__DisplayClass0_0___onCreate_b__1_d__MoveNext_06000025.__workflow(next_060000250, ref_awaiter1, ref_create_b__1_d2);
+//[javac]                                                                                                                                ^
+//  [javac]
+//symbol:   variable ref_create_b__1_d2
+//[javac]   location: class ApplicationActivity___c__DisplayClass0_0___onCreate_b__1_d__MoveNext_06000025
+//  [javac]
+//P:\src\AndroidTCPServerAsync\Activities\ApplicationActivity___c__DisplayClass0_1___onCreate_b__3_d__MoveNext_06000028.java:47: error: cannot find symbol
+//[javac] ApplicationActivity___c__DisplayClass0_1___onCreate_b__3_d__MoveNext_06000028.__workflow(next_060000280, ref_awaiter_11, ref_create_b__3_d2);
+//[javac]                                                                                                                                  ^
+//  [javac]
+//symbol:   variable ref_create_b__3_d2
+//[javac]   location: class ApplicationActivity___c__DisplayClass0_1___onCreate_b__3_d__MoveNext_06000028
+//  [javac]
+//P:\src\AndroidTCPServerAsync\Activities\ApplicationActivity__yield_d__1__MoveNext_06000022.java:51: error: cannot find symbol
+//[javac] ApplicationActivity__yield_d__1__MoveNext_06000022.__workflow(next_060000220, ref_awaiter_11, ref__yield_d__12, ref_awaiter3);
+//[javac]                                                                                                       ^
+//  [javac]
+//symbol:   variable ref__yield_d__12
+//[javac]   location: class ApplicationActivity__yield_d__1__MoveNext_06000022
+//  [javac]
+//P:\src\__AnonymousTypes__AndroidTCPServerAsync_AndroidActivity\__f__AnonymousType_106_1_1.java:34: error: reference to Format is ambiguous, both method Format(String, Object, Object) in __String and method Format(__IFormatProvider, String, Object[]) in __String match
+//[javac]         return __String.Format(null, "{{ ManagedThreadId = {0} }}", objectArray2);
+//  [javac]                        ^
+//  [javac]
+//P:\src\__AnonymousTypes__AndroidTCPServerAsync_AndroidActivity\__f__AnonymousType_74_2_2.java:41: error: reference to Format is ambiguous, both method Format(String, Object, Object) in __String and method Format(__IFormatProvider, String, Object[]) in __String match
 //[javac]         return __String.Format(null, "{{ c = {0}, ManagedThreadId = {1} }}", objectArray4);
-//    [javac]                        ^
-//    [javac]
-//W:\src\__AnonymousTypes__AndroidTCPServerAsync_AndroidActivity\__f__AnonymousType_78_3_2.java:44: error: reference to Format is ambiguous, both method Format(String, Object, Object) in __String and method Format(__IFormatProvider, String, Object[]) in __String match
+//  [javac]                        ^
+//  [javac]
+//P:\src\__AnonymousTypes__AndroidTCPServerAsync_AndroidActivity\__f__AnonymousType_95_3_2.java:44: error: reference to Format is ambiguous, both method Format(String, Object, Object) in __String and method Format(__IFormatProvider, String, Object[]) in __String match
 //[javac]         return __String.Format(null, "{{ ManagedThreadId = {0}, input = {1} }}", objectArray4);
-
-
-//[javac] Compiling 683 source files to W:\bin\classes
-//[javac] W:\src\ScriptCoreLib\Extensions\LinqExtensions.java:227: error: incompatible types
-//[javac]             if ((enumerator_10))
-//[javac]                  ^
+//  [javac]                        ^
+//  [javac]
+//Note: P:\src\ScriptCoreLibJava\BCLImplementation\System\Threading\__Thread.java uses or overrides a deprecated API.
+//  [javac] Note: Recompile with -Xlint:deprecation for details.
+//  [javac] Note: Some input files use unchecked or unsafe operations.
+//  [javac] Note: Recompile with -Xlint:unchecked for details.
+//  [javac] 6 errors

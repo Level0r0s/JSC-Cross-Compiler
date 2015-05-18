@@ -88,6 +88,7 @@ namespace android.app
 
         protected virtual void onDestroy()
         {
+            // X:\jsc.svn\examples\java\android\AndroidAssetsServerActivity\AndroidAssetsServerActivity\ApplicationActivity.cs
         }
 
 
