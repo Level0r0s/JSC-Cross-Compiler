@@ -56,8 +56,13 @@ namespace TestNDKAsAsset
     // [armeabi-v7a] Install        : libTestNDKAsAsset.so => libs/armeabi-v7a/libTestNDKAsAsset.so
     // "X:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\bin\Debug\staging\libs\armeabi-v7a\libTestNDKAsAsset.so"
     [Obfuscation(StripAfterObfuscation = true)]
+
+    // x:\jsc.svn\examples\java\android\androidndknugetexperiment\androidndknugetexperiment\applicationactivity.cs
+    [Script]
     partial class xNativeActivity
     {
+        // Java_TestNDKAsAsset_xActivity_stringFromJNI
+
         [Script(NoDecoration = true)]
         // JVM load the .so and calls this native function
         static jstring Java_TestNDKAsAsset_xActivity_stringFromJNI(
