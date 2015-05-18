@@ -1,0 +1,1 @@
+﻿jni folder contains generated c code for ndk.

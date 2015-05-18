@@ -78,6 +78,7 @@ namespace TestHybridOVR.OVRJVM
             java.lang.System.loadLibrary("TestHybridOVR");
         }
 
+        // does jsc support pinvoke too?
         [Script(IsPInvoke = true)]
         //private long find(string lib, string fname) { return default(long); }
         public static string stringFromJNI() { return default(string); }
