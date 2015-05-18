@@ -18,6 +18,9 @@ namespace AndroidNDKNugetExperiment.Activities
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
+        // http://stackoverflow.com/questions/19954156/android-build-separate-apks-for-different-processor-architectures
+        // "X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset.sln"
+
         //  [aapt] W:\bin\AndroidManifest.xml:14: error: Error: No resource found that matches the given name (at 'label' with value '@string/app_name').
 
 
@@ -37,11 +40,13 @@ namespace AndroidNDKNugetExperiment.Activities
             var b = new Button(this);
 
             b.setText(
-                
+                // X:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\Program.cs
                 // http://stackoverflow.com/questions/19954156/android-build-separate-apks-for-different-processor-architectures
 
+                // can we load that native so into a separate process?
+                // switch to native and back?
                 TestNDKAsAsset.xActivity.stringFromJNI()
-                //"Vibrate!"
+            //"Vibrate!"
             );
 
             b.AtClick(

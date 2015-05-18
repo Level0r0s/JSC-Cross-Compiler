@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestChromeAsAsset", "TestChromeAsAsset\TestChromeAsAsset.csproj", "{9D280B94-A86D-496D-940A-7C0C1C270590}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Ultra", "..\..\..\..\..\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra.csproj", "{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidNDKNugetExperiment", "..\..\AndroidNDKNugetExperiment\AndroidNDKNugetExperiment\AndroidNDKNugetExperiment.csproj", "{639740A5-EC27-49D6-80D9-775A49DA08A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNDKAsAssetFromSharedLibrary", "..\..\..\..\c\android\Test\TestNDKAsAsset\TestNDKAsAssetFromSharedLibrary\TestNDKAsAssetFromSharedLibrary.csproj", "{6552A979-7A93-49BA-96C7-E668494F146F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +28,18 @@ Global
 		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{639740A5-EC27-49D6-80D9-775A49DA08A3}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{639740A5-EC27-49D6-80D9-775A49DA08A3}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{639740A5-EC27-49D6-80D9-775A49DA08A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{639740A5-EC27-49D6-80D9-775A49DA08A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{639740A5-EC27-49D6-80D9-775A49DA08A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{639740A5-EC27-49D6-80D9-775A49DA08A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6552A979-7A93-49BA-96C7-E668494F146F}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{6552A979-7A93-49BA-96C7-E668494F146F}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{6552A979-7A93-49BA-96C7-E668494F146F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6552A979-7A93-49BA-96C7-E668494F146F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6552A979-7A93-49BA-96C7-E668494F146F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6552A979-7A93-49BA-96C7-E668494F146F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

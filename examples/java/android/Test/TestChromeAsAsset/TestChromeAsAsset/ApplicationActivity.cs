@@ -13,6 +13,10 @@ using ScriptCoreLib.Android.Manifest;
 using android.content;
 using android.content.res;
 
+
+// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150518/testchromeasasset
+[assembly: ScriptCoreLib.Shared.ScriptResourcesAttribute("libs/armeabi_v7a")]
+
 namespace TestChromeAsAsset.Activities
 {
 
@@ -147,14 +151,21 @@ namespace TestChromeAsAsset.Activities
             base.onCreate();
         }
 
-        //static LocalApplication()
-        //{
+        static LocalApplication()
+        {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150518/testchromeasasset
+
+            // U:\chromium\src\out\Release\chrome_shell_apk\libs\armeabi-v7a\libchromeshell.so
+            var libchromeshell = @"libs/armeabi_v7a/libchromeshell.so";
+            // U:\chromium\src\out\Release\chrome_shell_apk\libs\armeabi-v7a\libchromium_android_linker.so
+            var libchromium_android_linker = @"libs/armeabi_v7a/libchromium_android_linker.so";
+
         //    Console.WriteLine("should we prefetch our .so for JNI_OnLoad?");
         //    // U:\chromium\src\chrome\android\shell\chrome_shell_entry_point.cc
 
         //    // couldn't find "liblibchromeshell.so"
         //    java.lang.System.loadLibrary("chromeshell");
-        //}
+        }
     }
 
 
