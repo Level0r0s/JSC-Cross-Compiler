@@ -17,13 +17,20 @@ namespace ScriptCoreLib.Ultra.IL
     {
         public IDLParserToken Token;
 
-        public bool IsStatic;
+        // .method private hidebysig static void modopt([mscorlib]System.Runtime.CompilerServices.CallConvCdecl) 
+        //__AssemblyLoad() cil managed
 
+        public bool IsPrivate;
+        public bool IsStatic;
+        
         // X:\jsc.svn\examples\c\Test\TestConsoleWriteLine\TestConsoleWriteLine\Program.cs
         public bool IsUnmanagedExport;
 
         public IDLParserToken NameToken;
         public IDLParserToken ParameterStartToken;
         public IDLParserToken BodyStartToken;
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/08-cx/20150518
+        // implicitly should filter out private methods
     }
 }

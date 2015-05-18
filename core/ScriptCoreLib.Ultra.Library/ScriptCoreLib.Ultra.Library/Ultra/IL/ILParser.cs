@@ -80,6 +80,8 @@ namespace ScriptCoreLib.Ultra.IL
                             var NameToken = p.SkipWhile(k => k.SkipTo().Text != "(").First();
                             var Sig = p.TakeWhile(k => k != NameToken).ToArray();
 
+                            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/08-cx/20150518
+                            var IsPrivate = Sig.Any(k => k.Text == "private");
                             var IsStatic = Sig.Any(k => k.Text == "static");
                             var IsUnmanagedExport = Sig.Any(k => k.Text == "unmanagedexp");
 
@@ -87,6 +89,7 @@ namespace ScriptCoreLib.Ultra.IL
                                 new ILAssemblyMethod
                                 {
                                     Token = p,
+                                    IsPrivate = IsPrivate,
                                     IsStatic = IsStatic,
                                     IsUnmanagedExport = IsUnmanagedExport,
                                     NameToken = NameToken,
