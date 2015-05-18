@@ -42,4 +42,3 @@ using System.Runtime.InteropServices;
 
 // jsc, how do we add assets?
 
-[assembly: ScriptCoreLib.Shared.ScriptResourcesAttribute("libs/armeabi-v7a")]
