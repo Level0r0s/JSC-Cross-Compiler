@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ScriptCoreLibNative.SystemHeaders.sys.socket_h;
+using static ScriptCoreLibNative.SystemHeaders.sys.socket_h;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
@@ -28,6 +28,8 @@ namespace TestNDKUDP
             string message = "",
             [CallerFilePath] string sourceFilePath = "",
             [CallerLineNumber] int sourceLineNumber = 0)
+
+            // ?
             => log.__android_log_print(
                 log.android_LogPriority.ANDROID_LOG_INFO,
                 "xNativeActivity",
@@ -194,6 +196,7 @@ namespace TestNDKUDP
                 // http://pubs.opengroup.org/onlinepubs/009695399/functions/recvfrom.html
                 // Upon successful completion, recvfrom() shall return the length of the message in bytes. 
                 var recvfromret = s.recvfrom(buff, 0xfff, 0, (sockaddr*)&sender, &sizeof_sender);
+                // sent by?
 
                 //I/xNativeActivity(24024): X:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs:167 recvfrom:  116 errno: 22 Invalid argument
                 //I/xNativeActivity(24024): X:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs:168 SenderAddrSize:  16 errno: 22 Invalid argument
@@ -236,3 +239,9 @@ namespace TestNDKUDP
 
     }
 }
+
+//E/AndroidRuntime(12919): Caused by: java.lang.IllegalArgumentException: Unable to find native library: TestNDKUDP
+//E/AndroidRuntime(12919):        at android.app.NativeActivity.onCreate(NativeActivity.java:170)
+//E/AndroidRuntime(12919):        at android.app.Activity.performCreate(Activity.java:6374)
+//E/AndroidRuntime(12919):        at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1119)
+//E/AndroidRuntime(12919):        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2767)

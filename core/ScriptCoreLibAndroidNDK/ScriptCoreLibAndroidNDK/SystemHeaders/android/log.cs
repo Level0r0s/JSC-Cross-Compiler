@@ -37,7 +37,9 @@ namespace ScriptCoreLibNative.SystemHeaders.android
 
         // X:\jsc.svn\examples\c\android\HybridOculusVrActivity\HybridOculusVrActivity\OVRNDK\xNativeActivity.cs
         // would be callable if it were a shared code project?
-        internal static int __android_log_print(android_LogPriority prio, string tag, string fmt, __arglist) { return default(int); }
+        // called by
+        // x:\jsc.svn\examples\c\android\test\testndkudp\testndkudp\xnativeactivity.cs
+        public static int __android_log_print(android_LogPriority prio, string tag, string fmt, __arglist) { return default(int); }
 
 
     }
