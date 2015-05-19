@@ -9,19 +9,30 @@ namespace org.chromium.mojo.system
     // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150518/testchromeasasset
 
     //  U:\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\InvalidHandle.java"
-    class InvalidHandle : UntypedHandle
+    class xInvalidHandle : xUntypedHandle
     {
-        public InvalidHandle pass()
+        InvalidHandle i;
+
+        public xInvalidHandle pass()
         {
+            //i.pass();
+            var xx = (xUntypedHandle)i;
+
+            xx.pass();
             return this;
         }
 
-        Handle Handle.pass()
+        //        Severity Code    Description Project File Line
+        //Error CS0738	'InvalidHandle' does not implement interface member 'Handle.pass()'. 'InvalidHandle.pass()' cannot implement 'Handle.pass()' because it does not have the matching return type of 'Handle'.	TestInvalidHandle X:\jsc.svn\examples\java\android\Test\TestInvalidHandle\TestInvalidHandle\Class1.cs	12
+        //Error CS0738	'InvalidHandle' does not implement interface member 'UntypedHandle.pass()'. 'InvalidHandle.pass()' cannot implement 'UntypedHandle.pass()' because it does not have the matching return type of 'UntypedHandle'.	TestInvalidHandle X:\jsc.svn\examples\java\android\Test\TestInvalidHandle\TestInvalidHandle\Class1.cs	12
+
+
+        xHandle xHandle.pass()
         {
             throw new NotImplementedException();
         }
 
-        UntypedHandle UntypedHandle.pass()
+        xUntypedHandle xUntypedHandle.pass()
         {
             throw new NotImplementedException();
         }
@@ -29,15 +40,15 @@ namespace org.chromium.mojo.system
 
 
     // U:\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\UntypedHandle.java
-    interface UntypedHandle : Handle
+    interface xUntypedHandle : xHandle
     {
-        UntypedHandle pass();
+        xUntypedHandle pass();
     }
 
     // U:\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\Handle.java
-    interface Handle
+    interface xHandle
     {
-        Handle pass();
+        xHandle pass();
     }
 
 }

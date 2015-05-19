@@ -137,6 +137,8 @@ namespace ScriptCoreLib.Java
         }
     }
 
+
+    [DebuggerDisplay("{ReturnType} {MethodName}()")]
     public sealed class JavaArchiveReflectorMethod
     {
         public int MethodIndex;
