@@ -7,6 +7,8 @@ using java.lang;
 
 namespace TestPrintWriter
 {
+    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150521
+
     // http://docs.oracle.com/javase/7/docs/api/java/io/PrintWriter.html
     public class PrintWriter : Writer
     {
@@ -21,10 +23,10 @@ namespace TestPrintWriter
             throw new NotImplementedException();
         }
 
-        Appendable Appendable.append(CharSequence c)
-        {
-            throw new NotImplementedException();
-        }
+        //Appendable Appendable.append(CharSequence c)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 
         // X:\jsc.svn\examples\java\android\Test\TestPrintWriter\TestPrintWriter\References\PrintWriter.java:3: error: PrintWriter is not abstract and does not override abstract method append(CharSequence) in Appendable
@@ -40,6 +42,6 @@ namespace TestPrintWriter
     public interface Appendable
     {
         Appendable append(char c);
-        Appendable append(java.lang.CharSequence c);
+        //Appendable append(java.lang.CharSequence c);
     }
 }

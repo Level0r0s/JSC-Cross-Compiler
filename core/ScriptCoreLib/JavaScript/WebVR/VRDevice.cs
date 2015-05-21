@@ -12,6 +12,9 @@ namespace ScriptCoreLib.JavaScript.WebVR
 	[Script(HasNoPrototype = true)]
 	public class VRDevice
 	{
+        // https://youtu.be/UGv_sFMn0tQ?t=7882
+
+
 		// https://www.khronos.org/registry/gles/extensions/OVR/multiview2.txt
 		// https://www.khronos.org/registry/gles/extensions/OVR/multiview.txt
 
