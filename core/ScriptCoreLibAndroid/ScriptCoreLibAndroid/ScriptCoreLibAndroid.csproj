@@ -965,6 +965,7 @@
     <Compile Include="android\graphics\Color.cs" />
     <Compile Include="android\graphics\Bitmap.cs" />
     <Compile Include="android\graphics\BitmapFactory.cs" />
+    <Compile Include="android\graphics\Canvas.cs" />
     <Compile Include="android\graphics\drawable\BitmapDrawable.cs" />
     <Compile Include="android\graphics\drawable\Drawable.cs" />
     <Compile Include="android\graphics\PixelFormat.cs" />

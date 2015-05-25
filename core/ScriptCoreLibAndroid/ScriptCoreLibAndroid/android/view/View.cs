@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using android.content;
 using ScriptCoreLib;
+using android.graphics;
 
 namespace android.view
 {
@@ -20,6 +21,11 @@ namespace android.view
         public const int SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN = 0x00000400;
         public const int SYSTEM_UI_FLAG_IMMERSIVE_STICKY = 0x00001000;
 
+        // X:\jsc.svn\examples\java\android\AndroidLacasCameraServerActivity\AndroidLacasCameraServerActivity\ApplicationActivity.cs
+
+        protected virtual void onDraw(Canvas canvas)
+        {
+        }
 
         public void setEnabled(bool enabled) { }
         public void setSystemUiVisibility(int visibility)

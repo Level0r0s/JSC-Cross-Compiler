@@ -12,9 +12,15 @@ namespace android.content.pm
     {
         public static readonly int GET_META_DATA = 0x00000080;
 
-        public abstract string getApplicationLabel(ApplicationInfo info);
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150525/res
+        //  'getApplicationLabel' in type 'android.test.mock.MockPackageManager'
+
+        //public abstract string getApplicationLabel(ApplicationInfo info);
+        public abstract java.lang.CharSequence getApplicationLabel(ApplicationInfo info);
+
         public abstract android.graphics.drawable.Drawable getApplicationIcon(ApplicationInfo info);
-        public abstract java.util.List<ResolveInfo> queryIntentActivities(Intent intent, int flags);
+        //public abstract java.util.List<ResolveInfo> queryIntentActivities(Intent intent, int flags);
+        public abstract java.util.List queryIntentActivities(Intent intent, int flags);
         public abstract Intent getLaunchIntentForPackage(string packageName);
         public abstract PackageInfo getPackageInfo(string packageName, int flags);
     }

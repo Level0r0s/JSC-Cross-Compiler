@@ -70,13 +70,14 @@ namespace TestNDKAsAsset
             ref JNIEnv env,
             jobject thiz)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150525
 
             var n = env.NewStringUTF;
 
             // look almost the same file!
 
             // if we change our NDK code, will nuget packaing work on the background, and also upgrade running apps?
-            var v = n(ref env, "from Java_TestHybridOVR_OVRJVM_ApplicationActivity_stringFromJNI");
+            var v = n(ref env, "from Java_TestHybridOVR_OVRJVM_ApplicationActivity_stringFromJNI. yay");
 
             return v;
 

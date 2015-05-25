@@ -16,6 +16,10 @@ namespace TestNDKAsAsset
 
     public static partial class xActivity
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150525
+
+        // ConfigurationCreateNuGetPackage 
+
         // Embedded Resource
         // libs\armeabi-v7a\libTestNDKAsAsset.so
 

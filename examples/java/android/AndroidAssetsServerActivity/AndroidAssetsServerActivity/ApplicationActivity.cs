@@ -18,6 +18,7 @@ namespace AndroidAssetsServerActivity.Activities
 {
     public class ApplicationActivity : Activity
     {
+        // 
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150513
 
         // see also: y:\jsc.svn\examples\java\android\AndroidLacasCameraServerActivity\AndroidLacasCameraServerActivity\com\lacas\testsocket\TestSocketActivity.java

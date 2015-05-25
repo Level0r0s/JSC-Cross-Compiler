@@ -104,15 +104,15 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="U:\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\Handle.java">
+    <None Include="U:\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\Handle.java">
       <Link>References\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\Handle.java</Link>
-    </Content>
-    <Content Include="U:\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\InvalidHandle.java">
+    </None>
+    <None Include="U:\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\InvalidHandle.java">
       <Link>References\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\InvalidHandle.java</Link>
-    </Content>
-    <Content Include="U:\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\UntypedHandle.java">
+    </None>
+    <None Include="U:\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\UntypedHandle.java">
       <Link>References\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\UntypedHandle.java</Link>
-    </Content>
+    </None>
     <None Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\invalidation\UniqueIdInvalidationClientNameGenerator.java">
       <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\invalidation\UniqueIdInvalidationClientNameGenerator.java</Link>
     </None>
@@ -430,7 +430,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rem start /MIN /WAIT cmd /C X:\util\android-sdk-windows\build-tools\22.0.1\aapt.exe  package -v -f -m -S X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\res -M "X:\util\android-sdk-windows\extras\android\support\v7\appcompat\AndroidManifest.xml" -I "X:\util\android-sdk-windows\platforms\android-22\android.jar" -J X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\bin\Debug\staging\apk\gen\ 
+    <PostBuildEvent>start /WAIT cmd /C "C:\util\jsc\bin\jsc.meta.exe" ConfigurationCreateNuGetPackage /AssemblyMerge:TestChromeAsAsset.exe  /AssemblyMerge:TestChromeAsAsset.AssetsLibrary.dll /ProjectFileName:$(ProjectPath)
 
 start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
 </PostBuildEvent>

@@ -77,9 +77,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="AndroidVibrationActivity.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\AndroidVibrationActivity.AssetsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="AndroidNDKNugetExperiment.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\AndroidNDKNugetExperiment.AssetsLibrary.dll</HintPath>
     </Reference>
@@ -95,6 +92,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="staging\apk\bin\android-install.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Design\Images.htm" />

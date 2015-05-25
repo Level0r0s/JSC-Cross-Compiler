@@ -43,7 +43,7 @@ public class UtilsSD {
 		    }
 
 		} else {
-			Utils.alert("Figyelem!", "Hiba! Kérem helyezze be az SD kártyát és húzza ki az usb kábelt!", mycontext);		
+			Utils.alert("Figyelem!", " ", mycontext);		
 		}
 	}
 	public static InputStream loadBitmapFromSD(Context mycontext, String filename) {
@@ -58,7 +58,7 @@ public class UtilsSD {
 		    }
 
 		} else {
-			Utils.alert("Figyelem!", "Hiba! Kérem helyezze be az SD kártyát és húzza ki az usb kábelt!", mycontext);		
+			Utils.alert("Figyelem!", " ", mycontext);		
 		}
 		
 		return null;

@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNDKAsAsset", "TestNDKAsAsset\TestNDKAsAsset.csproj", "{CB6D45F2-3A55-4F83-A15C-777F9A6CAC01}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNDKUDP", "..\TestNDKUDP\TestNDKUDP\TestNDKUDP.csproj", "{9CC1F2EC-11D5-46D7-9088-113FD67EF952}"
@@ -17,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNDKAsAssetFromSharedLib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibA", "..\..\..\..\..\compiler\ScriptCoreLibA\ScriptCoreLibA.csproj", "{477C5608-F5CD-436F-935D-66675988F1D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidNDKNugetExperiment", "..\..\..\..\java\android\AndroidNDKNugetExperiment\AndroidNDKNugetExperiment\AndroidNDKNugetExperiment.csproj", "{9D280B94-A86D-496D-940A-7C0C1C270590}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidNDKNugetExperiment", "..\..\..\..\java\android\AndroidNDKNugetExperiment\AndroidNDKNugetExperiment\AndroidNDKNugetExperiment.csproj", "{639740A5-EC27-49D6-80D9-775A49DA08A3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6552A979-7A93-49BA-96C7-E668494F146F} = {6552A979-7A93-49BA-96C7-E668494F146F}
 	EndProjectSection
@@ -52,18 +50,18 @@ Global
 		{477C5608-F5CD-436F-935D-66675988F1D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{477C5608-F5CD-436F-935D-66675988F1D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{477C5608-F5CD-436F-935D-66675988F1D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9D280B94-A86D-496D-940A-7C0C1C270590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D280B94-A86D-496D-940A-7C0C1C270590}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D280B94-A86D-496D-940A-7C0C1C270590}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D280B94-A86D-496D-940A-7C0C1C270590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{639740A5-EC27-49D6-80D9-775A49DA08A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{639740A5-EC27-49D6-80D9-775A49DA08A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{639740A5-EC27-49D6-80D9-775A49DA08A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{639740A5-EC27-49D6-80D9-775A49DA08A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{9CC1F2EC-11D5-46D7-9088-113FD67EF952} = {37E9C648-07BC-42EF-AFC5-500569F2015C}
 		{813C7DFD-C62A-4021-AB97-BFDE8404D4AE} = {37E9C648-07BC-42EF-AFC5-500569F2015C}
 		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77} = {37E9C648-07BC-42EF-AFC5-500569F2015C}
+		{9CC1F2EC-11D5-46D7-9088-113FD67EF952} = {37E9C648-07BC-42EF-AFC5-500569F2015C}
 		{477C5608-F5CD-436F-935D-66675988F1D9} = {37E9C648-07BC-42EF-AFC5-500569F2015C}
 	EndGlobalSection
 EndGlobal
