@@ -7,6 +7,8 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Runtime.CompilerServices
 {
     // http://referencesource.microsoft.com/#mscorlib/system/runtime/compilerservices/TaskAwaiter.cs
     // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Runtime/CompilerServices/TaskAwaiter.cs
+    // https://github.com/dot42/api/blob/master/System/Runtime/CompilerServices/TaskAwaiter.cs
+
     // see: http://msdn.microsoft.com/en-us/library/hh138386(v=vs.110).aspx
 
 

@@ -8,12 +8,14 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 {
     // http://referencesource.microsoft.com/#mscorlib/system/object.cs
     // https://github.com/mono/mono/blob/master/mcs/class/corlib/System/Object.cs
+    // https://github.com/dot42/api/blob/master/System/Object.cs
+
     // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Object.cs
     // X:\jsc.svn\core\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Object.cs
     // X:\jsc.svn\core\ScriptCoreLib\ActionScript\BCLImplementation\System\Object.cs
     // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Object.cs
 
-	[Script(
+    [Script(
 
 		Implements = typeof(global::System.Object),
 		ImplementationType = typeof(global::java.lang.Object)

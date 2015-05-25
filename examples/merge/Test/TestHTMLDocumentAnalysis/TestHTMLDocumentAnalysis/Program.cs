@@ -27,6 +27,11 @@ namespace TestHTMLDocumentAnalysis
 
         static void Main(string[] args)
         {
+            // defined at?
+            // X:\opensource\github\taglib-sharp\src\taglib-sharp.csproj
+            // R:\opensource\codeplex\htmlagilitypack
+            // X:\opensource\codeplex\htmlagilitypack\HtmlAgilityPack\HtmlAgilityPack.fx.4.5.csproj
+            // if not local, do we have it on wifi?
             var doc = new HtmlAgilityPack.HtmlDocument();
 
             //var origin = new Uri("https://www.youtube.com/playlist?list=PL_2cq1Gbhke8KAbNKEz-HszGqNlqtGfKl");

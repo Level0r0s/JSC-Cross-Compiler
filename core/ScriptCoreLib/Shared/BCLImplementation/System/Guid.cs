@@ -7,6 +7,7 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System
 {
     // http://referencesource.microsoft.com/#mscorlib/system/guid.cs
     // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Guid.cs
+    // https://github.com/dot42/api/blob/master/System/Guid.cs
 
     [Script(Implements = typeof(global::System.Guid))]
     internal class __Guid

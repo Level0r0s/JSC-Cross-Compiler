@@ -21,6 +21,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System
     // http://referencesource.microsoft.com/#mscorlib/system/type.cs
     // https://github.com/mono/mono/tree/master/mcs/class/corlib/System/Type.cs
     // https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/Type.cs
+    // https://github.com/dot42/api/blob/master/System/Type.cs
 
     // X:\opensource\github\JSIL\Proxies\Reflection.cs
     // "X:\opensource\github\Netjs\mscorlib.ts"

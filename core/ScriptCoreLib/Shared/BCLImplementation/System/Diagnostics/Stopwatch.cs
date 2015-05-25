@@ -7,113 +7,114 @@ using System.Diagnostics;
 
 namespace ScriptCoreLib.Shared.BCLImplementation.System.Diagnostics
 {
-	// http://referencesource.microsoft.com/#System/services/monitoring/system/diagnosticts/Stopwatch.cs
-	// https://github.com/mono/mono/blob/master/mcs/class/System/System.Diagnostics/Stopwatch.cs
+    // http://referencesource.microsoft.com/#System/services/monitoring/system/diagnosticts/Stopwatch.cs
+    // https://github.com/mono/mono/blob/master/mcs/class/System/System.Diagnostics/Stopwatch.cs
+    // https://github.com/dot42/api/blob/master/System/Diagnostics/Stopwatch.cs
 
-	[Script(Implements = typeof(global::System.Diagnostics.Stopwatch))]
-	public class __Stopwatch
-	{
+    [Script(Implements = typeof(global::System.Diagnostics.Stopwatch))]
+    public class __Stopwatch
+    {
         // X:\jsc.svn\examples\actionscript\StarlingRotationExperiment\StarlingRotationExperiment\ApplicationSprite.cs
-		// X:\jsc.svn\examples\actionscript\Test\TestStopwatch\TestStopwatch\ApplicationSprite.cs
-		// X:\jsc.svn\examples\javascript\chrome\apps\test\TestStopwatch\TestStopwatch\Application.cs
+        // X:\jsc.svn\examples\actionscript\Test\TestStopwatch\TestStopwatch\ApplicationSprite.cs
+        // X:\jsc.svn\examples\javascript\chrome\apps\test\TestStopwatch\TestStopwatch\Application.cs
 
-		public bool IsRunning
-		{
-			get;
-			set;
-		}
-
-
-		// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2013/201312/20131224
-		// startTimeStamp
-		public DateTime InternalStart;
-		//public DateTime InternalStop;
-
-		public __Stopwatch()
-		{
-			InternalStart = DateTime.Now;
-			//InternalStop = InternalStart;
-		}
-
-		long InternalOffsetMilliseconds;
-
-		public void Start()
-		{
-			IsRunning = true;
-			InternalStart = DateTime.Now;
-			//InternalStop = InternalStart;
-		}
-
-		public void Stop()
-		{
-			InternalOffsetMilliseconds = this.ElapsedMilliseconds;
-
-			IsRunning = false;
-			//InternalStop = DateTime.Now;
-			//InternalStart = InternalStop;
-		}
+        public bool IsRunning
+        {
+            get;
+            set;
+        }
 
 
-		public void Restart()
-		{
-			Stop();
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2013/201312/20131224
+        // startTimeStamp
+        public DateTime InternalStart;
+        //public DateTime InternalStop;
 
-			InternalOffsetMilliseconds = 0;
+        public __Stopwatch()
+        {
+            InternalStart = DateTime.Now;
+            //InternalStop = InternalStart;
+        }
 
-			Start();
-		}
+        long InternalOffsetMilliseconds;
+
+        public void Start()
+        {
+            IsRunning = true;
+            InternalStart = DateTime.Now;
+            //InternalStop = InternalStart;
+        }
+
+        public void Stop()
+        {
+            InternalOffsetMilliseconds = this.ElapsedMilliseconds;
+
+            IsRunning = false;
+            //InternalStop = DateTime.Now;
+            //InternalStart = InternalStop;
+        }
 
 
-		public TimeSpan Elapsed
-		{
-			get
-			{
-				if (IsRunning)
-				{
-					var InternalStop = DateTime.Now;
+        public void Restart()
+        {
+            Stop();
 
-					return ((InternalStop - InternalStart) + TimeSpan.FromMilliseconds(InternalOffsetMilliseconds));
-				}
+            InternalOffsetMilliseconds = 0;
 
-				return TimeSpan.FromMilliseconds(InternalOffsetMilliseconds);
-			}
-		}
+            Start();
+        }
 
-		public long ElapsedMilliseconds
-		{
-			get
-			{
-				// tested by ?
-				// X:\jsc.svn\examples\actionscript\StarlingRotationExperiment\StarlingRotationExperiment\ApplicationSprite.cs
 
-				return Convert.ToInt64(Elapsed.TotalMilliseconds);
-			}
-		}
+        public TimeSpan Elapsed
+        {
+            get
+            {
+                if (IsRunning)
+                {
+                    var InternalStop = DateTime.Now;
 
-		public const long TicksPerMillisecond = 10000;
+                    return ((InternalStop - InternalStart) + TimeSpan.FromMilliseconds(InternalOffsetMilliseconds));
+                }
 
-		public long ElapsedTicks
-		{
-			get
-			{
-				// X:\jsc.svn\examples\javascript\appengine\AppEngineWhereOperator\AppEngineWhereOperator\ApplicationWebService.cs
+                return TimeSpan.FromMilliseconds(InternalOffsetMilliseconds);
+            }
+        }
 
-				return ElapsedMilliseconds * TicksPerMillisecond;
-			}
-		}
+        public long ElapsedMilliseconds
+        {
+            get
+            {
+                // tested by ?
+                // X:\jsc.svn\examples\actionscript\StarlingRotationExperiment\StarlingRotationExperiment\ApplicationSprite.cs
 
-		public override string ToString()
-		{
-			return this.Elapsed.ToString();
-		}
+                return Convert.ToInt64(Elapsed.TotalMilliseconds);
+            }
+        }
 
-		public static Stopwatch StartNew()
-		{
-			var x = new Stopwatch();
+        public const long TicksPerMillisecond = 10000;
 
-			x.Start();
+        public long ElapsedTicks
+        {
+            get
+            {
+                // X:\jsc.svn\examples\javascript\appengine\AppEngineWhereOperator\AppEngineWhereOperator\ApplicationWebService.cs
 
-			return x;
-		}
-	}
+                return ElapsedMilliseconds * TicksPerMillisecond;
+            }
+        }
+
+        public override string ToString()
+        {
+            return this.Elapsed.ToString();
+        }
+
+        public static Stopwatch StartNew()
+        {
+            var x = new Stopwatch();
+
+            x.Start();
+
+            return x;
+        }
+    }
 }

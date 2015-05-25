@@ -4,14 +4,14 @@ using System.Text;
 
 namespace ScriptCoreLib.Shared.BCLImplementation.System
 {
-	// http://referencesource.microsoft.com/#mscorlib/system/timespan.cs
-	// https://github.com/dotnet/corefx/blob/master/src/System.Runtime/tests/System/TimeSpan.cs
+    // http://referencesource.microsoft.com/#mscorlib/system/timespan.cs
+    // https://github.com/dotnet/corefx/blob/master/src/System.Runtime/tests/System/TimeSpan.cs
 
-	// https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/TimeSpan.cs
-	// https://github.com/erik-kallen/SaltarelleCompiler/blob/develop/Runtime/CoreLib/TimeSpan.cs
+    // https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/TimeSpan.cs
+    // https://github.com/erik-kallen/SaltarelleCompiler/blob/develop/Runtime/CoreLib/TimeSpan.cs
+    // https://github.com/dot42/api/blob/master/System/TimeSpan.cs
 
-
-	[Script(Implements = typeof(global::System.TimeSpan))]
+    [Script(Implements = typeof(global::System.TimeSpan))]
 	internal class __TimeSpan
 	{
 		public __TimeSpan()

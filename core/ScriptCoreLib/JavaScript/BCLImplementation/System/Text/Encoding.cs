@@ -7,7 +7,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Text
 {
 	// http://referencesource.microsoft.com/#mscorlib/system/text/encoding.cs
 	// https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Text/Encoding.cs
-
+    // https://github.com/dot42/api/blob/master/System/Text/Encoding.cs
 	// https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/Text/Encoding.cs
 
 	// X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Text\Encoding.cs

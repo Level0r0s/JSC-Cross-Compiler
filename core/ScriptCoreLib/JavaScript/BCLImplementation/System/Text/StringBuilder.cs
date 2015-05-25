@@ -7,6 +7,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Text
 	// http://referencesource.microsoft.com/#mscorlib/system/text/stringbuilder.cs
 	// https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Text/StringBuilder.cs
 	// https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Text/StringBuilder.cs
+    // https://github.com/dot42/api/blob/master/System/Text/StringBuilder.cs
 
 	// https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/Text/StringBuilder.cs
 	// https://github.com/erik-kallen/SaltarelleCompiler/blob/develop/Runtime/CoreLib/Text/StringBuilder.cs

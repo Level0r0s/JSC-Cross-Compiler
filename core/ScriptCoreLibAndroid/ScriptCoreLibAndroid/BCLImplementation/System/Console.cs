@@ -10,6 +10,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 {
     // http://referencesource.microsoft.com/#mscorlib/system/console.cs
     // https://github.com/mono/mono/blob/master/mcs/class/corlib/System/Console.cs
+    // https://github.com/dot42/api/blob/master/System/Console.cs
     // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Console.cs
 
     [Script(Implements = typeof(global::System.Console))]

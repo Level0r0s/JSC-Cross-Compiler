@@ -7,6 +7,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 {
     // http://referencesource.microsoft.com/#mscorlib/system/string.cs
     // https://github.com/mono/mono/blob/master/mcs/class/corlib/System/String.cs
+    // https://github.com/dot42/api/blob/master/System/String.cs
+
     // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\String.cs
     // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\String.cs
     // X:\jsc.svn\core\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\String.cs

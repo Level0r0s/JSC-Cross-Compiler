@@ -13,6 +13,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
 
     internal partial class __Task
     {
+        // https://web.archive.org/web/20140227023659/http://blog.dot42.com/2013/08/how-we-implemented-asyncawait.html
+
         // http://msdn.microsoft.com/en-us/library/system.threading.tasks.task.getawaiter.aspx
         // !supported in: 4.5
         public __TaskAwaiter GetAwaiter()

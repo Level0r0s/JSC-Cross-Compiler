@@ -6,6 +6,8 @@ using ScriptCoreLib;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Xml.Linq
 {
+    // https://github.com/dot42/api/blob/master/System/Xml/Linq/XText.cs
+
     [Script(Implements = typeof(global::System.Xml.Linq.XText))]
     internal class __XText : __XNode
 	{

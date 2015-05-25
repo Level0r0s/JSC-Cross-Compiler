@@ -7,6 +7,8 @@ using System.Xml.Linq;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Xml.Linq
 {
+    // https://github.com/dot42/api/blob/master/System/Xml/Linq/XElement.cs
+
     [Script(Implements = typeof(global::System.Xml.Linq.XElement))]
     internal class __XElement : __XContainer
     {

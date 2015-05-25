@@ -9,6 +9,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading
     // http://referencesource.microsoft.com/#mscorlib/system/threading/monitor.cs
     // https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Threading/Monitor.cs
     // https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/Threading/Monitor.cs
+    // https://github.com/dot42/api/blob/master/System/Threading/Monitor.cs
+
     // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Threading\Monitor.cs
     // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Threading\Monitor.cs
 

@@ -574,3 +574,6 @@ namespace TestYouTubeExtractor
 		}
 	}
 }
+
+//Severity Code    Description Project File Line
+//Error Error opening icon file r:\opensource\github\taglib-sharp\src -- Access to the path 'r:\opensource\github\taglib-sharp\src' is denied.taglib-sharp r:\opensource\github\taglib-sharp\src\CSC
