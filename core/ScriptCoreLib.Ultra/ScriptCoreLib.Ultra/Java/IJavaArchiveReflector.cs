@@ -138,7 +138,7 @@ namespace ScriptCoreLib.Java
     }
 
 
-    [DebuggerDisplay("{ReturnType} {MethodName}()")]
+    //[DebuggerDisplay("{ReturnType} {MethodName}()")]
     public sealed class JavaArchiveReflectorMethod
     {
         public int MethodIndex;
@@ -163,7 +163,14 @@ namespace ScriptCoreLib.Java
 
         public override string ToString()
         {
-            var w = MethodName;
+
+            var w = "";
+
+            if (DefinedAtInterfaceType != null)
+                w += DefinedAtInterfaceType + ".";
+
+
+            w += MethodName;
 
             w += "(";
 
@@ -180,6 +187,11 @@ namespace ScriptCoreLib.Java
 
             return w + " : " + ReturnType;
         }
+
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150521/headset
+        // if set, then this method represents explicit interface implementation
+        public string DefinedAtInterfaceType;
+        public JavaArchiveReflectorMethod DefinedAtInterfaceMethod;
     }
 
     public static class JavaArchiveReflectorExtensions
@@ -304,7 +316,7 @@ namespace ScriptCoreLib.Java
 
                 //f = t.GetMethods(); // what about protected members?
                 f = t.GetMethods(
-                    BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public 
+                    BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public
                 ); // what about protected members?
             }
             catch

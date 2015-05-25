@@ -100,10 +100,19 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <EmbeddedResource Include="U:\chromium\src\out\Release\chrome_shell_apk\libs\armeabi-v7a\libchromeshell.so">
-      <Link>staging\apk\libs\armeabi-v7a\libchromeshell.so</Link>
+      <Link>web\libs\armeabi-v7a\libchromeshell.so</Link>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="U:\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\Handle.java">
+      <Link>References\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\Handle.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\InvalidHandle.java">
+      <Link>References\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\InvalidHandle.java</Link>
+    </Content>
+    <Content Include="U:\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\UntypedHandle.java">
+      <Link>References\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\UntypedHandle.java</Link>
+    </Content>
     <None Include="U:\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\invalidation\UniqueIdInvalidationClientNameGenerator.java">
       <Link>References\chromium\src\chrome\android\java\src\org\chromium\chrome\browser\invalidation\UniqueIdInvalidationClientNameGenerator.java</Link>
     </None>
@@ -188,7 +197,7 @@
       <Link>References\chromium\src\content\public\android\java\src\org\chromium\content\app\SandboxedProcessService.java</Link>
     </None>
     <EmbeddedResource Include="U:\chromium\src\out\Release\chrome_shell_apk\libs\armeabi-v7a\libchromium_android_linker.so">
-      <Link>staging\apk\libs\armeabi-v7a\libchromium_android_linker.so</Link>
+      <Link>web\libs\armeabi-v7a\libchromium_android_linker.so</Link>
     </EmbeddedResource>
     <None Include="U:\chromium\src\sync\android\java\src\org\chromium\sync\notifier\InvalidationClientNameGenerator.java">
       <Link>References\chromium\src\sync\android\java\src\org\chromium\sync\notifier\InvalidationClientNameGenerator.java</Link>
@@ -301,18 +310,15 @@
     <Content Include="U:\chromium\src\out\Release\lib.java\content_java.jar">
       <Link>References\content_java.jar</Link>
     </Content>
-    <None Include="U:\chromium\src\out\Release\lib.java\mojo_bindings_java.jar">
-      <Link>staging\apk\libs\mojo_bindings_java.jar</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="U:\chromium\src\out\Release\lib.java\mojo_system_java.jar">
-      <Link>staging\apk\libs\mojo_system_java.jar</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="U:\chromium\src\out\Release\lib.java\mojo_public_java.jar">
-      <Link>staging\apk\libs\mojo_public_java.jar</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Content Include="U:\chromium\src\out\Release\lib.java\mojo_bindings_java.jar">
+      <Link>References\mojo_bindings_java.jar</Link>
+    </Content>
+    <Content Include="U:\chromium\src\out\Release\lib.java\mojo_system_java.jar">
+      <Link>References\mojo_system_java.jar</Link>
+    </Content>
+    <Content Include="U:\chromium\src\out\Release\lib.java\mojo_public_java.jar">
+      <Link>References\mojo_public_java.jar</Link>
+    </Content>
     <Content Include="U:\chromium\src\out\Release\lib.java\content_shell_java.jar">
       <Link>References\content_shell_java.jar</Link>
     </Content>
@@ -419,6 +425,8 @@
     <Folder Include="Diagnostics\" />
     <Folder Include="References\chromium\src\base\android\java\src\org\chromium\base\library_loader\" />
     <Folder Include="References\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\" />
+    <Folder Include="References\chromium\src\mojo\android\javatests\src\org\chromium\mojo\bindings\" />
+    <Folder Include="staging\apk\libs\armeabi-v7a\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

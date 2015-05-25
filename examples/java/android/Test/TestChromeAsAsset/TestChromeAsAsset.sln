@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestChromeAsAsset", "TestChromeAsAsset\TestChromeAsAsset.csproj", "{9D280B94-A86D-496D-940A-7C0C1C270590}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Ultra", "..\..\..\..\..\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra.csproj", "{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}"
@@ -8,6 +8,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidNDKNugetExperiment", "..\..\AndroidNDKNugetExperiment\AndroidNDKNugetExperiment\AndroidNDKNugetExperiment.csproj", "{639740A5-EC27-49D6-80D9-775A49DA08A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNDKAsAssetFromSharedLibrary", "..\..\..\..\c\android\Test\TestNDKAsAsset\TestNDKAsAssetFromSharedLibrary\TestNDKAsAssetFromSharedLibrary.csproj", "{6552A979-7A93-49BA-96C7-E668494F146F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{5F8AF2AA-9E9E-4A8D-B7B1-556EFF732ABB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,5 +45,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{639740A5-EC27-49D6-80D9-775A49DA08A3} = {5F8AF2AA-9E9E-4A8D-B7B1-556EFF732ABB}
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F} = {5F8AF2AA-9E9E-4A8D-B7B1-556EFF732ABB}
+		{6552A979-7A93-49BA-96C7-E668494F146F} = {5F8AF2AA-9E9E-4A8D-B7B1-556EFF732ABB}
 	EndGlobalSection
 EndGlobal

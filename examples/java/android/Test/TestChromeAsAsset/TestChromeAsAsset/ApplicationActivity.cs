@@ -234,7 +234,8 @@ namespace TestChromeAsAsset.Activities
             Console.WriteLine("enter ApplicationActivity ");
             Console.WriteLine(" ");
 
-            org.chromium.chrome.shell.TabManager.DEFAULT_URL = "https://explore.xavalon.net";
+            //org.chromium.chrome.shell.TabManager.DEFAULT_URL = "https://explore.xavalon.net";
+            org.chromium.chrome.shell.TabManager.DEFAULT_URL = "http://webglreport.com";
 
             //org.chromium.@base.CommandLine.enableNativeProxy();
 
