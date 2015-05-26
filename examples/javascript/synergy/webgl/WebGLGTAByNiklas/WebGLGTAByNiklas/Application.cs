@@ -31,9 +31,10 @@ namespace WebGLGTAByNiklas
 
 
 
-            Assets.Data INeedThis;
+            Assets.WebGL_GTA.data INeedThis;
 
 
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150526
             // rebase
             new IHTMLBase { href = "assets/WebGLGTAByNiklas/" }.AttachToDocument();
 
