@@ -18,6 +18,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
     [Script(Implements = typeof(XNode))]
     internal class __XNode : __XObject
     {
+        // https://androidxmldotnet.codeplex.com/SourceControl/latest#AndroidXml/Res/ResXMLTree_node.cs
+
         [Obsolete("not available for web workers?")]
         internal INode InternalValue;
 
