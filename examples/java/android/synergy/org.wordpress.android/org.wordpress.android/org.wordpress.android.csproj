@@ -103,20 +103,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="org\wordpress\android\R.java" />
-    <Content Include="Y:\opensource\other\android.svn.wordpress.org\res\**\*.*">
+    <Content Include="x:\opensource\other\android.svn.wordpress.org\res\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\res/%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Y:\opensource\other\android.svn.wordpress.org\libs\**\*.*">
+    <Content Include="x:\opensource\other\android.svn.wordpress.org\libs\**\*.*">
     <Link>libs/%(RecursiveDir)%(FileName)%(Extension)</Link>
   </Content>
   </ItemGroup>
   
   <ItemGroup>
-    <Content Include="Y:\opensource\other\android.svn.wordpress.org\src\**\*.*">
+    <Content Include="x:\opensource\other\android.svn.wordpress.org\src\**\*.*">
       <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
   </ItemGroup>
