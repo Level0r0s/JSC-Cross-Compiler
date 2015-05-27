@@ -7,8 +7,8 @@
     <ProjectGuid>{9D280B94-A86D-496D-940A-7C0C1C270590}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestChromeAsAsset</RootNamespace>
-    <AssemblyName>TestChromeAsAsset</AssemblyName>
+    <RootNamespace>testchromeasasset</RootNamespace>
+    <AssemblyName>testchromeasasset</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -85,6 +85,9 @@
     <Reference Include="TestChromeAsAsset.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\TestChromeAsAsset.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="testchromeasasset.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\testchromeasasset.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationActivity.cs">
@@ -93,6 +96,7 @@
       <DependentUpon>ApplicationActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="web\libs\KnownSharedLibraryAssets.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -129,6 +133,9 @@
     <None Include="U:\chromium\src\out\Release\gen\chrome\java\res\values\generated_resources.xml">
       <Link>staging\apk\res\values\generated_resources.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="U:\chromium\src\base\android\java\src\org\chromium\base\ResourceExtractor.java">
+      <Link>References\chromium\src\base\android\java\src\org\chromium\base\ResourceExtractor.java</Link>
     </None>
     <Content Include="U:\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\ChromeShellApplicationObserver.java">
       <Link>org\chromium\shell\ChromeShellApplicationObserver.java</Link>
@@ -198,6 +205,9 @@
     </EmbeddedResource>
     <None Include="U:\chromium\src\sync\android\java\src\org\chromium\sync\notifier\InvalidationClientNameGenerator.java">
       <Link>References\chromium\src\sync\android\java\src\org\chromium\sync\notifier\InvalidationClientNameGenerator.java</Link>
+    </None>
+    <None Include="U:\chromium\src\content\public\android\java\src\org\chromium\content\browser\BrowserStartupController.java">
+      <Link>References\chromium\src\content\public\android\java\src\org\chromium\content\browser\BrowserStartupController.java</Link>
     </None>
     <Content Include="U:\chromium\src\out\Release\lib.java\android_swipe_refresh_java.jar">
       <Link>References\android_swipe_refresh_java.jar</Link>
@@ -415,9 +425,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rem start /WAIT cmd /C "C:\util\jsc\bin\jsc.meta.exe" ConfigurationCreateNuGetPackage /AssemblyMerge:TestChromeAsAsset.exe  /AssemblyMerge:TestChromeAsAsset.AssetsLibrary.dll /ProjectFileName:$(ProjectPath)
+    <PostBuildEvent>rem start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
 
-rem start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
+start /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ConfigurationCreateNuGetPackage /AssemblyMerge:TestChromeAsAsset.exe  /AssemblyMerge:TestChromeAsAsset.AssetsLibrary.dll /ProjectFileName:"X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\TestChromeAsAsset.csproj" /PackageID:"chrome.android" /OutputName:"Chrome Android"
+
 </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>

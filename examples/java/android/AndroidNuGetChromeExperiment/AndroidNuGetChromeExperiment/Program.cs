@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using ScriptCoreLib.Shared.Avalon.Extensions;
 
-namespace AndroidNuGetChromeExperiment
+namespace androidnugetchromeexperiment
 {
     class Program
     {
@@ -14,7 +14,7 @@ namespace AndroidNuGetChromeExperiment
         public static void Main(string[] e)
         {
             global::jsc.AndroidLauncher.Launch(
-                 typeof(AndroidNuGetChromeExperiment.Activities.ApplicationActivity)
+                 typeof(androidnugetchromeexperiment.activities.LauncherActivity)
             );
         }
     }

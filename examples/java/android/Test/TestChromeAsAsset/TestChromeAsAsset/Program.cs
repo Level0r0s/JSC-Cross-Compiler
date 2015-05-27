@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using ScriptCoreLib.Shared.Avalon.Extensions;
 
-namespace TestChromeAsAsset
+namespace testchromeasasset
 {
     class Program
     {
@@ -14,7 +14,7 @@ namespace TestChromeAsAsset
         public static void Main(string[] e)
         {
             global::jsc.AndroidLauncher.Launch(
-                 typeof(TestChromeAsAsset.Activities.ApplicationActivity)
+                 typeof(testchromeasasset.activities.ApplicationActivity)
             );
         }
     }
