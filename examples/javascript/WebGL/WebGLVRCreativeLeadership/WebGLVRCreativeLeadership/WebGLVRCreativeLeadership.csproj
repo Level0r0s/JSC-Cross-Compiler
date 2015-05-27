@@ -153,14 +153,8 @@
     <Reference Include="ScriptCoreLib.Async.AssetsLibrary">
       <HintPath>..\..\..\..\..\core\ScriptCoreLib.Async\ScriptCoreLib.Async\bin\staging.AssetsLibrary\ScriptCoreLib.Async.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="HeatZeekerRTSOrto.AssetsLibrary">
-      <HintPath>..\..\HeatZeekerRTSOrto\HeatZeekerRTSOrto\bin\staging.AssetsLibrary\HeatZeekerRTSOrto.AssetsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="WebGLSVGSprite.AssetsLibrary">
       <HintPath>..\..\WebGLSVGSprite\WebGLSVGSprite\bin\staging.AssetsLibrary\WebGLSVGSprite.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="ChromeUDPNotification.AssetsLibrary">
-      <HintPath>..\..\..\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\bin\staging.AssetsLibrary\ChromeUDPNotification.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="WebGLSpeedBlendCharacter.AssetsLibrary">
       <HintPath>..\..\WebGLSpeedBlendCharacter\WebGLSpeedBlendCharacter\bin\staging.AssetsLibrary\WebGLSpeedBlendCharacter.AssetsLibrary.dll</HintPath>
@@ -192,10 +186,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\HeatZeekerRTSOrto\HeatZeekerRTSOrto\HeatZeekerRTSOrto.csproj">
-      <Project>{29947aad-0b14-4fb0-a3c3-a51322be2eda}</Project>
-      <Name>HeatZeekerRTSOrto</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\collada\WebGLAudi\WebGLAudi\WebGLAudi.csproj">
       <Project>{6b03abe7-4457-43d8-8f25-cd3a91df0988}</Project>
       <Name>WebGLAudi</Name>

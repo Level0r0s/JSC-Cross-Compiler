@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Web
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNuGetAssetsConsumer", "TestNuGetAssetsConsumer\TestNuGetAssetsConsumer.csproj", "{9D280B94-A86D-496D-940A-7C0C1C270590}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Ultra", "..\..\..\..\..\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra.csproj", "{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Ultra.Library", "..\..\..\..\..\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library.csproj", "{132EB43F-19B4-42AC-8025-3249B129867A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidMultiActivity", "..\..\AndroidMultiActivity\AndroidMultiActivity\AndroidMultiActivity.csproj", "{698E9FB9-16DC-4740-8914-6F5C28402BB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLocalApplication", "..\TestLocalApplication\TestLocalApplication\TestLocalApplication.csproj", "{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{7E739EF4-898F-4CBA-933C-F3F6DF5C721B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNuGetAssetsProducer", "TestNuGetAssetsProducer\TestNuGetAssetsProducer.csproj", "{3A4E1F94-8FD8-4F2C-9475-817D1E1F84CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Android|Any CPU = Android|Any CPU
+		Assets|Any CPU = Assets|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Android|Any CPU.Build.0 = Release|Any CPU
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Android|Any CPU.ActiveCfg = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Android|Any CPU.Build.0 = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Assets|Any CPU.ActiveCfg = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Assets|Any CPU.Build.0 = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{132EB43F-19B4-42AC-8025-3249B129867A}.Android|Any CPU.ActiveCfg = Android|Any CPU
+		{132EB43F-19B4-42AC-8025-3249B129867A}.Android|Any CPU.Build.0 = Android|Any CPU
+		{132EB43F-19B4-42AC-8025-3249B129867A}.Assets|Any CPU.ActiveCfg = Assets|Any CPU
+		{132EB43F-19B4-42AC-8025-3249B129867A}.Assets|Any CPU.Build.0 = Assets|Any CPU
+		{132EB43F-19B4-42AC-8025-3249B129867A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{132EB43F-19B4-42AC-8025-3249B129867A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{132EB43F-19B4-42AC-8025-3249B129867A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{132EB43F-19B4-42AC-8025-3249B129867A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{698E9FB9-16DC-4740-8914-6F5C28402BB1}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{698E9FB9-16DC-4740-8914-6F5C28402BB1}.Android|Any CPU.Build.0 = Release|Any CPU
+		{698E9FB9-16DC-4740-8914-6F5C28402BB1}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{698E9FB9-16DC-4740-8914-6F5C28402BB1}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{698E9FB9-16DC-4740-8914-6F5C28402BB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{698E9FB9-16DC-4740-8914-6F5C28402BB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{698E9FB9-16DC-4740-8914-6F5C28402BB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{698E9FB9-16DC-4740-8914-6F5C28402BB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA}.Android|Any CPU.Build.0 = Release|Any CPU
+		{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A4E1F94-8FD8-4F2C-9475-817D1E1F84CA}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{3A4E1F94-8FD8-4F2C-9475-817D1E1F84CA}.Android|Any CPU.Build.0 = Release|Any CPU
+		{3A4E1F94-8FD8-4F2C-9475-817D1E1F84CA}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{3A4E1F94-8FD8-4F2C-9475-817D1E1F84CA}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{3A4E1F94-8FD8-4F2C-9475-817D1E1F84CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A4E1F94-8FD8-4F2C-9475-817D1E1F84CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A4E1F94-8FD8-4F2C-9475-817D1E1F84CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A4E1F94-8FD8-4F2C-9475-817D1E1F84CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{698E9FB9-16DC-4740-8914-6F5C28402BB1} = {7E739EF4-898F-4CBA-933C-F3F6DF5C721B}
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F} = {7E739EF4-898F-4CBA-933C-F3F6DF5C721B}
+		{132EB43F-19B4-42AC-8025-3249B129867A} = {7E739EF4-898F-4CBA-933C-F3F6DF5C721B}
+		{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA} = {7E739EF4-898F-4CBA-933C-F3F6DF5C721B}
+	EndGlobalSection
+EndGlobal

@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeTCPServer", "..\..\ch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Async", "..\..\..\..\core\ScriptCoreLib.Async\ScriptCoreLib.Async\ScriptCoreLib.Async.csproj", "{88C3C260-D1DA-4FB3-A53D-79462913E80C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLSpeedBlendCharacter", "..\WebGLSpeedBlendCharacter\WebGLSpeedBlendCharacter\WebGLSpeedBlendCharacter.csproj", "{890F6FDF-577B-4100-9FE1-D0F228175984}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -77,6 +79,10 @@ Global
 		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Debug|x86.Build.0 = Debug|x86
 		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Release|x86.ActiveCfg = Release|x86
 		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Release|x86.Build.0 = Release|x86
+		{890F6FDF-577B-4100-9FE1-D0F228175984}.Debug|x86.ActiveCfg = Debug|x86
+		{890F6FDF-577B-4100-9FE1-D0F228175984}.Debug|x86.Build.0 = Debug|x86
+		{890F6FDF-577B-4100-9FE1-D0F228175984}.Release|x86.ActiveCfg = Release|x86
+		{890F6FDF-577B-4100-9FE1-D0F228175984}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,5 +98,6 @@ Global
 		{0DC6D7DF-0B3B-4EA4-BF8E-66B98B89F51F} = {B43D5FCE-FDD7-4AAD-9139-FE057C824868}
 		{9672D112-D806-49D3-B5C8-3B3A2278AD18} = {B43D5FCE-FDD7-4AAD-9139-FE057C824868}
 		{88C3C260-D1DA-4FB3-A53D-79462913E80C} = {B43D5FCE-FDD7-4AAD-9139-FE057C824868}
+		{890F6FDF-577B-4100-9FE1-D0F228175984} = {B43D5FCE-FDD7-4AAD-9139-FE057C824868}
 	EndGlobalSection
 EndGlobal
