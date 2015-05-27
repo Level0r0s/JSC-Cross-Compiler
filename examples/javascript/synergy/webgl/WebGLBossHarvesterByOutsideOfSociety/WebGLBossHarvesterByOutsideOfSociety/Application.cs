@@ -16,7 +16,7 @@ using WebGLBossHarvesterByOutsideOfSociety.Design;
 using WebGLBossHarvesterByOutsideOfSociety.HTML.Pages;
 using System.Diagnostics;
 
-using THREE;
+//using THREE;
 using WebGLRah66Comanche.Library;
 
 namespace WebGLBossHarvesterByOutsideOfSociety
@@ -37,6 +37,8 @@ namespace WebGLBossHarvesterByOutsideOfSociety
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page = null)
         {
+            // 20150527  i see a red blob. broken?
+
             var sw = Stopwatch.StartNew();
 
             // X:\jsc.svn\examples\javascript\synergy\webgl\WebGLMD2MorphtargetExample\WebGLMD2MorphtargetExample\Application.cs

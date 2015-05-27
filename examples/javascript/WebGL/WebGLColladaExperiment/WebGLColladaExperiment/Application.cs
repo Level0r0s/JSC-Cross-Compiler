@@ -255,3 +255,22 @@ namespace WebGLColladaExperiment
         }
     }
 }
+
+
+//0200026d ScriptCoreLib.JavaScript.Runtime.Convert
+//script: error JSC1000:
+//error:
+//  statement cannot be a load instruction(or is it a bug?)
+//  [0x00b0]
+//ldloca.s   +1 -0
+
+// assembly: X:\jsc.svn\examples\javascript\WebGL\WebGLColladaExperiment\WebGLColladaExperiment\bin\Debug\ScriptCoreLib.dll
+// type: ScriptCoreLib.JavaScript.Runtime.Convert, ScriptCoreLib, Version=4.6.0.0, Culture=neutral, PublicKeyToken=null
+// offset: 0x00b0
+//  method:System.String ToBase64String(System.String)
+
+//script: error JSC1000: Method: ToBase64String, Type: ScriptCoreLib.JavaScript.Runtime.Convert; emmiting failed : System.InvalidOperationException:
+//error:
+//  statement cannot be a load instruction(or is it a bug?)
+//  [0x00b0]
+//ldloca.s   +1 -0

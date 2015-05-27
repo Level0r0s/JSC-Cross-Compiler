@@ -100,9 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="staging\apk\bin\android-install.bat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <EmbeddedResource Include="U:\chromium\src\out\Release\chrome_shell_apk\libs\armeabi-v7a\libchromeshell.so">
       <Link>web\libs\armeabi-v7a\libchromeshell.so</Link>
     </EmbeddedResource>
@@ -422,6 +419,7 @@
     <Folder Include="References\chromium\src\base\android\java\src\org\chromium\base\library_loader\" />
     <Folder Include="References\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\" />
     <Folder Include="References\chromium\src\mojo\android\javatests\src\org\chromium\mojo\bindings\" />
+    <Folder Include="staging\apk\bin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
