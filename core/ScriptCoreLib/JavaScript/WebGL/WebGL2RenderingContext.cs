@@ -7,15 +7,15 @@ using System.Text;
 
 namespace ScriptCoreLib.JavaScript.WebGL
 {
-	// https://chromium.googlesource.com/chromium/src/+/master/gpu/blink/webgraphicscontext3d_impl.cc
-	// https://chromium.googlesource.com/chromium/src/+/master/gpu/blink/webgraphicscontext3d_impl.h
-	// http://dxr.mozilla.org/mozilla-central/source/dom/webidl/WebGL2RenderingContext.webidl
-	// http://mxr.mozilla.org/mozilla-central/source/dom/webidl/WebGL2RenderingContext.webidl
-	// https://www.khronos.org/registry/webgl/specs/latest/2.0/webgl2.idl
-
-	// getting closer. 
-	// http://webglreport.com/?v=2
-	[Script(HasNoPrototype = true, InternalConstructor = true)]
+    // https://chromium.googlesource.com/chromium/src/+/master/gpu/blink/webgraphicscontext3d_impl.cc
+    // https://chromium.googlesource.com/chromium/src/+/master/gpu/blink/webgraphicscontext3d_impl.h
+    // http://dxr.mozilla.org/mozilla-central/source/dom/webidl/WebGL2RenderingContext.webidl
+    // http://mxr.mozilla.org/mozilla-central/source/dom/webidl/WebGL2RenderingContext.webidl
+    // https://www.khronos.org/registry/webgl/specs/latest/2.0/webgl2.idl
+    // http://src.chromium.org/viewvc/blink/trunk/Source/core/html/canvas/WebGL2RenderingContextBase.idl
+    // getting closer. 
+    // http://webglreport.com/?v=2
+    [Script(HasNoPrototype = true, InternalConstructor = true)]
 	[Obsolete("for future reference")]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public class WebGL2RenderingContext
