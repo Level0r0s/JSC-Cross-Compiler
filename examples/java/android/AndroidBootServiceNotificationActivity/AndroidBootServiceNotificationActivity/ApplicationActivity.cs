@@ -32,6 +32,8 @@ namespace AndroidBootServiceNotificationActivity.Activities
         // http://stackoverflow.com/questions/7144908/how-is-an-intent-service-declared-in-the-android-manifest
         // http://developer.android.com/guide/topics/manifest/service-element.html
 
+        // https://github.com/android/platform_frameworks_base/blob/master/services/accessibility/java/com/android/server/accessibility/AccessibilityManagerService.java
+
         //AtBootCompleted hack1;
 
         protected override void onCreate(global::android.os.Bundle savedInstanceState)
@@ -105,82 +107,116 @@ namespace AndroidBootServiceNotificationActivity.Activities
             Console.WriteLine("getRunningServices " + s.size());
 
             var se =
+                // http://stackoverflow.com/questions/7170730/how-to-set-a-control-panel-for-my-service-in-android
 
                 from i in Enumerable.Range(0, s.size())
                 let rsi = (android.app.ActivityManager.RunningServiceInfo)s.get(i)
                 let cn = rsi.service.getClassName()
                 let cp = m.getRunningServiceControlPanel(rsi.service)
-                orderby cn
+
+                //orderby cn
+                orderby cp != null
 
                 select new { i, rsi, cn, cp };
 
-            //I/System.Console(32668): { cn = com.sec.enterprise.mdm.services.simpin.EnterpriseSimPin, cp =  }
-            //I/System.Console(32668): { cn = com.dsi.ant.server.AntService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.gms.analytics.service.AnalyticsService, cp =  }
-            //I/System.Console(32668): { cn = com.android.bluetooth.gatt.GattService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.scloud.auth.RelayService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.sconnect.periph.PeriphService, cp =  }
-            //I/System.Console(32668): { cn = org.simalliance.openmobileapi.service.SmartcardService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.sm.widgetapp.SMWidgetService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.sensor.framework.SensorService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.location.fused.FusedLocationService, cp =  }
-            //I/System.Console(32668): { cn = com.sec.android.app.launcher.services.LauncherService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.app.shealth.tracker.sport.livetracker.LiveTrackerService, cp =  }
-            //I/System.Console(32668): { cn = com.sec.android.widgetapp.digitalclockeasy.DigitalClockEasyService, cp =  }
-            //I/System.Console(32668): { cn = com.android.bluetooth.a2dp.A2dpService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.search.core.service.SearchService, cp =  }
-            //I/System.Console(32668): { cn = com.sec.android.widgetapp.ap.weather.widget.surfacewidget.WeatherSurfaceWidget, cp =  }
-            //I/System.Console(32668): { cn = com.android.incallui.InCallServiceImpl, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.gms.gcm.http.GoogleHttpService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.location.geofencer.service.GeofenceProviderService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.hotword.service.HotwordService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.sec.android.application.csc.CscUpdateService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.health.wearable.service.WearableService, cp =  }
-            //I/System.Console(32668): { cn = com.sec.spp.push.PushClientService, cp =  }
-            //I/System.Console(32668): { cn = com.android.systemui.SystemUIService, cp =  }
-            //I/System.Console(32668): { cn = android.hardware.location.GeofenceHardwareService, cp =  }
-            //I/System.Console(32668): { cn = com.sec.android.pagebuddynotisvc.PageBuddyNotiSvc, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.thememanager.ThemeManagerService, cp =  }
-            //I/System.Console(32668): { cn = com.fmm.dm.XDMService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.MtpApplication.MtpService, cp =  }
-            //I/System.Console(32668): { cn = com.android.server.telecom.BluetoothVoIPService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.gms.auth.trustagent.GoogleTrustAgent, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.appcessory.server.SAPService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.app.galaxyfinder.tag.TagReadyService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.location.internal.PendingIntentCallbackService, cp =  }
-            //I/System.Console(32668): { cn = com.android.incallui.SecInCallService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.app.edge.nightclock.NightClockService, cp =  }
-            //I/System.Console(32668): { cn = com.android.server.telecom.BluetoothPhoneService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.location.internal.server.GoogleLocationService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.app.galaxyfinder.recommended.RecommendedService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.libraries.hangouts.video.VideoChatService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.location.network.NetworkLocationService, cp =  }
-            //I/System.Console(32668): { cn = com.android.stk.StkAppService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.location.internal.GoogleLocationManagerService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.service.health.HealthService, cp =  }
-            //I/System.Console(32668): { cn = com.android.server.DrmEventService, cp =  }
-            //I/System.Console(32668): { cn = com.android.providers.media.MtpService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.gms.deviceconnection.service.DeviceConnectionServiceBroker, cp =  }
-            //I/System.Console(32668): { cn = com.android.bluetooth.hfp.HeadsetService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.voiceinteraction.GsaVoiceInteractionService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.providers.context.ContextService, cp =  }
-            //I/System.Console(32668): { cn = com.android.incallui.MCIDService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.app.shealth.tracker.pedometer.service.PedometerService, cp =  }
-            //I/System.Console(32668): { cn = com.android.internal.backup.LocalTransportService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.gms.playlog.service.PlayLogBrokerService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.gms.common.stats.GmsCoreStatsService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.gms.clearcut.service.ClearcutLoggerService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.service.peoplestripe.PeopleStripeService, cp =  }
-            //I/System.Console(32668): { cn = com.samsung.android.app.catchfavorites.catchnotifications.CatchNotificationsService, cp = PendingIntent{2a6fe01c: android.os.BinderProxy@6924ca9} }
-            //I/System.Console(32668): { cn = com.samsung.android.beaconmanager.BeaconService, cp =  }
-            //I/System.Console(32668): { cn = com.android.defcontainer.DefaultContainerService, cp =  }
-            //I/System.Console(32668): { cn = com.android.phone.TelephonyDebugService, cp =  }
-            //I/System.Console(32668): { cn = com.sec.android.service.sm.service.SecurityManagerService, cp =  }
-            //I/System.Console(32668): { cn = com.android.bluetooth.pan.PanService, cp =  }
-            //I/System.Console(32668): { cn = com.ime.framework.spellcheckservice.SamsungIMESpellCheckerService, cp =  }
-            //I/System.Console(32668): { cn = com.google.android.gms.backup.BackupTransportService, cp =  }
-            //I/System.Console(32668): { cn = com.sec.phone.SecPhoneService, cp =  }
+            //     I/System.Console( 1617): { i = 45, cn = android.hardware.location.GeofenceHardwareService, cp =  }
+            //I/System.Console( 1617): { i = 17, cn = ccc71.at.services.at_service, cp =  }
+            //I/System.Console( 1617): { i = 34, cn = com.android.bluetooth.a2dp.A2dpService, cp =  }
+            //I/System.Console( 1617): { i = 13, cn = com.android.bluetooth.btservice.AdapterService, cp =  }
+            //I/System.Console( 1617): { i = 23, cn = com.android.bluetooth.gatt.GattService, cp =  }
+            //I/System.Console( 1617): { i = 68, cn = com.android.bluetooth.hfp.HeadsetService, cp =  }
+            //I/System.Console( 1617): { i = 0, cn = com.android.bluetooth.hid.HidService, cp =  }
+            //I/System.Console( 1617): { i = 84, cn = com.android.bluetooth.pan.PanService, cp =  }
+            //I/System.Console( 1617): { i = 80, cn = com.android.defcontainer.DefaultContainerService, cp =  }
+            //I/System.Console( 1617): { i = 37, cn = com.android.incallui.InCallServiceImpl, cp =  }
+            //I/System.Console( 1617): { i = 71, cn = com.android.incallui.MCIDService, cp =  }
+            //I/System.Console( 1617): { i = 55, cn = com.android.incallui.SecInCallService, cp =  }
+            //I/System.Console( 1617): { i = 73, cn = com.android.internal.backup.LocalTransportService, cp =  }
+            //I/System.Console( 1617): { i = 81, cn = com.android.phone.TelephonyDebugService, cp =  }
+            //I/System.Console( 1617): { i = 66, cn = com.android.providers.media.MtpService, cp =  }
+            //I/System.Console( 1617): { i = 65, cn = com.android.server.DrmEventService, cp =  }
+            //I/System.Console( 1617): { i = 57, cn = com.android.server.telecom.BluetoothPhoneService, cp =  }
+            //I/System.Console( 1617): { i = 50, cn = com.android.server.telecom.BluetoothVoIPService, cp =  }
+            //I/System.Console( 1617): { i = 62, cn = com.android.stk.StkAppService, cp =  }
+            //I/System.Console( 1617): { i = 15, cn = com.android.systemui.ImageWallpaper, cp = PendingIntent{2759cef2: android.os.BinderProxy@181ef173} }
+            //I/System.Console( 1617): { i = 44, cn = com.android.systemui.SystemUIService, cp =  }
+            //I/System.Console( 1617): { i = 12, cn = com.android.systemui.keyguard.KeyguardService, cp =  }
+            //I/System.Console( 1617): { i = 21, cn = com.dsi.ant.server.AntService, cp =  }
+            //I/System.Console( 1617): { i = 48, cn = com.fmm.dm.XDMService, cp =  }
+            //I/System.Console( 1617): { i = 22, cn = com.google.android.gms.analytics.service.AnalyticsService, cp =  }
+            //I/System.Console( 1617): { i = 51, cn = com.google.android.gms.auth.trustagent.GoogleTrustAgent, cp =  }
+            //I/System.Console( 1617): { i = 86, cn = com.google.android.gms.backup.BackupTransportService, cp =  }
+            //I/System.Console( 1617): { i = 4, cn = com.google.android.gms.car.CarService, cp =  }
+            //I/System.Console( 1617): { i = 76, cn = com.google.android.gms.clearcut.service.ClearcutLoggerService, cp =  }
+            //I/System.Console( 1617): { i = 75, cn = com.google.android.gms.common.stats.GmsCoreStatsService, cp =  }
+            //I/System.Console( 1617): { i = 67, cn = com.google.android.gms.deviceconnection.service.DeviceConnectionServiceBroker, cp =  }
+            //I/System.Console( 1617): { i = 19, cn = com.google.android.gms.gcm.GcmService, cp =  }
+            //I/System.Console( 1617): { i = 38, cn = com.google.android.gms.gcm.http.GoogleHttpService, cp =  }
+            //I/System.Console( 1617): { i = 74, cn = com.google.android.gms.playlog.service.PlayLogBrokerService, cp =  }
+            //I/System.Console( 1617): { i = 18, cn = com.google.android.gms.trustagent.api.trustagent.GoogleTrustAgentService, cp =  }
+            //I/System.Console( 1617): { i = 25, cn = com.google.android.gms.usagereporting.service.UsageReportingService, cp =  }
+            //I/System.Console( 1617): { i = 82, cn = com.google.android.gms.wearable.service.WearableService, cp =  }
+            //I/System.Console( 1617): { i = 40, cn = com.google.android.hotword.service.HotwordService, cp =  }
+            //I/System.Console( 1617): { i = 60, cn = com.google.android.libraries.hangouts.video.VideoChatService, cp =  }
+            //I/System.Console( 1617): { i = 30, cn = com.google.android.location.fused.FusedLocationService, cp =  }
+            //I/System.Console( 1617): { i = 16, cn = com.google.android.location.geocode.GeocodeService, cp =  }
+            //I/System.Console( 1617): { i = 39, cn = com.google.android.location.geofencer.service.GeofenceProviderService, cp =  }
+            //I/System.Console( 1617): { i = 63, cn = com.google.android.location.internal.GoogleLocationManagerService, cp =  }
+            //I/System.Console( 1617): { i = 54, cn = com.google.android.location.internal.PendingIntentCallbackService, cp =  }
+            //I/System.Console( 1617): { i = 58, cn = com.google.android.location.internal.server.GoogleLocationService, cp =  }
+            //I/System.Console( 1617): { i = 61, cn = com.google.android.location.network.NetworkLocationService, cp =  }
+            //I/System.Console( 1617): { i = 3, cn = com.google.android.music.dial.DialMediaRouteProviderService, cp =  }
+            //I/System.Console( 1617): { i = 6, cn = com.google.android.search.core.service.BroadcastListenerService, cp =  }
+            //I/System.Console( 1617): { i = 35, cn = com.google.android.search.core.service.SearchService, cp =  }
+            //I/System.Console( 1617): { i = 69, cn = com.google.android.voiceinteraction.GsaVoiceInteractionService, cp =  }
+            //I/System.Console( 1617): { i = 85, cn = com.ime.framework.spellcheckservice.SamsungIMESpellCheckerService, cp =  }
+            //I/System.Console( 1617): { i = 49, cn = com.samsung.android.MtpApplication.MtpService, cp =  }
+            //I/System.Console( 1617): { i = 78, cn = com.samsung.android.app.catchfavorites.catchnotifications.CatchNotificationsService, cp = PendingIntent{1f770943: android.os.BinderProxy@6924ca9} }
+            //I/System.Console( 1617): { i = 56, cn = com.samsung.android.app.edge.nightclock.NightClockService, cp =  }
+            //I/System.Console( 1617): { i = 59, cn = com.samsung.android.app.galaxyfinder.recommended.RecommendedService, cp =  }
+            //I/System.Console( 1617): { i = 53, cn = com.samsung.android.app.galaxyfinder.tag.TagReadyService, cp =  }
+            //I/System.Console( 1617): { i = 72, cn = com.samsung.android.app.shealth.tracker.pedometer.service.PedometerService, cp =  }
+            //I/System.Console( 1617): { i = 32, cn = com.samsung.android.app.shealth.tracker.sport.livetracker.LiveTrackerService, cp =  }
+            //I/System.Console( 1617): { i = 79, cn = com.samsung.android.beaconmanager.BeaconService, cp =  }
+            //I/System.Console( 1617): { i = 42, cn = com.samsung.android.health.wearable.service.WearableService, cp =  }
+            //I/System.Console( 1617): { i = 70, cn = com.samsung.android.providers.context.ContextService, cp =  }
+            //I/System.Console( 1617): { i = 24, cn = com.samsung.android.scloud.auth.RelayService, cp =  }
+            //I/System.Console( 1617): { i = 26, cn = com.samsung.android.sconnect.periph.PeriphService, cp =  }
+            //I/System.Console( 1617): { i = 29, cn = com.samsung.android.sensor.framework.SensorService, cp =  }
+            //I/System.Console( 1617): { i = 64, cn = com.samsung.android.service.health.HealthService, cp =  }
+            //I/System.Console( 1617): { i = 14, cn = com.samsung.android.service.peoplestripe.PeopleNotiListenerService, cp = PendingIntent{17538bc0: android.os.BinderProxy@6924ca9} }
+            //I/System.Console( 1617): { i = 77, cn = com.samsung.android.service.peoplestripe.PeopleStripeService, cp =  }
+            //I/System.Console( 1617): { i = 28, cn = com.samsung.android.sm.widgetapp.SMWidgetService, cp =  }
+            //I/System.Console( 1617): { i = 47, cn = com.samsung.android.thememanager.ThemeManagerService, cp =  }
+            //I/System.Console( 1617): { i = 52, cn = com.samsung.appcessory.server.SAPService, cp =  }
+            //I/System.Console( 1617): { i = 5, cn = com.samsung.hs20settings.WifiHs20UtilityService, cp =  }
+            //I/System.Console( 1617): { i = 41, cn = com.samsung.sec.android.application.csc.CscUpdateService, cp =  }
+            //I/System.Console( 1617): { i = 2, cn = com.sec.android.app.bluetoothtest.BluetoothBDTestService, cp =  }
+            //I/System.Console( 1617): { i = 31, cn = com.sec.android.app.launcher.services.LauncherService, cp =  }
+            //I/System.Console( 1617): { i = 10, cn = com.sec.android.daemonapp.ap.accuweather.WeatherClockService, cp =  }
+            //I/System.Console( 1617): { i = 8, cn = com.sec.android.inputmethod.SamsungKeypad, cp = PendingIntent{39a730f9: android.os.BinderProxy@2b45775c} }
+            //I/System.Console( 1617): { i = 46, cn = com.sec.android.pagebuddynotisvc.PageBuddyNotiSvc, cp =  }
+            //I/System.Console( 1617): { i = 1, cn = com.sec.android.sensor.framework.SensorService, cp =  }
+            //I/System.Console( 1617): { i = 83, cn = com.sec.android.service.sm.service.SecurityManagerService, cp =  }
+            //I/System.Console( 1617): { i = 7, cn = com.sec.android.widgetapp.ap.weather.common.appservice.WeatherScreenService, cp =  }
+            //I/System.Console( 1617): { i = 11, cn = com.sec.android.widgetapp.ap.weather.common.appservice.WeatherService, cp =  }
+            //I/System.Console( 1617): { i = 36, cn = com.sec.android.widgetapp.ap.weather.widget.surfacewidget.WeatherSurfaceWidget, cp =  }
+            //I/System.Console( 1617): { i = 33, cn = com.sec.android.widgetapp.digitalclockeasy.DigitalClockEasyService, cp =  }
+            //I/System.Console( 1617): { i = 9, cn = com.sec.bcservice.BroadcastService, cp =  }
+            //I/System.Console( 1617): { i = 20, cn = com.sec.enterprise.mdm.services.simpin.EnterpriseSimPin, cp =  }
+            //I/System.Console( 1617): { i = 87, cn = com.sec.phone.SecPhoneService, cp =  }
+            //I/System.Console( 1617): { i = 43, cn = com.sec.spp.push.PushClientService, cp =  }
+            //I/System.Console( 1617): { i = 27, cn = org.simalliance.openmobileapi.service.SmartcardService, cp =  }
 
+            //I/System.Console( 5883): { i = 85, cn = com.google.android.gms.backup.BackupTransportService, process = com.google.android.gms.persistent }
+            //I/System.Console( 5883): { i = 86, cn = com.sec.phone.SecPhoneService, process = com.sec.phone }
+            //I/System.Console( 5883): { i = 7, cn = com.sec.android.inputmethod.SamsungKeypad, process = com.sec.android.inputmethod, cp = PendingIntent{e6c79e2: android.os.BinderProxy@181ef173}, describeContents = 0 }
+            //I/System.Console( 5883): { i = 13, cn = com.samsung.android.service.peoplestripe.PeopleNotiListenerService, process = com.samsung.android.service.peoplestripe, cp = PendingIntent{24b00830: android.os.BinderProxy@6924ca9}, describeContents = 0 }
+            //I/System.Console( 5883): { i = 14, cn = com.android.systemui.ImageWallpaper, process = com.android.systemui.imagewallpaper, cp = PendingIntent{135c522e: android.os.BinderProxy@1ced31cf}, describeContents = 0 }
+            //I/System.Console( 5883): { i = 77, cn = com.samsung.android.app.catchfavorites.catchnotifications.CatchNotificationsService, process = com.samsung.android.app.catchfavorites, cp = PendingIntent{2b45775c: android.os.BinderProxy@6924ca9}, describeContents = 0 }
+
+            // http://stackoverflow.com/questions/7170730/how-to-set-a-control-panel-for-my-service-in-android
+            // The service's description and configuration intent can be set during a service binding
             foreach (var ss in se)
             {
 
@@ -190,12 +226,18 @@ namespace AndroidBootServiceNotificationActivity.Activities
                 PendingIntent cp = ss.cp;
 
                 // whats a ControlPanel ?
-                Console.WriteLine(new { ss.i, cn, cp });
+
+                //  Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'int android.app.PendingIntent.describeContents()' on a null object reference
+
+                if (cp == null)
+                    Console.WriteLine(new { ss.i, cn, ss.rsi.process });
+                else
+                    Console.WriteLine(new { ss.i, cn, ss.rsi.process, cp, describeContents = cp.describeContents() });
 
                 // I/System.Console(17713): { cn = AndroidBootServiceNotificationActivity.Activities.NotifyService }
                 if (cn == typeof(NotifyService).FullName)
                 {
-                    // cannot find ourself?
+                    // cannot find ourself? unless its running
 
                     startservice.setEnabled(false);
                     stopservice.setEnabled(true);
@@ -244,6 +286,31 @@ namespace AndroidBootServiceNotificationActivity.Activities
 
 
 
+                }
+
+                if (cp != null)
+                {
+                    // could we not infer activity from code from application?
+
+                    new Button(this).WithText(
+                        cn
+                    ).AtClick(
+                        delegate
+                        {
+                            // http://codetheory.in/android-pending-intents/
+                            try
+                            {
+                                cp.send();
+                            }
+                            catch
+                            {
+                            }
+
+                            //this.startActivity(
+                            //    cp
+                            //);
+                        }
+                    ).AttachTo(ll);
                 }
             }
 
@@ -319,6 +386,7 @@ namespace AndroidBootServiceNotificationActivity.Activities
         }
 
 
+        // http://apiwave.com/java/api/android.app.PendingIntent
 
         public override android.os.IBinder onBind(Intent value)
         {

@@ -16,11 +16,12 @@ namespace android.content
     [Script(IsNative = true)]
     public class Intent
     {
-
+        // ??
+        public static string EXTRA_CLIENT_INTENT = "android.intent.extra.client_intent";
 
         // X:\jsc.svn\examples\java\android\Test\TestNuGetAssetsConsumer\TestNuGetAssetsConsumer\ApplicationActivity.cs
 
-        public static  int FLAG_ACTIVITY_NO_HISTORY = 0x40000000;
+        public static int FLAG_ACTIVITY_NO_HISTORY = 0x40000000;
 
         public static readonly string CATEGORY_DEFAULT = "android.intent.category.DEFAULT";
 
@@ -34,7 +35,7 @@ namespace android.content
         public const string ACTION_PACKAGE_INSTALL = "android.intent.action.PACKAGE_INSTALL";
 
         // X:\jsc.svn\examples\java\android\AndroidBootServiceNotificationActivity\AndroidBootServiceNotificationActivity\ApplicationActivity.cs
-        public const  string ACTION_BOOT_COMPLETED = "android.intent.action.BOOT_COMPLETED";
+        public const string ACTION_BOOT_COMPLETED = "android.intent.action.BOOT_COMPLETED";
 
         public Uri getData() { return null; }
 

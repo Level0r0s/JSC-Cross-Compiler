@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace ScriptCoreLib.JavaScript.DOM
 {
-	// http://mxr.mozilla.org/mozilla-central/source/dom/webidl/History.webidl
-	// https://src.chromium.org/viewvc/blink/trunk/Source/core/frame/History.idl
-	// https://github.com/mono/mono/blob/master/mcs/class/Mono.WebBrowser/Mono.WebBrowser/DOM/IHistory.cs
-	// https://github.com/mono/mono/blob/master/mcs/class/Mono.WebBrowser/Mono.Mozilla/DOM/History.cs
-	// http://www.scala-js.org/api/scalajs-dom/0.6/index.html#org.scalajs.dom.History
-	// http://sharpkit.net/help/SharpKit.Html4/SharpKit.Html4/History/
-	// https://github.com/bridgedotnet/Bridge/blob/master/Html5/History.cs
+    // http://mxr.mozilla.org/mozilla-central/source/dom/webidl/History.webidl
+    // https://src.chromium.org/viewvc/blink/trunk/Source/core/frame/History.idl
+    // https://github.com/mono/mono/blob/master/mcs/class/Mono.WebBrowser/Mono.WebBrowser/DOM/IHistory.cs
+    // https://github.com/mono/mono/blob/master/mcs/class/Mono.WebBrowser/Mono.Mozilla/DOM/History.cs
+    // http://www.scala-js.org/api/scalajs-dom/0.6/index.html#org.scalajs.dom.History
+    // http://sharpkit.net/help/SharpKit.Html4/SharpKit.Html4/History/
+    // https://github.com/bridgedotnet/Bridge/blob/master/Html5/History.cs
 
-	[Script(HasNoPrototype = true)]
+    [Script(HasNoPrototype = true)]
     public class History
     {
         // remoting.phistory?
@@ -30,6 +30,7 @@ namespace ScriptCoreLib.JavaScript.DOM
         {
         }
 
+        // this would be like android multi activity?
 
         // X:\jsc.svn\examples\javascript\Test\TestHistoryUTF8Path\TestHistoryUTF8Path\Application.cs
         // X:\jsc.svn\examples\javascript\Test\Test453History\Test453History\Application.cs
