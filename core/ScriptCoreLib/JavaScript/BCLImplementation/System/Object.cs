@@ -8,6 +8,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
 	// http://referencesource.microsoft.com/#mscorlib/system/object.cs
 	// https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Object.cs
 	// https://github.com/mono/mono/blob/master/mcs/class/corlib/System/Object.cs
+    // https://github.com/dot42/api/blob/master/System/Object.cs
 
 	// https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/Object.cs
 	// https://github.com/konsoletyper/teavm/blob/master/teavm-classlib/src/main/java/org/teavm/classlib/java/lang/TObject.java

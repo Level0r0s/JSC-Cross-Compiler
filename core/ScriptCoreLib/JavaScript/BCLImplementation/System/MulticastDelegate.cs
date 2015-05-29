@@ -9,6 +9,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
 	// https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/MulticastDelegate.cs
 	// http://referencesource.microsoft.com/#mscorlib/system/multicastdelegate.cs
 	// https://github.com/mono/mono/blob/master/mcs/class/corlib/System/MulticastDelegate.cs
+    // https://github.com/dot42/api/blob/master/System/MulticastDelegate.cs
+
 	// X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\MulticastDelegate.cs
 	// X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\MulticastDelegate.cs
 	// X:\jsc.svn\core\ScriptCoreLib\ActionScript\BCLImplementation\System\MulticastDelegate.cs

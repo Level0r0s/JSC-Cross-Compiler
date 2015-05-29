@@ -4,12 +4,13 @@ using System.Text;
 
 namespace ScriptCoreLib.JavaScript.BCLImplementation.System
 {
-	// http://referencesource.microsoft.com/#mscorlib/system/random.cs
-	// https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Random.cs
-	// https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/Random.cs
-	// https://github.com/erik-kallen/SaltarelleCompiler/blob/develop/Runtime/CoreLib/Random.cs
+    // http://referencesource.microsoft.com/#mscorlib/system/random.cs
+    // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Random.cs
+    // https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/Random.cs
+    // https://github.com/erik-kallen/SaltarelleCompiler/blob/develop/Runtime/CoreLib/Random.cs
+    // https://github.com/dot42/api/blob/master/System/Random.cs
 
-	[Script(Implements = typeof(global::System.Random))]
+    [Script(Implements = typeof(global::System.Random))]
     internal class __Random
     {
         public __Random()
@@ -17,13 +18,13 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
 
         }
 
-		public virtual void NextBytes(byte[] buffer)
-		{
-			for (int i = 0; i < buffer.Length; i++)
-			{
-				buffer[i] = (byte)Next(0, 0xFF);
-			}
-		}
+        public virtual void NextBytes(byte[] buffer)
+        {
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                buffer[i] = (byte)Next(0, 0xFF);
+            }
+        }
 
         public virtual int Next()
         {

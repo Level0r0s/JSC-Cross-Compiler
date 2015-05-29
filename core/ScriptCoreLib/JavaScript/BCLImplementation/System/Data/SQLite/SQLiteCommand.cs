@@ -14,6 +14,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Data.SQLite
     [Script(ImplementsViaAssemblyQualifiedName = "System.Data.SQLite.SQLiteCommand")]
     public partial class __SQLiteCommand : __DbCommand
     {
+        // http://blogs.microsoft.com/next/2015/05/27/always-encrypted-sql-server-2016-includes-new-advances-that-keeps-data-safer/
+
         // https://code.google.com/p/linq-cube/
 
         // X:\jsc.svn\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\BCLImplementation\System\Data\SQLite\SQLiteCommand.cs
