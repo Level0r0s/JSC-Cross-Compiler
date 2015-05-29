@@ -954,6 +954,7 @@
     <Compile Include="android\content\pm\ResolveInfo.cs" />
     <Compile Include="android\content\pm\PackageManager.cs" />
     <Compile Include="android\content\pm\MacAuthenticatedInputStream.cs" />
+    <Compile Include="android\content\res\AssetFileDescriptor.cs" />
     <Compile Include="android\content\res\Configuration.cs" />
     <Compile Include="android\content\SharedPreferences.cs" />
     <Compile Include="android\content\Intent.cs" />

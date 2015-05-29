@@ -105,7 +105,7 @@
     <Content Include="staging\apk\assets\viaCopyIfNewer.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="staging\apk\res\raw\resIDviaCopyIfNewer.txt">
+    <Content Include="staging\apk\res\raw\residviacopyifnewerlowercase.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

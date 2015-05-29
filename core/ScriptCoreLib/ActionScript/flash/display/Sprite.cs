@@ -12,6 +12,8 @@ namespace ScriptCoreLib.ActionScript.flash.display
     [Script(IsNative = true)]
     public class Sprite : DisplayObjectContainer
     {
+        // http://labsdownload.adobe.com/pub/labs/flashruntimes/shared/air18_flashplayer18_releasenotes.pdf
+
 		// http://blogs.adobe.com/flashplayer/
 
 		// http://news.slashdot.org/story/15/01/27/2217258/youtube-ditches-flash-for-html5-video-by-default

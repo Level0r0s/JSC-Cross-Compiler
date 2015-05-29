@@ -201,6 +201,11 @@ namespace TestNuGetAssetsConsumer.Activities
     }
 }
 
+//A third party open source project might have forgotten to commit some files...
+//Source files may be in different folders...
+//System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+//   at jsc.meta.Commands.Reference.ReferenceAssetsLibrary.InternalInvoke() in x:\jsc.internal.git\compiler\jsc.internal\jsc.internal\meta\Commands\Reference\ReferenceAssetsLibrary.cs:line 1658
+
 //0001 0200054a ScriptCoreLib::ScriptCoreLib.Shared.BCLImplementation.System.Linq.__IdentityFunction+<>c__0`1
 //script: error JSC1000: Java : Opcode not implemented: brtrue.s at ScriptCoreLib.Shared.BCLImplementation.System.Linq.__Ordere
 //internal compiler error at method
@@ -208,3 +213,21 @@ namespace TestNuGetAssetsConsumer.Activities
 //[javac] W:\src\ScriptCoreLib\Extensions\LinqExtensions.java:227: error: incompatible types
 //[javac]             if ((enumerator_10))
 //[javac]                  ^
+
+
+ //[javac] W:\src\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\__Task.java:248: error: cannot find symbol
+ //[javac]         return  __TaskExtensions.<TResult>Unwrap_060009d5(__Task.get_InternalFactory().<__Task_1<TResult>>StartNew(function));
+ //[javac]                                 ^
+ //[javac]   symbol:   method <TResult>Unwrap_060009d5(__Task_1<__Task_1<TResult>>)
+ //[javac]   location: class __TaskExtensions
+ //[javac]   where TResult is a type-variable:
+ //[javac]     TResult extends Object declared in method <TResult>Run(__Func_1<__Task_1<TResult>>)
+
+// 0001 020001bf ScriptCoreLibAndroid::ScriptCoreLibJava.BCLImplementation.System.Threading.__AutoResetEvent
+//internal compiler error at method
+// assembly: C:\util\jsc\bin\ScriptCoreLibAndroid.dll at
+// type: ScriptCoreLibJava.BCLImplementation.System.Threading.__EventWaitHandle, ScriptCoreLibAndroid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// method: Set
+// Object reference not set to an instance of an object.
+
+

@@ -16,6 +16,10 @@ namespace android.content
     [Script(IsNative = true)]
     public class Intent
     {
+        // X:\jsc.svn\examples\java\android\Test\TestNuGetAssetsConsumer\TestNuGetAssetsConsumer\ApplicationActivity.cs
+
+        public static  int FLAG_ACTIVITY_NO_HISTORY = 0x40000000;
+
         public static readonly string CATEGORY_DEFAULT = "android.intent.category.DEFAULT";
 
         public static int FLAG_ACTIVITY_SINGLE_TOP = 0x20000000;

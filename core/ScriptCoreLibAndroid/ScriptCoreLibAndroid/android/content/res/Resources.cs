@@ -21,6 +21,11 @@ namespace android.content.res
 
         }
 
+
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150526
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150529
+        // tested by?
+        // X:\jsc.svn\examples\java\android\Test\TestNuGetAssetsConsumer\TestNuGetAssetsConsumer\ApplicationActivity.cs
         public virtual AssetManager getAssets()
         {
             return default(AssetManager);

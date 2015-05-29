@@ -14,6 +14,7 @@ namespace android.widget
     public  class Toast
     {
         public static readonly int LENGTH_SHORT = 0;
+        public static readonly int LENGTH_LONG = 1;
 
         // members and types are to be extended by jsc at release build
 

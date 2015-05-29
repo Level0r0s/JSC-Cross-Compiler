@@ -9,6 +9,8 @@ using java.io;
 
 namespace android.content.res
 {
+    //  https://github.com/android/platform_frameworks_base/blob/master/core/java/android/content/res/AssetManager.java
+
     [Script(IsNative = true)]
     public class AssetManager 
     {
@@ -24,6 +26,11 @@ namespace android.content.res
         public virtual InputStream open(string value)
         {
             return default(InputStream);
+        }
+
+        public  AssetFileDescriptor openFd(String fileName)
+        {
+            return null;
         }
     }
 }

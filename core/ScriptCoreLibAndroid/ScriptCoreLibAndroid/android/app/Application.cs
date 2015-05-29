@@ -14,5 +14,11 @@ namespace android.app
     public class Application : ContextWrapper
     {
         // members and types are to be extended by jsc at release build
+
+        // X:\jsc.svn\examples\java\android\Test\TestNuGetAssetsConsumer\TestNuGetAssetsConsumer\ApplicationActivity.cs
+        public virtual void onCreate()
+        {
+        }
+
     }
 }
