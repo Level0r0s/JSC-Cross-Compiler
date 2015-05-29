@@ -7,6 +7,7 @@ using System.Text;
 namespace ScriptCoreLib.Shared.BCLImplementation.System.Collections.ObjectModel
 {
     // http://referencesource.microsoft.com/#mscorlib/system/collections/objectmodel/readonlycollection.cs
+    // https://github.com/dot42/api/blob/master/System/Collections/ObjectModel/ReadOnlyCollection.cs
 
     [Script(Implements = typeof(global::System.Collections.ObjectModel.ReadOnlyCollection<>))]
     internal class __ReadOnlyCollection<T> : __IList<T>, __ICollection<T>

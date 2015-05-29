@@ -18,7 +18,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 {
     // http://referencesource.microsoft.com/#System/net/System/Net/webclient.cs
     // https://github.com/mono/mono/tree/master/mcs/class/System/System.Net/WebClient.cs
-
+    // https://github.com/dot42/api/blob/master/System/Net/WebClient.cs
 
     [Script(Implements = typeof(global::System.Net.WebClient))]
     internal class __WebClient : __Component

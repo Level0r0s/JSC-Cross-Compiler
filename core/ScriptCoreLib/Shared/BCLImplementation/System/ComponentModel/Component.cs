@@ -6,11 +6,16 @@ using System.Text;
 namespace ScriptCoreLib.Shared.BCLImplementation.System.ComponentModel
 {
     // http://referencesource.microsoft.com/#System/compmod/system/componentmodel/Component.cs
+    // https://github.com/dot42/api/tree/master/System/ComponentModel
+
     [Script(Implements = typeof(global::System.ComponentModel.Component))]
     public class __Component :
         __MarshalByRefObject,
          __IComponent
     {
+        // will .NET start using Component concept again beyond 4.7?
+        // component designer was cool.
+
         public event EventHandler Disposed;
 
 

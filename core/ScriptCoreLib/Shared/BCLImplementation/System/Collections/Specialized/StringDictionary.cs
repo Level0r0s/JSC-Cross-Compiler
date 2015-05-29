@@ -8,6 +8,7 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Collections.Specialized
 {
     // http://referencesource.microsoft.com/#System/compmod/system/collections/specialized/stringdictionary.cs
     // https://github.com/dotnet/corefx/blob/master/src/System.Collections.Specialized/src/System/Collections/Specialized/StringDictionary.cs
+    // https://github.com/dot42/api/blob/master/System/Collections/Specialized/StringDictionary.cs
 
     [Script(Implements = typeof(global::System.Collections.Specialized.StringDictionary))]
     internal class __StringDictionary : IEnumerable

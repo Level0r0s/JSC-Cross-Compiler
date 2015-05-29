@@ -7,6 +7,7 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Resources
 {
 	// http://referencesource.microsoft.com/#mscorlib/system/globalization/cultureinfo.cs
 	// https://github.com/dotnet/coreclr/blob/master/src/mscorlib/corefx/System/Globalization/CultureInfo.cs
+    // https://github.com/dot42/api/blob/master/System/Globalization/CultureInfo.cs
 
 	[Script(Implements = typeof(global::System.Globalization.CultureInfo))]
     internal class __CultureInfo : __ICloneable, __IFormatProvider

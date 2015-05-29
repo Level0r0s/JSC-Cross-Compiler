@@ -17,6 +17,9 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
 {
     public partial class __Form
     {
+        // https://visualstudio.uservoice.com/forums/121579-visual-studio/suggestions/8127717-open-source-windows-forms
+        // Still today, even the most new Desktop Applications projects become Windows Forms Apps
+
         [Obsolete("pending css guidline review")]
         public CSSStyleRuleMonkier outer_css;
 
