@@ -10,6 +10,8 @@ namespace android.content
     [Script(IsNative = true)]
     public class ComponentName
     {
+        public string getClassName() { return null; }
+        public string getPackageName() { return null; }
         public ComponentName()
         {
 

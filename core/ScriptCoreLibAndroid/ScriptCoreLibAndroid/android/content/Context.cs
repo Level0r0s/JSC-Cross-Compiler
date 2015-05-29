@@ -18,7 +18,7 @@ namespace android.content
         public abstract Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter);
 
         public static readonly string SENSOR_SERVICE;
-
+        public static readonly string ACTIVITY_SERVICE = "activity";
 
         public const int MODE_PRIVATE = 0;
 
@@ -42,7 +42,7 @@ namespace android.content
 
         public abstract ComponentName startService(Intent service);
 
-
+        public abstract void unregisterReceiver(BroadcastReceiver receiver);
 
         public abstract SharedPreferences getSharedPreferences(string arg0, int arg1);
 

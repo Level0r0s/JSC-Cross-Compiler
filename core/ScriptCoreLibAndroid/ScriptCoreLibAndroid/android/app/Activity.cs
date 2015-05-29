@@ -200,5 +200,10 @@ namespace android.app
         public virtual void onWindowFocusChanged(bool hasFocus)
         {
         }
+
+        public void recreate()
+        {
+        }
+
     }
 }

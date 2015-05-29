@@ -74,6 +74,11 @@ namespace android.content
             throw new NotImplementedException();
         }
 
+        public override void unregisterReceiver(BroadcastReceiver receiver)
+        {
+            throw new NotImplementedException();
+        }
+
         public override PackageManager getPackageManager() { return null; }
 
         public override string getPackageName()

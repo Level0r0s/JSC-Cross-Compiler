@@ -927,6 +927,7 @@
     <Compile Include="android\appwidget\AppWidgetProvider.cs" />
     <Compile Include="android\appwidget\AppWidgetManager.cs" />
     <Compile Include="android\appwidget\AppWidgetHost.cs" />
+    <Compile Include="android\app\ActivityManager.cs" />
     <Compile Include="android\app\admin\DeviceAdminReceiver.cs" />
     <Compile Include="android\app\ActivityThread.cs" />
     <Compile Include="android\app\Application.cs" />

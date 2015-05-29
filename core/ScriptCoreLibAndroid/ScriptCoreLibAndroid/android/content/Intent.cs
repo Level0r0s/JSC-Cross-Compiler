@@ -16,6 +16,8 @@ namespace android.content
     [Script(IsNative = true)]
     public class Intent
     {
+
+
         // X:\jsc.svn\examples\java\android\Test\TestNuGetAssetsConsumer\TestNuGetAssetsConsumer\ApplicationActivity.cs
 
         public static  int FLAG_ACTIVITY_NO_HISTORY = 0x40000000;
@@ -31,7 +33,8 @@ namespace android.content
         public const string ACTION_PACKAGE_REPLACED = "android.intent.action.PACKAGE_REPLACED";
         public const string ACTION_PACKAGE_INSTALL = "android.intent.action.PACKAGE_INSTALL";
 
-
+        // X:\jsc.svn\examples\java\android\AndroidBootServiceNotificationActivity\AndroidBootServiceNotificationActivity\ApplicationActivity.cs
+        public const  string ACTION_BOOT_COMPLETED = "android.intent.action.BOOT_COMPLETED";
 
         public Uri getData() { return null; }
 

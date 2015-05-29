@@ -13,6 +13,8 @@ namespace ScriptCoreLib.Android.Manifest
     //public sealed class IntentFilterAttribute : Attribute
     public sealed class ApplicationIntentFilterAttribute : Attribute
     {
+        // X:\jsc.svn\examples\java\android\AndroidBootServiceNotificationActivity\AndroidBootServiceNotificationActivity\ApplicationActivity.cs
+
         // jsc does not support properties yet? are they even allowed in java?
 
         // action instead?

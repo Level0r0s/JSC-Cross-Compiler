@@ -104,19 +104,98 @@ namespace AndroidBootServiceNotificationActivity.Activities
 
             Console.WriteLine("getRunningServices " + s.size());
 
-            var se = Enumerable.Range(0, s.size()).Select(i => (android.app.ActivityManager.RunningServiceInfo)s.get(i));
+            var se =
+
+                from i in Enumerable.Range(0, s.size())
+                let rsi = (android.app.ActivityManager.RunningServiceInfo)s.get(i)
+                let cn = rsi.service.getClassName()
+                let cp = m.getRunningServiceControlPanel(rsi.service)
+                orderby cn
+
+                select new { i, rsi, cn, cp };
+
+            //I/System.Console(32668): { cn = com.sec.enterprise.mdm.services.simpin.EnterpriseSimPin, cp =  }
+            //I/System.Console(32668): { cn = com.dsi.ant.server.AntService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.gms.analytics.service.AnalyticsService, cp =  }
+            //I/System.Console(32668): { cn = com.android.bluetooth.gatt.GattService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.scloud.auth.RelayService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.sconnect.periph.PeriphService, cp =  }
+            //I/System.Console(32668): { cn = org.simalliance.openmobileapi.service.SmartcardService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.sm.widgetapp.SMWidgetService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.sensor.framework.SensorService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.location.fused.FusedLocationService, cp =  }
+            //I/System.Console(32668): { cn = com.sec.android.app.launcher.services.LauncherService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.app.shealth.tracker.sport.livetracker.LiveTrackerService, cp =  }
+            //I/System.Console(32668): { cn = com.sec.android.widgetapp.digitalclockeasy.DigitalClockEasyService, cp =  }
+            //I/System.Console(32668): { cn = com.android.bluetooth.a2dp.A2dpService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.search.core.service.SearchService, cp =  }
+            //I/System.Console(32668): { cn = com.sec.android.widgetapp.ap.weather.widget.surfacewidget.WeatherSurfaceWidget, cp =  }
+            //I/System.Console(32668): { cn = com.android.incallui.InCallServiceImpl, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.gms.gcm.http.GoogleHttpService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.location.geofencer.service.GeofenceProviderService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.hotword.service.HotwordService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.sec.android.application.csc.CscUpdateService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.health.wearable.service.WearableService, cp =  }
+            //I/System.Console(32668): { cn = com.sec.spp.push.PushClientService, cp =  }
+            //I/System.Console(32668): { cn = com.android.systemui.SystemUIService, cp =  }
+            //I/System.Console(32668): { cn = android.hardware.location.GeofenceHardwareService, cp =  }
+            //I/System.Console(32668): { cn = com.sec.android.pagebuddynotisvc.PageBuddyNotiSvc, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.thememanager.ThemeManagerService, cp =  }
+            //I/System.Console(32668): { cn = com.fmm.dm.XDMService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.MtpApplication.MtpService, cp =  }
+            //I/System.Console(32668): { cn = com.android.server.telecom.BluetoothVoIPService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.gms.auth.trustagent.GoogleTrustAgent, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.appcessory.server.SAPService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.app.galaxyfinder.tag.TagReadyService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.location.internal.PendingIntentCallbackService, cp =  }
+            //I/System.Console(32668): { cn = com.android.incallui.SecInCallService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.app.edge.nightclock.NightClockService, cp =  }
+            //I/System.Console(32668): { cn = com.android.server.telecom.BluetoothPhoneService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.location.internal.server.GoogleLocationService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.app.galaxyfinder.recommended.RecommendedService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.libraries.hangouts.video.VideoChatService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.location.network.NetworkLocationService, cp =  }
+            //I/System.Console(32668): { cn = com.android.stk.StkAppService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.location.internal.GoogleLocationManagerService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.service.health.HealthService, cp =  }
+            //I/System.Console(32668): { cn = com.android.server.DrmEventService, cp =  }
+            //I/System.Console(32668): { cn = com.android.providers.media.MtpService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.gms.deviceconnection.service.DeviceConnectionServiceBroker, cp =  }
+            //I/System.Console(32668): { cn = com.android.bluetooth.hfp.HeadsetService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.voiceinteraction.GsaVoiceInteractionService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.providers.context.ContextService, cp =  }
+            //I/System.Console(32668): { cn = com.android.incallui.MCIDService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.app.shealth.tracker.pedometer.service.PedometerService, cp =  }
+            //I/System.Console(32668): { cn = com.android.internal.backup.LocalTransportService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.gms.playlog.service.PlayLogBrokerService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.gms.common.stats.GmsCoreStatsService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.gms.clearcut.service.ClearcutLoggerService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.service.peoplestripe.PeopleStripeService, cp =  }
+            //I/System.Console(32668): { cn = com.samsung.android.app.catchfavorites.catchnotifications.CatchNotificationsService, cp = PendingIntent{2a6fe01c: android.os.BinderProxy@6924ca9} }
+            //I/System.Console(32668): { cn = com.samsung.android.beaconmanager.BeaconService, cp =  }
+            //I/System.Console(32668): { cn = com.android.defcontainer.DefaultContainerService, cp =  }
+            //I/System.Console(32668): { cn = com.android.phone.TelephonyDebugService, cp =  }
+            //I/System.Console(32668): { cn = com.sec.android.service.sm.service.SecurityManagerService, cp =  }
+            //I/System.Console(32668): { cn = com.android.bluetooth.pan.PanService, cp =  }
+            //I/System.Console(32668): { cn = com.ime.framework.spellcheckservice.SamsungIMESpellCheckerService, cp =  }
+            //I/System.Console(32668): { cn = com.google.android.gms.backup.BackupTransportService, cp =  }
+            //I/System.Console(32668): { cn = com.sec.phone.SecPhoneService, cp =  }
 
             foreach (var ss in se)
             {
 
 
-                var cn = ss.service.getClassName();
+                var cn = ss.cn;
 
-                Console.WriteLine(new { cn });
+                PendingIntent cp = ss.cp;
+
+                // whats a ControlPanel ?
+                Console.WriteLine(new { ss.i, cn, cp });
 
                 // I/System.Console(17713): { cn = AndroidBootServiceNotificationActivity.Activities.NotifyService }
                 if (cn == typeof(NotifyService).FullName)
                 {
+                    // cannot find ourself?
 
                     startservice.setEnabled(false);
                     stopservice.setEnabled(true);
@@ -160,7 +239,7 @@ namespace AndroidBootServiceNotificationActivity.Activities
                         );
                         ll.addView(cpb);
                     }
-                        #endregion
+                    #endregion
 #endif
 
 
@@ -207,7 +286,10 @@ namespace AndroidBootServiceNotificationActivity.Activities
                 android.R.drawable.star_on,
                 //(CharSequence)(object)"Boot!!",
                 "Boot!!",
-                java.lang.System.currentTimeMillis()
+
+                when: 0
+
+            //java.lang.System.currentTimeMillis()
             );
 
             var context = getApplicationContext();
@@ -268,7 +350,7 @@ namespace foo
 
 
     // android.intent.action.BOOT_COMPLETED
-    [IntentFilter(Action = Intent.ACTION_BOOT_COMPLETED)]
+    [ScriptCoreLib.Android.Manifest.ApplicationIntentFilterAttribute(Action = Intent.ACTION_BOOT_COMPLETED)]
     //[IntentFilter(Action = "android.intent.action.BOOT_COMPLETED")]
     public class AtBootCompleted : BroadcastReceiver
     {
@@ -293,3 +375,10 @@ namespace foo
 
 }
 
+//0001 020001c0 ScriptCoreLibAndroid::ScriptCoreLibJava.BCLImplementation.System.Threading.__AutoResetEvent
+//internal compiler error at method
+// assembly: C:\util\jsc\bin\ScriptCoreLibAndroid.dll at
+// type: ScriptCoreLibJava.BCLImplementation.System.Threading.__EventWaitHandle, ScriptCoreLibAndroid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// method: Set
+// Object reference not set to an instance of an object.
+//    at jsc.Languages.Java.JavaCompiler.EmitTryBlock(Prestatement p) in X:\jsc.internal.git\compiler\jsc\Languages\Java\JavaCompiler.EmitTryBlock.cs:line 129
