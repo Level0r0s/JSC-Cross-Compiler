@@ -18,6 +18,7 @@ using ScriptCoreLibJava.Extensions;
 namespace ScriptCoreLib.Android.WebGL
 {
     // Android L will allow <webview webgl!
+    // actually s6 edge has webgl disabled. we can roll our own chrome tho..
 
     using gl = __WebGLRenderingContext;
     using opengl = GLES20;

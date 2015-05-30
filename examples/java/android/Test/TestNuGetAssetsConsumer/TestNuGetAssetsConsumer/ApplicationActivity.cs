@@ -13,6 +13,7 @@ using ScriptCoreLib.Android.Manifest;
 using android.content;
 using android.content.res;
 using ScriptCoreLibJava.Extensions;
+using System.Diagnostics;
 
 namespace TestNuGetAssetsConsumer.Activities
 {
@@ -113,6 +114,10 @@ namespace TestNuGetAssetsConsumer.Activities
             #region ApplicationActivity
             ApplicationActivity.vCreate = (activity, savedInstanceState) =>
             {
+                var myPid = android.os.Process.myPid();
+
+                activity.setTitle("root " + new { myPid });
+
                 var sv = new ScrollView(activity);
                 var ll = new LinearLayout(activity);
                 ll.setOrientation(LinearLayout.VERTICAL);
@@ -147,7 +152,15 @@ namespace TestNuGetAssetsConsumer.Activities
                 // resume scope
                 var _item = activity.getIntent().getExtras().getString("_item");
 
-                activity.setTitle(_item);
+                // http://stackoverflow.com/questions/19631894/is-there-a-way-to-get-current-process-name-in-android
+                // http://stackoverflow.com/questions/6567768/how-can-an-android-application-have-more-than-one-process
+                var myPid = android.os.Process.myPid();
+                //Process.GetCurrentProcess().Id;
+
+                //activity.getPackageManager
+
+                activity.setTitle(_item + new { myPid });
+
 
                 //b.WithText("! secondary " + new { _item });
                 //b.AtClick(
@@ -215,13 +228,13 @@ namespace TestNuGetAssetsConsumer.Activities
 //[javac]                  ^
 
 
- //[javac] W:\src\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\__Task.java:248: error: cannot find symbol
- //[javac]         return  __TaskExtensions.<TResult>Unwrap_060009d5(__Task.get_InternalFactory().<__Task_1<TResult>>StartNew(function));
- //[javac]                                 ^
- //[javac]   symbol:   method <TResult>Unwrap_060009d5(__Task_1<__Task_1<TResult>>)
- //[javac]   location: class __TaskExtensions
- //[javac]   where TResult is a type-variable:
- //[javac]     TResult extends Object declared in method <TResult>Run(__Func_1<__Task_1<TResult>>)
+//[javac] W:\src\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\__Task.java:248: error: cannot find symbol
+//[javac]         return  __TaskExtensions.<TResult>Unwrap_060009d5(__Task.get_InternalFactory().<__Task_1<TResult>>StartNew(function));
+//[javac]                                 ^
+//[javac]   symbol:   method <TResult>Unwrap_060009d5(__Task_1<__Task_1<TResult>>)
+//[javac]   location: class __TaskExtensions
+//[javac]   where TResult is a type-variable:
+//[javac]     TResult extends Object declared in method <TResult>Run(__Func_1<__Task_1<TResult>>)
 
 // 0001 020001bf ScriptCoreLibAndroid::ScriptCoreLibJava.BCLImplementation.System.Threading.__AutoResetEvent
 //internal compiler error at method

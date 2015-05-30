@@ -1001,6 +1001,7 @@
     <Compile Include="android\os\BatteryManager.cs" />
     <Compile Include="android\os\BaseBundle.cs" />
     <Compile Include="android\os\Build.cs" />
+    <Compile Include="android\os\Process.cs" />
     <Compile Include="android\os\Looper.cs" />
     <Compile Include="android\os\Parcel.cs" />
     <Compile Include="android\os\Handler.cs" />

@@ -23,6 +23,10 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading
     [Script(Implements = typeof(global::System.Threading.Thread))]
     public class __Thread
     {
+        // http://miss-cache.blogspot.com/2013/01/android-running-native-code-on-multiple.html
+        // http://stackoverflow.com/questions/7467848/is-it-possible-to-set-affinity-with-sched-setaffinity-in-android
+        // https://github.com/OpenHFT/Java-Thread-Affinity
+
         // X:\jsc.svn\examples\java\appengine\Test\TestThreadManager\TestThreadManager\ApplicationWebService.cs
         // would this enable async queries?
 
@@ -108,6 +112,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading
         {
             get
             {
+                // X:\jsc.svn\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\android\os\Process.cs
+
                 return (int)this.InternalValue.getId();
             }
         }

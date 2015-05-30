@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeGalaxyS6Edge", "ChromeGalaxyS6Edge\ChromeGalaxyS6Edge.csproj", "{426A9419-9287-4880-979F-29F29D3F2A22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeTCPServer", "..\..\ChromeTCPServer\ChromeTCPServer\ChromeTCPServer.csproj", "{9672D112-D806-49D3-B5C8-3B3A2278AD18}"
@@ -8,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "THREE", "..\..\..\..\..\..\market\synergy\THREE\THREE\THREE.csproj", "{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeTCPServerWithFrameNone", "..\..\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone\ChromeTCPServerWithFrameNone.csproj", "{DF763FAD-6D74-47A6-80C3-EA7B444C81BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{E6232699-1F1D-4793-9A9B-15E7C2F941A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,5 +38,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18} = {E6232699-1F1D-4793-9A9B-15E7C2F941A3}
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC} = {E6232699-1F1D-4793-9A9B-15E7C2F941A3}
+		{DF763FAD-6D74-47A6-80C3-EA7B444C81BF} = {E6232699-1F1D-4793-9A9B-15E7C2F941A3}
 	EndGlobalSection
 EndGlobal
