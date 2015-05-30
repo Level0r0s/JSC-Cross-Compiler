@@ -16,12 +16,38 @@ using ScriptCoreLib.Android.Extensions;
 using ScriptCoreLibJava.Extensions;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Diagnostics;
 
 namespace AndroidBootServiceNotificationActivity.Activities
 {
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "8")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
+
+    public class LocalApplication :
+        // can we change our base depeinding on the process we are in?
+       Application
+    {
+        public override void onCreate()
+        {
+            base.onCreate();
+
+            // yes we are loaded for both processes.
+            {
+                var myPid = android.os.Process.myPid();
+
+                Console.WriteLine("enter AndroidBootServiceNotificationActivity onCreate, first time? " + new { myPid });
+
+                // https://stackoverflow.com/questions/7686482/when-does-applications-oncreate-method-is-called-on-android
+                Toast.makeText(this, "AndroidBootServiceNotificationActivity " + new { myPid }, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
+
+
     // http://android-er.blogspot.com/2011/04/start-service-to-send-notification.html
 
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "21")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
@@ -56,7 +82,7 @@ namespace AndroidBootServiceNotificationActivity.Activities
                 delegate
                 {
                     startservice.setEnabled(false);
-                    this.ShowToast("startservice_onclick");
+                    //this.ShowToast("startservice_onclick");
 
                     //var intent = new Intent(this, NotifyService.Class);
                     var intent = new Intent(this, typeof(NotifyService).ToClass());
@@ -118,7 +144,7 @@ namespace AndroidBootServiceNotificationActivity.Activities
                 orderby cp != null
 
                 select new { i, rsi, cn, cp };
-
+            //java.lang.JavaSystem.ex
             //     I/System.Console( 1617): { i = 45, cn = android.hardware.location.GeofenceHardwareService, cp =  }
             //I/System.Console( 1617): { i = 17, cn = ccc71.at.services.at_service, cp =  }
             //I/System.Console( 1617): { i = 34, cn = com.android.bluetooth.a2dp.A2dpService, cp =  }
@@ -247,47 +273,10 @@ namespace AndroidBootServiceNotificationActivity.Activities
                     // http://stackoverflow.com/questions/7170730/how-to-set-a-control-panel-for-my-service-in-android
                     // http://www.techques.com/question/1-7170730/How-to-set-a-control-panel-for-my-Service-in-Android
                     // http://alvinalexander.com/java/jwarehouse/android/core/java/android/app/ActivityManagerNative.java.shtml
-
-#if XCONTROLPANEL
-                    PendingIntent cp = m.getRunningServiceControlPanel(ss.service);
-
-                    Console.WriteLine(new { cp });
-                    if (cp != null)
-                    {
-                    #region cpb
-                        var cpb = new Button(this);
-                        cpb.setText("ServiceControlPanel");
-                        cpb.AtClick(
-                            delegate
-                            {
-                                //new Intent(
-                                //PendingIntent.getActivity(
-                                //startActivity(cp);
-
-                                // http://iserveandroid.blogspot.com/2011/03/how-to-launch-pending-intent.html
-                                Intent intent = new Intent();
-
-                                try
-                                {
-                                    cp.send(this, 0, intent);
-                                }
-                                catch
-                                {
-
-                                    throw;
-                                }
-
-                            }
-                        );
-                        ll.addView(cpb);
-                    }
-                    #endregion
-#endif
-
-
-
                 }
 
+
+                #region cp
                 if (cp != null)
                 {
                     // could we not infer activity from code from application?
@@ -312,18 +301,58 @@ namespace AndroidBootServiceNotificationActivity.Activities
                         }
                     ).AttachTo(ll);
                 }
+                #endregion
+
+
             }
 
             this.setContentView(sv);
 
-            this.ShowToast("http://jsc-solutions.net");
+            //this.ShowToast("http://jsc-solutions.net");
 
 
+            new Button(this).WithText("exit").AttachTo(ll).AtClick(
+                delegate
+                {
+
+                    // will it be logged?
+                    System.Environment.Exit(13);
+
+                    // application still visible in tasks?
+                }
+            );
+
+            new Button(this).WithText("finish").AttachTo(ll).AtClick(
+               delegate
+               {
+                   //this.finishAndRemoveTask();
+                   this.finish();
+
+                   // will it be logged?
+                   //System.Environment.Exit(13);
+
+                   // application still visible in tasks?
+               }
+           );
+
+            new Button(this).WithText("finishAndRemoveTask").AttachTo(ll).AtClick(
+             delegate
+             {
+                 this.finishAndRemoveTask();
+                 //this.finish();
+
+                 // will it be logged?
+                 //System.Environment.Exit(13);
+
+                 // application still visible in tasks?
+             }
+         );
         }
 
 
     }
 
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:process", value = ":foo5")]
     public sealed class NotifyService : Service
     {
         public const string ACTION = "NotifyServiceAction";
@@ -337,22 +366,46 @@ namespace AndroidBootServiceNotificationActivity.Activities
             notifyServiceReceiver = new NotifyServiceReceiver { that = this };
 
             base.onCreate();
+
         }
 
         public override int onStartCommand(Intent value0, int value1, int value2)
         {
+            // http://stackoverflow.com/questions/14182014/android-oncreate-or-onstartcommand-for-starting-service
+
+
+            new Thread(
+                delegate()
+                {
+                    var sw = Stopwatch.StartNew();
+
+                    while (true)
+                    {
+                        var xmyPid = android.os.Process.myPid();
+
+
+                        // cpu 
+                        Console.WriteLine(new { xmyPid, Thread.CurrentThread.ManagedThreadId, sw });
+
+                        Thread.Sleep(1000);
+                    }
+                }
+            ) { Name = "namedthread1" }.Start();
+
+            var myPid = android.os.Process.myPid();
+
             var intentFilter = new IntentFilter();
             intentFilter.addAction(ACTION);
             registerReceiver(notifyServiceReceiver, intentFilter);
 
 
-            // Send Notification
+            #region Send Notification
             var notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 
             var myNotification = new Notification(
                 android.R.drawable.star_on,
                 //(CharSequence)(object)"Boot!!",
-                "Boot!!",
+                "Boot!!" + new { myPid },
 
                 when: 0
 
@@ -370,10 +423,12 @@ namespace AndroidBootServiceNotificationActivity.Activities
             myNotification.defaults |= Notification.DEFAULT_SOUND;
             myNotification.flags |= Notification.FLAG_AUTO_CANCEL;
             myNotification.setLatestEventInfo(context,
-                    "Boot!!",
+                "Boot!!" + new { myPid },
                     "Proud to be a jsc developer :)",
                pendingIntent);
             notificationManager.notify(1, myNotification);
+            #endregion
+
 
 
             return base.onStartCommand(value0, value1, value2);
@@ -383,6 +438,15 @@ namespace AndroidBootServiceNotificationActivity.Activities
         {
             this.unregisterReceiver(notifyServiceReceiver);
             base.onDestroy();
+
+            //            I/System.Console( 8080): onDestroy { xmyPid = 8080 }
+            //I/art     ( 8080): System.exit called, status: 42
+
+            var xmyPid = android.os.Process.myPid();
+            Console.WriteLine("onDestroy " + new { xmyPid });
+
+            System.Environment.Exit(42);
+
         }
 
 
@@ -450,3 +514,11 @@ namespace foo
 // method: Set
 // Object reference not set to an instance of an object.
 //    at jsc.Languages.Java.JavaCompiler.EmitTryBlock(Prestatement p) in X:\jsc.internal.git\compiler\jsc\Languages\Java\JavaCompiler.EmitTryBlock.cs:line 129
+
+
+//    0001 020001c1 ScriptCoreLibAndroid::ScriptCoreLibJava.BCLImplementation.System.Threading.__AutoResetEvent
+//internal compiler error at method
+// assembly: C:\util\jsc\bin\ScriptCoreLibAndroid.dll at
+// type: ScriptCoreLibJava.BCLImplementation.System.Threading.__EventWaitHandle, ScriptCoreLibAndroid, Version=
+// method: Set
+// Object reference not set to an instance of an object.

@@ -11,6 +11,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System
     // https://github.com/Microsoft/referencesource/blob/master/mscorlib/system/environment.cs
     // https://github.com/mono/mono/blob/master/mcs/class/corlib/System/Environment.cs
 
+    // https://github.com/dot42/api/blob/master/System/Environment.cs
+
     // https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/Environment.cs
     // https://github.com/erik-kallen/SaltarelleCompiler/blob/develop/Runtime/CoreLib/Environment.cs
     // https://github.com/kswoll/WootzJs/blob/master/WootzJs.Runtime/Environment.cs
@@ -24,6 +26,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System
     {
         // X:\jsc.svn\examples\java\hybrid\Test\TestJVMCLRYieldStatement\TestJVMCLRYieldStatement\Program.cs
         // X:\jsc.svn\examples\java\hybrid\JVMCLRLoadLibrary\JVMCLRLoadLibrary\Program.cs
+
+        public static void Exit(int exitCode)
+        {
+            java.lang.System.exit(exitCode);
+        }
 
         public static int CurrentManagedThreadId
         {

@@ -82,6 +82,14 @@ namespace ScriptCoreLibJava.BCLImplementation.System
                 // http://stackoverflow.com/questions/8888654/android-set-max-length-of-logcat-messages
                 // So the real message size for both binary and non-binary logs is ~4076 bytes.
 
+                // like jsc we now report as a multiprocesss app..
+
+                // X:\jsc.svn\examples\java\android\AndroidBootServiceNotificationActivity\AndroidBootServiceNotificationActivity\ApplicationActivity.cs
+                var pid = android.os.Process.myPid();
+                var tid = global::System.Threading.Thread.CurrentThread.ManagedThreadId;
+
+                var prefix = pid.ToString("x4") + ":" + tid.ToString("x4") + " ";
+
                 var loop = true;
 
                 while (loop)
@@ -89,7 +97,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
                     if (e.Length < 4000)
                     {
-                        android.util.Log.i("System.Console", e);
+                        android.util.Log.i("System.Console", prefix + e);
 
                         loop = false;
                     }
@@ -98,7 +106,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System
                         var x = e.Substring(0, 4000);
                         e = e.Substring(4000);
 
-                        android.util.Log.i("System.Console", x);
+                        android.util.Log.i("System.Console", prefix + x);
                     }
                 }
 

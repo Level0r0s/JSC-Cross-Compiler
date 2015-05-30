@@ -132,14 +132,14 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
         public static void Copy(__Array sourceArray, __Array destinationArray, int length)
         {
-            java.lang.JavaSystem.arraycopy(sourceArray, 0, destinationArray, 0, length);
+            java.lang.System.arraycopy(sourceArray, 0, destinationArray, 0, length);
         }
 
         public static void Copy(__Array sourceArray, int sourceIndex, __Array destinationArray, int destinationIndex, int length)
         {
             // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Security\Cryptography\RSACryptoServiceProvider.cs
 
-            java.lang.JavaSystem.arraycopy(sourceArray, sourceIndex, destinationArray, destinationIndex, length);
+            java.lang.System.arraycopy(sourceArray, sourceIndex, destinationArray, destinationIndex, length);
         }
 
         public static Array CreateInstance(Type elementType, int length)

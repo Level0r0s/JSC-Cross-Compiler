@@ -7,11 +7,14 @@ using ScriptCoreLib;
 namespace java.lang
 {
 
-
+    // http://developer.android.com/reference/java/lang/System.html
 	// http://java.sun.com/j2se/1.5.0/docs/api/java/lang/System.html
+
 	[Script(IsNative = true, ExternalTarget = "System")]
-	public static class JavaSystem
+    //public static class JavaSystem
+	public static class System
 	{
+
         // X:\jsc.svn\examples\c\android\Test\TestHybridOVR\TestHybridOVR\OVRJVM\ApplicationActivity.cs
 
         // X:\jsc.svn\examples\java\hybrid\JVMCLRLoadLibrary\JVMCLRLoadLibrary\Program.cs
@@ -33,6 +36,15 @@ namespace java.lang
 
         }
 
+        // %ERRORLEVEL%
+        public static void exit(int code)
+        {
+
+        }
+
+        // X:\jsc.svn\examples\java\android\AndroidBootServiceNotificationActivity\AndroidBootServiceNotificationActivity\ApplicationActivity.cs
+        // could jsc do some magic there? could be like we did for alchemy for flash..
+        // on android we would have multiple process for app
 		public static void loadLibrary(string p)
 		{
 

@@ -60,7 +60,9 @@ namespace AndroidNotificationActivity.Activities
                     var notification = new Notification(
                         android.R.drawable.star_on,
                         "The text that flows by in the status bar when the notification first activates.",
-                         java.lang.System.currentTimeMillis()
+                         
+                        0
+                        //java.lang.System.currentTimeMillis()
                     );
 
                     var notificationIntent = new Intent(this, typeof(ApplicationActivity).ToClass());
@@ -73,8 +75,8 @@ namespace AndroidNotificationActivity.Activities
                         "The text that goes in the expanded entry.",
                         contentIntent);
 
-                    notification.defaults |= Notification.DEFAULT_VIBRATE;
-                    notification.defaults |= Notification.DEFAULT_LIGHTS;
+                    //notification.defaults |= Notification.DEFAULT_VIBRATE;
+                    //notification.defaults |= Notification.DEFAULT_LIGHTS;
                     // http://androiddrawableexplorer.appspot.com/
                     nm.notify(counter, notification);
                 }
