@@ -605,6 +605,8 @@ namespace AndroidMultiProcTCPServerAsync.Activities
             Console.WriteLine("enter onStartCommand " + new { flags, startId });
 
 
+
+            // until wifi changes?
             var xipv4 =
                 from n in System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces()
                 let IPProperties = n.GetIPProperties()
@@ -747,6 +749,8 @@ namespace AndroidMultiProcTCPServerAsync.Activities
                     {
                         var c = await l.AcceptTcpClientAsync();
 
+                        // time to do firewall or security?
+
                         Console.WriteLine("accept " + new { c, Thread.CurrentThread.ManagedThreadId });
 
                         yield(c);
@@ -789,8 +793,24 @@ namespace AndroidMultiProcTCPServerAsync.Activities
 Content-Type:	text/html; charset=utf-8
 Connection: close
 
-<body><h1 style='color: red;'>Hello world</h2><h3>jsc</h3>
-hello world. jvm clr android async tcp? udp?<iframe  sandbox='allow-forms' src='http://www.whatsmyip.us/'><iframe>
+<title>janusVR</title><body>
+
+<FireBoxRoom>
+	<Assets>
+		<AssetWebSurface src='#surface' id='webpage_id' width='800' height='400' />
+	<AssetScript src='view-source' />
+		</Assets>
+<Room use_local_asset='room_plane'  pos='0 0 0' fwd='0 0 1' col='0 0 1'  >
+
+<Text pos='0 2 -3' fwd='0 0 1' col='0 0 1' scale='9 9 9'>hi! Extremely minimal initial JavaScript example</Text>
+<Paragraph pos='5 5 5' fwd='0 0 1' col='0.5 0.8 0.5' scale='2 2 2' locked='false'>example paragraph's text</Paragraph>
+
+<Link url='bookmarks' title='Bookmarks' draw_text='false' auto_load='true' pos='4 4 -3' fwd='0 0 1'  scale='2.3 2.8 1.0' />
+
+	<Object id='plane' pos='-4 1 -1' fwd='0 0 1' scale='2 2 4' websurface_id='webpage_id' />
+</Room>	
+</FireBoxRoom>
+
 </body>
 ";
             var obuffer = Encoding.UTF8.GetBytes(outputString);
