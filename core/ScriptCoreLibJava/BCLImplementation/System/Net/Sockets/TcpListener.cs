@@ -151,7 +151,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             //I/System.Console(28234): 6e4a:6af1
             //I/System.Console(28234): __AsyncVoidMethodBuilder.SetException { exception =  }
 
-            Console.WriteLine("enter AcceptTcpClient");
+            //Console.WriteLine("enter AcceptTcpClient");
             // tested by?
 
             var r = default(__TcpClient);
@@ -168,7 +168,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
                 throw new InvalidOperationException();
             }
 
-            Console.WriteLine("exit AcceptTcpClient");
+            //Console.WriteLine("exit AcceptTcpClient");
             return (TcpClient)(object)r;
         }
 
@@ -181,7 +181,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
         public Task<TcpClient> AcceptTcpClientAsync()
         {
-            Console.WriteLine("enter AcceptTcpClientAsync");
+            //Console.WriteLine("enter AcceptTcpClientAsync");
             // X:\jsc.svn\examples\java\android\AndroidMultiProcTCPServerAsync\AndroidMultiProcTCPServerAsync\ApplicationActivity.cs
 
             // X:\jsc.svn\examples\java\async\Test\JVMCLRTCPServerAsync\JVMCLRTCPServerAsync\Program.cs
@@ -199,16 +199,16 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             __Task.Run(
                 delegate
                 {
-                    Console.WriteLine("before AcceptTcpClient");
+                    //Console.WriteLine("before AcceptTcpClient");
                     // we are operating in another thread by now...
                     var x = this.AcceptTcpClient();
 
-                    Console.WriteLine("after AcceptTcpClient");
+                    //Console.WriteLine("after AcceptTcpClient");
                     c.SetResult(x);
                 }
             );
 
-            Console.WriteLine("exit AcceptTcpClientAsync");
+            //Console.WriteLine("exit AcceptTcpClientAsync");
             return c.Task;
         }
     }

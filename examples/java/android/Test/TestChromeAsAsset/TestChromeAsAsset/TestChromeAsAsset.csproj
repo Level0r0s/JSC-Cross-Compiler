@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="ApplicationActivity.cs">
     </Compile>
+    <Compile Include="org\chromium\content\app\SandboxedProcessService0.cs" />
     <Compile Include="Program.cs">
       <DependentUpon>ApplicationActivity.cs</DependentUpon>
     </Compile>
@@ -205,6 +206,9 @@
     </None>
     <None Include="U:\chromium\src\content\public\android\java\src\org\chromium\content\browser\BrowserStartupController.java">
       <Link>References\chromium\src\content\public\android\java\src\org\chromium\content\browser\BrowserStartupController.java</Link>
+    </None>
+    <None Include="U:\chromium\src\content\public\android\java\src\org\chromium\content\app\SandboxedProcessService0.java">
+      <Link>References\chromium\src\content\public\android\java\src\org\chromium\content\app\SandboxedProcessService0.java</Link>
     </None>
     <Content Include="U:\chromium\src\out\Release\lib.java\android_swipe_refresh_java.jar">
       <Link>References\android_swipe_refresh_java.jar</Link>

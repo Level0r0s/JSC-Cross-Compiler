@@ -13,6 +13,9 @@ namespace ScriptCoreLib.JavaScript.DOM
     [Script(HasNoPrototype = true, ExternalTarget = "RTCPeerConnection")]
     public class RTCPeerConnection : IEventTarget
     {
+        // https://tech.appear.in/2015/05/25/Introduction-to-WebRTC-on-Android/
+        // https://blog.mozilla.org/futurereleases/2014/12/04/ericsson-interops-openwebrtc-with-firefox/
+
 		// http://opentools.homeip.net/webrtc
 		// https://software.intel.com/en-us/blogs/2015/03/05/meshcentral-microsoft-windows-for-iot-new-webrtc-microstack
 		// X:\jsc.svn\examples\java\hybrid\JVMCLRNIC\JVMCLRNIC\Program.cs

@@ -23,6 +23,10 @@ namespace testchromeasasset.activities
     // (at Binary XML file line #65): <activity> does not have valid android:name
 
 
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "18")]
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "8")]
+
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
     public class LocalApplication :
         //Application
 
@@ -189,7 +193,8 @@ namespace testchromeasasset.activities
     //<meta-data android:name="org.chromium.content.browser.NUM_SANDBOXED_SERVICES"
     //           android:value="{{ num_sandboxed_services }}"/>
 
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "org.chromium.content.browser.NUM_SANDBOXED_SERVICES", value = "5")]
+    // X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\org\chromium\content\app\SandboxedProcessService0.cs
+
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "org.chromium.content.browser.NUM_PRIVILEGED_SERVICES", value = "3")]
 
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(target = typeof(org.chromium.content.app.SandboxedProcessService0), name = "android:process", value = ":sandboxed_process0")]
@@ -199,10 +204,7 @@ namespace testchromeasasset.activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(target = typeof(org.chromium.content.app.SandboxedProcessService4), name = "android:process", value = ":sandboxed_process4")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(target = typeof(org.chromium.content.app.SandboxedProcessService5), name = "android:process", value = ":sandboxed_process5")]
 
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "18")]
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "8")]
-
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
+ 
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@style/Theme.AppCompat")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@style/MainTheme")]
@@ -240,7 +242,8 @@ namespace testchromeasasset.activities
             Console.WriteLine(" ");
 
             //org.chromium.chrome.shell.TabManager.DEFAULT_URL = "https://explore.xavalon.net";
-            org.chromium.chrome.shell.TabManager.DEFAULT_URL = "http://webglreport.com";
+            //org.chromium.chrome.shell.TabManager.DEFAULT_URL = "http://webglreport.com";
+            org.chromium.chrome.shell.TabManager.DEFAULT_URL = "http://webglstats.com";
 
             //org.chromium.@base.CommandLine.enableNativeProxy();
 
