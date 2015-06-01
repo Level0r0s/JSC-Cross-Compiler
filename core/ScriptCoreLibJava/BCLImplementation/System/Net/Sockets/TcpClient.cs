@@ -151,6 +151,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             }
             catch
             {
+                Console.WriteLine("err InternalGetNetworkStream");
                 throw;
             }
         }

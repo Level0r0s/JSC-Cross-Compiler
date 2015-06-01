@@ -167,18 +167,35 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         #region Read
         public override global::System.Threading.Tasks.Task<int> ReadAsync(byte[] buffer, int offset, int count)
         {
+            //Console.WriteLine("enter ReadAsync");
             var c = new TaskCompletionSource<int>();
 
             __Task.Run(
                 delegate
                 {
-                    var x = this.Read(buffer, offset, count);
+                    //Console.WriteLine("before Read");
+                    var x = default(int);
 
+                    try
+                    {
+                        x = this.Read(buffer, offset, count);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("err Read " + new { ex });
+                    }
+
+                    //Console.WriteLine("after Read, SetResult " + new { x });
+
+                    // faulty?
                     c.SetResult(x);
+
+                    //Console.WriteLine("after Read, SetResult done");
                 }
             );
 
 
+            //Console.WriteLine("exit ReadAsync");
             return c.Task;
         }
 

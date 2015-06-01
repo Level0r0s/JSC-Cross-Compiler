@@ -75,6 +75,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
         public void Start(int backlog)
         {
+            //Console.WriteLine("enter TcpListener.Start");
+
             try
             {
                 //this.InternalSocket = new global::java.net.ServerSocket(this.port, backlog, this.localaddr.InternalAddress);
@@ -143,11 +145,30 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         [Obsolete]
         public TcpClient AcceptTcpClient()
         {
+            //I/System.Console(28234): 6e4a:6af2 before AcceptTcpClient
+            //I/System.Console(28234): 6e4a:6af2 enter AcceptTcpClient
+            //I/System.Console(28234): 6e4a:6af1 enter catch { mname = <00c3> ldloca.s.try } ClauseCatchLocal:
+            //I/System.Console(28234): 6e4a:6af1
+            //I/System.Console(28234): __AsyncVoidMethodBuilder.SetException { exception =  }
+
+            Console.WriteLine("enter AcceptTcpClient");
             // tested by?
 
-            var s = AcceptSocket();
-            var r = new __TcpClient(s);
+            var r = default(__TcpClient);
 
+            try
+            {
+                var s = this.AcceptSocket();
+                r = new __TcpClient(s);
+            }
+            catch (global::System.Exception err)
+            {
+                Console.WriteLine("err AcceptTcpClient " + new { err });
+                //throw err;
+                throw new InvalidOperationException();
+            }
+
+            Console.WriteLine("exit AcceptTcpClient");
             return (TcpClient)(object)r;
         }
 
@@ -160,6 +181,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
         public Task<TcpClient> AcceptTcpClientAsync()
         {
+            Console.WriteLine("enter AcceptTcpClientAsync");
+            // X:\jsc.svn\examples\java\android\AndroidMultiProcTCPServerAsync\AndroidMultiProcTCPServerAsync\ApplicationActivity.cs
+
             // X:\jsc.svn\examples\java\async\Test\JVMCLRTCPServerAsync\JVMCLRTCPServerAsync\Program.cs
 
             // return Task<TcpClient>.Factory.FromAsync(BeginAcceptTcpClient, EndAcceptTcpClient, null);
@@ -175,13 +199,16 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             __Task.Run(
                 delegate
                 {
+                    Console.WriteLine("before AcceptTcpClient");
                     // we are operating in another thread by now...
                     var x = this.AcceptTcpClient();
 
+                    Console.WriteLine("after AcceptTcpClient");
                     c.SetResult(x);
                 }
             );
 
+            Console.WriteLine("exit AcceptTcpClientAsync");
             return c.Task;
         }
     }

@@ -595,6 +595,27 @@ namespace AndroidMultiProcTCPServerAsync.Activities
         }
 
 
+
+        //        [javac] W:\src\_PrivateImplementationDetails___02000012__06000059__System\IDisposable\Dispose_0000__ldarg_0__lookup.java:9: error: cannot find symbol
+        //[javac]     public static _ArrayType_12 data = new _ArrayType_12();
+        //[javac]                   ^
+
+        static IEnumerable<System.Net.NetworkInformation.NetworkInterface> AllNetworkInterfaces
+        {
+            get
+            {
+                Console.WriteLine("enter AllNetworkInterfaces ");
+                var stale = System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces();
+
+                foreach (var item in stale)
+                {
+                    yield return item;
+                }
+
+                yield break;
+            }
+        }
+
         // gateway service process/ event thread / async enabled?
         public override int onStartCommand(Intent value0, int flags, int startId)
         {
@@ -608,7 +629,8 @@ namespace AndroidMultiProcTCPServerAsync.Activities
 
             // until wifi changes?
             var xipv4 =
-                from n in System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces()
+                //from n in System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces()
+                from n in AllNetworkInterfaces
                 let IPProperties = n.GetIPProperties()
                 let c = IPProperties.UnicastAddresses.Count
                 from i in Enumerable.Range(0, c)
@@ -652,9 +674,15 @@ namespace AndroidMultiProcTCPServerAsync.Activities
                         // how do we reply?
                         // sharedmemory implementation is missing and useless
 
+                        xipv4.WithEach(
+                            Console.WriteLine
+                        );
 
                         var intent = new Intent();
-                        intent.putExtra("host", BestGuessHost.Address.ToString());
+                        //intent.putExtra("host", BestGuessHost.Address.ToString());
+
+                        // did we switch networks?
+                        intent.putExtra("host", xipv4.FirstOrDefault().ToString());
                         intent.putExtra("port", port);
                         intent.setAction(GatewayService.ACTION + "reply");
                         this.sendBroadcast(intent);
@@ -735,6 +763,7 @@ namespace AndroidMultiProcTCPServerAsync.Activities
                     var l = new TcpListener(IPAddress.Any, port);
 
                     // signal UI service is yet again available
+                    //Console.WriteLine("before Start ");
                     l.Start();
 
 
@@ -747,13 +776,16 @@ namespace AndroidMultiProcTCPServerAsync.Activities
 
                     while (true)
                     {
+                        //Console.WriteLine("before AcceptTcpClientAsync ");
+
                         var c = await l.AcceptTcpClientAsync();
 
                         // time to do firewall or security?
 
-                        Console.WriteLine("accept " + new { c, Thread.CurrentThread.ManagedThreadId });
+                        //Console.WriteLine("before yield " + new { c });
 
                         yield(c);
+                        //Console.WriteLine("after yield " + new { c });
                     }
                 }
             );
@@ -771,25 +803,54 @@ namespace AndroidMultiProcTCPServerAsync.Activities
 
 
 
+
         static async void yield(TcpClient c)
         {
+            // "X:\util\janusvr_windows\JanusVR_Win32\janusvr.exe"
+
+            //Console.WriteLine("enter yield, before ReadAsync");
+
+            // 83.187.193.24:16943
+            // I/System.Console(11801): 2e19:757c { RemoteEndPoint = 90. :63806 }
+
+            // I/System.Console( 9900): 26ac:7429 { RemoteEndPoint = 192. :63789 }
+
+            Console.WriteLine(
+                new
+                {
+                    // do we trust that device?
+
+                    c.Client.RemoteEndPoint
+                }
+            );
+
+
             var s = c.GetStream();
 
             // could we switch into a worker thread?
             // jsc would need to split the stream object tho
 
+
+
             var buffer = new byte[1024];
             // why no implict buffer?
             var count = await s.ReadAsync(buffer, 0, buffer.Length);
 
-            var input = Encoding.UTF8.GetString(buffer, 0, count);
+            if (count < 0)
+            {
+                //Console.WriteLine("after ReadAsync failed?");
+            }
+            else
+            {
+                var input = Encoding.UTF8.GetString(buffer, 0, count);
 
-            //new IHTMLPre { new { input } }.AttachToDocument();
-            Console.WriteLine(new { Thread.CurrentThread.ManagedThreadId, input });
+                //new IHTMLPre { new { input } }.AttachToDocument();
+                //Console.WriteLine("enter yield: " + input);
 
 
-            // http://stackoverflow.com/questions/369498/how-to-prevent-iframe-from-redirecting-top-level-window
-            var outputString = @"HTTP/1.0 200 OK 
+
+                // http://stackoverflow.com/questions/369498/how-to-prevent-iframe-from-redirecting-top-level-window
+                var outputString = @"HTTP/1.0 200 OK 
 Content-Type:	text/html; charset=utf-8
 Connection: close
 
@@ -813,11 +874,16 @@ Connection: close
 
 </body>
 ";
-            var obuffer = Encoding.UTF8.GetBytes(outputString);
+                var obuffer = Encoding.UTF8.GetBytes(outputString);
 
-            await s.WriteAsync(obuffer, 0, obuffer.Length);
+                await s.WriteAsync(obuffer, 0, obuffer.Length);
+            }
+
 
             c.Close();
+
+            //Console.WriteLine("exit yield");
+
         }
 
 

@@ -107,6 +107,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.NetworkInformation
 
         public static global::System.Net.NetworkInformation.NetworkInterface[] GetAllNetworkInterfaces()
         {
+            Console.WriteLine("enter GetAllNetworkInterfaces");
+
             // X:\jsc.svn\examples\java\JVMCLRNIC\JVMCLRNIC\Program.cs
 
             var i = default(java.util.Enumeration);
