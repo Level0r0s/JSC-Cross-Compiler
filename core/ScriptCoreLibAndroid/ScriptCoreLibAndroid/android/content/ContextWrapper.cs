@@ -85,5 +85,10 @@ namespace android.content
         {
             throw new NotImplementedException();
         }
+
+        public override java.io.File getFilesDir()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -19,6 +19,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
     [Script(Implements = typeof(global::System.Net.IPAddress))]
     public class __IPAddress
     {
+        // X:\jsc.svn\examples\java\android\AndroidMultiProcTCPServerAsync\AndroidMultiProcTCPServerAsync\ApplicationActivity.cs
+
         public AddressFamily AddressFamily { get; set; }
 
         public string InternalAddressString;

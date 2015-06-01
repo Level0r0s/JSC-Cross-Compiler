@@ -61,6 +61,9 @@ namespace android.app
         {
             throw null;
         }
-
+        
+        public void sendBroadcast(Intent intent)
+        {
+        }
     }
 }

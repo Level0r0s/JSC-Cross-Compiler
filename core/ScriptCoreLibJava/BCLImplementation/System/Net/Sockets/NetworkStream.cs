@@ -19,7 +19,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
     // x:\jsc.svn\core\scriptcorelibjava\bclimplementation\system\net\sockets\networkstream.cs
 
     [Script(Implements = typeof(global::System.Net.Sockets.NetworkStream))]
-    internal class __NetworkStream : __Stream
+    public class __NetworkStream : __Stream
     {
         // tested by?
 

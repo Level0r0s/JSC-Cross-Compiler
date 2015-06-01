@@ -46,6 +46,8 @@ namespace JVMCLRNIC
 			System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces().WithEach(
 			 n =>
 			 {
+                 // X:\jsc.svn\examples\java\hybrid\JVMCLRNIC\JVMCLRNIC\Program.cs
+
 				 // X:\jsc.svn\examples\javascript\chrome\apps\ChromeNetworkInterfaces\ChromeNetworkInterfaces\Application.cs
 				 // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
 

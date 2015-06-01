@@ -9,11 +9,18 @@ using System.Net.NetworkInformation;
 namespace ScriptCoreLibJava.BCLImplementation.System.Net.NetworkInformation
 {
     // http://referencesource.microsoft.com/#System/net/System/Net/NetworkInformation/UnicastIPAddressInformationCollection.cs
+    // https://github.com/mono/mono/blob/master/mcs/class/System/System.Net.NetworkInformation/UnicastIPAddressInformationCollection.cs
 
     [Script(Implements = typeof(global::System.Net.NetworkInformation.UnicastIPAddressInformationCollection))]
     internal class __UnicastIPAddressInformationCollection : IEnumerable<__UnicastIPAddressInformation>
     {
         public List<__UnicastIPAddressInformation> InternalValue;
+
+        public virtual UnicastIPAddressInformation this[int index]
+        {
+            // X:\jsc.svn\examples\java\android\AndroidMultiProcTCPServerAsync\AndroidMultiProcTCPServerAsync\ApplicationActivity.cs
+            get { return InternalValue[index]; }
+        }
 
         public virtual int Count
         {

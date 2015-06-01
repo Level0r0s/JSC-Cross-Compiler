@@ -14,6 +14,9 @@ namespace android.content
     [Script(IsNative = true)]
     public abstract class Context
     {
+        // X:\jsc.svn\examples\java\android\AndroidMultiProcTCPServerAsync\AndroidMultiProcTCPServerAsync\ApplicationActivity.cs
+        public abstract java.io.File getFilesDir();
+
         // X:\jsc.svn\examples\javascript\android\com.abstractatech.battery\com.abstractatech.battery\ApplicationWebService.cs
         public abstract Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter);
 
