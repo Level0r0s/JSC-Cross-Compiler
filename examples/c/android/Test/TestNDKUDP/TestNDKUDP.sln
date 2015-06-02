@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibNative", "..\.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeUDPSendAsync", "..\..\..\..\javascript\chrome\apps\ChromeUDPSendAsync\ChromeUDPSendAsync\ChromeUDPSendAsync.csproj", "{426A9419-9287-4880-979F-29F29D3F2A22}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{C5E16051-3CA8-48C2-9FEB-B2DE5F546E6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibAndroid", "..\..\..\..\..\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\ScriptCoreLibAndroid.csproj", "{1CE7D22F-52C8-4164-8955-CD89609E48A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,8 +97,28 @@ Global
 		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|Mixed Platforms.Build.0 = Release|x86
 		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.ActiveCfg = Release|x86
 		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.Build.0 = Release|x86
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Debug|x86.Build.0 = Debug|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|x86.ActiveCfg = Release|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77} = {C5E16051-3CA8-48C2-9FEB-B2DE5F546E6F}
+		{76843B5B-EB0A-4E49-8B36-037969E0545F} = {C5E16051-3CA8-48C2-9FEB-B2DE5F546E6F}
+		{9D280B94-A86D-496D-940A-7C0C1C270590} = {C5E16051-3CA8-48C2-9FEB-B2DE5F546E6F}
+		{1E792B23-CBAB-4D3E-AB26-4A83DA675D5E} = {C5E16051-3CA8-48C2-9FEB-B2DE5F546E6F}
+		{426A9419-9287-4880-979F-29F29D3F2A22} = {C5E16051-3CA8-48C2-9FEB-B2DE5F546E6F}
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9} = {C5E16051-3CA8-48C2-9FEB-B2DE5F546E6F}
 	EndGlobalSection
 EndGlobal

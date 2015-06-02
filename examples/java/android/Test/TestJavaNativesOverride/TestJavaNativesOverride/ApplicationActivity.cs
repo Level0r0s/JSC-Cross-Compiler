@@ -30,9 +30,11 @@ namespace foo
 
         public Bar()
         {
+            // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Activator.cs
             Console.WriteLine("Bar ctor implemented");
         }
 
+        [Obsolete("if we do not reimplement it, we wont have the implementation, as we are not decompiling java bytecode here!")]
         public string GetBarString()
         {
             return new { field1, field2 }.ToString();
@@ -71,6 +73,17 @@ namespace TestJavaNativesOverride.Activities
             var b = new Button(this).AttachTo(ll);
 
             var goo = new foo.Goo();
+
+            //Activator.CreateInstance<
+
+            //var goo = (foo.Goo)Activator.CreateInstance(
+            //    typeof(foo.Goo)
+            //);
+
+            //E/AndroidRuntime(32112): Caused by: java.lang.RuntimeException
+            //E/AndroidRuntime(32112):        at foo.Bar.GetBarString(Bar.java:29)
+            //E/AndroidRuntime(32112):        at foo.Goo.GetString(Goo.java:9)
+            //E/AndroidRuntime(32112):        at TestJavaNativesOverride.Activities.ApplicationActivity.onCreate(ApplicationActivity.java:69)
 
             b.WithText(goo.GetString());
             b.AtClick(

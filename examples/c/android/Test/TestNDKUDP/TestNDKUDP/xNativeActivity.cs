@@ -258,3 +258,7 @@ namespace TestNDKUDP
 //E/AndroidRuntime(12919):        at android.app.Activity.performCreate(Activity.java:6374)
 //E/AndroidRuntime(12919):        at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1119)
 //E/AndroidRuntime(12919):        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2767)
+
+//Error: Target id 'android-8' is not valid.Use 'android.bat list targets' to get the target ids.
+//ndk-build
+//[arm64 - v8a] Compile        : TestNDKUDP <= TestNDKUDP.dll.c

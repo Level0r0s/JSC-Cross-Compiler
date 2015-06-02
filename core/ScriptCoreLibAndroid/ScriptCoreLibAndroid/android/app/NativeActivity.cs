@@ -9,6 +9,7 @@ namespace android.app
 {
     // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/app/NativeActivity.java
     // https://developer.android.com/reference/android/app/NativeActivity.html
+    // https://android.googlesource.com/platform/frameworks/base.git/+/android-4.3_r2.1/core/jni/android_app_NativeActivity.cpp
 
     /// <summary>
     /// Typical good candidates for the NDK are CPU-intensive workloads such as game engines, 
@@ -19,6 +20,8 @@ namespace android.app
     [Script(IsNative = true)]
     public class NativeActivity : Activity
     {
+        // X:\jsc.svn\examples\java\android\future\NDKHybridMockup\NDKHybridMockup\ApplicationActivity.cs
+
         // Galaxy S5. The device could be revealed as early as April 2015. 
         // http://vrfocus.com/archives/11119/samsung-developing-new-version-gear-vr-galaxy-s6/
 

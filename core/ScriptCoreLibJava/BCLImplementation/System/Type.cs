@@ -72,12 +72,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System
         {
             get
             {
-				// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150402/scriptcorelibandroid-natives
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150402/scriptcorelibandroid-natives
 
-				// called by
-				// X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Java\IJavaArchiveReflector.cs
+                // called by
+                // X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Java\IJavaArchiveReflector.cs
 
-				return (__Type)this.InternalTypeDescription.getSuperclass();
+                return (__Type)this.InternalTypeDescription.getSuperclass();
             }
         }
 
@@ -186,6 +186,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System
         }
 
 
+        #region GetConstructors
         public ConstructorInfo[] GetConstructors()
         {
             var a = this.InternalTypeDescription.getConstructors();
@@ -310,7 +311,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
             return constructor;
         }
+        #endregion
 
+        #region GetMethods
         public MethodInfo GetMethod(string name, global::System.Type[] parameters)
         {
             var c = new List<java.lang.Class>();
@@ -378,7 +381,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
             for (int i = 0; i < a.Length; i++)
             {
-  
+
 
                 if (!IsInstance)
                     if (IsStatic)
@@ -436,6 +439,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
             return m;
         }
+        #endregion
 
         public override global::System.Type DeclaringType
         {
@@ -458,6 +462,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System
             return GetTypeFromHandle((RuntimeTypeHandle)i);
         }
 
+
+
+        #region InternalEquals
         public bool Equals(__Type e)
         {
             return InternalEquals(this, e);
@@ -510,33 +517,59 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
             return InternalEquals(left, right);
         }
+        #endregion
 
 
+
+        #region GetFields
+        // X:\jsc.svn\examples\java\android\test\TestMultiProcMemoryFile\TestMultiProcMemoryFile\ApplicationActivity.cs
 
         // X:\jsc.svn\examples\java\hybrid\JVMCLRSwitchToCLRContextAsync\JVMCLRSwitchToCLRContextAsync\Program.cs
         public FieldInfo[] GetFields(BindingFlags bindingAttr)
         {
-            #region FilterByStatic
-            Func<Field, bool> FilterByStatic =
-                fi =>
-                {
-                    var isStatic = Modifier.isStatic(fi.getModifiers());
+            // I/System.Console( 9288): 2448:0001 GetFields { Length = 0, IsPublic = false, IsNonPublic = true, IsStatic = false, IsInstance = true }
 
-                    if (!isStatic)
+            var fields = this.InternalTypeDescription.getDeclaredFields();
+
+            var IsPublic = (bindingAttr & BindingFlags.Public) == BindingFlags.Public;
+            var IsNonPublic = (bindingAttr & BindingFlags.NonPublic) == BindingFlags.NonPublic;
+
+            var IsStatic = (bindingAttr & BindingFlags.Static) == BindingFlags.Static;
+            var IsInstance = (bindingAttr & BindingFlags.Instance) == BindingFlags.Instance;
+
+            Console.WriteLine("GetFields " + new { fields.Length, IsPublic, IsNonPublic, IsStatic, IsInstance });
+
+            Func<bool, bool, bool> f =
+                (a, x) =>
+                {
+                    if (!a)
                         return true;
 
-                    return ((bindingAttr & BindingFlags.Static) == BindingFlags.Static);
+                    return x;
                 };
-            #endregion
 
             return Enumerable.ToArray(
-                from fi in this.InternalTypeDescription.getFields()
+                from fi in fields
 
+                let isStatic = Modifier.isStatic(fi.getModifiers())
 
-                where FilterByStatic(fi)
+                //where !IsStatic || (IsStatic && isStatic)
+                where f(IsStatic, isStatic)
 
-                select (FieldInfo)
-                    new __FieldInfo { InternalField = fi }
+                //where !IsInstance || (IsInstance && !isStatic)
+                where f(IsInstance, !isStatic)
+
+                let isPublic = Modifier.isPublic(fi.getModifiers())
+
+                //where !IsPublic || (IsPublic && isPublic)
+                where f(IsPublic, isPublic)
+
+                //where !IsNonPublic || (IsPublic && !isPublic)
+                where f(IsNonPublic, !isPublic)
+
+                let isFinal = Modifier.isFinal(fi.getModifiers())
+
+                select (FieldInfo)new __FieldInfo { InternalField = fi }
             );
         }
 
@@ -583,6 +616,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
             return f;
         }
+        #endregion
+
 
         // http://msdn.microsoft.com/en-us/library/system.type.isnested.aspx
         public bool IsNested

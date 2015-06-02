@@ -24,7 +24,7 @@ namespace TestMultiProcessActivity.Activities
 
     public class LocalApplication : 
         // can we change our base depeinding on the process we are in?
-        Application
+        Application // : ApplicationWebService ?
     {
         public override void onCreate()
         {

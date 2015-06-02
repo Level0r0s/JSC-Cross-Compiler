@@ -9,6 +9,7 @@ using java.lang.reflect;
 namespace ScriptCoreLibJava.BCLImplementation.System.Reflection
 {
     // http://referencesource.microsoft.com/#mscorlib/system/reflection/fieldinfo.cs
+    // https://github.com/dot42/api/blob/master/System/Reflection/FieldInfo.cs
 
     [Script(Implements = typeof(FieldInfo))]
     public class __FieldInfo : __MemberInfo
@@ -41,6 +42,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Reflection
             var n = default(object);
             try
             {
+                InternalField.setAccessible(true);
+
                 n = InternalField.get(obj);
             }
             catch

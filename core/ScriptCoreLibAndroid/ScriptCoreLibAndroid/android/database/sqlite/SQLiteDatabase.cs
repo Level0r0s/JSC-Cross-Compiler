@@ -7,8 +7,9 @@ using System.Text;
 namespace android.database.sqlite
 {
     // https://github.com/android/platform_frameworks_base/blob/master/core/java/android/database/sqlite/SQLiteDatabase.java
-
+    // https://android.googlesource.com/platform/frameworks/base.git/+/android-4.3_r2.1/core/jni/android_database_SQLiteConnection.cpp
     // http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html
+
     [Script(IsNative = true)]
     public class SQLiteDatabase
     {

@@ -1025,6 +1025,7 @@
     <Compile Include="android\text\method\TransformationMethod.cs" />
     <Compile Include="android\text\method\PasswordTransformationMethod.cs" />
     <Compile Include="android\text\Editable.cs" />
+    <Compile Include="android\os\Binder.cs" />
     <Compile Include="android\util\DisplayMetrics.cs" />
     <Compile Include="android\util\SparseArray.cs" />
     <Compile Include="android\util\Log.cs" />

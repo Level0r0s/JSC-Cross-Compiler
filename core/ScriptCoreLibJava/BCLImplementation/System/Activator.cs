@@ -22,6 +22,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System
     // https://github.com/erik-kallen/SaltarelleCompiler/blob/develop/Runtime/CoreLib/Activator.cs
     // https://github.com/kswoll/WootzJs/blob/master/WootzJs.Runtime/Activator.cs
 
+    // ? FEATURE_REMOTING                
+
     [Script(Implements = typeof(global::System.Activator))]
     internal class __Activator
     {
@@ -30,6 +32,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
         public static object CreateInstance(Type type)
         {
+            // X:\jsc.svn\core\ScriptCoreLibJava\java\io\FileDescriptor.cs
+            // X:\jsc.svn\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\android\os\MemoryFile.cs
+
             __Type t = type;
             var o = default(object);
 

@@ -5,8 +5,10 @@ using ScriptCoreLib;
 
 namespace java.lang
 {
-	// http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Math.html
-	[Script(IsNative = true)]
+    // http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Math.html
+    // https://android.googlesource.com/platform/libcore/+/master/luni/src/main/java/java/lang/Math.java
+
+    [Script(IsNative = true)]
 	public sealed class Math
 	{
 		/// <summary>

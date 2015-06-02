@@ -15,6 +15,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Runtime.Serializatio
     [Script(Implements = typeof(global::System.Runtime.Serialization.FormatterServices))]
     public class __FormatterServices
     {
+        // https://github.com/dot42/api/blob/master/System/Runtime/Serialization/Formatters/Binary/BinaryFormatter.cs
+
         // X:\jsc.svn\examples\javascript\test\TestGetUninitializedObject\TestGetUninitializedObject\Application.cs
 
         public static object GetUninitializedObject(Type type)

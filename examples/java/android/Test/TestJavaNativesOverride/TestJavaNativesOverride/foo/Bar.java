@@ -1,5 +1,5 @@
 package foo;
-public class Bar
+public class Bar extends BarBase
 {
     public String field1;
 
@@ -7,4 +7,5 @@ public class Bar
 	{
 		return field1;
 	}
+
 }

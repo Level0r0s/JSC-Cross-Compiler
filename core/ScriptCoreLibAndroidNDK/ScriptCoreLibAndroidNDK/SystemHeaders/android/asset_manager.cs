@@ -11,9 +11,11 @@ namespace ScriptCoreLibNative.SystemHeaders.android
     [Script(IsNative = true, Header = "android/asset_manager.h", IsSystemHeader = true)]
     public static class asset_manager
     {
+        // https://cells-source.cs.columbia.edu/plugins/gitiles/platform/frameworks/base/+/master/native/android/asset_manager.cpp
+        // https://cells-source.cs.columbia.edu/plugins/gitiles/platform/frameworks/base/+/master/libs/androidfw/AssetManager.cpp
         // X:\jsc.svn\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\android\content\res\AssetManager.cs
 
-        
+
         // 
         // http://mobilepearls.com/labs/native-android-api/
 

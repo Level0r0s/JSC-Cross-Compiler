@@ -11,6 +11,9 @@ namespace ScriptCoreLibNative.SystemHeaders.android
     [Script(IsNative = true, Header = "android/obb.h", IsSystemHeader = true)]
     public static class obb
     {
+        // https://cells-source.cs.columbia.edu/plugins/gitiles/platform/frameworks/base/+/master/native/android/obb.cpp
+        // https://cells-source.cs.columbia.edu/plugins/gitiles/platform/frameworks/base/+/master/libs/androidfw/ObbFile.cpp
+
 
         // http://mobilepearls.com/labs/native-android-api/
 

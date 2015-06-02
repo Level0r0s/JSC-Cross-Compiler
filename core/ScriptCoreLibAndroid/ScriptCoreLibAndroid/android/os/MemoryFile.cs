@@ -10,10 +10,44 @@ namespace android.os
     // http://developer.android.com/reference/android/os/MemoryFile.html
     // http://alvinalexander.com/java/jwarehouse/android/core/java/android/os/MemoryFile.java.shtml
     // https://cells-source.cs.columbia.edu/plugins/gitiles/platform/frameworks/base/+/e331644cb570e74a8739cb21ffcc5875663ffa58/core/java/android/os/MemoryFile.java
+    // https://cells-source.cs.columbia.edu/plugins/gitiles/platform/frameworks/base/+/master/core/jni/android_os_MemoryFile.cpp
+    // https://android.googlesource.com/platform/frameworks/base.git/+/android-4.3_r2.1/core/jni/android_os_MemoryFile.cpp
+    // https://github.com/android/platform_frameworks_base/blob/master/core/jni/android_os_MemoryFile.cpp
+    // https://github.com/pelya/android-shmem
 
     [Script(IsNative = true)]
     public class MemoryFile
     {
+        // !! NDK wont help us if the SDK wont implement the PDK methods we need.
+
+        // can we activate this type and fill in the fields?
+
+        //[System.Runtime.CompilerServices.Dynamic]
+        internal java.io.FileDescriptor mFD;        // ashmem file descriptor
+        internal long mAddress;   // address of ashmem memory
+        internal int mLength;    // total length of our ashmem region
+        internal bool mAllowPurging = false;  // true if our ashmem region is unpinned
+
+        // The $ character should be used only in mechanically generated source code or, rarely, to access preexisting names on legacy systems.
+
+        // $AOSP/frameworks/base/core/jni/android\os_MemoryFile.cpp_.
+        // https://vec.io/posts/andriod-ipc-shared-memory-with-ashmem-memoryfile-and-binder
+
+        // $(ANDROID_TOP)/system/core/cutils/ashmem.h
+
+        // https://code.google.com/p/volatility/wiki/AndroidMemoryForensics
+        // http://sssslide.com/www.slideshare.net/tetsu.koba/interprocess-communication-of-android
+        // https://github.com/android/platform_system_core/blob/master/include/cutils/ashmem.h
+        //  platform library with the ndk rather than the platform sdk.
+
+        // ashmem is part of the platform sdk!
+
+        // ?
+        // AndroidRuntime::registerNativeMethods(
+
+        // X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\SystemHeaders\sys\mman.cs
+        // X:\jsc.svn\examples\java\android\future\NDKHybridMockup\NDKHybridMockup\ApplicationActivity.cs
+
         // https://code.google.com/p/android/issues/detail?id=37372
         // http://src.chromium.org/svn/trunk/src/base/memory/shared_memory_posix.cc
 
