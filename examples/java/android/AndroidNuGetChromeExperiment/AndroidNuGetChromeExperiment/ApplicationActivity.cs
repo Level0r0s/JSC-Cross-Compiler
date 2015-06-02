@@ -54,8 +54,8 @@ namespace androidnugetchromeexperiment.activities
     // <activity android:name="ApplicationActivity" android:label="@string/xapp_name" android:launchMode="singleInstance" android:configChanges="orientation|screenSize" android:theme="@android:style/Theme.Holo.Dialog">
 
 
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "org.chromium.content.browser.NUM_SANDBOXED_SERVICES", value = "5")]
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "org.chromium.content.browser.NUM_PRIVILEGED_SERVICES", value = "3")]
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "org.chromium.content.browser.NUM_SANDBOXED_SERVICES", value = "5")]
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "org.chromium.content.browser.NUM_PRIVILEGED_SERVICES", value = "3")]
 
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(target = typeof(org.chromium.content.app.SandboxedProcessService0), name = "android:process", value = ":sandboxed_process0")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(target = typeof(org.chromium.content.app.SandboxedProcessService1), name = "android:process", value = ":sandboxed_process1")]
