@@ -427,9 +427,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rem start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
+    <PostBuildEvent>start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
 
-start /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ConfigurationCreateNuGetPackage /AssemblyMerge:TestChromeAsAsset.exe  /AssemblyMerge:TestChromeAsAsset.AssetsLibrary.dll /ProjectFileName:"X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\TestChromeAsAsset.csproj" /PackageID:"chrome.android" /OutputName:"Chrome Android"
+res start /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ConfigurationCreateNuGetPackage /AssemblyMerge:TestChromeAsAsset.exe  /AssemblyMerge:TestChromeAsAsset.AssetsLibrary.dll /ProjectFileName:"X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\TestChromeAsAsset.csproj" /PackageID:"chrome.android" /OutputName:"Chrome Android"
 
 </PostBuildEvent>
   </PropertyGroup>
