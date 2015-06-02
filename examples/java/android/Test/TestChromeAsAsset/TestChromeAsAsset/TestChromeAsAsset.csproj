@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="ApplicationActivity.cs">
     </Compile>
+    <Compile Include="org\chromium\content\app\PrivilegedProcessService0.cs" />
     <Compile Include="org\chromium\content\app\SandboxedProcessService0.cs" />
     <Compile Include="Program.cs">
       <DependentUpon>ApplicationActivity.cs</DependentUpon>
@@ -106,6 +107,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="staging\apk\bin\android-install.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="U:\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\Handle.java">
       <Link>References\chromium\src\third_party\mojo\src\mojo\public\java\system\src\org\chromium\mojo\system\Handle.java</Link>
     </None>
@@ -423,13 +427,12 @@
     <Folder Include="References\chromium\src\base\android\java\src\org\chromium\base\library_loader\" />
     <Folder Include="References\chromium\src\chrome\android\shell\java\src\org\chromium\chrome\shell\" />
     <Folder Include="References\chromium\src\mojo\android\javatests\src\org\chromium\mojo\bindings\" />
-    <Folder Include="staging\apk\bin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
 
-res start /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ConfigurationCreateNuGetPackage /AssemblyMerge:TestChromeAsAsset.exe  /AssemblyMerge:TestChromeAsAsset.AssetsLibrary.dll /ProjectFileName:"X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\TestChromeAsAsset.csproj" /PackageID:"chrome.android" /OutputName:"Chrome Android"
+start /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ConfigurationCreateNuGetPackage /AssemblyMerge:TestChromeAsAsset.exe  /AssemblyMerge:TestChromeAsAsset.AssetsLibrary.dll /ProjectFileName:"X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\TestChromeAsAsset.csproj" /PackageID:"chrome.android" /OutputName:"Chrome Android"
 
 </PostBuildEvent>
   </PropertyGroup>

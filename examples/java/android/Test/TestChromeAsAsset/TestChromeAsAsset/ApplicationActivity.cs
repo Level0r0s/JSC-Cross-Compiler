@@ -58,7 +58,7 @@ namespace testchromeasasset.activities
                 );
 
             // https://stackoverflow.com/questions/7686482/when-does-applications-oncreate-method-is-called-on-android
-            Toast.makeText(this, "LocalApplication", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "testchromeasasset", Toast.LENGTH_LONG).show();
 
             // jsc background compiler may have detected by now that the referenced jar
             // files were update on the build server,
@@ -194,15 +194,6 @@ namespace testchromeasasset.activities
     //           android:value="{{ num_sandboxed_services }}"/>
 
     // X:\jsc.svn\examples\java\android\Test\TestChromeAsAsset\TestChromeAsAsset\org\chromium\content\app\SandboxedProcessService0.cs
-
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "org.chromium.content.browser.NUM_PRIVILEGED_SERVICES", value = "3")]
-
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(target = typeof(org.chromium.content.app.SandboxedProcessService0), name = "android:process", value = ":sandboxed_process0")]
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(target = typeof(org.chromium.content.app.SandboxedProcessService1), name = "android:process", value = ":sandboxed_process1")]
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(target = typeof(org.chromium.content.app.SandboxedProcessService2), name = "android:process", value = ":sandboxed_process2")]
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(target = typeof(org.chromium.content.app.SandboxedProcessService3), name = "android:process", value = ":sandboxed_process3")]
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(target = typeof(org.chromium.content.app.SandboxedProcessService4), name = "android:process", value = ":sandboxed_process4")]
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(target = typeof(org.chromium.content.app.SandboxedProcessService5), name = "android:process", value = ":sandboxed_process5")]
 
  
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
