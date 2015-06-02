@@ -369,13 +369,21 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
         public MethodInfo[] GetMethods(BindingFlags bindingAttr)
         {
+            // X:\jsc.svn\examples\java\android\test\TestMultiProcMemoryFile\TestMultiProcMemoryFile\ApplicationActivity.cs
+
             var IsPublic = (bindingAttr & BindingFlags.Public) == BindingFlags.Public;
             var IsNonPublic = (bindingAttr & BindingFlags.NonPublic) == BindingFlags.NonPublic;
             var IsStatic = (bindingAttr & BindingFlags.Static) == BindingFlags.Static;
             var IsInstance = (bindingAttr & BindingFlags.Instance) == BindingFlags.Instance;
             var DeclaredOnly = (bindingAttr & BindingFlags.DeclaredOnly) == BindingFlags.DeclaredOnly;
 
-            var a = GetMethods();
+            //var a = GetMethods();
+            var a = Enumerable.ToArray(
+                 from x in this.InternalTypeDescription.getDeclaredMethods()
+                 let mm = new __MethodInfo { InternalMethod = x }
+                 select (MethodInfo)mm
+             );
+
 
             var that = (global::System.Type)(object)this;
 

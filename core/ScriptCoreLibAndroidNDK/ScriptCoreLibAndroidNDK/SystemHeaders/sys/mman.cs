@@ -12,6 +12,7 @@ namespace ScriptCoreLibNative.SystemHeaders.sys
     [Script(IsNative = true, Header = "sys/mman.h", IsSystemHeader = true)]
     public static class mman_h
     {
+        // https://github.com/android/platform_frameworks_base/blob/master/core/jni/android_os_MemoryFile.cpp
         // http://alvinalexander.com/java/jwarehouse/android/core/java/android/os/MemoryFile.java.shtml
         // http://man7.org/linux/man-pages/man2/mmap.2.html
         // http://en.wikipedia.org/wiki/Memory-mapped_file

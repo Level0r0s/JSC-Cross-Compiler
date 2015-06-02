@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Ultra.Library
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib", "..\..\..\..\..\core\ScriptCoreLib\ScriptCoreLib.csproj", "{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibAndroidNDK", "..\..\..\..\..\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK.csproj", "{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Android|Any CPU = Android|Any CPU
@@ -81,6 +83,14 @@ Global
 		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Android|Any CPU.Build.0 = Release|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,5 +102,6 @@ Global
 		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F} = {FC104B6E-5792-4569-87B5-96F3D606DCDA}
 		{132EB43F-19B4-42AC-8025-3249B129867A} = {FC104B6E-5792-4569-87B5-96F3D606DCDA}
 		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6} = {FC104B6E-5792-4569-87B5-96F3D606DCDA}
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77} = {FC104B6E-5792-4569-87B5-96F3D606DCDA}
 	EndGlobalSection
 EndGlobal

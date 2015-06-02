@@ -18,6 +18,8 @@ namespace android.os
     [Script(IsNative = true)]
     public class MemoryFile
     {
+        // http://developer.android.com/reference/android/os/FileObserver.html
+
         // !! NDK wont help us if the SDK wont implement the PDK methods we need.
 
         // can we activate this type and fill in the fields?
@@ -27,6 +29,11 @@ namespace android.os
         internal long mAddress;   // address of ashmem memory
         internal int mLength;    // total length of our ashmem region
         internal bool mAllowPurging = false;  // true if our ashmem region is unpinned
+
+        internal static int native_mmap(java.io.FileDescriptor fd, int length, int mode) { return 0; }
+        // mAddress = native_mmap(mFD, length, modeToProt(mode));
+
+
 
         // The $ character should be used only in mechanically generated source code or, rarely, to access preexisting names on legacy systems.
 

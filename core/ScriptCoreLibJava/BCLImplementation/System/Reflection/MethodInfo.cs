@@ -12,6 +12,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Reflection
     // http://referencesource.microsoft.com/#mscorlib/system/reflection/methodinfo.cs
     // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Reflection/MethodInfo.cs
     // https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Reflection/MethodInfo.cs
+    // https://github.com/dot42/api/blob/master/System/Reflection/MethodInfo.cs
 
 
     // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Reflection\MethodInfo.cs
@@ -108,6 +109,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Reflection
 
             try
             {
+                // X:\jsc.svn\examples\java\android\test\TestMultiProcMemoryFile\TestMultiProcMemoryFile\ApplicationActivity.cs
+                this.InternalMethod.setAccessible(true);
+
                 n = this.InternalMethod.invoke(obj, parameters);
             }
             catch

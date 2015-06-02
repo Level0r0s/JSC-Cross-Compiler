@@ -42,6 +42,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Reflection
             var n = default(object);
             try
             {
+                // X:\jsc.svn\examples\java\android\test\TestMultiProcMemoryFile\TestMultiProcMemoryFile\ApplicationActivity.cs
                 InternalField.setAccessible(true);
 
                 n = InternalField.get(obj);
@@ -57,6 +58,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Reflection
         {
             try
             {
+                InternalField.setAccessible(true);
                 InternalField.set(obj, value);
             }
             catch
