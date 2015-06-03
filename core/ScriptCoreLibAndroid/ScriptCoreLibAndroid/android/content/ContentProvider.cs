@@ -10,7 +10,7 @@ namespace android.content
     // https://github.com/android/platform_frameworks_base/blob/master/core/java/android/content/ContentProvider.java
     // http://developer.android.com/reference/android/content/ContentProvider.html
     [Script(IsNative = true)]
-    public class ContentProvider
+    public abstract  class ContentProvider
     {
         // http://mattias.niklewski.com/2014/03/binder.html
 

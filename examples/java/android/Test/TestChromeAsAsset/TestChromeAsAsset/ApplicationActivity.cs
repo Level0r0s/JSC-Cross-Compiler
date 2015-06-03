@@ -358,3 +358,18 @@ namespace testchromeasasset.activities
 //E/ChromeShellActivity(28806):   at org.chromium.base.library_loader.LibraryLoader.loadAlreadyLocked(LibraryLoader.java:278)
 //E/ChromeShellActivity(28806):   ... 18 more
 //I/art     (28806): System.exit called, status: -1
+
+
+//[javac] W:\src\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\__Task.java:248: error: cannot find symbol
+//[javac]         return  __TaskExtensions.<TResult>Unwrap_060009d5(__Task.get_InternalFactory().<__Task_1<TResult>>StartNew(function));
+//[javac]                                 ^
+//[javac]   symbol:   method <TResult>Unwrap_060009d5(__Task_1<__Task_1<TResult>>)
+//[javac]   location: class __TaskExtensions
+//[javac]   where TResult is a type-variable:
+//[javac]     TResult extends Object declared in method <TResult>Run(__Func_1<__Task_1<TResult>>)
+
+ //[javac] W:\src\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\__Task.java:248: error: cannot find symbol
+ //[javac]         return  __TaskExtensions.<TResult>Unwrap_060009d5(__Task.get_InternalFactory().<__Task_1<TResult>>StartNew(function));
+ //[javac]                                 ^
+ //[javac]   symbol:   method <TResult>Unwrap_060009d5(__Task_1<__Task_1<TResult>>)
+ //[javac]   location: class __TaskExtensions
