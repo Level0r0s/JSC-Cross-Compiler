@@ -51,6 +51,7 @@
       <Link>SystemHeaders\math.cs</Link>
     </Compile>
     <Compile Include="IAssemblyReferenceToken.cs" />
+    <Compile Include="Library\ConsoleExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemHeaders\android\bitmap.cs" />
     <Compile Include="SystemHeaders\android\asset_manager.cs" />

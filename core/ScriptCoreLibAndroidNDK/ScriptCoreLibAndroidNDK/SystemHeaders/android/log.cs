@@ -33,13 +33,20 @@ namespace ScriptCoreLibNative.SystemHeaders.android
             ANDROID_LOG_SILENT,     /* only for SetMinPriority(); must be last */
         }
 
-        public static int __android_log_print(android_LogPriority prio, string tag, string fmt) { return default(int); }
+        //public static int __android_log_print(android_LogPriority prio, string tag, string fmt) { return default(int); }
 
+        // 2012 cannot call __arglist?
+        //[Script(IsNative = true, Header = "android/log.h", IsSystemHeader = true)]
+        //public static class arglist
+        //{
         // X:\jsc.svn\examples\c\android\HybridOculusVrActivity\HybridOculusVrActivity\OVRNDK\xNativeActivity.cs
         // would be callable if it were a shared code project?
         // called by
         // x:\jsc.svn\examples\c\android\test\testndkudp\testndkudp\xnativeactivity.cs
+        //internal static int __android_log_print(android_LogPriority prio, string tag, string fmt, __arglist) { return default(int); }
         public static int __android_log_print(android_LogPriority prio, string tag, string fmt, __arglist) { return default(int); }
+        //}
+
 
 
     }

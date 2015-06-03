@@ -18,6 +18,10 @@ namespace android.os
     [Script(IsNative = true)]
     public class MemoryFile
     {
+        // if the hardware wont allow us to pass MemoryFiles, what about tcp sockets?
+
+        // avc:  denied  { mmap_zero }
+
         // "X:\opensource\github\libancillary\fd_recv.c"
 
         // http://www.normalesup.org/~george/comp/libancillary/

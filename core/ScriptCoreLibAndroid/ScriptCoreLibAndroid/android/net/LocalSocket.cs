@@ -20,6 +20,15 @@ namespace android.net
 
         }
 
+        public FileDescriptor[] getAncillaryFileDescriptors()
+        {
+            return null;
+        }
+
+        public void setFileDescriptorsForSend(FileDescriptor[] fds)
+        {
+        }
+
         public InputStream getInputStream()
         {
             return null;

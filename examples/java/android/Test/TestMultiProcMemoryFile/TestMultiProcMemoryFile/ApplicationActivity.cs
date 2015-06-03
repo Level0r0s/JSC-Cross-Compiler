@@ -66,6 +66,7 @@ namespace TestMultiProcMemoryFile.Activities
             var m_descriptor = 0;
             var m_fd = default(java.io.FileDescriptor);
             var pid = android.os.Process.myPid();
+            var uid = android.os.Process.myUid();
 
             //try { m = new MemoryFile(default(string), 0); }
             try { m = new MemoryFile("name1", 0x07); }
@@ -156,7 +157,8 @@ namespace TestMultiProcMemoryFile.Activities
 
             new Button(activity).WithText("Next \n " + new
             {
-                m_descriptor
+                pid,
+                uid
                 //,
                 //pfd = pfd.getFd(),
                 //size = pfd.getStatSize()
@@ -190,6 +192,7 @@ namespace TestMultiProcMemoryFile.Activities
                         var ls = ss.accept();
                         Console.WriteLine("after LocalServerSocket accept");
 
+                        ls.setFileDescriptorsForSend(new[] { m_fd });
                         ls.getOutputStream().write(42);
                     }
                     catch
@@ -234,6 +237,8 @@ namespace TestMultiProcMemoryFile.Activities
 
             var activity = this;
 
+            var fs = default(FileDescriptor);
+
             try
             {
                 var ls = new LocalSocket();
@@ -241,7 +246,14 @@ namespace TestMultiProcMemoryFile.Activities
 
                 var i8 = ls.getInputStream().read();
 
-                new Button(this).AttachTo(ll).WithText(new { i8 }.ToString());
+                fs = ls.getAncillaryFileDescriptors().FirstOrDefault();
+
+                new Button(this).AttachTo(ll).WithText(new { i8, fs }.ToString());
+
+
+                //var memory0 = new FileInputStream(ls_fd).read();
+
+                //new Button(this).AttachTo(ll).WithText(new { memory0 }.ToString());
             }
             catch { }
 
@@ -328,10 +340,16 @@ namespace TestMultiProcMemoryFile.Activities
 
             //var parentfd = ParcelFileDescriptor.open(parentpidf, ParcelFileDescriptor.MODE_READ_WRITE);
 
+            var pid = android.os.Process.myPid();
+            var uid = android.os.Process.myUid();
+
             this.setTitle(
                  new
                  {
-                     m_descriptor,
+                     pid,
+                     uid
+
+                     //m_descriptor,
                      //parentpid,
                      ////pfg = pfd.getFd(),
                      ////size = pfd.getStatSize()
@@ -397,16 +415,20 @@ namespace TestMultiProcMemoryFile.Activities
 
                                     patch = delegate
                                     {
-                                        Console.WriteLine("enter patch");
+                                        Console.WriteLine("enter patch " + new { SourceField });
 
                                         //mAddress = native_mmap(mFD, length, modeToProt(mode));
                                         //mOwnsRegion = false;
 
+                                        SourceField.SetValue(m, fs);
+                                        //xFileDescriptor_SourceField.SetValue(value, m_descriptor);
+                                        value = SourceField.GetValue(m);
+                                        xvalue = xFileDescriptor_SourceField.GetValue(value);
+
                                         var field_mAddress = fields.FirstOrDefault(xx => xx.Name == "mAddress");
 
-                                        Console.WriteLine("enter patch " + new { field_mAddress, m_descriptor } + " invoke mmap");
+                                        Console.WriteLine("enter patch " + new { xvalue } + " invoke mmap");
 
-                                        xFileDescriptor_SourceField.SetValue(value, m_descriptor);
 
                                         var PROT_READ = 0x1;
 
@@ -433,10 +455,28 @@ namespace TestMultiProcMemoryFile.Activities
                                         //    0
                                         //    );
 
+                                        //                                        I/System.Console( 8016): 1f50:0001 enter patch { SourceField = java.io.FileDescriptor mFD }
+                                        //I/System.Console( 8016): 1f50:0001 enter patch { field_mAddress = long mAddress, xvalue = 32 } invoke mmap
+                                        //I/System.Console( 8016): 1f50:0001 lib: libs/armeabi_v7a/libTestNDKAsAsset.so
+                                        //I/System.Console( 8016): 1f50:0001 loadLibrary: TestNDKAsAsset
+                                        //I/System.Console( 8016): 1f50:0001 exit patch { mAddress = -1 }
+
+
+                                        //I/System.Console( 9792): 2640:0001 enter patch { SourceField = java.io.FileDescriptor mFD }
+                                        //I/System.Console( 9792): 2640:0001 enter patch { xvalue = 32 } invoke mmap
+                                        //I/xNativeActivity( 9792): x:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\Program.cs:139 mmap -1 errno: 13 Permission denied
+                                        //I/System.Console( 9792): 2640:0001 exit patch { mAddress = -1 }
+                                        //E/audit   ( 5152): type=1400 msg=audit(1433328685.131:566): avc:  denied  { mmap_zero } for  pid=9792 comm="Activities:foo1" scontext=u:r:untrusted_app:s0 tcontext=u:r:untrusted_app:s0 tclass=memprotect permissive=0
+                                        //E/audit   ( 5152):  SEPF_SM-G925F_5.0.2_0009
+                                        //E/audit   ( 5152): type=1300 msg=audit(1433328685.131:566): arch=40000028 syscall=192 success=no exit=-13 a0=0 a1=7 a2=3 a3=10 items=0 ppid=2962 ppcomm=main pid=9792 auid=4294967295 uid=10315 gid=10315 euid=10315 suid=10315 fsuid=10315 egid=10315 sgid=10315 fsgid=10315 ses=4294967295 tty=(none) comm="Activities:foo1" exe="/system/bin/app_process32" subj=u:r:untrusted_app:s0 key=(null)
+                                        //E/audit   ( 5152): type=1320 msg=audit(1433328685.131:566):
+                                        //D/SSRM:n  ( 3468): SIOP:: AP = 290, PST = 300, CP = 395, CUR = 268
+
+                                        // https://github.com/realm/realm-java/issues/1037
 
                                         var mAddress = (int)
                                             TestNDKAsAsset.xActivity.mmap(
-                                            m_descriptor,
+                                            (int)xvalue,
                                             0x07
                                            );
 

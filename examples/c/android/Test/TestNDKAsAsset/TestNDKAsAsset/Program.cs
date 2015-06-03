@@ -18,8 +18,11 @@ using System.Threading.Tasks;
 namespace TestNDKAsAsset
 {
     using ScriptCoreLib;
+    using ScriptCoreLibAndroidNDK.Library;
     using ScriptCoreLibNative.SystemHeaders;
+    using ScriptCoreLibNative.SystemHeaders.android;
     using ScriptCoreLibNative.SystemHeaders.sys;
+    using System.Runtime.CompilerServices;
 
     [Obfuscation(StripAfterObfuscation = true)]
     class Program
@@ -89,6 +92,13 @@ namespace TestNDKAsAsset
         }
 
 
+
+
+
+
+
+
+
         //   // returns memory address for ashmem region
         //private static native long native_mmap(FileDescriptor fd, int length, int mode)
         //   void* result = mmap(NULL, length, prot, MAP_SHARED, fd, 0);
@@ -115,14 +125,20 @@ namespace TestNDKAsAsset
             //     return  (long long)mmap((void*)NULL, (int)length, (int)1, (int)16, (int)fd, (int)0);
             // http://osdir.com/ml/android-porting/2010-05/msg00182.html
 
-            var z = ScriptCoreLibNative.SystemHeaders.sys.mman_h.mmap(
+            var z = (int)ScriptCoreLibNative.SystemHeaders.sys.mman_h.mmap(
                 null,
                 length,
-                PROT_READ | PROT_WRITE,
+                //PROT_READ | PROT_WRITE,
+                PROT_READ,
                 MAP_SHARED,
                 fd,
                 0
                 );
+
+            //log.__android_log_print(
+
+            ConsoleExtensions.tracei("mmap", z);
+
 
             // this will crash Vs2015
             //ScriptCoreLibNative.SystemHeaders.android.log.__android_log_print(
