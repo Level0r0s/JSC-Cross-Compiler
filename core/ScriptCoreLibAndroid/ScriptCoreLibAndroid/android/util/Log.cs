@@ -9,6 +9,7 @@ namespace android.util
 {
     // http://developer.android.com/reference/android/util/Log.html#wtf(java.lang.String, java.lang.String)
     // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/util/Log.java
+    // https://github.com/android/platform_frameworks_base/blob/master/core/jni/android_util_Log.cpp
 
     [Script(IsNative = true)]
     public  class Log

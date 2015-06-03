@@ -6,6 +6,7 @@ using System.Text;
 
 namespace android.os
 {
+    // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/os/Binder.java
     // http://developer.android.com/reference/android/os/Binder.html
     // https://android.googlesource.com/platform/frameworks/base.git/+/android-4.3_r2.1/core/jni/android_util_Binder.cpp
     // https://android.googlesource.com/platform/frameworks/native/+/jb-dev/libs/binder/Binder.cpp

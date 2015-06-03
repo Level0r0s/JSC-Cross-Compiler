@@ -38,7 +38,7 @@ call "x:\util\android-sdk-windows\tools\android.bat" update project -p . -s --ta
 
 echo ndk-build
 :: Android NDK: Your APP_BUILD_SCRIPT points to an unknown file: ./jni/Android.mk
-call X:\util\android-ndk-r10e\ndk-build.cmd
+call r:\util\android-ndk-r10e\ndk-build.cmd
 
 pause
 exit 0

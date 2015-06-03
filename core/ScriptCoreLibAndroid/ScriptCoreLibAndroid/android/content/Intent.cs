@@ -14,7 +14,7 @@ namespace android.content
     // http://developer.android.com/reference/android/content/Intent.html
 
     [Script(IsNative = true)]
-    public class Intent
+    public class Intent : Parcelable
     {
         // ??
         public static string EXTRA_CLIENT_INTENT = "android.intent.extra.client_intent";
@@ -52,6 +52,12 @@ namespace android.content
         public bool hasExtra(string name)
         {
             return false;
+        }
+
+        public Intent putExtra(string name, Parcelable value)
+        {
+            // X:\jsc.svn\examples\java\android\Test\TestMultiProcMemoryFile\TestMultiProcMemoryFile\ApplicationActivity.cs
+            return null;
         }
 
         public Intent putExtra(string name, Class value)
@@ -97,6 +103,11 @@ namespace android.content
         public Serializable getSerializableExtra(string name)
         {
             throw null;
+        }
+
+        public Parcelable getParcelableExtra(string name)
+        {
+            return null;
         }
 
         public Bundle getBundleExtra(string name)
@@ -160,6 +171,20 @@ namespace android.content
         public Intent addCategory(string c)
         {
             throw null;
+        }
+
+
+        // X:\jsc.svn\examples\java\android\Test\TestMultiProcMemoryFile\TestMultiProcMemoryFile\ApplicationActivity.cs
+        public bool hasFileDescriptors() { return false; }
+
+        public int describeContents()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void writeToParcel(Parcel dest, int flags)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net.Sockets;
 using android.app;
 using android.os;
 using android.view;
@@ -12,6 +13,8 @@ using ScriptCoreLib.Android.Extensions;
 using ScriptCoreLib.Android.Manifest;
 using android.content;
 using ScriptCoreLibJava.Extensions;
+using android.net;
+using java.io;
 
 namespace TestMultiProcMemoryFile.Activities
 {
@@ -27,7 +30,10 @@ namespace TestMultiProcMemoryFile.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
+        // http://mattias.niklewski.com/2014/03/binder.html
 
+
+        MemoryFile m = default(MemoryFile);
 
 
         protected override void onCreate(Bundle savedInstanceState)
@@ -57,8 +63,9 @@ namespace TestMultiProcMemoryFile.Activities
             //E/AndroidRuntime( 4217):        at java.lang.Class.newInstance(Class.java:1639)
             //E/AndroidRuntime( 4217):        ... 15 more
 
-            var m = default(MemoryFile);
             var m_descriptor = 0;
+            var m_fd = default(java.io.FileDescriptor);
+            var pid = android.os.Process.myPid();
 
             //try { m = new MemoryFile(default(string), 0); }
             try { m = new MemoryFile("name1", 0x07); }
@@ -103,6 +110,8 @@ namespace TestMultiProcMemoryFile.Activities
                     var xFileDescriptor = value as java.io.FileDescriptor;
                     if (xFileDescriptor != null)
                     {
+                        m_fd = xFileDescriptor;
+
                         var xfields = typeof(java.io.FileDescriptor).GetFields(
                             System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance
                         );
@@ -114,7 +123,9 @@ namespace TestMultiProcMemoryFile.Activities
 
                                 //if (xFileDescriptor_SourceField.FieldType == typeof(int))
                                 if (xFileDescriptor_SourceField.Name == "descriptor")
+                                {
                                     m_descriptor = (int)xvalue;
+                                }
 
                                 new Button(this).AttachTo(ll).WithText(xFileDescriptor_SourceField + new { xvalue }.ToString());
                             }
@@ -131,8 +142,25 @@ namespace TestMultiProcMemoryFile.Activities
             );
             #endregion
 
+            //var pfd = default(android.os.ParcelFileDescriptor);
 
-            new Button(activity).WithText("Next " + new { m_descriptor }).AttachTo(ll).AtClick(
+            //try
+            //{
+            //    pfd = android.os.ParcelFileDescriptor.dup(
+            //        m_fd
+            //    );
+            //}
+            //catch
+            //{
+            //}
+
+            new Button(activity).WithText("Next \n " + new
+            {
+                m_descriptor
+                //,
+                //pfd = pfd.getFd(),
+                //size = pfd.getStatSize()
+            }).AttachTo(ll).AtClick(
                 delegate
                 {
                     Intent intent = new Intent(activity, typeof(SecondaryActivity).ToClass());
@@ -140,12 +168,35 @@ namespace TestMultiProcMemoryFile.Activities
 
                     // share scope
                     intent.putExtra("m_descriptor", m_descriptor);
+                    intent.putExtra("pid", pid);
+
+                    //intent.putExtra("pfd", pfd);
 
                     //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-                    // cached backgroun process?
-                    // switching to another process.. easy...
-                    activity.startActivity(intent);
+                    try
+                    {
+                        Console.WriteLine("new LocalServerSocket");
+                        var ss = new LocalServerSocket("MemoryFileDescriptor0");
+
+                        // cached backgroun process?
+                        // switching to another process.. easy...
+                        activity.startActivity(intent);
+
+                        Console.WriteLine("before LocalServerSocket accept");
+
+
+                        // http://alvinalexander.com/java/jwarehouse/android/core/tests/coretests/src/android/net/LocalSocketTest.java.shtml
+                        var ls = ss.accept();
+                        Console.WriteLine("after LocalServerSocket accept");
+
+                        ls.getOutputStream().write(42);
+                    }
+                    catch
+                    {
+                        throw;
+                    }
+
                 }
             );
 
@@ -166,6 +217,10 @@ namespace TestMultiProcMemoryFile.Activities
     {
         protected override void onCreate(Bundle savedInstanceState)
         {
+            // http://unix.stackexchange.com/questions/10050/proc-pid-fd-x-link-number
+            // http://stackoverflow.com/questions/21955273/sharing-shared-memory-file-descriptors-across-android-app-processes-using-binder
+            // http://permalink.gmane.org/gmane.comp.handhelds.android.porting/10904
+
             // http://www.mkyong.com/android/android-activity-from-one-screen-to-another-screen/
             // https://groups.google.com/forum/#!topic/android-ndk/sjIiMsLkHCM
 
@@ -179,12 +234,26 @@ namespace TestMultiProcMemoryFile.Activities
 
             var activity = this;
 
+            try
+            {
+                var ls = new LocalSocket();
+                ls.connect(new LocalSocketAddress("MemoryFileDescriptor0"));
+
+                var i8 = ls.getInputStream().read();
+
+                new Button(this).AttachTo(ll).WithText(new { i8 }.ToString());
+            }
+            catch { }
+
             var m = default(MemoryFile);
 
             //try { m = new MemoryFile(default(string), 0); }
             try { m = new MemoryFile("name1", 0x07); }
             catch { throw; }
             var m_descriptor = this.getIntent().getIntExtra("m_descriptor", 0);
+            var parentpid = this.getIntent().getIntExtra("pid", 0);
+
+            //var pfd = (ParcelFileDescriptor)this.getIntent().getParcelableExtra("pfd");
 
             ////var fs = new java.io.FileDescriptor { };
 
@@ -231,8 +300,8 @@ namespace TestMultiProcMemoryFile.Activities
             //#endregion
 
             //var available = 0;
-            //var buffer = new byte[0x07];
-            ////X:\jsc.svn\examples\java\android\Test\TestNewByteArray7\TestNewByteArray7\Class1.cs
+            var buffer = new byte[0x07];
+            //X:\jsc.svn\examples\java\android\Test\TestNewByteArray7\TestNewByteArray7\Class1.cs
             //try { m.readBytes(buffer, 0, 0, 0x07); }
             //catch { }
 
@@ -244,8 +313,31 @@ namespace TestMultiProcMemoryFile.Activities
             //catch
             //{ }
 
+
+            //var parentpidfd = "/proc/" + parentpid + "/fd/" + m_descriptor;
+
+            //var parentpidfdx = global::System.IO.File.Exists(parentpidfd);
+
+            //var parentpidf = new java.io.File(parentpidfd);
+
+
+            //new Button(this).AttachTo(ll).WithText(new { parentpidfdx }.ToString());
+            //new Button(this).AttachTo(ll).WithText(new { parentpidfd }.ToString());
+            //new Button(this).AttachTo(ll).WithText(new { size = parentpidf.length() }.ToString());
+
+
+            //var parentfd = ParcelFileDescriptor.open(parentpidf, ParcelFileDescriptor.MODE_READ_WRITE);
+
             this.setTitle(
-                 new { m_descriptor }.ToString()
+                 new
+                 {
+                     m_descriptor,
+                     //parentpid,
+                     ////pfg = pfd.getFd(),
+                     ////size = pfd.getStatSize()
+                     //parentpidfdx,
+                     //parentpidfd
+                 }.ToString()
             );
 
 
@@ -312,7 +404,7 @@ namespace TestMultiProcMemoryFile.Activities
 
                                         var field_mAddress = fields.FirstOrDefault(xx => xx.Name == "mAddress");
 
-                                        Console.WriteLine("enter patch " + new { field_mAddress } + " invoke native_mmap");
+                                        Console.WriteLine("enter patch " + new { field_mAddress, m_descriptor } + " invoke mmap");
 
                                         xFileDescriptor_SourceField.SetValue(value, m_descriptor);
 
@@ -323,8 +415,36 @@ namespace TestMultiProcMemoryFile.Activities
                                         //E/AndroidRuntime( 8047):        at java.lang.reflect.Method.invoke(Method.java:507)
                                         //E/AndroidRuntime( 8047):        at ScriptCoreLibJava.BCLImplementation.System.Reflection.__MethodInfo.InternalInvoke(__MethodInfo.java:93)
 
-                                        var mAddress = 0;
-                                        
+                                        //I/System.Console( 8648): 21c8:0001 enter patch { field_mAddress = int mAddress } invoke native_mmap
+
+                                        //I/System.Console( 8936): 22e8:0001 GetFields { Length = 5, IsPublic = false, IsNonPublic = true, IsStatic = fal
+                                        //I/System.Console( 8936): 22e8:0001 enter patch
+                                        //I/System.Console( 8936): 22e8:0001 enter patch { field_mAddress = int mAddress, m_descriptor = 39 } invoke mmap
+                                        //I/System.Console( 8936): 22e8:0001 lib: libs/armeabi_v7a/libTestNDKAsAsset.so
+                                        //I/System.Console( 8936): 22e8:0001 loadLibrary: TestNDKAsAsset
+                                        //I/System.Console( 8936): 22e8:0001 exit patch { mAddress = -1 }
+
+                                        //var z = ScriptCoreLibNative.SystemHeaders.sys.mman_h.mmap(
+                                        //    null,
+                                        //    length,
+                                        //    PROT_READ | PROT_WRITE,
+                                        //    MAP_SHARED,
+                                        //    fd,
+                                        //    0
+                                        //    );
+
+
+                                        var mAddress = (int)
+                                            TestNDKAsAsset.xActivity.mmap(
+                                            m_descriptor,
+                                            0x07
+                                           );
+
+                                        // https://android.googlesource.com/platform/development/+/858086e/ndk/sources/android/libportable/arch-mips/mmap.c
+                                        // https://groups.google.com/forum/#!msg/android-ndk/tNYpTsHNQEY/8S7VS2j8f_8J
+
+                                        // jint result = (jint)mmap(NULL, length, prot, MAP_SHARED, fd, 0);
+
                                         //native_mmap.Invoke(null,
                                         //    new object[]
                                         //                {
@@ -358,10 +478,11 @@ namespace TestMultiProcMemoryFile.Activities
             );
             #endregion
 
-            new Button(activity).WithText("Patch n Read").AttachTo(ll).AtClick(
+            new Button(activity).WithText("Patch n Read!").AttachTo(ll).AtClick(
                delegate
                {
                    patch();
+                   //return;
 
                    //this.finish();
 
@@ -370,14 +491,14 @@ namespace TestMultiProcMemoryFile.Activities
 
                    //this.finishAndRemoveTask();
 
-                   try { m.readBytes(buffer, 0, 0, 0x07); }
-                   catch { }
-                   buffer0 = buffer[0];
+                   //try { m.readBytes(buffer, 0, 0, 0x07); }
+                   //catch { }
+                   //var buffer0 = buffer[0];
 
 
-                   this.setTitle(
-                        new { m_descriptor, buffer0 }.ToString()
-                   );
+                   //this.setTitle(
+                   //     new { m_descriptor, buffer0 }.ToString()
+                   //);
 
 
 
@@ -389,3 +510,24 @@ namespace TestMultiProcMemoryFile.Activities
         }
     }
 }
+
+// http://stackoverflow.com/questions/8888342/how-to-pass-socket-file-descriptor-to-other-application-in-android
+//  it is not possible to pass a ParcelFileDescriptor through an Intent.
+// http://stackoverflow.com/questions/25777338/sending-an-ashmem-file-descriptor-via-an-intent
+
+//E/AndroidRuntime(19607): Caused by: java.lang.RuntimeException: Not allowed to write file descriptors here
+//E/AndroidRuntime(19607):        at android.os.Parcel.nativeWriteFileDescriptor(Native Method)
+//E/AndroidRuntime(19607):        at android.os.Parcel.writeFileDescriptor(Parcel.java:575)
+//E/AndroidRuntime(19607):        at android.os.ParcelFileDescriptor.writeToParcel(ParcelFileDescriptor.java:891)
+//E/AndroidRuntime(19607):        at android.os.Parcel.writeParcelable(Parcel.java:1357)
+//E/AndroidRuntime(19607):        at android.os.Parcel.writeValue(Parcel.java:1262)
+//E/AndroidRuntime(19607):        at android.os.Parcel.writeArrayMapInternal(Parcel.java:638)
+//E/AndroidRuntime(19607):        at android.os.BaseBundle.writeToParcelInner(BaseBundle.java:1313)
+//E/AndroidRuntime(19607):        at android.os.Bundle.writeToParcel(Bundle.java:1096)
+//E/AndroidRuntime(19607):        at android.os.Parcel.writeBundle(Parcel.java:663)
+//E/AndroidRuntime(19607):        at android.content.Intent.writeToParcel(Intent.java:7910)
+//E/AndroidRuntime(19607):        at android.app.ActivityManagerProxy.startActivity(ActivityManagerNative.java:2528)
+//E/AndroidRuntime(19607):        at android.app.Instrumentation.execStartActivity(Instrumentation.java:1494)
+//E/AndroidRuntime(19607):        at android.app.Activity.startActivityForResult(Activity.java:3954)
+//E/AndroidRuntime(19607):        at android.app.Activity.startActivityForResult(Activity.java:3901)
+//E/AndroidRuntime(19607):        at android.app.Activity.startActivity(Activity.java:4225)

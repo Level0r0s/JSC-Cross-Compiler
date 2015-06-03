@@ -944,6 +944,7 @@
     <Compile Include="android\app\Notification.cs" />
     <Compile Include="android\content\ComponentName.cs" />
     <Compile Include="android\content\ContentResolver.cs" />
+    <Compile Include="android\content\ContentProvider.cs" />
     <Compile Include="android\content\DialogInterface.cs" />
     <Compile Include="android\content\IntentFilter.cs" />
     <Compile Include="android\content\pm\ActivityInfo.cs" />
@@ -981,6 +982,9 @@
     <Compile Include="android\hardware\Sensor.cs" />
     <Compile Include="android\hardware\SensorEventListener.cs" />
     <Compile Include="android\media\MediaPlayer.cs" />
+    <Compile Include="android\net\LocalSocket.cs" />
+    <Compile Include="android\net\LocalServerSocket.cs" />
+    <Compile Include="android\net\LocalSocketAddress.cs" />
     <Compile Include="android\net\Uri.cs" />
     <Compile Include="android\net\wifi\WifiManager.cs" />
     <Compile Include="android\nfc\Tag.cs" />
@@ -1001,6 +1005,7 @@
     <Compile Include="android\os\BatteryManager.cs" />
     <Compile Include="android\os\BaseBundle.cs" />
     <Compile Include="android\os\Build.cs" />
+    <Compile Include="android\os\ParcelFileDescriptor.cs" />
     <Compile Include="android\os\MemoryFile.cs" />
     <Compile Include="android\os\Process.cs" />
     <Compile Include="android\os\Looper.cs" />

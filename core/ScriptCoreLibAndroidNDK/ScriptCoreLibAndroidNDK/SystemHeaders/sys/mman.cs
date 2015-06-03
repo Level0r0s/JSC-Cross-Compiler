@@ -12,6 +12,11 @@ namespace ScriptCoreLibNative.SystemHeaders.sys
     [Script(IsNative = true, Header = "sys/mman.h", IsSystemHeader = true)]
     public static class mman_h
     {
+        // https://lkml.org/lkml/2014/12/1/927
+
+        // https://android.googlesource.com/platform/libnativehelper/+/master/JNIHelp.cpp
+        // https://android.googlesource.com/platform/libnativehelper/+/master/include/nativehelper/JNIHelp.h
+
         // https://github.com/android/platform_frameworks_base/blob/master/core/jni/android_os_MemoryFile.cpp
         // http://alvinalexander.com/java/jwarehouse/android/core/java/android/os/MemoryFile.java.shtml
         // http://man7.org/linux/man-pages/man2/mmap.2.html
@@ -21,6 +26,13 @@ namespace ScriptCoreLibNative.SystemHeaders.sys
         // private static native FileDescriptor native_open(String name, int length) throws IOException;
 
         //extern void* mmap(void*, size_t, int, int, int, off_t);
+        // int fd = jniGetFDFromFileDescriptor(env, fileDescriptor);
+        //   void* result = mmap(NULL, length, prot, MAP_SHARED, fd, 0);
+        // X:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\Program.cs
+
+        //void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);
+        public static object mmap(object addr, int length, int prot, int flags, int descriptor, int offset) { return 0; }
+
     }
 
 }

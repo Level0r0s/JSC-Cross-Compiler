@@ -12,9 +12,20 @@ namespace android.os
 
     // http://developer.android.com/reference/android/os/Bundle.html
     [Script(IsNative = true)]
-    public class Bundle : BaseBundle 
+    public class Bundle : BaseBundle
     {
         // members and types are to be extended by jsc at release build
+
+        //public <T extends Parcelable> T getParcelable(String key) {
+        public Parcelable getParcelable(string key)
+        {
+            // X:\jsc.svn\examples\java\android\Test\TestMultiProcMemoryFile\TestMultiProcMemoryFile\ApplicationActivity.cs
+            return null;
+        }
+
+        public void putParcelable(string key, Parcelable value)
+        {
+        }
 
         public string getString(string e)
         {

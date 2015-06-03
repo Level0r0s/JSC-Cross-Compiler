@@ -18,6 +18,34 @@ namespace android.os
     [Script(IsNative = true)]
     public class MemoryFile
     {
+        // "X:\opensource\github\libancillary\fd_recv.c"
+
+        // http://www.normalesup.org/~george/comp/libancillary/
+        // https://chromium.googlesource.com/android_tools/+/master/ndk/sources/android/crazy_linker/README.TXT
+
+        // you don't need Binder, you can pass a file descriptor using sendmsg() and recvmsg() through a Unix local socket.
+        // https://chromium.googlesource.com/android_tools/+/master/ndk/sources/android/crazy_linker/tests/test_util.h
+
+
+        // LOCAL_LDLIBS :=  -lcutils
+        // http://android.2317887.n4.nabble.com/ashmem-usage-td220224.html
+
+        // http://stackoverflow.com/questions/22436414/how-to-pass-file-descriptor-to-ashmem-between-processes
+        // http://stackoverflow.com/questions/12864778/shared-memory-region-in-ndk
+        // https://lkml.org/lkml/2014/12/1/927
+
+        // /proc/self/fd/3
+        // /proc/43512/fd/5
+
+
+        // http://stackoverflow.com/questions/15809333/duplicate-file-descriptor-of-another-process-in-linux-without-sendmsg
+
+        // http://man7.org/linux/man-pages/man2/dup.2.html
+        // http://markmail.org/message/cv2ai2kt5k5ithgs
+
+        // http://stackoverflow.com/questions/22496130/ipc-how-to-redirect-a-command-output-to-a-shared-memory-segment-in-child
+        // http://stackoverflow.com/questions/9940086/sharing-file-descriptors-across-processes
+        // http://markmail.org/message/j2boxourew3ypdui
         // http://developer.android.com/reference/android/os/FileObserver.html
 
         // !! NDK wont help us if the SDK wont implement the PDK methods we need.
@@ -29,6 +57,9 @@ namespace android.os
         internal long mAddress;   // address of ashmem memory
         internal int mLength;    // total length of our ashmem region
         internal bool mAllowPurging = false;  // true if our ashmem region is unpinned
+
+        // But the memory pointer created by mmap is process dependent, and so is the file descriptor from ashmem_create_region, 
+        // i.e. they are only valid in the same process they are created.
 
         internal static int native_mmap(java.io.FileDescriptor fd, int length, int mode) { return 0; }
         // mAddress = native_mmap(mFD, length, modeToProt(mode));
