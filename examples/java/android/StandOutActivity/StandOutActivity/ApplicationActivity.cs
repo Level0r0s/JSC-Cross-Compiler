@@ -75,7 +75,7 @@ E/AndroidRuntime( 2974):        at android.app.ActivityThread.handleServiceArgs(
 
     }
 
-    public class XWidgetsWindow : SimpleWindow
+    public class XWidgetsWindow : wei.mark.example.SimpleWindow // StandOutWindow Service
     {
         public const int DATA_CHANGED_TEXT = 0;
 
@@ -105,6 +105,7 @@ E/AndroidRuntime( 2974):        at android.app.ActivityThread.handleServiceArgs(
             lltab.AttachTo(ll);
 
 
+            #region caption
             var caption = new TextView(frame.getContext());
 
             caption.setText(" XWidgetsWindow");
@@ -114,8 +115,10 @@ E/AndroidRuntime( 2974):        at android.app.ActivityThread.handleServiceArgs(
             caption.setBackgroundColor(Color.BLACK);
 
             caption.AttachTo(lltab);
+            #endregion
 
 
+            #region close
             var close = new TextView(frame.getContext());
 
             close.setText("  x  ");
@@ -134,6 +137,7 @@ E/AndroidRuntime( 2974):        at android.app.ActivityThread.handleServiceArgs(
                     this.close(id);
                 }
             );
+            #endregion
 
             #region WebView
             var webview = new WebView(frame.getContext());
@@ -175,7 +179,8 @@ E/AndroidRuntime( 2974):        at android.app.ActivityThread.handleServiceArgs(
             //Log.i(TAG, "loadUrl");
 
             //var uri = "http://cubiq.org/dropbox/3dcity/";
-            var uri = "http://abstractatech.com";
+            //var uri = "http://abstractatech.com";
+            var uri = "http://webglreport.com";
             webview.loadUrl(uri);
             #endregion
 
@@ -185,6 +190,8 @@ E/AndroidRuntime( 2974):        at android.app.ActivityThread.handleServiceArgs(
 
 
             webview.AttachTo(rr);
+
+            #region resizer
 
             var resizer = new Button(frame.getContext());
 
@@ -234,6 +241,7 @@ E/AndroidRuntime( 2974):        at android.app.ActivityThread.handleServiceArgs(
                     }
                 }
             );
+            #endregion
 
             rr.AttachTo(ll);
             ll.AttachTo(frame);
