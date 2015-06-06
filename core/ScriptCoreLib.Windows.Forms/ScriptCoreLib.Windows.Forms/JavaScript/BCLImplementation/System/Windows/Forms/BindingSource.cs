@@ -100,6 +100,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
         public object InternalActivatedDataSource;
         // -		_innerList	{SharedBrowserSessionExperiment.DataLayer.Data.NavigationOrdersNavigateBindingSource}	System.Collections.IList {SharedBrowserSessionExperiment.DataLayer.Data.NavigationOrdersNavigateBindingSource}
 
+        // called by?
+        // is it public api?
         public object ActivatedDataSource
         {
             get
@@ -177,6 +179,9 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
 
         public virtual object AddNew()
         {
+            // how to do typed add??
+            // X:\jsc.svn\examples\javascript\forms\Test\TestADBBattery\TestADBBattery\ApplicationControl.cs
+
             var x = this.ActivatedDataSource;
 
             var asBindingSource = x as BindingSource;

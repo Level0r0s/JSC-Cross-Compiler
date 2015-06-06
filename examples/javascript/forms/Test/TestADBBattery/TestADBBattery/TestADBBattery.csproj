@@ -8,11 +8,11 @@
     <ProjectGuid>{82FE6D0F-9218-4A6E-B820-B9241A69C9D9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChartExperiment</RootNamespace>
-    <AssemblyName>ChartExperiment</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>TestADBBattery</RootNamespace>
+    <AssemblyName>TestADBBattery</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>ChartExperiment.Program</StartupObject>
+    <StartupObject>TestADBBattery.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -120,6 +120,9 @@
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="TestADBBattery.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\TestADBBattery.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

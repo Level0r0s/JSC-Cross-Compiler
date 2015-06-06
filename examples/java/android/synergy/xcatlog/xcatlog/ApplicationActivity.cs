@@ -31,6 +31,36 @@ namespace xcatlog.Activities
         {
             base.onCreate(savedInstanceState);
 
+            // ok lets do some code review.
+            // whats the least ammount of effort to capture a log line and steam it over udp?
+            // it seems to start by
+            // X:\opensource\github\Catlog\Catlog\src\com\nolanlawson\logcat\LogcatActivity.java
+            // then startUpMainLog
+            // LogReaderAsyncTask
+            // line = reader.readLine()
+            //LogcatReaderLoader loader = LogcatReaderLoader.create(LogcatActivity.this, true);
+            //         reader = loader.loadReader();
+            // import com.nolanlawson.logcat.reader.LogcatReaderLoader;
+            // X:\opensource\github\Catlog\Catlog\src\com\nolanlawson\logcat\reader\LogcatReaderLoader.java
+            // SingleLogcatReader
+
+            // X:\opensource\github\Catlog\Catlog\src\com\nolanlawson\logcat\reader\SingleLogcatReader.java
+            // 	logcatProcess = LogcatHelper.getLogcatProcess(logBuffer);
+            //bufferedReader = new BufferedReader(new InputStreamReader(logcatProcess
+            //        .getInputStream()), 8192);
+            // did we find the magic?
+
+            // X:\opensource\github\Catlog\Catlog\src\com\nolanlawson\logcat\helper\LogcatHelper.java
+            // um
+            // "logcat", "-v", "time")
+
+            // so.  logging is like the shell example we used to have?
+
+
+
+
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150606/adb
         }
 
 
@@ -38,3 +68,13 @@ namespace xcatlog.Activities
 
 
 }
+
+//W/SuperUserHelper(15924): Cannot obtain root
+//W/SuperUserHelper(15924): java.io.IOException: Error running exec(). Command: [su] Working Directory: null Environment: null
+//W/SuperUserHelper(15924):       at java.lang.ProcessManager.exec(ProcessManager.java:211)
+//W/SuperUserHelper(15924):       at java.lang.Runtime.exec(Runtime.java:173)
+//W/SuperUserHelper(15924):       at java.lang.Runtime.exec(Runtime.java:246)
+//W/SuperUserHelper(15924):       at java.lang.Runtime.exec(Runtime.java:189)
+//W/SuperUserHelper(15924):       at com.nolanlawson.logcat.helper.SuperUserHelper.requestRoot(SuperUserHelper.java:155)
+
+// rather useless then?

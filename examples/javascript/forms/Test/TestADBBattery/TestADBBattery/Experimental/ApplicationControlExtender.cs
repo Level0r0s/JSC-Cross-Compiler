@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace ChartExperiment.Experimental
+namespace TestADBBattery.Experimental
 {
     // http://msdn.microsoft.com/en-us/library/system.componentmodel.providepropertyattribute(v=vs.110).aspx
 
@@ -29,7 +29,7 @@ should jsc extract, generate and autolink such an extender control for us?
 
         // http://msdn.microsoft.com/en-us/library/system.componentmodel.iextenderprovider(v=vs.110).aspx
 
-        //The designer must create an instance of type 'ChartExperiment.Experimental.WebUserControl' but it cannot because the type is declared as abstract. 
+        //The designer must create an instance of type 'TestADBBattery.Experimental.WebUserControl' but it cannot because the type is declared as abstract. 
 
         const string BindingSourcePositionAlpha = "BindingSourcePositionAlpha";
 
