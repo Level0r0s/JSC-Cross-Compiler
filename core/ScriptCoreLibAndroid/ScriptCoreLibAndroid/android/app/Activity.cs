@@ -92,6 +92,12 @@ namespace android.app
         {
         }
 
+        protected virtual void onStart()
+        {
+            // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceView\ApplicationActivity.cs
+
+        }
+
         protected virtual void onDestroy()
         {
             // X:\jsc.svn\examples\java\android\AndroidAssetsServerActivity\AndroidAssetsServerActivity\ApplicationActivity.cs
@@ -119,6 +125,11 @@ namespace android.app
 
 
         public Intent getIntent()
+        {
+            throw null;
+        }
+
+        public virtual bool dispatchTouchEvent(MotionEvent @event)
         {
             throw null;
         }

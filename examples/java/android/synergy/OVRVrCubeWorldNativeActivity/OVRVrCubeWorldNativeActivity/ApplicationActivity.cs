@@ -16,10 +16,10 @@ namespace OVRVrCubeWorldNative.segments
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
 
     // https://forums.oculus.com/viewtopic.php?t=21409
-    // ??
+    // vr_dual wont run on gearvr for now...
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_dual")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_only")]
-    	//<meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_only"/>
+    //<meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_only"/>
     public class LocalApplication : Application
     {
         public override void onCreate()
@@ -117,6 +117,10 @@ namespace OVRVrCubeWorldNative.segments
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:screenOrientation", value = "landscape")]
     public class xActivity : android.app.NativeActivity
     {
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" shell am start -n OVRVrCubeWorldNative.segments/OVRVrCubeWorldNative.segments.xActivity
+        //Starting: Intent { cmp = OVRVrCubeWorldNative.segments /.xActivity }
+        //Warning: Activity not started, its current task has been brought to the front
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" shell am force-stop OVRVrCubeWorldNative.segments
 
         // private native long loadNativeCode(String path, String funcname, MessageQueue queue,
         //String internalDataPath, String obbPath, String externalDataPath, int sdkVersion,

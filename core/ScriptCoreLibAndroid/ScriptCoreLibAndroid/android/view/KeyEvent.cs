@@ -7,6 +7,7 @@ using ScriptCoreLib;
 
 namespace android.view
 {
+    // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/view/KeyEvent.java
     // http://developer.android.com/reference/android/view/KeyEvent.html
     [Script(IsNative = true)]
     public class KeyEvent : InputEvent
@@ -33,5 +34,7 @@ namespace android.view
         public static int ACTION_UP;
 
         public const int KEYCODE_BACK = 4;
+
+        public static int ACTION_DOWN = 0;
     }
 }
