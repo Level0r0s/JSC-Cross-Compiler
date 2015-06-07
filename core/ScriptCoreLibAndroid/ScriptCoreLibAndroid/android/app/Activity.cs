@@ -43,6 +43,12 @@ namespace android.app
         {
         }
 
+
+        //public void setRequestedOrientation(@ActivityInfo.ScreenOrientation int requestedOrientation)
+        public void setRequestedOrientation(int requestedOrientation)
+        {
+        }
+
         public virtual bool onOptionsItemSelected(MenuItem item)
         {
             // X:\jsc.svn\examples\java\android\AndroidMenuActivity\AndroidMenuActivity\ApplicationActivity.cs

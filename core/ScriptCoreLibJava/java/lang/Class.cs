@@ -13,6 +13,8 @@ namespace java.lang
 {
     // http://docs.oracle.com/javase/1.5.0/docs/api/java/lang/Class.html
     // http://developer.android.com/reference/java/lang/Class.html
+    // http://ikvm.cvs.sourceforge.net/viewvc/ikvm/ikvm/openjdk/java/lang/Class.java?view=markup
+
     [Script(IsNative = true)]
     public sealed class Class : java.lang.reflect.Type, Serializable
     {

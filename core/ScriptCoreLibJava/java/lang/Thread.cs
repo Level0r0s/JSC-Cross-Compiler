@@ -4,6 +4,8 @@ namespace java.lang
 {
     // http://docs.oracle.com/javase/6/docs/api/java/lang/Thread.html
     // http://developer.android.com/reference/java/lang/Thread.html
+    // http://ikvm.cvs.sourceforge.net/viewvc/ikvm/ikvm/openjdk/java/lang/Thread.java?view=markup
+
     [Script(IsNative = true)]
     public class Thread : Runnable
     {

@@ -17,9 +17,11 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Data.SQLite
     [Script(ImplementsViaAssemblyQualifiedName = "System.Data.SQLite.SQLiteConnection")]
     internal class __SQLiteConnection : __DbConnection
     {
+        // https://www.zetetic.net/sqlcipher/sqlcipher-for-android/
+
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201403/20140322
 
-      
+
 
         // we aint using this yet? tests needed!
         public int BusyTimeout { get; set; }

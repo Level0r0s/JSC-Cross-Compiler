@@ -9,6 +9,7 @@ using android.widget;
 using ScriptCoreLib;
 using ScriptCoreLib.Android.Extensions;
 using ScriptCoreLib.Android.Manifest;
+using android.content.pm;
 
 namespace androidnugetchromeexperiment.activities
 {
@@ -87,7 +88,7 @@ namespace androidnugetchromeexperiment.activities
             // need /assets and /res too tho
             base.onCreate(savedInstanceState);
 
-
+            //this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
 
         }
@@ -150,3 +151,10 @@ namespace androidnugetchromeexperiment.activities
 //E/ChromeShellActivity(28065):   at org.chromium.base.library_loader.Linker.isUsed(Linker.java:371)
 //E/ChromeShellActivity(28065):   at org.chromium.base.library_loader.LibraryLoader.loadAlreadyLocked(LibraryLoader.java:283)
 //E/ChromeShellActivity(28065):   ... 18 more
+
+
+//    0001 020001c0 ScriptCoreLibAndroid::ScriptCoreLib.Android.BCLImplementation.System.Web.__IHttpHandler
+//script: error JSC1000: Java : Opcode not implemented: brtrue at ScriptCoreLib.Android.BCLImplementation.System.Web.__HttpResponse.Flush
+//internal compiler error at method
+// assembly: C:\util\jsc\bin\ScriptCoreLibAndroid.dll at
+// type: ScriptCoreLib.Android.BCLImplementation.System.Web.__HttpResponse, ScriptCoreLibAndroid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null

@@ -12,6 +12,7 @@ namespace android.content.pm
     public class ActivityInfo  : ComponentInfo
     {
         // X:\jsc.svn\examples\javascript\android\AndroidListApplications\AndroidListApplications\ApplicationWebService.cs
+        public static int SCREEN_ORIENTATION_LANDSCAPE = 0;
 
         public int theme;
     }

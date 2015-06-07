@@ -4,6 +4,8 @@ namespace java.lang.reflect
 {
     // http://docs.oracle.com/javase/1.5.0/docs/api/java/lang/reflect/Field.html
     // http://developer.android.com/reference/java/lang/reflect/Field.html
+    // http://ikvm.cvs.sourceforge.net/viewvc/ikvm/ikvm/openjdk/java/lang/reflect/Field.java?view=markup
+
     [Script(IsNative=true)]
     public sealed class Field : AccessibleObject
     {

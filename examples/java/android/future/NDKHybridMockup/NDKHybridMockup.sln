@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDKHybridMockup", "NDKHybridMockup\NDKHybridMockup.csproj", "{9D280B94-A86D-496D-940A-7C0C1C270590}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibAndroidNDK", "..\..\..\..\..\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK.csproj", "{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{BCBB25EE-2C93-409D-882D-BDD6448A5F29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibAndroid", "..\..\..\..\..\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\ScriptCoreLibAndroid.csproj", "{1CE7D22F-52C8-4164-8955-CD89609E48A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77} = {BCBB25EE-2C93-409D-882D-BDD6448A5F29}
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9} = {BCBB25EE-2C93-409D-882D-BDD6448A5F29}
+	EndGlobalSection
+EndGlobal

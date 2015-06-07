@@ -10,6 +10,7 @@ namespace java.lang
     // http://developer.android.com/reference/java/lang/System.html
     // http://java.sun.com/j2se/1.5.0/docs/api/java/lang/System.html
     // https://android.googlesource.com/platform/libcore/+/master/luni/src/main/java/java/lang/System.java
+    // http://ikvm.cvs.sourceforge.net/viewvc/ikvm/ikvm/openjdk/java/lang/System.java?view=markup
 
     [Script(IsNative = true, ExternalTarget = "System")]
     //public static class JavaSystem
