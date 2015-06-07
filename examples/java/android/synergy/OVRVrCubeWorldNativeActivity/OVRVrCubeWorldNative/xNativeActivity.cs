@@ -35,7 +35,7 @@ namespace OVRVrCubeWorldNative
 
         [Script(NoDecoration = true)]
         // JVM load the .so and calls this native function
-        static jstring Java_OVRVrCubeWorldNative_segments_xActivity_stringFromJNI(
+        static jstring Java_OVRVrCubeWorldNative_segments_xMarshal_stringFromJNI(
             // what would we be able to do inspecting the runtime?
             ref JNIEnv env,
             jobject thiz)
