@@ -90,7 +90,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\OVRVrCubeWorldNative\OVRVrCubeWorldNative.csproj">
+      <Project>{bf856be2-e607-42f9-8f88-88e5c9db06a9}</Project>
+      <Name>OVRVrCubeWorldNative</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Design\Preview.png" />
     <Content Include="Design\Images.htm" />
@@ -100,6 +105,10 @@
     <None Include="..\OVRVrCubeWorldNative\bin\Debug\staging\libs\armeabi-v7a\libOVRVrCubeWorldNative.so">
       <Link>staging\apk\libs\armeabi-v7a\libOVRVrCubeWorldNative.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\OVRVrCubeWorldNative\bin\Debug\staging\libs\armeabi-v7a\libvrapi.so">
+      <Link>staging\apk\libs\armeabi-v7a\libvrapi.so</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

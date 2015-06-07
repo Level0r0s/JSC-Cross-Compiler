@@ -51,6 +51,15 @@ namespace OVRVrCubeWorldNative.segments
 
             var b = new Button(this);
 
+            Func<string> inline_stringFromJNI = delegate
+            {
+                // env.NewStringUTF
+                // there should be a .h parser somewhere. via which we can generate the natives for so?
+                // jsc could generate a linker code to allow us to use c exports from java..
+                return global::OVRVrCubeWorldNative.VrApi_h.vrapi_GetVersionString();
+            };
+
+
             b.setText(
                 // X:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\Program.cs
                 // http://stackoverflow.com/questions/19954156/android-build-separate-apks-for-different-processor-architectures
@@ -90,7 +99,9 @@ namespace OVRVrCubeWorldNative.segments
             //Log.d( TAG, "LoadLibrary" );
 
             // "X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so"
-            //java.lang.System.loadLibrary("vrapi");
+
+            // did csproj copy it where it needs to be?
+            java.lang.System.loadLibrary("vrapi");
 
             //<!-- Tell NativeActivity the name of the .so -->
             //<meta-data android:name="android.app.lib_name" android:value="vrcubeworld" />
@@ -101,6 +112,7 @@ namespace OVRVrCubeWorldNative.segments
             // need to link it!
             // "X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldNativeActivity\OVRVrCubeWorldNative\bin\Debug\staging\libs\armeabi-v7a\libOVRVrCubeWorldNative.so"
 
+            // incline android c would automate this step.
             java.lang.System.loadLibrary("OVRVrCubeWorldNative");
         }
     }

@@ -48,8 +48,14 @@ namespace OVRVrCubeWorldNative
 
             // look almost the same file!
 
+            // OVR_VRAPI_EXPORT const char * vrapi_GetVersionString();
+
             // if we change our NDK code, will nuget packaing work on the background, and also upgrade running apps?
-            var v = n(ref env, "from Java_OVRVrCubeWorldNative_xActivity_stringFromJNI. yay");
+            var v = n(ref env, 
+                //"from Java_OVRVrCubeWorldNative_xActivity_stringFromJNI. yay"
+
+                VrApi_h.vrapi_GetVersionString()
+                );
 
             return v;
 
@@ -58,4 +64,14 @@ namespace OVRVrCubeWorldNative
         }
 
     }
+
+    [Script(IsNative = true, Header = "VrApi.h")]
+    public class VrApi_h
+    {
+        public static string vrapi_GetVersionString() { return null; }
+    }
 }
+
+//jni/VrCubeWorld_NativeActivity.c:38:19: fatal error: VrApi.h: No such file or directory
+// #include "VrApi.h"
+//                   ^

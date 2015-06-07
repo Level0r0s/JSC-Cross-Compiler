@@ -41,7 +41,8 @@ echo ndk-build
 rem call r:\util\android-ndk-r10e\ndk-build.cmd
 call x:\util\android-ndk-r10e\ndk-build.cmd
 
-::pause
+echo ERRORLEVEL: %ERRORLEVEL%
+pause
 exit 0
 
 popd

@@ -50,9 +50,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\..\..\..\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so">
+      <Link>staging\jni\armeabi-v7a\libvrapi.so</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="tools\build.bat" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\..\..\..\..\..\opensource\ovr_mobile_sdk_0.6.0\VrSamples\Native\VrCubeWorld_NativeActivity\jni\VrCubeWorld_NativeActivity.c">
+      <Link>staging\jni\VrCubeWorld_NativeActivity.c</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="staging\AndroidManifest.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -64,8 +72,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="staging\libs\" />
+    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Include\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>pushd ..\..\tools\
