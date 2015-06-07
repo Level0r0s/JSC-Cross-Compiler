@@ -73,7 +73,7 @@ namespace OVRVrCubeWorldSurfaceView.Activities
 
                 // https://stackoverflow.com/questions/7686482/when-does-applications-oncreate-method-is-called-on-android
                 //Toast.makeText(this, "OVRVrCubeWorldNative " + x + new { api }, Toast.LENGTH_LONG).show();
-                Toast.makeText(this, "OVRVrCubeWorldNative " + x + " " + api, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "OVRVrCubeWorldSurfaceView " + x + " " + api, Toast.LENGTH_LONG).show();
             }
 
             //I/VrApi   (  401):              "Message":      "Thread priority security exception. Make sure the APK is signed."
@@ -281,20 +281,31 @@ namespace com.oculus.gles3jni
     public static class GLES3JNILib
     {
         // Activity lifecycle
+        [Script(IsPInvoke = true)]
         public static long onCreate(Activity obj) { throw null; }
+        [Script(IsPInvoke = true)]
         public static void onStart(long handle) { throw null; }
+        [Script(IsPInvoke = true)]
         public static void onResume(long handle) { throw null; }
+        [Script(IsPInvoke = true)]
         public static void onPause(long handle) { throw null; }
+        [Script(IsPInvoke = true)]
         public static void onStop(long handle) { throw null; }
+        [Script(IsPInvoke = true)]
         public static void onDestroy(long handle) { throw null; }
 
         // Surface lifecycle
+        [Script(IsPInvoke = true)]
         public static void onSurfaceCreated(long handle, Surface s) { throw null; }
+        [Script(IsPInvoke = true)]
         public static void onSurfaceChanged(long handle, Surface s) { throw null; }
+        [Script(IsPInvoke = true)]
         public static void onSurfaceDestroyed(long handle) { throw null; }
 
         // Input       
+        [Script(IsPInvoke = true)]
         public static void onKeyEvent(long handle, int keyCode, int action) { throw null; }
+        [Script(IsPInvoke = true)]
         public static void onTouchEvent(long handle, int action, float x, float y) { throw null; }
     }
 }
@@ -302,3 +313,18 @@ namespace com.oculus.gles3jni
 //[javac] W:\src\ScriptCoreLib\Shared\BCLImplementation\System\Threading\Tasks\__TaskExtensions___c__DisplayClass2_1.java:38: error: cannot find symbol
 //[javac]         task_10.ContinueWith_060024e2(new __Action_1<__Task_1<TResult>>(this,
 //[javac]                ^
+
+
+  //[javac]     W:\gen\OVRVrCubeWorldSurfaceView\Activities\R.java
+  //[javac] W:\src\ScriptCoreLib\Shared\BCLImplementation\System\Threading\Tasks\__TaskExtensions.java:34: error: cannot find symbol
+  //[javac]         task.ContinueWith_06000318(new __Action_1<__Task_1<__Task_1<TResult>>>(class2_10,
+  //[javac]             ^
+  //[javac]   symbol:   method ContinueWith_06000318(__Action_1<__Task_1<__Task_1<TResult>>>)
+
+//E/AndroidRuntime(17306): Caused by: java.lang.NullPointerException: throw with null exception
+//E/AndroidRuntime(17306):        at com.oculus.gles3jni.GLES3JNILib.onCreate(GLES3JNILib.java:22)
+//E/AndroidRuntime(17306):        at OVRVrCubeWorldSurfaceView.Activities.ApplicationActivity.onCreate(ApplicationActivity.java:94)
+//E/AndroidRuntime(17306):        at android.app.Activity.performCreate(Activity.java:6374)
+//E/AndroidRuntime(17306):        at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1119)
+//E/AndroidRuntime(17306):        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2767)
+//E/AndroidRuntime(17306):        ... 10 more
