@@ -10,6 +10,9 @@ using ScriptCoreLib;
 using ScriptCoreLib.Android.Extensions;
 using ScriptCoreLib.Android.Manifest;
 using com.oculus.gles3jni;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace OVRVrCubeWorldSurfaceView.Activities
 {
@@ -182,13 +185,108 @@ namespace OVRVrCubeWorldSurfaceView.Activities
                 }
             };
 
+
+
+
+
+
             mView = new SurfaceView(this);
-            setContentView(mView);
+            this.setContentView(mView);
+
+
+
+            //            E/AndroidRuntime(22718): Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'android.view.ViewParent android.view.View.getParent()' on a null object reference
+            //E/AndroidRuntime(22718):        at android.view.ViewGroup.addViewInner(ViewGroup.java:4216)
+            //E/AndroidRuntime(22718):        at android.view.ViewGroup.addView(ViewGroup.java:4070)
+            //E/AndroidRuntime(22718):        at android.view.ViewGroup.addView(ViewGroup.java:4046)
+            //E/AndroidRuntime(22718):        at com.android.internal.policy.impl.PhoneWindow.setContentView(PhoneWindow.java:478)
+            //E/AndroidRuntime(22718):        at com.android.internal.policy.impl.PhoneWindow.setContentView(PhoneWindow.java:459)
+            //E/AndroidRuntime(22718):        at android.app.Activity.setContentView(Activity.java:2298)
+
+            var sw = Stopwatch.StartNew();
+
+            var mDraw = new DrawOnTop(this)
+            {
+                // yes it appears top left.
+
+                //text = "GearVR HUD"
+                text = () => sw.ElapsedMilliseconds + "ms"
+            };
+
+            //Task.Run(
+
+            new Thread(
+                delegate()
+                {
+                    // bg thread
+
+                    while (true)
+                    {
+                        //Thread.Sleep(1000 / 15);
+                        Thread.Sleep(1000 / 30);
+
+
+                        mDraw.postInvalidate();
+                    }
+                }
+            ).Start();
+
+            this.ondispatchTouchEvent = @event =>
+            {
+                if (mNativeHandle == 0)
+                    return;
+
+                int action = @event.getAction();
+                float x = @event.getRawX();
+                float y = @event.getRawY();
+                //if (action == MotionEvent.ACTION_UP)
+                {
+                    var halfx = 2560 / 2;
+                    var halfy = 1440 / 2;
+
+                    mDraw.x = (int)(500 + halfx - x);
+                    mDraw.y = (int)(600 + y - halfy);
+                    mDraw.text = () => sw.ElapsedMilliseconds + "ms \n" + new { x, y, action }.ToString();
+                    //Console.WriteLine(" ::dispatchTouchEvent( " + action + ", " + x + ", " + y + " )");
+                }
+                GLES3JNILib.onTouchEvent(mNativeHandle, action, x, y);
+
+                // can we move hud around and record it to gif or mp4?
+            };
+
+            this.ondispatchKeyEvent = @event =>
+            {
+                if (mNativeHandle == 0)
+                    return false;
+
+                int keyCode = @event.getKeyCode();
+                int action = @event.getAction();
+                if (action != KeyEvent.ACTION_DOWN && action != KeyEvent.ACTION_UP)
+                {
+                    return base.dispatchKeyEvent(@event);
+                }
+                if (action == KeyEvent.ACTION_UP)
+                {
+                    // keycode 4
+                    mDraw.text = () => sw.ElapsedMilliseconds + "ms \n" + new { keyCode, action }.ToString();
+                    //Log.v(TAG, "GLES3JNIActivity::dispatchKeyEvent( " + keyCode + ", " + action + " )");
+                }
+                GLES3JNILib.onKeyEvent(mNativeHandle, keyCode, action);
+
+                return true;
+            };
+
+
+            // X:\jsc.svn\examples\java\android\AndroidLacasCameraServerActivity\AndroidLacasCameraServerActivity\ApplicationActivity.cs
+            addContentView(mDraw, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
             mView.getHolder().addCallback(xCallback);
 
             // Force the screen to stay on, rather than letting it dim and shut off
             // while the user is watching a movie.
-            //getWindow().addFlags(WindowManager_LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+            // does this disable the face sensor?
+            getWindow().addFlags(WindowManager_LayoutParams.FLAG_KEEP_SCREEN_ON);
 
             // Force screen brightness to stay at maximum
             //WindowManager_LayoutParams _params = getWindow().getAttributes();
@@ -198,6 +296,43 @@ namespace OVRVrCubeWorldSurfaceView.Activities
             mNativeHandle = com.oculus.gles3jni.GLES3JNILib.onCreate(this);
 
             // can we now overlay something on top of the surface?
+        }
+
+        public class DrawOnTop : View
+        {
+            // http://stackoverflow.com/questions/6927286/force-a-view-to-redraw-itself
+
+            public DrawOnTop(android.content.Context context)
+                : base(context)
+            {
+            }
+
+            // udp mouse ?
+            public int x = 500; // animate it?
+            public int y = 600;
+
+            public Func<string> text = () => "hello";
+
+            public int textSize = 25;
+
+
+            protected override void onDraw(android.graphics.Canvas canvas)
+            {
+
+                var paint = new android.graphics.Paint();
+
+                paint.setStyle(android.graphics.Paint.Style.STROKE);
+                //paint.setStyle(android.graphics.Paint.Style.FILL_AND_STROKE);
+                paint.setColor(android.graphics.Color.RED);
+                paint.setTextSize(textSize);
+
+                var text = this.text();
+
+                canvas.drawText(text, x, y, paint);
+                canvas.drawText(text, x + 2560 / 2, y, paint);
+
+                base.onDraw(canvas);
+            }
         }
 
         protected override void onStart()
@@ -235,39 +370,23 @@ namespace OVRVrCubeWorldSurfaceView.Activities
             mNativeHandle = 0;
         }
 
+
+
+        Func<KeyEvent, bool> ondispatchKeyEvent;
         public override bool dispatchKeyEvent(KeyEvent @event)
         {
 
-            if (mNativeHandle != 0)
-            {
-                int keyCode = @event.getKeyCode();
-                int action = @event.getAction();
-                if (action != KeyEvent.ACTION_DOWN && action != KeyEvent.ACTION_UP)
-                {
-                    return base.dispatchKeyEvent(@event);
-                }
-                if (action == KeyEvent.ACTION_UP)
-                {
-                    //Log.v(TAG, "GLES3JNIActivity::dispatchKeyEvent( " + keyCode + ", " + action + " )");
-                }
-                GLES3JNILib.onKeyEvent(mNativeHandle, keyCode, action);
-            }
-            return true;
+
+            return ondispatchKeyEvent(@event);
         }
 
+        Action<MotionEvent> ondispatchTouchEvent;
         public override bool dispatchTouchEvent(MotionEvent @event)
         {
-            if (mNativeHandle != 0)
-            {
-                int action = @event.getAction();
-                float x = @event.getRawX();
-                float y = @event.getRawY();
-                if (action == MotionEvent.ACTION_UP)
-                {
-                    Console.WriteLine(" ::dispatchTouchEvent( " + action + ", " + x + ", " + y + " )");
-                }
-                GLES3JNILib.onTouchEvent(mNativeHandle, action, x, y);
-            }
+            // never fired? why the duck?
+            ondispatchTouchEvent(@event);
+
+
             return true;
         }
     }
@@ -315,11 +434,11 @@ namespace com.oculus.gles3jni
 //[javac]                ^
 
 
-  //[javac]     W:\gen\OVRVrCubeWorldSurfaceView\Activities\R.java
-  //[javac] W:\src\ScriptCoreLib\Shared\BCLImplementation\System\Threading\Tasks\__TaskExtensions.java:34: error: cannot find symbol
-  //[javac]         task.ContinueWith_06000318(new __Action_1<__Task_1<__Task_1<TResult>>>(class2_10,
-  //[javac]             ^
-  //[javac]   symbol:   method ContinueWith_06000318(__Action_1<__Task_1<__Task_1<TResult>>>)
+//[javac]     W:\gen\OVRVrCubeWorldSurfaceView\Activities\R.java
+//[javac] W:\src\ScriptCoreLib\Shared\BCLImplementation\System\Threading\Tasks\__TaskExtensions.java:34: error: cannot find symbol
+//[javac]         task.ContinueWith_06000318(new __Action_1<__Task_1<__Task_1<TResult>>>(class2_10,
+//[javac]             ^
+//[javac]   symbol:   method ContinueWith_06000318(__Action_1<__Task_1<__Task_1<TResult>>>)
 
 //E/AndroidRuntime(17306): Caused by: java.lang.NullPointerException: throw with null exception
 //E/AndroidRuntime(17306):        at com.oculus.gles3jni.GLES3JNILib.onCreate(GLES3JNILib.java:22)
@@ -328,3 +447,9 @@ namespace com.oculus.gles3jni
 //E/AndroidRuntime(17306):        at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1119)
 //E/AndroidRuntime(17306):        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2767)
 //E/AndroidRuntime(17306):        ... 10 more
+
+//Implementation not found for type import :
+//type: System.Threading.Tasks.Task
+//method: System.Threading.Tasks.Task Run(System.Func`1[System.Threading.Tasks.Task])
+//Did you forget to add the [Script] attribute?
+//Please double check the signature!

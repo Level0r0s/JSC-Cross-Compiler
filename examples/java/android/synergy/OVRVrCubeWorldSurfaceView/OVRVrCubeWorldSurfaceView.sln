@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRVrCubeWorldNative", "..\OVRVrCubeWorldNativeActivity\OVRVrCubeWorldNative\OVRVrCubeWorldNative.csproj", "{BF856BE2-E607-42F9-8F88-88E5C9DB06A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidNotificationActivity", "..\..\AndroidNotificationActivity\AndroidNotificationActivity\AndroidNotificationActivity.csproj", "{5A4875AE-F31D-48A8-952F-A0A46A942700}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidLacasCameraServerActivity", "..\..\AndroidLacasCameraServerActivity\AndroidLacasCameraServerActivity\AndroidLacasCameraServerActivity.csproj", "{FA2123D2-8933-460A-9331-27226C466FF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Android|Any CPU = Android|Any CPU
@@ -91,6 +95,22 @@ Global
 		{BF856BE2-E607-42F9-8F88-88E5C9DB06A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF856BE2-E607-42F9-8F88-88E5C9DB06A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF856BE2-E607-42F9-8F88-88E5C9DB06A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A4875AE-F31D-48A8-952F-A0A46A942700}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{5A4875AE-F31D-48A8-952F-A0A46A942700}.Android|Any CPU.Build.0 = Release|Any CPU
+		{5A4875AE-F31D-48A8-952F-A0A46A942700}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{5A4875AE-F31D-48A8-952F-A0A46A942700}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{5A4875AE-F31D-48A8-952F-A0A46A942700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A4875AE-F31D-48A8-952F-A0A46A942700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A4875AE-F31D-48A8-952F-A0A46A942700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A4875AE-F31D-48A8-952F-A0A46A942700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA2123D2-8933-460A-9331-27226C466FF5}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{FA2123D2-8933-460A-9331-27226C466FF5}.Android|Any CPU.Build.0 = Release|Any CPU
+		{FA2123D2-8933-460A-9331-27226C466FF5}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{FA2123D2-8933-460A-9331-27226C466FF5}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{FA2123D2-8933-460A-9331-27226C466FF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA2123D2-8933-460A-9331-27226C466FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA2123D2-8933-460A-9331-27226C466FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA2123D2-8933-460A-9331-27226C466FF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,5 +122,7 @@ Global
 		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
 		{7DF2830E-8342-4BFA-B5B7-3221A9831308} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
 		{BF856BE2-E607-42F9-8F88-88E5C9DB06A9} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
+		{5A4875AE-F31D-48A8-952F-A0A46A942700} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
+		{FA2123D2-8933-460A-9331-27226C466FF5} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
 	EndGlobalSection
 EndGlobal

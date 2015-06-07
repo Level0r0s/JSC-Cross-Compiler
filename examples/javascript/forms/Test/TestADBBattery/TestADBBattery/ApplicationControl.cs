@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using ScriptCoreLib.Extensions;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace TestADBBattery
 {
@@ -59,7 +60,6 @@ namespace TestADBBattery
         {
             this.BackColor = Color.Yellow;
             this.Invalidate();
-
             this.Refresh();
 
 
@@ -255,9 +255,31 @@ namespace TestADBBattery
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-              Process.Start("cmd",
-                @"/K  x:\util\android-sdk-windows\platform-tools\adb.exe logcat");
+            Process.Start("cmd",
+              @"/K  x:\util\android-sdk-windows\platform-tools\adb.exe logcat");
 
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.Yellow;
+            this.Invalidate();
+            this.Refresh();
+
+            var dir = new DirectoryInfo("x:/vr");
+            var count = dir.GetFiles().Length;
+
+            // http://stackoverflow.com/questions/12995030/how-to-use-adb-pull-command
+            var path = "/sdcard/screencap-" + count.ToString().PadLeft(3, '0') + ".png";
+
+            Process.Start("cmd", @"/C  x:\util\android-sdk-windows\platform-tools\adb.exe shell screencap -p " + path).WaitForExit();
+            Process.Start("cmd", @"/C  x:\util\android-sdk-windows\platform-tools\adb.exe  pull " + path + " " + dir.FullName).WaitForExit();
+            //            "x:\util\android-sdk-windows\platform-tools\adb.exe" shell screencap -p /sdcard/screen1.png
+            //"x:\util\android-sdk-windows\platform-tools\adb.exe" pull /sdcard/screen1.png
+
+            this.BackColor = Color.Cyan;
+            this.Invalidate();
+            this.Refresh();
         }
 
     }

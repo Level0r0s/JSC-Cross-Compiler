@@ -50,8 +50,9 @@ namespace TestADBBattery
             this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tagDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timestampDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.webUserControl1 = new TestADBBattery.Experimental.ApplicationControlExtender();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.webUserControl1 = new TestADBBattery.Experimental.ApplicationControlExtender();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -110,7 +111,8 @@ namespace TestADBBattery
             this.toolStripSplitButton1,
             this.toolStripProgressBar1,
             this.toolStripButton3,
-            this.toolStripButton4});
+            this.toolStripButton4,
+            this.toolStripButton5});
             this.bindingNavigator1.Location = new System.Drawing.Point(3, 0);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -118,7 +120,7 @@ namespace TestADBBattery
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(679, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(739, 25);
             this.bindingNavigator1.TabIndex = 2;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -350,6 +352,16 @@ namespace TestADBBattery
             this.toolStripButton4.Text = "logcat";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(60, 22);
+            this.toolStripButton5.Text = "screencap";
+            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
+            // 
             // ApplicationControl
             // 
             this.Controls.Add(this.chart1);
@@ -414,6 +426,7 @@ namespace TestADBBattery
         private ToolStripProgressBar toolStripProgressBar1;
         private ToolStripButton toolStripButton3;
         private ToolStripButton toolStripButton4;
+        private ToolStripButton toolStripButton5;
 
     }
 }
