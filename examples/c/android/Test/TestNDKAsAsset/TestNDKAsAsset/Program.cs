@@ -27,6 +27,7 @@ namespace TestNDKAsAsset
     [Obfuscation(StripAfterObfuscation = true)]
     class Program
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150607-1/vrcubeworld
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150518
         // X:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\staging\jni\Application.mk
         //├───arm64-v8a

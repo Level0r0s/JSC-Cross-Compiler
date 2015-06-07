@@ -16,6 +16,7 @@ namespace TestNDKAsAsset
 
     public static partial class xActivity
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150607-1/vrcubeworld
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150525
 
         // ConfigurationCreateNuGetPackage 
@@ -43,6 +44,8 @@ namespace TestNDKAsAsset
             java.lang.System.loadLibrary("TestNDKAsAsset");
         }
 
+        // tested by?
+        // X:\jsc.svn\examples\java\android\AndroidNDKNugetExperiment\AndroidNDKNugetExperiment\ApplicationActivity.cs
         [Script(IsPInvoke = true)]
         //private long find(string lib, string fname) { return default(long); }
         public static string stringFromJNI() { return default(string); }

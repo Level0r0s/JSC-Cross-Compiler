@@ -43,6 +43,10 @@ namespace AndroidNDKNugetExperiment.Activities
                 // X:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\Program.cs
                 // http://stackoverflow.com/questions/19954156/android-build-separate-apks-for-different-processor-architectures
 
+
+                //  <package id="TestNDKAsAssetFromSharedLibrary" version="1.0.0.0" targetFramework="net4" userInstalled="true" />
+                // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldNativeActivity\OVRVrCubeWorldNativeActivity\ApplicationActivity.cs
+
                 // can we load that native so into a separate process?
                 // switch to native and back?
                 TestNDKAsAsset.xActivity.stringFromJNI()
