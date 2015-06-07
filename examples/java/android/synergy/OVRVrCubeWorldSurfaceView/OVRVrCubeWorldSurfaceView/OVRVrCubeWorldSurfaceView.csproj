@@ -97,13 +97,34 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\OVRVrCubeWorldSurfaceViewNDK\bin\Debug\staging\libs\armeabi-v7a\libmain.so">
+      <Link>staging\apk\libs\armeabi-v7a\libmain.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\OVRVrCubeWorldSurfaceViewNDK\bin\Debug\staging\libs\armeabi-v7a\libvrapi.so">
+      <Link>staging\apk\libs\armeabi-v7a\libvrapi.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
+    <None Include="staging\apk\assets\oculussig_02157df2d5d4e70b">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="x:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar">
+      <Link>References\VrApi.jar</Link>
+    </Content>
     <Content Include="Design\Preview.png" />
     <Content Include="Design\Images.htm" />
     <Content Include="Design\jsc.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OVRVrCubeWorldSurfaceViewNDK\OVRVrCubeWorldSurfaceViewNDK.csproj">
+      <Project>{e32f254d-823d-41d5-99ee-abdf240af011}</Project>
+      <Name>OVRVrCubeWorldSurfaceViewNDK</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName)==Debug (

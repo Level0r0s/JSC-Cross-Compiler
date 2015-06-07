@@ -32,7 +32,7 @@ echo update project
 
 :: Error: X:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\bin\Debug\staging is not a valid project (AndroidManifest.xml not found).
 :: http://developer.android.com/tools/projects/projects-cmdline.html
-call "x:\util\android-sdk-windows\tools\android.bat" update project -p . -s --target "android-22" --name OVRVrCubeWorldNative
+call "x:\util\android-sdk-windows\tools\android.bat" update project -p . -s --target "android-22" --name OVRVrCubeWorldSurfaceViewNDK
 
 
 

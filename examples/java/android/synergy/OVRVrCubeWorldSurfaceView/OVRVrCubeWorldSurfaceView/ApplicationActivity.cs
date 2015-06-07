@@ -113,9 +113,8 @@ namespace OVRVrCubeWorldSurfaceView.Activities
         public static string stringFromJNI() { return default(string); }
     }
 
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "10")]
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Black.NoTitleBar.Fullscreen")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:screenOrientation", value = "landscape")]
     public class ApplicationActivity : Activity
     {
         // SurfaceHolder
@@ -197,6 +196,8 @@ namespace OVRVrCubeWorldSurfaceView.Activities
             //getWindow().setAttributes(_params);
 
             mNativeHandle = com.oculus.gles3jni.GLES3JNILib.onCreate(this);
+
+            // can we now overlay something on top of the surface?
         }
 
         protected override void onStart()
