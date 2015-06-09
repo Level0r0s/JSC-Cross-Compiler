@@ -30,6 +30,8 @@ namespace BinauralAudioExperiment
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // can we run this on a  VR HUD within a VR app??
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150609
             // http://www.theverge.com/2015/2/12/8021733/3d-audio-3dio-binaural-immersive-vr-sound-times-square-new-york
 
             new IStyle(IHTMLElement.HTMLElementEnum.button)
