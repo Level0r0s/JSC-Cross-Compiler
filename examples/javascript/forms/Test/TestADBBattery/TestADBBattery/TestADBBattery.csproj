@@ -36,6 +36,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon1.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="jsc.meta">
       <SpecificVersion>False</SpecificVersion>
@@ -146,10 +149,13 @@
     <Compile Include="Program.cs">
       <DependentUpon>ApplicationControl.cs</DependentUpon>
     </Compile>
+    <Content Include="Icon1.ico" />
+    <Content Include="Preview.png" />
     <None Include="app.config" />
     <None Include="Data\Book1.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Book1Sheet1BindingSource.datasource" />
+    <None Include="Scene1.dae" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ApplicationControl.resx">

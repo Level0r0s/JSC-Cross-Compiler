@@ -11,6 +11,7 @@ using ScriptCoreLib.Extensions;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.IO;
+using System.Reflection;
 
 namespace TestADBBattery
 {
@@ -185,7 +186,7 @@ namespace TestADBBattery
 
             // X:\jsc.svn\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\Desktop\TaskbarProgress.cs
             // not working for RemoteApp ? 
-            ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(_level);
+            ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(0.01 * _level);
             //Console.Title = new { _level }.ToString();
 
             this.FindForm().Text = new { _level }.ToString();
@@ -243,6 +244,7 @@ namespace TestADBBattery
 
         private void ApplicationControl_Load(object sender, EventArgs e)
         {
+            this.FindForm().Icon = Icon.ExtractAssociatedIcon(MethodBase.GetCurrentMethod().DeclaringType.Assembly.Location);
             this.toolStripButton2.PerformClick();
         }
 

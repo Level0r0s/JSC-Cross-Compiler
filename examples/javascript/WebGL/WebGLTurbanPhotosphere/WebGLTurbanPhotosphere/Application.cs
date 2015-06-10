@@ -60,7 +60,9 @@ namespace WebGLTurbanPhotosphere
                 new MeshBasicMaterial(
                     new
                     {
-                        map = THREE.ImageUtils.loadTexture(new HTML.Images.FromAssets.stolanuten().src)
+                        //20150608_165300.jpg
+                        //map = THREE.ImageUtils.loadTexture(new HTML.Images.FromAssets.stolanuten().src)
+                        map = THREE.ImageUtils.loadTexture(new HTML.Images.FromAssets._20150608_165300().src)
                     }
                 )
             );

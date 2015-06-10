@@ -133,6 +133,7 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
+    <Content Include="Textures\20150608_165300.jpg" />
     <Content Include="Textures\stolanuten.jpg" />
     <None Include="app.config" />
     <None Include="packages.config" />
