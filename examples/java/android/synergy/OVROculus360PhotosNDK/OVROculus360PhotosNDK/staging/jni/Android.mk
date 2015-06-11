@@ -76,16 +76,30 @@ LOCAL_CFLAGS	+= -Wno-multichar	# used in internal Android headers:  DISPLAY_EVEN
 #  OVR.h: No such file or directory
 # VrApi_Types.h: No such file or directory
 # OVR_TurboJpeg.h: No such file or directory
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/LibOVR/Src $(LOCAL_PATH)/VrAppFramework/Src $(LOCAL_PATH)/LibOVR/Include $(LOCAL_PATH)/VrApi/Include $(LOCAL_PATH)/Oculus360PhotosSDK
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/stb
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/minizip
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Src 
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppFramework/Src 
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Include 
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Src/Capture/include 
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrApi/Include 
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/Oculus360PhotosSDK
 
-LOCAL_SRC_FILES :=  OVROculus360PhotosNDK.dll.c $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./**/*.cpp))
+LOCAL_SRC_FILES :=  OVROculus360PhotosNDK.dll.c
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./stb/*.c))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./minizip/*.c))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Kernel/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Android/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Capture/src/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppFramework/Src/VRMenu/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppFramework/Src/*.cpp))
 
 #LOCAL_C_INCLUDES := X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Include\
 
 # libs could be discovered by what code we link to in ScriptCoreLibAndroidNDK
 #LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv1_CM -lGLESv2  -lGLESv3
-LOCAL_LDLIBS    := -llog -landroid -lEGL   -lGLESv3
-    
+LOCAL_LDLIBS    := -llog -landroid -lEGL   -lGLESv3 -lz 
+    #  http://stackoverflow.com/questions/11856688/openssl-build-issue-with-android-ndk-r8
 	# "X:\opensource\ovr_mobile_sdk_0.6.0\VrAppFramework\Projects\Android\jni\Android.mk"
 LOCAL_STATIC_LIBRARIES := android_native_app_glue 
 
