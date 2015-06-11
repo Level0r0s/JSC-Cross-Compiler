@@ -50,7 +50,185 @@ namespace TestYouTubeExtractor
 
         //Error CS0246  The type or namespace name 'VideoInfo' could not be found(are you missing a using directive or an assembly reference?)	TestYouTubeExtractor X:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\Program.cs	47
 
+
         private static void DownloadVideo(string link, IEnumerable<VideoInfo> videoInfos)
+        {
+            var mp4 = videoInfos.Where(x => x.VideoType == VideoType.Mp4);
+            var mp4video = mp4.Where(x => x.Resolution > 0).OrderBy(x => x.Resolution).ToArray();
+            var mp4audio = mp4video.Where(x => x.AudioBitrate > 0).OrderBy(x => x.Resolution).ToArray();
+
+
+            VideoInfo video = //videoInfos.FirstOrDefault(k => k.FormatCode == 299)
+             mp4audio.OrderBy(info => info.Resolution).Last();
+
+            video.DecryptDownloadUrl();
+
+            Console.WriteLine(video.Title);
+
+            // old name
+            var Title =
+                  video.Title
+                //.Replace("/", " ")
+                //.Replace("\\", " ")
+                .Replace("\"", "'")
+                //.Replace(":", " ")
+                .Replace("&", " and ")
+                //.Replace("*", " ")
+                ;
+
+            // http://msdn.microsoft.com/en-us/library/system.io.path.getinvalidpathchars(v=vs.110).aspx
+
+            foreach (var item in
+                Path.GetInvalidFileNameChars())
+            {
+                Title = Title.Replace(item, ' ');
+
+            }
+
+            // https://code.google.com/p/android/issues/detail?id=8185
+            // http://stackoverflow.com/questions/18596245/in-c-how-can-i-detect-if-a-character-is-a-non-ascii-character
+
+            var apkfriendlytitle = new string(
+                Title.Select(x => x < 127 ? x : '_').ToArray()
+                );
+
+            // apkfriendlytitle = "___360_ - __________find the truth 360 degree trick movie ."
+
+
+
+            var px = Path.Combine(
+                //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "x:/media",
+
+                Title + video.VideoExtension);
+
+            var pxa = Path.Combine(
+                 //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                 "x:/media",
+
+                 apkfriendlytitle + video.VideoExtension);
+
+
+            if (!File.Exists(pxa))
+                if (File.Exists(px))
+                {
+                    // upgrade old naming to apk friendly.
+                    File.Move(px, pxa);
+                }
+
+            var pxa_mp3 = Path.ChangeExtension(pxa, ".mp3");
+            var pxa_mp4_mp4 = Path.ChangeExtension(pxa, ".mp4.mp4");
+            var pxa_mp3_mp4 = Path.ChangeExtension(pxa, ".mp3.mp4");
+
+
+            // do we have the end result?
+
+            if (File.Exists(pxa_mp3_mp4))
+            {
+                // all done
+                //Debugger.Break();
+                return;
+            }
+
+
+            if (File.Exists(pxa))
+            {
+            }
+            else
+            {
+                var videoDownloader = new VideoDownloader(video, pxa);
+                videoDownloader.DownloadProgressChanged += (sender, args) =>
+                {
+                    ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(0.01 * args.ProgressPercentage);
+
+
+
+                    Console.Title = "%" + args.ProgressPercentage.ToString("0.0");
+                }
+                    ;
+                videoDownloader.Execute();
+            }
+
+            #region any reason to attempt upgrade?
+
+            // upgrade { link = //www.youtube.com/embed/E-SDNGMYB80 } from 360 to 480
+
+
+            if (mp4video.Last().Resolution > mp4audio.Last().Resolution)
+
+                // dont care about non HD
+                if (mp4video.Last().Resolution >= 1080)
+                {
+                    Console.WriteLine("upgrade " + new { link } + " from " + mp4audio.Last().Resolution + " to " + mp4video.Last().Resolution);
+
+
+                    var ffmpeg = @"X:\util\ffmpeg-20150609-git-7c9fcdf-win64-static\ffmpeg-20150609-git-7c9fcdf-win64-static\bin\ffmpeg.exe";
+
+                    if (!File.Exists(pxa_mp4_mp4))
+                    {
+                        var videoDownloader = new VideoDownloader(mp4video.Last(), pxa_mp4_mp4);
+                        videoDownloader.DownloadProgressChanged += (sender, args) =>
+                        {
+                            ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(0.01 * args.ProgressPercentage);
+
+
+
+                            Console.Title = "%" + args.ProgressPercentage.ToString("0.0");
+                        }
+                       ;
+                        videoDownloader.Execute();
+                    }
+
+                    // extract mp3
+
+                    // "X:\util\ffmpeg-20150609-git-7c9fcdf-win64-static\ffmpeg-20150609-git-7c9fcdf-win64-static\bin\ffmpeg.exe" -i "X:\media\Dolphins 360° 4K.mp4" "C:\Users\Administrator\Documents\Dolphins 360_ 4K.mp3"
+
+
+                    // "X:\util\ffmpeg-20150609-git-7c9fcdf-win64-static\ffmpeg-20150609-git-7c9fcdf-win64-static\bin\ffmpeg.exe" -i "C:\Users\Administrator\Documents\Dolphins 360_ 4K.mp4" -i "C:\Users\Administrator\Documents\Dolphins 360_ 4K.mp3" -shortest "C:\Users\Administrator\Documents\Dolphins 360_ 4K.mp3.mp4"
+
+                    if (!File.Exists(pxa_mp3))
+                        Process.Start(ffmpeg,
+                            "-i \"" + pxa + "\""
+                            + " \"" + pxa_mp3 + "\"").WaitForExit();
+
+                    // merge and delete
+
+                    // Additional information: The operation was canceled by the user
+
+                    // http://superuser.com/questions/227433/whats-the-difference-between-ffmpegs-vcodec-copy-and-sameq
+
+                    Process.Start(ffmpeg,
+                       " -i \"" + pxa_mp3 + "\""
+                       + " -i \"" + pxa_mp4_mp4 + "\""
+                       + " -c:v copy -shortest \"" + pxa_mp3_mp4 + "\"").WaitForExit();
+
+                    File.Delete(pxa_mp3);
+                    File.Delete(pxa_mp4_mp4);
+                    File.Delete(pxa);
+                }
+            #endregion
+
+
+            // X:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\xffmpeg\Program.cs
+
+            var pxx = File.Exists(pxa_mp3_mp4) ? pxa_mp3_mp4 : px;
+
+            Console.WriteLine("TagLib... " + new { new FileInfo(pxx).Length });
+
+            // what about webm?
+            TagLib.File videoFile = TagLib.File.Create(pxx);
+            //TagLib.Mpeg4.AppleTag customTag = (TagLib.Mpeg4.Comm)videoFile.GetTag(TagLib.TagTypes.Apple);
+            TagLib.Mpeg4.AppleTag customTag = (TagLib.Mpeg4.AppleTag)videoFile.GetTag(TagLib.TagTypes.Apple);
+
+
+            //customTag.SetDashBox("Producer", "Producer1",link);
+            //customTag.Comment = link;
+            customTag.Album = link;
+            videoFile.Save();
+            videoFile.Dispose();
+        }
+
+        private static void DownloadVideo1(string link, IEnumerable<VideoInfo> videoInfos)
         {
             // Show Details	Severity	Code	Description	Project	File	Line
             //Error CS0246  The type or namespace name 'ICSharpCode' could not be found(are you missing a using directive or an assembly reference?)	taglib-sharp File.cs 878
@@ -59,10 +237,11 @@ namespace TestYouTubeExtractor
             // Show Details	Severity	Code	Description	Project	File	Line
             //Error Error opening icon file X:\opensource\github\taglib - sharp\src-- Access to the path 'X:\opensource\github\taglib-sharp\src' is denied.taglib - sharp    CSC
 
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150609/360
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150608
             var mp4 = videoInfos.Where(x => x.VideoType == VideoType.Mp4);
-            var mp4video = mp4.Where(x => x.Resolution > 0).ToArray();
-            var mp4audio = mp4video.Where(x => x.AudioBitrate > 0).ToArray();
+            var mp4video = mp4.Where(x => x.Resolution > 0).OrderBy(x => x.Resolution).ToArray();
+            var mp4audio = mp4video.Where(x => x.AudioBitrate > 0).OrderBy(x => x.Resolution).ToArray();
 
             /*
              * Select the first .mp4 video with 360p resolution
@@ -103,6 +282,7 @@ namespace TestYouTubeExtractor
 
              Title + video.VideoExtension);
 
+#if REMOTE
             var p = Path.Combine(
                 //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "r:/media",
@@ -145,6 +325,7 @@ namespace TestYouTubeExtractor
                 IntPtr hWnd = new IntPtr(0);
                 int res = WNetRestoreSingleConnection(hWnd, "r:", true);
             }
+#endif
 
             // res = 86
             // res = 0
@@ -163,8 +344,10 @@ namespace TestYouTubeExtractor
             //OK
             //-------------------------- -
 
-
+#if REMOTE
             if (!File.Exists(p))
+#endif
+
             {
                 if (!File.Exists(px))
                 {
@@ -192,28 +375,31 @@ namespace TestYouTubeExtractor
                      * For GUI applications note, that this method runs synchronously.
                      */
                     videoDownloader.Execute();
+
+                    // modify the mp4 tag only if we just fetched it...
+
+                    // Additional information: The process cannot access the file 'C:\Users\Arvo\Documents\Dido - Don't Believe In Love.mp4' because it is being used by another process.
+
+                    // http://stackoverflow.com/questions/18250281/reading-writing-metadata-of-audio-video-files
+
+                    Console.WriteLine("TagLib... " + new { new FileInfo(px).Length });
+
+                    // what about webm?
+                    TagLib.File videoFile = TagLib.File.Create(px);
+                    //TagLib.Mpeg4.AppleTag customTag = (TagLib.Mpeg4.Comm)videoFile.GetTag(TagLib.TagTypes.Apple);
+                    TagLib.Mpeg4.AppleTag customTag = (TagLib.Mpeg4.AppleTag)videoFile.GetTag(TagLib.TagTypes.Apple);
+
+
+                    //customTag.SetDashBox("Producer", "Producer1",link);
+                    //customTag.Comment = link;
+                    customTag.Album = link;
+                    videoFile.Save();
+                    videoFile.Dispose();
                 }
-
-                // Additional information: The process cannot access the file 'C:\Users\Arvo\Documents\Dido - Don't Believe In Love.mp4' because it is being used by another process.
-
-                // http://stackoverflow.com/questions/18250281/reading-writing-metadata-of-audio-video-files
-
-                Console.WriteLine("TagLib... " + new { new FileInfo(px).Length });
-
-                // what about webm?
-                TagLib.File videoFile = TagLib.File.Create(px);
-                //TagLib.Mpeg4.AppleTag customTag = (TagLib.Mpeg4.Comm)videoFile.GetTag(TagLib.TagTypes.Apple);
-                TagLib.Mpeg4.AppleTag customTag = (TagLib.Mpeg4.AppleTag)videoFile.GetTag(TagLib.TagTypes.Apple);
-
-
-                //customTag.SetDashBox("Producer", "Producer1",link);
-                //customTag.Comment = link;
-                customTag.Album = link;
-                videoFile.Save();
-                videoFile.Dispose();
 
                 // http://stackoverflow.com/questions/13847669/file-move-progress-bar
 
+#if REMOTE
                 Console.WriteLine("Move... " + new { p });
 
                 //File.Move(px, p);
@@ -253,6 +439,8 @@ namespace TestYouTubeExtractor
                 //    delegate ()
                 //    {
                 Microsoft.VisualBasic.FileIO.FileSystem.MoveFile(px, p, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs);
+#endif
+
                 //    }
                 //)
                 //{ ApartmentState = ApartmentState.STA }.Start();
@@ -291,10 +479,13 @@ namespace TestYouTubeExtractor
 
         static void Main(string[] args)
         {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150609/360
+
             //DoVideo(
-            //	"https://www.youtube.com/watch?v=8myYyMg1fFE"
+            //    "https://www.youtube.com/watch?v=ZABusb0bsnw"
             //);
 
+#if REMOTE
             #region WNetRestoreSingleConnection
             try
             {
@@ -326,6 +517,8 @@ namespace TestYouTubeExtractor
                 int res = WNetRestoreSingleConnection(hWnd, "r:", true);
             }
             #endregion
+#endif
+
 
             // or what if debugger starts asking for developer license and clicking ok kills to downloads in progress?
             // what if device looses power.
@@ -343,9 +536,9 @@ namespace TestYouTubeExtractor
 
             for (int p = 1; p < 96; p++)
                 foreach (var src in new[] {
-                    $"http://consciousresonance.net/?page_id=1587&paged={p}",
-                    $"https://faustuscrow.wordpress.com/page/{p}/",
-                    $"https://hiddenlighthouse.wordpress.com/page/{p}/",
+                    //$"http://consciousresonance.net/?page_id=1587&paged={p}",
+                    //$"https://faustuscrow.wordpress.com/page/{p}/",
+                    //$"https://hiddenlighthouse.wordpress.com/page/{p}/",
                     $"https://zproxy.wordpress.com/page/{p}/"
 
                 })

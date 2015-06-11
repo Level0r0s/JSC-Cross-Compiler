@@ -252,6 +252,9 @@ namespace TestADBBattery
         {
             Process.Start("cmd",
                 @"/K  x:\util\android-sdk-windows\platform-tools\adb.exe connect 192.168.1.126:5550");
+            // https://github.com/cheezy/ADB/wiki/Connect-and--Disconnect-ADB-to-a-Device
+            // x:\util\android-sdk-windows\platform-tools\adb.exe disconnect
+
 
         }
 
@@ -286,3 +289,5 @@ namespace TestADBBattery
 
     }
 }
+
+// unable to connect to t-any:5550

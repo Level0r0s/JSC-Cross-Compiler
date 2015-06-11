@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22609.0
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestYouTubeExtractor", "TestYouTubeExtractor\TestYouTubeExtractor.csproj", "{D668D3F3-A1DE-44A5-A055-813A6B705350}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taglib-sharp", "r:\opensource\github\taglib-sharp\src\taglib-sharp.csproj", "{6B143A39-C7B2-4743-9917-92262C60E9A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taglib-sharp", "x:\opensource\github\taglib-sharp\src\taglib-sharp.csproj", "{6B143A39-C7B2-4743-9917-92262C60E9A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.SharpZLib", "..\..\..\..\market\synergy\github\SharpZipLib\external\src\ICSharpCode.SharpZLib.csproj", "{0E7413FF-EB9E-4714-ACF2-BE3A6A7B2FFD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Ultra.Library", "..\..\..\..\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library.csproj", "{132EB43F-19B4-42AC-8025-3249B129867A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlAgilityPack.fx.4.5", "r:\opensource\codeplex\htmlagilitypack\HtmlAgilityPack\HtmlAgilityPack.fx.4.5.csproj", "{1028002A-BBE2-4FF2-94B7-A8368A8F6887}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlAgilityPack.fx.4.5", "x:\opensource\codeplex\htmlagilitypack\HtmlAgilityPack\HtmlAgilityPack.fx.4.5.csproj", "{1028002A-BBE2-4FF2-94B7-A8368A8F6887}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHTMLDocumentAnalysis", "..\TestHTMLDocumentAnalysis\TestHTMLDocumentAnalysis\TestHTMLDocumentAnalysis.csproj", "{7238DDCD-07D1-431A-960C-9434DD2A334A}"
 EndProject
@@ -21,9 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByPackage", "ByPackage", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{5893771C-EBC2-4E3A-A8A1-546BACDE9E32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json", "r:\opensource\github\Newtonsoft.Json\Src\Newtonsoft.Json\Newtonsoft.Json.csproj", "{EEEA67F9-9089-481D-A4DC-0966DEC9FD7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json", "x:\opensource\github\Newtonsoft.Json\Src\Newtonsoft.Json\Newtonsoft.Json.csproj", "{EEEA67F9-9089-481D-A4DC-0966DEC9FD7D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{E0B0819D-0839-44C4-81DD-C8536E78B4D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleApplication", "..\..\..\..\market\synergy\github\YoutubeExtractor\external\ExampleApplication\ExampleApplication.csproj", "{B894B26A-A518-4366-B31C-D90489A0F138}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xffmpeg", "xffmpeg\xffmpeg.csproj", "{EF7CEA51-3C4A-49EB-B770-89FDCCA4A4F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +101,22 @@ Global
 		{EEEA67F9-9089-481D-A4DC-0966DEC9FD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEEA67F9-9089-481D-A4DC-0966DEC9FD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEEA67F9-9089-481D-A4DC-0966DEC9FD7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B894B26A-A518-4366-B31C-D90489A0F138}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{B894B26A-A518-4366-B31C-D90489A0F138}.Android|Any CPU.Build.0 = Release|Any CPU
+		{B894B26A-A518-4366-B31C-D90489A0F138}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{B894B26A-A518-4366-B31C-D90489A0F138}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{B894B26A-A518-4366-B31C-D90489A0F138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B894B26A-A518-4366-B31C-D90489A0F138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B894B26A-A518-4366-B31C-D90489A0F138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B894B26A-A518-4366-B31C-D90489A0F138}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF7CEA51-3C4A-49EB-B770-89FDCCA4A4F6}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{EF7CEA51-3C4A-49EB-B770-89FDCCA4A4F6}.Android|Any CPU.Build.0 = Release|Any CPU
+		{EF7CEA51-3C4A-49EB-B770-89FDCCA4A4F6}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{EF7CEA51-3C4A-49EB-B770-89FDCCA4A4F6}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{EF7CEA51-3C4A-49EB-B770-89FDCCA4A4F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF7CEA51-3C4A-49EB-B770-89FDCCA4A4F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF7CEA51-3C4A-49EB-B770-89FDCCA4A4F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF7CEA51-3C4A-49EB-B770-89FDCCA4A4F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,5 +130,7 @@ Global
 		{ECDC127F-8DEF-4F99-8300-72C13597339D} = {B87D47E1-DDA5-4ED2-8858-A5E58782C44B}
 		{5893771C-EBC2-4E3A-A8A1-546BACDE9E32} = {B87D47E1-DDA5-4ED2-8858-A5E58782C44B}
 		{EEEA67F9-9089-481D-A4DC-0966DEC9FD7D} = {5893771C-EBC2-4E3A-A8A1-546BACDE9E32}
+		{B894B26A-A518-4366-B31C-D90489A0F138} = {B87D47E1-DDA5-4ED2-8858-A5E58782C44B}
+		{EF7CEA51-3C4A-49EB-B770-89FDCCA4A4F6} = {B87D47E1-DDA5-4ED2-8858-A5E58782C44B}
 	EndGlobalSection
 EndGlobal

@@ -53,15 +53,20 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="tools\build.bat" />
-    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrSamples\Native\Oculus360PhotosSDK\jni\**\*.h">
+  </ItemGroup>
+  
+  
+  
+  <ItemGroup>
+      <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrSamples\Native\Oculus360PhotosSDK\jni\**\*.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>staging\jni\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <Link>staging\jni\Oculus360PhotosSDK\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrSamples\Native\Oculus360PhotosSDK\jni\**\*.cpp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>staging\jni\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <Link>staging\jni\Oculus360PhotosSDK\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
 
@@ -72,6 +77,44 @@
   </None>
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Include\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrApi\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\LibOVR\Include\**\*.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\LibOVR\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\LibOVR\Src\Android\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\LibOVR\Src\Android\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\LibOVR\Src\Kernel\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\LibOVR\Src\Kernel\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrAppFramework\Src\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrAppFramework\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+  
   <ItemGroup>
     <Content Include="staging\AndroidManifest.xml">
       <SubType>Designer</SubType>

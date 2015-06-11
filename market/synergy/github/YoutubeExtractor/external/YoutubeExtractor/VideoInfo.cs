@@ -45,22 +45,26 @@ namespace YoutubeExtractor
             new VideoInfo(244, VideoType.WebM, 480, false, AudioType.Unknown, 0, AdaptiveType.Video),
             new VideoInfo(247, VideoType.WebM, 720, false, AudioType.Unknown, 0, AdaptiveType.Video),
             new VideoInfo(248, VideoType.WebM, 1080, false, AudioType.Unknown, 0, AdaptiveType.Video),
+
             new VideoInfo(264, VideoType.Mp4, 1440, false, AudioType.Unknown, 0, AdaptiveType.Video),
+            new VideoInfo(266, VideoType.Mp4, 2160, false, AudioType.Unknown, 0, AdaptiveType.Video),
+
             new VideoInfo(271, VideoType.WebM, 1440, false, AudioType.Unknown, 0, AdaptiveType.Video),
             new VideoInfo(272, VideoType.WebM, 2160, false, AudioType.Unknown, 0, AdaptiveType.Video),
             new VideoInfo(278, VideoType.WebM, 144, false, AudioType.Unknown, 0, AdaptiveType.Video),
 
 
-			// 60
-			// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150502/yt
-			// no audio
+            // 60
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150502/yt
+            // no audio
             //new VideoInfo(299, VideoType.Mp4, 1080, false, AudioType.Unknown, 0, AdaptiveType.Video),
             //new VideoInfo(298, VideoType.Mp4, 721, false, AudioType.Unknown, 0, AdaptiveType.Video),
 
-			//new VideoInfo(315, VideoType.WebM, 2160, false, AudioType.Unknown, 0, AdaptiveType.Video),
+            new VideoInfo(313, VideoType.WebM, 2160, false, AudioType.Unknown, 0, AdaptiveType.Video),
+            new VideoInfo(315, VideoType.WebM, 2160, false, AudioType.Unknown, 0, AdaptiveType.Video),
 
-			/* Adaptive (aka DASH) - Audio */
-			new VideoInfo(139, VideoType.Mp4, 0, false, AudioType.Aac, 48, AdaptiveType.Audio),
+            /* Adaptive (aka DASH) - Audio */
+            new VideoInfo(139, VideoType.Mp4, 0, false, AudioType.Aac, 48, AdaptiveType.Audio),
             new VideoInfo(140, VideoType.Mp4, 0, false, AudioType.Aac, 128, AdaptiveType.Audio),
             new VideoInfo(141, VideoType.Mp4, 0, false, AudioType.Aac, 256, AdaptiveType.Audio),
             new VideoInfo(171, VideoType.WebM, 0, false, AudioType.Vorbis, 128, AdaptiveType.Audio),

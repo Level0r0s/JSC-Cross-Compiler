@@ -25,14 +25,16 @@ echo update project
 :: Error: Target id 'android-10' is not valid. Use 'android.bat list targets' to get the target ids.
 
 :: id: 8 or "Google Inc.:Google APIs:22"
-::call "x:\util\android-sdk-windows\tools\android.bat" list targets
+call "x:\util\android-sdk-windows\tools\android.bat" list targets
 
-:: pause
+pause
 :: exit 0
 
 :: Error: X:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\bin\Debug\staging is not a valid project (AndroidManifest.xml not found).
 :: http://developer.android.com/tools/projects/projects-cmdline.html
-call "x:\util\android-sdk-windows\tools\android.bat" update project -p . -s --target "android-22" --name OVROculus360PhotosNDK
+:: 
+::call "x:\util\android-sdk-windows\tools\android.bat" update project -p . -s --target "android-22" --name OVROculus360PhotosNDK
+call "x:\util\android-sdk-windows\tools\android.bat" update project -p . -s --target "android-19" --name OVROculus360PhotosNDK
 
 
 

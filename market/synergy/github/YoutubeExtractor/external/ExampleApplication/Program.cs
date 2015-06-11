@@ -48,7 +48,8 @@ namespace ExampleApplication
              * Select the first .mp4 video with 360p resolution
              */
             VideoInfo video = videoInfos
-                .First(info => info.VideoType == VideoType.Mp4 && info.Resolution == 360);
+                //.First(info => info.VideoType == VideoType.Mp4 && info.Resolution == 360);
+                .Where(info => info.VideoType == VideoType.Mp4).OrderBy(info => info.Resolution).Last();
 
 
             video.DecryptDownloadUrl();
@@ -62,7 +63,9 @@ namespace ExampleApplication
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
 
                 video.Title.Replace(":", "_")
-                        .Replace("*", "_") + video.VideoExtension));
+                        .Replace("*", "_") 
+                        .Replace("°", "_")
+                        + video.VideoExtension));
 
             // Register the ProgressChanged event and print the current progress
             videoDownloader.DownloadProgressChanged += (sender, args) => Console.WriteLine(args.ProgressPercentage);
@@ -84,7 +87,7 @@ namespace ExampleApplication
             // x:\jsc.svn\market\synergy\github\youtubeextractor\external\exampleapplication\program.cs
 
             // Our test youtube link
-            const string link = "https://www.youtube.com/watch?v=SXZ3qWAvbVs";
+            const string link = "https://www.youtube.com/watch?v=x3dhMxf7-QM";
             Debugger.Break();
 
       

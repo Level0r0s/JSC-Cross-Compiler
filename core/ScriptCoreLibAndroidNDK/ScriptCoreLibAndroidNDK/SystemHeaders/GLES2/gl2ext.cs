@@ -16,6 +16,8 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES2
     [Script(IsNative = true)]
     public class gl2ext : gl2ext_h
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150611/ovroculus360photosndk
+
         // how do we get the ref in the correct order?
         // use interface?
 
