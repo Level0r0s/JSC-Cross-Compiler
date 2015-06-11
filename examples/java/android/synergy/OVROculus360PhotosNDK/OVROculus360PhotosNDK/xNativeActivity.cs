@@ -25,7 +25,7 @@ namespace OVROculus360PhotosNDK
 
         [Script(NoDecoration = true)]
         // JVM load the .so and calls this native function
-        static jlong Java_OVROculus360Photos_Activities_xMarshal_nativeSetAppInterface(
+        static long Java_OVROculus360Photos_Activities_xMarshal_nativeSetAppInterface(
             ref JNIEnv env,
             jclass clazz,
             jobject activity,
@@ -44,11 +44,19 @@ namespace OVROculus360PhotosNDK
             //log.__android_log_print(
             //    log.android_LogPriority.ANDROID_LOG_INFO,
             //    "OVROculus360PhotosNDK", 
-               
+
             //);
 
             //return default(jlong);
-            return jlong_default;
+            //return jlong_default;
+            return Oculus360Photos_h.Java_com_oculus_oculus360photossdk_MainActivity_nativeSetAppInterface(
+                ref env,
+                clazz,
+                activity,
+                fromPackageNameString,
+                commandString,
+                uriString
+            );
         }
 
         static jlong jlong_default;
@@ -91,6 +99,23 @@ namespace OVROculus360PhotosNDK
     //{
     //    public static string vrapi_GetVersionString() { return null; }
     //}
+
+    [Script(IsNative = true
+       
+        // thats a c++ header, wont help us.
+        // , Header = "Oculus360Photos.h"
+        )]
+    public class Oculus360Photos_h
+    {
+        public static long Java_com_oculus_oculus360photossdk_MainActivity_nativeSetAppInterface(ref JNIEnv env,
+            jclass clazz,
+            jobject activity,
+
+            jstring fromPackageNameString,
+            jstring commandString,
+            jstring uriString
+         ) { return 0; }
+    }
 }
 
 //E/AndroidRuntime(18960): java.lang.UnsatisfiedLinkError: No implementation found for long OVROculus360Photos.Activities.xMarshal.nativeSetAppInterface(java.lang.Object, java.lang.String, java.lang.String, java.lang.String) (tried Java_OVROculus360Photos_Activities_xMarshal_nativeSetAppInterface and Java_OVROculus360Photos_Activities_xMarshal_nativeSetAppInterface__Ljava_lang_Object_2Ljava_lang_String_2Ljava_lang_String_2Ljava_lang_String_2)
