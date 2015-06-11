@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="xNativeActivity.cs" />
   </ItemGroup>
@@ -54,11 +53,8 @@
   <ItemGroup>
     <None Include="tools\build.bat" />
   </ItemGroup>
-  
-  
-  
   <ItemGroup>
-      <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrSamples\Native\Oculus360PhotosSDK\jni\**\*.h">
+    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrSamples\Native\Oculus360PhotosSDK\jni\**\*.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\Oculus360PhotosSDK\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
@@ -69,95 +65,66 @@
       <Link>staging\jni\Oculus360PhotosSDK\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <None Include="x:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so">
-    <Link>staging\jni\armeabi-v7a\libvrapi.so</Link>
-    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  </None>
+      <Link>staging\jni\armeabi-v7a\libvrapi.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
-
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\3rdParty\stb\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\stb\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\3rdParty\minizip\ioapi.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\minizip\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-  
   <ItemGroup>
     <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\3rdParty\minizip\unzip.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\minizip\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Include\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\VrApi\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-  
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\LibOVR\Include\**\*.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\LibOVR\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\LibOVR\Src\Android\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\LibOVR\Src\Android\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\LibOVR\Src\Capture\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\LibOVR\Src\Capture\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-  
   <ItemGroup>
     <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\LibOVR\Src\Kernel\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\LibOVR\Src\Kernel\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-  
   <ItemGroup>
     <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrAppFramework\Src\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\VrAppFramework\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
-  
   <ItemGroup>
     <Content Include="staging\AndroidManifest.xml">
       <SubType>Designer</SubType>

@@ -35,16 +35,18 @@ namespace ScriptCoreLibNative.SystemHeaders.android
 
         //public static int __android_log_print(android_LogPriority prio, string tag, string fmt) { return default(int); }
 
-        // 2012 cannot call __arglist?
-        //[Script(IsNative = true, Header = "android/log.h", IsSystemHeader = true)]
-        //public static class arglist
-        //{
-        // X:\jsc.svn\examples\c\android\HybridOculusVrActivity\HybridOculusVrActivity\OVRNDK\xNativeActivity.cs
-        // would be callable if it were a shared code project?
-        // called by
-        // x:\jsc.svn\examples\c\android\test\testndkudp\testndkudp\xnativeactivity.cs
-        //internal static int __android_log_print(android_LogPriority prio, string tag, string fmt, __arglist) { return default(int); }
+        // X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\Library\ConsoleExtensions.cs
         public static int __android_log_print(android_LogPriority prio, string tag, string fmt, __arglist) { return default(int); }
+
+        //// 2012 cannot call __arglist?
+        //[Script(IsNative = true, Header = "android/log.h", IsSystemHeader = true)]
+        //public static class stdcall
+        //{
+        //    //X:\jsc.svn\examples\c\android\HybridOculusVrActivity\HybridOculusVrActivity\OVRNDK\xNativeActivity.cs
+        //    // would be callable if it were a shared code project?
+        //    // called by
+        //    // x:\jsc.svn\examples\c\android\test\testndkudp\testndkudp\xnativeactivity.cs
+        //    internal static int __android_log_print(android_LogPriority prio, string tag, string fmt) { return default(int); }
         //}
 
 
