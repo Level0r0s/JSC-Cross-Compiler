@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}</ProjectGuid>
+    <ProjectGuid>{A9E994CF-F125-4571-9BED-52B5B5A92826}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WebGLEquirectangularPanorama</RootNamespace>

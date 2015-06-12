@@ -155,6 +155,8 @@ namespace OVRVrCubeWorldSurfaceView.Activities
         {
             base.onCreate(savedInstanceState);
 
+            #region xCallback
+            // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceView\ApplicationActivity.cs
             var xCallback = new xCallback
             {
                 onsurfaceCreated = holder =>
@@ -184,6 +186,7 @@ namespace OVRVrCubeWorldSurfaceView.Activities
                     }
                 }
             };
+            #endregion
 
 
 
@@ -276,7 +279,7 @@ namespace OVRVrCubeWorldSurfaceView.Activities
                 return true;
             };
 
-
+            // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceView\ApplicationActivity.cs
             // X:\jsc.svn\examples\java\android\AndroidLacasCameraServerActivity\AndroidLacasCameraServerActivity\ApplicationActivity.cs
             addContentView(mDraw, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
@@ -335,6 +338,7 @@ namespace OVRVrCubeWorldSurfaceView.Activities
             }
         }
 
+        #region Activity life cycle
         protected override void onStart()
         {
             base.onStart();
@@ -369,6 +373,8 @@ namespace OVRVrCubeWorldSurfaceView.Activities
             base.onDestroy();
             mNativeHandle = 0;
         }
+
+        #endregion
 
 
 

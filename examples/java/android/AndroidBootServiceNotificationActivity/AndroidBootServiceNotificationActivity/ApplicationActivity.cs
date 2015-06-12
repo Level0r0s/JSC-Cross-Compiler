@@ -383,10 +383,11 @@ namespace AndroidBootServiceNotificationActivity.Activities
                     {
                         var xmyPid = android.os.Process.myPid();
 
-
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150612/ovroculus360photoshud
                         // cpu 
                         Console.WriteLine(new { xmyPid, Thread.CurrentThread.ManagedThreadId, sw });
 
+                        // "x:\util\android-sdk-windows\platform-tools\adb.exe" uninstall AndroidBootServiceNotificationActivity.Activities
                         Thread.Sleep(1000);
                     }
                 }

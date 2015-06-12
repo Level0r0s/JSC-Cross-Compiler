@@ -85,19 +85,48 @@
   <ItemGroup>
     <Compile Include="ApplicationActivity.cs">
     </Compile>
+    <Compile Include="ConsoleReceiver.cs" />
     <Compile Include="Program.cs">
       <DependentUpon>ApplicationActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VrActivity.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="References\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Design\Preview.png" />
     <Content Include="Design\Images.htm" />
     <Content Include="Design\jsc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="x:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar">
+      <Link>References\VrApi.jar</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="staging\apk\assets\oculussig_02157df2d5d4e70b">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="X:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosNDK\bin\Debug\staging\libs\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\apk\libs\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrSamples\Native\Oculus360PhotosSDK\res\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\apk\res-OVROculus360Photos.Activities.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrAppFramework\Projects\Android\res\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\apk\res-com.oculus.vrappframework.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrSamples\Native\Oculus360PhotosSDK\assets\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\apk\assets\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

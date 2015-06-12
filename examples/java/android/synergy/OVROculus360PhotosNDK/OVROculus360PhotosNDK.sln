@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVROculus360PhotosNDK", "OVROculus360PhotosNDK\OVROculus360PhotosNDK.csproj", "{4E6A75A0-AAFE-450E-B9BF-FF666A64D5CB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRVrCubeWorldSurfaceViewNDK", "..\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewNDK\OVRVrCubeWorldSurfaceViewNDK.csproj", "{E32F254D-823D-41D5-99EE-ABDF240AF011}"
@@ -22,6 +22,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVROculus360PhotosHUD", "OVROculus360PhotosHUD\OVROculus360PhotosHUD.csproj", "{FC4FA0EA-F76F-4932-863E-3980F7587C34}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSS3DPanoramaByHumus", "..\..\..\..\javascript\synergy\css\CSS3DPanoramaByHumus\CSS3DPanoramaByHumus\CSS3DPanoramaByHumus.csproj", "{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidBootServiceNotificationActivity", "..\..\AndroidBootServiceNotificationActivity\AndroidBootServiceNotificationActivity\AndroidBootServiceNotificationActivity.csproj", "{BA0FA900-945A-4566-B0B4-E05E94AA97D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLEquirectangularPanorama", "..\..\..\..\javascript\synergy\webgl\WebGLEquirectangularPanorama\WebGLEquirectangularPanorama\WebGLEquirectangularPanorama.csproj", "{A9E994CF-F125-4571-9BED-52B5B5A92826}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{79888291-1DF1-4A00-AC84-9BB21E801A4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLHZBlendCharacter", "..\..\..\..\javascript\WebGL\WebGLHZBlendCharacter\WebGLHZBlendCharacter\WebGLHZBlendCharacter.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -143,8 +151,52 @@ Global
 		{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}.Release|Mixed Platforms.Build.0 = Release|x86
 		{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}.Release|x86.ActiveCfg = Release|x86
 		{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}.Release|x86.Build.0 = Release|x86
+		{BA0FA900-945A-4566-B0B4-E05E94AA97D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0FA900-945A-4566-B0B4-E05E94AA97D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0FA900-945A-4566-B0B4-E05E94AA97D7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BA0FA900-945A-4566-B0B4-E05E94AA97D7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BA0FA900-945A-4566-B0B4-E05E94AA97D7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BA0FA900-945A-4566-B0B4-E05E94AA97D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0FA900-945A-4566-B0B4-E05E94AA97D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA0FA900-945A-4566-B0B4-E05E94AA97D7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BA0FA900-945A-4566-B0B4-E05E94AA97D7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BA0FA900-945A-4566-B0B4-E05E94AA97D7}.Release|x86.ActiveCfg = Release|Any CPU
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Debug|x86.ActiveCfg = Debug|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Debug|x86.Build.0 = Debug|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Release|Any CPU.ActiveCfg = Release|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Release|Mixed Platforms.Build.0 = Release|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Release|x86.ActiveCfg = Release|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Release|x86.Build.0 = Release|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.ActiveCfg = Debug|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.Build.0 = Debug|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|Any CPU.ActiveCfg = Release|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|Mixed Platforms.Build.0 = Release|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.ActiveCfg = Release|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{813C7DFD-C62A-4021-AB97-BFDE8404D4AE} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
+		{BA0FA900-945A-4566-B0B4-E05E94AA97D7} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
+		{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
+		{B7021883-D6A7-4569-9B4C-0414BDC47719} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
+		{D9CDC982-2616-41FF-95E3-56D2D33A40B2} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
+		{E32F254D-823D-41D5-99EE-ABDF240AF011} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
+		{82FE6D0F-9218-4A6E-B820-B9241A69C9D9} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
+		{A9E994CF-F125-4571-9BED-52B5B5A92826} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
+		{9D280B94-A86D-496D-940A-7C0C1C270590} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
 	EndGlobalSection
 EndGlobal

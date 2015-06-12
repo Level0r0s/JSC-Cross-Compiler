@@ -96,9 +96,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="x:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar">
-      <Link>References\VrApi.jar</Link>
-    </Content>
+
     <Content Include="com\oculus\vrappframework\ConsoleReceiver.java" />
     <Content Include="com\oculus\vrappframework\JoyEvent.java" />
     <Content Include="com\oculus\vrappframework\VrActivity.java" />
@@ -106,8 +104,14 @@
     <Content Include="Design\Images.htm" />
     <Content Include="Design\jsc.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup >
+    <Content Include="x:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar">
+      <Link>References\VrApi.jar</Link>
+    </Content>
+
+  </ItemGroup>
   <ItemGroup>
+    
     <None Include="X:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosNDK\bin\Debug\staging\libs\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\libs\%(RecursiveDir)%(FileName)%(Extension)</Link>
