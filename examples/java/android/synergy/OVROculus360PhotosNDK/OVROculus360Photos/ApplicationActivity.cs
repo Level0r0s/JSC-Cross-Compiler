@@ -95,7 +95,9 @@ namespace OVROculus360Photos.Activities
             // "X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so"
 
             // did csproj copy it where it needs to be?
-            java.lang.System.loadLibrary("vrapi");
+
+            // do we need it?
+            //java.lang.System.loadLibrary("vrapi");
 
             //<!-- Tell NativeActivity the name of the .so -->
             //<meta-data android:name="android.app.lib_name" android:value="vrcubeworld" />

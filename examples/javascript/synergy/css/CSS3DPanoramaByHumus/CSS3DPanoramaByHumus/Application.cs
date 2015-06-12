@@ -47,32 +47,32 @@ namespace CSS3DPanoramaByHumus
             {
                 new side
 			    {
-                    img=  new posx(),
+                    img=  new humus_px(),
 				    position= new THREE.Vector3( -512, 0, 0 ),
 				    rotation= new THREE.Vector3( 0, Math.PI / 2, 0 )
                 },
 			    new side {
-                    img=  new negx(),
+                    img=  new humus_nx(),
 				    position= new THREE.Vector3( 512, 0, 0 ),
 				    rotation= new THREE.Vector3( 0, -Math.PI / 2, 0 )
 			    },
 			    new side{
-                    img=  new posy(),
+                    img=  new humus_py(),
 				    position= new THREE.Vector3( 0,  512, 0 ),
 				    rotation= new THREE.Vector3( Math.PI / 2, 0, Math.PI )
 			    },
 			    new side{
-				    img=  new negy(),
+				    img=  new humus_ny(),
 				    position= new THREE.Vector3( 0, -512, 0 ),
 				    rotation= new THREE.Vector3( - Math.PI / 2, 0, Math.PI )
 			    },
 			    new side{
-                    img=  new posz(),
+                    img=  new humus_pz(),
 				    position= new THREE.Vector3( 0, 0,  512 ),
 				    rotation= new THREE.Vector3( 0, Math.PI, 0 )
 			    },
 			    new side{
-				    img=  new negz(),
+				    img=  new humus_nz(),
 				    position= new THREE.Vector3( 0, 0, -512 ),
 				    rotation= new THREE.Vector3( 0, 0, 0 )
 			    }

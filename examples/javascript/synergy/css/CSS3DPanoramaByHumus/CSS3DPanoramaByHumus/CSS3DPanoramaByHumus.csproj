@@ -135,21 +135,20 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <Content Include="Textures\negx.jpg" />
-    <Content Include="Textures\negy.jpg" />
-    <Content Include="Textures\negz.jpg" />
-    <Content Include="Textures\posx.jpg" />
-    <Content Include="Textures\posy.jpg" />
-    <Content Include="Textures\posz.jpg" />
+    <Content Include="Textures\humus_nx.jpg" />
+    <Content Include="Textures\humus_ny.jpg" />
+    <Content Include="Textures\humus_nz.jpg" />
+    <Content Include="Textures\humus_px.jpg" />
+    <Content Include="Textures\humus_py.jpg" />
+    <Content Include="Textures\humus_pz.jpg" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-		if $(ConfigurationName)==Release (
 		start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:false /DisableWebServiceChrome:true 
-		)</PostBuildEvent>
+</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
 		            </PreBuildEvent>
   </PropertyGroup>

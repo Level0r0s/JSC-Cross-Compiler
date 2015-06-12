@@ -29,6 +29,8 @@ LOCAL_SRC_FILES := $(TARGET_ARCH_ABI)/libvrapi.so
 # only export public headers
 #LOCAL_EXPORT_C_INCLUDES := X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Include\
 
+#need it? yes
+# https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150612/ovroculus360photoshud
 include $(PREBUILT_SHARED_LIBRARY)
 # http://stackoverflow.com/questions/11037765/where-to-place-so-file-so-that-it-gets-included-in-the-final-build
 # make.exe: *** No rule to make target `jni/../libs/armeabi-v7a/libvrapi.so', needed by `obj/local/armeabi-v7a/libvrapi.so'.  Stop.
@@ -113,6 +115,7 @@ LOCAL_LDLIBS    := -llog -landroid -lEGL   -lGLESv3 -lz
 LOCAL_STATIC_LIBRARIES := android_native_app_glue  jpeg
 
 # http://stackoverflow.com/questions/3551989/android-library-linking
+#need it? yes
 LOCAL_SHARED_LIBRARIES	:= vrapi 
 
 include $(BUILD_SHARED_LIBRARY)
