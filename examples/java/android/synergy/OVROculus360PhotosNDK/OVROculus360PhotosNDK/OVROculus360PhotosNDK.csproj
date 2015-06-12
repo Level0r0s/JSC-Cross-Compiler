@@ -53,6 +53,16 @@
   <ItemGroup>
     <None Include="tools\build.bat" />
   </ItemGroup>
+
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrSamples\Native\Oculus360PhotosSDK\jni\**\*.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\Oculus360PhotosSDK\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
   <ItemGroup>
     <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrSamples\Native\Oculus360PhotosSDK\jni\**\*.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

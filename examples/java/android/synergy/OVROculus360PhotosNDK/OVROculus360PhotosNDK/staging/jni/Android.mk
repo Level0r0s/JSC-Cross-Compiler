@@ -34,6 +34,13 @@ include $(PREBUILT_SHARED_LIBRARY)
 # make.exe: *** No rule to make target `jni/../libs/armeabi-v7a/libvrapi.so', needed by `obj/local/armeabi-v7a/libvrapi.so'.  Stop.
 
 
+include $(CLEAR_VARS)					# clean everything up to prepare for a module
+LOCAL_ARM_MODE  := arm					# full speed arm instead of thumb
+LOCAL_ARM_NEON  := true					# compile with neon support enabled
+LOCAL_MODULE := jpeg
+LOCAL_SRC_FILES := Oculus360PhotosSDK/libjpeg.a
+
+include $(PREBUILT_STATIC_LIBRARY)
 
 
 include $(CLEAR_VARS)
@@ -85,14 +92,16 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Src/Capture/include
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrApi/Include 
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/Oculus360PhotosSDK
 
-LOCAL_SRC_FILES :=  OVROculus360PhotosNDK.dll.c
-LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./stb/*.c))
+
+LOCAL_SRC_FILES :=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./stb/*.c))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./minizip/*.c))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Kernel/*.cpp))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Android/*.cpp))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Capture/src/*.cpp))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppFramework/Src/VRMenu/*.cpp))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppFramework/Src/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./Oculus360PhotosSDK/*.cpp))
+LOCAL_SRC_FILES +=  OVROculus360PhotosNDK.dll.c
 
 #LOCAL_C_INCLUDES := X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Include\
 
@@ -101,10 +110,10 @@ LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppFr
 LOCAL_LDLIBS    := -llog -landroid -lEGL   -lGLESv3 -lz 
     #  http://stackoverflow.com/questions/11856688/openssl-build-issue-with-android-ndk-r8
 	# "X:\opensource\ovr_mobile_sdk_0.6.0\VrAppFramework\Projects\Android\jni\Android.mk"
-LOCAL_STATIC_LIBRARIES := android_native_app_glue 
+LOCAL_STATIC_LIBRARIES := android_native_app_glue  jpeg
 
 # http://stackoverflow.com/questions/3551989/android-library-linking
-LOCAL_SHARED_LIBRARIES	:= vrapi
+LOCAL_SHARED_LIBRARIES	:= vrapi 
 
 include $(BUILD_SHARED_LIBRARY)
 

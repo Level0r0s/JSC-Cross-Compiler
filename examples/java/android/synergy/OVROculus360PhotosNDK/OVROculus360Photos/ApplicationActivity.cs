@@ -31,7 +31,7 @@ namespace OVROculus360Photos.Activities
         {
             base.onCreate();
 
-            Console.WriteLine("enter LocalApplication onCreate, first time?");
+            Console.WriteLine("enter OVROculus360Photos LocalApplication onCreate, first time?");
 
             //Func<string> futureinline_stringFromJNI = delegate
             //{
@@ -154,6 +154,8 @@ namespace OVROculus360Photos.Activities
 
         protected override void onCreate(Bundle savedInstanceState)
         {
+            Console.WriteLine("enter OVROculus360Photos ApplicationActivity onCreate");
+
             base.onCreate(savedInstanceState);
 
             var intent = getIntent();

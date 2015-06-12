@@ -102,8 +102,8 @@ namespace OVROculus360PhotosNDK
 
     [Script(IsNative = true
        
-        // thats a c++ header, wont help us.
-        // , Header = "Oculus360Photos.h"
+        // thats a c++ header, wont help us. unless we fix it
+         , Header = "Oculus360Photos.h"
         )]
     public class Oculus360Photos_h
     {

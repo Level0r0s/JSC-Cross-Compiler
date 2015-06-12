@@ -27,6 +27,9 @@ namespace GalaxyS6GPUManager.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
+        // http://repo.xposed.info/module/ma.wanam.dvfs
+        //DVFS import android.os.DVFSHelper;
+        // http://forum.xda-developers.com/showthread.php?t=2674928
         // https://groups.google.com/forum/#!topic/android-developers/Y5wnstMT5Lo
 
         public event Action<MenuItem> AtOption;
