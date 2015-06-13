@@ -15,6 +15,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
     [Script(Implements = typeof(global::System.Net.Sockets.Socket))]
     internal class __Socket : IDisposable
     {
+        // http://ftp.arl.mil/mike/ping.html
         // "X:\opensource\android-ndk-r10c\platforms\android-21\arch-arm\usr\include\sys\socket.h"
 
         public global::java.net.ServerSocket InternalServerSocket;

@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRVrCubeWorldSurfaceView", "OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceView.csproj", "{9D280B94-A86D-496D-940A-7C0C1C270590}"
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRVrCubeWorldSurfaceView", "OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceView.csproj", "{D9CDC982-2616-41FF-95E3-56D2D33A40B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRVrCubeWorldNativeActivity", "..\OVRVrCubeWorldNativeActivity\OVRVrCubeWorldNativeActivity\OVRVrCubeWorldNativeActivity.csproj", "{7DF2830E-8342-4BFA-B5B7-3221A9831308}"
 EndProject
@@ -23,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidNotificationActivity
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidLacasCameraServerActivity", "..\..\AndroidLacasCameraServerActivity\AndroidLacasCameraServerActivity\AndroidLacasCameraServerActivity.csproj", "{FA2123D2-8933-460A-9331-27226C466FF5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRVrCubeWorldSurfaceViewXNDK", "OVRVrCubeWorldSurfaceViewXNDK\OVRVrCubeWorldSurfaceViewXNDK.csproj", "{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Android|Any CPU = Android|Any CPU
@@ -31,14 +35,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9D280B94-A86D-496D-940A-7C0C1C270590}.Android|Any CPU.ActiveCfg = Release|Any CPU
-		{9D280B94-A86D-496D-940A-7C0C1C270590}.Android|Any CPU.Build.0 = Release|Any CPU
-		{9D280B94-A86D-496D-940A-7C0C1C270590}.Assets|Any CPU.ActiveCfg = Release|Any CPU
-		{9D280B94-A86D-496D-940A-7C0C1C270590}.Assets|Any CPU.Build.0 = Release|Any CPU
-		{9D280B94-A86D-496D-940A-7C0C1C270590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D280B94-A86D-496D-940A-7C0C1C270590}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D280B94-A86D-496D-940A-7C0C1C270590}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D280B94-A86D-496D-940A-7C0C1C270590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9CDC982-2616-41FF-95E3-56D2D33A40B2}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{D9CDC982-2616-41FF-95E3-56D2D33A40B2}.Android|Any CPU.Build.0 = Release|Any CPU
+		{D9CDC982-2616-41FF-95E3-56D2D33A40B2}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{D9CDC982-2616-41FF-95E3-56D2D33A40B2}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{D9CDC982-2616-41FF-95E3-56D2D33A40B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9CDC982-2616-41FF-95E3-56D2D33A40B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9CDC982-2616-41FF-95E3-56D2D33A40B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9CDC982-2616-41FF-95E3-56D2D33A40B2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7DF2830E-8342-4BFA-B5B7-3221A9831308}.Android|Any CPU.ActiveCfg = Release|Any CPU
 		{7DF2830E-8342-4BFA-B5B7-3221A9831308}.Android|Any CPU.Build.0 = Release|Any CPU
 		{7DF2830E-8342-4BFA-B5B7-3221A9831308}.Assets|Any CPU.ActiveCfg = Release|Any CPU
@@ -111,16 +115,24 @@ Global
 		{FA2123D2-8933-460A-9331-27226C466FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA2123D2-8933-460A-9331-27226C466FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA2123D2-8933-460A-9331-27226C466FF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Android|Any CPU.Build.0 = Release|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{7DF2830E-8342-4BFA-B5B7-3221A9831308} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
 		{1CE7D22F-52C8-4164-8955-CD89609E48A9} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
 		{132EB43F-19B4-42AC-8025-3249B129867A} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
 		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
 		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
-		{7DF2830E-8342-4BFA-B5B7-3221A9831308} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
 		{BF856BE2-E607-42F9-8F88-88E5C9DB06A9} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
 		{5A4875AE-F31D-48A8-952F-A0A46A942700} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
 		{FA2123D2-8933-460A-9331-27226C466FF5} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}

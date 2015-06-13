@@ -1,142 +1,165 @@
-﻿using System;
+﻿using ScriptCoreLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+[assembly: Script()]
+[assembly: ScriptTypeFilter(ScriptType.C, typeof(OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld))]
+
 namespace OVRVrCubeWorldSurfaceViewXNDK
 {
+    [Script]
     public static class VrCubeWorld
     {
-     
-        EglErrorString
-            EglFrameBufferStatusString
-            EglCheckErrors
 
-               class ovrEgl
+        static void EglErrorString() { }
+        static void EglFrameBufferStatusString() { }
+        static void EglCheckErrors() { }
+
+        [Script]
+        class ovrEgl
         { }
 
-        ovrEgl_Clear
-            ovrEgl_CreateContext
-            ovrEgl_DestroyContext
-            ovrEgl_CreateSurface
-            ovrEgl_DestroySurface
+        static void ovrEgl_Clear(this ovrEgl that) { }
+        static void ovrEgl_CreateContext(this ovrEgl that) { }
+        static void ovrEgl_DestroyContext(this ovrEgl that) { }
+        static void ovrEgl_CreateSurface(this ovrEgl that) { }
+        static void ovrEgl_DestroySurface(this ovrEgl that) { }
 
-            class ovrVertexAttribPointer
+        [Script]
+        class ovrVertexAttribPointer
         { }
 
+        [Script]
         class ovrGeometry
         { }
 
+        [Script]
         class ovrVertexAttribute
         { }
 
         static ovrVertexAttribute[] ProgramVertexAttributes;
 
-        ovrGeometry_Clear
-            ovrGeometry_CreateCube
-            ovrGeometry_Destroy
-            ovrGeometry_CreateVAO
-            ovrGeometry_DestroyVAO
+        static void ovrGeometry_Clear(this ovrGeometry that) { }
+        static void ovrGeometry_CreateCube(this ovrGeometry that) { }
+        static void ovrGeometry_Destroy(this ovrGeometry that) { }
+        static void ovrGeometry_CreateVAO(this ovrGeometry that) { }
+        static void ovrGeometry_DestroyVAO(this ovrGeometry that) { }
 
-         class ovrProgram        { }
-         class ovrUniform { }
+        [Script]
+        class ovrProgram { }
+        [Script]
+        class ovrUniform { }
 
         static ovrUniform[] ProgramUniforms;
 
-        ovrProgram_Clear
-            ovrProgram_Create
-            ovrProgram_Destroy
+        static void ovrProgram_Clear(this ovrProgram that) { }
+        static void ovrProgram_Create(this ovrProgram that) { }
+        static void ovrProgram_Destroy(this ovrProgram that) { }
 
-            class ovrRenderTexture { }
+        [Script]
+        class ovrRenderTexture { }
 
-        ovrRenderTexture_Clear
-            ovrRenderTexture_Create
-            ovrRenderTexture_Destroy
-            ovrRenderTexture_SetCurrent
-            ovrRenderTexture_SetNone
-            ovrRenderTexture_Resolve
+        static void ovrRenderTexture_Clear(this ovrRenderTexture that) { }
+        static void ovrRenderTexture_Create(this ovrRenderTexture that) { }
+        static void ovrRenderTexture_Destroy(this ovrRenderTexture that) { }
+        static void ovrRenderTexture_SetCurrent(this ovrRenderTexture that) { }
+        static void ovrRenderTexture_SetNone(this ovrRenderTexture that) { }
+        static void ovrRenderTexture_Resolve(this ovrRenderTexture that) { }
 
-            class ovrScene { }
+        [Script]
+        class ovrScene { }
 
-        VERTEX_SHADER
-            FRAGMENT_SHADER
+        //VERTEX_SHADER
+        //FRAGMENT_SHADER
 
-            ovrScene_Clear
-            ovrScene_IsCreated
-            ovrScene_CreateVAOs
-            ovrScene_DestroyVAOs
-            ovrScene_Create
-            ovrScene_Destroy
+        static void ovrScene_Clear(this ovrScene that) { }
+        static void ovrScene_IsCreated(this ovrScene that) { }
+        static void ovrScene_CreateVAOs(this ovrScene that) { }
+        static void ovrScene_DestroyVAOs(this ovrScene that) { }
+        static void ovrScene_Create(this ovrScene that) { }
+        static void ovrScene_Destroy(this ovrScene that) { }
 
-            class ovrSimulation { }
+        [Script]
+        class ovrSimulation { }
 
-        ovrSimulation_Clear
-            ovrSimulation_AdvanceSimulation
+        static void ovrSimulation_Clear(this ovrSimulation that)
+        { }
+        static void ovrSimulation_AdvanceSimulation(this ovrSimulation that) { }
 
-            class ovrRenderer { }
+        [Script]
+        class ovrRenderer { }
 
-        ovrRenderer_Clear
-            ovrRenderer_Create
-ovrRenderer_Destroy
-            ovrRenderer_RenderFrame
+        static void ovrRenderer_Clear(this ovrRenderer that) { }
+        static void ovrRenderer_Create(this ovrRenderer that) { }
+        static void ovrRenderer_Destroy(this ovrRenderer that) { }
+        static void ovrRenderer_RenderFrame(this ovrRenderer that) { }
 
-            class ovrRenderThread { }
+        [Script]
+        class ovrRenderThread { }
 
-        RenderThreadFunction
-            ovrRenderThread_Clear
-            ovrRenderThread_Create
-            ovrRenderThread_Destroy
-            ovrRenderThread_Submit
-            ovrRenderThread_Wait
-            ovrRenderThread_GetTid
+        static void RenderThreadFunction() { }
+        static void ovrRenderThread_Clear(this ovrRenderThread that) { }
+        static void ovrRenderThread_Create(this ovrRenderThread that) { }
+        static void ovrRenderThread_Destroy(this ovrRenderThread that) { }
+        static void ovrRenderThread_Submit(this ovrRenderThread that) { }
+        static void ovrRenderThread_Wait(this ovrRenderThread that) { }
+        static void ovrRenderThread_GetTid(this ovrRenderThread that) { }
 
-            class ovrApp_Clear { }
+        [Script]
+        class ovrApp { }
 
-        ovrApp_HandleVrModeChanges
-            ovrApp_BackButtonAction
-            ovrApp_HandleKeyEvent
-            ovrApp_HandleTouchEvent
-            ovrApp_HandleSystemEvents
+        static void ovrApp_Clear(this ovrApp that) { }
+        static void ovrApp_HandleVrModeChanges(this ovrApp that) { }
+        static void ovrApp_BackButtonAction(this ovrApp that) { }
+        static void ovrApp_HandleKeyEvent(this ovrApp that) { }
+        static void ovrApp_HandleTouchEvent(this ovrApp that) { }
+        static void ovrApp_HandleSystemEvents(this ovrApp that) { }
 
-            class ovrMessage { }
+        [Script]
+        class ovrMessage { }
 
-        ovrMessage_Init
+        static void ovrMessage_Init(this ovrMessage that)
+        { }
 
-            ovrMessage_SetPointerParm
-            ovrMessage_GetPointerParm
-            ovrMessage_SetIntegerParm
-            ovrMessage_GetIntegerParm
-            ovrMessage_SetFloatParm
-            ovrMessage_GetFloatParm
+        static void ovrMessage_SetPointerParm(this ovrMessage that) { }
+        static void ovrMessage_GetPointerParm(this ovrMessage that) { }
+        static void ovrMessage_SetIntegerParm(this ovrMessage that) { }
+        static void ovrMessage_GetIntegerParm(this ovrMessage that) { }
+        static void ovrMessage_SetFloatParm(this ovrMessage that) { }
+        static void ovrMessage_GetFloatParm(this ovrMessage that) { }
 
-            class ovrMessageQueue { }
+        [Script]
+        class ovrMessageQueue { }
 
-        ovrMessageQueue_Create
-            ovrMessageQueue_Destroy
-            ovrMessageQueue_Enable
-            ovrMessageQueue_PostMessage
-            ovrMessageQueue_SleepUntilMessage
-            ovrMessageQueue_GetNextMessage
+        static void ovrMessageQueue_Create(this ovrMessageQueue that) { }
+        static void ovrMessageQueue_Destroy(this ovrMessageQueue that) { }
+        static void ovrMessageQueue_Enable(this ovrMessageQueue that) { }
+        static void ovrMessageQueue_PostMessage(this ovrMessageQueue that) { }
+        static void ovrMessageQueue_SleepUntilMessage(this ovrMessageQueue that) { }
+        static void ovrMessageQueue_GetNextMessage(this ovrMessageQueue that) { }
 
-            class ovrAppThread { }
+        [Script]
+        class ovrAppThread { }
 
-        AppThreadFunction
-            ovrAppThread_Create
-            ovrAppThread_Destroy
+        static void AppThreadFunction() { }
+        static void ovrAppThread_Create(this ovrMessageQueue that) { }
+        static void ovrAppThread_Destroy(this ovrMessageQueue that) { }
 
-        // java
+        // java, jsc hybrid?
 
-        Java_com_oculus_gles3jni_GLES3JNILib_onCreate
-            Java_com_oculus_gles3jni_GLES3JNILib_onStart
-            Java_com_oculus_gles3jni_GLES3JNILib_onResume
-            Java_com_oculus_gles3jni_GLES3JNILib_onPause
-            Java_com_oculus_gles3jni_GLES3JNILib_onStop
-            Java_com_oculus_gles3jni_GLES3JNILib_onDestroy
-
-            Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceCreated
-            Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceChanged
-            Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceDestroyed
-            Java_com_oculus_gles3jni_GLES3JNILib_onKeyEvent
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onCreate() { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onStart() { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onResume() { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onPause() { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onStop() { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onDestroy() { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceCreated() { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceChanged() { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceDestroyed() { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onKeyEvent() { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onTouchEvent() { }
     }
 }
