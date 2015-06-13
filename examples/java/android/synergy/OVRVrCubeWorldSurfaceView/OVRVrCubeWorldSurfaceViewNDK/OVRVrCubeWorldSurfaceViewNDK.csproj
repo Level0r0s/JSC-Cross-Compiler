@@ -50,17 +50,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\..\..\..\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so">
+    <None Include="x:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so">
       <Link>staging\jni\armeabi-v7a\libvrapi.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="tools\build.bat" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\..\..\..\..\opensource\ovr_mobile_sdk_0.6.0\VrSamples\Native\VrCubeWorld_SurfaceView\jni\VrCubeWorld_SurfaceView.c">
-      <Link>staging\jni\VrCubeWorld_SurfaceView.c</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="staging\AndroidManifest.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -71,12 +67,30 @@
     <Content Include="staging\jni\Application.mk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Include\**\*.*">
+    <Content Include="staging\jni\VrApi.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>staging\jni\%(RecursiveDir)%(FileName)%(Extension)</Link>
-    </None>
+    </Content>
+    <Content Include="staging\jni\VrApi_Android.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="staging\jni\VrApi_Config.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="staging\jni\VrApi_Helpers.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="staging\jni\VrApi_LocalPrefs.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="staging\jni\VrApi_Types.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="staging\jni\VrApi_Version.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="staging\jni\VrCubeWorld_SurfaceView.c">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
