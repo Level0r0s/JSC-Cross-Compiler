@@ -45,9 +45,14 @@ namespace ScriptCoreLibNative.SystemHeaders
 
 
     [Script(IsNative = true, PointerName = "jlong")]
-    public class jlong : jni_h
+    public unsafe class jlong : jni_h
     {
         // long
+
+        public static implicit operator void* (jlong x)
+        {
+            return default(void*);
+        }
     }
 
     //typedef const struct JNINativeInterface* JNIEnv;
@@ -75,6 +80,13 @@ namespace ScriptCoreLibNative.SystemHeaders
 
     }
 
+    //typedef const struct JNIInvokeInterface* JavaVM;
+    [Script(IsNative = true, PointerName = "JavaVM")]
+    public class JavaVM : jni_h
+    {
+        //jint        (*GetEnv)(JavaVM*, void**, jint);
+    }
+
     [Script(IsNative = true)]
     public class jni : jni_h
     {
@@ -85,12 +97,7 @@ namespace ScriptCoreLibNative.SystemHeaders
 
 
 
-        //typedef const struct JNIInvokeInterface* JavaVM;
-        [Script(IsNative = true)]
-        public class JavaVM
-        {
-            //jint        (*GetEnv)(JavaVM*, void**, jint);
-        }
+    
 
     }
 

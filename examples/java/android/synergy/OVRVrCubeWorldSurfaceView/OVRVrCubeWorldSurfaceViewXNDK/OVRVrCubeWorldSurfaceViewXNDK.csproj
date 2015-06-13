@@ -34,6 +34,9 @@
     <Reference Include="ScriptCoreLibA">
       <HintPath>C:\util\jsc\bin\ScriptCoreLibA.dll</HintPath>
     </Reference>
+    <Reference Include="ScriptCoreLibAndroidNDK">
+      <HintPath>C:\util\jsc\bin\ScriptCoreLibAndroidNDK.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,8 +53,18 @@
   <ItemGroup>
     <None Include="tools\build.bat" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="staging\jni\" />
+    <Content Include="staging\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="staging\jni\Android.mk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="staging\jni\Application.mk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

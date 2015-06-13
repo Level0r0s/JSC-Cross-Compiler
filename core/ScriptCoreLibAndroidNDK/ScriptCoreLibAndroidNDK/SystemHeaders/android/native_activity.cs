@@ -46,7 +46,8 @@ namespace ScriptCoreLibNative.SystemHeaders.android
         {
             public ANativeActivityCallbacks callbacks;
 
-            public jni.JavaVM vm;
+            //public jni.JavaVM vm;
+            public JavaVM vm;
 
             // X:\jsc.svn\examples\c\android\Test\TestHybridOVR\TestHybridOVR\OVRNDK\xNativeActivity.cs
             public JNIEnv env;

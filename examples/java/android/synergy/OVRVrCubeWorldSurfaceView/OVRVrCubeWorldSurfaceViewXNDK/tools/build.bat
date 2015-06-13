@@ -14,7 +14,7 @@ pushd ..\bin\%ConfigurationName%
 
 call c:\util\jsc\bin\jsc.exe %TargetFileName% -c
 
-exit 0
+::exit 0
 
 copy "web\%TargetFileName%.*" ".\staging\jni\"
 

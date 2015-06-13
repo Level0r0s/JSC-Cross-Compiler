@@ -1,4 +1,5 @@
 ﻿using ScriptCoreLib;
+using ScriptCoreLibNative.SystemHeaders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,8 @@ using System.Threading.Tasks;
 
 [assembly: Script()]
 [assembly: ScriptTypeFilter(ScriptType.C, typeof(OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld))]
+[assembly: ScriptTypeFilter(ScriptType.C, typeof(Java.com.oculus.gles3jni.GLES3JNILib))]
+
 
 namespace OVRVrCubeWorldSurfaceViewXNDK
 {
@@ -29,8 +32,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     using ovrVector3f = Object;
     using ovrMatrix4f = Object;
 
-    using JavaVM = Object;
-    using jobject = Object;
+    //using JavaVM = Object;
+    //using jobject = Object;
     using pthread_t = Object;
     using pthread_cond_t = Object;
     using pthread_mutex_t = Object;
@@ -337,24 +340,30 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         static void ovrApp_HandleSystemEvents(this ovrApp that) { }
 
         [Script]
-        class ovrMessage {
+        // why struct?
+        public struct ovrMessage {
             public int Id;
             public ovrMQWait Wait;
             public long[] Parms;
+
+            public void ovrMessage_Init()
+            {
+                // this byref?
+
+            }
         }
 
-        static void ovrMessage_Init(this ovrMessage that)
-        { }
+  
 
-        static void ovrMessage_SetPointerParm(this ovrMessage that) { }
-        static void ovrMessage_GetPointerParm(this ovrMessage that) { }
-        static void ovrMessage_SetIntegerParm(this ovrMessage that) { }
-        static void ovrMessage_GetIntegerParm(this ovrMessage that) { }
-        static void ovrMessage_SetFloatParm(this ovrMessage that) { }
-        static void ovrMessage_GetFloatParm(this ovrMessage that) { }
+        public static void ovrMessage_SetPointerParm(this ovrMessage that) { }
+        public static void ovrMessage_GetPointerParm(this ovrMessage that) { }
+        public static void ovrMessage_SetIntegerParm(this ovrMessage that, int i, int value) { }
+        public static void ovrMessage_GetIntegerParm(this ovrMessage that) { }
+        public static void ovrMessage_SetFloatParm(this ovrMessage that, int i, float value) { }
+        public static void ovrMessage_GetFloatParm(this ovrMessage that) { }
 
         [Script]
-        class ovrMessageQueue {
+        public class ovrMessageQueue {
             public ovrMessage[] Messages;
             public volatile int Head;  // dequeue at the head
             public volatile int Tail;  // enqueue at the tail
@@ -369,12 +378,17 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         static void ovrMessageQueue_Create(this ovrMessageQueue that) { }
         static void ovrMessageQueue_Destroy(this ovrMessageQueue that) { }
         static void ovrMessageQueue_Enable(this ovrMessageQueue that) { }
-        static void ovrMessageQueue_PostMessage(this ovrMessageQueue that) { }
+
+        // called by Java_com_oculus_gles3jni_GLES3JNILib_onTouchEvent
+        public static void ovrMessageQueue_PostMessage(this ovrMessageQueue that, ref ovrMessage message) {
+
+        }
+
         static void ovrMessageQueue_SleepUntilMessage(this ovrMessageQueue that) { }
         static void ovrMessageQueue_GetNextMessage(this ovrMessageQueue that) { }
 
         [Script]
-        class ovrAppThread {
+        public class ovrAppThread {
             public JavaVM JavaVm;
             public jobject ActivityObject;
             public pthread_t Thread;
@@ -388,18 +402,75 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
         // java, jsc hybrid?
 
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onCreate() { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onStart() { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onResume() { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onPause() { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onStop() { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onDestroy() { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onCreate(ref JNIEnv env, jobject obj, jlong handle) { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onStart(ref JNIEnv env, jobject obj, jlong handle) { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onResume(ref JNIEnv env, jobject obj, jlong handle) { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onPause(ref JNIEnv env, jobject obj, jlong handle) { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onStop(ref JNIEnv env, jobject obj, jlong handle) { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onDestroy(ref JNIEnv env, jobject obj, jlong handle) { }
 
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceCreated() { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceChanged() { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceDestroyed() { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceCreated(ref JNIEnv env, jobject obj, jlong handle, jobject surface) { }
+        static  void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceChanged(ref JNIEnv  env, jobject obj, jlong handle, jobject surface) { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceDestroyed(ref JNIEnv env, jobject obj, jlong handle)
+        { }
 
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onKeyEvent() { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onTouchEvent() { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onKeyEvent(ref JNIEnv env, jobject obj, jlong handle, int keyCode, int action)
+        {
+
+        }
+
+     
+    }
+}
+
+// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150613/xndk
+// java/c jsc hybrid layer gen?
+namespace Java
+{
+    namespace com.oculus.gles3jni
+    {
+        using OVRVrCubeWorldSurfaceViewXNDK;
+
+        [Script]
+        class GLES3JNILib
+        {
+            // public static void onTouchEvent(long handle, int action, float x, float y) { throw null; }
+
+            //static void Java_com_oculus_gles3jni_GLES3JNILib_onTouchEvent(
+            static void onTouchEvent(
+                 ref JNIEnv env, 
+                 jobject obj,
+
+                 // mNativeHandle
+                 jlong handle, int action, float x, float y)
+            {
+                // await into native?
+                // means prepend Java namespace
+                // and ref JNIEnv?
+
+
+
+                //X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\SystemHeaders\jni.cs
+
+                //Error CS0208  Cannot take the address of, get the size of, or declare a pointer to a managed type('VrCubeWorld.ovrAppThread')    OVRVrCubeWorldSurfaceViewXNDK X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs 413
+
+                //var appThread = (ovrAppThread*)(void*)handle;
+                var appThread = (VrCubeWorld.ovrAppThread)(object)handle;
+
+                var message = default(VrCubeWorld.ovrMessage);
+
+
+                //     OVRVrCubeWorldSurfaceViewXNDK_VrCubeWorld_ovrMessage_ovrMessage_Init((OVRVrCubeWorldSurfaceViewXNDK_VrCubeWorld_ovrMessage)message1);
+                message.ovrMessage_Init();
+
+                message.ovrMessage_SetIntegerParm(0, action);
+                message.ovrMessage_SetFloatParm(1, x);
+                message.ovrMessage_SetFloatParm(2, y);
+
+                appThread.MessageQueue.ovrMessageQueue_PostMessage(
+                    ref message
+                );
+            }
+        }
     }
 }

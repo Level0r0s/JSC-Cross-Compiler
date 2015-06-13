@@ -31,6 +31,7 @@ namespace NDKHybridMockup.Activities
         // X:\jsc.svn\examples\c\android\HybridOculusVrActivity\HybridOculusVrActivity\OVRJVM\ApplicationActivity.cs
         // X:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\xActivity.cs
         public static string stringFromJNI()
+        // x:\jsc.svn\examples\java\android\synergy\ovrvrcubeworldsurfaceview\ovrvrcubeworldsurfaceviewxndk\vrcubeworld.cs
 
         // ref JNIEnv env
         // var n = env.NewStringUTF;
