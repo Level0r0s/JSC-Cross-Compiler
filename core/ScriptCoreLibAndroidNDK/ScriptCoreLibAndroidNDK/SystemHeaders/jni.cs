@@ -19,6 +19,13 @@ namespace ScriptCoreLibNative.SystemHeaders
     }
 
 
+    // where is it defined???
+    [Script(IsNative = true, PointerName = "size_t")]
+    public class size_t : jni_h
+    {
+    }
+
+
     // typedef jobject         jstring;
     //typedef void*           jobject;
     [Script(IsNative = true, PointerName = "jobject")]
@@ -52,6 +59,13 @@ namespace ScriptCoreLibNative.SystemHeaders
         public static implicit operator void* (jlong x)
         {
             return default(void*);
+        }
+
+        // size_t
+
+        public static implicit operator size_t(jlong x)
+        {
+            return default(size_t);
         }
     }
 

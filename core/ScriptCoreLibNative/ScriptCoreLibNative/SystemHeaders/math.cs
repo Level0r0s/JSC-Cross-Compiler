@@ -6,7 +6,7 @@ using ScriptCoreLib;
 
 namespace ScriptCoreLibNative.SystemHeaders
 {
-    // "X:\opensource\android-ndk-r10c\platforms\android-21\arch-arm64\usr\include\math.h"
+    // "X:\util\android-ndk-r10e\platforms\android-21\arch-arm\usr\include\math.h"
     // X:\jsc.svn\core\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Math.cs
     // X:\jsc.svn\core\discontinued\ScriptCoreLib.Alchemy\ScriptCoreLib.Alchemy\Alchemy\BCLImplementation\System\Math.cs
     // X:\jsc.svn\core\discontinued\ScriptCoreLib.Alchemy\ScriptCoreLib.Alchemy\Alchemy\Headers\math.cs

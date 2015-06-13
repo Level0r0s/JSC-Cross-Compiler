@@ -119,16 +119,16 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public string name;
         }
 
-        // does jsc initialize statically ot at cctor?
-        static ovrVertexAttribute[] ProgramVertexAttributes =
-            new[]
-            {
-                new ovrVertexAttribute { location = ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_POSITION,  name = "vertexPosition" },
-                new ovrVertexAttribute { location =  ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_COLOR,      name = "vertexColor" },
-                new ovrVertexAttribute { location =  ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_UV,      name =         "vertexUv" },
-                new ovrVertexAttribute { location =  ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_TRANSFORM,      name =  "vertexTransform" }
+        //// does jsc initialize statically ot at cctor?
+        //static ovrVertexAttribute[] ProgramVertexAttributes =
+        //    new[]
+        //    {
+        //        new ovrVertexAttribute { location = ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_POSITION,  name = "vertexPosition" },
+        //        new ovrVertexAttribute { location =  ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_COLOR,      name = "vertexColor" },
+        //        new ovrVertexAttribute { location =  ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_UV,      name =         "vertexUv" },
+        //        new ovrVertexAttribute { location =  ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_TRANSFORM,      name =  "vertexTransform" }
 
-            };
+        //    };
 
         static void ovrGeometry_Clear(this ovrGeometry that) { }
         static void ovrGeometry_CreateCube(this ovrGeometry that) { }
@@ -141,14 +141,16 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         public const int MAX_PROGRAM_TEXTURES = 8;
 
         [Script]
-        struct ovrProgram
+        //struct ovrProgram
+        class ovrProgram
         {
             public GLuint Program;
             public GLuint VertexShader;
             public GLuint FragmentShader;
             // These will be -1 if not used by the program.
-            public fixed GLint Uniforms[MAX_PROGRAM_UNIFORMS];       // ProgramUniforms[].name
-            public fixed GLint Textures[MAX_PROGRAM_TEXTURES];      // Texture%i
+            //public fixed GLint Uniforms[MAX_PROGRAM_UNIFORMS];       // ProgramUniforms[].name
+            public  GLint[] Uniforms;       // ProgramUniforms[].name
+            public  GLint[] Textures;      // Texture%i
 
             //Error CS1663  Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double OVRVrCubeWorldSurfaceViewXNDK   X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	130
             //Error CS1642  Fixed size buffer fields may only be members of structs OVRVrCubeWorldSurfaceViewXNDK X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	129
@@ -177,14 +179,14 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // using static enum?
         }
 
-        static ovrUniform[] ProgramUniforms =
-            new[]
-            {
-    new ovrUniform { index=ovrUniform_index.UNIFORM_MODEL_MATRIX,         type=ovrUniform_type.UNIFORM_TYPE_MATRIX4X4, name="ModelMatrix" },
-    new ovrUniform { index=ovrUniform_index.UNIFORM_VIEW_MATRIX,          type=ovrUniform_type.UNIFORM_TYPE_MATRIX4X4, name="ViewMatrix" },
-    new ovrUniform { index=ovrUniform_index.UNIFORM_PROJECTION_MATRIX,    type=ovrUniform_type.UNIFORM_TYPE_MATRIX4X4, name="ProjectionMatrix" }
+        //    static ovrUniform[] ProgramUniforms =
+        //        new[]
+        //        {
+        //new ovrUniform { index=ovrUniform_index.UNIFORM_MODEL_MATRIX,         type=ovrUniform_type.UNIFORM_TYPE_MATRIX4X4, name="ModelMatrix" },
+        //new ovrUniform { index=ovrUniform_index.UNIFORM_VIEW_MATRIX,          type=ovrUniform_type.UNIFORM_TYPE_MATRIX4X4, name="ViewMatrix" },
+        //new ovrUniform { index=ovrUniform_index.UNIFORM_PROJECTION_MATRIX,    type=ovrUniform_type.UNIFORM_TYPE_MATRIX4X4, name="ProjectionMatrix" }
 
-            };
+        //        };
 
         static void ovrProgram_Clear(this ovrProgram that) { }
         static void ovrProgram_Create(this ovrProgram that) { }
@@ -341,7 +343,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
         [Script]
         // why struct?
-        public struct ovrMessage {
+        public struct ovrMessage
+        {
             public int Id;
             public ovrMQWait Wait;
             public long[] Parms;
@@ -353,7 +356,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             }
         }
 
-  
+
 
         public static void ovrMessage_SetPointerParm(this ovrMessage that) { }
         public static void ovrMessage_GetPointerParm(this ovrMessage that) { }
@@ -363,7 +366,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         public static void ovrMessage_GetFloatParm(this ovrMessage that) { }
 
         [Script]
-        public class ovrMessageQueue {
+        public class ovrMessageQueue
+        {
             public ovrMessage[] Messages;
             public volatile int Head;  // dequeue at the head
             public volatile int Tail;  // enqueue at the tail
@@ -380,7 +384,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         static void ovrMessageQueue_Enable(this ovrMessageQueue that) { }
 
         // called by Java_com_oculus_gles3jni_GLES3JNILib_onTouchEvent
-        public static void ovrMessageQueue_PostMessage(this ovrMessageQueue that, ref ovrMessage message) {
+        public static void ovrMessageQueue_PostMessage(this ovrMessageQueue that, ref ovrMessage message)
+        {
 
         }
 
@@ -388,7 +393,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         static void ovrMessageQueue_GetNextMessage(this ovrMessageQueue that) { }
 
         [Script]
-        public class ovrAppThread {
+        public class ovrAppThread
+        {
             public JavaVM JavaVm;
             public jobject ActivityObject;
             public pthread_t Thread;
@@ -410,16 +416,13 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         static void Java_com_oculus_gles3jni_GLES3JNILib_onDestroy(ref JNIEnv env, jobject obj, jlong handle) { }
 
         static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceCreated(ref JNIEnv env, jobject obj, jlong handle, jobject surface) { }
-        static  void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceChanged(ref JNIEnv  env, jobject obj, jlong handle, jobject surface) { }
+        static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceChanged(ref JNIEnv env, jobject obj, jlong handle, jobject surface) { }
         static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceDestroyed(ref JNIEnv env, jobject obj, jlong handle)
         { }
 
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onKeyEvent(ref JNIEnv env, jobject obj, jlong handle, int keyCode, int action)
-        {
 
-        }
 
-     
+
     }
 }
 
@@ -432,18 +435,34 @@ namespace Java
         using OVRVrCubeWorldSurfaceViewXNDK;
 
         [Script]
-        class GLES3JNILib
+        static class GLES3JNILib
         {
-            // public static void onTouchEvent(long handle, int action, float x, float y) { throw null; }
+            static void onKeyEvent(ref JNIEnv env, jobject obj, jlong handle, int keyCode, int action)
+            {
+                var __handle = (size_t)handle;
 
+                var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+                var message = default(VrCubeWorld.ovrMessage);
+                //message.ovrMessage_Init(MESSAGE_ON_KEY_EVENT, MQ_WAIT_NONE);
+                message.ovrMessage_Init();
+                message.ovrMessage_SetIntegerParm(0, keyCode);
+                message.ovrMessage_SetIntegerParm(1, action);
+                appThread.MessageQueue. ovrMessageQueue_PostMessage(ref message);
+            }
+
+
+            // public static void onTouchEvent(long handle, int action, float x, float y) { throw null; }
+           
             //static void Java_com_oculus_gles3jni_GLES3JNILib_onTouchEvent(
             static void onTouchEvent(
-                 ref JNIEnv env, 
+                 ref JNIEnv env,
                  jobject obj,
 
                  // mNativeHandle
                  jlong handle, int action, float x, float y)
             {
+                var __handle = (size_t)handle;
+
                 // await into native?
                 // means prepend Java namespace
                 // and ref JNIEnv?
@@ -453,9 +472,11 @@ namespace Java
                 //X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\SystemHeaders\jni.cs
 
                 //Error CS0208  Cannot take the address of, get the size of, or declare a pointer to a managed type('VrCubeWorld.ovrAppThread')    OVRVrCubeWorldSurfaceViewXNDK X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs 413
-
+                // jni/OVRVrCubeWorldSurfaceViewXNDK.dll.c:566:75: error: cast to pointer from integer of different size [-Werror=int-to-pointer-cast]
                 //var appThread = (ovrAppThread*)(void*)handle;
-                var appThread = (VrCubeWorld.ovrAppThread)(object)handle;
+
+                // size_t
+                var appThread = (VrCubeWorld.ovrAppThread)(object)__handle;
 
                 var message = default(VrCubeWorld.ovrMessage);
 
