@@ -11,7 +11,7 @@ namespace ScriptCoreLibNative.SystemHeaders
     {
         // https://msdn.microsoft.com/en-us/library/windows/desktop/ms681944(v=vs.85).aspx
         // cant we just use pinvoke, yet link it in as we have a header available?
-        public static bool AllocConsole() => default(bool);
+        public static bool AllocConsole() { return default(bool); }
 
         // http://msdn.microsoft.com/library/windows/desktop/ms685086.aspx
         public static void ResumeThread(object hThread) { }

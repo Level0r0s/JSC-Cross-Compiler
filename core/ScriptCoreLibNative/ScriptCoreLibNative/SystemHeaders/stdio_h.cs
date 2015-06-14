@@ -21,7 +21,7 @@ namespace ScriptCoreLibNative.SystemHeaders
         // #define 	stdout   (__iob[1])
         //public static object[] __iob;
 
-        public static object freopen(string path, string mode, object stream) => default(object);
+        public static object freopen(string path, string mode, object stream) { return default(object); }
 
 
         // http://msdn.microsoft.com/en-us/library/9yky46tz.aspx

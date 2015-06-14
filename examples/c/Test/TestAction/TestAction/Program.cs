@@ -134,13 +134,18 @@ namespace TestAction
 
             //     return  (long long)(/* typecast */(long long(*)(void*))__that->__Stream_get_Length)((void*)__that);
 
+            Console.WriteLine("ptr <- MethodToken");
             var ptr = ((__MethodInfo)yy.Method).MethodToken;
+            Console.WriteLine("ya <- ptr");
             var ya = (Action<object>)(object)ptr;
 
 
 
+            Console.WriteLine("ya()");
+            // crash?
             ya("goo invoke");
 
+            Console.WriteLine("y()");
             y("goo, delegate invoke now works?");
 
 
