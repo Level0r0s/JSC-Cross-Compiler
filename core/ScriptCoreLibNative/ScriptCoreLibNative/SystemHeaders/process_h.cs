@@ -55,15 +55,22 @@ namespace ScriptCoreLibNative.SystemHeaders
         // The operating system passes arg to func when execution begins. arg can be any 32-bit value cast to void *.
         // http://www.tenouk.com/ModuleS.html
         // http://msdn.microsoft.com/en-us/library/kdzttdcb.aspx
-        public static object _beginthread(IntPtr start_address, uint stack_size,
+
+        // uintptr_t 
+        public static uintptr_t _beginthread(IntPtr start_address, uint stack_size,
 
             // Argument list to be passed to a new thread, or NULL.
             object arglist)
         {
-            return default(object);
+            return default(uintptr_t);
         }
 
         //int _getpid(void);
     }
 
+    // http://www.cplusplus.com/reference/cstdint/
+    [Script(IsNative = true)]
+    public static class uintptr_t
+    {
+    }
 }

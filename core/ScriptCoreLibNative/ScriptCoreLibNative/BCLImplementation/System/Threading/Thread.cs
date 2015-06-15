@@ -115,11 +115,13 @@ namespace ScriptCoreLibNative.BCLImplementation.System.Threading
 
             // If successful, _beginthread returns the thread ID number of the new thread. It returns -1 to indicate an error.
 
-            InternalHandle = process_h._beginthread(
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150615
+
+            this.InternalHandle = process_h._beginthread(
                 __MethodInfo.MethodToken, stack_size: 0, arglist: new InternalThreadStartArguments { __ThreadStart = this.__ThreadStart });
         }
 
-        public object InternalHandle;
+        public uintptr_t InternalHandle;
 
         public static void Sleep(int p)
         {

@@ -37,7 +37,7 @@ namespace TestStructByRefInvoke
 
         public void Increment(ref foo shadow)
         {
-
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150615
             this.field32++;
 
             shadow.field32 = this.field32;
@@ -49,6 +49,12 @@ namespace TestStructByRefInvoke
             Console.Write("field32: ");
             Console.Write(this.field32);
             Console.WriteLine();
+        }
+
+        public static void PrintCopy(foo copy)
+        {
+            // System.InvalidOperationException: C : Opcode not implemented: ldarga.s at TestStructByRefInvoke.foo.PrintCopy
+            copy.Print();
         }
     }
 
@@ -65,6 +71,9 @@ namespace TestStructByRefInvoke
             //TestStructByRefInvoke_foo_Increment((TestStructByRefInvoke_foo)foo0);
             stackalloc1.Increment(ref stackalloc2);
             stackalloc1.Print();
+
+            foo.PrintCopy(copy: stackalloc2);
+
             stackalloc1.Increment(ref stackalloc2);
             stackalloc1.Print();
 
@@ -72,6 +81,10 @@ namespace TestStructByRefInvoke
             //field32: 42
 
 
+            //X:\jsc.svn\examples\c\Test\TestStructByRefInvoke\TestStructByRefInvoke\bin\Release\web>TestStructByRefInvoke.exe
+            //field32: 41
+            //field32: 41
+            //field32: 42
 
         }
     }
