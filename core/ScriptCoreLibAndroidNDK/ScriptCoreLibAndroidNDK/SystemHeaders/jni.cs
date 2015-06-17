@@ -10,7 +10,7 @@ namespace ScriptCoreLibNative.SystemHeaders
     // into scriptcorelib
     // and then share the API here?
 
-    // "X:\opensource\android-ndk-r10c\platforms\android-12\arch-arm\usr\include\jni.h"
+    // "X:\util\android-ndk-r10e\platforms\android-21\arch-arm\usr\include\jni.h"
 
     // or should this be a marker attribute instead?
     [Script(IsNative = true, Header = "jni.h", IsSystemHeader = true)]
@@ -69,10 +69,33 @@ namespace ScriptCoreLibNative.SystemHeaders
         }
     }
 
-    //typedef const struct JNINativeInterface* JNIEnv;
-    [Script(IsNative = true, PointerName = "JNIEnv")]
-    public class JNIEnv : jni_h
+
+    // struct JNIInvokeInterface;
+
+
+    [Script(IsNative = true)]
+    public struct JNINativeInterface : jni_h
     {
+        public object reserved0;
+        public object reserved1;
+        public object reserved2;
+        public object reserved3;
+    }
+
+    [Script(IsNative = true)]
+    public struct JNIInvokeInterface : jni_h
+    {
+        public object reserved0;
+        public object reserved1;
+        public object reserved2;
+
+
+        //jint        (*DestroyJavaVM)(JavaVM*);
+        //jint        (*AttachCurrentThread)(JavaVM*, JNIEnv**, void*);
+        //jint        (*DetachCurrentThread)(JavaVM*);
+        //jint        (*GetEnv)(JavaVM*, void**, jint);
+        //jint        (*AttachCurrentThreadAsDaemon)(JavaVM*, JNIEnv**, void*);
+
         // used by 
         // X:\jsc.svn\examples\c\android\Test\TestHybridOVR\TestHybridOVR\OVRNDK\xNativeActivity.cs
 
@@ -85,14 +108,32 @@ namespace ScriptCoreLibNative.SystemHeaders
         // return  (void*)NewStringUTF((void*)env, (void*)env, (char*)"from Java_TestHybridOVR_OVRJVM_ApplicationActivity_stringFromJNI");
         // c does not have instance methods!
 
-        //   void        (*DeleteGlobalRef)(JNIEnv*, jobject);
 
+
+    }
+
+
+
+
+    //typedef const struct JNINativeInterface* JNIEnv;
+    //typedef const struct JNIInvokeInterface* JavaVM;
+
+
+    //typedef const struct JNINativeInterface* JNIEnv;
+    //[Script(IsNative = true, PointerName = "JNINativeInterface*")]
+    [Script(IsNative = true, PointerName = "JNIEnv*")]
+    //[Script(IsNative = true)]
+    public class JNIEnv : jni_h  // : JNIInvokeInterface
+    {
+        // will we ever need JNEnv instead of JNIEnv* ?
+
+        //   void        (*DeleteGlobalRef)(JNIEnv*, jobject);
         [Script(IsNative = true)]
-        public delegate void DeleteGlobalRefDelegate(ref JNIEnv env, jobject value);
+        public delegate void DeleteGlobalRefDelegate(JNIEnv env, jobject value);
         public DeleteGlobalRefDelegate DeleteGlobalRef;
 
         [Script(IsNative = true)]
-        public delegate jstring NewStringUTFDelegate(ref JNIEnv env, string value);
+        public delegate jstring NewStringUTFDelegate(JNIEnv env, string value);
 
 
         // tested by?
@@ -100,21 +141,40 @@ namespace ScriptCoreLibNative.SystemHeaders
 
 
         [Script(IsNative = true)]
-        public delegate int GetJavaVMDelegate(ref JNIEnv env, out JavaVM value);
+        public delegate int GetJavaVMDelegate(JNIEnv env, out JavaVM value);
         //jint        (*GetJavaVM)(JNIEnv*, JavaVM**);
         public GetJavaVMDelegate GetJavaVM;
 
         //jobject     (*NewGlobalRef)(JNIEnv*, jobject);
         [Script(IsNative = true)]
-        public delegate jobject NewGlobalRefDelegate(ref JNIEnv env, jobject value);
+        public delegate jobject NewGlobalRefDelegate(JNIEnv env, jobject value);
         public NewGlobalRefDelegate NewGlobalRef;
     }
 
     //typedef const struct JNIInvokeInterface* JavaVM;
-    [Script(IsNative = true, PointerName = "JavaVM")]
-    public class JavaVM : jni_h
+    //[Script(IsNative = true, PointerName = "JavaVM")]
+    //[Script(IsNative = true, PointerName = "JNIInvokeInterface*")]
+    //[Script(IsNative = true)]
+    [Script(IsNative = true, PointerName = "JavaVM*")]
+    public class JavaVM : jni_h //: JNIInvokeInterface
     {
         //jint        (*GetEnv)(JavaVM*, void**, jint);
+
+        [Script(IsNative = true)]
+        //public delegate int AttachCurrentThreadDelegate(ref JavaVM vm, out JNIEnv env, jobject value);
+        public delegate int AttachCurrentThreadDelegate(JavaVM byref_vm, out JNIEnv env, jobject value);
+        public AttachCurrentThreadDelegate AttachCurrentThread;
+
+        // (JavaVM**, JNIEnv*, jobject)
+        //jint        (*AttachCurrentThread)(JavaVM*, JNIEnv**, void*);
+
+
+
+        //jint        (*DetachCurrentThread)(JavaVM*);
+        [Script(IsNative = true)]
+        public delegate int DetachCurrentThreadDelegate(JavaVM byref_vm);
+        public DetachCurrentThreadDelegate DetachCurrentThread;
+
     }
 
     [Script(IsNative = true)]

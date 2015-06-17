@@ -17,19 +17,19 @@ LOCAL_PATH := $(call my-dir)
 # http://stackoverflow.com/questions/17172153/ndk-how-to-include-prebuilt-shared-library-regardless-of-architecture
 # for fk sake. why is it so complicated???
 
-###include $(CLEAR_VARS)
-###
-###
-###
-####Android NDK: ERROR:jni/Android.mk:vrapi: LOCAL_SRC_FILES points to a missing file
-####Android NDK: Check that /../libs/armeabi-v7a/libvrapi.so  exists  or that its path is correct
-###
-###LOCAL_MODULE := vrapi
-###LOCAL_SRC_FILES := $(TARGET_ARCH_ABI)/libvrapi.so 
-#### only export public headers
-####LOCAL_EXPORT_C_INCLUDES := X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Include\
-###
-###include $(PREBUILT_SHARED_LIBRARY)
+include $(CLEAR_VARS)
+
+
+
+#Android NDK: ERROR:jni/Android.mk:vrapi: LOCAL_SRC_FILES points to a missing file
+#Android NDK: Check that /../libs/armeabi-v7a/libvrapi.so  exists  or that its path is correct
+
+LOCAL_MODULE := vrapi
+LOCAL_SRC_FILES := $(TARGET_ARCH_ABI)/libvrapi.so 
+# only export public headers
+#LOCAL_EXPORT_C_INCLUDES := X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Include\
+
+include $(PREBUILT_SHARED_LIBRARY)
 # http://stackoverflow.com/questions/11037765/where-to-place-so-file-so-that-it-gets-included-in-the-final-build
 # make.exe: *** No rule to make target `jni/../libs/armeabi-v7a/libvrapi.so', needed by `obj/local/armeabi-v7a/libvrapi.so'.  Stop.
 
@@ -56,7 +56,7 @@ LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv1_CM -lGLESv2  -lGLESv3
 LOCAL_STATIC_LIBRARIES := android_native_app_glue 
 
 # http://stackoverflow.com/questions/3551989/android-library-linking
-#LOCAL_SHARED_LIBRARIES	:= vrapi
+LOCAL_SHARED_LIBRARIES	:= vrapi
 
 include $(BUILD_SHARED_LIBRARY)
 

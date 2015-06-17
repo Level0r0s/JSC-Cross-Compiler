@@ -20,7 +20,7 @@ namespace ScriptCoreLibNative.SystemHeaders.android
 
         // ANativeWindow
 
-        public static native_window.ANativeWindow ANativeWindow_fromSurface(ref JNIEnv env, jobject surface) { return null; }
+        public static native_window.ANativeWindow ANativeWindow_fromSurface( JNIEnv env, jobject surface) { return null; }
 
     }
 
