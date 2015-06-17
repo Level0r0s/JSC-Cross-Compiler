@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ScriptCoreLibNative.SystemHeaders.android;
+using ScriptCoreLibNative.SystemHeaders.EGL;
 
 [assembly: Script()]
 [assembly: ScriptTypeFilter(ScriptType.C, typeof(OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld))]
@@ -16,14 +17,16 @@ using ScriptCoreLibNative.SystemHeaders.android;
 
 namespace OVRVrCubeWorldSurfaceViewXNDK
 {
+    using GLuint = UInt32;
+
     using EGLDisplay = Object;
     using EGLConfig = Object;
     //using EGLSurface = Object;
     using EGLContext = Object;
 
-    using GLuint = Object;
+    //using GLuint = Object;
     using GLint = Int32;
-    using GLenum = Object;
+    //using GLenum = Object;
     using GLboolean = Object;
     using GLsizei = Object;
 
@@ -32,8 +35,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     //enum GLint { }
 
     using ovrVector3f = Object;
-    using ovrMatrix4f = Object;
-    using ScriptCoreLibNative.SystemHeaders.EGL;
+    using ScriptCoreLibNative.SystemHeaders.GLES3;
+
 
 
 
@@ -72,7 +75,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         {
             public GLuint Index;
             public GLint Size;
-            public GLenum Type;
+
+            public uint Type;
+
             public GLboolean Normalized;
             public GLsizei Stride;
             public void* Pointer;
@@ -198,14 +203,16 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public GLuint ColorTexture;
             public GLuint DepthBuffer;
             public GLuint FrameBuffer;
+
+            public void ovrRenderTexture_Clear() { }
+            public void ovrRenderTexture_Create() { }
+            public void ovrRenderTexture_Destroy() { }
+            public void ovrRenderTexture_SetCurrent() { }
+            public void ovrRenderTexture_SetNone() { }
+            public void ovrRenderTexture_Resolve() { }
         }
 
-        static void ovrRenderTexture_Clear(this ovrRenderTexture that) { }
-        static void ovrRenderTexture_Create(this ovrRenderTexture that) { }
-        static void ovrRenderTexture_Destroy(this ovrRenderTexture that) { }
-        static void ovrRenderTexture_SetCurrent(this ovrRenderTexture that) { }
-        static void ovrRenderTexture_SetNone(this ovrRenderTexture that) { }
-        static void ovrRenderTexture_Resolve(this ovrRenderTexture that) { }
+
 
         public const int NUM_INSTANCES = 1500;
 
@@ -255,19 +262,29 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         static void ovrSimulation_Clear(this ovrSimulation that)
         { }
 
+        public const int NUM_EYES = 2;
+        public const int NUM_BUFFERS = 3;
+        public const int NUM_MULTI_SAMPLES = 4;
+
         [Script]
         class ovrRenderer
         {
-            public ovrRenderTexture[][] RenderTextures;
+            // used by ovrRenderer_RenderFrame
+            //public ovrRenderTexture[][] RenderTextures;
+            public ovrRenderTexture[,] RenderTextures;
+
             public int BufferIndex;
             public ovrMatrix4f ProjectionMatrix;
             public ovrMatrix4f TanAngleMatrix;
 
 
-          
+
 
             public void ovrRenderer_Clear() { }
-            public void ovrRenderer_Create(ref ovrHmdInfo hmdInfo) { }
+            public void ovrRenderer_Create(ref ovrHmdInfo hmdInfo) {
+
+                //RenderTextures = new ovrRenderTexture[NUM_BUFFERS, NUM_EYES];
+            }
             public void ovrRenderer_Destroy() { }
 
             // sent into vrapi_SubmitFrame
@@ -275,12 +292,50 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             {
                 // 1049
 
-                var x = default(ovrFrameParms);
+                ovrFrameParms parms = VrApi_Helpers.vrapi_DefaultFrameParms(ref appState.Java, ovrFrameInit.VRAPI_FRAME_INIT_DEFAULT, 0u);
+                parms.FrameIndex = appState.FrameIndex;
+                parms.MinimumVsyncs = appState.MinimumVsyncs;
 
 
-                x.FrameIndex = 0;
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, appState.Scene.InstanceTransformBuffer);
 
-                return x;
+
+                // 1070
+                gl3.glUnmapBuffer(gl3.GL_ARRAY_BUFFER);
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, 0);
+
+                // Calculate the center view matrix.
+                var headModelParms = VrApi_Helpers.vrapi_DefaultHeadModelParms();
+
+                var input = default(ovrMatrix4f);
+                var centerEyeViewMatrix = VrApi_Helpers.vrapi_GetCenterEyeViewMatrix(ref headModelParms, ref tracking, ref input);
+
+                // 1077
+                for (int eye = 0; eye < 2; eye++)
+                {
+                    var eyeViewMatrix = VrApi_Helpers.vrapi_GetEyeViewMatrix(ref headModelParms, ref centerEyeViewMatrix, eye);
+
+                    // LPOVRVrCubeWorldSurfaceViewXNDK_VrCubeWorld_ovrRenderTexture texture6;
+
+                    var RenderTextures = appState.Renderer.RenderTextures;
+                    //var rt = RenderTextures[appState.Renderer.BufferIndex][eye];
+
+                    //  texture7 = OVRVrCubeWorldSurfaceViewXNDK_VrCubeWorld_ovrRenderTexture*_Get(textureArray6, appState->Renderer->BufferIndex, num4);
+                    var rt = RenderTextures[appState.Renderer.BufferIndex, eye];
+                    // texture6 = ((LPOVRVrCubeWorldSurfaceViewXNDK_VrCubeWorld_ovrRenderTexture)appState->Renderer->RenderTextures[appState->Renderer->BufferIndex][num4]);
+
+                    rt.ovrRenderTexture_SetCurrent();
+
+                    // 1085
+
+                    // 1119
+                    rt.ovrRenderTexture_Resolve();
+                }
+
+                //ovrRenderTexture_SetNone();
+
+
+                return parms;
             }
         }
 

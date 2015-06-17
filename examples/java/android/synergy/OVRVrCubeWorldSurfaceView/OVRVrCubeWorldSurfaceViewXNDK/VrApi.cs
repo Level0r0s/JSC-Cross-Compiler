@@ -34,7 +34,18 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         VRAPI_FRAME_INIT_LOADING_ICON_FLUSH,
         VRAPI_FRAME_INIT_MESSAGE,
         VRAPI_FRAME_INIT_MESSAGE_FLUSH
-    } ;
+    }
+
+    // Row-major 4x4 matrix.
+    [Script(IsNative = true)]
+    public struct ovrMatrix4f : VrApi_h
+    {
+        // Fixed sized buffers can only be one-dimensional.
+        // http://stackoverflow.com/questions/665573/multidimensional-arrays-in-a-struct-in-c-sharp
+
+        //public float M[4,4];
+        public float[] M;
+    }
 
     [Script(IsNative = true)]
     public struct ovrInitParms : VrApi_h
@@ -49,6 +60,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
         public long FrameIndex;
+
+        // set in ovrRenderer_RenderFrame
+        public int MinimumVsyncs;
 
     }
 
@@ -85,6 +99,11 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         // GearVR voot
     }
 
+    [Script(IsNative = true)]
+    public struct ovrHeadModelParms : VrApi_h
+    {
+        // GearVR voot
+    }
 
 
 
@@ -127,6 +146,28 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     [Script(IsNative = true, Header = "VrApi_Helpers.h")]
     public static class VrApi_Helpers
     {
+        public static ovrMatrix4f vrapi_GetEyeViewMatrix(ref ovrHeadModelParms headModelParms,
+                                                    ref ovrMatrix4f centerEyeViewMatrix,
+                                                    int eye)
+        {
+            throw null;
+        }
+
+        public static ovrMatrix4f vrapi_GetCenterEyeViewMatrix(ref ovrHeadModelParms headModelParms,
+                                                        ref ovrTracking tracking,
+
+            // nullable struct?
+                                                        ref ovrMatrix4f input)
+        {
+            throw null;
+        }
+
+        // ovrRenderer_RenderFrame
+        public static ovrHeadModelParms vrapi_DefaultHeadModelParms()
+        {
+            throw null;
+        }
+
         // vrapi_DefaultModeParms
         public static ovrModeParms vrapi_DefaultModeParms(ref ovrJava java)
         {
@@ -138,6 +179,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             return default(ovrInitParms);
         }
 
+        // called by ovrRenderer_RenderFrame
+        // called by AppThreadFunction
         public static ovrFrameParms vrapi_DefaultFrameParms(ref ovrJava java, ovrFrameInit init, uint texId)
         {
             return default(ovrFrameParms);
@@ -155,7 +198,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         public const string PUI_CONFIRM_QUIT = "confirmQuit";
 
         public static void vrapi_LeaveVrMode(ovrMobile ovr)
-        { 
+        {
         }
 
 

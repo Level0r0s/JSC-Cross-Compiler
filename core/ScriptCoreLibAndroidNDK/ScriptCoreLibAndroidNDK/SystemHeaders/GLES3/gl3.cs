@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using ScriptCoreLib;
 
-namespace ScriptCoreLibNative.SystemHeaders.GLES2
+namespace ScriptCoreLibNative.SystemHeaders.GLES3
 {
+    //typedef unsigned int GLenum;
+    //typedef unsigned int GLuint;
+
     // X:\jsc.svn\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\android\opengl\GLES20.cs
 
     // "X:\opensource\android-ndk-r10c\platforms\android-21\arch-arm64\usr\include\GLES3\gl3.h"
@@ -21,6 +24,11 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES2
     [Script(IsNative = true)]
     public class gl3 : gl3_h
     {
+        public const int GL_ARRAY_BUFFER = 0x8892;
+
+        public static bool glUnmapBuffer(uint target) { throw null; }
+        public static void glBindBuffer(uint target, uint buffer) { throw null; }
+
         //#include <EGL/eglplatform.h>
         //#include <EGL/egl.h>
         //#include <GLES2/gl2platform.h>
