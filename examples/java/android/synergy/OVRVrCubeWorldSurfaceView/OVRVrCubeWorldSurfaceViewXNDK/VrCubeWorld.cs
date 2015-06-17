@@ -65,7 +65,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrEgl_DestroySurface() { }
         }
 
-   
+
         [Script]
         class ovrVertexAttribPointer
         {
@@ -279,7 +279,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrRenderer_Destroy() { }
         }
 
-      
+
 
 
         enum ovrRenderType
@@ -291,6 +291,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         }
        ;
 
+        #region MULTI_THREADED
         [Script]
         class ovrRenderThread
         {
@@ -323,6 +324,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         static void ovrRenderThread_Submit(this ovrRenderThread that) { }
         static void ovrRenderThread_Wait(this ovrRenderThread that) { }
         static void ovrRenderThread_GetTid(this ovrRenderThread that) { }
+        #endregion
 
         enum ovrBackButtonState
         {
@@ -404,13 +406,17 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrMessage_SetIntegerParm(int i, int value) { }
             public int ovrMessage_GetIntegerParm(int i) { return 0; }
             public void ovrMessage_SetFloatParm(int i, float value) { }
-            public float ovrMessage_GetFloatParm(int i) { 
+            public float ovrMessage_GetFloatParm(int i)
+            {
                 //script: error JSC1000: C : Opcode not implemented: ldc.r4 at OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld+ovrMessage.ovrMessage_GetFloatParm
-                return 0; }
+                return 0;
+            }
 
 
         }
 
+
+        public const int MAX_MESSAGES = 1024;
 
 
 
@@ -419,6 +425,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         public class ovrMessageQueue
         {
             public ovrMessage[] Messages;
+
+            // does js do volatile?
             public volatile int Head;  // dequeue at the head
             public volatile int Tail;  // enqueue at the tail
             public volatile bool Enabled;
@@ -438,11 +446,49 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrMessageQueue_Create() { }
             public void ovrMessageQueue_Destroy() { }
             public void ovrMessageQueue_Enable(bool v) { }
+
             public void ovrMessageQueue_SleepUntilMessage() { }
 
             public bool ovrMessageQueue_GetNextMessage(out ovrMessage message, bool waitForMessages)
             {
+                // 1716
+
+                if (this.Wait == ovrMQWait.MQ_WAIT_PROCESSED)
+                {
+                    //pthread_cond_broadcast(ref Processed);
+
+                    this.Wait = ovrMQWait.MQ_WAIT_NONE;
+                }
+
+                if (waitForMessages)
+                {
+                    ovrMessageQueue_SleepUntilMessage();
+                }
+
+                //pthread_mutex_lock(ref this.Mutex);
+
                 message = default(ovrMessage);
+
+                if (this.Tail <= this.Head)
+                {
+                    //pthread_mutex_unlock(ref Mutex);
+                    return false;
+                }
+
+                message = this.Messages[Head & (MAX_MESSAGES - 1)];
+
+                this.Head++;
+                //pthread_mutex_unlock(ref Mutex);
+
+                if (this.Wait == ovrMQWait.MQ_WAIT_RECEIVED)
+                {
+                    //pthread_cond_broadcast(ref Processed);
+
+                }
+                else if (this.Wait == ovrMQWait.MQ_WAIT_PROCESSED)
+                {
+                    this.Wait = ovrMQWait.MQ_WAIT_PROCESSED;
+                }
 
                 return false;
             }
