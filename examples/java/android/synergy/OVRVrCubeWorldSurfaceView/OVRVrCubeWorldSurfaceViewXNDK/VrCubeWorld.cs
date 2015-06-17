@@ -1,4 +1,6 @@
-﻿using ScriptCoreLib;
+﻿//using ANativeWindow = System.Object;
+
+using ScriptCoreLib;
 using ScriptCoreLibNative.SystemHeaders;
 using System;
 using System.Collections.Generic;
@@ -34,15 +36,15 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
     //using JavaVM = Object;
     //using jobject = Object;
-    using pthread_t = Object;
+    //using pthread_t = Object;
     using pthread_cond_t = Object;
     using pthread_mutex_t = Object;
     using ovrMobile = Object;
     using ovrTracking = Object;
 
-    using ovrMQWait = Object;
+    //using ovrMQWait = Object;
     using ovrJava = Object;
-    using ANativeWindow = Int32;
+    using ScriptCoreLibNative.SystemHeaders.android;
 
     [Script]
     public static unsafe partial class VrCubeWorld
@@ -149,8 +151,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public GLuint FragmentShader;
             // These will be -1 if not used by the program.
             //public fixed GLint Uniforms[MAX_PROGRAM_UNIFORMS];       // ProgramUniforms[].name
-            public  GLint[] Uniforms;       // ProgramUniforms[].name
-            public  GLint[] Textures;      // Texture%i
+            public GLint[] Uniforms;       // ProgramUniforms[].name
+            public GLint[] Textures;      // Texture%i
 
             //Error CS1663  Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double OVRVrCubeWorldSurfaceViewXNDK   X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	130
             //Error CS1642  Fixed size buffer fields may only be members of structs OVRVrCubeWorldSurfaceViewXNDK X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	129
@@ -317,7 +319,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         {
             public ovrJava Java;
             public ovrEgl Egl;
-            public ANativeWindow* NativeWindow;
+            public native_window.ANativeWindow NativeWindow;
             public bool Resumed;
             public ovrMobile Ovr;
             public ovrScene Scene;
@@ -341,6 +343,14 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         static void ovrApp_HandleTouchEvent(this ovrApp that) { }
         static void ovrApp_HandleSystemEvents(this ovrApp that) { }
 
+
+        public enum ovrMQWait
+        {
+            MQ_WAIT_NONE,		// don't wait
+            MQ_WAIT_RECEIVED,	// wait until the consumer thread has received the message
+            MQ_WAIT_PROCESSED	// wait until the consumer thread has processed the message
+        };
+
         [Script]
         // why struct?
         public struct ovrMessage
@@ -349,22 +359,26 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public ovrMQWait Wait;
             public long[] Parms;
 
-            public void ovrMessage_Init()
+            public void ovrMessage_Init(MESSAGE mESSAGE, ovrMQWait ovrMQWait)
             {
                 // this byref?
 
             }
+
+            public void ovrMessage_SetPointerParm() { }
+            public void ovrMessage_GetPointerParm() { }
+            public void ovrMessage_SetIntegerParm(int i, int value) { }
+            public void ovrMessage_GetIntegerParm() { }
+            public void ovrMessage_SetFloatParm(int i, float value) { }
+            public void ovrMessage_GetFloatParm() { }
+
+
         }
 
 
 
-        public static void ovrMessage_SetPointerParm(this ovrMessage that) { }
-        public static void ovrMessage_GetPointerParm(this ovrMessage that) { }
-        public static void ovrMessage_SetIntegerParm(this ovrMessage that, int i, int value) { }
-        public static void ovrMessage_GetIntegerParm(this ovrMessage that) { }
-        public static void ovrMessage_SetFloatParm(this ovrMessage that, int i, float value) { }
-        public static void ovrMessage_GetFloatParm(this ovrMessage that) { }
 
+        // struct?
         [Script]
         public class ovrMessageQueue
         {
@@ -377,53 +391,100 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public pthread_cond_t Posted;
             public pthread_cond_t Received;
             public pthread_cond_t Processed;
+
+
+            // called by Java_com_oculus_gles3jni_GLES3JNILib_onTouchEvent
+            public void ovrMessageQueue_PostMessage(ref ovrMessage message)
+            {
+
+            }
+
+            public void ovrMessageQueue_Create() { }
+            public void ovrMessageQueue_Destroy() { }
+            public void ovrMessageQueue_Enable(bool v) { }
+            public void ovrMessageQueue_SleepUntilMessage() { }
+            public void ovrMessageQueue_GetNextMessage() { }
         }
 
-        static void ovrMessageQueue_Create(this ovrMessageQueue that) { }
-        static void ovrMessageQueue_Destroy(this ovrMessageQueue that) { }
-        static void ovrMessageQueue_Enable(this ovrMessageQueue that) { }
 
-        // called by Java_com_oculus_gles3jni_GLES3JNILib_onTouchEvent
-        public static void ovrMessageQueue_PostMessage(this ovrMessageQueue that, ref ovrMessage message)
+
+        // nameless in the c file.
+        public enum MESSAGE
         {
-
+            MESSAGE_ON_CREATE,
+            MESSAGE_ON_START,
+            MESSAGE_ON_RESUME,
+            MESSAGE_ON_PAUSE,
+            MESSAGE_ON_STOP,
+            MESSAGE_ON_DESTROY,
+            MESSAGE_ON_SURFACE_CREATED,
+            MESSAGE_ON_SURFACE_DESTROYED,
+            MESSAGE_ON_KEY_EVENT,
+            MESSAGE_ON_TOUCH_EVENT
         }
 
-        static void ovrMessageQueue_SleepUntilMessage(this ovrMessageQueue that) { }
-        static void ovrMessageQueue_GetNextMessage(this ovrMessageQueue that) { }
-
+        // converted from size_t
+        // can do a sizeof for malloc?
+        // sizeof not available for managed members?
         [Script]
         public class ovrAppThread
         {
+            // set via ovrAppThread_Create
             public JavaVM JavaVm;
+
             public jobject ActivityObject;
             public pthread_t Thread;
             public ovrMessageQueue MessageQueue;
-            public ANativeWindow* NativeWindow;
+
+            // set to null by onSurfaceDestroyed
+            public native_window.ANativeWindow NativeWindow;
         }
 
-        static void AppThreadFunction() { }
-        static void ovrAppThread_Create(this ovrMessageQueue that) { }
-        static void ovrAppThread_Destroy(this ovrMessageQueue that) { }
+        //static object AppThreadFunction(object arg)
+        static object AppThreadFunction(ovrAppThread appThread)
+        {
+            //ovrAppThread* appThread = (ovrAppThread*)parm;
+
+            return null;
+        }
+
+        public static void ovrAppThread_Create(this ovrAppThread appThread, ref JNIEnv env, jobject activityObject)
+        {
+            // System.NotImplementedException: { ParameterType = ScriptCoreLibNative.SystemHeaders.pthread+pthread_t&,
+
+            env.GetJavaVM(ref env, out appThread.JavaVm);
+
+            appThread.ActivityObject = env.NewGlobalRef(ref env, activityObject);
+            //appThread.Thread = default(pthread_t);
+            appThread.NativeWindow = null;
+
+            appThread.MessageQueue.ovrMessageQueue_Create();
+
+            // ldfda ?
+            var createErr = pthread.pthread_create(out appThread.Thread, null, AppThreadFunction, appThread);
+
+
+            //var createErr2 = pthread.pthread_create(out appThread.Thread, null,
+            //    arg: appThread,
+            //    start_routine: (ovrAppThread appThread0) =>
+            //    {
+            //        // scope sharing via arg0, in c! ready for roslyn?
+
+            //        return null;
+            //    }
+            //);
+        }
+
+        public static void ovrAppThread_Destroy(this ovrAppThread appThread, ref JNIEnv env)
+        {
+            pthread.pthread_join(appThread.Thread, null);
+            env.DeleteGlobalRef(ref env, appThread.ActivityObject);
+            appThread.MessageQueue.ovrMessageQueue_Destroy();
+        }
 
         // java, jsc hybrid?
-
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onCreate(ref JNIEnv env, jobject obj, jlong handle) { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onStart(ref JNIEnv env, jobject obj, jlong handle) { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onResume(ref JNIEnv env, jobject obj, jlong handle) { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onPause(ref JNIEnv env, jobject obj, jlong handle) { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onStop(ref JNIEnv env, jobject obj, jlong handle) { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onDestroy(ref JNIEnv env, jobject obj, jlong handle) { }
-
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceCreated(ref JNIEnv env, jobject obj, jlong handle, jobject surface) { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceChanged(ref JNIEnv env, jobject obj, jlong handle, jobject surface) { }
-        static void Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceDestroyed(ref JNIEnv env, jobject obj, jlong handle)
-        { }
-
-
-
-
     }
+
 }
 
 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150613/xndk
@@ -432,27 +493,207 @@ namespace Java
 {
     namespace com.oculus.gles3jni
     {
+        using refovrAppThread = Int64;
+
+        // named pointers for jsc hybrid apps?
+        //public enum refovrAppThread : long { }
+
         using OVRVrCubeWorldSurfaceViewXNDK;
+        using ScriptCoreLibNative.SystemHeaders.android;
+
+
 
         [Script]
-        static class GLES3JNILib
+        unsafe static class GLES3JNILib
         {
+            #region Activity
+            // named pointers! typedefs!
+            static refovrAppThread onCreate(ref JNIEnv env, jobject obj, jobject activity)
+            {
+                // Error	4	Cannot take the address of, get the size of, or declare a pointer to a managed type ('OVRVrCubeWorldSurfaceViewXNDK.xovrAppThread')	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	489	40	OVRVrCubeWorldSurfaceViewXNDK
+
+
+                var appThread = new VrCubeWorld.ovrAppThread();
+
+                // jsc would calla ctor for us...
+                VrCubeWorld.ovrAppThread_Create(appThread, ref env, activity);
+
+                // set property?
+                appThread.MessageQueue.ovrMessageQueue_Enable(true);
+
+                var message = default(VrCubeWorld.ovrMessage);
+                message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_CREATE, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+                appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+
+
+                //stdlib_h.malloc(sizeof(VrCubeWorld.ovrAppThread));
+                //stdlib_h.malloc(sizeof(xovrAppThread));
+
+                var __handle = (size_t)(object)appThread;
+                var __ref = (refovrAppThread)(object)__handle;
+
+                return __ref;
+            }
+
+            #region wndproc/ovrMessageQueue_PostMessage
+            static void onStart(ref JNIEnv env, jobject obj, jlong handle)
+            {
+                var __handle = (size_t)handle;
+                var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+
+                var message = default(VrCubeWorld.ovrMessage);
+                message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_START, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+                appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+            }
+            static void onResume(ref JNIEnv env, jobject obj, jlong handle)
+            {
+                var __handle = (size_t)handle;
+                var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+
+                var message = default(VrCubeWorld.ovrMessage);
+                message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_RESUME, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+                appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+            }
+            static void onPause(ref JNIEnv env, jobject obj, jlong handle)
+            {
+                var __handle = (size_t)handle;
+                var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+
+                var message = default(VrCubeWorld.ovrMessage);
+                message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_PAUSE, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+                appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+            }
+            static void onStop(ref JNIEnv env, jobject obj, jlong handle)
+            {
+                var __handle = (size_t)handle;
+                var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+
+                var message = default(VrCubeWorld.ovrMessage);
+                message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_STOP, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+                appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+            }
+
+            #endregion
+
+            static void onDestroy(ref JNIEnv env, jobject obj, jlong handle)
+            {
+                var __handle = (size_t)handle;
+                var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+
+                var message = default(VrCubeWorld.ovrMessage);
+                message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_DESTROY, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+                appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+
+                appThread.MessageQueue.ovrMessageQueue_Enable(false);
+
+
+                VrCubeWorld.ovrAppThread_Destroy(appThread, ref env);
+
+                stdlib_h.free(appThread);
+            }
+
+            #endregion
+
+
+
+
+            #region onSurface
+            static void onSurfaceCreated(ref JNIEnv env, jobject obj, jlong handle, jobject surface)
+            {
+
+                var __handle = (size_t)handle;
+                var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+
+                var newNativeWindow = native_window_jni.ANativeWindow_fromSurface(ref env, surface);
+                if (native_window.ANativeWindow_getWidth(newNativeWindow) < native_window.ANativeWindow_getHeight(newNativeWindow))
+                {
+                    // An app that is relaunched after pressing the home button gets an initial surface with
+                    // the wrong orientation even though android:screenOrientation="landscape" is set in the
+                    // manifest. The choreographer callback will also never be called for this surface because
+                    // the surface is immediately replaced with a new surface with the correct orientation.
+                    //ALOGE("        Surface not in landscape mode!");
+                }
+
+                appThread.NativeWindow = newNativeWindow;
+
+                var message = default(VrCubeWorld.ovrMessage);
+                message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_SURFACE_CREATED, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+                appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+            }
+            static void onSurfaceChanged(ref JNIEnv env, jobject obj, jlong handle, jobject surface)
+            {
+                var __handle = (size_t)handle;
+                var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+
+
+                var newNativeWindow = native_window_jni.ANativeWindow_fromSurface(ref env, surface);
+                if (native_window.ANativeWindow_getWidth(newNativeWindow) < native_window.ANativeWindow_getHeight(newNativeWindow))
+                {
+                    // An app that is relaunched after pressing the home button gets an initial surface with
+                    // the wrong orientation even though android:screenOrientation="landscape" is set in the
+                    // manifest. The choreographer callback will also never be called for this surface because
+                    // the surface is immediately replaced with a new surface with the correct orientation.
+                    //ALOGE("        Surface not in landscape mode!");
+                }
+
+                if (newNativeWindow != appThread.NativeWindow)
+                {
+                    if (appThread.NativeWindow != null)
+                    {
+                        var message = default(VrCubeWorld.ovrMessage);
+                        message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_SURFACE_DESTROYED, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+                        appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+
+                        native_window.ANativeWindow_release(appThread.NativeWindow);
+                        appThread.NativeWindow = default(native_window.ANativeWindow);
+
+                    }
+                    if (newNativeWindow != null)
+                    {
+                        var message = default(VrCubeWorld.ovrMessage);
+                        message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_SURFACE_CREATED, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+                        appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+
+                        native_window.ANativeWindow_release(appThread.NativeWindow);
+                        appThread.NativeWindow = default(native_window.ANativeWindow);
+
+                    }
+                }
+                else if (newNativeWindow != null)
+                {
+                    native_window.ANativeWindow_release(newNativeWindow);
+                }
+            }
+            static void onSurfaceDestroyed(ref JNIEnv env, jobject obj, jlong handle)
+            {
+                var __handle = (size_t)handle;
+                var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+
+                var message = default(VrCubeWorld.ovrMessage);
+                message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_SURFACE_DESTROYED, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+                appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+
+                native_window.ANativeWindow_release(appThread.NativeWindow);
+                appThread.NativeWindow = default(native_window.ANativeWindow);
+            }
+            #endregion
+
+
             static void onKeyEvent(ref JNIEnv env, jobject obj, jlong handle, int keyCode, int action)
             {
                 var __handle = (size_t)handle;
 
                 var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
                 var message = default(VrCubeWorld.ovrMessage);
-                //message.ovrMessage_Init(MESSAGE_ON_KEY_EVENT, MQ_WAIT_NONE);
-                message.ovrMessage_Init();
+                message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_KEY_EVENT, VrCubeWorld.ovrMQWait.MQ_WAIT_NONE);
                 message.ovrMessage_SetIntegerParm(0, keyCode);
                 message.ovrMessage_SetIntegerParm(1, action);
-                appThread.MessageQueue. ovrMessageQueue_PostMessage(ref message);
+                appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
             }
 
 
             // public static void onTouchEvent(long handle, int action, float x, float y) { throw null; }
-           
+
             //static void Java_com_oculus_gles3jni_GLES3JNILib_onTouchEvent(
             static void onTouchEvent(
                  ref JNIEnv env,
@@ -482,7 +723,7 @@ namespace Java
 
 
                 //     OVRVrCubeWorldSurfaceViewXNDK_VrCubeWorld_ovrMessage_ovrMessage_Init((OVRVrCubeWorldSurfaceViewXNDK_VrCubeWorld_ovrMessage)message1);
-                message.ovrMessage_Init();
+                message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_TOUCH_EVENT, VrCubeWorld.ovrMQWait.MQ_WAIT_NONE);
 
                 message.ovrMessage_SetIntegerParm(0, action);
                 message.ovrMessage_SetFloatParm(1, x);

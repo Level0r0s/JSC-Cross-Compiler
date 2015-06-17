@@ -50,6 +50,9 @@
     <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\SystemHeaders\math.cs">
       <Link>SystemHeaders\math.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\SystemHeaders\stdlib_h.cs">
+      <Link>SystemHeaders\stdlib_h.cs</Link>
+    </Compile>
     <Compile Include="IAssemblyReferenceToken.cs" />
     <Compile Include="Library\ConsoleExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +71,7 @@
     <Compile Include="SystemHeaders\android\native_activity.cs" />
     <Compile Include="SystemHeaders\android_native_app_glue.cs" />
     <Compile Include="SystemHeaders\android\log.cs" />
+    <Compile Include="SystemHeaders\pthread.cs" />
     <Compile Include="SystemHeaders\errno.cs" />
     <Compile Include="SystemHeaders\EGL\eglplatform.cs" />
     <Compile Include="SystemHeaders\EGL\egl.cs" />

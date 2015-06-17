@@ -6,7 +6,7 @@ using ScriptCoreLib;
 
 namespace ScriptCoreLibNative.SystemHeaders.android
 {
-    // "X:\opensource\android-ndk-r10c\platforms\android-9\arch-arm\usr\include\android\native_window.h"
+    // "X:\util\android-ndk-r10e\platforms\android-21\arch-arm\usr\include\android\native_window.h"
     // https://github.com/android/platform_frameworks_base/blob/master/core/jni/android_app_NativeActivity.cpp
 
     [Script(IsNative = true, Header = "android/native_window.h", IsSystemHeader = true)]
@@ -18,7 +18,20 @@ namespace ScriptCoreLibNative.SystemHeaders.android
 
         // X:\jsc.svn\examples\c\android\Test\TestNDK\TestNDK\xNativeActivity.cs
 
-        // ANativeWindow
+
+        // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs
+        [Script(IsNative = true)]
+        public class ANativeWindow
+        {
+        }
+
+        //public static void ANativeWindow_release(ref ANativeWindow window) { }
+        public static void ANativeWindow_release(ANativeWindow window) { }
+
+        public static int ANativeWindow_getWidth(ANativeWindow window) { return 0; }
+
+        public static int ANativeWindow_getHeight(ANativeWindow window) { return 0; }
+
     }
 
 }

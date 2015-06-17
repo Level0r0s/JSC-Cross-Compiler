@@ -8,8 +8,7 @@ using ScriptCoreLibNative.SystemHeaders.android;
 namespace ScriptCoreLibNative.SystemHeaders
 {
     // "X:\opensource\android-ndk-r10c\sources\android\native_app_glue\android_native_app_glue.c"
-    // "X:\opensource\android-ndk-r10c\sources\android\native_app_glue\android_native_app_glue.h"
-
+    // "X:\util\android-ndk-r10e\sources\android\native_app_glue\android_native_app_glue.h"
 
     // LOCAL_STATIC_LIBRARIES := android_native_app_glue
     [Script(IsNative = true, Header = "android_native_app_glue.h", IsSystemHeader = true)]

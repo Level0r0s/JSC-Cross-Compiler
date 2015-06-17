@@ -56,7 +56,7 @@ namespace ScriptCoreLibNative.SystemHeaders
     {
         // long
 
-        public static implicit operator void* (jlong x)
+        public static implicit operator void*(jlong x)
         {
             return default(void*);
         }
@@ -81,9 +81,15 @@ namespace ScriptCoreLibNative.SystemHeaders
         //jstring     (*NewStringUTF)(JNIEnv*, const char*);
 
         // this is actualy a field to function pointer?
-        
+
         // return  (void*)NewStringUTF((void*)env, (void*)env, (char*)"from Java_TestHybridOVR_OVRJVM_ApplicationActivity_stringFromJNI");
         // c does not have instance methods!
+
+        //   void        (*DeleteGlobalRef)(JNIEnv*, jobject);
+
+        [Script(IsNative = true)]
+        public delegate void DeleteGlobalRefDelegate(ref JNIEnv env, jobject value);
+        public DeleteGlobalRefDelegate DeleteGlobalRef;
 
         [Script(IsNative = true)]
         public delegate jstring NewStringUTFDelegate(ref JNIEnv env, string value);
@@ -92,6 +98,16 @@ namespace ScriptCoreLibNative.SystemHeaders
         // tested by?
         public NewStringUTFDelegate NewStringUTF;
 
+
+        [Script(IsNative = true)]
+        public delegate int GetJavaVMDelegate(ref JNIEnv env, out JavaVM value);
+        //jint        (*GetJavaVM)(JNIEnv*, JavaVM**);
+        public GetJavaVMDelegate GetJavaVM;
+
+        //jobject     (*NewGlobalRef)(JNIEnv*, jobject);
+        [Script(IsNative = true)]
+        public delegate jobject NewGlobalRefDelegate(ref JNIEnv env, jobject value);
+        public NewGlobalRefDelegate NewGlobalRef;
     }
 
     //typedef const struct JNIInvokeInterface* JavaVM;
@@ -111,7 +127,7 @@ namespace ScriptCoreLibNative.SystemHeaders
 
 
 
-    
+
 
     }
 
