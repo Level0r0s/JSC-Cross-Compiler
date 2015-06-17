@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VrCubeWorld.MessageQueue.cs" />
     <Compile Include="GLES3JNILib.cs" />
     <Compile Include="VrCubeWorld.AppThreadFunction.cs" />
     <Compile Include="VrApi.cs" />

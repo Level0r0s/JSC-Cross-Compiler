@@ -34,8 +34,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     using ovrVector3f = Object;
     using ovrMatrix4f = Object;
 
-    using pthread_cond_t = Object;
-    using pthread_mutex_t = Object;
 
 
     [Script]
@@ -416,84 +414,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         }
 
 
-        public const int MAX_MESSAGES = 1024;
-
-
-
-        // struct?
-        [Script]
-        public class ovrMessageQueue
-        {
-            public ovrMessage[] Messages;
-
-            // does js do volatile?
-            public volatile int Head;  // dequeue at the head
-            public volatile int Tail;  // enqueue at the tail
-            public volatile bool Enabled;
-            public ovrMQWait Wait;
-            public pthread_mutex_t Mutex;
-            public pthread_cond_t Posted;
-            public pthread_cond_t Received;
-            public pthread_cond_t Processed;
-
-
-            // called by Java_com_oculus_gles3jni_GLES3JNILib_onTouchEvent
-            public void ovrMessageQueue_PostMessage(ref ovrMessage message)
-            {
-
-            }
-
-            public void ovrMessageQueue_Create() { }
-            public void ovrMessageQueue_Destroy() { }
-            public void ovrMessageQueue_Enable(bool v) { }
-
-            public void ovrMessageQueue_SleepUntilMessage() { }
-
-            public bool ovrMessageQueue_GetNextMessage(out ovrMessage message, bool waitForMessages)
-            {
-                // 1716
-
-                if (this.Wait == ovrMQWait.MQ_WAIT_PROCESSED)
-                {
-                    //pthread_cond_broadcast(ref Processed);
-
-                    this.Wait = ovrMQWait.MQ_WAIT_NONE;
-                }
-
-                if (waitForMessages)
-                {
-                    ovrMessageQueue_SleepUntilMessage();
-                }
-
-                //pthread_mutex_lock(ref this.Mutex);
-
-                message = default(ovrMessage);
-
-                if (this.Tail <= this.Head)
-                {
-                    //pthread_mutex_unlock(ref Mutex);
-                    return false;
-                }
-
-                message = this.Messages[Head & (MAX_MESSAGES - 1)];
-
-                this.Head++;
-                //pthread_mutex_unlock(ref Mutex);
-
-                if (this.Wait == ovrMQWait.MQ_WAIT_RECEIVED)
-                {
-                    //pthread_cond_broadcast(ref Processed);
-
-                }
-                else if (this.Wait == ovrMQWait.MQ_WAIT_PROCESSED)
-                {
-                    this.Wait = ovrMQWait.MQ_WAIT_PROCESSED;
-                }
-
-                return false;
-            }
-        }
-
+    
 
 
         // nameless in the c file.

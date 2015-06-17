@@ -14,6 +14,17 @@ namespace ScriptCoreLibNative.SystemHeaders
     {
     }
 
+    [Script(IsNative = true)]
+    public struct pthread_mutex_t //: pthread_h
+    {
+    }
+
+    [Script(IsNative = true)]
+    public struct pthread_cond_t //: pthread_h
+    {
+        // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.MessageQueue.cs
+    }
+
     //[Script(IsNative = true)]
     //public enum pthread_t { }
 
