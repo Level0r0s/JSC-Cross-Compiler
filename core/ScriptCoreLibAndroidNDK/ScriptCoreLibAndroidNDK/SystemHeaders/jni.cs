@@ -21,7 +21,7 @@ namespace ScriptCoreLibNative.SystemHeaders
 
     // where is it defined???
     [Script(IsNative = true, PointerName = "size_t")]
-    public class size_t : jni_h
+    public struct size_t : jni_h
     {
     }
 

@@ -72,7 +72,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         if (message.Id == MESSAGE.MESSAGE_ON_SURFACE_CREATED) { appState.NativeWindow = (native_window.ANativeWindow)message.ovrMessage_GetPointerParm(0); destroyed = true; break; }
                         if (message.Id == MESSAGE.MESSAGE_ON_SURFACE_DESTROYED) { appState.NativeWindow = null; break; }
 
-                        if (message.Id == MESSAGE.MESSAGE_ON_KEY_EVENT) { appState.ovrApp_HandleKeyEvent(message.ovrMessage_GetIntegerParm(0), message.ovrMessage_GetIntegerParm(1)); break; }
+                        if (message.Id == MESSAGE.MESSAGE_ON_KEY_EVENT) { appState.ovrApp_HandleKeyEvent((keycodes.AKEYCODE)message.ovrMessage_GetIntegerParm(0), (input.AInputEventAction)message.ovrMessage_GetIntegerParm(1)); break; }
                         if (message.Id == MESSAGE.MESSAGE_ON_TOUCH_EVENT) { appState.ovrApp_HandleTouchEvent(message.ovrMessage_GetIntegerParm(0), message.ovrMessage_GetFloatParm(1), message.ovrMessage_GetFloatParm(2)); break; }
 
                         appState.ovrApp_HandleVrModeChanges();

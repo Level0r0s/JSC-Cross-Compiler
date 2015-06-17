@@ -52,8 +52,21 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
     }
 
+    [Script(IsNative = true)]
+    public struct ovrModeParms
+    {
+        // These are fixed clock levels.
+        public int CpuLevel;
+        public int GpuLevel;
+
+        // These threads will get SCHED_FIFO.
+        public pid_t MainThreadTid;
+
+        public int RenderThreadTid;
+    }
 
 
+    // vrapi_EnterVrMode
     [Script(IsNative = true)]
     public class ovrMobile : VrApi_h
     {
@@ -72,9 +85,54 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         // GearVR voot
     }
 
+
+
+
+
+    [Script(IsNative = true)]
+    public enum eVrApiEventStatus
+    {
+        VRAPI_EVENT_ERROR_INTERNAL = -2,		// queue isn't created, etc.
+        VRAPI_EVENT_ERROR_INVALID_BUFFER = -1,	// the buffer passed in was invalid
+        VRAPI_EVENT_NOT_PENDING = 0,			// no event is waiting
+        VRAPI_EVENT_PENDING,					// an event is waiting
+        VRAPI_EVENT_CONSUMED,					// an event was pending but was consumed internally
+        VRAPI_EVENT_BUFFER_OVERFLOW,			// an event is being returned, but it could not fit into the buffer
+        VRAPI_EVENT_INVALID_JSON				// there was an error parsing the JSON data
+    }
+
+    [Script(IsNative = true, Header = "VrApi_Android.h")]
+    public static class VrApi_Android
+    {
+        public const float BACK_BUTTON_DOUBLE_TAP_TIME_IN_SECONDS = 0.25f;
+        public const float BACK_BUTTON_SHORT_PRESS_TIME_IN_SECONDS = 0.25f;
+        public const float BACK_BUTTON_LONG_PRESS_TIME_IN_SECONDS = 0.75f;
+
+        public static eVrApiEventStatus ovr_GetNextPendingEvent(byte[] buffer, uint bufferSize)
+        {
+            return default(eVrApiEventStatus);
+        }
+
+
+        // if we wanted to group methods by the this pointer, each method could want its own header file still?
+        // called by ovrApp_BackButtonAction
+        public static bool ovr_StartSystemActivity(ref ovrJava java, string command, string jsonText)
+        {
+            return false;
+        }
+
+    }
+
+
     [Script(IsNative = true, Header = "VrApi_Helpers.h")]
     public static class VrApi_Helpers
     {
+        // vrapi_DefaultModeParms
+        public static ovrModeParms vrapi_DefaultModeParms(ref ovrJava java)
+        {
+            return default(ovrModeParms);
+        }
+
         public static ovrInitParms vrapi_DefaultInitParms(ref ovrJava java)
         {
             return default(ovrInitParms);
@@ -89,6 +147,28 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     [Script(IsNative = true, Header = "VrApi.h")]
     public static class VrApi
     {
+        // ovrApp_BackButtonAction
+
+        public const string PUI_GLOBAL_MENU = "globalMenu";
+
+
+        public const string PUI_CONFIRM_QUIT = "confirmQuit";
+
+        public static void vrapi_LeaveVrMode(ovrMobile ovr)
+        { 
+        }
+
+
+        public static ovrMobile vrapi_EnterVrMode(ref ovrModeParms parms)
+        {
+            return default(ovrMobile);
+        }
+
+
+        // ovrApp_HandleKeyEvent
+        public static double vrapi_GetTimeInSeconds() { return 0; }
+
+
         public static ovrHmdInfo vrapi_GetHmdInfo(ref ovrJava java)
         {
             return default(ovrHmdInfo);

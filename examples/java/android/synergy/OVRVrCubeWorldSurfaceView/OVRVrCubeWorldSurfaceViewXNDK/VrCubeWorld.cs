@@ -18,7 +18,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 {
     using EGLDisplay = Object;
     using EGLConfig = Object;
-    using EGLSurface = Object;
+    //using EGLSurface = Object;
     using EGLContext = Object;
 
     using GLuint = Object;
@@ -33,6 +33,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
     using ovrVector3f = Object;
     using ovrMatrix4f = Object;
+    using ScriptCoreLibNative.SystemHeaders.EGL;
 
 
 
@@ -59,7 +60,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrEgl_Clear() { }
             public void ovrEgl_CreateContext(object e) { }
             public void ovrEgl_DestroyContext() { }
-            public void ovrEgl_CreateSurface() { }
+
+            // called by ovrApp_HandleVrModeChanges
+            public void ovrEgl_CreateSurface(native_window.ANativeWindow w) { }
             public void ovrEgl_DestroySurface() { }
         }
 
@@ -261,9 +264,17 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public ovrMatrix4f TanAngleMatrix;
 
 
+          
+
+            public void ovrRenderer_Clear() { }
+            public void ovrRenderer_Create(ref ovrHmdInfo hmdInfo) { }
+            public void ovrRenderer_Destroy() { }
+
             // sent into vrapi_SubmitFrame
             public ovrFrameParms ovrRenderer_RenderFrame(ref ovrApp appState, ref ovrTracking tracking)
             {
+                // 1049
+
                 var x = default(ovrFrameParms);
 
 
@@ -271,10 +282,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 return x;
             }
-
-            public void ovrRenderer_Clear() { }
-            public void ovrRenderer_Create(ref ovrHmdInfo hmdInfo) { }
-            public void ovrRenderer_Destroy() { }
         }
 
 
@@ -313,15 +320,17 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public ovrScene Scene;
             public ovrSimulation Simulation;
             public ovrTracking Tracking;
+
+            public void ovrRenderThread_Clear() { }
+            public void ovrRenderThread_Create() { }
+            public void ovrRenderThread_Destroy() { }
+            public void ovrRenderThread_Submit() { }
+            public void ovrRenderThread_Wait() { }
+            public void ovrRenderThread_GetTid() { }
         }
 
         static void RenderThreadFunction() { }
-        static void ovrRenderThread_Clear(this ovrRenderThread that) { }
-        static void ovrRenderThread_Create(this ovrRenderThread that) { }
-        static void ovrRenderThread_Destroy(this ovrRenderThread that) { }
-        static void ovrRenderThread_Submit(this ovrRenderThread that) { }
-        static void ovrRenderThread_Wait(this ovrRenderThread that) { }
-        static void ovrRenderThread_GetTid(this ovrRenderThread that) { }
+
         #endregion
 
         enum ovrBackButtonState
@@ -360,77 +369,193 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public ovrRenderer Renderer;
 #endif
 
+            // ctor
+            // called by AppThreadFunction
+            public void ovrApp_Clear()
+            {
+                // 1408
 
-            public void ovrApp_Clear() { }
-            public void ovrApp_HandleVrModeChanges() { }
-            public void ovrApp_BackButtonAction() { }
+                this.Java.Vm = default(JavaVM);
+                this.Java.Env = default(JNIEnv);
+                this.Java.ActivityObject = null;
+                this.NativeWindow = null;
+                this.Resumed = false;
+                this.Ovr = default(ovrMobile);
+                this.FrameIndex = 1;
+                this.MinimumVsyncs = 1;
+                this.BackButtonState = ovrBackButtonState.BACK_BUTTON_STATE_NONE;
+                this.BackButtonDown = false;
+                this.BackButtonDownStartTime = 0.0;
+
+                this.Egl.ovrEgl_Clear();
+                this.Scene.ovrScene_Clear();
+                this.Simulation.ovrSimulation_Clear();
+#if MULTI_THREADED
+	ovrRenderThread_Clear( &app->RenderThread );
+#else
+                this.Renderer.ovrRenderer_Clear();
+#endif
+            }
+
+            public void ovrApp_HandleVrModeChanges()
+            {
+                // 1432
+                if (this.NativeWindow != null && this.Egl.MainSurface == egl.EGL_NO_SURFACE)
+                {
+                    this.Egl.ovrEgl_CreateSurface(this.NativeWindow);
+                }
+
+                if (this.Resumed != false && this.NativeWindow != null)
+                {
+                    if (this.Ovr == null)
+                    {
+                        var parms = VrApi_Helpers.vrapi_DefaultModeParms(ref Java);
+                        parms.CpuLevel = 2;
+                        parms.GpuLevel = 3;
+                        parms.MainThreadTid = unistd.gettid();
+#if MULTI_THREADED
+			// Also set the renderer thread to SCHED_FIFO.
+			parms.RenderThreadTid = ovrRenderThread_GetTid( &app->RenderThread );
+#endif
+
+                        //ALOGV("        eglGetCurrentSurface( EGL_DRAW ) = %p", eglGetCurrentSurface(EGL_DRAW));
+
+                        this.Ovr = VrApi.vrapi_EnterVrMode(ref parms);
+
+                        //ALOGV("        vrapi_EnterVrMode()");
+                        //ALOGV("        eglGetCurrentSurface( EGL_DRAW ) = %p", eglGetCurrentSurface(EGL_DRAW));
+                    }
+                }
+                else
+                {
+                    if (this.Ovr != null)
+                    {
+#if MULTI_THREADED
+			// Make sure the renderer thread is no longer using the ovrMobile.
+			ovrRenderThread_Wait( &app->RenderThread );
+#endif
+                        //ALOGV("        eglGetCurrentSurface( EGL_DRAW ) = %p", eglGetCurrentSurface(EGL_DRAW));
+
+                        VrApi.vrapi_LeaveVrMode(this.Ovr);
+                        this.Ovr = null;
+
+                        //ALOGV("        vrapi_LeaveVrMode()");
+                        //ALOGV("        eglGetCurrentSurface( EGL_DRAW ) = %p", eglGetCurrentSurface(EGL_DRAW));
+                    }
+                }
+
+                if (this.NativeWindow == null && this.Egl.MainSurface != egl.EGL_NO_SURFACE)
+                {
+                    this.Egl.ovrEgl_DestroySurface();
+                }
+            }
+
+            public void ovrApp_BackButtonAction()
+            {
+                // 1484
+
+                if (this.BackButtonState == ovrBackButtonState.BACK_BUTTON_STATE_PENDING_DOUBLE_TAP)
+                {
+                    //ALOGV("back button double tap");
+                    this.BackButtonState = ovrBackButtonState.BACK_BUTTON_STATE_SKIP_UP;
+                }
+                else if (this.BackButtonState == ovrBackButtonState.BACK_BUTTON_STATE_PENDING_SHORT_PRESS && !this.BackButtonDown)
+                {
+                    if ((VrApi.vrapi_GetTimeInSeconds() - this.BackButtonDownStartTime) > VrApi_Android.BACK_BUTTON_DOUBLE_TAP_TIME_IN_SECONDS)
+                    {
+                        //ALOGV("back button short press");
+                        //ALOGV("        ovr_StartSystemActivity( %s )", PUI_CONFIRM_QUIT);
+                        VrApi_Android.ovr_StartSystemActivity(ref Java, VrApi.PUI_CONFIRM_QUIT, default(string));
+                        this.BackButtonState = ovrBackButtonState.BACK_BUTTON_STATE_NONE;
+                    }
+                }
+                else if (this.BackButtonState == ovrBackButtonState.BACK_BUTTON_STATE_NONE && this.BackButtonDown)
+                {
+                    if ((VrApi.vrapi_GetTimeInSeconds() - this.BackButtonDownStartTime) > VrApi_Android.BACK_BUTTON_LONG_PRESS_TIME_IN_SECONDS)
+                    {
+                        //ALOGV("back button long press");
+                        //ALOGV("        ovr_StartSystemActivity( %s )", PUI_GLOBAL_MENU);
+                        VrApi_Android.ovr_StartSystemActivity(ref Java, VrApi.PUI_GLOBAL_MENU, null);
+                        this.BackButtonState = ovrBackButtonState.BACK_BUTTON_STATE_SKIP_UP;
+                    }
+                }
+            }
 
             // java UI sends over to native, which the uses MQ to send over to bg thread? SharedMemory would be nice?
             // onKeyEvent
-            public void ovrApp_HandleKeyEvent(int keyCode, int action) { }
+            public void ovrApp_HandleKeyEvent(keycodes.AKEYCODE keyCode, input.AInputEventAction action)
+            {
+                // 1513
+                // cannot do this aliasing?
+                //var app = this;
+
+                // Handle GearVR back button.
+                if (keyCode == keycodes.AKEYCODE.AKEYCODE_BACK)
+                {
+                    if (action == input.AInputEventAction.AKEY_EVENT_ACTION_DOWN)
+                    {
+                        if (!this.BackButtonDown)
+                        {
+                            if ((VrApi.vrapi_GetTimeInSeconds() - this.BackButtonDownStartTime) < VrApi_Android.BACK_BUTTON_DOUBLE_TAP_TIME_IN_SECONDS)
+                            {
+                                this.BackButtonState = ovrBackButtonState.BACK_BUTTON_STATE_PENDING_DOUBLE_TAP;
+                            }
+                            this.BackButtonDownStartTime = VrApi.vrapi_GetTimeInSeconds();
+                        }
+                        this.BackButtonDown = true;
+                    }
+                    else if (action == input.AInputEventAction.AKEY_EVENT_ACTION_UP)
+                    {
+                        if (this.BackButtonState == ovrBackButtonState.BACK_BUTTON_STATE_NONE)
+                        {
+                            if ((VrApi.vrapi_GetTimeInSeconds() - this.BackButtonDownStartTime) < VrApi_Android.BACK_BUTTON_SHORT_PRESS_TIME_IN_SECONDS)
+                            {
+                                this.BackButtonState = ovrBackButtonState.BACK_BUTTON_STATE_PENDING_SHORT_PRESS;
+                            }
+                        }
+                        else if (this.BackButtonState == ovrBackButtonState.BACK_BUTTON_STATE_SKIP_UP)
+                        {
+                            this.BackButtonState = ovrBackButtonState.BACK_BUTTON_STATE_NONE;
+                        }
+                        this.BackButtonDown = false;
+                    }
+                    //return 1;
+                }
+                //return 0;
+            }
 
             // onTouchEvent
-            public void ovrApp_HandleTouchEvent(int action, float x, float y) { }
-
-            public void ovrApp_HandleSystemEvents() { }
-
-        }
-
-
-
-        public enum ovrMQWait
-        {
-            MQ_WAIT_NONE,		// don't wait
-            MQ_WAIT_RECEIVED,	// wait until the consumer thread has received the message
-            MQ_WAIT_PROCESSED	// wait until the consumer thread has processed the message
-        };
-
-        [Script]
-        // why struct?
-        public struct ovrMessage
-        {
-            public VrCubeWorld.MESSAGE Id;
-            public ovrMQWait Wait;
-            public long[] Parms;
-
-            public void ovrMessage_Init(MESSAGE mESSAGE, ovrMQWait ovrMQWait)
+            public void ovrApp_HandleTouchEvent(int action, float x, float y)
             {
-                // this byref?
+                // ??? not used
 
             }
 
-            public void ovrMessage_SetPointerParm(int i, object value) { }
-            public object ovrMessage_GetPointerParm(int i) { return null; }
-            public void ovrMessage_SetIntegerParm(int i, int value) { }
-            public int ovrMessage_GetIntegerParm(int i) { return 0; }
-            public void ovrMessage_SetFloatParm(int i, float value) { }
-            public float ovrMessage_GetFloatParm(int i)
+            // sent by?
+            public void ovrApp_HandleSystemEvents()
             {
-                //script: error JSC1000: C : Opcode not implemented: ldc.r4 at OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld+ovrMessage.ovrMessage_GetFloatParm
-                return 0;
+                // 1568
+                var MAX_EVENT_SIZE = 4096u;
+
+                var eventBuffer = new byte[MAX_EVENT_SIZE];
+
+                for (var status = VrApi_Android.ovr_GetNextPendingEvent(eventBuffer, MAX_EVENT_SIZE); status >= eVrApiEventStatus.VRAPI_EVENT_PENDING; status = VrApi_Android.ovr_GetNextPendingEvent(eventBuffer, MAX_EVENT_SIZE))
+                {
+                    if (status != eVrApiEventStatus.VRAPI_EVENT_PENDING)
+                    {
+                        if (status != eVrApiEventStatus.VRAPI_EVENT_CONSUMED)
+                        {
+                            //ALOGE("Error %i handing System Activities Event", status);
+                        }
+                        continue;
+                    }
+                }
+
             }
 
-
         }
 
 
-    
-
-
-        // nameless in the c file.
-        public enum MESSAGE
-        {
-            MESSAGE_ON_CREATE,
-            MESSAGE_ON_START,
-            MESSAGE_ON_RESUME,
-            MESSAGE_ON_PAUSE,
-            MESSAGE_ON_STOP,
-            MESSAGE_ON_DESTROY,
-            MESSAGE_ON_SURFACE_CREATED,
-            MESSAGE_ON_SURFACE_DESTROYED,
-            MESSAGE_ON_KEY_EVENT,
-            MESSAGE_ON_TOUCH_EVENT
-        }
 
         // converted from size_t
         // can do a sizeof for malloc?
