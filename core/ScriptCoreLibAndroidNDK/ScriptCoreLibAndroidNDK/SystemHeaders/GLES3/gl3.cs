@@ -373,6 +373,17 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
         public static void glEnableVertexAttribArray(uint index) { throw null; }
         public static void glVertexAttribPointer(uint index, int size, int type, bool normalized, int stride, void* pointer) { throw null; }
         public static void glVertexAttribDivisor(uint index, uint divisor) { throw null; }
+
+
+        public static void glInvalidateFramebuffer(int target, int numAttachments, int[] attachments) { throw null; }
+
+        public static void glFlush() { throw null; }
+
+        public static void glBindFramebuffer(int target, uint framebuffer) { throw null; }
+        public static void glDeleteFramebuffers(int n, ref uint framebuffers) { throw null; }
+        public static void glDeleteRenderbuffers(int n, ref uint renderbuffers) { throw null; }
+        public static void glDeleteTextures(int n, ref uint textures) { throw null; }
+
         //#include <EGL/eglplatform.h>
         //#include <EGL/egl.h>
         //#include <GLES2/gl2platform.h>
