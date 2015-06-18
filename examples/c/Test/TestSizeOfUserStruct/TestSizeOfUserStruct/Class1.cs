@@ -21,8 +21,21 @@ namespace TestSizeOfUserStruct
 
             var len = sizeof(__msg_control_cmsghdr_int);
 
+
+            //buffer.M[0, 2] = 5;
         }
     }
+
+    //public struct float4x4
+    //{
+    //    public float this[int x, int y]
+    //    {
+    //        set { }
+    //    }
+    //}
+
+   
+
     public struct __msg_control_cmsghdr_int
     {
         //public socket_h.cmsghdr cmsg;
@@ -30,6 +43,11 @@ namespace TestSizeOfUserStruct
         public long cmsg;
 
         public int data0;
+
+        //public float4x4 M;
+        public fixed float M[4*4];
+
+
     }
 
     //Error	1	'TestSizeOfUserStruct.__msg_control_cmsghdr_int' does not have a predefined size, therefore sizeof can only be used in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)	X:\jsc.svn\examples\c\Test\TestSizeOfUserStruct\TestSizeOfUserStruct\Class1.cs	18	23	TestSizeOfUserStruct

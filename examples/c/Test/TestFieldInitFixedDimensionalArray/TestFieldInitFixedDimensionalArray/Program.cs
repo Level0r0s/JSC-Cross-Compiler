@@ -19,12 +19,19 @@ namespace TestFieldInitFixedDimensionalArray
     }
 #endif
 
+    unsafe struct float1
+    {
+        public float value;
+    }
+
     unsafe struct almostWhatWeWant
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150618/ovrmatrix4f
+
         //  long long fixed1[4];
-        public fixed long fixed1[4];
+        public fixed float M[4 * 4];
 
-
+        // extra 4 bytes padding
         public int other;
 
         public void ovrRenderTexture_SetCurrent()
@@ -82,6 +89,10 @@ namespace TestFieldInitFixedDimensionalArray
         static void Main(string[] args)
         {
             ScriptCoreLibNative.SystemHeaders.stdio_h.puts("enter");
+
+
+            float4x4();
+
 
             Console.WriteLine("hi bakery!");
 
@@ -142,6 +153,27 @@ namespace TestFieldInitFixedDimensionalArray
             }
 
             Console.WriteLine("bye!");
+        }
+
+        private static void float4x4()
+        {
+            var eyeViewMatrix = default(almostWhatWeWant);
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150618/ovrmatrix4f
+
+            // TestFieldInitFixedDimensionalArray.exe.c(1107) : error C2102: '&' requires l-value
+            var f1 = (float*)&eyeViewMatrix;
+            //     single_1 = ((float*)&(&want0));
+
+            var ff1 = (float1*)&eyeViewMatrix;
+
+            var ff1value =default(float1);
+
+            // memset(, 0, sizeof(TestFieldInitFixedDimensionalArray_float1));
+            ff1[1] = ff1value;
+
+            //  (float1_2 + sizeof(TestFieldInitFixedDimensionalArray_float1)) = float13;
+            //f1[4] = 4;
+
         }
     }
 }

@@ -39,14 +39,58 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     // Row-major 4x4 matrix.
     [Script(IsNative = true)]
 
-    // allocated by glMapBufferRange
+    //float M[4][4];
+    // 
+
+    //public unsafe struct float4
+    //{
+    //    float float0;
+    //    float float1;
+    //    float float2;
+    //    float float3;
+    //}
+
+    //public unsafe struct float4x4 //: VrApi_h
+    //{
+    //    public fixed float __value[4 * 4];
+
+    //    // 16 floats in size!
+
+    //    //float4 row0;
+    //    //float4 row1;
+    //    //float4 row2;
+    //    //float4 row3;
+
+    //    // can we return ref float?
+
+    //    float* this[int row]
+    //    {
+    //        get
+    //        {
+    //            return (float*)&this;
+    //        }
+    //    }
+    //}
+
+
+    // allocated by glMapBufferRange, sizeof
     public unsafe struct ovrMatrix4f //: VrApi_h
     {
         // Fixed sized buffers can only be one-dimensional.
         // http://stackoverflow.com/questions/665573/multidimensional-arrays-in-a-struct-in-c-sharp
 
+        // sent to glUniformMatrix4fv
+
         //public float M[4,4];
-        public float[,] M; // no need to init it as it is native
+        public fixed float M[4 * 4]; // no need to init it as it is native
+
+        // http://stackoverflow.com/questions/15071775/struct-with-fixed-sized-array-of-another-struct
+
+        // now we cannot get the size for allocator anymore?
+
+        // X:\jsc.svn\examples\c\Test\TestSizeOfUserStruct\TestSizeOfUserStruct\Class1.cs
+        //Error	7	Cannot take the address of, get the size of, or declare a pointer to a managed type ('OVRVrCubeWorldSurfaceViewXNDK.ovrMatrix4f')	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Renderer.cs	100	44	OVRVrCubeWorldSurfaceViewXNDK
+
     }
 
     [Script(IsNative = true)]
@@ -285,6 +329,26 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     [Script(IsNative = true, Header = "VrApi_Helpers.h")]
     public static class VrApi_Helpers
     {
+        public static ovrMatrix4f ovrMatrix4f_Transpose(ref ovrMatrix4f a)
+        {
+            throw null;
+        }
+
+        public static ovrMatrix4f ovrMatrix4f_Multiply(ref ovrMatrix4f a, ref ovrMatrix4f b)
+        {
+            throw null;
+        }
+
+        public static ovrMatrix4f ovrMatrix4f_CreateRotation(float radiansX, float radiansY, float radiansZ)
+        {
+            throw null;
+        }
+
+        public static ovrMatrix4f ovrMatrix4f_CreateTranslation(float radiansX, float radiansY, float radiansZ)
+        {
+            throw null;
+        }
+
         public static ovrMatrix4f vrapi_GetEyeViewMatrix(ref ovrHeadModelParms headModelParms,
                                                     ref ovrMatrix4f centerEyeViewMatrix,
                                                     int eye)

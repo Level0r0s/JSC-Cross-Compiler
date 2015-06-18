@@ -159,7 +159,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             //public fixed int[] Uniforms[MAX_PROGRAM_UNIFORMS];      // ProgramUniforms[].name
             //public fixed int[] Textures[MAX_PROGRAM_TEXTURES];      // Texture%i
 
-            public readonly int[] Uniforms = new int [MAX_PROGRAM_UNIFORMS];      // ProgramUniforms[].name
+            public readonly int[] Uniforms = new int[MAX_PROGRAM_UNIFORMS];      // ProgramUniforms[].name
             public readonly int[] Textures = new int[MAX_PROGRAM_TEXTURES];      // Texture%i
 
             //Error CS1663  Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double OVRVrCubeWorldSurfaceViewXNDK   X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	130
@@ -245,17 +245,19 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         [Script]
         class ovrSimulation
         {
-            ovrVector3f CurrentRotation;
+            public ovrVector3f CurrentRotation;
 
 
             public void ovrSimulation_AdvanceSimulation(double predictedDisplayTime)
             {
 
             }
+
+            public void ovrSimulation_Clear()
+            { }
+
         }
 
-        static void ovrSimulation_Clear(this ovrSimulation that)
-        { }
 
 
 

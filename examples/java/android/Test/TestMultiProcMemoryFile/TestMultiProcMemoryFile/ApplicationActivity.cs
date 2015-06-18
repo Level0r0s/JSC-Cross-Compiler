@@ -14,7 +14,7 @@ using ScriptCoreLib.Android.Manifest;
 using android.content;
 using ScriptCoreLibJava.Extensions;
 using android.net;
-using java.io;
+//using java.io;
 
 namespace TestMultiProcMemoryFile.Activities
 {
@@ -30,6 +30,8 @@ namespace TestMultiProcMemoryFile.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
+        // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Renderer.cs
+
         // http://mattias.niklewski.com/2014/03/binder.html
 
 
@@ -237,7 +239,8 @@ namespace TestMultiProcMemoryFile.Activities
 
             var activity = this;
 
-            var fs = default(FileDescriptor);
+            // does it work for us?
+            var fs = default(java.io.FileDescriptor);
 
             try
             {
@@ -475,6 +478,7 @@ namespace TestMultiProcMemoryFile.Activities
                                         // https://github.com/realm/realm-java/issues/1037
 
                                         var mAddress = (int)
+                                            // ???
                                             TestNDKAsAsset.xActivity.mmap(
                                             (int)xvalue,
                                             0x07

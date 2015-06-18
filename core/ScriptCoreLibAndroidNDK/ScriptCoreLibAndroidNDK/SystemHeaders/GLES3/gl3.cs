@@ -22,7 +22,7 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
     { }
 
     [Script(IsNative = true)]
-    public class gl3 : gl3_h
+    public unsafe class gl3 : gl3_h
     {
 
         #region #define
@@ -355,7 +355,7 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
         public static void glUseProgram(uint program) { throw null; }
 
 
-        public static void glUniformMatrix4fv(int location, int count, bool transpose, ref float value) { throw null; }
+        public static void glUniformMatrix4fv(int location, int count, bool transpose, float* value) { throw null; }
 
         public static void glBindVertexArray(uint vao) { throw null; }
 
@@ -363,7 +363,7 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
         public static void glDrawElementsInstanced(int mode, int count, int type, object indices, int instancecount) { throw null; }
 
 
-        public static object glMapBufferRange(int target, int offset, int length, int access) { throw null; }
+        public static void* glMapBufferRange(int target, int offset, int length, int access) { throw null; }
 
         //#include <EGL/eglplatform.h>
         //#include <EGL/egl.h>
