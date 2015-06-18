@@ -277,9 +277,43 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     }
 
     [Script(IsNative = true)]
-    public struct ovrHmdInfo : VrApi_h
+    public unsafe struct ovrHmdInfo : VrApi_h
     {
         // GearVR voot
+
+        // Resolution of the display in pixels.
+        public int DisplayPixelsWide;
+        public int DisplayPixelsHigh;
+
+        // Refresh rate of the display in cycles per second.
+        // Currently 60Hz.
+        public float DisplayRefreshRate;
+
+        // With a display resolution of 2560x1440, the pixels at the center
+        // of each eye cover about 0.06 degrees of visual arc. To wrap a
+        // full 360 degrees, about 6000 pixels would be needed and about one
+        // quarter of that would be needed for ~90 degrees FOV. As such, Eye
+        // images with a resolution of 1536x1536 result in a good 1:1 mapping
+        // in the center, but they need mip-maps for off center pixels. To
+        // avoid the need for mip-maps and for significantly improved rendering
+        // performance this currently returns a conservative 1024x1024.
+        public fixed int SuggestedEyeResolution[2];
+
+        // This is a product of the lens distortion and the screen size,
+        // but there is no truly correct answer.
+        //
+        // There is a tradeoff in resolution and coverage.
+        // Too small of an FOV will leave unrendered pixels visible, but too
+        // large wastes resolution or fill rate.  It is unreasonable to
+        // increase it until the corners are completely covered, but we do
+        // want most of the outside edges completely covered.
+        //
+        // Applications might choose to render a larger FOV when angular
+        // acceleration is high to reduce black pull in at the edges by
+        // the time warp.
+        //
+        // Currently symmetric 90.0 degrees.
+        public fixed float SuggestedEyeFov[2];
     }
 
     [Script(IsNative = true)]
@@ -329,6 +363,18 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     [Script(IsNative = true, Header = "VrApi_Helpers.h")]
     public static class VrApi_Helpers
     {
+
+        public static ovrMatrix4f ovrMatrix4f_TanAngleMatrixFromProjection(ref  ovrMatrix4f projection)
+        {
+            throw null;
+        }
+
+        public static ovrMatrix4f ovrMatrix4f_CreateProjectionFov(float fovRadiansX, float fovRadiansY,
+                                                 float offsetX, float offsetY, float nearZ, float farZ)
+        {
+            throw null;
+        }
+
         public static ovrMatrix4f ovrMatrix4f_Transpose(ref ovrMatrix4f a)
         {
             throw null;

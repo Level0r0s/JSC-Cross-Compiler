@@ -106,9 +106,19 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             //Error   CS1663  Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double    OVRVrCubeWorldSurfaceViewXNDK   X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs 73
 
 
+            // called by ovrScene_Clear
+            public void ovrGeometry_Clear() { }
+
+            // called by ovrScene_Create
+            public void ovrGeometry_CreateCube() { }
+            public void ovrGeometry_Destroy() { }
+            public void ovrGeometry_CreateVAO() { }
+
+            // called by ovrScene_DestroyVAOs
+            public void ovrGeometry_DestroyVAO() { }
         }
 
-        enum ovrVertexAttribute_location
+        enum ovrVertexAttribute_location : uint
         {
             VERTEX_ATTRIBUTE_LOCATION_POSITION,
             VERTEX_ATTRIBUTE_LOCATION_COLOR,
@@ -134,11 +144,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
         //    };
 
-        static void ovrGeometry_Clear(this ovrGeometry that) { }
-        static void ovrGeometry_CreateCube(this ovrGeometry that) { }
-        static void ovrGeometry_Destroy(this ovrGeometry that) { }
-        static void ovrGeometry_CreateVAO(this ovrGeometry that) { }
-        static void ovrGeometry_DestroyVAO(this ovrGeometry that) { }
 
 
         public const int MAX_PROGRAM_UNIFORMS = 8;
@@ -165,8 +170,11 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             //Error CS1663  Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double OVRVrCubeWorldSurfaceViewXNDK   X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	130
             //Error CS1642  Fixed size buffer fields may only be members of structs OVRVrCubeWorldSurfaceViewXNDK X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	129
 
+            // called by ovrScene_Clear
             public void ovrProgram_Clear() { }
-            public void ovrProgram_Create() { }
+
+            // called by  ovrScene_Create
+            public void ovrProgram_Create(string vert, string frag) { }
             public void ovrProgram_Destroy() { }
 
         }
@@ -209,31 +217,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
         public const int NUM_INSTANCES = 1500;
 
-        [Script]
-        class ovrScene
-        {
-            public bool CreatedScene;
-            public bool CreatedVAOs;
-
-            public ovrProgram Program;
-
-            public ovrGeometry Cube;
-            public GLuint InstanceTransformBuffer;
-            public ovrVector3f[] CubePositions;
-            public ovrVector3f[] CubeRotations;
-
-            public void ovrScene_Clear() { }
-            public bool ovrScene_IsCreated()
-            {
-
-                return false;
-            }
-            public void ovrScene_CreateVAOs() { }
-            public void ovrScene_DestroyVAOs() { }
-            public void ovrScene_Create() { }
-            public void ovrScene_Destroy() { }
-
-        }
 
         // assetslibrary
         public const string VERTEX_SHADER = @"
@@ -242,20 +225,224 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 ";
 
 
+        // member of ovrApp
+        // member of ovrRenderThread
         [Script]
-        class ovrSimulation
+        unsafe class ovrScene
         {
-            public ovrVector3f CurrentRotation;
+            public bool CreatedScene;
+            public bool CreatedVAOs;
 
+            public ovrProgram Program;
 
-            public void ovrSimulation_AdvanceSimulation(double predictedDisplayTime)
+            public ovrGeometry Cube;
+
+            // deleted by ovrScene_Destroy
+            public GLuint InstanceTransformBuffer;
+
+            public readonly ovrVector3f[] CubePositions = new ovrVector3f[NUM_INSTANCES];
+            public readonly ovrVector3f[] CubeRotations = new ovrVector3f[NUM_INSTANCES];
+
+            public ovrScene()
             {
+                ovrScene_Clear();
+            }
+
+            // called by ovrApp_Clear
+            void ovrScene_Clear()
+            {
+                // 817
+                this.CreatedScene = false;
+                this.CreatedVAOs = false;
+                this.InstanceTransformBuffer = 0;
+
+                this.Program.ovrProgram_Clear();
+                this.Cube.ovrGeometry_Clear();
+            }
+
+            public bool ovrScene_IsCreated()
+            {
+                return this.CreatedScene;
+            }
+            public void ovrScene_CreateVAOs()
+            {
+                // 832
+
+                if (this.CreatedVAOs)
+                    return;
+
+                this.Cube.ovrGeometry_CreateVAO();
+
+                // Modify the VAO to use the instance transform attributes.
+                gl3.glBindVertexArray(this.Cube.VertexArrayObject);
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.InstanceTransformBuffer);
+
+                //for (uint i = 0; i < 4; i++)
+                for (int i = 0; i < 4; i++)
+                {
+                    gl3.glEnableVertexAttribArray((uint)ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_TRANSFORM + (uint)i);
+                    gl3.glVertexAttribPointer((uint)ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_TRANSFORM + (uint)i,
+                        4, gl3.GL_FLOAT,
+                        false,
+                        4 * 4 * sizeof(float),
+                        // offset?
+                        (void*)(i * 4 * sizeof(float)));
+                    gl3.glVertexAttribDivisor((uint)ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_TRANSFORM + (uint)i, 1);
+                }
+
+                gl3.glBindVertexArray(0);
+
+                this.CreatedVAOs = true;
+            }
+
+            // called by ovrScene_Destroy
+            public void ovrScene_DestroyVAOs()
+            {
+                if (this.CreatedVAOs)
+                {
+                    this.Cube.ovrGeometry_DestroyVAO();
+
+                    this.CreatedVAOs = false;
+                }
+            }
+
+            // called by AppThreadFunction
+            public void ovrScene_Create()
+            {
+                // 864
+
+                this.Program.ovrProgram_Create(VERTEX_SHADER, FRAGMENT_SHADER);
+                this.Cube.ovrGeometry_CreateCube();
+
+                // Create the instance transform attribute buffer.
+                gl3.glGenBuffers(1, out this.InstanceTransformBuffer);
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.InstanceTransformBuffer);
+                gl3.glBufferData(gl3.GL_ARRAY_BUFFER, NUM_INSTANCES * 4 * 4 * sizeof(float), null, gl3.GL_DYNAMIC_DRAW);
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, 0);
+
+                // Setup random cube positions and rotations.
+                for (int i = 0; i < NUM_INSTANCES; i++)
+                {
+                    // Using volatile keeps the compiler from optimizing away multiple calls to drand48().
+                    //volatile float rx; ry, rz;
+                    float rx = 0, ry = 0, rz = 0;
+
+                    //for (; ; )
+
+                    var notfound = true;
+                    while (notfound)
+                    {
+                        rx = (float)(stdlib_h.drand48() - 0.5f) * (50.0f + (float)Math.Sqrt(NUM_INSTANCES));
+                        ry = (float)(stdlib_h.drand48() - 0.5f) * (50.0f + (float)Math.Sqrt(NUM_INSTANCES));
+                        rz = (float)(stdlib_h.drand48() - 0.5f) * (1500.0f + (float)Math.Sqrt(NUM_INSTANCES));
+
+
+                        // If too close to 0,0,0
+                        var too_closex = Math.Abs(rx) < 4.0f;
+                        var too_closey = Math.Abs(ry) < 4.0f;
+                        var too_closez = Math.Abs(rz) < 4.0f;
+
+                        if (!too_closex)
+                            if (!too_closey)
+                                if (!too_closez)
+                                {
+                                    // Test for overlap with any of the existing cubes.
+                                    bool overlap = false;
+                                    for (int j = 0; j < i; j++)
+                                    {
+                                        if (Math.Abs(rx - this.CubePositions[j].x) < 4.0f)
+                                            if (Math.Abs(ry - this.CubePositions[j].y) < 4.0f)
+                                                if (Math.Abs(rz - this.CubePositions[j].z) < 4.0f)
+                                                {
+                                                    overlap = true;
+                                                    break;
+                                                }
+                                    }
+                                    if (!overlap)
+                                    {
+                                        //break;
+                                        notfound = false;
+                                    }
+                                }
+                    }
+
+                    // Insert into list sorted based on distance.
+                    int insert = 0;
+                    float distSqr = rx * rx + ry * ry + rz * rz;
+                    for (int j = i; j > 0; j--)
+                    {
+                        var otherDistSqr = default(float);
+
+                        // fixed/break does a try/finally to zero out the pointer
+                        fixed (ovrVector3f* otherPos = &this.CubePositions[j - 1])
+                            otherDistSqr = otherPos->x * otherPos->x + otherPos->y * otherPos->y + otherPos->z * otherPos->z;
+
+                        if (distSqr > otherDistSqr)
+                        {
+                            insert = j;
+                            break;
+                        }
+
+
+                        this.CubePositions[j] = this.CubePositions[j - 1];
+                        this.CubeRotations[j] = this.CubeRotations[j - 1];
+                    }
+
+                    this.CubePositions[insert].x = rx;
+                    this.CubePositions[insert].y = ry;
+                    this.CubePositions[insert].z = rz;
+
+                    this.CubeRotations[insert].x = (float)stdlib_h.drand48();
+                    this.CubeRotations[insert].y = (float)stdlib_h.drand48();
+                    this.CubeRotations[insert].z = (float)stdlib_h.drand48();
+                }
+
+
+                this.CreatedScene = true;
+
+                this.ovrScene_CreateVAOs();
+            }
+
+            // called by AppThreadFunction
+            public void ovrScene_Destroy()
+            {
+                // 940
+                this.ovrScene_DestroyVAOs();
+
+                this.Program.ovrProgram_Destroy();
+                this.Cube.ovrGeometry_Destroy();
+
+                gl3.glDeleteBuffers(1, ref this.InstanceTransformBuffer);
+                this.CreatedScene = false;
 
             }
 
-            public void ovrSimulation_Clear()
-            { }
+        }
 
+
+
+        [Script]
+        struct ovrSimulation
+        {
+            public ovrVector3f CurrentRotation;
+
+            public void ovrSimulation_Clear()
+            {
+                // 965
+                this.CurrentRotation.x = 0.0f;
+                this.CurrentRotation.y = 0.0f;
+                this.CurrentRotation.z = 0.0f;
+            }
+
+            // called by AppThreadFunction, would we benefit if jsc marked no branch methods as inline?
+            public void ovrSimulation_AdvanceSimulation(double predictedDisplayTime)
+            {
+                // 972
+                // Update rotation.
+                this.CurrentRotation.x = (float)(predictedDisplayTime);
+                this.CurrentRotation.y = (float)(predictedDisplayTime);
+                this.CurrentRotation.z = (float)(predictedDisplayTime);
+            }
         }
 
 
@@ -271,7 +458,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         }
        ;
 
-        #region MULTI_THREADED
+#if MULTI_THREADED
         [Script]
         class ovrRenderThread
         {
@@ -306,7 +493,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
         static void RenderThreadFunction() { }
 
-        #endregion
+#endif
+
 
         enum ovrBackButtonState
         {
@@ -381,7 +569,10 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 this.BackButtonDownStartTime = 0.0;
 
                 this.Egl.ovrEgl_Clear();
-                this.Scene.ovrScene_Clear();
+
+                this.Scene = new ovrScene();
+                //this.Scene.ovrScene_Clear();
+
                 this.Simulation.ovrSimulation_Clear();
 #if MULTI_THREADED
 	ovrRenderThread_Clear( &app->RenderThread );

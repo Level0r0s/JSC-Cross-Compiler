@@ -339,6 +339,11 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
         public static bool glUnmapBuffer(uint target) { throw null; }
         public static void glBindBuffer(uint target, uint buffer) { throw null; }
 
+        public static void glDeleteBuffers(int n, ref uint buffers) { throw null; }
+
+        public static void glGenBuffers(int n, out uint buffers) { throw null; }
+        public static void glBufferData(int target, int size, object data, int usage) { throw null; }
+
         public static void glEnable(uint cap) { throw null; }
 
         public static void glDepthFunc(uint func) { throw null; }
@@ -354,7 +359,6 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
         // WebGLProgram?
         public static void glUseProgram(uint program) { throw null; }
 
-
         public static void glUniformMatrix4fv(int location, int count, bool transpose, float* value) { throw null; }
 
         public static void glBindVertexArray(uint vao) { throw null; }
@@ -365,6 +369,10 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
 
         public static void* glMapBufferRange(int target, int offset, int length, int access) { throw null; }
 
+
+        public static void glEnableVertexAttribArray(uint index) { throw null; }
+        public static void glVertexAttribPointer(uint index, int size, int type, bool normalized, int stride, void* pointer) { throw null; }
+        public static void glVertexAttribDivisor(uint index, uint divisor) { throw null; }
         //#include <EGL/eglplatform.h>
         //#include <EGL/egl.h>
         //#include <GLES2/gl2platform.h>

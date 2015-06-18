@@ -59,7 +59,9 @@
   <ItemGroup>
     <None Include="tools\build.bat" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Shaders\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="x:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so">
       <Link>staging\jni\armeabi-v7a\libvrapi.so</Link>

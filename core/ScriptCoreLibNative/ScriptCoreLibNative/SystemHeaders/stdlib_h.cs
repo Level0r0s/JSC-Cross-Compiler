@@ -6,6 +6,7 @@ using ScriptCoreLib;
 
 namespace ScriptCoreLibNative.SystemHeaders
 {
+    // "X:\util\android-ndk-r10e\platforms\android-21\arch-arm\usr\include\stdlib.h"
     // X:\jsc.svn\core\ScriptCoreLibNative\ScriptCoreLibNative\SystemHeaders\stdlib_h.cs
 
     /// <summary>
@@ -34,6 +35,13 @@ namespace ScriptCoreLibNative.SystemHeaders
         public static void free(object e)
         {
 
+        }
+
+        // android only?
+
+        public static double drand48() 
+        {
+            throw null;
         }
     }
 

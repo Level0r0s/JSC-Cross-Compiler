@@ -35,7 +35,14 @@ namespace ScriptCoreLibNative.BCLImplementation.System
 			return 1;
 		}
 
-		
+        public static float Abs(float e)
+        {
+            if (e < 0)
+                return (float)-e;
+
+            return e;
+        }
+
 		public static short Abs(short e)
 		{
 			if (e < 0)
