@@ -24,6 +24,8 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
     [Script(IsNative = true)]
     public unsafe class gl3 : gl3_h
     {
+        // X:\jsc.svn\core\ScriptCoreLib\JavaScript\WebGL\WebGL2RenderingContext.cs
+
 
         #region #define
 
@@ -358,6 +360,11 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
 
         // WebGLProgram?
         public static void glUseProgram(uint program) { throw null; }
+        public static void glDeleteProgram(uint program) { throw null; }
+        public static uint glCreateProgram() { throw null; }
+        public static uint glLinkProgram(uint program) { throw null; }
+
+        public static void glGetProgramiv(uint program, int pname, out int _params) { throw null; }
 
         public static void glUniformMatrix4fv(int location, int count, bool transpose, float* value) { throw null; }
 
@@ -384,6 +391,43 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
         public static void glDeleteRenderbuffers(int n, ref uint renderbuffers) { throw null; }
         public static void glDeleteTextures(int n, ref uint textures) { throw null; }
 
+
+        public static void glGenTextures(int n, out uint textures) { throw null; }
+        public static void glBindTexture(int target, uint texture) { throw null; }
+
+        public static void glTexImage2D(int target, int level, int internalformat, int width, int height, int border, int format, int type, void* pixels) { throw null; }
+        public static void glTexParameteri(int target, int pname, int param) { throw null; }
+
+
+        public static void glGenRenderbuffers(int n, out uint renderbuffers) { throw null; }
+        public static void glBindRenderbuffer(int target, uint renderbuffer) { throw null; }
+
+        public static void glRenderbufferStorage(int target, int internalformat, int width, int height) { throw null; }
+
+        public static void glGenFramebuffers(int n, out uint framebuffers) { throw null; }
+        public static void glFramebufferRenderbuffer(int target, int attachment, int renderbuffertarget, uint renderbuffer) { throw null; }
+
+        public static void glFramebufferTexture2D(int target, int attachment, int textarget, uint texture, int level) { throw null; }
+
+
+        public static int glCheckFramebufferStatus(int target) { throw null; }
+
+
+        public static uint glCreateShader(int type) { throw null; }
+        public static void glDeleteShader(uint shader) { throw null; }
+        public static void glAttachShader(uint program, uint shader) { throw null; }
+
+        public static void glShaderSource(uint shader, int count, ref string _string, int* length) { throw null; }
+        public static void glCompileShader(uint shader) { throw null; }
+
+        public static void glGetShaderiv(uint shader, int pname, out int _params) { throw null; }
+
+
+        public static void glBindAttribLocation(uint program, uint index, string name) { throw null; }
+
+
+        public static int glGetUniformLocation(uint program, string name) { throw null; }
+
         //#include <EGL/eglplatform.h>
         //#include <EGL/egl.h>
         //#include <GLES2/gl2platform.h>
@@ -404,6 +448,10 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
 
         public const int GL_MAP_WRITE_BIT = 0x0002;
         public const int GL_MAP_INVALIDATE_BUFFER_BIT = 0x0008;
+
+        public const int GL_RGBA8 = 0x8058;
+
+        public const int GL_DEPTH_COMPONENT24 = 0x81A6;
 
     }
 
