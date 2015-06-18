@@ -21,7 +21,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
         // 20141230
         // would be nice if applets would continue their life as PPAPI?
-
+        // http://ask.slashdot.org/story/15/06/05/2210211/ask-slashdot-options-after-google-chrome-discontinues-npapi-support
 
         // http://java.com/en/download/faq/chrome.xml
         // The Java plug-in for web browsers relies on the cross platform plugin architecture NPAPI, 

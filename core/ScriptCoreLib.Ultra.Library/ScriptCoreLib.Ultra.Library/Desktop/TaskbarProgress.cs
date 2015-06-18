@@ -113,6 +113,7 @@ namespace ScriptCoreLib.Desktop
 
         public static void SetMainWindowProgress(double progress)
         {
+            // X:\jsc.svn\examples\javascript\forms\Test\TestADBBattery\TestADBBattery\ApplicationControl.cs
             // X:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\Program.cs
 
             ScriptCoreLib.Desktop.TaskbarProgress.SetState(
