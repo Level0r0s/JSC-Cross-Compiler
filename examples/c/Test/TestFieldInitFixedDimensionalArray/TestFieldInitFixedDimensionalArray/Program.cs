@@ -26,6 +26,12 @@ namespace TestFieldInitFixedDimensionalArray
 
 
         public int other;
+
+        public void ovrRenderTexture_SetCurrent()
+        {
+            Console.WriteLine("enter ovrRenderTexture_SetCurrent");
+
+        }
     }
 
 
@@ -71,7 +77,7 @@ namespace TestFieldInitFixedDimensionalArray
         public halfWayThere next;
     }
 
-    class Program : ScriptCoreLibNative.IAssemblyReferenceToken
+    unsafe class Program : ScriptCoreLibNative.IAssemblyReferenceToken
     {
         static void Main(string[] args)
         {
@@ -116,6 +122,24 @@ namespace TestFieldInitFixedDimensionalArray
 
             // TestFieldInitFixedDimensionalArray_almostWhatWeWant*_Address(there0->data, 1, 1)->other = 1;
             halfWayThere.data[1, 1].other = halfWayThere.other;
+
+
+            fixed (almostWhatWeWant* rt = &halfWayThere.data[1, 1])
+            {
+                //               jni/OVRVrCubeWorldSurfaceViewXNDK.dll.c:239:9: error: conversion to non-scalar type requested
+                //OVRVrCubeWorldSurfaceViewXNDK_VrCubeWorld_ovrRenderTexture_ovrRenderTexture_SetCurrent((OVRVrCubeWorldSurfaceViewXNDK_VrCubeWorld_ovrRenderTexture)texture_6);
+
+                //// 1085
+
+                // TestFieldInitFixedDimensionalArray_almostWhatWeWant_ovrRenderTexture_SetCurrent((TestFieldInitFixedDimensionalArray_almostWhatWeWant)want_4);
+                rt->ovrRenderTexture_SetCurrent();
+                (*rt).ovrRenderTexture_SetCurrent();
+
+                //TestFieldInitFixedDimensionalArray.exe.c(1120) : error C2440: 'type cast' : cannot convert from 'TestFieldInitFixedDimensionalArray_almostWhatWeWant *' to 'TestFieldInitFixedDimensionalArray_almostWhatWeWant'
+                //TestFieldInitFixedDimensionalArray.exe.c(1120) : error C2440: 'function' : cannot convert from 'TestFieldInitFixedDimensionalArray_almostWhatWeWant' to 'TestFieldInitFixedDimensionalArray_almostWhatWeWant *'
+                //TestFieldInitFixedDimensionalArray.exe.c(1120) : warning C4024: 'TestFieldInitFixedDimensionalArray_almostWhatWeWant_ovrRenderTexture_SetCurrent' : different types for formal and actual parameter 1
+                //done
+            }
 
             Console.WriteLine("bye!");
         }

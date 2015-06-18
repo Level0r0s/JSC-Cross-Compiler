@@ -59,7 +59,7 @@ namespace TestStructByRefInvoke
     }
 
     [Script]
-    class Program : ScriptCoreLibNative.IAssemblyReferenceToken
+    unsafe class Program : ScriptCoreLibNative.IAssemblyReferenceToken
     {
         static void Main(string[] args)
         {
@@ -68,14 +68,23 @@ namespace TestStructByRefInvoke
 
             stackalloc1.field32 = 40;
 
+            foo* alias = &stackalloc1;
+            alias->Increment(ref stackalloc2);
+            stackalloc1.Print();
+
             //TestStructByRefInvoke_foo_Increment((TestStructByRefInvoke_foo)foo0);
             stackalloc1.Increment(ref stackalloc2);
             stackalloc1.Print();
 
             foo.PrintCopy(copy: stackalloc2);
 
-            stackalloc1.Increment(ref stackalloc2);
-            stackalloc1.Print();
+
+
+            //fixed (foo* alias = &stackalloc2)
+            //{
+            //}
+
+        
 
             //field32: 41
             //field32: 42

@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Library\DimensionalArray.cs" />
     <Compile Include="VrCubeWorld.Renderer.cs" />
     <Compile Include="VrCubeWorld.MessageQueue.cs" />
     <Compile Include="GLES3JNILib.cs" />

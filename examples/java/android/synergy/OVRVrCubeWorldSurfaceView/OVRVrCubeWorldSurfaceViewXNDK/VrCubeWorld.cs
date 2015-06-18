@@ -142,20 +142,31 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         public const int MAX_PROGRAM_UNIFORMS = 8;
         public const int MAX_PROGRAM_TEXTURES = 8;
 
+        // a field at ovrScene, keep it as class as fixed causes uglyness
         [Script]
         //struct ovrProgram
         class ovrProgram
         {
+            // sent to glUseProgram
             public GLuint Program;
+
             public GLuint VertexShader;
             public GLuint FragmentShader;
             // These will be -1 if not used by the program.
             //public fixed GLint Uniforms[MAX_PROGRAM_UNIFORMS];       // ProgramUniforms[].name
-            public GLint[] Uniforms;       // ProgramUniforms[].name
-            public GLint[] Textures;      // Texture%i
+            //public fixed int[] Uniforms[MAX_PROGRAM_UNIFORMS];      // ProgramUniforms[].name
+            //public fixed int[] Textures[MAX_PROGRAM_TEXTURES];      // Texture%i
+
+            public readonly int[] Uniforms = new int [MAX_PROGRAM_UNIFORMS];      // ProgramUniforms[].name
+            public readonly int[] Textures = new int[MAX_PROGRAM_TEXTURES];      // Texture%i
 
             //Error CS1663  Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double OVRVrCubeWorldSurfaceViewXNDK   X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	130
             //Error CS1642  Fixed size buffer fields may only be members of structs OVRVrCubeWorldSurfaceViewXNDK X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	129
+
+            public void ovrProgram_Clear() { }
+            public void ovrProgram_Create() { }
+            public void ovrProgram_Destroy() { }
+
         }
 
         public enum ovrUniform_index
@@ -190,27 +201,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
         //        };
 
-        static void ovrProgram_Clear(this ovrProgram that) { }
-        static void ovrProgram_Create(this ovrProgram that) { }
-        static void ovrProgram_Destroy(this ovrProgram that) { }
 
-        [Script]
-        class ovrRenderTexture
-        {
-            public int Width;
-            public int Height;
-            public int Multisamples;
-            public GLuint ColorTexture;
-            public GLuint DepthBuffer;
-            public GLuint FrameBuffer;
-
-            public void ovrRenderTexture_Clear() { }
-            public void ovrRenderTexture_Create() { }
-            public void ovrRenderTexture_Destroy() { }
-            public void ovrRenderTexture_SetCurrent() { }
-            public void ovrRenderTexture_SetNone() { }
-            public void ovrRenderTexture_Resolve() { }
-        }
 
 
 
@@ -221,7 +212,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         {
             public bool CreatedScene;
             public bool CreatedVAOs;
+
             public ovrProgram Program;
+
             public ovrGeometry Cube;
             public GLuint InstanceTransformBuffer;
             public ovrVector3f[] CubePositions;
@@ -262,7 +255,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         static void ovrSimulation_Clear(this ovrSimulation that)
         { }
 
-  
+
 
 
         enum ovrRenderType
@@ -323,6 +316,18 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
         // stackalloc at X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.AppThreadFunction.cs
+
+        //[Script]
+        //class ovrAppRef
+        //{
+        //    public ovrApp fields;
+
+        //    public ovrAppRef()
+        //    {
+        //        this.fields.ovrApp_Clear();
+        //    }
+        //}
+
         [Script]
         struct ovrApp
         {
@@ -344,8 +349,14 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 #if MULTI_THREADED
 	ovrRenderThread		RenderThread;
 #else
+            // set by?
             public ovrRenderer Renderer;
 #endif
+
+            //public ovrApp()
+            //{
+            //    ovrApp_Clear();
+            //}
 
             // ctor
             // called by AppThreadFunction
@@ -371,7 +382,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 #if MULTI_THREADED
 	ovrRenderThread_Clear( &app->RenderThread );
 #else
-                this.Renderer.ovrRenderer_Clear();
+                this.Renderer = new ovrRenderer();
+                //this.Renderer.ovrRenderer_Clear();
 #endif
             }
 

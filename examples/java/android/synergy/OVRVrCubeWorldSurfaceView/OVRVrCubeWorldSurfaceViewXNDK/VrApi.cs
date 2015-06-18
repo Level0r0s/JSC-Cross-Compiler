@@ -44,7 +44,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         // http://stackoverflow.com/questions/665573/multidimensional-arrays-in-a-struct-in-c-sharp
 
         //public float M[4,4];
-        public float[] M;
+        public float[,] M; // no need to init it as it is native
     }
 
     [Script(IsNative = true)]

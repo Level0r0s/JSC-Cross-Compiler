@@ -39,7 +39,12 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 VrApi.vrapi_Initialize(ref initParms);
 
 
+                //var appState = new ovrAppRef();
+
                 var appState = default(ovrApp);
+
+                // http://stackoverflow.com/questions/4919965/ref-for-variables-not-parameters-in-functions
+                //var appState = &appState.fields;
                 appState.ovrApp_Clear();
                 appState.Java = java;
 
