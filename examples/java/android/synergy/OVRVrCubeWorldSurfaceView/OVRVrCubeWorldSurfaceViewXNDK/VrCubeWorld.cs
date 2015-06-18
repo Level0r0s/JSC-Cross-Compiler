@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ScriptCoreLibNative.SystemHeaders.android;
 using ScriptCoreLibNative.SystemHeaders.EGL;
+using ScriptCoreLibNative.SystemHeaders.GLES3;
 
 [assembly: Script()]
 [assembly: ScriptTypeFilter(ScriptType.C, typeof(OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld))]
@@ -34,8 +35,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     //enum EGLint { }
     //enum GLint { }
 
-    using ovrVector3f = Object;
-    using ScriptCoreLibNative.SystemHeaders.GLES3;
 
 
 
@@ -90,7 +89,10 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         {
             public GLuint VertexBuffer;
             public GLuint IndexBuffer;
+
+            // sent to glBindVertexArray
             public GLuint VertexArrayObject;
+
             public int VertexCount;
             public int IndexCount;
             public ovrVertexAttribPointer[] VertexAttribs;

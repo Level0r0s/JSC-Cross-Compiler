@@ -38,7 +38,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
     // Row-major 4x4 matrix.
     [Script(IsNative = true)]
-    public struct ovrMatrix4f : VrApi_h
+
+    // allocated by glMapBufferRange
+    public unsafe struct ovrMatrix4f //: VrApi_h
     {
         // Fixed sized buffers can only be one-dimensional.
         // http://stackoverflow.com/questions/665573/multidimensional-arrays-in-a-struct-in-c-sharp
@@ -52,9 +54,95 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     {
     }
 
-    [Script(IsNative = true)]
-    public struct ovrFrameParms : VrApi_h
+
+    public enum ovrFrameLayerType
     {
+        VRAPI_FRAME_LAYER_TYPE_WORLD,
+        VRAPI_FRAME_LAYER_TYPE_OVERLAY,
+        VRAPI_FRAME_LAYER_TYPE_CURSOR,
+        VRAPI_FRAME_LAYER_TYPE_USER,
+        VRAPI_FRAME_LAYER_TYPE_MAX
+    } ;
+
+
+    [Script(IsNative = true)]
+    public unsafe struct ovrRectf
+    {
+        public float x;
+        public float y;
+        public float width;
+        public float height;
+    }
+
+    // Note that any layer images that are dynamic must be triple buffered.
+    [Script(IsNative = true)]
+    public unsafe struct ovrFrameLayerImage
+    {
+        // One of the ovrFrameLayerImageType.
+        //ovrFrameLayerImageType	ImageType;
+
+        // If TexId == 0, this image is disabled.
+        // Most applications will have the overlay image
+        // disabled.
+        //
+        // Because OpenGL ES does not support clampToBorder,
+        // it is the application's responsibility to make sure
+        // that all mip levels of the texture have a black border
+        // that will show up when time warp pushes the texture partially
+        // off screen.
+        //
+        // Overlap textures will only show through where alpha on the
+        // primary texture is not 1.0, so they do not require a border.
+        public uint TexId;
+
+        // Experimental separate R/G/B cube maps
+        public fixed uint PlanarTexId[3];
+
+        // Points on the screen are mapped by a distortion correction
+        // function into ( TanX, TanY, -1, 1 ) vectors that are transformed
+        // by this matrix to get ( S, T, Q, _ ) vectors that are looked
+        // up with texture2dproj() to get texels.
+        public ovrMatrix4f TexCoordsFromTanAngles;
+
+        // Only texels within this range should be drawn.
+        // This is a sub-rectangle of the [(0,0)-(1,1)] texture coordinate range.
+        public ovrRectf TextureRect;
+
+        // The tracking state for which ModelViewMatrix is correct.
+        // It is ok to update the orientation for each eye, which
+        // can help minimize black edge pull-in, but the position
+        // must remain the same for both eyes, or the position would
+        // seem to judder "backwards in time" if a frame is dropped.
+        public ovrPoseStatef HeadPose;
+    }
+
+
+    public enum ovrFrameLayerEye
+    {
+        VRAPI_FRAME_LAYER_EYE_LEFT,
+        VRAPI_FRAME_LAYER_EYE_RIGHT,
+        VRAPI_FRAME_LAYER_EYE_MAX
+    }
+
+    [Script(IsNative = true)]
+    public unsafe struct ovrFrameLayer : VrApi_h
+    {
+        //public fixed ovrFrameLayerImage[] Images[(int)ovrFrameLayerEye.VRAPI_FRAME_LAYER_EYE_MAX];
+        public ovrFrameLayerImage[] Images;//[(int)ovrFrameLayerEye.VRAPI_FRAME_LAYER_EYE_MAX];
+
+    }
+
+
+
+
+    [Script(IsNative = true)]
+    public unsafe struct ovrFrameParms : VrApi_h
+    {
+        // Layers composited in the time warp.
+        //public fixed ovrFrameLayer[] Layers[(int)ovrFrameLayerType.VRAPI_FRAME_LAYER_TYPE_MAX];
+        public ovrFrameLayer[] Layers; //[(int)ovrFrameLayerType.VRAPI_FRAME_LAYER_TYPE_MAX];
+        public int LayerCount;
+
         // created by ovrRenderer_RenderFrame
         // then sent to vrapi_SubmitFrame
 
@@ -86,11 +174,62 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     {
     }
 
+
+
+    //-----------------------------------------------------------------
+    // HMD sensor input
+    //-----------------------------------------------------------------
+
+
+    // vec3
+    [Script(IsNative = true)]
+    public struct ovrVector3f
+    {
+        public float x, y, z;
+    }
+
+    // Quaternion.
+    // vec4?
+    [Script(IsNative = true)]
+    public struct ovrQuatf
+    {
+        public float x, y, z, w;
+    }
+
+
+
+    // Position and orientation together.
+    [Script(IsNative = true)]
+    public unsafe struct ovrPosef
+    {
+        public ovrQuatf Orientation;
+        public ovrVector3f Position;
+    }
+
+
+    // Full pose (rigid body) configuration with first and second derivatives.
+    public unsafe struct ovrPoseStatef
+    {
+        public ovrPosef Pose;
+        public ovrVector3f AngularVelocity;
+        public ovrVector3f LinearVelocity;
+        public ovrVector3f AngularAcceleration;
+        public ovrVector3f LinearAcceleration;
+        public double TimeInSeconds;			// Absolute time of this state sample.
+        public double PredictionInSeconds;	// Seconds this state was predicted ahead.
+    }
+
     // via vrapi_GetPredictedTracking
     [Script(IsNative = true)]
     public struct ovrTracking : VrApi_h
     {
         // GearVR voot
+
+        // Sensor status described by ovrTrackingStatus flags.
+        public uint Status;
+        // Predicted head configuration at the requested absolute time.
+        // The pose describes the head orientation and center eye position.
+        public ovrPoseStatef HeadPose;
     }
 
     [Script(IsNative = true)]

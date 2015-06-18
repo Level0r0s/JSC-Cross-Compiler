@@ -357,6 +357,13 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
 
         public static void glUniformMatrix4fv(int location, int count, bool transpose, ref float value) { throw null; }
 
+        public static void glBindVertexArray(uint vao) { throw null; }
+
+        //public static void glDrawElementsInstanced<T>(int mode, int count, int type, T[] indices, int instancecount) { throw null; }
+        public static void glDrawElementsInstanced(int mode, int count, int type, object indices, int instancecount) { throw null; }
+
+
+        public static object glMapBufferRange(int target, int offset, int length, int access) { throw null; }
 
         //#include <EGL/eglplatform.h>
         //#include <EGL/egl.h>
@@ -375,6 +382,10 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
 
         // X:\jsc.svn\examples\c\android\Test\TestNDK\TestNDK\xNativeActivity.cs
         // X:\jsc.svn\examples\c\android\Test\TestHybridOVR\TestHybridOVR\xNativeActivity.cs
+
+        public const int GL_MAP_WRITE_BIT = 0x0002;
+        public const int GL_MAP_INVALIDATE_BUFFER_BIT = 0x0008;
+
     }
 
 }
