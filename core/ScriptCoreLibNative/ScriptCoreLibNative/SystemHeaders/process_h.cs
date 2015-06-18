@@ -68,9 +68,11 @@ namespace ScriptCoreLibNative.SystemHeaders
         //int _getpid(void);
     }
 
+
+    // used by X:\jsc.svn\core\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Threading\Thread.cs
     // http://www.cplusplus.com/reference/cstdint/
     [Script(IsNative = true)]
-    public static class uintptr_t
+    public struct uintptr_t
     {
     }
 }

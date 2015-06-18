@@ -32,6 +32,13 @@ namespace ScriptCoreLib.JavaScript.DOM
 	[Script(HasNoPrototype = true, ExternalTarget = "Worker")]
 	public class Worker : IEventTarget
 	{
+        // how will the new bytecode differ fron java or flash??
+        // https://blog.mozilla.org/luke/2015/06/17/webassembly/#comment-45134
+
+        // https://github.com/WebAssembly/design/blob/master/FutureFeatures.md
+        // https://github.com/WebAssembly/design/blob/master/BinaryEncoding.md
+        // lookslike with the new HTTP client code can also be loaded as binary..
+
 		// http://developers.slashdot.org/story/14/10/18/2117247/javascript-and-the-netflix-user-interface
 
 		//Web-workers are not cutting it. For the following reason.

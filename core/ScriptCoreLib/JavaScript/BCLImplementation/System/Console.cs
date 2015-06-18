@@ -25,6 +25,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
 	// X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Console.cs
 	// X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Console.cs
 	// X:\jsc.svn\core\ScriptCoreLib\ActionScript\BCLImplementation\System\Console.cs
+    // X:\jsc.svn\core\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Console.cs
 
 	[Script(Implements = typeof(global::System.Console))]
 	internal class __Console
