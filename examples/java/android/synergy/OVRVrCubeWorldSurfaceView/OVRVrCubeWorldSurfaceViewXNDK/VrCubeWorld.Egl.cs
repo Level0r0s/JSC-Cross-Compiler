@@ -29,6 +29,33 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             const int MAX_CONFIGS = 1024;
             readonly EGLConfig[] configs = new EGLConfig[MAX_CONFIGS];
 
+            // could aswell be static?
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150619
+            static readonly int[] configAttribs =
+	            {
+		            egl.EGL_BLUE_SIZE,  8,
+		            egl.EGL_GREEN_SIZE, 8,
+		            egl.EGL_RED_SIZE,   8,
+		            egl.EGL_DEPTH_SIZE, 0,
+		            egl.EGL_SAMPLES,	0,
+		            egl.EGL_NONE
+	            };
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150619
+            static readonly int[] surfaceAttribs =
+	            {
+		            egl.EGL_WIDTH, 16,
+		            egl.EGL_HEIGHT, 16,
+		            egl.EGL_NONE
+	            };
+
+
+            static readonly int[] contextAttribs =
+	            {
+		            egl.EGL_CONTEXT_CLIENT_VERSION, 3,
+		            egl.EGL_NONE
+	            };
 
             // 141
             public int MajorVersion = 0;
@@ -64,15 +91,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     return;
                 }
 
-                int[] configAttribs =
-	            {
-		            egl.EGL_BLUE_SIZE,  8,
-		            egl.EGL_GREEN_SIZE, 8,
-		            egl.EGL_RED_SIZE,   8,
-		            egl.EGL_DEPTH_SIZE, 0,
-		            egl.EGL_SAMPLES,	0,
-		            egl.EGL_NONE
-	            };
+               
 
 
                 const int egl_EGL_OPENGL_ES3_BIT_KHR = 0x0040;
@@ -118,11 +137,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     return;
                 }
 
-                int[] contextAttribs =
-	            {
-		            egl.EGL_CONTEXT_CLIENT_VERSION, 3,
-		            egl.EGL_NONE
-	            };
+              
                 //ALOGV( "        Context = eglCreateContext( Display, Config, EGL_NO_CONTEXT, contextAttribs )" );
                 //this.Context = egl.eglCreateContext(this.Display, this.Config, (shareEgl != NULL) ? shareEgl->Context : egl.EGL_NO_CONTEXT, contextAttribs);
                 this.Context = egl.eglCreateContext(this.Display, this.Config, shareEgl_Context, contextAttribs);
@@ -132,12 +147,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     return;
                 }
 
-                int[] surfaceAttribs =
-	            {
-		            egl.EGL_WIDTH, 16,
-		            egl.EGL_HEIGHT, 16,
-		            egl.EGL_NONE
-	            };
+             
+
                 //ALOGV( "        TinySurface = eglCreatePbufferSurface( Display, Config, surfaceAttribs )" );
                 this.TinySurface = egl.eglCreatePbufferSurface(this.Display, this.Config, surfaceAttribs);
                 if (this.TinySurface == egl.EGL_NO_SURFACE)

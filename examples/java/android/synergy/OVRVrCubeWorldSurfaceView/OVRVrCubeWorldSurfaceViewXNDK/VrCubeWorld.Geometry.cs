@@ -38,6 +38,34 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void* Pointer;
         }
 
+        // http://stackoverflow.com/questions/8048540/sizeof-structures-not-known-why
+
+
+
+        //Error	1	The expression being assigned to 'OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld.ovrCubeVertices.positions' must be constant	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Geometry.cs	60	42	OVRVrCubeWorldSurfaceViewXNDK
+        //Error	2	'OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld.i8vec4' does not have a predefined size, therefore sizeof can only be used in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Geometry.cs	60	46	OVRVrCubeWorldSurfaceViewXNDK
+
+        //[System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Explicit, Size = 4, Pack = 4)]
+        [Script]
+        public unsafe struct i8vec4
+        {
+            public sbyte x, y, z, w;
+        }
+
+        [Script]
+        public struct u8vec4
+        {
+            public byte x, y, z, w;
+        }
+
+        [Script]
+        public unsafe struct ovrCubeVertices
+        {
+            //public fixed sbyte positions[8 * sizeof(i8vec4)];
+            public fixed sbyte positions[8 * 4];
+            public fixed byte colors[8 * 4];
+        }
+
         const int MAX_VERTEX_ATTRIB_POINTERS = 3;
 
 
@@ -69,34 +97,39 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 }
             }
 
+            static readonly ushort[] cubeIndices = new ushort[] 
+            {
+                0, 1, 2, 2, 3, 0,	// top
+                4, 5, 6, 6, 7, 4,	// bottom
+                2, 6, 7, 7, 1, 2,	// right
+                0, 4, 5, 5, 3, 0,	// left
+                3, 5, 6, 6, 2, 3,	// front
+                0, 1, 7, 7, 4, 0	// back
+            };
+
             // called by ovrScene_Create
             // called after VRAPI_FRAME_INIT_LOADING_ICON_FLUSH
             public void ovrGeometry_CreateCube()
             {
+                // X:\jsc.svn\examples\c\Test\TestInitializeArray\TestInitializeArray\Class1.cs
                 // 405
 
-                var cubeIndices = new ushort[] 
-                {
-                    0, 1, 2, 2, 3, 0,	// top
-                    4, 5, 6, 6, 7, 4,	// bottom
-                    2, 6, 7, 7, 1, 2,	// right
-                    0, 4, 5, 5, 3, 0,	// left
-                    3, 5, 6, 6, 2, 3,	// front
-                    0, 1, 7, 7, 4, 0	// back
-                };
+
 
                 this.VertexCount = 8;
                 this.IndexCount = 36;
 
 
                 // 438
-
+                // https://en.wikipedia.org/wiki/Offsetof
+                // http://linux.die.net/man/3/offsetof
 
                 this.VertexAttribs[0].Index = ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_POSITION;
                 this.VertexAttribs[0].Size = 4;
                 this.VertexAttribs[0].Type = gl3.GL_BYTE;
                 this.VertexAttribs[0].Normalized = true;
                 //this.VertexAttribs[0].Stride = sizeof( cubeVertices.positions[0] );
+                this.VertexAttribs[0].Stride = sizeof(i8vec4);
                 //this.VertexAttribs[0].Pointer = (const GLvoid *)offsetof( ovrCubeVertices, positions );
 
                 this.VertexAttribs[1].Index = ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_COLOR;
@@ -104,6 +137,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 this.VertexAttribs[1].Type = gl3.GL_UNSIGNED_BYTE;
                 this.VertexAttribs[1].Normalized = true;
                 //this.VertexAttribs[1].Stride = sizeof( cubeVertices.colors[0] );
+                this.VertexAttribs[1].Stride = sizeof(u8vec4);
                 //this.VertexAttribs[1].Pointer = (const GLvoid *)offsetof( ovrCubeVertices, colors );
 
                 gl3.glGenBuffers(1, out this.VertexBuffer);
