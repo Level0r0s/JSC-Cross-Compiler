@@ -54,6 +54,10 @@ namespace ScriptCoreLib.Android.WebGL
     [Script(Implements = typeof(ScriptCoreLib.JavaScript.WebGL.WebGLRenderingContext))]
     public class __WebGLRenderingContext
     {
+        // what about webgl2?
+        // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Scene.cs
+
+
         // let's try to mimic WebGL api and see how far we get
         // why is Android ES a static reference?
 

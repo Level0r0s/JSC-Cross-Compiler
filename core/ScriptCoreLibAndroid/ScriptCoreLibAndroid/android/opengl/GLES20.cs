@@ -6,6 +6,7 @@ namespace android.opengl
 {
     // http://developer.android.com/reference/android/opengl/GLES20.html
     // X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\SystemHeaders\GLES2\gl2.cs
+    // https://android.googlesource.com/platform/frameworks/base.git/+/master/opengl/java/android/opengl/GLES20.java
 
     [Script(IsNative = true)]
     public class GLES20

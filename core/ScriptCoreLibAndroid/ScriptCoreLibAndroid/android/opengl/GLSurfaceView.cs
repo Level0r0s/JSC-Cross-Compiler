@@ -11,6 +11,8 @@ using System.Text;
 namespace android.opengl
 {
     // http://developer.android.com/reference/android/opengl/GLSurfaceView.html
+    // https://android.googlesource.com/platform/frameworks/base.git/+/master/opengl/java/com/google/android/gles_jni/EGLSurfaceImpl.java
+
     [Script(IsNative = true)]
     public class GLSurfaceView : SurfaceView
     {

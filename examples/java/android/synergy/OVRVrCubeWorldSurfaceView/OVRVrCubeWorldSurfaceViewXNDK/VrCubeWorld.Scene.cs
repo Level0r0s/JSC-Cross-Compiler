@@ -45,7 +45,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
             // deleted by ovrScene_Destroy
             public uint InstanceTransformBuffer = 0;
-          
+
             public bool ovrScene_IsCreated()
             {
                 return this.CreatedScene;
@@ -99,8 +99,17 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrScene_Create()
             {
                 // 864
+                //Error	2	The type 'ScriptCoreLib.GLSL.VertexShader' is defined in an assembly that is not referenced. You must add a reference to assembly 'ScriptCoreLib, Version=4.6.0.0, Culture=neutral, PublicKeyToken=null'.	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Scene.cs	103	17	OVRVrCubeWorldSurfaceViewXNDK
+                //  ScriptCoreLib.GLSL.FragmentShader for Void .ctor() used at
 
-                this.Program.ovrProgram_Create(VERTEX_SHADER, FRAGMENT_SHADER);
+                var vert = new Shaders.VrCubeWorldVertexShader();
+                var frag = new Shaders.VrCubeWorldFragmentShader();
+
+                this.Program.ovrProgram_Create(
+                    vert.ToString(),
+                    frag.ToString()
+                );
+
                 this.Cube.ovrGeometry_CreateCube();
 
                 // Create the instance transform attribute buffer.

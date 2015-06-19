@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ScriptCoreLib">
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.dll</HintPath>
+    </Reference>
     <Reference Include="ScriptCoreLibA">
       <HintPath>C:\util\jsc\bin\ScriptCoreLibA.dll</HintPath>
     </Reference>
@@ -53,6 +56,7 @@
     <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\SystemHeaders\stdlib_h.cs">
       <Link>SystemHeaders\stdlib_h.cs</Link>
     </Compile>
+    <Compile Include="BCLImplementation\System\Attribute.cs" />
     <Compile Include="IAssemblyReferenceToken.cs" />
     <Compile Include="Library\ConsoleExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,6 +89,7 @@
     <Compile Include="SystemHeaders\netinet\in_h.cs" />
     <Compile Include="SystemHeaders\sys\mman.cs" />
     <Compile Include="SystemHeaders\sys\socket.cs" />
+    <Compile Include="WebGL\Shader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SystemHeaders\GLES\" />

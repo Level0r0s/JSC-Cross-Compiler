@@ -49,6 +49,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         [Script]
         public unsafe struct i8vec4
         {
+            // https://www.opengl.org/wiki/Data_Type_(GLSL)
+            // http://stackoverflow.com/questions/28159591/how-to-pack4bytes-and-unpackvec4-between-c-and-glsl
+
             public sbyte x, y, z, w;
         }
 

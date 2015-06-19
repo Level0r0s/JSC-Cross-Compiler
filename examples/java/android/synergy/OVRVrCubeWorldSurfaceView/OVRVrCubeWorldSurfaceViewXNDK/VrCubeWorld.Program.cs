@@ -85,6 +85,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
             // called by  ovrScene_Create
+            // called after VRAPI_FRAME_INIT_LOADING_ICON_FLUSH
             public void ovrProgram_Create(string vertexSource, string fragmentSource)
             {
                 // 554

@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ScriptCoreLib">
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.dll</HintPath>
+    </Reference>
     <Reference Include="ScriptCoreLibA">
       <HintPath>C:\util\jsc\bin\ScriptCoreLibA.dll</HintPath>
     </Reference>
@@ -46,6 +49,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="OVRVrCubeWorldSurfaceViewXNDK.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\OVRVrCubeWorldSurfaceViewXNDK.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="VrCubeWorld.AppThread.cs" />
@@ -97,6 +103,12 @@
     <PostBuildEvent>pushd ..\..\tools\
 start /WAIT cmd /K  build.bat $(ProjectName) $(TargetFileName)  $(ConfigurationName)
 popd</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true /IsScriptLibrary:true /IsScriptTypeFilterC:true
+
+</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
