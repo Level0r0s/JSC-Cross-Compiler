@@ -48,6 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VrCubeWorld.AppThread.cs" />
+    <Compile Include="VrCubeWorld.App.cs" />
+    <Compile Include="VrCubeWorld.Program.cs" />
+    <Compile Include="VrCubeWorld.Geometry.cs" />
     <Compile Include="VrCubeWorld.Egl.cs" />
     <Compile Include="VrCubeWorld.Scene.cs" />
     <Compile Include="Library\DimensionalArray.cs" />

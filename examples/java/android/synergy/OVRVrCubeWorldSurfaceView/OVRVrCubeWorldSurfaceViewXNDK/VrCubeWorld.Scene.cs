@@ -47,7 +47,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             {
                 ovrScene_Clear();
             }
-
             // called by ovrApp_Clear
             void ovrScene_Clear()
             {
@@ -56,14 +55,18 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 this.CreatedVAOs = false;
                 this.InstanceTransformBuffer = 0;
 
-                this.Program.ovrProgram_Clear();
-                this.Cube.ovrGeometry_Clear();
+                this.Program = new ovrProgram();
+                //this.Program.ovrProgram_Clear();
+                this.Cube = new ovrGeometry();
+                //this.Cube.ovrGeometry_Clear();
             }
 
             public bool ovrScene_IsCreated()
             {
                 return this.CreatedScene;
             }
+
+            // called by ovrScene_Create
             public void ovrScene_CreateVAOs()
             {
                 // 832

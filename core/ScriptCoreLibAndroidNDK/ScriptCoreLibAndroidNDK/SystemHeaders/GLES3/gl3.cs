@@ -341,7 +341,7 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
         public static bool glUnmapBuffer(uint target) { throw null; }
         public static void glBindBuffer(uint target, uint buffer) { throw null; }
 
-        public static void glDeleteBuffers(int n, ref uint buffers) { throw null; }
+        public static void glDeleteBuffers(int n,  uint[] buffers) { throw null; }
 
         public static void glGenBuffers(int n, out uint buffers) { throw null; }
         public static void glBufferData(int target, int size, object data, int usage) { throw null; }
@@ -417,7 +417,7 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
         public static void glDeleteShader(uint shader) { throw null; }
         public static void glAttachShader(uint program, uint shader) { throw null; }
 
-        public static void glShaderSource(uint shader, int count, ref string _string, int* length) { throw null; }
+        public static void glShaderSource(uint shader, int count, string[] _string, int[] length) { throw null; }
         public static void glCompileShader(uint shader) { throw null; }
 
         public static void glGetShaderiv(uint shader, int pname, out int _params) { throw null; }
@@ -427,7 +427,10 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
 
 
         public static int glGetUniformLocation(uint program, string name) { throw null; }
+        public static int glUniform1i(int location, int v0) { throw null; }
 
+        public static void glDeleteVertexArrays(int n, uint[] arrays) { throw null; }
+        public static void glGenVertexArrays(int n, uint[] arrays) { throw null; }
         //#include <EGL/eglplatform.h>
         //#include <EGL/egl.h>
         //#include <GLES2/gl2platform.h>

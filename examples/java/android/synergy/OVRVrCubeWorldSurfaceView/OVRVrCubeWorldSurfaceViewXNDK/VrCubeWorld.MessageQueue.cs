@@ -133,6 +133,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
 
+        // field of ovrAppThread
         // struct? created by?
         [Script]
         public struct ovrMessageQueue
@@ -152,6 +153,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
             // ctor?
+            // called by ovrAppThread_Create
             public void ovrMessageQueue_Create()
             {
                 this.Head = 0;
@@ -171,6 +173,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 pthread.pthread_cond_init(ref Processed, null);
             }
 
+            // called by ovrAppThread_Destroy
             public void ovrMessageQueue_Destroy()
             {
                 pthread.pthread_mutex_destroy(ref Mutex);
@@ -214,6 +217,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             }
 
             // appworkerThread
+            // called by ovrMessageQueue_GetNextMessage
             public void ovrMessageQueue_SleepUntilMessage()
             {
                 if (Wait == ovrMQWait.MQ_WAIT_PROCESSED)
@@ -231,6 +235,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 pthread.pthread_mutex_unlock(ref Mutex);
             }
 
+
+            // called by AppThreadFunction
             public bool ovrMessageQueue_GetNextMessage(out ovrMessage message, bool waitForMessages)
             {
                 // 1716

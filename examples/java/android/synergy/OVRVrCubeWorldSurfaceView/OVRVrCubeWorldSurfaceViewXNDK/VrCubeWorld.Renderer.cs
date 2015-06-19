@@ -34,6 +34,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrRenderTexture_Clear() { 
                 // 665
 
+                // set default?
                 this.Width = 0;
                 this.Height = 0;
                 this.Multisamples = 0;
@@ -97,6 +98,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 this.FrameBuffer = 0;
             }
 
+            // called by ovrRenderer_RenderFrame
             public void ovrRenderTexture_SetCurrent()
             {
                 // 753
@@ -220,6 +222,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 // can other processes/non ndk stream a surface to us?
                 // local socket?
                 // shared memory?
+                // editn n continue?
                 // 1049
 
                 ovrFrameParms parms = VrApi_Helpers.vrapi_DefaultFrameParms(ref appState.Java, ovrFrameInit.VRAPI_FRAME_INIT_DEFAULT, 0u);

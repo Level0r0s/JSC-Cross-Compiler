@@ -108,6 +108,9 @@ namespace Java
 
                 appThread.ovrAppThread_Destroy(env);
 
+                // finalize
+                //~appThread();
+
                 stdlib_h.free(appThread);
             }
 
