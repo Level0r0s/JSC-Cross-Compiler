@@ -125,6 +125,8 @@ namespace ScriptCoreLibNative.SystemHeaders
     //[Script(IsNative = true)]
     public class JNIEnv : jni_h  // : JNIInvokeInterface
     {
+        // X:\jsc.svn\examples\java\android\future\NDKHybridMockup\NDKHybridMockup\ApplicationActivity.cs
+
         // will we ever need JNEnv instead of JNIEnv* ?
 
         //   void        (*DeleteGlobalRef)(JNIEnv*, jobject);

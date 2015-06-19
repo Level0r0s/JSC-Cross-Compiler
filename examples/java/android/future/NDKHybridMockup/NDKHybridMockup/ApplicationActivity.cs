@@ -12,10 +12,31 @@ using ScriptCoreLib.Android.Extensions;
 using ScriptCoreLib.Android.Manifest;
 using android.content;
 using ScriptCoreLibNative.SystemHeaders.android;
+using ScriptCoreLibNative.SystemHeaders;
 
 namespace NDKHybridMockup.Activities
 {
+    public struct NDKenter : System.Runtime.CompilerServices.INotifyCompletion
+    {
+        // basically we have to hibernate the current state to resume
+        public NDKenter GetAwaiter() { return this; }
+        public bool IsCompleted { get { return false; } }
 
+        public static Action<Action> VirtualOnCompleted;
+        public void OnCompleted(Action continuation) { VirtualOnCompleted(continuation); }
+
+        public JNIEnv GetResult() { return default(JNIEnv); }
+    }
+
+
+    // make it look like a new keyword
+    static class NDK
+    {
+
+        static readonly public NDKenter enter;
+        static readonly public NDKenter exit;
+
+    }
 
 
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "8")]
@@ -78,6 +99,22 @@ namespace NDKHybridMockup.Activities
                 }
             );
 
+            new Button(this).AttachTo(ll).WithText("invoke NDK via env").AtClick(
+               async button =>
+               {
+                   // does our C do await already?
+
+                   JNIEnv env = await NDK.enter;
+
+                   // NDK worker thread?
+
+                   var x = stringFromJNI();
+
+                   await NDK.exit;
+
+                   button.setText(x);
+               }
+           );
 
             new Button(this).AttachTo(ll).WithText("invoke NDK via closure").AtClick(
                  button =>
