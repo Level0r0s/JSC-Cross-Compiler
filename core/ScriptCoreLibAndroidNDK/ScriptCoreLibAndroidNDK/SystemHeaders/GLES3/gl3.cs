@@ -383,6 +383,7 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
 
 
         public static void glInvalidateFramebuffer(int target, int numAttachments, int[] attachments) { throw null; }
+        //public static void glInvalidateFramebuffer(int target, int numAttachments, int* attachments) { throw null; }
 
         public static void glFlush() { throw null; }
 
