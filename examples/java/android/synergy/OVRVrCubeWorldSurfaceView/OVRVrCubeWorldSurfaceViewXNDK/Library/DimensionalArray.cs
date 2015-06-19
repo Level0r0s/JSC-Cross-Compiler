@@ -15,6 +15,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK.Library
 
         TElement[] data;
 
+        // Error	9	Warning as Error: Field 'OVRVrCubeWorldSurfaceViewXNDK.Library.DimensionalArray<TElement>.LengthRank0' is never assigned to, and will always have its default value 0	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\Library\DimensionalArray.cs	18	13	OVRVrCubeWorldSurfaceViewXNDK
+
         int LengthRank0;
         int LengthRank1;
 

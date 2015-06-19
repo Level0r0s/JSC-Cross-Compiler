@@ -212,7 +212,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 this.Program.ovrProgram_Destroy();
                 this.Cube.ovrGeometry_Destroy();
 
-                gl3.glDeleteBuffers(1, ref this.InstanceTransformBuffer);
+
+                var InstanceTransformBuffer0 = new[] { this.InstanceTransformBuffer };
+                gl3.glDeleteBuffers(1, InstanceTransformBuffer0);
                 this.CreatedScene = false;
 
             }

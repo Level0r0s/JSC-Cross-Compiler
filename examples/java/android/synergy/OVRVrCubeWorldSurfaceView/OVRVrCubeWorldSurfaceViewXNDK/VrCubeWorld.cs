@@ -20,10 +20,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 {
     using GLuint = UInt32;
 
-    using EGLDisplay = Object;
-    using EGLConfig = Object;
-    //using EGLSurface = Object;
-    using EGLContext = Object;
 
     //using GLuint = Object;
     using GLint = Int32;
@@ -43,42 +39,20 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     public static unsafe partial class VrCubeWorld
     {
 
-        static void EglErrorString() { }
-        static void EglFrameBufferStatusString() { }
-        static void EglCheckErrors() { }
+      
 
         [Script]
-        class ovrEgl
+        struct ovrVertexAttribPointer
         {
-            public EGLint MajorVersion;
-            public EGLint MinorVersion;
-            public EGLDisplay Display;
-            public EGLConfig Config;
-            public EGLSurface TinySurface;
-            public EGLSurface MainSurface;
-            public EGLContext Context;
+            public ovrVertexAttribute_location Index;
 
+            public int Size;
 
-            public void ovrEgl_Clear() { }
-            public void ovrEgl_CreateContext(object e) { }
-            public void ovrEgl_DestroyContext() { }
+            public int Type;
 
-            // called by ovrApp_HandleVrModeChanges
-            public void ovrEgl_CreateSurface(native_window.ANativeWindow w) { }
-            public void ovrEgl_DestroySurface() { }
-        }
+            public bool Normalized;
 
-
-        [Script]
-        class ovrVertexAttribPointer
-        {
-            public GLuint Index;
-            public GLint Size;
-
-            public uint Type;
-
-            public GLboolean Normalized;
-            public GLsizei Stride;
+            public int Stride;
             public void* Pointer;
         }
 
@@ -95,30 +69,123 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
             public int VertexCount;
             public int IndexCount;
-            public ovrVertexAttribPointer[] VertexAttribs;
-            //public fixed ovrVertexAttribPointer VertexAttribs[MAX_VERTEX_ATTRIB_POINTERS];
-
-            //Error CS0270  Array size cannot be specified in a variable declaration(try initializing with a 'new' expression) OVRVrCubeWorldSurfaceViewXNDK X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	73
-            //Error CS0650  Bad array declarator: To declare a managed array the rank specifier precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field type.	OVRVrCubeWorldSurfaceViewXNDK	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	73
-            //Error CS1642  Fixed size buffer fields may only be members of structs OVRVrCubeWorldSurfaceViewXNDK X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	73
-            //Error CS0270  Array size cannot be specified in a variable declaration(try initializing with a 'new' expression) OVRVrCubeWorldSurfaceViewXNDK X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	73
-            //Error CS1641  A fixed size buffer field must have the array size specifier after the field name   OVRVrCubeWorldSurfaceViewXNDK   X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs 73
-            //Error   CS1663  Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double    OVRVrCubeWorldSurfaceViewXNDK   X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs 73
+            public readonly ovrVertexAttribPointer[] VertexAttribs = new ovrVertexAttribPointer[MAX_VERTEX_ATTRIB_POINTERS];
 
 
             // called by ovrScene_Clear
-            public void ovrGeometry_Clear() { }
+            public void ovrGeometry_Clear()
+            {
+                // 391
+
+                this.VertexBuffer = 0;
+                this.IndexBuffer = 0;
+                this.VertexArrayObject = 0;
+                this.VertexCount = 0;
+                this.IndexCount = 0;
+                for (int i = 0; i < MAX_VERTEX_ATTRIB_POINTERS; i++)
+                {
+                    //this.VertexAttribs[i] = default(ovrVertexAttribPointer);
+
+                    //memset( &geometry->VertexAttribs[i], 0, sizeof( geometry->VertexAttribs[i] ) );
+                    this.VertexAttribs[i].Index = (ovrVertexAttribute_location)(-1);
+                }
+            }
 
             // called by ovrScene_Create
-            public void ovrGeometry_CreateCube() { }
-            public void ovrGeometry_Destroy() { }
-            public void ovrGeometry_CreateVAO() { }
+            public void ovrGeometry_CreateCube()
+            {
+                // 405
+
+                //var cubeIndices = new ushort[] 
+                //{
+                //    0, 1, 2, 2, 3, 0,	// top
+                //    4, 5, 6, 6, 7, 4,	// bottom
+                //    2, 6, 7, 7, 1, 2,	// right
+                //    0, 4, 5, 5, 3, 0,	// left
+                //    3, 5, 6, 6, 2, 3,	// front
+                //    0, 1, 7, 7, 4, 0	// back
+                //};
+
+                this.VertexCount = 8;
+                this.IndexCount = 36;
+
+
+                // 438
+
+
+                this.VertexAttribs[0].Index = ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_POSITION;
+                this.VertexAttribs[0].Size = 4;
+                this.VertexAttribs[0].Type = gl3.GL_BYTE;
+                this.VertexAttribs[0].Normalized = true;
+                //this.VertexAttribs[0].Stride = sizeof( cubeVertices.positions[0] );
+                //this.VertexAttribs[0].Pointer = (const GLvoid *)offsetof( ovrCubeVertices, positions );
+
+                this.VertexAttribs[1].Index = ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_COLOR;
+                this.VertexAttribs[1].Size = 4;
+                this.VertexAttribs[1].Type = gl3.GL_UNSIGNED_BYTE;
+                this.VertexAttribs[1].Normalized = true;
+                //this.VertexAttribs[1].Stride = sizeof( cubeVertices.colors[0] );
+                //this.VertexAttribs[1].Pointer = (const GLvoid *)offsetof( ovrCubeVertices, colors );
+
+                gl3.glGenBuffers(1, out this.VertexBuffer);
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.VertexBuffer);
+                //gl3.glBufferData( gl3.GL_ARRAY_BUFFER, sizeof( cubeVertices ), &cubeVertices, GL_STATIC_DRAW ) );
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, 0);
+
+                gl3.glGenBuffers(1, out this.IndexBuffer);
+                gl3.glBindBuffer(gl3.GL_ELEMENT_ARRAY_BUFFER, this.IndexBuffer);
+                //gl3.glBufferData( gl3.GL_ELEMENT_ARRAY_BUFFER, sizeof( cubeIndices ), cubeIndices, gl3.GL_STATIC_DRAW ) ;
+                gl3.glBindBuffer(gl3.GL_ELEMENT_ARRAY_BUFFER, 0);
+            }
+
+            public void ovrGeometry_Destroy()
+            {
+                // 465
+
+                var IndexBuffer0 = new[] { IndexBuffer };
+                gl3.glDeleteBuffers(1, IndexBuffer0);
+                var VertexBuffer0 = new[] { VertexBuffer };
+                gl3.glDeleteBuffers(1, VertexBuffer0);
+
+                this.ovrGeometry_Clear();
+            }
+            public void ovrGeometry_CreateVAO()
+            {
+                // 473
+                var VertexArrayObject0 = new[] { this.VertexArrayObject };
+                gl3.glGenVertexArrays(1, VertexArrayObject0);
+                gl3.glBindVertexArray(this.VertexArrayObject);
+
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.VertexBuffer);
+
+                for (int i = 0; i < MAX_VERTEX_ATTRIB_POINTERS; i++)
+                {
+                    if ((int)this.VertexAttribs[i].Index != -1)
+                    {
+                        gl3.glEnableVertexAttribArray((uint)this.VertexAttribs[i].Index);
+                        gl3.glVertexAttribPointer((uint)this.VertexAttribs[i].Index, this.VertexAttribs[i].Size,
+                                this.VertexAttribs[i].Type, this.VertexAttribs[i].Normalized,
+                                this.VertexAttribs[i].Stride, this.VertexAttribs[i].Pointer);
+                    }
+                }
+
+                gl3.glBindBuffer(gl3.GL_ELEMENT_ARRAY_BUFFER, this.IndexBuffer);
+
+                gl3.glBindVertexArray(0);
+            }
 
             // called by ovrScene_DestroyVAOs
-            public void ovrGeometry_DestroyVAO() { }
+            public void ovrGeometry_DestroyVAO()
+            {
+                // 496
+
+                var VertexArrayObject0 = new[] { this.VertexArrayObject };
+
+                gl3.glDeleteVertexArrays(1, VertexArrayObject0);
+            }
         }
 
-        enum ovrVertexAttribute_location : uint
+        enum ovrVertexAttribute_location //: uint
         {
             VERTEX_ATTRIBUTE_LOCATION_POSITION,
             VERTEX_ATTRIBUTE_LOCATION_COLOR,
@@ -148,7 +215,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         }
 
         [Script]
-        class ovrUniform
+        struct ovrUniform
         {
             public ovrUniform_index index;
             public ovrUniform_type type;
@@ -185,28 +252,31 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
             //// does jsc initialize statically ot at cctor?
             // if its readonly then we could remember the size of it?
-            readonly ovrVertexAttribute[] ProgramVertexAttributes =
-               new[]
-                {
-                    new ovrVertexAttribute { location = ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_POSITION,  name = "vertexPosition" },
-                    new ovrVertexAttribute { location =  ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_COLOR,      name = "vertexColor" },
-                    new ovrVertexAttribute { location =  ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_UV,      name =         "vertexUv" },
-                    new ovrVertexAttribute { location =  ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_TRANSFORM,      name =  "vertexTransform" }
+            readonly ovrVertexAttribute[] ProgramVertexAttributes = new[]
+            {
+                new ovrVertexAttribute { location = ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_POSITION,  name = "vertexPosition" },
+                new ovrVertexAttribute { location =  ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_COLOR,      name = "vertexColor" },
+                new ovrVertexAttribute { location =  ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_UV,      name =         "vertexUv" },
+                new ovrVertexAttribute { location =  ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_TRANSFORM,      name =  "vertexTransform" }
+            };
 
-                };
-
-            //readonly ovrUniform[] ProgramUniforms =
-            //    new[]
-            //        {
-            //new ovrUniform { index=ovrUniform_index.UNIFORM_MODEL_MATRIX,         type=ovrUniform_type.UNIFORM_TYPE_MATRIX4X4, name="ModelMatrix" },
-            //new ovrUniform { index=ovrUniform_index.UNIFORM_VIEW_MATRIX,          type=ovrUniform_type.UNIFORM_TYPE_MATRIX4X4, name="ViewMatrix" },
-            //new ovrUniform { index=ovrUniform_index.UNIFORM_PROJECTION_MATRIX,    type=ovrUniform_type.UNIFORM_TYPE_MATRIX4X4, name="ProjectionMatrix" }
-
-            //        };
+            readonly ovrUniform[] ProgramUniforms = new[]
+            {
+                new ovrUniform { index=ovrUniform_index.UNIFORM_MODEL_MATRIX,         type=ovrUniform_type.UNIFORM_TYPE_MATRIX4X4, name="ModelMatrix" },
+                new ovrUniform { index=ovrUniform_index.UNIFORM_VIEW_MATRIX,          type=ovrUniform_type.UNIFORM_TYPE_MATRIX4X4, name="ViewMatrix" },
+                new ovrUniform { index=ovrUniform_index.UNIFORM_PROJECTION_MATRIX,    type=ovrUniform_type.UNIFORM_TYPE_MATRIX4X4, name="ProjectionMatrix" }
+            };
 
 
             // called by ovrScene_Clear
-            public void ovrProgram_Clear() { }
+            public void ovrProgram_Clear()
+            {
+                // 545
+
+                this.Program = 0;
+                this.VertexShader = 0;
+                this.FragmentShader = 0;
+            }
 
             // called by  ovrScene_Create
             public void ovrProgram_Create(string vertexSource, string fragmentSource)
@@ -217,7 +287,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 this.VertexShader = gl3.glCreateShader(gl3.GL_VERTEX_SHADER);
 
-                gl3.glShaderSource(this.VertexShader, 1, ref vertexSource, null);
+
+                var vertexSource0 = new[] { vertexSource };
+                gl3.glShaderSource(this.VertexShader, 1, vertexSource0, null);
 
                 gl3.glCompileShader(this.VertexShader);
                 gl3.glGetShaderiv(this.VertexShader, gl3.GL_COMPILE_STATUS, out r);
@@ -230,7 +302,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 //}
 
                 this.FragmentShader = gl3.glCreateShader(gl3.GL_FRAGMENT_SHADER);
-                gl3.glShaderSource(this.FragmentShader, 1, ref fragmentSource, null);
+                var fragmentSource0 = new[] { fragmentSource };
+                gl3.glShaderSource(this.FragmentShader, 1, fragmentSource0, null);
                 gl3.glCompileShader(this.FragmentShader);
                 gl3.glGetShaderiv(this.FragmentShader, gl3.GL_COMPILE_STATUS, out r);
                 //if ( r == GL_FALSE )
@@ -264,26 +337,27 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 // Get the uniform locations.
                 //memset( program->Uniforms, -1, sizeof( program->Uniforms ) );
-                //for (int i = 0; i < ProgramUniforms.Length; i++)
-                //{
-                //    this.Uniforms[(int)ProgramUniforms[i].index] = gl3.glGetUniformLocation(this.Program, ProgramUniforms[i].name);
-                //}
+                for (int i = 0; i < ProgramUniforms.Length; i++)
+                {
+                    this.Uniforms[(int)ProgramUniforms[i].index] = gl3.glGetUniformLocation(this.Program, ProgramUniforms[i].name);
+                }
 
-                gl3.glUseProgram(this.Program);
+                //gl3.glUseProgram(this.Program);
 
-                // Get the texture locations.
+                //// Get the texture locations.
                 //for ( int i = 0; i < MAX_PROGRAM_TEXTURES; i++ )
                 //{
-                //    char name[32];
+                //    fixed char name[32] = {0};
+
                 //    sprintf( name, "Texture%i", i );
-                //    program->Textures[i] = glGetUniformLocation( program->Program, name );
-                //    if ( program->Textures[i] != -1 )
+                //    this.Textures[i] = gl3.glGetUniformLocation( this.Program, name );
+                //    if ( this.Textures[i] != -1 )
                 //    {
-                //        GL( glUniform1i( program->Textures[i], i ) );
+                //        gl3.glUniform1i( this.Textures[i], i  );
                 //    }
                 //}
 
-                gl3.glUseProgram(0);
+                //gl3.glUseProgram(0);
 
             }
 
@@ -310,7 +384,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
         }
 
-     
+
 
 
 
@@ -470,7 +544,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 this.BackButtonDown = false;
                 this.BackButtonDownStartTime = 0.0;
 
-                this.Egl.ovrEgl_Clear();
+                this.Egl = new ovrEgl();
+                //this.Egl.ovrEgl_Clear();
 
                 this.Scene = new ovrScene();
                 //this.Scene.ovrScene_Clear();

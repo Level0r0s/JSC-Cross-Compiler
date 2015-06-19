@@ -45,7 +45,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 appState.ovrApp_Clear();
                 appState.Java = java;
 
-
+                // 1794
                 appState.Egl.ovrEgl_CreateContext(null);
 
 
