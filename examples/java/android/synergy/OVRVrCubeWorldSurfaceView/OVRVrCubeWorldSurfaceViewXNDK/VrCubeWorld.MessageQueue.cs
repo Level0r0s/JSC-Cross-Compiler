@@ -42,6 +42,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
         [Script]
         // why struct?
+        // sent to ovrMessageQueue_PostMessage
         public struct ovrMessage
         {
             public VrCubeWorld.MESSAGE Id;
@@ -138,6 +139,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         [Script]
         public struct ovrMessageQueue
         {
+            // fixed array?
             public ovrMessage[] Messages;
 
             // does js do volatile? not yet?
