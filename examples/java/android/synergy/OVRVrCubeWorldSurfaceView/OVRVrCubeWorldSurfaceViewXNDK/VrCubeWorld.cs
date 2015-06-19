@@ -11,14 +11,9 @@ using ScriptCoreLibNative.SystemHeaders.android;
 using ScriptCoreLibNative.SystemHeaders.EGL;
 using ScriptCoreLibNative.SystemHeaders.GLES3;
 
-[assembly: Script()]
-[assembly: ScriptTypeFilter(ScriptType.C, typeof(OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld))]
-[assembly: ScriptTypeFilter(ScriptType.C, typeof(Java.com.oculus.gles3jni.GLES3JNILib))]
-
 
 namespace OVRVrCubeWorldSurfaceViewXNDK
 {
-    [Script]
     public static unsafe partial class VrCubeWorld
     {
 

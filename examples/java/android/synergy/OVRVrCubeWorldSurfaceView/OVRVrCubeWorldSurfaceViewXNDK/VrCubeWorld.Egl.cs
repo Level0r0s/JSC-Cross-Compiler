@@ -23,7 +23,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
         // member of ovrApp
-        [Script]
         class ovrEgl
         {
             const int MAX_CONFIGS = 1024;

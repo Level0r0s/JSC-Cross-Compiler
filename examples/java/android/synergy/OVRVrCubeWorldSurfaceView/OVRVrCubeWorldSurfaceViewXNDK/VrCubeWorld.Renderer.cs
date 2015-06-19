@@ -1,5 +1,4 @@
-﻿using OVRVrCubeWorldSurfaceViewXNDK.Library;
-using ScriptCoreLib;
+﻿using ScriptCoreLib;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
 using ScriptCoreLibNative.SystemHeaders.GLES3;
@@ -20,7 +19,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         public const int NUM_MULTI_SAMPLES = 4;
 
         // element of fixed dimensional array ovrRenderTexture[NUM_BUFFERS, NUM_EYES]
-        [Script]
         struct ovrRenderTexture
         {
             public int Width;
@@ -51,6 +49,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 this.Width = width;
                 this.Height = height;
                 this.Multisamples = multisamples;
+
+                // http://fabiensanglard.net/quake2/quake2_opengl_renderer.php
 
                 // Create the color buffer texture.
                 gl3.glGenTextures(1, out this.ColorTexture);
@@ -135,7 +135,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         }
 
         // created by ovrApp_Clear
-        [Script]
         unsafe class ovrRenderer
         {
             // used by ovrRenderer_RenderFrame

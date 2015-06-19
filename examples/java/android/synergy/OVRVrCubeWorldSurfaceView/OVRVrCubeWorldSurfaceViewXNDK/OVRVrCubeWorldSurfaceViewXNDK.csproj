@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;JNIEnv</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -60,11 +60,10 @@
     <Compile Include="VrCubeWorld.Geometry.cs" />
     <Compile Include="VrCubeWorld.Egl.cs" />
     <Compile Include="VrCubeWorld.Scene.cs" />
-    <Compile Include="Library\DimensionalArray.cs" />
     <Compile Include="VrCubeWorld.Renderer.cs" />
     <Compile Include="VrCubeWorld.MessageQueue.cs" />
     <Compile Include="GLES3JNILib.cs" />
-    <Compile Include="VrApi.cs" />
+    <Compile Include="References\VrApi.cs" />
     <Compile Include="VrCubeWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

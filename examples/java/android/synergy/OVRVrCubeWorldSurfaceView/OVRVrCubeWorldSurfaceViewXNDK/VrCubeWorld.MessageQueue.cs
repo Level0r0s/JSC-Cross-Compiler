@@ -9,6 +9,25 @@ using System.Threading.Tasks;
 
 namespace OVRVrCubeWorldSurfaceViewXNDK
 {
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150619/ovrvrcubeworldsurfaceviewx
+    public struct ovrMessageParms
+    {
+        // union?
+
+        public object Pointer;
+        public int Integer;
+        public static implicit operator ovrMessageParms(int value)
+        {
+            return new ovrMessageParms { Integer = value };
+        }
+
+        public float Float;
+        public static implicit operator ovrMessageParms(float value)
+        {
+            return new ovrMessageParms { Float = value };
+        }
+    }
+
     public static unsafe partial class VrCubeWorld
     {
         // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewNDK\staging\jni\VrCubeWorld_SurfaceView.c
@@ -22,19 +41,11 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             MQ_WAIT_PROCESSED	// wait until the consumer thread has processed the message
         };
 
-        [Script]
-        public struct ovrMessageParms
-        {
-            // union?
 
-            public object Pointer;
-            public int Integer;
-            public float Float;
-        }
 
-        [Script]
         // why struct?
         // sent to ovrMessageQueue_PostMessage
+        // this is like intentextras between processes?
         public struct ovrMessage
         {
             public VrCubeWorld.MESSAGE Id;
@@ -71,6 +82,19 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 return Parms[i].Pointer;
             }
 
+            #region int
+            public ovrMessageParms this[int i]
+            {
+                set
+                {
+                    Parms[i] = value;
+                }
+                get
+                {
+                    return Parms[i];
+                }
+            }
+
             public void ovrMessage_SetIntegerParm(int i, int value)
             {
                 //var p = (int*)Parms[i];
@@ -85,6 +109,21 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 return Parms[i].Integer;
             }
+            #endregion
+
+            // Error	5	Type 'OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld.ovrMessage' already defines a member called 'this' with the same parameter types	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.MessageQueue.cs	103	26	OVRVrCubeWorldSurfaceViewXNDK
+
+            //public float this[int i]
+            //{
+            //    set
+            //    {
+            //        Parms[i].Float = value;
+            //    }
+            //    get
+            //    {
+            //        return Parms[i].Float;
+            //    }
+            //}
 
             public void ovrMessage_SetFloatParm(int i, float value)
             {
@@ -128,7 +167,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
         // field of ovrAppThread
         // created by ovrAppThread
-        [Script]
         public class ovrMessageQueue
         {
             // fixed array?

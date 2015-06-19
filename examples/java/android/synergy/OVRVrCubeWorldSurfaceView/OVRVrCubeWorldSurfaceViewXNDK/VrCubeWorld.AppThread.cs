@@ -19,7 +19,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         // converted from size_t
         // can do a sizeof for malloc?
         // sizeof not available for managed members?
-        [Script]
         public partial class ovrAppThread
         {
             // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrApi.cs

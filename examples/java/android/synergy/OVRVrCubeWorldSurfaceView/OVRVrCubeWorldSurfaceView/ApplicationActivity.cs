@@ -76,7 +76,7 @@ namespace OVRVrCubeWorldSurfaceView.Activities
 
                 // https://stackoverflow.com/questions/7686482/when-does-applications-oncreate-method-is-called-on-android
                 //Toast.makeText(this, "OVRVrCubeWorldNative " + x + new { api }, Toast.LENGTH_LONG).show();
-                Toast.makeText(this, "OVRVrCubeWorldSurfaceView " + x + " " + api, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "OVRVrCubeWorldSurfaceView! " + x + " " + api, Toast.LENGTH_LONG).show();
             }
 
             //I/VrApi   (  401):              "Message":      "Thread priority security exception. Make sure the APK is signed."
@@ -314,7 +314,7 @@ namespace OVRVrCubeWorldSurfaceView.Activities
             public int x = 500; // animate it?
             public int y = 600;
 
-            public Func<string> text = () => "hello";
+            public Func<string> text = () => "hello!";
 
             public int textSize = 25;
 
@@ -398,41 +398,6 @@ namespace OVRVrCubeWorldSurfaceView.Activities
     }
 
 
-}
-
-namespace com.oculus.gles3jni
-{
-    // inline C ?
-    public static class GLES3JNILib
-    {
-        // Activity lifecycle
-        [Script(IsPInvoke = true)]
-        public static long onCreate(Activity obj) { throw null; }
-        [Script(IsPInvoke = true)]
-        public static void onStart(long handle) { throw null; }
-        [Script(IsPInvoke = true)]
-        public static void onResume(long handle) { throw null; }
-        [Script(IsPInvoke = true)]
-        public static void onPause(long handle) { throw null; }
-        [Script(IsPInvoke = true)]
-        public static void onStop(long handle) { throw null; }
-        [Script(IsPInvoke = true)]
-        public static void onDestroy(long handle) { throw null; }
-
-        // Surface lifecycle
-        [Script(IsPInvoke = true)]
-        public static void onSurfaceCreated(long handle, Surface s) { throw null; }
-        [Script(IsPInvoke = true)]
-        public static void onSurfaceChanged(long handle, Surface s) { throw null; }
-        [Script(IsPInvoke = true)]
-        public static void onSurfaceDestroyed(long handle) { throw null; }
-
-        // Input       
-        [Script(IsPInvoke = true)]
-        public static void onKeyEvent(long handle, int keyCode, int action) { throw null; }
-        [Script(IsPInvoke = true)]
-        public static void onTouchEvent(long handle, int action, float x, float y) { throw null; }
-    }
 }
 
 //[javac] W:\src\ScriptCoreLib\Shared\BCLImplementation\System\Threading\Tasks\__TaskExtensions___c__DisplayClass2_1.java:38: error: cannot find symbol

@@ -102,23 +102,23 @@ namespace TestYouTubeExtractor
 
                 Title + video.VideoExtension);
 
-            var pxa = Path.Combine(
+            var pxa_mp4 = Path.Combine(
                  //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                  "x:/media",
 
                  apkfriendlytitle + video.VideoExtension);
 
 
-            if (!File.Exists(pxa))
+            if (!File.Exists(pxa_mp4))
                 if (File.Exists(px))
                 {
                     // upgrade old naming to apk friendly.
-                    File.Move(px, pxa);
+                    File.Move(px, pxa_mp4);
                 }
 
-            var pxa_mp3 = Path.ChangeExtension(pxa, ".mp3");
-            var pxa_mp4_mp4 = Path.ChangeExtension(pxa, ".mp4.mp4");
-            var pxa_mp3_mp4 = Path.ChangeExtension(pxa, ".mp3.mp4");
+            var pxa_mp3 = Path.ChangeExtension(pxa_mp4, ".mp3");
+            var pxa_mp4_mp4 = Path.ChangeExtension(pxa_mp4, ".mp4.mp4");
+            var pxa_mp3_mp4 = Path.ChangeExtension(pxa_mp4, ".mp3.mp4");
 
 
             // do we have the end result?
@@ -131,12 +131,12 @@ namespace TestYouTubeExtractor
             }
 
 
-            if (File.Exists(pxa))
+            if (File.Exists(pxa_mp4))
             {
             }
             else
             {
-                var videoDownloader = new VideoDownloader(video, pxa);
+                var videoDownloader = new VideoDownloader(video, pxa_mp4);
                 videoDownloader.DownloadProgressChanged += (sender, args) =>
                 {
                     ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(0.01 * args.ProgressPercentage);
@@ -159,10 +159,35 @@ namespace TestYouTubeExtractor
                 // dont care about non HD
                 if (mp4video.Last().Resolution >= 1080)
                 {
+                    // fk u visual studio, for closing IDE for stale license.
+
                     Console.WriteLine("upgrade " + new { link } + " from " + mp4audio.Last().Resolution + " to " + mp4video.Last().Resolution);
 
 
                     var ffmpeg = @"X:\util\ffmpeg-20150609-git-7c9fcdf-win64-static\ffmpeg-20150609-git-7c9fcdf-win64-static\bin\ffmpeg.exe";
+
+                    if (File.Exists(pxa_mp4_mp4))
+                        if (
+
+                            // 15m is the timeout to not conitnue
+                            (DateTime.UtcNow - File.GetLastWriteTimeUtc(pxa_mp4_mp4)).TotalMinutes > 15
+                            )
+                        {
+                            File.Delete(pxa_mp4_mp4);
+
+                        }
+
+                    if (File.Exists(pxa_mp3))
+                        if (
+
+                            // 15m is the timeout to not conitnue
+                            (DateTime.UtcNow - File.GetLastWriteTimeUtc(pxa_mp3)).TotalMinutes > 15
+                            )
+                        {
+                            File.Delete(pxa_mp3);
+
+                        }
+
 
                     if (!File.Exists(pxa_mp4_mp4))
                     {
@@ -188,7 +213,7 @@ namespace TestYouTubeExtractor
 
                     if (!File.Exists(pxa_mp3))
                         Process.Start(ffmpeg,
-                            "-i \"" + pxa + "\""
+                            "-i \"" + pxa_mp4 + "\""
                             + " \"" + pxa_mp3 + "\"").WaitForExit();
 
                     // merge and delete
@@ -204,7 +229,7 @@ namespace TestYouTubeExtractor
 
                     File.Delete(pxa_mp3);
                     File.Delete(pxa_mp4_mp4);
-                    File.Delete(pxa);
+                    File.Delete(pxa_mp4);
                 }
             #endregion
 

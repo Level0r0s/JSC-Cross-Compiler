@@ -15,7 +15,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewNDK\staging\jni\VrCubeWorld_SurfaceView.c
 
 
-        [Script]
         struct ovrVertexAttribute
         {
             public ovrVertexAttribute_location location;
@@ -36,7 +35,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             UNIFORM_TYPE_MATRIX4X4,
         }
 
-        [Script]
         struct ovrUniform
         {
             public ovrUniform_index index;
@@ -52,7 +50,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
         // a field at ovrScene, keep it as class as fixed causes uglyness
         // created by ovrScene
-        [Script]
         class ovrProgram
         {
             public readonly int[] Uniforms = new int[MAX_PROGRAM_UNIFORMS];      // ProgramUniforms[].name

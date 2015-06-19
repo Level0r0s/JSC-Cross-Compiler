@@ -17,7 +17,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
         // field of ovrApp
-        [Script]
         struct ovrSimulation
         {
             public ovrVector3f CurrentRotation;
@@ -56,7 +55,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
         // created by AppThreadFunction
         // ref used by ovrRenderer_RenderFrame
-        [Script]
         class ovrApp
         {
             // defined at vrapi.h?

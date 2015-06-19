@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="ApplicationActivity.cs">
     </Compile>
+    <Compile Include="GLES3JNILib.cs" />
     <Compile Include="Program.cs">
       <DependentUpon>ApplicationActivity.cs</DependentUpon>
     </Compile>

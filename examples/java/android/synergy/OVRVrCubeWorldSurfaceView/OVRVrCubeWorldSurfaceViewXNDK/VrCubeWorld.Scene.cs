@@ -14,23 +14,12 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     {
         // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewNDK\staging\jni\VrCubeWorld_SurfaceView.c
 
-
-
-
-        // assetslibrary
-        public const string VERTEX_SHADER = @"
-";
-        public const string FRAGMENT_SHADER = @"
-";
-
-
         public const int NUM_INSTANCES = 1500;
 
 
         // member of ovrApp
         // member of ovrRenderThread
         // created by ovrApp_Clear
-        [Script]
         unsafe class ovrScene
         {
             public readonly ovrVector3f[] CubePositions = new ovrVector3f[NUM_INSTANCES];

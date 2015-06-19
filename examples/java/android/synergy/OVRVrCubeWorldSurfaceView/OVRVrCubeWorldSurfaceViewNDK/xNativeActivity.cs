@@ -25,7 +25,7 @@ namespace OVRVrCubeWorldSurfaceViewNDK
         // JVM load the .so and calls this native function
         static jstring Java_OVRVrCubeWorldSurfaceView_Activities_xMarshal_stringFromJNI(
             // what would we be able to do inspecting the runtime?
-            ref JNIEnv env,
+             JNIEnv env,
             jobject thiz)
         {
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150607-1/vrcubeworld
@@ -39,7 +39,7 @@ namespace OVRVrCubeWorldSurfaceViewNDK
             // OVR_VRAPI_EXPORT const char * vrapi_GetVersionString();
 
             // if we change our NDK code, will nuget packaing work on the background, and also upgrade running apps?
-            var v = n(ref env,
+            var v = n( env,
                 //"from Java_OVRVrCubeWorldNative_xActivity_stringFromJNI. yay"
 
                 VrApi_h.vrapi_GetVersionString()

@@ -23,7 +23,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             VERTEX_ATTRIBUTE_LOCATION_TRANSFORM
         }
 
-        [Script]
         struct ovrVertexAttribPointer
         {
             public ovrVertexAttribute_location Index;
@@ -46,7 +45,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         //Error	2	'OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld.i8vec4' does not have a predefined size, therefore sizeof can only be used in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Geometry.cs	60	46	OVRVrCubeWorldSurfaceViewXNDK
 
         //[System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Explicit, Size = 4, Pack = 4)]
-        [Script]
         public unsafe struct i8vec4
         {
             // https://www.opengl.org/wiki/Data_Type_(GLSL)
@@ -55,13 +53,11 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public sbyte x, y, z, w;
         }
 
-        [Script]
         public struct u8vec4
         {
             public byte x, y, z, w;
         }
 
-        [Script]
         public unsafe struct ovrCubeVertices
         {
             //public fixed sbyte positions[8 * sizeof(i8vec4)];
@@ -73,7 +69,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
         // autoinit field ovrScene,
-        [Script]
         class ovrGeometry
         {
             public readonly ovrVertexAttribPointer[] VertexAttribs = new ovrVertexAttribPointer[MAX_VERTEX_ATTRIB_POINTERS];
