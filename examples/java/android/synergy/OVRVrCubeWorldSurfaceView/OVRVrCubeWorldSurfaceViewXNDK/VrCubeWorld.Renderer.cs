@@ -19,7 +19,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         public const int NUM_BUFFERS = 3;
         public const int NUM_MULTI_SAMPLES = 4;
 
-        // element of fixed dimensional array
+        // element of fixed dimensional array ovrRenderTexture[NUM_BUFFERS, NUM_EYES]
         [Script]
         struct ovrRenderTexture
         {
@@ -140,15 +140,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
             public readonly ovrRenderTexture[,] RenderTextures = new ovrRenderTexture[NUM_BUFFERS, NUM_EYES];
 
-
-            //public ovrRenderTexture[][] RenderTextures;
-            //public ovrRenderTexture[,] RenderTextures;
-            //public DimensionalArray<ovrRenderTexture> RenderTextures;
-
-            public int BufferIndex;
+            public int BufferIndex = 0;
             public ovrMatrix4f ProjectionMatrix;
             public ovrMatrix4f TanAngleMatrix;
-
 
             public ovrRenderer()
             {
@@ -166,7 +160,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         this.RenderTextures[i, eye].ovrRenderTexture_Clear();
                     }
 
-                this.BufferIndex = 0;
+                //this.BufferIndex = 0;
             }
 
             // called by AppThreadFunction
@@ -217,7 +211,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
             // sent into vrapi_SubmitFrame
             // will use glMapBufferRange
-            public ovrFrameParms ovrRenderer_RenderFrame(ref ovrApp appState, ref ovrTracking tracking)
+            //public ovrFrameParms ovrRenderer_RenderFrame(ref ovrApp appState, ref ovrTracking tracking)
+            public ovrFrameParms ovrRenderer_RenderFrame( ovrApp appState, ref ovrTracking tracking)
             {
                 // can other processes/non ndk stream a surface to us?
                 // local socket?

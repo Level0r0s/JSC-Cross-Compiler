@@ -13,13 +13,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     {
         // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewNDK\staging\jni\VrCubeWorld_SurfaceView.c
 
-        //static object AppThreadFunction(object arg)
-
-
-
         public const int MAX_MESSAGES = 1024;
-
-
 
         public enum ovrMQWait
         {
@@ -36,8 +30,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public object Pointer;
             public int Integer;
             public float Float;
-
-
         }
 
         [Script]
@@ -135,33 +127,27 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
         // field of ovrAppThread
-        // struct? created by?
+        // created by ovrAppThread
         [Script]
-        public struct ovrMessageQueue
+        public class ovrMessageQueue
         {
             // fixed array?
-            public ovrMessage[] Messages;
+            public readonly ovrMessage[] Messages = new ovrMessage[MAX_MESSAGES];
 
             // does js do volatile? not yet?
-            public /* volatile*/ int Head;  // dequeue at the head
-            public /* volatile*/ int Tail;  // enqueue at the tail
-            public /* volatile*/ bool Enabled;
-            public ovrMQWait Wait;
+            public /* volatile*/ int Head = 0;   // dequeue at the head
+            public /* volatile*/ int Tail = 0;  // enqueue at the tail
+            public /* volatile*/ bool Enabled = false;
+            public ovrMQWait Wait = ovrMQWait.MQ_WAIT_NONE;
             public pthread_mutex_t Mutex;
             public pthread_cond_t Posted;
             public pthread_cond_t Received;
             public pthread_cond_t Processed;
 
 
-
-            // ctor?
-            // called by ovrAppThread_Create
-            public void ovrMessageQueue_Create()
+            public ovrMessageQueue()
             {
-                this.Head = 0;
-                this.Tail = 0;
-                this.Enabled = false;
-                this.Wait = ovrMQWait.MQ_WAIT_NONE;
+                // 1644
 
                 var attr = default(pthread_mutexattr_t);
 
@@ -178,6 +164,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // called by ovrAppThread_Destroy
             public void ovrMessageQueue_Destroy()
             {
+                // 1661
+
                 pthread.pthread_mutex_destroy(ref Mutex);
                 pthread.pthread_cond_destroy(ref Posted);
                 pthread.pthread_cond_destroy(ref Received);
@@ -190,6 +178,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // uithread
             public void ovrMessageQueue_PostMessage(ref ovrMessage message)
             {
+                // 1674
+
                 if (!this.Enabled)
                 {
                     return;
@@ -222,6 +212,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // called by ovrMessageQueue_GetNextMessage
             public void ovrMessageQueue_SleepUntilMessage()
             {
+                // 1699
+
                 if (Wait == ovrMQWait.MQ_WAIT_PROCESSED)
                 {
                     pthread.pthread_cond_broadcast(ref Processed);

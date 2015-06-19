@@ -216,6 +216,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     [Script(IsNative = true)]
     public class ovrMobile : VrApi_h
     {
+
     }
 
 
@@ -418,6 +419,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         }
 
         // vrapi_DefaultModeParms
+        //public static ovrModeParms vrapi_DefaultModeParms(ovrJava* java)
         public static ovrModeParms vrapi_DefaultModeParms(ref ovrJava java)
         {
             return default(ovrModeParms);

@@ -32,10 +32,10 @@ namespace Java
                 // Error	4	Cannot take the address of, get the size of, or declare a pointer to a managed type ('OVRVrCubeWorldSurfaceViewXNDK.xovrAppThread')	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	489	40	OVRVrCubeWorldSurfaceViewXNDK
 
 
-                var appThread = new VrCubeWorld.ovrAppThread();
+                var appThread = new VrCubeWorld.ovrAppThread(env, activity);
 
                 // jsc would calla ctor for us...
-                appThread.ovrAppThread_Create(env, activity);
+                //appThread.ovrAppThread_Create(env, activity);
 
                 // set property?
                 appThread.MessageQueue.ovrMessageQueue_Enable(true);

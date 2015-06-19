@@ -54,82 +54,47 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
         // stackalloc at X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.AppThreadFunction.cs
 
-        //[Script]
-        //class ovrAppRef
-        //{
-        //    public ovrApp fields;
-
-        //    public ovrAppRef()
-        //    {
-        //        this.fields.ovrApp_Clear();
-        //    }
-        //}
-
-        // cant make it class yet?
         // created by AppThreadFunction
         // ref used by ovrRenderer_RenderFrame
         [Script]
-        struct ovrApp
+        class ovrApp
         {
             // defined at vrapi.h?
 
+            // cant make it readonly
+            // sent to vrapi_DefaultFrameParms VRAPI_FRAME_INIT_DEFAULT VRAPI_FRAME_INIT_LOADING_ICON_FLUSH
             public ovrJava Java;
 
-            public ovrEgl Egl;
-            public native_window.ANativeWindow NativeWindow;
-            public bool Resumed;
-            public ovrMobile Ovr;
-            public ovrScene Scene;
+            public ovrEgl Egl = new ovrEgl();
+            public native_window.ANativeWindow NativeWindow = null;
+            public bool Resumed = false;
+
+            public ovrMobile Ovr = default(ovrMobile);
+
+            public ovrScene Scene = new ovrScene();
             public ovrSimulation Simulation;
-            public long FrameIndex;
-            public int MinimumVsyncs;
-            public ovrBackButtonState BackButtonState;
-            public bool BackButtonDown;
-            public double BackButtonDownStartTime;
+
+            public long FrameIndex = 1;
+            public int MinimumVsyncs = 1;
+
+            public ovrBackButtonState BackButtonState = ovrBackButtonState.BACK_BUTTON_STATE_NONE;
+            public bool BackButtonDown = false;
+            public double BackButtonDownStartTime = 0;
 #if MULTI_THREADED
 	ovrRenderThread		RenderThread;
 #else
             // set by?
-            public ovrRenderer Renderer;
+            public ovrRenderer Renderer = new ovrRenderer();
 #endif
 
-            //public ovrApp()
-            //{
-            //    ovrApp_Clear();
-            //}
-
-            // ctor
             // called by AppThreadFunction
-            public
-            void ovrApp_Clear()
+            public ovrApp(ref ovrJava java)
             {
+                this.Java = java;
+
                 // 1408
 
-                this.Java.Vm = default(JavaVM);
-                this.Java.Env = default(JNIEnv);
-                this.Java.ActivityObject = null;
-                this.NativeWindow = null;
-                this.Resumed = false;
-                this.Ovr = default(ovrMobile);
-                this.FrameIndex = 1;
-                this.MinimumVsyncs = 1;
-                this.BackButtonState = ovrBackButtonState.BACK_BUTTON_STATE_NONE;
-                this.BackButtonDown = false;
-                this.BackButtonDownStartTime = 0.0;
-
-                this.Egl = new ovrEgl();
-                //this.Egl.ovrEgl_Clear();
-
-                this.Scene = new ovrScene();
-                //this.Scene.ovrScene_Clear();
-
                 this.Simulation.ovrSimulation_Clear();
-#if MULTI_THREADED
-	ovrRenderThread_Clear( &app->RenderThread );
-#else
-                this.Renderer = new ovrRenderer();
-                //this.Renderer.ovrRenderer_Clear();
-#endif
             }
 
             // called by AppThreadFunction

@@ -51,26 +51,21 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         public const int MAX_PROGRAM_TEXTURES = 8;
 
         // a field at ovrScene, keep it as class as fixed causes uglyness
+        // created by ovrScene
         [Script]
-        //struct ovrProgram
         class ovrProgram
         {
-            // sent to glUseProgram
-            public uint Program;
-
-            public uint VertexShader;
-            public uint FragmentShader;
-            // These will be -1 if not used by the program.
-
             public readonly int[] Uniforms = new int[MAX_PROGRAM_UNIFORMS];      // ProgramUniforms[].name
             public readonly int[] Textures = new int[MAX_PROGRAM_TEXTURES];      // Texture%i
 
-            //Error CS1663  Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double OVRVrCubeWorldSurfaceViewXNDK   X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	130
-            //Error CS1642  Fixed size buffer fields may only be members of structs OVRVrCubeWorldSurfaceViewXNDK X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	129
+            // sent to glUseProgram
+            public uint Program = 0;
 
+            public uint VertexShader = 0;
+            public uint FragmentShader = 0;
 
-            //// does jsc initialize statically ot at cctor?
-            // if its readonly then we could remember the size of it?
+            // These will be -1 if not used by the program.
+
             readonly ovrVertexAttribute[] ProgramVertexAttributes = new[]
             {
                 new ovrVertexAttribute { location = ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_POSITION,  name = "vertexPosition" },
@@ -87,19 +82,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             };
 
 
-            public ovrProgram()
-            {
-                ovrProgram_Clear();
-            }
-            // called by ovrScene_Clear
-            void ovrProgram_Clear()
-            {
-                // 545
 
-                this.Program = 0;
-                this.VertexShader = 0;
-                this.FragmentShader = 0;
-            }
 
             // called by  ovrScene_Create
             public void ovrProgram_Create(string vertexSource, string fragmentSource)
@@ -165,22 +148,22 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     this.Uniforms[(int)ProgramUniforms[i].index] = gl3.glGetUniformLocation(this.Program, ProgramUniforms[i].name);
                 }
 
-                //gl3.glUseProgram(this.Program);
+                gl3.glUseProgram(this.Program);
 
                 //// Get the texture locations.
-                //for ( int i = 0; i < MAX_PROGRAM_TEXTURES; i++ )
-                //{
-                //    fixed char name[32] = {0};
+                for (int i = 0; i < MAX_PROGRAM_TEXTURES; i++)
+                {
+                    //    fixed char name[32] = {0};
 
-                //    sprintf( name, "Texture%i", i );
-                //    this.Textures[i] = gl3.glGetUniformLocation( this.Program, name );
-                //    if ( this.Textures[i] != -1 )
-                //    {
-                //        gl3.glUniform1i( this.Textures[i], i  );
-                //    }
-                //}
+                    //    sprintf( name, "Texture%i", i );
+                    //    this.Textures[i] = gl3.glGetUniformLocation( this.Program, name );
+                    //    if ( this.Textures[i] != -1 )
+                    //    {
+                    //        gl3.glUniform1i( this.Textures[i], i  );
+                    //    }
+                }
 
-                //gl3.glUseProgram(0);
+                gl3.glUseProgram(0);
 
             }
 

@@ -41,36 +41,25 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         const int MAX_VERTEX_ATTRIB_POINTERS = 3;
 
 
-        // member of ovrScene
+        // autoinit field ovrScene,
         [Script]
         class ovrGeometry
         {
             public readonly ovrVertexAttribPointer[] VertexAttribs = new ovrVertexAttribPointer[MAX_VERTEX_ATTRIB_POINTERS];
 
-            public uint VertexBuffer;
-            public uint IndexBuffer;
+            public uint VertexBuffer = 0;
+            public uint IndexBuffer = 0;
 
             // sent to glBindVertexArray
-            public uint VertexArrayObject;
+            public uint VertexArrayObject = 0;
 
-            public int VertexCount;
-            public int IndexCount;
-
+            public int VertexCount = 0;
+            public int IndexCount = 0;
 
             public ovrGeometry()
             {
-                ovrGeometry_Clear();
-            }
-            // called by ovrScene_Clear
-             void ovrGeometry_Clear()
-            {
                 // 391
 
-                this.VertexBuffer = 0;
-                this.IndexBuffer = 0;
-                this.VertexArrayObject = 0;
-                this.VertexCount = 0;
-                this.IndexCount = 0;
                 for (int i = 0; i < MAX_VERTEX_ATTRIB_POINTERS; i++)
                 {
                     //this.VertexAttribs[i] = default(ovrVertexAttribPointer);
@@ -81,19 +70,20 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             }
 
             // called by ovrScene_Create
+            // called after VRAPI_FRAME_INIT_LOADING_ICON_FLUSH
             public void ovrGeometry_CreateCube()
             {
                 // 405
 
-                //var cubeIndices = new ushort[] 
-                //{
-                //    0, 1, 2, 2, 3, 0,	// top
-                //    4, 5, 6, 6, 7, 4,	// bottom
-                //    2, 6, 7, 7, 1, 2,	// right
-                //    0, 4, 5, 5, 3, 0,	// left
-                //    3, 5, 6, 6, 2, 3,	// front
-                //    0, 1, 7, 7, 4, 0	// back
-                //};
+                var cubeIndices = new ushort[] 
+                {
+                    0, 1, 2, 2, 3, 0,	// top
+                    4, 5, 6, 6, 7, 4,	// bottom
+                    2, 6, 7, 7, 1, 2,	// right
+                    0, 4, 5, 5, 3, 0,	// left
+                    3, 5, 6, 6, 2, 3,	// front
+                    0, 1, 7, 7, 4, 0	// back
+                };
 
                 this.VertexCount = 8;
                 this.IndexCount = 36;
@@ -137,7 +127,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 var VertexBuffer0 = new[] { VertexBuffer };
                 gl3.glDeleteBuffers(1, VertexBuffer0);
 
-                this.ovrGeometry_Clear();
+                //this.ovrGeometry_Clear();
             }
 
             // called by ovrScene_CreateVAOs

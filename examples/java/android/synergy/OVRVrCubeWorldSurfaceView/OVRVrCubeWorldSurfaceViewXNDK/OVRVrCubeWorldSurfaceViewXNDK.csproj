@@ -58,17 +58,16 @@
     <Compile Include="VrCubeWorld.Renderer.cs" />
     <Compile Include="VrCubeWorld.MessageQueue.cs" />
     <Compile Include="GLES3JNILib.cs" />
-    <Compile Include="VrCubeWorld.AppThreadFunction.cs" />
     <Compile Include="VrApi.cs" />
     <Compile Include="VrCubeWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shaders\VrCubeWorld.frag" />
+    <None Include="Shaders\VrCubeWorld.vert" />
     <None Include="tools\build.bat" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Shaders\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="x:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so">
       <Link>staging\jni\armeabi-v7a\libvrapi.so</Link>

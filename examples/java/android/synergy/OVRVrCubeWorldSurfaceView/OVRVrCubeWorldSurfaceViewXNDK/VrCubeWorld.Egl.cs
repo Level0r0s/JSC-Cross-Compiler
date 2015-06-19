@@ -30,31 +30,16 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             readonly EGLConfig[] configs = new EGLConfig[MAX_CONFIGS];
 
 
-            public int MajorVersion;
-            public int MinorVersion;
-            public EGLDisplay Display;
-            public EGLConfig Config;
-            public EGLSurface TinySurface;
-            public EGLSurface MainSurface;
-            public EGLContext Context;
+            // 141
+            public int MajorVersion = 0;
+            public int MinorVersion = 0;
+            public EGLDisplay Display = default(EGLDisplay);
+            public EGLConfig Config = default(EGLConfig);
+            public EGLSurface TinySurface = egl.EGL_NO_SURFACE;
+            public EGLSurface MainSurface = egl.EGL_NO_SURFACE;
+            public EGLContext Context = egl.EGL_NO_CONTEXT;
           
-            public ovrEgl()
-            {
-                ovrEgl_Clear();
-            }
-            void ovrEgl_Clear()
-            {
-                // 141
-
-                this.MajorVersion = 0;
-                this.MinorVersion = 0;
-                this.Display = default(EGLDisplay);
-                this.Config = default(EGLConfig);
-                this.TinySurface = egl.EGL_NO_SURFACE;
-                this.MainSurface = egl.EGL_NO_SURFACE;
-                this.Context = egl.EGL_NO_CONTEXT;
-            }
-
+         
             // called by AppThreadFunction
             public void ovrEgl_CreateContext(EGLContext shareEgl_Context)
             {

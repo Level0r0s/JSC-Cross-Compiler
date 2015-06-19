@@ -15,7 +15,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewNDK\staging\jni\VrCubeWorld_SurfaceView.c
 
 
-        public const int NUM_INSTANCES = 1500;
 
 
         // assetslibrary
@@ -25,42 +24,28 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 ";
 
 
+        public const int NUM_INSTANCES = 1500;
+
+
         // member of ovrApp
         // member of ovrRenderThread
+        // created by ovrApp_Clear
         [Script]
         unsafe class ovrScene
         {
-            public bool CreatedScene;
-            public bool CreatedVAOs;
-
-            public ovrProgram Program;
-
-            public ovrGeometry Cube;
-
-            // deleted by ovrScene_Destroy
-            public uint InstanceTransformBuffer;
-
             public readonly ovrVector3f[] CubePositions = new ovrVector3f[NUM_INSTANCES];
             public readonly ovrVector3f[] CubeRotations = new ovrVector3f[NUM_INSTANCES];
 
-            public ovrScene()
-            {
-                ovrScene_Clear();
-            }
-            // called by ovrApp_Clear
-            void ovrScene_Clear()
-            {
-                // 817
-                this.CreatedScene = false;
-                this.CreatedVAOs = false;
-                this.InstanceTransformBuffer = 0;
+            // 815
+            public bool CreatedScene = false;
+            public bool CreatedVAOs = false;
 
-                this.Program = new ovrProgram();
-                //this.Program.ovrProgram_Clear();
-                this.Cube = new ovrGeometry();
-                //this.Cube.ovrGeometry_Clear();
-            }
+            public readonly ovrProgram Program = new ovrProgram();
+            public readonly ovrGeometry Cube = new ovrGeometry();
 
+            // deleted by ovrScene_Destroy
+            public uint InstanceTransformBuffer = 0;
+          
             public bool ovrScene_IsCreated()
             {
                 return this.CreatedScene;
@@ -110,6 +95,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             }
 
             // called by AppThreadFunction
+            // called after VRAPI_FRAME_INIT_LOADING_ICON_FLUSH
             public void ovrScene_Create()
             {
                 // 864
@@ -214,7 +200,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 this.Program.ovrProgram_Destroy();
                 this.Cube.ovrGeometry_Destroy();
-
 
                 var InstanceTransformBuffer0 = new[] { this.InstanceTransformBuffer };
                 gl3.glDeleteBuffers(1, InstanceTransformBuffer0);
