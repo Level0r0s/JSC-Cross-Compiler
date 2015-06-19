@@ -115,6 +115,10 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
             }
 
+            // stackalloc? we are about to leak memory? or move it out of the method?
+            static readonly int[] depthAttachment = new[] { gl3.GL_DEPTH_ATTACHMENT };
+
+
             // called by ovrRenderer_RenderFrame
             public void ovrRenderTexture_Resolve()
             {
@@ -122,9 +126,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 // Discard the depth buffer, so the tiler won't need to write it back out to memory.
 
-                // stackalloc? we are about to leak memory? or move it out of the method?
-                var depthAttachment = new[] { gl3.GL_DEPTH_ATTACHMENT };
-
+              
                 gl3.glInvalidateFramebuffer(gl3.GL_FRAMEBUFFER, 1, depthAttachment);
 
                 // Flush this frame worth of commands.

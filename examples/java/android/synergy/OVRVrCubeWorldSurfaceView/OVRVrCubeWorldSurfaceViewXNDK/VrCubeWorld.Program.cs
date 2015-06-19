@@ -94,8 +94,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 this.VertexShader = gl3.glCreateShader(gl3.GL_VERTEX_SHADER);
 
 
-                var vertexSource0 = new[] { vertexSource };
-                gl3.glShaderSource(this.VertexShader, 1, vertexSource0, null);
+                //var vertexSource0 = new[] { vertexSource };
+                //gl3.glShaderSource(this.VertexShader, 1, vertexSource0, null);
+                gl3.glShaderSource(this.VertexShader, 1, ref vertexSource, null);
 
                 gl3.glCompileShader(this.VertexShader);
                 gl3.glGetShaderiv(this.VertexShader, gl3.GL_COMPILE_STATUS, out r);
@@ -108,8 +109,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 //}
 
                 this.FragmentShader = gl3.glCreateShader(gl3.GL_FRAGMENT_SHADER);
-                var fragmentSource0 = new[] { fragmentSource };
-                gl3.glShaderSource(this.FragmentShader, 1, fragmentSource0, null);
+                //var fragmentSource0 = new[] { fragmentSource };
+                //gl3.glShaderSource(this.FragmentShader, 1, fragmentSource0, null);
+                gl3.glShaderSource(this.FragmentShader, 1, ref fragmentSource, null);
                 gl3.glCompileShader(this.FragmentShader);
                 gl3.glGetShaderiv(this.FragmentShader, gl3.GL_COMPILE_STATUS, out r);
                 //if ( r == GL_FALSE )

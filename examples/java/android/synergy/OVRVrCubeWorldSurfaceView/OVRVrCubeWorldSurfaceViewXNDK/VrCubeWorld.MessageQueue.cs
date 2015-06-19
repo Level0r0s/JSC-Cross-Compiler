@@ -134,10 +134,11 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // fixed array?
             public readonly ovrMessage[] Messages = new ovrMessage[MAX_MESSAGES];
 
-            // does js do volatile? not yet?
+            // does js do volatile? not yet? while does not like it.
             public /* volatile*/ int Head = 0;   // dequeue at the head
             public /* volatile*/ int Tail = 0;  // enqueue at the tail
-            public /* volatile*/ bool Enabled = false;
+            public /*volatile */bool Enabled = false;
+
             public ovrMQWait Wait = ovrMQWait.MQ_WAIT_NONE;
             public pthread_mutex_t Mutex;
             public pthread_cond_t Posted;

@@ -129,8 +129,11 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 this.VertexAttribs[0].Type = gl3.GL_BYTE;
                 this.VertexAttribs[0].Normalized = true;
                 //this.VertexAttribs[0].Stride = sizeof( cubeVertices.positions[0] );
-                this.VertexAttribs[0].Stride = sizeof(i8vec4);
+                this.VertexAttribs[0].Stride = sizeof(i8vec4); // there are 8 elements
                 //this.VertexAttribs[0].Pointer = (const GLvoid *)offsetof( ovrCubeVertices, positions );
+                //this.VertexAttribs[0].Pointer = System.Runtime.InteropServices.Marshal.OffsetOf(
+                this.VertexAttribs[0].Pointer = (void*)0;
+
 
                 this.VertexAttribs[1].Index = ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_COLOR;
                 this.VertexAttribs[1].Size = 4;
@@ -138,7 +141,10 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 this.VertexAttribs[1].Normalized = true;
                 //this.VertexAttribs[1].Stride = sizeof( cubeVertices.colors[0] );
                 this.VertexAttribs[1].Stride = sizeof(u8vec4);
+                // The macro offsetof() returns the offset of the field member from the start of the structure type.
                 //this.VertexAttribs[1].Pointer = (const GLvoid *)offsetof( ovrCubeVertices, colors );
+                var offset_colors = (void*)(8 * 4);
+                this.VertexAttribs[1].Pointer = offset_colors;
 
                 gl3.glGenBuffers(1, out this.VertexBuffer);
                 gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.VertexBuffer);
@@ -156,10 +162,10 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             {
                 // 465
 
-                var IndexBuffer0 = new[] { IndexBuffer };
-                gl3.glDeleteBuffers(1, IndexBuffer0);
-                var VertexBuffer0 = new[] { VertexBuffer };
-                gl3.glDeleteBuffers(1, VertexBuffer0);
+                //var IndexBuffer0 = new[] { IndexBuffer };
+                gl3.glDeleteBuffers(1, ref IndexBuffer);
+                //var VertexBuffer0 = new[] { VertexBuffer };
+                gl3.glDeleteBuffers(1, ref VertexBuffer);
 
                 //this.ovrGeometry_Clear();
             }
@@ -168,8 +174,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrGeometry_CreateVAO()
             {
                 // 473
-                var VertexArrayObject0 = new[] { this.VertexArrayObject };
-                gl3.glGenVertexArrays(1, VertexArrayObject0);
+                //var VertexArrayObject0 = new[] { this.VertexArrayObject };
+                gl3.glGenVertexArrays(1, ref VertexArrayObject);
                 gl3.glBindVertexArray(this.VertexArrayObject);
 
                 gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.VertexBuffer);
@@ -193,9 +199,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             {
                 // 496
 
-                var VertexArrayObject0 = new[] { this.VertexArrayObject };
+                //var VertexArrayObject0 = new[] { this.VertexArrayObject };
 
-                gl3.glDeleteVertexArrays(1, VertexArrayObject0);
+                gl3.glDeleteVertexArrays(1, ref VertexArrayObject);
             }
         }
 
