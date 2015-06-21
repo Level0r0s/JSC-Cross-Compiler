@@ -35,6 +35,7 @@ static interface THREE
 
 
 	// File:src/renderers/shaders/ShaderLib.js
+	static attribute THREE.ShaderChunkType ShaderChunk;
 	static attribute THREE.ShaderLibType ShaderLib;
 
 	// X:\jsc.svn\market\synergy\THREE\THREE\opensource\gihtub\three.js\build\THREE.ShaderGodRays.idl
@@ -98,6 +99,13 @@ static interface THREE
 interface THREE.UniformsUtilsType
 {
 	any clone(any uniforms_src);
+};
+
+interface THREE.ShaderChunkType
+{
+	getter any get(string index);
+//getter dynamic get(string index);
+
 };
 
 // x:\jsc.svn\examples\webgl\WebGLSpeedBlendCharacter\WebGLSpeedBlendCharacter\Application.cs
@@ -739,7 +747,12 @@ Constructor(any geometry, any material)]
 interface THREE.Mesh : THREE.Object3D
 {
 	// ? X:\jsc.svn\examples\javascript\WebGL\WebGLOBJExperiment\WebGLOBJExperiment\Application.cs
-	attribute THREE.MeshBasicMaterial  material;
+
+	// X:\jsc.svn\examples\javascript\WebGL\WebGLStereoCubeMap\WebGLStereoCubeMap\Application.cs
+
+	//attribute THREE.MeshBasicMaterial  material;
+
+	attribute THREE.Material  material;
 	attribute THREE.Geometry geometry;
 
 

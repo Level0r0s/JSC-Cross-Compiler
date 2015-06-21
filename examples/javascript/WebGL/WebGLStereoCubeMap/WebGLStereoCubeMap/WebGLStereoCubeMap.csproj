@@ -134,6 +134,7 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
+    <Content Include="Textures\airplane.jpg" />
     <Content Include="Textures\nx.jpg" />
     <Content Include="Textures\ny.jpg" />
     <Content Include="Textures\nz.jpg" />
