@@ -14,10 +14,12 @@ namespace ScriptCoreLib
         public string NativeNamespaceName;
         public string VirtualNamespaceName;
 
-        /// <summary>
-        /// Only native classes shall be considered while renaming
-        /// </summary>
-        [Obsolete]
+        // X:\jsc.svn\examples\c\Test\TestNamespaceFixup\TestNamespaceFixup\Class1.cs
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150621
+        ///// <summary>
+        ///// Only native classes shall be considered while renaming. Or user 
+        ///// </summary>
+        //[Obsolete]
         public bool FilterToIsNative;
 
         public ScriptNamespaceRenameAttribute()
