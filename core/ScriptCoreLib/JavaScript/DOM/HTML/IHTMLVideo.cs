@@ -14,6 +14,9 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 	[Script(InternalConstructor = true)]
 	public class IHTMLVideo : IHTMLMedia
 	{
+        // web content could be archived into a DVD like experience with a DVD MENU
+        // can a data stream be extracted from such a video?
+
 		// when can a jsc app store video in db?
 
 		// X:\jsc.svn\examples\javascript\async\test\TestGetUserMedia\TestGetUserMedia\Application.cs

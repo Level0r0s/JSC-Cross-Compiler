@@ -20,6 +20,8 @@ namespace ScriptCoreLib.JavaScript.WebGL
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public class WebGL2RenderingContext
 	{
+        // X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\SystemHeaders\GLES3\gl3.cs
+
 		// https://code.google.com/p/chromium/issues/detail?id=288731
 		// https://code.google.com/p/chromium/issues/detail?id=483890
 

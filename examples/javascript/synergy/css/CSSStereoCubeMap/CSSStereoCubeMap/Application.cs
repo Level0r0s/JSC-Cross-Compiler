@@ -14,6 +14,8 @@ using CSSStereoCubeMap;
 using CSSStereoCubeMap.Design;
 using CSSStereoCubeMap.HTML.Pages;
 using CSSStereoCubeMap.HTML.Images.FromAssets;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace CSSStereoCubeMap
 {
@@ -31,7 +33,10 @@ namespace CSSStereoCubeMap
 
         public class side
         {
-            public IHTMLImage img;
+            // T where Image or Canvas
+            //public IHTMLElement CSS3DObject_element;
+            public IHTMLElement CSS3DObject_element;
+
             public THREE.Vector3 position;
             public THREE.Vector3 rotation;
         }
@@ -41,6 +46,48 @@ namespace CSSStereoCubeMap
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            //var frame0 = Task.Delay(100);
+            //var frame1 = Task.Delay(200);
+
+            //new { }.With(
+            //    async delegate
+            //    {
+            //        while (true)
+            //        {
+            //            await frame0;
+
+            //            frame0 = Task.Delay(100);
+
+            //            await frame1;
+
+            //            frame0 = Task.Delay(100);
+            //        }
+            //    }
+            //);
+
+            var sw = Stopwatch.StartNew();
+
+            Action<long> activateeye = delegate { };
+
+            new { }.With(
+               async delegate
+               {
+                   while (true)
+                   {
+                       var eye = (sw.ElapsedMilliseconds / 5) % 2;
+
+                       var drawImage = Stopwatch.StartNew();
+                       activateeye(eye);
+                       drawImage.Stop();
+                       Native.document.title = "" + drawImage.ElapsedMilliseconds + "ms (6x drawImage)";
+                       // 120ms.
+
+                       await Task.Delay(1000 / 7);
+                   }
+               }
+            );
+
+
             new { }.With(
                 async delegate
                 {
@@ -62,13 +109,54 @@ namespace CSSStereoCubeMap
                     // haha. we get all frames in one.
 
 
-                    Func<int, IHTMLImage> f = i =>
+                    //Func<int, var> f = i =>
+                    Func<int, IHTMLCanvas> f = i =>
                     {
+                        // we do have a skybox example somewhere...
                         var f1 = new CanvasRenderingContext2D(w: f12.height, h: f12.height);
-                        f1.drawImage(f12, i * f12.height, 0, sw: f12.height, sh: f12.height,
-                            dx: 0, dy: 0, dw: f12.height, dh: f12.height);
+
 
                         // can we keep animating the stereo ?
+
+                        // if we return canvas it gets messed up. why?
+                        // looks to  be a bug?
+
+                        //var stale = new IHTMLImage();
+
+                        activateeye += eye =>
+                        {
+                            if (eye == 0)
+                            {
+                                // GearVR would have both eyes!
+                                // laptop has to flip between eyes to give similar effect?
+                                // if this were a chrome app. could gearvr request the frames into the photos360 app?
+
+                                f1.drawImage(f12, i * f12.height, 0, sw: f12.height, sh: f12.height,
+                                dx: 0, dy: 0, dw: f12.height, dh: f12.height);
+
+                                // whenever we call drawImage ? callsite event monitoring?
+                                // this seems to be slow
+                                //stale.src = f1.canvas.toDataURL();
+
+                                // can we have a synchronized frame choreo?
+                                //await Task.Delay(1000 / 15);
+                            }
+                            else
+                            {
+                                //await frame0;
+
+                                // update!
+
+                                f1.drawImage(f12, (i + 6) * f12.height, 0, sw: f12.height, sh: f12.height,
+                                dx: 0, dy: 0, dw: f12.height, dh: f12.height);
+
+                                //stale.src = f1.canvas.toDataURL();
+
+                                //await frame1;
+                                //await Task.Delay(1000 / 15);
+
+                            };
+                        };
 
                         return f1;
                     };
@@ -82,37 +170,37 @@ namespace CSSStereoCubeMap
                     {
                 new side
                 {
-                    img=  f(0),
+                    CSS3DObject_element=  f(0),
                     position= new THREE.Vector3( -512, 0, 0 ),
                     rotation= new THREE.Vector3( 0, Math.PI / 2, 0 )
                 },
                 new side {
                     //img=  new humus_nx(),
-                    img = f(1),
+                    CSS3DObject_element = f(1),
 
                     position= new THREE.Vector3( 512, 0, 0 ),
                     rotation= new THREE.Vector3( 0, -Math.PI / 2, 0 )
                 },
                 new side{
-                    img=  f(2),
+                    CSS3DObject_element=  f(2),
                     //img=  new humus_py(),
                     position= new THREE.Vector3( 0,  512, 0 ),
                     rotation= new THREE.Vector3( Math.PI / 2, 0, Math.PI )
                 },
                 new side{
                     //img=  new humus_ny(),
-                    img=  f(3),
+                    CSS3DObject_element=  f(3),
                     position= new THREE.Vector3( 0, -512, 0 ),
                     rotation= new THREE.Vector3( - Math.PI / 2, 0, Math.PI )
                 },
                 new side{
-                    img=  f(4),
+                    CSS3DObject_element=  f(4),
                     //img=  new humus_pz(),
                     position= new THREE.Vector3( 0, 0,  512 ),
                     rotation= new THREE.Vector3( 0, Math.PI, 0 )
                 },
                 new side{
-                    img=  f(5),
+                    CSS3DObject_element=  f(5),
                     //img=  new humus_nz(),
                     position= new THREE.Vector3( 0, 0, -512 ),
                     rotation= new THREE.Vector3( 0, 0, 0 )
@@ -124,7 +212,7 @@ namespace CSSStereoCubeMap
                     {
                         var side = sides[i];
 
-                        var element = side.img;
+                        var element = side.CSS3DObject_element;
 
                         element.style.SetSize(1026, 1026);
 

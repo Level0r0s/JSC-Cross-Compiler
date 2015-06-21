@@ -69,6 +69,7 @@ namespace WebGLSpeedBlendCharacter
 
             scene.add(light);
 
+            #region renderer
             var renderer = new THREE.WebGLRenderer(new { antialias = true, alpha = false });
             renderer.setSize(Native.window.Width, Native.window.Height);
             renderer.autoClear = false;
@@ -76,6 +77,9 @@ namespace WebGLSpeedBlendCharacter
             renderer.shadowMapType = THREE.PCFSoftShadowMap;
 
             renderer.domElement.AttachToDocument();
+            #endregion
+
+
 
             // this will mess up
             // three.OrbitControls.js
@@ -140,7 +144,8 @@ namespace WebGLSpeedBlendCharacter
 
             var random = new Random();
             var meshArray = new List<THREE.Mesh>();
-            var geometry = new THREE.CubeGeometry(1, 1, 1);
+            //var geometry = new THREE.CubeGeometry(1, 1, 1);
+            var geometry = new THREE.BoxGeometry(1, 1, 1);
 
             for (var i = 1; i < 100; i++)
             {
@@ -324,3 +329,18 @@ namespace WebGLSpeedBlendCharacter
 
     }
 }
+
+
+// redux roslyn RC rewrite not supported
+
+//    0200026d ScriptCoreLib.JavaScript.Runtime.Convert
+//script: error JSC1000:
+//error:
+//  statement cannot be a load instruction(or is it a bug?)
+//  [0x00b0]
+//ldloca.s   +1 -0
+
+// assembly: X:\jsc.svn\examples\javascript\WebGL\WebGLSpeedBlendCharacter\WebGLSpeedBlendCharacter\bin\Debug\ScriptCoreLib.dll
+// type: ScriptCoreLib.JavaScript.Runtime.Convert, ScriptCoreLib, Version=4.6.0.0, Culture=neutral, PublicKeyToken=null
+// offset: 0x00b0
+//  method:System.String ToBase64String(System.String)

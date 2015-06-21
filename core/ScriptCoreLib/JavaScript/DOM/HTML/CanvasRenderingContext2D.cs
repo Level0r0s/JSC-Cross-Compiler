@@ -112,6 +112,11 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         {
         }
 
+        // X:\jsc.svn\examples\javascript\synergy\css\CSSStereoCubeMap\CSSStereoCubeMap\Application.cs
+        public void drawImage(IHTMLImage image, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
+        {
+        }
+
 
         public bool ImageSmoothingEnabled
         {

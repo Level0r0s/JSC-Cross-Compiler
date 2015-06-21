@@ -139,12 +139,6 @@
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
     <Content Include="Textures\airplane.jpg" />
-    <Content Include="Textures\humus_nx.jpg" />
-    <Content Include="Textures\humus_ny.jpg" />
-    <Content Include="Textures\humus_nz.jpg" />
-    <Content Include="Textures\humus_px.jpg" />
-    <Content Include="Textures\humus_py.jpg" />
-    <Content Include="Textures\humus_pz.jpg" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

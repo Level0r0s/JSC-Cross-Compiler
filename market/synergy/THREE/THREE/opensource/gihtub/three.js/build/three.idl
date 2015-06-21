@@ -158,8 +158,8 @@ interface THREE.Texture
 
 	// X:\jsc.svn\examples\javascript\synergy\webgl\WebGLEarthByBjorn\WebGLEarthByBjorn\Application.cs
 	attribute html::HTMLImageElement image;
-	attribute boolean needsUpdate;
-
+attribute boolean needsUpdate;
+attribute boolean flipY;
 	attribute THREE.Vector2 repeat;
 
 	attribute long wrapS;
@@ -171,6 +171,12 @@ interface THREE.Texture
 	attribute int anisotropy;
 
 
+};
+
+// X:\jsc.svn\examples\javascript\WebGL\WebGLStereoCubeMap\WebGLStereoCubeMap\Application.cs
+[Constructor(any[] images)]
+interface THREE.CubeTexture :  THREE.Texture
+{
 };
 
 
