@@ -228,7 +228,7 @@ namespace WebGLSpeedBlendCharacter
                          );
 
                         #region  createSky
-
+                        // gearvr has photos360 app
                         var urls = new[] {
                             new px().src, new nx().src,
                             new py().src, new ny().src,
@@ -253,7 +253,8 @@ namespace WebGLSpeedBlendCharacter
 
                         // THREE.CubeGeometry has been renamed to THREE.BoxGeometry
                         // The box dimension size doesn't matter that much when the camera is in the center.  Experiment with the values.
-                        var skyMesh = new THREE.Mesh(new THREE.CubeGeometry(10000, 10000, 10000, 1, 1, 1), material);
+                        //var skyMesh = new THREE.Mesh(new THREE.CubeGeometry(10000, 10000, 10000, 1, 1, 1), material);
+                        var skyMesh = new THREE.Mesh(new THREE.BoxGeometry(10000, 10000, 10000), material);
                         //skyMesh.renderDepth = -10;
 
 
@@ -295,20 +296,23 @@ namespace WebGLSpeedBlendCharacter
                             };
                         #endregion
 
+
+                        #region onresize
                         new { }.With(
                               async delegate
                               {
-                                    do
+                                  do
                                   {
                                       camera.aspect = Native.window.aspect;
                                       camera.updateProjectionMatrix();
                                       renderer.setSize(Native.window.Width, Native.window.Height);
 
-                                    } while (await Native.window.async.onresize);
-                                }
+                                  } while (await Native.window.async.onresize);
+                              }
                           );
+                        #endregion
 
-                      
+
                     }
                 )
            );
