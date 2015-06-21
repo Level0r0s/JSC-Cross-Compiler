@@ -31,6 +31,9 @@ namespace ScriptCoreLibNative.SystemHeaders
     [Script(IsNative = true, PointerName = "jobject")]
     public class jobject : jni_h
     {
+        // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Object.cs
+
+
         // look we just defined an object?
         // the name already is the pointer?
     }

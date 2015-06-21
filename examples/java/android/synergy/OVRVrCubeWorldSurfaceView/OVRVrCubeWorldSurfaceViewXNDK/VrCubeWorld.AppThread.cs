@@ -1,4 +1,5 @@
-﻿using ScriptCoreLib;
+﻿using com.oculus.gles3jni;
+using ScriptCoreLib;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
 using ScriptCoreLibNative.SystemHeaders.EGL;
@@ -185,6 +186,27 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 //   (/* typecast */(void(*)(JNIEnv*, jobject))env->DeleteGlobalRef)(env, appThread->ActivityObject);
                 env.DeleteGlobalRef(env, this.ActivityObject);
                 this.MessageQueue.ovrMessageQueue_Destroy();
+            }
+
+
+
+
+   
+
+            public static implicit operator ovrAppThread(ovrAppThreadPointer handle)
+            {
+                var __handle = (size_t)(object)handle;
+                var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+
+                return appThread;
+            }
+
+            public static implicit operator ovrAppThreadPointer(ovrAppThread appThread)
+            {
+                var __handle = (size_t)(object)appThread;
+                var __ref = (ovrAppThreadPointer)(object)__handle;
+                
+                return __ref;
             }
         }
 

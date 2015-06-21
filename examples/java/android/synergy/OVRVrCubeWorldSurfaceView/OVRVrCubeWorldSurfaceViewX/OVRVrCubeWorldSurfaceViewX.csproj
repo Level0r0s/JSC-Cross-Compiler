@@ -98,13 +98,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\OVRVrCubeWorldSurfaceViewXNDK\bin\Debug\staging\libs\armeabi-v7a\libmain.so">
+      <Link>staging\apk\libs\armeabi-v7a\libmain.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\OVRVrCubeWorldSurfaceViewXNDK\bin\Debug\staging\libs\armeabi-v7a\libvrapi.so">
+      <Link>staging\apk\libs\armeabi-v7a\libvrapi.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
+    <None Include="staging\apk\assets\oculussig_02157df2d5d4e70b">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Design\Preview.png" />
     <Content Include="Design\Images.htm" />
     <Content Include="Design\jsc.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName)==Debug (
