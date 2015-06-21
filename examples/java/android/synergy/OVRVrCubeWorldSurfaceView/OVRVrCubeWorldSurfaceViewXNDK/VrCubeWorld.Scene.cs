@@ -1,4 +1,5 @@
 ﻿using ScriptCoreLib;
+using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
 using ScriptCoreLibNative.SystemHeaders.GLES3;
@@ -88,8 +89,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrScene_Create()
             {
                 // 864
-                //Error	2	The type 'ScriptCoreLib.GLSL.VertexShader' is defined in an assembly that is not referenced. You must add a reference to assembly 'ScriptCoreLib, Version=4.6.0.0, Culture=neutral, PublicKeyToken=null'.	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Scene.cs	103	17	OVRVrCubeWorldSurfaceViewXNDK
-                //  ScriptCoreLib.GLSL.FragmentShader for Void .ctor() used at
+                ConsoleExtensions.tracei("enter ovrScene_Create");
+
 
                 var vert = new Shaders.VrCubeWorldVertexShader();
                 var frag = new Shaders.VrCubeWorldFragmentShader();
@@ -188,6 +189,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 this.CreatedScene = true;
 
                 this.ovrScene_CreateVAOs();
+                ConsoleExtensions.tracei("exit ovrScene_Create NUM_INSTANCES: ", NUM_INSTANCES);
             }
 
             // called by AppThreadFunction

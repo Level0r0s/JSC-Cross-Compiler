@@ -1,4 +1,5 @@
 ﻿using ScriptCoreLib;
+using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
 using ScriptCoreLibNative.SystemHeaders.GLES3;
@@ -29,7 +30,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public uint FrameBuffer;
 
             // called by ovrRenderer_Clear
-            public void ovrRenderTexture_Clear() { 
+            public void ovrRenderTexture_Clear()
+            {
                 // 665
 
                 // set default?
@@ -126,7 +128,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 // Discard the depth buffer, so the tiler won't need to write it back out to memory.
 
-              
+
                 gl3.glInvalidateFramebuffer(gl3.GL_FRAMEBUFFER, 1, depthAttachment);
 
                 // Flush this frame worth of commands.
@@ -167,6 +169,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // called by AppThreadFunction
             public void ovrRenderer_Create(ref ovrHmdInfo hmdInfo)
             {
+                ConsoleExtensions.tracei("enter ovrRenderer_Create");
+
                 //fixed (ovrHmdInfo* hmdInfo = &refhmdInfo)
                 fixed (int* hmdInfo_SuggestedEyeResolution = hmdInfo.SuggestedEyeResolution)
                 fixed (float* hmdInfo_SuggestedEyeFov = hmdInfo.SuggestedEyeFov)
@@ -192,6 +196,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                     this.TanAngleMatrix = VrApi_Helpers.ovrMatrix4f_TanAngleMatrixFromProjection(ref this.ProjectionMatrix);
                 }
+
+                ConsoleExtensions.tracei("exit ovrRenderer_Create");
             }
 
 
@@ -213,8 +219,10 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // sent into vrapi_SubmitFrame
             // will use glMapBufferRange
             //public ovrFrameParms ovrRenderer_RenderFrame(ref ovrApp appState, ref ovrTracking tracking)
-            public ovrFrameParms ovrRenderer_RenderFrame( ovrApp appState, ref ovrTracking tracking)
+            public ovrFrameParms ovrRenderer_RenderFrame(ovrApp appState, ref ovrTracking tracking)
             {
+                //ConsoleExtensions.tracei("enter ovrRenderer_RenderFrame, VRAPI_FRAME_INIT_DEFAULT");
+
                 // can other processes/non ndk stream a surface to us?
                 // local socket?
                 // shared memory?
@@ -226,13 +234,23 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 parms.MinimumVsyncs = appState.MinimumVsyncs;
 
 
+                #region InstanceTransformBuffer
                 gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, appState.Scene.InstanceTransformBuffer);
 
                 // malloc? Activator/CreateArray?
-                var cubeTransforms = (ovrMatrix4f*)gl3.glMapBufferRange(
+
+
+                var sizeof_ovrMatrix4f = sizeof(ovrMatrix4f);
+
+                // I/xNativeActivity(20912): x:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Renderer.cs:245 ovrRenderer_RenderFrame, glMapBufferRange sizeof_ovrMatrix4f  64 errno: 0 Success
+                //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, glMapBufferRange sizeof_ovrMatrix4f ", sizeof_ovrMatrix4f);
+
+                // 
+                //var cubeTransforms = (ovrMatrix4f*)gl3.glMapBufferRange(
+                var cubeTransforms = gl3.glMapBufferRange<ovrMatrix4f>(
                     gl3.GL_ARRAY_BUFFER, 0,
                     // do we need marshal.getsize?
-                    NUM_INSTANCES * sizeof(ovrMatrix4f),
+                    NUM_INSTANCES * sizeof_ovrMatrix4f,
 
                     // the first gl3 members, the other are gl2 apis
                     gl3.GL_MAP_WRITE_BIT | gl3.GL_MAP_INVALIDATE_BUFFER_BIT
@@ -242,29 +260,47 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 for (int i = 0; i < NUM_INSTANCES; i++)
                 {
+                    //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, ovrMatrix4f_CreateRotation i ", i);
+                    
                     var rotation = VrApi_Helpers.ovrMatrix4f_CreateRotation(
                         appState.Scene.CubeRotations[i].x * appState.Simulation.CurrentRotation.x,
                         appState.Scene.CubeRotations[i].y * appState.Simulation.CurrentRotation.y,
-                        appState.Scene.CubeRotations[i].z * appState.Simulation.CurrentRotation.z);
+                        appState.Scene.CubeRotations[i].z * appState.Simulation.CurrentRotation.z
+                    );
+
+                    //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, ovrMatrix4f_CreateTranslation i ", i);
 
                     var translation = VrApi_Helpers.ovrMatrix4f_CreateTranslation(
                         appState.Scene.CubePositions[i].x,
                         appState.Scene.CubePositions[i].y,
-                        appState.Scene.CubePositions[i].z);
+                        appState.Scene.CubePositions[i].z
+                    );
 
+                    //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, ovrMatrix4f_Multiply i ", i);
                     var transform = VrApi_Helpers.ovrMatrix4f_Multiply(ref translation, ref rotation);
 
-                    cubeTransforms[i] = VrApi_Helpers.ovrMatrix4f_Transpose(ref transform);
+
+                    var transpose= VrApi_Helpers.ovrMatrix4f_Transpose(ref transform);
+
+                    // I/xNativeActivity(21998): x:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Renderer.cs:282 ovrRenderer_RenderFrame, ubeTransforms[i] = transpose  173 errno: 0 Success
+                    //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, ubeTransforms[i] = transpose ", i);
+                    // (*((matrix4f_2 + (num3 * sizeof(ovrMatrix4f))))) = matrix4f7;
+                    //(*((&(matrix4fArray2[num3])))) = matrix4f7;
+                    cubeTransforms[i] = transpose; 
                 }
 
                 // 1070
                 gl3.glUnmapBuffer(gl3.GL_ARRAY_BUFFER);
                 gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, 0);
+                #endregion
+
 
                 // Calculate the center view matrix.
+                //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, vrapi_DefaultHeadModelParms");
                 var headModelParms = VrApi_Helpers.vrapi_DefaultHeadModelParms();
 
                 var input = default(ovrMatrix4f);
+                //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, vrapi_GetCenterEyeViewMatrix");
                 var centerEyeViewMatrix = VrApi_Helpers.vrapi_GetCenterEyeViewMatrix(ref headModelParms, ref tracking, ref input);
 
                 // 1077
@@ -342,6 +378,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 appState.Renderer.BufferIndex = (appState.Renderer.BufferIndex + 1) % NUM_BUFFERS;
 
                 // 1130
+                //ConsoleExtensions.tracei("exit ovrRenderer_RenderFrame");
                 return parms;
             }
         }

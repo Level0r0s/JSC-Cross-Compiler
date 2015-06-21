@@ -1,4 +1,5 @@
 ﻿using ScriptCoreLib;
+using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
 using ScriptCoreLibNative.SystemHeaders.EGL;
@@ -64,12 +65,13 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public EGLSurface TinySurface = egl.EGL_NO_SURFACE;
             public EGLSurface MainSurface = egl.EGL_NO_SURFACE;
             public EGLContext Context = egl.EGL_NO_CONTEXT;
-          
-         
+
+
             // called by AppThreadFunction
             public void ovrEgl_CreateContext(EGLContext shareEgl_Context)
             {
                 // 152
+                ConsoleExtensions.tracei("enter ovrEgl_CreateContext");
 
                 if (this.Display != egl.EGL_NO_DISPLAY)
                 {
@@ -90,13 +92,16 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     return;
                 }
 
-               
+                ConsoleExtensions.tracei("ovrEgl_CreateContext numConfigs: ", numConfigs);
+
 
 
                 const int egl_EGL_OPENGL_ES3_BIT_KHR = 0x0040;
 
 
                 this.Config = default(EGLConfig);
+
+                #region numConfigs
                 for (int i = 0; i < numConfigs; i++)
                 {
                     int value = 0;
@@ -130,13 +135,16 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         break;
                     }
                 }
+                #endregion
+
                 if (this.Config == default(EGLConfig))
                 {
+                    ConsoleExtensions.tracei("ovrEgl_CreateContext eglChooseConfig failed");
                     //ALOGE( "        eglChooseConfig() failed: %s", EglErrorString( eglGetError() ) );
                     return;
                 }
 
-              
+
                 //ALOGV( "        Context = eglCreateContext( Display, Config, EGL_NO_CONTEXT, contextAttribs )" );
                 //this.Context = egl.eglCreateContext(this.Display, this.Config, (shareEgl != NULL) ? shareEgl->Context : egl.EGL_NO_CONTEXT, contextAttribs);
                 this.Context = egl.eglCreateContext(this.Display, this.Config, shareEgl_Context, contextAttribs);
@@ -146,7 +154,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     return;
                 }
 
-             
+
 
                 //ALOGV( "        TinySurface = eglCreatePbufferSurface( Display, Config, surfaceAttribs )" );
                 this.TinySurface = egl.eglCreatePbufferSurface(this.Display, this.Config, surfaceAttribs);
@@ -166,6 +174,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     this.Context = egl.EGL_NO_CONTEXT;
                     return;
                 }
+
+                ConsoleExtensions.tracei("exit ovrEgl_CreateContext");
+
             }
 
 
@@ -214,6 +225,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // called by ovrApp_HandleVrModeChanges
             public void ovrEgl_CreateSurface(native_window.ANativeWindow nativeWindow)
             {
+                ConsoleExtensions.tracei("enter ovrEgl_CreateSurface");
+
                 //298
                 if (this.MainSurface != egl.EGL_NO_SURFACE)
                 {

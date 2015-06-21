@@ -1,4 +1,5 @@
 ﻿using ScriptCoreLib;
+using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
 using ScriptCoreLibNative.SystemHeaders.EGL;
@@ -67,6 +68,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public native_window.ANativeWindow NativeWindow = null;
             public bool Resumed = false;
 
+            // set by?
             public ovrMobile Ovr = default(ovrMobile);
 
             public ovrScene Scene = new ovrScene();
@@ -88,6 +90,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // called by AppThreadFunction
             public ovrApp(ref ovrJava java)
             {
+                ConsoleExtensions.tracei("enter ovrApp");
                 this.Java = java;
 
                 // 1408
@@ -98,6 +101,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // called by AppThreadFunction
             public void ovrApp_HandleVrModeChanges()
             {
+                ConsoleExtensions.tracei("enter ovrApp_HandleVrModeChanges, FrameIndex: ", (int)FrameIndex);
+
                 // 1432
                 if (this.NativeWindow != null && this.Egl.MainSurface == egl.EGL_NO_SURFACE)
                 {
@@ -119,6 +124,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                         //ALOGV("        eglGetCurrentSurface( EGL_DRAW ) = %p", eglGetCurrentSurface(EGL_DRAW));
 
+                        ConsoleExtensions.tracei("ovrApp_HandleVrModeChanges, vrapi_EnterVrMode");
                         this.Ovr = VrApi.vrapi_EnterVrMode(ref parms);
 
                         //ALOGV("        vrapi_EnterVrMode()");
@@ -135,6 +141,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 #endif
                         //ALOGV("        eglGetCurrentSurface( EGL_DRAW ) = %p", eglGetCurrentSurface(EGL_DRAW));
 
+                        ConsoleExtensions.tracei("ovrApp_HandleVrModeChanges, vrapi_LeaveVrMode");
                         VrApi.vrapi_LeaveVrMode(this.Ovr);
                         this.Ovr = null;
 

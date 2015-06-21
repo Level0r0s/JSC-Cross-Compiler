@@ -1,4 +1,5 @@
 ﻿using ScriptCoreLib;
+using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
 using System;
@@ -15,16 +16,33 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         // union?
 
         public object Pointer;
+        //public static explicit operator object(ovrMessageParms value)
+        //{
+        //    var c = value;
+        //    return c.Pointer;
+        //}
+
         public int Integer;
         public static implicit operator ovrMessageParms(int value)
         {
             return new ovrMessageParms { Integer = value };
+        }
+        public static implicit operator int(ovrMessageParms value)
+        {
+            var c = value;
+            return c.Integer;
+            //return value.Integer;
         }
 
         public float Float;
         public static implicit operator ovrMessageParms(float value)
         {
             return new ovrMessageParms { Float = value };
+        }
+        public static implicit operator float(ovrMessageParms value)
+        {
+            var c = value;
+            return c.Float;
         }
     }
 
@@ -177,7 +195,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public /* volatile*/ int Tail = 0;  // enqueue at the tail
             public /*volatile */bool Enabled = false;
 
+            // setb ?
             public ovrMQWait Wait = ovrMQWait.MQ_WAIT_NONE;
+
             public pthread_mutex_t Mutex;
             public pthread_cond_t Posted;
             public pthread_cond_t Received;
@@ -187,6 +207,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public ovrMessageQueue()
             {
                 // 1644
+                ConsoleExtensions.tracei("enter ovrMessageQueue");
 
                 var attr = default(pthread_mutexattr_t);
 
@@ -198,6 +219,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 pthread.pthread_cond_init(ref Posted, null);
                 pthread.pthread_cond_init(ref Received, null);
                 pthread.pthread_cond_init(ref Processed, null);
+
+                ConsoleExtensions.tracei("exit ovrMessageQueue");
             }
 
             // called by ovrAppThread_Destroy
@@ -218,12 +241,15 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrMessageQueue_PostMessage(ref ovrMessage message)
             {
                 // 1674
+                //ConsoleExtensions.tracei("enter ovrMessageQueue_PostMessage", (int)message.Id);
 
+                // enabled by?
                 if (!this.Enabled)
                 {
+                    ConsoleExtensions.tracei("exit ovrMessageQueue_PostMessage, disabled!");
                     return;
                 }
-                while (Tail - Head >= MAX_MESSAGES)
+                while (this.Tail - this.Head >= MAX_MESSAGES)
                 {
                     // block for a second until messages are processed in the worker?
                     // usleep(microseconds)
@@ -231,20 +257,25 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 }
 
                 // lock(?)
-                pthread.pthread_mutex_lock(ref Mutex);
+                pthread.pthread_mutex_lock(ref this.Mutex);
                 Messages[Tail & (MAX_MESSAGES - 1)] = message;
-
                 Tail++;
+
                 pthread.pthread_cond_broadcast(ref Posted);
-                if (Wait == ovrMQWait.MQ_WAIT_RECEIVED)
+                if (message.Wait == ovrMQWait.MQ_WAIT_RECEIVED)
                 {
+                    //ConsoleExtensions.tracei("ovrMessageQueue_PostMessage MQ_WAIT_RECEIVED, pthread_cond_wait");
                     pthread.pthread_cond_wait(ref Received, ref Mutex);
                 }
-                else if (Wait == ovrMQWait.MQ_WAIT_PROCESSED)
+                else if (message.Wait == ovrMQWait.MQ_WAIT_PROCESSED)
                 {
+                    //ConsoleExtensions.tracei("ovrMessageQueue_PostMessage MQ_WAIT_PROCESSED, pthread_cond_wait");
                     pthread.pthread_cond_wait(ref Processed, ref Mutex);
+                    //ConsoleExtensions.tracei("ovrMessageQueue_PostMessage MQ_WAIT_PROCESSED, pthread_cond_wait done");
                 }
                 pthread.pthread_mutex_unlock(ref Mutex);
+
+                //ConsoleExtensions.tracei("exit ovrMessageQueue_PostMessage");
             }
 
             // appworkerThread
@@ -252,6 +283,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrMessageQueue_SleepUntilMessage()
             {
                 // 1699
+                ConsoleExtensions.tracei("ovrMessageQueue_SleepUntilMessage");
 
                 if (Wait == ovrMQWait.MQ_WAIT_PROCESSED)
                 {
@@ -273,8 +305,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public bool ovrMessageQueue_GetNextMessage(out ovrMessage message, bool waitForMessages)
             {
                 // 1716
+                //ConsoleExtensions.tracei("enter ovrMessageQueue_GetNextMessage");
 
-                // script: error JSC1000: C : Opcode not implemented: volatile. at OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld+ovrAppThread+ovrMessageQueue.ovrMessageQueue_GetNextMessage
 
                 if (this.Wait == ovrMQWait.MQ_WAIT_PROCESSED)
                 {
@@ -303,16 +335,17 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 this.Head++;
                 pthread.pthread_mutex_unlock(ref Mutex);
 
-                if (this.Wait == ovrMQWait.MQ_WAIT_RECEIVED)
+                if (message.Wait == ovrMQWait.MQ_WAIT_RECEIVED)
                 {
                     pthread.pthread_cond_broadcast(ref Processed);
                 }
-                else if (this.Wait == ovrMQWait.MQ_WAIT_PROCESSED)
+                else if (message.Wait == ovrMQWait.MQ_WAIT_PROCESSED)
                 {
                     this.Wait = ovrMQWait.MQ_WAIT_PROCESSED;
                 }
 
-                return false;
+                //ConsoleExtensions.tracei("exit ovrMessageQueue_GetNextMessage");
+                return true;
             }
         }
 

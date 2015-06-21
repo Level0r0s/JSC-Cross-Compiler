@@ -82,6 +82,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         // sent to glUniformMatrix4fv
 
         //public float M[4,4];
+        // 8 * 4 * 4 = 128
         public fixed float M[4 * 4]; // no need to init it as it is native
 
         // http://stackoverflow.com/questions/15071775/struct-with-fixed-sized-array-of-another-struct

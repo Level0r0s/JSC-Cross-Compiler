@@ -1,4 +1,5 @@
 ﻿using ScriptCoreLib;
+using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
 using ScriptCoreLibNative.SystemHeaders.GLES3;
@@ -83,9 +84,10 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
             // called by  ovrScene_Create
             // called after VRAPI_FRAME_INIT_LOADING_ICON_FLUSH
-            public void ovrProgram_Create(string vertexSource, string fragmentSource)
+            public bool ovrProgram_Create(string vertexSource, string fragmentSource)
             {
                 // 554
+                ConsoleExtensions.tracei("enter ovrProgram_Create");
 
                 var r = default(int);
 
@@ -98,13 +100,22 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 gl3.glCompileShader(this.VertexShader);
                 gl3.glGetShaderiv(this.VertexShader, gl3.GL_COMPILE_STATUS, out r);
-                //if ( r == gl3.GL_FALSE )
-                //{
-                //    GLchar msg[4096];
-                //    GL( glGetShaderInfoLog( program->VertexShader, sizeof( msg ), 0, msg ) );
-                //    ALOGE( "%s\n%s\n", vertexSource, msg );
-                //    return false;
-                //}
+
+                ConsoleExtensions.tracei("ovrProgram_Create VertexShader GL_COMPILE_STATUS ", r);
+
+                if (r == gl3.GL_FALSE)
+                {
+                    //I/xNativeActivity( 9698): x:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Program.cs:104 ovrProgram_Create VertexShader GL_COMPILE_STATUS  0 errno: 0 Success
+                    //I/xNativeActivity( 9698): x:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Program.cs:111 0:12: L0001: Typename expected, found ';'
+                    //I/xNativeActivity( 9698):  0 errno: 0 Success
+
+                    var msg = new byte[4096];
+                    var len = 0;
+                    gl3.glGetShaderInfoLog(this.VertexShader, 4096, out len, msg);
+                    ConsoleExtensions.tracei((string)(object)msg);
+                    unistd._exit(-1);
+                    return false;
+                }
 
                 this.FragmentShader = gl3.glCreateShader(gl3.GL_FRAGMENT_SHADER);
                 //var fragmentSource0 = new[] { fragmentSource };
@@ -112,13 +123,19 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 gl3.glShaderSource(this.FragmentShader, 1, ref fragmentSource, null);
                 gl3.glCompileShader(this.FragmentShader);
                 gl3.glGetShaderiv(this.FragmentShader, gl3.GL_COMPILE_STATUS, out r);
-                //if ( r == GL_FALSE )
-                //{
-                //    GLchar msg[4096];
-                //    GL( glGetShaderInfoLog( program->FragmentShader, sizeof( msg ), 0, msg ) );
-                //    ALOGE( "%s\n%s\n", fragmentSource, msg );
-                //    return false;
-                //}
+
+                ConsoleExtensions.tracei("ovrProgram_Create FragmentShader GL_COMPILE_STATUS ", r);
+                // I/xNativeActivity( 6203): x:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Program.cs:121 ovrProgram_Create FragmentShader GL_COMPILE_STATUS  1 errno: 0 Success
+
+                if (r == gl3.GL_FALSE)
+                {
+                    var msg = new byte[4096];
+                    var len = 0;
+                    gl3.glGetShaderInfoLog(this.FragmentShader, 4096, out len, msg);
+                    ConsoleExtensions.tracei((string)(object)msg);
+                    unistd._exit(-1);
+                    return false;
+                }
 
                 this.Program = gl3.glCreateProgram();
 
@@ -165,6 +182,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 gl3.glUseProgram(0);
 
+                ConsoleExtensions.tracei("exit ovrProgram_Create");
+                return true;
             }
 
             // called by ovrScene_Destroy

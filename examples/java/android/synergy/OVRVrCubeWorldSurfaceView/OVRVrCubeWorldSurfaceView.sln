@@ -46,6 +46,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLSpiral", "..\..\..\..\javascript\WebGL\WebGLSpiral\WebGLSpiral\WebGLSpiral.csproj", "{6BE0FE6F-5EA4-40A5-8938-FF7C3B5D0969}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRVrCubeWorldSurfaceViewX", "OVRVrCubeWorldSurfaceViewX\OVRVrCubeWorldSurfaceViewX.csproj", "{C54BCD92-0CBA-4B68-A93D-3CB30A94D024}"
+	ProjectSection(ProjectDependencies) = postProject
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83} = {44F8F2CD-9873-410B-90D4-BD9D8CA03D83}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSwitchToIFrame", "..\..\..\..\javascript\Test\TestSwitchToIFrame\TestSwitchToIFrame\TestSwitchToIFrame.csproj", "{E88F583A-F361-4D97-8642-13EDB6DDC9C1}"
 EndProject

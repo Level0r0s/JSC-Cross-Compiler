@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using OVRVrCubeWorldSurfaceViewXNDK;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
+using ScriptCoreLibAndroidNDK.Library;
 
 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150619/ovrvrcubeworldsurfaceviewx
 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150613/xndk
@@ -40,6 +41,9 @@ namespace com.oculus.gles3jni
         // JVM load the .so and calls this native function
         public static jstring stringFromJNI( JNIEnv env, jobject thiz)
         {
+            // jstring Java_com_oculus_gles3jni_GLES3JNILib_stringFromJNI(JNIEnv* env, jobject thiz)
+            // X:\jsc.svn\examples\c\Test\TestNamespaceFixup\TestNamespaceFixup\Class1.cs
+
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150607-1/vrcubeworld
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150525
 
@@ -65,7 +69,7 @@ namespace com.oculus.gles3jni
         static ovrAppThreadPointer onCreate(JNIEnv env, jobject obj, jobject activity)
         {
             // Error	4	Cannot take the address of, get the size of, or declare a pointer to a managed type ('OVRVrCubeWorldSurfaceViewXNDK.xovrAppThread')	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	489	40	OVRVrCubeWorldSurfaceViewXNDK
-
+            ConsoleExtensions.tracei("enter onCreate, then ovrAppThread, then ovrMessageQueue_Enable");
 
             var appThread = new VrCubeWorld.ovrAppThread(env, activity);
 
@@ -76,15 +80,16 @@ namespace com.oculus.gles3jni
 
             var message = default(VrCubeWorld.ovrMessage);
             message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_CREATE, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+
+
+            //ConsoleExtensions.tracei("onCreate, post MESSAGE_ON_CREATE");
+
             appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
 
+            //ConsoleExtensions.tracei("onCreate, post MESSAGE_ON_CREATE done");
 
-            //stdlib_h.malloc(sizeof(VrCubeWorld.ovrAppThread));
-            //stdlib_h.malloc(sizeof(xovrAppThread));
 
-            //var __handle = (size_t)(object)appThread;
-            //var __ref = (ovrAppThreadPointer)(object)__handle;
-
+       
             return appThread;
         }
 
@@ -158,9 +163,8 @@ namespace com.oculus.gles3jni
         #region Surface lifecycle
         static void onSurfaceCreated(JNIEnv env, jobject obj, ovrAppThreadPointer handle, jobject surface)
         {
+            ConsoleExtensions.tracei("enter onSurfaceCreated");
 
-            //var __handle = (size_t)handle;
-            //var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
             var appThread = (VrCubeWorld.ovrAppThread)handle;
 
             var newNativeWindow = native_window_jni.ANativeWindow_fromSurface(env, surface);
@@ -178,8 +182,12 @@ namespace com.oculus.gles3jni
             var message = default(VrCubeWorld.ovrMessage);
             message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_SURFACE_CREATED, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
             message.ovrMessage_SetPointerParm(0, appThread.NativeWindow);
+            ConsoleExtensions.tracei("onSurfaceCreated, post MESSAGE_ON_SURFACE_CREATED");
             appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+            
+            ConsoleExtensions.tracei("exit onSurfaceCreated");
         }
+
         static void onSurfaceChanged(JNIEnv env, jobject obj, ovrAppThreadPointer handle, jobject surface)
         {
             //var __handle = (size_t)handle;
@@ -302,39 +310,39 @@ namespace com.oculus.gles3jni
         }
         #endregion
 #else
-        
+
         [Script(IsPInvoke = true)]
         public static string stringFromJNI() { return default(string); }
 
         #region Activity lifecycle
         [Script(IsPInvoke = true)]
-        public static ovrAppThreadPointer onCreate(object obj) { throw null; }
+        public static ovrAppThreadPointer onCreate(object activity) { throw null; }
         [Script(IsPInvoke = true)]
-        public static void onStart(long handle) { throw null; }
+        public static void onStart(this ovrAppThreadPointer handle) { throw null; }
         [Script(IsPInvoke = true)]
-        public static void onResume(long handle) { throw null; }
+        public static void onResume(this ovrAppThreadPointer handle) { throw null; }
         [Script(IsPInvoke = true)]
-        public static void onPause(long handle) { throw null; }
+        public static void onPause(this ovrAppThreadPointer handle) { throw null; }
         [Script(IsPInvoke = true)]
-        public static void onStop(long handle) { throw null; }
+        public static void onStop(this ovrAppThreadPointer handle) { throw null; }
         [Script(IsPInvoke = true)]
-        public static void onDestroy(long handle) { throw null; }
+        public static void onDestroy(this ovrAppThreadPointer handle) { throw null; }
         #endregion
 
         #region Surface lifecycle
         [Script(IsPInvoke = true)]
-        public static void onSurfaceCreated(long handle, object s) { throw null; }
+        public static void onSurfaceCreated(this ovrAppThreadPointer handle, object surface) { throw null; }
         [Script(IsPInvoke = true)]
-        public static void onSurfaceChanged(long handle, object s) { throw null; }
+        public static void onSurfaceChanged(this ovrAppThreadPointer handle, object surface) { throw null; }
         [Script(IsPInvoke = true)]
-        public static void onSurfaceDestroyed(long handle) { throw null; }
+        public static void onSurfaceDestroyed(this ovrAppThreadPointer handle) { throw null; }
         #endregion
 
         #region Input
         [Script(IsPInvoke = true)]
-        public static void onKeyEvent(long handle, int keyCode, int action) { throw null; }
+        public static void onKeyEvent(this ovrAppThreadPointer handle, int keyCode, int action) { throw null; }
         [Script(IsPInvoke = true)]
-        public static void onTouchEvent(long handle, int action, float x, float y) { throw null; }
+        public static void onTouchEvent(this ovrAppThreadPointer handle, int action, float x, float y) { throw null; }
         #endregion
 #endif
     }

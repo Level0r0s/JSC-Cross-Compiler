@@ -21,6 +21,16 @@ namespace ScriptCoreLibAndroidNDK.Library
             [CallerLineNumber] int sourceLineNumber = 0
             )
         {
+            //var err0 = *errno_h.__errno();
+
+            // jni/OVRVrCubeWorldSurfaceViewXNDK.dll.c:1452:13: error: assignment discards 'volatile' qualifier from pointer target type [-Werror]
+            //var err0 = *err;
+
+            // can we clear it?
+            //*err = 0;
+
+            // x:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.MessageQueue.cs:244
+
             log.__android_log_print(
                 log.android_LogPriority.ANDROID_LOG_INFO,
                 "xNativeActivity",
@@ -34,12 +44,15 @@ namespace ScriptCoreLibAndroidNDK.Library
                     message,
                     value,
 
-                        *errno_h.__errno(),
+                       *errno_h.__errno(),
 
                         errno_h.strerror(*errno_h.__errno())
 
                 )
             );
+
+            *errno_h.__errno() = 0;
+
         }
     }
 }

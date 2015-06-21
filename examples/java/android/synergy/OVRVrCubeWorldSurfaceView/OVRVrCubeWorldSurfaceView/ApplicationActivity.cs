@@ -208,6 +208,7 @@ namespace OVRVrCubeWorldSurfaceView.Activities
 
             var sw = Stopwatch.StartNew();
 
+            #region mDraw
             var mDraw = new DrawOnTop(this)
             {
                 // yes it appears top left.
@@ -233,6 +234,8 @@ namespace OVRVrCubeWorldSurfaceView.Activities
                     }
                 }
             ).Start();
+            #endregion
+
 
             this.ondispatchTouchEvent = @event =>
             {

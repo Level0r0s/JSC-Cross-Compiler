@@ -1,5 +1,6 @@
 ﻿using com.oculus.gles3jni;
 using ScriptCoreLib;
+using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
 using ScriptCoreLibNative.SystemHeaders.EGL;
@@ -17,7 +18,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewNDK\staging\jni\VrCubeWorld_SurfaceView.c
 
 
-        // converted from size_t
+        // converted from size_t/ovrAppThreadPointer
         // can do a sizeof for malloc?
         // sizeof not available for managed members?
         public partial class ovrAppThread
@@ -38,10 +39,12 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // called by onCreate
             public ovrAppThread(JNIEnv env, jobject activityObject)
             {
+                ConsoleExtensions.tracei("enter ovrAppThread");
+
                 env.GetJavaVM(env, out this.JavaVm);
 
                 this.ActivityObject = env.NewGlobalRef(env, activityObject);
-                
+
                 //// ldfda ?
                 // new Thread( ?
                 // await HopToWorkerThread?
@@ -57,6 +60,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 //        return null;
                 //    }
                 //);
+                ConsoleExtensions.tracei("exit ovrAppThread");
             }
 
 
@@ -75,25 +79,30 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             object AppThreadFunction()
             {
                 // 1778
+                ConsoleExtensions.tracei("enter AppThreadFunction");
 
                 var java = default(ovrJava);
                 java.Vm = this.JavaVm;
-                java.Vm.AttachCurrentThread( /* JavaVM* */ java.Vm, /* JNIEnv** */out java.Env, null);
+                java.Vm.AttachCurrentThread(java.Vm, out java.Env, null);
                 java.ActivityObject = this.ActivityObject;
                 // 1785
 
                 var initParms = VrApi_Helpers.vrapi_DefaultInitParms(ref java);
+                ConsoleExtensions.tracei("AppThreadFunction, vrapi_Initialize");
                 VrApi.vrapi_Initialize(ref initParms);
 
 
+                ConsoleExtensions.tracei("AppThreadFunction, ovrApp");
                 var appState = new ovrApp(ref java);
                 // 1794
                 appState.Egl.ovrEgl_CreateContext(null);
 
 
+                ConsoleExtensions.tracei("AppThreadFunction, vrapi_GetHmdInfo");
                 var hmdInfo = VrApi.vrapi_GetHmdInfo(ref java);
                 appState.Renderer.ovrRenderer_Create(ref hmdInfo);
 
+                ConsoleExtensions.tracei("AppThreadFunction, enter loop");
                 bool destroyed = false;
                 while (!destroyed)
                 {
@@ -104,20 +113,31 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         var waitForMessages = appState.Ovr == null;
 
                         if (!this.MessageQueue.ovrMessageQueue_GetNextMessage(out message, waitForMessages)) break;
+                        // 1812
 
                         // no switch for jsc?
-                        if (message.Id == MESSAGE.MESSAGE_ON_CREATE) break;
-                        if (message.Id == MESSAGE.MESSAGE_ON_START) break;
-                        if (message.Id == MESSAGE.MESSAGE_ON_RESUME) { appState.Resumed = true; break; }
-                        if (message.Id == MESSAGE.MESSAGE_ON_PAUSE) { appState.Resumed = false; break; }
-                        if (message.Id == MESSAGE.MESSAGE_ON_STOP) break;
-                        if (message.Id == MESSAGE.MESSAGE_ON_DESTROY) { appState.NativeWindow = null; destroyed = true; break; }
-
-                        if (message.Id == MESSAGE.MESSAGE_ON_SURFACE_CREATED) { appState.NativeWindow = (native_window.ANativeWindow)message.ovrMessage_GetPointerParm(0); destroyed = true; break; }
-                        if (message.Id == MESSAGE.MESSAGE_ON_SURFACE_DESTROYED) { appState.NativeWindow = null; break; }
-
-                        if (message.Id == MESSAGE.MESSAGE_ON_KEY_EVENT) { appState.ovrApp_HandleKeyEvent((keycodes.AKEYCODE)message.ovrMessage_GetIntegerParm(0), (input.AInputEventAction)message.ovrMessage_GetIntegerParm(1)); break; }
-                        if (message.Id == MESSAGE.MESSAGE_ON_TOUCH_EVENT) { appState.ovrApp_HandleTouchEvent(message.ovrMessage_GetIntegerParm(0), message.ovrMessage_GetFloatParm(1), message.ovrMessage_GetFloatParm(2)); break; }
+                        if (message.Id == MESSAGE.MESSAGE_ON_CREATE)
+                        {
+                            ConsoleExtensions.tracei("AppThreadFunction, MESSAGE_ON_CREATE");
+                        }
+                        else if (message.Id == MESSAGE.MESSAGE_ON_START) { }
+                        else if (message.Id == MESSAGE.MESSAGE_ON_RESUME) { appState.Resumed = true; }
+                        else if (message.Id == MESSAGE.MESSAGE_ON_PAUSE) { appState.Resumed = false; }
+                        else if (message.Id == MESSAGE.MESSAGE_ON_STOP) { }
+                        else if (message.Id == MESSAGE.MESSAGE_ON_DESTROY) { appState.NativeWindow = null; destroyed = true; }
+                        else if (message.Id == MESSAGE.MESSAGE_ON_SURFACE_CREATED)
+                        {
+                            ConsoleExtensions.tracei("AppThreadFunction, MESSAGE_ON_SURFACE_CREATED");
+                            var m0 = message[0];
+                            appState.NativeWindow = (native_window.ANativeWindow)m0.Pointer;
+                        }
+                        else if (message.Id == MESSAGE.MESSAGE_ON_SURFACE_DESTROYED) { appState.NativeWindow = null; }
+                        else if (message.Id == MESSAGE.MESSAGE_ON_KEY_EVENT) { appState.ovrApp_HandleKeyEvent((keycodes.AKEYCODE)(int)message[0], (input.AInputEventAction)(int)message[1]); }
+                        else if (message.Id == MESSAGE.MESSAGE_ON_TOUCH_EVENT)
+                        {
+                            ConsoleExtensions.tracei("AppThreadFunction, MESSAGE_ON_TOUCH_EVENT");
+                            appState.ovrApp_HandleTouchEvent(message[0], message[1], message[2]);
+                        }
 
                         appState.ovrApp_HandleVrModeChanges();
                     }
@@ -127,6 +147,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     appState.ovrApp_HandleSystemEvents();
 
                     // not ready yet?
+                    // set by vrapi_EnterVrMode
                     if (appState.Ovr == null)
                     {
                         continue;
@@ -140,15 +161,21 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                         var parms = VrApi_Helpers.vrapi_DefaultFrameParms(ref appState.Java, ovrFrameInit.VRAPI_FRAME_INIT_LOADING_ICON_FLUSH, 0);
                         parms.FrameIndex = appState.FrameIndex;
+                        ConsoleExtensions.tracei("AppThreadFunction, vrapi_SubmitFrame VRAPI_FRAME_INIT_LOADING_ICON_FLUSH");
                         appState.Ovr.vrapi_SubmitFrame(ref parms);
 
                         appState.Scene.ovrScene_Create();
+
+                        // keep the loader on for a moment...
+                        unistd.usleep(1000);
                     }
 
                     // 1862
                     appState.FrameIndex++;
 
+                    ConsoleExtensions.tracei("AppThreadFunction, vrapi_GetPredictedDisplayTime");
                     var predictedDisplayTime = appState.Ovr.vrapi_GetPredictedDisplayTime(appState.FrameIndex);
+                    ConsoleExtensions.tracei("AppThreadFunction, vrapi_GetPredictedTracking");
                     var tracking = appState.Ovr.vrapi_GetPredictedTracking(predictedDisplayTime);
 
                     // like step in physics?
@@ -191,7 +218,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
 
-   
+
 
             public static implicit operator ovrAppThread(ovrAppThreadPointer handle)
             {
@@ -205,7 +232,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             {
                 var __handle = (size_t)(object)appThread;
                 var __ref = (ovrAppThreadPointer)(object)__handle;
-                
+
                 return __ref;
             }
         }

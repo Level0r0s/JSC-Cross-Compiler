@@ -9,4 +9,4 @@
 	{ 
 		gl_Position = ProjectionMatrix * ( ViewMatrix * ( vertexTransform * vec4( vertexPosition, 1.0 ) ) ); 
 		fragmentColor = vertexColor; 
-	} ;
+	}

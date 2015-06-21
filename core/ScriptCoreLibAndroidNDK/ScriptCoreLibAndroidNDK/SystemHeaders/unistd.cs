@@ -13,6 +13,8 @@ namespace ScriptCoreLibNative.SystemHeaders
     [Script(IsNative = true, Header = "unistd.h", IsSystemHeader = true)]
     public unsafe static class unistd
     {
+        public static void _exit(int i) { throw null; }
+
         public static pid_t gettid() { throw null; }
 
         //public static int usleep(useconds_t);

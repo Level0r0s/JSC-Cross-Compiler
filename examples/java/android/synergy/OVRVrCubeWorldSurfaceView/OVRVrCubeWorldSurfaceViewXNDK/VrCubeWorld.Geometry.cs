@@ -1,4 +1,5 @@
 ﻿using ScriptCoreLib;
+using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
 using ScriptCoreLibNative.SystemHeaders.GLES3;
@@ -111,6 +112,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             {
                 // X:\jsc.svn\examples\c\Test\TestInitializeArray\TestInitializeArray\Class1.cs
                 // 405
+                ConsoleExtensions.tracei("enter ovrGeometry_CreateCube");
 
 
 
@@ -153,6 +155,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 gl3.glBindBuffer(gl3.GL_ELEMENT_ARRAY_BUFFER, this.IndexBuffer);
                 //gl3.glBufferData( gl3.GL_ELEMENT_ARRAY_BUFFER, sizeof( cubeIndices ), cubeIndices, gl3.GL_STATIC_DRAW ) ;
                 gl3.glBindBuffer(gl3.GL_ELEMENT_ARRAY_BUFFER, 0);
+
+                ConsoleExtensions.tracei("exit ovrGeometry_CreateCube");
             }
 
             // called by ovrScene_Destroy

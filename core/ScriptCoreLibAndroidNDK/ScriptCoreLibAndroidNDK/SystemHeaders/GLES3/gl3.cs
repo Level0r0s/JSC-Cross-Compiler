@@ -338,6 +338,8 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
 
 
 
+        public static void glGetShaderInfoLog(uint shader, int bufSize, out int length, byte[] infoLog) { throw null; }
+
         // process is the this pointer?
 
         public static bool glUnmapBuffer(uint target) { throw null; }
@@ -377,7 +379,8 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
         public static void glDrawElementsInstanced(int mode, int count, int type, object indices, int instancecount) { throw null; }
 
 
-        public static void* glMapBufferRange(int target, int offset, int length, int access) { throw null; }
+        //public static void* glMapBufferRange(int target, int offset, int length, int access) { throw null; }
+        public static T[] glMapBufferRange<T>(int target, int offset, int length, int access) { throw null; }
 
 
         public static void glEnableVertexAttribArray(uint index) { throw null; }
