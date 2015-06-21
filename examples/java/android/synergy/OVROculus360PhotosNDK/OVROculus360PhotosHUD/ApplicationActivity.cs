@@ -152,6 +152,7 @@ namespace OVROculus360PhotosHUD.Activities
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:screenOrientation", value = "landscape")]
     public class ApplicationActivity : com.oculus.vrappframework.VrActivity
     {
+        // X:\jsc.svn\examples\javascript\WebGL\WebGLStereoCubeMap\WebGLStereoCubeMap\Application.cs
         // http://paulbourke.net/geometry/transformationprojection/
 
 

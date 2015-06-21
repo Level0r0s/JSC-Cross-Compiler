@@ -12,6 +12,8 @@ namespace ScriptCoreLib.JavaScript.WebGL
     [Script(HasNoPrototype = true, InternalConstructor = true)]
     public class WebGLVertexArrayObject : WebGLObject
     {
+        // https://docs.google.com/presentation/d/19x9XDjUvkW_9gsfsMQzt3hZbRNziVsoCEHOn4AercAc/edit#slide=id.g5791d9ed1_010
+
 		// https://www.opengl.org/sdk/docs/man/html/glCreateVertexArrays.xhtml
 
 		// tested by ?
