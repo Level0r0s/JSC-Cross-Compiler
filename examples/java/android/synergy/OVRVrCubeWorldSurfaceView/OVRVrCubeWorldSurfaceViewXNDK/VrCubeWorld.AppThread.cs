@@ -106,6 +106,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 bool destroyed = false;
                 while (!destroyed)
                 {
+                    #region ovrMessageQueue_GetNextMessage
                     var ok = true;
                     while (ok)
                     {
@@ -135,12 +136,14 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         else if (message.Id == MESSAGE.MESSAGE_ON_KEY_EVENT) { appState.ovrApp_HandleKeyEvent((keycodes.AKEYCODE)(int)message[0], (input.AInputEventAction)(int)message[1]); }
                         else if (message.Id == MESSAGE.MESSAGE_ON_TOUCH_EVENT)
                         {
-                            ConsoleExtensions.tracei("AppThreadFunction, MESSAGE_ON_TOUCH_EVENT");
+                            //ConsoleExtensions.tracei("AppThreadFunction, MESSAGE_ON_TOUCH_EVENT");
                             appState.ovrApp_HandleTouchEvent(message[0], message[1], message[2]);
                         }
 
                         appState.ovrApp_HandleVrModeChanges();
                     }
+                    #endregion
+
 
 
                     appState.ovrApp_BackButtonAction();
@@ -154,7 +157,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     }
 
 
-
+                    #region VRAPI_FRAME_INIT_LOADING_ICON_FLUSH
                     if (!appState.Scene.ovrScene_IsCreated())
                     {
                         // need to keep the enum typename?
@@ -169,13 +172,20 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         // keep the loader on for a moment...
                         unistd.usleep(1000);
                     }
+                    #endregion
+
+                    if (appState.FrameIndex % 60 == 1)
+                    {
+                        ConsoleExtensions.tracei("AppThreadFunction, FrameIndex ", (int)appState.FrameIndex);
+
+                    }
 
                     // 1862
                     appState.FrameIndex++;
 
-                    ConsoleExtensions.tracei("AppThreadFunction, vrapi_GetPredictedDisplayTime");
+                    //ConsoleExtensions.tracei("AppThreadFunction, vrapi_GetPredictedDisplayTime");
                     var predictedDisplayTime = appState.Ovr.vrapi_GetPredictedDisplayTime(appState.FrameIndex);
-                    ConsoleExtensions.tracei("AppThreadFunction, vrapi_GetPredictedTracking");
+                    //ConsoleExtensions.tracei("AppThreadFunction, vrapi_GetPredictedTracking");
                     var tracking = appState.Ovr.vrapi_GetPredictedTracking(predictedDisplayTime);
 
                     // like step in physics?

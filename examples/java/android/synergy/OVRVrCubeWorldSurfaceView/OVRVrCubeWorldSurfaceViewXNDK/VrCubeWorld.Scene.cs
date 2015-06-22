@@ -189,6 +189,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 this.CreatedScene = true;
 
                 this.ovrScene_CreateVAOs();
+
+
+                // elapsed?
                 ConsoleExtensions.tracei("exit ovrScene_Create NUM_INSTANCES: ", NUM_INSTANCES);
             }
 

@@ -1056,7 +1056,7 @@ static ovrFrameParms ovrRenderer_RenderFrame( ovrRenderer * renderer, const ovrJ
 				NUM_INSTANCES * sizeof( ovrMatrix4f ), GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT ) );
 	for ( int i = 0; i < NUM_INSTANCES; i++ )
 	{
-		const ovrMatrix4f rotation = ovrMatrix4f_CreateRotation(
+		const ovrMatrix4f rotation = ovrMatrix4f_CreateRotation(`
 										scene->CubeRotations[i].x * simulation->CurrentRotation.x,
 										scene->CubeRotations[i].y * simulation->CurrentRotation.y,
 										scene->CubeRotations[i].z * simulation->CurrentRotation.z );

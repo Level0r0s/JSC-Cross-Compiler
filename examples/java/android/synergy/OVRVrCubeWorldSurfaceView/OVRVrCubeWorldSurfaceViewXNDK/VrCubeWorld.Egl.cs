@@ -222,6 +222,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 }
             }
 
+
+            static readonly int[] eglCreateWindowSurface_surfaceAttribs = { egl.EGL_NONE };
+
             // called by ovrApp_HandleVrModeChanges
             public void ovrEgl_CreateSurface(native_window.ANativeWindow nativeWindow)
             {
@@ -233,8 +236,10 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     return;
                 }
                 //ALOGV( "        MainSurface = eglCreateWindowSurface( Display, Config, nativeWindow, attribs )" );
-                int[] surfaceAttribs = { egl.EGL_NONE };
-                this.MainSurface = egl.eglCreateWindowSurface(this.Display, this.Config, nativeWindow, surfaceAttribs);
+
+                ConsoleExtensions.tracei("ovrEgl_CreateSurface, eglCreateWindowSurface");
+
+                this.MainSurface = egl.eglCreateWindowSurface(this.Display, this.Config, nativeWindow, eglCreateWindowSurface_surfaceAttribs);
                 if (this.MainSurface == egl.EGL_NO_SURFACE)
                 {
                     //ALOGE( "        eglCreateWindowSurface() failed: %s", EglErrorString( eglGetError() ) );
@@ -247,6 +252,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     return;
                 }
 
+                ConsoleExtensions.tracei("exit ovrEgl_CreateSurface");
             }
 
             // called by ovrApp_Clear

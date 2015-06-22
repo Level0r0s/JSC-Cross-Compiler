@@ -31,25 +31,72 @@ namespace ScriptCoreLibAndroidNDK.Library
 
             // x:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.MessageQueue.cs:244
 
-            log.__android_log_print(
-                log.android_LogPriority.ANDROID_LOG_INFO,
-                "xNativeActivity",
-                //"line %i file %s",
-                "%s:%i %s %i errno: %i %s",
 
-                // only calling convention will change?
-                __arglist(
-                    sourceFilePath,
-                    sourceLineNumber,
-                    message,
-                    value,
+            var bytes = (byte[])(object)sourceFilePath;
 
-                       *errno_h.__errno(),
+            // scan for // or /0
 
-                        errno_h.strerror(*errno_h.__errno())
+            var f = 0;
+            var i = 0;
 
-                )
-            );
+            while (bytes[i] != 0x0)
+            {
+                if (bytes[i] == '\\')
+                {
+                    f = i;
+                }
+
+                i++;
+            }
+
+
+            fixed (byte* takeuntil = &bytes[f])
+            {
+
+                if (*errno_h.__errno() == 0)
+                {
+                    log.__android_log_print(
+                      log.android_LogPriority.ANDROID_LOG_INFO,
+                      "xNativeActivity",
+                        //"line %i file %s",
+                      "%s:%i %s %i",
+
+                      // only calling convention will change?
+                      __arglist(
+                        //sourceFilePath,
+                          takeuntil,
+                          sourceLineNumber,
+                          message,
+                          value
+
+
+                      )
+                  );
+                }
+                else
+                {
+                    log.__android_log_print(
+                        log.android_LogPriority.ANDROID_LOG_INFO,
+                        "xNativeActivity",
+                        //"line %i file %s",
+                        "%s:%i %s %i errno: %i %s",
+
+                        // only calling convention will change?
+                        __arglist(
+                        //sourceFilePath,
+                            takeuntil,
+                            sourceLineNumber,
+                            message,
+                            value,
+
+                               *errno_h.__errno(),
+
+                                errno_h.strerror(*errno_h.__errno())
+
+                        )
+                    );
+                }
+            }
 
             *errno_h.__errno() = 0;
 
