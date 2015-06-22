@@ -122,6 +122,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
             // called by ovrRenderer_RenderFrame
+            // ovrRenderTexture_SetNone
             public void ovrRenderTexture_Resolve()
             {
                 // 763
@@ -143,27 +144,26 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
             public readonly ovrRenderTexture[,] RenderTextures = new ovrRenderTexture[NUM_BUFFERS, NUM_EYES];
 
+            // incremented by ovrRenderer_RenderFrame
             public int BufferIndex = 0;
+
+            // set by ovrMatrix4f_CreateProjectionFov
             public ovrMatrix4f ProjectionMatrix;
+
+            // set by ovrMatrix4f_TanAngleMatrixFromProjection
             public ovrMatrix4f TanAngleMatrix;
 
             public ovrRenderer()
             {
-                ovrRenderer_Clear();
-            }
-
-            // called by ovrApp_Clear
-            void ovrRenderer_Clear()
-            {
                 // 1000
+                // called by ovrApp_Clear?
 
                 for (int i = 0; i < NUM_BUFFERS; i++)
                     for (int eye = 0; eye < NUM_EYES; eye++)
                     {
+                        //this.RenderTextures[i, eye] = default(ovrRenderTexture);
                         this.RenderTextures[i, eye].ovrRenderTexture_Clear();
                     }
-
-                //this.BufferIndex = 0;
             }
 
             // called by AppThreadFunction
@@ -180,6 +180,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     for (int i = 0; i < NUM_BUFFERS; i++)
                         for (int eye = 0; eye < NUM_EYES; eye++)
                         {
+                            ConsoleExtensions.tracei("ovrRenderer_Create i ", i);
                             this.RenderTextures[i, eye].ovrRenderTexture_Create(
                                 hmdInfo_SuggestedEyeResolution[0],
                                 hmdInfo_SuggestedEyeResolution[1],
@@ -261,7 +262,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 for (int i = 0; i < NUM_INSTANCES; i++)
                 {
                     //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, ovrMatrix4f_CreateRotation i ", i);
-                    
+
                     var rotation = VrApi_Helpers.ovrMatrix4f_CreateRotation(
                         appState.Scene.CubeRotations[i].x * appState.Simulation.CurrentRotation.x,
                         appState.Scene.CubeRotations[i].y * appState.Simulation.CurrentRotation.y,
@@ -280,13 +281,13 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     var transform = VrApi_Helpers.ovrMatrix4f_Multiply(ref translation, ref rotation);
 
 
-                    var transpose= VrApi_Helpers.ovrMatrix4f_Transpose(ref transform);
+                    var transpose = VrApi_Helpers.ovrMatrix4f_Transpose(ref transform);
 
                     // I/xNativeActivity(21998): x:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Renderer.cs:282 ovrRenderer_RenderFrame, ubeTransforms[i] = transpose  173 errno: 0 Success
                     //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, ubeTransforms[i] = transpose ", i);
                     // (*((matrix4f_2 + (num3 * sizeof(ovrMatrix4f))))) = matrix4f7;
                     //(*((&(matrix4fArray2[num3])))) = matrix4f7;
-                    cubeTransforms[i] = transpose; 
+                    cubeTransforms[i] = transpose;
                 }
 
                 // 1070
@@ -317,6 +318,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     fixed (ovrRenderTexture* rt = &appState.Renderer.RenderTextures[appState.Renderer.BufferIndex, eye])
                     {
                         //// 1085
+                        appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_SetCurrent BufferIndex ", appState.Renderer.BufferIndex);
+                        appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_SetCurrent eye ", eye);
+
                         rt->ovrRenderTexture_SetCurrent();
 
 
@@ -364,6 +368,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         }
 
                         //// 1119
+                        appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_Resolve");
                         rt->ovrRenderTexture_Resolve();
 
 
@@ -375,9 +380,17 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 ovrRenderTexture.ovrRenderTexture_SetNone();
 
-                appState.Renderer.BufferIndex = (appState.Renderer.BufferIndex + 1) % NUM_BUFFERS;
+                // appState->Renderer->BufferIndex = ((appState->Renderer->BufferIndex + 1) % 3);
+
+                var BufferIndex = appState.Renderer.BufferIndex;
+                appState.tracei60("ovrRenderer_RenderFrame BufferIndex before ", BufferIndex);
+                BufferIndex = (BufferIndex + 1) % NUM_BUFFERS;
+                appState.tracei60("ovrRenderer_RenderFrame BufferIndex after ", BufferIndex);
+                //appState.Renderer.BufferIndex = (appState.Renderer.BufferIndex + 1) % NUM_BUFFERS;
+                appState.Renderer.BufferIndex = BufferIndex;
 
                 // 1130
+                appState.tracei60("exit ovrRenderer_RenderFrame BufferIndex", appState.Renderer.BufferIndex);
                 //ConsoleExtensions.tracei("exit ovrRenderer_RenderFrame");
                 return parms;
             }

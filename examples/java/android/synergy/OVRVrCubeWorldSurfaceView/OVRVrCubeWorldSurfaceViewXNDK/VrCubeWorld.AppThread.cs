@@ -8,6 +8,7 @@ using ScriptCoreLibNative.SystemHeaders.GLES3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -62,7 +63,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 //);
                 ConsoleExtensions.tracei("exit ovrAppThread");
             }
-
 
 
 
@@ -174,11 +174,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     }
                     #endregion
 
-                    if (appState.FrameIndex % 60 == 1)
-                    {
-                        ConsoleExtensions.tracei("AppThreadFunction, FrameIndex ", (int)appState.FrameIndex);
 
-                    }
+                    //appState.tracei60("AppThreadFunction, FrameIndex ", (int)appState.FrameIndex);
 
                     // 1862
                     appState.FrameIndex++;
@@ -195,6 +192,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         //var parms = appState.Renderer.ovrRenderer_RenderFrame(ref appState, ref tracking);
                         var parms = appState.Renderer.ovrRenderer_RenderFrame(appState, ref tracking);
 
+                        appState.tracei60("AppThreadFunction, vrapi_SubmitFrame ", (int)appState.FrameIndex);
                         appState.Ovr.vrapi_SubmitFrame(ref parms);
                     }
                     // 1891

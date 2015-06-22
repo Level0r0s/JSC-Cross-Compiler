@@ -7,6 +7,7 @@ using ScriptCoreLibNative.SystemHeaders.GLES3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -261,6 +262,24 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
             }
 
+            public unsafe void tracei60(
+            string message = "",
+            int value = 0,
+            [CallerFilePath] string sourceFilePath = "",
+            [CallerLineNumber] int sourceLineNumber = 0
+            )
+            {
+                if (this.FrameIndex % 60 == 1)
+                {
+                    ConsoleExtensions.tracei(
+                        message,
+                        value,
+                        sourceFilePath,
+                        sourceLineNumber
+
+                    );
+                }
+            }
         }
 
 

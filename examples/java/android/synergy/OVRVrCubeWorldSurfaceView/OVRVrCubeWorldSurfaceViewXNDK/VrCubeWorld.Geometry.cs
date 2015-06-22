@@ -66,6 +66,44 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public fixed byte colors[8 * 4];
         }
 
+
+
+        public static readonly sbyte[,] ovrCubeVertices8x4_positions = new sbyte[8, 4]
+    { 
+                { -127, +127, -127, +127 }, { +127, +127, -127, +127 }, { +127, +127, +127, +127 }, { -127, +127, +127, +127 },	// top
+                { -127, -127, -127, +127 }, { -127, -127, +127, +127 }, { +127, -127, +127, +127 }, { +127, -127, -127, +127 }	// bottom
+            };
+
+        public static readonly byte[,] ovrCubeVertices8x4_colors = new byte[8, 4] { 
+                { 255,   0, 255, 255 }, {   0, 255,   0, 255 }, {   0,   0, 255, 255 }, { 255,   0,   0, 255 },
+                {   0,   0, 255, 255 }, {   0, 255,   0, 255 }, { 255,   0, 255, 255 }, { 255,   0,   0, 255 }
+            };
+
+        class ovrCubeVertices8x4
+        {
+            public readonly sbyte[,] positions = new sbyte[8, 4];
+
+            public readonly byte[,] colors = new byte[8, 4];
+
+            //jni/OVRVrCubeWorldSurfaceViewXNDK.dll.c: In function 'OVRVrCubeWorldSurfaceViewXNDK_VrCubeWorld_ovrCubeVertices8x4__ctor_6000017':
+            //jni/OVRVrCubeWorldSurfaceViewXNDK.dll.c:1382:23: error: incompatible types when assigning to type 'signed char[8][4]' from type 'signed char (*)[4]'
+            //     __that->positions = OVRVrCubeWorldSurfaceViewXNDK_VrCubeWorld_ovrCubeVertices8x4_positions;
+            //                       ^
+
+            public ovrCubeVertices8x4()
+            {
+                //positions = ovrCubeVertices8x4_positions;
+
+                for (int x = 0; x < 8; x++)
+                    for (int y = 0; y < 4; y++)
+                    {
+                        positions[x, y] = ovrCubeVertices8x4_positions[x, y];
+                        colors[x, y] = ovrCubeVertices8x4_colors[x, y];
+
+                    }
+            }
+        }
+
         const int MAX_VERTEX_ATTRIB_POINTERS = 3;
 
 
@@ -74,6 +112,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         {
             public readonly ovrVertexAttribPointer[] VertexAttribs = new ovrVertexAttribPointer[MAX_VERTEX_ATTRIB_POINTERS];
 
+            // set by ovrGeometry_CreateCube
             public uint VertexBuffer = 0;
             public uint IndexBuffer = 0;
 
@@ -95,6 +134,27 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     this.VertexAttribs[i].Index = (ovrVertexAttribute_location)(-1);
                 }
             }
+
+            //readonly ovrCubeVertices ovrCubeVertices = new VrCubeWorld.ovrCubeVertices {
+            //    // Error	9	Cannot implicitly convert type 'sbyte[*,*]' to 'sbyte*'	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Geometry.cs	101	29	OVRVrCubeWorldSurfaceViewXNDK
+            //    //positions = new sbyte[8, 4] { 
+            //    //Error	9	Cannot implicitly convert type 'sbyte[]' to 'sbyte*'	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Geometry.cs	103	29	OVRVrCubeWorldSurfaceViewXNDK
+
+            //    positions = new sbyte[] { 
+            //    /* { */ -127, +127, -127, +127 /*}*/,
+            //    /* { */ +127, +127, -127, +127 /*}*/,
+            //    /* { */ +127, +127, +127, +127 /*}*/,
+            //    /* { */ -127, +127, +127, +127 /*}*/,	// top
+            //    /* { */ -127, -127, -127, +127 /*}*/,
+            //    /* { */ -127, -127, +127, +127 /*}*/,
+            //    /* { */ +127, -127, +127, +127 /*}*/,
+            //    /* { */ +127, -127, -127, +127 /*}*/	// bottom
+            //    }
+            //};
+
+
+
+            readonly ovrCubeVertices8x4 ovrCubeVertices8x4 = new ovrCubeVertices8x4();
 
             static readonly ushort[] cubeIndices = new ushort[] 
             {
@@ -146,14 +206,17 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 var offset_colors = (void*)(8 * 4);
                 this.VertexAttribs[1].Pointer = offset_colors;
 
+
+                // 452
                 gl3.glGenBuffers(1, out this.VertexBuffer);
                 gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.VertexBuffer);
-                //gl3.glBufferData( gl3.GL_ARRAY_BUFFER, sizeof( cubeVertices ), &cubeVertices, GL_STATIC_DRAW ) );
+                gl3.glBufferData(gl3.GL_ARRAY_BUFFER, sizeof(ovrCubeVertices), ovrCubeVertices8x4, gl3.GL_STATIC_DRAW);
                 gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, 0);
 
+                // 457
                 gl3.glGenBuffers(1, out this.IndexBuffer);
                 gl3.glBindBuffer(gl3.GL_ELEMENT_ARRAY_BUFFER, this.IndexBuffer);
-                //gl3.glBufferData( gl3.GL_ELEMENT_ARRAY_BUFFER, sizeof( cubeIndices ), cubeIndices, gl3.GL_STATIC_DRAW ) ;
+                gl3.glBufferData(gl3.GL_ELEMENT_ARRAY_BUFFER, 36 * 4, cubeIndices, gl3.GL_STATIC_DRAW);
                 gl3.glBindBuffer(gl3.GL_ELEMENT_ARRAY_BUFFER, 0);
 
                 ConsoleExtensions.tracei("exit ovrGeometry_CreateCube");
@@ -164,9 +227,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             {
                 // 465
 
-                //var IndexBuffer0 = new[] { IndexBuffer };
                 gl3.glDeleteBuffers(1, ref IndexBuffer);
-                //var VertexBuffer0 = new[] { VertexBuffer };
                 gl3.glDeleteBuffers(1, ref VertexBuffer);
 
                 //this.ovrGeometry_Clear();
@@ -176,7 +237,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrGeometry_CreateVAO()
             {
                 // 473
-                //var VertexArrayObject0 = new[] { this.VertexArrayObject };
                 gl3.glGenVertexArrays(1, ref VertexArrayObject);
                 gl3.glBindVertexArray(this.VertexArrayObject);
 
@@ -200,8 +260,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrGeometry_DestroyVAO()
             {
                 // 496
-
-                //var VertexArrayObject0 = new[] { this.VertexArrayObject };
 
                 gl3.glDeleteVertexArrays(1, ref VertexArrayObject);
             }

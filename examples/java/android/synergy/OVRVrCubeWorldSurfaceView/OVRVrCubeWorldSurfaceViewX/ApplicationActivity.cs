@@ -91,19 +91,9 @@ namespace OVRVrCubeWorldSurfaceViewX.Activities
         {
             base.onCreate(savedInstanceState);
 
-            Console.WriteLine("enter onCreate");
+            Console.WriteLine("enter ApplicationActivity onCreate");
 
-            //var sv = new ScrollView(this);
-            //var ll = new LinearLayout(this);
-            //ll.setOrientation(LinearLayout.VERTICAL);
-            //sv.addView(ll);
 
-            //var b = new Button(this).AttachTo(ll);
-            //b.WithText(
-            //    com.oculus.gles3jni.GLES3JNILib.stringFromJNI()
-            //);
-
-            //this.setContentView(sv);
 
 
             #region xCallback
@@ -178,6 +168,7 @@ namespace OVRVrCubeWorldSurfaceViewX.Activities
             ).Start();
             #endregion
 
+            #region ondispatchTouchEvent
             this.ondispatchTouchEvent = @event =>
             {
                 if (appThread == 0)
@@ -200,7 +191,9 @@ namespace OVRVrCubeWorldSurfaceViewX.Activities
 
                 // can we move hud around and record it to gif or mp4?
             };
+            #endregion
 
+            #region ondispatchKeyEvent
             this.ondispatchKeyEvent = @event =>
             {
                 if (appThread == 0)
@@ -222,6 +215,8 @@ namespace OVRVrCubeWorldSurfaceViewX.Activities
 
                 return true;
             };
+            #endregion
+
 
             addContentView(mDraw, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
