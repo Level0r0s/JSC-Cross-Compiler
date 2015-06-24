@@ -17,6 +17,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Security.Cryptograph
 	[Script(Implements = typeof(global::System.Security.Cryptography.RSA))]
     internal class __RSA : __AsymmetricAlgorithm
     {
+        // https://randomoracle.wordpress.com/2015/06/21/dual-ec-bitlocker-disk-encryption-and-conspiracy-theories/
+        // https://randomoracle.wordpress.com/
 		// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201503/20150323
 
         // did we not implement rsa via webcrypto?

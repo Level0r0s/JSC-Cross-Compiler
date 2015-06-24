@@ -13,6 +13,7 @@ namespace android.opengl
     [Script(IsNative = true)]
     public class GLES30 : GLES20
     {
+        // X:\jsc.svn\examples\c\android\hybrid\HybridGLES3JNIActivity\HybridGLES3JNIActivity\ApplicationActivity.cs
         // X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\SystemHeaders\GLES3\gl3.cs
     }
 }

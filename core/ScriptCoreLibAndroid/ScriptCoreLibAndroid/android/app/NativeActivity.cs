@@ -20,6 +20,8 @@ namespace android.app
     [Script(IsNative = true)]
     public class NativeActivity : Activity
     {
+        // "X:\util\android-ndk-r10e\samples\gles3jni\jni\gles3jni.cpp"
+
         // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldNativeActivity\OVRVrCubeWorldNativeActivity\ApplicationActivity.cs
         // X:\jsc.svn\examples\java\android\future\NDKHybridMockup\NDKHybridMockup\ApplicationActivity.cs
 

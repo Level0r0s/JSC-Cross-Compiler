@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HybridGLES3JNIActivity", "HybridGLES3JNIActivity\HybridGLES3JNIActivity.csproj", "{9D280B94-A86D-496D-940A-7C0C1C270590}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibAndroid", "..\..\..\..\..\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\ScriptCoreLibAndroid.csproj", "{1CE7D22F-52C8-4164-8955-CD89609E48A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibAndroidNDK", "..\..\..\..\..\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK.csproj", "{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidOpenGLESLesson5Activity", "..\..\..\..\java\android\gles\AndroidOpenGLESLesson5Activity\AndroidOpenGLESLesson5Activity\AndroidOpenGLESLesson5Activity.csproj", "{6314B853-870A-4B1E-A9FA-B9326192270B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidGLSpiralActivity", "..\..\..\..\java\android\gles\AndroidGLSpiralActivity\AndroidGLSpiralActivity\AndroidGLSpiralActivity.csproj", "{22AD40CA-F961-4953-9D6D-F8EE978CDB80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRVrCubeWorldSurfaceViewXNDK", "..\..\..\..\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\OVRVrCubeWorldSurfaceViewXNDK.csproj", "{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRVrCubeWorldSurfaceViewX", "..\..\..\..\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewX\OVRVrCubeWorldSurfaceViewX.csproj", "{C54BCD92-0CBA-4B68-A93D-3CB30A94D024}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{9534814D-1E12-4DB3-AF32-AB8EEAE44541}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D280B94-A86D-496D-940A-7C0C1C270590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6314B853-870A-4B1E-A9FA-B9326192270B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6314B853-870A-4B1E-A9FA-B9326192270B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6314B853-870A-4B1E-A9FA-B9326192270B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6314B853-870A-4B1E-A9FA-B9326192270B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22AD40CA-F961-4953-9D6D-F8EE978CDB80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22AD40CA-F961-4953-9D6D-F8EE978CDB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22AD40CA-F961-4953-9D6D-F8EE978CDB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22AD40CA-F961-4953-9D6D-F8EE978CDB80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C54BCD92-0CBA-4B68-A93D-3CB30A94D024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C54BCD92-0CBA-4B68-A93D-3CB30A94D024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C54BCD92-0CBA-4B68-A93D-3CB30A94D024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C54BCD92-0CBA-4B68-A93D-3CB30A94D024}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9} = {9534814D-1E12-4DB3-AF32-AB8EEAE44541}
+		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77} = {9534814D-1E12-4DB3-AF32-AB8EEAE44541}
+		{6314B853-870A-4B1E-A9FA-B9326192270B} = {9534814D-1E12-4DB3-AF32-AB8EEAE44541}
+		{22AD40CA-F961-4953-9D6D-F8EE978CDB80} = {9534814D-1E12-4DB3-AF32-AB8EEAE44541}
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83} = {9534814D-1E12-4DB3-AF32-AB8EEAE44541}
+		{C54BCD92-0CBA-4B68-A93D-3CB30A94D024} = {9534814D-1E12-4DB3-AF32-AB8EEAE44541}
+	EndGlobalSection
+EndGlobal

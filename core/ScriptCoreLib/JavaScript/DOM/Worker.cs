@@ -34,6 +34,7 @@ namespace ScriptCoreLib.JavaScript.DOM
 	{
         // how will the new bytecode differ fron java or flash??
         // https://blog.mozilla.org/luke/2015/06/17/webassembly/#comment-45134
+        // http://developers.slashdot.org/story/15/06/18/132225/ecmascript-6-is-officially-a-javascript-standard
 
         // https://github.com/WebAssembly/design/blob/master/FutureFeatures.md
         // https://github.com/WebAssembly/design/blob/master/BinaryEncoding.md
