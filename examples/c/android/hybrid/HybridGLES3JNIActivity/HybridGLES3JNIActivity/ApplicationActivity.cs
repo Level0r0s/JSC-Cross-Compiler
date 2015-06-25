@@ -9,6 +9,11 @@ using android.widget;
 using ScriptCoreLib;
 using ScriptCoreLib.Android.Extensions;
 using ScriptCoreLib.Android.Manifest;
+using android.opengl;
+using android.content;
+using javax.microedition.khronos.egl;
+using javax.microedition.khronos.opengles;
+using HybridGLES3JNIActivity.NDK;
 
 namespace HybridGLES3JNIActivity.Activities
 {
@@ -20,37 +25,58 @@ namespace HybridGLES3JNIActivity.Activities
         // "X:\util\android-ndk-r10e\samples\gles3jni\src\com\android\gles3jni\GLES3JNIActivity.java"
         // can we compile .c in the same project already?
 
+        GLES3JNIView mView;
 
         protected override void onCreate(Bundle savedInstanceState)
         {
             base.onCreate(savedInstanceState);
-
-            var sv = new ScrollView(this);
-            var ll = new LinearLayout(this);
-            //ll.setOrientation(LinearLayout.VERTICAL);
-            sv.addView(ll);
-
-            var b = new Button(this).AttachTo(ll);
-
-
-
-            b.WithText("before AtClick");
-            b.AtClick(
-                v =>
-                {
-                    b.setText("AtClick");
-                }
-            );
-
-            var b2 = new Button(this);
-            b2.setText("The other button!");
-            ll.addView(b2);
-
-            this.setContentView(sv);
+            //mView = new GLES3JNIView(getApplication());
+            setContentView(mView);
         }
 
+        protected override void onPause()
+        {
+            base.onPause();
+            //mView.onPause();
+        }
 
+        protected override void onResume()
+        {
+            base.onResume();
+            //mView.onResume();
+        }
     }
 
+    class GLES3JNIView : GLSurfaceView
+    {
+        public GLES3JNIView(Context context) : base(context)
+        {
+            // Pick an EGLConfig with RGB8 color, 16-bit depth, no stencil,
+            // supporting OpenGL ES 2.0 or later backwards-compatible versions.
+            setEGLConfigChooser(8, 8, 8, 0, 16, 0);
+            setEGLContextClientVersion(2);
+            setRenderer(new Renderer());
+        }
 
+        class Renderer : GLSurfaceView.Renderer
+        {
+            public void onDrawFrame(GL10 gl)
+            {
+                // stepping into NDK
+                GLES3JNILib.step();
+            }
+
+            public void onSurfaceChanged(GL10 gl, int width, int height)
+            {
+                GLES3JNILib.resize(width, height);
+            }
+
+            public void onSurfaceCreated(GL10 gl, javax.microedition.khronos.egl.EGLConfig config)
+            {
+                GLES3JNILib.init();
+            }
+        }
+    }
+
+    
 }

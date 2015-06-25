@@ -7,11 +7,11 @@ using System.Threading;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Threading
 {
-	// http://referencesource.microsoft.com/#mscorlib/system/threading/EventWaitHandle.cs
-	// https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Threading/EventWaitHandle.cs
-	// https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Threading/EventWaitHandle.cs
+    // http://referencesource.microsoft.com/#mscorlib/system/threading/EventWaitHandle.cs
+    // https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Threading/EventWaitHandle.cs
+    // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Threading/EventWaitHandle.cs
 
-	[Script(Implements = typeof(global::System.Threading.EventWaitHandle))]
+    [Script(Implements = typeof(global::System.Threading.EventWaitHandle))]
     internal class __EventWaitHandle : __WaitHandle
     {
         // see: http://www.koders.com/java/fid403F7FA980A2B7384C906BF2C6C3E15FB62A1A2F.aspx?s=file:semap*.java
@@ -37,15 +37,22 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading
 
         public bool Set()
         {
-			// roslyn 4.6 changes it?
-			// X:\jsc.svn\examples\java\hybrid\JVMCLRNIC\JVMCLRNIC\Program.cs
-			// X:\jsc.svn\examples\java\test\Test46LockField\Test46LockField\Class1.cs
+            // roslyn 4.6 changes it?
+            // X:\jsc.svn\examples\java\hybrid\JVMCLRNIC\JVMCLRNIC\Program.cs
+            // X:\jsc.svn\examples\java\test\Test46LockField\Test46LockField\Class1.cs
 
-			lock (this.Context)
+            lock (this.Context)
                 this.Context.notify();
 
             return false;
         }
+
+        //0001 020001d1 ScriptCoreLibAndroid::ScriptCoreLibJava.BCLImplementation.System.Threading.__AutoResetEvent
+        //internal compiler error at method
+        // assembly: C:\util\jsc\bin\ScriptCoreLibAndroid.dll at
+        // type: ScriptCoreLibJava.BCLImplementation.System.Threading.__EventWaitHandle, ScriptCoreLibAndroid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+        // method: Set
+        // Object reference not set to an instance of an object.
 
         public override bool WaitOne(int millisecondsTimeout)
         {

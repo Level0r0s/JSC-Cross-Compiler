@@ -48,6 +48,8 @@ namespace NDKHybridMockup.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201506/20150625
+
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201506/20150602/ndk
         // X:\jsc.svn\examples\c\android\HybridOculusVrActivity\HybridOculusVrActivity\OVRJVM\ApplicationActivity.cs
         // X:\jsc.svn\examples\c\android\Test\TestNDKAsAsset\TestNDKAsAsset\xActivity.cs

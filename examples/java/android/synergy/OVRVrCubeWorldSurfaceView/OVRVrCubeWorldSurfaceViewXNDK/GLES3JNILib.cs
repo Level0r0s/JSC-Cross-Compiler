@@ -31,6 +31,8 @@ using ScriptCoreLibAndroidNDK.Library;
 
 namespace com.oculus.gles3jni
 {
+    // X:\jsc.svn\examples\c\android\hybrid\HybridGLES3JNIActivity\HybridGLES3JNIActivity\NDK\GLES3JNILib.cs
+
     // can we have named pointer between java and ndk?
     public enum ovrAppThreadPointer : long { }
 

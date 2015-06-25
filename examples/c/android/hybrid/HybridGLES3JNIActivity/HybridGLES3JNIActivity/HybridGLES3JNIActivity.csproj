@@ -72,6 +72,9 @@
     <Reference Include="ScriptCoreLibAndroid.Windows.Forms">
       <HintPath>C:\util\jsc\bin\ScriptCoreLibAndroid.Windows.Forms.dll</HintPath>
     </Reference>
+    <Reference Include="ScriptCoreLibAndroidNDK">
+      <HintPath>C:\util\jsc\bin\ScriptCoreLibAndroidNDK.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />
@@ -88,6 +91,7 @@
   <ItemGroup>
     <Compile Include="ApplicationActivity.cs">
     </Compile>
+    <Compile Include="NDK\GLES3JNILib.cs" />
     <Compile Include="Program.cs">
       <DependentUpon>ApplicationActivity.cs</DependentUpon>
     </Compile>
@@ -95,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="tools\build.bat" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Design\Preview.png" />
@@ -102,14 +107,16 @@
     <Content Include="Design\jsc.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NDK\" />
+    <Folder Include="staging\jni\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName)==Debug (
- start /MIN /WAIT cmd /K c:\util\jsc\bin\jsc.meta.exe SkipRewriteToMVSProjectTemplate /ProjectFileName:"$(ProjectPath)" /Assembly:"$(TargetPath)" /AttachDebugger:false  /DefaultToDev14:true
-)
-rem start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
+    <PostBuildEvent>pushd ..\..\tools\
+start /WAIT cmd /K  build.bat $(ProjectName) $(TargetFileName)  $(ConfigurationName)
+popd
+
+
+start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
 </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>

@@ -12,10 +12,13 @@ namespace android.opengl
 {
     // http://developer.android.com/reference/android/opengl/GLSurfaceView.html
     // https://android.googlesource.com/platform/frameworks/base.git/+/master/opengl/java/com/google/android/gles_jni/EGLSurfaceImpl.java
+    // https://android.googlesource.com/platform/frameworks/base.git/+/master/opengl/java/android/opengl/GLSurfaceView.java
 
     [Script(IsNative = true)]
     public class GLSurfaceView : SurfaceView
     {
+        // X:\jsc.svn\examples\c\android\hybrid\HybridGLES3JNIActivity\HybridGLES3JNIActivity\ApplicationActivity.cs
+
         // X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Android\Extensions\GLSurfaceViewExtensions.cs
         public void queueEvent(java.lang.Runnable y)
         { 
@@ -45,6 +48,10 @@ namespace android.opengl
         }
 
         public void setDebugFlags(int debugFlags)
+        {
+        }
+        public void setEGLConfigChooser(int redSize, int greenSize, int blueSize,
+            int alphaSize, int depthSize, int stencilSize)
         {
         }
         public void setEGLContextClientVersion(int version)
