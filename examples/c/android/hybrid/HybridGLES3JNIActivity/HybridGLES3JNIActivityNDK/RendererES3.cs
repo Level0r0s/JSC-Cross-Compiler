@@ -45,6 +45,8 @@ namespace HybridGLES3JNIActivity.NDK
 
         public QUAD()
         {
+            //ConsoleExtensions.tracei("QUAD = {");
+
             for (int y = 0; y < 4; y++)
                 fixed (Vertex* v = &__value[y])
                 {
@@ -297,14 +299,7 @@ namespace HybridGLES3JNIActivity.NDK
                     gl3.GL_MAP_WRITE_BIT | gl3.GL_MAP_INVALIDATE_BUFFER_BIT);
         }
 
-        void unmapTransformBuf()
-        {
-        }
-
-
-
-
-
+        
         float[] mapOffsetBuf()
         {
             gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, mVB[(int)VB.VB_OFFSET]);
@@ -312,9 +307,6 @@ namespace HybridGLES3JNIActivity.NDK
                     0, MAX_INSTANCES * 2 * sizeof(float),
                     gl3.GL_MAP_WRITE_BIT | gl3.GL_MAP_INVALIDATE_BUFFER_BIT);
         }
-
-
-
 
 
         void calcSceneParams(int w, int h, float[] offsets)
