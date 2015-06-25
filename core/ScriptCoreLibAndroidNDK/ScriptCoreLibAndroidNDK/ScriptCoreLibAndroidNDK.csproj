@@ -75,6 +75,8 @@
     <Compile Include="SystemHeaders\android\native_activity.cs" />
     <Compile Include="SystemHeaders\android_native_app_glue.cs" />
     <Compile Include="SystemHeaders\android\log.cs" />
+    <Compile Include="SystemHeaders\linux\time.cs" />
+    <Compile Include="SystemHeaders\time.cs" />
     <Compile Include="SystemHeaders\unistd.cs" />
     <Compile Include="SystemHeaders\pthread.cs" />
     <Compile Include="SystemHeaders\errno.cs" />
@@ -93,7 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SystemHeaders\GLES\" />
-    <Folder Include="SystemHeaders\linux\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

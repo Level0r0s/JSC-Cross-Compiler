@@ -23,6 +23,32 @@ namespace ScriptCoreLibNative.SystemHeaders
         // C is important because it directly presents the actual machine memory model.
         // C allows you to get into regions that Java does not even know exist.
 
+        public static float fmaxf(float e, float x)
+        {
+            return 0;
+        }
+        public static float fminf(float e, float x)
+        {
+            return 0;
+        }
+
+        public static float floorf(float e)
+        {
+            return default(float);
+        }
+
+        public static float sinf(float e)
+        {
+            // X:\jsc.svn\examples\c\android\hybrid\HybridGLES3JNIActivity\HybridGLES3JNIActivityNDK\RendererES3.cs
+
+            return default(float);
+        }
+
+        public static float cosf(float e)
+        {
+            return default(float);
+        }
+
 
         public static double sin(double e)
         {

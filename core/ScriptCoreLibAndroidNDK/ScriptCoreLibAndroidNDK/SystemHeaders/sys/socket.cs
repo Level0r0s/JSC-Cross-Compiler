@@ -13,7 +13,7 @@ namespace ScriptCoreLibNative.SystemHeaders.sys
     using size_t = UInt64;
 
     // "X:\opensource\android-ndk-r10c\platforms\android-12\arch-arm\usr\include\sys\socket.h"
-    // "R:\util\android-ndk-r10e\platforms\android-21\arch-arm64\usr\include\sys\socket.h"
+    // "x:\util\android-ndk-r10e\platforms\android-21\arch-arm64\usr\include\sys\socket.h"
 
     public enum SOCKET { }
 

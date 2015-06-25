@@ -98,22 +98,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\HybridGLES3JNIActivityNDK\bin\Debug\staging\libs\armeabi-v7a\libmain.so">
+      <Link>staging\apk\libs\armeabi-v7a\libmain.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
-    <None Include="tools\build.bat" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Design\Preview.png" />
     <Content Include="Design\Images.htm" />
     <Content Include="Design\jsc.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="staging\jni\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>pushd ..\..\tools\
-start /WAIT cmd /K  build.bat $(ProjectName) $(TargetFileName)  $(ConfigurationName)
-popd
+    <PostBuildEvent>
 
 
 start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)

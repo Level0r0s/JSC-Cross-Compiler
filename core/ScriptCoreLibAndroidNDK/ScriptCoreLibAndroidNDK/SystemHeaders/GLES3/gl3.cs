@@ -348,6 +348,7 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
         public static void glDeleteBuffers(int n, uint[] buffers) { throw null; }
         public static void glDeleteBuffers(int n, ref uint buffers) { throw null; }
 
+        public static void glGenBuffers(int n,  uint[] buffers) { throw null; }
         public static void glGenBuffers(int n, out uint buffers) { throw null; }
         public static void glBufferData(int target, int size, object data, int usage) { throw null; }
 
@@ -441,6 +442,9 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
         public static void glDeleteVertexArrays(int n, ref uint arrays) { throw null; }
         public static void glGenVertexArrays(int n, uint[] arrays) { throw null; }
         public static void glGenVertexArrays(int n, ref uint  arrays) { throw null; }
+
+        public static void glDrawArraysInstanced(int mode, int first, int count, int instancecount) { throw null; }
+
         //#include <EGL/eglplatform.h>
         //#include <EGL/egl.h>
         //#include <GLES2/gl2platform.h>glShaderSource

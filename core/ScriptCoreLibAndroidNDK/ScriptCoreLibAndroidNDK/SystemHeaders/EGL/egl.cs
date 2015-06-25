@@ -207,7 +207,7 @@ namespace ScriptCoreLibNative.SystemHeaders.EGL
         #endregion
 
 
-
+        public static EGLContext eglGetCurrentContext() { throw null; }
 
         public static EGLDisplay eglGetDisplay(ScriptCoreLibNative.SystemHeaders.android.native_window.ANativeWindow display_id) { throw null; }
         public static bool eglInitialize(EGLDisplay dpy, out int major, out int minor) { throw null; }
@@ -219,7 +219,7 @@ namespace ScriptCoreLibNative.SystemHeaders.EGL
                     int[] attrib_list) { throw null; }
 
         public static EGLContext eglCreateContext(EGLDisplay dpy, EGLConfig config,
-			    EGLContext share_context,
+                EGLContext share_context,
                 int[] attrib_list) { throw null; }
 
         public static bool eglGetConfigAttrib(EGLDisplay dpy, EGLConfig config,

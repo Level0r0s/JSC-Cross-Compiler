@@ -67,7 +67,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         }
 
 
-
+        // X:\jsc.svn\examples\c\android\hybrid\HybridGLES3JNIActivity\HybridGLES3JNIActivityNDK\RendererES3.cs
         public static readonly sbyte[,] ovrCubeVertices8x4_positions = new sbyte[8, 4]
     { 
                 { -127, +127, -127, +127 }, { +127, +127, -127, +127 }, { +127, +127, +127, +127 }, { -127, +127, +127, +127 },	// top
