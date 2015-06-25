@@ -143,7 +143,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 // Bind the vertex attribute locations.
                 for (int i = 0; i < ProgramVertexAttributes.Length; i++)
                 {
-                    ConsoleExtensions.tracei("ovrProgram_Create glBindAttribLocation i ", i);
+                    //ConsoleExtensions.tracei("ovrProgram_Create glBindAttribLocation i ", i);
                     gl3.glBindAttribLocation((uint)this.Program, (uint)ProgramVertexAttributes[i].location, ProgramVertexAttributes[i].name);
                 }
 
@@ -164,7 +164,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 //memset( program->Uniforms, -1, sizeof( program->Uniforms ) );
                 for (int i = 0; i < ProgramUniforms.Length; i++)
                 {
-                    ConsoleExtensions.tracei("ovrProgram_Create glGetUniformLocation i ", i);
+                    //ConsoleExtensions.tracei("ovrProgram_Create glGetUniformLocation i ", i);
                     this.Uniforms[(int)ProgramUniforms[i].index] = gl3.glGetUniformLocation(this.Program, ProgramUniforms[i].name);
                 }
 

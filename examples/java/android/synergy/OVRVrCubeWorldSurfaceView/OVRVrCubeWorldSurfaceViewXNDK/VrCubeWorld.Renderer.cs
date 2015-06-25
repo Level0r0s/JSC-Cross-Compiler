@@ -274,14 +274,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 ovrRenderTexture.ovrRenderTexture_SetNone();
 
-                // appState->Renderer->BufferIndex = ((appState->Renderer->BufferIndex + 1) % 3);
-
-                //var BufferIndex = appState.Renderer.BufferIndex;
-                //appState.tracei60("ovrRenderer_RenderFrame BufferIndex before ", BufferIndex);
-                //BufferIndex = (BufferIndex + 1) % NUM_BUFFERS;
-                //appState.tracei60("ovrRenderer_RenderFrame BufferIndex after ", BufferIndex);
+               
                 appState.Renderer.BufferIndex = (appState.Renderer.BufferIndex + 1) % NUM_BUFFERS;
-                //appState.Renderer.BufferIndex = BufferIndex;
 
                 // 1130
                 appState.tracei60("exit ovrRenderer_RenderFrame BufferIndex", appState.Renderer.BufferIndex);

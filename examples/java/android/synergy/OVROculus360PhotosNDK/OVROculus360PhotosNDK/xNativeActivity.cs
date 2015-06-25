@@ -26,7 +26,7 @@ namespace OVROculus360PhotosNDK
         [Script(NoDecoration = true)]
         // JVM load the .so and calls this native function
         static long Java_OVROculus360Photos_Activities_xMarshal_nativeSetAppInterface(
-            ref JNIEnv env,
+             JNIEnv env,
             jclass clazz,
             jobject activity,
 
@@ -50,7 +50,7 @@ namespace OVROculus360PhotosNDK
             //return default(jlong);
             //return jlong_default;
             return Oculus360Photos_h.Java_com_oculus_oculus360photossdk_MainActivity_nativeSetAppInterface(
-                ref env,
+                 env,
                 clazz,
                 activity,
                 fromPackageNameString,
@@ -65,7 +65,7 @@ namespace OVROculus360PhotosNDK
         // JVM load the .so and calls this native function
         static jstring Java_OVROculus360Photos_Activities_xMarshal_stringFromJNI(
             // what would we be able to do inspecting the runtime?
-            ref JNIEnv env,
+             JNIEnv env,
             jobject thiz)
         {
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150607-1/vrcubeworld
@@ -79,7 +79,7 @@ namespace OVROculus360PhotosNDK
             // OVR_VRAPI_EXPORT const char * vrapi_GetVersionString();
 
             // if we change our NDK code, will nuget packaing work on the background, and also upgrade running apps?
-            var v = n(ref env,
+            var v = n( env,
                 "from Java_OVROculus360PhotosNDK_Activities_xMarshal_stringFromJNI. yay"
 
                 //VrApi_h.vrapi_GetVersionString()
@@ -107,7 +107,7 @@ namespace OVROculus360PhotosNDK
         )]
     public class Oculus360Photos_h
     {
-        public static long Java_com_oculus_oculus360photossdk_MainActivity_nativeSetAppInterface(ref JNIEnv env,
+        public static long Java_com_oculus_oculus360photossdk_MainActivity_nativeSetAppInterface( JNIEnv env,
             jclass clazz,
             jobject activity,
 

@@ -141,12 +141,12 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         ConsoleExtensions.trace("vrapi_SubmitFrame VRAPI_FRAME_INIT_LOADING_ICON_FLUSH");
                         appState.Ovr.vrapi_SubmitFrame(ref parms);
 
-                        //unistd.usleep(1000);
+                        unistd.usleep(1000);
 
                         appState.Scene.ovrScene_Create();
 
                         // keep the loader on for a moment...
-                        //unistd.usleep(1000);
+                        unistd.usleep(1000);
                     }
                     #endregion
 
@@ -168,7 +168,12 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         //var parms = appState.Renderer.ovrRenderer_RenderFrame(ref appState, ref tracking);
                         var parms = appState.Renderer.ovrRenderer_RenderFrame(appState, ref tracking);
 
-                        appState.tracei60("AppThreadFunction, vrapi_SubmitFrame ", (int)appState.FrameIndex);
+                        appState.tracei60("vrapi_SubmitFrame ", (int)appState.FrameIndex);
+                        appState.tracei60(" tracking.Status ", (int)tracking.Status);
+                        appState.tracei60(" tracking.HeadPose.Pose.Orientation.x ", (int)(1000 * tracking.HeadPose.Pose.Orientation.x));
+                        appState.tracei60(" tracking.HeadPose.Pose.Orientation.y ", (int)(1000 * tracking.HeadPose.Pose.Orientation.y));
+                        appState.tracei60(" tracking.HeadPose.Pose.Orientation.z ", (int)(1000 * tracking.HeadPose.Pose.Orientation.z));
+                        appState.tracei60(" tracking.HeadPose.Pose.Orientation.w ", (int)(1000 * tracking.HeadPose.Pose.Orientation.w));
                         appState.Ovr.vrapi_SubmitFrame(ref parms);
                     }
                     // 1891

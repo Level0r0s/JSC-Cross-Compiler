@@ -265,6 +265,17 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         public double PredictionInSeconds;	// Seconds this state was predicted ahead.
     }
 
+
+
+
+    // Bit flags describing the current status of sensor tracking.
+    public enum ovrTrackingStatus : uint
+    {
+        VRAPI_TRACKING_STATUS_ORIENTATION_TRACKED = 0x0001,	// Orientation is currently tracked.
+        VRAPI_TRACKING_STATUS_POSITION_TRACKED = 0x0002,	// Position is currently tracked.
+        VRAPI_TRACKING_STATUS_HMD_CONNECTED = 0x0080	// HMD is available & connected.
+    }
+
     // via vrapi_GetPredictedTracking
     [Script(IsNative = true)]
     public struct ovrTracking : VrApi_h
@@ -272,7 +283,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         // GearVR voot
 
         // Sensor status described by ovrTrackingStatus flags.
-        public uint Status;
+        public ovrTrackingStatus Status;
         // Predicted head configuration at the requested absolute time.
         // The pose describes the head orientation and center eye position.
         public ovrPoseStatef HeadPose;
@@ -404,7 +415,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             throw null;
         }
 
-        public  static ovrMatrix4f vrapi_GetCenterEyeViewMatrix(
+        public static ovrMatrix4f vrapi_GetCenterEyeViewMatrix(
             ref ovrHeadModelParms headModelParms,
             ref ovrTracking tracking,
 
