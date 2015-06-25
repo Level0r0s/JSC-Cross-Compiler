@@ -214,7 +214,7 @@ namespace OVRVrCubeWorldSurfaceView.Activities
                 // yes it appears top left.
 
                 //text = "GearVR HUD"
-                text = () => sw.ElapsedMilliseconds + "ms"
+                text = () => sw.ElapsedMilliseconds + "ms !"
             };
 
             //Task.Run(

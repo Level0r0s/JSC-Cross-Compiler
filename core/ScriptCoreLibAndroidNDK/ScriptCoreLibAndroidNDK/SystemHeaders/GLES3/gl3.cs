@@ -373,6 +373,7 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
         public static void glGetProgramiv(uint program, int pname, out int _params) { throw null; }
 
         public static void glUniformMatrix4fv(int location, int count, bool transpose, float* value) { throw null; }
+        public static void glUniformMatrix4fv<T>(int location, int count, bool transpose, ref T value) { throw null; }
 
         public static void glBindVertexArray(uint vao) { throw null; }
 
@@ -441,7 +442,7 @@ namespace ScriptCoreLibNative.SystemHeaders.GLES3
         public static void glDeleteVertexArrays(int n, uint[] arrays) { throw null; }
         public static void glDeleteVertexArrays(int n, ref uint arrays) { throw null; }
         public static void glGenVertexArrays(int n, uint[] arrays) { throw null; }
-        public static void glGenVertexArrays(int n, ref uint  arrays) { throw null; }
+        public static void glGenVertexArrays(int n, out uint  arrays) { throw null; }
 
         public static void glDrawArraysInstanced(int mode, int first, int count, int instancecount) { throw null; }
 

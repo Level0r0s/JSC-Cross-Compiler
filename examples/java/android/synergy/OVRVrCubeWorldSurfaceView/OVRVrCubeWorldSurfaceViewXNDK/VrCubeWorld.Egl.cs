@@ -18,9 +18,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
 
-        static void EglErrorString() { }
-        static void EglFrameBufferStatusString() { }
-        static void EglCheckErrors() { }
+        //static void EglErrorString() { }
+        //static void EglFrameBufferStatusString() { }
+        //static void EglCheckErrors() { }
 
 
         // member of ovrApp
@@ -71,7 +71,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrEgl_CreateContext(EGLContext shareEgl_Context)
             {
                 // 152
-                ConsoleExtensions.tracei("enter ovrEgl_CreateContext");
+                ConsoleExtensions.trace("enter ovrEgl_CreateContext, eglGetDisplay");
 
                 if (this.Display != egl.EGL_NO_DISPLAY)
                 {
@@ -79,8 +79,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 }
 
                 this.Display = egl.eglGetDisplay(default(native_window.ANativeWindow));
-                //ALOGV( "        eglInitialize( Display, &MajorVersion, &MinorVersion )" );
+
                 egl.eglInitialize(this.Display, out this.MajorVersion, out this.MinorVersion);
+
                 // Do NOT use eglChooseConfig, because the Android EGL code pushes in multisample
                 // flags in eglChooseConfig if the user has selected the "force 4x MSAA" option in
                 // settings, and that is completely wasted for our warp target.
@@ -93,7 +94,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 }
 
                 ConsoleExtensions.tracei("ovrEgl_CreateContext numConfigs: ", numConfigs);
-
+                //  \VrCubeWorld.Egl.cs:95 ovrEgl_CreateContext numConfigs:  22 
 
 
                 const int egl_EGL_OPENGL_ES3_BIT_KHR = 0x0040;
@@ -131,6 +132,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     }
                     if (configAttribs[j] == egl.EGL_NONE)
                     {
+                        ConsoleExtensions.tracei("ovrEgl_CreateContext config found i: ", i);
                         this.Config = configs[i];
                         break;
                     }
@@ -175,7 +177,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     return;
                 }
 
-                ConsoleExtensions.tracei("exit ovrEgl_CreateContext");
+                ConsoleExtensions.trace("exit ovrEgl_CreateContext");
 
             }
 
@@ -228,7 +230,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // called by ovrApp_HandleVrModeChanges
             public void ovrEgl_CreateSurface(native_window.ANativeWindow nativeWindow)
             {
-                ConsoleExtensions.tracei("enter ovrEgl_CreateSurface");
+                ConsoleExtensions.trace("enter ovrEgl_CreateSurface");
 
                 //298
                 if (this.MainSurface != egl.EGL_NO_SURFACE)
@@ -237,7 +239,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 }
                 //ALOGV( "        MainSurface = eglCreateWindowSurface( Display, Config, nativeWindow, attribs )" );
 
-                ConsoleExtensions.tracei("ovrEgl_CreateSurface, eglCreateWindowSurface");
+                ConsoleExtensions.trace("ovrEgl_CreateSurface, eglCreateWindowSurface, eglMakeCurrent");
 
                 this.MainSurface = egl.eglCreateWindowSurface(this.Display, this.Config, nativeWindow, eglCreateWindowSurface_surfaceAttribs);
                 if (this.MainSurface == egl.EGL_NO_SURFACE)
@@ -252,7 +254,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     return;
                 }
 
-                ConsoleExtensions.tracei("exit ovrEgl_CreateSurface");
+                ConsoleExtensions.trace("exit ovrEgl_CreateSurface, ready for ovrRenderer_Create");
             }
 
             // called by ovrApp_Clear

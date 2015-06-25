@@ -220,7 +220,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 pthread.pthread_cond_init(ref Received, null);
                 pthread.pthread_cond_init(ref Processed, null);
 
-                ConsoleExtensions.tracei("exit ovrMessageQueue");
+                //ConsoleExtensions.tracei("exit ovrMessageQueue");
             }
 
             // called by ovrAppThread_Destroy
@@ -246,7 +246,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 // enabled by?
                 if (!this.Enabled)
                 {
-                    ConsoleExtensions.tracei("exit ovrMessageQueue_PostMessage, disabled!");
+                    ConsoleExtensions.trace("exit ovrMessageQueue_PostMessage, disabled!");
                     return;
                 }
                 while (this.Tail - this.Head >= MAX_MESSAGES)
@@ -283,7 +283,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrMessageQueue_SleepUntilMessage()
             {
                 // 1699
-                ConsoleExtensions.tracei("ovrMessageQueue_SleepUntilMessage");
+                //ConsoleExtensions.tracei("ovrMessageQueue_SleepUntilMessage");
 
                 if (Wait == ovrMQWait.MQ_WAIT_PROCESSED)
                 {
@@ -307,11 +307,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 // 1716
                 //ConsoleExtensions.tracei("enter ovrMessageQueue_GetNextMessage");
 
-
                 if (this.Wait == ovrMQWait.MQ_WAIT_PROCESSED)
                 {
                     pthread.pthread_cond_broadcast(ref Processed);
-
                     this.Wait = ovrMQWait.MQ_WAIT_NONE;
                 }
 
@@ -322,11 +320,11 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 pthread.pthread_mutex_lock(ref this.Mutex);
 
-                message = default(ovrMessage);
 
                 if (this.Tail <= this.Head)
                 {
                     pthread.pthread_mutex_unlock(ref Mutex);
+                    message = default(ovrMessage);
                     return false;
                 }
 
@@ -337,7 +335,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 if (message.Wait == ovrMQWait.MQ_WAIT_RECEIVED)
                 {
-                    pthread.pthread_cond_broadcast(ref Processed);
+                    // 1736!
+                    //pthread.pthread_cond_broadcast(ref Processed);
+                    pthread.pthread_cond_broadcast(ref Received);
                 }
                 else if (message.Wait == ovrMQWait.MQ_WAIT_PROCESSED)
                 {

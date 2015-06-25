@@ -56,7 +56,7 @@ namespace com.oculus.gles3jni
 
             // if we change our NDK code, will nuget packaing work on the background, and also upgrade running apps?
             var v = env.NewStringUTF( env,
-                "hey! XNDK"
+                "hey! XNDK!"
 
                 //VrApi_h.vrapi_GetVersionString()
             );
@@ -70,68 +70,50 @@ namespace com.oculus.gles3jni
         // named pointers! typedefs!
         static ovrAppThreadPointer onCreate(JNIEnv env, jobject obj, jobject activity)
         {
-            // Error	4	Cannot take the address of, get the size of, or declare a pointer to a managed type ('OVRVrCubeWorldSurfaceViewXNDK.xovrAppThread')	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs	489	40	OVRVrCubeWorldSurfaceViewXNDK
-            ConsoleExtensions.tracei("enter onCreate, then ovrAppThread, then ovrMessageQueue_Enable");
+            // 1937
+            ConsoleExtensions.trace("enter onCreate, then ovrAppThread, then ovrMessageQueue_Enable");
 
             var appThread = new VrCubeWorld.ovrAppThread(env, activity);
-
-            
 
             // set property?
             appThread.MessageQueue.ovrMessageQueue_Enable(true);
 
             var message = default(VrCubeWorld.ovrMessage);
             message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_CREATE, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
-
-
-            //ConsoleExtensions.tracei("onCreate, post MESSAGE_ON_CREATE");
-
             appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
 
-            //ConsoleExtensions.tracei("onCreate, post MESSAGE_ON_CREATE done");
-
-
-       
             return appThread;
         }
 
         #region wndproc/ovrMessageQueue_PostMessage
         static void onStart(ref JNIEnv env, jobject obj, ovrAppThreadPointer handle)
         {
-            //var __handle = (size_t)handle;
-            //var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+            // 1952
             var appThread = (VrCubeWorld.ovrAppThread)handle;
-
             var message = default(VrCubeWorld.ovrMessage);
             message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_START, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
             appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
         }
         static void onResume(ref JNIEnv env, jobject obj, ovrAppThreadPointer handle)
         {
-            //var __handle = (size_t)handle;
-            //var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+            // 1961
             var appThread = (VrCubeWorld.ovrAppThread)handle;
-
             var message = default(VrCubeWorld.ovrMessage);
             message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_RESUME, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
             appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
         }
         static void onPause(ref JNIEnv env, jobject obj, ovrAppThreadPointer handle)
         {
-            //var __handle = (size_t)handle;
-            //var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+            // 1970
             var appThread = (VrCubeWorld.ovrAppThread)handle;
-
             var message = default(VrCubeWorld.ovrMessage);
             message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_PAUSE, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
             appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
         }
         static void onStop(ref JNIEnv env, jobject obj, ovrAppThreadPointer handle)
         {
-            //var __handle = (size_t)handle;
-            //var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+            // 1980
             var appThread = (VrCubeWorld.ovrAppThread)handle;
-
             var message = default(VrCubeWorld.ovrMessage);
             message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_STOP, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
             appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
@@ -141,22 +123,13 @@ namespace com.oculus.gles3jni
 
         static void onDestroy(JNIEnv env, jobject obj, ovrAppThreadPointer handle)
         {
-            //var __handle = (size_t)handle;
-            //var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+            // 1988
             var appThread = (VrCubeWorld.ovrAppThread)handle;
-
             var message = default(VrCubeWorld.ovrMessage);
             message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_DESTROY, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
             appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
-
             appThread.MessageQueue.ovrMessageQueue_Enable(false);
-
-
             appThread.ovrAppThread_Destroy(env);
-
-            // finalize
-            //~appThread();
-
             stdlib_h.free(appThread);
         }
 
@@ -165,11 +138,13 @@ namespace com.oculus.gles3jni
         #region Surface lifecycle
         static void onSurfaceCreated(JNIEnv env, jobject obj, ovrAppThreadPointer handle, jobject surface)
         {
-            ConsoleExtensions.tracei("enter onSurfaceCreated");
+            // 2009
+            ConsoleExtensions.trace("enter onSurfaceCreated");
 
             var appThread = (VrCubeWorld.ovrAppThread)handle;
 
             var newNativeWindow = native_window_jni.ANativeWindow_fromSurface(env, surface);
+
             if (native_window.ANativeWindow_getWidth(newNativeWindow) < native_window.ANativeWindow_getHeight(newNativeWindow))
             {
                 // An app that is relaunched after pressing the home button gets an initial surface with
@@ -184,20 +159,19 @@ namespace com.oculus.gles3jni
             var message = default(VrCubeWorld.ovrMessage);
             message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_SURFACE_CREATED, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
             message.ovrMessage_SetPointerParm(0, appThread.NativeWindow);
-            ConsoleExtensions.tracei("onSurfaceCreated, post MESSAGE_ON_SURFACE_CREATED");
+            //ConsoleExtensions.tracei("onSurfaceCreated, post MESSAGE_ON_SURFACE_CREATED");
             appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
             
-            ConsoleExtensions.tracei("exit onSurfaceCreated");
+            //ConsoleExtensions.tracei("exit onSurfaceCreated");
         }
 
         static void onSurfaceChanged(JNIEnv env, jobject obj, ovrAppThreadPointer handle, jobject surface)
         {
-            //var __handle = (size_t)handle;
-            //var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+            // 2032
             var appThread = (VrCubeWorld.ovrAppThread)handle;
 
-
             var newNativeWindow = native_window_jni.ANativeWindow_fromSurface(env, surface);
+            
             if (native_window.ANativeWindow_getWidth(newNativeWindow) < native_window.ANativeWindow_getHeight(newNativeWindow))
             {
                 // An app that is relaunched after pressing the home button gets an initial surface with
@@ -238,10 +212,8 @@ namespace com.oculus.gles3jni
 
         static void onSurfaceDestroyed(JNIEnv env, jobject obj, ovrAppThreadPointer handle)
         {
-            //var __handle = (size_t)handle;
-            //var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+            // 2074
             var appThread = (VrCubeWorld.ovrAppThread)handle;
-
             var message = default(VrCubeWorld.ovrMessage);
             message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_SURFACE_DESTROYED, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
             appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
@@ -254,61 +226,30 @@ namespace com.oculus.gles3jni
 
         #region Input
 
-        // public static void onKeyEvent(long handle, int keyCode, int action) { throw null; }
-        public static void onKeyEvent(
-            JNIEnv env, jobject obj, ovrAppThreadPointer handle, int keyCode, int action)
+        public static void onKeyEvent(JNIEnv env, jobject obj, ovrAppThreadPointer handle, int keyCode, int action)
         {
- 
-
-            //var __handle = (size_t)(object)handle;
-            //var appThread = (VrCubeWorld.ovrAppThread)(object)(__handle);
+            // 2094
             var appThread = (VrCubeWorld.ovrAppThread)handle;
             var message = default(VrCubeWorld.ovrMessage);
             message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_KEY_EVENT, VrCubeWorld.ovrMQWait.MQ_WAIT_NONE);
             message[0] = keyCode;
             message[1] = action;
-            //message.ovrMessage_SetIntegerParm(0, keyCode);
-            //message.ovrMessage_SetIntegerParm(1, action);
             // ovrApp_HandleKeyEvent
             appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
- 
         }
 
 
-        // public static void onTouchEvent(long handle, int action, float x, float y) { throw null; }
-        public static void onTouchEvent(
-            JNIEnv env, jobject obj,
-            ovrAppThreadPointer handle, int action, float x, float y)
+        public static void onTouchEvent( JNIEnv env, jobject obj, ovrAppThreadPointer handle, int action, float x, float y)
         {
- 
-
-            //var __handle = (size_t)(object)handle;
-
-            // await into native?
-            // means prepend Java namespace
-            // and ref JNIEnv?
-
-            //X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\SystemHeaders\jni.cs
-            
-            //var appThread = (VrCubeWorld.ovrAppThread)(object)__handle;
+            // 2108
             var appThread = (VrCubeWorld.ovrAppThread)handle;
-
             var message = default(VrCubeWorld.ovrMessage);
-
             message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_TOUCH_EVENT, VrCubeWorld.ovrMQWait.MQ_WAIT_NONE);
             message[0] = action;
             message[1] = x;
             message[2] = y;
-
-            //message.ovrMessage_SetIntegerParm(0, action);
-            //message.ovrMessage_SetFloatParm(1, x);
-            //message.ovrMessage_SetFloatParm(2, y);
-
             // ovrApp_HandleTouchEvent
-            appThread.MessageQueue.ovrMessageQueue_PostMessage(
-                ref message
-            );
- 
+            appThread.MessageQueue.ovrMessageQueue_PostMessage( ref message );
         }
         #endregion
 #else

@@ -15,7 +15,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     {
         // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewNDK\staging\jni\VrCubeWorld_SurfaceView.c
 
-
         struct ovrVertexAttribute
         {
             public ovrVertexAttribute_location location;
@@ -45,7 +44,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // using static enum?
         }
 
-
+        // 508
         public const int MAX_PROGRAM_UNIFORMS = 8;
         public const int MAX_PROGRAM_TEXTURES = 8;
 
@@ -56,6 +55,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public readonly int[] Uniforms = new int[MAX_PROGRAM_UNIFORMS];      // ProgramUniforms[].name
             public readonly int[] Textures = new int[MAX_PROGRAM_TEXTURES];      // Texture%i
 
+            // 545
             // sent to glUseProgram
             public uint Program = 0;
 
@@ -72,6 +72,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 new ovrVertexAttribute { location =  ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_TRANSFORM,      name =  "vertexTransform" }
             };
 
+            // 536
             readonly ovrUniform[] ProgramUniforms = new[]
             {
                 new ovrUniform { index=ovrUniform_index.UNIFORM_MODEL_MATRIX,         type=ovrUniform_type.UNIFORM_TYPE_MATRIX4X4, name="ModelMatrix" },
@@ -87,22 +88,18 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public bool ovrProgram_Create(string vertexSource, string fragmentSource)
             {
                 // 554
-                ConsoleExtensions.tracei("enter ovrProgram_Create");
+                ConsoleExtensions.trace("enter ovrProgram_Create, glCreateShader");
 
                 var r = default(int);
 
                 this.VertexShader = gl3.glCreateShader(gl3.GL_VERTEX_SHADER);
-
-
-                //var vertexSource0 = new[] { vertexSource };
-                //gl3.glShaderSource(this.VertexShader, 1, vertexSource0, null);
                 gl3.glShaderSource(this.VertexShader, 1, ref vertexSource, null);
-
                 gl3.glCompileShader(this.VertexShader);
                 gl3.glGetShaderiv(this.VertexShader, gl3.GL_COMPILE_STATUS, out r);
 
                 ConsoleExtensions.tracei("ovrProgram_Create VertexShader GL_COMPILE_STATUS ", r);
 
+                #region glGetShaderInfoLog
                 if (r == gl3.GL_FALSE)
                 {
                     //I/xNativeActivity( 9698): x:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Program.cs:104 ovrProgram_Create VertexShader GL_COMPILE_STATUS  0 errno: 0 Success
@@ -116,10 +113,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     unistd._exit(-1);
                     return false;
                 }
+                #endregion
 
                 this.FragmentShader = gl3.glCreateShader(gl3.GL_FRAGMENT_SHADER);
-                //var fragmentSource0 = new[] { fragmentSource };
-                //gl3.glShaderSource(this.FragmentShader, 1, fragmentSource0, null);
                 gl3.glShaderSource(this.FragmentShader, 1, ref fragmentSource, null);
                 gl3.glCompileShader(this.FragmentShader);
                 gl3.glGetShaderiv(this.FragmentShader, gl3.GL_COMPILE_STATUS, out r);
@@ -127,6 +123,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 ConsoleExtensions.tracei("ovrProgram_Create FragmentShader GL_COMPILE_STATUS ", r);
                 // I/xNativeActivity( 6203): x:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Program.cs:121 ovrProgram_Create FragmentShader GL_COMPILE_STATUS  1 errno: 0 Success
 
+                #region glGetShaderInfoLog
                 if (r == gl3.GL_FALSE)
                 {
                     var msg = new byte[4096];
@@ -136,6 +133,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     unistd._exit(-1);
                     return false;
                 }
+                #endregion
 
                 this.Program = gl3.glCreateProgram();
 
@@ -145,11 +143,15 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 // Bind the vertex attribute locations.
                 for (int i = 0; i < ProgramVertexAttributes.Length; i++)
                 {
+                    ConsoleExtensions.tracei("ovrProgram_Create glBindAttribLocation i ", i);
                     gl3.glBindAttribLocation((uint)this.Program, (uint)ProgramVertexAttributes[i].location, ProgramVertexAttributes[i].name);
                 }
 
                 gl3.glLinkProgram(this.Program);
                 gl3.glGetProgramiv(this.Program, gl3.GL_LINK_STATUS, out r);
+
+                ConsoleExtensions.tracei("ovrProgram_Create Program GL_LINK_STATUS ", r);
+
                 //if ( r == GL_FALSE )
                 //{
                 //    GLchar msg[4096];
@@ -162,6 +164,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 //memset( program->Uniforms, -1, sizeof( program->Uniforms ) );
                 for (int i = 0; i < ProgramUniforms.Length; i++)
                 {
+                    ConsoleExtensions.tracei("ovrProgram_Create glGetUniformLocation i ", i);
                     this.Uniforms[(int)ProgramUniforms[i].index] = gl3.glGetUniformLocation(this.Program, ProgramUniforms[i].name);
                 }
 
@@ -182,7 +185,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 gl3.glUseProgram(0);
 
-                ConsoleExtensions.tracei("exit ovrProgram_Create");
+                ConsoleExtensions.trace("exit ovrProgram_Create");
                 return true;
             }
 

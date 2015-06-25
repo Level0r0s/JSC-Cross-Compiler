@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRVrCubeWorldSurfaceView", "OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceView.csproj", "{D9CDC982-2616-41FF-95E3-56D2D33A40B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRVrCubeWorldNativeActivity", "..\OVRVrCubeWorldNativeActivity\OVRVrCubeWorldNativeActivity\OVRVrCubeWorldNativeActivity.csproj", "{7DF2830E-8342-4BFA-B5B7-3221A9831308}"
@@ -53,6 +53,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSwitchToIFrame", "..\..\..\..\javascript\Test\TestSwitchToIFrame\TestSwitchToIFrame\TestSwitchToIFrame.csproj", "{E88F583A-F361-4D97-8642-13EDB6DDC9C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLocalApplication", "..\..\Test\TestLocalApplication\TestLocalApplication\TestLocalApplication.csproj", "{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HybridGLES3JNIActivityNDK", "..\..\..\..\c\android\hybrid\HybridGLES3JNIActivity\HybridGLES3JNIActivityNDK\HybridGLES3JNIActivityNDK.csproj", "{834EA320-6448-46F9-B19B-741D19F7FFCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HybridGLES3JNIActivity", "..\..\..\..\c\android\hybrid\HybridGLES3JNIActivity\HybridGLES3JNIActivity\HybridGLES3JNIActivity.csproj", "{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -522,6 +526,46 @@ Global
 		{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2DFE8746-407E-4DB8-83AD-CE4C8F1AA5DA}.Release|x86.ActiveCfg = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Android|Any CPU.Build.0 = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Android|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Android|Mixed Platforms.Build.0 = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Android|x86.ActiveCfg = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Assets|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Assets|Mixed Platforms.Build.0 = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Assets|x86.ActiveCfg = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{834EA320-6448-46F9-B19B-741D19F7FFCF}.Release|x86.ActiveCfg = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Android|Any CPU.Build.0 = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Android|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Android|Mixed Platforms.Build.0 = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Android|x86.ActiveCfg = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Assets|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Assets|Mixed Platforms.Build.0 = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Assets|x86.ActiveCfg = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -531,6 +575,8 @@ Global
 		{E32F254D-823D-41D5-99EE-ABDF240AF011} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
 		{D9CDC982-2616-41FF-95E3-56D2D33A40B2} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
 		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
+		{834EA320-6448-46F9-B19B-741D19F7FFCF} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
+		{5D78A349-C8BB-4C91-8A78-C69067E7FC6C} = {68E9F7C8-2753-40EA-9862-C7BA1DA5EECB}
 		{1CE7D22F-52C8-4164-8955-CD89609E48A9} = {06DC1751-B282-4BCD-8D58-B1B78CF91E7A}
 		{132EB43F-19B4-42AC-8025-3249B129867A} = {06DC1751-B282-4BCD-8D58-B1B78CF91E7A}
 		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F} = {06DC1751-B282-4BCD-8D58-B1B78CF91E7A}

@@ -91,7 +91,7 @@ namespace OVRVrCubeWorldSurfaceViewX.Activities
         {
             base.onCreate(savedInstanceState);
 
-            Console.WriteLine("enter ApplicationActivity onCreate");
+            Console.WriteLine("enter OVRVrCubeWorldSurfaceViewX onCreate");
 
 
 
@@ -102,14 +102,14 @@ namespace OVRVrCubeWorldSurfaceViewX.Activities
             {
                 onsurfaceCreated = holder =>
                 {
-                    Console.WriteLine("enter onsurfaceCreated " + new { appThread });
+                    //Console.WriteLine("enter onsurfaceCreated " + new { appThread });
                     if (appThread == 0)
                         return;
 
                     appThread.onSurfaceCreated(holder.getSurface());
                     mSurfaceHolder = holder;
 
-                    Console.WriteLine("exit onsurfaceCreated " + new { appThread });
+                    //Console.WriteLine("exit onsurfaceCreated " + new { appThread });
                 },
 
                 onsurfaceChanged = (SurfaceHolder holder, int format, int width, int height) =>
@@ -146,7 +146,7 @@ namespace OVRVrCubeWorldSurfaceViewX.Activities
                 // yes it appears top left.
 
                 //text = "GearVR HUD"
-                text = () => sw.ElapsedMilliseconds + "ms can you see cubes?"
+                text = () => sw.ElapsedMilliseconds + "ms " + GLES3JNILib.stringFromJNI()
             };
 
             //Task.Run(
@@ -226,7 +226,7 @@ namespace OVRVrCubeWorldSurfaceViewX.Activities
 
             appThread = com.oculus.gles3jni.GLES3JNILib.onCreate(this);
 
-            Console.WriteLine("set appThread");
+            Console.WriteLine("after OVRVrCubeWorldSurfaceViewX onCreate, attach the headset!");
 
         }
 

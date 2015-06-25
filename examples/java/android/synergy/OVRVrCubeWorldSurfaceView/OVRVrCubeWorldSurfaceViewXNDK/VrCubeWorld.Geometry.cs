@@ -21,7 +21,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             VERTEX_ATTRIBUTE_LOCATION_POSITION,
             VERTEX_ATTRIBUTE_LOCATION_COLOR,
             VERTEX_ATTRIBUTE_LOCATION_UV,
+            
             VERTEX_ATTRIBUTE_LOCATION_TRANSFORM
+            // ...
         }
 
         struct ovrVertexAttribPointer
@@ -39,11 +41,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         }
 
         // http://stackoverflow.com/questions/8048540/sizeof-structures-not-known-why
-
-
-
-        //Error	1	The expression being assigned to 'OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld.ovrCubeVertices.positions' must be constant	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Geometry.cs	60	42	OVRVrCubeWorldSurfaceViewXNDK
-        //Error	2	'OVRVrCubeWorldSurfaceViewXNDK.VrCubeWorld.i8vec4' does not have a predefined size, therefore sizeof can only be used in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Geometry.cs	60	46	OVRVrCubeWorldSurfaceViewXNDK
 
         //[System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Explicit, Size = 4, Pack = 4)]
         public unsafe struct i8vec4
@@ -112,6 +109,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         {
             public readonly ovrVertexAttribPointer[] VertexAttribs = new ovrVertexAttribPointer[MAX_VERTEX_ATTRIB_POINTERS];
 
+            // 391
             // set by ovrGeometry_CreateCube
             public uint VertexBuffer = 0;
             public uint IndexBuffer = 0;
@@ -135,25 +133,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 }
             }
 
-            //readonly ovrCubeVertices ovrCubeVertices = new VrCubeWorld.ovrCubeVertices {
-            //    // Error	9	Cannot implicitly convert type 'sbyte[*,*]' to 'sbyte*'	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Geometry.cs	101	29	OVRVrCubeWorldSurfaceViewXNDK
-            //    //positions = new sbyte[8, 4] { 
-            //    //Error	9	Cannot implicitly convert type 'sbyte[]' to 'sbyte*'	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Geometry.cs	103	29	OVRVrCubeWorldSurfaceViewXNDK
-
-            //    positions = new sbyte[] { 
-            //    /* { */ -127, +127, -127, +127 /*}*/,
-            //    /* { */ +127, +127, -127, +127 /*}*/,
-            //    /* { */ +127, +127, +127, +127 /*}*/,
-            //    /* { */ -127, +127, +127, +127 /*}*/,	// top
-            //    /* { */ -127, -127, -127, +127 /*}*/,
-            //    /* { */ -127, -127, +127, +127 /*}*/,
-            //    /* { */ +127, -127, +127, +127 /*}*/,
-            //    /* { */ +127, -127, -127, +127 /*}*/	// bottom
-            //    }
-            //};
-
-
-
             readonly ovrCubeVertices8x4 ovrCubeVertices8x4 = new ovrCubeVertices8x4();
 
             static readonly ushort[] cubeIndices = new ushort[] 
@@ -172,7 +151,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             {
                 // X:\jsc.svn\examples\c\Test\TestInitializeArray\TestInitializeArray\Class1.cs
                 // 405
-                ConsoleExtensions.tracei("enter ovrGeometry_CreateCube");
+                ConsoleExtensions.trace("enter ovrGeometry_CreateCube");
 
 
 
@@ -219,7 +198,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 gl3.glBufferData(gl3.GL_ELEMENT_ARRAY_BUFFER, 36 * 4, cubeIndices, gl3.GL_STATIC_DRAW);
                 gl3.glBindBuffer(gl3.GL_ELEMENT_ARRAY_BUFFER, 0);
 
-                ConsoleExtensions.tracei("exit ovrGeometry_CreateCube");
+                //ConsoleExtensions.trace("exit ovrGeometry_CreateCube");
             }
 
             // called by ovrScene_Destroy
@@ -231,13 +210,15 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 gl3.glDeleteBuffers(1, ref VertexBuffer);
 
                 //this.ovrGeometry_Clear();
+                ConsoleExtensions.trace("exit ovrGeometry_Destroy");
             }
 
             // called by ovrScene_CreateVAOs
             public void ovrGeometry_CreateVAO()
             {
+                ConsoleExtensions.trace("enter ovrGeometry_CreateVAO, glGenVertexArrays");
                 // 473
-                gl3.glGenVertexArrays(1, ref VertexArrayObject);
+                gl3.glGenVertexArrays(1, out VertexArrayObject);
                 gl3.glBindVertexArray(this.VertexArrayObject);
 
                 gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.VertexBuffer);
@@ -245,6 +226,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 for (int i = 0; i < MAX_VERTEX_ATTRIB_POINTERS; i++)
                     if ((int)this.VertexAttribs[i].Index != -1)
                     {
+                        ConsoleExtensions.tracei("ovrGeometry_CreateVAO VertexAttribs i: ", i);
+
                         gl3.glEnableVertexAttribArray((uint)this.VertexAttribs[i].Index);
                         gl3.glVertexAttribPointer((uint)this.VertexAttribs[i].Index, this.VertexAttribs[i].Size,
                                 this.VertexAttribs[i].Type, this.VertexAttribs[i].Normalized,
@@ -254,6 +237,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 gl3.glBindBuffer(gl3.GL_ELEMENT_ARRAY_BUFFER, this.IndexBuffer);
 
                 gl3.glBindVertexArray(0);
+                ConsoleExtensions.trace("exit ovrGeometry_CreateVAO");
             }
 
             // called by ovrScene_DestroyVAOs

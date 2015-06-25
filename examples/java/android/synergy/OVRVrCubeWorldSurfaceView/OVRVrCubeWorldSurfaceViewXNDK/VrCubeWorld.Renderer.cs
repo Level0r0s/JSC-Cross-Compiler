@@ -19,123 +19,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         public const int NUM_BUFFERS = 3;
         public const int NUM_MULTI_SAMPLES = 4;
 
-        // element of fixed dimensional array ovrRenderTexture[NUM_BUFFERS, NUM_EYES]
-        struct ovrRenderTexture
-        {
-            public int Width;
-            public int Height;
-            public int Multisamples;
-            public uint ColorTexture;
-            public uint DepthBuffer;
-            public uint FrameBuffer;
 
-            // called by ovrRenderer_Clear
-            public void ovrRenderTexture_Clear()
-            {
-                // 665
-
-                // set default?
-                this.Width = 0;
-                this.Height = 0;
-                this.Multisamples = 0;
-                this.ColorTexture = 0;
-                this.DepthBuffer = 0;
-                this.FrameBuffer = 0;
-            }
-
-            // called by ovrRenderer_Create
-            public void ovrRenderTexture_Create(int width, int height, int multisamples)
-            {
-                // 674
-
-                this.Width = width;
-                this.Height = height;
-                this.Multisamples = multisamples;
-
-                // http://fabiensanglard.net/quake2/quake2_opengl_renderer.php
-
-                // Create the color buffer texture.
-                gl3.glGenTextures(1, out this.ColorTexture);
-                gl3.glBindTexture(gl3.GL_TEXTURE_2D, this.ColorTexture);
-                gl3.glTexImage2D(gl3.GL_TEXTURE_2D, 0, gl3.GL_RGBA8, width, height, 0, gl3.GL_RGBA, gl3.GL_UNSIGNED_BYTE, null);
-                gl3.glTexParameteri(gl3.GL_TEXTURE_2D, gl3.GL_TEXTURE_WRAP_S, gl3.GL_CLAMP_TO_EDGE);
-                gl3.glTexParameteri(gl3.GL_TEXTURE_2D, gl3.GL_TEXTURE_WRAP_T, gl3.GL_CLAMP_TO_EDGE);
-                gl3.glTexParameteri(gl3.GL_TEXTURE_2D, gl3.GL_TEXTURE_MIN_FILTER, gl3.GL_LINEAR);
-                gl3.glTexParameteri(gl3.GL_TEXTURE_2D, gl3.GL_TEXTURE_MAG_FILTER, gl3.GL_LINEAR);
-                gl3.glBindTexture(gl3.GL_TEXTURE_2D, 0);
-
-                // 687
-
-                // ?? glRenderbufferStorageMultisampleEXT
-                // ?? glFramebufferTexture2DMultisampleEXT
-
-                // Create depth buffer.
-                gl3.glGenRenderbuffers(1, out this.DepthBuffer);
-                gl3.glBindRenderbuffer(gl3.GL_RENDERBUFFER, this.DepthBuffer);
-                gl3.glRenderbufferStorage(gl3.GL_RENDERBUFFER, gl3.GL_DEPTH_COMPONENT24, width, height);
-                gl3.glBindRenderbuffer(gl3.GL_RENDERBUFFER, 0);
-
-                // Create the frame buffer.
-                gl3.glGenFramebuffers(1, out this.FrameBuffer);
-                gl3.glBindFramebuffer(gl3.GL_FRAMEBUFFER, this.FrameBuffer);
-                gl3.glFramebufferRenderbuffer(gl3.GL_FRAMEBUFFER, gl3.GL_DEPTH_ATTACHMENT, gl3.GL_RENDERBUFFER, this.DepthBuffer);
-                gl3.glFramebufferTexture2D(gl3.GL_FRAMEBUFFER, gl3.GL_COLOR_ATTACHMENT0, gl3.GL_TEXTURE_2D, this.ColorTexture, 0);
-
-                var renderFramebufferStatus = gl3.glCheckFramebufferStatus(gl3.GL_FRAMEBUFFER);
-                gl3.glBindFramebuffer(gl3.GL_FRAMEBUFFER, 0);
-
-            }
-
-            // called by ovrRenderer_Destroy
-            public void ovrRenderTexture_Destroy()
-            {
-                // 742
-
-                gl3.glDeleteFramebuffers(1, ref this.FrameBuffer);
-                gl3.glDeleteRenderbuffers(1, ref this.DepthBuffer);
-                gl3.glDeleteTextures(1, ref this.ColorTexture);
-
-                this.ColorTexture = 0;
-                this.DepthBuffer = 0;
-                this.FrameBuffer = 0;
-            }
-
-            // called by ovrRenderer_RenderFrame
-            public void ovrRenderTexture_SetCurrent()
-            {
-                // 753
-                gl3.glBindFramebuffer(gl3.GL_FRAMEBUFFER, this.FrameBuffer);
-
-            }
-
-            // called by ovrRenderer_RenderFrame
-            public static void ovrRenderTexture_SetNone()
-            {
-                // 758
-
-                gl3.glBindFramebuffer(gl3.GL_FRAMEBUFFER, 0);
-
-            }
-
-            // stackalloc? we are about to leak memory? or move it out of the method?
-            static readonly int[] depthAttachment = new[] { gl3.GL_DEPTH_ATTACHMENT };
-
-
-            // called by ovrRenderer_RenderFrame
-            // ovrRenderTexture_SetNone
-            public void ovrRenderTexture_Resolve()
-            {
-                // 763
-
-                // Discard the depth buffer, so the tiler won't need to write it back out to memory.
-
-
-                gl3.glInvalidateFramebuffer(gl3.GL_FRAMEBUFFER, 1, depthAttachment);
-
-                // Flush this frame worth of commands.
-                gl3.glFlush();
-            }
-        }
 
         // created by ovrApp_Clear
         unsafe class ovrRenderer
@@ -157,6 +41,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             {
                 // 1000
                 // called by ovrApp_Clear?
+                ConsoleExtensions.trace("enter ovrRenderer ctor, call ovrRenderTexture_Clear");
 
                 for (int i = 0; i < NUM_BUFFERS; i++)
                     for (int eye = 0; eye < NUM_EYES; eye++)
@@ -166,28 +51,52 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     }
             }
 
+            // vrapi_GetHmdInfo
             // called by AppThreadFunction
             public void ovrRenderer_Create(ref ovrHmdInfo hmdInfo)
             {
-                ConsoleExtensions.tracei("enter ovrRenderer_Create");
+                ConsoleExtensions.trace("enter ovrRenderer_Create");
 
-                //fixed (ovrHmdInfo* hmdInfo = &refhmdInfo)
                 fixed (int* hmdInfo_SuggestedEyeResolution = hmdInfo.SuggestedEyeResolution)
                 fixed (float* hmdInfo_SuggestedEyeFov = hmdInfo.SuggestedEyeFov)
                 {
+                    //I/xNativeActivity(26905): \VrCubeWorld.Renderer.cs:89 hmdInfo_SuggestedEyeResolution width  1024
+                    //I/xNativeActivity(26905): \VrCubeWorld.Renderer.cs:90 hmdInfo_SuggestedEyeResolution height  1024
+                    //I/xNativeActivity(26905): \VrCubeWorld.Renderer.cs:91 NUM_MULTI_SAMPLES  4
+                    //I/xNativeActivity(26905): \VrCubeWorld.Renderer.cs:95 hmdInfo_SuggestedEyeFov[0]  90
+                    //I/xNativeActivity(26905): \VrCubeWorld.Renderer.cs:96 hmdInfo_SuggestedEyeFov[1]  90
+                    //I/xNativeActivity(26905): \VrCubeWorld.Renderer.cs:97 DisplayRefreshRate  60
+
+
+                    ConsoleExtensions.tracei("hmdInfo_SuggestedEyeResolution width ", hmdInfo_SuggestedEyeResolution[0]);
+                    ConsoleExtensions.tracei("hmdInfo_SuggestedEyeResolution height ", hmdInfo_SuggestedEyeResolution[1]);
+                    ConsoleExtensions.tracei("NUM_MULTI_SAMPLES ", NUM_MULTI_SAMPLES);
+
+
+                    ConsoleExtensions.tracei("hmdInfo_SuggestedEyeFov[0] ", (int)hmdInfo_SuggestedEyeFov[0]);
+                    ConsoleExtensions.tracei("hmdInfo_SuggestedEyeFov[1] ", (int)hmdInfo_SuggestedEyeFov[1]);
+                    ConsoleExtensions.tracei("DisplayRefreshRate ", (int)hmdInfo.DisplayRefreshRate);
+
+
                     // 1012
                     // Create the render Textures.
                     for (int i = 0; i < NUM_BUFFERS; i++)
                         for (int eye = 0; eye < NUM_EYES; eye++)
                         {
-                            ConsoleExtensions.tracei("ovrRenderer_Create i ", i);
+                            //ConsoleExtensions.tracei("call ovrRenderTexture_Create i ", i);
+
                             this.RenderTextures[i, eye].ovrRenderTexture_Create(
                                 hmdInfo_SuggestedEyeResolution[0],
                                 hmdInfo_SuggestedEyeResolution[1],
-                                NUM_MULTI_SAMPLES);
+                                NUM_MULTI_SAMPLES,
+
+                                i, eye
+                            );
                         }
 
                     this.BufferIndex = 0;
+
+                    // https://www.kickstarter.com/projects/wearality/wearality-sky-limitless-vr
 
                     // Setup the projection matrix.
                     this.ProjectionMatrix = VrApi_Helpers.ovrMatrix4f_CreateProjectionFov(
@@ -198,7 +107,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     this.TanAngleMatrix = VrApi_Helpers.ovrMatrix4f_TanAngleMatrixFromProjection(ref this.ProjectionMatrix);
                 }
 
-                ConsoleExtensions.tracei("exit ovrRenderer_Create");
+                //ConsoleExtensions.trace("exit ovrRenderer_Create");
             }
 
 
@@ -209,8 +118,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 for (int i = 0; i < NUM_BUFFERS; i++)
                     for (int eye = 0; eye < NUM_EYES; eye++)
                     {
-                        //  OVRVrCubeWorldSurfaceViewXNDK_VrCubeWorld_ovrRenderTexture_ovrRenderTexture_Destroy((OVRVrCubeWorldSurfaceViewXNDK_VrCubeWorld_ovrRenderTexture)(&(__that->RenderTextures[num0][num1])));
-
                         this.RenderTextures[i, eye].ovrRenderTexture_Destroy();
                     }
 
@@ -236,18 +143,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
                 #region InstanceTransformBuffer
-                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, appState.Scene.InstanceTransformBuffer);
-
-                // malloc? Activator/CreateArray?
-
-
                 var sizeof_ovrMatrix4f = sizeof(ovrMatrix4f);
-
-                // I/xNativeActivity(20912): x:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Renderer.cs:245 ovrRenderer_RenderFrame, glMapBufferRange sizeof_ovrMatrix4f  64 errno: 0 Success
-                //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, glMapBufferRange sizeof_ovrMatrix4f ", sizeof_ovrMatrix4f);
-
-                // 
-                //var cubeTransforms = (ovrMatrix4f*)gl3.glMapBufferRange(
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, appState.Scene.InstanceTransformBuffer);
                 var cubeTransforms = gl3.glMapBufferRange<ovrMatrix4f>(
                     gl3.GL_ARRAY_BUFFER, 0,
                     // do we need marshal.getsize?
@@ -283,10 +180,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                     var transpose = VrApi_Helpers.ovrMatrix4f_Transpose(ref transform);
 
-                    // I/xNativeActivity(21998): x:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Renderer.cs:282 ovrRenderer_RenderFrame, ubeTransforms[i] = transpose  173 errno: 0 Success
                     //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, ubeTransforms[i] = transpose ", i);
-                    // (*((matrix4f_2 + (num3 * sizeof(ovrMatrix4f))))) = matrix4f7;
-                    //(*((&(matrix4fArray2[num3])))) = matrix4f7;
                     cubeTransforms[i] = transpose;
                 }
 
@@ -300,9 +194,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, vrapi_DefaultHeadModelParms");
                 var headModelParms = VrApi_Helpers.vrapi_DefaultHeadModelParms();
 
-                var input = default(ovrMatrix4f);
                 //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, vrapi_GetCenterEyeViewMatrix");
-                var centerEyeViewMatrix = VrApi_Helpers.vrapi_GetCenterEyeViewMatrix(ref headModelParms, ref tracking, ref input);
+                var centerEyeViewMatrix = VrApi_Helpers.vrapi_GetCenterEyeViewMatrix(ref headModelParms, ref tracking, default(ovrMatrix4f*));
 
                 // 1077
 
@@ -312,14 +205,12 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150618/ovrmatrix4f
                     var eyeViewMatrix = VrApi_Helpers.vrapi_GetEyeViewMatrix(ref headModelParms, ref centerEyeViewMatrix, eye);
 
-
-
                     fixed (ovrMatrix4f* ref_ProjectionMatrix = &appState.Renderer.ProjectionMatrix)
                     fixed (ovrRenderTexture* rt = &appState.Renderer.RenderTextures[appState.Renderer.BufferIndex, eye])
                     {
                         //// 1085
-                        appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_SetCurrent BufferIndex ", appState.Renderer.BufferIndex);
-                        appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_SetCurrent eye ", eye);
+                        //appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_SetCurrent BufferIndex ", appState.Renderer.BufferIndex);
+                        //appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_SetCurrent eye ", eye);
 
                         rt->ovrRenderTexture_SetCurrent();
 
@@ -330,7 +221,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         gl3.glDepthFunc(gl3.GL_LEQUAL);
                         gl3.glViewport(0, 0, rt->Width, rt->Height);
                         gl3.glScissor(0, 0, rt->Width, rt->Height);
-                        gl3.glClearColor(0.125f, 0.0f, 0.125f, 1.0f);
+                        //gl3.glClearColor(0.125f, 0.0f, 0.125f, 1.0f);
+                        //gl3.glClearColor(0.9f, 0.0f, 0.125f, 1.0f);
+                        gl3.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
                         gl3.glClear(gl3.GL_COLOR_BUFFER_BIT | gl3.GL_DEPTH_BUFFER_BIT);
 
                         gl3.glUseProgram(appState.Scene.Program.Program);
@@ -349,7 +242,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                         // what happens if we dont?
 
-                        // Explicitly clear the border texels to black because OpenGL-ES does not support GL_CLAMP_TO_BORDER.
+                        #region Explicitly clear the border texels to black because OpenGL-ES does not support GL_CLAMP_TO_BORDER.
                         {
                             // Clear to fully opaque black.
                             gl3.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -366,9 +259,10 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                             gl3.glScissor(rt->Width - 1, 0, 1, rt->Height);
                             gl3.glClear(gl3.GL_COLOR_BUFFER_BIT);
                         }
+                        #endregion
 
                         //// 1119
-                        appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_Resolve");
+                        //appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_Resolve, glInvalidateFramebuffer");
                         rt->ovrRenderTexture_Resolve();
 
 
@@ -382,12 +276,12 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 // appState->Renderer->BufferIndex = ((appState->Renderer->BufferIndex + 1) % 3);
 
-                var BufferIndex = appState.Renderer.BufferIndex;
-                appState.tracei60("ovrRenderer_RenderFrame BufferIndex before ", BufferIndex);
-                BufferIndex = (BufferIndex + 1) % NUM_BUFFERS;
-                appState.tracei60("ovrRenderer_RenderFrame BufferIndex after ", BufferIndex);
-                //appState.Renderer.BufferIndex = (appState.Renderer.BufferIndex + 1) % NUM_BUFFERS;
-                appState.Renderer.BufferIndex = BufferIndex;
+                //var BufferIndex = appState.Renderer.BufferIndex;
+                //appState.tracei60("ovrRenderer_RenderFrame BufferIndex before ", BufferIndex);
+                //BufferIndex = (BufferIndex + 1) % NUM_BUFFERS;
+                //appState.tracei60("ovrRenderer_RenderFrame BufferIndex after ", BufferIndex);
+                appState.Renderer.BufferIndex = (appState.Renderer.BufferIndex + 1) % NUM_BUFFERS;
+                //appState.Renderer.BufferIndex = BufferIndex;
 
                 // 1130
                 appState.tracei60("exit ovrRenderer_RenderFrame BufferIndex", appState.Renderer.BufferIndex);

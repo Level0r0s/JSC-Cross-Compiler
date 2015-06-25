@@ -37,32 +37,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // set by onSurfaceCreated
             public native_window.ANativeWindow NativeWindow = null;
 
-            // called by onCreate
-            public ovrAppThread(JNIEnv env, jobject activityObject)
-            {
-                ConsoleExtensions.tracei("enter ovrAppThread");
-
-                env.GetJavaVM(env, out this.JavaVm);
-
-                this.ActivityObject = env.NewGlobalRef(env, activityObject);
-
-                //// ldfda ?
-                // new Thread( ?
-                // await HopToWorkerThread?
-                var createErr = pthread.pthread_create(out this.Thread, null, AppThreadFunction, this);
-
-
-                //var createErr2 = pthread.pthread_create(out appThread.Thread, null,
-                //    arg: appThread,
-                //    start_routine: (ovrAppThread appThread0) =>
-                //    {
-                //        // scope sharing via arg0, in c! ready for roslyn?
-
-                //        return null;
-                //    }
-                //);
-                ConsoleExtensions.tracei("exit ovrAppThread");
-            }
 
 
 
@@ -79,7 +53,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             object AppThreadFunction()
             {
                 // 1778
-                ConsoleExtensions.tracei("enter AppThreadFunction");
+                ConsoleExtensions.trace("enter pthread_create AppThreadFunction, call vrapi_DefaultInitParms");
 
                 var java = default(ovrJava);
                 java.Vm = this.JavaVm;
@@ -88,21 +62,21 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 // 1785
 
                 var initParms = VrApi_Helpers.vrapi_DefaultInitParms(ref java);
-                ConsoleExtensions.tracei("AppThreadFunction, vrapi_Initialize");
+                ConsoleExtensions.trace("AppThreadFunction, call vrapi_Initialize");
                 VrApi.vrapi_Initialize(ref initParms);
 
 
-                ConsoleExtensions.tracei("AppThreadFunction, ovrApp");
+                ConsoleExtensions.trace("AppThreadFunction, create ovrApp, call ovrEgl_CreateContext");
                 var appState = new ovrApp(ref java);
                 // 1794
                 appState.Egl.ovrEgl_CreateContext(null);
 
 
-                ConsoleExtensions.tracei("AppThreadFunction, vrapi_GetHmdInfo");
+                ConsoleExtensions.trace("AppThreadFunction, call vrapi_GetHmdInfo, then ovrRenderer_Create");
                 var hmdInfo = VrApi.vrapi_GetHmdInfo(ref java);
                 appState.Renderer.ovrRenderer_Create(ref hmdInfo);
 
-                ConsoleExtensions.tracei("AppThreadFunction, enter loop");
+                ConsoleExtensions.trace("AppThreadFunction, enter loop, call ovrMessageQueue_GetNextMessage");
                 bool destroyed = false;
                 while (!destroyed)
                 {
@@ -111,7 +85,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     while (ok)
                     {
                         ovrMessage message;
-                        var waitForMessages = appState.Ovr == null;
+                        var waitForMessages = appState.Ovr == null && !destroyed;
 
                         if (!this.MessageQueue.ovrMessageQueue_GetNextMessage(out message, waitForMessages)) break;
                         // 1812
@@ -119,7 +93,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         // no switch for jsc?
                         if (message.Id == MESSAGE.MESSAGE_ON_CREATE)
                         {
-                            ConsoleExtensions.tracei("AppThreadFunction, MESSAGE_ON_CREATE");
+                            ConsoleExtensions.trace("AppThreadFunction, MESSAGE_ON_CREATE");
                         }
                         else if (message.Id == MESSAGE.MESSAGE_ON_START) { }
                         else if (message.Id == MESSAGE.MESSAGE_ON_RESUME) { appState.Resumed = true; }
@@ -128,7 +102,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         else if (message.Id == MESSAGE.MESSAGE_ON_DESTROY) { appState.NativeWindow = null; destroyed = true; }
                         else if (message.Id == MESSAGE.MESSAGE_ON_SURFACE_CREATED)
                         {
-                            ConsoleExtensions.tracei("AppThreadFunction, MESSAGE_ON_SURFACE_CREATED");
+                            ConsoleExtensions.trace("AppThreadFunction, MESSAGE_ON_SURFACE_CREATED");
                             var m0 = message[0];
                             appState.NativeWindow = (native_window.ANativeWindow)m0.Pointer;
                         }
@@ -164,13 +138,15 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                         var parms = VrApi_Helpers.vrapi_DefaultFrameParms(ref appState.Java, ovrFrameInit.VRAPI_FRAME_INIT_LOADING_ICON_FLUSH, 0);
                         parms.FrameIndex = appState.FrameIndex;
-                        ConsoleExtensions.tracei("AppThreadFunction, vrapi_SubmitFrame VRAPI_FRAME_INIT_LOADING_ICON_FLUSH");
+                        ConsoleExtensions.trace("vrapi_SubmitFrame VRAPI_FRAME_INIT_LOADING_ICON_FLUSH");
                         appState.Ovr.vrapi_SubmitFrame(ref parms);
+
+                        //unistd.usleep(1000);
 
                         appState.Scene.ovrScene_Create();
 
                         // keep the loader on for a moment...
-                        unistd.usleep(1000);
+                        //unistd.usleep(1000);
                     }
                     #endregion
 
@@ -211,14 +187,26 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             }
 
 
+            // called by onCreate
+            public ovrAppThread(JNIEnv env, jobject activityObject)
+            {
+                // 1907
+                ConsoleExtensions.trace("enter ovrAppThread, call pthread_create");
+
+                env.GetJavaVM(env, out this.JavaVm);
+                this.ActivityObject = env.NewGlobalRef(env, activityObject);
+
+                var createErr = pthread.pthread_create(out this.Thread, null, AppThreadFunction, this);
+                // tail call?
+            }
 
 
             // called by onDestroy, then free
             public void ovrAppThread_Destroy(JNIEnv env)
             {
+                //1922
                 pthread.pthread_join(this.Thread, null);
 
-                //   (/* typecast */(void(*)(JNIEnv*, jobject))env->DeleteGlobalRef)(env, appThread->ActivityObject);
                 env.DeleteGlobalRef(env, this.ActivityObject);
                 this.MessageQueue.ovrMessageQueue_Destroy();
             }

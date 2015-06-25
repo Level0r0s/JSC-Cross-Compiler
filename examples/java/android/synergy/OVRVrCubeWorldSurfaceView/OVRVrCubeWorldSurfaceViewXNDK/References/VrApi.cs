@@ -363,7 +363,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
 
     [Script(IsNative = true, Header = "VrApi_Helpers.h")]
-    public static class VrApi_Helpers
+    public unsafe static class VrApi_Helpers
     {
 
         public static ovrMatrix4f ovrMatrix4f_TanAngleMatrixFromProjection(ref  ovrMatrix4f projection)
@@ -404,11 +404,12 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             throw null;
         }
 
-        public static ovrMatrix4f vrapi_GetCenterEyeViewMatrix(ref ovrHeadModelParms headModelParms,
-                                                        ref ovrTracking tracking,
+        public  static ovrMatrix4f vrapi_GetCenterEyeViewMatrix(
+            ref ovrHeadModelParms headModelParms,
+            ref ovrTracking tracking,
 
             // nullable struct?
-                                                        ref ovrMatrix4f input)
+            ovrMatrix4f* input)
         {
             throw null;
         }
@@ -442,6 +443,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     [Script(IsNative = true, Header = "VrApi.h")]
     public static class VrApi
     {
+        // X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Include\VrApi.h
+
         // ovrApp_BackButtonAction
 
         public const string PUI_GLOBAL_MENU = "globalMenu";

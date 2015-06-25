@@ -15,6 +15,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
     {
         // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewNDK\staging\jni\VrCubeWorld_SurfaceView.c
 
+        // 779
         public const int NUM_INSTANCES = 1500;
 
 
@@ -26,16 +27,17 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public readonly ovrVector3f[] CubePositions = new ovrVector3f[NUM_INSTANCES];
             public readonly ovrVector3f[] CubeRotations = new ovrVector3f[NUM_INSTANCES];
 
+            public readonly ovrProgram Program = new ovrProgram();
+            public readonly ovrGeometry Cube = new ovrGeometry();
+
             // 815
             public bool CreatedScene = false;
             public bool CreatedVAOs = false;
 
-            public readonly ovrProgram Program = new ovrProgram();
-            public readonly ovrGeometry Cube = new ovrGeometry();
-
             // deleted by ovrScene_Destroy
             public uint InstanceTransformBuffer = 0;
 
+            // VRAPI_FRAME_INIT_LOADING_ICON_FLUSH
             public bool ovrScene_IsCreated()
             {
                 return this.CreatedScene;
@@ -45,6 +47,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrScene_CreateVAOs()
             {
                 // 832
+                ConsoleExtensions.trace("enter ovrScene_CreateVAOs, call ovrGeometry_CreateVAO");
 
                 if (this.CreatedVAOs)
                     return;
@@ -55,7 +58,6 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 gl3.glBindVertexArray(this.Cube.VertexArrayObject);
                 gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.InstanceTransformBuffer);
 
-                //for (uint i = 0; i < 4; i++)
                 for (int i = 0; i < 4; i++)
                 {
                     gl3.glEnableVertexAttribArray((uint)ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_TRANSFORM + (uint)i);
@@ -71,6 +73,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 gl3.glBindVertexArray(0);
 
                 this.CreatedVAOs = true;
+                ConsoleExtensions.trace("exit ovrScene_CreateVAOs");
             }
 
             // called by ovrScene_Destroy
@@ -89,7 +92,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             public void ovrScene_Create()
             {
                 // 864
-                ConsoleExtensions.tracei("enter ovrScene_Create");
+                ConsoleExtensions.trace("enter ovrScene_Create, invoke ovrProgram_Create, ovrGeometry_CreateCube");
 
 
                 var vert = new Shaders.VrCubeWorldVertexShader();
@@ -130,28 +133,30 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                         var too_closey = Math.Abs(ry) < 4.0f;
                         var too_closez = Math.Abs(rz) < 4.0f;
 
-                        if (!too_closex)
-                            if (!too_closey)
-                                if (!too_closez)
+                        if (too_closex)
+                            if (too_closey)
+                                if (too_closez)
                                 {
-                                    // Test for overlap with any of the existing cubes.
-                                    bool overlap = false;
-                                    for (int j = 0; j < i; j++)
-                                    {
-                                        if (Math.Abs(rx - this.CubePositions[j].x) < 4.0f)
-                                            if (Math.Abs(ry - this.CubePositions[j].y) < 4.0f)
-                                                if (Math.Abs(rz - this.CubePositions[j].z) < 4.0f)
-                                                {
-                                                    overlap = true;
-                                                    break;
-                                                }
-                                    }
-                                    if (!overlap)
-                                    {
-                                        //break;
-                                        notfound = false;
-                                    }
+                                    continue;
                                 }
+
+                        // Test for overlap with any of the existing cubes.
+                        bool overlap = false;
+                        for (int j = 0; j < i; j++)
+                        {
+                            if (Math.Abs(rx - this.CubePositions[j].x) < 4.0f)
+                                if (Math.Abs(ry - this.CubePositions[j].y) < 4.0f)
+                                    if (Math.Abs(rz - this.CubePositions[j].z) < 4.0f)
+                                    {
+                                        overlap = true;
+                                        break;
+                                    }
+                        }
+                        if (!overlap)
+                        {
+                            //break;
+                            notfound = false;
+                        }
                     }
 
                     // Insert into list sorted based on distance.
@@ -179,6 +184,8 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                     this.CubePositions[insert].x = rx;
                     this.CubePositions[insert].y = ry;
                     this.CubePositions[insert].z = rz;
+
+                    //ConsoleExtensions.tracei("ovrScene_Create CubePositions i: ", insert);
 
                     this.CubeRotations[insert].x = (float)stdlib_h.drand48();
                     this.CubeRotations[insert].y = (float)stdlib_h.drand48();

@@ -91,7 +91,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // called by AppThreadFunction
             public ovrApp(ref ovrJava java)
             {
-                ConsoleExtensions.tracei("enter ovrApp");
+                ConsoleExtensions.trace("enter ovrApp, set ovrJava, call ovrSimulation_Clear");
                 this.Java = java;
 
                 // 1408
@@ -102,11 +102,12 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             // called by AppThreadFunction
             public void ovrApp_HandleVrModeChanges()
             {
-                ConsoleExtensions.tracei("enter ovrApp_HandleVrModeChanges, FrameIndex: ", (int)FrameIndex);
+                //ConsoleExtensions.tracei("enter ovrApp_HandleVrModeChanges, FrameIndex: ", (int)FrameIndex);
 
                 // 1432
                 if (this.NativeWindow != null && this.Egl.MainSurface == egl.EGL_NO_SURFACE)
                 {
+                    ConsoleExtensions.trace("ovrApp_HandleVrModeChanges, ovrEgl_CreateSurface");
                     this.Egl.ovrEgl_CreateSurface(this.NativeWindow);
                 }
 
@@ -125,7 +126,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                         //ALOGV("        eglGetCurrentSurface( EGL_DRAW ) = %p", eglGetCurrentSurface(EGL_DRAW));
 
-                        ConsoleExtensions.tracei("ovrApp_HandleVrModeChanges, vrapi_EnterVrMode");
+                        ConsoleExtensions.trace("ovrApp_HandleVrModeChanges, vrapi_EnterVrMode");
                         this.Ovr = VrApi.vrapi_EnterVrMode(ref parms);
 
                         //ALOGV("        vrapi_EnterVrMode()");
@@ -142,7 +143,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 #endif
                         //ALOGV("        eglGetCurrentSurface( EGL_DRAW ) = %p", eglGetCurrentSurface(EGL_DRAW));
 
-                        ConsoleExtensions.tracei("ovrApp_HandleVrModeChanges, vrapi_LeaveVrMode");
+                        ConsoleExtensions.trace("ovrApp_HandleVrModeChanges, vrapi_LeaveVrMode");
                         VrApi.vrapi_LeaveVrMode(this.Ovr);
                         this.Ovr = null;
 
@@ -153,6 +154,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
                 if (this.NativeWindow == null && this.Egl.MainSurface != egl.EGL_NO_SURFACE)
                 {
+                    ConsoleExtensions.trace("ovrApp_HandleVrModeChanges, ovrEgl_DestroySurface");
                     this.Egl.ovrEgl_DestroySurface();
                 }
             }
@@ -171,7 +173,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 {
                     if ((VrApi.vrapi_GetTimeInSeconds() - this.BackButtonDownStartTime) > VrApi_Android.BACK_BUTTON_DOUBLE_TAP_TIME_IN_SECONDS)
                     {
-                        //ALOGV("back button short press");
+                        ConsoleExtensions.trace("back button short press");
                         //ALOGV("        ovr_StartSystemActivity( %s )", PUI_CONFIRM_QUIT);
                         VrApi_Android.ovr_StartSystemActivity(ref Java, VrApi.PUI_CONFIRM_QUIT, default(string));
                         this.BackButtonState = ovrBackButtonState.BACK_BUTTON_STATE_NONE;
@@ -181,7 +183,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
                 {
                     if ((VrApi.vrapi_GetTimeInSeconds() - this.BackButtonDownStartTime) > VrApi_Android.BACK_BUTTON_LONG_PRESS_TIME_IN_SECONDS)
                     {
-                        //ALOGV("back button long press");
+                        ConsoleExtensions.trace("back button long press");
                         //ALOGV("        ovr_StartSystemActivity( %s )", PUI_GLOBAL_MENU);
                         VrApi_Android.ovr_StartSystemActivity(ref Java, VrApi.PUI_GLOBAL_MENU, null);
                         this.BackButtonState = ovrBackButtonState.BACK_BUTTON_STATE_SKIP_UP;
@@ -269,6 +271,9 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
             [CallerLineNumber] int sourceLineNumber = 0
             )
             {
+                if (this.FrameIndex > 300)
+                    return;
+
                 if (this.FrameIndex % 60 == 1)
                 {
                     ConsoleExtensions.tracei(

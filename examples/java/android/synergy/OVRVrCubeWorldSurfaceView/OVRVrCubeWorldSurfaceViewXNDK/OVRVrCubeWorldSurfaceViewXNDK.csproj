@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VrCubeWorld.RenderTexture.cs" />
     <Compile Include="VrCubeWorld.AppThread.cs" />
     <Compile Include="VrCubeWorld.App.cs" />
     <Compile Include="VrCubeWorld.Program.cs" />
@@ -99,8 +100,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>pushd ..\..\tools\
+start /WAIT cmd /K  build.bat $(ProjectName) $(TargetFileName)  $(ConfigurationName)
+popd</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
