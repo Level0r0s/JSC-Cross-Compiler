@@ -112,7 +112,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="x:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar">
+    <Content Include="x:\opensource\ovr_mobile_sdk_0.6.0.1\VrApi\Libs\Android\VrApi.jar">
       <Link>Reference\VrApi.jar</Link>
     </Content>
     <Content Include="Design\Preview.png" />

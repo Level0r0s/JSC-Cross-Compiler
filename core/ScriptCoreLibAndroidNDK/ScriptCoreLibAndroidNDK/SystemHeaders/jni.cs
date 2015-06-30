@@ -54,6 +54,15 @@ namespace ScriptCoreLibNative.SystemHeaders
     }
 
 
+
+
+    [Script(IsNative = true, PointerName = "jfieldID")]
+    public class jfieldID
+    {
+
+    }
+
+
     [Script(IsNative = true, PointerName = "jlong")]
     public unsafe class jlong : jni_h
     {
@@ -137,12 +146,65 @@ namespace ScriptCoreLibNative.SystemHeaders
         public delegate void DeleteGlobalRefDelegate(JNIEnv env, jobject value);
         public DeleteGlobalRefDelegate DeleteGlobalRef;
 
+
+
+
+        #region  jclass      (*GetObjectClass)(JNIEnv*, jobject);
+
+        [Script(IsNative = true)]
+        public delegate jclass GetObjectClassDelegate(JNIEnv env, jobject value);
+
+        public GetObjectClassDelegate GetObjectClass;
+
+        #endregion
+
+
+
+        #region   jfieldID    (*GetFieldID)(JNIEnv*, jclass, const char*, const char*);
+
+        [Script(IsNative = true)]
+        public delegate jfieldID GetFieldIDDelegate(JNIEnv env, jclass value, string n, string t);
+
+        public GetFieldIDDelegate GetFieldID;
+
+        #endregion
+
+
+
+        #region jint        (*GetIntField)(JNIEnv*, jobject, jfieldID);
+        [Script(IsNative = true)]
+        public delegate int GetIntFieldDelegate(JNIEnv env, jobject value, jfieldID i);
+
+        public GetIntFieldDelegate GetIntField;
+        #endregion
+
+        #region void        (*SetFloatField)(JNIEnv*, jobject, jfieldID, jfloat) __NDK_FPABI__;
+        [Script(IsNative = true)]
+        public delegate void SetFloatFieldDelegate(JNIEnv env, jobject value, jfieldID i, float f);
+
+        public SetFloatFieldDelegate SetFloatField;
+        #endregion
+
+
+        #region NewStringUTF
+        // Error	7	The type 'ScriptCoreLibNative.SystemHeaders.JNIEnv' already contains a definition for 'NewStringUTF'	X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\SystemHeaders\jni.cs	155	37	ScriptCoreLibAndroidNDK
+
+        // first method to be made available as a native instance call?
+        // then to be used to call into any native function returning a string?
+        // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\GLES3JNILib.cs
+        // need to prefix it until field is removed?
+        public virtual jstring JNIEnv_NewStringUTF(string value)
+        {
+            throw null;
+        }
+
         [Script(IsNative = true)]
         public delegate jstring NewStringUTFDelegate(JNIEnv env, string value);
 
 
         // tested by?
         public NewStringUTFDelegate NewStringUTF;
+        #endregion
 
 
         [Script(IsNative = true)]

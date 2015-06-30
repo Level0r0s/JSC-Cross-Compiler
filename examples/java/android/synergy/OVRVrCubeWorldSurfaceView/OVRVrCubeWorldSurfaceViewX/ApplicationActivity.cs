@@ -21,6 +21,9 @@ namespace OVRVrCubeWorldSurfaceViewX.Activities
     // https://forums.oculus.com/viewtopic.php?t=21409
     // dual shows our own popup and inserting in gearvr stays black.
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "dual")]
+
+    // what if we want to display our own welcome screen?
+    // com.samsung.android.hmt.vrsvc/com.samsung.android.hmt.vrsvc.WaitActivity
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_only")]
     public class LocalApplication : Application
     {
@@ -52,6 +55,7 @@ namespace OVRVrCubeWorldSurfaceViewX.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell dumpsys battery
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG"
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVRVrCubeWorldSurfaceViewX.Activities
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVRVrCubeWorldSurfaceViewX.Activities/OVRVrCubeWorldSurfaceViewX.Activities.ApplicationActivity
@@ -146,6 +150,7 @@ namespace OVRVrCubeWorldSurfaceViewX.Activities
                 // yes it appears top left.
 
                 //text = "GearVR HUD"
+                // (out) VrApi.vrapi_GetVersionString()
                 text = () => sw.ElapsedMilliseconds + "ms " + GLES3JNILib.stringFromJNI()
             };
 

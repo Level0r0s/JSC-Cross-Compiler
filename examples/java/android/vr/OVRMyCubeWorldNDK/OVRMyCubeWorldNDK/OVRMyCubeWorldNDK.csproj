@@ -7,8 +7,8 @@
     <ProjectGuid>{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OVRVrCubeWorldSurfaceViewXNDK</RootNamespace>
-    <AssemblyName>OVRVrCubeWorldSurfaceViewXNDK</AssemblyName>
+    <RootNamespace>OVRMyCubeWorldNDK</RootNamespace>
+    <AssemblyName>OVRMyCubeWorldNDK</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,8 +49,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="OVRVrCubeWorldSurfaceViewXNDK.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\OVRVrCubeWorldSurfaceViewXNDK.AssetsLibrary.dll</HintPath>
+    <Reference Include="OVRMyCubeWorldNDK.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\OVRMyCubeWorldNDK.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -81,9 +81,33 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0.1\VrApi\Include\**\*.*">
+    <None Include="x:\opensource\ovr_mobile_sdk_0.6.0.1\VrApi\Include\VrApi.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>staging\jni\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <Link>staging\jni\VrApi.h</Link>
+    </None>
+    <None Include="x:\opensource\ovr_mobile_sdk_0.6.0.1\VrApi\Include\VrApi_Android.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrApi_Android.h</Link>
+    </None>
+    <None Include="x:\opensource\ovr_mobile_sdk_0.6.0.1\VrApi\Include\VrApi_Config.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrApi_Config.h</Link>
+    </None>
+    <None Include="x:\opensource\ovr_mobile_sdk_0.6.0.1\VrApi\Include\VrApi_Helpers.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrApi_Helpers.h</Link>
+    </None>
+    <None Include="x:\opensource\ovr_mobile_sdk_0.6.0.1\VrApi\Include\VrApi_LocalPrefs.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrApi_LocalPrefs.h</Link>
+    </None>
+    <None Include="x:\opensource\ovr_mobile_sdk_0.6.0.1\VrApi\Include\VrApi_Types.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrApi_Types.h</Link>
+    </None>
+    <None Include="x:\opensource\ovr_mobile_sdk_0.6.0.1\VrApi\Include\VrApi_Version.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrApi_Version.h</Link>
     </None>
   </ItemGroup>
   <ItemGroup>

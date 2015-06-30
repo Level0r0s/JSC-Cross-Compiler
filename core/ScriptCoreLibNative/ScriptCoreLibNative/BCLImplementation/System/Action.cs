@@ -8,6 +8,9 @@ namespace ScriptCoreLibNative.BCLImplementation.System
 {
     // tested by?
     // X:\jsc.svn\examples\c\Test\TestAction\TestAction\Program.cs
+    // X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorldNDK\GLES3JNILib.cs
+
+
 
 	// A native delegate is a static function pointer
     //[Script(IsNative = true, Implements = typeof(global::System.Action))]
@@ -16,6 +19,9 @@ namespace ScriptCoreLibNative.BCLImplementation.System
 
 	[Script(Implements = typeof(global::System.Action<>))]
 	internal delegate void __Action<T1>(T1 t1);
+
+    [Script(Implements = typeof(global::System.Action<,>))]
+    internal delegate void __Action<T1, T2>(T1 t1, T2 t2);
 
 	[Script(Implements = typeof(global::System.Action<,,>))]
 	internal delegate void __Action<T1, T2, T3>(T1 t1, T2 t2, T3 t3);

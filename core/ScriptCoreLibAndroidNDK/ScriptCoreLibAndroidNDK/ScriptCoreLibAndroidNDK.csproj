@@ -47,8 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Delegate.cs">
+      <Link>BCLImplementation\System\Delegate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\IntPtr.cs">
+      <Link>BCLImplementation\System\IntPtr.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Math.cs">
       <Link>BCLImplementation\System\Math.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\MulticastDelegate.cs">
+      <Link>BCLImplementation\System\MulticastDelegate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Reflection\MethodInfo.cs">
+      <Link>BCLImplementation\System\Reflection\MethodInfo.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\SystemHeaders\math.cs">
       <Link>SystemHeaders\math.cs</Link>

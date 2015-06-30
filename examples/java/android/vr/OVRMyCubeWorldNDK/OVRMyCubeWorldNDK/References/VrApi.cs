@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OVRVrCubeWorldSurfaceViewXNDK
+namespace OVRMyCubeWorldNDK
 {
     //X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewNDK\staging\jni\VrApi_Types.h
     // "X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Include\VrApi.h"
@@ -90,7 +90,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         // now we cannot get the size for allocator anymore?
 
         // X:\jsc.svn\examples\c\Test\TestSizeOfUserStruct\TestSizeOfUserStruct\Class1.cs
-        //Error	7	Cannot take the address of, get the size of, or declare a pointer to a managed type ('OVRVrCubeWorldSurfaceViewXNDK.ovrMatrix4f')	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.Renderer.cs	100	44	OVRVrCubeWorldSurfaceViewXNDK
+        //Error	7	Cannot take the address of, get the size of, or declare a pointer to a managed type ('OVRMyCubeWorldNDK.ovrMatrix4f')	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRMyCubeWorldNDK\VrCubeWorld.Renderer.cs	100	44	OVRMyCubeWorldNDK
 
     }
 
@@ -524,7 +524,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
         }
     }
 
-    //   jni/OVRVrCubeWorldSurfaceViewXNDK.dll.h:12:19: fatal error: VrApi.h: No such file or directory
+    //   jni/OVRMyCubeWorldNDK.dll.h:12:19: fatal error: VrApi.h: No such file or directory
     //#include "VrApi.h"
     //                  ^
 
@@ -545,7 +545,7 @@ namespace OVRVrCubeWorldSurfaceViewXNDK
 
         public jobject ActivityObject;		// Java activity object
 
-        // Error	1	Cannot take the address of, get the size of, or declare a pointer to a managed type ('ScriptCoreLibNative.SystemHeaders.JavaVM')	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrApi.cs	43	24	OVRVrCubeWorldSurfaceViewXNDK
+        // Error	1	Cannot take the address of, get the size of, or declare a pointer to a managed type ('ScriptCoreLibNative.SystemHeaders.JavaVM')	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRMyCubeWorldNDK\VrApi.cs	43	24	OVRMyCubeWorldNDK
 
     }
 }

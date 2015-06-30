@@ -14,6 +14,8 @@ namespace ScriptCoreLibNative.SystemHeaders.EGL
     [Script(IsNative = true, Header = "EGL/egl.h", IsSystemHeader = true, PointerName = "EGLDisplay")]
     public class EGLDisplay { }
 
+    // http://developer.android.com/reference/android/Manifest.permission.html#ACCESS_SURFACE_FLINGER
+    // https://android.googlesource.com/platform/frameworks/native/+/master/services/surfaceflinger/SurfaceFlinger.cpp
     [Script(IsNative = true, Header = "EGL/egl.h", IsSystemHeader = true, PointerName = "EGLSurface")]
     public class EGLSurface { }
 

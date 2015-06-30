@@ -39,6 +39,8 @@ namespace WebGLSpadeWarrior
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IDefault page = null)
         {
+            // X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorldNDK\VrCubeWorld.Renderer.cs
+
             // works for IE11
             //DiagnosticsConsole.ApplicationContent.BindKeyboardToDiagnosticsConsole();
 
