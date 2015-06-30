@@ -22,6 +22,7 @@ namespace jni
     [Script]
     public static class CPtrLibrary
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150630
         public static string LibraryPath = "lib_jnistb10";
     }
 
@@ -218,11 +219,11 @@ namespace jni
 
                 if (value)
                 {
-                    JavaSystem.load(p);
+                    java.lang.System.load(p);
                 }
                 else
                 {
-                    JavaSystem.loadLibrary(CPtrLibrary.LibraryPath);
+                    java.lang.System.loadLibrary(CPtrLibrary.LibraryPath);
                 }
 
             }
@@ -245,7 +246,7 @@ namespace jni
 
             try
             {
-                JavaSystem.load(hint);
+                java.lang.System.load(hint);
             }
             catch (csharp.ThrowableException ex)
             {
@@ -369,7 +370,7 @@ namespace jni
                 }
             }
 
-            var path = java.lang.JavaSystem.getProperty("java.library.path").Split(';');
+            var path = java.lang.System.getProperty("java.library.path").Split(';');
 
             foreach (var item in path)
             {

@@ -15,6 +15,14 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Text
     [Script(Implements = typeof(global::System.Text.StringBuilder))]
     internal class __StringBuilder
     {
+        //       type: ScriptCoreLibJava.BCLImplementation.System.Text.__StringBuilder, ScriptCoreLibJava, Version=4.5.0.0, Culture=neutral, PublicKeyToken=null
+        //offset: 0x000f
+        // method:ScriptCoreLibJava.BCLImplementation.System.Text.__StringBuilder Append(Boolean) }
+        //   System.NotSupportedException: multiple stack entries instead of one
+        //  at jsc.ILFlowStackItem.get_SingleStackInstruction() in X:\jsc.internal.git\compiler\jsc\CodeModel\ILFlow.cs:line 139
+        //  at jsc.Script.CompilerCLike.WriteParameters(Prestatement p, MethodBase _method, ILFlowStackItem[] s, Int32 offset, ParameterInfo[] pi, Boolean pWritten, String op) in X:\jsc.internal.git\compiler\jsc\Languages\CompilerCLike.cs:line 295
+
+
         // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Text\StringBuilder.cs
 
         global::java.lang.StringBuffer InternalBuffer;
@@ -87,6 +95,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Text
 
         public __StringBuilder Append(bool e)
         {
+            // ??
+
             InternalBuffer.append("" + e);
 
             return this;

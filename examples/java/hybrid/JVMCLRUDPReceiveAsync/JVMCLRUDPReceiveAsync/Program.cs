@@ -21,6 +21,9 @@ namespace JVMCLRUDPReceiveAsync
 
     static class Program
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150630
+        // broken?
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -146,9 +149,3 @@ namespace JVMCLRUDPReceiveAsync
 
 }
 
-//script: error JSC1000: Java : valuetype ScriptCoreLib.Shared.BCLImplementation.System.Net.Sockets.__UdpReceiveResult - ScriptCoreLib.Shared.BCLImplementation.System.Net.Sockets.__UdpReceiveResult must define a default .ctor
-//internal compiler error at method
-// assembly: Y:\staging\JVMCLRUDPReceiveAsync__i__d.jvm.exe at C:\Users\Arvo\AppData\Local\Temp\q4flwv54.z0g\staging.jvm
-// type: JVMCLRUDPReceiveAsync.Program+<>c+<<Main>b__0_0>d+<MoveNext>06000024, JVMCLRUDPReceiveAsync__i__d.jvm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// method: <>forwardref
-// Java : valuetype ScriptCoreLib.Shared.BCLImplementation.System.Net.Sockets.__UdpReceiveResult - ScriptCoreLib.Shared.BCLImplementation.System.Net.Sockets.__UdpReceiveResult must define a default .ctor

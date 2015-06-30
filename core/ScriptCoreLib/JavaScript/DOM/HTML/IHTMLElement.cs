@@ -1434,6 +1434,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 		}
 
 
+        // can we link to gearVR_
 		// X:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\Application.cs
 		// http://dvcs.w3.org/hg/pointerlock/raw-file/default/index.html
 		[Script(DefineAsStatic = true)]
