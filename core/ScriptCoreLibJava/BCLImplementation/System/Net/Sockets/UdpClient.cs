@@ -70,6 +70,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             return datagramSocket;
         }
 
+        static java.net.DatagramSocket try_new_DatagramSocket(IPEndPoint e)
+        {
+            // how do we listen on specific NIC?
+            return try_new_DatagramSocket(e.Port);
+        }
 
 
         public __UdpClient(java.net.DatagramSocket datagramSocket)
@@ -93,7 +98,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
                         // http://tutorials.jenkov.com/java-networking/udp-datagram-sockets.html
 
 
- 
+
                         var packet = new java.net.DatagramPacket(buffer, buffer.Length);
 
                         try
@@ -211,14 +216,17 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         public __UdpClient()
             : this(try_new_DatagramSocket())
         {
-
         }
 
         public __UdpClient(int port)
             : this(try_new_DatagramSocket(port))
         {
+        }
 
 
+        public __UdpClient(IPEndPoint e)
+            : this(try_new_DatagramSocket(e))
+        {
         }
 
         public Socket Client { get; set; }

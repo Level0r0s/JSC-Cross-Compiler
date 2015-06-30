@@ -68,12 +68,12 @@ namespace jni
             return "" + Pointer;
         }
 
-        public static implicit operator long (CPtr e)
+        public static implicit operator long(CPtr e)
         {
             return e.Pointer;
         }
 
-        public static implicit operator string (CPtr e)
+        public static implicit operator string(CPtr e)
         {
             return e.getString(0);
         }
@@ -187,6 +187,11 @@ namespace jni
 
         static CPtr()
         {
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150630/jvmclrudpreceiveasync
+            //System.Console.WriteLine("CPtr cctor");
+
+
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150503/udp
             // http://support.teamdev.com/thread/405
             InternalTryLoadLibrary();
@@ -198,7 +203,7 @@ namespace jni
 
         private static void InternalTryLoadLibrary()
         {
-
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150630/dispatch_x86
             try
             {
                 //System.Console.WriteLine("InternalTryLoadLibrary");
@@ -219,10 +224,12 @@ namespace jni
 
                 if (value)
                 {
+                    //System.Console.WriteLine("InternalTryLoadLibrary load: " + p);
                     java.lang.System.load(p);
                 }
                 else
                 {
+                    //System.Console.WriteLine("InternalTryLoadLibrary loadLibrary: " + CPtrLibrary.LibraryPath);
                     java.lang.System.loadLibrary(CPtrLibrary.LibraryPath);
                 }
 
@@ -410,7 +417,7 @@ namespace jni
             catch (csharp.UnsatisfiedLinkError u)
             {
 
-                r = 
+                r =
                     @"X:\jsc.svn\core\ScriptCoreLibJava.jni\jni\jnistb10.cs [UnsatisfiedLinkError] lib: " + lib + "; fname: " + fname + "; message:" + u.Message;
 
             }

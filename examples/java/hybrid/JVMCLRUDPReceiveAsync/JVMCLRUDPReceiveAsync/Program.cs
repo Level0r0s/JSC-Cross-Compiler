@@ -21,8 +21,9 @@ namespace JVMCLRUDPReceiveAsync
 
     static class Program
     {
+        // X:\jsc.svn\examples\java\hybrid\JVMCLRUDPReceiveAsync\JVMCLRUDPReceiveAsync\bin\Release
+
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150630
-        // broken?
 
         /// <summary>
         /// The main entry point for the application.
@@ -33,6 +34,10 @@ namespace JVMCLRUDPReceiveAsync
             System.Console.WriteLine(
                typeof(object).AssemblyQualifiedName
             );
+
+            //Console.WriteLine("");
+            //var linein = Console.ReadLine();
+
 
 
             #region data
@@ -118,7 +123,18 @@ namespace JVMCLRUDPReceiveAsync
             );
 
 
-            CLRProgram.CLRMain();
+            Console.WriteLine("invoke CLRMain...");
+            try
+            {
+                CLRProgram.CLRMain();
+
+                Console.WriteLine("invoke CLRMain... done");
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine("invoke CLRMain... err " + new { err.Message, err.StackTrace });
+            }
+
         }
 
 
@@ -151,3 +167,18 @@ namespace JVMCLRUDPReceiveAsync
 
 }
 
+
+//:106 ReceiveAsync...
+//invoke CLRMain...
+//invoke CLRMain... err { Message = jni.CPtr.initIDs(Ljni/CPtr;)I, StackTrace = java.lang.UnsatisfiedLinkError: jni.CPtr.initIDs(Ljni/CPtr;)I
+//        at jni.CPtr.initIDs(Native Method)
+//        at jni.CPtr.<clinit>(CPtr.java:41)
+//        at ScriptCoreLibJava.BCLImplementation.ScriptCoreLibA.Shared.__PlatformInvocationServices_Func.get_Method(__PlatformInvocationServices_Func.java:64)
+//        at ScriptCoreLibJava.BCLImplementation.ScriptCoreLibA.Shared.__PlatformInvocationServices_Func.To__PlatformInvocationServices_Action(__PlatformInvocationServices_Func.java:93)
+//        at ScriptCoreLibJava.BCLImplementation.ScriptCoreLibA.Shared.__PlatformInvocationServices.InvokeVoid(__PlatformInvocationServices.java:118)
+//        at JVMCLRUDPReceiveAsync__i__d._0200001e__nativeimport_.export___06000081(_0200001e__nativeimport_.java:48)
+//        at JVMCLRUDPReceiveAsync__i__d._0200001e_.CLRMain(_0200001e_.java:46)
+//        at JVMCLRUDPReceiveAsync__i._02000005_____import.CLRMain(_02000005_____import.java:29)
+//        at JVMCLRUDPReceiveAsync._02000004__________interfaceimport_.CLRMain(_02000004__________interfaceimport_.java:29)
+//        at JVMCLRUDPReceiveAsync.Program.main(Program.java:271)
+// }
