@@ -9,10 +9,13 @@ using System.Threading.Tasks;
 
 namespace ScriptCoreLib.Shared.BCLImplementation.System.Net.Sockets
 {
+    // https://github.com/mono/mono/blob/master/mcs/class/System/System.Net.Sockets/UdpReceiveResult.cs
+
 	//[Script(Implements = typeof(global::System.Net.Sockets.UdpReceiveResult))]
 	[Script(ImplementsViaAssemblyQualifiedName = "System.Net.Sockets.UdpReceiveResult")]
 	public class __UdpReceiveResult
 	{
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150630/jvmclrudpreceiveasync
 		// X:\jsc.svn\market\synergy\javascript\chrome\chrome\BCLImplementation\System\Net\Sockets\UdpClient.cs
 
         // actionscript likes one constructor

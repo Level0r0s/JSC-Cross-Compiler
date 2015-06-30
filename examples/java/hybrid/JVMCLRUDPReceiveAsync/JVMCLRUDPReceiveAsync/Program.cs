@@ -35,79 +35,81 @@ namespace JVMCLRUDPReceiveAsync
             );
 
 
+            #region data
+            var data =
+                from n in NetworkInterface.GetAllNetworkInterfaces()
+                let SupportsMulticast = n.SupportsMulticast
+                from u in n.GetIPProperties().UnicastAddresses
+                let IsLoopback = IPAddress.IsLoopback(u.Address)
+                let IPv4 = u.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork
+
+                // http://compnetworking.about.com/od/workingwithipaddresses/l/aa042400b.htm
+                // http://ipaddressextensions.codeplex.com/SourceControl/latest#WorldDomination.Net/IPAddressExtensions.cs
+
+                let get_IsPrivate = new Func<bool>(
+                 delegate
+                 {
+                     Console.WriteLine("get_IsPrivate " + new { SupportsMulticast, n.Description, u.Address, IPv4 });
+
+                     var AddressBytes = u.Address.GetAddressBytes();
+
+                     // should do a full mask check?
+                     // http://en.wikipedia.org/wiki/IP_address
+                     //var PrivateAddresses = new[] { 10, 172, 192 };
+
+                     if (AddressBytes[0] == 10)
+                         return true;
+
+                     if (AddressBytes[0] == 172)
+                         return true;
+
+                     if (AddressBytes[0] == 192)
+                         return true;
+
+                     return false;
+
+                 }
+                )
+
+
+                let IsPrivate = get_IsPrivate()
+                let IsCandidate = IsPrivate && !IsLoopback && SupportsMulticast && IPv4
+
+                select new
+                {
+                    IsPrivate,
+                    IsLoopback,
+                    SupportsMulticast,
+                    IPv4,
+                    IsCandidate,
+
+                    u,
+                    n
+                };
+            #endregion
+
+            var cc = data.First(x => x.IsCandidate);
+
             new { }.With(
                 async delegate
                 {
                     var port = 8080;
+                    Console.WriteLine(":95");
 
-                    var data =
-                        from n in NetworkInterface.GetAllNetworkInterfaces()
-                        let SupportsMulticast = n.SupportsMulticast
-                        from u in n.GetIPProperties().UnicastAddresses
-                        let IsLoopback = IPAddress.IsLoopback(u.Address)
-                        let IPv4 = u.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork
-
-                        // http://compnetworking.about.com/od/workingwithipaddresses/l/aa042400b.htm
-                        // http://ipaddressextensions.codeplex.com/SourceControl/latest#WorldDomination.Net/IPAddressExtensions.cs
-
-                        let get_IsPrivate = new Func<bool>(
-                         delegate
-                         {
-                             Console.WriteLine("get_IsPrivate " + new { SupportsMulticast, n.Description, u.Address, IPv4 });
-
-                             var AddressBytes = u.Address.GetAddressBytes();
-
-                             // should do a full mask check?
-                             // http://en.wikipedia.org/wiki/IP_address
-                             //var PrivateAddresses = new[] { 10, 172, 192 };
-
-                             if (AddressBytes[0] == 10)
-                                 return true;
-
-                             if (AddressBytes[0] == 172)
-                                 return true;
-
-                             if (AddressBytes[0] == 192)
-                                 return true;
-
-                             return false;
-
-                         }
-                        )
-
-
-                        let IsPrivate = get_IsPrivate()
-                        let IsCandidate = IsPrivate && !IsLoopback && SupportsMulticast && IPv4
-
-                        select new
-                        {
-                            IsPrivate,
-                            IsLoopback,
-                            SupportsMulticast,
-                            IPv4,
-                            IsCandidate,
-
-                            u,
-                            n
-                        };
-
-                    var cc = data.First(x => x.IsCandidate);
+                    //var cc = data.First(x => x.IsCandidate);
+                    //Console.WriteLine(":98");
 
                     //var u = new UdpClient("127.0.0.1", port);
                     var uu = new UdpClient(
 
-                        new IPEndPoint(
-                        cc.u.Address,
+                        new IPEndPoint(cc.u.Address, port)
+                    );
 
-                        // local address?
-                        port)
-                        );
-
-
-                    Console.WriteLine("ReceiveAsync...");
+                    Console.WriteLine(":106 ReceiveAsync...");
 
                     while (true)
                     {
+                        // UdpReceiveResult
                         var x = await uu.ReceiveAsync();
 
                         Console.WriteLine(new { x.Buffer.Length });

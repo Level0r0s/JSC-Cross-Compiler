@@ -228,6 +228,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         public void Close() { vClose(); }
 
 
+        // X:\jsc.svn\examples\java\hybrid\JVMCLRUDPReceiveAsync\JVMCLRUDPReceiveAsync\Program.cs
         // X:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\System\Net\Sockets\UdpReceiveResult.cs
         public Func<Task<__UdpReceiveResult>> vReceiveAsync;
         public Task<__UdpReceiveResult> ReceiveAsync() { return vReceiveAsync(); }
