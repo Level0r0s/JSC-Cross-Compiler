@@ -6,7 +6,9 @@ using ScriptCoreLib;
 
 namespace android.graphics
 {
+    //  SurfaceTexture is the combination of a Surface and a GLES texture. 
     //  X:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosHUD\VrActivity.cs
+    // https://source.android.com/devices/graphics/architecture.html
 
     // https://android.googlesource.com/platform/frameworks/base.git/+/master/graphics/java/android/graphics/SurfaceTexture.java
     // http://developer.android.com/reference/android/graphics/SurfaceTexture.html

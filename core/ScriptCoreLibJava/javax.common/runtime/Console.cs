@@ -154,7 +154,7 @@ namespace javax.common.runtime
 
         internal static void InternalWriteLine(string e)
         {
-            JavaSystem.@out.println(e);
+            java.lang.System.@out.println(e);
 
         }
 
@@ -166,11 +166,11 @@ namespace javax.common.runtime
 
             try
             {
-                int len = JavaSystem.@in.available();
+                int len = java.lang.System.@in.available();
 
                 sbyte[] b = new sbyte[len];
 
-                JavaSystem.@in.read(b, 0, len);
+                java.lang.System.@in.read(b, 0, len);
 
                 return b;
             }
@@ -199,7 +199,7 @@ namespace javax.common.runtime
         {
             try
             {
-                JavaSystem.@out.write(p);
+                java.lang.System.@out.write(p);
             }
             catch
             {
@@ -209,7 +209,7 @@ namespace javax.common.runtime
 
         public static void WriteErrorLine(string p)
         {
-            JavaSystem.err.print("*** error: " + p + "\n");
+            java.lang.System.err.print("*** error: " + p + "\n");
         }
 
         //public static void WriteHexDumpFromFile(string filename)

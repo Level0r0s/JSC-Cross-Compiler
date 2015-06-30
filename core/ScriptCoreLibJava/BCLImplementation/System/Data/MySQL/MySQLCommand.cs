@@ -74,6 +74,13 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
 
         private void InternalCreateStatement()
         {
+            // X:\jsc.svn\examples\java\appengine\Test\TestThreadManager\TestThreadManager\ApplicationWebService.cs
+
+            throw null;
+
+#if FTESTED
+            // tested by?
+
             if (this.InternalStatement != null)
                 return;
 
@@ -110,6 +117,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
                     foreach (var item in index)
                     {
                         c++;
+
+                        // X:\jsc.svn\examples\java\appengine\Test\TestThreadManager\TestThreadManager\ApplicationWebService.cs
 
                         if (item.p.Value == null)
                         {
@@ -199,6 +208,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
             {
 
             }
+#endif
+
         }
 
         public override int ExecuteNonQuery()

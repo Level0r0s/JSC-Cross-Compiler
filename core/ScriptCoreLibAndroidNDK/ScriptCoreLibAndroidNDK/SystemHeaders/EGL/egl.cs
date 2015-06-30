@@ -21,6 +21,13 @@ namespace ScriptCoreLibNative.SystemHeaders.EGL
 
     [Script(IsNative = true, Header = "EGL/egl.h", IsSystemHeader = true, PointerName = "EGLConfig")]
     public class EGLConfig { }
+
+
+    // https://source.android.com/devices/graphics/architecture.html
+    // Before you can do anything with GLES, you need to create a GL context. 
+    // In EGL, this means creating an EGLContext and an EGLSurface. GLES operations apply to the current context, 
+    // which is accessed through thread-local storage rather than passed around as an argument. 
+    // ThreadLocal ?
     [Script(IsNative = true, Header = "EGL/egl.h", IsSystemHeader = true, PointerName = "EGLContext")]
     public class EGLContext { }
 

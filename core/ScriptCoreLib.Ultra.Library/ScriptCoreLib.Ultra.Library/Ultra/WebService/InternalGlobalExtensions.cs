@@ -15,6 +15,8 @@ namespace ScriptCoreLib.Ultra.WebService
 {
     public static partial class InternalGlobalExtensions
     {
+        // X:\jsc.svn\examples\java\appengine\Test\TestThreadManager\TestThreadManager\ApplicationWebService.cs
+
         // X:\jsc.svn\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\Ultra\WebService\InternalGlobalExtensions.cs
 
         // X:\jsc.svn\examples\vr\VRTurbanPhotosphere\VRTurbanPhotosphere\Application.cs

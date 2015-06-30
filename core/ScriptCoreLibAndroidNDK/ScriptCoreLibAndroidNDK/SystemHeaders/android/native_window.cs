@@ -9,6 +9,9 @@ namespace ScriptCoreLibNative.SystemHeaders.android
     // "X:\util\android-ndk-r10e\platforms\android-21\arch-arm\usr\include\android\native_window.h"
     // https://github.com/android/platform_frameworks_base/blob/master/core/jni/android_app_NativeActivity.cpp
 
+    // https://source.android.com/devices/graphics/architecture.html
+    // To create an EGL window surface from native code, you pass an instance of EGLNativeWindowType to eglCreateWindowSurface().
+    // EGLNativeWindowType is just a synonym for ANativeWindow,
     [Script(IsNative = true, Header = "android/native_window.h", IsSystemHeader = true)]
     public static class native_window
     {

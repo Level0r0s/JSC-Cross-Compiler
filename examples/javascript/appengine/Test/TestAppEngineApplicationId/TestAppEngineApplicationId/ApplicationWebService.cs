@@ -17,17 +17,18 @@ namespace TestAppEngineApplicationId
     /// </summary>
     public class ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201506/20150625/appengine
+
 
         public XElement title;
 
-        public Task yield()
+        public async Task yield()
         {
             title.Value = "hi";
 
             // https://code.google.com/p/googleappengine/source/browse/trunk/java/src/main/com/google/appengine/api/utils/SystemProperty.java?r=219
             // https://developers.google.com/appengine/docs/adminconsole/performancesettings
 
-#if !DEBUG
             //var environment = com.google.appengine.api.utils.SystemProperty.environment.value().value();
 
             var applicationId = com.google.appengine.api.utils.SystemProperty.applicationId.get();
@@ -40,9 +41,11 @@ namespace TestAppEngineApplicationId
                 applicationVersion
                 //, environment 
             }.ToString();
-#endif
 
-            return "".AsResult();
+        //    Y:\TestAppEngineApplicationId.ApplicationWebService\staging.java\web\java\__AnonymousTypes__TestAppEngineApplica
+        //return __String.Format(null, "{{ applicationId = {0}, applicationVersion = {1} }}", objectArray4);
+
+            //return "".AsResult();
         }
     }
 }

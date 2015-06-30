@@ -106,7 +106,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System
             try
             {
                 // we cannot do this in applet?
-                u = global::java.lang.JavaSystem.getProperty("file.encoding");
+                // applets dissapeared from chrome? and web? now we have WebAssembly?
+                u = global::java.lang.System.getProperty("file.encoding");
             }
             catch
             {
@@ -138,7 +139,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System
                 {
                     if (InternalPrintStreamCache == null)
                     {
-                        var _stream = global::java.lang.JavaSystem.@out;
+                        var _stream = global::java.lang.System.@out;
                         var _encoding = InternalGetEnvironmentEncoding();
 
                         InternalPrintStreamCache = new global::java.io.PrintStream(_stream, true, _encoding);
@@ -192,7 +193,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
             try
             {
-                var r0 = new global::java.io.InputStreamReader(global::java.lang.JavaSystem.@in);
+                var r0 = new global::java.io.InputStreamReader(global::java.lang.System.@in);
                 var r1 = new global::java.io.BufferedReader(r0);
 
 

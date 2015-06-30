@@ -18,6 +18,8 @@ namespace AppEngineFirstEverWebServiceTask
     /// </summary>
     public class ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201506/20150625/appengine
+
         // E/Web Console( 6547): Uncaught SyntaxError: 
         // Unexpected token function at http://83.191.200.38:2764/view-source:56475
         //  type$wPbomspuLjGhA_az1BEMUOQ.function = null;

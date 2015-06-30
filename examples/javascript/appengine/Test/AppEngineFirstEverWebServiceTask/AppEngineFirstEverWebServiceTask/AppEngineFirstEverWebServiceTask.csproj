@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AppEngineFirstEverWebServiceTask</RootNamespace>
     <AssemblyName>AppEngineFirstEverWebServiceTask</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>AppEngineFirstEverWebServiceTask.Program</StartupObject>
     <TargetFrameworkProfile />

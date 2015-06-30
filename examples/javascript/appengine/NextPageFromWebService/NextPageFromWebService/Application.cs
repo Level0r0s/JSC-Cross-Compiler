@@ -46,7 +46,7 @@ namespace NextPageFromWebService
             var body_n = this.body.Nodes().ToArray();
 
             page.GoNextPage.WhenClicked(
-                async delegate
+                async button =>
                 {
                     var DataSource = await this.GoNextPage();
                     // by now the layout was changed!

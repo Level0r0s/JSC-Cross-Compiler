@@ -89,3 +89,79 @@ namespace TestThreadManager
 
     }
 }
+
+
+//X:\Program Files (x86)\Java\jdk1.7.0_79\bin\javac.exe  -encoding UTF-8 -cp Y:\TestThreadManager.ApplicationWebService\staging.java\web\release;x:\util\appengine-java-sdk-1.9.15\lib\impl\*;x:\util\appengine-java-sdk-1.9.15\lib\shared\* -d "Y:\TestThreadManager.ApplicationWebService\staging.java\web\release" @"Y:\TestThreadManager.ApplicationWebService\staging.java\web\files"
+
+//Y:\TestThreadManager.ApplicationWebService\staging.java\web\java\ScriptCoreLibJava\BCLImplementation\System\Web\__HttpRequest.java:5: error: package javax.servlet.http does not exist
+//import javax.servlet.http.Cookie;
+//                         ^
+//Y:\TestThreadManager.ApplicationWebService\staging.java\web\java\ScriptCoreLibJava\BCLImplementation\System\Web\__HttpRequest.java:6: error: package javax.servlet.http does not exist
+
+
+//X:\Program Files (x86)\Java\jdk1.7.0_79\bin\javac.exe  -encoding UTF-8 -cp Y:\TestThreadManager.ApplicationWebService\staging.java\web\release;x:\util\appengine-java-sdk-1.9.22\lib\impl\*;x:\util\appengine-java-sdk-1.9.22\lib\shared\* -d "Y:\TestThreadManager.ApplicationWebService\staging.java\web\release" @"Y:\TestThreadManager.ApplicationWebService\staging.java\web\files"
+
+//Y:\TestThreadManager.ApplicationWebService\staging.java\web\java\ScriptCoreLib\Extensions\LinqExtensions.java:63: error: incompatible types
+//                    if ((enumerator_13))
+//                         ^
+//  required: boolean
+//  found:    __IEnumerator_1<T>
+//  where T is a type-variable:
+//    T extends Object declared in method <T>WithEachIndex(__IEnumerable_1<T>,__Action_2<T,Integer>)
+
+//0001 02000042 TestThreadManager.ApplicationWebService::<module>.SHA14cdcc3a4041f43cf15b17f195067126f523efbb1@1634151512
+//Y:\TestThreadManager.ApplicationWebService\staging.java\web\files
+//X:\Program Files (x86)\Java\jdk1.7.0_79\bin\javac.exe  -encoding UTF-8 -cp Y:\TestThreadManager.ApplicationWebService\staging.java\web\release;x:\util\appengine-java-sdk-1.9.22\lib\impl
+
+//Y:\TestThreadManager.ApplicationWebService\staging.java\web\java\ScriptCoreLib\Ultra\WebService\InternalGlobalExtensions___c__DisplayClass0_0.java:96: error: incompatible types
+//        for (num3 = 0; num3; num3++)
+//                       ^
+//  required: boolean
+
+
+//X:\Program Files (x86)\Java\jdk1.7.0_79\bin\javac.exe  -encoding UTF-8 -cp Y:\TestThreadManager.ApplicationWebService\staging.java\web\release;x:\util\appengine-java-sdk-1.9.2
+
+//Y:\TestThreadManager.ApplicationWebService\staging.java\web\java\ScriptCoreLibJava\BCLImplementation\System\Data\SQLite\__MySQLCommand.java:454: error: incompatible types
+//        return ((((Object)_017e) instanceof  Integer) ? (Integer)((Object)_017e) : (Integer)null);
+//                                                      ^
+//  required: __Int32
+//  found:    Integer
+
+
+//0001 02000042 TestThreadManager.ApplicationWebService::<module>.SHA14cdcc3a4041f43cf15b17f195067126f523efbb1@161959109
+//Y:\TestThreadManager.ApplicationWebService\staging.java\web\files
+//X:\Program Files (x86)\Java\jdk1.7.0_79\bin\javac.exe  -encoding UTF-8 -cp Y:\TestThreadManager.ApplicationWebService\staging.java\web\release;x:\util\appengine-java-sdk-1.9.22\lib\impl\*;x:\util\appengine-java-sdk-1.9
+
+//Y:\TestThreadManager.ApplicationWebService\staging.java\web\java\ScriptCoreLib\Shared\BCLImplementation\System\Threading\Tasks\__TaskExtensions.java:34: error: cannot find symbol
+//        task.ContinueWith_0600018f(new __Action_1<__Task_1<__Task_1<TResult>>>(class2_10,
+//            ^
+//  symbol:   method ContinueWith_0600018f(__Action_1<__Task_1<__Task_1<TResult>>>)
+//  location: variable task of type __Task_1<__Task_1<TResult>>
+//  where TResult is a type-variable:
+//    TResult extends Object declared in method <TResult>Unwrap_06000b5a(__Task_1<__Task_1<TResult>>,String)
+//Y:\TestThreadManager.ApplicationWebService\staging.java\web\java\ScriptCoreLib\Shared\BCLImplementation\System\Threading\Tasks\__TaskExtensions.java:59: error: cannot find symbol
+//        task.ContinueWith_0600018f(new __Action_1<__Task_1<__Task>>(class60,
+//            ^
+//  symbol:   method ContinueWith_0600018f(__Action_1<__Task_1<__Task>>)
+//  location: variable task of type __Task_1<__Task>
+//Y:\TestThreadManager.ApplicationWebService\staging.java\web\java\ScriptCoreLib\Shared\BCLImplementation\System\Threading\Tasks\__TaskExtensions___c__DisplayClass2_1.java:38: error: cannot find symbol
+//        task_10.ContinueWith_0600018f(new __Action_1<__Task_1<TResult>>(this,
+//               ^
+//  symbol:   method ContinueWith_0600018f(__Action_1<__Task_1<TResult>>)
+//  location: variable task_10 of type __Task_1<TResult>
+//  where TResult is a type-variable:
+//    TResult extends Object declared in class __TaskExtensions___c__DisplayClass2_1
+//Note: Y:\TestThreadManager.ApplicationWebService\staging.java\web\java\ScriptCoreLibJava\BCLImplementation\System\Threading\__Thread.java uses or overrides a deprecated API.
+
+
+//0001 02000042 TestThreadManager.ApplicationWebService::<module>.SHA14cdcc3a4041f43cf15b17f195067126f523efbb1@1498165865
+//Y:\TestThreadManager.ApplicationWebService\staging.java\web\files
+//X:\Program Files (x86)\Java\jdk1.7.0_79\bin\javac.exe  -encoding UTF-8 -cp Y:\TestThreadManager.ApplicationWebService\staging.java\web\release;x:\util\appengine-java-sdk-1.9
+
+//Y:\TestThreadManager.ApplicationWebService\staging.java\web\java\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\__Task.java:286: error: cannot find symbol
+//        return  __TaskExtensions.<TResult>Unwrap_06000b59(__Task.get_InternalFactory().<__Task_1<TResult>>StartNew(function));
+//                                ^
+//  symbol:   method <TResult>Unwrap_06000b59(__Task_1<__Task_1<TResult>>)
+//  location: class __TaskExtensions
+//  where TResult is a type-variable:
+//    TResult extends Object declared in method <TResult>Run(__Func_1<__Task_1<TResult>>)

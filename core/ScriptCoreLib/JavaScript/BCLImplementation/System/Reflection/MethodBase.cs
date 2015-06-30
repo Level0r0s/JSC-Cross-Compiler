@@ -16,11 +16,15 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Reflection
 	[Script(Implements = typeof(global::System.Reflection.MethodBase))]
 	public abstract class __MethodBase : __MemberInfo
 	{
-		// https://github.com/dotnet/coreclr/blob/master/Documentation/method-descriptor.md
+        // https://developer.chrome.com/native-client/nacl-and-pnacl
+        //Your application uses certain GNU extensions not supported by PNaCl’s LLVM toolchain, like 
+        // taking the address of a label for computed goto, or nested functions.
 
-		// X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Reflection\MethodBase.cs
+        // https://github.com/dotnet/coreclr/blob/master/Documentation/method-descriptor.md
 
-		public abstract ParameterInfo[] GetParameters();
+        // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Reflection\MethodBase.cs
+
+        public abstract ParameterInfo[] GetParameters();
 
 
 		public abstract object InternalInvoke(object obj, object[] parameters);

@@ -26,6 +26,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Runtime.CompilerServ
 	[Script(Implements = typeof(global::System.Runtime.CompilerServices.CallSite))]
 	internal class __CallSite
 	{
+        // can we do a callsite from chrome laptop into gearvr ?
 
 		// tested by
 		// X:\jsc.svn\examples\javascript\Test\Test435Dynamic\Test435Dynamic\Application.cs

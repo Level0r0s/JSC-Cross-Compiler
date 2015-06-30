@@ -25,31 +25,32 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
 	[Script(Implements = typeof(global::System.Threading.Thread))]
 	internal class __Thread
 	{
-		// https://github.com/kswoll/WootzJs/wiki/Limitations
+        // NaCl applications must target the Pepper API (PPAPI) in order to interact with the underlying system. 
+        // https://github.com/kswoll/WootzJs/wiki/Limitations
 
-		// More generally, the cost of context switches is why high-performance code is often thread-per-core and not thread-per-logical-task.
-		// http://danluu.com/new-cpu-features/
+        // More generally, the cost of context switches is why high-performance code is often thread-per-core and not thread-per-logical-task.
+        // http://danluu.com/new-cpu-features/
 
-		// http://nexusilluminati.blogspot.com/2013/10/the-big-lie-of-genetics-exposed-human.html
-		//somehow the cells in your hand knew they were supposed to grow into a hand, not a foot or an ear, for example.
+        // http://nexusilluminati.blogspot.com/2013/10/the-big-lie-of-genetics-exposed-human.html
+        //somehow the cells in your hand knew they were supposed to grow into a hand, not a foot or an ear, for example.
 
 
 
-		// https://zproxy.wordpress.com/2009/06/22/new-example-threadingexample/
+        // https://zproxy.wordpress.com/2009/06/22/new-example-threadingexample/
 
-		// how can we move data from thread to thread?
-		// some components, like UI may not be movable.
-		// will we need a proxy type then?
-		// much like the tainted data concept.
+        // how can we move data from thread to thread?
+        // some components, like UI may not be movable.
+        // will we need a proxy type then?
+        // much like the tainted data concept.
 
-		// can we make threads from service workers?
+        // can we make threads from service workers?
 
-		// "C:\Program Files (x86)\SketchUp\SketchUp 2014\Tools\RubyStdLib\thread.rb"
-		// X:\jsc.svn\examples\c\Test\TestThreadStart\TestThreadStart\BCLImplementation.cs
-		// tested by x:\jsc.svn\examples\javascript\Test\TestThreadStartAsWebWorker\TestThreadStartAsWebWorker\Application.cs
+        // "C:\Program Files (x86)\SketchUp\SketchUp 2014\Tools\RubyStdLib\thread.rb"
+        // X:\jsc.svn\examples\c\Test\TestThreadStart\TestThreadStart\BCLImplementation.cs
+        // tested by x:\jsc.svn\examples\javascript\Test\TestThreadStartAsWebWorker\TestThreadStartAsWebWorker\Application.cs
 
-		#region CurrentThread
-		static __Thread InternalCurrentThreadValue;
+        #region CurrentThread
+        static __Thread InternalCurrentThreadValue;
 
 		public static __Thread InternalCurrentThread
 		{
