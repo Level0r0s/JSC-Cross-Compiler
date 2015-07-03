@@ -130,12 +130,59 @@ namespace xchrome.BCLImplementation.System.Net.Sockets
                      );
 
                 // sent: -15 no bind?
-                Console.WriteLine("UdpClient.vSendAsync " + new { result.bytesWritten });
+                //Console.WriteLine("UdpClient.vSendAsync " + new { result.bytesWritten });
+                // would spam the chrome://extensions ?
 
                 return result.bytesWritten;
             };
             #endregion
 
+
+
+
+            #region vSend
+            this.vSend = (byte[] datagram, int bytes, string hostname, int port) =>
+            {
+                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPSendAsync\ChromeUDPSendAsync\Application.cs
+
+                new { }.With(
+                    async delegate
+                    {
+                        // now we need it
+                        var isocket = await isocket_after_create;
+
+                        // are we bound?
+                        await afterbind.Task;
+
+                        this.vSend = (byte[] datagram0, int bytes0, string hostname0, int port0) =>
+                        {
+                            // patch the vSend now?
+                            var data = new ScriptCoreLib.JavaScript.WebGL.Uint8Array(datagram);
+
+                            isocket.socketId.sendTo(
+                                data.buffer,
+                                hostname,
+                                port
+                            );
+
+                            // optimistic.
+                            return datagram0.Length;
+                        };
+
+                        // tail
+                        this.vSend(datagram, bytes, hostname, port);
+                    }
+                );
+
+
+                // sent: -15 no bind?
+                //Console.WriteLine("UdpClient.vSendAsync " + new { result.bytesWritten });
+                // would spam the chrome://extensions ?
+
+                // optimistic.
+                return datagram.Length;
+            };
+            #endregion
 
 
 
@@ -165,6 +212,12 @@ namespace xchrome.BCLImplementation.System.Net.Sockets
 
         public Action<IPAddress> vJoinMulticastGroup;
         public void JoinMulticastGroup(IPAddress multicastAddr) { vJoinMulticastGroup(multicastAddr); }
+
+
+
+        public SendDelegate vSend;
+        public delegate int SendDelegate(byte[] datagram, int bytes, string hostname, int port);
+        public int Send(byte[] datagram, int bytes, string hostname, int port) { return vSend(datagram, bytes, hostname, port); }
 
 
         public SendAsyncDelegate vSendAsync;

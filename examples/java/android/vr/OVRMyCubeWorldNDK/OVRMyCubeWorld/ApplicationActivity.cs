@@ -106,7 +106,7 @@ namespace OVRMyCubeWorld.Activities
 
             public string mouse;
 
-            public int mousex, mousey;
+            public int mousex, mousey, ws, ad;
 
             public int x, y, z, w;
 
@@ -207,6 +207,10 @@ namespace OVRMyCubeWorld.Activities
 
                      args.mousex = int.Parse(xy[0]);
                      args.mousey = int.Parse(xy[1]);
+
+                     // getchar?
+                     args.ad = int.Parse(xy[2]);
+                     args.ws = int.Parse(xy[3]);
                  }
              };
 
@@ -300,7 +304,11 @@ namespace OVRMyCubeWorld.Activities
                     while (true)
                     {
                         //Thread.Sleep(1000 / 15);
-                        Thread.Sleep(1000 / 30);
+                        //Thread.Sleep(1000 / 30);
+
+                        // fullspeed
+
+                        Thread.Sleep(1000 / 60);
 
 
                         mDraw.postInvalidate();
@@ -395,7 +403,7 @@ namespace OVRMyCubeWorld.Activities
 
             // udp mouse ?
             public int x = 500; // animate it?
-            public int y = 600;
+            public int y = 800;
 
             public Func<string> text = () => "hello!";
 
@@ -413,7 +421,7 @@ namespace OVRMyCubeWorld.Activities
                 //paint.setColor(android.graphics.Color.YELLOW);
                 paint.setColor(android.graphics.Color.GREEN);
                 paint.setTextSize(textSize);
-                paint.setAlpha(127);
+                paint.setAlpha(80);
 
                 var a = this.text().Split('\n');
 

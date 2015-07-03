@@ -172,6 +172,7 @@ namespace ChromeAppWindowUDPPointerLock
                         var div = new IHTMLDiv { }.AttachTo(Native.document.documentElement);
 
                         new IHTMLPre { "click to  requestPointerLock, double click to stop" }.AttachTo(div);
+                        var wasd = new IHTMLPre { "{}" }.AttachTo(div);
                         var xy = new IHTMLPre { "{}" }.AttachTo(div);
 
                         div.css.style.backgroundColor = "transparent";
@@ -188,6 +189,8 @@ namespace ChromeAppWindowUDPPointerLock
 
 
 
+                        var ad = 0;
+                        var ws = 0;
 
                         var x = 0;
                         var y = 0;
@@ -312,11 +315,123 @@ namespace ChromeAppWindowUDPPointerLock
                                           }
                                       }
                                   );
+
+                                    new IHTMLButton { "send onframe " + item.address }.AttachTo(div).With(
+                                         async refresh =>
+                                         {
+                                             refresh.style.display = IStyle.DisplayEnum.block;
+
+                                             // experimental until ref count 33?
+                                             await refresh.async.onmousedown;
+
+                                             refresh.disabled = true;
+
+                                             var port = new Random().Next(16000, 40000);
+
+                                             //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
+
+                                             // where is bind async?
+                                             var socket = new UdpClient();
+                                             socket.Client.Bind(
+
+                                                 //new IPEndPoint(IPAddress.Any, port: 40000)
+                                                 new IPEndPoint(IPAddress.Parse(item.address), port)
+                                             );
+
+
+                                             // this will eat too much memory?
+                                             div.ownerDocument.defaultView.onframe +=
+                                                 delegate
+                                                 {
+                                                     var nmessage = x + ":" + y + ":" + ad + ":" + ws;
+
+
+                                                     var data = Encoding.UTF8.GetBytes(nmessage);	   //creates a variable b of type byte
+
+
+
+                                                     //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
+
+                                                     // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                                                     socket.Send(
+                                                         data,
+                                                         data.Length,
+                                                         hostname: "239.1.2.3",
+                                                         port: 41814
+                                                     );
+                                                 };
+
+                                             return;
+
+                                             //while (await Native.window.async.onframe)
+                                             //while (await div.async.onframe)
+                                             while (await div.ownerDocument.defaultView.async.onframe)
+                                             {
+                                                 var nmessage = x + ":" + y + ":" + ad + ":" + ws;
+
+
+                                                 var data = Encoding.UTF8.GetBytes(nmessage);	   //creates a variable b of type byte
+
+
+
+                                                 //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
+
+                                                 // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                                                 var s = await socket.SendAsync(
+                                                     data,
+                                                     data.Length,
+                                                     hostname: "239.1.2.3",
+                                                     port: 41814
+                                                 );
+
+                                                 //socket.Close();
+
+                                             }
+                                         }
+                                     );
                                 }
                             }
                         );
 
 
+                        div.tabIndex = 1;
+
+                        div.onkeydown +=
+                             async e =>
+                             {
+
+                                 if (e.KeyCode == 65 || e.KeyCode == 68)
+                                 {
+                                     ad = e.KeyCode;
+
+                                     //Native.document.title = new { e.CursorX, e.CursorY }.ToString();
+                                     wasd.innerText = new { e.KeyCode, ad, ws }.ToString();
+
+                                     while ((await div.async.onkeyup).KeyCode != e.KeyCode) ;
+
+                                     //var ee = await div.async.onkeyup;
+
+                                     ad = 0;
+
+                                     wasd.innerText = new { e.KeyCode, ad, ws }.ToString();
+
+                                     return;
+                                 }
+
+                                 {
+                                     ws = e.KeyCode;
+
+                                     //Native.document.title = new { e.CursorX, e.CursorY }.ToString();
+                                     wasd.innerText = new { e.KeyCode, ad, ws }.ToString();
+
+                                     while ((await div.async.onkeyup).KeyCode != e.KeyCode) ;
+                                     //var ee = await div.async.onkeyup;
+
+                                     ws = 0;
+
+                                     wasd.innerText = new { e.KeyCode, ad, ws }.ToString();
+                                 }
+                             };
 
                         div.onmousemove +=
                             e =>

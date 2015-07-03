@@ -49,6 +49,10 @@ namespace com.oculus.gles3jni
         public static int fields_mousex;
         public static int fields_mousey;
 
+        public static int fields_ad;
+        public static int fields_ws;
+        public static int fields_c;
+
         //public delegate void ActionStringFloat(string fname, float f);
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150619/ovrvrcubeworldsurfaceviewx
@@ -126,6 +130,9 @@ namespace com.oculus.gles3jni
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150703/mousex
             GLES3JNILib.fields_mousex = aI["mousex"];
             GLES3JNILib.fields_mousey = aI["mousey"];
+
+            GLES3JNILib.fields_ad = aI["ad"];
+            GLES3JNILib.fields_ws = aI["ws"];
 
             appThread.appState.Scene.Update();
 

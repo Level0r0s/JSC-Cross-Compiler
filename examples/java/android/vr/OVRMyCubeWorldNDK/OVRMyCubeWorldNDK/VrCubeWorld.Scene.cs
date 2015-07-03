@@ -1,4 +1,5 @@
-﻿using ScriptCoreLib;
+﻿using com.oculus.gles3jni;
+using ScriptCoreLib;
 using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
@@ -198,16 +199,68 @@ namespace OVRMyCubeWorldNDK
             }
 
 
-            // HUDp50 thread!
+
+            static float wasd_x;
+            static float wasd_y;
+
+            // called by stringFromJNI
+            // HUDp30 thread!
             public void Update()
             {
                 // UI thread writes, VR thread reads..
 
+                var flatlandFrameSpeed = .7f;
+                var flatlandFrameSpeedStrafe = .5f;
+
+                // A
+                if (GLES3JNILib.fields_ad == 65)
+                {
+                    // GLES3JNILib.fields_mousex * 0.005f
+                    wasd_x += (float)Math.Cos(GLES3JNILib.fields_mousex * 0.005f) * flatlandFrameSpeedStrafe;
+                    wasd_y += (float)Math.Sin(GLES3JNILib.fields_mousex * 0.005f) * flatlandFrameSpeedStrafe;
+                }
+
+                // D
+                if (GLES3JNILib.fields_ad == 68)
+                {
+                    // GLES3JNILib.fields_mousex * 0.005f
+                    wasd_x += (float)Math.Cos(GLES3JNILib.fields_mousex * 0.005f + Math.PI) * flatlandFrameSpeedStrafe;
+                    wasd_y += (float)Math.Sin(GLES3JNILib.fields_mousex * 0.005f + Math.PI) * flatlandFrameSpeedStrafe;
+                }
+
+                // W
+                if (GLES3JNILib.fields_ws == 87)
+                {
+                    // GLES3JNILib.fields_mousex * 0.005f
+                    wasd_x += (float)Math.Cos(GLES3JNILib.fields_mousex * 0.005f + Math.PI / 2) * flatlandFrameSpeed;
+                    wasd_y += (float)Math.Sin(GLES3JNILib.fields_mousex * 0.005f + Math.PI / 2) * flatlandFrameSpeed;
+                }
+
+                // S
+                if (GLES3JNILib.fields_ws == 83)
+                {
+                    wasd_x += (float)Math.Cos(GLES3JNILib.fields_mousex * 0.005f - Math.PI / 2) * flatlandFrameSpeed;
+                    wasd_y += (float)Math.Sin(GLES3JNILib.fields_mousex * 0.005f - Math.PI / 2) * flatlandFrameSpeed;
+                }
+
+
+                var y = 0;
+
+                // C crouch or jump?
+                if (GLES3JNILib.fields_ws == 67)
+                {
+
+                }
+
+                var touchpadSpeed = 0.05f;
+
+                //var flatlandFrameSpeed = 1.0f;
+
                 for (int i = 0; i < NUM_INSTANCES; i++)
                 {
-                    this.CubePositions[i].x = this.CubePositions0[i].x + 0.05f * com.oculus.gles3jni.GLES3JNILib.fields_xvalue;
+                    this.CubePositions[i].x = this.CubePositions0[i].x + touchpadSpeed * com.oculus.gles3jni.GLES3JNILib.fields_xvalue + wasd_x;
                     this.CubePositions[i].y = this.CubePositions0[i].y;
-                    this.CubePositions[i].z = this.CubePositions0[i].z + 0.05f * com.oculus.gles3jni.GLES3JNILib.fields_yvalue;
+                    this.CubePositions[i].z = this.CubePositions0[i].z + touchpadSpeed * com.oculus.gles3jni.GLES3JNILib.fields_yvalue + wasd_y;
                 }
 
             }

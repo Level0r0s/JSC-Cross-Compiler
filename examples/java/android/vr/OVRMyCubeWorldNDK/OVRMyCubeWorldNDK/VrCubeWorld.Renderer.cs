@@ -246,6 +246,8 @@ namespace OVRMyCubeWorldNDK
 
                     // can we get it via udp mouse lock?
                     //appState.FrameIndex * 0.005f
+
+                    // mouslock should be automatic, if the headset is put on.
                     GLES3JNILib.fields_mousex * 0.005f
                     //(float)(Math.Sin(appState.FrameIndex * 0.01f) * 0.05f)
                     ,
