@@ -106,12 +106,12 @@ namespace OVRMyCubeWorldNDK
             }
 
             // called by ovrRenderer_RenderFrame
-            public void ovrRenderTexture_SetCurrent()
-            {
-                // 753
-                gl3.glBindFramebuffer(gl3.GL_FRAMEBUFFER, this.FrameBuffer);
+            //public void ovrRenderTexture_SetCurrent()
+            //{
+            //    // 753
+            //    gl3.glBindFramebuffer(gl3.GL_FRAMEBUFFER, this.FrameBuffer);
 
-            }
+            //}
 
             // called by ovrRenderer_RenderFrame
             //public static void ovrRenderTexture_SetNone()

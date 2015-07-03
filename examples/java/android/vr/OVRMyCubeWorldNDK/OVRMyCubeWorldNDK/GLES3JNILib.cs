@@ -46,14 +46,23 @@ namespace com.oculus.gles3jni
         public static int fields_xvalue;
         public static int fields_yvalue;
 
+        public static int fields_mousex;
+        public static int fields_mousey;
 
         //public delegate void ActionStringFloat(string fname, float f);
 
-        class args
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150619/ovrvrcubeworldsurfaceviewx
+
+        class args<T>
+        {
+        }
+
+        class argsF
         {
             public JNIEnv env;
             public jobject fields;
 
+            // 
             public float this[string fname]
             {
 
@@ -63,10 +72,31 @@ namespace com.oculus.gles3jni
                     var fref = env.GetFieldID(env, fields_GetType, fname, "F");
 
                     env.SetFloatField(env, fields, fref, value);
-
                 }
             }
         }
+
+        class argsI
+        {
+            public JNIEnv env;
+            public jobject fields;
+
+            // 
+            public int this[string fname]
+            {
+
+                get
+                {
+                    var fields_GetType = env.GetObjectClass(env, fields);
+                    var fref = env.GetFieldID(env, fields_GetType, fname, "I");
+
+                    var value = env.GetIntField(env, fields, fref);
+
+                    return value;
+                }
+            }
+        }
+
 
         // JVM load the .so and calls this native function
         public static jstring stringFromJNI(JNIEnv env, jobject thiz, jobject fields)
@@ -84,22 +114,27 @@ namespace com.oculus.gles3jni
 
             // journals.ecs.soton.ac.uk/java/tutorial/native1.1/implementing/field.html
 
-            var fields_GetType = env.GetObjectClass(env, fields);
-            var fields_x = env.GetFieldID(env, fields_GetType, "x", "I");
-            var fields_y = env.GetFieldID(env, fields_GetType, "y", "I");
+
 
             // generic / per field variables?
-            GLES3JNILib.fields_xvalue = env.GetIntField(env, fields, fields_x);
-            GLES3JNILib.fields_yvalue = env.GetIntField(env, fields, fields_y);
+
+            var aI = new argsI { env = env, fields = fields };
+
+            GLES3JNILib.fields_xvalue = aI["x"];
+            GLES3JNILib.fields_yvalue = aI["y"];
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150703/mousex
+            GLES3JNILib.fields_mousex = aI["mousex"];
+            GLES3JNILib.fields_mousey = aI["mousey"];
 
             appThread.appState.Scene.Update();
 
-            var a = new args { env = env, fields = fields };
+            var aF = new argsF { env = env, fields = fields };
 
-            a["tracking_HeadPose_Pose_Orientation_x"] = appThread.tracking.HeadPose.Pose.Orientation.x;
-            a["tracking_HeadPose_Pose_Orientation_y"] = appThread.tracking.HeadPose.Pose.Orientation.y;
-            a["tracking_HeadPose_Pose_Orientation_z"] = appThread.tracking.HeadPose.Pose.Orientation.z;
-            a["tracking_HeadPose_Pose_Orientation_w"] = appThread.tracking.HeadPose.Pose.Orientation.w;
+            aF["tracking_HeadPose_Pose_Orientation_x"] = appThread.tracking.HeadPose.Pose.Orientation.x;
+            aF["tracking_HeadPose_Pose_Orientation_y"] = appThread.tracking.HeadPose.Pose.Orientation.y;
+            aF["tracking_HeadPose_Pose_Orientation_z"] = appThread.tracking.HeadPose.Pose.Orientation.z;
+            aF["tracking_HeadPose_Pose_Orientation_w"] = appThread.tracking.HeadPose.Pose.Orientation.w;
 
             //void ScriptCoreLibNative_BCLImplementation_System___Action_2_Invoke(LPScriptCoreLibNative_BCLImplementation_System___Action_2, void*, void*);
 

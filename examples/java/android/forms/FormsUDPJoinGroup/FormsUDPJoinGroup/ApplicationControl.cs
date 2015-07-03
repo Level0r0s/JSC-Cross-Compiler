@@ -112,6 +112,8 @@ namespace FormsUDPJoinGroup
                 button_onmousemove.Click += async delegate
                 {
                     button_onmousemove.Enabled = false;
+
+                    // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
                     // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
                     var uu = new UdpClient(41814);
                     uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
@@ -128,6 +130,7 @@ namespace FormsUDPJoinGroup
             System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces().WithEach(
                 n =>
                 {
+                    // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
                     // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
 
                     var IPProperties = n.GetIPProperties();

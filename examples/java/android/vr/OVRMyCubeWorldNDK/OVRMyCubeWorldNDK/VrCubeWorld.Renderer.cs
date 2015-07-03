@@ -1,4 +1,5 @@
-﻿using ScriptCoreLib;
+﻿using com.oculus.gles3jni;
+using ScriptCoreLib;
 using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
@@ -127,7 +128,7 @@ namespace OVRMyCubeWorldNDK
             // sent into vrapi_SubmitFrame
             // will use glMapBufferRange
             //public ovrFrameParms ovrRenderer_RenderFrame(ref ovrApp appState, ref ovrTracking tracking)
-            public ovrFrameParms ovrRenderer_RenderFrame(ovrApp appState, ref ovrTracking tracking)
+            public ovrFrameParms ovrRenderer_RenderFrame(ovrAppThread appThread, ovrApp appState, ref ovrTracking tracking0)
             {
                 // X:\jsc.svn\examples\javascript\WebGL\WebGLSpadeWarrior\WebGLSpadeWarrior\Application.cs
 
@@ -223,20 +224,38 @@ namespace OVRMyCubeWorldNDK
 
                 //tracking.HeadPose.Pose.Orientation.y += appState.FrameIndex * 0.05f;
 
+                //var tracking1 = appThread.tracking;
+
+                // no thats not any better
+                //tracking1.HeadPose.Pose.Orientation.x += GLES3JNILib.fields_mousey * 0.005f;
+
                 //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, vrapi_GetCenterEyeViewMatrix");
-                var centerEyeViewMatrix0 = VrApi_Helpers.vrapi_GetCenterEyeViewMatrix(ref headModelParms, ref tracking, default(ovrMatrix4f*));
+                var centerEyeViewMatrix0 = VrApi_Helpers.vrapi_GetCenterEyeViewMatrix(ref headModelParms, ref appThread.tracking, default(ovrMatrix4f*));
 
+
+                // cant modify y thisway?
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150703/mousex
                 var centerEyeViewMatrix1 = VrApi_Helpers.ovrMatrix4f_CreateRotation(
-                    //0,
+                    0.0f,
 
-                    (float)(Math.Cos(appState.FrameIndex * 0.01f) * 0.05f),
+                    //(float)(Math.Cos(appState.FrameIndex * 0.01f) * 0.05f),
+                    //GLES3JNILib.fields_mousey * 0.005f,
+
 
                     //appState.FrameIndex * 0.05f
 
                     // can we get it via udp mouse lock?
                     //appState.FrameIndex * 0.005f
-                    (float)(Math.Sin(appState.FrameIndex * 0.01f) * 0.05f)
-                    , 0);
+                    GLES3JNILib.fields_mousex * 0.005f
+                    //(float)(Math.Sin(appState.FrameIndex * 0.01f) * 0.05f)
+                    ,
+
+
+                    //GLES3JNILib.fields_mousey * 0.005f
+                    0.0f
+
+
+                    );
 
                 var centerEyeViewMatrix = VrApi_Helpers.ovrMatrix4f_Multiply(
                     ref centerEyeViewMatrix0,
@@ -318,7 +337,7 @@ namespace OVRMyCubeWorldNDK
 
                         parms.Layers[(int)ovrFrameLayerType.VRAPI_FRAME_LAYER_TYPE_WORLD].Images[eye].TexId = rt->ColorTexture;
                         parms.Layers[(int)ovrFrameLayerType.VRAPI_FRAME_LAYER_TYPE_WORLD].Images[eye].TexCoordsFromTanAngles = appState.Renderer.TanAngleMatrix;
-                        parms.Layers[(int)ovrFrameLayerType.VRAPI_FRAME_LAYER_TYPE_WORLD].Images[eye].HeadPose = tracking.HeadPose;
+                        parms.Layers[(int)ovrFrameLayerType.VRAPI_FRAME_LAYER_TYPE_WORLD].Images[eye].HeadPose = tracking0.HeadPose;
                     }
                 }
 

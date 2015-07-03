@@ -175,7 +175,7 @@ namespace OVRMyCubeWorldNDK
 
                     {
                         //var parms = appState.Renderer.ovrRenderer_RenderFrame(ref appState, ref tracking);
-                        var parms = appState.Renderer.ovrRenderer_RenderFrame(appState, ref tracking);
+                        var parms = appState.Renderer.ovrRenderer_RenderFrame(this, appState, ref tracking);
 
                         appState.tracei60("vrapi_SubmitFrame ", (int)appState.FrameIndex);
                         appState.tracei60(" tracking.Status ", (int)tracking.Status);

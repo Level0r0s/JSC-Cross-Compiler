@@ -13,6 +13,8 @@ namespace OVRMyCubeWorldNDK
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150619/ovrvrcubeworldsurfaceviewx
     public struct ovrMessageParms
     {
+        // X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorldNDK\VrCubeWorld.MessageQueue.cs
+
         // union?
 
         public object Pointer;

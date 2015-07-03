@@ -7,11 +7,15 @@ using android.os;
 using android.view;
 using android.widget;
 using ScriptCoreLib;
+using ScriptCoreLib.Extensions;
 using ScriptCoreLib.Android.Extensions;
 using ScriptCoreLib.Android.Manifest;
 using com.oculus.gles3jni;
 using System.Threading;
 using System.Diagnostics;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 namespace OVRMyCubeWorld.Activities
 {
@@ -19,14 +23,16 @@ namespace OVRMyCubeWorld.Activities
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
 
     // https://forums.oculus.com/viewtopic.php?t=21409
-    // dual shows our own popup and inserting in gearvr stays black.
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "dual")]
+    // dual shows our own popup and inserting in gearvr stays black. howcom?
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "dual")]
 
     // what if we want to display our own welcome screen?
     // com.samsung.android.hmt.vrsvc/com.samsung.android.hmt.vrsvc.WaitActivity
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_only")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_only")]
     public class LocalApplication : Application
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150703
+
         public override void onCreate()
         {
             base.onCreate();
@@ -97,6 +103,9 @@ namespace OVRMyCubeWorld.Activities
         {
             // X:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\Application.cs
             // flatland is sending input to vrland?
+
+            public string mouse;
+
             public int mousex, mousey;
 
             public int x, y, z, w;
@@ -178,6 +187,57 @@ namespace OVRMyCubeWorld.Activities
             //this.xSurfaceView.getHolder().setFormat(android.graphics.PixelFormat.TRANSPARENT);
 
 
+            Action<IPAddress> f = async nic =>
+             {
+                 args.mouse = "awaiting at " + nic;
+
+
+                 // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                 // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
+                 var uu = new UdpClient(41814);
+                 uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
+                 while (true)
+                 {
+                     var x = await uu.ReceiveAsync(); // did we jump to ui thread?
+                     //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
+                     args.mouse = Encoding.UTF8.GetString(x.Buffer);
+
+                     // or marshal memory?
+                     var xy = args.mouse.Split(':');
+
+                     args.mousex = int.Parse(xy[0]);
+                     args.mousey = int.Parse(xy[1]);
+                 }
+             };
+
+            NetworkInterface.GetAllNetworkInterfaces().WithEach(
+                n =>
+                {
+                    // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
+
+                    var IPProperties = n.GetIPProperties();
+                    var PhysicalAddress = n.GetPhysicalAddress();
+
+
+
+                    foreach (var ip in IPProperties.UnicastAddresses)
+                    {
+                        // ipv4
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            if (!IPAddress.IsLoopback(ip.Address))
+                                if (n.SupportsMulticast)
+                                    f(ip.Address);
+                        }
+                    }
+
+
+
+
+                }
+            );
+
             var sw = Stopwatch.StartNew();
 
             //var args = new object();
@@ -204,11 +264,16 @@ namespace OVRMyCubeWorld.Activities
 
 
 
-                    return sw.ElapsedMilliseconds + "ms "
+                    return sw.ElapsedMilliseconds + "ms \n"
+                        + args.mouse + "\n"
+                        + new { args.mousex, args.mousey } + "\n"
                         + new
                         {
+                            //args.mousex,
+
                             // left to right
                             args.x,
+
 
                             // nod up +0.7 down -0.7
                             //ox = args.tracking_HeadPose_Pose_Orientation_x 
@@ -319,6 +384,8 @@ namespace OVRMyCubeWorld.Activities
 
         public class DrawOnTop : View
         {
+            // html hud?
+
             // http://stackoverflow.com/questions/6927286/force-a-view-to-redraw-itself
 
             public DrawOnTop(android.content.Context context)
@@ -348,10 +415,16 @@ namespace OVRMyCubeWorld.Activities
                 paint.setTextSize(textSize);
                 paint.setAlpha(127);
 
-                var text = this.text();
+                var a = this.text().Split('\n');
 
-                canvas.drawText(text, x, y, paint);
-                canvas.drawText(text, x + 2560 / 2, y, paint);
+                a.WithEachIndex(
+                    (text, i) =>
+                    {
+
+                        canvas.drawText(text, x, y + i * 24, paint);
+                        canvas.drawText(text, x + 2560 / 2, y + i * 24, paint);
+                    }
+                );
 
                 base.onDraw(canvas);
             }
