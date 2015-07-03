@@ -17,12 +17,12 @@ namespace xchrome.BCLImplementation.System.Net.Sockets
 
 		// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201503/20150306/udp
 
-		public static implicit operator global::System.Net.Sockets.Socket(__Socket i) => (global::System.Net.Sockets.Socket)(object)i;
-		public static implicit operator __Socket(global::System.Net.Sockets.Socket i) => (__Socket)(object)i;
+		public static implicit operator global::System.Net.Sockets.Socket(__Socket i) { return (global::System.Net.Sockets.Socket)(object)i;}
+		public static implicit operator __Socket(global::System.Net.Sockets.Socket i) { return (__Socket)(object)i;}
 
 
 		public delegate void BindDelegate(EndPoint localEP);
 		public BindDelegate vBind;
-		public void Bind(EndPoint localEP) => vBind(localEP);
+        public void Bind(EndPoint localEP) { vBind(localEP); }
 	}
 }

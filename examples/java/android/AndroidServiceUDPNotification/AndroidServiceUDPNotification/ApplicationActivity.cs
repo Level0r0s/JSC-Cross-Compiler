@@ -28,6 +28,13 @@ namespace AndroidServiceUDPNotification.Activities
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
+        // test via
+        // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPSendAsync\ChromeUDPSendAsync\Application.cs
+        // how do we know its running?
+
+        // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "DEBUG" "System.Console"
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
+
         // https://github.com/opersys/raidl
 
 
@@ -256,10 +263,10 @@ namespace AndroidServiceUDPNotification.Activities
 
                     
                     // http://stackoverflow.com/questions/10402686/how-to-have-led-light-notification
-                    notification.defaults |= Notification.DEFAULT_VIBRATE;
+                    //notification.defaults |= Notification.DEFAULT_VIBRATE;
                     //notification.defaults |= Notification.DEFAULT_SOUND;
                     //notification.defaults |= Notification.DEFAULT_LIGHTS;
-                    notification.defaults |= Notification.FLAG_SHOW_LIGHTS;
+                    //notification.defaults |= Notification.FLAG_SHOW_LIGHTS;
 
 
                     //new Notification.BigTextStyle(
@@ -373,9 +380,9 @@ namespace AndroidServiceUDPNotification.Activities
 namespace foo
 {
 
-
+    // X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Android\IntentFilterAttribute.cs
     // android.intent.action.BOOT_COMPLETED
-    [IntentFilter(Action = Intent.ACTION_BOOT_COMPLETED)]
+    [ScriptCoreLib.Android.Manifest.ApplicationIntentFilter(Action = Intent.ACTION_BOOT_COMPLETED)]
     //[IntentFilter(Action = "android.intent.action.BOOT_COMPLETED")]
     public class AtBootCompleted : BroadcastReceiver
     {

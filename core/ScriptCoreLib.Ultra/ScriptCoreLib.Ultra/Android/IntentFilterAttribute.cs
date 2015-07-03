@@ -6,6 +6,7 @@ using System.Text;
 namespace ScriptCoreLib.Android.Manifest
 {
     // X:\jsc.svn\examples\javascript\android\com.abstractatech.appmanager\com.abstractatech.appmanager\AtInstall.cs
+    // X:\jsc.svn\examples\java\android\AndroidServiceUDPNotification\AndroidServiceUDPNotification\ApplicationActivity.cs
 
     // move to .Manifest
     #region IntentFilter

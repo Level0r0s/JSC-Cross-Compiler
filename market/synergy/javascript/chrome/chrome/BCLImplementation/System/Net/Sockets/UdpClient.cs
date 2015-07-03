@@ -13,158 +13,171 @@ using ScriptCoreLib.JavaScript.BCLImplementation.System.Net;
 
 namespace xchrome.BCLImplementation.System.Net.Sockets
 {
-	// http://referencesource.microsoft.com/#System/net/System/Net/Sockets/UdpClient.cs
-	// https://github.com/mono/mono/blob/master/mcs/class/System/System.Net.Sockets/UdpClient.cs
-	// X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\Sockets\UdpClient.cs
-	// X:\jsc.svn\market\synergy\javascript\chrome\chrome\BCLImplementation\System\Net\Sockets\UdpClient.cs
+    // http://referencesource.microsoft.com/#System/net/System/Net/Sockets/UdpClient.cs
+    // https://github.com/mono/mono/blob/master/mcs/class/System/System.Net.Sockets/UdpClient.cs
+    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\Sockets\UdpClient.cs
+    // X:\jsc.svn\market\synergy\javascript\chrome\chrome\BCLImplementation\System\Net\Sockets\UdpClient.cs
 
 
-	[Script(Implements = typeof(global::System.Net.Sockets.UdpClient))]
-	public class __UdpClient
-	{
-		// https://software.intel.com/en-us/blogs/2012/10/16/developing-for-intel-smart-connect-technology
-		//Unattended Active State(S0ISCT).  Similar to S0(standard power on) except that the system looks and sound like it is still in standby – display off, audio off, fans off or muted, etc.. The user will not be interacting with the platform during this state.The platform will periodically enter this state and remain there for a specific duration determined by the ISCT service. There is full network connectivity (if available) in this state. The service will put the system back to sleep within a predefined interval. The exceptions to this activity are when the ISCT agent decides to disable the service and remain in standby (S3) in order to protect the platform from overheating or running low on battery. Should this occur, the platform will not wake up from this state until the user presses the power button.
+    [Script(Implements = typeof(global::System.Net.Sockets.UdpClient))]
+    public class __UdpClient
+    {
+        // https://software.intel.com/en-us/blogs/2012/10/16/developing-for-intel-smart-connect-technology
+        //Unattended Active State(S0ISCT).  Similar to S0(standard power on) except that the system looks and sound like it is still in standby – display off, audio off, fans off or muted, etc.. The user will not be interacting with the platform during this state.The platform will periodically enter this state and remain there for a specific duration determined by the ISCT service. There is full network connectivity (if available) in this state. The service will put the system back to sleep within a predefined interval. The exceptions to this activity are when the ISCT agent decides to disable the service and remain in standby (S3) in order to protect the platform from overheating or running low on battery. Should this occur, the platform will not wake up from this state until the user presses the power button.
 
-		// Intel® Smart ConnectTechnology
-		// https://software.intel.com/en-us/tags/41560
-		// http://www.intel.com/content/www/us/en/architecture-and-technology/smart-connect-technology-compatible-apps-brief.html
+        // Intel® Smart ConnectTechnology
+        // https://software.intel.com/en-us/tags/41560
+        // http://www.intel.com/content/www/us/en/architecture-and-technology/smart-connect-technology-compatible-apps-brief.html
 
-		private const int MaxUDPSize = 0x10000;
+        private const int MaxUDPSize = 0x10000;
 
-		// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201503/20150306/udp
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201503/20150306/udp
 
-		public __UdpClient()
-		{
-			// x:\jsc.svn\examples\javascript\chrome\apps\chromeudpsendasync\chromeudpsendasync\application.cs
+        public __UdpClient()
+        {
+            // x:\jsc.svn\examples\javascript\chrome\apps\chromeudpsendasync\chromeudpsendasync\application.cs
 
-			// async ctors?
-			var isocket_after_create = socket.create("udp", new object());
-			var afterbind = new TaskCompletionSource<int>();
+            // async ctors?
+            var isocket_after_create = socket.create("udp", new object());
 
-
-			#region vJoinMulticastGroup
-			this.vJoinMulticastGroup = async (IPAddress multicastAddr) =>
-			{
-				__IPAddress a = multicastAddr;
-
-				var isocket = await isocket_after_create;
-
-				var value_joinGroup = await isocket.socketId.joinGroup(a.ipString);
-
-				Console.WriteLine("UdpClient.vJoinMulticastGroup " + new { value_joinGroup });
-			};
-			#endregion
+            var afterbind = new TaskCompletionSource<int>();
 
 
-			#region vReceiveAsync
-			this.vReceiveAsync = async delegate
-			{
-				var isocket = await isocket_after_create;
+            #region vJoinMulticastGroup
+            this.vJoinMulticastGroup = async (IPAddress multicastAddr) =>
+            {
+                __IPAddress a = multicastAddr;
 
-				var result = await isocket.socketId.recvFrom(1048576);
+                var isocket = await isocket_after_create;
 
-				byte[] buffer = new ScriptCoreLib.JavaScript.WebGL.Uint8ClampedArray(result.data);
+                var value_joinGroup = await isocket.socketId.joinGroup(a.ipString);
 
-				return new UdpReceiveResult(
-					buffer,
-					remoteEndPoint: default(IPEndPoint)
-				);
-			};
-
-			#endregion
-
-			#region Client
-			this.Client = new __Socket
-			{
-				#region vBind
-				vBind = async (EndPoint localEP) =>
-				{
-					var isocket = await isocket_after_create;
-
-					var v4 = localEP as IPEndPoint;
-					if (v4 != null)
-					{
-						var bind = await isocket.socketId.bind(
-							address: "0.0.0.0",
-							port: v4.Port
-						);
-
-						Console.WriteLine("UdpClient.Client.vBind " + new
-						{
-							bind
-						});
-
-						afterbind.SetResult(bind);
-					}
-				}
-				#endregion
-
-			};
-			#endregion
+                Console.WriteLine("UdpClient.vJoinMulticastGroup " + new { value_joinGroup });
+            };
+            #endregion
 
 
-			#region vClose
-			this.vClose = async delegate
-			{
-				var isocket = await isocket_after_create;
+            #region vReceiveAsync
+            this.vReceiveAsync = async delegate
+            {
+                var isocket = await isocket_after_create;
 
-				isocket.socketId.disconnect();
-				isocket.socketId.destroy();
-			};
-			#endregion
+                var result = await isocket.socketId.recvFrom(1048576);
 
-			#region vSendAsync
-			this.vSendAsync = async (byte[] datagram, int bytes, string hostname, int port) =>
-			{
-				// now we need it
-				var isocket = await isocket_after_create;
+                byte[] buffer = new ScriptCoreLib.JavaScript.WebGL.Uint8ClampedArray(result.data);
 
-				// are we bound?
-				await afterbind.Task;
+                return new UdpReceiveResult(
+                    buffer,
+                    remoteEndPoint: default(IPEndPoint)
+                );
+            };
 
-				var data = new ScriptCoreLib.JavaScript.WebGL.Uint8Array(datagram);
+            #endregion
 
-				var result = await isocket.socketId.sendTo(
-						 data.buffer,
-						 hostname,
-						 port
-					 );
+            #region Client
+            this.Client = new __Socket
+            {
+                #region vBind
+                vBind = async (EndPoint localEP) =>
+                {
+                    var isocket = await isocket_after_create;
 
-				// sent: -15 no bind?
-				Console.WriteLine("UdpClient.vSendAsync " + new { result.bytesWritten });
+                    var v4 = localEP as IPEndPoint;
+                    if (v4 != null)
+                    {
+                        __IPAddress v4a = v4.Address;
 
-				return result.bytesWritten;
-			};
-			#endregion
+                        var bind = await isocket.socketId.bind(
+                            //address: "0.0.0.0",
+                            address: v4a.ipString,
+                            port: v4.Port
+                        );
+
+                        Console.WriteLine("UdpClient.Client.vBind " + new
+                        {
+                            v4a.ipString,
+                            v4.Port,
+
+                            bind
+                        });
+
+                        afterbind.SetResult(bind);
+                    }
+                }
+                #endregion
+
+            };
+            #endregion
 
 
+            #region vSendAsync
+            this.vSendAsync = async (byte[] datagram, int bytes, string hostname, int port) =>
+            {
+                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPSendAsync\ChromeUDPSendAsync\Application.cs
 
-		}
+                // now we need it
+                var isocket = await isocket_after_create;
+
+                // are we bound?
+                await afterbind.Task;
+
+                var data = new ScriptCoreLib.JavaScript.WebGL.Uint8Array(datagram);
+
+                var result = await isocket.socketId.sendTo(
+                         data.buffer,
+                         hostname,
+                         port
+                     );
+
+                // sent: -15 no bind?
+                Console.WriteLine("UdpClient.vSendAsync " + new { result.bytesWritten });
+
+                return result.bytesWritten;
+            };
+            #endregion
 
 
 
-		public Socket Client { get; set; }
+
+            #region vClose
+            this.vClose = async delegate
+            {
+                var isocket = await isocket_after_create;
+
+                isocket.socketId.disconnect();
+                isocket.socketId.destroy();
+            };
+            #endregion
+        }
 
 
-		public Action vClose;
-		public void Close() => vClose();
-
-		// X:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\System\Net\Sockets\UdpReceiveResult.cs
-		public Func<Task<UdpReceiveResult>> vReceiveAsync;
-		public Task<UdpReceiveResult> ReceiveAsync() => vReceiveAsync();
+        // are we supposed to bind?
+        public Socket Client { get; set; }
 
 
-		public Action<IPAddress> vJoinMulticastGroup;
-		public void JoinMulticastGroup(IPAddress multicastAddr) => vJoinMulticastGroup(multicastAddr);
+        public Action vClose;
+        public void Close() { vClose(); }
+
+        // X:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\System\Net\Sockets\UdpReceiveResult.cs
+        public Func<Task<UdpReceiveResult>> vReceiveAsync;
+        public Task<UdpReceiveResult> ReceiveAsync() { return vReceiveAsync(); }
 
 
-		public SendAsyncDelegate vSendAsync;
-		public delegate Task<int> SendAsyncDelegate(byte[] datagram, int bytes, string hostname, int port);
-		public Task<int> SendAsync(byte[] datagram, int bytes, string hostname, int port) => vSendAsync(datagram, bytes, hostname, port);
+        public Action<IPAddress> vJoinMulticastGroup;
+        public void JoinMulticastGroup(IPAddress multicastAddr) { vJoinMulticastGroup(multicastAddr); }
 
-		public Task<int> SendAsync(byte[] datagram, int bytes)
-		{
-			return null;
-		}
-	}
+
+        public SendAsyncDelegate vSendAsync;
+        public delegate Task<int> SendAsyncDelegate(byte[] datagram, int bytes, string hostname, int port);
+        public Task<int> SendAsync(byte[] datagram, int bytes, string hostname, int port) { return vSendAsync(datagram, bytes, hostname, port); }
+        // why cant android see if we send our stuff?
+
+        // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPSendAsync\ChromeUDPSendAsync\Application.cs
+        public Task<int> SendAsync(byte[] datagram, int bytes)
+        {
+            return null;
+        }
+
+        //public bool EnableBroadcast { get; set; }
+    }
 }

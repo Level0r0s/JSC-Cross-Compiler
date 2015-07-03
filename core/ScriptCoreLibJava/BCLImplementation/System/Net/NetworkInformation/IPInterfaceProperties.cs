@@ -14,7 +14,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.NetworkInformation
     [Script(Implements = typeof(global::System.Net.NetworkInformation.IPInterfaceProperties))]
     internal class __IPInterfaceProperties
     {
-        public __NetworkInterface InternalValue;
+        public __NetworkInterface InternalNetworkInterface;
 
         public virtual UnicastIPAddressInformationCollection UnicastAddresses
         {
@@ -23,13 +23,14 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.NetworkInformation
                 var a = new List<__UnicastIPAddressInformation>();
 
 
-                var InetAddresses = this.InternalValue.InternalValue.getInetAddresses();
+                var InetAddresses = this.InternalNetworkInterface.InternalValue.getInetAddresses();
 
                 while (InetAddresses.hasMoreElements())
                 {
                     var xInetAddress = (java.net.InetAddress)InetAddresses.nextElement();
 
-                    var Address = new __IPAddress { InternalAddress = xInetAddress };
+                    // see udp joingroup
+                    var Address = new __IPAddress { InternalAddress = xInetAddress, InternalNetworkInterface = InternalNetworkInterface };
 
                     if (xInetAddress is java.net.Inet4Address)
                     {

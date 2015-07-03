@@ -41,10 +41,10 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
                 [Script(DefineAsStatic = true)]
                 get
                 {
-					// X:\jsc.svn\examples\javascript\xml\FindByClassAndObserve\FindByClassAndObserve\Application.cs
-					// X:\jsc.svn\examples\javascript\svg\SVGFromHTMLDivObservable\SVGFromHTMLDivObservable\Application.cs
+                    // X:\jsc.svn\examples\javascript\xml\FindByClassAndObserve\FindByClassAndObserve\Application.cs
+                    // X:\jsc.svn\examples\javascript\svg\SVGFromHTMLDivObservable\SVGFromHTMLDivObservable\Application.cs
 
-					var x = new TaskCompletionSource<IEvent>();
+                    var x = new TaskCompletionSource<IEvent>();
                     //that.onmouseover += x.SetResult;
 
                     new MutationObserver(
@@ -105,25 +105,49 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
                     return x.Task;
                 }
             }
-			#endregion
+            #endregion
 
-			public virtual Task<IEvent> onchange
-			{
-				[Script(DefineAsStatic = true)]
-				get
-				{
-					// X:\jsc.svn\examples\javascript\chrome\apps\ChromeHTMLTextToGLSLBytes\ChromeHTMLTextToGLSLBytes\Application.cs
+            // while this is a script library, could we mark some classes to be for merge?
+            public virtual Task<IEvent> ondblclick
+            {
+                [Script(DefineAsStatic = true)]
+                get
+                {
+                    var x = new TaskCompletionSource<IEvent>();
 
-					var x = new TaskCompletionSource<IEvent>();
-					that.onchange += x.SetResult;
-					return x.Task;
-				}
-			}
+                    // tested by
+                    // X:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\Application.cs
+                    that.ondblclick +=
+                        e =>
+                        {
+                            x.SetResult(e);
+                        };
+
+                    // tested by?
+                    ScriptCoreLib.JavaScript.DOM.CSSStyleRuleMonkier.InternalTaskNameLookup[x.Task] = "ondblclick";
+
+                    return x.Task;
+                }
+            }
+
+
+            public virtual Task<IEvent> onchange
+            {
+                [Script(DefineAsStatic = true)]
+                get
+                {
+                    // X:\jsc.svn\examples\javascript\chrome\apps\ChromeHTMLTextToGLSLBytes\ChromeHTMLTextToGLSLBytes\Application.cs
+
+                    var x = new TaskCompletionSource<IEvent>();
+                    that.onchange += x.SetResult;
+                    return x.Task;
+                }
+            }
 
 
 
-			// X:\jsc.svn\examples\javascript\async\Test\TestAsyncMouseOver\TestAsyncMouseOver\Application.cs
-			public virtual Task<IEvent> onmouseover
+            // X:\jsc.svn\examples\javascript\async\Test\TestAsyncMouseOver\TestAsyncMouseOver\Application.cs
+            public virtual Task<IEvent> onmouseover
             {
                 [Script(DefineAsStatic = true)]
                 get
@@ -155,6 +179,22 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
                     return x.Task;
                 }
             }
+
+
+            public virtual Task<IEvent> onmousemove
+            {
+                [Script(DefineAsStatic = true)]
+                get
+                {
+                    // X:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\Application.cs
+
+                    var x = new TaskCompletionSource<IEvent>();
+                    that.onmousemove += x.SetResult;
+                    return x.Task;
+                }
+            }
+
+
 
 
             public virtual Task<IEvent> onmouseup

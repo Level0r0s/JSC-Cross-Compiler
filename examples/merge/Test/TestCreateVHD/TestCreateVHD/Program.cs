@@ -15,6 +15,8 @@ namespace TestCreateVHD
 {
     class Program
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150630/udp
+
         static void Main(string[] args)
         {
             // http://stackoverflow.com/questions/2818179/how-to-force-my-net-app-to-run-as-administrator-on-windows-7

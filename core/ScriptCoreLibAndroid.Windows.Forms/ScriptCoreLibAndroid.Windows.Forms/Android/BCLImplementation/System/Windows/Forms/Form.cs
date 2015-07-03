@@ -25,8 +25,45 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Windows.Forms
         // X:\jsc.svn\examples\java\android\forms\FormsMessageBox\FormsMessageBox\ApplicationActivity.cs
         // X:\jsc.svn\examples\javascript\android\AndroidPINForm\AndroidPINForm\ApplicationWebService.cs
 
+        [Script]
+        class xRunnable : java.lang.Runnable
+        {
+            public Action yield;
 
-        public override string Text { get; set; }
+            public void run()
+            {
+                yield();
+            }
+        }
+
+        public override string Text
+        {
+            // called by ShowDialog
+            get { return "__Form"; }
+            set
+            {
+                // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+
+                Console.WriteLine("set Text " + new { value });
+
+                // were we created vi FindForm?
+
+                var xActivity = this.xContext as Activity;
+                if (xActivity != null)
+                {
+                    xActivity.runOnUiThread(
+                        new xRunnable
+                        {
+                            yield = delegate
+                            {
+
+                                xActivity.setTitle(value);
+                            }
+                        }
+                    );
+                }
+            }
+        }
 
         public event EventHandler Load;
 
@@ -98,9 +135,9 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Windows.Forms
             //E/AndroidRuntime( 1380):        at ScriptCoreLib.Android.BCLImplementation.System.Windows.Forms.__Form.ShowDialog(__Form.java:110)
 
             // ?
-           // alertDialog.setOnDismissListener(
-           //    new xDialogInterface_OnDismissListener()
-           //);
+            // alertDialog.setOnDismissListener(
+            //    new xDialogInterface_OnDismissListener()
+            //);
 
             //alertDialog.setPositiveButton("OK",
             //        new xDialogInterface_OnClickListener
@@ -147,6 +184,11 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Windows.Forms
             {
                 dialog.dismiss();
             };
+        }
+
+        public static implicit operator Form(__Form f)
+        {
+            return (Form)(object)f;
         }
     }
 }

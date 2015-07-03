@@ -16,6 +16,8 @@ namespace android.content
     [Script(IsNative = true)]
     public class Intent : Parcelable
     {
+        public static readonly string ACTION_SEARCH = "android.intent.action.SEARCH";
+
         // ??
         public static string EXTRA_CLIENT_INTENT = "android.intent.extra.client_intent";
 
@@ -162,6 +164,7 @@ namespace android.content
             throw null;
         }
 
+        public Intent setPackage(string packageName) { throw null; }
         public Intent setComponent(ComponentName c)
         {
             throw null;

@@ -166,6 +166,8 @@ namespace JVMCLRBroadcastLogger
 
                 var localport = new Random().Next(10000, 30000);
 
+                // upgrade to CLR api?
+
                 var socket = new java.net.MulticastSocket(
                     //localport
                     40804
@@ -231,7 +233,8 @@ namespace JVMCLRBroadcastLogger
                     {
                         Console.WriteLine("");
                         Console.WriteLine("");
-                        Console.WriteLine("joinGroup " + new { x.u.Address });
+                        // I/System.Console( 8450): 2102:4d97 joinGroup { Address = 192.168.1.126 }
+                        //Console.WriteLine("joinGroup " + new { x.u.Address });
 
                         //                        pile:
                         //[javac] Compiling 545 source files to V:\bin\classes
@@ -260,7 +263,7 @@ namespace JVMCLRBroadcastLogger
                                 new java.net.InetSocketAddress(
                                     java.net.InetAddress.getByName("239.1.2.3"),
                                     40804
-                                    //40404
+                                //40404
                                 ),
 
                                 (__NetworkInterface)
@@ -287,6 +290,7 @@ namespace JVMCLRBroadcastLogger
 
                 System.Console.WriteLine("LANBroadcastListener joinGroup... awaiting DatagramPacket");
 
+                // 
                 // workaround
                 var forever = true;
                 while (forever)
@@ -296,6 +300,7 @@ namespace JVMCLRBroadcastLogger
 
                     var bytes = new MemoryStream((byte[])(object)dgram.getData(), 0, dgram.getLength());
 
+                    System.Console.WriteLine("receive " + new { bytes.Length });
 
                     var listen = Encoding.UTF8.GetString(bytes.ToArray());
 
@@ -357,3 +362,10 @@ namespace JVMCLRBroadcastLogger
     }
 
 }
+
+
+  //[javac] W:\src\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\__Task.java:248: error: cannot find symbol
+  //[javac]         return  __TaskExtensions.<TResult>Unwrap_06000b59(__Task.get_InternalFactory().<__Task_1<TResult>>StartNew(function));
+  //[javac]                                 ^
+  //[javac]   symbol:   method <TResult>Unwrap_06000b59(__Task_1<__Task_1<TResult>>)
+  //[javac]   location: class __TaskExtensions

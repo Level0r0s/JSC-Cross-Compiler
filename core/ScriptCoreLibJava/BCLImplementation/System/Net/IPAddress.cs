@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks;
 using System.Diagnostics;
 using System.Threading;
+using ScriptCoreLibJava.BCLImplementation.System.Net.NetworkInformation;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Net
 {
@@ -26,6 +27,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
         public string InternalAddressString;
         public global::java.net.InetAddress InternalAddress;
 
+
+        public __NetworkInterface InternalNetworkInterface;
+
         public static readonly IPAddress Loopback;
         public static readonly IPAddress Any;
 
@@ -36,12 +40,55 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
         }
 
 
+        public static IPAddress Parse(string ipString)
+        {
+            var sw = Stopwatch.StartNew();
+            var a = new AutoResetEvent(false);
+
+            var value = new __IPAddress { };
+
+
+            new Thread(
+               delegate()
+               {
+                   Console.WriteLine("enter __IPAddress Parse");
+
+                   a.Set();
+
+                   try
+                   {
+                       value.InternalAddress = global::java.net.InetAddress.getByName(ipString);
+
+                       // http://msdn.microsoft.com/en-us/library/system.net.ipaddress.any.aspx
+                   }
+                   catch (Exception ex)
+                   {
+                       Console.WriteLine(new { ex.Message, ex.StackTrace });
+
+                       //throw;
+                   }
+                   Console.WriteLine("exit __IPAddress Parse " + new { sw.ElapsedMilliseconds });
+
+               }
+           ).Start();
+
+            a.WaitOne();
+            Thread.Sleep(1);
+
+            return value;
+
+        }
 
         public static bool IsLoopback(IPAddress address)
         {
             __IPAddress a = address;
 
-            return a.InternalAddress.isLoopbackAddress();
+            if (a.InternalAddress.isLoopbackAddress())
+                return true;
+
+
+            // oldschool
+            return a.ToString() == "127.0.0.1";
         }
 
         static __IPAddress()

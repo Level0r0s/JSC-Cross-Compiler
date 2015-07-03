@@ -15,11 +15,13 @@ namespace TestDetectOpenFiles
 {
     public static class x
     {
-        public static IEnumerable<FileInfo> GetOpenFiles(this Process p) =>
-            from x in p.GetOpenFileSystemInfos()
-            let y = x as FileInfo
-            where y != null
-            select y;
+        public static IEnumerable<FileInfo> GetOpenFiles(this Process p)
+        {
+            return from x in p.GetOpenFileSystemInfos()
+                   let y = x as FileInfo
+                   where y != null
+                   select y;
+        }
 
 
         public static IEnumerable<FileSystemInfo> GetOpenFileSystemInfos(this Process p)
@@ -40,6 +42,14 @@ namespace TestDetectOpenFiles
     class Program
     {
         // X:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\Program.cs
+
+        // are we already running? if so can we patch and merge into debug session?
+        // TestDetectOpenFiles.exe       4464 Console                    1     23,120 K
+        // tasklist /FI "IMAGENAME eq TestDetectOpenFiles.exe"
+        // taskkill /F /FI "IMAGENAME eq TestDetectOpenFiles.exe"
+
+        //        ERROR: The process with PID 4464 could not be terminated.
+        //Reason: This process can only be terminated forcefully (with /F option).
 
         static void Main(string[] args)
         {
@@ -199,20 +209,20 @@ namespace TestDetectOpenFiles
 
                 var port = new Random().Next(16000, 40000);
 
-                var socket = new UdpClient();
+                var socket = new UdpClient {
+                    //EnableBroadcast = true                
+                };
 
+                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPSendAsync\ChromeUDPSendAsync\Application.cs
 
-                socket.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-
-                socket.ExclusiveAddressUse = false;
-                socket.EnableBroadcast = true;
+                //socket.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+                //socket.ExclusiveAddressUse = false;
 
                 // 192.168.43.12
                 var aa = g.Single(x => x.Key).First().u.Address;
 
-                var loc = new IPEndPoint(aa
-                   ,
-                    port);
+                var loc = new IPEndPoint(aa, port);
+                //var loc = new IPEndPoint(IPAddress.Any, port);
 
                 socket.Client.Bind(loc);
 
@@ -229,6 +239,9 @@ namespace TestDetectOpenFiles
 
             #endregion
 
+
+
+            advertise("video node online...");
 
             //var p = Process.GetProcesses().FirstOrDefault(x => x.ProcessName == "vlc");
 
@@ -261,27 +274,44 @@ namespace TestDetectOpenFiles
 
             advertise(m);
 
-        retry:
-            var mp4next = Process.GetProcesses().FirstOrDefault(x => x.ProcessName == "vlc")?.GetOpenFiles().ToArray().FirstOrDefault(f => f.Extension == ".mp4");
 
-            if (mp4next == null)
+            // 		Process.GetProcesses().FirstOrDefault(x => x.ProcessName == "vlc")	
+        // Evaluation of method System.Linq.Enumerable.FirstOrDefault() calls into native method Microsoft.Win32.NativeMethods.LookupPrivilegeValue(). Evaluation of native methods in this context is not supported.	System.Diagnostics.Process
+
+            retry:
+            var vlc = Process.GetProcesses().FirstOrDefault(x => x.ProcessName == "vlc");
+
+            // +		[1]	{I:\media\filmid\Friends Complete Seasons 1-10 Uncut DVDRip - 480p\Friends Season 2\Friends - [2x08] - The One with the List.mkv}	System.IO.FileInfo
+
+
+            if (vlc != null)
             {
-                mp4 = null;
+                var mp4next = vlc.GetOpenFiles().ToArray().FirstOrDefault(
+                    f => f.Extension == ".mp4" || f.Extension == ".mkv");
 
-                //Console.Write(".");
-                Thread.Sleep(1000);
-                goto retry;
-            }
-
-            if (mp4 != null)
-                if (mp4next.FullName == mp4.FullName)
+                if (mp4next == null)
                 {
+                    mp4 = null;
+
                     //Console.Write(".");
                     Thread.Sleep(1000);
                     goto retry;
                 }
 
-            mp4 = mp4next;
+                if (mp4 != null)
+                    if (mp4next.FullName == mp4.FullName)
+                    {
+                        //Console.Write(".");
+                        Thread.Sleep(1000);
+                        goto retry;
+                    }
+
+
+                mp4 = mp4next;
+            }
+            else mp4 = null;
+
+
             goto next;
 
             Debugger.Break();

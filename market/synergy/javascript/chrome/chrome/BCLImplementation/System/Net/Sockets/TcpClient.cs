@@ -24,22 +24,23 @@ namespace xchrome.BCLImplementation.System.Net.Sockets
 		{
 		}
 
-		public static implicit operator global::System.Net.Sockets.TcpClient(__TcpClient i) => (global::System.Net.Sockets.TcpClient)(object)i;
-		public static implicit operator __TcpClient(global::System.Net.Sockets.TcpClient i) => (__TcpClient)(object)i;
+		public static implicit operator global::System.Net.Sockets.TcpClient(__TcpClient i) { return (global::System.Net.Sockets.TcpClient)(object)i;}
+		public static implicit operator __TcpClient(global::System.Net.Sockets.TcpClient i) { return (__TcpClient)(object)i;}
 
 
 
 
 		// X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerAsync\ChromeTCPServerAsync\Application.cs
 		// object not ready to be inspected yet?
-		public Func<string> VirtualToString = () => nameof(global::System.Net.Sockets.TcpClient);
-		public override string ToString() => VirtualToString();
+        //public Func<string> VirtualToString = () => nameof(global::System.Net.Sockets.TcpClient);
+        public Func<string> VirtualToString = () => "System.Net.Sockets.TcpClient";
+		public override string ToString() {return VirtualToString();}
 
 		public Func<NetworkStream> VirtualGetStream;
-		public NetworkStream GetStream() => VirtualGetStream();
+		public NetworkStream GetStream() { return VirtualGetStream();}
 
 
 		public Action VirtualClose;
-		public void Close() => VirtualClose();
+        public void Close() {  VirtualClose(); }
     }
 }

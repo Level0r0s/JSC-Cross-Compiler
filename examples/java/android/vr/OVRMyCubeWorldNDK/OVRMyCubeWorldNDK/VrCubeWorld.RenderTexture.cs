@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace OVRMyCubeWorldNDK
 {
+    // we set unsafe  for DEBUG build configuration
     public static unsafe partial class VrCubeWorld
     {
         // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewNDK\staging\jni\VrCubeWorld_SurfaceView.c

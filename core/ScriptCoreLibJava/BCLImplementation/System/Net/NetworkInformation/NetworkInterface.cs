@@ -22,7 +22,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.NetworkInformation
 
         public virtual IPInterfaceProperties GetIPProperties()
         {
-            return new __IPInterfaceProperties { InternalValue = this };
+            return new __IPInterfaceProperties { InternalNetworkInterface = this };
 
         }
 

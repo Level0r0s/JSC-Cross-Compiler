@@ -39,8 +39,20 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Windows.Forms
 
         public global::System.Windows.Forms.Padding Padding { get; set; }
 
+        public global::System.Windows.Forms.Form FindForm()
+        {
+            //this.cont
+            var f = new __Form { };
+            f.InternalSetContext(this.xContext);
+
+            return f;
+        }
+
+        public Context xContext;
         public void InternalSetContext(Context c)
         {
+            this.xContext = c;
+
             InternalBeforeSetContext(c);
 
             var a = this.Controls.InternalItems;

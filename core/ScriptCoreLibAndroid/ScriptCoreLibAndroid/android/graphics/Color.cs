@@ -6,6 +6,7 @@ using ScriptCoreLib;
 
 namespace android.graphics
 {
+    // https://android.googlesource.com/platform/frameworks/base.git/+/master/graphics/java/android/graphics/Color.java
     // http://developer.android.com/reference/android/graphics/Color.html
     [Script(IsNative = true)]
     public class Color
@@ -14,6 +15,7 @@ namespace android.graphics
 
 
         public static int WHITE;
+        public static int GREEN;
         public static int RED;
 
 

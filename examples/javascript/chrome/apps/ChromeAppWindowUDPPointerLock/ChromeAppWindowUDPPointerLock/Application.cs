@@ -16,131 +16,345 @@ using System.Xml.Linq;
 using ChromeAppWindowUDPPointerLock;
 using ChromeAppWindowUDPPointerLock.Design;
 using ChromeAppWindowUDPPointerLock.HTML.Pages;
+using System.Net.Sockets;
+using System.Net;
 
 namespace ChromeAppWindowUDPPointerLock
 {
-	/// <summary>
-	/// Your client side code running inside a web browser as JavaScript.
-	/// </summary>
-	public sealed class Application : ApplicationWebService
-	{
-		/// <summary>
-		/// This is a javascript application.
-		/// </summary>
-		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
-		public Application(IApp page)
-		{
-			// how are we to make this into a chrome app?
-			// "X:\jsc.svn\examples\javascript\chrome\apps\ChomeAlphaAppWindow\ChomeAlphaAppWindow.sln"
+    /// <summary>
+    /// Your client side code running inside a web browser as JavaScript.
+    /// </summary>
+    public sealed class Application : ApplicationWebService
+    {
+        // subst a: r:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\bin\Debug\staging\ChromeAppWindowUDPPointerLock.Application\web
 
-			// since now jsc shows ssl support
-			// how about packaging the view-source for chrome too?
+        // X:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\bin\Debug\staging\ChromeAppWindowUDPPointerLock.Application\web
 
-			// nuget, add chrome.
+        // logoff logon?
+        // net start LanmanServer
 
-			#region += Launched chrome.app.window
-			dynamic self = Native.self;
-			dynamic self_chrome = self.chrome;
-			object self_chrome_socket = self_chrome.socket;
-
-			if (self_chrome_socket != null)
-			{
-				if (!(Native.window.opener == null && Native.window.parent == Native.window.self))
-				{
-					Console.WriteLine("chrome.app.window.create, is that you?");
-
-					// pass thru
-				}
-				else
-				{
-					// should jsc send a copresence udp message?
-					chrome.runtime.UpdateAvailable += delegate
-					{
-						new chrome.Notification(title: "UpdateAvailable");
-
-					};
-
-					chrome.app.runtime.Launched += async delegate
-					{
-						// 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
-						Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
-
-						new chrome.Notification(title: "Launched2");
-
-						var xappwindow = await chrome.app.window.create(
-							   Native.document.location.pathname, options: null
-						);
-
-						//xappwindow.setAlwaysOnTop
-
-						xappwindow.show();
-
-						await xappwindow.contentWindow.async.onload;
-
-						Console.WriteLine("chrome.app.window loaded!");
-					};
+        //        ---------------------------
+        //Restoring Network Connections
+        //---------------------------
+        //An error occurred while reconnecting R: to
+        //\\192.168.1.12\x$
+        //Microsoft Windows Network: The specified network name is no longer available.
 
 
-					return;
-				}
-			}
-			#endregion
+        //This connection has not been restored.
+        //---------------------------
+        //OK   
+        //---------------------------
+
+        /// <summary>
+        /// This is a javascript application.
+        /// </summary>
+        /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
+        public Application(IApp page)
+        {
+            // how are we to make this into a chrome app?
+            // "X:\jsc.svn\examples\javascript\chrome\apps\ChomeAlphaAppWindow\ChomeAlphaAppWindow.sln"
+
+            // since now jsc shows ssl support
+            // how about packaging the view-source for chrome too?
+
+            // nuget, add chrome.
+
+            #region += Launched chrome.app.window
+            dynamic self = Native.self;
+            dynamic self_chrome = self.chrome;
+            object self_chrome_socket = self_chrome.socket;
+
+            if (self_chrome_socket != null)
+            {
+                if (!(Native.window.opener == null && Native.window.parent == Native.window.self))
+                {
+                    Console.WriteLine("chrome.app.window.create, is that you?");
+
+                    // pass thru
+                }
+                else
+                {
+                    // should jsc send a copresence udp message?
+                    chrome.runtime.UpdateAvailable += delegate
+                    {
+                        new chrome.Notification(title: "UpdateAvailable");
+
+                    };
+
+                    chrome.app.runtime.Launched += async delegate
+                    {
+                        // 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
+                        Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
+
+                        new chrome.Notification(title: "Launched2");
+
+                        var xappwindow = await chrome.app.window.create(
+                               Native.document.location.pathname, options: null
+                        );
+
+                        //xappwindow.setAlwaysOnTop
+
+                        xappwindow.show();
+
+                        await xappwindow.contentWindow.async.onload;
+
+                        Console.WriteLine("chrome.app.window loaded!");
+                    };
 
 
-			// can we also test the shadow DOM ?
-			// how does it work again?
+                    return;
+                }
+            }
+            #endregion
 
 
-			// now we have to update our alpha window/server window
-			// to be in the correct context.
-
-			// what about property window
-			// back in the vb days we made one.
-			// time to do one?
-
-			new IHTMLButton { "ready1" }.AttachToDocument().onclick +=
-				//async
-				delegate
-				{
-
-					new MyShadow { }.AttachTo(Native.shadow);
-
-					// shadow will select div from chldren
-					var div = new IHTMLDiv { }.AttachTo(Native.document.documentElement);
+            // can we also test the shadow DOM ?
+            // how does it work again?
 
 
-					new IHTMLPre { "drag me" }.AttachTo(div);
-					var xy = new IHTMLPre { "{}" }.AttachTo(div);
+            // now we have to update our alpha window/server window
+            // to be in the correct context.
 
-					div.css.style.backgroundColor = "transparent";
-					div.css.style.transition = "background 500ms linear";
+            // what about property window
+            // back in the vb days we made one.
+            // time to do one?
 
-					div.css.active.style.backgroundColor = "yellow";
+            new IHTMLButton { "ready1" }.AttachToDocument().onclick +=
+                //async
+                delegate
+                {
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150701
 
-					Native.document.documentElement.style.cursor = IStyle.CursorEnum.move;
+                    new MyShadow { }.AttachTo(Native.shadow);
 
-					div.onmousemove +=
-						e =>
-						{
-							// we could tilt the svg cursor
-							// like we do on heat zeeker:D
+                    #region CaptureMouse
+                    {
+                        // shadow will select div from chldren
+                        var div = new IHTMLDiv { }.AttachTo(Native.document.documentElement);
+
+                        new IHTMLPre { "drag me via CaptureMouse" }.AttachTo(div);
+                        var xy = new IHTMLPre { "{}" }.AttachTo(div);
+
+                        div.css.style.backgroundColor = "transparent";
+                        div.css.style.transition = "background 500ms linear";
+
+                        div.css.active.style.backgroundColor = "yellow";
+
+                        Native.document.documentElement.style.cursor = IStyle.CursorEnum.move;
+
+                        div.css.hover.style.backgroundColor = "cyan";
+
+                        div.onmousemove +=
+                            e =>
+                            {
+                                // we could tilt the svg cursor
+                                // like we do on heat zeeker:D
 
 
-							//Native.document.title = new { e.CursorX, e.CursorY }.ToString();
-							xy.innerText = new { e.CursorX, e.CursorY }.ToString();
+                                //Native.document.title = new { e.CursorX, e.CursorY }.ToString();
+                                xy.innerText = new { e.CursorX, e.CursorY }.ToString();
 
-						};
+                            };
 
-					div.onmousedown +=
-						async e =>
-						{
-							e.CaptureMouse();
+                        div.onmousedown +=
+                            async e =>
+                            {
+                                e.CaptureMouse();
 
-							await div.async.onmouseup;
-						};
-				};
+                                await div.async.onmouseup;
+                            };
+                    }
+                    #endregion
 
-		}
+                    {
+                        // shadow will select div from chldren
+                        var div = new IHTMLDiv { }.AttachTo(Native.document.documentElement);
 
-	}
+                        new IHTMLPre { "click to  requestPointerLock, double click to stop" }.AttachTo(div);
+                        var xy = new IHTMLPre { "{}" }.AttachTo(div);
+
+                        div.css.style.backgroundColor = "transparent";
+                        div.css.style.transition = "background 500ms linear";
+
+                        div.css.active.style.backgroundColor = "yellow";
+
+                        Native.document.documentElement.style.cursor = IStyle.CursorEnum.move;
+
+                        div.css.hover.style.backgroundColor = "cyan";
+
+
+
+
+
+
+
+                        var x = 0;
+                        var y = 0;
+
+
+                        // what about 255.255.255.255 ?
+                        chrome.socket.getNetworkList().ContinueWithResult(
+                            async n =>
+                            {
+                                // which networks should we notify of our data?
+
+                                //new IHTMLPre { new { n.Length } }.AttachToDocument();
+
+                                foreach (var item in n)
+                                {
+
+
+                                    new IHTMLButton { "send onmouseup " + item.address }.AttachTo(div).With(
+                                        async refresh =>
+                                        {
+                                            refresh.style.display = IStyle.DisplayEnum.block;
+
+                                            // experimental until ref count 33?
+                                            await refresh.async.onmousedown;
+
+                                            refresh.disabled = true;
+
+                                            while (await div.async.onmouseup)
+                                            {
+
+
+                                                #region xml
+
+                                                var nmessage = x + ":" + y;
+                                                var Host = "";
+                                                var PublicPort = "";
+
+                                                var message =
+                                                    new XElement("string",
+                                                        new XAttribute("c", "" + 1),
+                                                        new XAttribute("n", nmessage),
+                                                        "Visit me at " + Host + ":" + PublicPort
+                                                    ).ToString();
+
+                                                #endregion
+
+                                                var data = Encoding.UTF8.GetBytes(message);	   //creates a variable b of type byte
+
+                                                var port = new Random().Next(16000, 40000);
+
+                                                //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
+
+                                                // where is bind async?
+                                                var socket = new UdpClient();
+                                                socket.Client.Bind(
+
+                                                    //new IPEndPoint(IPAddress.Any, port: 40000)
+                                                    new IPEndPoint(IPAddress.Parse(item.address), port)
+                                                );
+
+
+                                                //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
+
+                                                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                                                var s = await socket.SendAsync(
+                                                    data,
+                                                    data.Length,
+                                                    hostname: "239.1.2.3",
+                                                    port: 40804
+                                                );
+
+                                                socket.Close();
+
+                                            }
+                                        }
+                                    );
+
+                                    new IHTMLButton { "send onmousemove " + item.address }.AttachTo(div).With(
+                                      async refresh =>
+                                      {
+                                          refresh.style.display = IStyle.DisplayEnum.block;
+
+                                          // experimental until ref count 33?
+                                          await refresh.async.onmousedown;
+
+                                          refresh.disabled = true;
+
+                                          var port = new Random().Next(16000, 40000);
+
+                                          //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
+
+                                          // where is bind async?
+                                          var socket = new UdpClient();
+                                          socket.Client.Bind(
+
+                                              //new IPEndPoint(IPAddress.Any, port: 40000)
+                                              new IPEndPoint(IPAddress.Parse(item.address), port)
+                                          );
+
+
+                                          while (await div.async.onmousemove)
+                                          {
+                                              var nmessage = x + ":" + y;
+
+
+                                              var data = Encoding.UTF8.GetBytes(nmessage);	   //creates a variable b of type byte
+
+
+
+                                              //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
+
+                                              // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                                              var s = await socket.SendAsync(
+                                                  data,
+                                                  data.Length,
+                                                  hostname: "239.1.2.3",
+                                                  port: 41814
+                                              );
+
+                                              //socket.Close();
+
+                                          }
+                                      }
+                                  );
+                                }
+                            }
+                        );
+
+
+
+                        div.onmousemove +=
+                            e =>
+                            {
+                                // we could tilt the svg cursor
+                                // like we do on heat zeeker:D
+
+                                x += e.movementX;
+                                y += e.movementY;
+
+
+                                //Native.document.title = new { e.CursorX, e.CursorY }.ToString();
+                                xy.innerText = new { x, y }.ToString();
+
+                            };
+
+                        div.onmousedown +=
+                            async e =>
+                            {
+                                // wont work for RemoteApp users tho
+
+                                // await ?
+                                div.requestPointerLock();
+                                //e.CaptureMouse();
+
+                                //await div.async.onmouseup;
+                                var ee = await div.async.ondblclick;
+
+                                //if (ee.MouseButton == IEvent.MouseButtonEnum.Right)
+                                Native.document.exitPointerLock();
+
+                            };
+                    }
+
+
+                };
+
+        }
+
+    }
 }

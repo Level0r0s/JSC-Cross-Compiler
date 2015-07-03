@@ -23,6 +23,9 @@ namespace android.view
 
         // X:\jsc.svn\examples\java\android\AndroidLacasCameraServerActivity\AndroidLacasCameraServerActivity\ApplicationActivity.cs
 
+        // X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorld\ApplicationActivity.cs
+        public void postInvalidate() { }
+
         protected virtual void onDraw(Canvas canvas)
         {
         }

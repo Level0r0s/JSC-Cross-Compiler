@@ -270,7 +270,10 @@ namespace OVRMyCubeWorldNDK
                         gl3.glScissor(0, 0, rt->Width, rt->Height);
                         //gl3.glClearColor(0.125f, 0.0f, 0.125f, 1.0f);
                         //gl3.glClearColor(0.9f, 0.0f, 0.125f, 1.0f);
-                        gl3.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+                        // 
+                        //gl3.glClearColor(0.0f, 0.0f, 1.0f, 0.1f);
+                        gl3.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
                         gl3.glClear(gl3.GL_COLOR_BUFFER_BIT | gl3.GL_DEPTH_BUFFER_BIT);
 
                         gl3.glUseProgram(appState.Scene.Program.Program);

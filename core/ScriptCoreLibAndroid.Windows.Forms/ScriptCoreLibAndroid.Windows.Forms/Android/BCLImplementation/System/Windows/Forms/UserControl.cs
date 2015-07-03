@@ -9,6 +9,11 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Windows.Forms
     [Script(Implements = typeof(global::System.Windows.Forms.UserControl))]
     public class __UserControl : __ContainerControl
     {
+        // what about gearVR? or should we do Avalonfor VR? since its for flash is should know better..
+
+        // tested by
+        // X:\jsc.svn\examples\java\android\forms\AndroidFormsActivity\AndroidFormsActivity\ApplicationActivity.cs
+
         // see also: X:\jsc.svn\core\ScriptCoreLib.Windows.Forms\ScriptCoreLib.Windows.Forms\JavaScript\BCLImplementation\System\Windows\Forms\UserControl.cs
 
 

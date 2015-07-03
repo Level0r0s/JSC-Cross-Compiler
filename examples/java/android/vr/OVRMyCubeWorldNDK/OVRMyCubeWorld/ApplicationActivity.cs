@@ -20,11 +20,11 @@ namespace OVRMyCubeWorld.Activities
 
     // https://forums.oculus.com/viewtopic.php?t=21409
     // dual shows our own popup and inserting in gearvr stays black.
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "dual")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "dual")]
 
     // what if we want to display our own welcome screen?
     // com.samsung.android.hmt.vrsvc/com.samsung.android.hmt.vrsvc.WaitActivity
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_only")]
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_only")]
     public class LocalApplication : Application
     {
         public override void onCreate()
@@ -56,19 +56,21 @@ namespace OVRMyCubeWorld.Activities
     public class ApplicationActivity : Activity
     {
         // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell dumpsys battery
+
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG"
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVRMyCubeWorld.Activities
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVRMyCubeWorld.Activities/OVRMyCubeWorld.Activities.ApplicationActivity
         // https://code.google.com/p/android/issues/detail?can=2&start=0&num=100&q=&colspec=ID%20Type%20Status%20Owner%20Summary%20Stars&groupby=&sort=&id=75442
 
-        private SurfaceHolder mSurfaceHolder;
-        private SurfaceView mView;
+        private SurfaceHolder xSurfaceHolder;
+        private SurfaceView xSurfaceView;
 
 
         private ovrAppThreadPointer appThread;
 
 
-        public class xCallback : SurfaceHolder_Callback
+        public class xSurfaceHolder_Callback : SurfaceHolder_Callback
         {
 
             public Action<SurfaceHolder, int, int, int> onsurfaceChanged;
@@ -93,10 +95,15 @@ namespace OVRMyCubeWorld.Activities
 
         class __args
         {
+            // X:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\Application.cs
+            // flatland is sending input to vrland?
+            public int mousex, mousey;
+
             public int x, y, z, w;
 
             //tracking.HeadPose.Pose.Orientation.x
 
+            // these are to be streamed over udp back to flatland
             public float tracking_HeadPose_Pose_Orientation_x;
             public float tracking_HeadPose_Pose_Orientation_y;
             public float tracking_HeadPose_Pose_Orientation_z;
@@ -116,7 +123,7 @@ namespace OVRMyCubeWorld.Activities
 
             #region xCallback
             // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceView\ApplicationActivity.cs
-            var xCallback = new xCallback
+            var xCallback = new xSurfaceHolder_Callback
             {
                 onsurfaceCreated = holder =>
                 {
@@ -124,8 +131,11 @@ namespace OVRMyCubeWorld.Activities
                     if (appThread == 0)
                         return;
 
+                    // did we use it for float window?
+                    //holder.setFormat(android.graphics.PixelFormat.TRANSLUCENT);
+
                     GLES3JNILib.onSurfaceCreated(holder.getSurface());
-                    mSurfaceHolder = holder;
+                    xSurfaceHolder = holder;
 
                     //Console.WriteLine("exit onsurfaceCreated " + new { appThread });
                 },
@@ -136,29 +146,43 @@ namespace OVRMyCubeWorld.Activities
                         return;
 
                     GLES3JNILib.onSurfaceChanged(holder.getSurface());
-                    mSurfaceHolder = holder;
+                    xSurfaceHolder = holder;
                 },
 
                 onsurfaceDestroyed = holder =>
                 {
+                    //I/System.Console( 3549): 0ddd:0001 after OVRMyCubeWorld onCreate, attach the headset!
+                    //I/System.Console( 3549): 0ddd:0001 enter onsurfaceDestroyed
+
+                    Console.WriteLine("enter onsurfaceDestroyed");
+
+
                     if (appThread == 0)
                         return;
 
+
+                    // I/DEBUG   ( 2079):     #01 pc 0000672f  /data/app/OVRMyCubeWorld.Activities-1/lib/arm/libmain.so (Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceDestroyed+46)
                     GLES3JNILib.onSurfaceDestroyed();
-                    mSurfaceHolder = null;
+                    xSurfaceHolder = null;
+                    appThread = 0;
                 }
             };
             #endregion
 
+            // https://github.com/dalinaum/TextureViewDemo
+            //  TextureView semi-translucent by calling myView.setAlpha(0.5f).
+            // !! should we use TextureView instead?
+            // https://groups.google.com/forum/#!topic/android-developers/jYjvm7ItpXQ
+            this.xSurfaceView = new SurfaceView(this);
+            //this.xSurfaceView.setZOrderOnTop(true);    // necessary
+            //this.xSurfaceView.getHolder().setFormat(android.graphics.PixelFormat.TRANSPARENT);
 
-
-
-            mView = new SurfaceView(this);
-            this.setContentView(mView);
 
             var sw = Stopwatch.StartNew();
 
             //var args = new object();
+
+            // can we draw on back?
 
             #region mDraw
             var mDraw = new DrawOnTop(this)
@@ -169,6 +193,13 @@ namespace OVRMyCubeWorld.Activities
                 // (out) VrApi.vrapi_GetVersionString()
                 text = () =>
                 {
+                    // can we listen to udp?
+                    // like X:\jsc.svn\examples\java\android\AndroidServiceUDPNotification\AndroidServiceUDPNotification\ApplicationActivity.cs
+                    // in vr if the other service is running it can display vr notification
+
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150630/udp
+                    // lets run it, and see if we can see some vr notifications as we skip a video 
+
                     GLES3JNILib.stringFromJNI(args);
 
 
@@ -266,12 +297,18 @@ namespace OVRMyCubeWorld.Activities
             };
             #endregion
 
+            this.setContentView(xSurfaceView);
+            this.addContentView(mDraw, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             // canw e add a camera too?
-            addContentView(mDraw, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-            mView.getHolder().addCallback(xCallback);
+            //  stackoverflow.com/questions/20936480/how-to-make-surfaceview-transparent-background
+            //this.setContentView(mDraw);
+            //this.addContentView(xSurfaceView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-            getWindow().addFlags(WindowManager_LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+            xSurfaceView.getHolder().addCallback(xCallback);
+
+            //getWindow().addFlags(WindowManager_LayoutParams.FLAG_KEEP_SCREEN_ON);
 
             appThread = com.oculus.gles3jni.GLES3JNILib.onCreate(this);
 
@@ -309,6 +346,7 @@ namespace OVRMyCubeWorld.Activities
                 //paint.setColor(android.graphics.Color.YELLOW);
                 paint.setColor(android.graphics.Color.GREEN);
                 paint.setTextSize(textSize);
+                paint.setAlpha(127);
 
                 var text = this.text();
 
@@ -347,7 +385,7 @@ namespace OVRMyCubeWorld.Activities
 
         protected override void onDestroy()
         {
-            if (mSurfaceHolder != null)
+            if (xSurfaceHolder != null)
             {
                 GLES3JNILib.onSurfaceDestroyed();
             }
@@ -381,3 +419,9 @@ namespace OVRMyCubeWorld.Activities
 
 
 }
+
+
+//42d0:02:01:1f ActiveJavaArchiveNativesAssemblies load X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorld\bin\staging.AssetsLibrary\output.jar\VrApi.dll
+//System.TypeLoadException: Could not load type 'FrameCallback' from assembly 'ScriptCoreLibAndroid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+//System.TypeLoadException: Could not load type 'android.telephony.PhoneStateListener' from assembly 'ScriptCoreLibAndroid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+//System.Reflection.ReflectionTypeLoadException: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.

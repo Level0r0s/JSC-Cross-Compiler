@@ -504,10 +504,20 @@ interface chrome.sockets.udp
 
 	// joinGroup − chrome.sockets.udp.joinGroup(integer socketId, string address, function callback)
 	async static void joinGroup(chrome.socketId socketId, string address, function<int> callback);
+	// chrome.sockets.udp.setBroadcast(integer socketId, boolean enabled, function callback)
+
+
+	// API changed again?
+	// X:\jsc.svn\market\synergy\javascript\chrome\chrome\BCLImplementation\System\Net\Sockets\UdpClient.cs
+	async static void setBroadcast(chrome.socketId socketId, boolean enabled, function<int> callback);
+
+
 
 	// chrome.sockets.udp.onReceiveError.addListener(function callback)
 	event static attribute chrome.ChromeEventTarget<chrome.onReceiveInfo> onReceive;
 	event static attribute chrome.ChromeEventTarget<any> onReceiveError;
+
+	// tested by?
 };
 
 interface chrome.socketId

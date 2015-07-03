@@ -969,6 +969,7 @@
     <Compile Include="android\graphics\Bitmap.cs" />
     <Compile Include="android\graphics\BitmapFactory.cs" />
     <Compile Include="android\graphics\Canvas.cs" />
+    <Compile Include="android\graphics\Paint.cs" />
     <Compile Include="android\graphics\SurfaceTexture.cs" />
     <Compile Include="android\graphics\drawable\BitmapDrawable.cs" />
     <Compile Include="android\graphics\drawable\Drawable.cs" />

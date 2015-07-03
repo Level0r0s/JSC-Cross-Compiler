@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Threading.Tasks;
 using ScriptCoreLib.Shared.BCLImplementation.System.Net.Sockets;
 using ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks;
+using ScriptCoreLibJava.BCLImplementation.System.Net.NetworkInformation;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 {
@@ -19,6 +20,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
     [Script(Implements = typeof(global::System.Net.Sockets.UdpClient))]
     internal class __UdpClient
     {
+        // http://www.acc.umu.se/~bosse/High%20performance%20kernel%20mode%20web%20server%20for%20Windows.pdf
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150630/udp
+
+        // multicast tested?
+
+
         // what comes after tcp?
         // what about async API ?
 
@@ -30,6 +37,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
         // X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\SystemHeaders\sys\socket.cs
 
+        #region try_new_DatagramSocket
         static java.net.DatagramSocket try_new_DatagramSocket()
         {
             #region datagramSocket
@@ -76,14 +84,192 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             return try_new_DatagramSocket(e.Port);
         }
 
+        #endregion
 
-        public __UdpClient(java.net.DatagramSocket datagramSocket)
+        [Script]
+        public class xConstructorArguments
         {
+            Func<java.net.DatagramSocket> vDatagramSocket;
+            public java.net.DatagramSocket xDatagramSocket
+            {
+                get
+                {
+                    return vDatagramSocket();
+                }
+            }
+
+            Func<java.net.MulticastSocket> vMulticastSocket;
+            public java.net.MulticastSocket xMulticastSocket
+            {
+                get
+                {
+                    return vMulticastSocket();
+                }
+            }
+
+            public static xConstructorArguments Of()
+            {
+                return new xConstructorArguments { };
+            }
+            public static xConstructorArguments Of(IPEndPoint e)
+            {
+                var xMulticastSocket = default(java.net.MulticastSocket);
+                var xDatagramSocket = default(java.net.DatagramSocket);
+
+                // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                return new xConstructorArguments
+                {
+                    vMulticastSocket = delegate
+                    {
+                        if (xMulticastSocket != null)
+                            return xMulticastSocket;
+
+
+                        #region datagramSocket
+
+                        try
+                        {
+                            xMulticastSocket = new java.net.MulticastSocket(e.Port);
+                            xDatagramSocket = xMulticastSocket;
+                        }
+                        catch
+                        {
+                            throw;
+                        }
+                        #endregion
+
+                        return xMulticastSocket;
+                    },
+
+                    vDatagramSocket = delegate
+                    {
+                        if (xDatagramSocket != null)
+                            return xDatagramSocket;
+
+                        try
+                        {
+                            xDatagramSocket = new java.net.DatagramSocket(e.Port);
+                        }
+                        catch
+                        {
+                            throw;
+                        }
+
+                        return xDatagramSocket;
+                    }
+                };
+            }
+
+            // see udp joingroup
+            public int port;
+
+            public static xConstructorArguments Of(int port)
+            {
+
+                var xMulticastSocket = default(java.net.MulticastSocket);
+                var xDatagramSocket = default(java.net.DatagramSocket);
+
+                // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                return new xConstructorArguments
+                {
+                    port = port,
+
+                    vMulticastSocket = delegate
+                    {
+                        if (xMulticastSocket != null)
+                            return xMulticastSocket;
+
+
+                        #region datagramSocket
+
+                        try
+                        {
+                            xMulticastSocket = new java.net.MulticastSocket(port);
+                            xDatagramSocket = xMulticastSocket;
+                        }
+                        catch
+                        {
+                            throw;
+                        }
+                        #endregion
+
+                        return xMulticastSocket;
+                    },
+
+                    vDatagramSocket = delegate
+                    {
+                        if (xDatagramSocket != null)
+                            return xDatagramSocket;
+
+                        try
+                        {
+                            xDatagramSocket = new java.net.DatagramSocket(port);
+                        }
+                        catch
+                        {
+                            throw;
+                        }
+
+                        return xDatagramSocket;
+                    }
+                };
+            }
+        }
+
+        public __UdpClient(xConstructorArguments args)
+        {
+
+            java.net.DatagramSocket datagramSocket;
+
+            // http://stackoverflow.com/questions/8558791/multicastsocket-vs-datagramsocket-in-broadcasting-to-multiple-clients
+            // you must use MulticastSocket for receiving the multicasts; for sending them, again, you can use either DatagramSocket or MulticastSocket, and there is no difference in efficiency.
+
             //var buffer = new sbyte[0x10000];
             var buffer = new sbyte[0x1000];
 
             //E/dalvikvm-heap(14366): Out of memory on a 1048592-byte allocation.
             //I/dalvikvm(14366): "Thread-4310" prio=5 tid=827 RUNNABLE
+
+
+
+            // tested by
+            // X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorld\ApplicationActivity.cs
+
+            #region vJoinMulticastGroup
+            this.vJoinMulticastGroup = (IPAddress multicastAddr, IPAddress localAddress) =>
+           {
+               // http://developer.android.com/reference/java/net/InetSocketAddress.html
+               // http://developer.android.com/reference/java/net/SocketAddress.html
+
+               Console.WriteLine("enter vJoinMulticastGroup");
+               // at this point we have to jump back in time and get a multicast socket.
+
+               __IPAddress __multicastAddr = multicastAddr;
+               __IPAddress __localAddress = localAddress;
+
+               __NetworkInterface nic = __localAddress.InternalNetworkInterface;
+
+               // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
+               // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+
+               try
+               {
+                   args.xMulticastSocket.joinGroup(
+                       new java.net.InetSocketAddress(
+                            __multicastAddr.InternalAddress,
+                            args.port
+                       ),
+
+                       nic
+                   );
+               }
+               catch
+               {
+                   throw;
+               }
+
+           };
+            #endregion
 
 
             #region vReceiveAsync
@@ -103,7 +289,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
                         try
                         {
-                            datagramSocket.receive(packet);
+                            args.xDatagramSocket.receive(packet);
 
 
                             var xbuffer = new byte[packet.getLength()];
@@ -153,7 +339,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
                                 (sbyte[])(object)datagram,
                                 datagram.Length, a, port
                             );
-                            datagramSocket.send(packet);
+                            args.xDatagramSocket.send(packet);
                             // retval tested?
                             c.SetResult(
                                 packet.getLength()
@@ -182,7 +368,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
                                 (sbyte[])(object)datagram,
                                 datagram.Length, (__IPAddress)endPoint.Address, endPoint.Port
                             );
-                            datagramSocket.send(packet);
+                            args.xDatagramSocket.send(packet);
                             // retval tested?
                             c.SetResult(
                                 packet.getLength()
@@ -203,7 +389,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             {
                 try
                 {
-                    datagramSocket.close();
+                    args.xDatagramSocket.close();
                 }
                 catch
                 {
@@ -214,18 +400,18 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         }
 
         public __UdpClient()
-            : this(try_new_DatagramSocket())
+            : this(xConstructorArguments.Of())
         {
         }
 
         public __UdpClient(int port)
-            : this(try_new_DatagramSocket(port))
+            : this(xConstructorArguments.Of(port))
         {
         }
 
 
         public __UdpClient(IPEndPoint e)
-            : this(try_new_DatagramSocket(e))
+            : this(xConstructorArguments.Of(e))
         {
         }
 
@@ -243,6 +429,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
 
 
+        public Action<IPAddress, IPAddress> vJoinMulticastGroup;
+        //public void JoinMulticastGroup(IPAddress multicastAddr) { vJoinMulticastGroup(multicastAddr); }
+        public void JoinMulticastGroup(IPAddress multicastAddr, IPAddress localAddress) { vJoinMulticastGroup(multicastAddr, localAddress); }
 
 
         public SendAsyncDelegate vSendAsync;
@@ -251,6 +440,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         public Task<int> SendAsync(byte[] datagram, int bytes, string hostname, int port) { return vSendAsync(datagram, bytes, hostname, port); }
 
 
+
+        // tested by?
         public SendAsyncDelegate2 vSendAsync2;
         [Script]
         public delegate Task<int> SendAsyncDelegate2(byte[] datagram, int bytes, IPEndPoint endPoint);
