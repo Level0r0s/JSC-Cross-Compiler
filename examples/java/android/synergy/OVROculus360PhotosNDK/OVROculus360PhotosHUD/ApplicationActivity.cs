@@ -11,6 +11,8 @@ using ScriptCoreLib.Android.Extensions;
 using ScriptCoreLib.Android.Manifest;
 using System.Diagnostics;
 using System.Threading;
+using ScriptCoreLib.Extensions;
+
 
 namespace OVROculus360Photos.Activities
 {
@@ -34,6 +36,7 @@ namespace OVROculus360Photos.Activities
 
 namespace OVROculus360PhotosHUD.Activities
 {
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/ovroculus360photoshud
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150613/record
     // "x:\util\android-sdk-windows\platform-tools\adb.exe" shell am start -n OVROculus360PhotosHUD.Activities/OVROculus360PhotosHUD.Activities.ApplicationActivity
 
@@ -204,27 +207,27 @@ namespace OVROculus360PhotosHUD.Activities
                 }
             ).Start();
 
-            this.ondispatchTouchEvent += @event =>
-            {
+            //this.ondispatchTouchEvent += @event =>
+            //{
 
-                int action = @event.getAction();
-                float x = @event.getRawX();
-                float y = @event.getRawY();
-                //if (action == MotionEvent.ACTION_UP)
-                {
-                    var halfx = 2560 / 2;
-                    var halfy = 1440 / 2;
+            //    int action = @event.getAction();
+            //    float x = @event.getRawX();
+            //    float y = @event.getRawY();
+            //    //if (action == MotionEvent.ACTION_UP)
+            //    {
+            //        var halfx = 2560 / 2;
+            //        var halfy = 1440 / 2;
 
-                    mDraw.x = (int)(500 + halfx - x);
-                    mDraw.y = (int)(600 + y - halfy);
-                    mDraw.text = () => sw.ElapsedMilliseconds + "ms \n" + new { x, y, action }.ToString();
-                    //Console.WriteLine(" ::dispatchTouchEvent( " + action + ", " + x + ", " + y + " )");
-                }
+            //        mDraw.x = (int)(500 + halfx - x);
+            //        mDraw.y = (int)(600 + y - halfy);
+            //        mDraw.text = () => sw.ElapsedMilliseconds + "ms \n" + new { x, y, action }.ToString();
+            //        //Console.WriteLine(" ::dispatchTouchEvent( " + action + ", " + x + ", " + y + " )");
+            //    }
 
-                // can we move hud around and record it to gif or mp4?
+            //    // can we move hud around and record it to gif or mp4?
 
-                return true;
-            };
+            //    return true;
+            //};
 
             // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceView\ApplicationActivity.cs
             // X:\jsc.svn\examples\java\android\AndroidLacasCameraServerActivity\AndroidLacasCameraServerActivity\ApplicationActivity.cs
@@ -260,9 +263,10 @@ namespace OVROculus360PhotosHUD.Activities
             // ffs
         }
 
-
         public class DrawOnTop : View
         {
+            // html hud?
+
             // http://stackoverflow.com/questions/6927286/force-a-view-to-redraw-itself
 
             public DrawOnTop(android.content.Context context)
@@ -272,12 +276,14 @@ namespace OVROculus360PhotosHUD.Activities
 
             // udp mouse ?
             public int x = 500; // animate it?
-            public int y = 600;
+            public int y = 800;
 
-            public Func<string> text = () => "hello";
+            public Func<string> text = () => "hello!";
 
             public int textSize = 25;
 
+            public int color = android.graphics.Color.GREEN;
+            public int alpha = 80;
 
             protected override void onDraw(android.graphics.Canvas canvas)
             {
@@ -286,13 +292,22 @@ namespace OVROculus360PhotosHUD.Activities
 
                 paint.setStyle(android.graphics.Paint.Style.STROKE);
                 //paint.setStyle(android.graphics.Paint.Style.FILL_AND_STROKE);
-                paint.setColor(android.graphics.Color.RED);
+                //paint.setColor(android.graphics.Color.RED);
+                //paint.setColor(android.graphics.Color.YELLOW);
+                paint.setColor(color);
                 paint.setTextSize(textSize);
+                paint.setAlpha(alpha);
 
-                var text = this.text();
+                var a = this.text().Split('\n');
 
-                canvas.drawText(text, x, y, paint);
-                canvas.drawText(text, x + 2560 / 2, y, paint);
+                a.WithEachIndex(
+                    (text, i) =>
+                    {
+
+                        canvas.drawText(text, x, y + i * 24, paint);
+                        canvas.drawText(text, x + 2560 / 2, y + i * 24, paint);
+                    }
+                );
 
                 base.onDraw(canvas);
             }

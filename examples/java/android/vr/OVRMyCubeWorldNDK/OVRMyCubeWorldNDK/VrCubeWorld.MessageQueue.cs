@@ -238,6 +238,19 @@ namespace OVRMyCubeWorldNDK
 
             public void ovrMessageQueue_Enable(bool value) { Enabled = value; }
 
+
+
+
+            // VrCubeWorld.MESSAGE.MESSAGE_ON_RESUME
+            public void ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE id)
+            {
+                var message = default(VrCubeWorld.ovrMessage);
+                message.ovrMessage_Init(id, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+                this.ovrMessageQueue_PostMessage(ref message);
+
+                // Task.Wait()
+            }
+
             // called by Java_com_oculus_gles3jni_GLES3JNILib_onTouchEvent
             // uithread
             public void ovrMessageQueue_PostMessage(ref ovrMessage message)

@@ -29,6 +29,7 @@ namespace OVRMyCubeWorld.Activities
     // what if we want to display our own welcome screen?
     // com.samsung.android.hmt.vrsvc/com.samsung.android.hmt.vrsvc.WaitActivity
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_only")]
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/pui_global_menu
     public class LocalApplication : Application
     {
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150703
@@ -40,7 +41,7 @@ namespace OVRMyCubeWorld.Activities
             // where is the source for it?
             //  <Content Include="x:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar">
             // com/oculus/vrapi/VrApi
-            var api = typeof(com.oculus.vrapi.VrApi);
+            //var api = typeof(com.oculus.vrapi.VrApi);
 
             //I/VrApi   (  401):              "Message":      "Thread priority security exception. Make sure the APK is signed."
         }
@@ -63,10 +64,17 @@ namespace OVRMyCubeWorld.Activities
     {
         // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell dumpsys battery
 
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
         // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG"
+        // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity"
+
+
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVRMyCubeWorld.Activities
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVRMyCubeWorld.Activities/OVRMyCubeWorld.Activities.ApplicationActivity
+
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell dumpsys SurfaceFlinger
+
         // https://code.google.com/p/android/issues/detail?can=2&start=0&num=100&q=&colspec=ID%20Type%20Status%20Owner%20Summary%20Stars&groupby=&sort=&id=75442
 
         private SurfaceHolder xSurfaceHolder;
@@ -106,7 +114,7 @@ namespace OVRMyCubeWorld.Activities
 
             public string mouse;
 
-            public int mousex, mousey, ws, ad;
+            public int mousex, mousey, ws, ad, c, mousebutton;
 
             public int x, y, z, w;
 
@@ -136,7 +144,7 @@ namespace OVRMyCubeWorld.Activities
             {
                 onsurfaceCreated = holder =>
                 {
-                    //Console.WriteLine("enter onsurfaceCreated " + new { appThread });
+                    Console.WriteLine("enter onsurfaceCreated " + new { appThread });
                     if (appThread == 0)
                         return;
 
@@ -163,7 +171,7 @@ namespace OVRMyCubeWorld.Activities
                     //I/System.Console( 3549): 0ddd:0001 after OVRMyCubeWorld onCreate, attach the headset!
                     //I/System.Console( 3549): 0ddd:0001 enter onsurfaceDestroyed
 
-                    Console.WriteLine("enter onsurfaceDestroyed");
+                    //Console.WriteLine("enter onsurfaceDestroyed");
 
 
                     if (appThread == 0)
@@ -173,7 +181,9 @@ namespace OVRMyCubeWorld.Activities
                     // I/DEBUG   ( 2079):     #01 pc 0000672f  /data/app/OVRMyCubeWorld.Activities-1/lib/arm/libmain.so (Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceDestroyed+46)
                     GLES3JNILib.onSurfaceDestroyed();
                     xSurfaceHolder = null;
-                    appThread = 0;
+                    //appThread = 0;
+
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/pui_global_menu
                 }
             };
             #endregion
@@ -182,11 +192,10 @@ namespace OVRMyCubeWorld.Activities
             //  TextureView semi-translucent by calling myView.setAlpha(0.5f).
             // !! should we use TextureView instead?
             // https://groups.google.com/forum/#!topic/android-developers/jYjvm7ItpXQ
-            this.xSurfaceView = new SurfaceView(this);
             //this.xSurfaceView.setZOrderOnTop(true);    // necessary
             //this.xSurfaceView.getHolder().setFormat(android.graphics.PixelFormat.TRANSPARENT);
 
-
+            #region ReceiveAsync
             Action<IPAddress> f = async nic =>
              {
                  args.mouse = "awaiting at " + nic;
@@ -211,6 +220,11 @@ namespace OVRMyCubeWorld.Activities
                      // getchar?
                      args.ad = int.Parse(xy[2]);
                      args.ws = int.Parse(xy[3]);
+
+                     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+                     args.c = int.Parse(xy[4]);
+                     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/mousedown
+                     args.mousebutton = int.Parse(xy[5]);
                  }
              };
 
@@ -241,6 +255,8 @@ namespace OVRMyCubeWorld.Activities
 
                 }
             );
+            #endregion
+
 
             var sw = Stopwatch.StartNew();
 
@@ -311,6 +327,17 @@ namespace OVRMyCubeWorld.Activities
                         Thread.Sleep(1000 / 60);
 
 
+                        if (args.mousebutton == 0)
+                        {
+                            mDraw.color = android.graphics.Color.GREEN;
+                            mDraw.alpha = 80;
+                        }
+                        else
+                        {
+                            mDraw.color = android.graphics.Color.YELLOW;
+                            mDraw.alpha = 255;
+                        }
+
                         mDraw.postInvalidate();
                     }
                 }
@@ -361,7 +388,7 @@ namespace OVRMyCubeWorld.Activities
                 if (action == KeyEvent.ACTION_UP)
                 {
                     // keycode 4
-                    mDraw.text = () => sw.ElapsedMilliseconds + "ms \n" + new { keyCode, action }.ToString();
+                    //mDraw.text = () => sw.ElapsedMilliseconds + "ms \n" + new { keyCode, action }.ToString();
                     //Log.v(TAG, "GLES3JNIActivity::dispatchKeyEvent( " + keyCode + ", " + action + " )");
                 }
                 GLES3JNILib.onKeyEvent(keyCode, action);
@@ -370,8 +397,29 @@ namespace OVRMyCubeWorld.Activities
             };
             #endregion
 
-            this.setContentView(xSurfaceView);
-            this.addContentView(mDraw, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+
+            AtResume = delegate
+            {
+                Console.WriteLine("enter onResume");
+
+
+                // http://stackoverflow.com/questions/3527621/how-to-pause-and-resume-a-surfaceview-thread
+                // http://stackoverflow.com/questions/10277694/resume-to-surfaceview-shows-black-screen
+                //this.xSurfaceView.onres
+
+                // You must ensure that the drawing thread only touches the underlying Surface while it is valid
+
+                this.xSurfaceView = new SurfaceView(this);
+
+                this.setContentView(xSurfaceView);
+                this.addContentView(mDraw, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                this.xSurfaceView.getHolder().addCallback(xCallback);
+
+                GLES3JNILib.onResume();
+            };
+
             // canw e add a camera too?
 
             //  stackoverflow.com/questions/20936480/how-to-make-surfaceview-transparent-background
@@ -379,7 +427,6 @@ namespace OVRMyCubeWorld.Activities
             //this.addContentView(xSurfaceView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
 
-            xSurfaceView.getHolder().addCallback(xCallback);
 
             //getWindow().addFlags(WindowManager_LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -409,6 +456,8 @@ namespace OVRMyCubeWorld.Activities
 
             public int textSize = 25;
 
+            public int color = android.graphics.Color.GREEN;
+            public int alpha = 80;
 
             protected override void onDraw(android.graphics.Canvas canvas)
             {
@@ -419,9 +468,9 @@ namespace OVRMyCubeWorld.Activities
                 //paint.setStyle(android.graphics.Paint.Style.FILL_AND_STROKE);
                 //paint.setColor(android.graphics.Color.RED);
                 //paint.setColor(android.graphics.Color.YELLOW);
-                paint.setColor(android.graphics.Color.GREEN);
+                paint.setColor(color);
                 paint.setTextSize(textSize);
-                paint.setAlpha(80);
+                paint.setAlpha(alpha);
 
                 var a = this.text().Split('\n');
 
@@ -439,6 +488,29 @@ namespace OVRMyCubeWorld.Activities
         }
 
 
+
+
+        protected override void onNewIntent(android.content.Intent value)
+        {
+            base.onNewIntent(value);
+            var DataString = value.getDataString();
+            Console.WriteLine("exit onNewIntent " + new { DataString });
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/pui_global_menu
+        }
+
+
+
+        Action AtResume;
+        protected override void onResume()
+        {
+            base.onResume();
+
+
+            AtResume();
+
+        }
+
         #region Activity life cycle
         protected override void onStart()
         {
@@ -446,11 +518,6 @@ namespace OVRMyCubeWorld.Activities
             GLES3JNILib.onStart();
         }
 
-        protected override void onResume()
-        {
-            base.onResume();
-            GLES3JNILib.onResume();
-        }
 
         protected override void onPause()
         {
@@ -472,7 +539,7 @@ namespace OVRMyCubeWorld.Activities
             }
             GLES3JNILib.onDestroy();
             base.onDestroy();
-            appThread = 0;
+            this.appThread = 0;
         }
 
         #endregion

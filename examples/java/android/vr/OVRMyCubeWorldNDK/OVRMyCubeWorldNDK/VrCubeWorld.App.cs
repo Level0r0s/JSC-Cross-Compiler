@@ -183,7 +183,8 @@ namespace OVRMyCubeWorldNDK
                 {
                     if ((VrApi.vrapi_GetTimeInSeconds() - this.BackButtonDownStartTime) > VrApi_Android.BACK_BUTTON_LONG_PRESS_TIME_IN_SECONDS)
                     {
-                        ConsoleExtensions.trace("back button long press");
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/pui_global_menu
+                        ConsoleExtensions.trace("back button long press, ovr_StartSystemActivity PUI_GLOBAL_MENU");
                         //ALOGV("        ovr_StartSystemActivity( %s )", PUI_GLOBAL_MENU);
                         VrApi_Android.ovr_StartSystemActivity(ref Java, VrApi.PUI_GLOBAL_MENU, null);
                         this.BackButtonState = ovrBackButtonState.BACK_BUTTON_STATE_SKIP_UP;

@@ -203,14 +203,33 @@ namespace OVRMyCubeWorldNDK
             static float wasd_x;
             static float wasd_y;
 
+
+
+            static int old_mousey;
+            static bool old_mousey_defined;
+
             // called by stringFromJNI
             // HUDp30 thread!
             public void Update()
             {
                 // UI thread writes, VR thread reads..
 
+
+                // what about mouse wheel?
+                // var flatlandMouseForwardFrameSpeed = .1f;
+                var flatlandMouseForwardFrameSpeed = .05f;
+
                 var flatlandFrameSpeed = .7f;
                 var flatlandFrameSpeedStrafe = .5f;
+
+                if (old_mousey_defined)
+                {
+                    var dyA = old_mousey - GLES3JNILib.fields_mousey;
+
+
+                    wasd_x += (float)Math.Cos(GLES3JNILib.fields_mousex * 0.005f + Math.PI / 2) * dyA * flatlandMouseForwardFrameSpeed;
+                    wasd_y += (float)Math.Sin(GLES3JNILib.fields_mousex * 0.005f + Math.PI / 2) * dyA * flatlandMouseForwardFrameSpeed;
+                }
 
                 // A
                 if (GLES3JNILib.fields_ad == 65)
@@ -244,11 +263,19 @@ namespace OVRMyCubeWorldNDK
                 }
 
 
-                var y = 0;
+                var y = 0f;
 
                 // C crouch or jump?
-                if (GLES3JNILib.fields_ws == 67)
+                if (GLES3JNILib.fields_c == 67)
                 {
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+
+                    // how low can we go?
+                    // if we change only one opcode, can we send out a patch via udp?
+                    //y = -20f;
+                    //y = +2f;
+                    y = 0.5f;
+                    // as a workaround right now we press run.
 
                 }
 
@@ -256,13 +283,29 @@ namespace OVRMyCubeWorldNDK
 
                 //var flatlandFrameSpeed = 1.0f;
 
+
+
+                var wasd_x0 = wasd_x;
+                var wasd_y0 = wasd_y;
+
+                // allow trackpad
+                wasd_x0 += touchpadSpeed * com.oculus.gles3jni.GLES3JNILib.fields_xvalue;
+                wasd_y0 += touchpadSpeed * com.oculus.gles3jni.GLES3JNILib.fields_yvalue;
+
+                // at the direction
+                //wasd_x0 += (float)Math.Cos(GLES3JNILib.fields_mousex * 0.005f) * flatlandFrameSpeedStrafe;
+                //wasd_y0 += (float)Math.Sin(GLES3JNILib.fields_mousex * 0.005f) * flatlandFrameSpeedStrafe;
+
                 for (int i = 0; i < NUM_INSTANCES; i++)
                 {
-                    this.CubePositions[i].x = this.CubePositions0[i].x + touchpadSpeed * com.oculus.gles3jni.GLES3JNILib.fields_xvalue + wasd_x;
-                    this.CubePositions[i].y = this.CubePositions0[i].y;
-                    this.CubePositions[i].z = this.CubePositions0[i].z + touchpadSpeed * com.oculus.gles3jni.GLES3JNILib.fields_yvalue + wasd_y;
+                    this.CubePositions[i].x = this.CubePositions0[i].x + wasd_x0;
+                    this.CubePositions[i].y = this.CubePositions0[i].y + y;
+                    this.CubePositions[i].z = this.CubePositions0[i].z + wasd_y0;
                 }
 
+
+                old_mousey = GLES3JNILib.fields_mousey;
+                old_mousey_defined = true;
             }
         }
 

@@ -63,6 +63,7 @@ LOCAL_MODULE    := main
 LOCAL_CFLAGS	:= -DANDROID_NDK -DGL_EXT_texture_sRGB_decode -DGL_EXT_sRGB_write_control
 LOCAL_CFLAGS	+= -Werror			# error on warnings
 LOCAL_CFLAGS	+= -Wno-error=deprecated-declarations
+LOCAL_CFLAGS	+= -Wno-error=write-strings
 
 LOCAL_CFLAGS	+= -Wall
 LOCAL_CFLAGS	+= -Wextra

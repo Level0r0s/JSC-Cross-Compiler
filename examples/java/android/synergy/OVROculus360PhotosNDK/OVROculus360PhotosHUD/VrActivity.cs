@@ -546,8 +546,6 @@ namespace com.oculus.vrappframework
         public event System.Func<MotionEvent, bool> ondispatchTouchEvent;
         public override bool dispatchTouchEvent(MotionEvent @event)
         {
-            // never fired? why the duck?
-
             return ondispatchTouchEvent(@event);
         }
 

@@ -24,6 +24,7 @@ namespace ScriptCoreLib.Android
         // 'android.opengl.GLSurfaceView.Renderer.onSurfaceCreated(javax.microedition.khronos.opengles.GL10, android.opengl.EGLConfig)'	X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Android\RenderingContextView.cs	21	18	ScriptCoreLib.Ultra
 
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201403/20140322
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/pui_global_menu
 
         WebGLRenderingContext gl;
 

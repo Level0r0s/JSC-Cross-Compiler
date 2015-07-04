@@ -26,6 +26,9 @@ namespace ChromeAppWindowUDPPointerLock
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // net use
+        // OK           R:        \\192.168.1.12\x$         Microsoft Windows Network
+
         // subst a: r:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\bin\Debug\staging\ChromeAppWindowUDPPointerLock.Application\web
 
         // X:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\bin\Debug\staging\ChromeAppWindowUDPPointerLock.Application\web
@@ -188,9 +191,13 @@ namespace ChromeAppWindowUDPPointerLock
 
 
 
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
 
-                        var ad = 0;
-                        var ws = 0;
+                        var keys_ad = 0;
+                        var keys_ws = 0;
+                        var keys_c = 0;
+
+                        var mousebutton = 0;
 
                         var x = 0;
                         var y = 0;
@@ -198,125 +205,25 @@ namespace ChromeAppWindowUDPPointerLock
 
                         // what about 255.255.255.255 ?
                         chrome.socket.getNetworkList().ContinueWithResult(
-                            async n =>
-                            {
-                                // which networks should we notify of our data?
+                             async n =>
+                             {
+                                 // which networks should we notify of our data?
 
-                                //new IHTMLPre { new { n.Length } }.AttachToDocument();
+                                 //new IHTMLPre { new { n.Length } }.AttachToDocument();
 
-                                foreach (var item in n)
-                                {
+                                 foreach (var item in n)
+                                 {
+                                     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+                                     // skip ipv6
+                                     if (item.address.Contains(":"))
+                                         continue;
 
-
-                                    new IHTMLButton { "send onmouseup " + item.address }.AttachTo(div).With(
-                                        async refresh =>
-                                        {
-                                            refresh.style.display = IStyle.DisplayEnum.block;
-
-                                            // experimental until ref count 33?
-                                            await refresh.async.onmousedown;
-
-                                            refresh.disabled = true;
-
-                                            while (await div.async.onmouseup)
-                                            {
+                                     //if (item.prefixLength != 4)
+                                     //    continue;
 
 
-                                                #region xml
-
-                                                var nmessage = x + ":" + y;
-                                                var Host = "";
-                                                var PublicPort = "";
-
-                                                var message =
-                                                    new XElement("string",
-                                                        new XAttribute("c", "" + 1),
-                                                        new XAttribute("n", nmessage),
-                                                        "Visit me at " + Host + ":" + PublicPort
-                                                    ).ToString();
-
-                                                #endregion
-
-                                                var data = Encoding.UTF8.GetBytes(message);	   //creates a variable b of type byte
-
-                                                var port = new Random().Next(16000, 40000);
-
-                                                //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
-
-                                                // where is bind async?
-                                                var socket = new UdpClient();
-                                                socket.Client.Bind(
-
-                                                    //new IPEndPoint(IPAddress.Any, port: 40000)
-                                                    new IPEndPoint(IPAddress.Parse(item.address), port)
-                                                );
-
-
-                                                //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
-
-                                                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
-                                                var s = await socket.SendAsync(
-                                                    data,
-                                                    data.Length,
-                                                    hostname: "239.1.2.3",
-                                                    port: 40804
-                                                );
-
-                                                socket.Close();
-
-                                            }
-                                        }
-                                    );
-
-                                    new IHTMLButton { "send onmousemove " + item.address }.AttachTo(div).With(
-                                      async refresh =>
-                                      {
-                                          refresh.style.display = IStyle.DisplayEnum.block;
-
-                                          // experimental until ref count 33?
-                                          await refresh.async.onmousedown;
-
-                                          refresh.disabled = true;
-
-                                          var port = new Random().Next(16000, 40000);
-
-                                          //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
-
-                                          // where is bind async?
-                                          var socket = new UdpClient();
-                                          socket.Client.Bind(
-
-                                              //new IPEndPoint(IPAddress.Any, port: 40000)
-                                              new IPEndPoint(IPAddress.Parse(item.address), port)
-                                          );
-
-
-                                          while (await div.async.onmousemove)
-                                          {
-                                              var nmessage = x + ":" + y;
-
-
-                                              var data = Encoding.UTF8.GetBytes(nmessage);	   //creates a variable b of type byte
-
-
-
-                                              //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
-
-                                              // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
-                                              var s = await socket.SendAsync(
-                                                  data,
-                                                  data.Length,
-                                                  hostname: "239.1.2.3",
-                                                  port: 41814
-                                              );
-
-                                              //socket.Close();
-
-                                          }
-                                      }
-                                  );
-
-                                    new IHTMLButton { "send onframe " + item.address }.AttachTo(div).With(
+                                     #region other
+                                     new IHTMLButton { "send onmouseup " + item.address }.AttachTo(div).With(
                                          async refresh =>
                                          {
                                              refresh.style.display = IStyle.DisplayEnum.block;
@@ -326,52 +233,38 @@ namespace ChromeAppWindowUDPPointerLock
 
                                              refresh.disabled = true;
 
-                                             var port = new Random().Next(16000, 40000);
-
-                                             //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
-
-                                             // where is bind async?
-                                             var socket = new UdpClient();
-                                             socket.Client.Bind(
-
-                                                 //new IPEndPoint(IPAddress.Any, port: 40000)
-                                                 new IPEndPoint(IPAddress.Parse(item.address), port)
-                                             );
-
-
-                                             // this will eat too much memory?
-                                             div.ownerDocument.defaultView.onframe +=
-                                                 delegate
-                                                 {
-                                                     var nmessage = x + ":" + y + ":" + ad + ":" + ws;
-
-
-                                                     var data = Encoding.UTF8.GetBytes(nmessage);	   //creates a variable b of type byte
-
-
-
-                                                     //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
-
-                                                     // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
-                                                     socket.Send(
-                                                         data,
-                                                         data.Length,
-                                                         hostname: "239.1.2.3",
-                                                         port: 41814
-                                                     );
-                                                 };
-
-                                             return;
-
-                                             //while (await Native.window.async.onframe)
-                                             //while (await div.async.onframe)
-                                             while (await div.ownerDocument.defaultView.async.onframe)
+                                             while (await div.async.onmouseup)
                                              {
-                                                 var nmessage = x + ":" + y + ":" + ad + ":" + ws;
 
 
-                                                 var data = Encoding.UTF8.GetBytes(nmessage);	   //creates a variable b of type byte
+                                                 #region xml
 
+                                                 var nmessage = x + ":" + y;
+                                                 var Host = "";
+                                                 var PublicPort = "";
+
+                                                 var message =
+                                                     new XElement("string",
+                                                         new XAttribute("c", "" + 1),
+                                                         new XAttribute("n", nmessage),
+                                                         "Visit me at " + Host + ":" + PublicPort
+                                                     ).ToString();
+
+                                                 #endregion
+
+                                                 var data = Encoding.UTF8.GetBytes(message);	   //creates a variable b of type byte
+
+                                                 var port = new Random().Next(16000, 40000);
+
+                                                 //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
+
+                                                 // where is bind async?
+                                                 var socket = new UdpClient();
+                                                 socket.Client.Bind(
+
+                                                     //new IPEndPoint(IPAddress.Any, port: 40000)
+                                                     new IPEndPoint(IPAddress.Parse(item.address), port)
+                                                 );
 
 
                                                  //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
@@ -381,16 +274,144 @@ namespace ChromeAppWindowUDPPointerLock
                                                      data,
                                                      data.Length,
                                                      hostname: "239.1.2.3",
-                                                     port: 41814
+                                                     port: 40804
                                                  );
 
-                                                 //socket.Close();
+                                                 socket.Close();
 
                                              }
                                          }
                                      );
-                                }
-                            }
+
+                                     new IHTMLButton { "send onmousemove " + item.address }.AttachTo(div).With(
+                                       async refresh =>
+                                       {
+                                           refresh.style.display = IStyle.DisplayEnum.block;
+
+                                           // experimental until ref count 33?
+                                           await refresh.async.onmousedown;
+
+                                           refresh.disabled = true;
+
+                                           var port = new Random().Next(16000, 40000);
+
+                                           //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
+
+                                           // where is bind async?
+                                           var socket = new UdpClient();
+                                           socket.Client.Bind(
+
+                                               //new IPEndPoint(IPAddress.Any, port: 40000)
+                                               new IPEndPoint(IPAddress.Parse(item.address), port)
+                                           );
+
+
+                                           while (await div.async.onmousemove)
+                                           {
+                                               var nmessage = x + ":" + y;
+
+
+                                               var data = Encoding.UTF8.GetBytes(nmessage);	   //creates a variable b of type byte
+
+
+
+                                               //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
+
+                                               // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                                               var s = await socket.SendAsync(
+                                                   data,
+                                                   data.Length,
+                                                   hostname: "239.1.2.3",
+                                                   port: 41814
+                                               );
+
+                                               //socket.Close();
+
+                                           }
+                                       }
+                                   );
+                                     #endregion
+
+
+                                     new IHTMLButton { "send onframe " + item.address }.AttachTo(div).With(
+                                          async refresh =>
+                                          {
+                                              refresh.style.color = "blue";
+
+                                              refresh.style.display = IStyle.DisplayEnum.block;
+
+                                              // experimental until ref count 33?
+                                              await refresh.async.onmousedown;
+
+                                              refresh.disabled = true;
+
+                                              var port = new Random().Next(16000, 40000);
+
+                                              //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
+
+                                              // where is bind async?
+                                              var socket = new UdpClient();
+                                              socket.Client.Bind(
+
+                                                  //new IPEndPoint(IPAddress.Any, port: 40000)
+                                                  new IPEndPoint(IPAddress.Parse(item.address), port)
+                                              );
+
+
+                                              // this will eat too much memory?
+                                              //div.ownerDocument.defaultView.onframe +=
+                                              div.onframe +=
+                                                  delegate
+                                                  {
+                                                      // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+                                                      var nmessage = x + ":" + y + ":" + keys_ad + ":" + keys_ws + ":" + keys_c + ":" + mousebutton;
+
+
+                                                      var data = Encoding.UTF8.GetBytes(nmessage);	   //creates a variable b of type byte
+
+
+
+                                                      //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
+
+                                                      // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                                                      socket.Send(
+                                                          data,
+                                                          data.Length,
+                                                          hostname: "239.1.2.3",
+                                                          port: 41814
+                                                      );
+                                                  };
+
+                                              return;
+
+                                              //while (await Native.window.async.onframe)
+                                              //while (await div.async.onframe)
+                                              while (await div.ownerDocument.defaultView.async.onframe)
+                                              {
+                                                  var nmessage = x + ":" + y + ":" + keys_ad + ":" + keys_ws + ":" + keys_c;
+
+
+                                                  var data = Encoding.UTF8.GetBytes(nmessage);	   //creates a variable b of type byte
+
+
+
+                                                  //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
+
+                                                  // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                                                  var s = await socket.SendAsync(
+                                                      data,
+                                                      data.Length,
+                                                      hostname: "239.1.2.3",
+                                                      port: 41814
+                                                  );
+
+                                                  //socket.Close();
+
+                                              }
+                                          }
+                                      );
+                                 }
+                             }
                         );
 
 
@@ -402,34 +423,54 @@ namespace ChromeAppWindowUDPPointerLock
 
                                  if (e.KeyCode == 65 || e.KeyCode == 68)
                                  {
-                                     ad = e.KeyCode;
+                                     keys_ad = e.KeyCode;
 
                                      //Native.document.title = new { e.CursorX, e.CursorY }.ToString();
-                                     wasd.innerText = new { e.KeyCode, ad, ws }.ToString();
+                                     wasd.innerText = new { e.KeyCode, ad = keys_ad, ws = keys_ws }.ToString();
 
                                      while ((await div.async.onkeyup).KeyCode != e.KeyCode) ;
 
                                      //var ee = await div.async.onkeyup;
 
-                                     ad = 0;
+                                     keys_ad = 0;
 
-                                     wasd.innerText = new { e.KeyCode, ad, ws }.ToString();
+                                     wasd.innerText = new { e.KeyCode, ad = keys_ad, ws = keys_ws }.ToString();
+
+                                     return;
+                                 }
+
+                                 // CS
+                                 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+                                 if (e.KeyCode == 67)
+                                 {
+                                     keys_c = e.KeyCode;
+
+                                     //Native.document.title = new { e.CursorX, e.CursorY }.ToString();
+                                     wasd.innerText = new { e.KeyCode, keys_ad, keys_ws, keys_c }.ToString();
+
+                                     while ((await div.async.onkeyup).KeyCode != e.KeyCode) ;
+
+                                     //var ee = await div.async.onkeyup;
+
+                                     keys_c = 0;
+
+                                     wasd.innerText = new { e.KeyCode, keys_ad, keys_ws, keys_c }.ToString();
 
                                      return;
                                  }
 
                                  {
-                                     ws = e.KeyCode;
+                                     keys_ws = e.KeyCode;
 
                                      //Native.document.title = new { e.CursorX, e.CursorY }.ToString();
-                                     wasd.innerText = new { e.KeyCode, ad, ws }.ToString();
+                                     wasd.innerText = new { e.KeyCode, ad = keys_ad, ws = keys_ws }.ToString();
 
                                      while ((await div.async.onkeyup).KeyCode != e.KeyCode) ;
                                      //var ee = await div.async.onkeyup;
 
-                                     ws = 0;
+                                     keys_ws = 0;
 
-                                     wasd.innerText = new { e.KeyCode, ad, ws }.ToString();
+                                     wasd.innerText = new { e.KeyCode, ad = keys_ad, ws = keys_ws }.ToString();
                                  }
                              };
 
@@ -453,15 +494,19 @@ namespace ChromeAppWindowUDPPointerLock
                             {
                                 // wont work for RemoteApp users tho
 
+                                mousebutton = (int)e.MouseButton;
+
                                 // await ?
                                 div.requestPointerLock();
                                 //e.CaptureMouse();
 
-                                //await div.async.onmouseup;
-                                var ee = await div.async.ondblclick;
+                                var ee = await div.async.onmouseup;
+                                //var ee = await div.async.ondblclick;
 
-                                //if (ee.MouseButton == IEvent.MouseButtonEnum.Right)
-                                Native.document.exitPointerLock();
+                                if (ee.MouseButton == IEvent.MouseButtonEnum.Right)
+                                    Native.document.exitPointerLock();
+
+                                mousebutton = 0;
 
                             };
                     }

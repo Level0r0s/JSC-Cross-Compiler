@@ -55,6 +55,7 @@ namespace OVRMyCubeWorldNDK
 
 
             // set by vrapi_GetPredictedTracking
+            public ovrTracking trackingOld;
             public ovrTracking tracking;
 
             object AppThreadFunction()
@@ -102,16 +103,20 @@ namespace OVRMyCubeWorldNDK
                         // no switch for jsc?
                         if (message.Id == MESSAGE.MESSAGE_ON_CREATE)
                         {
-                            ConsoleExtensions.trace("AppThreadFunction, MESSAGE_ON_CREATE");
+                            //ConsoleExtensions.trace("AppThreadFunction, MESSAGE_ON_CREATE");
                         }
                         else if (message.Id == MESSAGE.MESSAGE_ON_START) { }
-                        else if (message.Id == MESSAGE.MESSAGE_ON_RESUME) { appState.Resumed = true; }
+                        else if (message.Id == MESSAGE.MESSAGE_ON_RESUME)
+                        {
+                            appState.Resumed = true;
+                            //ConsoleExtensions.trace("AppThreadFunction, MESSAGE_ON_RESUME");
+                        }
                         else if (message.Id == MESSAGE.MESSAGE_ON_PAUSE) { appState.Resumed = false; }
                         else if (message.Id == MESSAGE.MESSAGE_ON_STOP) { }
                         else if (message.Id == MESSAGE.MESSAGE_ON_DESTROY) { appState.NativeWindow = null; destroyed = true; }
                         else if (message.Id == MESSAGE.MESSAGE_ON_SURFACE_CREATED)
                         {
-                            ConsoleExtensions.trace("AppThreadFunction, MESSAGE_ON_SURFACE_CREATED");
+                            //ConsoleExtensions.trace("AppThreadFunction, MESSAGE_ON_SURFACE_CREATED");
                             var m0 = message[0];
                             appState.NativeWindow = (native_window.ANativeWindow)m0.Pointer;
                         }
@@ -168,6 +173,8 @@ namespace OVRMyCubeWorldNDK
                     //ConsoleExtensions.tracei("AppThreadFunction, vrapi_GetPredictedDisplayTime");
                     var predictedDisplayTime = appState.Ovr.vrapi_GetPredictedDisplayTime(appState.FrameIndex);
                     //ConsoleExtensions.tracei("AppThreadFunction, vrapi_GetPredictedTracking");
+
+                    this.trackingOld = this.tracking;
                     this.tracking = appState.Ovr.vrapi_GetPredictedTracking(predictedDisplayTime);
 
                     // like step in physics?
@@ -178,21 +185,19 @@ namespace OVRMyCubeWorldNDK
                         var parms = appState.Renderer.ovrRenderer_RenderFrame(this, appState, ref tracking);
 
                         appState.tracei60("vrapi_SubmitFrame ", (int)appState.FrameIndex);
-                        appState.tracei60(" tracking.Status ", (int)tracking.Status);
+
+                        if (tracking.Status == trackingOld.Status)
+                            appState.tracei60(" tracking.Status ", (int)tracking.Status);
+                        else
+                            ConsoleExtensions.tracei(" tracking.Status ", (int)tracking.Status);
+
                         appState.tracei60(" tracking.HeadPose.Pose.Orientation.x ", (int)(1000 * tracking.HeadPose.Pose.Orientation.x));
                         appState.tracei60(" tracking.HeadPose.Pose.Orientation.y ", (int)(1000 * tracking.HeadPose.Pose.Orientation.y));
                         appState.tracei60(" tracking.HeadPose.Pose.Orientation.z ", (int)(1000 * tracking.HeadPose.Pose.Orientation.z));
                         appState.tracei60(" tracking.HeadPose.Pose.Orientation.w ", (int)(1000 * tracking.HeadPose.Pose.Orientation.w));
                         appState.Ovr.vrapi_SubmitFrame(ref parms);
 
-                        //                        meterValue: { r = 0.36 }
-                        //meterValue: { name = fie
-                        //meterValue: { key = _060
-                        //meterValue: { value = fa
-                        //meterValue: { r = false
-                        //atteryStatus
-                        //StatusCheck { status = 3
-                        //ryStatus = 0.36, intent
+
                     }
                     // 1891
                 }
@@ -225,6 +230,7 @@ namespace OVRMyCubeWorldNDK
 
 
             // called by onDestroy, then free
+            // Dispose
             public void ovrAppThread_Destroy(JNIEnv env)
             {
                 //1922

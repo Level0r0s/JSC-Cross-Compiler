@@ -131,8 +131,10 @@ namespace com.oculus.gles3jni
             GLES3JNILib.fields_mousex = aI["mousex"];
             GLES3JNILib.fields_mousey = aI["mousey"];
 
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
             GLES3JNILib.fields_ad = aI["ad"];
             GLES3JNILib.fields_ws = aI["ws"];
+            GLES3JNILib.fields_c = aI["c"];
 
             appThread.appState.Scene.Update();
 
@@ -215,16 +217,17 @@ namespace com.oculus.gles3jni
         static ovrAppThreadPointer onCreate(JNIEnv env, jobject obj, jobject activity)
         {
             // 1937
-            ConsoleExtensions.trace("enter onCreate, then ovrAppThread, then ovrMessageQueue_Enable");
+            ConsoleExtensions.trace("enter onCreate");
 
             appThread = new VrCubeWorld.ovrAppThread(env, activity);
 
             // set property?
             appThread.MessageQueue.ovrMessageQueue_Enable(true);
 
-            var message = default(VrCubeWorld.ovrMessage);
-            message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_CREATE, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
-            appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_CREATE);
+            //var message = default(VrCubeWorld.ovrMessage);
+            //message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_CREATE, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+            //appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
 
             return appThread;
         }
@@ -233,34 +236,39 @@ namespace com.oculus.gles3jni
         static void onStart(ref JNIEnv env, jobject obj)
         {
             // 1952
-            //var appThread = (VrCubeWorld.ovrAppThread)handle;
-            var message = default(VrCubeWorld.ovrMessage);
-            message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_START, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
-            appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_START);
+            //var message = default(VrCubeWorld.ovrMessage);
+            //message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_START, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+            //appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
         }
         static void onResume(ref JNIEnv env, jobject obj)
         {
             // 1961
-            //var appThread = (VrCubeWorld.ovrAppThread)handle;
-            var message = default(VrCubeWorld.ovrMessage);
-            message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_RESUME, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
-            appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+
+            ConsoleExtensions.trace("enter onResume, did we come back from the menu?");
+
+            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_RESUME);
+            //var message = default(VrCubeWorld.ovrMessage);
+            //message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_RESUME, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+            //appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
         }
         static void onPause(ref JNIEnv env, jobject obj)
         {
             // 1970
-            //var appThread = (VrCubeWorld.ovrAppThread)handle;
-            var message = default(VrCubeWorld.ovrMessage);
-            message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_PAUSE, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
-            appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_PAUSE);
+            //var message = default(VrCubeWorld.ovrMessage);
+            //message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_PAUSE, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+            //appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+
+            ConsoleExtensions.trace("exit onPause");
         }
         static void onStop(ref JNIEnv env, jobject obj)
         {
             // 1980
-            //var appThread = (VrCubeWorld.ovrAppThread)handle;
-            var message = default(VrCubeWorld.ovrMessage);
-            message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_STOP, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
-            appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_STOP);
+            //var message = default(VrCubeWorld.ovrMessage);
+            //message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_STOP, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+            //appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
         }
 
         #endregion
@@ -269,12 +277,17 @@ namespace com.oculus.gles3jni
         {
             // 1988
             //var appThread = (VrCubeWorld.ovrAppThread)handle;
-            var message = default(VrCubeWorld.ovrMessage);
-            message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_DESTROY, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
-            appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_DESTROY);
+            //var message = default(VrCubeWorld.ovrMessage);
+            //message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_DESTROY, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+            //appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
+
             appThread.MessageQueue.ovrMessageQueue_Enable(false);
             appThread.ovrAppThread_Destroy(env);
             stdlib_h.free(appThread);
+            appThread = null;
+
+            ConsoleExtensions.trace("exit onDestroy");
         }
 
         #endregion
@@ -357,13 +370,22 @@ namespace com.oculus.gles3jni
         static void onSurfaceDestroyed(JNIEnv env, jobject obj)
         {
             // 2074
-            //var appThread = (VrCubeWorld.ovrAppThread)handle;
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+
             var message = default(VrCubeWorld.ovrMessage);
             message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_SURFACE_DESTROYED, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
             appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
 
             native_window.ANativeWindow_release(appThread.NativeWindow);
             appThread.NativeWindow = default(native_window.ANativeWindow);
+
+            ConsoleExtensions.trace("exit onSurfaceDestroyed, are we in the menu?");
+
+            //      HWC | 7f8912c2b0 | 0000 | 0000 | 00 | 0100 | RGBA_8888   |    0.0,    0.0, 1440.0, 2560.0 |    0,    0, 1440, 2560 |    0,    0, 1440, 2560 | Mono background window
+            //      HWC | 7f8912c1d0 | 0000 | 0000 | 04 | 0105 | RGBA_8888   |    0.0,    0.0, 2560.0, 1440.0 |    0,    0, 1440, 2560 |    0,    0, 2560, 1440 | OVRMyCubeWorld.Activities/OVRMyCubeWorld.Activities.ApplicationActivity
+            //FB TARGET | 7f96525080 | 0000 | 0000 | 00 | 0105 | RGBA_8888   |    0.0,    0.0, 1440.0, 2560.0 |    0,    0, 1440, 2560 |    0,    0,    0,    0 | HWC_FRAMEBUFFER_TARGET
+
         }
         #endregion
 
