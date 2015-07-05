@@ -23,10 +23,13 @@ namespace OVRMyCubeWorldNDK
             public int Width;
             public int Height;
             public int Multisamples;
+
+            // set via glGenTextures
             public uint ColorTexture;
             public uint DepthBuffer;
 
             // set by ovrRenderTexture_Create
+            // used via glBindFramebuffer
             public uint FrameBuffer;
 
             // called by ovrRenderer_Clear
@@ -105,39 +108,10 @@ namespace OVRMyCubeWorldNDK
                 this.FrameBuffer = 0;
             }
 
-            // called by ovrRenderer_RenderFrame
+            // inlined
             //public void ovrRenderTexture_SetCurrent()
-            //{
-            //    // 753
-            //    gl3.glBindFramebuffer(gl3.GL_FRAMEBUFFER, this.FrameBuffer);
-
-            //}
-
-            // called by ovrRenderer_RenderFrame
             //public static void ovrRenderTexture_SetNone()
-            //{
-            //    // 758
-
-            //    gl3.glBindFramebuffer(gl3.GL_FRAMEBUFFER, 0);
-
-            //}
-
-            static readonly int[] depthAttachment = new[] { gl3.GL_DEPTH_ATTACHMENT };
-
-            // called by ovrRenderer_RenderFrame
-            // ovrRenderTexture_SetNone
-            public void ovrRenderTexture_Resolve()
-            {
-                // 763
-
-                // Discard the depth buffer, so the tiler won't need to write it back out to memory.
-
-
-                gl3.glInvalidateFramebuffer(gl3.GL_FRAMEBUFFER, 1, depthAttachment);
-
-                // Flush this frame worth of commands.
-                gl3.glFlush();
-            }
+            //public void ovrRenderTexture_Resolve()
         }
 
 

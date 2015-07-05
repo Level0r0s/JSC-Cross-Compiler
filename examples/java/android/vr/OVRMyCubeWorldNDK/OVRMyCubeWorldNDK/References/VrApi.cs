@@ -36,63 +36,8 @@ namespace OVRMyCubeWorldNDK
         VRAPI_FRAME_INIT_MESSAGE_FLUSH
     }
 
-    // Row-major 4x4 matrix.
-    [Script(IsNative = true)]
 
-    //float M[4][4];
-    // 
-
-    //public unsafe struct float4
-    //{
-    //    float float0;
-    //    float float1;
-    //    float float2;
-    //    float float3;
-    //}
-
-    //public unsafe struct float4x4 //: VrApi_h
-    //{
-    //    public fixed float __value[4 * 4];
-
-    //    // 16 floats in size!
-
-    //    //float4 row0;
-    //    //float4 row1;
-    //    //float4 row2;
-    //    //float4 row3;
-
-    //    // can we return ref float?
-
-    //    float* this[int row]
-    //    {
-    //        get
-    //        {
-    //            return (float*)&this;
-    //        }
-    //    }
-    //}
-
-
-    // allocated by glMapBufferRange, sizeof
-    public unsafe struct ovrMatrix4f //: VrApi_h
-    {
-        // Fixed sized buffers can only be one-dimensional.
-        // http://stackoverflow.com/questions/665573/multidimensional-arrays-in-a-struct-in-c-sharp
-
-        // sent to glUniformMatrix4fv
-
-        //public float M[4,4];
-        // 8 * 4 * 4 = 128
-        public fixed float M[4 * 4]; // no need to init it as it is native
-
-        // http://stackoverflow.com/questions/15071775/struct-with-fixed-sized-array-of-another-struct
-
-        // now we cannot get the size for allocator anymore?
-
-        // X:\jsc.svn\examples\c\Test\TestSizeOfUserStruct\TestSizeOfUserStruct\Class1.cs
-        //Error	7	Cannot take the address of, get the size of, or declare a pointer to a managed type ('OVRMyCubeWorldNDK.ovrMatrix4f')	X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRMyCubeWorldNDK\VrCubeWorld.Renderer.cs	100	44	OVRMyCubeWorldNDK
-
-    }
+  
 
     [Script(IsNative = true)]
     public struct ovrInitParms : VrApi_h
@@ -209,7 +154,7 @@ namespace OVRMyCubeWorldNDK
         // These threads will get SCHED_FIFO.
         public pid_t MainThreadTid;
 
-        public int RenderThreadTid;
+        //public int RenderThreadTid;
     }
 
 
@@ -400,6 +345,8 @@ namespace OVRMyCubeWorldNDK
             throw null;
         }
 
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150705
         public static ovrMatrix4f ovrMatrix4f_CreateRotation(float radiansX, float radiansY, float radiansZ)
         {
             throw null;

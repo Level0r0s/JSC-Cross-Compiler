@@ -21,8 +21,18 @@ namespace ScriptCoreLibNative.SystemHeaders
 
     // where is it defined???
     [Script(IsNative = true, PointerName = "size_t")]
-    public struct size_t : jni_h
+    public unsafe struct size_t : jni_h
     {
+        // X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorldNDK\References\VrApi.ovrMatrix4f.cs
+        public static implicit operator size_t(void* x)
+        {
+            return default(size_t);
+        }
+
+        public static implicit operator size_t(float[,] x)
+        {
+            return default(size_t);
+        }
     }
 
 

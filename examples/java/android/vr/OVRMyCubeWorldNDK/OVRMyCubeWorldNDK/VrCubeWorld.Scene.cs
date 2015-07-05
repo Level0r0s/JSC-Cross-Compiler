@@ -40,6 +40,7 @@ namespace OVRMyCubeWorldNDK
             public readonly ovrProgram Program = new ovrProgram();
             public readonly ovrGeometry Cube = new ovrGeometry();
 
+            // set after ovrScene_Create
             // 815
             public bool CreatedScene = false;
             public bool CreatedVAOs = false;

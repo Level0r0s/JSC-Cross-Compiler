@@ -98,12 +98,15 @@ namespace OVRMyCubeWorldNDK
                     this.BufferIndex = 0;
 
                     // https://www.kickstarter.com/projects/wearality/wearality-sky-limitless-vr
+                    // jsc first pass should be a diff, to see if UDP patch can be issued instead of full build.
 
                     // Setup the projection matrix.
                     this.ProjectionMatrix = VrApi_Helpers.ovrMatrix4f_CreateProjectionFov(
-                                                        hmdInfo_SuggestedEyeFov[0] * ((float)Math.PI / 180.0f),
-                                                        hmdInfo_SuggestedEyeFov[1] * ((float)Math.PI / 180.0f),
-                                                        0.0f, 0.0f, 1.0f, 0.0f);
+                        hmdInfo_SuggestedEyeFov[0] * ((float)Math.PI / 180.0f),
+                        hmdInfo_SuggestedEyeFov[1] * ((float)Math.PI / 180.0f),
+                        0.0f, 0.0f,
+                        1.0f, 0.0f
+                    );
 
                     this.TanAngleMatrix = VrApi_Helpers.ovrMatrix4f_TanAngleMatrixFromProjection(ref this.ProjectionMatrix);
                 }
@@ -111,7 +114,7 @@ namespace OVRMyCubeWorldNDK
                 //ConsoleExtensions.trace("exit ovrRenderer_Create");
             }
 
-
+            // Dispose
             // called by AppThreadFunction
             public void ovrRenderer_Destroy()
             {
@@ -140,14 +143,14 @@ namespace OVRMyCubeWorldNDK
                 // editn n continue?
                 // 1049
 
-                ovrFrameParms parms = VrApi_Helpers.vrapi_DefaultFrameParms(ref appState.Java, ovrFrameInit.VRAPI_FRAME_INIT_DEFAULT, 0u);
-                parms.FrameIndex = appState.FrameIndex;
-                parms.MinimumVsyncs = appState.MinimumVsyncs;
+                ovrFrameParms parms = VrApi_Helpers.vrapi_DefaultFrameParms(ref appThread.appState.Java, ovrFrameInit.VRAPI_FRAME_INIT_DEFAULT, 0u);
+                parms.FrameIndex = appThread.appState.FrameIndex;
+                parms.MinimumVsyncs = appThread.appState.MinimumVsyncs;
 
 
                 #region InstanceTransformBuffer
                 var sizeof_ovrMatrix4f = sizeof(ovrMatrix4f);
-                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, appState.Scene.InstanceTransformBuffer);
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, appThread.appState.Scene.InstanceTransformBuffer);
 
                 var cubeTransforms = gl3.glMapBufferRange<ovrMatrix4f>(
                     gl3.GL_ARRAY_BUFFER, 0,
@@ -173,11 +176,19 @@ namespace OVRMyCubeWorldNDK
                     //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, ovrMatrix4f_CreateTranslation i ", i);
 
                     // VR thread wants to know where our stuff is. lowframe thread changes data it may look choppy.
-                    var translation = VrApi_Helpers.ovrMatrix4f_CreateTranslation(
+                    //var translation = VrApi_Helpers.ovrMatrix4f_CreateTranslation(
+                    //    appState.Scene.CubePositions[i].x,
+                    //    appState.Scene.CubePositions[i].y,
+                    //    appState.Scene.CubePositions[i].z
+                    //);
+
+
+                    var translation = __ovrMatrix4f.CreateTranslation(
                         appState.Scene.CubePositions[i].x,
                         appState.Scene.CubePositions[i].y,
                         appState.Scene.CubePositions[i].z
                     );
+
 
                     //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, ovrMatrix4f_Multiply i ", i);
                     //var transform = VrApi_Helpers.ovrMatrix4f_Multiply(ref translation, ref rotation);
@@ -230,39 +241,53 @@ namespace OVRMyCubeWorldNDK
                 //tracking1.HeadPose.Pose.Orientation.x += GLES3JNILib.fields_mousey * 0.005f;
 
                 //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, vrapi_GetCenterEyeViewMatrix");
-                var centerEyeViewMatrix0 = VrApi_Helpers.vrapi_GetCenterEyeViewMatrix(ref headModelParms, ref appThread.tracking, default(ovrMatrix4f*));
 
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150705
+                var centerEyeViewMatrix0 = VrApi_Helpers.vrapi_GetCenterEyeViewMatrix(ref headModelParms, ref appThread.tracking, default(ovrMatrix4f*));
+                //__ovrMatrix4f __centerEyeViewMatrix0 = &centerEyeViewMatrix0;
 
                 // cant modify y thisway?
                 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150703/mousex
-                var centerEyeViewMatrix1 = VrApi_Helpers.ovrMatrix4f_CreateRotation(
-                    0.0f,
+                //var centerEyeViewMatrix1 = VrApi_Helpers.ovrMatrix4f_CreateRotation(
+                //    0.0f,
 
-                    //(float)(Math.Cos(appState.FrameIndex * 0.01f) * 0.05f),
-                    //GLES3JNILib.fields_mousey * 0.005f,
-
-
-                    //appState.FrameIndex * 0.05f
-
-                    // can we get it via udp mouse lock?
-                    //appState.FrameIndex * 0.005f
-
-                    // mouslock should be automatic, if the headset is put on.
-                    GLES3JNILib.fields_mousex * 0.005f
-                    //(float)(Math.Sin(appState.FrameIndex * 0.01f) * 0.05f)
-                    ,
+                //    //(float)(Math.Cos(appState.FrameIndex * 0.01f) * 0.05f),
+                //    //GLES3JNILib.fields_mousey * 0.005f,
 
 
-                    //GLES3JNILib.fields_mousey * 0.005f
-                    0.0f
+                //    //appState.FrameIndex * 0.05f
+
+                //    // can we get it via udp mouse lock?
+                //    //appState.FrameIndex * 0.005f
+
+                //    // mouslock should be automatic, if the headset is put on.
+                //    GLES3JNILib.fields_mousex * 0.005f
+                //    //(float)(Math.Sin(appState.FrameIndex * 0.01f) * 0.05f)
+                //    ,
 
 
-                    );
+                //    //GLES3JNILib.fields_mousey * 0.005f
+                //    0.0f
 
-                var centerEyeViewMatrix = VrApi_Helpers.ovrMatrix4f_Multiply(
-                    ref centerEyeViewMatrix0,
-                    ref centerEyeViewMatrix1
-                );
+
+                //    );
+
+                var centerEyeViewMatrix1 = __ovrMatrix4f.CreateRotation(0, GLES3JNILib.fields_mousex * 0.005f, 0);
+
+                //__ovrMatrix4f __centerEyeViewMatrix1 = &centerEyeViewMatrix1;
+
+
+                //var centerEyeViewMatrix = __centerEyeViewMatrix0.Multiply(__centerEyeViewMatrix1);
+                //var centerEyeViewMatrix = __ovrMatrix4f.Multiply(__centerEyeViewMatrix0, __centerEyeViewMatrix1);
+                //var centerEyeViewMatrix = __ovrMatrix4f.Multiply(&centerEyeViewMatrix0, &centerEyeViewMatrix1);
+                //var centerEyeViewMatrix = __ovrMatrix4f.Multiply(&centerEyeViewMatrix0, &centerEyeViewMatrix1);
+                var centerEyeViewMatrix = __ovrMatrix4f.Multiply(centerEyeViewMatrix0, centerEyeViewMatrix1);
+                //var centerEyeViewMatrix = __ovrMatrix4f.Multiply(ref centerEyeViewMatrix0, ref centerEyeViewMatrix1);
+
+                //var centerEyeViewMatrix = VrApi_Helpers.ovrMatrix4f_Multiply(
+                //    ref centerEyeViewMatrix0,
+                //    ref centerEyeViewMatrix1
+                //);
 
                 // 1077
 
@@ -272,14 +297,13 @@ namespace OVRMyCubeWorldNDK
                     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150618/ovrmatrix4f
                     var eyeViewMatrix = VrApi_Helpers.vrapi_GetEyeViewMatrix(ref headModelParms, ref centerEyeViewMatrix, eye);
 
-                    fixed (ovrMatrix4f* ref_ProjectionMatrix = &appState.Renderer.ProjectionMatrix)
-                    fixed (ovrRenderTexture* rt = &appState.Renderer.RenderTextures[appState.Renderer.BufferIndex, eye])
+                    fixed (ovrMatrix4f* ref_ProjectionMatrix = &appThread.appState.Renderer.ProjectionMatrix)
+                    fixed (ovrRenderTexture* rt = &appState.Renderer.RenderTextures[appThread.appState.Renderer.BufferIndex, eye])
                     {
                         //// 1085
                         //appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_SetCurrent BufferIndex ", appState.Renderer.BufferIndex);
                         //appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_SetCurrent eye ", eye);
 
-                        //rt->ovrRenderTexture_SetCurrent();
                         gl3.glBindFramebuffer(gl3.GL_FRAMEBUFFER, rt->FrameBuffer);
 
 
@@ -297,16 +321,17 @@ namespace OVRMyCubeWorldNDK
                         gl3.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
                         gl3.glClear(gl3.GL_COLOR_BUFFER_BIT | gl3.GL_DEPTH_BUFFER_BIT);
 
-                        gl3.glUseProgram(appState.Scene.Program.Program);
+                        gl3.glUseProgram(appThread.appState.Scene.Program.Program);
 
                         // 1094
 
-                        gl3.glUniformMatrix4fv(appState.Scene.Program.Uniforms[(int)ovrUniform_index.UNIFORM_VIEW_MATRIX], 1, true, (float*)&eyeViewMatrix);
-                        gl3.glUniformMatrix4fv(appState.Scene.Program.Uniforms[(int)ovrUniform_index.UNIFORM_PROJECTION_MATRIX], 1, true, (float*)ref_ProjectionMatrix);
+                        gl3.glUniformMatrix4fv(appThread.appState.Scene.Program.Uniforms[(int)ovrUniform_index.UNIFORM_VIEW_MATRIX], 1, true, (float*)&eyeViewMatrix);
+                        gl3.glUniformMatrix4fv(appThread.appState.Scene.Program.Uniforms[(int)ovrUniform_index.UNIFORM_PROJECTION_MATRIX], 1, true, (float*)ref_ProjectionMatrix);
 
-                        gl3.glBindVertexArray(appState.Scene.Cube.VertexArrayObject);
-                        gl3.glDrawElementsInstanced(gl3.GL_TRIANGLES, appState.Scene.Cube.IndexCount, gl3.GL_UNSIGNED_SHORT, null, NUM_INSTANCES);
+                        gl3.glBindVertexArray(appThread.appState.Scene.Cube.VertexArrayObject);
+                        gl3.glDrawElementsInstanced(gl3.GL_TRIANGLES, appThread.appState.Scene.Cube.IndexCount, gl3.GL_UNSIGNED_SHORT, null, NUM_INSTANCES);
                         gl3.glBindVertexArray(0);
+
                         gl3.glUseProgram(0);
 
                         // 1104
@@ -333,8 +358,14 @@ namespace OVRMyCubeWorldNDK
                         #endregion
 
                         //// 1119
-                        //appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_Resolve, glInvalidateFramebuffer");
-                        rt->ovrRenderTexture_Resolve();
+                        #region ovrRenderTexture_Resolve
+                        // 763
+                        // Discard the depth buffer, so the tiler won't need to write it back out to memory.
+                        gl3.glInvalidateFramebuffer(gl3.GL_FRAMEBUFFER, 1, depthAttachment);
+                        // Flush this frame worth of commands.
+                        gl3.glFlush();
+                        #endregion
+
 
 
                         parms.Layers[(int)ovrFrameLayerType.VRAPI_FRAME_LAYER_TYPE_WORLD].Images[eye].TexId = rt->ColorTexture;
@@ -343,17 +374,18 @@ namespace OVRMyCubeWorldNDK
                     }
                 }
 
-                //ovrRenderTexture.ovrRenderTexture_SetNone();
                 gl3.glBindFramebuffer(gl3.GL_FRAMEBUFFER, 0);
-
 
                 appState.Renderer.BufferIndex = (appState.Renderer.BufferIndex + 1) % NUM_BUFFERS;
 
                 // 1130
-                appState.tracei60("exit ovrRenderer_RenderFrame BufferIndex", appState.Renderer.BufferIndex);
+                //appState.tracei60("exit ovrRenderer_RenderFrame BufferIndex", appState.Renderer.BufferIndex);
                 //ConsoleExtensions.tracei("exit ovrRenderer_RenderFrame");
                 return parms;
             }
+
+            static readonly int[] depthAttachment = new[] { gl3.GL_DEPTH_ATTACHMENT };
+
         }
 
 

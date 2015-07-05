@@ -128,6 +128,8 @@ namespace OVRMyCubeWorldNDK
             public uint VertexBuffer = 0;
             public uint IndexBuffer = 0;
 
+
+            // set via glGenVertexArrays
             // sent to glBindVertexArray
             public uint VertexArrayObject = 0;
 

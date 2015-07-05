@@ -52,6 +52,8 @@ namespace OVRMyCubeWorldNDK
         // created by ovrScene
         public class ovrProgram
         {
+            // set by ovrProgram_Create
+            // sent to glUniformMatrix4fv
             public readonly int[] Uniforms = new int[MAX_PROGRAM_UNIFORMS];      // ProgramUniforms[].name
             public readonly int[] Textures = new int[MAX_PROGRAM_TEXTURES];      // Texture%i
 

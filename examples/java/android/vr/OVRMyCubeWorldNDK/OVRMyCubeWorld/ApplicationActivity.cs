@@ -62,9 +62,12 @@ namespace OVRMyCubeWorld.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+
+
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell dumpsys SurfaceFlinger
         // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell dumpsys battery
 
-        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
         // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG"
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity"
@@ -73,7 +76,8 @@ namespace OVRMyCubeWorld.Activities
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVRMyCubeWorld.Activities
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVRMyCubeWorld.Activities/OVRMyCubeWorld.Activities.ApplicationActivity
 
-        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell dumpsys SurfaceFlinger
+        // sometimes the vrsvc fails to init and shows black screen?
+
 
         // https://code.google.com/p/android/issues/detail?can=2&start=0&num=100&q=&colspec=ID%20Type%20Status%20Owner%20Summary%20Stars&groupby=&sort=&id=75442
 
