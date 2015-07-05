@@ -448,7 +448,7 @@ namespace WebGLLesson10
 
 
 
-                        glMatrix.mat4.perspective(45, gl_viewportWidth / gl_viewportHeight, 0.1f, 100.0f, pMatrix);
+                        glMatrix.mat4.perspective(45, (float)Native.window.aspect, 0.1f, 100.0f, pMatrix);
 
                         glMatrix.mat4.identity(mvMatrix);
 

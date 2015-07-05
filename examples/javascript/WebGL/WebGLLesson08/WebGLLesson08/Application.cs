@@ -538,7 +538,7 @@ namespace WebGLLesson08
                             gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
                             gl.enable(gl.BLEND);
                             gl.disable(gl.DEPTH_TEST);
-                            gl.uniform1f(shaderProgram_alphaUniform, toolbar.alpha.ToFloat());
+                            gl.uniform1f(shaderProgram_alphaUniform, toolbar.alpha);
                         }
                         else
                         {
@@ -555,15 +555,15 @@ namespace WebGLLesson08
                         {
                             gl.uniform3f(
                                 shaderProgram_ambientColorUniform,
-                                toolbar.ambientR.ToFloat(),
-                                toolbar.ambientG.ToFloat(),
-                                toolbar.ambientB.ToFloat()
+                                toolbar.ambientR,
+                                toolbar.ambientG,
+                                toolbar.ambientB
                             );
 
-                            var lightingDirection = new[]{
-                                toolbar.lightDirectionX.ToFloat(),
-                                toolbar.lightDirectionY.ToFloat(),
-                                toolbar.lightDirectionZ.ToFloat()
+                            var lightingDirection = new float []{
+                                toolbar.lightDirectionX,
+                                toolbar.lightDirectionY,
+                                toolbar.lightDirectionZ
                             };
                             var adjustedLD = glMatrix.vec3.create();
                             glMatrix.vec3.normalize(lightingDirection, adjustedLD);
@@ -572,9 +572,9 @@ namespace WebGLLesson08
 
                             gl.uniform3f(
                                 shaderProgram_directionalColorUniform,
-                                toolbar.directionalR.ToFloat(),
-                                toolbar.directionalG.ToFloat(),
-                                toolbar.directionalB.ToFloat()
+                                toolbar.directionalR,
+                                toolbar.directionalG,
+                                toolbar.directionalB
                             );
                         }
 
