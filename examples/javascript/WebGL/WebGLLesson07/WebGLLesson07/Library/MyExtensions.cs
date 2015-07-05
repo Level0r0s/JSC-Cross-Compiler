@@ -14,9 +14,9 @@ namespace WebGLLesson07.Library
                 return 1;
             return 0;
         }
-        public static float ToFloat(this IHTMLInput i)
-        {
-            return float.Parse(i.value);
-        }
+        //public static float ToFloat(this IHTMLInput i)
+        //{
+        //    return float.Parse(i.value);
+        //}
     }
 }

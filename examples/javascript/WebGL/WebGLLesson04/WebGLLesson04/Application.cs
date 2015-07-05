@@ -449,24 +449,24 @@ namespace WebGLLesson04
             {
                 c++;
 
-                Native.Document.title = "" + c;
+                Native.document.title = "" + c;
 
                 drawScene();
                 animate();
             };
 
 
-            new IHTMLAnchor { "drag me to my.jsc-solutions.net" }.AttachToDocument().With(
-                dragme =>
-                {
-                    dragme.style.position = IStyle.PositionEnum.@fixed;
-                    dragme.style.left = "1em";
-                    dragme.style.bottom = "1em";
-                    dragme.style.color = "yellow";
+            //new IHTMLAnchor { "drag me to my.jsc-solutions.net" }.AttachToDocument().With(
+            //    dragme =>
+            //    {
+            //        dragme.style.position = IStyle.PositionEnum.@fixed;
+            //        dragme.style.left = "1em";
+            //        dragme.style.bottom = "1em";
+            //        dragme.style.color = "yellow";
 
-                    dragme.AllowToDragAsApplicationPackage();
-                }
-            );
+            //        dragme.AllowToDragAsApplicationPackage();
+            //    }
+            //);
 
         }
 

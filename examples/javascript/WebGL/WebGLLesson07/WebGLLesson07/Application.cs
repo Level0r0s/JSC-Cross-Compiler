@@ -531,15 +531,15 @@ namespace WebGLLesson07
                         {
                             gl.uniform3f(
                                 shaderProgram_ambientColorUniform,
-                                toolbar.ambientR.ToFloat(),
-                                toolbar.ambientG.ToFloat(),
-                                toolbar.ambientB.ToFloat()
+                                toolbar.ambientR,
+                                toolbar.ambientG,
+                                toolbar.ambientB
                             );
 
-                            var lightingDirection = new[]{
-                                toolbar.lightDirectionX.ToFloat(),
-                                toolbar.lightDirectionY.ToFloat(),
-                                toolbar.lightDirectionZ.ToFloat()
+                            var lightingDirection = new float[]{
+                                toolbar.lightDirectionX,
+                                toolbar.lightDirectionY,
+                                toolbar.lightDirectionZ
                             };
                             var adjustedLD = glMatrix.vec3.create();
                             glMatrix.vec3.normalize(lightingDirection, adjustedLD);
@@ -548,9 +548,9 @@ namespace WebGLLesson07
 
                             gl.uniform3f(
                                 shaderProgram_directionalColorUniform,
-                                toolbar.directionalR.ToFloat(),
-                                toolbar.directionalG.ToFloat(),
-                                toolbar.directionalB.ToFloat()
+                                toolbar.directionalR,
+                                toolbar.directionalG,
+                                toolbar.directionalB
                             );
                         }
 
@@ -614,7 +614,7 @@ namespace WebGLLesson07
                     {
                         c++;
 
-                        Native.Document.title = "" + new { c, filter };
+                        Native.document.title = "" + new { c, filter };
 
                         handleKeys();
                         drawScene();
