@@ -174,11 +174,11 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
 		// fixme: rewrtie to extension methods
 
-		[System.Obsolete("await async.onload")]
+        //[System.Obsolete("await async.onload")]
 		[Script(DefineAsStatic = true)]
 		public void InvokeOnComplete(global::System.Action<IHTMLImage> e)
 		{
-			InvokeOnComplete(e, 100);
+			InvokeOnComplete(e, 1000 / 15);
 		}
 
 		[System.Obsolete("await async.onload")]

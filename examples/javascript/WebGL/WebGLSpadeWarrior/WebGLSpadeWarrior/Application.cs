@@ -30,7 +30,7 @@ namespace WebGLSpadeWarrior
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
-
+        // https://zproxy.wordpress.com/2015/07/04/gearvr-ovrmycubeworldndk/
 
 
         /// <summary>
@@ -121,11 +121,46 @@ namespace WebGLSpadeWarrior
             var shaderProgram_mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
 
 
+            // X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorldNDK\References\VrApi.ovrMatrix4f.cs
+            // exports.mat4 = require("./gl-matrix/mat4.js");
+            // https://github.com/toji/gl-matrix/blob/master/src/gl-matrix.js
+            // https://github.com/toji/gl-matrix/blob/master/src/gl-matrix/mat4.js
+            // new glMatrix.ARRAY_TYPE(16);
+            // https://github.com/toji/gl-matrix/blob/master/src/gl-matrix/common.js
+            //  Float32Array : Array
 
-            var mvMatrix = glMatrix.mat4.create();
+
+
+            var __mat4 = new
+            {
+                create = new Func<float[]>(
+                    () => new float[]
+                    {
+                        1, 0, 0, 0,
+                        0, 1, 0, 0,
+                        0, 0, 1, 0,
+                        0, 0, 0, 1,
+                    }
+                )
+            };
+
+            // should jsc default to Float32Array  ?
+            //var __mvMatrix = new float[]
+            //{
+            //    1, 0, 0, 0,
+            //    0, 1, 0, 0,
+            //    0, 0, 1, 0,
+            //    0, 0, 0, 1,
+            //};
+
+            //var mvMatrix = glMatrix.mat4.create();
+            var mvMatrix = new Float32Array(__mat4.create());
             var mvMatrixStack = new Stack<Float32Array>();
 
-            var pMatrix = glMatrix.mat4.create();
+            // X:\jsc.svn\examples\javascript\WebGL\WebGLSpadeWarrior\WebGLSpadeWarrior\Shaders\GeometryVertexShader.cs
+            var pMatrix = new Float32Array(__mat4.create());
+            //var pMatrix = new ScriptCoreLib.GLSL.mat4(1);
+            //var pMatrix = glMatrix.mat4.create();
 
 
             #region mvMatrixScope
@@ -235,7 +270,7 @@ namespace WebGLSpadeWarrior
                 1.0f, 0.5f, 0.0f, 1.0f, // Bottom face
                 1.0f, 0.5f, 0.0f, 1.0f, // Bottom face
 
-                
+
                 1.0f, 0.8f, 0.0f, 1.0f, // Right face
                 1.0f, 0.8f, 0.0f, 1.0f, // Right face
                 1.0f, 0.8f, 0.0f, 1.0f, // Right face
@@ -275,7 +310,7 @@ namespace WebGLSpadeWarrior
                 0.0f, 0.5f, 1.0f, 1.0f, // Bottom face
                 0.0f, 0.5f, 1.0f, 1.0f, // Bottom face
 
-                
+
                 0.0f, 0.8f, 1.0f, 1.0f, // Right face
                 0.0f, 0.8f, 1.0f, 1.0f, // Right face
                 0.0f, 0.8f, 1.0f, 1.0f, // Right face
@@ -315,7 +350,7 @@ namespace WebGLSpadeWarrior
                 0.0f, 0.7f, 0.0f, 1.0f, // Bottom face
                 0.0f, 0.7f, 0.0f, 1.0f, // Bottom face
 
-                
+
                 0.0f, 0.8f, 0.0f, 1.0f, // Right face
                 0.0f, 0.8f, 0.0f, 1.0f, // Right face
                 0.0f, 0.8f, 0.0f, 1.0f, // Right face
@@ -494,9 +529,9 @@ namespace WebGLSpadeWarrior
                 mvMatrixScope(
                     delegate
                     {
-                        glMatrix.mat4.translate(mvMatrix, new float[] { 
-                            - 1.5f, 
-                            0, 
+                        glMatrix.mat4.translate(mvMatrix, new float[] {
+                            - 1.5f,
+                            0,
                              - 7f});
                         glMatrix.mat4.rotate(mvMatrix, degToRad(-80), new float[] { 1f, 0f, 0f });
 
@@ -580,9 +615,9 @@ namespace WebGLSpadeWarrior
                                   (x, y, z) =>
                                   {
                                       mvPushMatrix();
-                                      glMatrix.mat4.translate(mvMatrix, new float[] { 
-                                        2 * cubesize * x, 
-                                        2 * cubesize * y, 
+                                      glMatrix.mat4.translate(mvMatrix, new float[] {
+                                        2 * cubesize * x,
+                                        2 * cubesize * y,
                                         2 * cubesize  * z});
 
                                       gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
@@ -614,38 +649,38 @@ namespace WebGLSpadeWarrior
                                       mvPushMatrix();
 
                                       #region hiprotation
-                                      glMatrix.mat4.translate(mvMatrix, new float[] { 
-                                        2 * cubesize * 2, 
-                                        2 * cubesize * 0, 
+                                      glMatrix.mat4.translate(mvMatrix, new float[] {
+                                        2 * cubesize * 2,
+                                        2 * cubesize * 0,
                                         2 * cubesize * 11});
 
                                       glMatrix.mat4.rotate(mvMatrix, degToRad(hiprotation), new float[] { 0f, 1f, 0f });
-                                      glMatrix.mat4.translate(mvMatrix, new float[] { 
-                                        2 * cubesize * -2, 
-                                        2 * cubesize * 0, 
+                                      glMatrix.mat4.translate(mvMatrix, new float[] {
+                                        2 * cubesize * -2,
+                                        2 * cubesize * 0,
                                         2 * cubesize * -11});
                                       #endregion
 
 
 
-                                      glMatrix.mat4.translate(mvMatrix, new float[] { 
-                                        2 * cubesize * 1, 
-                                        2 * cubesize * y, 
+                                      glMatrix.mat4.translate(mvMatrix, new float[] {
+                                        2 * cubesize * 1,
+                                        2 * cubesize * y,
                                         2 * cubesize  * 0});
 
 
                                       mvPushMatrix();
 
                                       #region kneerotation
-                                      glMatrix.mat4.translate(mvMatrix, new float[] { 
-                                        2 * cubesize * 1, 
-                                        2 * cubesize * 0, 
+                                      glMatrix.mat4.translate(mvMatrix, new float[] {
+                                        2 * cubesize * 1,
+                                        2 * cubesize * 0,
                                         2 * cubesize * 6f});
 
                                       glMatrix.mat4.rotate(mvMatrix, degToRad(kneerotation), new float[] { 0f, 1f, 0f });
-                                      glMatrix.mat4.translate(mvMatrix, new float[] { 
-                                        2 * cubesize * -1, 
-                                        2 * cubesize * 0, 
+                                      glMatrix.mat4.translate(mvMatrix, new float[] {
+                                        2 * cubesize * -1,
+                                        2 * cubesize * 0,
                                         2 * cubesize * -6f});
                                       #endregion
 
@@ -678,9 +713,9 @@ namespace WebGLSpadeWarrior
 
                                       #region upper leg
                                       mvPushMatrix();
-                                      glMatrix.mat4.translate(mvMatrix, new float[] { 
-                                        2 * cubesize * 1, 
-                                        2 * cubesize * 0, 
+                                      glMatrix.mat4.translate(mvMatrix, new float[] {
+                                        2 * cubesize * 1,
+                                        2 * cubesize * 0,
                                         2 * cubesize  * 0});
 
                                       rect(3, 3, 7);
@@ -780,9 +815,9 @@ namespace WebGLSpadeWarrior
                               mvMatrixScope(
                                   delegate
                                   {
-                                      glMatrix.mat4.translate(mvMatrix, new float[] { 
-                                        2 * cubesize * 1, 
-                                        2 * cubesize * -2, 
+                                      glMatrix.mat4.translate(mvMatrix, new float[] {
+                                        2 * cubesize * 1,
+                                        2 * cubesize * -2,
                                         2 * cubesize  * 11});
 
                                       rect(8, 4, 0);
@@ -798,9 +833,9 @@ namespace WebGLSpadeWarrior
                                       mvMatrixScope(
                                          delegate
                                          {
-                                             glMatrix.mat4.translate(mvMatrix, new float[] { 
-                                                2 * cubesize * 0, 
-                                                2 * cubesize * -2, 
+                                             glMatrix.mat4.translate(mvMatrix, new float[] {
+                                                2 * cubesize * 0,
+                                                2 * cubesize * -2,
                                                 2 * cubesize  * 7});
 
                                              rect(2, 10, 0);
@@ -817,9 +852,9 @@ namespace WebGLSpadeWarrior
                                               gl.vertexAttribPointer((uint)shaderProgram_vertexColorAttribute, cubeVertexColorBuffer_itemSize, gl.FLOAT, false, 0, 0);
                                               #endregion
 
-                                              glMatrix.mat4.translate(mvMatrix, new float[] { 
-                                                    2 * cubesize * 10, 
-                                                    2 * cubesize * -2, 
+                                              glMatrix.mat4.translate(mvMatrix, new float[] {
+                                                    2 * cubesize * 10,
+                                                    2 * cubesize * -2,
                                                     2 * cubesize  * 7});
 
                                               rect(2, 2, 0);
@@ -840,9 +875,9 @@ namespace WebGLSpadeWarrior
                                               gl.vertexAttribPointer((uint)shaderProgram_vertexColorAttribute, cubeVertexColorBuffer_itemSize, gl.FLOAT, false, 0, 0);
                                               #endregion
 
-                                              glMatrix.mat4.translate(mvMatrix, new float[] { 
-                                                    2 * cubesize * 10, 
-                                                    2 * cubesize * 8, 
+                                              glMatrix.mat4.translate(mvMatrix, new float[] {
+                                                    2 * cubesize * 10,
+                                                    2 * cubesize * 8,
                                                     2 * cubesize  * 7});
 
                                               rect(2, 2, 0);
@@ -859,9 +894,9 @@ namespace WebGLSpadeWarrior
                                       delegate
                                       {
 
-                                          glMatrix.mat4.translate(mvMatrix, new float[] { 
-                                                2 * cubesize * 0, 
-                                                2 * cubesize * 8, 
+                                          glMatrix.mat4.translate(mvMatrix, new float[] {
+                                                2 * cubesize * 0,
+                                                2 * cubesize * 8,
                                                 2 * cubesize  * 7});
 
                                           rect(2, 10, 0);
@@ -881,9 +916,9 @@ namespace WebGLSpadeWarrior
                               mvMatrixScope(
                                   delegate
                                   {
-                                      glMatrix.mat4.translate(mvMatrix, new float[] { 
-                                        2 * cubesize * 0, 
-                                        2 * cubesize * -1, 
+                                      glMatrix.mat4.translate(mvMatrix, new float[] {
+                                        2 * cubesize * 0,
+                                        2 * cubesize * -1,
                                         2 * cubesize  * 20});
 
                                       #region color
@@ -1115,20 +1150,20 @@ namespace WebGLSpadeWarrior
                 };
             #endregion
 
-            #region requestFullscreen
-            Native.document.body.ondblclick +=
-                delegate
-                {
-                    if (IsDisposed)
-                        return;
+            //#region requestFullscreen
+            //Native.document.body.ondblclick +=
+            //    delegate
+            //    {
+            //        if (IsDisposed)
+            //            return;
 
-                    // http://tutorialzine.com/2012/02/enhance-your-website-fullscreen-api/
+            //        // http://tutorialzine.com/2012/02/enhance-your-website-fullscreen-api/
 
-                    Native.document.body.requestFullscreen();
+            //        Native.document.body.requestFullscreen();
 
 
-                };
-            #endregion
+            //    };
+            //#endregion
 
 
 

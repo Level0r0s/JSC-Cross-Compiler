@@ -12,6 +12,12 @@ namespace ScriptCoreLib.GLSL
 
 		// see also: http://cgkit.sourceforge.net/doc2/mat4.html
 
+        // X:\jsc.svn\examples\javascript\WebGL\WebGLSpadeWarrior\WebGLSpadeWarrior\Shaders\GeometryVertexShader.cs
+        // X:\jsc.svn\examples\javascript\WebGL\WebGLSpadeWarrior\WebGLSpadeWarrior\Application.cs
+        public mat4(float i)
+        {
+
+        }
 
 		#region []
 		public vec4 this[int i]

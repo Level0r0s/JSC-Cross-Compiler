@@ -209,9 +209,11 @@ namespace ChromeWebGLFrameBufferToSquare
 
 			Native.window.onframe += e =>
 			{
+                // can we run it in VR as HUD?
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150706
 
-				#region FRAMEBUFFER
-				gl.bindFramebuffer(gl.FRAMEBUFFER, xWebGLFramebuffer);
+                #region FRAMEBUFFER
+                gl.bindFramebuffer(gl.FRAMEBUFFER, xWebGLFramebuffer);
 
 				//// http://stackoverflow.com/questions/20362023/webgl-why-does-transparent-canvas-show-clearcolor-color-component-when-alpha-is
 				gl.clearColor(1, 1, 0, 1.0f);
