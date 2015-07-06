@@ -1,4 +1,5 @@
 ﻿using ScriptCoreLib;
+using ScriptCoreLib.GLSL;
 using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
@@ -88,9 +89,13 @@ namespace OVRMyCubeWorldNDK
             // called by  ovrScene_Create
             // called after VRAPI_FRAME_INIT_LOADING_ICON_FLUSH
             public bool ovrProgram_Create(string vertexSource, string fragmentSource)
+            //public bool ovrProgram_Create(VertexShader vert, FragmentShader frag)
             {
                 // 554
                 ConsoleExtensions.trace("enter ovrProgram_Create, glCreateShader");
+
+                //var vertexSource = vert.ToString();
+                //var fragmentSource = frag.ToString();
 
                 var r = default(int);
 

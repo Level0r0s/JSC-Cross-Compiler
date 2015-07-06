@@ -198,6 +198,7 @@ namespace ChromeAppWindowUDPPointerLock
                         var keys_c = 0;
 
                         var mousebutton = 0;
+                        var mousewheel = 0;
 
                         var x = 0;
                         var y = 0;
@@ -364,7 +365,7 @@ namespace ChromeAppWindowUDPPointerLock
                                                   delegate
                                                   {
                                                       // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
-                                                      var nmessage = x + ":" + y + ":" + keys_ad + ":" + keys_ws + ":" + keys_c + ":" + mousebutton;
+                                                      var nmessage = x + ":" + y + ":" + keys_ad + ":" + keys_ws + ":" + keys_c + ":" + mousebutton + ":" + mousewheel;
 
 
                                                       var data = Encoding.UTF8.GetBytes(nmessage);	   //creates a variable b of type byte
@@ -388,7 +389,7 @@ namespace ChromeAppWindowUDPPointerLock
                                               //while (await div.async.onframe)
                                               while (await div.ownerDocument.defaultView.async.onframe)
                                               {
-                                                  var nmessage = x + ":" + y + ":" + keys_ad + ":" + keys_ws + ":" + keys_c;
+                                                  var nmessage = x + ":" + y + ":" + keys_ad + ":" + keys_ws + ":" + keys_c + ":" + mousebutton + ":" + mousewheel;
 
 
                                                   var data = Encoding.UTF8.GetBytes(nmessage);	   //creates a variable b of type byte
@@ -473,6 +474,13 @@ namespace ChromeAppWindowUDPPointerLock
                                      wasd.innerText = new { e.KeyCode, ad = keys_ad, ws = keys_ws }.ToString();
                                  }
                              };
+
+
+                        div.onmousewheel += e =>
+                            {
+                                // since we are a chrome app. is chrome sending us wheel delta too?
+                                mousewheel += e.WheelDirection;
+                            };
 
                         div.onmousemove +=
                             e =>

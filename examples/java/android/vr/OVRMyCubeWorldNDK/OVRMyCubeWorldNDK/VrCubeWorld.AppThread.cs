@@ -79,12 +79,12 @@ namespace OVRMyCubeWorldNDK
                 this.appState = new ovrApp(ref java);
 
                 // 1794
-                appState.Egl.ovrEgl_CreateContext(null);
+                this.appState.Egl.ovrEgl_CreateContext(null);
 
 
                 ConsoleExtensions.trace("AppThreadFunction, call vrapi_GetHmdInfo, then ovrRenderer_Create");
                 var hmdInfo = VrApi.vrapi_GetHmdInfo(ref java);
-                appState.Renderer.ovrRenderer_Create(ref hmdInfo);
+                this.appState.Renderer.ovrRenderer_Create(ref hmdInfo);
 
                 ConsoleExtensions.trace("AppThreadFunction, enter loop, call ovrMessageQueue_GetNextMessage");
                 bool destroyed = false;
@@ -155,12 +155,12 @@ namespace OVRMyCubeWorldNDK
                         ConsoleExtensions.trace("vrapi_SubmitFrame VRAPI_FRAME_INIT_LOADING_ICON_FLUSH");
                         appState.Ovr.vrapi_SubmitFrame(ref parms);
 
-                        unistd.usleep(1000);
+                        //unistd.usleep(1000);
 
                         appState.Scene.ovrScene_Create();
 
                         // keep the loader on for a moment...
-                        unistd.usleep(1000);
+                        //unistd.usleep(1000);
                     }
                     #endregion
 
@@ -182,7 +182,9 @@ namespace OVRMyCubeWorldNDK
 
                     {
                         //var parms = appState.Renderer.ovrRenderer_RenderFrame(ref appState, ref tracking);
-                        var parms = appState.Renderer.ovrRenderer_RenderFrame(this, appState, ref tracking);
+                        //var parms = appState.Renderer.ovrRenderer_RenderFrame(this, appState, ref tracking);
+                        //var parms = this.appState.Renderer.ovrRenderer_RenderFrame(this, ref tracking);
+                        var parms = this.appState.Renderer.ovrRenderer_RenderFrame(this);
 
                         appState.tracei60("vrapi_SubmitFrame ", (int)appState.FrameIndex);
 

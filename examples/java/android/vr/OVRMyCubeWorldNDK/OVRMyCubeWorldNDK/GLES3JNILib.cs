@@ -37,6 +37,22 @@ namespace com.oculus.gles3jni
     // can we have named pointer between java and ndk?
     public enum ovrAppThreadPointer : long { }
 
+    // nameless in the c file.
+    public enum MESSAGE
+    {
+        MESSAGE_ON_CREATE,
+        MESSAGE_ON_START,
+        MESSAGE_ON_RESUME,
+        MESSAGE_ON_PAUSE,
+        MESSAGE_ON_STOP,
+        MESSAGE_ON_DESTROY,
+        MESSAGE_ON_SURFACE_CREATED,
+        MESSAGE_ON_SURFACE_DESTROYED,
+        MESSAGE_ON_KEY_EVENT,
+        MESSAGE_ON_TOUCH_EVENT
+    }
+
+
     unsafe static class GLES3JNILib
     {
         // ifelse does not look that good. lets keep two sets of signatures..
@@ -48,6 +64,8 @@ namespace com.oculus.gles3jni
 
         public static int fields_mousex;
         public static int fields_mousey;
+
+        public static int fields_mousewheel;
 
         public static int fields_ad;
         public static int fields_ws;
@@ -135,6 +153,7 @@ namespace com.oculus.gles3jni
             GLES3JNILib.fields_ad = aI["ad"];
             GLES3JNILib.fields_ws = aI["ws"];
             GLES3JNILib.fields_c = aI["c"];
+            GLES3JNILib.fields_mousewheel = aI["mousewheel"];
 
             appThread.appState.Scene.Update();
 
@@ -223,7 +242,7 @@ namespace com.oculus.gles3jni
 
             // set property?
             appThread.MessageQueue.ovrMessageQueue_Enable(true);
-            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_CREATE);
+            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(MESSAGE.MESSAGE_ON_CREATE);
 
             return appThread;
         }
@@ -232,7 +251,7 @@ namespace com.oculus.gles3jni
         static void onStart(ref JNIEnv env, jobject obj)
         {
             // 1952
-            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_START);
+            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(MESSAGE.MESSAGE_ON_START);
         }
         static void onResume(ref JNIEnv env, jobject obj)
         {
@@ -240,19 +259,19 @@ namespace com.oculus.gles3jni
 
             ConsoleExtensions.trace("enter onResume, did we come back from the menu?");
 
-            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_RESUME);
+            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(MESSAGE.MESSAGE_ON_RESUME);
         }
         static void onPause(ref JNIEnv env, jobject obj)
         {
             // 1970
-            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_PAUSE);
+            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(MESSAGE.MESSAGE_ON_PAUSE);
 
             ConsoleExtensions.trace("exit onPause");
         }
         static void onStop(ref JNIEnv env, jobject obj)
         {
             // 1980
-            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_STOP);
+            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(MESSAGE.MESSAGE_ON_STOP);
         }
 
         #endregion
@@ -260,7 +279,7 @@ namespace com.oculus.gles3jni
         static void onDestroy(JNIEnv env, jobject obj)
         {
             // 1988
-            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_DESTROY);
+            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(MESSAGE.MESSAGE_ON_DESTROY);
 
             appThread.MessageQueue.ovrMessageQueue_Enable(false);
 
@@ -295,7 +314,7 @@ namespace com.oculus.gles3jni
             appThread.NativeWindow = newNativeWindow;
 
             var message = default(VrCubeWorld.ovrMessage);
-            message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_SURFACE_CREATED, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
+            message.ovrMessage_Init(MESSAGE.MESSAGE_ON_SURFACE_CREATED, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);
             message.ovrMessage_SetPointerParm(0, appThread.NativeWindow);
             //ConsoleExtensions.tracei("onSurfaceCreated, post MESSAGE_ON_SURFACE_CREATED");
             appThread.MessageQueue.ovrMessageQueue_PostMessage(ref message);
@@ -323,7 +342,7 @@ namespace com.oculus.gles3jni
             {
                 if (appThread.NativeWindow != null)
                 {
-                    appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_SURFACE_DESTROYED);
+                    appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(MESSAGE.MESSAGE_ON_SURFACE_DESTROYED);
 
                     native_window.ANativeWindow_release(appThread.NativeWindow);
                     appThread.NativeWindow = default(native_window.ANativeWindow);
@@ -331,7 +350,7 @@ namespace com.oculus.gles3jni
                 }
                 if (newNativeWindow != null)
                 {
-                    appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_SURFACE_CREATED);
+                    appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(MESSAGE.MESSAGE_ON_SURFACE_CREATED);
 
                     native_window.ANativeWindow_release(appThread.NativeWindow);
                     appThread.NativeWindow = default(native_window.ANativeWindow);
@@ -350,7 +369,7 @@ namespace com.oculus.gles3jni
 
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
 
-            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE.MESSAGE_ON_SURFACE_DESTROYED);
+            appThread.MessageQueue.ovrMessageQueue_PostMessageThenWait(MESSAGE.MESSAGE_ON_SURFACE_DESTROYED);
 
             native_window.ANativeWindow_release(appThread.NativeWindow);
             appThread.NativeWindow = default(native_window.ANativeWindow);
@@ -371,7 +390,7 @@ namespace com.oculus.gles3jni
         {
             // 2094
             var message = default(VrCubeWorld.ovrMessage);
-            message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_KEY_EVENT, VrCubeWorld.ovrMQWait.MQ_WAIT_NONE);
+            message.ovrMessage_Init(MESSAGE.MESSAGE_ON_KEY_EVENT, VrCubeWorld.ovrMQWait.MQ_WAIT_NONE);
             message[0] = keyCode;
             message[1] = action;
             // ovrApp_HandleKeyEvent
@@ -383,7 +402,7 @@ namespace com.oculus.gles3jni
         {
             // 2108
             var message = default(VrCubeWorld.ovrMessage);
-            message.ovrMessage_Init(VrCubeWorld.MESSAGE.MESSAGE_ON_TOUCH_EVENT, VrCubeWorld.ovrMQWait.MQ_WAIT_NONE);
+            message.ovrMessage_Init(MESSAGE.MESSAGE_ON_TOUCH_EVENT, VrCubeWorld.ovrMQWait.MQ_WAIT_NONE);
             message[0] = action;
             message[1] = x;
             message[2] = y;

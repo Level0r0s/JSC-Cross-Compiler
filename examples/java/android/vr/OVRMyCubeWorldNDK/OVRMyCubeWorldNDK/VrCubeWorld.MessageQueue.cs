@@ -1,4 +1,5 @@
-﻿using ScriptCoreLib;
+﻿using com.oculus.gles3jni;
+using ScriptCoreLib;
 using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
@@ -68,7 +69,7 @@ namespace OVRMyCubeWorldNDK
         // this is like intentextras between processes?
         public struct ovrMessage
         {
-            public VrCubeWorld.MESSAGE Id;
+            public MESSAGE Id;
             public ovrMQWait Wait;
 
             // bit64 union?
@@ -168,21 +169,7 @@ namespace OVRMyCubeWorldNDK
 
 
 
-        // nameless in the c file.
-        public enum MESSAGE
-        {
-            MESSAGE_ON_CREATE,
-            MESSAGE_ON_START,
-            MESSAGE_ON_RESUME,
-            MESSAGE_ON_PAUSE,
-            MESSAGE_ON_STOP,
-            MESSAGE_ON_DESTROY,
-            MESSAGE_ON_SURFACE_CREATED,
-            MESSAGE_ON_SURFACE_DESTROYED,
-            MESSAGE_ON_KEY_EVENT,
-            MESSAGE_ON_TOUCH_EVENT
-        }
-
+   
 
 
         // field of ovrAppThread
@@ -242,7 +229,7 @@ namespace OVRMyCubeWorldNDK
 
 
             // VrCubeWorld.MESSAGE.MESSAGE_ON_RESUME
-            public void ovrMessageQueue_PostMessageThenWait(VrCubeWorld.MESSAGE id)
+            public void ovrMessageQueue_PostMessageThenWait(MESSAGE id)
             {
                 var message = default(VrCubeWorld.ovrMessage);
                 message.ovrMessage_Init(id, VrCubeWorld.ovrMQWait.MQ_WAIT_PROCESSED);

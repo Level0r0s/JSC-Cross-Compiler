@@ -64,11 +64,14 @@ namespace OVRMyCubeWorld.Activities
     {
         // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
 
+        // should jsc remember last connected device and reconnect if disconnected?
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
+
+
 
         // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell dumpsys SurfaceFlinger
         // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell dumpsys battery
 
-        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG"
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity"
 
@@ -76,7 +79,19 @@ namespace OVRMyCubeWorld.Activities
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVRMyCubeWorld.Activities
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVRMyCubeWorld.Activities/OVRMyCubeWorld.Activities.ApplicationActivity
 
+
+        // x:\util\android-sdk-windows\platform-tools\adb.exe  shell dumpsys meminfo OVRMyCubeWorld.Activities
+
+
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell screenrecord --bit-rate 6000000 "/sdcard/oculus/Movies/My Videos/3D/OVRMyCubeWorldNDK-WASDC-mousewheel.mp4"
+
         // sometimes the vrsvc fails to init and shows black screen?
+
+
+        //-----------+----------+------+------+----+------+-------------+--------------------------------+------------------------+------------------------+------
+        //       HWC | 7f9d73c0f0 | 0000 | 0000 | 00 | 0100 | RGBA_8888   |    0.0,    0.0, 1440.0, 2560.0 |    0,    0, 1440, 2560 |    0,    0, 1440, 2560 | com.samsung.android.hmt.vrsvc/com.samsung.android.hmt.vrsvc.HomeCrashGuideActivity
+        // FB TARGET | 7faf04e860 | 0000 | 0000 | 00 | 0105 | RGBA_8888   |    0.0,    0.0, 1440.0, 2560.0 |    0,    0, 1440, 2560 |    0,    0,    0,    0 | HWC_FRAMEBUFFER_TARGET
+
 
 
         // https://code.google.com/p/android/issues/detail?can=2&start=0&num=100&q=&colspec=ID%20Type%20Status%20Owner%20Summary%20Stars&groupby=&sort=&id=75442
@@ -118,7 +133,7 @@ namespace OVRMyCubeWorld.Activities
 
             public string mouse;
 
-            public int mousex, mousey, ws, ad, c, mousebutton;
+            public int mousex, mousey, ws, ad, c, mousebutton, mousewheel;
 
             public int x, y, z, w;
 
@@ -229,6 +244,7 @@ namespace OVRMyCubeWorld.Activities
                      args.c = int.Parse(xy[4]);
                      // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/mousedown
                      args.mousebutton = int.Parse(xy[5]);
+                     args.mousewheel = int.Parse(xy[6]);
                  }
              };
 
@@ -431,8 +447,8 @@ namespace OVRMyCubeWorld.Activities
             //this.addContentView(xSurfaceView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
 
-
-            //getWindow().addFlags(WindowManager_LayoutParams.FLAG_KEEP_SCREEN_ON);
+            // sometimes system wants to try to black the screen it seems..
+            getWindow().addFlags(WindowManager_LayoutParams.FLAG_KEEP_SCREEN_ON);
 
             appThread = com.oculus.gles3jni.GLES3JNILib.onCreate(this);
 

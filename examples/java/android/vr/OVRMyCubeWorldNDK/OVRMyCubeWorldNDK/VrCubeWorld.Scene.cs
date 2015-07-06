@@ -20,7 +20,10 @@ namespace OVRMyCubeWorldNDK
         //public const int NUM_INSTANCES = 1500;
         //public const int NUM_INSTANCES = 12;
         //public const int NUM_INSTANCES = 6;
-        public const int NUM_INSTANCES = 8 * 8 * 3;
+
+
+        public const int floors = 5;
+        public const int NUM_INSTANCES = 8 * 8 * floors;
 
 
         // member of ovrApp
@@ -34,6 +37,7 @@ namespace OVRMyCubeWorldNDK
 
             // ovrRenderer_RenderFrame
             // how are they sent to gpu?
+            // used by CreateTranslation
             public readonly ovrVector3f[] CubePositions = new ovrVector3f[NUM_INSTANCES];
             public readonly ovrVector3f[] CubeRotations = new ovrVector3f[NUM_INSTANCES];
 
@@ -133,12 +137,12 @@ namespace OVRMyCubeWorldNDK
                     float rx = 0, ry = 0, rz = 0;
 
 
-                    rx = 3 * (((i / 3) / 8) - 2);
+                    rx = 2.0f * (((i / floors) / 8) - floors);
 
-                    rz = 3 * (((i / 3) % 8) - 2);
+                    rz = 2.0f * (((i / floors) % 8) - floors);
 
 
-                    ry = (i % 3 - 1) * 1;
+                    ry = (i % floors - 1.0f) * 0.6f;
 
                     //// can we offset the thing?
                     //rx = (float)(stdlib_h.drand48() - 0.5f) * (5.0f + (float)Math.Sqrt(NUM_INSTANCES));
@@ -213,6 +217,8 @@ namespace OVRMyCubeWorldNDK
             // HUDp30 thread!
             public void Update()
             {
+                // should move to global Translation?
+
                 // UI thread writes, VR thread reads..
 
 

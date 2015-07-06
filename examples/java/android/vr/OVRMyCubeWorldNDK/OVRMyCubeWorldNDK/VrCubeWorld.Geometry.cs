@@ -71,7 +71,9 @@ namespace OVRMyCubeWorldNDK
         //        { -127, -127, -127, +127 }, { -127, -127, +127, +127 }, { +127, -127, +127, +127 }, { +127, -127, -127, +127 }	// bottom
         //    };
 
-        const sbyte scale = 24;
+
+        // modified via CreateTranslation
+        const sbyte scale = 127;
 
         // why cant we scale it via transform?
         public static readonly sbyte[,] ovrCubeVertices8x4_positions = new sbyte[8, 4]
