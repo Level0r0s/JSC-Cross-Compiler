@@ -95,13 +95,15 @@ namespace TestYouTubeExtractor
             // apkfriendlytitle = "___360_ - __________find the truth 360 degree trick movie ."
 
 
-
+            // px = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp4"
             var px = Path.Combine(
                 //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "x:/media",
 
                 Title + video.VideoExtension);
 
+
+            // pxa_mp4 = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp4"
             var pxa_mp4 = Path.Combine(
                  //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                  "x:/media",
@@ -116,8 +118,12 @@ namespace TestYouTubeExtractor
                     File.Move(px, pxa_mp4);
                 }
 
+            // pxa_mp3 = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp3"
             var pxa_mp3 = Path.ChangeExtension(pxa_mp4, ".mp3");
+            // pxa_mp4_mp4 = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp4.mp4"
             var pxa_mp4_mp4 = Path.ChangeExtension(pxa_mp4, ".mp4.mp4");
+
+            // pxa_mp3_mp4 = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp3.mp4"
             var pxa_mp3_mp4 = Path.ChangeExtension(pxa_mp4, ".mp3.mp4");
 
 
@@ -125,11 +131,14 @@ namespace TestYouTubeExtractor
 
             if (File.Exists(pxa_mp3_mp4))
             {
+                Console.WriteLine("all done: " + pxa_mp3_mp4);
+
                 // all done
                 //Debugger.Break();
                 return;
             }
 
+            var awaitingToBeTagged = false;
 
             if (File.Exists(pxa_mp4))
             {
@@ -147,6 +156,7 @@ namespace TestYouTubeExtractor
                 }
                     ;
                 videoDownloader.Execute();
+                awaitingToBeTagged = true;
             }
 
             #region any reason to attempt upgrade?
@@ -191,7 +201,17 @@ namespace TestYouTubeExtractor
 
                     if (!File.Exists(pxa_mp4_mp4))
                     {
-                        var videoDownloader = new VideoDownloader(mp4video.Last(), pxa_mp4_mp4);
+                        var upgradeTargets = new Stack<VideoInfo>(mp4video.ToList());
+                        // +		upgradeTargets.Peek()	{Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 2160p}	YoutubeExtractor.VideoInfo
+                        // +		upgradeTargets.Peek()	{Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 1440p}	YoutubeExtractor.VideoInfo
+                        // +		upgradeTargets.Peek()	{Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 1080p}	YoutubeExtractor.VideoInfo
+                        // +		upgradeTargets.Peek()	{Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 720p}	YoutubeExtractor.VideoInfo
+
+                        // video = {Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 720p}
+
+                        retry_lesser:
+
+                        var videoDownloader = new VideoDownloader(upgradeTargets.Peek(), pxa_mp4_mp4);
                         videoDownloader.DownloadProgressChanged += (sender, args) =>
                         {
                             ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(0.01 * args.ProgressPercentage);
@@ -201,7 +221,21 @@ namespace TestYouTubeExtractor
                             Console.Title = "%" + args.ProgressPercentage.ToString("0.0");
                         }
                        ;
-                        videoDownloader.Execute();
+
+                        // some videos may not allow that?
+                        // err = {"The remote server returned an error: (403) Forbidden."}
+                        try
+                        {
+                            videoDownloader.Execute();
+                        }
+                        catch (Exception err)
+                        {
+                            upgradeTargets.Pop();
+                            // the others are also blocked?
+
+                            //goto retry_lesser;
+                            throw;
+                        }
                     }
 
                     // extract mp3
@@ -227,21 +261,28 @@ namespace TestYouTubeExtractor
                        + " -i \"" + pxa_mp4_mp4 + "\""
                        + " -c:v copy -shortest \"" + pxa_mp3_mp4 + "\"").WaitForExit();
 
+                    awaitingToBeTagged = true;
+
+
+
                     File.Delete(pxa_mp3);
                     File.Delete(pxa_mp4_mp4);
                     File.Delete(pxa_mp4);
                 }
             #endregion
 
+            // we did not upgrade.. assume it was already tagged...
+            if (!awaitingToBeTagged)
+                return;
 
             // X:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\xffmpeg\Program.cs
 
-            var pxx = File.Exists(pxa_mp3_mp4) ? pxa_mp3_mp4 : px;
+            var pxatagged_mp4 = File.Exists(pxa_mp3_mp4) ? pxa_mp3_mp4 : pxa_mp4;
 
-            Console.WriteLine("TagLib... " + new { new FileInfo(pxx).Length });
+            Console.WriteLine("TagLib... " + new { new FileInfo(pxatagged_mp4).Length });
 
             // what about webm?
-            TagLib.File videoFile = TagLib.File.Create(pxx);
+            TagLib.File videoFile = TagLib.File.Create(pxatagged_mp4);
             //TagLib.Mpeg4.AppleTag customTag = (TagLib.Mpeg4.Comm)videoFile.GetTag(TagLib.TagTypes.Apple);
             TagLib.Mpeg4.AppleTag customTag = (TagLib.Mpeg4.AppleTag)videoFile.GetTag(TagLib.TagTypes.Apple);
 
@@ -251,6 +292,9 @@ namespace TestYouTubeExtractor
             customTag.Album = link;
             videoFile.Save();
             videoFile.Dispose();
+
+            // all done now..
+
         }
 
         private static void DownloadVideo1(string link, IEnumerable<VideoInfo> videoInfos)
@@ -561,9 +605,9 @@ namespace TestYouTubeExtractor
 
             for (int p = 1; p < 96; p++)
                 foreach (var src in new[] {
-                    $"http://consciousresonance.net/?page_id=1587&paged={p}",
-                    $"https://faustuscrow.wordpress.com/page/{p}/",
-                    $"https://hiddenlighthouse.wordpress.com/page/{p}/",
+                    //$"http://consciousresonance.net/?page_id=1587&paged={p}",
+                    //$"https://faustuscrow.wordpress.com/page/{p}/",
+                    //$"https://hiddenlighthouse.wordpress.com/page/{p}/",
                     $"https://zproxy.wordpress.com/page/{p}/"
 
                 })

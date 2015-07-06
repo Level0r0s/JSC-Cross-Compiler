@@ -35,11 +35,14 @@ namespace GLSLShaderToyPip
 	/// </summary>
 	public sealed class Application : ApplicationWebService
 	{
-		/// <summary>
-		/// This is a javascript application.
-		/// </summary>
-		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
-		public Application(IApp page)
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150706
+        // subst b: r:\jsc.svn\examples\glsl\future\GLSLShaderToyPip\GLSLShaderToyPip\bin\Debug\staging\GLSLShaderToyPip.Application\web
+
+        /// <summary>
+        /// This is a javascript application.
+        /// </summary>
+        /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
+        public Application(IApp page)
 		{
 			// the idea of this exammple
 			// is to look at how multiple shaders can be linked to work together.

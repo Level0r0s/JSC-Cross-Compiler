@@ -31,8 +31,11 @@ namespace ChromeShaderToyColumns
 	/// </summary>
 	public sealed class Application : ApplicationWebService
 	{
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150706
+        // subst b: X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyColumns\ChromeShaderToyColumns\bin\Debug\staging\ChromeShaderToyColumns.Application\web
 
-		public Application(IApp page)
+
+        public Application(IApp page)
 		{
 			#region += Launched chrome.app.window
 			dynamic self = Native.self;
@@ -197,12 +200,13 @@ namespace ChromeShaderToyColumns
 							mMouseOriX,
 							mMouseOriY,
 							mMousePosX,
-							mMousePosY,
+							mMousePosY
+                            //,
 
 							// gl_FragCoord
 							// cannot be scaled, and can be referenced directly.
 							// need another way to scale
-							zoom: 0.3f
+							//zoom: 0.3f
 						);
 
 						// what does it do?

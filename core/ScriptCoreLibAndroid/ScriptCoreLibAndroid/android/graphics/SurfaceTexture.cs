@@ -12,6 +12,10 @@ namespace android.graphics
 
     // https://android.googlesource.com/platform/frameworks/base.git/+/master/graphics/java/android/graphics/SurfaceTexture.java
     // http://developer.android.com/reference/android/graphics/SurfaceTexture.html
+
+    // https://software.intel.com/sites/landingpage/mmsf/documentation/mmsf_android_example2.html
+    
+
     [Script(IsNative = true)]
     public class SurfaceTexture
     {

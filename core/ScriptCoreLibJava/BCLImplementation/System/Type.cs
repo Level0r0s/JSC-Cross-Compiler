@@ -32,6 +32,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System
     [Script(Implements = typeof(global::System.Type))]
     public class __Type : __MemberInfo
     {
+        // NDK typeof needs to know enought to query JNIEnv
+        // casting from jobject to NDK would mean to map the fields?
+
         // X:\jsc.svn\examples\java\hybrid\Test\JVMCLRTypeOfBool\JVMCLRTypeOfBool\Program.cs
 
         public virtual bool IsEnum
