@@ -41,7 +41,8 @@ namespace WebGLDopamineMolecule
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IDefault page = null)
         {
-
+            // defined at?
+            // CanvasMatrixLibrary
             var prMatrix = new CanvasMatrix4();
 
             var gl_viewportWidth = 500;
@@ -428,16 +429,16 @@ false, new Float32Array(prMatrix.getAsArray()));
 
 
 
-            new IHTMLAnchor { "drag me to my.jsc-solutions.net" }.AttachToDocument().With(
-                dragme =>
-                {
-                    dragme.style.position = IStyle.PositionEnum.@fixed;
-                    dragme.style.left = "1em";
-                    dragme.style.bottom = "1em";
+            //new IHTMLAnchor { "drag me to my.jsc-solutions.net" }.AttachToDocument().With(
+            //    dragme =>
+            //    {
+            //        dragme.style.position = IStyle.PositionEnum.@fixed;
+            //        dragme.style.left = "1em";
+            //        dragme.style.bottom = "1em";
 
-                    dragme.AllowToDragAsApplicationPackage();
-                }
-            );
+            //        dragme.AllowToDragAsApplicationPackage();
+            //    }
+            //);
 
 
 

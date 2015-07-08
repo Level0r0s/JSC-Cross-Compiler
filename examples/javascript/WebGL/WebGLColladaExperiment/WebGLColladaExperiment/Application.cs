@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using WebGLColladaExperiment;
+// ?
 using WebGLColladaExperiment.Design;
 using WebGLColladaExperiment.HTML.Pages;
 
@@ -35,7 +36,10 @@ namespace WebGLColladaExperiment
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // why are the trucks black?
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2013/201311/20131110-dae
+            // what will happen if we resync THREE version from 70 to?
+            Native.document.title = new { THREE.REVISION }.ToString();
 
             var oo = new List<THREE.Object3D>();
 
@@ -54,12 +58,13 @@ namespace WebGLColladaExperiment
 
             var scene = new THREE.Scene();
 
-            var ambient = new THREE.AmbientLight(0x101030);
-            //scene.add(ambient);
+            //var ambient = new THREE.AmbientLight(0x101030);
+            var ambient = new THREE.AmbientLight(0x808080);
+            scene.add(ambient);
 
             var directionalLight = new THREE.DirectionalLight(0xffeedd, 0.7);
             directionalLight.position.set(0, 0, 1);
-            //scene.add(directionalLight);
+            scene.add(directionalLight);
 
             // WebGLRenderer preserveDrawingBuffer 
             var renderer = new THREE.WebGLRenderer(

@@ -17,6 +17,7 @@ using System.Xml.Linq;
 using WebGLDashedLines;
 using WebGLDashedLines.Design;
 using WebGLDashedLines.HTML.Pages;
+// manual rebuild?
 using WebGLRah66Comanche.Library;
 
 using static THREE;

@@ -133,6 +133,8 @@ namespace WebGLSpadeWarrior
 
             var __mat4 = new
             {
+                // X:\jsc.svn\examples\javascript\Test\TestFloatArray\TestFloatArray\Application.cs
+                // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/20150706/20150708
                 create = new Func<float[]>(
                     () => new float[]
                     {
@@ -154,11 +156,12 @@ namespace WebGLSpadeWarrior
             //};
 
             //var mvMatrix = glMatrix.mat4.create();
-            var mvMatrix = new Float32Array(__mat4.create());
-            var mvMatrixStack = new Stack<Float32Array>();
+            var mvMatrix = __mat4.create();
+            // for js we erased the generic type..
+            var mvMatrixStack = new Stack<float[]>();
 
             // X:\jsc.svn\examples\javascript\WebGL\WebGLSpadeWarrior\WebGLSpadeWarrior\Shaders\GeometryVertexShader.cs
-            var pMatrix = new Float32Array(__mat4.create());
+            var pMatrix = __mat4.create();
             //var pMatrix = new ScriptCoreLib.GLSL.mat4(1);
             //var pMatrix = glMatrix.mat4.create();
 
@@ -166,7 +169,7 @@ namespace WebGLSpadeWarrior
             #region mvMatrixScope
             Action mvPushMatrix = delegate
             {
-                var copy = glMatrix.mat4.create();
+                var copy = __mat4.create();
                 glMatrix.mat4.set(mvMatrix, copy);
                 mvMatrixStack.Push(copy);
             };

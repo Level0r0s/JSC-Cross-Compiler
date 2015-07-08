@@ -11,9 +11,10 @@ namespace TestNewByteArrayViaScriptCoreLib
 	[Script]
 	public class Class1 : ScriptCoreLib.Shared.IAssemblyReferenceToken
 	{
-		// X:\jsc.svn\examples\javascript\Test\TestNewByteArray\TestNewByteArrayViaScriptCoreLib\Class1.cs
+        // X:\jsc.svn\examples\javascript\Test\TestFloatArray\TestFloatArray\Application.cs
+        // X:\jsc.svn\examples\javascript\Test\TestNewByteArray\TestNewByteArrayViaScriptCoreLib\Class1.cs
 
-		public Class1()
+        public Class1()
 		{
 			//  b = new Uint8ClampedArray(16);
 			var bytes = new byte[0x10];

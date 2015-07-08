@@ -71,6 +71,9 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
             }
             set
             {
+                // X:\jsc.svn\examples\javascript\Test\Test46SetEmptyStringConcatArg\Test46SetEmptyStringConcatArg\Application.cs
+                // X:\jsc.svn\examples\javascript\WebGL\collada\WebGLRah66Comanche\WebGLRah66Comanche\Application.cs
+                // jsc wont like the way toslyn does it?
                 AllowUserToResizeColumnsAttribute.Value = "" + value;
 
             }

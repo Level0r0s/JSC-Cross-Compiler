@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22609.0
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLDashedLines", "WebGLDashedLines\WebGLDashedLines.csproj", "{76843B5B-EB0A-4E49-8B36-037969E0545F}"
 EndProject
@@ -19,6 +19,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Drawing", "..\..\..\..\core\ScriptCoreLib.Drawing\ScriptCoreLib.Drawing\ScriptCoreLib.Drawing.csproj", "{053C4547-E32B-458E-B295-1E3640BE96E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsTreeViewDrag", "..\..\forms\FormsTreeViewDrag\FormsTreeViewDrag\FormsTreeViewDrag.csproj", "{02F60678-6AE6-4B09-970C-C6836C0D25DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nonroslyn", "nonroslyn", "{05D774AA-DC4E-4D59-AFBD-8CAE40FDE5F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,8 +77,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC} = {FBA05655-4E01-4575-BE5E-D689E1FC1E08}
 		{F6EE5D37-A30A-438F-AF72-D571B0AB257C} = {FBA05655-4E01-4575-BE5E-D689E1FC1E08}
-		{B8D28279-57CD-4163-86F9-1DFDF540B58B} = {FBA05655-4E01-4575-BE5E-D689E1FC1E08}
+		{B8D28279-57CD-4163-86F9-1DFDF540B58B} = {05D774AA-DC4E-4D59-AFBD-8CAE40FDE5F1}
 		{053C4547-E32B-458E-B295-1E3640BE96E9} = {FBA05655-4E01-4575-BE5E-D689E1FC1E08}
 		{02F60678-6AE6-4B09-970C-C6836C0D25DF} = {FBA05655-4E01-4575-BE5E-D689E1FC1E08}
+		{05D774AA-DC4E-4D59-AFBD-8CAE40FDE5F1} = {FBA05655-4E01-4575-BE5E-D689E1FC1E08}
 	EndGlobalSection
 EndGlobal

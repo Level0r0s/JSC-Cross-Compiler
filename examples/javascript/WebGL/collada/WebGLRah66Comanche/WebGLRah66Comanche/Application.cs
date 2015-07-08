@@ -57,6 +57,7 @@ namespace WebGLRah66Comanche
 
             var lightOffset = new THREE.Vector3(0, 1000, 1000.0);
 
+            // why is idl showing 110?
             var light = new THREE.DirectionalLight(0xffffff, 1.0);
             //var light = new THREE.DirectionalLight(0xffffff, 1.0);
             //var light = new THREE.DirectionalLight(0xffffff, 2.5);
@@ -272,3 +273,11 @@ namespace WebGLRah66Comanche
         }
     }
 }
+
+//script: error JSC1000: Method: set_AllowUserToResizeColumns, Type: ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms.__DataGridView; emmiting failed : System.ArgumentNullException: Value cannot be null.
+//   at jsc.ILFlowStackItem.InlineLogic(Prestatement p) in X:\jsc.internal.git\compiler\jsc\CodeModel\ILFlow.cs:line 68
+//   at jsc.IL2ScriptGenerator.OpCodeHandlerArgument(IdentWriter w, Prestatement p, ILInstruction i, ILFlowStackItem s) in X:\jsc.internal.git\compiler\jsc\Languages\JavaScript\IL2ScriptGenerator.cs:line 212
+//   at jsc.IL2ScriptGenerator.OpCodeHandler(IdentWriter w, Prestatement p, ILInstruction i, ILFlowStackItem s) in X:\jsc.internal.git\compiler\jsc\Languages\JavaScript\IL2ScriptGenerator.cs:line 268
+//   at jsc.IdentWriter.JavaScript_WriteParameters(Prestatement p, ILInstruction i, ILFlowStackItem[] s, Int32 offset, MethodBase m) in X:\jsc.internal.git\compiler\jsc\Languages\IdentWriter.cs:line 899
+//   at jsc.IL2ScriptGenerator.OpCode_call_override(IdentWriter w, Prestatement p, ILInstruction i, ILFlowStackItem[] s, MethodBase m) in X:\jsc.internal.git\compiler\jsc\Languages\JavaScript\IL2ScriptGenerator.cs:line 410
+//   at jsc.IL2ScriptGenerator.<>c.<CreateInstructionHandlers>b__0_18(IdentWriter w, Prestatement p, ILInstruction i, ILFlowStackItem[] s) in X:\jsc.internal.git\compiler\jsc\Languages\JavaScript\IL2ScriptGenerator.OpCodes.cs:line 841
