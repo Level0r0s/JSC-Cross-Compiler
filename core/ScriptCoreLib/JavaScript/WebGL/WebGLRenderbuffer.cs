@@ -5,7 +5,8 @@ using System.Text;
 
 namespace ScriptCoreLib.JavaScript.WebGL
 {
-	// http://src.chromium.org/viewvc/blink/trunk/Source/core/html/canvas/WebGLRenderbuffer.idl
+    // http://src.chromium.org/viewvc/blink/trunk/Source/modules/webgl/WebGLRenderbuffer.idl
+    // http://src.chromium.org/viewvc/blink/trunk/Source/modules/webgl/WebGLRenderbuffer.cpp
 
 	[Script(HasNoPrototype = true, InternalConstructor = true)]
     public class WebGLRenderbuffer

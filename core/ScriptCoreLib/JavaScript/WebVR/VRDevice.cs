@@ -8,6 +8,7 @@ namespace ScriptCoreLib.JavaScript.WebVR
 	// http://mozvr.github.io/webvr-spec/webvr.html#vrdevice
 	// https://chromium.googlesource.com/experimental/chromium/src/+/refs/wip/bajones/webvr/content/browser/vr/cardboard/cardboard_vr_device.cc
 	// https://chromium.googlesource.com/experimental/chromium/src/+/refs/wip/bajones/webvr/content/public/android/java/src/org/chromium/content/browser/input/CardboardVRDevice.java
+    // http://src.chromium.org/viewvc/blink/trunk/Source/modules/vr/VRDevice.idl
 
 	[Script(HasNoPrototype = true)]
 	public class VRDevice

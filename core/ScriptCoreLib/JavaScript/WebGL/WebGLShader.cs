@@ -5,9 +5,8 @@ using System.Text;
 
 namespace ScriptCoreLib.JavaScript.WebGL
 {
-	// http://src.chromium.org/viewvc/blink/trunk/Source/core/html/canvas/WebGLShader.cpp
-	// http://src.chromium.org/viewvc/blink/trunk/Source/core/html/canvas/WebGLShader.h
-	// http://src.chromium.org/viewvc/blink/trunk/Source/core/html/canvas/WebGLShader.idl
+    // http://src.chromium.org/viewvc/blink/trunk/Source/modules/webgl/WebGLShader.idl
+    // http://src.chromium.org/viewvc/blink/trunk/Source/modules/webgl/WebGLShader.cpp
 
 	[Script(HasNoPrototype = true, InternalConstructor = true)]
 	public class WebGLShader

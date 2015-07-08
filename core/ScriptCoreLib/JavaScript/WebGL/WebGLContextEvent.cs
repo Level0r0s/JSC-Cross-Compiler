@@ -6,7 +6,8 @@ using System.Text;
 
 namespace ScriptCoreLib.JavaScript.WebGL
 {
-	// http://src.chromium.org/viewvc/blink/trunk/Source/core/html/canvas/WebGLContextEvent.idl
+    // http://src.chromium.org/viewvc/blink/trunk/Source/modules/webgl/WebGLContextEvent.idl
+
 	[Script(HasNoPrototype = true)]
     public class WebGLContextEvent : IEvent
     {

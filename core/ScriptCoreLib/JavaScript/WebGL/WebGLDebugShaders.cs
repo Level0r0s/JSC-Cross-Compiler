@@ -5,12 +5,14 @@ using System.Text;
 
 namespace ScriptCoreLib.JavaScript.WebGL
 {
-	// http://src.chromium.org/viewvc/blink/trunk/Source/core/html/canvas/WebGLDebugShaders.idl
-	// http://src.chromium.org/viewvc/blink/trunk/Source/core/html/canvas/WebGLDebugRendererInfo.idl
+    // http://src.chromium.org/viewvc/blink/trunk/Source/modules/webgl/WebGLDebugShaders.idl
+    // http://src.chromium.org/viewvc/blink/trunk/Source/modules/webgl/WebGLDebugRendererInfo.idl
 
 	[Script(HasNoPrototype = true, InternalConstructor = true)]
 	public class WebGLDebugShaders : WebGLObject
 	{
+        // tested by?
+
 		public string getTranslatedShaderSource(WebGLShader shader) { return default(string); }
 
 

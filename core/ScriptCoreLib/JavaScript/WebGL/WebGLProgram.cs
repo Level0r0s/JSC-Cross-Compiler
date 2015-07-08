@@ -5,11 +5,14 @@ using System.Text;
 
 namespace ScriptCoreLib.JavaScript.WebGL
 {
-	// http://src.chromium.org/viewvc/blink/trunk/Source/core/html/canvas/WebGLProgram.idl
+    // http://src.chromium.org/viewvc/blink/trunk/Source/modules/webgl/WebGLProgram.idl
+    // http://src.chromium.org/viewvc/blink/trunk/Source/modules/webgl/WebGLProgram.cpp
 
 	[Script(HasNoPrototype = true, InternalConstructor = true)]
 	public class WebGLProgram
 	{
+        // m_vertexShader
+
 		// --enable-unsafe-es3-apis 
 		// https://twitter.com/Tojiro/status/583686243046723586
 

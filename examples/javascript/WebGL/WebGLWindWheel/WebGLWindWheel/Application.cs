@@ -76,16 +76,50 @@ namespace WebGLWindWheel
             var shaderProgram_mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
 
 
+            // https://github.com/toji/gl-matrix/blob/master/src/gl-matrix/mat4.js
 
-            var mvMatrix = glMatrix.mat4.create();
-            var mvMatrixStack = new Stack<Float32Array>();
+            var __mat4 = new
+            {
+                // X:\jsc.svn\examples\javascript\Test\TestFloatArray\TestFloatArray\Application.cs
+                // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/20150706/20150708
+                create = new Func<float[]>(
+                    () =>
+                    //new mat4()
+                    new float[]
+                    {
+                        1, 0, 0, 0,
+                        0, 1, 0, 0,
+                        0, 0, 1, 0,
+                        0, 0, 0, 1,
+                    }
+                ),
 
-            var pMatrix = glMatrix.mat4.create();
+                #region not used?
+                clone = new Func<float[], float[]>(
+                    smat4 =>
+                    //new mat4()
+                    new float[]
+                    {
+                        smat4[0], smat4[1], smat4[2], smat4[3],
+                        smat4[4], smat4[5], smat4[6], smat4[7],
+                        smat4[8], smat4[9], smat4[10], smat4[11],
+                        smat4[12], smat4[13], smat4[14], smat4[15],
+                    }
+                )
+                #endregion
+
+
+            };
+
+            var mvMatrix = __mat4.create();
+            var mvMatrixStack = new Stack<float[]>();
+
+            var pMatrix = __mat4.create();
 
             #region new in lesson 03
             Action mvPushMatrix = delegate
             {
-                var copy = glMatrix.mat4.create();
+                var copy = __mat4.create();
                 glMatrix.mat4.set(mvMatrix, copy);
                 mvMatrixStack.Push(copy);
             };
@@ -113,7 +147,7 @@ namespace WebGLWindWheel
 
 
             #region cube
-            var cubeVertexPositionBuffer = gl.createBuffer();
+            var cubeVertexPositionBuffer = new WebGLBuffer(gl);
             gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
 
             var cubesize = 1.0f * 0.05f;
@@ -184,7 +218,7 @@ namespace WebGLWindWheel
                 1.0f, 0.5f, 0.0f, 1.0f, // Bottom face
                 1.0f, 0.5f, 0.0f, 1.0f, // Bottom face
 
-                
+
                 1.0f, 0.8f, 0.0f, 1.0f, // Right face
                 1.0f, 0.8f, 0.0f, 1.0f, // Right face
                 1.0f, 0.8f, 0.0f, 1.0f, // Right face
@@ -213,6 +247,7 @@ namespace WebGLWindWheel
                 20, 21, 22,   20, 22, 23  // Left face
             };
 
+            // ushort[]?
             gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeVertexIndices), gl.STATIC_DRAW);
             var cubeVertexIndexBuffer_itemSize = 1;
             var cubeVertexIndexBuffer_numItems = 36;
@@ -322,7 +357,13 @@ namespace WebGLWindWheel
                 gl.viewport(0, 0, gl_viewportWidth, gl_viewportHeight);
                 gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-                glMatrix.mat4.perspective(45f, (float)gl_viewportWidth / (float)gl_viewportHeight, 0.1f, 100.0f, pMatrix);
+                glMatrix.mat4.perspective(
+                    45f,
+                    (float)gl_viewportWidth / (float)gl_viewportHeight,
+                    0.1f,
+                    100.0f,
+                    pMatrix
+               );
 
                 glMatrix.mat4.identity(mvMatrix);
 
@@ -517,7 +558,7 @@ namespace WebGLWindWheel
             #endregion
 
             #region requestFullscreen
-            Native.Document.body.ondblclick +=
+            Native.document.body.ondblclick +=
                 delegate
                 {
                     if (IsDisposed)
@@ -525,7 +566,7 @@ namespace WebGLWindWheel
 
                     // http://tutorialzine.com/2012/02/enhance-your-website-fullscreen-api/
 
-                    Native.Document.body.requestFullscreen();
+                    Native.document.body.requestFullscreen();
 
 
                 };
@@ -545,7 +586,7 @@ namespace WebGLWindWheel
 
                 c++;
 
-                Native.Document.title = "" + c;
+                Native.document.title = "" + c;
 
                 drawScene();
                 animate();
