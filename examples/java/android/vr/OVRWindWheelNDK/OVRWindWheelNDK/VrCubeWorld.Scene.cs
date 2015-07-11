@@ -22,8 +22,13 @@ namespace OVRWindWheelNDK
         //public const int NUM_INSTANCES = 6;
 
 
-        public const int floors = 5;
-        public const int NUM_INSTANCES = 8 * 8 * floors;
+        //public const int floors = 5;
+        public const int floors = 33;
+
+        public const int floorwidth = 3;
+
+        //public const int NUM_INSTANCES = 8 * 8 * floors;
+        public const int NUM_INSTANCES = 3 * 3 * floors;
 
 
         // member of ovrApp
@@ -53,6 +58,7 @@ namespace OVRWindWheelNDK
             // used by glMapBufferRange
             // set by glGenBuffers
             // deleted by ovrScene_Destroy
+            // GL_ARRAY_BUFFER
             public uint InstanceTransformBuffer = 0;
 
             // VRAPI_FRAME_INIT_LOADING_ICON_FLUSH
@@ -137,9 +143,9 @@ namespace OVRWindWheelNDK
                     float rx = 0, ry = 0, rz = 0;
 
 
-                    rx = 2.0f * (((i / floors) / 8) - floors);
+                    rx = 2.0f * (((i / floors) / floorwidth) - floors);
 
-                    rz = 2.0f * (((i / floors) % 8) - floors);
+                    rz = 2.0f * (((i / floors) % floorwidth) - floors);
 
 
                     ry = (i % floors - 1.0f) * 0.6f;

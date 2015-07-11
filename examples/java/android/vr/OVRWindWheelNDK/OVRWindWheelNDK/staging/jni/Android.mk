@@ -42,7 +42,9 @@ include $(CLEAR_VARS)
 # https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/app/NativeActivity.java
 LOCAL_MODULE    := main
 # jni/VrApi_Helpers.h:393:2: error: 'for' loop initial declarations are only allowed in C99 mode
-LOCAL_CFLAGS			:= -std=c99 -Werror
+#LOCAL_CFLAGS			:= -std=c99 -Werror
+# we want our delegates, even if with warnings
+LOCAL_CFLAGS			:= -std=c99 
 # https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150607-1/vrcubeworld
 # "X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldNativeActivity\OVRVrCubeWorldNative\bin\Debug\staging\jni\OVRVrCubeWorldNative.dll.c"
 

@@ -154,6 +154,7 @@ namespace OVRWindWheelNDK
                     (1.0f + (float)Math.Sin(appThread.appState.FrameIndex * 0.05f) * 0.2f);
 
 
+                // for gearvr we get do pre set all cubes?
                 #region InstanceTransformBuffer
                 var sizeof_ovrMatrix4f = sizeof(ovrMatrix4f);
                 gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, appThread.appState.Scene.InstanceTransformBuffer);
@@ -327,6 +328,7 @@ namespace OVRWindWheelNDK
                         //appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_SetCurrent BufferIndex ", appState.Renderer.BufferIndex);
                         //appState.tracei60("ovrRenderer_RenderFrame, ovrRenderTexture_SetCurrent eye ", eye);
 
+                        // using?
                         gl3.glBindFramebuffer(gl3.GL_FRAMEBUFFER, RenderTexture->FrameBuffer);
 
 

@@ -137,16 +137,19 @@ namespace OVRWindWheelNDK
             // 391
             // set by ovrGeometry_CreateCube
             public uint VertexBuffer = 0;
+
+            // GL_ELEMENT_ARRAY_BUFFER
             public uint IndexBuffer = 0;
 
 
             // set via glGenVertexArrays
             // sent to glBindVertexArray
+            // before glDrawElementsInstanced
             public uint VertexArrayObject = 0;
 
-            public int VertexCount = 0;
-            public int IndexCount = 0;
-
+            public int VertexCount = 8;
+            public int IndexCount = 36;
+            
             public ovrGeometry()
             {
                 // 391
@@ -163,7 +166,8 @@ namespace OVRWindWheelNDK
             readonly ovrCubeVertices8x4 ovrCubeVertices8x4 = new ovrCubeVertices8x4();
 
             // downgrade to byte?
-            static readonly ushort[] cubeIndices = new ushort[] 
+            // 6x6 ushort
+            static readonly ushort[] IndexBufferData = new ushort[] 
             {
                 0, 1, 2, 2, 3, 0,	// top
                 4, 5, 6, 6, 7, 4,	// bottom
@@ -183,8 +187,6 @@ namespace OVRWindWheelNDK
 
 
 
-                this.VertexCount = 8;
-                this.IndexCount = 36;
 
 
                 // 438
@@ -223,7 +225,7 @@ namespace OVRWindWheelNDK
                 // 457
                 gl3.glGenBuffers(1, out this.IndexBuffer);
                 gl3.glBindBuffer(gl3.GL_ELEMENT_ARRAY_BUFFER, this.IndexBuffer);
-                gl3.glBufferData(gl3.GL_ELEMENT_ARRAY_BUFFER, 36 * 4, cubeIndices, gl3.GL_STATIC_DRAW);
+                gl3.glBufferData(gl3.GL_ELEMENT_ARRAY_BUFFER, 6 * 6 * 4, IndexBufferData, gl3.GL_STATIC_DRAW);
                 gl3.glBindBuffer(gl3.GL_ELEMENT_ARRAY_BUFFER, 0);
 
                 //ConsoleExtensions.trace("exit ovrGeometry_CreateCube");
@@ -262,6 +264,7 @@ namespace OVRWindWheelNDK
                                 this.VertexAttribs[i].Stride, this.VertexAttribs[i].Pointer);
                     }
 
+                // why?
                 gl3.glBindBuffer(gl3.GL_ELEMENT_ARRAY_BUFFER, this.IndexBuffer);
 
                 gl3.glBindVertexArray(0);

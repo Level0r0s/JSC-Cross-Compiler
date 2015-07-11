@@ -25,11 +25,12 @@ namespace OVRWindWheelNDK
         public partial class ovrAppThread
         {
             // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRWindWheelNDK\VrApi.cs
-            // set via ovrAppThread_Create
+            // set via ovrAppThread_Create, via GetJavaVM
+            // used by?
             public readonly JavaVM JavaVm;
 
             public readonly jobject ActivityObject;
-            public readonly pthread_t Thread;
+            //public readonly pthread_t Thread;
 
             public readonly ovrMessageQueue MessageQueue = new ovrMessageQueue();
 
@@ -41,16 +42,6 @@ namespace OVRWindWheelNDK
 
 
 
-
-
-            // 1777
-            static object AppThreadFunction(ovrAppThread appThread)
-            {
-                // new thread, jump into instance callsite
-                return appThread.AppThreadFunction();
-            }
-
-
             public ovrApp appState;
 
 
@@ -58,7 +49,27 @@ namespace OVRWindWheelNDK
             public ovrTracking trackingOld;
             public ovrTracking tracking;
 
-            object AppThreadFunction()
+            readonly System.Threading.Thread Thread;
+
+            // called by onCreate
+            public ovrAppThread(JNIEnv env, jobject activityObject)
+            {
+                // 1907
+                ConsoleExtensions.trace("enter ovrAppThread, call pthread_create");
+
+                // why keep it?
+                env.GetJavaVM(env, out this.JavaVm);
+                this.ActivityObject = env.NewGlobalRef(env, activityObject);
+
+
+                this.Thread = new System.Threading.Thread(
+                    this.AppThreadFunction
+                );
+                this.Thread.Start();
+            }
+
+
+            void AppThreadFunction()
             {
                 // 1778
                 ConsoleExtensions.trace("enter pthread_create AppThreadFunction, call vrapi_DefaultInitParms");
@@ -213,22 +224,9 @@ namespace OVRWindWheelNDK
                 VrApi.vrapi_Shutdown();
 
                 java.Vm.DetachCurrentThread(java.Vm);
-                return null;
             }
 
 
-            // called by onCreate
-            public ovrAppThread(JNIEnv env, jobject activityObject)
-            {
-                // 1907
-                ConsoleExtensions.trace("enter ovrAppThread, call pthread_create");
-
-                env.GetJavaVM(env, out this.JavaVm);
-                this.ActivityObject = env.NewGlobalRef(env, activityObject);
-
-                var createErr = pthread.pthread_create(out this.Thread, null, AppThreadFunction, this);
-                // tail call?
-            }
 
 
             // called by onDestroy, then free
@@ -236,7 +234,7 @@ namespace OVRWindWheelNDK
             public void ovrAppThread_Destroy(JNIEnv env)
             {
                 //1922
-                pthread.pthread_join(this.Thread, null);
+                this.Thread.Join();
 
                 env.DeleteGlobalRef(env, this.ActivityObject);
                 this.MessageQueue.ovrMessageQueue_Destroy();
