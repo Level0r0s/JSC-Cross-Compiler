@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 
 namespace TestStackFloatArray
 {
-    public class Class1
+    public unsafe class Class1
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150711/teststackfloatarray
+
+        // X:\jsc.svn\examples\c\Test\TestStackFloatArray\TestStackFloatArray
+        // r:\jsc.svn\examples\c\Test\TestStackFloatArray\TestStackFloatArray
+
         // at 60hz we should not touch malloc.
         // as we would run out of RAM fast.
         // in VR matrix ops need float arrays.
@@ -19,6 +24,7 @@ namespace TestStackFloatArray
         // it means downstream functions need either to copy it
         // or signal the caller not to destroy it.
         // for now lets assume downstream functions can only copy, as our GC protocol does not exist yet.
+        // glsl also wont like any heap/malloc 
 
         static float[] heap_rotationX;
 
@@ -50,6 +56,17 @@ namespace TestStackFloatArray
                 0,    0,     0, 1
             };
             Invoke(stack_rotationX);
+
+
+            //var localloc_rotationX = stackalloc float[16]
+            //{
+            //    1,    0,     0, 0 ,
+            //    0, cosX, -sinX, 0 ,
+            //    0, sinX,  cosX, 0 ,
+            //    0,    0,     0, 1
+            //};
+            //Invoke(localloc_rotationX);
+
             heap_rotationX = new float[]
             {
                 1,    0,     0, 0 ,
