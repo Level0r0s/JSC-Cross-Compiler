@@ -78,6 +78,8 @@ namespace WebGLWindWheel
 
             // https://github.com/toji/gl-matrix/blob/master/src/gl-matrix/mat4.js
 
+            // can we convert this code to NDK friendly non GC library?
+            // for gearVR 90FOV and cardboard wearality 150FOV
             #region __mat4
             var __mat4 = new
             {
@@ -126,7 +128,6 @@ namespace WebGLWindWheel
                             0, 0, 0, 1,
                         };
 
-                        // script: error JSC1000: No implementation found for this native method, please implement [System.Array.CopyTo(System.Array, System.Int32)]
                         //is this the best way to update array contents?
                         x.CopyTo(that, 0);
 
@@ -213,8 +214,6 @@ namespace WebGLWindWheel
                         b10, b11, b12,
                         b20, b21, b22;
 
-
-                        // script: error JSC1000: No implementation found for this native method, please implement [static System.Math.Abs(System.Single)]
 
                         if (Math.Abs(len) < float.Epsilon)
                             return that;
@@ -535,13 +534,13 @@ namespace WebGLWindWheel
                 //);
 
                 __mat4.perspective(
-            pMatrix,
+                    pMatrix,
 
-            45f,
-            (float)gl_viewportWidth / (float)gl_viewportHeight,
-            0.1f,
-            100.0f
-            );
+                    45f,
+                    (float)gl_viewportWidth / (float)gl_viewportHeight,
+                    0.1f,
+                    100.0f
+                    );
 
                 __mat4.identity(mvMatrix);
                 //glMatrix.mat4.identity(mvMatrix);
