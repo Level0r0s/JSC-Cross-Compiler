@@ -19,7 +19,7 @@ using System.Net.Sockets;
 
 namespace OVRWindWheelActivity.Activities
 {
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "10")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "18")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
 
     // https://forums.oculus.com/viewtopic.php?t=21409
@@ -69,6 +69,7 @@ namespace OVRWindWheelActivity.Activities
         // should jsc remember last connected device and reconnect if disconnected?
         // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
         // restart android?
+        // restart usb debugging?
 
 
         // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell dumpsys SurfaceFlinger
@@ -80,6 +81,8 @@ namespace OVRWindWheelActivity.Activities
 
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVRWindWheelActivity.Activities
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVRWindWheelActivity.Activities/OVRWindWheelActivity.Activities.ApplicationActivity
+        // Warning: Activity not started, its current task has been brought to the front
+
 
 
         // x:\util\android-sdk-windows\platform-tools\adb.exe  shell dumpsys meminfo OVRWindWheelActivity.Activities
@@ -146,6 +149,10 @@ namespace OVRWindWheelActivity.Activities
             public float tracking_HeadPose_Pose_Orientation_y;
             public float tracking_HeadPose_Pose_Orientation_z;
             public float tracking_HeadPose_Pose_Orientation_w;
+
+
+            // our VR thread will stop at 64MB
+            public long total_allocated_space;
         }
 
         __args args = new __args();
@@ -302,11 +309,15 @@ namespace OVRWindWheelActivity.Activities
                     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150630/udp
                     // lets run it, and see if we can see some vr notifications as we skip a video 
 
-                    GLES3JNILib.stringFromJNI(args);
 
 
+                    //if (args.total_allocated_space > 48 * 1024 * 1024)
+                    //    this.recreate();
 
-                    return sw.ElapsedMilliseconds + "ms \n"
+
+                    return
+                        sw.ElapsedMilliseconds + "ms \n"
+                        + args.total_allocated_space + " bytes \n"
                         + args.mouse + "\n"
                         + new { args.mousex, args.mousey } + "\n"
                         + new
@@ -334,6 +345,15 @@ namespace OVRWindWheelActivity.Activities
 
             //Task.Run(
 
+
+            Func<string> safemode = () =>
+            {
+                return
+                    sw.ElapsedMilliseconds + "ms \n"
+                        + args.total_allocated_space + " bytes \n"
+                    + "safe mode / malloc limit..";
+            };
+
             new Thread(
                 delegate()
                 {
@@ -346,21 +366,34 @@ namespace OVRWindWheelActivity.Activities
 
                         // fullspeed
 
-                        Thread.Sleep(1000 / 60);
 
 
-                        if (args.mousebutton == 0)
+                        GLES3JNILib.stringFromJNI(args);
+
+                        if (args.total_allocated_space > 20 * 1024 * 1024)
                         {
-                            mDraw.color = android.graphics.Color.GREEN;
-                            mDraw.alpha = 80;
+                            mDraw.color = android.graphics.Color.RED;
+                            mDraw.alpha = 255;
+
+                            mDraw.text = safemode;
                         }
                         else
                         {
-                            mDraw.color = android.graphics.Color.YELLOW;
-                            mDraw.alpha = 255;
+
+                            if (args.mousebutton == 0)
+                            {
+                                mDraw.color = android.graphics.Color.GREEN;
+                                mDraw.alpha = 80;
+                            }
+                            else
+                            {
+                                mDraw.color = android.graphics.Color.YELLOW;
+                                mDraw.alpha = 255;
+                            }
                         }
 
                         mDraw.postInvalidate();
+                        Thread.Sleep(1000 / 60);
                     }
                 }
             ).Start();

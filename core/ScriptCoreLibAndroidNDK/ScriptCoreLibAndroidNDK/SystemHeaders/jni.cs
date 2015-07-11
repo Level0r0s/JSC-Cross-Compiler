@@ -29,10 +29,21 @@ namespace ScriptCoreLibNative.SystemHeaders
             return default(size_t);
         }
 
+        public static implicit operator void*(size_t x)
+        {
+            return default(void*);
+        }
+
         public static implicit operator size_t(float[,] x)
         {
             return default(size_t);
         }
+
+        public static implicit operator int(size_t x)
+        {
+            return default(int);
+        }
+
     }
 
 
@@ -194,6 +205,15 @@ namespace ScriptCoreLibNative.SystemHeaders
 
         public SetFloatFieldDelegate SetFloatField;
         #endregion
+
+
+        #region SetLongField
+        [Script(IsNative = true)]
+        public delegate void SetLongFieldDelegate(JNIEnv env, jobject value, jfieldID i, long f);
+
+        public SetLongFieldDelegate SetLongField;
+        #endregion
+
 
 
         #region NewStringUTF

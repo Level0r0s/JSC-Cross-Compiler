@@ -6,8 +6,7 @@ using ScriptCoreLib;
 
 namespace ScriptCoreLibNative.SystemHeaders
 {
-
-    //"X:\opensource\android-ndk-r10c\platforms\android-12\arch-arm\usr\include\sys\errno.h"
+    // "X:\util\android-ndk-r10e\platforms\android-21\arch-arm\usr\include\errno.h"
 
     [Script(IsNative = true, Header = "errno.h", IsSystemHeader = true)]
     public unsafe static class errno_h

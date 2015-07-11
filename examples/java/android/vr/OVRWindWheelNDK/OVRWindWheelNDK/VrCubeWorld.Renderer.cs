@@ -100,18 +100,31 @@ namespace OVRWindWheelNDK
                     // https://www.kickstarter.com/projects/wearality/wearality-sky-limitless-vr
                     // jsc first pass should be a diff, to see if UDP patch can be issued instead of full build.
 
+                    ConsoleExtensions.trace("call CreateProjectionFov");
+
                     // Setup the projection matrix.
-                    this.ProjectionMatrix = VrApi_Helpers.ovrMatrix4f_CreateProjectionFov(
+                    this.ProjectionMatrix = __ovrMatrix4f.CreateProjectionFov(
                         hmdInfo_SuggestedEyeFov[0] * ((float)Math.PI / 180.0f),
                         hmdInfo_SuggestedEyeFov[1] * ((float)Math.PI / 180.0f),
                         0.0f, 0.0f,
-                        1.0f, 0.0f
+                        //nearZ: 1.0f, 
+                        //nearZ: 2.0f,
+                        //nearZ: 0.5f,
+
+                        // this feels close
+                        nearZ: 0.01f,
+
+                        //farZ: 0.1f
+                        farZ: 0.0f
                     );
 
-                    this.TanAngleMatrix = VrApi_Helpers.ovrMatrix4f_TanAngleMatrixFromProjection(ref this.ProjectionMatrix);
+                    ConsoleExtensions.trace("call TanAngleMatrixFromProjection");
+                    //this.TanAngleMatrix = VrApi_Helpers.ovrMatrix4f_TanAngleMatrixFromProjection(ref this.ProjectionMatrix);
+                    this.TanAngleMatrix = __ovrMatrix4f.TanAngleMatrixFromProjection(this.ProjectionMatrix);
+                    ConsoleExtensions.trace("after call TanAngleMatrixFromProjection");
                 }
 
-                //ConsoleExtensions.trace("exit ovrRenderer_Create");
+                ConsoleExtensions.trace("exit ovrRenderer_Create");
             }
 
             // Dispose
@@ -130,9 +143,8 @@ namespace OVRWindWheelNDK
 
             // sent into vrapi_SubmitFrame
             // will use glMapBufferRange
-            //public ovrFrameParms ovrRenderer_RenderFrame(ref ovrApp appState, ref ovrTracking tracking)
-            //public ovrFrameParms ovrRenderer_RenderFrame(ovrAppThread appThread, ovrApp appState, ref ovrTracking tracking0)
-            //public ovrFrameParms ovrRenderer_RenderFrame(ovrAppThread appThread, ref ovrTracking tracking0)
+
+            // no malloc for this method!
             public ovrFrameParms ovrRenderer_RenderFrame(ovrAppThread appThread)
             {
                 // X:\jsc.svn\examples\javascript\WebGL\WebGLSpadeWarrior\WebGLSpadeWarrior\Application.cs
@@ -275,13 +287,14 @@ namespace OVRWindWheelNDK
 
                 // 1070
                 gl3.glUnmapBuffer(gl3.GL_ARRAY_BUFFER);
+
+                // whats the next buffer to be bound?
                 gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, 0);
                 #endregion
 
 
                 // Calculate the center view matrix.
                 //ConsoleExtensions.tracei("ovrRenderer_RenderFrame, vrapi_DefaultHeadModelParms");
-                var headModelParms = VrApi_Helpers.vrapi_DefaultHeadModelParms();
 
 
                 //tracking.HeadPose.Pose.Orientation.y += appState.FrameIndex * 0.05f;
@@ -295,9 +308,12 @@ namespace OVRWindWheelNDK
 
                 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150703/mousex
                 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150705
-                var centerEyeViewMatrix0 = VrApi_Helpers.vrapi_GetCenterEyeViewMatrix(ref headModelParms, ref appThread.tracking, default(ovrMatrix4f*));
+
+
                 var centerEyeViewMatrix1 = __ovrMatrix4f.CreateRotation(0, GLES3JNILib.fields_mousex * 0.005f, 0);
-                var centerEyeViewMatrix = __ovrMatrix4f.Multiply(centerEyeViewMatrix0, centerEyeViewMatrix1);
+                var centerEyeViewMatrix = VrApi_Helpers.vrapi_GetCenterEyeViewMatrix(ref appThread.headModelParms, ref appThread.tracking, ref centerEyeViewMatrix1);
+
+                //var centerEyeViewMatrix = __ovrMatrix4f.Multiply(centerEyeViewMatrix0, centerEyeViewMatrix1);
 
                 //__ovrMatrix4f __centerEyeViewMatrix1 = &centerEyeViewMatrix1;
 
@@ -319,7 +335,7 @@ namespace OVRWindWheelNDK
                 for (int eye = 0; eye < NUM_EYES; eye++)
                 {
                     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150618/ovrmatrix4f
-                    var eyeViewMatrix = VrApi_Helpers.vrapi_GetEyeViewMatrix(ref headModelParms, ref centerEyeViewMatrix, eye);
+                    var eyeViewMatrix = VrApi_Helpers.vrapi_GetEyeViewMatrix(ref  appThread.headModelParms, ref centerEyeViewMatrix, eye);
 
                     fixed (ovrMatrix4f* ref_ProjectionMatrix = &appThread.appState.Renderer.ProjectionMatrix)
                     fixed (ovrRenderTexture* RenderTexture = &appThread.appState.Renderer.RenderTextures[appThread.appState.Renderer.BufferIndex, eye])
@@ -346,11 +362,14 @@ namespace OVRWindWheelNDK
                         gl3.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
                         gl3.glClear(gl3.GL_COLOR_BUFFER_BIT | gl3.GL_DEPTH_BUFFER_BIT);
 
+                        // using
                         gl3.glUseProgram(appThread.appState.Scene.Program.Program);
 
                         // 1094
 
+                        // 	uniform mat4 ViewMatrix; 
                         gl3.glUniformMatrix4fv(appThread.appState.Scene.Program.Uniforms[(int)ovrUniform_index.UNIFORM_VIEW_MATRIX], 1, true, (float*)&eyeViewMatrix);
+                        // 	uniform mat4 ProjectionMatrix; 
                         gl3.glUniformMatrix4fv(appThread.appState.Scene.Program.Uniforms[(int)ovrUniform_index.UNIFORM_PROJECTION_MATRIX], 1, true, (float*)ref_ProjectionMatrix);
 
                         gl3.glBindVertexArray(appThread.appState.Scene.Cube.VertexArrayObject);
@@ -393,7 +412,7 @@ namespace OVRWindWheelNDK
 
 
 
-                        parms.Layers[(int)ovrFrameLayerType.VRAPI_FRAME_LAYER_TYPE_WORLD].Images[eye].TexId = RenderTexture->ColorTexture;
+                        parms.Layers[(int)ovrFrameLayerType.VRAPI_FRAME_LAYER_TYPE_WORLD].Images[eye].TexId = RenderTexture->FrameBufferColorTexture;
                         parms.Layers[(int)ovrFrameLayerType.VRAPI_FRAME_LAYER_TYPE_WORLD].Images[eye].TexCoordsFromTanAngles = appThread.appState.Renderer.TanAngleMatrix;
                         parms.Layers[(int)ovrFrameLayerType.VRAPI_FRAME_LAYER_TYPE_WORLD].Images[eye].HeadPose = appThread.tracking.HeadPose;
                     }

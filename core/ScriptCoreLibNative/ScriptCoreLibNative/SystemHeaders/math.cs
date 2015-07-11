@@ -69,6 +69,14 @@ namespace ScriptCoreLibNative.SystemHeaders
         {
             return default(double);
         }
+
+        public static float tanf(float e)
+        {
+            // X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\References\VrApi.ovrMatrix4f.cs
+
+            return default(float);
+        }
+
 	}
 
 }

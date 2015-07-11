@@ -28,10 +28,10 @@ namespace OVRWindWheelNDK
             // set via glGenTextures
             // sent to TexId
             // GL_TEXTURE_2D
-            public uint ColorTexture;
+            public uint FrameBufferColorTexture;
 
             // GL_RENDERBUFFER
-            public uint DepthBuffer;
+            public uint FrameBufferDepthBuffer;
 
             // set by ovrRenderTexture_Create
             // used via glBindFramebuffer
@@ -47,8 +47,8 @@ namespace OVRWindWheelNDK
                 this.Width = 0;
                 this.Height = 0;
                 this.Multisamples = 0;
-                this.ColorTexture = 0;
-                this.DepthBuffer = 0;
+                this.FrameBufferColorTexture = 0;
+                this.FrameBufferDepthBuffer = 0;
                 this.FrameBuffer = 0;
             }
 
@@ -68,8 +68,8 @@ namespace OVRWindWheelNDK
                 // http://fabiensanglard.net/quake2/quake2_opengl_renderer.php
 
                 // Create the color buffer texture.
-                gl3.glGenTextures(1, out this.ColorTexture);
-                gl3.glBindTexture(gl3.GL_TEXTURE_2D, this.ColorTexture);
+                gl3.glGenTextures(1, out this.FrameBufferColorTexture);
+                gl3.glBindTexture(gl3.GL_TEXTURE_2D, this.FrameBufferColorTexture);
                 gl3.glTexImage2D(gl3.GL_TEXTURE_2D, 0, gl3.GL_RGBA8, width, height, 0, gl3.GL_RGBA, gl3.GL_UNSIGNED_BYTE, null);
                 gl3.glTexParameteri(gl3.GL_TEXTURE_2D, gl3.GL_TEXTURE_WRAP_S, gl3.GL_CLAMP_TO_EDGE);
                 gl3.glTexParameteri(gl3.GL_TEXTURE_2D, gl3.GL_TEXTURE_WRAP_T, gl3.GL_CLAMP_TO_EDGE);
@@ -83,16 +83,16 @@ namespace OVRWindWheelNDK
                 // ?? glFramebufferTexture2DMultisampleEXT
 
                 // Create depth buffer.
-                gl3.glGenRenderbuffers(1, out this.DepthBuffer);
-                gl3.glBindRenderbuffer(gl3.GL_RENDERBUFFER, this.DepthBuffer);
+                gl3.glGenRenderbuffers(1, out this.FrameBufferDepthBuffer);
+                gl3.glBindRenderbuffer(gl3.GL_RENDERBUFFER, this.FrameBufferDepthBuffer);
                 gl3.glRenderbufferStorage(gl3.GL_RENDERBUFFER, gl3.GL_DEPTH_COMPONENT24, width, height);
                 gl3.glBindRenderbuffer(gl3.GL_RENDERBUFFER, 0);
 
                 // Create the frame buffer.
                 gl3.glGenFramebuffers(1, out this.FrameBuffer);
                 gl3.glBindFramebuffer(gl3.GL_FRAMEBUFFER, this.FrameBuffer);
-                gl3.glFramebufferRenderbuffer(gl3.GL_FRAMEBUFFER, gl3.GL_DEPTH_ATTACHMENT, gl3.GL_RENDERBUFFER, this.DepthBuffer);
-                gl3.glFramebufferTexture2D(gl3.GL_FRAMEBUFFER, gl3.GL_COLOR_ATTACHMENT0, gl3.GL_TEXTURE_2D, this.ColorTexture, 0);
+                gl3.glFramebufferRenderbuffer(gl3.GL_FRAMEBUFFER, gl3.GL_DEPTH_ATTACHMENT, gl3.GL_RENDERBUFFER, this.FrameBufferDepthBuffer);
+                gl3.glFramebufferTexture2D(gl3.GL_FRAMEBUFFER, gl3.GL_COLOR_ATTACHMENT0, gl3.GL_TEXTURE_2D, this.FrameBufferColorTexture, 0);
 
                 var renderFramebufferStatus = gl3.glCheckFramebufferStatus(gl3.GL_FRAMEBUFFER);
                 gl3.glBindFramebuffer(gl3.GL_FRAMEBUFFER, 0);
@@ -106,11 +106,11 @@ namespace OVRWindWheelNDK
                 // 742
 
                 gl3.glDeleteFramebuffers(1, ref this.FrameBuffer);
-                gl3.glDeleteRenderbuffers(1, ref this.DepthBuffer);
-                gl3.glDeleteTextures(1, ref this.ColorTexture);
+                gl3.glDeleteRenderbuffers(1, ref this.FrameBufferDepthBuffer);
+                gl3.glDeleteTextures(1, ref this.FrameBufferColorTexture);
 
-                this.ColorTexture = 0;
-                this.DepthBuffer = 0;
+                this.FrameBufferColorTexture = 0;
+                this.FrameBufferDepthBuffer = 0;
                 this.FrameBuffer = 0;
             }
 

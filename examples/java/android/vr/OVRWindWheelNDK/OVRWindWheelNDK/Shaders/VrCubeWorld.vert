@@ -4,6 +4,9 @@
 	
 	// set by?
 	in mat4 vertexTransform; 
+
+	// X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\VrCubeWorld.Renderer.cs
+	// 370
 	uniform mat4 ViewMatrix; 
 	uniform mat4 ProjectionMatrix; 
 	

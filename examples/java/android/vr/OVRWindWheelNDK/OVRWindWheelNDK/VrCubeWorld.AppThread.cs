@@ -50,6 +50,68 @@ namespace OVRWindWheelNDK
             public ovrTracking tracking;
 
             readonly System.Threading.Thread Thread;
+            
+            public ovrHeadModelParms headModelParms;
+
+
+            [Script(OptimizedCode = "return e.uordblks;")]
+            public static long __uordblks(mallinfo e)
+            {
+                throw null;
+            }
+
+            //[Script(OptimizedCode = "return e.fordblks;")]
+            //static long __fordblks(mallinfo e) { throw null; }
+
+            //[Script(OptimizedCode = "return e.usmblks;")]
+            //static long __usmblks(mallinfo e) { throw null; }
+
+            public static long xmallinfo()
+            {
+                var m = malloc_h.mallinfo();
+
+                //ConsoleExtensions.tracei("mallinfo  total allocated space: ", (int)m.uordblks);
+                //ConsoleExtensions.tracei64("mallinfo    maximum total allocated space: ", (int)__usmblks(m));
+
+                var total = __uordblks(m);
+                //ConsoleExtensions.tracei64("mallinfo            total allocated space: ", (long)__uordblks(m));
+                //ConsoleExtensions.tracei64("mallinfo                total free  space: ", (int)__fordblks(m));
+
+                //I/xNativeActivity( 5501): \VrCubeWorld.AppThread.cs:72 mallinfo            total allocated space:  617 370 120
+
+                //if (total > 96 * 1024 * 1024)
+                //{
+                //    ConsoleExtensions.tracei64("sanity check, are we leaking memory?");
+
+                //    //I/xNativeActivity( 5501): \VrCubeWorld.AppThread.cs:72 mallinfo            total allocated space:  2027296912
+                //    //I/xNativeActivity( 5501): \VrApi.ovrMatrix4f.cs:343 out of heap? errno: 12 Out of memory
+                //    //I/xNativeActivity( 5501): \VrCubeWorld.AppThread.cs:72 mallinfo            total allocated space:  2212791352
+
+                //    unistd._exit(-5);
+                //}
+
+                return total;
+            }
+
+            //I/xNativeActivity(21471): \VrCubeWorld.AppThread.cs:71 mallinfo  total allocated space:  2 027 243 344
+            //I/xNativeActivity(21471): \VrCubeWorld.AppThread.cs:72 mallinfo  total free  space:  70 957 232
+            //I/xNativeActivity(21471): \VrApi.ovrMatrix4f.cs:343 out of heap? errno: 12 Out of memory
+            //I/xNativeActivity(21471): \VrCubeWorld.AppThread.cs:71 mallinfo  total allocated space:  -2 080 212 552
+            //I/xNativeActivity(21471): \VrCubeWorld.AppThread.cs:72 mallinfo  total free  space:  74 286 664
+
+
+            //I/xNativeActivity(15462): \VrCubeWorld.AppThread.cs:90 mallinfo  total allocated space:  5 512 048
+            //I/xNativeActivity(15462): \VrCubeWorld.AppThread.cs:91 mallinfo  total free  space:  13 362 320
+
+            //I/xNativeActivity(18481): \VrCubeWorld.AppThread.cs:71 mallinfo  total allocated space:  -2083023504
+            //I/xNativeActivity(18481): \VrCubeWorld.AppThread.cs:72 mallinfo  total free  space:  76 049 040
+
+            // https://groups.google.com/forum/#!topic/android-ndk/lcnwzszrESo
+            // http://stackoverflow.com/questions/30480007/is-using-largeheap-in-android-manifest-a-good-practice
+            // https://developer.android.com/reference/android/app/ActivityManager.html#getLargeMemoryClass()
+            // http://dwij.co.in/increase-heap-size-of-android-application/
+            // http://stackoverflow.com/questions/16957805/android-how-to-increase-application-memory-using-ndk
+
 
             // called by onCreate
             public ovrAppThread(JNIEnv env, jobject activityObject)
@@ -63,10 +125,65 @@ namespace OVRWindWheelNDK
 
 
                 this.Thread = new System.Threading.Thread(
-                    this.AppThreadFunction
+                    delegate()
+                    {
+                        // can we do closures?
+                        ConsoleExtensions.trace("enter thread for vrapi_SubmitFrame");
+
+
+                        //malloc_h.malloc_stats();
+
+                        //xmallinfo();
+
+                        //ConsoleExtensions.trace("adding memory pressure...");
+
+                        //var mb = 8 * 1024 * 1024;
+                        //var pressure = new byte[mb];
+
+                        ////System.Threading.Thread.Sleep(1000);
+
+                        //xmallinfo();
+
+
+                        ////ConsoleExtensions.trace("adding memory pressure... store...");
+
+                        ////for (int i = 0; i < mb; i++)
+                        ////{
+                        ////    pressure[i] = (byte)(0xcc ^ i);
+                        ////}
+
+                        ////xmallinfo();
+
+                        //// GC. would jsc static analysis know it means we can free that memory?
+
+                        //stdlib_h.free(pressure);
+
+                        ////pressure = null;
+
+                        ////System.Threading.Thread.Sleep(1000);
+                        //xmallinfo();
+
+
+                        // would our chrome app be able to switch over to ndk over udp?
+                        this.AppThreadFunction();
+                    }
                 );
                 this.Thread.Start();
             }
+
+
+
+            //I/DEBUG   ( 2941): pid: 31621, tid: 31653, name: Thread-653  >>> OVRWindWheelActivity.Activities <<<
+            //I/DEBUG   ( 2941): signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x8
+            //I/DEBUG   ( 2941):     r0 00000000  r1 00000000  r2 ffffffff  r3 3e86c40e
+            //I/DEBUG   ( 2941):     r4 3e86c40e  r5 ff4fffc0  r6 00000000  r7 3f800000
+            //I/DEBUG   ( 2941):     r8 e22fe448  r9 3f772ed9  sl e22fe488  fp 00000bb5
+            //I/DEBUG   ( 2941):     ip f73a0710  sp e22fe310  lr f7380375  pc f40fab72  cpsr 800f0030
+            //I/DEBUG   ( 2941):
+            //I/DEBUG   ( 2941): backtrace:
+            //I/DEBUG   ( 2941):     #00 pc 00008b72  /data/app/OVRWindWheelActivity.Activities-1/lib/arm/libmain.so (OVRWindWheelNDK___ovrMatrix4f_CreateRotation+99)
+            //I/DEBUG   ( 2941):     #01 pc 00008e61  /data/app/OVRWindWheelActivity.Activities-1/lib/arm/libmain.so (OVRWindWheelNDK_VrCubeWorld_ovrRenderer_ovrRenderer_RenderFrame+376)
+            //I/DEBUG   ( 2941):     #02 pc 000098eb  /data/app/OVRWindWheelActivity.Activities-1/lib/arm/libmain.so (OVRWindWheelNDK_VrCubeWorld_ovrAppThread_AppThreadFunction+810)
 
 
             void AppThreadFunction()
@@ -96,6 +213,10 @@ namespace OVRWindWheelNDK
                 ConsoleExtensions.trace("AppThreadFunction, call vrapi_GetHmdInfo, then ovrRenderer_Create");
                 var hmdInfo = VrApi.vrapi_GetHmdInfo(ref java);
                 this.appState.Renderer.ovrRenderer_Create(ref hmdInfo);
+
+
+                this.headModelParms = VrApi_Helpers.vrapi_DefaultHeadModelParms();
+
 
                 ConsoleExtensions.trace("AppThreadFunction, enter loop, call ovrMessageQueue_GetNextMessage");
                 bool destroyed = false;
@@ -176,10 +297,30 @@ namespace OVRWindWheelNDK
                     #endregion
 
 
+                    if (xmallinfo() > 20 * 1024 * 1024)
+                    {
+                        // I/xNativeActivity(24473): \VrCubeWorld.AppThread.cs:71 mallinfo    maximum total allocated space:  1825611032
+                        // https://news.ycombinator.com/item?id=9179833
+
+                        // https://www.youtube.com/watch?v=se2KMs5qrqY
+                        ConsoleExtensions.tracei64("safe mode before sleep ", appState.FrameIndex);
+
+                        // slow down VR thread...
+                        System.Threading.Thread.Sleep(5000);
+                        //unistd.usleep(2000 * 1000);
+
+                        //ConsoleExtensions.tracei64("safe mode after sleep ", appState.FrameIndex);
+
+                        //continue;
+                    }
+
+
+
                     //appState.tracei60("AppThreadFunction, FrameIndex ", (int)appState.FrameIndex);
 
                     // 1862
                     appState.FrameIndex++;
+
 
                     //ConsoleExtensions.tracei("AppThreadFunction, vrapi_GetPredictedDisplayTime");
                     var predictedDisplayTime = appState.Ovr.vrapi_GetPredictedDisplayTime(appState.FrameIndex);
@@ -197,18 +338,18 @@ namespace OVRWindWheelNDK
                         //var parms = this.appState.Renderer.ovrRenderer_RenderFrame(this, ref tracking);
                         var parms = this.appState.Renderer.ovrRenderer_RenderFrame(this);
 
-                        appState.tracei60("vrapi_SubmitFrame ", (int)appState.FrameIndex);
 
-                        if (tracking.Status == trackingOld.Status)
-                            appState.tracei60(" tracking.Status ", (int)tracking.Status);
-                        else
-                            ConsoleExtensions.tracei(" tracking.Status ", (int)tracking.Status);
+                        //if (tracking.Status == trackingOld.Status)
+                        //    appState.tracei60(" tracking.Status ", (int)tracking.Status);
+                        //else
+                        //    ConsoleExtensions.tracei(" tracking.Status ", (int)tracking.Status);
 
-                        appState.tracei60(" tracking.HeadPose.Pose.Orientation.x ", (int)(1000 * tracking.HeadPose.Pose.Orientation.x));
-                        appState.tracei60(" tracking.HeadPose.Pose.Orientation.y ", (int)(1000 * tracking.HeadPose.Pose.Orientation.y));
-                        appState.tracei60(" tracking.HeadPose.Pose.Orientation.z ", (int)(1000 * tracking.HeadPose.Pose.Orientation.z));
-                        appState.tracei60(" tracking.HeadPose.Pose.Orientation.w ", (int)(1000 * tracking.HeadPose.Pose.Orientation.w));
+                        //appState.tracei60(" tracking.HeadPose.Pose.Orientation.x ", (int)(1000 * tracking.HeadPose.Pose.Orientation.x));
+                        //appState.tracei60(" tracking.HeadPose.Pose.Orientation.y ", (int)(1000 * tracking.HeadPose.Pose.Orientation.y));
+                        //appState.tracei60(" tracking.HeadPose.Pose.Orientation.z ", (int)(1000 * tracking.HeadPose.Pose.Orientation.z));
+                        //appState.tracei60(" tracking.HeadPose.Pose.Orientation.w ", (int)(1000 * tracking.HeadPose.Pose.Orientation.w));
                         appState.Ovr.vrapi_SubmitFrame(ref parms);
+
 
 
                     }

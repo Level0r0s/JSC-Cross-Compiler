@@ -67,6 +67,8 @@ namespace OVRWindWheelNDK
 
             public ovrEgl Egl = new ovrEgl();
             public native_window.ANativeWindow NativeWindow = null;
+
+            // other activites could be selected too...
             public bool Resumed = false;
 
             // set by?

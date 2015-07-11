@@ -23,12 +23,23 @@ namespace OVRWindWheelNDK
 
 
         //public const int floors = 5;
-        public const int floors = 33;
+        //public const int floors = 33;
+        //public const int floors = 333;
+        //public const int floors = 16;
+        //public const int floors = 3;
+        public const int floors = 2;
 
-        public const int floorwidth = 3;
+        public const int floorwidth = 2;
+        //public const int floorwidth = 19;
 
         //public const int NUM_INSTANCES = 8 * 8 * floors;
-        public const int NUM_INSTANCES = 3 * 3 * floors;
+        public const int NUM_INSTANCES = floorwidth * floorwidth * floors;
+
+        // I/xNativeActivity(12533): \VrCubeWorld.AppThread.cs:330 vrapi_SubmitFrame  6241
+
+        //I/xNativeActivity(11266): \VrCubeWorld.AppThread.cs:330 vrapi_SubmitFrame  241
+        //I/xNativeActivity(11266): \VrCubeWorld.AppThread.cs:74 mallinfo            total allocated space:  114192224
+        //I/xNativeActivity(11266): \VrCubeWorld.AppThread.cs:81 sanity check, are we leaking memory? 0
 
 
         // member of ovrApp
@@ -45,6 +56,8 @@ namespace OVRWindWheelNDK
             // used by CreateTranslation
             public readonly ovrVector3f[] CubePositions = new ovrVector3f[NUM_INSTANCES];
             public readonly ovrVector3f[] CubeRotations = new ovrVector3f[NUM_INSTANCES];
+            // can each cube have its own color?
+
 
             public readonly ovrProgram Program = new ovrProgram();
             public readonly ovrGeometry Cube = new ovrGeometry();
@@ -123,6 +136,7 @@ namespace OVRWindWheelNDK
                 var frag = new Shaders.VrCubeWorldFragmentShader();
 
                 this.Program.ovrProgram_Create(
+                    // jsc should keep typeinfo/virtal function pointer table tagged on objects?
                     vert.ToString(),
                     frag.ToString()
                 );

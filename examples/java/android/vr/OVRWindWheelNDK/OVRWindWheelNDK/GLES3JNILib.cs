@@ -122,6 +122,25 @@ namespace com.oculus.gles3jni
             }
         }
 
+        class argsI64
+        {
+            public JNIEnv env;
+            public jobject fields;
+
+            // 
+            public long this[string fname]
+            {
+
+                set
+                {
+                    var fields_GetType = env.GetObjectClass(env, fields);
+                    var fref = env.GetFieldID(env, fields_GetType, fname, "J");
+
+                    env.SetLongField(env, fields, fref, value);
+                }
+            }
+        }
+
 
         // JVM load the .so and calls this native function
         public static jstring stringFromJNI(JNIEnv env, jobject thiz, jobject fields)
@@ -143,6 +162,31 @@ namespace com.oculus.gles3jni
 
             // generic / per field variables?
 
+            // do we need our own GC?
+            var aI64 = new argsI64 { env = env, fields = fields };
+
+
+            var m = malloc_h.mallinfo();
+            var total = VrCubeWorld.ovrAppThread.__uordblks(m);
+
+            aI64["total_allocated_space"] = total;
+
+            if (total > 20 * 1024 * 1024)
+            {
+                //ConsoleExtensions.trace("HUD safe mode...");
+
+                //System.Threading.Thread.Sleep(1000);
+
+                //GC.Collect(
+
+                // should jsc call the finalizer too?
+                stdlib_h.free(aI64);
+                aI64 = null;
+
+                return null;
+            }
+
+
             var aI = new argsI { env = env, fields = fields };
 
             GLES3JNILib.fields_xvalue = aI["x"];
@@ -158,6 +202,12 @@ namespace com.oculus.gles3jni
             GLES3JNILib.fields_c = aI["c"];
             GLES3JNILib.fields_mousewheel = aI["mousewheel"];
 
+            if (appThread == null)
+                return null;
+            if (appThread.appState == null)
+                return null;
+
+
             appThread.appState.Scene.Update();
 
             var aF = new argsF { env = env, fields = fields };
@@ -166,6 +216,8 @@ namespace com.oculus.gles3jni
             aF["tracking_HeadPose_Pose_Orientation_y"] = appThread.tracking.HeadPose.Pose.Orientation.y;
             aF["tracking_HeadPose_Pose_Orientation_z"] = appThread.tracking.HeadPose.Pose.Orientation.z;
             aF["tracking_HeadPose_Pose_Orientation_w"] = appThread.tracking.HeadPose.Pose.Orientation.w;
+
+
 
             //void ScriptCoreLibNative_BCLImplementation_System___Action_2_Invoke(LPScriptCoreLibNative_BCLImplementation_System___Action_2, void*, void*);
 

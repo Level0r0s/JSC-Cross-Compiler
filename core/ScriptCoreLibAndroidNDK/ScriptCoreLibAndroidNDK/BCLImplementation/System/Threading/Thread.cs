@@ -65,5 +65,11 @@ namespace ScriptCoreLibAndroidNDK.BCLImplementation.System.Threading
             pthread.pthread_join(this.InternalThread, null);
         }
 
+
+        public static void Sleep(int millisecondsTimeout)
+        {
+            unistd.usleep(1000 * millisecondsTimeout);
+        }
+
     }
 }

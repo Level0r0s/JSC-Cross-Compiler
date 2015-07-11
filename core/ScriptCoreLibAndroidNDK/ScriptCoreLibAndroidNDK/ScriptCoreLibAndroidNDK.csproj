@@ -91,6 +91,7 @@
     <Compile Include="SystemHeaders\android\native_activity.cs" />
     <Compile Include="SystemHeaders\android_native_app_glue.cs" />
     <Compile Include="SystemHeaders\android\log.cs" />
+    <Compile Include="SystemHeaders\malloc.cs" />
     <Compile Include="SystemHeaders\linux\time.cs" />
     <Compile Include="SystemHeaders\sys\capability.cs" />
     <Compile Include="SystemHeaders\time.cs" />

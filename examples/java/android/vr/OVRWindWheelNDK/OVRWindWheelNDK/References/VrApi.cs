@@ -278,6 +278,15 @@ namespace OVRWindWheelNDK
     public struct ovrHeadModelParms : VrApi_h
     {
         // GearVR voot
+
+        // called by ovrRenderer_RenderFrame
+
+
+        //Error	9	'OVRWindWheelNDK.ovrHeadModelParms.InterpupillaryDistance': cannot have instance field initializers in structs	X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\References\VrApi.cs	284	22	OVRWindWheelNDK
+        //public float InterpupillaryDistance = 0.0640f;
+        //public float EyeHeight = 1.6750f;
+        //public float HeadModelDepth = 0.0805f;
+        //public float HeadModelHeight = 0.0750f;
     }
 
 
@@ -364,12 +373,16 @@ namespace OVRWindWheelNDK
             throw null;
         }
 
-        public static ovrMatrix4f vrapi_GetCenterEyeViewMatrix(
-            ref ovrHeadModelParms headModelParms,
-            ref ovrTracking tracking,
-
+        public static ovrMatrix4f vrapi_GetCenterEyeViewMatrix(ref ovrHeadModelParms headModelParms, ref ovrTracking tracking,
             // nullable struct?
             ovrMatrix4f* input)
+        {
+            throw null;
+        }
+
+        public static ovrMatrix4f vrapi_GetCenterEyeViewMatrix(ref ovrHeadModelParms headModelParms, ref ovrTracking tracking,
+            // nullable struct?
+            ref ovrMatrix4f input)
         {
             throw null;
         }

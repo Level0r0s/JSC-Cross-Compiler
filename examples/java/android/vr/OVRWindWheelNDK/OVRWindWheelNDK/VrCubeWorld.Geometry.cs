@@ -92,10 +92,10 @@ namespace OVRWindWheelNDK
 
         // used by glVertexAttribPointer
         // what about color animation
-        //public static readonly byte[,] ovrCubeVertices8x4_colors = new byte[8, 4] { 
-        //        {   255,   0, 0, 255}, {   255, 0,   0, 255 }, {   127,   0, 0, 255 }, { 80,   0,   0, 255 },
-        //        {   255,   0, 0, 255 }, {   255, 0,   0, 255 }, { 127,   0, 0, 255 }, { 80,   0,   0, 255 }
-        //};
+        public static readonly byte[,] ovrCubeVertices8x4_colors_red = new byte[8, 4] { 
+                {   255,   0, 0, 255}, {   255, 0,   0, 255 }, {   127,   0, 0, 255 }, { 80,   0,   0, 255 },
+                {   255,   0, 0, 255 }, {   255, 0,   0, 255 }, { 127,   0, 0, 255 }, { 80,   0,   0, 255 }
+        };
 
         // can we udp color?
         // if we change source, would jsc be able do patch the running apps via udp?
@@ -110,6 +110,7 @@ namespace OVRWindWheelNDK
             public readonly sbyte[,] positions = new sbyte[8, 4];
 
             public readonly byte[,] colors = new byte[8, 4];
+            //public readonly byte[,] colors = ovrCubeVertices8x4_colors;
 
 
             public ovrCubeVertices8x4()
@@ -148,6 +149,9 @@ namespace OVRWindWheelNDK
             public uint VertexArrayObject = 0;
 
             public int VertexCount = 8;
+
+            // NUM_INSTANCES
+            // sent to glDrawElementsInstanced
             public int IndexCount = 36;
             
             public ovrGeometry()
