@@ -188,12 +188,17 @@ namespace WebGLWindWheel
                 -cubesize,  cubesize,  cubesize,
                 -cubesize,  cubesize, -cubesize
             };
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+
+            // 46ms verticies ?function Array() { [native code] }
+            Console.WriteLine("verticies " + vertices.GetType());
+
+            //gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+            gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
 
             var cubeVertexPositionBuffer_itemSize = 3;
             var cubeVertexPositionBuffer_numItems = 6 * 6;
 
-            var squareVertexColorBuffer = gl.createBuffer();
+            var squareVertexColorBuffer = new WebGLBuffer(gl);
             gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexColorBuffer);
 
             // 216, 191, 18
@@ -232,11 +237,11 @@ namespace WebGLWindWheel
 
 
 
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
+            gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW);
             var cubeVertexColorBuffer_itemSize = 4;
             var cubeVertexColorBuffer_numItems = 24;
 
-            var cubeVertexIndexBuffer = gl.createBuffer();
+            var cubeVertexIndexBuffer = new WebGLBuffer(gl);
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
             var cubeVertexIndices = new UInt16[]{
                 0, 1, 2,      0, 2, 3,    // Front face

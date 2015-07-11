@@ -128,3 +128,10 @@ namespace TestServiceWorkerRegistrations
 
     }
 }
+
+//---------------------------
+//Security Warning
+//---------------------------
+//You are about to install a certificate from a certification authority(CA) claiming to represent://peer integrity authority for cpu BFEBFBFF00040651//Windows cannot validate that the certificate is actually from "peer integrity authority for cpu BFEBFBFF00040651". You should confirm its origin by contacting "peer integrity authority for cpu BFEBFBFF00040651". The following number will assist you in this process://Thumbprint (sha1): FF6A94CE A87E5A44 CCCF27A4 EC253085 1EB61DF7//Warning://If you install this root certificate, Windows will automatically trust any certificate issued by this CA. Installing a certificate with an unconfirmed thumbprint is a security risk. If you click "Yes" you acknowledge this risk.//Do you want to install this certificate?//---------------------------
+//Yes No   
+//---------------------------

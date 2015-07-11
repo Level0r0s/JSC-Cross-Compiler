@@ -127,7 +127,10 @@ namespace ScriptCoreLib.Extensions
 			get
 			{
 				var makecert70A = "c:/program files/microsoft sdks/windows/v7.0A/bin/makecert.exe";
-				var makecert80 = @"C:\Program Files (x86)\Windows Kits\8.0\bin\x64\makecert.exe";
+                var makecert80 = @"C:\Program Files (x86)\Windows Kits\8.0\bin\x64\makecert.exe";
+                var makecert81 = @"C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makecert.exe";
+
+                // "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makecert.exe"
 
 				// http://stackoverflow.com/questions/589834/what-rsa-key-length-should-i-use-for-my-ssl-certificates
 				// ENISA recommends 15360 Bit. Have a look to the PDF (page 35)
@@ -140,7 +143,7 @@ namespace ScriptCoreLib.Extensions
 
 				// Error: There is no matching certificate in the issuer's Root cert store
 				//Error: There are more than one matching certificate in the issuer's Root cert store
-				var makecert = new[] { makecert70A, makecert80 }.FirstOrDefault(File.Exists);
+                var makecert = new[] { makecert70A, makecert80, makecert81 }.FirstOrDefault(File.Exists);
 
 				return makecert;
 			}

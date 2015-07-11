@@ -75,6 +75,119 @@ namespace TestFloatArray
                 new IHTMLPre { floats.GetType() }.AttachToDocument();
             }
 
+            {
+                // using a local non const variable 
+                // makes C# not use the InitializeArray helper?
+                //var cubesize = 1.0f * 0.05f;
+                const float cubesize = 1.0f * 0.05f;
+
+                //h = 0.05;
+                //j = [
+                //  (-h),
+
+                var vertices = new[]{
+                    // Front face
+                    -cubesize, -cubesize,  cubesize,
+                     cubesize, -cubesize,  cubesize,
+                     cubesize,  cubesize,  cubesize,
+                    -cubesize,  cubesize,  cubesize,
+
+                    // Back face
+                    -cubesize, -cubesize, -cubesize,
+                    -cubesize,  cubesize, -cubesize,
+                     cubesize,  cubesize, -cubesize,
+                     cubesize, -cubesize, -cubesize,
+
+                    // Top face
+                    -cubesize,  cubesize, -cubesize,
+                    -cubesize,  cubesize,  cubesize,
+                     cubesize,  cubesize,  cubesize,
+                     cubesize,  cubesize, -cubesize,
+
+                    // Bottom face
+                    -cubesize, -cubesize, -cubesize,
+                     cubesize, -cubesize, -cubesize,
+                     cubesize, -cubesize,  cubesize,
+                    -cubesize, -cubesize,  cubesize,
+
+                    // Right face
+                     cubesize, -cubesize, -cubesize,
+                     cubesize,  cubesize, -cubesize,
+                     cubesize,  cubesize,  cubesize,
+                     cubesize, -cubesize,  cubesize,
+
+                    // Left face
+                    -cubesize, -cubesize, -cubesize,
+                    -cubesize, -cubesize,  cubesize,
+                    -cubesize,  cubesize,  cubesize,
+                    -cubesize,  cubesize, -cubesize
+                };
+
+                //                { { Length = 72 } }
+                //?function Array() { [native code]
+                //    }
+                new IHTMLPre { new { vertices } }.AttachToDocument();
+                new IHTMLPre { new { vertices.Length } }.AttachToDocument();
+                new IHTMLPre { vertices.GetType() }.AttachToDocument();
+            }
+
+            {
+                // using a local non const variable 
+                // makes C# not use the InitializeArray helper?
+                //var cubesize = 1.0f * 0.05f;
+                float cubesize = 1.0f * 0.05f;
+
+                //h = 0.05;
+                //j = [
+                //  (-h),
+
+                var vertices = new[]{
+                    // Front face
+                    -cubesize, -cubesize,  cubesize,
+                     cubesize, -cubesize,  cubesize,
+                     cubesize,  cubesize,  cubesize,
+                    -cubesize,  cubesize,  cubesize,
+
+                    // Back face
+                    -cubesize, -cubesize, -cubesize,
+                    -cubesize,  cubesize, -cubesize,
+                     cubesize,  cubesize, -cubesize,
+                     cubesize, -cubesize, -cubesize,
+
+                    // Top face
+                    -cubesize,  cubesize, -cubesize,
+                    -cubesize,  cubesize,  cubesize,
+                     cubesize,  cubesize,  cubesize,
+                     cubesize,  cubesize, -cubesize,
+
+                    // Bottom face
+                    -cubesize, -cubesize, -cubesize,
+                     cubesize, -cubesize, -cubesize,
+                     cubesize, -cubesize,  cubesize,
+                    -cubesize, -cubesize,  cubesize,
+
+                    // Right face
+                     cubesize, -cubesize, -cubesize,
+                     cubesize,  cubesize, -cubesize,
+                     cubesize,  cubesize,  cubesize,
+                     cubesize, -cubesize,  cubesize,
+
+                    // Left face
+                    -cubesize, -cubesize, -cubesize,
+                    -cubesize, -cubesize,  cubesize,
+                    -cubesize,  cubesize,  cubesize,
+                    -cubesize,  cubesize, -cubesize
+                };
+
+                //                { { Length = 72 } }
+                //?function Array() { [native code]
+                //    }
+                new IHTMLPre { new { vertices } }.AttachToDocument();
+                new IHTMLPre { new { vertices.Length } }.AttachToDocument();
+                new IHTMLPre { vertices.GetType() }.AttachToDocument();
+            }
+
+
         }
 
     }

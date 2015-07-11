@@ -19,6 +19,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
     {
         // float4 x16 = mat4
 
+        // is it possible to have float[] stackable matrix for WebGL and NDK?
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/20150706/20150708
 
         [Script(OptimizedCode = "return parseFloat(e);")]

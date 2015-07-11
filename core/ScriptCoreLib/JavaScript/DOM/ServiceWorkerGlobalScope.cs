@@ -23,15 +23,17 @@ namespace ScriptCoreLib.JavaScript.DOM
     [Obsolete("experimental")]
     public class ServiceWorkerGlobalScope : WorkerGlobalScope
     {
+        // X:\jsc.svn\examples\javascript\test\TestServiceWorker\TestServiceWorker\Application.cs
+        // X:\jsc.svn\examples\javascript\Test\TestServiceWorkerRegistrations\TestServiceWorkerRegistrations\Application.cs
+        // X:\jsc.svn\examples\javascript\test\TestServiceWorkerClient\TestServiceWorkerClient\Application.cs
+
         // http://src.chromium.org/viewvc/blink/trunk/Source/modules/websockets/CloseEventInit.idl
 
         //  what about event source?
 
-        // X:\jsc.svn\examples\javascript\test\TestServiceWorker\TestServiceWorker\Application.cs
         // chrome just removed it..?
         public readonly string scope;
 
-        // X:\jsc.svn\examples\javascript\Test\TestServiceWorkerRegistrations\TestServiceWorkerRegistrations\Application.cs
 
         // http://www.chromium.org/blink/serviceworker/service-worker-faq
         // chrome://serviceworker-internals
@@ -39,7 +41,6 @@ namespace ScriptCoreLib.JavaScript.DOM
 
         // how does this relate to UI performance tracker?
 
-        // X:\jsc.svn\examples\javascript\test\TestServiceWorkerClient\TestServiceWorkerClient\Application.cs
 
         public readonly ServiceWorkerClients clients;
 
