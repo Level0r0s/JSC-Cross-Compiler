@@ -17,7 +17,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
-namespace OVRMyCubeWorld.Activities
+namespace OVRWindWheelActivity.Activities
 {
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "10")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
@@ -78,11 +78,11 @@ namespace OVRMyCubeWorld.Activities
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity"
 
 
-        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVRMyCubeWorld.Activities
-        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVRMyCubeWorld.Activities/OVRMyCubeWorld.Activities.ApplicationActivity
+        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVRWindWheelActivity.Activities
+        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVRWindWheelActivity.Activities/OVRWindWheelActivity.Activities.ApplicationActivity
 
 
-        // x:\util\android-sdk-windows\platform-tools\adb.exe  shell dumpsys meminfo OVRMyCubeWorld.Activities
+        // x:\util\android-sdk-windows\platform-tools\adb.exe  shell dumpsys meminfo OVRWindWheelActivity.Activities
 
 
         // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell screenrecord --bit-rate 6000000 "/sdcard/oculus/Movies/My Videos/3D/OVRMyCubeWorldNDK-WASDC-mousewheel.mp4"
@@ -154,7 +154,7 @@ namespace OVRMyCubeWorld.Activities
         {
             base.onCreate(savedInstanceState);
 
-            Console.WriteLine("enter OVRMyCubeWorld onCreate");
+            Console.WriteLine("enter OVRWindWheelActivity onCreate");
 
 
 
@@ -189,7 +189,7 @@ namespace OVRMyCubeWorld.Activities
 
                 onsurfaceDestroyed = holder =>
                 {
-                    //I/System.Console( 3549): 0ddd:0001 after OVRMyCubeWorld onCreate, attach the headset!
+                    //I/System.Console( 3549): 0ddd:0001 after OVRWindWheelActivity onCreate, attach the headset!
                     //I/System.Console( 3549): 0ddd:0001 enter onsurfaceDestroyed
 
                     //Console.WriteLine("enter onsurfaceDestroyed");
@@ -199,7 +199,7 @@ namespace OVRMyCubeWorld.Activities
                         return;
 
 
-                    // I/DEBUG   ( 2079):     #01 pc 0000672f  /data/app/OVRMyCubeWorld.Activities-1/lib/arm/libmain.so (Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceDestroyed+46)
+                    // I/DEBUG   ( 2079):     #01 pc 0000672f  /data/app/OVRWindWheelActivity.Activities-1/lib/arm/libmain.so (Java_com_oculus_gles3jni_GLES3JNILib_onSurfaceDestroyed+46)
                     GLES3JNILib.onSurfaceDestroyed();
                     xSurfaceHolder = null;
                     //appThread = 0;
@@ -219,7 +219,7 @@ namespace OVRMyCubeWorld.Activities
             #region ReceiveAsync
             Action<IPAddress> f = async nic =>
              {
-                 args.mouse = "awaiting at " + nic;
+                 args.mouse = "WindWheel awaiting at " + nic;
 
 
                  // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
@@ -454,7 +454,7 @@ namespace OVRMyCubeWorld.Activities
 
             appThread = com.oculus.gles3jni.GLES3JNILib.onCreate(this);
 
-            Console.WriteLine("after OVRMyCubeWorld onCreate, attach the headset!");
+            Console.WriteLine("after OVRWindWheelActivity onCreate, attach the headset!");
 
         }
 
@@ -591,7 +591,7 @@ namespace OVRMyCubeWorld.Activities
 }
 
 
-//42d0:02:01:1f ActiveJavaArchiveNativesAssemblies load X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorld\bin\staging.AssetsLibrary\output.jar\VrApi.dll
+//42d0:02:01:1f ActiveJavaArchiveNativesAssemblies load X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRWindWheelActivity\bin\staging.AssetsLibrary\output.jar\VrApi.dll
 //System.TypeLoadException: Could not load type 'FrameCallback' from assembly 'ScriptCoreLibAndroid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
 //System.TypeLoadException: Could not load type 'android.telephony.PhoneStateListener' from assembly 'ScriptCoreLibAndroid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
 //System.Reflection.ReflectionTypeLoadException: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.

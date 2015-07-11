@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OVRMyCubeWorldNDK
+namespace OVRWindWheelNDK
 {
     // we set unsafe  for DEBUG build configuration
     public static unsafe partial class VrCubeWorld
@@ -22,15 +22,20 @@ namespace OVRMyCubeWorldNDK
         {
             public int Width;
             public int Height;
+
             public int Multisamples;
 
             // set via glGenTextures
             // sent to TexId
+            // GL_TEXTURE_2D
             public uint ColorTexture;
+
+            // GL_RENDERBUFFER
             public uint DepthBuffer;
 
             // set by ovrRenderTexture_Create
             // used via glBindFramebuffer
+            // GL_FRAMEBUFFER
             public uint FrameBuffer;
 
             // called by ovrRenderer_Clear

@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OVRMyCubeWorldNDK
+namespace OVRWindWheelNDK
 {
     public static unsafe partial class VrCubeWorld
     {
@@ -92,10 +92,18 @@ namespace OVRMyCubeWorldNDK
 
         // used by glVertexAttribPointer
         // what about color animation
+        //public static readonly byte[,] ovrCubeVertices8x4_colors = new byte[8, 4] { 
+        //        {   255,   0, 0, 255}, {   255, 0,   0, 255 }, {   127,   0, 0, 255 }, { 80,   0,   0, 255 },
+        //        {   255,   0, 0, 255 }, {   255, 0,   0, 255 }, { 127,   0, 0, 255 }, { 80,   0,   0, 255 }
+        //};
+
+        // can we udp color?
+        // if we change source, would jsc be able do patch the running apps via udp?
         public static readonly byte[,] ovrCubeVertices8x4_colors = new byte[8, 4] { 
-                {   255,   0, 0, 255}, {   255, 0,   0, 255 }, {   127,   0, 0, 255 }, { 80,   0,   0, 255 },
-                {   255,   0, 0, 255 }, {   255, 0,   0, 255 }, { 127,   0, 0, 255 }, { 80,   0,   0, 255 }
-            };
+                {   0,   255, 0, 255}, {   0, 255,   0, 255 }, { 0,   127, 0, 255 }, { 0,   80,   0, 255 },
+                {   0,   255, 0, 255 }, {  0, 255,   0, 255 }, { 0,   127, 0, 255 }, { 0,   80,   0, 255 }
+        };
+
 
         class ovrCubeVertices8x4
         {

@@ -49,6 +49,22 @@ namespace ChromeAppWindowUDPPointerLock
         //OK   
         //---------------------------
 
+
+
+        //        ---------------------------
+        //Restoring Network Connections
+        //---------------------------
+        //An error occurred while reconnecting R: to
+        //\\192.168.1.12\x$
+        //Microsoft Windows Network: Multiple connections to a server or shared resource by the same user, using more than one user name, are not allowed. Disconnect all previous connections to the server or shared resource and try again.
+
+
+        //This connection has not been restored.
+        //---------------------------
+        //OK   
+
+
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>

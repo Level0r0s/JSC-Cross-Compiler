@@ -101,6 +101,10 @@ namespace AndroidMultiProcTCPServerAsync.Activities
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:excludeFromRecents", value = "true")]
     public class ApplicationActivity : Activity
     {
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
+
+        //  x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG"
+
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150513
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150531
 
@@ -604,14 +608,16 @@ namespace AndroidMultiProcTCPServerAsync.Activities
         {
             get
             {
-                Console.WriteLine("enter AllNetworkInterfaces ");
+                Console.WriteLine("609 enter AllNetworkInterfaces ");
                 var stale = System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces();
+                Console.WriteLine("611 AllNetworkInterfaces " + new { stale });
 
                 foreach (var item in stale)
                 {
                     yield return item;
                 }
 
+                Console.WriteLine("618 AllNetworkInterfaces yield break");
                 yield break;
             }
         }
@@ -621,7 +627,6 @@ namespace AndroidMultiProcTCPServerAsync.Activities
         {
             // Options that have been set in the service declaration in the manifest.
             // http://developer.android.com/reference/android/content/pm/ServiceInfo.html#FLAG_STOP_WITH_TASK
-
 
             Console.WriteLine("enter onStartCommand " + new { flags, startId });
 
@@ -652,9 +657,15 @@ namespace AndroidMultiProcTCPServerAsync.Activities
             );
 
             var BestGuessHost = xipv4.FirstOrDefault();
+            Console.WriteLine(" " + new { BestGuessHost });
 
 
-            var port = new Random().Next(8000, 30000);
+            //var port = new Random().Next(8000, 30000);
+
+            // cached by cloudflare?
+            //var port = 80;
+            var port = 8080;
+            // https://github.com/NanoHttpd/nanohttpd/blob/master/core/src/main/java/fi/iki/elonen/NanoHTTPD.java
 
             var notifyServiceReceiver = new AsyncReplyReceiver
             {
@@ -690,6 +701,9 @@ namespace AndroidMultiProcTCPServerAsync.Activities
                 }
             };
 
+
+
+            #region AtDestroy
             this.AtDestroy = delegate
             {
                 Console.WriteLine("enter AtDestroy");
@@ -703,6 +717,7 @@ namespace AndroidMultiProcTCPServerAsync.Activities
 
                 System.Environment.Exit(42);
             };
+            #endregion
 
 
             //I/System.Console( 9390): 24ae:0001 { OperationalStatus = 2, Name = ip6tnl0, Description = ip6tnl0, SupportsMulticast = false, InetAddressesString =  }
@@ -754,17 +769,45 @@ namespace AndroidMultiProcTCPServerAsync.Activities
             registerReceiver(notifyServiceReceiver, intentFilter);
 
 
+            Func<TcpListener> ctor = delegate
+            {
+                TcpListener x = null;
+                try
+                {
+                    Console.WriteLine("774 TcpListener " + new { port });
+                    x = new TcpListener(IPAddress.Any, port);
+                    Console.WriteLine("776 TcpListener ");
+
+                    // signal UI service is yet again available
+                    //Console.WriteLine("before Start ");
+
+                    // I/System.Console(25817): 64d9:0001 { err = java.lang.RuntimeException: bind failed: EACCES (Permission denied) }
+
+                    x.Start();
+
+                    Console.WriteLine("782 TcpListener ");
+
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine(new { err });
+                    System.Environment.Exit(42);
+                }
+
+                return x;
+            };
+
 
 
             #region TcpListener
             new { }.With(
                 async delegate
                 {
-                    var l = new TcpListener(IPAddress.Any, port);
 
-                    // signal UI service is yet again available
-                    //Console.WriteLine("before Start ");
-                    l.Start();
+                    //var l = new TcpListener(IPAddress.Any, port);
+                    var l = ctor();
+
+            
 
 
                     var href =
@@ -842,6 +885,8 @@ namespace AndroidMultiProcTCPServerAsync.Activities
             }
             else
             {
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150706
+
                 var input = Encoding.UTF8.GetString(buffer, 0, count);
 
                 //new IHTMLPre { new { input } }.AttachToDocument();

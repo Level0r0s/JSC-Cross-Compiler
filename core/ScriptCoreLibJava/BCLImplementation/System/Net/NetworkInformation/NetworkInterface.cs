@@ -107,6 +107,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.NetworkInformation
 
         public static global::System.Net.NetworkInformation.NetworkInterface[] GetAllNetworkInterfaces()
         {
+            // X:\jsc.svn\examples\java\android\AndroidMultiProcTCPServerAsync\AndroidMultiProcTCPServerAsync\ApplicationActivity.cs
+
             Console.WriteLine("enter GetAllNetworkInterfaces");
 
             // X:\jsc.svn\examples\java\JVMCLRNIC\JVMCLRNIC\Program.cs

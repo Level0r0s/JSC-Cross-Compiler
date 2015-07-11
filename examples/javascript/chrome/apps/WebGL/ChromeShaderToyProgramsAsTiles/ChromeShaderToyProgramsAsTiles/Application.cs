@@ -369,6 +369,7 @@ do we have a stack trace?
 					supportDerivatives: gl.getExtension("OES_standard_derivatives") != null
 				);
 
+                // defined at?
 				pass0.xWebGLFramebuffer0 = xWebGLFramebuffer0;
 				pass0.xWebGLTexture0 = xWebGLTexture0;
 

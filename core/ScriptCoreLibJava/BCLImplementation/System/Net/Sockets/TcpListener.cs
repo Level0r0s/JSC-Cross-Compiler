@@ -75,6 +75,41 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
         public void Start(int backlog)
         {
+            // http://www.pantz.org/software/bind/srvdnsrecords.html
+            // http://homepage.ntlworld.com/jonathan.deboynepollard/FGA/dns-srv-record-use-by-clients.html#Shame
+            // http://stackoverflow.com/questions/9063378/why-do-browsers-not-use-srv-records
+
+            // https://bugzilla.mozilla.org/show_bug.cgi?id=14328
+
+            // https://code.google.com./p/chromium/issues/detail?id=22423
+
+            // _http._tcp.www.example.com. IN      SRV 0    5      87   www.example.com.
+            // https://bugs.webkit.org./show_bug.cgi?id=6872
+
+            // http://serverfault.com/questions/74362/how-to-use-dns-hostnames-or-other-ways-to-resolve-to-a-specific-ipport
+
+            // http://serverfault.com/questions/354970/why-do-browsers-not-use-srv-records
+
+            // X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\SystemHeaders\sys\capability.cs
+            // https://books.google.ee/books?id=AKbNBgAAQBAJ&pg=PA16&lpg=PA16&dq=android+man+capabilities&source=bl&ots=MalbpqFIeH&sig=XUsnqUyF0ylyubM-DQTR7jwrEW0&hl=en&sa=X&ei=lIeaVdapHcrfU9C0veAM&ved=0CFAQ6AEwCA#v=onepage&q=android%20man%20capabilities&f=false
+            // https://code.google.com/p/android-source-browsing/source/browse/utils/hcid/main.c?repo=platform--external--bluez&r=81212f85458b5606335338de630c6da1089f33d7
+            // https://github.com/android/platform_external_bluez/blob/master/utils/common/android_bluez.c
+            // https://gitlab.com/pbeeler/system_core/commit/109f4e16cb22e2ae915a4c16d8c8a5e46a749d27
+            // https://github.com/jcs/adb/blob/master/adb.c
+
+            //#ifdef ANDROID_SET_AID_AND_CAP
+            //        /* Unfortunately Android's init.rc does not yet support applying
+            //         * capabilities. So we must do it in-process. */
+            //        void *android_set_aid_and_cap(void);
+            //        android_set_aid_and_cap();
+            //#endif
+
+            // CAP_NET_BIND_SERVICE	Bind to any UDP/TCP port below 1024
+            // https://code.google.com/p/android/issues/detail?id=4039
+
+            // X:\jsc.svn\examples\java\android\AndroidMultiProcTCPServerAsync\AndroidMultiProcTCPServerAsync\ApplicationActivity.cs
+            // http://fun2code-blog.blogspot.com/2011/11/running-paw-on-port-80.html
+
             //Console.WriteLine("enter TcpListener.Start");
 
             try
