@@ -245,7 +245,7 @@ namespace ScriptCoreLib.JavaScript.WebGL
 
 
 
-        public void bufferData(uint target, float[] data, uint usage)
+        public void bufferData<TElementType>(uint target, TElementType[] data, uint usage)
         {
             // X:\jsc.svn\examples\javascript\WebGL\WebGLWindWheel\WebGLWindWheel\Application.cs
 
