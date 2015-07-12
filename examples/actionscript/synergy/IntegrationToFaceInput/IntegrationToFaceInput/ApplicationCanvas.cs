@@ -41,3 +41,8 @@ namespace IntegrationToFaceInput
 
     }
 }
+
+// "X:\util\air17_sdk_sa_win"
+//x:\util\air16_sdk_win\bin\compc.bat
+//  -include-sources "." -load-config x:\util\air16_sdk_win/frameworks/airmobile-config.xml -output "X:\jsc.svn\examples\actionscri
+//System.ComponentModel.Win32Exception (0x80004005): The system cannot find the file specified
