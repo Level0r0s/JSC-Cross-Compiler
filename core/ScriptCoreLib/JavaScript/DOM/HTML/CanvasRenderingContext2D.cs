@@ -152,6 +152,8 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         }
 
 
+
+        // X:\jsc.svn\examples\javascript\chrome\apps\ChromeThreadedCameraTracker\ChromeThreadedCameraTracker\Application.cs
 		// X:\jsc.svn\examples\javascript\synergy\webgl\WebGLEarthByBjorn\WebGLEarthByBjorn\Application.cs
 		// X:\jsc.svn\examples\javascript\chrome\apps\ChromeHTMLTextToGLSLBytes\ChromeHTMLTextToGLSLBytes\Application.cs
 		public byte[] bytes
@@ -159,6 +161,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             [Script(DefineAsStatic = true)]
             get
             {
+                // 250ms?
                 var i = this.getImageData();
 
                 return i.data;

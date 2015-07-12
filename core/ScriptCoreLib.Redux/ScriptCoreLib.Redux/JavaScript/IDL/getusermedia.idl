@@ -50,6 +50,12 @@ interface NavigatorUserMedia {
 interface NavigatorUserMediaError {
     const unsigned short PERMISSION_DENIED = 1;
     readonly attribute unsigned short code;
+
+
+	// http://w3c.github.io/mediacapture-main/getusermedia.html#idl-def-MediaStreamError
+	readonly    attribute DOMString  name;
+    readonly    attribute DOMString? message;
+    readonly    attribute DOMString? constraintName;
 };
 
 

@@ -1,0 +1,420 @@
+#pragma warning disable CS1998
+
+using ScriptCoreLib;
+using ScriptCoreLib.Delegates;
+using ScriptCoreLib.Extensions;
+using ScriptCoreLib.JavaScript;
+using ScriptCoreLib.JavaScript.Components;
+using ScriptCoreLib.JavaScript.DOM;
+using ScriptCoreLib.JavaScript.DOM.HTML;
+using ScriptCoreLib.JavaScript.Extensions;
+using ScriptCoreLib.JavaScript.Windows.Forms;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+using ChromeThreadedCameraTracker;
+using ChromeThreadedCameraTracker.Design;
+using ChromeThreadedCameraTracker.HTML.Pages;
+using System.Diagnostics;
+using System.Threading;
+using ScriptCoreLib.JavaScript.BCLImplementation.System.Threading;
+
+namespace ChromeThreadedCameraTracker
+{
+    /// <summary>
+    /// Your client side code running inside a web browser as JavaScript.
+    /// </summary>
+    public sealed class Application : ApplicationWebService
+    {
+        // 200 ms?
+        static byte[] WorkerThread(int i3, int vw, int vh, byte[] rgba_bytes0in)
+        {
+            unsafe
+            {
+                //var i3 = frame0c % 3;
+                //var i3 = 0;
+
+                for (int ix = 0; ix < vw; ix++)
+
+                    // first row contains variables?
+                    for (int iy = 1; iy < vh; iy += 1)
+                    {
+                        var x = ix * 4;
+                        var y = iy * 4 * vw;
+
+                        //fixed (byte* r = &rgba_bytes[y + x + 0])
+                        {
+                            var r = rgba_bytes0in[y + x + 0];
+                            var g = rgba_bytes0in[y + x + 1];
+                            var b = rgba_bytes0in[y + x + 2];
+
+                            var xg = (byte)(
+                                  (3 * 255 - r - g - b)
+                                  / 3
+                              );
+
+                            // animate only the left 8 pixels 
+                            if (ix < 8)
+                            {
+                                rgba_bytes0in[y + x + 0] = 0;
+                                rgba_bytes0in[y + x + 1] = 0;
+                                rgba_bytes0in[y + x + 2] = 0;
+
+                                rgba_bytes0in[y + x + i3] = xg;
+                            }
+                            else
+                            {
+                                rgba_bytes0in[y + x + 0] = xg;
+                                rgba_bytes0in[y + x + 1] = xg;
+                                rgba_bytes0in[y + x + 2] = xg;
+                            }
+                        }
+
+                    }
+            }
+
+            return rgba_bytes0in;
+        }
+
+        /// <summary>
+        /// This is a javascript application.
+        /// </summary>
+        /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
+        public Application(IApp page)
+        {
+            #region += Launched chrome.app.window
+            dynamic self = Native.self;
+            dynamic self_chrome = self.chrome;
+            object self_chrome_socket = self_chrome.socket;
+
+            if (self_chrome_socket != null)
+            {
+                if (!(Native.window.opener == null && Native.window.parent == Native.window.self))
+                {
+                    Console.WriteLine("chrome.app.window.create, is that you?");
+
+                    // pass thru
+                }
+                else
+                {
+                    // should jsc send a copresence udp message?
+                    chrome.runtime.UpdateAvailable += delegate
+                    {
+                        new chrome.Notification(title: "UpdateAvailable");
+
+                    };
+
+                    chrome.app.runtime.Launched += async delegate
+                    {
+                        // 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
+                        Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
+
+                        new chrome.Notification(title: "Launched2");
+
+                        var xappwindow = await chrome.app.window.create(
+                               Native.document.location.pathname, options: null
+                        );
+
+                        //xappwindow.setAlwaysOnTop
+
+                        xappwindow.show();
+
+                        await xappwindow.contentWindow.async.onload;
+
+                        Console.WriteLine("chrome.app.window loaded!");
+                    };
+
+
+                    return;
+                }
+            }
+            #endregion
+
+            // 
+            // http://stackoverflow.com/questions/13076272/how-do-i-give-webkitgetusermedia-permission-in-a-chrome-extension-popup-window
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150712
+            new { }.With(
+                async delegate
+                {
+                    Native.body.Clear();
+                    Native.document.documentElement.style.overflow = IStyle.OverflowEnum.auto;
+
+                    // would it be easy to do head tracking via webcam for VR?
+                    // the app would run on android, yet
+                    // two sattelites could spawn on two laptops to track the head.
+
+                    // would we be able to thread hop between camera devices and android?
+
+                    // http://shopap.lenovo.com/hk/en/laptops/lenovo/u-series/u330p/
+                    // The U330p's integrated 720p HD webcam
+
+
+                    // HD wont work for chrome app?
+                    var v = await Native.window.navigator.async.onvideo;
+                    v.AttachToDocument();
+
+                    v.play();
+
+
+                    var sw = Stopwatch.StartNew();
+
+                    while (v.videoWidth == 0)
+                        await Native.window.async.onframe;
+
+
+                    const int zoomx = 2;
+                    const int zoomy = 4;
+
+                    var ow = v.videoWidth / zoomx;
+                    var oh = v.videoHeight / zoomy;
+
+                    var frame0in = new CanvasRenderingContext2D(ow, oh);
+                    frame0in.canvas.AttachToDocument();
+
+                    var frame0out = new CanvasRenderingContext2D(ow, oh);
+                    frame0out.canvas.AttachToDocument();
+
+                    var frame1out = new CanvasRenderingContext2D(ow, oh);
+                    frame1out.canvas.AttachToDocument();
+
+                    var frame2out = new CanvasRenderingContext2D(ow, oh);
+                    frame2out.canvas.AttachToDocument();
+
+
+                    var frame3out = new CanvasRenderingContext2D(ow, oh);
+                    frame3out.canvas.AttachToDocument();
+
+
+                    var frame0sw = Stopwatch.StartNew();
+                    var frame0c = 0;
+                    var frame0sw0 = Stopwatch.StartNew();
+
+                    new IHTMLPre {
+                        () => new {
+                            frame0c,
+                            frame0sw.ElapsedMilliseconds,
+
+                            fps = 1000 / frame0sw.ElapsedMilliseconds ,
+                            fps3 = 3000 / frame0sw.ElapsedMilliseconds ,
+                        }
+                    }.AttachToDocument();
+
+                    var aloop = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox }.AttachToDocument();
+
+                    var fdiv = new IHTMLDiv { }.AttachToDocument();
+
+                    new { }.With(
+                        async delegate
+                        {
+                            var vw = ow;
+                            var vh = oh;
+
+                            #region 3 workers
+                            byte[] rgba_bytes0in = null;
+                            var rgba_bytes0in_set = new System.Threading.SemaphoreSlim(1);
+                            byte[] rgba_bytes0out = null;
+                            //var rgba_bytes0out_set = new System.Threading.SemaphoreSlim(1);
+                            SemaphoreSlim rgba_bytes0out_set = new __SemaphoreSlim(1) { Name = "rgba_bytes0out_set" };
+
+
+                            byte[] rgba_bytes1in = null;
+                            var rgba_bytes1in_set = new System.Threading.SemaphoreSlim(1);
+                            byte[] rgba_bytes1out = null;
+                            var rgba_bytes1out_set = new System.Threading.SemaphoreSlim(1);
+
+                            byte[] rgba_bytes2in = null;
+                            var rgba_bytes2in_set = new System.Threading.SemaphoreSlim(1);
+                            byte[] rgba_bytes2out = null;
+                            var rgba_bytes2out_set = new System.Threading.SemaphoreSlim(1);
+
+
+                            Task.Run(
+                                async delegate
+                                {
+                                    next:
+                                    await rgba_bytes0in_set.WaitAsync();
+
+                                    rgba_bytes0out = WorkerThread(0, vw, vh, rgba_bytes0in);
+                                    rgba_bytes1out = null;
+                                    rgba_bytes2out = null;
+
+                                    rgba_bytes0in = null;
+                                    rgba_bytes1in = null;
+                                    rgba_bytes2in = null;
+                                    // we should not sync back data we did not put there. nor should it be there anyway?
+                                    rgba_bytes0out_set.Release();
+                                    goto next;
+                                }
+                            );
+
+
+                            Task.Run(
+                                async delegate
+                                {
+                                    next:
+                                    await rgba_bytes1in_set.WaitAsync();
+                                    rgba_bytes0out = null;
+                                    rgba_bytes1out = WorkerThread(1, vw, vh, rgba_bytes1in);
+                                    rgba_bytes2out = null;
+
+                                    rgba_bytes0in = null;
+                                    rgba_bytes1in = null;
+                                    rgba_bytes2in = null;
+
+                                    rgba_bytes1out_set.Release();
+                                    goto next;
+                                }
+                            );
+
+
+                            Task.Run(
+                                async delegate
+                                {
+                                    next:
+                                    await rgba_bytes2in_set.WaitAsync();
+
+                                    rgba_bytes0out = null;
+                                    rgba_bytes1out = null;
+                                    rgba_bytes2out = WorkerThread(2, vw, vh, rgba_bytes2in);
+                                    rgba_bytes0in = null;
+                                    rgba_bytes1in = null;
+                                    rgba_bytes2in = null;
+
+
+                                    rgba_bytes2out_set.Release();
+                                    goto next;
+                                }
+                            );
+                            #endregion
+
+                            Console.WriteLine("worker0 spinning already...");
+
+                            //do
+                            await v.async.onclick;
+
+                            {
+
+                                frame0sw0 = Stopwatch.StartNew();
+                                //Console.WriteLine(frame0sw0.ElapsedMilliseconds + " fetch frame0");
+
+                                frame0in.drawImage(v, 0, 0, vw, vh);
+                                rgba_bytes0in = frame0in.bytes;
+                                rgba_bytes0in_set.Release();
+                                new IHTMLPre { frame0sw0.ElapsedMilliseconds + " frame0 posted" }.AttachTo(fdiv);
+
+                                // await Task.Delay(1000 / 60);
+                                // 300?
+                                // Console.WriteLine(frame0sw0.ElapsedMilliseconds + " send frame2");
+                                frame0in.drawImage(v, 0, 0, vw, vh);
+                                rgba_bytes1in = frame0in.bytes;
+                                rgba_bytes1in_set.Release();
+                                new IHTMLPre { frame0sw0.ElapsedMilliseconds + " frame1 posted" }.AttachTo(fdiv);
+
+                                loop:
+                                frame0c++;
+                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " " + new { frame0c } }.AttachTo(fdiv);
+
+                                //await Task.Delay(1000 / 60);
+                                //Console.WriteLine(frame0sw0.ElapsedMilliseconds + " send frame3");
+                                frame0in.drawImage(v, 0, 0, vw, vh);
+                                rgba_bytes2in = frame0in.bytes;
+                                rgba_bytes2in_set.Release();
+                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " frame2 posted" }.AttachTo(fdiv);
+
+                                // [12] (rgba_bytes2in_set) enter xSemaphoreSlim.InternalVirtualWaitAsync, worker is now awaiting for signal
+                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collect frame0" }.AttachTo(fdiv);
+                                await Native.window.async.onframe;
+                                await rgba_bytes0out_set.WaitAsync();
+                                if (!aloop.@checked)
+                                    new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collected frame0" }.AttachTo(fdiv);
+                                frame0out.bytes = rgba_bytes0out;
+                                frame3out.drawImage(frame0out.canvas, 0, 0, vw, vh);
+                                rgba_bytes0out = null;
+
+                                frame0in.drawImage(v, 0, 0, vw, vh);
+                                rgba_bytes0in = frame0in.bytes;
+                                rgba_bytes0in_set.Release();
+                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " frame0 posted" }.AttachTo(fdiv);
+
+                                // ready for frame1 ?
+                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collect frame1" }.AttachTo(fdiv);
+                                await Native.window.async.onframe;
+                                await rgba_bytes1out_set.WaitAsync();
+                                if (!aloop.@checked)
+                                    new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collected frame1" }.AttachTo(fdiv);
+                                frame1out.bytes = rgba_bytes1out;
+                                frame3out.drawImage(frame1out.canvas, 0, 0, vw, vh);
+                                rgba_bytes1out = null;
+
+                                frame0in.drawImage(v, 0, 0, vw, vh);
+                                rgba_bytes1in = frame0in.bytes;
+                                rgba_bytes1in_set.Release();
+                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " frame1 posted" }.AttachTo(fdiv);
+
+                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collect frame2" }.AttachTo(fdiv);
+                                await Native.window.async.onframe;
+                                await rgba_bytes2out_set.WaitAsync(); // or discard the frame if it times out? drop frame?
+                                if (!aloop.@checked)
+                                    new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collected frame2, next? " + new { aloop.@checked } }.AttachTo(fdiv);
+                                frame2out.bytes = rgba_bytes2out;
+                                frame3out.drawImage(frame2out.canvas, 0, 0, vw, vh);
+                                rgba_bytes1out = null;
+
+
+                                frame0sw0.Stop();
+                                frame0sw = frame0sw0;
+
+
+                                //if (aloop)
+                                if (aloop.@checked)
+                                    await Native.window.async.onframe;
+                                else
+                                {
+                                    await v.async.onclick;
+
+                                    fdiv.Clear();
+                                }
+                                frame0sw0 = Stopwatch.StartNew();
+                                goto loop;
+
+
+                                // 10000ms?
+                                // 400ms?
+                            }
+                            //} while (await v.async.onclick);
+                            //} while (await Native.window.async.onframe);
+                        }
+                    );
+
+                    await Native.window.async.onblur;
+
+                    Native.body.style.backgroundColor = "yellow";
+                }
+            );
+        }
+
+    }
+
+    struct rgba
+    {
+        public byte r, g, b, a;
+    }
+}
+
+
+//4559ms 4 frame0 posted
+//view-source:53769 4563ms 8 frame1 posted
+//view-source:53769 4565ms 10 {{ frame0c = 1 }}
+//view-source:53769 4570ms 15 frame2 posted
+//view-source:53769 4572ms 17 collect frame0
+//view-source:53769 4600ms 45 collected frame0
+//view-source:53769 4609ms 54 frame0 posted
+//view-source:53769 4638ms 83 collected frame1
+//view-source:53769 4644ms 89 frame1 posted
+//view-source:53769 4679ms 124 collected frame2
+//view-source:53769 20847ms 0 {{ frame0c = 2 }}
+//view-source:53769 20856ms 9 frame2 posted
+//view-source:53769 20859ms 12 collect frame0

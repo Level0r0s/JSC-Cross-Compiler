@@ -437,8 +437,10 @@ namespace ChromeAppWindowUDPPointerLock
                         div.onkeydown +=
                              async e =>
                              {
+                                 var A = e.KeyCode == 65;
+                                 var D = e.KeyCode == 68;
 
-                                 if (e.KeyCode == 65 || e.KeyCode == 68)
+                                 if (A || D)
                                  {
                                      keys_ad = e.KeyCode;
 

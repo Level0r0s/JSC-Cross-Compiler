@@ -20,131 +20,141 @@ using TestGetUserMedia.HTML.Pages;
 
 namespace TestGetUserMedia
 {
-	/// <summary>
-	/// Your client side code running inside a web browser as JavaScript.
-	/// </summary>
-	public sealed class Application : ApplicationWebService
-	{
-		/// <summary>
-		/// This is a javascript application.
-		/// </summary>
-		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
-		public Application(IApp page)
-		{
-			new { }.With(
-				async delegate
-				{
-					Native.body.Clear();
+    /// <summary>
+    /// Your client side code running inside a web browser as JavaScript.
+    /// </summary>
+    public sealed class Application : ApplicationWebService
+    {
+        /// <summary>
+        /// This is a javascript application.
+        /// </summary>
+        /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
+        public Application(IApp page)
+        {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150712
+            new { }.With(
+                async delegate
+                {
+                    Native.body.Clear();
 
-					// would it be easy to do head tracking via webcam for VR?
-					// the app would run on android, yet
-					// two sattelites could spawn on two laptops to track the head.
+                    // would it be easy to do head tracking via webcam for VR?
+                    // the app would run on android, yet
+                    // two sattelites could spawn on two laptops to track the head.
 
-					// would we be able to thread hop between camera devices and android?
+                    // would we be able to thread hop between camera devices and android?
 
-					var v = await Native.window.navigator.async.onvideo;
+                    // http://shopap.lenovo.com/hk/en/laptops/lenovo/u-series/u330p/
+                    // The U330p's integrated 720p HD webcam
 
+                    Console.WriteLine("awaiting onvideo...");
+                    var v = await Native.window.navigator.async.onvideo;
+                    Console.WriteLine("awaiting onvideo... done");
 
-					v.AttachToDocument();
+                    // 93ms getUserMedia error { code = , err = [object NavigatorUserMediaError] }
 
-					v.play();
+                    v.AttachToDocument();
 
-					// what do we see at this point?
+                    v.play();
 
-					// first, could we detect greenscreen without having one?
+                    // what do we see at this point?
 
-					// assuming the camera is static, we could remove the pixels that never seem to move
+                    // first, could we detect greenscreen without having one?
 
-					// a shader program, consuming the video would be able to apply the effects a lot faster.
-					// doing it in ui thread will slow it down.
+                    // assuming the camera is static, we could remove the pixels that never seem to move
 
-					//					videoHeight: 480
-					//videoWidth: 640
-					new IHTMLPre {
+                    // a shader program, consuming the video would be able to apply the effects a lot faster.
+                    // doing it in ui thread will slow it down.
 
-						new { v.videoWidth, v.videoHeight }
-					}.AttachToDocument();
-					// do we know the size of the cam?
-					// {{ videoWidth = 0, videoHeight = 0 }}
+                    //					videoHeight: 480
+                    //videoWidth: 640
 
-					var sw = Stopwatch.StartNew();
+                    // 
+                    new IHTMLPre {
 
-					//Error CS4004  Cannot await in an unsafe context TestGetUserMedia    X:\jsc.svn\examples\javascript\async\test\TestGetUserMedia\TestGetUserMedia\Application.cs  45
-					// https://social.msdn.microsoft.com/Forums/en-US/29a3ca5b-c783-4197-af08-7b3c83585e99/minor-compiler-message-unsafe-async?forum=async
+                        new { v.videoWidth, v.videoHeight }
+                    }.AttachToDocument();
+                    // do we know the size of the cam?
+                    // {{ videoWidth = 0, videoHeight = 0 }}
 
+                    var sw = Stopwatch.StartNew();
 
-					while (v.videoWidth == 0)
-						await Native.window.async.onframe;
-
-					new IHTMLPre {
-						new { v.videoWidth, v.videoHeight, sw.ElapsedMilliseconds, Environment.ProcessorCount }
-					}.AttachToDocument();
-
-					// {{ videoWidth = 640, videoHeight = 480, ElapsedMilliseconds = 94 }}
-
-
-					var frame0 = new CanvasRenderingContext2D(
-						v.videoWidth, v.videoHeight
-					);
-
-					frame0.canvas.AttachToDocument();
-
-					var frame0sw = Stopwatch.StartNew();
-					var frame0c = 0;
-
-					// battery/full speed
-					// {{ frame0c = 1752, ElapsedMilliseconds = 66 }}
-
-					// 
-					new IHTMLPre {
-								() => new { frame0c, frame0sw.ElapsedMilliseconds, fps = 1000 / frame0sw.ElapsedMilliseconds  }
-							}.AttachToDocument();
+                    //Error CS4004  Cannot await in an unsafe context TestGetUserMedia    X:\jsc.svn\examples\javascript\async\test\TestGetUserMedia\TestGetUserMedia\Application.cs  45
+                    // https://social.msdn.microsoft.com/Forums/en-US/29a3ca5b-c783-4197-af08-7b3c83585e99/minor-compiler-message-unsafe-async?forum=async
 
 
-					// jsc, when can we start using semaphores?
-					// this could also trgger state sync
-					//var xx = new System.Threading.SemaphoreSlim(1);
+                    while (v.videoWidth == 0)
+                        await Native.window.async.onframe;
 
-					var slider = new IHTMLInput
-					{
-						type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range,
-						max = 4 * v.videoWidth * v.videoHeight,
-						valueAsNumber = 2 * v.videoWidth * v.videoHeight
-					}.AttachToDocument();
+                    new IHTMLPre {
+                        new { v.videoWidth, v.videoHeight, sw.ElapsedMilliseconds, Environment.ProcessorCount }
+                    }.AttachToDocument();
 
-					new { }.With(
-						async delegate
-						{
-							// could we hop into worker thread, and await for bytes to render?
-
-							// this is essentially a shader
-
-							// switch to worker here
-							// at runtime we should know, which fields in this state are in use
-
-							do
-							{
-								frame0c++;
-								frame0sw = Stopwatch.StartNew();
+                    // {{ videoWidth = 640, videoHeight = 480, ElapsedMilliseconds = 793, ProcessorCount = 4 }}
+                    // {{ videoWidth = 1280, videoHeight = 720, ElapsedMilliseconds = 368, ProcessorCount = 4 }}
 
 
-								frame0.drawImage(
-									v,
-									0, 0, v.videoWidth, v.videoHeight);
+                    var frame0 = new CanvasRenderingContext2D(
+                        v.videoWidth, v.videoHeight
+                    );
+
+                    frame0.canvas.AttachToDocument();
+
+                    var frame0sw = Stopwatch.StartNew();
+                    var frame0c = 0;
+
+                    // battery/full speed
+                    // {{ frame0c = 1752, ElapsedMilliseconds = 66 }}
+
+                    // 
+                    new IHTMLPre {
+                                () => new { frame0c, frame0sw.ElapsedMilliseconds, fps = 1000 / frame0sw.ElapsedMilliseconds  }
+                            }.AttachToDocument();
 
 
-								// could we do thread hopping here to multicore process the data without shaders?
-								// RGB,
-								// would we have each core work on 8bits. a single color?
+                    // jsc, when can we start using semaphores?
+                    // this could also trgger state sync
+                    //var xx = new System.Threading.SemaphoreSlim(1);
 
-								// X:\jsc.svn\examples\javascript\canvas\CanvasFromBytes\CanvasFromBytes\Application.cs 
+                    var slider = new IHTMLInput
+                    {
+                        type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range,
+                        max = 4 * v.videoWidth * v.videoHeight,
+                        valueAsNumber = 2 * v.videoWidth * v.videoHeight
+                    }.AttachToDocument();
+
+                    new { }.With(
+                        async delegate
+                        {
+                            // could we hop into worker thread, and await for bytes to render?
+
+                            // this is essentially a shader
+
+                            // switch to worker here
+                            // at runtime we should know, which fields in this state are in use
+
+                            do
+                            {
+                                frame0c++;
+                                frame0sw = Stopwatch.StartNew();
 
 
-								var rgba_bytes = frame0.bytes;
+                                frame0.drawImage(
+                                    v,
+                                    0, 0, v.videoWidth, v.videoHeight);
 
 
-								//var rgba_pixels = (rgba[])rgba_bytes;
-								//Error CS0030  Cannot convert type 'byte[]' to 'TestGetUserMedia.rgba[]'   TestGetUserMedia X:\jsc.svn\examples\javascript\async\test\TestGetUserMedia\TestGetUserMedia\Application.cs  98
+                                // could we do thread hopping here to multicore process the data without shaders?
+                                // RGB,
+                                // would we have each core work on 8bits. a single color?
+
+                                // X:\jsc.svn\examples\javascript\canvas\CanvasFromBytes\CanvasFromBytes\Application.cs 
+
+
+                                var rgba_bytes = frame0.bytes;
+
+
+                                //var rgba_pixels = (rgba[])rgba_bytes;
+                                //Error CS0030  Cannot convert type 'byte[]' to 'TestGetUserMedia.rgba[]'   TestGetUserMedia X:\jsc.svn\examples\javascript\async\test\TestGetUserMedia\TestGetUserMedia\Application.cs  98
 
 #if FPOINTERS
 					unsafe
@@ -177,57 +187,57 @@ namespace TestGetUserMedia
 					}
 #endif
 
-								// make it all blue
-								// glsl. u8vec4
+                                // make it all blue
+                                // glsl. u8vec4
 
-								// lets deal only with first half of bytes
-								//for (int x = 0; x < rgba_bytes.Length / 2; x += 4)
-								//for (int x = 0; x < rgba_bytes.Length; x += 4)
-								for (int x = 0; x < slider.valueAsNumber; x += 4)
-								{
-									//// red
-									//rgba_bytes[x + 0] = 0;
-									//rgba_bytes[x + 1] = (byte)(1 - rgba_bytes[x + 1]);
-									//// blue
-									//rgba_bytes[x + 2] = 0;
-
-
-									// red
-									rgba_bytes[x + 0] = 0;
-									rgba_bytes[x + 1] = (byte)(
-										(3 * 255 - rgba_bytes[x + 0] - rgba_bytes[x + 1] - rgba_bytes[x + 2])
-										/ 3
-									);
-
-									// blue
-									rgba_bytes[x + 2] = 0;
-								}
-
-								frame0.bytes = rgba_bytes;
+                                // lets deal only with first half of bytes
+                                //for (int x = 0; x < rgba_bytes.Length / 2; x += 4)
+                                //for (int x = 0; x < rgba_bytes.Length; x += 4)
+                                for (int x = 0; x < slider.valueAsNumber; x += 4)
+                                {
+                                    //// red
+                                    //rgba_bytes[x + 0] = 0;
+                                    //rgba_bytes[x + 1] = (byte)(1 - rgba_bytes[x + 1]);
+                                    //// blue
+                                    //rgba_bytes[x + 2] = 0;
 
 
-							} while (await Native.window.async.onframe);
-						}
-					);
+                                    // red
+                                    rgba_bytes[x + 0] = 0;
+                                    rgba_bytes[x + 1] = (byte)(
+                                        (3 * 255 - rgba_bytes[x + 0] - rgba_bytes[x + 1] - rgba_bytes[x + 2])
+                                        / 3
+                                    );
+
+                                    // blue
+                                    rgba_bytes[x + 2] = 0;
+                                }
+
+                                frame0.bytes = rgba_bytes;
+
+
+                            } while (await Native.window.async.onframe);
+                        }
+                    );
 
 
 
-					// {{ videoWidth = 640, videoHeight = 480, ElapsedMilliseconds = 109 }}
+                    // {{ videoWidth = 640, videoHeight = 480, ElapsedMilliseconds = 109 }}
 
-					await Native.window.async.onblur;
+                    await Native.window.async.onblur;
 
-					// stream is not stopped yet?
-					//v.Orphanize();
+                    // stream is not stopped yet?
+                    //v.Orphanize();
 
-					Native.body.style.backgroundColor = "yellow";
-				}
-			);
-		}
+                    Native.body.style.backgroundColor = "yellow";
+                }
+            );
+        }
 
-	}
+    }
 
-	struct rgba
-	{
-		public byte r, g, b, a;
-	}
+    struct rgba
+    {
+        public byte r, g, b, a;
+    }
 }

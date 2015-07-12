@@ -157,7 +157,7 @@ namespace xchrome.BCLImplementation.System.Net.Sockets
                         this.vSend = (byte[] datagram0, int bytes0, string hostname0, int port0) =>
                         {
                             // patch the vSend now?
-                            var data = new ScriptCoreLib.JavaScript.WebGL.Uint8Array(datagram);
+                            var data = new ScriptCoreLib.JavaScript.WebGL.Uint8Array(datagram0);
 
                             isocket.socketId.sendTo(
                                 data.buffer,

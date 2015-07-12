@@ -32,12 +32,12 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
         // X:\jsc.svn\examples\javascript\async\test\TestTaskRun\TestTaskRun\Application.cs
         public Task<TResult> StartNew<TResult>(Func<TResult> function)
         {
-            Console.WriteLine("enter StartNew");
+            //Console.WriteLine("enter StartNew");
             var x = new __Task<TResult>(function, state: null);
 
             x.Start();
 
-            Console.WriteLine("exit StartNew " + new { x });
+            //Console.WriteLine("exit StartNew " + new { x });
 
             // can we unwrap it later?
             return x;
