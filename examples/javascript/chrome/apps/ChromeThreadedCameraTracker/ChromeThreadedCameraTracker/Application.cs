@@ -30,6 +30,11 @@ namespace ChromeThreadedCameraTracker
     public sealed class Application : ApplicationWebService
     {
         //public Func<byte[], byte[]> WorkerThread(int ii3, int vw, int vh)
+
+
+        /// <summary>
+        /// If GearVR sends this to run on laptop we can observe the flashlight in parallax.
+        /// </summary>
         public class WorkerThread
         {
             public readonly Func<byte[], byte[]> Invoke;
@@ -199,10 +204,12 @@ namespace ChromeThreadedCameraTracker
                             //    rgba_bytes[y + x + 2] = 0;
                             //}
                             //else
-
                             rgba_bytes[y + x + 0] = 0;
-                            rgba_bytes[y + x + 1] = (byte)(xg - xg % (32 + (xg / 2)));
+                            //rgba_bytes[y + x + 0] = (byte)(xg - xg % (32 + (xg / 2)) + 31);
+                            //rgba_bytes[y + x + 1] = (byte)(xg - xg % (32 + (xg / 2)));
+                            rgba_bytes[y + x + 1] = (byte)(xg - xg % (32 + (xg / 2)) + 31);
                             rgba_bytes[y + x + 2] = 0;
+
 
                             var historiy_leftotrighty_projected_totopsidebar = 32 * historic_y[ix % vh] / vh;
                             if (iy >= historiy_leftotrighty_projected_totopsidebar - 2)
@@ -312,8 +319,8 @@ namespace ChromeThreadedCameraTracker
                             var y = iy * 4 * vw;
 
                             rgba_bytes[y + x + 0] = 255;
-                            rgba_bytes[y + x + 1] >>= 2;
-                            rgba_bytes[y + x + 2] >>= 2;
+                            //rgba_bytes[y + x + 1] >>= 2;
+                            //rgba_bytes[y + x + 2] >>= 2;
                         }
                     }
 
@@ -741,11 +748,14 @@ namespace ChromeThreadedCameraTracker
 
 
                                 //if (aloop)
-                                if (!aloop.@checked)
+                                //if (!aloop.@checked)
                                 {
-                                    await v.async.onclick;
-                                    fdiv.Clear();
+                                    await Task.WhenAny(aloop.async.@checked, v.async.onclick);
+
+                                    if (!aloop.@checked)
+                                        fdiv.Clear();
                                 }
+
                                 frame0sw0 = Stopwatch.StartNew();
                                 fps3 = (int)(3000 / frame0sw.ElapsedMilliseconds);
 
