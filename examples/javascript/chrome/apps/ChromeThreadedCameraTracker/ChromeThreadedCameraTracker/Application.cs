@@ -593,7 +593,28 @@ namespace ChromeThreadedCameraTracker
                         valueAsNumber = 48
                     }.AttachToDocument();
 
+
+                    var z = 0;
+                    var x = 0;
+                    var y = 0;
+
                     var frame0in = new CanvasRenderingContext2D(ow, oh);
+
+                    Action frame0in_drawImage = delegate
+                    {
+
+                        var clip = v.videoHeight / 6;
+
+                        // 6000 zoom out
+                        // 8000 zoom in
+
+                        // haha. this wont work.
+                        //var zz = (2000 - (z - 6000).Min(2000)) / 2000f;
+                        //clip = (int)(clip * zz);
+
+                        frame0in.drawImage(v, 0, clip, v.videoWidth, v.videoHeight - clip * 2, 0, 0, ow, oh);
+                    };
+
                     //frame0in.canvas.AttachToDocument();
 
                     //var frame0out = new CanvasRenderingContext2D(ow, oh);
@@ -619,9 +640,6 @@ namespace ChromeThreadedCameraTracker
                     // avg per sec x3
                     var fps3avg = new byte[20 * 3];
 
-                    var z = 0;
-                    var x = 0;
-                    var y = 0;
 
 
                     var sent = new IHTMLPre
@@ -677,13 +695,37 @@ namespace ChromeThreadedCameraTracker
                                     Native.window.onframe += e =>
                                      {
                                          //var px = (float)(__yscan64max_ix - v.videoWidth / 2) / (float)v.videoWidth;
-                                         var px = (float)(x - ow / 2) / (float)ow;
-                                         var py = (float)(y - oh / 2) / (float)oh;
+                                         var px0 = (float)(x - ow / 2) / (float)ow;
+                                         var py0 = (float)(y - oh / 2) / (float)oh;
+
+
+                                         // 4000 zoom out
+                                         // 7000 zoom in
+
+                                         // haha. this wont work.
+                                         //var pz = ((z - 4500) / 2000f).Max(0f).Min(1.5f);
+
+                                         // in a dark room?
+                                         var pz = ((z - 6000) / 1000f).Max(0f).Min(1.5f);
+
+                                         // allow py only if pz is negative.
+                                         // 0 means py stays
+                                         // 1 means py is zero
+
+                                         var pzz = (1.0f - pz).Max(0.0f).Min(1.0f);
+
+                                         var py = py0 * pzz;
+                                         var px = px0 * pzz;
+
+                                         pz -= 0.3f;
+                                         // !! leaning in kills parallax left and up.
+                                         // rotating on gear vr will cancel all parallax.
 
                                          // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
-                                         var nmessage = e.counter + ":" + px + ":" + py + ":0";
+                                         var nmessage = e.counter + ":" + px + ":" + py + ":" + pz;
 
-                                         sent.innerText = nmessage;
+                                         //sent.innerText = nmessage.Replace(":", ":\n") + new { py0, pzz, py };
+                                         sent.innerText = nmessage.Replace(":", ":\n");
 
                                          var data = Encoding.UTF8.GetBytes(nmessage);      //creates a variable b of type byte
 
@@ -827,7 +869,7 @@ namespace ChromeThreadedCameraTracker
                                 frame0sw0 = Stopwatch.StartNew();
                                 //Console.WriteLine(frame0sw0.ElapsedMilliseconds + " fetch frame0");
 
-                                frame0in.drawImage(v, 0, 0, vw, vh);
+                                frame0in.drawImage(v, 0, v.videoHeight / 4, v.videoWidth, v.videoHeight / 2, 0, 0, vw, vh);
                                 rgba_bytes0in = frame0in.bytes;
                                 rgba_bytes0in_set.Release();
                                 new IHTMLPre { frame0sw0.ElapsedMilliseconds + " frame0 posted" }.AttachTo(fdiv);
@@ -835,7 +877,7 @@ namespace ChromeThreadedCameraTracker
                                 // await Task.Delay(1000 / 60);
                                 // 300?
                                 // Console.WriteLine(frame0sw0.ElapsedMilliseconds + " send frame2");
-                                frame0in.drawImage(v, 0, 0, vw, vh);
+                                frame0in.drawImage(v, 0, v.videoHeight / 4, v.videoWidth, v.videoHeight / 2, 0, 0, vw, vh);
                                 rgba_bytes1in = frame0in.bytes;
                                 rgba_bytes1in_set.Release();
                                 new IHTMLPre { frame0sw0.ElapsedMilliseconds + " frame1 posted" }.AttachTo(fdiv);
@@ -844,7 +886,7 @@ namespace ChromeThreadedCameraTracker
                                 // 60fps!!
                                 frameID += 3;
 
-                                frame0in.drawImage(v, 0, 0, vw, vh);
+                                frame0in_drawImage();
                                 rgba_bytes2in = frame0in.bytes;
                                 rgba_bytes2in[0] = (byte)(frameID & 0xff);
                                 rgba_bytes2in[1] = (byte)((frameID >> 8) & 0xff);
@@ -861,7 +903,7 @@ namespace ChromeThreadedCameraTracker
                                 rgba_bytes2in = null;
                                 rgba_bytes0out = null;
 
-                                frame0in.drawImage(v, 0, 0, vw, vh);
+                                frame0in_drawImage();
                                 rgba_bytes0in = frame0in.bytes;
                                 rgba_bytes0in[0] = (byte)(frameID & 0xff);
                                 rgba_bytes0in[1] = (byte)((frameID >> 8) & 0xff);
@@ -878,7 +920,8 @@ namespace ChromeThreadedCameraTracker
                                 rgba_bytes0in = null;
                                 rgba_bytes1out = null;
 
-                                frame0in.drawImage(v, 0, 0, vw, vh);
+
+                                frame0in_drawImage();
                                 rgba_bytes1in = frame0in.bytes;
                                 rgba_bytes1in[0] = (byte)(frameID & 0xff);
                                 rgba_bytes1in[1] = (byte)((frameID >> 8) & 0xff);
