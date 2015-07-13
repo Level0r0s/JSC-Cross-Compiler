@@ -1,4 +1,4 @@
-#pragma warning disable CS1998
+#pragma warning disable 1998
 
 using ScriptCoreLib;
 using ScriptCoreLib.Delegates;
@@ -30,53 +30,255 @@ namespace ChromeThreadedCameraTracker
     public sealed class Application : ApplicationWebService
     {
         // 200 ms?
-        static byte[] WorkerThread(int i3, int vw, int vh, byte[] rgba_bytes0in)
+        static byte[] WorkerThread(int ii3, int vw, int vh, byte[] rgba_bytes)
         {
-            unsafe
+            //var i3 = frame0c % 3;
+            //var i3 = 0;
+
+            var i3 = (ii3 + 1) % 3;
+
+            var frameID0 =
+                rgba_bytes[0]
+                + (rgba_bytes[1] << 8);
+
+            var frameID = frameID0 + i3;
+
+            //x:\jsc.svn\examples\javascript\chrome\apps\chromeflashlighttracker\chromeflashlighttracker\application.cs
+            var xscan = new int[vh];
+            var xscanmax = 0;
+            var xscanmax_iy = 0;
+            var xscanmax_iyc = 0;
+
+            // 16pixels added up
+            var yscan16 = new int[vw];
+            var yscan = new int[vw];
+            var yscanmax = 0;
+            var yscanmax_ix = 0;
+            var yscanmax_ixc = 0;
+
+
+
+            #region xscan
+            for (int iy = 0; iy < vh; iy += 1)
             {
-                //var i3 = frame0c % 3;
-                //var i3 = 0;
+                var xscaniy = 0;
 
-                for (int ix = 0; ix < vw; ix++)
+                for (int ix = 4; ix < vw; ix++)
+                {
+                    var x = ix * 4;
+                    var y = iy * 4 * vw;
 
-                    // first row contains variables?
-                    for (int iy = 1; iy < vh; iy += 1)
+                    //fixed (byte* r = &rgba_bytes[y + x + 0])
+                    var r = rgba_bytes[y + x + 0];
+                    var g = rgba_bytes[y + x + 1];
+                    var b = rgba_bytes[y + x + 2];
+
+                    var xg = (byte)(
+                      (3 * 255 - r - g - b)
+                      / 3
+                    );
+
+                    if (xg <= 0x30)
                     {
-                        var x = ix * 4;
-                        var y = iy * 4 * vw;
+                        xg = 0;
+                        xscaniy += 1;
+                    }
+                }
 
-                        //fixed (byte* r = &rgba_bytes[y + x + 0])
+                xscan[iy] = xscaniy;
+
+                if (xscaniy > xscanmax)
+                {
+                    xscanmax = xscaniy;
+                    xscanmax_iy = iy;
+                }
+
+
+                if (xscaniy == xscanmax)
+                {
+                    xscanmax_iyc = iy;
+                }
+            }
+            #endregion
+
+
+            #region yscan
+            for (int ix = 0; ix < vw; ix++)
+            {
+                var yscanix = 0;
+
+                // first row contains variables?
+                for (int iy = 1; iy < vh; iy += 1)
+                {
+                    var x = ix * 4;
+                    var y = iy * 4 * vw;
+
+                    //fixed (byte* r = &rgba_bytes[y + x + 0])
+                    var r = rgba_bytes[y + x + 0];
+                    var g = rgba_bytes[y + x + 1];
+                    var b = rgba_bytes[y + x + 2];
+
+                    var xg = (byte)(
+                          (3 * 255 - r - g - b)
+                          / 3
+                      );
+
+                    if (xg < 0x30)
+                    {
+                        xg = 0;
+                        yscanix += 1;
+                    }
+
+                    // animate only the left 8 pixels 
+                    if (ix < 4)
+                    {
+                        rgba_bytes[y + x + 0] = 0;
+                        rgba_bytes[y + x + 1] = 0;
+                        rgba_bytes[y + x + 2] = 0;
+
+                        rgba_bytes[y + x + i3] = xg;
+
+                        continue;
+                    }
+
+
+                    // frameID progressbar
+                    if (iy < 4)
+                        if ((ix) < (frameID % vw))
                         {
-                            var r = rgba_bytes0in[y + x + 0];
-                            var g = rgba_bytes0in[y + x + 1];
-                            var b = rgba_bytes0in[y + x + 2];
-
-                            var xg = (byte)(
-                                  (3 * 255 - r - g - b)
-                                  / 3
-                              );
-
-                            // animate only the left 8 pixels 
-                            if (ix < 8)
-                            {
-                                rgba_bytes0in[y + x + 0] = 0;
-                                rgba_bytes0in[y + x + 1] = 0;
-                                rgba_bytes0in[y + x + 2] = 0;
-
-                                rgba_bytes0in[y + x + i3] = xg;
-                            }
-                            else
-                            {
-                                rgba_bytes0in[y + x + 0] = xg;
-                                rgba_bytes0in[y + x + 1] = xg;
-                                rgba_bytes0in[y + x + 2] = xg;
-                            }
+                            rgba_bytes[y + x + 0] = (byte)(xg >> 1);
+                            rgba_bytes[y + x + 1] = (byte)(xg >> 1);
+                            rgba_bytes[y + x + 2] = 0xff;
+                            continue;
                         }
 
-                    }
+                    rgba_bytes[y + x + 0] = xg;
+                    rgba_bytes[y + x + 1] = xg;
+                    rgba_bytes[y + x + 2] = xg;
+
+
+
+                }
+
+                // init
+                yscan16[ix] = yscanix;
+
+                for (int jx = (ix - 16).Max(0); jx < ix; jx++)
+                {
+                    yscan16[jx] += yscanix;
+                }
+
+                yscan[ix] = yscanix;
+
+                if (yscanix > yscanmax)
+                {
+                    yscanmax = yscanix;
+                    yscanmax_ix = ix;
+                }
+
+                if (yscanix == yscanmax)
+                {
+                    yscanmax_ixc = ix;
+                }
+            }
+            #endregion
+
+
+
+            #region top visualization yscan
+            for (int ix = 4; ix < vw; ix++)
+            {
+                // gives a better visualization
+                var kf = 1 - ((float)yscan[ix] / (float)yscanmax);
+                //var kf = ((float)yscan[ix] / (float)yscanmax);
+                var k8 = (byte)(kf * 32f);
+
+                for (int iy = 4; iy < k8; iy++)
+                {
+
+                    var x = ix * 4;
+                    var y = iy * 4 * vw;
+
+                    rgba_bytes[y + x + 0] = 255;
+                    rgba_bytes[y + x + 1] >>= 1;
+                    rgba_bytes[y + x + 2] >>= 1;
+                }
+
+                // big number?
+                var n = (int)(yscan16[ix] * 0.1);
+
+
+                for (int iy = (vh - n).Max(vh / 2); iy < vh; iy++)
+                {
+
+                    var x = ix * 4;
+                    var y = iy * 4 * vw;
+
+                    rgba_bytes[y + x + 0] = 255;
+                    rgba_bytes[y + x + 1] >>= 2;
+                    rgba_bytes[y + x + 2] >>= 2;
+                }
             }
 
-            return rgba_bytes0in;
+            #endregion
+
+            #region top visualization
+            for (int iy = 4; iy < vh; iy++)
+            {
+                // gives a better visualization
+                var kf = 1 - ((float)xscan[iy] / (float)xscanmax);
+                //var kf = ((float)yscan[ix] / (float)yscanmax);
+                var k8 = (byte)(kf * 32f);
+
+                for (int ix = 4; ix < k8; ix++)
+                {
+
+                    var x = ix * 4;
+                    var y = iy * 4 * vw;
+
+                    rgba_bytes[y + x + 0] >>= 1;
+                    rgba_bytes[y + x + 1] >>= 1;
+                    rgba_bytes[y + x + 2] = 255;
+                }
+            }
+
+            #endregion
+
+
+            #region crosshair!
+
+            //for (int ix = yscanmax_ix; ix <= yscanmax_ixc; ix++)
+            for (int ix = yscanmax_ix; ix <= yscanmax_ix; ix++)
+            {
+                for (int iy = (xscanmax_iy - 32).Max(0); iy < (xscanmax_iy + 32).Min(vh); iy += 2)
+                {
+                    var x = ix * 4;
+                    var y = iy * 4 * vw;
+
+                    //fixed (byte* r = &rgba_bytes[y + x + 0])
+                    rgba_bytes[y + x + 0] = 0xff;
+                    rgba_bytes[y + x + 1] = 0xff;
+                    rgba_bytes[y + x + 2] = 0;
+                }
+            }
+
+            for (int iy = xscanmax_iy; iy <= xscanmax_iy; iy += 1)
+            {
+                for (int ix = (yscanmax_ix - 32).Max(0); ix < (yscanmax_ix + 32).Min(vw); ix += 2)
+                {
+                    var x = ix * 4;
+                    var y = iy * 4 * vw;
+
+                    //fixed (byte* r = &rgba_bytes[y + x + 0])
+                    rgba_bytes[y + x + 0] = 0xff;
+                    rgba_bytes[y + x + 1] = 0xff;
+                    rgba_bytes[y + x + 2] = 0;
+                }
+            }
+            #endregion
+
+
+            return rgba_bytes;
         }
 
         /// <summary>
@@ -165,20 +367,22 @@ namespace ChromeThreadedCameraTracker
                         await Native.window.async.onframe;
 
 
-                    const int zoomx = 2;
-                    const int zoomy = 4;
+                    const int zoomx = 1;
+                    const int zoomy = 2;
 
                     var ow = v.videoWidth / zoomx;
                     var oh = v.videoHeight / zoomy;
 
+                    var aloop = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox, @checked = false }.AttachToDocument();
+
                     var frame0in = new CanvasRenderingContext2D(ow, oh);
-                    frame0in.canvas.AttachToDocument();
+                    //frame0in.canvas.AttachToDocument();
 
                     var frame0out = new CanvasRenderingContext2D(ow, oh);
-                    frame0out.canvas.AttachToDocument();
+                    //frame0out.canvas.AttachToDocument();
 
                     var frame1out = new CanvasRenderingContext2D(ow, oh);
-                    frame1out.canvas.AttachToDocument();
+                    //frame1out.canvas.AttachToDocument();
 
                     var frame2out = new CanvasRenderingContext2D(ow, oh);
                     frame2out.canvas.AttachToDocument();
@@ -189,12 +393,12 @@ namespace ChromeThreadedCameraTracker
 
 
                     var frame0sw = Stopwatch.StartNew();
-                    var frame0c = 0;
+                    var frameID = 0;
                     var frame0sw0 = Stopwatch.StartNew();
 
                     new IHTMLPre {
                         () => new {
-                            frame0c,
+                            frameID,
                             frame0sw.ElapsedMilliseconds,
 
                             fps = 1000 / frame0sw.ElapsedMilliseconds ,
@@ -202,7 +406,6 @@ namespace ChromeThreadedCameraTracker
                         }
                     }.AttachToDocument();
 
-                    var aloop = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox }.AttachToDocument();
 
                     var fdiv = new IHTMLDiv { }.AttachToDocument();
 
@@ -216,8 +419,8 @@ namespace ChromeThreadedCameraTracker
                             byte[] rgba_bytes0in = null;
                             var rgba_bytes0in_set = new System.Threading.SemaphoreSlim(1);
                             byte[] rgba_bytes0out = null;
-                            //var rgba_bytes0out_set = new System.Threading.SemaphoreSlim(1);
-                            SemaphoreSlim rgba_bytes0out_set = new __SemaphoreSlim(1) { Name = "rgba_bytes0out_set" };
+                            var rgba_bytes0out_set = new System.Threading.SemaphoreSlim(1);
+                            //SemaphoreSlim rgba_bytes0out_set = new __SemaphoreSlim(1) { Name = "rgba_bytes0out_set" };
 
 
                             byte[] rgba_bytes1in = null;
@@ -314,54 +517,53 @@ namespace ChromeThreadedCameraTracker
                                 new IHTMLPre { frame0sw0.ElapsedMilliseconds + " frame1 posted" }.AttachTo(fdiv);
 
                                 loop:
-                                frame0c++;
-                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " " + new { frame0c } }.AttachTo(fdiv);
 
-                                //await Task.Delay(1000 / 60);
-                                //Console.WriteLine(frame0sw0.ElapsedMilliseconds + " send frame3");
+                                frameID += 3;
+
                                 frame0in.drawImage(v, 0, 0, vw, vh);
                                 rgba_bytes2in = frame0in.bytes;
+                                rgba_bytes2in[0] = (byte)(frameID & 0xff);
+                                rgba_bytes2in[1] = (byte)((frameID >> 8) & 0xff);
                                 rgba_bytes2in_set.Release();
-                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " frame2 posted" }.AttachTo(fdiv);
 
-                                // [12] (rgba_bytes2in_set) enter xSemaphoreSlim.InternalVirtualWaitAsync, worker is now awaiting for signal
-                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collect frame0" }.AttachTo(fdiv);
                                 await Native.window.async.onframe;
                                 await rgba_bytes0out_set.WaitAsync();
                                 if (!aloop.@checked)
                                     new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collected frame0" }.AttachTo(fdiv);
                                 frame0out.bytes = rgba_bytes0out;
                                 frame3out.drawImage(frame0out.canvas, 0, 0, vw, vh);
+                                rgba_bytes2in = null;
                                 rgba_bytes0out = null;
 
                                 frame0in.drawImage(v, 0, 0, vw, vh);
                                 rgba_bytes0in = frame0in.bytes;
+                                rgba_bytes0in[0] = (byte)(frameID & 0xff);
+                                rgba_bytes0in[1] = (byte)((frameID >> 8) & 0xff);
                                 rgba_bytes0in_set.Release();
-                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " frame0 posted" }.AttachTo(fdiv);
 
-                                // ready for frame1 ?
-                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collect frame1" }.AttachTo(fdiv);
                                 await Native.window.async.onframe;
                                 await rgba_bytes1out_set.WaitAsync();
                                 if (!aloop.@checked)
                                     new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collected frame1" }.AttachTo(fdiv);
                                 frame1out.bytes = rgba_bytes1out;
                                 frame3out.drawImage(frame1out.canvas, 0, 0, vw, vh);
+                                rgba_bytes0in = null;
                                 rgba_bytes1out = null;
 
                                 frame0in.drawImage(v, 0, 0, vw, vh);
                                 rgba_bytes1in = frame0in.bytes;
+                                rgba_bytes1in[0] = (byte)(frameID & 0xff);
+                                rgba_bytes1in[1] = (byte)((frameID >> 8) & 0xff);
                                 rgba_bytes1in_set.Release();
-                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " frame1 posted" }.AttachTo(fdiv);
 
-                                //new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collect frame2" }.AttachTo(fdiv);
                                 await Native.window.async.onframe;
                                 await rgba_bytes2out_set.WaitAsync(); // or discard the frame if it times out? drop frame?
                                 if (!aloop.@checked)
                                     new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collected frame2, next? " + new { aloop.@checked } }.AttachTo(fdiv);
                                 frame2out.bytes = rgba_bytes2out;
                                 frame3out.drawImage(frame2out.canvas, 0, 0, vw, vh);
-                                rgba_bytes1out = null;
+                                rgba_bytes1in = null;
+                                rgba_bytes2out = null;
 
 
                                 frame0sw0.Stop();
