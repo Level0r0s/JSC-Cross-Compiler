@@ -205,7 +205,10 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         public int selectionEnd;
 
 
-
+        public static implicit operator byte(IHTMLInput i)
+        {
+            return byte.Parse(i.value);
+        }
 
 
         public static implicit operator float(IHTMLInput i)

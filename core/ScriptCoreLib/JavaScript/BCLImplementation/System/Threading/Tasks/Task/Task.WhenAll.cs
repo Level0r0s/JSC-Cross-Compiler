@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 {
-	// can we keep a type partiall shared and partially platform specific?
+    // can we keep a type partiall shared and partially platform specific?
     public partial class __Task
     {
         // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.WhenAll.cs
@@ -30,6 +30,38 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 
         public static Task WhenAll(params Task[] tasks)
         {
+            // X:\jsc.svn\examples\javascript\chrome\apps\ChromeThreadedCameraTracker\ChromeThreadedCameraTracker\Application.cs
+            // can we make it faster?
+            if (tasks.Length == 2)
+            {
+                // assume 1st is onframe
+
+                var done = new TaskCompletionSource<object>();
+
+
+                tasks[1].ContinueWith(
+                    y =>
+                    {
+                        if (tasks[0].IsCompleted)
+                        {
+                            done.SetResult(null);
+                            return;
+                        }
+
+                        tasks[0].ContinueWith(
+                            x =>
+                            {
+                                done.SetResult(null);
+                            }
+                        );
+                    }
+                );
+
+                return done.Task;
+            }
+
+
+
             // used by
             // X:\jsc.svn\core\ScriptCoreLib.Async\ScriptCoreLib.Async\Query\Experimental\QueryExpressionBuilderAsync.IDbConnection.Insert.cs
 
@@ -71,7 +103,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 
         public static Task<TResult[]> WhenAll<TResult>(IEnumerable<Task<TResult>> tasks)
         {
-            return WhenAll( tasks.ToArray() );
+            return WhenAll(tasks.ToArray());
         }
 
     }

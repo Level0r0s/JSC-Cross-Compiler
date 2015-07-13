@@ -17,6 +17,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading
     [Script(Implements = typeof(global::System.Threading.SemaphoreSlim))]
     public class __SemaphoreSlim
     {
+        // set by thread manager, async scope manager
         public string Name;
 
         public int CurrentCount { get; set; }
@@ -98,7 +99,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading
             // X:\jsc.svn\examples\javascript\chrome\apps\ChromeThreadedCameraTracker\ChromeThreadedCameraTracker\Application.cs
             var c = new TaskCompletionSource<object>();
 
-            Console.WriteLine("SemaphoreSlim.WaitAsync " + new { Name });
+            //Console.WriteLine("SemaphoreSlim.WaitAsync " + new { Name });
 
 
             // at this point, the worker thread may not yet have connected back, entangled
