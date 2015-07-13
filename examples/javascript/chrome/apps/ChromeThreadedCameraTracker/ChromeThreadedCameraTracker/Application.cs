@@ -21,6 +21,8 @@ using ChromeThreadedCameraTracker.HTML.Pages;
 using System.Diagnostics;
 using System.Threading;
 using ScriptCoreLib.JavaScript.BCLImplementation.System.Threading;
+using System.Net.Sockets;
+using System.Net;
 
 namespace ChromeThreadedCameraTracker
 {
@@ -54,6 +56,9 @@ namespace ChromeThreadedCameraTracker
                 for (int n = 0; n < vw; n++) historic_x[n] = vw / 2;
                 for (int n = 0; n < vh; n++) historic_y[n] = vh / 2;
 
+                var yscan16_highp = new int[vw];
+
+                // lowp
                 var yscan16 = new int[vw];
                 var yscan = new int[vw];
                 var xscan = new int[vh];
@@ -268,8 +273,11 @@ namespace ChromeThreadedCameraTracker
                         //yscanix /= (1 + slider);
                         //yscanix += yscan16[ix];
                         //yscan16[ix] += (yscanix / 2) / slider;
+
+                        yscan16_highp[ix] = yscanix;
                         yscanix = (int)((yscanix / (1 + slider)) * 0.7);
                         yscan16[ix] = yscanix;
+                        //yscan16[ix] = (int)((yscanix / (1 + slider)) * 0.7);
 
                         if (yscan16[ix] > yscanmax16)
                         {
@@ -359,9 +367,9 @@ namespace ChromeThreadedCameraTracker
 
                     var crosshairsize = (yscan16[yscanmax_ix]).Max(4);
 
-                    historic_z[(frameID0 + 0) % vw] = crosshairsize;
-                    historic_z[(frameID0 + 1) % vw] = crosshairsize;
-                    historic_z[(frameID0 + 2) % vw] = crosshairsize;
+                    historic_z[(frameID0 + 0) % vw] = yscan16_highp[yscanmax_ix];
+                    historic_z[(frameID0 + 1) % vw] = yscan16_highp[yscanmax_ix];
+                    historic_z[(frameID0 + 2) % vw] = yscan16_highp[yscanmax_ix];
 
                     // remember where is our cursor
                     historic_x[(frameID0 + 0) % vw] = yscanmax_ix;
@@ -372,6 +380,16 @@ namespace ChromeThreadedCameraTracker
                     historic_y[(frameID0 + 1) % vw] = xscanmax_iy;
                     historic_y[(frameID0 + 2) % vw] = xscanmax_iy;
 
+                    // can we  pin and dereference the pointer into struct?
+                    // out
+                    // 24..40? lowp/ highp
+                    rgba_bytes[0] = (byte)(yscan16_highp[yscanmax_ix] & 0xff);
+                    rgba_bytes[1] = (byte)((yscan16_highp[yscanmax_ix] >> 8) & 0xff);
+
+                    rgba_bytes[4] = (byte)(yscanmax_ix & 0xff);
+                    rgba_bytes[5] = (byte)((yscanmax_ix >> 8) & 0xff);
+
+                    rgba_bytes[8] = (byte)(xscanmax_iy & 0xff);
 
                     //yscanmax_ix = 0;
 
@@ -385,10 +403,16 @@ namespace ChromeThreadedCameraTracker
                     //#endregion
 
 
+                    //crosshairsize = (int)((crosshairsize / (1 + slider)) * 0.7);
+
+                    var crosshairsizelow = crosshairsize;
+                    //((int)((crosshairsize / (1 + slider)) * 0.7).Max(4));
+
+
                     //for (int ix = yscanmax_ix; ix <= yscanmax_ixc; ix++)
-                    for (int ix = (yscanmax_ix - crosshairsize).Max(0); ix <= (yscanmax_ix + crosshairsize); ix += crosshairsize * 2)
+                    for (int ix = (yscanmax_ix - crosshairsizelow).Max(0); ix <= (yscanmax_ix + crosshairsizelow); ix += crosshairsizelow * 2)
                     {
-                        for (int iy = (xscanmax_iy - crosshairsize / 2); iy < (xscanmax_iy + crosshairsize / 2); iy += 4)
+                        for (int iy = (xscanmax_iy - crosshairsizelow / 2); iy < (xscanmax_iy + crosshairsizelow / 2); iy += 4)
                         {
                             var x = ix * 4;
                             var y = iy * 4 * vw;
@@ -406,9 +430,9 @@ namespace ChromeThreadedCameraTracker
                         }
                     }
 
-                    for (int iy = (xscanmax_iy - crosshairsize / 2).Max(0); iy <= (xscanmax_iy + crosshairsize / 2).Min(vh); iy += crosshairsize)
+                    for (int iy = (xscanmax_iy - crosshairsizelow / 2).Max(0); iy <= (xscanmax_iy + crosshairsizelow / 2).Min(vh); iy += crosshairsizelow)
                     {
-                        for (int ix = (yscanmax_ix - crosshairsize).Max(0); ix < (yscanmax_ix + crosshairsize).Min(vw); ix += 4)
+                        for (int ix = (yscanmax_ix - crosshairsizelow).Max(0); ix < (yscanmax_ix + crosshairsizelow).Min(vw); ix += 4)
                         {
                             var x = ix * 4;
                             var y = iy * 4 * vw;
@@ -514,6 +538,13 @@ namespace ChromeThreadedCameraTracker
 
                     v.play();
 
+                    new IHTMLButton { "stop" }.AttachToDocument().onclick += delegate
+                    {
+                        //v.src = null;
+                        v.src = "";
+                        //v.pause();
+                        //v.stop();
+                    };
 
                     var sw = Stopwatch.StartNew();
 
@@ -532,29 +563,47 @@ namespace ChromeThreadedCameraTracker
                     //var oh = 256;
                     var oh = 128;
 
-                    var aloop = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox, @checked = true }.AttachToDocument();
+                    // 40 with udp
+                    //var oh = 0xA0;
+                    //var oh = 0xb0;
+
+                    // 58
+                    //var oh = 196;
+                    // 35
+                    //var oh = 256;
+
+                    var aloop = new IHTMLInput
+                    {
+                        title = "loop it",
+
+                        type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox,
+                        @checked = true
+                    }.AttachToDocument();
 
                     var slider = new IHTMLInput
                     {
-                        title = "64",
+                        title = "stabilizer?",
+
                         type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range,
                         //max = 255,
                         //max = 128,
                         max = 64,
-                        valueAsNumber = 16
+
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150712-1
+                        valueAsNumber = 48
                     }.AttachToDocument();
 
                     var frame0in = new CanvasRenderingContext2D(ow, oh);
                     //frame0in.canvas.AttachToDocument();
 
-                    var frame0out = new CanvasRenderingContext2D(ow, oh);
-                    //frame0out.canvas.AttachToDocument();
+                    //var frame0out = new CanvasRenderingContext2D(ow, oh);
+                    ////frame0out.canvas.AttachToDocument();
 
-                    var frame1out = new CanvasRenderingContext2D(ow, oh);
-                    //frame1out.canvas.AttachToDocument();
+                    //var frame1out = new CanvasRenderingContext2D(ow, oh);
+                    ////frame1out.canvas.AttachToDocument();
 
-                    var frame2out = new CanvasRenderingContext2D(ow, oh);
-                    frame2out.canvas.AttachToDocument();
+                    //var frame2out = new CanvasRenderingContext2D(ow, oh);
+                    //frame2out.canvas.AttachToDocument();
 
 
                     var frame3out = new CanvasRenderingContext2D(ow, oh);
@@ -567,14 +616,114 @@ namespace ChromeThreadedCameraTracker
 
                     var fps3 = 0;
 
+                    // avg per sec x3
+                    var fps3avg = new byte[20 * 3];
+
+                    var z = 0;
+                    var x = 0;
+                    var y = 0;
+
+
+                    var sent = new IHTMLPre
+                    {
+                    }.AttachToDocument();
+
+
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150701
+
+
+                    // what about 255.255.255.255 ?
+                    chrome.socket.getNetworkList().ContinueWithResult(async n =>
+                    {
+                        // which networks should we notify of our data?
+
+                        //new IHTMLPre { new { n.Length } }.AttachToDocument();
+
+                        foreach (var item in n)
+                        {
+                            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+                            // skip ipv6
+                            if (item.address.Contains(":"))
+                                continue;
+
+                            #region send
+                            new IHTMLButton { "send onframe " + item.address }.AttachToDocument().With(
+                                async refresh =>
+                                {
+                                    refresh.style.color = "blue";
+
+                                    refresh.style.display = IStyle.DisplayEnum.block;
+
+                                    // experimental until ref count 33?
+                                    await refresh.async.onmousedown;
+
+                                    refresh.disabled = true;
+
+                                    var port = new Random().Next(16000, 40000);
+
+                                    //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
+
+                                    // where is bind async?
+                                    var socket = new UdpClient();
+                                    socket.Client.Bind(
+
+                                         //new IPEndPoint(IPAddress.Any, port: 40000)
+                                         new IPEndPoint(IPAddress.Parse(item.address), port)
+                                     );
+
+
+                                    // this will eat too much memory?
+                                    //div.ownerDocument.defaultView.onframe +=
+                                    Native.window.onframe += e =>
+                                     {
+                                         //var px = (float)(__yscan64max_ix - v.videoWidth / 2) / (float)v.videoWidth;
+                                         var px = (float)(x - ow / 2) / (float)ow;
+                                         var py = (float)(y - oh / 2) / (float)oh;
+
+                                         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+                                         var nmessage = e.counter + ":" + px + ":" + py + ":0";
+
+                                         sent.innerText = nmessage;
+
+                                         var data = Encoding.UTF8.GetBytes(nmessage);      //creates a variable b of type byte
+
+
+
+                                         //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
+
+                                         // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                                         socket.Send(
+                                              data,
+                                              data.Length,
+                                              hostname: "239.1.2.3",
+                                              port: 43834
+                                          );
+                                     };
+
+
+                                }
+                            );
+                            #endregion
+
+                        }
+                    }
+                );
+
+
                     var status = new IHTMLPre {
                         () => new {
                             frameID,
                             frame0sw.ElapsedMilliseconds,
 
                             fps = 1000 / frame0sw.ElapsedMilliseconds ,
-                            fps3 ,
-                        }
+                            fps3avg = (byte)fps3avg.Average(k => k),
+
+                            x,y,z,
+
+                            fps3,
+
+                            // script: error JSC1000: No implementation found for this native method, please implement [System.String.Replace(System.Char, System.Char)]
+                        }.ToString().Replace(",", ",\t")
                     }.AttachToDocument();
 
 
@@ -706,8 +855,9 @@ namespace ChromeThreadedCameraTracker
                                 await rgba_bytes0out_set.WaitAsync();
                                 if (!aloop.@checked)
                                     new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collected frame0" }.AttachTo(fdiv);
-                                frame0out.bytes = rgba_bytes0out;
-                                frame3out.drawImage(frame0out.canvas, 0, 0, vw, vh);
+                                //frame0out.bytes = rgba_bytes0out;
+                                //frame3out.drawImage(frame0out.canvas, 0, 0, vw, vh);
+                                frame3out.bytes = rgba_bytes0out;
                                 rgba_bytes2in = null;
                                 rgba_bytes0out = null;
 
@@ -722,8 +872,9 @@ namespace ChromeThreadedCameraTracker
                                 await rgba_bytes1out_set.WaitAsync();
                                 if (!aloop.@checked)
                                     new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collected frame1" }.AttachTo(fdiv);
-                                frame1out.bytes = rgba_bytes1out;
-                                frame3out.drawImage(frame1out.canvas, 0, 0, vw, vh);
+                                //frame1out.bytes = rgba_bytes1out;
+                                //frame3out.drawImage(frame1out.canvas, 0, 0, vw, vh);
+                                frame3out.bytes = rgba_bytes1out;
                                 rgba_bytes0in = null;
                                 rgba_bytes1out = null;
 
@@ -737,8 +888,15 @@ namespace ChromeThreadedCameraTracker
                                 await Task.WhenAll(Native.window.async.onframe, rgba_bytes2out_set.WaitAsync());
                                 if (!aloop.@checked)
                                     new IHTMLPre { frame0sw0.ElapsedMilliseconds + " collected frame2, next? " + new { aloop.@checked } }.AttachTo(fdiv);
-                                frame2out.bytes = rgba_bytes2out;
-                                frame3out.drawImage(frame2out.canvas, 0, 0, vw, vh);
+
+                                //
+                                z = rgba_bytes2out[0] + (rgba_bytes2out[1] << 8);
+                                x = rgba_bytes2out[4] + (rgba_bytes2out[5] << 8);
+                                y = rgba_bytes2out[8];
+
+                                //frame2out.bytes = rgba_bytes2out;
+                                //frame3out.drawImage(frame2out.canvas, 0, 0, vw, vh);
+                                frame3out.bytes = rgba_bytes2out;
                                 rgba_bytes1in = null;
                                 rgba_bytes2out = null;
 
@@ -747,17 +905,24 @@ namespace ChromeThreadedCameraTracker
                                 frame0sw = frame0sw0;
 
 
-                                //if (aloop)
-                                //if (!aloop.@checked)
-                                {
-                                    await Task.WhenAny(aloop.async.@checked, v.async.onclick);
+                                //if (v.src == null)
+                                //{
+                                //    Native.body.style.backgroundColor = "red";
+                                //    return;
+                                //}
 
-                                    if (!aloop.@checked)
-                                        fdiv.Clear();
+                                //if (aloop)
+                                if (!aloop.@checked)
+                                {
+                                    //await Task.WhenAny(aloop.async.@checked, v.async.onclick);
+                                    await v.async.onclick;
+
+                                    fdiv.Clear();
                                 }
 
                                 frame0sw0 = Stopwatch.StartNew();
                                 fps3 = (int)(3000 / frame0sw.ElapsedMilliseconds);
+                                fps3avg[(frameID / 3) % fps3avg.Length] = (byte)fps3;
 
                                 if (fps3 > 55)
                                 {
