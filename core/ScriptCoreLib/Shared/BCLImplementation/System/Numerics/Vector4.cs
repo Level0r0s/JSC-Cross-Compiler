@@ -6,6 +6,8 @@ using System.Text;
 namespace ScriptCoreLib.Shared.BCLImplementation.System.Numerics
 {
     // https://github.com/dotnet/corefx/blob/master/src/System.Numerics.Vectors/src/System/Numerics/Vector4.cs
+    // https://github.com/dotnet/corefx/blob/master/src/System.Numerics.Vectors/src/System/Numerics/Vector4_Intrinsics.cs
+    // https://github.com/dotnet/corefx/blob/master/src/System.Numerics.Vectors/src/System/Numerics/Matrix4x4.cs
 
     // X:\jsc.svn\core\ScriptCoreLib\GLSL\ivec4.cs
 
