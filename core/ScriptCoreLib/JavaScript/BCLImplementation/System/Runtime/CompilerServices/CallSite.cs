@@ -13,9 +13,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Runtime.CompilerServ
 {
 	// see: http://msdn.microsoft.com/en-us/library/System.Runtime.CompilerServices.CallSite.aspx
 	// http://referencesource.microsoft.com/#System.Core/Microsoft/Scripting/Actions/CallSite.cs
-    // https://github.com/dotnet/corefx/tree/master/src/System.Dynamic.Runtime/src/System/Runtime/CompilerServices
-	
-    // https://github.com/mono/mono/blob/master/mcs/class/dlr/Runtime/Microsoft.Scripting.Core/Actions/CallSite.cs
+	// https://github.com/mono/mono/blob/master/mcs/class/dlr/Runtime/Microsoft.Scripting.Core/Actions/CallSite.cs
 	// https://github.com/mono/mono/blob/master/mcs/tools/cil-strip/Mono.Cecil/CallSite.cs
 	// https://github.com/mono/mono/blob/master/mcs/class/dlr/Runtime/Microsoft.Scripting.Core/Actions/CallSiteOps.cs
 	// https://github.com/kswoll/WootzJs/blob/master/WootzJs.Runtime/Runtime/CompilerServices/CallSite.cs

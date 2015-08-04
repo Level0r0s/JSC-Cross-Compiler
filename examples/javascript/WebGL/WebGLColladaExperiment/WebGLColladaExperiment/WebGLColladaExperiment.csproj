@@ -136,7 +136,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Models\truck.dae">
-      <SubType>Designer</SubType>
     </None>
     <None Include="Models\skpBOX.dae" />
   </ItemGroup>

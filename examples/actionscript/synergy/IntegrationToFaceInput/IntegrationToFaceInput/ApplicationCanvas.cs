@@ -46,3 +46,30 @@ namespace IntegrationToFaceInput
 //x:\util\air16_sdk_win\bin\compc.bat
 //  -include-sources "." -load-config x:\util\air16_sdk_win/frameworks/airmobile-config.xml -output "X:\jsc.svn\examples\actionscri
 //System.ComponentModel.Win32Exception (0x80004005): The system cannot find the file specified
+
+
+//Y:\com\mrdoob\tools\threedoob\renderers\CommonRenderer.as:75
+//Warning: Assignment within conditional.  Did you mean == instead of =?
+//                                                if (v.visible = (focus + v.sz > 0))
+//                                                    ^
+
+//Y:\com\mrdoob\tools\threedoob\renderers\CommonRenderer.as:186
+//Warning: Assignment within conditional.  Did you mean == instead of =?
+//                                        if (object.container.visible = (focus + object.sz > 0))
+//                                            ^
+
+//Y:\com\mrdoob\tools\threedoob\renderers\LayerRenderer.as:99
+//Warning: Assignment within conditional.  Did you mean == instead of =?
+//                                                if (v.visible = (focus + v.sz > 0))
+//                                                    ^
+
+//Y:\com\mrdoob\tools\threedoob\renderers\LayerRenderer.as:210
+//Warning: Assignment within conditional.  Did you mean == instead of =?
+//                                        if (object.container.visible = (focus + object.sz > 0))
+//                                            ^
+
+//Y:\com\mrdoob\tools\threedoob\renderers\SimpleBitmapRenderer.as:65
+//Warning: Assignment within conditional.  Did you mean == instead of =?
+//                                        if (object.container.visible = (focus + object.sz > 0))
+//                                            ^
+

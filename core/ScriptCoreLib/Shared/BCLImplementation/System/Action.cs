@@ -4,6 +4,19 @@ using System.Text;
 
 namespace ScriptCoreLib.Shared.BCLImplementation.System
 {
+    // X:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\System\Action.cs
+
+
+    // also used in NDK
+    // should all args be sent as byref if generic?
+    // if a method really wants a non byref it can always make a local copy?
+
+
+    // tested by?
+    // X:\jsc.svn\examples\c\Test\TestAction\TestAction\Program.cs
+    // X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorldNDK\GLES3JNILib.cs
+
+
     // may implement System.Core
     // should be defined in ScriptCoreLib.Query but
     // this assembly needs to use them

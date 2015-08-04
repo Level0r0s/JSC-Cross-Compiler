@@ -151,7 +151,7 @@ namespace WebGLEarthTest
             #endregion
 
             // http://stackoverflow.com/questions/12447734/three-js-updateing-texture-on-plane
-
+            
 
             //sphere.rotation.y = rotation;
             parent.rotation.y = rotation;
@@ -168,7 +168,7 @@ namespace WebGLEarthTest
             #region clouds
             var clouds = new THREE.Mesh(
                     new THREE.SphereGeometry(
-                        //radius + 0.003,
+                //radius + 0.003,
                         radius + 0.006,
                         segments, segments),
                     new THREE.MeshPhongMaterial(
@@ -251,7 +251,7 @@ namespace WebGLEarthTest
             var
                 old = new
                 {
-                    parent = new
+                    parent = new 
                     {
                         parent.rotation.x,
                         parent.rotation.y
@@ -477,7 +477,7 @@ namespace WebGLEarthTest
             var p = new THREE.Mesh(
                     new THREE.SphereGeometry(
                         0.005,
-                        (int)segments, (int)segments),
+                        segments, segments),
                     new THREE.MeshBasicMaterial(
                         new
                         {

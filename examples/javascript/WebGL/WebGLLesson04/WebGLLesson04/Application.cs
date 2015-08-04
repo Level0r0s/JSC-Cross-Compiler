@@ -19,6 +19,7 @@ using WebGLLesson04.Shaders;
 
 namespace WebGLLesson04
 {
+    using System.Numerics;
     using f = System.Single;
     using gl = ScriptCoreLib.JavaScript.WebGL.WebGLRenderingContext;
 
@@ -145,7 +146,12 @@ namespace WebGLLesson04
             var shaderProgram_mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
             #endregion
 
-
+            // X:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\System\Numerics\Vector4.cs
+            //var CLRmvMatrix = new Matrix4x4();
+            //Matrix4x4.
+            // um. would a generic stack of struct work in ndk?
+            // need to flatten it.
+            // can we convert cannon to Matrix4x4 ?
 
             var mvMatrix = glMatrix.mat4.create();
             var mvMatrixStack = new Stack<Float32Array>();
