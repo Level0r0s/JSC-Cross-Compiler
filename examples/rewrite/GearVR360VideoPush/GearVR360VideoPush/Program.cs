@@ -11,6 +11,8 @@ namespace GearVR360VideoPush
     {
         static void Main(string[] args)
         {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150718/360
+
             // because .bat files cannot do it.
 
             Console.WriteLine("hi");
@@ -24,17 +26,35 @@ namespace GearVR360VideoPush
                     ).WaitForExit();
             }
 
-            var forfiles = Directory.GetFiles("x:/media", "*360*.mp4");
+            var forfiles = Directory.GetFiles("x:/media", "360*.mp4");
 
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150614/pvr
 
-            foreach (var path in forfiles)
+            var forfiles0 = Enumerable.ToArray(
+                from ff in forfiles
+                let fff = new FileInfo(ff)
+
+                orderby ff.Contains("Quake") descending, fff.Length descending
+
+                select fff
+                );
+
+            foreach (var path0 in forfiles0)
             {
+                var path = path0.FullName;
+
+                var apkfriendlytitle = new string(
+               path0.Name.Select(x => x < 127 ? x : '_').ToArray()
+               );
                 Console.WriteLine(path);
 
+                // cannot stat 'x:\media\360 Quake Gameplay in  _  E2M3 by Freeflow Plays.mp3.mp4': Bad file descriptor
+
                 {
+                    // http://stackoverflow.com/questions/26788998/adb-push-p-bad-file-descriptor
+
                     var cmd = @"x:\util\android-sdk-windows\platform-tools\adb.exe";
-                    var a = "push \"" + path + "\" /sdcard/oculus/360Videos/";
+                    var a = "push \"" + path + "\" \"/sdcard/oculus/360Videos/" + apkfriendlytitle + "\"";
 
                     System.Diagnostics.Process.Start(
                         new System.Diagnostics.ProcessStartInfo(cmd, a) { UseShellExecute = false }
@@ -45,7 +65,7 @@ namespace GearVR360VideoPush
                 // "X:\util\ffmpeg-20150609-git-7c9fcdf-win64-static\ffmpeg-20150609-git-7c9fcdf-win64-static\bin\ffmpeg.exe\"
                 // -ss 00:00:30 -t 1   -i x:\media\@file -vf \"scale=512:256, crop=256:256\" -f mjpeg X:\vr\@fname.thm"
 
-                var thm = @"x:\vr\" + Path.ChangeExtension(new FileInfo(path).Name, ".thm");
+                var thm = @"x:\vr\" + Path.ChangeExtension(apkfriendlytitle, ".thm");
 
                 Console.WriteLine(thm);
 
@@ -55,7 +75,7 @@ namespace GearVR360VideoPush
 
                     System.Diagnostics.Process.Start(
                         new System.Diagnostics.ProcessStartInfo(cmd, a) { UseShellExecute = false }
-                        
+
                         ).WaitForExit();
                 }
 
@@ -66,7 +86,7 @@ namespace GearVR360VideoPush
 
                     System.Diagnostics.Process.Start(
                         new System.Diagnostics.ProcessStartInfo(cmd, a) { UseShellExecute = false }
-                        
+
                         ).WaitForExit();
                 }
 

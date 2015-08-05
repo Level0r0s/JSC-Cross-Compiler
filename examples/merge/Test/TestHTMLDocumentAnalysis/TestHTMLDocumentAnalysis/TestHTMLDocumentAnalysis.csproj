@@ -52,7 +52,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\opensource\codeplex\htmlagilitypack\HtmlAgilityPack\HtmlAgilityPack.fx.4.5.csproj">
+    <ProjectReference Include="x:\opensource\codeplex\htmlagilitypack\HtmlAgilityPack\HtmlAgilityPack.fx.4.5.csproj">
       <Project>{1028002a-bbe2-4ff2-94b7-a8368a8f6887}</Project>
       <Name>HtmlAgilityPack.fx.4.5</Name>
     </ProjectReference>

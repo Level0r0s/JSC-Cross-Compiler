@@ -63,11 +63,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\opensource\codeplex\htmlagilitypack\HtmlAgilityPack\HtmlAgilityPack.fx.4.5.csproj">
+    <ProjectReference Include="x:\opensource\codeplex\htmlagilitypack\HtmlAgilityPack\HtmlAgilityPack.fx.4.5.csproj">
       <Project>{1028002a-bbe2-4ff2-94b7-a8368a8f6887}</Project>
       <Name>HtmlAgilityPack.fx.4.5</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\opensource\github\taglib-sharp\src\taglib-sharp.csproj">
+    <ProjectReference Include="x:\opensource\github\taglib-sharp\src\taglib-sharp.csproj">
       <Project>{6b143a39-c7b2-4743-9917-92262c60e9a6}</Project>
       <Name>taglib-sharp</Name>
     </ProjectReference>

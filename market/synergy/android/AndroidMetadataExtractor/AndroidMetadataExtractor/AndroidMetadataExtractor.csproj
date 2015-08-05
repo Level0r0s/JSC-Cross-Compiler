@@ -129,7 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="References\xmpcore-5.1.2.jar" />
-    <Content Include="X:\opensource\googlecode\metadata-extractor\Source\**\*.*">
+    <Content Include="X:\opensource\github\metadata-extractor\Source\**\*.*">
       <Link>opensource\googlecode\metadata-extractor\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
   </ItemGroup>

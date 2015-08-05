@@ -36,6 +36,8 @@ namespace TestYouTubeExtractor
 
     public class Program
     {
+        static int countunavailable;
+
         // Show Details	Severity	Code	Description	Project	File	Line
         //Error NuGet Package restore failed for project TestYouTubeExtractor: Unable to find version '1.0.0.0' of package 'YoutubeExtractor'..			0
 
@@ -51,7 +53,11 @@ namespace TestYouTubeExtractor
         //Error CS0246  The type or namespace name 'VideoInfo' could not be found(are you missing a using directive or an assembly reference?)	TestYouTubeExtractor X:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\Program.cs	47
 
 
-        private static void DownloadVideo(string link, IEnumerable<VideoInfo> videoInfos)
+        private static void DownloadVideo(
+            string chname,
+            bool Spherical,
+            string link,
+            IEnumerable<VideoInfo> videoInfos)
         {
             var mp4 = videoInfos.Where(x => x.VideoType == VideoType.Mp4);
             var mp4video = mp4.Where(x => x.Resolution > 0).OrderBy(x => x.Resolution).ToArray();
@@ -95,13 +101,29 @@ namespace TestYouTubeExtractor
             // apkfriendlytitle = "___360_ - __________find the truth 360 degree trick movie ."
 
 
+
+
+            // 
+            //apkfriendlytitle = apkfriendlytitle.Replace("360", "_");
+
+
+            // prefix it, and loose the keyword later to be less redundant...
+            if (Spherical)
+                apkfriendlytitle = "360 " + (apkfriendlytitle.Replace("360", " ")).Trim();
+
+
+
+
+
             // px = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp4"
-            var px = Path.Combine(
+            var px_old = Path.Combine(
                 //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "x:/media",
 
-                Title + video.VideoExtension);
+                apkfriendlytitle + video.VideoExtension);
 
+            if (!string.IsNullOrEmpty(chname))
+                apkfriendlytitle += " by " + chname;
 
             // pxa_mp4 = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp4"
             var pxa_mp4 = Path.Combine(
@@ -111,12 +133,6 @@ namespace TestYouTubeExtractor
                  apkfriendlytitle + video.VideoExtension);
 
 
-            if (!File.Exists(pxa_mp4))
-                if (File.Exists(px))
-                {
-                    // upgrade old naming to apk friendly.
-                    File.Move(px, pxa_mp4);
-                }
 
             // pxa_mp3 = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp3"
             var pxa_mp3 = Path.ChangeExtension(pxa_mp4, ".mp3");
@@ -125,6 +141,29 @@ namespace TestYouTubeExtractor
 
             // pxa_mp3_mp4 = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp3.mp4"
             var pxa_mp3_mp4 = Path.ChangeExtension(pxa_mp4, ".mp3.mp4");
+            var pxa_old_mp3_mp4 = Path.ChangeExtension(px_old, ".mp3.mp4");
+
+
+
+
+
+
+            if (!File.Exists(pxa_mp4))
+                if (File.Exists(px_old))
+                {
+                    Console.WriteLine("renamed " + new { pxa_mp4 });
+                    // upgrade old naming to apk friendly.
+                    File.Move(px_old, pxa_mp4);
+                }
+
+
+            if (!File.Exists(pxa_mp3_mp4))
+                if (File.Exists(pxa_old_mp3_mp4))
+                {
+                    Console.WriteLine("renamed " + new { pxa_mp3_mp4 });
+                    // upgrade old naming to apk friendly.
+                    File.Move(pxa_old_mp3_mp4, pxa_mp3_mp4);
+                }
 
 
             // do we have the end result?
@@ -140,10 +179,7 @@ namespace TestYouTubeExtractor
 
             var awaitingToBeTagged = false;
 
-            if (File.Exists(pxa_mp4))
-            {
-            }
-            else
+            if (!File.Exists(pxa_mp4))
             {
                 var videoDownloader = new VideoDownloader(video, pxa_mp4);
                 videoDownloader.DownloadProgressChanged += (sender, args) =>
@@ -158,6 +194,8 @@ namespace TestYouTubeExtractor
                 videoDownloader.Execute();
                 awaitingToBeTagged = true;
             }
+
+            ;
 
             #region any reason to attempt upgrade?
 
@@ -660,6 +698,8 @@ namespace TestYouTubeExtractor
                     {
                         // <iframe src="//www.youtube.com/embed/umfjGNlxWcw" 
 
+                        // <span class='embed-youtube' style='text-align:center; display: block;'><iframe class='youtube-player' type='text/html' width='640' height='390' src='https://www.youtube.com/embed/8vwzVVJ9lvg?version=3&#038;rel=1&#038;fs=1&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;wmode=transparent' frameborder='0' allowfullscreen='true'></iframe></span>
+
                         var prefix = "//www.youtube.com/embed/";
                         //var prefix = "https://www.youtube.com/embed/";
                         var embed = page0.SkipUntilOrEmpty(prefix);
@@ -707,8 +747,11 @@ namespace TestYouTubeExtractor
                                 c.SkipUntilOrEmpty("<h1 id=\"unavailable-message\" class=\"message\">").TakeUntilOrEmpty("<").Trim() : "";
                             if (unavailable != "")
                             {
+                                // 180?
+                                countunavailable++;
+                                Console.Title = new { countunavailable }.ToString();
                                 Console.WriteLine(new { videoUrl, unavailable });
-                                Thread.Sleep(3000);
+                                //Thread.Sleep(3000);
                                 continue;
                             }
 
@@ -737,6 +780,7 @@ namespace TestYouTubeExtractor
                             // rewrite broke JObject Parse.
                             // Additional information: Bad JSON escape sequence: \5.Path 'args.afv_ad_tag_restricted_to_instream', line 1, position 3029.
 
+                            var Spherical = new WebClient().DownloadString("https://www.youtube.com/get_video_info?html5=1&video_id=" + id).Contains("projection_type%3D2");
 
 
                             // jsc rewriter breaks it?
@@ -744,7 +788,7 @@ namespace TestYouTubeExtractor
                             // Additional information: The remote name could not be resolved: 'youtube.com'
 
                             //DownloadAudio(videoInfos);
-                            DownloadVideo(link, videoInfos);
+                            DownloadVideo(ch_name, Spherical, link, videoInfos);
 
                             //{
                             //    err = System.IO.IOException: Unable to read data from the transport connection: An established connection was aborted by the software in your host machine. --->System.Net.Sockets.SocketException: An established connection was aborted by the software in your host machine
@@ -781,6 +825,8 @@ namespace TestYouTubeExtractor
         // CALLED BY?
         public static void DoVideo(string link)
         {
+            Debugger.Break();
+
             try
             {
 
@@ -854,7 +900,7 @@ namespace TestYouTubeExtractor
                 // Additional information: The remote name could not be resolved: 'youtube.com'
 
                 //DownloadAudio(videoInfos);
-                DownloadVideo(link, videoInfos);
+                //DownloadVideo(link, videoInfos);
 
                 //{
                 //    err = System.IO.IOException: Unable to read data from the transport connection: An established connection was aborted by the software in your host machine. --->System.Net.Sockets.SocketException: An established connection was aborted by the software in your host machine

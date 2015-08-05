@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GearVR360VideoPush", "GearVR360VideoPush\GearVR360VideoPush.csproj", "{A67831B0-60FC-4F79-852D-A9F5B7ABF28F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestADBBattery", "..\..\javascript\forms\Test\TestADBBattery\TestADBBattery\TestADBBattery.csproj", "{82FE6D0F-9218-4A6E-B820-B9241A69C9D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCIMPull", "DCIMPull\DCIMPull.csproj", "{B2D28F5B-7418-451D-B8DE-CCC390C4615E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestYouTubeExtractor", "..\..\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\TestYouTubeExtractor.csproj", "{D668D3F3-A1DE-44A5-A055-813A6B705350}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +41,30 @@ Global
 		{82FE6D0F-9218-4A6E-B820-B9241A69C9D9}.Release|Mixed Platforms.Build.0 = Release|x86
 		{82FE6D0F-9218-4A6E-B820-B9241A69C9D9}.Release|x86.ActiveCfg = Release|x86
 		{82FE6D0F-9218-4A6E-B820-B9241A69C9D9}.Release|x86.Build.0 = Release|x86
+		{B2D28F5B-7418-451D-B8DE-CCC390C4615E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D28F5B-7418-451D-B8DE-CCC390C4615E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2D28F5B-7418-451D-B8DE-CCC390C4615E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B2D28F5B-7418-451D-B8DE-CCC390C4615E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B2D28F5B-7418-451D-B8DE-CCC390C4615E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B2D28F5B-7418-451D-B8DE-CCC390C4615E}.Debug|x86.Build.0 = Debug|Any CPU
+		{B2D28F5B-7418-451D-B8DE-CCC390C4615E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2D28F5B-7418-451D-B8DE-CCC390C4615E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2D28F5B-7418-451D-B8DE-CCC390C4615E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B2D28F5B-7418-451D-B8DE-CCC390C4615E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B2D28F5B-7418-451D-B8DE-CCC390C4615E}.Release|x86.ActiveCfg = Release|Any CPU
+		{B2D28F5B-7418-451D-B8DE-CCC390C4615E}.Release|x86.Build.0 = Release|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Debug|x86.Build.0 = Debug|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Release|x86.ActiveCfg = Release|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

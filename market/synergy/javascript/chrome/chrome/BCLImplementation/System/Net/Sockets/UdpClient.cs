@@ -34,6 +34,11 @@ namespace xchrome.BCLImplementation.System.Net.Sockets
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201503/20150306/udp
 
         public __UdpClient()
+            : this(0)
+        {
+
+        }
+        public __UdpClient(int __port = 0)
         {
             // x:\jsc.svn\examples\javascript\chrome\apps\chromeudpsendasync\chromeudpsendasync\application.cs
 
@@ -42,41 +47,10 @@ namespace xchrome.BCLImplementation.System.Net.Sockets
 
             var afterbind = new TaskCompletionSource<int>();
 
-
-            #region vJoinMulticastGroup
-            this.vJoinMulticastGroup = async (IPAddress multicastAddr) =>
-            {
-                __IPAddress a = multicastAddr;
-
-                var isocket = await isocket_after_create;
-
-                var value_joinGroup = await isocket.socketId.joinGroup(a.ipString);
-
-                Console.WriteLine("UdpClient.vJoinMulticastGroup " + new { value_joinGroup });
-            };
-            #endregion
-
-
-            #region vReceiveAsync
-            this.vReceiveAsync = async delegate
-            {
-                var isocket = await isocket_after_create;
-
-                var result = await isocket.socketId.recvFrom(1048576);
-
-                byte[] buffer = new ScriptCoreLib.JavaScript.WebGL.Uint8ClampedArray(result.data);
-
-                return new UdpReceiveResult(
-                    buffer,
-                    remoteEndPoint: default(IPEndPoint)
-                );
-            };
-
-            #endregion
-
-            #region Client
+            #region Client vBind
             this.Client = new __Socket
             {
+                // called by?
                 #region vBind
                 vBind = async (EndPoint localEP) =>
                 {
@@ -87,6 +61,7 @@ namespace xchrome.BCLImplementation.System.Net.Sockets
                     {
                         __IPAddress v4a = v4.Address;
 
+                        //  Error: Invocation of form socket.bind(integer, null, integer, function) doesn't match definition socket.bind(integer socketId, string address, integer port, function callback)
                         var bind = await isocket.socketId.bind(
                             //address: "0.0.0.0",
                             address: v4a.ipString,
@@ -101,12 +76,72 @@ namespace xchrome.BCLImplementation.System.Net.Sockets
                             bind
                         });
 
+                        // 0 is ok?
                         afterbind.SetResult(bind);
                     }
                 }
                 #endregion
 
             };
+            #endregion
+
+
+            // https://developer.chrome.com/apps/app_network
+
+            // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPFloats\ChromeUDPFloats\Application.cs
+            if (__port > 0)
+            {
+                // X:\jsc.svn\examples\javascript\chrome\apps\MulticastListenExperiment\MulticastListenExperiment\Application.cs
+
+                // are we doing the right thing?
+                // um. xt7 chrome wont listen at all?
+                this.Client.Bind(
+                    new IPEndPoint(IPAddress.Any, port: __port)
+                    //new IPEndPoint(IPAddress.Parse("192.168.1.3"), port: __port)
+                );
+            }
+
+
+            #region vJoinMulticastGroup
+            this.vJoinMulticastGroup = async (IPAddress multicastAddr) =>
+            {
+                __IPAddress a = multicastAddr;
+
+                var isocket = await isocket_after_create;
+
+                var value_joinGroup = await isocket.socketId.joinGroup(a.ipString);
+
+                // 0 is ok?
+                Console.WriteLine("UdpClient.vJoinMulticastGroup " + new { value_joinGroup });
+            };
+            #endregion
+
+
+            #region vReceiveAsync
+            this.vReceiveAsync = async delegate
+            {
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150723
+                Console.WriteLine("enter UdpClient.vReceiveAsync ");
+
+                var isocket = await isocket_after_create;
+
+                Console.WriteLine("UdpClient.vReceiveAsync recvFrom ");
+
+                // android defaults to 4096
+                var result = await isocket.socketId.recvFrom(1048576);
+
+                Console.WriteLine("UdpClient.vReceiveAsync " + new { result.resultCode });
+
+                byte[] buffer = new ScriptCoreLib.JavaScript.WebGL.Uint8ClampedArray(result.data);
+
+                //Console.WriteLine("UdpClient.vReceiveAsync " + new { buffer.Length });
+
+                return new UdpReceiveResult(
+                    buffer,
+                    remoteEndPoint: default(IPEndPoint)
+                );
+            };
+
             #endregion
 
 
