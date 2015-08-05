@@ -283,10 +283,6 @@ namespace WebGLLesson05
             #endregion
 
             // initTexture new in lesson 05
-
-             // in VR we need either svg textures or shader textures...
-             // pngs are only good for skyboxes.
-             //new WebGLTexture(
             var neheTexture = gl.createTexture();
             var neheTexture_image = new WebGLLesson05.HTML.Images.FromAssets.nehe();
 

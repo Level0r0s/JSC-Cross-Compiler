@@ -48,6 +48,8 @@ namespace CSS3DPanoramaByHumus
                 new side
 			    {
                     img=  new humus_px(),
+
+                    // glsl, clr46, Vector3?
 				    position= new THREE.Vector3( -512, 0, 0 ),
 				    rotation= new THREE.Vector3( 0, Math.PI / 2, 0 )
                 },

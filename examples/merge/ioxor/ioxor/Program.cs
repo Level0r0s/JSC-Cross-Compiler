@@ -10,6 +10,16 @@ using System.Windows.Forms;
 
 namespace ioxor
 {
+    //358612821 read in 260861
+    //reading... done in 35
+
+    //Unhandled Exception: System.OperationCanceledException: The operation was canceled.
+    //   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+    //   at System.IO.FileStream.ReadCore(Byte[] buffer, Int32 offset, Int32 count)
+    //   at System.IO.FileStream.Read(Byte[] array, Int32 offset, Int32 count)
+    //   at ioxor.Program.Main(String[] args) in X:\jsc.svn\examples\merge\ioxor\ioxor\Program.cs:line 152
+
+
 
     class Program
     {
@@ -62,7 +72,9 @@ namespace ioxor
             Console.WriteLine(new { Environment.CurrentDirectory });
             //Console.WriteLine(Environment.ter);
 
-            var CrashManagerLastWriteback = File.Exists("LastWriteback") ? File.ReadAllText("LastWriteback") : "";
+            // 683671226
+            var CrashManagerLastWriteback = File.Exists("LastWriteback") ? File.ReadAllText("LastWriteback") : "0";
+            var CrashManagerLastWriteback64 = long.Parse(CrashManagerLastWriteback);
 
             Console.WriteLine(new { CrashManagerLastWriteback });
 
@@ -109,6 +121,13 @@ namespace ioxor
                             {
                                 var sw = Stopwatch.StartNew();
 
+
+                                var r = File.Open(f, FileMode.Open, FileAccess.ReadWrite);
+
+                                if (CrashManagerLastWriteback64 < r.Length)
+                                    if (MessageBox.Show("resume at " + new { CrashManagerLastWriteback64 }, "crash?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                        r.Position = CrashManagerLastWriteback64;
+
                                 var seed3r = Enumerable.ToArray(
                                     from fff in seed3
                                     let fr = fff.OpenRead()
@@ -116,17 +135,17 @@ namespace ioxor
                                     // SIGINT 55
                                     // offset by, ask UDP device
 
-                                    let peek = fr.ReadByte()
-                                    let peekdata = new byte[peek]
-                                    let x = fr.Read(peekdata, 0, peek)
+                                    let peek = fr.ReadByte() + r.Position
+                                    //let peekdata = new byte[peek]
+                                    //let x = fr.Read(peekdata, 0, peek)
+
+                                    let p = fr.Position = 1 + peek
 
                                     select fr
                                 );
 
                                 Console.WriteLine(new { sw.ElapsedMilliseconds });
 
-
-                                var r = File.Open(f, FileMode.Open, FileAccess.ReadWrite);
 
 
                                 var c = 0;
@@ -140,8 +159,22 @@ namespace ioxor
 
                                     GC.KeepAlive(data);
 
-                                    var c0 = r.Read(data, 0, data.Length);
-                                    c = c0;
+                                    var c0 = 0;
+
+                                    reread:
+                                    try
+                                    {
+                                        // a hybrid app needs to be resillien while lengthy data sync may be interupted
+                                        c0 = r.Read(data, 0, data.Length);
+                                        c = c0;
+                                    }
+                                    catch (Exception readfault)
+                                    {
+                                        Console.WriteLine(new { readfault });
+
+                                        MessageBox.Show("reread?");
+                                        goto reread;
+                                    }
 
                                     // 255 read in 14
                                     // 65535 read in 15
@@ -189,8 +222,31 @@ namespace ioxor
 
                                             yield += delegate
                                             {
+
+                                                //                                             Unhandled Exception: System.OperationCanceledException: The operation was canceled.
+                                                //at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+                                                //at System.IO.FileStream.WriteCore(Byte[] buffer, Int32 offset, Int32 count)
+                                                //at System.IO.FileStream.Write(Byte[] array, Int32 offset, Int32 count)
+                                                //at ioxor.Program.<> c__DisplayClass0_1.< Main > b__10() in X:\jsc.svn\examples\merge\ioxor\ioxor\Program.cs:line 191
+                                                //at System.Action.Invoke()
+                                                //at ioxor.Program.Main(String[] args) in X:\jsc.svn\examples\merge\ioxor\ioxor\Program.cs:line 233
+
+
                                                 r.Position = Position0;
-                                                r.Write(data, 0, c0);
+
+                                                // data corruption...
+                                                retry:
+                                                try
+                                                {
+                                                    r.Write(data, 0, c0);
+                                                }
+                                                catch (Exception err)
+                                                {
+                                                    Console.WriteLine(new { err });
+                                                    Thread.Sleep(10000);
+                                                    if (MessageBox.Show("retry at " + new { Position0 }, "crash?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                                        goto retry;
+                                                }
                                                 r.Flush();
 
                                                 //                                                0 written in 0
@@ -251,3 +307,12 @@ namespace ioxor
         }
     }
 }
+
+//[Window Title]
+//RemoteApp Error
+
+//[Content]
+//Couldn’t open this program or file.Either there was a problem with "X:\jsc.svn\examples\merge\ioxor\ioxor\bin\Debug\ioxor.exe" or the file you’re trying to open couldn’t be accessed.
+//For assistance, contact your system administrator.
+
+//[OK]

@@ -1,11 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLLesson04", "WebGLLesson04\WebGLLesson04.csproj", "{E6FE25E1-547B-47DD-A4D0-F5C6CDB49784}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "glMatrixLibrary", "..\..\..\..\market\synergy\javascript\glMatrixLibrary\glMatrixLibrary\glMatrixLibrary.csproj", "{D69BEEFB-7FB1-4AC7-BF4A-AC3E04DB0E37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +13,6 @@ Global
 		{E6FE25E1-547B-47DD-A4D0-F5C6CDB49784}.Debug|x86.Build.0 = Debug|x86
 		{E6FE25E1-547B-47DD-A4D0-F5C6CDB49784}.Release|x86.ActiveCfg = Release|x86
 		{E6FE25E1-547B-47DD-A4D0-F5C6CDB49784}.Release|x86.Build.0 = Release|x86
-		{D69BEEFB-7FB1-4AC7-BF4A-AC3E04DB0E37}.Debug|x86.ActiveCfg = Debug|x86
-		{D69BEEFB-7FB1-4AC7-BF4A-AC3E04DB0E37}.Debug|x86.Build.0 = Debug|x86
-		{D69BEEFB-7FB1-4AC7-BF4A-AC3E04DB0E37}.Release|x86.ActiveCfg = Release|x86
-		{D69BEEFB-7FB1-4AC7-BF4A-AC3E04DB0E37}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -248,8 +248,6 @@ gl_FragColor = c;
                            tCube = new
                            {
                                type = "t",
-
-                               // rebuild three?
                                value = new THREE.CubeTexture(ii
                            )
                                {

@@ -581,61 +581,61 @@ namespace WebGLWindWheel
 
                 #region DrawWingAtX
                 Action<int, int, float, float> DrawWingAtX =
-            (WingX, WingSize, WingRotationMultiplier, WingRotationOffset) =>
-            {
-                mvPushMatrix();
+                    (WingX, WingSize, WingRotationMultiplier, WingRotationOffset) =>
+                    {
+                        mvPushMatrix();
 
-                __mat4.translate(mvMatrix, mvMatrix, new float[] { cubesize * WingX, 0, 0 });
-                //glMatrix.mat4.translate(mvMatrix, new float[] { cubesize * WingX, 0, 0 });
+                        __mat4.translate(mvMatrix, mvMatrix, new float[] { cubesize * WingX, 0, 0 });
+                        //glMatrix.mat4.translate(mvMatrix, new float[] { cubesize * WingX, 0, 0 });
 
-                if (WingRotationOffset == 0)
-                {
-                    DrawFrameworkWingAtX(0, 0);
-                }
+                        if (WingRotationOffset == 0)
+                        {
+                            DrawFrameworkWingAtX(0, 0);
+                        }
 
-                #region DrawWingPart
-                Action<float> DrawWingPart =
-            PartIndex =>
-            {
-                mvPushMatrix();
-                //glMatrix.mat4.rotate(mvMatrix, degToRad(WingRotationOffset + (rCube * WingRotationMultiplier)), new float[] { 1f, 0f, 0f });
-                __mat4.rotate(mvMatrix, mvMatrix, degToRad(WingRotationOffset + (rCube * WingRotationMultiplier)), new float[] { 1f, 0f, 0f });
-                //glMatrix.mat4.translate(mvMatrix, new float[] { 0f, cubesize * PartIndex * 2, 0 });
-                __mat4.translate(mvMatrix, mvMatrix, new float[] { 0f, cubesize * PartIndex * 2, 0 });
+                        #region DrawWingPart
+                        Action<float> DrawWingPart =
+                    PartIndex =>
+                    {
+                        mvPushMatrix();
+                        //glMatrix.mat4.rotate(mvMatrix, degToRad(WingRotationOffset + (rCube * WingRotationMultiplier)), new float[] { 1f, 0f, 0f });
+                        __mat4.rotate(mvMatrix, mvMatrix, degToRad(WingRotationOffset + (rCube * WingRotationMultiplier)), new float[] { 1f, 0f, 0f });
+                        //glMatrix.mat4.translate(mvMatrix, new float[] { 0f, cubesize * PartIndex * 2, 0 });
+                        __mat4.translate(mvMatrix, mvMatrix, new float[] { 0f, cubesize * PartIndex * 2, 0 });
 
-                gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
-                gl.vertexAttribPointer((uint)shaderProgram_vertexPositionAttribute, cubeVertexPositionBuffer_itemSize, gl.FLOAT, false, 0, 0);
+                        gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
+                        gl.vertexAttribPointer((uint)shaderProgram_vertexPositionAttribute, cubeVertexPositionBuffer_itemSize, gl.FLOAT, false, 0, 0);
 
-                gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexColorBuffer);
-                gl.vertexAttribPointer((uint)shaderProgram_vertexColorAttribute, cubeVertexColorBuffer_itemSize, gl.FLOAT, false, 0, 0);
+                        gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexColorBuffer);
+                        gl.vertexAttribPointer((uint)shaderProgram_vertexColorAttribute, cubeVertexColorBuffer_itemSize, gl.FLOAT, false, 0, 0);
 
-                gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
-                setMatrixUniforms();
-                //gl.drawElements(gl.TRIANGLES, cubeVertexPositionBuffer_numItems, gl.UNSIGNED_SHORT, 0);
-                gl.drawElements(gl.TRIANGLES, cubeVertexPositionBuffer_numItems, gl.UNSIGNED_BYTE, 0);
+                        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
+                        setMatrixUniforms();
+                        //gl.drawElements(gl.TRIANGLES, cubeVertexPositionBuffer_numItems, gl.UNSIGNED_SHORT, 0);
+                        gl.drawElements(gl.TRIANGLES, cubeVertexPositionBuffer_numItems, gl.UNSIGNED_BYTE, 0);
 
-                mvPopMatrix();
-            };
-                #endregion
+                        mvPopMatrix();
+                    };
+                        #endregion
 
-                #region DrawWingWithSize
-                Action<int> DrawWingWithSize =
-            length =>
-            {
-                for (int i = 4; i < length; i++)
-                {
-                    DrawWingPart(i * 1.0f);
-                    DrawWingPart(-i * 1.0f);
+                        #region DrawWingWithSize
+                        Action<int> DrawWingWithSize =
+                    length =>
+                    {
+                        for (int i = 4; i < length; i++)
+                        {
+                            DrawWingPart(i * 1.0f);
+                            DrawWingPart(-i * 1.0f);
 
-                }
-            };
-                #endregion
+                        }
+                    };
+                        #endregion
 
-                DrawWingWithSize(WingSize);
+                        DrawWingWithSize(WingSize);
 
-                mvPopMatrix();
+                        mvPopMatrix();
 
-            };
+                    };
                 #endregion
 
                 var x = 8;

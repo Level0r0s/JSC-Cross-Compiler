@@ -39,6 +39,9 @@ namespace WebGLEquirectangularPanorama
 
         public Application(IApp page)
         {
+            // is there a chrome version?
+            // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularPanorama\ChromeEquirectangularPanorama\Application.cs
+
 			// http://mrdoob.github.io/three.js/examples/webgl_panorama_equirectangular.html
 			// http://stackoverflow.com/users/94411/zproxy
 			// https://www.shadertoy.com/view/XsBSDR#
