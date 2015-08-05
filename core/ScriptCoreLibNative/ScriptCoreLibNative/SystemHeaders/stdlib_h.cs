@@ -30,6 +30,11 @@ namespace ScriptCoreLibNative.SystemHeaders
             return default(object);
         }
 
+        public static T realloc<T>(T ptr, int size)
+        {
+            return default(T);
+        }
+
 
         // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewXNDK\VrCubeWorld.cs
         public static void free(object e)

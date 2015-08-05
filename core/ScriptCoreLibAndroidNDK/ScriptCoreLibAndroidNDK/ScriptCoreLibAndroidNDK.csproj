@@ -68,6 +68,9 @@
     <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\SystemHeaders\stdlib_h.cs">
       <Link>SystemHeaders\stdlib_h.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\System\Action.cs">
+      <Link>BCLImplementation\System\Action.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\System\Threading\ThreadStart.cs">
       <Link>BCLImplementation\System\Threading\ThreadStart.cs</Link>
     </Compile>
@@ -75,6 +78,7 @@
     <Compile Include="BCLImplementation\System\Threading\Thread.cs" />
     <Compile Include="IAssemblyReferenceToken.cs" />
     <Compile Include="Library\ConsoleExtensions.cs" />
+    <Compile Include="Library\Reflection\args.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemHeaders\android\bitmap.cs" />
     <Compile Include="SystemHeaders\android\asset_manager.cs" />

@@ -9,8 +9,14 @@ using System.Net.Sockets;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 {
+    // X:\jsc.svn\market\synergy\javascript\chrome\chrome\BCLImplementation\System\Net\Sockets\Socket.cs
+    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\Sockets\Socket.cs
+
+    // 
     // https://github.com/mono/mono/blob/master/mcs/class/System/System.Net.Sockets/Socket.cs
     // http://referencesource.microsoft.com/#System/net/System/Net/Sockets/Socket.cs
+
+    // https://github.com/dotnet/corefx/blob/master/src/System.Net.WebSockets/src/System/Net/WebSockets/WebSocket.cs
 
     [Script(Implements = typeof(global::System.Net.Sockets.Socket))]
     internal class __Socket : IDisposable
@@ -21,9 +27,32 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         public global::java.net.ServerSocket InternalServerSocket;
         public global::java.net.Socket InternalSocket;
 
+
+
+
+        public static implicit operator global::System.Net.Sockets.Socket(__Socket i) { return (global::System.Net.Sockets.Socket)(object)i; }
+        public static implicit operator __Socket(global::System.Net.Sockets.Socket i) { return (__Socket)(object)i; }
+
+
+
+
+        // X:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosHUD\ApplicationActivity.cs
+        [Script]
+        public delegate void BindDelegate(EndPoint localEP);
+        public BindDelegate vBind;
+        public void Bind(EndPoint localEP)
+        {
+
+
+
+            Console.WriteLine("enter __Socket Bind " + new { vBind });
+            vBind(localEP);
+        }
+
+
         public void SetSocketOption(SocketOptionLevel optionLevel, SocketOptionName optionName, bool optionValue)
         {
-      
+
             if (optionName == SocketOptionName.ReuseAddress)
             {
                 if (this.InternalServerSocket != null)

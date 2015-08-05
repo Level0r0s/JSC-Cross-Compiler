@@ -51,8 +51,12 @@ namespace ScriptCoreLibAndroidNDK.BCLImplementation.System.Threading
             // X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\VrCubeWorld.AppThread.cs
             var createErr = pthread.pthread_create(out this.InternalThread, null, AppThreadFunction, this);
 
+
+            // LOCAL_CFLAGS	+= -Wno-error=unused-but-set-variable
         }
 
+        // Shim to call a C++ object from a posix thread start.
+        //void *AppLocal::ThreadStarter( void * parm )
         static object AppThreadFunction(__Thread that)
         {
             that.__ThreadStart();
@@ -71,5 +75,20 @@ namespace ScriptCoreLibAndroidNDK.BCLImplementation.System.Threading
             unistd.usleep(1000 * millisecondsTimeout);
         }
 
+
+
+        public string Name
+        {
+            set
+            {
+                // // Set the name that will show up in systrace
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
+                //pthread_setname_np(pthread_self(), "BackgrndGLLoad");
+                // pthread_setname_np( pthread_self(), "OVR::VrThread" );
+
+            }
+        }
+
+        // Current
     }
 }

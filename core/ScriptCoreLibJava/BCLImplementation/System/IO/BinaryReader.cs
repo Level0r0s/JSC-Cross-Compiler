@@ -9,7 +9,10 @@ using ScriptCoreLib.Shared.BCLImplementation.System;
 namespace ScriptCoreLibJava.BCLImplementation.System.IO
 {
     // http://referencesource.microsoft.com/#mscorlib/system/io/binaryreader.cs
+    // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/IO/BinaryReader.cs
     // https://github.com/mono/mono/blob/master/mcs/class/corlib/System.IO/BinaryReader.cs
+    // https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/IO/BinaryReader.cs
+
     // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\IO\BinaryReader.cs
     // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\IO\BinaryReader.cs
     // X:\jsc.svn\core\ScriptCoreLib\ActionScript\BCLImplementation\System\IO\BinaryReader.cs
@@ -17,6 +20,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System.IO
 	[Script(Implements = typeof(global::System.IO.BinaryReader))]
 	internal class __BinaryReader : __IDisposable
 	{
+        // Buffer
+        // BitConverter
+        //  IEEE 754 
+        // http://docs.oracle.com/javase/1.5.0/docs/api/java/lang/Float.html#intBitsToFloat(int
+
 		internal Stream InternalStream;
 
 		public virtual Stream BaseStream { get { return this.InternalStream; } }

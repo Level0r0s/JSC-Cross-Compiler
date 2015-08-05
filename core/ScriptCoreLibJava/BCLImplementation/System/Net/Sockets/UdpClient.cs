@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ScriptCoreLib.Shared.BCLImplementation.System.Net.Sockets;
 using ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks;
 using ScriptCoreLibJava.BCLImplementation.System.Net.NetworkInformation;
+using ScriptCoreLib.Shared.BCLImplementation.System.Net;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 {
@@ -20,6 +21,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
     [Script(Implements = typeof(global::System.Net.Sockets.UdpClient))]
     internal class __UdpClient
     {
+        public const int MaxData = 1048576;
+
         // http://www.acc.umu.se/~bosse/High%20performance%20kernel%20mode%20web%20server%20for%20Windows.pdf
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150630/udp
 
@@ -109,7 +112,17 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
             public static xConstructorArguments Of()
             {
-                return new xConstructorArguments { };
+                var xDatagramSocket = default(java.net.DatagramSocket);
+
+                return new xConstructorArguments
+                {
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
+                    vDatagramSocket = delegate
+                    {
+
+                        throw new NotImplementedException();
+                    }
+                };
             }
             public static xConstructorArguments Of(IPEndPoint e)
             {
@@ -165,6 +178,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
             public static xConstructorArguments Of(int port)
             {
+                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPFloats\ChromeUDPFloats\Application.cs
 
                 var xMulticastSocket = default(java.net.MulticastSocket);
                 var xDatagramSocket = default(java.net.DatagramSocket);
@@ -216,16 +230,20 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             }
         }
 
+
         public __UdpClient(xConstructorArguments args)
         {
+            //Console.WriteLine("enter __UdpClient ctor");
 
-            java.net.DatagramSocket datagramSocket;
 
             // http://stackoverflow.com/questions/8558791/multicastsocket-vs-datagramsocket-in-broadcasting-to-multiple-clients
             // you must use MulticastSocket for receiving the multicasts; for sending them, again, you can use either DatagramSocket or MulticastSocket, and there is no difference in efficiency.
 
             //var buffer = new sbyte[0x10000];
-            var buffer = new sbyte[0x1000];
+
+            // X:\jsc.svn\market\synergy\javascript\chrome\chrome\BCLImplementation\System\Net\Sockets\UdpClient.cs
+            //var buffer = new sbyte[0x1000];
+            var buffer = new sbyte[MaxData];
 
             //E/dalvikvm-heap(14366): Out of memory on a 1048592-byte allocation.
             //I/dalvikvm(14366): "Thread-4310" prio=5 tid=827 RUNNABLE
@@ -325,6 +343,76 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             };
             #endregion
 
+            //Console.WriteLine("enter __UdpClient before this.Client");
+
+            this.Client = new __Socket
+           {
+               #region vBind
+               vBind = (EndPoint localEP) =>
+               {
+                   // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
+
+                   try
+                   {
+                       Console.WriteLine("enter __UdpClient vBind " + new { args.xDatagramSocket, localEP });
+
+
+                       var v4 = localEP as IPEndPoint;
+                       if (v4 != null)
+                       {
+                           __IPAddress v4a = v4.Address;
+
+
+
+                           // http://developer.android.com/reference/java/net/InetSocketAddress.html
+                           var x = new java.net.InetSocketAddress(v4a.InternalAddress, v4.Port);
+
+                           Console.WriteLine("before __UdpClient vBind " + new { v4a.InternalAddress, v4.Port });
+
+                           args.xDatagramSocket.bind(x);
+
+                       }
+
+                   }
+                   catch (Exception err)
+                   {
+                       Console.WriteLine("err __UdpClient vBind " + new { err.Message, err.StackTrace });
+                       //throw;
+
+
+                       throw new InvalidOperationException();
+                   }
+               }
+               #endregion
+           };
+
+
+
+            //Console.WriteLine("enter __UdpClient after this.Client " + new { this.Client });
+
+
+            #region vSend
+            this.vSend = (byte[] datagram, int bytes, string hostname, int port) =>
+            {
+                //I/System.Console(22987): 59cb:0001 about to Send
+                //I/System.Console(22987): 59cb:0001 enter __UdpClient vSend
+                //I/System.Console(22987): 59cb:0001 err __UdpClient vSend { Message = , StackTrace = android.os.NetworkOnMainThreadException
+                //I/System.Console(22987):        at android.os.StrictMode$AndroidBlockGuardPolicy.onNetwork(StrictMode.java:1147)
+                //I/System.Console(22987):        at libcore.io.BlockGuardOs.sendto(BlockGuardOs.java:276)
+                //I/System.Console(22987):        at libcore.io.IoBridge.sendto(IoBridge.java:513)
+                //I/System.Console(22987):        at java.net.PlainDatagramSocketImpl.send(PlainDatagramSocketImpl.java:184)
+                //I/System.Console(22987):        at java.net.DatagramSocket.send(DatagramSocket.java:305)
+                //I/System.Console(22987):        at ScriptCoreLibJava.BCLImplementation.System.Net.Sockets.__UdpClient___c__DisplayClass12.__ctor_b__6(__UdpClient___c__DisplayClass12.java:109)
+
+                var t = this.vSendAsync(datagram, bytes, hostname, port);
+
+
+
+                return t.Result;
+            };
+            #endregion
+
+
             #region vSendAsync
             this.vSendAsync = (byte[] datagram, int bytes, string hostname, int port) =>
             {
@@ -337,7 +425,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
                             var a = global::java.net.InetAddress.getByName(hostname);
                             var packet = new java.net.DatagramPacket(
                                 (sbyte[])(object)datagram,
-                                datagram.Length, a, port
+                                bytes, a, port
                             );
                             args.xDatagramSocket.send(packet);
                             // retval tested?
@@ -366,7 +454,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
                         {
                             var packet = new java.net.DatagramPacket(
                                 (sbyte[])(object)datagram,
-                                datagram.Length, (__IPAddress)endPoint.Address, endPoint.Port
+                                bytes, (__IPAddress)endPoint.Address, endPoint.Port
                             );
                             args.xDatagramSocket.send(packet);
                             // retval tested?
@@ -415,6 +503,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         {
         }
 
+
+        // are we supposed to bind?
         public Socket Client { get; set; }
 
 
@@ -432,6 +522,14 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         public Action<IPAddress, IPAddress> vJoinMulticastGroup;
         //public void JoinMulticastGroup(IPAddress multicastAddr) { vJoinMulticastGroup(multicastAddr); }
         public void JoinMulticastGroup(IPAddress multicastAddr, IPAddress localAddress) { vJoinMulticastGroup(multicastAddr, localAddress); }
+
+
+
+        public SendDelegate vSend;
+        [Script]
+        public delegate int SendDelegate(byte[] datagram, int bytes, string hostname, int port);
+        public int Send(byte[] datagram, int bytes, string hostname, int port) { return vSend(datagram, bytes, hostname, port); }
+
 
 
         public SendAsyncDelegate vSendAsync;

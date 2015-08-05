@@ -156,7 +156,7 @@ namespace ScriptCoreLibNative.SystemHeaders
     //[Script(IsNative = true, PointerName = "JNINativeInterface*")]
     [Script(IsNative = true, PointerName = "JNIEnv*")]
     //[Script(IsNative = true)]
-    public class JNIEnv : jni_h  // : JNIInvokeInterface
+    public unsafe class JNIEnv : jni_h  // : JNIInvokeInterface
     {
         // X:\jsc.svn\examples\java\android\future\NDKHybridMockup\NDKHybridMockup\ApplicationActivity.cs
 
@@ -204,6 +204,48 @@ namespace ScriptCoreLibNative.SystemHeaders
         public delegate void SetFloatFieldDelegate(JNIEnv env, jobject value, jfieldID i, float f);
 
         public SetFloatFieldDelegate SetFloatField;
+        #endregion
+
+
+
+
+        #region    jfloat      (*GetFloatField)(JNIEnv*, jobject, jfieldID) __NDK_FPABI__;
+        [Script(IsNative = true)]
+        public delegate float GetFloatFieldDelegate(JNIEnv env, jobject value, jfieldID i);
+
+        public GetFloatFieldDelegate GetFloatField;
+        #endregion
+
+
+
+        #region   jobject     (*GetObjectField)(JNIEnv*, jobject, jfieldID);
+        [Script(IsNative = true)]
+        public delegate object GetObjectFieldDelegate(JNIEnv env, jobject value, jfieldID i);
+
+        public GetObjectFieldDelegate GetObjectField;
+        #endregion
+
+        #region jsize       (*GetArrayLength)(JNIEnv*, jarray);
+        [Script(IsNative = true)]
+        public delegate int GetArrayLengthDelegate(JNIEnv env, object value);
+
+        public GetArrayLengthDelegate GetArrayLength;
+        #endregion
+
+
+        // https://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/functions.html
+        #region jbyte*      (*GetByteArrayElements)(JNIEnv*, jbyteArray, jboolean*);
+        [Script(IsNative = true)]
+        public delegate byte* GetByteArrayElementsDelegate(JNIEnv env, object value, out bool isCopy);
+
+        public GetByteArrayElementsDelegate GetByteArrayElements;
+        #endregion
+
+        #region    void        (*ReleaseByteArrayElements)(JNIEnv*, jbyteArray, jbyte*, jint);
+        [Script(IsNative = true)]
+        public delegate void ReleaseByteArrayElementsDelegate(JNIEnv env, object value, byte* bytes, int mode = 0); // JNI_ABORT
+
+        public ReleaseByteArrayElementsDelegate ReleaseByteArrayElements;
         #endregion
 
 

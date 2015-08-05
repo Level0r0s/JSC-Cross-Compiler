@@ -7,6 +7,15 @@ using System.IO;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.IO
 {
+    // http://referencesource.microsoft.com/#mscorlib/system/io/binarywriter.cs
+    // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/IO/BinaryWriter.cs
+    // https://github.com/mono/mono/blob/master/mcs/class/corlib/System.IO/BinaryWriter.cs
+    // https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/IO/BinaryWriter.cs
+
+    // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\IO\BinaryWriter.cs
+    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\IO\BinaryWriter.cs
+
+
 	[Script(Implements = typeof(global::System.IO.BinaryWriter))]
 	internal class __BinaryWriter : IDisposable
 	{
