@@ -61,8 +61,9 @@ LOCAL_MODULE    := main
 
 # "X:\opensource\ovr_mobile_sdk_0.6.0\cflags.mk"
 LOCAL_CFLAGS	:= -DANDROID_NDK -DGL_EXT_texture_sRGB_decode -DGL_EXT_sRGB_write_control
-LOCAL_CFLAGS	+= -Werror			# error on warnings
+#LOCAL_CFLAGS	+= -Werror			# error on warnings
 LOCAL_CFLAGS	+= -Wno-error=deprecated-declarations
+LOCAL_CFLAGS	+= -Wno-error=unused-but-set-variable
 LOCAL_CFLAGS	+= -Wno-error=write-strings
 
 LOCAL_CFLAGS	+= -Wall
@@ -72,6 +73,7 @@ LOCAL_CFLAGS	+= -Wno-unused-parameter
 LOCAL_CFLAGS	+= -Wno-missing-field-initializers	# warns on this: SwipeAction	ret = {}
 LOCAL_CFLAGS	+= -Wno-multichar	# used in internal Android headers:  DISPLAY_EVENT_VSYNC = 'vsyn',
 
+LOCAL_CFLAGS			+= -std=c99 
 #LOCAL_CFLAGS			:= -std=c99 -Werror
 # https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150607-1/vrcubeworld
 # "X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldNativeActivity\OVRVrCubeWorldNative\bin\Debug\staging\jni\OVRVrCubeWorldNative.dll.c"

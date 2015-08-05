@@ -12,15 +12,23 @@ using ScriptCoreLib.Android.Manifest;
 using System.Diagnostics;
 using System.Threading;
 using ScriptCoreLib.Extensions;
+using System.Net.Sockets;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.IO;
+using System.Threading.Tasks;
+using ScriptCoreLibJava.BCLImplementation.System.Net.Sockets;
 
 
 namespace OVROculus360Photos.Activities
 {
     static class xMarshal
     {
+        // called by?
+
         [Script(IsPInvoke = true)]
         //private long find(string lib, string fname) { return default(long); }
-        public static string stringFromJNI() { return default(string); }
+        public static string stringFromJNI(object args) { return default(string); }
 
         [Script(IsPInvoke = true)]
         public static long nativeSetAppInterface(
@@ -49,7 +57,9 @@ namespace OVROculus360PhotosHUD.Activities
 
     // https://forums.oculus.com/viewtopic.php?t=21409
     // vr_dual wont run on gearvr for now...
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_dual")]
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "dual")]
+    // for dual we could switch to chrome view activity
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
 
     // vr_only means we wont see our activity ui
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_only")]
@@ -95,7 +105,7 @@ namespace OVROculus360PhotosHUD.Activities
             //}
             //catch
             {
-                x = "xMarshal " + OVROculus360Photos.Activities.xMarshal.stringFromJNI();
+                //x = "xMarshal " + OVROculus360Photos.Activities.xMarshal.stringFromJNI();
             }
             //finally
             {
@@ -106,9 +116,7 @@ namespace OVROculus360PhotosHUD.Activities
 
                 // https://stackoverflow.com/questions/7686482/when-does-applications-oncreate-method-is-called-on-android
                 //Toast.makeText(this, "OVRVrCubeWorldNative " + x + new { api }, Toast.LENGTH_LONG).show();
-                Toast.makeText(this, "OVRVrCubeWorldSurfaceView " + x
-                    //+ " " + api
-                    , Toast.LENGTH_LONG).show();
+
             }
 
             //I/VrApi   (  401):              "Message":      "Thread priority security exception. Make sure the APK is signed."
@@ -157,13 +165,165 @@ namespace OVROculus360PhotosHUD.Activities
     {
         // X:\jsc.svn\examples\javascript\WebGL\WebGLStereoCubeMap\WebGLStereoCubeMap\Application.cs
         // http://paulbourke.net/geometry/transformationprojection/
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150723
 
+
+
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150711
+
+
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" devices
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  netcfg
+
+        // should jsc remember last connected device and reconnect if disconnected?
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.68:5555
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.69:5555
+        // restart android?
+        // restart usb debugging?
+
+
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell dumpsys SurfaceFlinger
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell dumpsys battery
+        // x:\util\android-sdk-windows\platform-tools\adb.exe shell ls /sdcard/oculus/360Photos/
+
+        // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG"
+        // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity"
+        // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity" "AndroidRuntime" "OVR" "VrApi" "Oculus360Photos"
+        // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity" "AndroidRuntime" "Oculus360Photos"
+
+
+        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVROculus360PhotosHUD.Activities
+        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVROculus360PhotosHUD.Activities/OVROculus360PhotosHUD.Activities.ApplicationActivity
+        // Warning: Activity not started, its current task has been brought to the front
+
+
+
+        // x:\util\android-sdk-windows\platform-tools\adb.exe  shell dumpsys meminfo OVRWindWheelActivity.Activities
+
+
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell screenrecord --bit-rate 6000000 "/sdcard/oculus/Movies/My Videos/3D/OVRMyCubeWorldNDK-WASDC-mousewheel.mp4"
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell screenrecord --bit-rate 6000000 "/sdcard/oculus/Movies/My Videos/3D/OVRWindWheelActivity-fakepush.mp4"
+
+        class args
+        {
+            public long filesize;
+            public string filename;
+
+            public float x;
+            public float y;
+            public float z;
+        }
 
         protected override void onCreate(Bundle savedInstanceState)
         {
             Console.WriteLine("enter OVROculus360Photos ApplicationActivity onCreate");
 
             base.onCreate(savedInstanceState);
+
+
+
+
+            Console.WriteLine("about to convince NDK what the first image should be...");
+            // http://www.flightradar24.com/18.39,37.3/2
+
+            // http://paulbourke.net/geometry/transformationprojection/
+
+            // http://krpano.com/download/
+            // http://unrealoldfriends.activeboard.com/t47250341/creating-background-using-spacescape/?page=1
+
+            //Convert CUBE to SPHERE droplet
+
+
+            //kcube2sphere 1.18.4 - 64bit (build 2015-04-23)
+            //loading...
+            //loading azi_l.jpg...
+            //loading azi_f.jpg...
+            //loading azi_r.jpg...
+            //loading azi_b.jpg...
+            //loading azi_u.jpg...
+            //loading azi_d.jpg...
+            //done.
+            //making sphere azi_sphere.tif...
+            //done.
+
+            //Press any key to continue . . .
+
+
+
+
+
+
+
+
+
+
+            //C:\Windows\system32> x:\util\android-sdk-windows\platform-tools\adb.exe push X:\jsc.svn\examples\javascript\synergy\css\CSSAzimuthMapViz\CSSAzimuthMapViz\Textures  /sdcard/oculus/360Photos/
+            //push: X:\jsc.svn\examples\javascript\synergy\css\CSSAzimuthMapViz\CSSAzimuthMapViz\Textures/azi_pz.jpg -> /sdcard/oculus/360Photos/azi_pz.jpg
+            //push: X:\jsc.svn\examples\javascript\synergy\css\CSSAzimuthMapViz\CSSAzimuthMapViz\Textures/azi_py.jpg -> /sdcard/oculus/360Photos/azi_py.jpg
+            //push: X:\jsc.svn\examples\javascript\synergy\css\CSSAzimuthMapViz\CSSAzimuthMapViz\Textures/azi_px.jpg -> /sdcard/oculus/360Photos/azi_px.jpg
+            //push: X:\jsc.svn\examples\javascript\synergy\css\CSSAzimuthMapViz\CSSAzimuthMapViz\Textures/azi_nz.jpg -> /sdcard/oculus/360Photos/azi_nz.jpg
+            //push: X:\jsc.svn\examples\javascript\synergy\css\CSSAzimuthMapViz\CSSAzimuthMapViz\Textures/azi_ny.jpg -> /sdcard/oculus/360Photos/azi_ny.jpg
+            //push: X:\jsc.svn\examples\javascript\synergy\css\CSSAzimuthMapViz\CSSAzimuthMapViz\Textures/azi_nx.jpg -> /sdcard/oculus/360Photos/azi_nx.jpg
+            //6 files pushed. 0 files skipped.
+            //466 KB/s (969865 bytes in 2.030s)
+
+            //C:\Windows\system32> x:\util\android-sdk-windows\platform-tools\adb.exe shell cp /sdcard/oculus/360Photos/humus.thm /sdcard/oculus/360Photos/azi.thm
+
+            Action<string, string> copy =
+                (from, to) =>
+                {
+
+                    try
+                    {
+
+                        // http://gis.stackexchange.com/questions/92907/re-project-raster-image-from-mercator-to-equirectangular
+
+                        // https://en.wikipedia.org/wiki/List_of_map_projections
+                        // Web Mercator
+                        // https://xkcd.com/977/
+                        // mercator?
+                        var value = this.getResources().getAssets().open(from);
+                        var s = new __NetworkStream { InternalInputStream = value };
+
+                        // 1,392,914
+                        //var buffer = new byte[1392914];
+                        var buffer = new byte[4392914];
+
+                        var len = s.Read(buffer, 0, buffer.Length);
+
+
+                        var m = new MemoryStream();
+
+                        m.Write(buffer, 0, len);
+
+                        //s.CopyTo(
+
+                        File.WriteAllBytes(to, m.ToArray());
+
+                    }
+                    catch
+                    {
+                        Console.WriteLine("about to convince NDK what the first image should be... fault");
+
+                    }
+
+                };
+
+            copy("2_no_clouds_4k.jpg", "/sdcard/oculus/360Photos/0.jpg");
+            copy("1.jpg", "/sdcard/oculus/360Photos/1.jpg");
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150724/invaders
+            copy("celestial-joshua-trees-milky-way-in-saline-va.jpg", "/sdcard/oculus/360Photos/2.jpg");
+
+
+
+
+            Console.WriteLine("about to convince NDK what the first image should be... done");
+
 
             var intent = getIntent();
             var commandString = com.oculus.vrappframework.VrActivity.getCommandStringFromIntent(intent);
@@ -179,30 +339,295 @@ namespace OVROculus360PhotosHUD.Activities
                 uriString
             );
 
+            var args = new args
+            {
+
+            };
+
+            var uploadLength = 0L;
+            var uploadPosition = 0L;
 
             var sw = Stopwatch.StartNew();
+
+            #region mDraw
             var mDraw = new DrawOnTop(this)
             {
                 // yes it appears top left.
 
                 //text = "GearVR HUD"
-                text = () => sw.ElapsedMilliseconds + "ms"
+                text = () => sw.ElapsedMilliseconds + "ms "
+                    //+ "\n " + Path.GetFileName(args.filename)
+                    + "\n " + args.filename
+
+                    + "\n " + new
+                    {
+                        upload = (int)(100 * (uploadPosition + 1) / (args.filesize + 1)) + "%",
+                        uploadPosition,
+                        args.filesize,
+
+                        // can we capture pointer?
+
+                        args.x,
+                        args.y,
+                        args.z,
+
+                        //uploadLength
+                    }.ToString().Replace(",", ",\n")
+
+                // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularPanorama\ChromeEquirectangularPanorama\Application.cs
             };
+            #endregion
+
 
             //Task.Run(
+
+            #region sendTracking
+            Action<IPAddress> sendTracking = nic =>
+            {
+                var port = new Random().Next(16000, 40000);
+
+                //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
+
+                // where is bind async?
+                var socket = new UdpClient(
+                     new IPEndPoint(nic, port)
+                    );
+
+
+                // who is on the other end?
+                var nmessage = args.x + ":" + args.y + ":" + args.z + ":0:" + args.filename;
+
+                var data = Encoding.UTF8.GetBytes(nmessage);      //creates a variable b of type byte
+
+
+                //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
+
+                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                //Console.WriteLine("about to Send");
+                // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularPanorama\ChromeEquirectangularPanorama\Application.cs
+                socket.Send(
+                     data,
+                     data.Length,
+                     hostname: "239.1.2.3",
+                     port: 49834
+                 );
+
+
+
+                socket.Close();
+
+            };
+            #endregion
+
+
+
+
+            //I/System.Console( 9109): 2395:1fb3 enter __UdpClient ctor
+            //I/System.Console( 9109): 2395:1fb3 enter __UdpClient before this.Client
+            //I/System.Console( 9109): 2395:1fb3 enter __UdpClient after this.Client { Client = ScriptCoreLibJava.BCLImplementation.System.Net.Sockets.__Socket@4f1c02b }
+            //I/System.Console( 9109): 2395:1fb3 enter GetAllNetworkInterfaces
+            //I/System.Console( 9109): 2395:1fb3 enter __UdpClient ctor
+
+            string current = null;
+            byte[] bytes = null;
 
             new Thread(
                 delegate()
                 {
                     // bg thread
 
+
+                    // bug out 1sec.
+                    Thread.Sleep(1000);
+                    // await gear on
+
                     while (true)
                     {
-                        //Thread.Sleep(1000 / 15);
-                        Thread.Sleep(1000 / 30);
+                        // collect tracking from ndk
+                        // broadcast to udp
 
+
+                        //Thread.Sleep(1000 / 15);
+
+                        //var a = new
+                        //{
+                        //    // for java do we also do the fields?
+                        //    x = 0
+                        //};
+
+                        args.filename = OVROculus360Photos.Activities.xMarshal.stringFromJNI(args);
+
+                        //E/AndroidRuntime( 7601): Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'char[] java.lang.String.toCharArray()' on a null object reference
+                        //E/AndroidRuntime( 7601):        at java.io.File.fixSlashes(File.java:185)
+                        //E/AndroidRuntime( 7601):        at java.io.File.<init>(File.java:134)
+                        //E/AndroidRuntime( 7601):        at ScriptCoreLibJava.BCLImplementation.System.IO.__File.Exists(__File.java:57)
+                        //E/AndroidRuntime( 7601):        at OVROculus360PhotosHUD.Activities.ApplicationActivity___c__DisplayClass1d._onCreate_b__1b(ApplicationActivity___c__DisplayClass1d.java:95)
+
+
+
+                        // uplink 144Mbps
+                        // 18 MBps
+                        #region udp broadcast
+                        // overkill at 60hz
+                        NetworkInterface.GetAllNetworkInterfaces().WithEach(
+                             n =>
+                             {
+                                 // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                                 // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
+
+                                 var IPProperties = n.GetIPProperties();
+                                 var PhysicalAddress = n.GetPhysicalAddress();
+
+
+
+                                 foreach (var ip in IPProperties.UnicastAddresses)
+                                 {
+                                     // ipv4
+                                     if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                                     {
+                                         if (!IPAddress.IsLoopback(ip.Address))
+                                             if (n.SupportsMulticast)
+                                             {
+                                                 //fWASDC(ip.Address);
+                                                 //fParallax(ip.Address);
+                                                 //fvertexTransform(ip.Address);
+                                                 sendTracking(ip.Address);
+                                             }
+                                     }
+                                 }
+
+
+
+
+                             }
+                         );
+
+
+
+                        #endregion
+
+                        if (args.filename != null)
+                            if (File.Exists(args.filename))
+                            {
+                                if (current != args.filename)
+                                {
+                                    current = args.filename;
+
+                                    var ff = new FileInfo(args.filename);
+
+                                    args.filesize = ff.Length;
+
+                                    // we are not on ui thread.
+                                    // HUD thread can freeze...
+                                    // mmap?
+                                    bytes = File.ReadAllBytes(args.filename);
+
+                                    // now broadcast. at 500KBps in segments.
+                                    // 8MB is 16 segments then.
+
+
+                                    NetworkInterface.GetAllNetworkInterfaces().WithEach(
+                                          n =>
+                                          {
+                                              // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                                              // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
+
+                                              var IPProperties = n.GetIPProperties();
+                                              var PhysicalAddress = n.GetPhysicalAddress();
+
+
+
+                                              foreach (var ip in IPProperties.UnicastAddresses)
+                                              {
+                                                  // ipv4
+                                                  if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                                                  {
+                                                      if (!IPAddress.IsLoopback(ip.Address))
+                                                          if (n.SupportsMulticast)
+                                                          {
+                                                              //fWASDC(ip.Address);
+                                                              //fParallax(ip.Address);
+                                                              //fvertexTransform(ip.Address);
+                                                              //sendTracking(ip.Address);
+
+                                                              var port = new Random().Next(16000, 40000);
+
+                                                              //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
+
+                                                              // where is bind async?
+                                                              var socket = new UdpClient(
+                                                                   new IPEndPoint(ip.Address, port)
+                                                                  );
+
+
+                                                              //// who is on the other end?
+                                                              //var nmessage = args.x + ":" + args.y + ":" + args.z + ":0:" + args.filename;
+
+                                                              //var data = Encoding.UTF8.GetBytes(nmessage);      //creates a variable b of type byte
+
+                                                              // http://stackoverflow.com/questions/25841/maximum-buffer-length-for-sendto
+
+                                                              new { }.With(
+                                                                  async delegate
+                                                                  {
+                                                                      var r = new MemoryStream(bytes);
+                                                                      uploadLength = r.Length;
+
+                                                                      var data = new byte[65507];
+
+                                                                  next:
+                                                                      var cc = r.Read(data, 0, 65507);
+
+                                                                      uploadPosition = r.Position;
+
+                                                                      if (cc <= 0)
+                                                                          return;
+
+                                                                      //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
+
+                                                                      // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                                                                      //Console.WriteLine("about to Send");
+                                                                      // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularPanorama\ChromeEquirectangularPanorama\Application.cs
+                                                                      await socket.SendAsync(
+                                                                           data,
+                                                                           cc,
+                                                                           hostname: "239.1.2.3",
+                                                                           port: 49000
+                                                                       );
+
+                                                                      //await Task.Delay(1000 / 15);
+                                                                      //await Task.Delay(1000 / 30);
+
+                                                                      // no corruption
+                                                                      await Task.Delay(1000 / 20);
+
+                                                                      goto next;
+
+                                                                  }
+                                                              );
+
+                                                              //socket.Close();
+                                                          }
+                                                  }
+                                              }
+
+
+
+
+                                          }
+                                      );
+                                }
+                            }
+
+                        if (uploadPosition < args.filesize)
+                            mDraw.color = android.graphics.Color.YELLOW;
+                        else
+                            mDraw.color = android.graphics.Color.GREEN;
 
                         mDraw.postInvalidate();
+                        Thread.Sleep(1000 / 30);
+                        //Thread.Sleep(1000 / 2);
+                        //Thread.Sleep(1000 / 15);
                     }
                 }
             ).Start();
@@ -275,7 +700,7 @@ namespace OVROculus360PhotosHUD.Activities
             }
 
             // udp mouse ?
-            public int x = 500; // animate it?
+            public int x = 300; // animate it?
             public int y = 800;
 
             public Func<string> text = () => "hello!";
@@ -283,7 +708,7 @@ namespace OVROculus360PhotosHUD.Activities
             public int textSize = 25;
 
             public int color = android.graphics.Color.GREEN;
-            public int alpha = 80;
+            public int alpha = 255;
 
             protected override void onDraw(android.graphics.Canvas canvas)
             {

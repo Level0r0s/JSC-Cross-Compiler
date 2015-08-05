@@ -41,21 +41,48 @@ namespace TestStackFloatArray
 
         }
 
-        public static void CreateRotation(float radiansX, float radiansY, float radiansZ)
+
+        float[] stack_rotationX;
+
+        public void CreateRotation(float radiansX, float radiansY, float radiansZ)
         {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150715/localoc
             // in C++ it is executed on the same thread as soon as the object is deleted or popped off the stack,
 
             float sinX = 1.2f;
             float cosX = 1.1f;
 
-            float[] stack_rotationX =
+            var stack_rotationX_locallocp = stackalloc float[16];
+            //var stack_rotationX_localloc = stack_rotationX_locallocp as float[];
+
+
+            //Error	1	A stackalloc expression requires [] after type	X:\jsc.svn\examples\c\Test\TestStackFloatArray\TestStackFloatArray\Class1.cs	52	60	TestStackFloatArray
+
+            // readonly memory?
+            float[] stack_rotationXinline = { 1.1f, 2.2f, 3.3f };
+
+
+            float[] stack_rotationX_alloca =
             {
                 1,    0,     0, 0 ,
                 0, cosX, -sinX, 0 ,
                 0, sinX,  cosX, 0 ,
                 0,    0,     0, 1
             };
-            Invoke(stack_rotationX);
+            // should we scan level1 methods to see what they do with our memory?
+            Invoke(stack_rotationX_alloca);
+
+
+            float[] stack_rotationX_malloc =
+            {
+                1,    0,     0, 0 ,
+                0, cosX, -sinX, 0 ,
+                0, sinX,  cosX, 0 ,
+                0,    0,     0, 1
+            };
+            // should we scan level1 methods to see what they do with our memory?
+            Invoke(stack_rotationX_malloc);
+            this.stack_rotationX = stack_rotationX_malloc;
 
 
             //var localloc_rotationX = stackalloc float[16]

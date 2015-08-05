@@ -115,6 +115,8 @@ namespace FormsUDPJoinGroup
 
                     // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
                     // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
+                    // X:\jsc.svn\examples\java\android\Test\TestUDPSend\TestUDPSend\ApplicationActivity.cs
+
                     var uu = new UdpClient(41814);
                     uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
                     while (true)

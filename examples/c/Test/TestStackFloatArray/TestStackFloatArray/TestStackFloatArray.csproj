@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F2CE8DA0-641F-475F-90F6-36F9451DD5CF}</ProjectGuid>
+    <ProjectGuid>{D61592AC-7194-481C-A815-A0C3F07284D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestStackFloatArray</RootNamespace>
@@ -46,7 +46,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>c:/util/jsc/bin/jsc.exe $(TargetPath) -c</PostBuildEvent>
+    <PostBuildEvent>rem c:/util/jsc/bin/jsc.exe $(TargetPath) -c</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -18,6 +18,7 @@ of patent rights can be found in the PATENTS file in the same directory.
 
 #include "jni.h"
 #ifndef __cplusplus
+// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/ovroculus360photoshud
 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150611/ovroculus360photos
 // jsc is not generating c++ but is generating c and java
@@ -29,7 +30,7 @@ of patent rights can be found in the PATENTS file in the same directory.
 //collect2.exe: error: ld returned 1 exit status
 
  long Java_com_oculus_oculus360photossdk_MainActivity_nativeSetAppInterface(JNIEnv *jni, jclass clazz, jobject activity,
-						 jstring fromPackageName, jstring commandString, jstring uriString);
+						 jstring fromPackageName, jstring commandString, jstring uriString, void* arg_AtStartBackgroundPanoLoad);
 
  //#error we just defined it?
 
@@ -37,7 +38,7 @@ of patent rights can be found in the PATENTS file in the same directory.
 
 extern "C" {
 long Java_com_oculus_oculus360photossdk_MainActivity_nativeSetAppInterface(JNIEnv *jni, jclass clazz, jobject activity,
-						 jstring fromPackageName, jstring commandString, jstring uriString);
+						 jstring fromPackageName, jstring commandString, jstring uriString, void* arg_AtStartBackgroundPanoLoad);
 }
 
 
