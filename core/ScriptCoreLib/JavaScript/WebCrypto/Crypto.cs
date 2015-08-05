@@ -13,6 +13,12 @@ namespace ScriptCoreLib.JavaScript.DOM
     [Script(HasNoPrototype = true)]
     public class Crypto
     {
+        // http://keithwiley.com/mindRamblings/unbreakableEncryption.shtml
+
+        // http://securitydriven.net/inferno/
+        // can we do RSA on non https links?
+        // could we do it in shaders?
+
 		// RSA-OAEP
 
 		// https://github.com/fantapsody/webgl-aes

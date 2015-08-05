@@ -35,10 +35,15 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
 
         public static double Floor(double d) { return m.floor(d); }
         public static double Ceiling(double d) { return m.ceil(d); }
+
         public static double Atan(double d) { return m.atan(d); }
+        public static double Atan2(double d, double y) { return m.atan2(d, y); }
+
         public static double Tan(double d) { return m.tan(d); }
         public static double Cos(double d) { return m.cos(d); }
         public static double Sin(double d) { return m.sin(d); }
+
+        public static double Acos(double d) { return m.acos(d); }
 
         // X:\jsc.svn\examples\javascript\WebGL\WebGLWindWheel\WebGLWindWheel\Application.cs
         public static float Abs(float e) { return (float)m.abs(e); }

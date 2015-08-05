@@ -82,13 +82,8 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.IO
 
         public static string GetDirectoryName(string path)
         {
-            var z = path.LastIndexOf(@"\");
-            var y = path.LastIndexOf("/");
-
-            var i = z;
-
-            if (y > z)
-                i = z;
+            var p = path.Replace("/", "\\");
+            var i = p.LastIndexOf(@"\");
 
             if (i == -1)
                 return path;
@@ -97,22 +92,22 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.IO
         }
 
 
+
+        // called by
+        // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\IO\FileInfo.cs
         public static string GetFileName(string path)
         {
+            // X:\jsc.svn\examples\javascript\android\EXIFThumbnail\EXIFThumbnail\ApplicationWebService.cs
+
             // http://www.devx.com/tips/Tip/13804
 
-            var z = path.LastIndexOf(@"\");
-            var y = path.LastIndexOf("/");
+            var p = path.Replace("/", "\\");
+            var z = p.LastIndexOf(@"\");
 
-            var i = z;
-
-            if (y > z)
-                i = z;
-
-            if (i == -1)
+            if (z == -1)
                 return path;
 
-            return path.Substring(i + 1);
+            return path.Substring(z + 1);
         }
     }
 }
