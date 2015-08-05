@@ -19,9 +19,10 @@ namespace SpaceInvadersTemplate
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150724
         // port from: Z:\jsc.svn\javascript\Games\SpaceInvaders\source\js\Controls\SpaceInvaders.cs
 
-        public readonly DefaultStyle style = new DefaultStyle();
+        //public readonly DefaultStyle style = new DefaultStyle();
 
         /// <summary>
         /// This is a javascript application.

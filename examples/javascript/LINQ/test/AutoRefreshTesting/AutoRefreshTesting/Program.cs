@@ -22,6 +22,7 @@ namespace AutoRefreshTesting
 
 
 
+
             Console.WriteLine("look we can change color. ctrl s.");
             // xx
         }

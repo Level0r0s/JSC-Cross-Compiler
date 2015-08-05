@@ -98,6 +98,8 @@ namespace AutoRefreshTestingHost
         // called by post build event
         static void InternalMain(string[] args)
         {
+            Console.WriteLine("enter InternalMain");
+
             // X:\jsc.svn\examples\actionscript\Test\TestFlashBC\TestFlashBC\ApplicationSprite.cs
             // what about watching for nuget updates?
 
@@ -119,8 +121,8 @@ namespace AutoRefreshTestingHost
             Console.Title = Environment.CurrentDirectory;
 
             Console.WriteLine("terminate old process?");
-
             wDispose();
+
             //Console.WriteLine("enter InternalMain wDispose.");
 
             // are we already watching the filesystem?
@@ -213,23 +215,27 @@ namespace AutoRefreshTestingHost
                 #region run
                 if (run)
                 {
+                    // X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\UDPWindWheel\Program.cs
+
                     var old = new { Console.ForegroundColor, Console.BackgroundColor };
 
                     if (clear)
+                    {
                         Console.Clear();
-
+                    }
 
                     {
                         //Console.Title += " (running. ";
                         // run the new version
 
                         new Thread(
-                            delegate()
+                            delegate ()
                             {
                                 //Thread.Sleep(1000);
 
+                                //Console.WriteLine("Process.Start");
                                 var p = Process.Start(
-                                    //new ProcessStartInfo(Output)
+                                     //new ProcessStartInfo(Output)
                                      new ProcessStartInfo(exe)
                                      {
                                          WorkingDirectory = Path.GetDirectoryName(exe),
@@ -368,7 +374,7 @@ namespace AutoRefreshTestingHost
 
                             //if (!w.EnableRaisingEvents)
                             //    return;
-        
+
                             rebuilding = true;
                             Console.Title += " rebuilding...";
                             //w.EnableRaisingEvents = false;
@@ -393,12 +399,16 @@ namespace AutoRefreshTestingHost
                             //  { msbuild = C:\Windows\system32\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe }
 
                             var ww = Stopwatch.StartNew();
-                            //Console.WriteLine("lets rebuild! " + new { msbuild });
+
+                            wDispose();
+
+                            Console.WriteLine("lets rebuild! " + new { msbuild });
 
 
                             //Thread.Sleep(1000);
 
                             // %SystemRoot%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe
+
 
                             var p = Process.Start(
                                 new ProcessStartInfo(msbuild)
@@ -505,6 +515,7 @@ namespace AutoRefreshTestingHost
         // called by post build event
         static void Main(string[] args)
         {
+            Console.WriteLine("enter Main");
 
             //1>  Unhandled Exception: System.IO.DirectoryNotFoundException: Could not find a part of the path 'X:\jsc.svn\examples\javascript\LINQ\test\auto\TestSelect\TestSelect\bin\DebugAsServerSignal'.
             //1>     at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
@@ -538,7 +549,7 @@ namespace AutoRefreshTestingHost
 
                 #region WindowPos.xml
                 new Thread(
-                    delegate()
+                    delegate ()
                     {
                         Thread.Yield();
 
@@ -596,7 +607,8 @@ namespace AutoRefreshTestingHost
 
 
                     }
-                ) { IsBackground = true }.Start();
+                )
+                { IsBackground = true }.Start();
                 #endregion
 
 
@@ -651,7 +663,7 @@ namespace AutoRefreshTestingHost
             var wConnected = false;
 
             new Thread(
-                delegate()
+                delegate ()
                 {
                     // allow 100 until we need to take action
                     Thread.Sleep(100);
@@ -666,6 +678,8 @@ namespace AutoRefreshTestingHost
 
                     // make us a new server
                     // cmd.exe allows us to survive a process crash.
+
+                    Console.WriteLine("Process.Start cmd");
                     Process.Start("cmd.exe", "/K " + typeof(Program).Assembly.Location);
 
 

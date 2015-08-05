@@ -25,6 +25,8 @@ namespace SVGAnonymous
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150727
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>
