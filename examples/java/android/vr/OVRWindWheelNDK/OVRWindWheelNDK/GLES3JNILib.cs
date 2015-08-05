@@ -11,6 +11,7 @@ using OVRWindWheelNDK;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
 using ScriptCoreLibAndroidNDK.Library;
+using ScriptCoreLibAndroidNDK.Library.Reflection;
 
 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150619/ovrvrcubeworldsurfaceviewx
 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150613/xndk
@@ -58,8 +59,22 @@ namespace com.oculus.gles3jni
 
     unsafe static class GLES3JNILib
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150716/ovrwindwheelactivity
+
+        //public const int safemodeMemoryLimitMB = 200;
+        //public const int safemodeMemoryLimitMB = 16;
+        //public const int safemodeMemoryLimitMB = 24;
+        public const int safemodeMemoryLimitMB = 48;
+
         // ifelse does not look that good. lets keep two sets of signatures..
 #if JNIEnv
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150712-1
+        public static float fields_px;
+        public static float fields_py;
+        public static float fields_pz;
+
+        public static ByteArrayWithLength fields_vertexTransform;
 
         // we could use it as offset from touch screen!
         public static int fields_xvalue;
@@ -78,73 +93,19 @@ namespace com.oculus.gles3jni
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150619/ovrvrcubeworldsurfaceviewx
 
-        class args<T>
-        {
-        }
+  
 
-        class argsF
-        {
-            public JNIEnv env;
-            public jobject fields;
-
-            // 
-            public float this[string fname]
-            {
-
-                set
-                {
-                    var fields_GetType = env.GetObjectClass(env, fields);
-                    var fref = env.GetFieldID(env, fields_GetType, fname, "F");
-
-                    env.SetFloatField(env, fields, fref, value);
-                }
-            }
-        }
-
-        class argsI
-        {
-            public JNIEnv env;
-            public jobject fields;
-
-            // 
-            public int this[string fname]
-            {
-
-                get
-                {
-                    var fields_GetType = env.GetObjectClass(env, fields);
-                    var fref = env.GetFieldID(env, fields_GetType, fname, "I");
-
-                    var value = env.GetIntField(env, fields, fref);
-
-                    return value;
-                }
-            }
-        }
-
-        class argsI64
-        {
-            public JNIEnv env;
-            public jobject fields;
-
-            // 
-            public long this[string fname]
-            {
-
-                set
-                {
-                    var fields_GetType = env.GetObjectClass(env, fields);
-                    var fref = env.GetFieldID(env, fields_GetType, fname, "J");
-
-                    env.SetLongField(env, fields, fref, value);
-                }
-            }
-        }
+        static argsByteArray aByteArray;
+        static argsI64 aI64;
+        static argsI aI;
+        static argsF aF;
 
 
         // JVM load the .so and calls this native function
         public static jstring stringFromJNI(JNIEnv env, jobject thiz, jobject fields)
         {
+            //ConsoleExtensions.trace("enter stringFromJNI");
+
             // what about jobject dynamic?
 
             //dynamic locfields = fields;
@@ -163,7 +124,14 @@ namespace com.oculus.gles3jni
             // generic / per field variables?
 
             // do we need our own GC?
-            var aI64 = new argsI64 { env = env, fields = fields };
+
+            if (aI64 == null)
+            {
+                aByteArray = new argsByteArray { env = env, fields = fields };
+                aI64 = new argsI64 { env = env, fields = fields };
+                aI = new argsI { env = env, fields = fields };
+                aF = new argsF { env = env, fields = fields };
+            }
 
 
             var m = malloc_h.mallinfo();
@@ -171,7 +139,7 @@ namespace com.oculus.gles3jni
 
             aI64["total_allocated_space"] = total;
 
-            if (total > 20 * 1024 * 1024)
+            if (total > GLES3JNILib.safemodeMemoryLimitMB * 1024 * 1024)
             {
                 //ConsoleExtensions.trace("HUD safe mode...");
 
@@ -180,14 +148,13 @@ namespace com.oculus.gles3jni
                 //GC.Collect(
 
                 // should jsc call the finalizer too?
-                stdlib_h.free(aI64);
-                aI64 = null;
+                //stdlib_h.free(aI64);
+                //aI64 = null;
 
                 return null;
             }
 
 
-            var aI = new argsI { env = env, fields = fields };
 
             GLES3JNILib.fields_xvalue = aI["x"];
             GLES3JNILib.fields_yvalue = aI["y"];
@@ -207,10 +174,17 @@ namespace com.oculus.gles3jni
             if (appThread.appState == null)
                 return null;
 
+            GLES3JNILib.fields_px = aF["px"];
+            GLES3JNILib.fields_py = aF["py"];
+            GLES3JNILib.fields_pz = aF["pz"];
+
+
+            //ConsoleExtensions.trace("get fields_vertexTransform");
+
+            GLES3JNILib.fields_vertexTransform = aByteArray["vertexTransform"];
 
             appThread.appState.Scene.Update();
 
-            var aF = new argsF { env = env, fields = fields };
 
             aF["tracking_HeadPose_Pose_Orientation_x"] = appThread.tracking.HeadPose.Pose.Orientation.x;
             aF["tracking_HeadPose_Pose_Orientation_y"] = appThread.tracking.HeadPose.Pose.Orientation.y;
@@ -260,23 +234,24 @@ namespace com.oculus.gles3jni
 
             // OVR_VRAPI_EXPORT const char * vrapi_GetVersionString();
 
-            if (fields == null)
-            {
-                return env.NewStringUTF(env, "dynamic fields null?");
+            //if (fields == null)
+            //{
+            //    return env.NewStringUTF(env, "dynamic fields null?");
 
-            }
+            //}
 
-            // if we change our NDK code, will nuget packaing work on the background, and also upgrade running apps?
-            var v = env.NewStringUTF(env,
-                //"hey! XNDK!"
+            //// if we change our NDK code, will nuget packaing work on the background, and also upgrade running apps?
+            //var v = env.NewStringUTF(env,
+            //    //"hey! XNDK!"
 
-                VrApi.vrapi_GetVersionString()
-            );
+            //    VrApi.vrapi_GetVersionString()
+            //);
 
             //v = env.JNIEnv_NewStringUTF(VrApi.vrapi_GetVersionString());
             // the other option is to have a debugger send the updated MSIL via edit and continue, and we would have to patch the function on the fly.
 
-            return v;
+            //ConsoleExtensions.trace("exit stringFromJNI");
+            return null;
         }
 
 
@@ -292,6 +267,36 @@ namespace com.oculus.gles3jni
         {
             // 1937
             ConsoleExtensions.trace("enter onCreate");
+
+
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# 0.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# -4482497940269729854931310573780992.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# -112522782313195449178724042276864.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# -112561990195377190832118112976896.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# 0.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# -112309334370484290251637919842304.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# -112521273573772570121514008969216.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# -112522782313195449178724042276864.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# 0.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# -112561990195377190832118112976896.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# 0.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# -4419917904888785132619678770790400.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# 0.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# -4442953183654797667429932949569536.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# -112522134328956135737486399766528.000000
+            //I/xNativeActivity(24015): \GLES3JNILib.cs:322 alloca# nan
+
+            //var alloca = stackalloc float[16];
+
+            //for (int i = 0; i < 16; i++)
+            //{
+            //    ConsoleExtensions.tracef("alloca#", alloca[i]);
+
+            //    alloca[i] = i;
+
+            //    ConsoleExtensions.tracef("alloca0", alloca[i]);
+            //}
+
 
             appThread = new VrCubeWorld.ovrAppThread(env, activity);
 

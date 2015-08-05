@@ -59,6 +59,8 @@ namespace OVRWindWheelNDK
         // ref used by ovrRenderer_RenderFrame
         public class ovrApp
         {
+            public ovrAppThread AppThread;
+
             // defined at vrapi.h?
 
             // cant make it readonly
@@ -74,7 +76,6 @@ namespace OVRWindWheelNDK
             // set by?
             public ovrMobile Ovr = default(ovrMobile);
 
-            public ovrScene Scene = new ovrScene();
             public ovrSimulation Simulation;
 
             public long FrameIndex = 1;
@@ -90,9 +91,14 @@ namespace OVRWindWheelNDK
             public ovrRenderer Renderer = new ovrRenderer();
 #endif
 
+
+            public ovrScene Scene;
+
             // called by AppThreadFunction
             public ovrApp(ref ovrJava java)
             {
+                this.Scene = new ovrScene { App = this };
+
                 ConsoleExtensions.trace("enter ovrApp, set ovrJava, call ovrSimulation_Clear");
                 this.Java = java;
 
@@ -244,16 +250,21 @@ namespace OVRWindWheelNDK
 
             }
 
+
+
+            const int MAX_EVENT_SIZE = 4096;
+            readonly byte[] ovrApp_HandleSystemEvents_eventBuffer = new byte[MAX_EVENT_SIZE];
+
             // sent by?
             // called by AppThreadFunction
             public void ovrApp_HandleSystemEvents()
             {
                 // 1568
-                var MAX_EVENT_SIZE = 4096u;
 
-                var eventBuffer = new byte[MAX_EVENT_SIZE];
+                //var eventBuffer = new byte[MAX_EVENT_SIZE];
+                //var eventBuffer = stackalloc byte[MAX_EVENT_SIZE];
 
-                for (var status = VrApi_Android.ovr_GetNextPendingEvent(eventBuffer, MAX_EVENT_SIZE); status >= eVrApiEventStatus.VRAPI_EVENT_PENDING; status = VrApi_Android.ovr_GetNextPendingEvent(eventBuffer, MAX_EVENT_SIZE))
+                for (var status = VrApi_Android.ovr_GetNextPendingEvent(ovrApp_HandleSystemEvents_eventBuffer, MAX_EVENT_SIZE); status >= eVrApiEventStatus.VRAPI_EVENT_PENDING; status = VrApi_Android.ovr_GetNextPendingEvent(ovrApp_HandleSystemEvents_eventBuffer, MAX_EVENT_SIZE))
                 {
                     if (status != eVrApiEventStatus.VRAPI_EVENT_PENDING)
                     {
@@ -267,6 +278,30 @@ namespace OVRWindWheelNDK
 
             }
 
+
+
+
+            public unsafe void trace60(
+           string message = "",
+           [CallerFilePath] string sourceFilePath = "",
+           [CallerLineNumber] int sourceLineNumber = 0
+           )
+            {
+                //if (this.FrameIndex > 300)
+                //    return;
+
+                if (this.FrameIndex % 60 == 1)
+                {
+                    ConsoleExtensions.trace(
+                        message,
+                        //value,
+                        sourceFilePath,
+                        sourceLineNumber
+
+                    );
+                }
+            }
+
             public unsafe void tracei60(
             string message = "",
             int value = 0,
@@ -274,12 +309,35 @@ namespace OVRWindWheelNDK
             [CallerLineNumber] int sourceLineNumber = 0
             )
             {
-                if (this.FrameIndex > 300)
-                    return;
+                //if (this.FrameIndex > 300)
+                //    return;
 
                 if (this.FrameIndex % 60 == 1)
                 {
                     ConsoleExtensions.tracei(
+                        message,
+                        value,
+                        sourceFilePath,
+                        sourceLineNumber
+
+                    );
+                }
+            }
+
+
+            public unsafe void tracef60(
+            string message = "",
+            float value = 0,
+            [CallerFilePath] string sourceFilePath = "",
+            [CallerLineNumber] int sourceLineNumber = 0
+            )
+            {
+                //if (this.FrameIndex > 300)
+                //    return;
+
+                if (this.FrameIndex % 60 == 1)
+                {
+                    ConsoleExtensions.tracef(
                         message,
                         value,
                         sourceFilePath,

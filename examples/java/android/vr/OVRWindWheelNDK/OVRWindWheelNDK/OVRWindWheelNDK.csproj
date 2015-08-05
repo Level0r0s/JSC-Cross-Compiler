@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Library\Matrix4x4Stack.cs" />
     <Compile Include="References\VrApi.ovrMatrix4f.cs" />
     <Compile Include="VrCubeWorld.RenderTexture.cs" />
     <Compile Include="VrCubeWorld.AppThread.cs" />

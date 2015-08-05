@@ -98,20 +98,17 @@ namespace JVMCLRUDPReceiveAsync
             new { }.With(
                 async delegate
                 {
-                    //var port = 8080;
-                    //Console.WriteLine(":95");
+                    var port = 8080;
+                    Console.WriteLine(":95");
 
                     //var cc = data.First(x => x.IsCandidate);
                     //Console.WriteLine(":98");
 
                     //var u = new UdpClient("127.0.0.1", port);
-                    var uu = new UdpClient(49834);
-                    //    new IPEndPoint(cc.u.Address, port)
-                    //);
+                    var uu = new UdpClient(
 
-                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/udp
-                    uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), cc.u.Address);
-
+                        new IPEndPoint(cc.u.Address, port)
+                    );
 
                     Console.WriteLine(":106 ReceiveAsync...");
 
@@ -120,8 +117,7 @@ namespace JVMCLRUDPReceiveAsync
                         // UdpReceiveResult
                         var x = await uu.ReceiveAsync();
 
-                        Console.WriteLine(new { x.Buffer.Length } + Encoding.UTF8.GetString(x.Buffer));
-
+                        Console.WriteLine(new { x.Buffer.Length });
                     }
                 }
             );

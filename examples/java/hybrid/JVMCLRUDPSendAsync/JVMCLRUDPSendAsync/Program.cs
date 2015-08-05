@@ -39,6 +39,8 @@ namespace JVMCLRUDPSendAsync
         [STAThread]
         public static void Main(string[] args)
         {
+            // X:\jsc.svn\examples\java\android\Test\TestUDPSend\TestUDPSend\ApplicationActivity.cs
+
             // 2012desktop?
 
             System.Console.WriteLine(

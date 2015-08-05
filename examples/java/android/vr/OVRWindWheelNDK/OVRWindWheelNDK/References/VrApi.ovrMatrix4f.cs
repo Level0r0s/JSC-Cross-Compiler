@@ -83,8 +83,12 @@ namespace OVRWindWheelNDK
 
     // enables M[,]
     //public unsafe class __ovrMatrix4<float>
-    public unsafe class __ovrMatrix4f
+    //public unsafe class __ovrMatrix4f
+    public unsafe class __Matrix4x4
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150717/matrix4x4
+        // X:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\System\Numerics\Matrix4x4.cs
+
         public readonly float[,] M = new float[4, 4];
 
         //public ovrMatrix4f __value;
@@ -107,13 +111,13 @@ namespace OVRWindWheelNDK
             fixed (ovrMatrix4f* pb = &ref_b)
             {
                 object so = (size_t)(void*)&_o;
-                var o = (__ovrMatrix4f)so;
+                var o = (__Matrix4x4)so;
 
                 object sa = (size_t)pa;
-                var a = (__ovrMatrix4f)sa;
+                var a = (__Matrix4x4)sa;
 
                 object sb = (size_t)pb;
-                var b = (__ovrMatrix4f)sb;
+                var b = (__Matrix4x4)sb;
 
                 o.M[0, 0] = a.M[0, 0] * b.M[0, 0] + a.M[0, 1] * b.M[1, 0] + a.M[0, 2] * b.M[2, 0] + a.M[0, 3] * b.M[3, 0];
                 o.M[1, 0] = a.M[1, 0] * b.M[0, 0] + a.M[1, 1] * b.M[1, 0] + a.M[1, 2] * b.M[2, 0] + a.M[1, 3] * b.M[3, 0];
@@ -141,7 +145,7 @@ namespace OVRWindWheelNDK
 
 
 
-        public static implicit operator __ovrMatrix4f(float[] ptr_float16)
+        public static implicit operator __Matrix4x4(float[] ptr_float16)
         {
             // Error	3	Cannot take the address of, get the size of, or declare a pointer to a managed type ('float[*,*]')	X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\References\VrApi.ovrMatrix4f.cs	142	40	OVRWindWheelNDK
 
@@ -149,7 +153,7 @@ namespace OVRWindWheelNDK
 
             //var ff = &float16;
             object so = (size_t)(object)ptr_float16;
-            var x = (__ovrMatrix4f)so;
+            var x = (__Matrix4x4)so;
             //System.Runtime.InteropServices.Marshal.pi
             // no memory relocation in our heap. thanks.
             return x;
@@ -157,14 +161,58 @@ namespace OVRWindWheelNDK
 
 
 
-        public static implicit operator __ovrMatrix4f(ovrMatrix4f* o)
+        public static implicit operator __Matrix4x4(ovrMatrix4f* o)
         {
             object so = (size_t)(void*)o;
-            var x = (__ovrMatrix4f)so;
+            var x = (__Matrix4x4)so;
             //System.Runtime.InteropServices.Marshal.pi
             // no memory relocation in our heap. thanks.
             return x;
         }
+
+
+
+
+
+        // https://github.com/dotnet/corefx/blob/master/src/System.Numerics.Vectors/src/System/Numerics/Matrix4x4.cs
+        //  public static Matrix4x4 Add(Matrix4x4 value1, Matrix4x4 value2)
+        public static ovrMatrix4f Add(ovrMatrix4f _a, ovrMatrix4f _b)
+        {
+            // when is this of any use?
+
+            ovrMatrix4f _o;
+            __Matrix4x4 o = &_o;
+            __Matrix4x4 a = &_a;
+            __Matrix4x4 b = &_b;
+
+            {
+                o.M[0, 0] = a.M[0, 0] + b.M[0, 0];
+                o.M[1, 0] = a.M[1, 0] + b.M[1, 0];
+                o.M[2, 0] = a.M[2, 0] + b.M[2, 0];
+                o.M[3, 0] = a.M[3, 0] + b.M[3, 0];
+
+                o.M[0, 1] = a.M[0, 1] + b.M[0, 1];
+                o.M[1, 1] = a.M[1, 1] + b.M[1, 1];
+                o.M[2, 1] = a.M[2, 1] + b.M[2, 1];
+                o.M[3, 1] = a.M[3, 1] + b.M[3, 1];
+
+                o.M[0, 2] = a.M[0, 2] + b.M[0, 2];
+                o.M[1, 2] = a.M[1, 2] + b.M[1, 2];
+                o.M[2, 2] = a.M[2, 2] + b.M[2, 2];
+                o.M[3, 2] = a.M[3, 2] + b.M[3, 2];
+
+                o.M[0, 3] = a.M[0, 3] + b.M[0, 3];
+                o.M[1, 3] = a.M[1, 3] + b.M[1, 3];
+                o.M[2, 3] = a.M[2, 3] + b.M[2, 3];
+                o.M[3, 3] = a.M[3, 3] + b.M[3, 3];
+
+                // operating on fixed buffers, yet we want the dimensional array magic.
+            }
+
+            return _o;
+        }
+
+
 
         public static ovrMatrix4f Multiply(ovrMatrix4f _a, ovrMatrix4f _b)
         {
@@ -179,9 +227,9 @@ namespace OVRWindWheelNDK
             //Error	5	The type of a local declared in a fixed statement must be a pointer type	X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\References\VrApi.ovrMatrix4f.cs	92	20	OVRWindWheelNDK
 
             ovrMatrix4f _o;
-            __ovrMatrix4f o = &_o;
-            __ovrMatrix4f a = &_a;
-            __ovrMatrix4f b = &_b;
+            __Matrix4x4 o = &_o;
+            __Matrix4x4 a = &_a;
+            __Matrix4x4 b = &_b;
 
             {
                 o.M[0, 0] = a.M[0, 0] * b.M[0, 0] + a.M[0, 1] * b.M[1, 0] + a.M[0, 2] * b.M[2, 0] + a.M[0, 3] * b.M[3, 0];
@@ -210,12 +258,23 @@ namespace OVRWindWheelNDK
             return _o;
         }
 
-        public ovrMatrix4f Multiply(__ovrMatrix4f b)
+        public ovrMatrix4f Multiply(__Matrix4x4 b)
         {
-            return __ovrMatrix4f.Multiply(this, b);
+            return __Matrix4x4.Multiply(this, b);
         }
 
-        public static ovrMatrix4f Multiply(__ovrMatrix4f a, __ovrMatrix4f b)
+        public static ovrMatrix4f Multiply(__Matrix4x4 a, __Matrix4x4 b, __Matrix4x4 c)
+        {
+            var ab = Multiply(a, b);
+            //__ovrMatrix4f ab = &_ab;
+
+            var abc = Multiply(&ab, c);
+
+            return abc;
+
+        }
+
+        public static ovrMatrix4f Multiply(__Matrix4x4 a, __Matrix4x4 b)
         {
             // perhaps the compiler could decide to optimize and move to a byref pointer version?
 
@@ -228,7 +287,7 @@ namespace OVRWindWheelNDK
             //Error	5	The type of a local declared in a fixed statement must be a pointer type	X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\References\VrApi.ovrMatrix4f.cs	92	20	OVRWindWheelNDK
 
             ovrMatrix4f _o;
-            __ovrMatrix4f o = &_o;
+            __Matrix4x4 o = &_o;
             //__ovrMatrix4f a = &_a;
             //__ovrMatrix4f b = &_b;
 
@@ -393,14 +452,14 @@ namespace OVRWindWheelNDK
 
 
 
-            __ovrMatrix4f x = rotationX;
-            __ovrMatrix4f y = rotationY;
-            __ovrMatrix4f z = rotationZ;
+            __Matrix4x4 x = rotationX;
+            __Matrix4x4 y = rotationY;
+            __Matrix4x4 z = rotationZ;
 
             //ovrMatrix4f o;
 
-            ovrMatrix4f rotationXY = __ovrMatrix4f.Multiply(y, x);
-            ovrMatrix4f rotationXYZ = __ovrMatrix4f.Multiply(z, &rotationXY);
+            ovrMatrix4f rotationXY = __Matrix4x4.Multiply(y, x);
+            ovrMatrix4f rotationXYZ = __Matrix4x4.Multiply(z, &rotationXY);
 
             // copy it back..
             return rotationXYZ;
@@ -414,7 +473,7 @@ namespace OVRWindWheelNDK
         public static ovrMatrix4f CreateTranslation(float x, float y, float z, float scale = 1.0f)
         {
             ovrMatrix4f _o;
-            __ovrMatrix4f o = &_o;
+            __Matrix4x4 o = &_o;
 
             o.M[0, 0] = scale; o.M[0, 1] = 0.0f; o.M[0, 2] = 0.0f; o.M[0, 3] = x;
             o.M[1, 0] = 0.0f; o.M[1, 1] = scale; o.M[1, 2] = 0.0f; o.M[1, 3] = y;
@@ -425,10 +484,10 @@ namespace OVRWindWheelNDK
         }
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public static ovrMatrix4f Transpose(__ovrMatrix4f a)
+        public static ovrMatrix4f Transpose(__Matrix4x4 a)
         {
             ovrMatrix4f _o;
-            __ovrMatrix4f o = &_o;
+            __Matrix4x4 o = &_o;
 
             o.M[0, 0] = a.M[0, 0]; o.M[0, 1] = a.M[1, 0]; o.M[0, 2] = a.M[2, 0]; o.M[0, 3] = a.M[3, 0];
             o.M[1, 0] = a.M[0, 1]; o.M[1, 1] = a.M[1, 1]; o.M[1, 2] = a.M[2, 1]; o.M[1, 3] = a.M[3, 1];
@@ -460,7 +519,7 @@ namespace OVRWindWheelNDK
             float offsetZ = nearZ;	// set to zero for a [0,1] clip space
 
             ovrMatrix4f that_data;
-            __ovrMatrix4f that = &that_data;
+            __Matrix4x4 that = &that_data;
 
             // what about jagged arrays?
             if (farZ <= nearZ)
@@ -545,7 +604,7 @@ namespace OVRWindWheelNDK
         {
             ConsoleExtensions.trace("enter TanAngleMatrixFromProjection");
 
-            __ovrMatrix4f projection = &__projection;
+            __Matrix4x4 projection = &__projection;
 
             // A projection matrix goes from a view point to NDC, or -1 to 1 space.
             // Scale and bias to convert that to a 0 to 1 space.
@@ -567,7 +626,7 @@ namespace OVRWindWheelNDK
 	        };
 
             ovrMatrix4f that_data;
-            __ovrMatrix4f that = &that_data;
+            __Matrix4x4 that = &that_data;
 
             //that_data.M = tanAngleMatrix;
             //that_data.M[0] = tanAngleMatrix[0];
@@ -593,6 +652,178 @@ namespace OVRWindWheelNDK
 
             ConsoleExtensions.trace("exit TanAngleMatrixFromProjection, stack still valid?");
             return that_data;
+        }
+
+
+
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        public static ovrMatrix4f GetEyeViewMatrix(ref ovrHeadModelParms headModelParms,
+                                                    ref ovrMatrix4f centerEyeViewMatrix,
+                                                    int eye)
+        {
+            var o = (eye > 0 ? -0.5f : 0.5f);
+
+            //float eyeOffset = (eye > 0 ? -0.5f : 0.5f) * headModelParms.InterpupillaryDistance;
+            float eyeOffset = o * headModelParms.InterpupillaryDistance;
+            ovrMatrix4f eyeOffsetMatrix = CreateTranslation(eyeOffset, 0.0f, 0.0f);
+            return Multiply(ref eyeOffsetMatrix, ref centerEyeViewMatrix);
+        }
+
+
+        //[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        //static inline ovrMatrix4f vrapi_GetCenterEyeViewMatrix(	
+        //    ref ovrHeadModelParms headModelParms,
+        //                                                ref ovrTracking tracking,
+        //                                                ref ovrMatrix4f input 
+        //    )
+        //{
+        //    const ovrMatrix4f centerEyeTransform = vrapi_GetCenterEyeTransform( headModelParms, tracking, input );
+        //    return ovrMatrix4f_Inverse( &centerEyeTransform );
+        //}
+
+
+
+
+
+
+        //public static ovrMatrix4f translate(ovrMatrix4f input, float x, float y, float z)
+        //{
+        //    ovrMatrix4f output;
+
+        //    translate(ref output, ref input, x, y, z);
+
+
+        //    return output;
+        //}
+
+        //public static void translate(ref ovrMatrix4f output, ref ovrMatrix4f input, float x, float y, float z)
+        //{
+        //    //float x = xyz[0], y = xyz[1], z = xyz[2];
+
+
+        //    //if (input == output)
+        //    //{
+        //    //    output[12] = input[0] * x + input[4] * y + input[8] * z + input[12];
+        //    //    output[13] = input[1] * x + input[5] * y + input[9] * z + input[13];
+        //    //    output[14] = input[2] * x + input[6] * y + input[10] * z + input[14];
+        //    //    output[15] = input[3] * x + input[7] * y + input[11] * z + input[15];
+
+        //    //    return output;
+        //    //}
+
+        //    fixed (float* input_M = input.M)
+        //    fixed (float* output_M = output.M)
+        //    {
+        //        float a00, a01, a02, a03,
+        //            a10, a11, a12, a13,
+        //            a20, a21, a22, a23;
+
+
+        //        a00 = input_M[0]; a01 = input_M[1]; a02 = input_M[2]; a03 = input_M[3];
+        //        a10 = input_M[4]; a11 = input_M[5]; a12 = input_M[6]; a13 = input_M[7];
+        //        a20 = input_M[8]; a21 = input_M[9]; a22 = input_M[10]; a23 = input_M[11];
+
+        //        output_M[0] = a00; output_M[1] = a01; output_M[2] = a02; output_M[3] = a03;
+        //        output_M[4] = a10; output_M[5] = a11; output_M[6] = a12; output_M[7] = a13;
+        //        output_M[8] = a20; output_M[9] = a21; output_M[10] = a22; output_M[11] = a23;
+
+        //        output_M[12] = a00 * x + a10 * y + a20 * z + input_M[12];
+        //        output_M[13] = a01 * x + a11 * y + a21 * z + input_M[13];
+        //        output_M[14] = a02 * x + a12 * y + a22 * z + input_M[14];
+        //        output_M[15] = a03 * x + a13 * y + a23 * z + input_M[15];
+        //    }
+
+        //}
+
+
+
+        //public static float[] translate(float[] output, float[] input, float[] xyz)
+        //{
+        //    float x = xyz[0], y = xyz[1], z = xyz[2];
+
+        //    if (input == output)
+        //    {
+        //        output[12] = input[0] * x + input[4] * y + input[8] * z + input[12];
+        //        output[13] = input[1] * x + input[5] * y + input[9] * z + input[13];
+        //        output[14] = input[2] * x + input[6] * y + input[10] * z + input[14];
+        //        output[15] = input[3] * x + input[7] * y + input[11] * z + input[15];
+
+        //        return output;
+        //    }
+
+        //    float a00, a01, a02, a03,
+        //        a10, a11, a12, a13,
+        //        a20, a21, a22, a23;
+
+
+        //    a00 = input[0]; a01 = input[1]; a02 = input[2]; a03 = input[3];
+        //    a10 = input[4]; a11 = input[5]; a12 = input[6]; a13 = input[7];
+        //    a20 = input[8]; a21 = input[9]; a22 = input[10]; a23 = input[11];
+
+        //    output[0] = a00; output[1] = a01; output[2] = a02; output[3] = a03;
+        //    output[4] = a10; output[5] = a11; output[6] = a12; output[7] = a13;
+        //    output[8] = a20; output[9] = a21; output[10] = a22; output[11] = a23;
+
+        //    output[12] = a00 * x + a10 * y + a20 * z + input[12];
+        //    output[13] = a01 * x + a11 * y + a21 * z + input[13];
+        //    output[14] = a02 * x + a12 * y + a22 * z + input[14];
+        //    output[15] = a03 * x + a13 * y + a23 * z + input[15];
+
+
+        //    return output;
+        //}
+
+
+        //public static void Set(ref ovrMatrix4f xyz, byte* pBuffer)
+        public static void Set(ref ovrMatrix4f xyz, byte[] aBuffer, int UDPMatrixIndex)
+        {
+            // Error	7	You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.	X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\References\VrApi.ovrMatrix4f.cs	808	21	OVRWindWheelNDK
+            // Error	7	You cannot use the fixed statement to take the address of an already fixed expression	X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\References\VrApi.ovrMatrix4f.cs	782	37	OVRWindWheelNDK
+
+            //ConsoleExtensions.tracef("ovrRenderer_RenderFrame UDPDraw[] ", f);
+
+            //fixed (float* __xyz_M = &xyz.M[0])
+            fixed (float* __xyz_M = xyz.M)
+            fixed (byte* pBuffer = &aBuffer[0])
+            {
+                var pFloatBuffer = (float*)pBuffer;
+
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  1.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  0.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  0.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  2.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  0.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  1.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  0.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  3.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  0.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  0.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  1.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  4.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  0.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  0.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  0.000000
+                //I/xNativeActivity(15380): \VrCubeWorld.Renderer.cs:579 ovrRenderer_RenderFrame UDPDraw[]  1.000000
+
+                for (int i = 0; i < 4 * 4; i++)
+                {
+                    var f = pFloatBuffer[i + UDPMatrixIndex * (64 / 4)];
+
+                    //appThread.appState.tracef60("ovrRenderer_RenderFrame UDPDraw[] ", f);
+                    //ConsoleExtensions.tracef("ovrRenderer_RenderFrame UDPDraw[] ", f);
+
+
+                    __xyz_M[i] = f;
+                    //xyz.M[i] = f;
+                    // *(((float*)((&((&matrix4f2)->M)))) + (num5 * 4)) = single6;
+                }
+            }
+
+            // I/DEBUG   (32762): signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x4
+            // new data available!
+            //gpuInstanceTransformBuffer1[0] = __Matrix4x4.Transpose(&xyz);
+            //appThread.appState.tracei60("ovrRenderer_RenderFrame UDPDraw ? crash?");
+            //ConsoleExtensions.trace("ovrRenderer_RenderFrame UDPDraw ? crash?");
         }
     }
 }

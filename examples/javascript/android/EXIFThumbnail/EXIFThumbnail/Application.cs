@@ -19,21 +19,27 @@ namespace EXIFThumbnail
     /// <summary>
     /// Your client side code running inside a web browser as JavaScript.
     /// </summary>
-    public sealed class Application
+    public sealed class Application : ApplicationWebService
     {
-        public readonly ApplicationWebService service = new ApplicationWebService();
 
-        /// <summary>
-        /// This is a javascript application.
-        /// </summary>
-        /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
-            @"Hello world".ToDocumentTitle();
-            // Send data from JavaScript to the server tier
-            service.WebMethod2(
+            Native.css[IHTMLElement.HTMLElementEnum.img].style.width = "100%";
+            Native.css.children.style.width = "100%";
+
+            WebMethod2(
                 @"A string from JavaScript.",
-                value => new IHTMLImage { src = value }.AttachToDocument()
+                async (name, data64) =>
+                {
+                    // async using for Attach?
+
+                    if (data64 != null)
+                        new IHTMLImage { src = data64 }.AttachToDocument();
+
+                    await new IHTMLButton { name }.AttachToDocument().async.onclick;
+
+                    inspect(name);
+                }
             );
         }
 

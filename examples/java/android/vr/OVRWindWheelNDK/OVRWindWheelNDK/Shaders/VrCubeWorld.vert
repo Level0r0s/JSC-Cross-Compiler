@@ -2,6 +2,8 @@
 	in vec3 vertexPosition; 
 	in vec4 vertexColor; 
 	
+
+	// X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRUDPMatrix\Program.cs
 	// set by?
 	in mat4 vertexTransform; 
 
@@ -15,6 +17,7 @@
 	void main() 
 	{ 
 		gl_Position = ProjectionMatrix * ( ViewMatrix * ( vertexTransform * vec4( vertexPosition, 1.0 ) ) ); 
+		
 		fragmentColor = vertexColor; 
 	}
 

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C54BCD92-0CBA-4B68-A93D-3CB30A94D024}</ProjectGuid>
+    <ProjectGuid>{A7D4BEFF-3993-4369-AF7D-FB8C28BA3359}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OVRWindWheelActivity</RootNamespace>
@@ -94,7 +94,8 @@
     <Compile Include="X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\GLES3JNILib.cs">
       <Link>GLES3JNILib.cs</Link>
     </Compile>
-    <Compile Include="ApplicationActivity.cs"></Compile>
+    <Compile Include="ApplicationActivity.cs">
+    </Compile>
     <Compile Include="Program.cs">
       <DependentUpon>ApplicationActivity.cs</DependentUpon>
     </Compile>
@@ -109,7 +110,8 @@
       <Link>staging\apk\libs\armeabi-v7a\libvrapi.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="app.config"></None>
+    <None Include="app.config">
+    </None>
     <None Include="staging\apk\assets\oculussig_02157df2d5d4e70b">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

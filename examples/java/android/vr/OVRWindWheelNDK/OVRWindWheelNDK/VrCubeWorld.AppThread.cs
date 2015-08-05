@@ -50,7 +50,7 @@ namespace OVRWindWheelNDK
             public ovrTracking tracking;
 
             readonly System.Threading.Thread Thread;
-            
+
             public ovrHeadModelParms headModelParms;
 
 
@@ -204,7 +204,8 @@ namespace OVRWindWheelNDK
 
                 ConsoleExtensions.trace("AppThreadFunction, create ovrApp, call ovrEgl_CreateContext");
 
-                this.appState = new ovrApp(ref java);
+                this.appState = new ovrApp(ref java) { AppThread = this };
+
 
                 // 1794
                 this.appState.Egl.ovrEgl_CreateContext(null);
@@ -222,6 +223,8 @@ namespace OVRWindWheelNDK
                 bool destroyed = false;
                 while (!destroyed)
                 {
+                    //appState.trace60("enter frame, ovrMessageQueue_GetNextMessage");
+
                     #region ovrMessageQueue_GetNextMessage
                     var ok = true;
                     while (ok)
@@ -264,21 +267,29 @@ namespace OVRWindWheelNDK
                     }
                     #endregion
 
+                    // ok
+                    //appState.trace60("ovrMessageQueue_GetNextMessage done, ovrApp_BackButtonAction");
 
-
+                    // ok
                     appState.ovrApp_BackButtonAction();
+
+                    //appState.trace60("ovrApp_BackButtonAction done (ok), ovrApp_HandleSystemEvents (leak?)");
+
                     appState.ovrApp_HandleSystemEvents();
+
+                    //appState.trace60("ovrApp_HandleSystemEvents done");
 
                     // not ready yet?
                     // set by vrapi_EnterVrMode
                     if (appState.Ovr == null)
                     {
+                        appState.trace60("Ovr == null");
                         continue;
                     }
 
 
                     #region VRAPI_FRAME_INIT_LOADING_ICON_FLUSH
-                    if (!appState.Scene.ovrScene_IsCreated())
+                    if (!appState.Scene.CreatedScene)
                     {
                         // need to keep the enum typename?
 
@@ -297,7 +308,7 @@ namespace OVRWindWheelNDK
                     #endregion
 
 
-                    if (xmallinfo() > 20 * 1024 * 1024)
+                    if (xmallinfo() > GLES3JNILib.safemodeMemoryLimitMB * 1024 * 1024)
                     {
                         // I/xNativeActivity(24473): \VrCubeWorld.AppThread.cs:71 mallinfo    maximum total allocated space:  1825611032
                         // https://news.ycombinator.com/item?id=9179833
@@ -319,7 +330,14 @@ namespace OVRWindWheelNDK
                     //appState.tracei60("AppThreadFunction, FrameIndex ", (int)appState.FrameIndex);
 
                     // 1862
+
+
                     appState.FrameIndex++;
+
+
+                    //appState.trace60("who is eating our memory?");
+                    //System.Threading.Thread.Sleep(1000 / 15);
+                    //continue;
 
 
                     //ConsoleExtensions.tracei("AppThreadFunction, vrapi_GetPredictedDisplayTime");

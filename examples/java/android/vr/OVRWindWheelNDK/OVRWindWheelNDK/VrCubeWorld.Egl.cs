@@ -239,7 +239,7 @@ namespace OVRWindWheelNDK
                 }
                 //ALOGV( "        MainSurface = eglCreateWindowSurface( Display, Config, nativeWindow, attribs )" );
 
-                ConsoleExtensions.trace("ovrEgl_CreateSurface, eglCreateWindowSurface, eglMakeCurrent");
+                ConsoleExtensions.trace("ovrEgl_CreateSurface, eglCreateWindowSurface");
 
                 this.MainSurface = egl.eglCreateWindowSurface(this.Display, this.Config, nativeWindow, eglCreateWindowSurface_surfaceAttribs);
                 if (this.MainSurface == egl.EGL_NO_SURFACE)
@@ -247,6 +247,9 @@ namespace OVRWindWheelNDK
                     //ALOGE( "        eglCreateWindowSurface() failed: %s", EglErrorString( eglGetError() ) );
                     return;
                 }
+
+                ConsoleExtensions.trace("ovrEgl_CreateSurface, eglMakeCurrent");
+
                 //ALOGV( "        eglMakeCurrent( display, MainSurface, MainSurface, Context )" );
                 if (egl.eglMakeCurrent(this.Display, this.MainSurface, this.MainSurface, this.Context) == false)
                 {

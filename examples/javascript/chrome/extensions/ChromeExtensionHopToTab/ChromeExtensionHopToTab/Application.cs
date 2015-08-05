@@ -61,10 +61,13 @@ namespace ChromeExtensionHopToTab
 	/// </summary>
 	public sealed class Application : ApplicationWebService
 	{
-		// jsc should package displayName  the end of the view-source?
-		// should we gzip the string lookup?
+        // X:\jsc.svn\examples\javascript\chrome\extensions\ChromeExtensionHopToTab\ChromeExtensionHopToTab\bin\Debug\staging\ChromeExtensionHopToTab.Application\web
 
-		static Application()
+
+        // jsc should package displayName  the end of the view-source?
+        // should we gzip the string lookup?
+
+        static Application()
 		{
 
 			// what about console? consolidate all core apps into one?
@@ -269,7 +272,7 @@ namespace ChromeExtensionHopToTab
 
 					// <div class="player-video-title">Ariana Grande - One Last Time (Official)</div>
 
-					Native.document.title = "(" + Native.document.title + ")";
+					//Native.document.title = "(" + Native.document.title + ")";
 
 					// X:\jsc.svn\examples\javascript\xml\FindByClassAndObserve\FindByClassAndObserve\Application.cs
 

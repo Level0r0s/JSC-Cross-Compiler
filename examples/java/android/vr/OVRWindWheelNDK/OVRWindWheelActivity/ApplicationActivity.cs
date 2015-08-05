@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using android.hardware;
 
 namespace OVRWindWheelActivity.Activities
 {
@@ -62,6 +63,7 @@ namespace OVRWindWheelActivity.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150711
         // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
 
@@ -77,6 +79,7 @@ namespace OVRWindWheelActivity.Activities
 
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG"
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity"
+        // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity" "AndroidRuntime"
 
 
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVRWindWheelActivity.Activities
@@ -89,6 +92,8 @@ namespace OVRWindWheelActivity.Activities
 
 
         // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell screenrecord --bit-rate 6000000 "/sdcard/oculus/Movies/My Videos/3D/OVRMyCubeWorldNDK-WASDC-mousewheel.mp4"
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell screenrecord --bit-rate 6000000 "/sdcard/oculus/Movies/My Videos/3D/OVRWindWheelActivity-fakepush.mp4"
+
 
         // sometimes the vrsvc fails to init and shows black screen?
 
@@ -153,15 +158,34 @@ namespace OVRWindWheelActivity.Activities
 
             // our VR thread will stop at 64MB
             public long total_allocated_space;
+
+
+            public string parallax;
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150712-1
+            public float px;
+            public float py;
+            public float pz;
+
+
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150718/udpmatrix
+            // red sends via udp, java sends to ndk, then to shader...
+            public byte[] vertexTransform = new byte[0];
+            //public byte[] vertexTransform = null;
         }
 
         __args args = new __args();
+
+        android.hardware.Camera nogc;
+
 
         protected override void onCreate(Bundle savedInstanceState)
         {
             base.onCreate(savedInstanceState);
 
             Console.WriteLine("enter OVRWindWheelActivity onCreate");
+
+            // http://www.mkyong.com/android/how-to-turn-onoff-camera-ledflashlight-in-android/
 
 
 
@@ -223,15 +247,87 @@ namespace OVRWindWheelActivity.Activities
             //this.xSurfaceView.setZOrderOnTop(true);    // necessary
             //this.xSurfaceView.getHolder().setFormat(android.graphics.PixelFormat.TRANSPARENT);
 
-            #region ReceiveAsync
-            Action<IPAddress> f = async nic =>
-             {
-                 args.mouse = "WindWheel awaiting at " + nic;
+            var ActivityPaused = true;
 
+            #region ReceiveAsync
+            // https://www.youtube.com/watch?v=GpmKq_qg3Tk
+
+
+            #region fParallax
+            Action<IPAddress> fParallax = async nic =>
+            {
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150712-1
+                var uu = new UdpClient(43834);
+
+                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeFlashlightTracker\ChromeFlashlightTracker\Application.cs
+                args.parallax = "awaiting Parallax at " + nic + " :43834";
+
+                // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
+                uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
+                while (true)
+                {
+                    var x = await uu.ReceiveAsync(); // did we jump to ui thread?
+
+
+                    // discard input?
+                    if (ActivityPaused)
+                        continue;
+
+                    // while we have the signal turn on torch/.
+
+                    #region await webcam feed
+                    if (nogc == null)
+                    {
+                        var camera = android.hardware.Camera.open();
+                        android.hardware.Camera.Parameters p = camera.getParameters();
+                        p.setFlashMode(android.hardware.Camera.Parameters.FLASH_MODE_TORCH);
+                        camera.setParameters(p);
+                        camera.startPreview();
+
+                        nogc = camera;
+                    }
+                    #endregion
+
+
+                    //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
+                    args.parallax = Encoding.UTF8.GetString(x.Buffer);
+
+                    var xy = args.parallax.Split(':');
+
+                    //Console.WriteLine(new { args.parallax });
+
+                    //// or marshal memory?
+                    //var xy = args.mouse.Split(':');
+
+                    args.px = float.Parse(xy[1]);
+                    args.py = float.Parse(xy[2]);
+                    args.pz = float.Parse(xy[3]);
+
+                    //args.mousey = int.Parse(xy[1]);
+
+                    //// getchar?
+                    //args.ad = int.Parse(xy[2]);
+                    //args.ws = int.Parse(xy[3]);
+
+                    //// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+                    //args.c = int.Parse(xy[4]);
+                    //// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/mousedown
+                    //args.mousebutton = int.Parse(xy[5]);
+                    //args.mousewheel = int.Parse(xy[6]);
+                }
+            };
+            #endregion
+
+            #region fWASDC
+            Action<IPAddress> fWASDC = async nic =>
+             {
+                 var uu = new UdpClient(41814);
+
+                 args.mouse = "awaiting WASDC at " + nic + " :41814";
 
                  // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
                  // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
-                 var uu = new UdpClient(41814);
                  uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
                  while (true)
                  {
@@ -256,6 +352,32 @@ namespace OVRWindWheelActivity.Activities
                      args.mousewheel = int.Parse(xy[6]);
                  }
              };
+            #endregion
+
+
+
+            #region fvertexTransform
+            // X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRUDPMatrix\Program.cs
+            Action<IPAddress> fvertexTransform = async nic =>
+            {
+                var uu = new UdpClient(40014);
+
+                //args.mouse = "awaiting vertexTransform at " + nic + " :40014";
+
+                // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
+                uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
+                while (true)
+                {
+                    var x = await uu.ReceiveAsync(); // did we jump to ui thread?
+                    //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
+                    args.vertexTransform = x.Buffer;
+
+
+                }
+            };
+            #endregion
+
 
             NetworkInterface.GetAllNetworkInterfaces().WithEach(
                 n =>
@@ -275,7 +397,11 @@ namespace OVRWindWheelActivity.Activities
                         {
                             if (!IPAddress.IsLoopback(ip.Address))
                                 if (n.SupportsMulticast)
-                                    f(ip.Address);
+                                {
+                                    fWASDC(ip.Address);
+                                    fParallax(ip.Address);
+                                    fvertexTransform(ip.Address);
+                                }
                         }
                     }
 
@@ -316,20 +442,27 @@ namespace OVRWindWheelActivity.Activities
 
 
                     return
-                        sw.ElapsedMilliseconds + "ms \n"
-                        + args.total_allocated_space + " bytes \n"
+                        sw.ElapsedMilliseconds + "ms | " + args.total_allocated_space + " bytes \n"
+                        + new { vertexTransform = args.vertexTransform.Length } + "\n"
                         + args.mouse + "\n"
-                        + new { args.mousex, args.mousey } + "\n"
+                        + args.parallax + "\n"
+                        + args.vertexTransform.Length + "bytes udp\n"
+                        //+ new { args.mousex, args.mousey } + "\n"
                         + new
                         {
                             //args.mousex,
 
                             // left to right
-                            args.x,
+                            //args.x,
+                            //args.px,
+
+                            args.px,
+                            args.py,
+                            args.pz,
 
 
                             // nod up +0.7 down -0.7
-                            //ox = args.tracking_HeadPose_Pose_Orientation_x 
+                            ox = args.tracking_HeadPose_Pose_Orientation_x,
 
                             // -0.7 right +0.7 left
                             oy = args.tracking_HeadPose_Pose_Orientation_y
@@ -339,7 +472,7 @@ namespace OVRWindWheelActivity.Activities
 
                             // ??
                             //ow = args.tracking_HeadPose_Pose_Orientation_w
-                        };
+                        }.ToString().Replace(",", "\n");
                 }
             };
 
@@ -351,7 +484,67 @@ namespace OVRWindWheelActivity.Activities
                 return
                     sw.ElapsedMilliseconds + "ms \n"
                         + args.total_allocated_space + " bytes \n"
-                    + "safe mode / malloc limit..";
+                    + "GC safe mode / malloc limit..";
+            };
+
+            mDraw.AtDraw = canvas =>
+            {
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150717/replay
+                // can w visually store tracking intel. like tvs do.
+                {
+                    // https://code.google.com/p/android/issues/detail?id=4086
+
+                    var paint = new android.graphics.Paint();
+
+
+                    paint.setStrokeWidth(0);
+                    paint.setStyle(android.graphics.Paint.Style.FILL_AND_STROKE);
+                    //paint.setColor(android.graphics.Color.RED);
+
+                    // lets have left to right recorder as a color block
+
+                    //// nod up +0.7 down -0.7
+                    // cannot see it.
+                    var rgb_left_to_right = (int)(0xffffff * (args.tracking_HeadPose_Pose_Orientation_x + 0.7) / 1.4);
+
+
+
+                    // I/System.Console( 8999): 2327:0001 AtDraw 16 0078af2e
+                    // why wont our tracking correctly show?
+                    //Console.WriteLine("AtDraw 16 " + rgb_left_to_right.ToString("x8"));
+
+                    //paint.setColor(android.graphics.Color.YELLOW);
+                    paint.setColor(
+                        (int)(0xff000000 | rgb_left_to_right));
+
+                    canvas.drawRect(16, 0, 32, 32, paint);
+                }
+
+                //       ox = args.tracking_HeadPose_Pose_Orientation_x,
+
+                //       oy = args.tracking_HeadPose_Pose_Orientation_y
+
+                {
+                    // https://code.google.com/p/android/issues/detail?id=4086
+
+                    var paint = new android.graphics.Paint();
+
+
+                    paint.setStrokeWidth(0);
+                    paint.setStyle(android.graphics.Paint.Style.FILL_AND_STROKE);
+                    //paint.setColor(android.graphics.Color.RED);
+
+                    // lets have left to right recorder as a color block
+
+                    //       // -0.7 right +0.7 left
+                    var rgb_left_to_right = (int)(0xffffff * (args.tracking_HeadPose_Pose_Orientation_y + 0.7) / 1.4);
+
+                    //paint.setColor(android.graphics.Color.YELLOW);
+                    paint.setColor(
+                        (int)(0xff000000 | rgb_left_to_right));
+
+                    canvas.drawRect(16 + 64, 0, 320, 32, paint);
+                }
             };
 
             new Thread(
@@ -370,30 +563,54 @@ namespace OVRWindWheelActivity.Activities
 
                         GLES3JNILib.stringFromJNI(args);
 
-                        if (args.total_allocated_space > 20 * 1024 * 1024)
+                        // http://developer.android.com/reference/android/graphics/Color.html
+                        if (args.total_allocated_space > GLES3JNILib.safemodeMemoryLimitMB * 1024 * 1024)
                         {
                             mDraw.color = android.graphics.Color.RED;
                             mDraw.alpha = 255;
 
                             mDraw.text = safemode;
+                            // goto secondary activity?
+                        }
+                        else if (args.mousebutton != 0)
+                        {
+                            // go a head. lean left or up
+                            mDraw.color = android.graphics.Color.YELLOW;
+                            mDraw.alpha = 255;
                         }
                         else
                         {
+                            mDraw.color = android.graphics.Color.GREEN;
 
-                            if (args.mousebutton == 0)
+                            // not leaning in?
+                            if (args.pz < 0)
                             {
-                                mDraw.color = android.graphics.Color.GREEN;
-                                mDraw.alpha = 80;
+                                mDraw.color = android.graphics.Color.WHITE;
                             }
-                            else
+
+                            var BaseStationEdgeX = Math.Abs(args.px) > 0.3;
+                            var BaseStationEdgeY = Math.Abs(args.py) > 0.3;
+
+                            if (BaseStationEdgeX
+                                || BaseStationEdgeY
+                                )
                             {
+                                // base station wont track ya for long..
+                                // reorient?
+                                // fade to black?
                                 mDraw.color = android.graphics.Color.YELLOW;
                                 mDraw.alpha = 255;
+
                             }
                         }
 
                         mDraw.postInvalidate();
+
                         Thread.Sleep(1000 / 60);
+
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150716/ovrwindwheelactivity
+                        //Thread.Sleep(1000 / 15);
+                        //Thread.Sleep(1000 / 4);
                     }
                 }
             ).Start();
@@ -453,11 +670,31 @@ namespace OVRWindWheelActivity.Activities
             #endregion
 
 
+            AtPause = delegate
+            {
+                ActivityPaused = true;
+                GLES3JNILib.onPause();
+
+
+                // http://www.mkyong.com/android/how-to-turn-onoff-camera-ledflashlight-in-android/
+
+                if (nogc != null)
+                {
+                    var camera = nogc;
+                    var p = camera.getParameters();
+                    p.setFlashMode(android.hardware.Camera.Parameters.FLASH_MODE_OFF);
+                    camera.setParameters(p);
+                    camera.stopPreview();
+
+                    camera.release();
+                    nogc = null;
+                }
+            };
 
             AtResume = delegate
             {
-                Console.WriteLine("enter onResume");
-
+                //Console.WriteLine("enter onResume");
+                ActivityPaused = false;
 
                 // http://stackoverflow.com/questions/3527621/how-to-pause-and-resume-a-surfaceview-thread
                 // http://stackoverflow.com/questions/10277694/resume-to-surfaceview-shows-black-screen
@@ -504,8 +741,8 @@ namespace OVRWindWheelActivity.Activities
             }
 
             // udp mouse ?
-            public int x = 500; // animate it?
-            public int y = 800;
+            public int x = 200; // animate it?
+            public int y = 900;
 
             public Func<string> text = () => "hello!";
 
@@ -514,29 +751,38 @@ namespace OVRWindWheelActivity.Activities
             public int color = android.graphics.Color.GREEN;
             public int alpha = 80;
 
+
+
+            public Action<android.graphics.Canvas> AtDraw;
+
             protected override void onDraw(android.graphics.Canvas canvas)
             {
+                {
+                    var paint = new android.graphics.Paint();
 
-                var paint = new android.graphics.Paint();
+                    paint.setStyle(android.graphics.Paint.Style.STROKE);
+                    //paint.setStyle(android.graphics.Paint.Style.FILL_AND_STROKE);
+                    //paint.setColor(android.graphics.Color.RED);
+                    //paint.setColor(android.graphics.Color.YELLOW);
+                    paint.setColor(color);
+                    paint.setTextSize(textSize);
+                    paint.setAlpha(alpha);
 
-                paint.setStyle(android.graphics.Paint.Style.STROKE);
-                //paint.setStyle(android.graphics.Paint.Style.FILL_AND_STROKE);
-                //paint.setColor(android.graphics.Color.RED);
-                //paint.setColor(android.graphics.Color.YELLOW);
-                paint.setColor(color);
-                paint.setTextSize(textSize);
-                paint.setAlpha(alpha);
+                    var a = this.text().Split('\n');
 
-                var a = this.text().Split('\n');
+                    a.WithEachIndex(
+                        (text, i) =>
+                        {
 
-                a.WithEachIndex(
-                    (text, i) =>
-                    {
+                            canvas.drawText(text, x, y + i * 24, paint);
+                            canvas.drawText(text, x + 2560 / 2, y + i * 24, paint);
+                        }
+                    );
+                }
 
-                        canvas.drawText(text, x, y + i * 24, paint);
-                        canvas.drawText(text, x + 2560 / 2, y + i * 24, paint);
-                    }
-                );
+                if (AtDraw != null)
+                    AtDraw(canvas);
+
 
                 base.onDraw(canvas);
             }
@@ -574,9 +820,11 @@ namespace OVRWindWheelActivity.Activities
         }
 
 
+        Action AtPause;
         protected override void onPause()
         {
-            GLES3JNILib.onPause();
+            AtPause();
+
             base.onPause();
         }
 
@@ -628,3 +876,32 @@ namespace OVRWindWheelActivity.Activities
 //System.TypeLoadException: Could not load type 'FrameCallback' from assembly 'ScriptCoreLibAndroid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
 //System.TypeLoadException: Could not load type 'android.telephony.PhoneStateListener' from assembly 'ScriptCoreLibAndroid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
 //System.Reflection.ReflectionTypeLoadException: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.
+
+//I/xNativeActivity( 9944): [17763920] \VrCubeWorld.Renderer.cs:556 ovrRenderer_RenderFrame, vertexTransform UDPMatrixIndex:  2
+//I/xNativeActivity( 9944): [17994528] \VrCubeWorld.App.cs:154 ovrApp_HandleVrModeChanges, vrapi_LeaveVrMode
+//I/xNativeActivity( 9944): [17466440] \VrCubeWorld.App.cs:165 ovrApp_HandleVrModeChanges, ovrEgl_DestroySurface
+//I/xNativeActivity( 9944): [17109736] \VrCubeWorld.App.cs:118 ovrApp_HandleVrModeChanges, ovrEgl_CreateSurface
+//I/xNativeActivity( 9944): [17109736] \VrCubeWorld.Egl.cs:233 enter ovrEgl_CreateSurface
+//I/xNativeActivity( 9944): [17109736] \VrCubeWorld.Egl.cs:242 ovrEgl_CreateSurface, eglCreateWindowSurface, eglMakeCurrent
+//I/DEBUG   (29301): *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+//I/DEBUG   (29301): Build fingerprint: 'samsung/zeroltexx/zerolte:5.0.2/LRX22G/G925FXXU1AOE3:user/release-keys'
+//I/DEBUG   (29301): Revision: '10'
+//I/DEBUG   (29301): ABI: 'arm'
+//I/DEBUG   (29301): pid: 9944, tid: 10074, name: Thread-1519  >>> OVRWindWheelActivity.Activities <<<
+//I/DEBUG   (29301): signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x1c7
+//I/DEBUG   (29301):     r0 e17fedb4  r1 00000000  r2 00000001  r3 f6e853b0
+//I/DEBUG   (29301):     r4 0000016f  r5 e16dc194  r6 00000001  r7 e17ff658
+//I/DEBUG   (29301):     r8 e17fedb4  r9 00000000  sl 00000000  fp e959b280
+//I/DEBUG   (29301):     ip f6e7cd8c  sp e17feda0  lr f6e2b9b5  pc f6e2e690  cpsr a00f0030
+//I/DEBUG   (29301):
+//I/DEBUG   (29301): backtrace:
+//I/DEBUG   (29301):     #00 pc 00012690  /system/lib/libEGL.so (eglCreateWindowSurface+47)
+//I/DEBUG   (29301):     #01 pc 00008e7d  /data/app/OVRWindWheelActivity.Activities-1/lib/arm/libmain.so (OVRWindWheelNDK_VrCubeWorld_ovrEgl_ovrEgl_CreateSurface+56)
+//I/DEBUG   (29301):     #02 pc 00009515  /data/app/OVRWindWheelActivity.Activities-1/lib/arm/libmain.so (OVRWindWheelNDK_VrCubeWorld_ovrApp_ovrApp_HandleVrModeChanges+40)
+//I/DEBUG   (29301):     #03 pc 0000cdd9  /data/app/OVRWindWheelActivity.Activities-1/lib/arm/libmain.so (OVRWindWheelNDK_VrCubeWorld_ovrAppThread_AppThreadFunction+600)
+//I/DEBUG   (29301):     #04 pc 0000b613  /data/app/OVRWindWheelActivity.Activities-1/lib/arm/libmain.so (ScriptCoreLib_Shared_BCLImplementation_System_Threading___ThreadStart_Invoke+26)
+//I/DEBUG   (29301):     #05 pc 0000b61b  /data/app/OVRWindWheelActivity.Activities-1/lib/arm/libmain.so (ScriptCoreLibAndroidNDK_BCLImplementation_System_Threading___Thread_AppThreadFunction+4)
+//I/DEBUG   (29301):     #06 pc 00016bbb  /system/lib/libc.so (__pthread_start(void*)+30)
+//I/DEBUG   (29301):     #07 pc 00014c83  /system/lib/libc.so (__start_thread+6)
+//I/DEBUG   (29301):
+//I/DEBUG   (29301): Tombstone written to: /data/tombstones/tombstone_07

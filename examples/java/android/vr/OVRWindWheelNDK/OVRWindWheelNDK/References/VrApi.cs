@@ -176,6 +176,7 @@ namespace OVRWindWheelNDK
     [Script(IsNative = true)]
     public struct ovrVector3f
     {
+
         public float x, y, z;
     }
 
@@ -184,6 +185,8 @@ namespace OVRWindWheelNDK
     [Script(IsNative = true)]
     public struct ovrQuatf
     {
+        // https://en.wikipedia.org/wiki/Quaternion
+
         public float x, y, z, w;
     }
 
@@ -221,10 +224,13 @@ namespace OVRWindWheelNDK
         VRAPI_TRACKING_STATUS_HMD_CONNECTED = 0x0080	// HMD is available & connected.
     }
 
+    // "X:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosNDK\bin\Debug\staging\jni\VrApi\Include\VrApi.h"
     // via vrapi_GetPredictedTracking
+    //[Script(IsNative = true, Header = "VrApi_Types.h")]
     [Script(IsNative = true)]
     public struct ovrTracking : VrApi_h
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
         // GearVR voot
 
         // Sensor status described by ovrTrackingStatus flags.
@@ -281,6 +287,10 @@ namespace OVRWindWheelNDK
 
         // called by ovrRenderer_RenderFrame
 
+        public float InterpupillaryDistance;
+        public float EyeHeight;
+        public float HeadModelDepth;
+        public float HeadModelHeight;
 
         //Error	9	'OVRWindWheelNDK.ovrHeadModelParms.InterpupillaryDistance': cannot have instance field initializers in structs	X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\References\VrApi.cs	284	22	OVRWindWheelNDK
         //public float InterpupillaryDistance = 0.0640f;

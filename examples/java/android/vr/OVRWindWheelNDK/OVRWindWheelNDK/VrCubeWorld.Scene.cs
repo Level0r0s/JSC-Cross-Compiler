@@ -27,13 +27,21 @@ namespace OVRWindWheelNDK
         //public const int floors = 333;
         //public const int floors = 16;
         //public const int floors = 3;
-        public const int floors = 2;
 
-        public const int floorwidth = 2;
+
+        // can we have two sets of floors?
+        public const int floors = 9;
+
+        public const int floorwidth = 9;
+
         //public const int floorwidth = 19;
 
         //public const int NUM_INSTANCES = 8 * 8 * floors;
         public const int NUM_INSTANCES = floorwidth * floorwidth * floors;
+
+
+        // one cube at a time?
+        public const int NUM_INSTANCES1 = 1;
 
         // I/xNativeActivity(12533): \VrCubeWorld.AppThread.cs:330 vrapi_SubmitFrame  6241
 
@@ -47,6 +55,9 @@ namespace OVRWindWheelNDK
         // created by ovrApp_Clear
         public unsafe class ovrScene
         {
+            public ovrApp App;
+
+            // used by? original
             public readonly ovrVector3f[] CubePositions0 = new ovrVector3f[NUM_INSTANCES];
 
 
@@ -72,13 +83,16 @@ namespace OVRWindWheelNDK
             // set by glGenBuffers
             // deleted by ovrScene_Destroy
             // GL_ARRAY_BUFFER
-            public uint InstanceTransformBuffer = 0;
+            public uint InstanceTransformBuffer0 = 0;
+
+            // for the other boxes..
+            public uint InstanceTransformBuffer1 = 0;
 
             // VRAPI_FRAME_INIT_LOADING_ICON_FLUSH
-            public bool ovrScene_IsCreated()
-            {
-                return this.CreatedScene;
-            }
+            //public bool ovrScene_IsCreated()
+            //{
+            //    return this.CreatedScene;
+            //}
 
             // called by ovrScene_Create
             public void ovrScene_CreateVAOs()
@@ -92,18 +106,21 @@ namespace OVRWindWheelNDK
                 this.Cube.ovrGeometry_CreateVAO();
 
                 // Modify the VAO to use the instance transform attributes.
-                gl3.glBindVertexArray(this.Cube.VertexArrayObject);
-                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.InstanceTransformBuffer);
+                gl3.glBindVertexArray(this.Cube.VertexArrayObject0);
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.InstanceTransformBuffer0);
 
+                // 4 what?
                 for (int i = 0; i < 4; i++)
                 {
                     gl3.glEnableVertexAttribArray((uint)ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_TRANSFORM + (uint)i);
+
                     gl3.glVertexAttribPointer((uint)ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_TRANSFORM + (uint)i,
                         4, gl3.GL_FLOAT,
                         false,
                         4 * 4 * sizeof(float),
                         // offset?
                         (void*)(i * 4 * sizeof(float)));
+
                     gl3.glVertexAttribDivisor((uint)ovrVertexAttribute_location.VERTEX_ATTRIBUTE_LOCATION_TRANSFORM + (uint)i, 1);
                 }
 
@@ -144,11 +161,18 @@ namespace OVRWindWheelNDK
                 this.Cube.ovrGeometry_CreateCube();
 
                 // Create the instance transform attribute buffer.
-                gl3.glGenBuffers(1, out this.InstanceTransformBuffer);
-                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.InstanceTransformBuffer);
+                gl3.glGenBuffers(1, out this.InstanceTransformBuffer0);
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.InstanceTransformBuffer0);
                 gl3.glBufferData(gl3.GL_ARRAY_BUFFER, NUM_INSTANCES * 4 * 4 * sizeof(float), null, gl3.GL_DYNAMIC_DRAW);
                 gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, 0);
 
+                gl3.glGenBuffers(1, out this.InstanceTransformBuffer1);
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, this.InstanceTransformBuffer1);
+                gl3.glBufferData(gl3.GL_ARRAY_BUFFER, NUM_INSTANCES1 * 4 * 4 * sizeof(float), null, gl3.GL_DYNAMIC_DRAW);
+                gl3.glBindBuffer(gl3.GL_ARRAY_BUFFER, 0);
+
+
+                #region init data
                 // Setup random cube positions and rotations.
                 for (int i = 0; i < NUM_INSTANCES; i++)
                 {
@@ -198,6 +222,7 @@ namespace OVRWindWheelNDK
                     //this.CubeRotations[i].y = (float)stdlib_h.drand48();
                     //this.CubeRotations[i].z = (float)stdlib_h.drand48();
                 }
+                #endregion
 
 
                 this.CreatedScene = true;
@@ -218,15 +243,24 @@ namespace OVRWindWheelNDK
                 this.Program.ovrProgram_Destroy();
                 this.Cube.ovrGeometry_Destroy();
 
-                gl3.glDeleteBuffers(1, ref InstanceTransformBuffer);
+                gl3.glDeleteBuffers(1, ref InstanceTransformBuffer0);
                 this.CreatedScene = false;
 
             }
 
 
 
+
+
+            public static float wasd_x0;
+            public static float wasd_y0;
+            public static float wasd_z0;
+
+
+
             static float wasd_x;
             static float wasd_y;
+            static float wasd_z;
 
 
 
@@ -244,10 +278,30 @@ namespace OVRWindWheelNDK
 
                 // what about mouse wheel?
                 // var flatlandMouseForwardFrameSpeed = .1f;
-                var flatlandMouseForwardFrameSpeed = .05f;
+                var flatlandMouseForwardFrameSpeed = .005f;
 
-                var flatlandFrameSpeed = .7f;
-                var flatlandFrameSpeedStrafe = .5f;
+                var flatlandFrameSpeed = .1f;
+                var flatlandFrameSpeedStrafe = .04f;
+
+                var y = 0.1f;
+                //var y = 0f;
+
+                // C crouch or jump?
+                if (GLES3JNILib.fields_c == 67)
+                {
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+
+                    // how low can we go?
+                    // if we change only one opcode, can we send out a patch via udp?
+                    //y = -20f;
+                    //y = +2f;
+                    y += 0.3f;
+                    // as a workaround right now we press run.
+
+                    flatlandMouseForwardFrameSpeed /= 3;
+                    flatlandFrameSpeed /= 3;
+                    flatlandFrameSpeedStrafe /= 3;
+                }
 
                 if (old_mousey_defined)
                 {
@@ -264,6 +318,8 @@ namespace OVRWindWheelNDK
                     // GLES3JNILib.fields_mousex * 0.005f
                     wasd_x += (float)Math.Cos(GLES3JNILib.fields_mousex * 0.005f) * flatlandFrameSpeedStrafe;
                     wasd_y += (float)Math.Sin(GLES3JNILib.fields_mousex * 0.005f) * flatlandFrameSpeedStrafe;
+
+                    //wasd_z += (float)(0.1f * this.App.AppThread.tracking.HeadPose.Pose.Orientation.z / 0.7f);
                 }
 
                 // D
@@ -272,6 +328,8 @@ namespace OVRWindWheelNDK
                     // GLES3JNILib.fields_mousex * 0.005f
                     wasd_x += (float)Math.Cos(GLES3JNILib.fields_mousex * 0.005f + Math.PI) * flatlandFrameSpeedStrafe;
                     wasd_y += (float)Math.Sin(GLES3JNILib.fields_mousex * 0.005f + Math.PI) * flatlandFrameSpeedStrafe;
+
+                    //wasd_z += (float)(-0.1f * this.App.AppThread.tracking.HeadPose.Pose.Orientation.z / 0.7f);
                 }
 
                 // W
@@ -280,6 +338,8 @@ namespace OVRWindWheelNDK
                     // GLES3JNILib.fields_mousex * 0.005f
                     wasd_x += (float)Math.Cos(GLES3JNILib.fields_mousex * 0.005f + Math.PI / 2) * flatlandFrameSpeed;
                     wasd_y += (float)Math.Sin(GLES3JNILib.fields_mousex * 0.005f + Math.PI / 2) * flatlandFrameSpeed;
+
+                    //wasd_z += (float)(-0.1f * this.App.AppThread.tracking.HeadPose.Pose.Orientation.x / 0.7f);
                 }
 
                 // S
@@ -287,24 +347,11 @@ namespace OVRWindWheelNDK
                 {
                     wasd_x += (float)Math.Cos(GLES3JNILib.fields_mousex * 0.005f - Math.PI / 2) * flatlandFrameSpeed;
                     wasd_y += (float)Math.Sin(GLES3JNILib.fields_mousex * 0.005f - Math.PI / 2) * flatlandFrameSpeed;
+                    //wasd_z += (float)(0.1f * this.App.AppThread.tracking.HeadPose.Pose.Orientation.x / 0.7f);
                 }
 
 
-                var y = 0f;
 
-                // C crouch or jump?
-                if (GLES3JNILib.fields_c == 67)
-                {
-                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
-
-                    // how low can we go?
-                    // if we change only one opcode, can we send out a patch via udp?
-                    //y = -20f;
-                    //y = +2f;
-                    y = 0.5f;
-                    // as a workaround right now we press run.
-
-                }
 
                 var touchpadSpeed = 0.05f;
 
@@ -312,8 +359,30 @@ namespace OVRWindWheelNDK
 
 
 
-                var wasd_x0 = wasd_x;
-                var wasd_y0 = wasd_y;
+                wasd_x0 = wasd_x;
+                wasd_y0 = wasd_y;
+                wasd_z0 = wasd_z + y;
+
+                // allow cheap positional tracking. at 6fps? 19fps
+                //wasd_x0 += 0.7f * com.oculus.gles3jni.GLES3JNILib.fields_px;
+                //wasd_x0 += 0.3f * com.oculus.gles3jni.GLES3JNILib.fields_px;
+
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150712-1/
+                // 60hz udp is a bit slow?
+                wasd_x0 += (float)Math.Cos(GLES3JNILib.fields_mousex * 0.005f + Math.PI * 0) * com.oculus.gles3jni.GLES3JNILib.fields_px * 0.5f;
+                wasd_y0 += (float)Math.Sin(GLES3JNILib.fields_mousex * 0.005f + Math.PI * 0) * com.oculus.gles3jni.GLES3JNILib.fields_px * 0.5f;
+
+
+                y += com.oculus.gles3jni.GLES3JNILib.fields_py * 0.4f;
+
+                // lean forward should be exclusive to left right up down?
+
+                if (com.oculus.gles3jni.GLES3JNILib.fields_pz < 0)
+                    com.oculus.gles3jni.GLES3JNILib.fields_pz *= 0.3f;
+
+                wasd_x0 += (float)Math.Cos(GLES3JNILib.fields_mousex * 0.005f + Math.PI / 2) * com.oculus.gles3jni.GLES3JNILib.fields_pz * 0.1f;
+                wasd_y0 += (float)Math.Sin(GLES3JNILib.fields_mousex * 0.005f + Math.PI / 2) * com.oculus.gles3jni.GLES3JNILib.fields_pz * 0.1f;
+
 
                 // allow trackpad
                 wasd_x0 += touchpadSpeed * com.oculus.gles3jni.GLES3JNILib.fields_xvalue;
@@ -323,17 +392,19 @@ namespace OVRWindWheelNDK
                 //wasd_x0 += (float)Math.Cos(GLES3JNILib.fields_mousex * 0.005f) * flatlandFrameSpeedStrafe;
                 //wasd_y0 += (float)Math.Sin(GLES3JNILib.fields_mousex * 0.005f) * flatlandFrameSpeedStrafe;
 
-                for (int i = 0; i < NUM_INSTANCES; i++)
-                {
-                    this.CubePositions[i].x = this.CubePositions0[i].x + wasd_x0;
-                    this.CubePositions[i].y = this.CubePositions0[i].y + y;
-                    this.CubePositions[i].z = this.CubePositions0[i].z + wasd_y0;
-                }
+                //for (int i = 0; i < NUM_INSTANCES; i++)
+                //{
+                //    this.CubePositions[i].x = this.CubePositions0[i].x + wasd_x0;
+                //    this.CubePositions[i].y = this.CubePositions0[i].y + wasd_z0;
+                //    this.CubePositions[i].z = this.CubePositions0[i].z + wasd_y0;
+                //}
 
 
                 old_mousey = GLES3JNILib.fields_mousey;
                 old_mousey_defined = true;
             }
+
+
         }
 
 
@@ -341,3 +412,31 @@ namespace OVRWindWheelNDK
 
 
 }
+
+//---------------------------
+//Restoring Network Connections
+//---------------------------
+//An error occurred while reconnecting R: to
+//\\192.168.1.12\x$
+//Microsoft Windows Network: The local device name is already in use.
+
+
+//This connection has not been restored.
+//---------------------------
+//OK   
+//---------------------------
+
+//---------------------------
+//Windows
+//---------------------------
+//The mapped network drive could not be created because the following error has occurred:
+
+
+
+//The specified network name is no longer available.
+
+
+//---------------------------
+//OK   
+//---------------------------
+
