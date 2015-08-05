@@ -24,6 +24,11 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.IO
 	[Script(Implements = typeof(global::System.IO.MemoryStream))]
     internal class __MemoryStream : __Stream
     {
+        // https://code.msdn.microsoft.com/windowshardware/RAMDisk-Storage-Driver-9ce5f699
+
+        // RAMdisk
+        // http://www.ltr-data.se/opencode.html/#ImDisk
+
 		// 20150401 
 		// could byte[] or MemoryStream be context switched yet?
 		// 20150410, byte[] can now be signaled to the worker and back
