@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStackFloatArray", "..\.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibAndroid", "..\..\..\..\..\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\ScriptCoreLibAndroid.csproj", "{1CE7D22F-52C8-4164-8955-CD89609E48A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeThreadedCameraTracker", "..\..\..\..\javascript\chrome\apps\ChromeThreadedCameraTracker\ChromeThreadedCameraTracker\ChromeThreadedCameraTracker.csproj", "{B3BB4B06-E097-45A6-BB73-6CBF20089E93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeThreadedCameraTracker", "..\..\..\..\javascript\chrome\apps\ChromeThreadedCameraTracker\ChromeThreadedCameraTracker\ChromeThreadedCameraTracker.csproj", "{6C647231-D3C5-4934-AFE4-697FF76A503E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRUDPMatrix", "OVRUDPMatrix\OVRUDPMatrix.csproj", "{CC41AD5A-9588-476E-973A-73ADEE84349F}"
 EndProject
@@ -176,21 +176,21 @@ Global
 		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|x86.ActiveCfg = Release|Any CPU
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Assets|Any CPU.ActiveCfg = Release|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Assets|Mixed Platforms.ActiveCfg = Release|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Assets|Mixed Platforms.Build.0 = Release|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Assets|x86.ActiveCfg = Release|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Assets|x86.Build.0 = Release|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Debug|x86.ActiveCfg = Debug|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Debug|x86.Build.0 = Debug|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Release|Any CPU.ActiveCfg = Release|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Release|Mixed Platforms.Build.0 = Release|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Release|x86.ActiveCfg = Release|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Release|x86.Build.0 = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Assets|Any CPU.ActiveCfg = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Assets|Mixed Platforms.ActiveCfg = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Assets|Mixed Platforms.Build.0 = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Assets|x86.ActiveCfg = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Assets|x86.Build.0 = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Debug|x86.ActiveCfg = Debug|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Debug|x86.Build.0 = Debug|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Release|Any CPU.ActiveCfg = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Release|Mixed Platforms.Build.0 = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Release|x86.ActiveCfg = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Release|x86.Build.0 = Release|x86
 		{CC41AD5A-9588-476E-973A-73ADEE84349F}.Assets|Any CPU.ActiveCfg = Release|Any CPU
 		{CC41AD5A-9588-476E-973A-73ADEE84349F}.Assets|Any CPU.Build.0 = Release|Any CPU
 		{CC41AD5A-9588-476E-973A-73ADEE84349F}.Assets|Mixed Platforms.ActiveCfg = Release|Any CPU

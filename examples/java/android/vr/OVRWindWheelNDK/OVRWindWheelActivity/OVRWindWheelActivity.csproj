@@ -91,7 +91,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\GLES3JNILib.cs">
+    <Compile Include="z:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\GLES3JNILib.cs">
       <Link>GLES3JNILib.cs</Link>
     </Compile>
     <Compile Include="ApplicationActivity.cs">
@@ -102,11 +102,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\bin\Debug\staging\libs\armeabi-v7a\libmain.so">
+    <None Include="z:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\bin\Debug\staging\libs\armeabi-v7a\libmain.so">
       <Link>staging\apk\libs\armeabi-v7a\libmain.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\bin\Debug\staging\libs\armeabi-v7a\libvrapi.so">
+    <None Include="z:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\bin\Debug\staging\libs\armeabi-v7a\libvrapi.so">
       <Link>staging\apk\libs\armeabi-v7a\libvrapi.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
