@@ -2382,6 +2382,10 @@
       <Project>{54a8ac0d-b5f1-4425-b9e4-7018d766e247}</Project>
       <Name>NumbersByPMalin</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\OblivionByHoskins\OblivionByHoskins\OblivionByHoskins.csproj">
+      <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
+      <Name>OblivionByHoskins</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\OblivionRadarByNdel\OblivionRadarByNdel\OblivionRadarByNdel.csproj">
       <Project>{224f75cc-01ad-4093-9b6a-2c62ead509c7}</Project>
       <Name>OblivionRadarByNdel</Name>
