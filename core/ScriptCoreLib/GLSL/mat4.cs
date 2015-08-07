@@ -8,6 +8,8 @@ namespace ScriptCoreLib.GLSL
     [Script]
     public struct mat4
     {
+        // X:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\System\Numerics\Matrix4x4.cs
+
 		// 5.6 Matrix Components
 
 		// see also: http://cgkit.sourceforge.net/doc2/mat4.html

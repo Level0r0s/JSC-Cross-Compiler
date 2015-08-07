@@ -5,6 +5,8 @@ using System.Text;
 
 namespace ScriptCoreLib.JavaScript.WebGL
 {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer
+
 	// https://github.com/bridgedotnet/Bridge/blob/master/Html5/TypedArray/ArrayBuffer.cs
 
 	[Script(HasNoPrototype = true, ExternalTarget = "ArrayBuffer")]

@@ -114,9 +114,11 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
             }
         }
 
+        [Obsolete("need to use ArrayBuffer to speed it up!")]
         public static void Copy(global::System.Array sourceArray, int sourceOffset, global::System.Array destinationArray, int destinationOffset, int length)
         {
-            Console.WriteLine("Array.Copy source: " + sourceArray.GetType() + " destination " + destinationArray.GetType());
+            // X:\jsc.svn\examples\javascript\chrome\apps\webgl\ChromeUDPWindWheel\ChromeUDPWindWheel\Application.cs
+            //Console.WriteLine("Array.Copy source: " + sourceArray.GetType() + " destination " + destinationArray.GetType());
 
             // http://stackoverflow.com/questions/7110666/il-instructions-not-exposed-by-c-sharp
             // http://referencesource.microsoft.com/#mscorlib/system/buffer.cs,570e88af5685d024

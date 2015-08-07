@@ -12,6 +12,7 @@ namespace ScriptCoreLib.JavaScript.WebGL
     // http://dxr.mozilla.org/mozilla-central/source/dom/webidl/WebGL2RenderingContext.webidl
     // http://mxr.mozilla.org/mozilla-central/source/dom/webidl/WebGL2RenderingContext.webidl
     // https://www.khronos.org/registry/webgl/specs/latest/2.0/webgl2.idl
+
     // http://src.chromium.org/viewvc/blink/trunk/Source/modules/webgl/WebGL2RenderingContextBase.idl
     // http://src.chromium.org/viewvc/blink/trunk/Source/modules/webgl/WebGL2RenderingContext.idl
 
@@ -22,8 +23,10 @@ namespace ScriptCoreLib.JavaScript.WebGL
     [Script(HasNoPrototype = true, InternalConstructor = true)]
     [Obsolete("for future reference")]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public class WebGL2RenderingContext
+    public class WebGL2RenderingContext : WebGLRenderingContext
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150718/webgl2
+
         // Vulkan API is more low-level than OpenGL (programmer is responsible for memory and threads management for example), 
         //  there will not need to be a ‘WebVulkan.’ WebGL will continue to absorb capabilities of underlying APIs
         // http://home.seekscale.com/blog/the-future-of-graphics-programming-the-vulkan-api
@@ -85,8 +88,12 @@ namespace ScriptCoreLib.JavaScript.WebGL
             // tested by X:\jsc.svn\examples\javascript\ImageCachedIntoLocalStorageExperiment\ImageCachedIntoLocalStorageExperiment\Application.cs
             // X:\jsc.svn\examples\javascript\WebGL\Test\TestWebGL2RenderingContext\TestWebGL2RenderingContext\Application.cs
 
+            //  ['webgl2', 'experimental-webgl2']
+            // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeWebGLExtensions\ChromeWebGLExtensions\Application.cs
+
             var canvas = new IHTMLCanvas();
-            var context = (WebGL2RenderingContext)canvas.getContext("experimental-webgl2");
+            //var context = (WebGL2RenderingContext)canvas.getContext("experimental-webgl2");
+            var context = (WebGL2RenderingContext)canvas.getContext("webgl2");
 
             return context;
         }

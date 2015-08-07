@@ -241,7 +241,9 @@ namespace ScriptCoreLib.Shared
         /// <summary>
         /// this is not actually a part of html input tag, but denotes to multiline text
         /// </summary>
-        textarea
+        textarea,
+
+        number
     }
 
     [Script(IsStringEnum = true)]

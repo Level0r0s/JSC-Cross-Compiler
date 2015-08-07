@@ -61,8 +61,10 @@ namespace ChromeExtensionHopToTab
 	/// </summary>
 	public sealed class Application : ApplicationWebService
 	{
-        // X:\jsc.svn\examples\javascript\chrome\extensions\ChromeExtensionHopToTab\ChromeExtensionHopToTab\bin\Debug\staging\ChromeExtensionHopToTab.Application\web
+        // X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPMultiPort\ChromeTCPMultiPort\Application.cs
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150719
 
+        // X:\jsc.svn\examples\java\android\future\ADBSwitchToCompiler\ADBSwitchToCompiler\ApplicationActivity.cs
 
         // jsc should package displayName  the end of the view-source?
         // should we gzip the string lookup?
@@ -272,7 +274,7 @@ namespace ChromeExtensionHopToTab
 
 					// <div class="player-video-title">Ariana Grande - One Last Time (Official)</div>
 
-					//Native.document.title = "(" + Native.document.title + ")";
+					Native.document.title = "(" + Native.document.title + ")";
 
 					// X:\jsc.svn\examples\javascript\xml\FindByClassAndObserve\FindByClassAndObserve\Application.cs
 

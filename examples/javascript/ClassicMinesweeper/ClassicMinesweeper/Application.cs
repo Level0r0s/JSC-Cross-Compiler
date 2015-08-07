@@ -23,6 +23,7 @@ namespace ClassicMinesweeper
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // did we also do a chrome app?
 
         /// <summary>
         /// This is a javascript application.
@@ -30,6 +31,9 @@ namespace ClassicMinesweeper
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IDefault page)
         {
+            // did we do a chrome app?
+            // what about a gearVR version?
+
             new MineSweeper.js.MineSweeperGame();
 
             new IHTMLElement(IHTMLElement.HTMLElementEnum.hr).AttachToDocument();

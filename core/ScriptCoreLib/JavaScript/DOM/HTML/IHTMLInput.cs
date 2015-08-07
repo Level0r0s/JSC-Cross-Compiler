@@ -29,6 +29,9 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         public int maxLength;
         public int size;
 
+
+
+        // X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPMultiPort\ChromeTCPMultiPort\Application.cs
         public HTMLInputTypeEnum type;
         public string value;
 
@@ -39,6 +42,8 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
         [System.Obsolete("Need to test Browsers")]
         public long valueAsNumber;
+        // while seting, also set? type = ScriptCoreLib.Shared.HTMLInputTypeEnum.number, 
+
         public IDate valueAsDate;
 
         [Script(DefineAsStatic = true)]
@@ -235,6 +240,14 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         {
             // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyColumns\ChromeShaderToyColumns\Application.cs
             return new IHTMLInput { @checked = i };
+        }
+
+
+        public static implicit operator IHTMLInput(int i)
+        {
+            // X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPMultiPort\ChromeTCPMultiPort\Application.cs
+            // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyColumns\ChromeShaderToyColumns\Application.cs
+            return new IHTMLInput { type = HTMLInputTypeEnum.number, valueAsNumber = i };
         }
 
 

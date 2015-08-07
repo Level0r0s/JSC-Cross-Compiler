@@ -154,6 +154,8 @@ namespace GalaxyS6GPUManager.Activities
             // SystemService
             Action update = delegate
             {
+                // newer SDKS hide it
+
                 // X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\jni\VrApi\VrApi.cpp
                 int cpuCore = 0;
 

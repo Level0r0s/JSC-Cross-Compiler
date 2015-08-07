@@ -30,11 +30,12 @@ namespace ChromeShaderToyReactableSynthByRamocles
 		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
 		public Application(IApp page)
 		{
-			// https://www.shadertoy.com/view/4sj3Rc#
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150718/shadertoy
+            // https://www.shadertoy.com/view/4sj3Rc#
 
 
-			#region += Launched chrome.app.window
-			dynamic self = Native.self;
+            #region += Launched chrome.app.window
+            dynamic self = Native.self;
 			dynamic self_chrome = self.chrome;
 			object self_chrome_socket = self_chrome.socket;
 

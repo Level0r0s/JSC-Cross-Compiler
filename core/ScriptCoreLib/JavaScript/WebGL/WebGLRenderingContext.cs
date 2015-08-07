@@ -141,7 +141,7 @@ namespace ScriptCoreLib.JavaScript.WebGL
             // tested by X:\jsc.svn\examples\javascript\ImageCachedIntoLocalStorageExperiment\ImageCachedIntoLocalStorageExperiment\Application.cs
 
             var canvas = new IHTMLCanvas();
-            var context = (WebGLRenderingContext)canvas.getContext("experimental-webgl");
+            var context = (WebGLRenderingContext)canvas.getContext("webgl");
 
             return context;
         }
@@ -170,9 +170,10 @@ namespace ScriptCoreLib.JavaScript.WebGL
         {
             // tested by X:\jsc.svn\examples\javascript\ImageCachedIntoLocalStorageExperiment\ImageCachedIntoLocalStorageExperiment\Application.cs
             // X:\jsc.svn\examples\javascript\WebGL\WebGLSVGAnonymous\WebGLSVGAnonymous\Application.cs
+            // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeWebGLExtensions\ChromeWebGLExtensions\Application.cs
 
             var canvas = new IHTMLCanvas();
-            var context = (WebGLRenderingContext)canvas.getContext("experimental-webgl",
+            var context = (WebGLRenderingContext)canvas.getContext("webgl",
 
                 new __preserveDrawingBuffer
                 {
