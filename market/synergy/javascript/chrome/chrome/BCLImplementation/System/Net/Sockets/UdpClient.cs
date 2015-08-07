@@ -121,16 +121,24 @@ namespace xchrome.BCLImplementation.System.Net.Sockets
             this.vReceiveAsync = async delegate
             {
                 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150723
-                Console.WriteLine("enter UdpClient.vReceiveAsync ");
+                //Console.WriteLine("enter UdpClient.vReceiveAsync ");
 
                 var isocket = await isocket_after_create;
 
-                Console.WriteLine("UdpClient.vReceiveAsync recvFrom ");
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150807/chromeequirectangularpanorama
+                Console.WriteLine("UdpClient.vReceiveAsync recvFrom " + new { isocket });
 
                 // android defaults to 4096
                 var result = await isocket.socketId.recvFrom(1048576);
 
-                Console.WriteLine("UdpClient.vReceiveAsync " + new { result.resultCode });
+                if (result.resultCode < 0)
+                {
+                    Console.WriteLine("UdpClient.vReceiveAsync " + new { result.resultCode });
+
+                    #region await forever
+                    await new TaskCompletionSource<object>().Task;
+                    #endregion
+                }
 
                 byte[] buffer = new ScriptCoreLib.JavaScript.WebGL.Uint8ClampedArray(result.data);
 

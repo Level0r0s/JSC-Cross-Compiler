@@ -176,7 +176,7 @@ namespace OVROculus360PhotosHUD.Activities
 
         // "x:\util\android-sdk-windows\platform-tools\adb.exe" devices
         // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
-        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  netcfg
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell netcfg
 
         // should jsc remember last connected device and reconnect if disconnected?
         // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
@@ -313,11 +313,12 @@ namespace OVROculus360PhotosHUD.Activities
 
                 };
 
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150807/ovroculus360photosndk
             copy("2_no_clouds_4k.jpg", "/sdcard/oculus/360Photos/0.jpg");
-            copy("1.jpg", "/sdcard/oculus/360Photos/1.jpg");
+            //copy("1.jpg", "/sdcard/oculus/360Photos/1.jpg");
 
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150724/invaders
-            copy("celestial-joshua-trees-milky-way-in-saline-va.jpg", "/sdcard/oculus/360Photos/2.jpg");
+            //copy("celestial-joshua-trees-milky-way-in-saline-va.jpg", "/sdcard/oculus/360Photos/2.jpg");
 
 
 

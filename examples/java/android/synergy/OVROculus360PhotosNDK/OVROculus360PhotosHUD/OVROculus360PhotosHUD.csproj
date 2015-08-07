@@ -124,7 +124,7 @@
     <None Include="staging\apk\assets\oculussig_02157df2d5d4e70b">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="X:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosNDK\bin\Debug\staging\libs\**\*.*">
+    <None Include="z:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosNDK\bin\Debug\staging\libs\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\libs\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>

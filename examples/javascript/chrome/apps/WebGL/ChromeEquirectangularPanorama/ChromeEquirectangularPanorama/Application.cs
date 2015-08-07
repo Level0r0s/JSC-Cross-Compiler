@@ -28,8 +28,11 @@ namespace ChromeEquirectangularPanorama
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150807/ovroculus360photosndk
+
         // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularPanorama\ChromeEquirectangularPanorama\bin\Debug\staging\ChromeEquirectangularPanorama.Application\web
         // subst a: r:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularPanorama\ChromeEquirectangularPanorama\bin\Debug\staging\ChromeEquirectangularPanorama.Application\web
+        // subst a: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularPanorama\ChromeEquirectangularPanorama\bin\Debug\staging\ChromeEquirectangularPanorama.Application\web
 
         // 237ms UdpClient.Client.vBind { ipString = 0.0.0.0, Port = 49000, bind = 0 }
 

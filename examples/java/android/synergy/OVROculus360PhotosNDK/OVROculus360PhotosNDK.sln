@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVROculus360PhotosNDK", "OVROculus360PhotosNDK\OVROculus360PhotosNDK.csproj", "{4E6A75A0-AAFE-450E-B9BF-FF666A64D5CB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRVrCubeWorldSurfaceViewNDK", "..\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewNDK\OVRVrCubeWorldSurfaceViewNDK.csproj", "{E32F254D-823D-41D5-99EE-ABDF240AF011}"
@@ -58,7 +58,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNDKUDP", "..\..\..\..\c
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "chrome", "chrome", "{BADA890F-5BFF-429C-AAA4-0339305C6252}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeThreadedCameraTracker", "..\..\..\..\javascript\chrome\apps\ChromeThreadedCameraTracker\ChromeThreadedCameraTracker\ChromeThreadedCameraTracker.csproj", "{B3BB4B06-E097-45A6-BB73-6CBF20089E93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeThreadedCameraTracker", "..\..\..\..\javascript\chrome\apps\ChromeThreadedCameraTracker\ChromeThreadedCameraTracker\ChromeThreadedCameraTracker.csproj", "{6C647231-D3C5-4934-AFE4-697FF76A503E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chromelabs", "..\..\..\..\..\market\synergy\javascript\chrome\chrome\chromelabs.csproj", "{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7}"
 EndProject
@@ -280,16 +280,16 @@ Global
 		{9CC1F2EC-11D5-46D7-9088-113FD67EF952}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9CC1F2EC-11D5-46D7-9088-113FD67EF952}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9CC1F2EC-11D5-46D7-9088-113FD67EF952}.Release|x86.ActiveCfg = Release|Any CPU
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Debug|x86.ActiveCfg = Debug|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Debug|x86.Build.0 = Debug|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Release|Any CPU.ActiveCfg = Release|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Release|Mixed Platforms.Build.0 = Release|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Release|x86.ActiveCfg = Release|x86
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93}.Release|x86.Build.0 = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Debug|x86.ActiveCfg = Debug|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Debug|x86.Build.0 = Debug|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Release|Any CPU.ActiveCfg = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Release|Mixed Platforms.Build.0 = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Release|x86.ActiveCfg = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Release|x86.Build.0 = Release|x86
 		{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -427,8 +427,7 @@ Global
 		{9A1F5234-675E-4B8E-8E26-AAD983393A23} = {104F9FCF-3E09-4B73-99DB-2C4CB042AD95}
 		{69C8D784-E9B0-4A72-AD41-D0B530DFC654} = {104F9FCF-3E09-4B73-99DB-2C4CB042AD95}
 		{813C7DFD-C62A-4021-AB97-BFDE8404D4AE} = {9462F6FF-8BEB-4198-BD69-60CCBF9D3A46}
-		{B3BB4B06-E097-45A6-BB73-6CBF20089E93} = {BADA890F-5BFF-429C-AAA4-0339305C6252}
+		{6C647231-D3C5-4934-AFE4-697FF76A503E} = {BADA890F-5BFF-429C-AAA4-0339305C6252}
 		{6B03ABE7-4457-43D8-8F25-CD3A91DF0988} = {BADA890F-5BFF-429C-AAA4-0339305C6252}
-		{BC5A5B01-CCE8-41AC-AA90-9B50E1735F85} = {BADA890F-5BFF-429C-AAA4-0339305C6252}
 	EndGlobalSection
 EndGlobal
