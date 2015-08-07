@@ -564,7 +564,7 @@ color.a = 1.0;
 				bool forceMuted,
 				bool forcePaused)
 			{
-				new IHTMLPre { "enter Effect" }.AttachToDocument();
+				//new IHTMLPre { "enter Effect" }.AttachToDocument();
 
 				var ext = gl.getExtension("OES_standard_derivatives");
 				var supportsDerivatives = (ext != null);

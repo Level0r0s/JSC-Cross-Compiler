@@ -24,12 +24,22 @@ namespace OblivionByHoskins
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // lets tune down the loggin
+        // ChromeShaderToyColumns
+
+        //        C:\Windows\system32>netsh wlan stop hostednetwork
+        //The hosted network stopped.
+
+
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150807/shadertoy
+
             // https://www.shadertoy.com/view/XtfXDN#
 
 
@@ -81,6 +91,8 @@ namespace OblivionByHoskins
             }
             #endregion
 
+
+            Native.body.Clear();
             ChromeShaderToyColumns.Library.ShaderToy.AttachToDocument(
                 new Shaders.ProgramFragmentShader()
             );
@@ -88,3 +100,15 @@ namespace OblivionByHoskins
 
     }
 }
+
+//..................{ Location =
+// assembly: Y:\OblivionByHoskins.Application\WebGL ShaderToy.dll
+// type: ChromeShaderToyColumns.Library.ShaderToy, WebGL ShaderToy, Version= 0.0.0.0, Culture= neutral, PublicKeyToken= null
+// offset: 0x004d
+//  method:ScriptCoreLib.JavaScript.WebGL.WebGLBuffer createQuadVBO(ScriptCoreLib.JavaScript.WebGL.WebGLRenderingContext, Single, Single, Single, Single) }
+
+//{ trace = X:\jsc.internal.svn\compiler\jsc\Languages\IL\ILTranslationExtensions.EmitToArguments.cs, TargetMethod = Void AttachToDocument(ScriptCoreLib.GLSL.FragmentShader), DeclaringType = ChromeShaderToyColumns.Library.ShaderToy, Location =
+// assembly: Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\OblivionByHoskins\OblivionByHoskins\bin\Debug\OblivionByHoskins.exe
+// type: OblivionByHoskins.Application, OblivionByHoskins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// offset: 0x0146
+//  method:Void.ctor(OblivionByHoskins.HTML.Pages.IApp), ex = System.MissingMethodException: Method not found: 'Void ScriptCoreLib.JavaScript.WebGL.WebGLRenderingContext.bindBuffer(UInt32, ScriptCoreLib.JavaScript.WebGL.WebGLBuffer)'.
