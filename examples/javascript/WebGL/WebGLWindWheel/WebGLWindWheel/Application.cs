@@ -53,7 +53,11 @@ namespace WebGLWindWheel
             var gl_viewportHeight = size;
 
 
+            // can AssetLibrary create a special type
+            // and define the variables
+            // for it we need to parse glsl?
 
+            // Geometry
             var shaderProgram = gl.createProgram(
                 new GeometryVertexShader(),
                 new GeometryFragmentShader()
@@ -75,8 +79,14 @@ namespace WebGLWindWheel
             var shaderProgram_pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
             var shaderProgram_mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
 
-
+            // https://hacks.mozilla.org/2014/10/introducing-simd-js/
             // https://github.com/toji/gl-matrix/blob/master/src/gl-matrix/mat4.js
+            // http://www.i-programmer.info/news/167-javascript/8578-chrome-to-support-simdjs.html
+
+            // https://code.google.com/p/v8/issues/detail?id=2228
+            var SIMD_mat4 = new System.Numerics.Matrix4x4();
+            var SIMD_mat4s = new  Stack<System.Numerics.Matrix4x4>();
+            
 
             // can we convert this code to NDK friendly non GC library?
             // for gearVR 90FOV and cardboard wearality 150FOV
@@ -162,18 +172,18 @@ namespace WebGLWindWheel
                 #endregion
 
                 ,
-
+                // X:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelNDK\References\VrApi.ovrMatrix4f.cs
                 translate = new Func<float[], float[], float[], float[]>(
-                    (that, a, v) =>
+                    (float[] that, float[] output, float[]  xyz) =>
                     {
-                        float x = v[0], y = v[1], z = v[2];
+                        float x = xyz[0], y = xyz[1], z = xyz[2];
 
-                        if (a == that)
+                        if (output == that)
                         {
-                            that[12] = a[0] * x + a[4] * y + a[8] * z + a[12];
-                            that[13] = a[1] * x + a[5] * y + a[9] * z + a[13];
-                            that[14] = a[2] * x + a[6] * y + a[10] * z + a[14];
-                            that[15] = a[3] * x + a[7] * y + a[11] * z + a[15];
+                            that[12] = output[0] * x + output[4] * y + output[8] * z + output[12];
+                            that[13] = output[1] * x + output[5] * y + output[9] * z + output[13];
+                            that[14] = output[2] * x + output[6] * y + output[10] * z + output[14];
+                            that[15] = output[3] * x + output[7] * y + output[11] * z + output[15];
 
                             return that;
                         }
@@ -183,18 +193,18 @@ namespace WebGLWindWheel
                             a20, a21, a22, a23;
 
 
-                        a00 = a[0]; a01 = a[1]; a02 = a[2]; a03 = a[3];
-                        a10 = a[4]; a11 = a[5]; a12 = a[6]; a13 = a[7];
-                        a20 = a[8]; a21 = a[9]; a22 = a[10]; a23 = a[11];
+                        a00 = output[0]; a01 = output[1]; a02 = output[2]; a03 = output[3];
+                        a10 = output[4]; a11 = output[5]; a12 = output[6]; a13 = output[7];
+                        a20 = output[8]; a21 = output[9]; a22 = output[10]; a23 = output[11];
 
                         that[0] = a00; that[1] = a01; that[2] = a02; that[3] = a03;
                         that[4] = a10; that[5] = a11; that[6] = a12; that[7] = a13;
                         that[8] = a20; that[9] = a21; that[10] = a22; that[11] = a23;
 
-                        that[12] = a00 * x + a10 * y + a20 * z + a[12];
-                        that[13] = a01 * x + a11 * y + a21 * z + a[13];
-                        that[14] = a02 * x + a12 * y + a22 * z + a[14];
-                        that[15] = a03 * x + a13 * y + a23 * z + a[15];
+                        that[12] = a00 * x + a10 * y + a20 * z + output[12];
+                        that[13] = a01 * x + a11 * y + a21 * z + output[13];
+                        that[14] = a02 * x + a12 * y + a22 * z + output[14];
+                        that[15] = a03 * x + a13 * y + a23 * z + output[15];
 
 
                         return that;
@@ -581,61 +591,61 @@ namespace WebGLWindWheel
 
                 #region DrawWingAtX
                 Action<int, int, float, float> DrawWingAtX =
-                    (WingX, WingSize, WingRotationMultiplier, WingRotationOffset) =>
-                    {
-                        mvPushMatrix();
+            (WingX, WingSize, WingRotationMultiplier, WingRotationOffset) =>
+            {
+                mvPushMatrix();
 
-                        __mat4.translate(mvMatrix, mvMatrix, new float[] { cubesize * WingX, 0, 0 });
-                        //glMatrix.mat4.translate(mvMatrix, new float[] { cubesize * WingX, 0, 0 });
+                __mat4.translate(mvMatrix, mvMatrix, new float[] { cubesize * WingX, 0, 0 });
+                //glMatrix.mat4.translate(mvMatrix, new float[] { cubesize * WingX, 0, 0 });
 
-                        if (WingRotationOffset == 0)
-                        {
-                            DrawFrameworkWingAtX(0, 0);
-                        }
+                if (WingRotationOffset == 0)
+                {
+                    DrawFrameworkWingAtX(0, 0);
+                }
 
-                        #region DrawWingPart
-                        Action<float> DrawWingPart =
-                    PartIndex =>
-                    {
-                        mvPushMatrix();
-                        //glMatrix.mat4.rotate(mvMatrix, degToRad(WingRotationOffset + (rCube * WingRotationMultiplier)), new float[] { 1f, 0f, 0f });
-                        __mat4.rotate(mvMatrix, mvMatrix, degToRad(WingRotationOffset + (rCube * WingRotationMultiplier)), new float[] { 1f, 0f, 0f });
-                        //glMatrix.mat4.translate(mvMatrix, new float[] { 0f, cubesize * PartIndex * 2, 0 });
-                        __mat4.translate(mvMatrix, mvMatrix, new float[] { 0f, cubesize * PartIndex * 2, 0 });
+                #region DrawWingPart
+                Action<float> DrawWingPart =
+            PartIndex =>
+            {
+                mvPushMatrix();
+                //glMatrix.mat4.rotate(mvMatrix, degToRad(WingRotationOffset + (rCube * WingRotationMultiplier)), new float[] { 1f, 0f, 0f });
+                __mat4.rotate(mvMatrix, mvMatrix, degToRad(WingRotationOffset + (rCube * WingRotationMultiplier)), new float[] { 1f, 0f, 0f });
+                //glMatrix.mat4.translate(mvMatrix, new float[] { 0f, cubesize * PartIndex * 2, 0 });
+                __mat4.translate(mvMatrix, mvMatrix, new float[] { 0f, cubesize * PartIndex * 2, 0 });
 
-                        gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
-                        gl.vertexAttribPointer((uint)shaderProgram_vertexPositionAttribute, cubeVertexPositionBuffer_itemSize, gl.FLOAT, false, 0, 0);
+                gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
+                gl.vertexAttribPointer((uint)shaderProgram_vertexPositionAttribute, cubeVertexPositionBuffer_itemSize, gl.FLOAT, false, 0, 0);
 
-                        gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexColorBuffer);
-                        gl.vertexAttribPointer((uint)shaderProgram_vertexColorAttribute, cubeVertexColorBuffer_itemSize, gl.FLOAT, false, 0, 0);
+                gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexColorBuffer);
+                gl.vertexAttribPointer((uint)shaderProgram_vertexColorAttribute, cubeVertexColorBuffer_itemSize, gl.FLOAT, false, 0, 0);
 
-                        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
-                        setMatrixUniforms();
-                        //gl.drawElements(gl.TRIANGLES, cubeVertexPositionBuffer_numItems, gl.UNSIGNED_SHORT, 0);
-                        gl.drawElements(gl.TRIANGLES, cubeVertexPositionBuffer_numItems, gl.UNSIGNED_BYTE, 0);
+                gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
+                setMatrixUniforms();
+                //gl.drawElements(gl.TRIANGLES, cubeVertexPositionBuffer_numItems, gl.UNSIGNED_SHORT, 0);
+                gl.drawElements(gl.TRIANGLES, cubeVertexPositionBuffer_numItems, gl.UNSIGNED_BYTE, 0);
 
-                        mvPopMatrix();
-                    };
-                        #endregion
+                mvPopMatrix();
+            };
+                #endregion
 
-                        #region DrawWingWithSize
-                        Action<int> DrawWingWithSize =
-                    length =>
-                    {
-                        for (int i = 4; i < length; i++)
-                        {
-                            DrawWingPart(i * 1.0f);
-                            DrawWingPart(-i * 1.0f);
+                #region DrawWingWithSize
+                Action<int> DrawWingWithSize =
+            length =>
+            {
+                for (int i = 4; i < length; i++)
+                {
+                    DrawWingPart(i * 1.0f);
+                    DrawWingPart(-i * 1.0f);
 
-                        }
-                    };
-                        #endregion
+                }
+            };
+                #endregion
 
-                        DrawWingWithSize(WingSize);
+                DrawWingWithSize(WingSize);
 
-                        mvPopMatrix();
+                mvPopMatrix();
 
-                    };
+            };
                 #endregion
 
                 var x = 8;

@@ -422,7 +422,7 @@ color.a = 1.0;
 
 							#region Paint_Image
 
-							new IHTMLPre { "enter Paint_Image" }.AttachToDocument();
+							//new IHTMLPre { "enter Paint_Image" }.AttachToDocument();
 
 							// this is enough to do pip to bottom left, no need to adjust vertex positions even?
 							gl.viewport(0, 0, (int)xres, (int)yres);
@@ -523,9 +523,10 @@ color.a = 1.0;
 									left,top
 								};
 
-							var vertices = new Float32Array(fvertices);
+							//var vertices = new Float32Array(fvertices);
 							#endregion
-							gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+							//gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+							gl.bufferData(gl.ARRAY_BUFFER, fvertices, gl.STATIC_DRAW);
 
 							gl.vertexAttribPointer(vec2pos, 2, gl.FLOAT, false, 0, 0);
 							gl.enableVertexAttribArray(vec2pos);

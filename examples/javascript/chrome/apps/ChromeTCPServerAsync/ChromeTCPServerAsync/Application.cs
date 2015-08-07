@@ -180,7 +180,9 @@ namespace ChromeTCPServerAsync
 
 		private async void yield(TcpClient c)
 		{
-			var s = c.GetStream();
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150719
+
+            var s = c.GetStream();
 
 			// could we switch into a worker thread?
 			// jsc would need to split the stream object tho
