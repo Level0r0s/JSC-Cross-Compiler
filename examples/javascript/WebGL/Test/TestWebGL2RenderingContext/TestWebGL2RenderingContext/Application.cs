@@ -31,16 +31,38 @@ namespace TestWebGL2RenderingContext
 		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
 		public Application(IApp page)
 		{
-			//https://wiki.mozilla.org/Platform/GFX/WebGL2
-			// https://twitter.com/etribz/status/359954523789328387
-			// 2years since?
-			// https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext
-			// cannot find any example. retry later
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150718/webgl2
 
-			var c = new WebGL2RenderingContext();
+            //https://wiki.mozilla.org/Platform/GFX/WebGL2
+            // https://twitter.com/etribz/status/359954523789328387
+            // 2years since?
+            // https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext
+            // cannot find any example. retry later
+
+            var c = new WebGL2RenderingContext();
 
 			new IHTMLPre { new { c } }.AttachToDocument();
-		}
 
-	}
+            // {{ c = null }}
+            // https://github.com/dotnet/corefx/blob/master/src/System.Numerics.Vectors/src/System/Numerics/Matrix4x4.cs
+            //  --enable-unsafe-es3-apis.
+            // https://groups.google.com/forum/#!topic/webgl-dev-list/8P9Sk47K5hg
+
+            // http://www.marmoset.co/viewer/gallery
+            // http://lmv.rocks/
+
+            // "C:\Users\Arvo\AppData\Local\Google\Chrome SxS\Application\chrome.exe - es3.lnk"
+            // GL_VERSION	OpenGL ES 2.0 (ANGLE 2.1.0.02df796f466c)
+
+            // GL_VERSION	OpenGL ES 3.0 (ANGLE 2.1.0.02df796f466c)
+
+            ///* Uniform Buffer Objects and Transform Feedback Buffers */
+            //421     void bindBufferBase(GLenum target, GLuint index, WebGLBuffer? buffer);
+            //422     void bindBufferRange(GLenum target, GLuint index, WebGLBuffer? buffer, GLintptr offset, GLsizeiptr size);
+
+            //  void drawElementsInstanced(GLenum mode, GLsizei count, GLenum type, GLintptr offset, GLsizei instanceCount);
+
+        }
+
+    }
 }
