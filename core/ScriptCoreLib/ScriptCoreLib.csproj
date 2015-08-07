@@ -47,6 +47,7 @@
     <UseVSHostingProcess>true</UseVSHostingProcess>
     <NoWarn>67, 108, 1587, 169, 618</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -165,6 +166,7 @@
     <Compile Include="Shared\BCLImplementation\System\IObservable.cs" />
     <Compile Include="Shared\BCLImplementation\System\Net\EndPoint.cs" />
     <Compile Include="Shared\BCLImplementation\System\Net\Sockets\UdpReceiveResult.cs" />
+    <Compile Include="Shared\BCLImplementation\System\Numerics\Matrix4x4.cs" />
     <Compile Include="Shared\BCLImplementation\System\Numerics\Vector2.cs" />
     <Compile Include="Shared\BCLImplementation\System\Numerics\Vector4.cs" />
     <Compile Include="Shared\BCLImplementation\System\Reflection\IReflect.cs" />
