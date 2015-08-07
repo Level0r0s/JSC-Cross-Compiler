@@ -136,6 +136,15 @@ namespace ChromeShaderToyPrograms
 
             Native.body.style.backgroundColor = "blue";
 
+            gl.oncontextlost += delegate
+            {
+                Native.body.style.backgroundColor = "red";
+
+                // reload?
+                
+            };
+
+            //gl.canvas.async.oncont
 
             var combo = new IHTMLSelect().AttachToDocument();
 
@@ -206,6 +215,8 @@ namespace ChromeShaderToyPrograms
                 mMouseOriY = -Math.Abs(mMouseOriY);
             };
 
+           //c.ontouchmove += 
+
             c.onmousemove += ev =>
             {
                 if (ev.MouseButton == IEvent.MouseButtonEnum.Left)
@@ -253,7 +264,8 @@ namespace ChromeShaderToyPrograms
                         position = IStyle.PositionEnum.absolute,
                         right = "1em",
                         top = "2em",
-                        bottom = "1em"
+                        bottom = "1em",
+                        padding = "4em"
                     };
 
                     next.onclick += delegate

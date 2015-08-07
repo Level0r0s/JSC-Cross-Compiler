@@ -856,6 +856,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExovoidLogoByRoberto", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OblivionByHoskins", "..\synergy\OblivionByHoskins\OblivionByHoskins\OblivionByHoskins.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeLightByBeyondTheStatic", "..\synergy\ShapeLightByBeyondTheStatic\ShapeLightByBeyondTheStatic\ShapeLightByBeyondTheStatic.csproj", "{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -2454,6 +2456,10 @@ Global
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}.Debug|x86.ActiveCfg = Debug|x86
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}.Debug|x86.Build.0 = Debug|x86
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}.Release|x86.ActiveCfg = Release|x86
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2881,5 +2887,6 @@ Global
 		{929B036F-0005-42AC-8D79-0088891BADD0} = {F938B933-5FAD-41D4-8813-7F51CEFF1B8E}
 		{0E8755C0-C084-4357-B903-C8EE03CC6937} = {D5965CD1-F0B9-4821-943C-C1078CBD0503}
 		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {57FF136E-E3D9-4403-907A-DC57E1658181}
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C} = {6FFB21C5-17AB-4499-948A-AA2F6B43C352}
 	EndGlobalSection
 EndGlobal

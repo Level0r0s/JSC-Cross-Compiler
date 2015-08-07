@@ -319,6 +319,7 @@ namespace ScriptCoreLib.JavaScript.WebGL
                 // tested by
                 // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyColumns\ChromeShaderToyColumns\Library\ShaderToy.cs
                 // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyProgramsAsGazeTiles\ChromeShaderToyProgramsAsGazeTiles\Application.cs
+                // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyPrograms\ChromeShaderToyPrograms\Application.cs
 
                 // http://src.chromium.org/viewvc/blink/trunk/Source/core/html/canvas/WebGLContextEventInit.idl
                 // http://src.chromium.org/viewvc/blink/trunk/Source/core/html/canvas/WebGLContextEvent.idl

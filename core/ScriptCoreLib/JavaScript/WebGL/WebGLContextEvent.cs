@@ -11,6 +11,8 @@ namespace ScriptCoreLib.JavaScript.WebGL
 	[Script(HasNoPrototype = true)]
     public class WebGLContextEvent : IEvent
     {
+        // tested by?
+
 		public string statusMessage;
     }
 }

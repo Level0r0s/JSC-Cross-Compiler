@@ -1317,6 +1317,9 @@
     <Reference Include="OblivionByHoskins.AssetsLibrary">
       <HintPath>..\..\synergy\OblivionByHoskins\OblivionByHoskins\bin\staging.AssetsLibrary\OblivionByHoskins.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="ShapeLightByBeyondTheStatic.AssetsLibrary">
+      <HintPath>..\..\synergy\ShapeLightByBeyondTheStatic\ShapeLightByBeyondTheStatic\bin\staging.AssetsLibrary\ShapeLightByBeyondTheStatic.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2576,6 +2579,10 @@
     <ProjectReference Include="..\..\synergy\ShakespeareQuestByEiffie\ShakespeareQuestByEiffie\ShakespeareQuestByEiffie.csproj">
       <Project>{cb5b562c-2a62-4c77-844c-cc762c61b23b}</Project>
       <Name>ShakespeareQuestByEiffie</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\ShapeLightByBeyondTheStatic\ShapeLightByBeyondTheStatic\ShapeLightByBeyondTheStatic.csproj">
+      <Project>{ecfe9c03-6452-41dd-9c6c-c9ec38fc2f6c}</Project>
+      <Name>ShapeLightByBeyondTheStatic</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\ShapeshifterByMu6k\ShapeshifterByMu6k\ShapeshifterByMu6k.csproj">
       <Project>{17c767c7-d06c-41a6-8b95-ed644237ff6a}</Project>
