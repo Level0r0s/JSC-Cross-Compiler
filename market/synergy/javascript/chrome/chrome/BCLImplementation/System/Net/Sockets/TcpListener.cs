@@ -24,6 +24,8 @@ namespace xchrome.BCLImplementation.System.Net.Sockets
     [Script(Implements = typeof(global::System.Net.Sockets.TcpListener))]
     public class __TcpListener
     {
+        // X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPMultiPort\ChromeTCPMultiPort\Application.cs
+
         // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Net\IPAddress.cs
         // X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerAsync\ChromeTCPServerAsync\Application.cs
 
@@ -37,10 +39,34 @@ namespace xchrome.BCLImplementation.System.Net.Sockets
             this.VirtualAcceptTcpClientAsync = async delegate
             {
                 Console.WriteLine("at VirtualAcceptTcpClientAsync");
-                var iisocket = await isocket_after_listen.Task;
 
-                Console.WriteLine("at VirtualAcceptTcpClientAsync accept... ");
+                // idl is not marking it as enum:int?
+                socketId iisocket = await isocket_after_listen.Task;
+
+                Console.WriteLine("at VirtualAcceptTcpClientAsync accept... " + new { iisocket });
+
+                if (!((int)(object)iisocket > 0))
+                {
+                    // Unchecked runtime.lastError while running socket.listen: Could not listen on the specified port.
+
+                    // throw?
+                    return null;
+                }
+
                 var accept = await iisocket.accept();
+
+                // accept {{ c = {{ resultCode = -2, socketId = null }} }}
+                Console.WriteLine("at VirtualAcceptTcpClientAsync accept... " + new { accept.resultCode, accept.socketId });
+                //33551ms at VirtualAcceptTcpClientAsync accept... { { accept = [object Object] } }
+
+
+                if (accept.resultCode < 0)
+                {
+                    // throw?
+                    return null;
+                }
+
+
 
                 return new __TcpClient
                 {
@@ -104,8 +130,12 @@ namespace xchrome.BCLImplementation.System.Net.Sockets
                 {
                     var ix = await socket.create("tcp", null);
                     var isocket = ix.socketId;
+
+                    Console.WriteLine("at VirtualStart " + new { isocket });
+
                     var listen = await isocket.listen(host, port, backlog: backlog);
 
+                    Console.WriteLine("at VirtualStart " + new { listen });
 
                     isocket_after_listen.SetResult(isocket);
                 };
