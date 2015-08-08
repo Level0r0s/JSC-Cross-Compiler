@@ -25,6 +25,9 @@ namespace ChromeGalaxyS6Edge
 	/// </summary>
 	public sealed class Application : ApplicationWebService
 	{
+        // subst a: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeGalaxyS6Edge\ChromeGalaxyS6Edge\bin\Debug\staging\ChromeGalaxyS6Edge.Application\web
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeGalaxyS6Edge\ChromeGalaxyS6Edge\bin\Debug\staging\ChromeGalaxyS6Edge.Application\web
+
 		/// <summary>
 		/// This is a javascript application.
 		/// </summary>

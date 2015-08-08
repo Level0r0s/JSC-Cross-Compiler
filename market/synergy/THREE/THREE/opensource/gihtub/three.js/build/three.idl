@@ -7,6 +7,7 @@
 // X:\jsc.svn\examples\javascript\WebGL\WebGLYomotsuMD2Model\WebGLYomotsuMD2Model\Application.cs
 // "X:\opensource\github\three.js\build\three.js"
 // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201501/20150127
+// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150808/cubemapcamera
 
 
 // will the IDL compiler work as chrome app too?
@@ -230,6 +231,21 @@ interface THREE.Camera : THREE.Object3D
 
 };
 
+
+
+
+
+// tested by?
+[Constructor(
+	attribute double near,
+	attribute double far,
+	attribute double cubeResolution
+	)]
+//THREE.CubeCamera = function ( near, far, cubeResolution ) {
+interface THREE.CubeCamera : THREE.Object3D
+{
+
+};
 
 
 // http://threejs.org/docs/#Reference/Cameras/OrthographicCamera

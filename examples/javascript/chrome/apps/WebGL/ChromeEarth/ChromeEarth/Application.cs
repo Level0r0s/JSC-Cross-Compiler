@@ -19,6 +19,8 @@ using ChromeEarth.HTML.Pages;
 using System.Windows.Forms;
 using ChromeEarth.HTML.Images.FromAssets;
 
+// Error	5	The type or namespace name 'TheServerWithAppWindow' does not exist in the namespace 'ChromeTCPServer' (are you missing an assembly reference?)	Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEarth\ChromeEarth\Application.cs	77	33	ChromeEarth
+
 namespace ChromeEarth
 {
     /// <summary>
@@ -26,6 +28,9 @@ namespace ChromeEarth
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // subst a: S:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEarth\ChromeEarth\bin\Debug\staging\ChromeEarth.Application\web
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEarth\ChromeEarth\bin\Debug\staging\ChromeEarth.Application\web
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>
