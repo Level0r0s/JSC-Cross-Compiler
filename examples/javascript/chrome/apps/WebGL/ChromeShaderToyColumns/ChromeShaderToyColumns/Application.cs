@@ -31,6 +31,7 @@ namespace ChromeShaderToyColumns
 	/// </summary>
 	public sealed class Application : ApplicationWebService
 	{
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150808/equirectangular
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150718/shadertoy
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150706
         // subst b: X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyColumns\ChromeShaderToyColumns\bin\Debug\staging\ChromeShaderToyColumns.Application\web

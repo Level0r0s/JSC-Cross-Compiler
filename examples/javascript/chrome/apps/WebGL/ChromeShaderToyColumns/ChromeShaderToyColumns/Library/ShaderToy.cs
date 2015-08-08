@@ -112,7 +112,9 @@ namespace ChromeShaderToyColumns.Library
 			return vbo;
 		}
 
-		public class samplerCube
+
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\CubeToEquirectangular\CubeToEquirectangular\Application.cs
+        public class samplerCube
 		{
 
 		}

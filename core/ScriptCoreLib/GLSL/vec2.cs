@@ -92,6 +92,9 @@ namespace ScriptCoreLib.GLSL
         public static vec2 operator +(float y, vec2 x) { throw new NotImplementedException(); }
         public static vec2 operator -(vec2 y, float x) { throw new NotImplementedException(); }
 
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\CubeToEquirectangular\CubeToEquirectangular\Shaders\ProgramFragmentShader.cs
+        public static vec2 operator -(vec2 y, vec2 x) { throw new NotImplementedException(); }
+
         public static vec2 operator +(vec2 y, vec2 x)
         {
             throw new NotImplementedException();

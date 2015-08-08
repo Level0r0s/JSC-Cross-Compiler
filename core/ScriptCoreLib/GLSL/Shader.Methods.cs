@@ -41,6 +41,12 @@ namespace ScriptCoreLib.GLSL
             throw new NotImplementedException();
         }
 
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\CubeToEquirectangular\CubeToEquirectangular\Shaders\ProgramFragmentShader.cs
+        static protected vec2 vec2(float x)
+        {
+            throw new NotImplementedException();
+        }
+
 
         #region vec3
         static protected vec3 vec3(float x)
