@@ -164,14 +164,16 @@ namespace ChromeCubeCameraExperiment
             // what about physics and that portal rendering?
 
             // if we are running as a chrome web server, we may also be opened as android ndk webview app
-            var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: window.aspect, near: 1, far: 2000);
+            //var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: window.aspect, near: 1, far: 2000);
+            var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
             // once we update source
             // save the source
             // manually recompile 
             //cameraPX.position.z = 400;
 
-            // the camera should be close enough for the object to float off the FOV of PX
-            cameraPX.position.z = 200;
+            //// the camera should be close enough for the object to float off the FOV of PX
+            //cameraPX.position.z = 200;
 
             // scene
             // can we make the 3D object orbit around us ?
@@ -192,6 +194,8 @@ namespace ChromeCubeCameraExperiment
             // whats WebGLRenderTargetCube do?
 
             // WebGLRenderer preserveDrawingBuffer 
+
+            #region rendererPX
             var rendererPX = new THREE.WebGLRenderer(
 
                 new
@@ -212,7 +216,32 @@ namespace ChromeCubeCameraExperiment
 
             rendererPX.domElement.AttachToDocument();
             rendererPX.domElement.style.SetLocation(0, 0);
+            #endregion
 
+
+
+            #region rendererPY
+            var rendererPY = new THREE.WebGLRenderer(
+                  new
+                  {
+                      antialias = true,
+                      alpha = true,
+                      preserveDrawingBuffer = true
+                  }
+                );
+
+
+            rendererPY.setClearColor(0x4fffff, 1);
+
+            //renderer.setSize(window.Width, window.Height);
+            rendererPY.setSize(256, 256);
+
+            rendererPY.domElement.AttachToDocument();
+            rendererPY.domElement.style.SetLocation(256 + 8, 8);
+            #endregion
+
+
+            // c++ alias locals would be nice..
             var canvasPX = (IHTMLCanvas)rendererPX.domElement;
 
 
@@ -226,11 +255,8 @@ namespace ChromeCubeCameraExperiment
             };
 
 
-            var mouseX = 0;
-            var mouseY = 0;
             var st = new Stopwatch();
             st.Start();
-
 
             canvasPX.css.active.style.cursor = IStyle.CursorEnum.move;
 
@@ -239,24 +265,17 @@ namespace ChromeCubeCameraExperiment
                 e =>
                 {
 
-                    if (e.MouseButton == IEvent.MouseButtonEnum.Middle)
+                    // movementX no longer works
+                    old = new
                     {
-                        canvasPX.requestFullscreen();
-                    }
-                    else
-                    {
-                        // movementX no longer works
-                        old = new
-                        {
 
 
-                            e.CursorX,
-                            e.CursorY
-                        };
+                        e.CursorX,
+                        e.CursorY
+                    };
 
 
-                        e.CaptureMouse();
-                    }
+                    e.CaptureMouse();
 
                 };
             #endregion
@@ -298,26 +317,6 @@ namespace ChromeCubeCameraExperiment
 
                 };
             #endregion
-            var z = cameraPX.position.z;
-
-            //#region onmousewheel
-            //canvas.onmousewheel +=
-            //    e =>
-            //    {
-            //        //camera.position.z = 1.5;
-
-            //        // min max. shall adjust speed also!
-            //        // max 4.0
-            //        // min 0.6
-            //        z -= 10.0 * e.WheelDirection;
-
-            //        //camera.position.z = 400;
-            //        z = z.Max(200).Min(500);
-
-            //        //Native.document.title = new { z }.ToString();
-
-            //    };
-            //#endregion
 
 
 
@@ -332,7 +331,7 @@ namespace ChromeCubeCameraExperiment
                        //dae.scale.x = 30;
                        //dae.scale.y = 30;
                        //dae.scale.z = 30;
-                       dae.position.z = 65;
+                       dae.position.z = 65 - 200;
 
                        var scale = 0.7;
 
@@ -366,9 +365,10 @@ namespace ChromeCubeCameraExperiment
 
 
                                rendererPX.clear();
+                               rendererPY.clear();
 
-                               cameraPX.aspect = canvasPX.aspect;
-                               cameraPX.updateProjectionMatrix();
+                               //cameraPX.aspect = canvasPX.aspect;
+                               //cameraPX.updateProjectionMatrix();
 
                                // um what does this do?
                                //cameraPX.position.z += (z - cameraPX.position.z) * e.delay.ElapsedMilliseconds / 200.0;
@@ -377,8 +377,12 @@ namespace ChromeCubeCameraExperiment
 
                                cameraPX.lookAt(scene.position);
 
+                               // and then rotate right?
+                               cameraPY.lookAt(scene.position);
+
                                // how can we render cubemap?
                                rendererPX.render(scene, cameraPX);
+                               rendererPY.render(scene, cameraPY);
 
 
                            };
@@ -388,15 +392,6 @@ namespace ChromeCubeCameraExperiment
                );
 
 
-            Native.window.onresize +=
-                delegate
-                {
-                    //if (canvas.parentNode == Native.document.body)
-                    //{
-                    //    renderer.setSize(window.Width, window.Height);
-                    //}
-
-                };
             #endregion
 
 
