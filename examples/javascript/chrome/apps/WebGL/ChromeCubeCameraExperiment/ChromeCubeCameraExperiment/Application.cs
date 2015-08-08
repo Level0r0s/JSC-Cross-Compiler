@@ -75,8 +75,8 @@ namespace ChromeCubeCameraExperiment
                 //chrome.Notification.DefaultTitle = "Nexus7";
                 //chrome.Notification.DefaultIconUrl = new x128().src;
                 ChromeTCPServer.TheServerWithStyledForm.Invoke(
-                     AppSource.Text,
-                    AtFormCreated: FormStyler.AtFormCreated
+                     AppSource.Text
+                //, AtFormCreated: FormStyler.AtFormCreated
 
                 //AtFormConstructor:
                 //    f =>
@@ -160,13 +160,18 @@ namespace ChromeCubeCameraExperiment
             #region scene
             var window = Native.window;
 
-            var cameraPX = new THREE.PerspectiveCamera(
-                45,
-                window.aspect,
-                1,
-                2000
-                );
-            cameraPX.position.z = 400;
+
+            // what about physics and that portal rendering?
+
+            // if we are running as a chrome web server, we may also be opened as android ndk webview app
+            var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: window.aspect, near: 1, far: 2000);
+            // once we update source
+            // save the source
+            // manually recompile 
+            //cameraPX.position.z = 400;
+
+            // the camera should be close enough for the object to float off the FOV of PX
+            cameraPX.position.z = 200;
 
             // scene
             // can we make the 3D object orbit around us ?
@@ -182,8 +187,12 @@ namespace ChromeCubeCameraExperiment
             directionalLight.position.set(0, 0, 1);
             scene.add(directionalLight);
 
+
+
+            // whats WebGLRenderTargetCube do?
+
             // WebGLRenderer preserveDrawingBuffer 
-            var renderer = new THREE.WebGLRenderer(
+            var rendererPX = new THREE.WebGLRenderer(
 
                 new
                 {
@@ -196,15 +205,15 @@ namespace ChromeCubeCameraExperiment
             // https://github.com/mrdoob/three.js/issues/3836
 
             // the construct. white bg
-            renderer.setClearColor(0xfffff, 1);
+            rendererPX.setClearColor(0xfffff, 1);
 
             //renderer.setSize(window.Width, window.Height);
-            renderer.setSize(256, 256);
+            rendererPX.setSize(256, 256);
 
-            renderer.domElement.AttachToDocument();
-            renderer.domElement.style.SetLocation(0, 0);
+            rendererPX.domElement.AttachToDocument();
+            rendererPX.domElement.style.SetLocation(0, 0);
 
-            var canvas = (IHTMLCanvas)renderer.domElement;
+            var canvasPX = (IHTMLCanvas)rendererPX.domElement;
 
 
             var old = new
@@ -223,16 +232,16 @@ namespace ChromeCubeCameraExperiment
             st.Start();
 
 
-            canvas.css.active.style.cursor = IStyle.CursorEnum.move;
+            canvasPX.css.active.style.cursor = IStyle.CursorEnum.move;
 
             #region onmousedown
-            canvas.onmousedown +=
+            canvasPX.onmousedown +=
                 e =>
                 {
 
                     if (e.MouseButton == IEvent.MouseButtonEnum.Middle)
                     {
-                        canvas.requestFullscreen();
+                        canvasPX.requestFullscreen();
                     }
                     else
                     {
@@ -256,10 +265,10 @@ namespace ChromeCubeCameraExperiment
 
             // X:\jsc.svn\examples\javascript\Test\TestMouseMovement\TestMouseMovement\Application.cs
             #region onmousemove
-            canvas.onmousemove +=
+            canvasPX.onmousemove +=
                 e =>
                 {
-                    var pointerLock = canvas == Native.document.pointerLockElement;
+                    var pointerLock = canvasPX == Native.document.pointerLockElement;
 
 
                     //Console.WriteLine(new { e.MouseButton, pointerLock, e.movementX });
@@ -291,24 +300,24 @@ namespace ChromeCubeCameraExperiment
             #endregion
             var z = cameraPX.position.z;
 
-            #region onmousewheel
-            canvas.onmousewheel +=
-                e =>
-                {
-                    //camera.position.z = 1.5;
+            //#region onmousewheel
+            //canvas.onmousewheel +=
+            //    e =>
+            //    {
+            //        //camera.position.z = 1.5;
 
-                    // min max. shall adjust speed also!
-                    // max 4.0
-                    // min 0.6
-                    z -= 10.0 * e.WheelDirection;
+            //        // min max. shall adjust speed also!
+            //        // max 4.0
+            //        // min 0.6
+            //        z -= 10.0 * e.WheelDirection;
 
-                    //camera.position.z = 400;
-                    z = z.Max(200).Min(500);
+            //        //camera.position.z = 400;
+            //        z = z.Max(200).Min(500);
 
-                    //Native.document.title = new { z }.ToString();
+            //        //Native.document.title = new { z }.ToString();
 
-                };
-            #endregion
+            //    };
+            //#endregion
 
 
 
@@ -356,19 +365,20 @@ namespace ChromeCubeCameraExperiment
                                // app reloads
 
 
-                               renderer.clear();
+                               rendererPX.clear();
 
-                               cameraPX.aspect = canvas.aspect;
+                               cameraPX.aspect = canvasPX.aspect;
                                cameraPX.updateProjectionMatrix();
 
                                // um what does this do?
-                               cameraPX.position.z += (z - cameraPX.position.z) * e.delay.ElapsedMilliseconds / 200.0;
-
+                               //cameraPX.position.z += (z - cameraPX.position.z) * e.delay.ElapsedMilliseconds / 200.0;
+                               // mousewheel allos the camera to move closer
+                               // once we see the frame in vr, can we udp sync vr tracking back to laptop?
 
                                cameraPX.lookAt(scene.position);
 
                                // how can we render cubemap?
-                               renderer.render(scene, cameraPX);
+                               rendererPX.render(scene, cameraPX);
 
 
                            };
