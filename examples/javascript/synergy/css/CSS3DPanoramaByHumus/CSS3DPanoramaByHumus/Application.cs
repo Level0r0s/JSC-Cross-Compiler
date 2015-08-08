@@ -43,42 +43,48 @@ namespace CSS3DPanoramaByHumus
             var renderer = new THREE.CSS3DRenderer();
 
             #region sides
-            var sides = new[] 
+            var sides = new[]
             {
                 new side
-			    {
-                    img=  new humus_px(),
+                {
+                    img=  new cubecamera_px(),
+                    //img=  new humus_px(),
 
                     // glsl, clr46, Vector3?
-				    position= new THREE.Vector3( -512, 0, 0 ),
-				    rotation= new THREE.Vector3( 0, Math.PI / 2, 0 )
+                    position= new THREE.Vector3( -512, 0, 0 ),
+                    rotation= new THREE.Vector3( 0, Math.PI / 2, 0 )
                 },
-			    new side {
-                    img=  new humus_nx(),
-				    position= new THREE.Vector3( 512, 0, 0 ),
-				    rotation= new THREE.Vector3( 0, -Math.PI / 2, 0 )
-			    },
-			    new side{
-                    img=  new humus_py(),
-				    position= new THREE.Vector3( 0,  512, 0 ),
-				    rotation= new THREE.Vector3( Math.PI / 2, 0, Math.PI )
-			    },
-			    new side{
-				    img=  new humus_ny(),
-				    position= new THREE.Vector3( 0, -512, 0 ),
-				    rotation= new THREE.Vector3( - Math.PI / 2, 0, Math.PI )
-			    },
-			    new side{
-                    img=  new humus_pz(),
-				    position= new THREE.Vector3( 0, 0,  512 ),
-				    rotation= new THREE.Vector3( 0, Math.PI, 0 )
-			    },
-			    new side{
-				    img=  new humus_nz(),
-				    position= new THREE.Vector3( 0, 0, -512 ),
-				    rotation= new THREE.Vector3( 0, 0, 0 )
-			    }
-		    };
+                new side {
+                    img=  new cubecamera_nx(),
+                    //img=  new humus_nx(),
+                    position= new THREE.Vector3( 512, 0, 0 ),
+                    rotation= new THREE.Vector3( 0, -Math.PI / 2, 0 )
+                },
+                new side{
+                    img=  new cubecamera_py(),
+                    //img=  new humus_py(),
+                    position= new THREE.Vector3( 0,  512, 0 ),
+                    rotation= new THREE.Vector3( Math.PI / 2, 0, Math.PI )
+                },
+                new side{
+                    img=  new cubecamera_ny(),
+                    //img=  new humus_ny(),
+                    position= new THREE.Vector3( 0, -512, 0 ),
+                    rotation= new THREE.Vector3( - Math.PI / 2, 0, Math.PI )
+                },
+                new side{
+                    img=  new cubecamera_pz(),
+                    //img=  new humus_pz(),
+                    position= new THREE.Vector3( 0, 0,  512 ),
+                    rotation= new THREE.Vector3( 0, Math.PI, 0 )
+                },
+                new side{
+                    img=  new cubecamera_nz(),
+                    //img=  new humus_nz(),
+                    position= new THREE.Vector3( 0, 0, -512 ),
+                    rotation= new THREE.Vector3( 0, 0, 0 )
+                }
+            };
             #endregion
 
             for (var i = 0; i < sides.Length; i++)
@@ -251,7 +257,7 @@ namespace CSS3DPanoramaByHumus
                     camera.updateProjectionMatrix();
                 };
 
-       
+
         }
 
     }

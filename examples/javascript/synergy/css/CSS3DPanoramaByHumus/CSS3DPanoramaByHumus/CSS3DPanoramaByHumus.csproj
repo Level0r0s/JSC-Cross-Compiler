@@ -135,6 +135,12 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
+    <Content Include="Textures\cubecamera_nx.png" />
+    <Content Include="Textures\cubecamera_ny.png" />
+    <Content Include="Textures\cubecamera_nz.png" />
+    <Content Include="Textures\cubecamera_px.png" />
+    <Content Include="Textures\cubecamera_py.png" />
+    <Content Include="Textures\cubecamera_pz.png" />
     <Content Include="Textures\humus_nx.jpg" />
     <Content Include="Textures\humus_ny.jpg" />
     <Content Include="Textures\humus_nz.jpg" />

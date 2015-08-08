@@ -152,8 +152,14 @@ namespace ChromeCubeCameraExperiment
 
 
             Native.css.style.backgroundColor = "blue";
+            Native.css.style.overflow = IStyle.OverflowEnum.hidden;
 
             Native.body.Clear();
+
+            new IHTMLPre { "can we stream it into VR, shadertoy, youtube 360, youtube stereo yet?" }.AttachToDocument();
+
+
+            var pause = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox, title = "pause" }.AttachToDocument();
 
             var oo = new List<THREE.Object3D>();
 
@@ -165,8 +171,6 @@ namespace ChromeCubeCameraExperiment
 
             // if we are running as a chrome web server, we may also be opened as android ndk webview app
             //var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: window.aspect, near: 1, far: 2000);
-            var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
-            var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
             // once we update source
             // save the source
             // manually recompile 
@@ -195,8 +199,12 @@ namespace ChromeCubeCameraExperiment
 
             // WebGLRenderer preserveDrawingBuffer 
 
-            #region rendererPX
-            var rendererPX = new THREE.WebGLRenderer(
+            //const int size = 128;
+            //const int size = 256; // 6 faces, 12KB
+            const int size = 512; // 6 faces, ?
+            //const int size = 1024; // 6 faces, ?
+
+            var renderer0 = new THREE.WebGLRenderer(
 
                 new
                 {
@@ -209,40 +217,99 @@ namespace ChromeCubeCameraExperiment
             // https://github.com/mrdoob/three.js/issues/3836
 
             // the construct. white bg
-            rendererPX.setClearColor(0xfffff, 1);
+            renderer0.setClearColor(0xfffff, 1);
 
             //renderer.setSize(window.Width, window.Height);
-            rendererPX.setSize(256, 256);
+            renderer0.setSize(size, size);
 
-            rendererPX.domElement.AttachToDocument();
-            rendererPX.domElement.style.SetLocation(0, 0);
+            //renderer0.domElement.AttachToDocument();
+            //rendererPX.domElement.style.SetLocation(0, 0);
+            //renderer0.domElement.style.SetLocation(4, 4);
+
+
+            // top
+
+            // http://stackoverflow.com/questions/27612524/can-multiple-webglrenderers-render-the-same-scene
+
+
+            // need a place to show the cubemap face to GUI 
+            // how does the stereo OTOY do it?
+            // https://www.opengl.org/wiki/Sampler_(GLSL)
+
+            // http://www.richardssoftware.net/Home/Post/25
+
+            // [+X, –X, +Y, –Y, +Z, –Z] fa
+
+            var uizoom = 0.25;
+
+
+            #region x
+            var cameraNX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            cameraNX.lookAt(new THREE.Vector3(-1, 0, 0));
+            var canvasNX = new CanvasRenderingContext2D(size, size);
+            canvasNX.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 2, 8 + (int)(uizoom * size + 8) * 1);
+            canvasNX.canvas.title = "NX";
+            canvasNX.canvas.AttachToDocument();
+            canvasNX.canvas.style.transformOrigin = "0 0";
+            canvasNX.canvas.style.transform = $"scale({uizoom})";
+
+            var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            cameraPX.lookAt(new THREE.Vector3(1, 0, 0));
+            var canvasPX = new CanvasRenderingContext2D(size, size);
+            canvasPX.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 0, 8 + (int)(uizoom * size + 8) * 1);
+            canvasPX.canvas.title = "PX";
+            canvasPX.canvas.AttachToDocument();
+            canvasPX.canvas.style.transformOrigin = "0 0";
+            canvasPX.canvas.style.transform = $"scale({uizoom})";
             #endregion
 
 
+            #region y
+            // need to rotate90?
+            var cameraNY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            cameraNY.lookAt(new THREE.Vector3(0, -1, 0));
+            var canvasNY = new CanvasRenderingContext2D(size, size);
+            canvasNY.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 1, 8 + (int)(uizoom * size + 8) * 2);
+            canvasNY.canvas.title = "NY";
+            canvasNY.canvas.AttachToDocument();
+            canvasNY.canvas.style.transformOrigin = "0 0";
+            canvasNY.canvas.style.transform = $"scale({uizoom})";
 
-            #region rendererPY
-            var rendererPY = new THREE.WebGLRenderer(
-                  new
-                  {
-                      antialias = true,
-                      alpha = true,
-                      preserveDrawingBuffer = true
-                  }
-                );
-
-
-            rendererPY.setClearColor(0x4fffff, 1);
-
-            //renderer.setSize(window.Width, window.Height);
-            rendererPY.setSize(256, 256);
-
-            rendererPY.domElement.AttachToDocument();
-            rendererPY.domElement.style.SetLocation(256 + 8, 8);
+            var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            cameraPY.lookAt(new THREE.Vector3(0, 1, 0));
+            var canvasPY = new CanvasRenderingContext2D(size, size);
+            canvasPY.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 1, 8 + (int)(uizoom * size + 8) * 0);
+            canvasPY.canvas.title = "PY";
+            canvasPY.canvas.AttachToDocument();
+            canvasPY.canvas.style.transformOrigin = "0 0";
+            canvasPY.canvas.style.transform = $"scale({uizoom})";
             #endregion
+
+            #region z
+            var cameraNZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            cameraNZ.lookAt(new THREE.Vector3(0, 0, -1));
+            var canvasNZ = new CanvasRenderingContext2D(size, size);
+            canvasNZ.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 3, 8 + (int)(uizoom * size + 8) * 1);
+            canvasNZ.canvas.title = "NZ";
+            canvasNZ.canvas.AttachToDocument();
+            canvasNZ.canvas.style.transformOrigin = "0 0";
+            canvasNZ.canvas.style.transform = $"scale({uizoom})";
+
+            var cameraPZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            cameraPZ.lookAt(new THREE.Vector3(0, 0, 1));
+            var canvasPZ = new CanvasRenderingContext2D(size, size);
+            canvasPZ.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 1, 8 + (int)(uizoom * size + 8) * 1);
+            canvasPZ.canvas.title = "PZ";
+            canvasPZ.canvas.AttachToDocument();
+            canvasPZ.canvas.style.transformOrigin = "0 0";
+            canvasPZ.canvas.style.transform = $"scale({uizoom})";
+            #endregion
+
+
 
 
             // c++ alias locals would be nice..
-            var canvasPX = (IHTMLCanvas)rendererPX.domElement;
+            var canvas0 = (IHTMLCanvas)renderer0.domElement;
 
 
             var old = new
@@ -258,12 +325,14 @@ namespace ChromeCubeCameraExperiment
             var st = new Stopwatch();
             st.Start();
 
-            canvasPX.css.active.style.cursor = IStyle.CursorEnum.move;
+            //canvas0.css.active.style.cursor = IStyle.CursorEnum.move;
 
             #region onmousedown
-            canvasPX.onmousedown +=
-                e =>
+            Native.body.onmousedown +=
+                async e =>
                 {
+                    if (e.Element.nodeName.ToLower() != "canvas")
+                        return;
 
                     // movementX no longer works
                     old = new
@@ -275,7 +344,12 @@ namespace ChromeCubeCameraExperiment
                     };
 
 
-                    e.CaptureMouse();
+                    //e.CaptureMouse();
+                    var release = e.Element.CaptureMouse();
+                    await e.Element.async.onmouseup;
+
+                    release();
+
 
                 };
             #endregion
@@ -284,10 +358,22 @@ namespace ChromeCubeCameraExperiment
 
             // X:\jsc.svn\examples\javascript\Test\TestMouseMovement\TestMouseMovement\Application.cs
             #region onmousemove
-            canvasPX.onmousemove +=
+            Native.body.onmousemove +=
                 e =>
                 {
-                    var pointerLock = canvasPX == Native.document.pointerLockElement;
+                    if (e.Element.nodeName.ToLower() != "canvas")
+                    {
+                        Native.body.style.cursor = IStyle.CursorEnum.@default;
+                        return;
+                    }
+
+                    e.preventDefault();
+                    e.stopPropagation();
+
+
+                    Native.body.style.cursor = IStyle.CursorEnum.move;
+
+                    var pointerLock = canvas0 == Native.document.pointerLockElement;
 
 
                     //Console.WriteLine(new { e.MouseButton, pointerLock, e.movementX });
@@ -318,9 +404,11 @@ namespace ChromeCubeCameraExperiment
                 };
             #endregion
 
-
-
+            // THREE.WebGLProgram: gl.getProgramInfoLog() C:\fakepath(78,3-98): warning X3557: loop only executes for 1 iteration(s), forcing loop to unroll
             // THREE.WebGLProgram: gl.getProgramInfoLog() (79,3-98): warning X3557: loop only executes for 1 iteration(s), forcing loop to unroll
+
+            // http://www.roadtovr.com/youtube-confirms-stereo-3d-360-video-support-coming-soon/
+            // https://www.youtube.com/watch?v=D-Wl9jAB45Q
 
             new Models.ColladaS6Edge().Source.Task.ContinueWithResult(
                    dae =>
@@ -331,14 +419,41 @@ namespace ChromeCubeCameraExperiment
                        //dae.scale.x = 30;
                        //dae.scale.y = 30;
                        //dae.scale.z = 30;
-                       dae.position.z = 65 - 200;
+                       dae.position.z = -(65 - 200);
 
-                       var scale = 0.7;
+
+
+
+
+                       var scale = 0.9;
 
                        // jsc, do we have ILObserver available yet?
                        dae.scale.x = scale;
                        dae.scale.y = scale;
                        dae.scale.z = scale;
+
+
+                       #region onmousewheel
+                       Native.body.onmousewheel +=
+                           e =>
+                           {
+                               e.preventDefault();
+
+                               //camera.position.z = 1.5;
+
+                               // min max. shall adjust speed also!
+                               // max 4.0
+                               // min 0.6
+                               dae.position.z -= 10.0 * e.WheelDirection;
+
+                               //camera.position.z = 400;
+                               //dae.position.z = dae.position.z.Max(-200).Min(200);
+
+                               //Native.document.title = new { z }.ToString();
+
+                           };
+                       #endregion
+
 
                        //dae.position.y = -80;
 
@@ -349,23 +464,29 @@ namespace ChromeCubeCameraExperiment
                        var sw = Stopwatch.StartNew();
 
 
+                       // view-source:http://threejs.org/examples/webgl_multiple_canvases_circle.html
                        // https://threejsdoc.appspot.com/doc/three.js/src.source/extras/cameras/CubeCamera.js.html
                        Native.window.onframe +=
                            e =>
                            {
+                               //if (pause) return;
+                               if (pause.@checked)
+                                   return;
+
 
                                // can we float out of frame?
                                // haha. a bit too flickery.
                                //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.01) * 50.0;
                                //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.001) * 190.0;
-                               dae.position.x = Math.Sin(sw.ElapsedMilliseconds * 0.001) * 190.0;
+                               dae.position.x = Math.Sin(sw.ElapsedMilliseconds * 0.0001) * 190.0;
+                               dae.position.y = Math.Cos(sw.ElapsedMilliseconds * 0.0001) * 90.0;
                                // manual rebuild?
                                // red compiler notifies laptop chrome of pending update
                                // app reloads
 
 
-                               rendererPX.clear();
-                               rendererPY.clear();
+                               renderer0.clear();
+                               //rendererPY.clear();
 
                                //cameraPX.aspect = canvasPX.aspect;
                                //cameraPX.updateProjectionMatrix();
@@ -375,14 +496,68 @@ namespace ChromeCubeCameraExperiment
                                // mousewheel allos the camera to move closer
                                // once we see the frame in vr, can we udp sync vr tracking back to laptop?
 
-                               cameraPX.lookAt(scene.position);
+
+                               //this.targetPX.x += 1;
+                               //this.targetNX.x -= 1;
+
+                               //this.targetPY.y += 1;
+                               //this.targetNY.y -= 1;
+
+                               //this.targetPZ.z += 1;
+                               //this.targetNZ.z -= 1;
+
+                               // how does the 360 or shadertoy want our cubemaps?
+
 
                                // and then rotate right?
-                               cameraPY.lookAt(scene.position);
 
                                // how can we render cubemap?
-                               rendererPX.render(scene, cameraPX);
-                               rendererPY.render(scene, cameraPY);
+
+
+                               #region x
+                               // upside down?
+                               renderer0.render(scene, cameraPX);
+                               canvasPX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
+
+                               renderer0.render(scene, cameraNX);
+                               canvasNX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
+                               #endregion
+
+                               #region z
+                               renderer0.render(scene, cameraPZ);
+                               canvasPZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
+
+                               renderer0.render(scene, cameraNZ);
+                               canvasNZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
+                               #endregion
+
+
+
+                               #region y
+                               renderer0.render(scene, cameraPY);
+
+                               canvasPY.save();
+                               canvasPY.translate(0, size);
+                               canvasPY.rotate((float)(-Math.PI / 2));
+                               canvasPY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
+                               canvasPY.restore();
+
+                               // ?
+
+                               renderer0.render(scene, cameraNY);
+                               canvasNY.save();
+                               canvasNY.translate(size, 0);
+                               canvasNY.rotate((float)(Math.PI / 2));
+                               canvasNY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
+                               canvasNY.restore();
+                               // ?
+                               #endregion
+
+
+                               //renderer0.render(scene, cameraPX);
+
+
+                               //rendererPY.render(scene, cameraPY);
 
 
                            };
