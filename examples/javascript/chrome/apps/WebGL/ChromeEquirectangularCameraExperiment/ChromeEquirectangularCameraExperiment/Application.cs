@@ -1,4 +1,4 @@
-#define AsWEBSERVER
+//#define AsWEBSERVER
 
 using ScriptCoreLib;
 using ScriptCoreLib.Delegates;
@@ -19,9 +19,12 @@ using ChromeEquirectangularCameraExperiment;
 using ChromeEquirectangularCameraExperiment.Design;
 using ChromeEquirectangularCameraExperiment.HTML.Pages;
 using System.Diagnostics;
+using ScriptCoreLib.JavaScript.WebGL;
 
 namespace ChromeEquirectangularCameraExperiment
 {
+    using gl = WebGLRenderingContext;
+
     /// <summary>
     /// Your client side code running inside a web browser as JavaScript.
     /// </summary>
@@ -161,7 +164,21 @@ namespace ChromeEquirectangularCameraExperiment
             new IHTMLPre { "can we stream it into VR, shadertoy, youtube 360, youtube stereo yet?" }.AttachToDocument();
 
 
+            var sw = Stopwatch.StartNew();
+
             var pause = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox, title = "pause" }.AttachToDocument();
+
+
+            pause.onchange += delegate
+            {
+
+                if (pause.@checked)
+                    sw.Stop();
+                else
+                    sw.Start();
+
+
+            };
 
             var oo = new List<THREE.Object3D>();
 
@@ -203,8 +220,12 @@ namespace ChromeEquirectangularCameraExperiment
 
             //const int size = 128;
             //const int size = 256; // 6 faces, 12KB
-            const int size = 512; // 6 faces, ?
-            //const int size = 1024; // 6 faces, ?
+            //const int size = 512; // 6 faces, ?
+
+            // WebGL: drawArrays: texture bound to texture unit 0 is not renderable. It maybe non-power-of-2 and have incompatible texture filtering or is not 'texture complete'. Or the texture is Float or Half Float type with linear filtering while OES_float_linear or OES_half_float_linear extension is not enabled.
+
+            //const int size = 720; // 6 faces, ?
+            const int size = 1024; // 6 faces, ?
 
             var renderer0 = new THREE.WebGLRenderer(
 
@@ -242,34 +263,14 @@ namespace ChromeEquirectangularCameraExperiment
 
             // [+X, –X, +Y, –Y, +Z, –Z] fa
 
-            var uizoom = 0.25;
-
-
-            #region x
-            var cameraNX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
-            cameraNX.lookAt(new THREE.Vector3(-1, 0, 0));
-            var canvasNX = new CanvasRenderingContext2D(size, size);
-            canvasNX.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 2, 8 + (int)(uizoom * size + 8) * 1);
-            canvasNX.canvas.title = "NX";
-            canvasNX.canvas.AttachToDocument();
-            canvasNX.canvas.style.transformOrigin = "0 0";
-            canvasNX.canvas.style.transform = $"scale({uizoom})";
-
-            var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
-            cameraPX.lookAt(new THREE.Vector3(1, 0, 0));
-            var canvasPX = new CanvasRenderingContext2D(size, size);
-            canvasPX.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 0, 8 + (int)(uizoom * size + 8) * 1);
-            canvasPX.canvas.title = "PX";
-            canvasPX.canvas.AttachToDocument();
-            canvasPX.canvas.style.transformOrigin = "0 0";
-            canvasPX.canvas.style.transform = $"scale({uizoom})";
-            #endregion
+            var uizoom = 0.1;
 
 
             #region y
             // need to rotate90?
             var cameraNY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
             cameraNY.lookAt(new THREE.Vector3(0, -1, 0));
+            //cameraNY.lookAt(new THREE.Vector3(0, 1, 0));
             var canvasNY = new CanvasRenderingContext2D(size, size);
             canvasNY.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 1, 8 + (int)(uizoom * size + 8) * 2);
             canvasNY.canvas.title = "NY";
@@ -279,6 +280,7 @@ namespace ChromeEquirectangularCameraExperiment
 
             var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
             cameraPY.lookAt(new THREE.Vector3(0, 1, 0));
+            //cameraPY.lookAt(new THREE.Vector3(0, -1, 0));
             var canvasPY = new CanvasRenderingContext2D(size, size);
             canvasPY.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 1, 8 + (int)(uizoom * size + 8) * 0);
             canvasPY.canvas.title = "PY";
@@ -287,9 +289,42 @@ namespace ChromeEquirectangularCameraExperiment
             canvasPY.canvas.style.transform = $"scale({uizoom})";
             #endregion
 
+            // transpose xz?
+
+            #region x
+            var cameraNX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            cameraNX.lookAt(new THREE.Vector3(0, 0, 1));
+            //cameraNX.lookAt(new THREE.Vector3(0, 0, -1));
+            //cameraNX.lookAt(new THREE.Vector3(-1, 0, 0));
+            //cameraNX.lookAt(new THREE.Vector3(1, 0, 0));
+            var canvasNX = new CanvasRenderingContext2D(size, size);
+            canvasNX.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 2, 8 + (int)(uizoom * size + 8) * 1);
+            canvasNX.canvas.title = "NX";
+            canvasNX.canvas.AttachToDocument();
+            canvasNX.canvas.style.transformOrigin = "0 0";
+            canvasNX.canvas.style.transform = $"scale({uizoom})";
+
+            var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            cameraPX.lookAt(new THREE.Vector3(0, 0, -1));
+            //cameraPX.lookAt(new THREE.Vector3(0, 0, 1));
+            //cameraPX.lookAt(new THREE.Vector3(1, 0, 0));
+            //cameraPX.lookAt(new THREE.Vector3(-1, 0, 0));
+            var canvasPX = new CanvasRenderingContext2D(size, size);
+            canvasPX.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 0, 8 + (int)(uizoom * size + 8) * 1);
+            canvasPX.canvas.title = "PX";
+            canvasPX.canvas.AttachToDocument();
+            canvasPX.canvas.style.transformOrigin = "0 0";
+            canvasPX.canvas.style.transform = $"scale({uizoom})";
+            #endregion
+
+
+
             #region z
             var cameraNZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
-            cameraNZ.lookAt(new THREE.Vector3(0, 0, -1));
+            //cameraNZ.lookAt(new THREE.Vector3(0, 0, -1));
+            cameraNX.lookAt(new THREE.Vector3(1, 0, 0));
+            //cameraNX.lookAt(new THREE.Vector3(-1, 0, 0));
+            //cameraNZ.lookAt(new THREE.Vector3(0, 0, 1));
             var canvasNZ = new CanvasRenderingContext2D(size, size);
             canvasNZ.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 3, 8 + (int)(uizoom * size + 8) * 1);
             canvasNZ.canvas.title = "NZ";
@@ -298,7 +333,10 @@ namespace ChromeEquirectangularCameraExperiment
             canvasNZ.canvas.style.transform = $"scale({uizoom})";
 
             var cameraPZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
-            cameraPZ.lookAt(new THREE.Vector3(0, 0, 1));
+            //cameraPZ.lookAt(new THREE.Vector3(1, 0, 0));
+            cameraPZ.lookAt(new THREE.Vector3(-1, 0, 0));
+            //cameraPZ.lookAt(new THREE.Vector3(0, 0, 1));
+            //cameraPZ.lookAt(new THREE.Vector3(0, 0, -1));
             var canvasPZ = new CanvasRenderingContext2D(size, size);
             canvasPZ.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 1, 8 + (int)(uizoom * size + 8) * 1);
             canvasPZ.canvas.title = "PZ";
@@ -412,6 +450,99 @@ namespace ChromeEquirectangularCameraExperiment
             // http://www.roadtovr.com/youtube-confirms-stereo-3d-360-video-support-coming-soon/
             // https://www.youtube.com/watch?v=D-Wl9jAB45Q
 
+
+
+            #region spherical
+            var gl = new WebGLRenderingContext(alpha: true);
+            var c = gl.canvas.AttachToDocument();
+
+            //  3840x2160
+
+            //c.style.SetSize(3840, 2160);
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150722/360-youtube
+
+
+            c.width = 3840;
+            c.height = 2160;
+
+            // wont work
+            //c.width = 8192;
+            //c.height = 4096;
+
+
+            // this has the wrong aspect?
+            //c.width = 6466;
+            //c.height = 3232;
+
+            new IHTMLPre { new { c.width, c.height } }.AttachToDocument();
+
+            //6466x3232
+
+            //var suizoom = 720f / c.height;
+            //var suizoom = 360f / c.height;
+            var suizoom = 480f / c.width;
+
+            c.style.transformOrigin = "0 0";
+            c.style.transform = $"scale({suizoom})";
+            c.style.backgroundColor = "yellow";
+            c.style.position = IStyle.PositionEnum.absolute;
+
+            c.style.SetLocation(8 + (int)(uizoom * size + 8) * 0, 8 + (int)(uizoom * size + 8) * 3);
+
+            var pass = new CubeToEquirectangular.Library.ShaderToy.EffectPass(
+                       null,
+                       gl,
+                       precission: CubeToEquirectangular.Library.ShaderToy.DetermineShaderPrecission(gl),
+                       supportDerivatives: gl.getExtension("OES_standard_derivatives") != null,
+                       callback: null,
+                       obj: null,
+                       forceMuted: false,
+                       forcePaused: false,
+                       //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
+                       outputGainNode: null
+                   );
+
+            // how shall we upload our textures?
+            // can we reference GLSL.samplerCube yet?
+            //pass.mInputs[0] = new samplerCube { };
+            pass.mInputs[0] = new CubeToEquirectangular.Library.ShaderToy.samplerCube { };
+
+            pass.MakeHeader_Image();
+            var vs = new Shaders.ProgramFragmentShader();
+            pass.NewShader_Image(vs);
+
+            #endregion
+
+            //var xor = new HTML.Images.FromAssets.tiles_regrid().AttachToDocument();
+            //var xor = new HTML.Images.FromAssets.Orion360_test_image_8192x4096().AttachToDocument();
+            var xor = new HTML.Images.FromAssets._2_no_clouds_4k().AttachToDocument();
+
+
+            // 270px
+            //xor.style.height = "";
+            xor.style.height = "270px";
+            xor.style.width = "480px";
+            xor.style.SetLocation(
+                8 + (int)(uizoom * size + 8) * 0 + 480 + 16, 8 + (int)(uizoom * size + 8) * 3);
+
+
+            var mesh = new THREE.Mesh(new THREE.SphereGeometry(500, 50, 50),
+           new THREE.MeshBasicMaterial(new
+           {
+               map = THREE.ImageUtils.loadTexture(
+                  //new HTML.Images.FromAssets._2294472375_24a3b8ef46_o().src
+                  //new HTML.Images.FromAssets._4008650304_7f837ccbb7_b().src
+                  xor.src
+                   //new WebGLEquirectangularPanorama.HTML.Images.FromAssets.PANO_20130616_222058().src
+                   //new WebGLEquirectangularPanorama.HTML.Images.FromAssets.PANO_20121225_210448().src
+
+                   )
+           }));
+            mesh.scale.x = -1;
+            scene.add(mesh);
+
+
             new Models.ColladaS6Edge().Source.Task.ContinueWithResult(
                    dae =>
                    {
@@ -463,7 +594,6 @@ namespace ChromeEquirectangularCameraExperiment
                        oo.Add(dae);
 
 
-                       var sw = Stopwatch.StartNew();
 
 
                        // view-source:http://threejs.org/examples/webgl_multiple_canvases_circle.html
@@ -472,8 +602,8 @@ namespace ChromeEquirectangularCameraExperiment
                            e =>
                            {
                                //if (pause) return;
-                               if (pause.@checked)
-                                   return;
+                               //if (pause.@checked)
+                               //    return;
 
 
                                // can we float out of frame?
@@ -538,20 +668,19 @@ namespace ChromeEquirectangularCameraExperiment
                                #region y
                                renderer0.render(scene, cameraPY);
 
-                               canvasPY.save();
-                               canvasPY.translate(0, size);
-                               canvasPY.rotate((float)(-Math.PI / 2));
+                               //canvasPY.save();
+                               //canvasPY.translate(0, size);
+                               //canvasPY.rotate((float)(-Math.PI / 2));
                                canvasPY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
-                               canvasPY.restore();
+                               //canvasPY.restore();
 
-                               // ?
 
                                renderer0.render(scene, cameraNY);
-                               canvasNY.save();
-                               canvasNY.translate(size, 0);
-                               canvasNY.rotate((float)(Math.PI / 2));
+                               //canvasNY.save();
+                               //canvasNY.translate(size, 0);
+                               //canvasNY.rotate((float)(Math.PI / 2));
                                canvasNY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
-                               canvasNY.restore();
+                               //canvasNY.restore();
                                // ?
                                #endregion
 
@@ -561,6 +690,72 @@ namespace ChromeEquirectangularCameraExperiment
 
                                //rendererPY.render(scene, cameraPY);
 
+                               // at this point we should be able to render the sphere texture
+
+                               //public const uint TEXTURE_CUBE_MAP_POSITIVE_X = 34069;
+                               //public const uint TEXTURE_CUBE_MAP_NEGATIVE_X = 34070;
+                               //public const uint TEXTURE_CUBE_MAP_POSITIVE_Y = 34071;
+                               //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Y = 34072;
+                               //public const uint TEXTURE_CUBE_MAP_POSITIVE_Z = 34073;
+                               //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074;
+
+
+                               //var cube0 = new IHTMLImage[] {
+                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_px(),
+                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nx(),
+
+                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_py(),
+                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_ny(),
+
+
+                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_pz(),
+                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nz()
+                               //};
+
+                               new[] {
+                                   canvasPX, canvasNX,
+                                   canvasPY, canvasNY,
+                                   canvasPZ, canvasNZ
+                               }.WithEachIndex(
+                                   (img, index) =>
+                                   {
+                                       gl.bindTexture(gl.TEXTURE_CUBE_MAP, pass.tex);
+
+                                       //gl.pixelStorei(gl.UNPACK_FLIP_X_WEBGL, false);
+                                       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+
+                                       // http://stackoverflow.com/questions/15364517/pixelstoreigl-unpack-flip-y-webgl-true
+
+                                       // https://msdn.microsoft.com/en-us/library/dn302429(v=vs.85).aspx
+                                       //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
+                                       //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+
+                                       gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X + (uint)index, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img.canvas);
+
+                                   }
+                                );
+
+
+                               pass.Paint_Image(
+                                     0,
+
+                                     0,
+                                     0,
+                                     0,
+                                     0
+                                //,
+
+                                // gl_FragCoord
+                                // cannot be scaled, and can be referenced directly.
+                                // need another way to scale
+                                //zoom: 0.3f
+                                );
+
+                               //paintsw.Stop();
+
+
+                               // what does it do?
+                               gl.flush();
 
                            };
 

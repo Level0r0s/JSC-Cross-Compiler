@@ -329,5 +329,11 @@ namespace ScriptCoreLib.JavaScript.WebGL
             }
             remove { }
         }
+
+
+
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularCameraExperiment\ChromeEquirectangularCameraExperiment\Application.cs
+        public void pixelStorei(uint pname, bool param)
+        { }
     }
 }

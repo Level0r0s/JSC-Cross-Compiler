@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeEquirectangularCamera
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CubeToEquirectangular", "..\CubeToEquirectangular\CubeToEquirectangular\CubeToEquirectangular.csproj", "{EB93B081-4EDC-41A2-85B3-0487062617CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLEquirectangularPanorama", "..\..\..\..\synergy\webgl\WebGLEquirectangularPanorama\WebGLEquirectangularPanorama\WebGLEquirectangularPanorama.csproj", "{A9E994CF-F125-4571-9BED-52B5B5A92826}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{9B371290-223A-4EA3-8D7B-C59CCD1EB280}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLEarthByBjorn", "..\..\..\..\synergy\webgl\WebGLEarthByBjorn\WebGLEarthByBjorn\WebGLEarthByBjorn.csproj", "{9A1F5234-675E-4B8E-8E26-AAD983393A23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -21,8 +27,21 @@ Global
 		{EB93B081-4EDC-41A2-85B3-0487062617CC}.Debug|x86.Build.0 = Debug|x86
 		{EB93B081-4EDC-41A2-85B3-0487062617CC}.Release|x86.ActiveCfg = Release|x86
 		{EB93B081-4EDC-41A2-85B3-0487062617CC}.Release|x86.Build.0 = Release|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Debug|x86.ActiveCfg = Debug|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Debug|x86.Build.0 = Debug|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Release|x86.ActiveCfg = Release|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Release|x86.Build.0 = Release|x86
+		{9A1F5234-675E-4B8E-8E26-AAD983393A23}.Debug|x86.ActiveCfg = Debug|x86
+		{9A1F5234-675E-4B8E-8E26-AAD983393A23}.Debug|x86.Build.0 = Debug|x86
+		{9A1F5234-675E-4B8E-8E26-AAD983393A23}.Release|x86.ActiveCfg = Release|x86
+		{9A1F5234-675E-4B8E-8E26-AAD983393A23}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EB93B081-4EDC-41A2-85B3-0487062617CC} = {9B371290-223A-4EA3-8D7B-C59CCD1EB280}
+		{A9E994CF-F125-4571-9BED-52B5B5A92826} = {9B371290-223A-4EA3-8D7B-C59CCD1EB280}
+		{9A1F5234-675E-4B8E-8E26-AAD983393A23} = {9B371290-223A-4EA3-8D7B-C59CCD1EB280}
 	EndGlobalSection
 EndGlobal
