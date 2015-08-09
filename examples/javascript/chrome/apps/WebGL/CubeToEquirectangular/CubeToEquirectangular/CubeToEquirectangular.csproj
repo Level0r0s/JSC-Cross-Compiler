@@ -140,13 +140,17 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
+    <Content Include="Textures\cube02_0.jpg" />
+    <Content Include="Textures\cube02_1.jpg" />
+    <Content Include="Textures\cube02_2.jpg" />
+    <Content Include="Textures\cube02_3.jpg" />
+    <Content Include="Textures\cube02_4.jpg" />
+    <Content Include="Textures\cube02_5.jpg" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Shaders\Program.frag" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Textures\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>start /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe ConfigurationCreateNuGetPackage /AssemblyMergeExtension:$(TargetPath) /AssemblyMerge:$(TargetName).AssetsLibrary.dll /OutputDirectory:C:\util\jsc\nuget /PackageID:"WebGL.ShaderToy" /OutputName:"WebGL ShaderToy"

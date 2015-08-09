@@ -312,6 +312,13 @@ namespace CubeToEquirectangular.Library
                 // used by?
                 var mFrame = 0;
 
+
+
+
+
+
+                // http://math.hws.edu/eck/cs424/notes2013/19_GLSL.html
+                // http://stackoverflow.com/questions/10079368/how-would-i-do-environment-reflection-in-webgl-without-using-a-library-like-thre
                 this.MakeHeader_Image = delegate
                 {
                     #region MakeHeader_Image
@@ -347,6 +354,64 @@ namespace CubeToEquirectangular.Library
                         if (inp is samplerCube)
                         {
                             new IHTMLPre { "add MakeHeader_Image samplerCube" }.AttachToDocument();
+
+                            var tex = new WebGLTexture(gl);
+
+                            // http://stackoverflow.com/questions/10079368/how-would-i-do-environment-reflection-in-webgl-without-using-a-library-like-thre
+                            // view-source:https://www.shadertoy.com/js/effect.js
+
+                            // um can there be only one samplerCube?
+                            gl.activeTexture(gl.TEXTURE0);
+                            gl.enable(gl.TEXTURE_CUBE_MAP);
+                            gl.bindTexture(gl.TEXTURE_CUBE_MAP, tex);
+                            //gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_S, (int)gl.CLAMP_TO_EDGE);
+                            //gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_T, (int)gl.CLAMP_TO_EDGE);
+                            gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, (int)gl.LINEAR);
+                            gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, (int)gl.LINEAR);
+
+                            var cube0 = new IHTMLImage[] {
+                                    new HTML.Images.FromAssets.cube02_0(),
+                                    new HTML.Images.FromAssets.cube02_1(),
+                                    new HTML.Images.FromAssets.cube02_2(),
+                                    new HTML.Images.FromAssets.cube02_3(),
+                                    new HTML.Images.FromAssets.cube02_4(),
+                                    new HTML.Images.FromAssets.cube02_5()
+                            };
+
+
+
+
+                            cube0.WithEachIndex(
+                                (pendingimg, index) =>
+                                {
+                                    pendingimg.InvokeOnComplete(
+                                        img =>
+                                        {
+                                            gl.bindTexture(gl.TEXTURE_CUBE_MAP, tex);
+                                            //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+                                            gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
+                                            gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X + (uint)index, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+
+                                            new IHTMLPre { "add MakeHeader_Image samplerCube TEXTURE_CUBE_MAP_POSITIVE_X + " + new { index } }.AttachToDocument();
+
+                                            if (index == 5)
+                                            {
+                                                new IHTMLPre { "add MakeHeader_Image samplerCube activeTexture  " }.AttachToDocument();
+
+                                                //  samplerCube iChannel0; = 0 = TEXTURE0
+                                            }
+
+                                            // https://code.google.com/p/opengles-book-samples/source/browse/trunk/WebGL/Chapter_9/Simple_TextureCubemap/Simple_TextureCubemap.html?r=5
+                                            // http://stackoverflow.com/questions/31665132/gl-invalid-operation-caused-by-samplercube
+                                            // http://forum.processing.org/two/discussion/7039/samplercube-and-ambient-reflection
+
+
+                                        }
+                                    );
+                                }
+                            );
+
+
                             header += "uniform samplerCube iChannel" + i + ";\n";
                         }
                         else
@@ -355,6 +420,7 @@ namespace CubeToEquirectangular.Library
                             header += "uniform sampler2D iChannel" + i + ";\n";
                         }
 
+                        // dont need it?
                         headerlength++;
                     }
 
@@ -451,10 +517,10 @@ color.a = 1.0;
 
                             //var l9 = gl.getUniformLocation(this.mProgram, "iSampleRate"); if (l9 != null) gl.uniform1f(l9, this.mSampleRate);
 
-                            var ich0 = gl.getUniformLocation(mProgram, "iChannel0"); if (ich0 != null) gl.uniform1i(ich0, 0);
-                            var ich1 = gl.getUniformLocation(mProgram, "iChannel1"); if (ich1 != null) gl.uniform1i(ich1, 1);
-                            var ich2 = gl.getUniformLocation(mProgram, "iChannel2"); if (ich2 != null) gl.uniform1i(ich2, 2);
-                            var ich3 = gl.getUniformLocation(mProgram, "iChannel3"); if (ich3 != null) gl.uniform1i(ich3, 3);
+                            //var ich0 = gl.getUniformLocation(mProgram, "iChannel0"); if (ich0 != null) gl.uniform1i(ich0, 0);
+                            //var ich1 = gl.getUniformLocation(mProgram, "iChannel1"); if (ich1 != null) gl.uniform1i(ich1, 1);
+                            //var ich2 = gl.getUniformLocation(mProgram, "iChannel2"); if (ich2 != null) gl.uniform1i(ich2, 2);
+                            //var ich3 = gl.getUniformLocation(mProgram, "iChannel3"); if (ich3 != null) gl.uniform1i(ich3, 3);
 
 
                             // what if there are other textures too?
@@ -526,6 +592,11 @@ color.a = 1.0;
 
                             gl.vertexAttribPointer(vec2pos, 2, gl.FLOAT, false, 0, 0);
                             gl.enableVertexAttribArray(vec2pos);
+
+
+                            //var iChannel0 = gl.getUniformLocation(mProgram, "iChannel0");
+
+
 
                             // GL ERROR :GL_INVALID_OPERATION : glDrawArrays: attempt to render with no buffer attached to enabled attribute 1
                             gl.drawArrays(gl.TRIANGLES, 0, 6);
