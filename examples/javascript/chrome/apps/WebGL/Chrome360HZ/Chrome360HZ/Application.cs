@@ -33,11 +33,18 @@ namespace Chrome360HZ
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // http://youtu.be/Lo1IU8UAutE
+        // 60hz 2160 4K!
+
+        // The equirectangular projection was used in map creation since it was invented around 100 A.D. by Marinus of Tyre. 
+
         //        C:\Users\Arvo> "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\hzsky.png" "/sdcard/oculus/360photos/"
         //1533 KB/s(3865902 bytes in 2.461s)
 
         //C:\Users\Arvo> "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\hznosky.png" "/sdcard/oculus/360photos/"
         //1556 KB/s(2714294 bytes in 1.703s)
+
+        //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\hz2048c3840x2160.png" "/sdcard/oculus/360photos/"
 
 
 
@@ -168,6 +175,22 @@ namespace Chrome360HZ
 
 #endif
 
+            //const int size = 128;
+            //const int size = 256; // 6 faces, 12KB
+            //const int size = 512; // 6 faces, ?
+
+            // WebGL: drawArrays: texture bound to texture unit 0 is not renderable. It maybe non-power-of-2 and have incompatible texture filtering or is not 'texture complete'. Or the texture is Float or Half Float type with linear filtering while OES_float_linear or OES_half_float_linear extension is not enabled.
+
+            //const int size = 720; // 6 faces, ?
+            //const int size = 1024; // 6 faces, ?
+            //const int size = 1024; // 6 faces, ?
+            const int cubefacesize = 2048; // 6 faces, ?
+
+
+
+            var uizoom = 0.05;
+
+            var far = 0xfffff;
 
             Native.css.style.backgroundColor = "blue";
             Native.css.style.overflow = IStyle.OverflowEnum.hidden;
@@ -268,14 +291,7 @@ namespace Chrome360HZ
 
             // WebGLRenderer preserveDrawingBuffer 
 
-            //const int size = 128;
-            //const int size = 256; // 6 faces, 12KB
-            //const int size = 512; // 6 faces, ?
 
-            // WebGL: drawArrays: texture bound to texture unit 0 is not renderable. It maybe non-power-of-2 and have incompatible texture filtering or is not 'texture complete'. Or the texture is Float or Half Float type with linear filtering while OES_float_linear or OES_half_float_linear extension is not enabled.
-
-            //const int size = 720; // 6 faces, ?
-            const int size = 1024; // 6 faces, ?
 
             var renderer0 = new THREE.WebGLRenderer(
 
@@ -293,7 +309,7 @@ namespace Chrome360HZ
             renderer0.setClearColor(0xfffff, 1);
 
             //renderer.setSize(window.Width, window.Height);
-            renderer0.setSize(size, size);
+            renderer0.setSize(cubefacesize, cubefacesize);
 
             //renderer0.domElement.AttachToDocument();
             //rendererPX.domElement.style.SetLocation(0, 0);
@@ -313,9 +329,6 @@ namespace Chrome360HZ
 
             // [+X, –X, +Y, –Y, +Z, –Z] fa
 
-            var uizoom = 0.1;
-
-            var far = 0xfffff;
 
 
             // move up
@@ -330,8 +343,8 @@ namespace Chrome360HZ
             cameraNY.position.add(cameraoffset);
 
             //cameraNY.lookAt(new THREE.Vector3(0, 1, 0));
-            var canvasNY = new CanvasRenderingContext2D(size, size);
-            canvasNY.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 1, 8 + (int)(uizoom * size + 8) * 2);
+            var canvasNY = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
+            canvasNY.canvas.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 1, 8 + (int)(uizoom * cubefacesize + 8) * 2);
             canvasNY.canvas.title = "NY";
             canvasNY.canvas.AttachToDocument();
             canvasNY.canvas.style.transformOrigin = "0 0";
@@ -341,8 +354,8 @@ namespace Chrome360HZ
             cameraPY.lookAt(new THREE.Vector3(0, 1, 0));
             cameraPY.position.add(cameraoffset);
             //cameraPY.lookAt(new THREE.Vector3(0, -1, 0));
-            var canvasPY = new CanvasRenderingContext2D(size, size);
-            canvasPY.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 1, 8 + (int)(uizoom * size + 8) * 0);
+            var canvasPY = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
+            canvasPY.canvas.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 1, 8 + (int)(uizoom * cubefacesize + 8) * 0);
             canvasPY.canvas.title = "PY";
             canvasPY.canvas.AttachToDocument();
             canvasPY.canvas.style.transformOrigin = "0 0";
@@ -358,8 +371,8 @@ namespace Chrome360HZ
             //cameraNX.lookAt(new THREE.Vector3(0, 0, -1));
             //cameraNX.lookAt(new THREE.Vector3(-1, 0, 0));
             //cameraNX.lookAt(new THREE.Vector3(1, 0, 0));
-            var canvasNX = new CanvasRenderingContext2D(size, size);
-            canvasNX.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 2, 8 + (int)(uizoom * size + 8) * 1);
+            var canvasNX = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
+            canvasNX.canvas.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 2, 8 + (int)(uizoom * cubefacesize + 8) * 1);
             canvasNX.canvas.title = "NX";
             canvasNX.canvas.AttachToDocument();
             canvasNX.canvas.style.transformOrigin = "0 0";
@@ -371,8 +384,8 @@ namespace Chrome360HZ
             //cameraPX.lookAt(new THREE.Vector3(0, 0, 1));
             //cameraPX.lookAt(new THREE.Vector3(1, 0, 0));
             //cameraPX.lookAt(new THREE.Vector3(-1, 0, 0));
-            var canvasPX = new CanvasRenderingContext2D(size, size);
-            canvasPX.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 0, 8 + (int)(uizoom * size + 8) * 1);
+            var canvasPX = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
+            canvasPX.canvas.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 0, 8 + (int)(uizoom * cubefacesize + 8) * 1);
             canvasPX.canvas.title = "PX";
             canvasPX.canvas.AttachToDocument();
             canvasPX.canvas.style.transformOrigin = "0 0";
@@ -388,8 +401,8 @@ namespace Chrome360HZ
             cameraNZ.position.add(cameraoffset);
             //cameraNX.lookAt(new THREE.Vector3(-1, 0, 0));
             //cameraNZ.lookAt(new THREE.Vector3(0, 0, 1));
-            var canvasNZ = new CanvasRenderingContext2D(size, size);
-            canvasNZ.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 3, 8 + (int)(uizoom * size + 8) * 1);
+            var canvasNZ = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
+            canvasNZ.canvas.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 3, 8 + (int)(uizoom * cubefacesize + 8) * 1);
             canvasNZ.canvas.title = "NZ";
             canvasNZ.canvas.AttachToDocument();
             canvasNZ.canvas.style.transformOrigin = "0 0";
@@ -401,8 +414,8 @@ namespace Chrome360HZ
             cameraPZ.position.add(cameraoffset);
             //cameraPZ.lookAt(new THREE.Vector3(0, 0, 1));
             //cameraPZ.lookAt(new THREE.Vector3(0, 0, -1));
-            var canvasPZ = new CanvasRenderingContext2D(size, size);
-            canvasPZ.canvas.style.SetLocation(8 + (int)(uizoom * size + 8) * 1, 8 + (int)(uizoom * size + 8) * 1);
+            var canvasPZ = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
+            canvasPZ.canvas.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 1, 8 + (int)(uizoom * cubefacesize + 8) * 1);
             canvasPZ.canvas.title = "PZ";
             canvasPZ.canvas.AttachToDocument();
             canvasPZ.canvas.style.transformOrigin = "0 0";
@@ -530,6 +543,23 @@ namespace Chrome360HZ
             c.width = 3840;
             c.height = 2160;
 
+
+            //c.width = 3840 * 2;
+            //c.height = 2160 * 2;
+
+
+            //c.width = 3840;
+            //c.height = 2160;
+            // 1,777777777777778
+
+            // https://www.youtube.com/watch?v=fTfJwzRsE-w
+            //c.width = 7580;
+            //c.height = 3840;
+            //1,973958333333333
+
+            //7580
+            //    3840
+
             // wont work
             //c.width = 8192;
             //c.height = 4096;
@@ -552,7 +582,7 @@ namespace Chrome360HZ
             c.style.backgroundColor = "yellow";
             c.style.position = IStyle.PositionEnum.absolute;
 
-            c.style.SetLocation(8 + (int)(uizoom * size + 8) * 0, 8 + (int)(uizoom * size + 8) * 3);
+            c.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 0, 8 + (int)(uizoom * cubefacesize + 8) * 3);
 
             var pass = new CubeToEquirectangular.Library.ShaderToy.EffectPass(
                        null,
@@ -593,7 +623,7 @@ namespace Chrome360HZ
             frame0.style.height = "270px";
             frame0.style.width = "480px";
             frame0.style.SetLocation(
-                8 + (int)(uizoom * size + 8) * 0 + 480 + 16, 8 + (int)(uizoom * size + 8) * 3);
+                8 + (int)(uizoom * cubefacesize + 8) * 0 + 480 + 16, 8 + (int)(uizoom * cubefacesize + 8) * 3);
 
 
             var mesh = new THREE.Mesh(new THREE.SphereGeometry(far / 2, 50, 50),
@@ -1134,18 +1164,18 @@ namespace Chrome360HZ
                                #region x
                                // upside down?
                                renderer0.render(scene, cameraPX);
-                               canvasPX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
+                               canvasPX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
 
                                renderer0.render(scene, cameraNX);
-                               canvasNX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
+                               canvasNX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
                                #endregion
 
                                #region z
                                renderer0.render(scene, cameraPZ);
-                               canvasPZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
+                               canvasPZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
 
                                renderer0.render(scene, cameraNZ);
-                               canvasNZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
+                               canvasNZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
                                #endregion
 
 
@@ -1156,7 +1186,7 @@ namespace Chrome360HZ
                                //canvasPY.save();
                                //canvasPY.translate(0, size);
                                //canvasPY.rotate((float)(-Math.PI / 2));
-                               canvasPY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
+                               canvasPY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
                                //canvasPY.restore();
 
 
@@ -1164,7 +1194,7 @@ namespace Chrome360HZ
                                //canvasNY.save();
                                //canvasNY.translate(size, 0);
                                //canvasNY.rotate((float)(Math.PI / 2));
-                               canvasNY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, size, size);
+                               canvasNY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
                                //canvasNY.restore();
                                // ?
                                #endregion
