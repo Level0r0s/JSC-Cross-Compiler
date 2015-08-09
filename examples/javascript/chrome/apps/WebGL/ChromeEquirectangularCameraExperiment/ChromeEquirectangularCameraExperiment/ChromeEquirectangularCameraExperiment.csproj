@@ -156,7 +156,6 @@
     <Content Include="Textures\2294472375_24a3b8ef46_o.jpg" />
     <Content Include="Textures\2_no_clouds_4k.jpg" />
     <Content Include="Textures\4008650304_7f837ccbb7_b.jpg" />
-    <Content Include="Textures\Orion360_test_image_8192x4096.jpg" />
     <Content Include="Textures\tiles_regrid.png" />
     <None Include="app.config" />
     <None Include="packages.config" />

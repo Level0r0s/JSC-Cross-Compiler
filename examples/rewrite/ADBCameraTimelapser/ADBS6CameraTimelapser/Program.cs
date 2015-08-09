@@ -557,6 +557,7 @@ namespace ADBS6CameraTimelapser
                     // 58KBps??
                     do_adb("-s " + device + " pull -p \"/sdcard/DCIM/Camera/" + filename + "\" \"" + storage + "/" + iNNNN + ".jpg" + "\"");
                     ;
+                    // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularCameraExperiment\ChromeEquirectangularCameraExperiment\Application.cs
 
                     do_adb("-s " + device + " shell rm \"/sdcard/DCIM/Camera/" + filename + "\"");
 

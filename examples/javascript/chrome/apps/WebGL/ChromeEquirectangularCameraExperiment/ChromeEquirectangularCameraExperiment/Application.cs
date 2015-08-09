@@ -1,4 +1,7 @@
-//#define AsWEBSERVER
+#define AsWEBSERVER
+// as webserver imgs will have saves context menu
+
+
 
 using ScriptCoreLib;
 using ScriptCoreLib.Delegates;
@@ -265,10 +268,11 @@ namespace ChromeEquirectangularCameraExperiment
 
             var uizoom = 0.1;
 
+            var far = 0xffff;
 
             #region y
             // need to rotate90?
-            var cameraNY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            var cameraNY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             cameraNY.lookAt(new THREE.Vector3(0, -1, 0));
             //cameraNY.lookAt(new THREE.Vector3(0, 1, 0));
             var canvasNY = new CanvasRenderingContext2D(size, size);
@@ -278,7 +282,7 @@ namespace ChromeEquirectangularCameraExperiment
             canvasNY.canvas.style.transformOrigin = "0 0";
             canvasNY.canvas.style.transform = $"scale({uizoom})";
 
-            var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             cameraPY.lookAt(new THREE.Vector3(0, 1, 0));
             //cameraPY.lookAt(new THREE.Vector3(0, -1, 0));
             var canvasPY = new CanvasRenderingContext2D(size, size);
@@ -292,7 +296,7 @@ namespace ChromeEquirectangularCameraExperiment
             // transpose xz?
 
             #region x
-            var cameraNX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            var cameraNX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             cameraNX.lookAt(new THREE.Vector3(0, 0, 1));
             //cameraNX.lookAt(new THREE.Vector3(0, 0, -1));
             //cameraNX.lookAt(new THREE.Vector3(-1, 0, 0));
@@ -304,7 +308,7 @@ namespace ChromeEquirectangularCameraExperiment
             canvasNX.canvas.style.transformOrigin = "0 0";
             canvasNX.canvas.style.transform = $"scale({uizoom})";
 
-            var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             cameraPX.lookAt(new THREE.Vector3(0, 0, -1));
             //cameraPX.lookAt(new THREE.Vector3(0, 0, 1));
             //cameraPX.lookAt(new THREE.Vector3(1, 0, 0));
@@ -320,9 +324,9 @@ namespace ChromeEquirectangularCameraExperiment
 
 
             #region z
-            var cameraNZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            var cameraNZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             //cameraNZ.lookAt(new THREE.Vector3(0, 0, -1));
-            cameraNX.lookAt(new THREE.Vector3(1, 0, 0));
+            cameraNZ.lookAt(new THREE.Vector3(1, 0, 0));
             //cameraNX.lookAt(new THREE.Vector3(-1, 0, 0));
             //cameraNZ.lookAt(new THREE.Vector3(0, 0, 1));
             var canvasNZ = new CanvasRenderingContext2D(size, size);
@@ -332,7 +336,7 @@ namespace ChromeEquirectangularCameraExperiment
             canvasNZ.canvas.style.transformOrigin = "0 0";
             canvasNZ.canvas.style.transform = $"scale({uizoom})";
 
-            var cameraPZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: 2000);
+            var cameraPZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             //cameraPZ.lookAt(new THREE.Vector3(1, 0, 0));
             cameraPZ.lookAt(new THREE.Vector3(-1, 0, 0));
             //cameraPZ.lookAt(new THREE.Vector3(0, 0, 1));
@@ -453,7 +457,7 @@ namespace ChromeEquirectangularCameraExperiment
 
 
             #region spherical
-            var gl = new WebGLRenderingContext(alpha: true);
+            var gl = new WebGLRenderingContext(alpha: true, preserveDrawingBuffer: true);
             var c = gl.canvas.AttachToDocument();
 
             //  3840x2160
@@ -514,34 +518,72 @@ namespace ChromeEquirectangularCameraExperiment
 
             #endregion
 
+
+
+
             //var xor = new HTML.Images.FromAssets.tiles_regrid().AttachToDocument();
             //var xor = new HTML.Images.FromAssets.Orion360_test_image_8192x4096().AttachToDocument();
-            var xor = new HTML.Images.FromAssets._2_no_clouds_4k().AttachToDocument();
+            //var xor = new HTML.Images.FromAssets._2_no_clouds_4k().AttachToDocument();
+            var frame0 = new HTML.Images.FromAssets._2294472375_24a3b8ef46_o().AttachToDocument();
 
 
             // 270px
             //xor.style.height = "";
-            xor.style.height = "270px";
-            xor.style.width = "480px";
-            xor.style.SetLocation(
+            frame0.style.height = "270px";
+            frame0.style.width = "480px";
+            frame0.style.SetLocation(
                 8 + (int)(uizoom * size + 8) * 0 + 480 + 16, 8 + (int)(uizoom * size + 8) * 3);
 
 
-            var mesh = new THREE.Mesh(new THREE.SphereGeometry(500, 50, 50),
+            var mesh = new THREE.Mesh(new THREE.SphereGeometry(0xFFF, 50, 50),
            new THREE.MeshBasicMaterial(new
            {
                map = THREE.ImageUtils.loadTexture(
                   //new HTML.Images.FromAssets._2294472375_24a3b8ef46_o().src
                   //new HTML.Images.FromAssets._4008650304_7f837ccbb7_b().src
-                  xor.src
+                  frame0.src
                    //new WebGLEquirectangularPanorama.HTML.Images.FromAssets.PANO_20130616_222058().src
                    //new WebGLEquirectangularPanorama.HTML.Images.FromAssets.PANO_20121225_210448().src
 
                    )
            }));
             mesh.scale.x = -1;
+
+            #region fixup rotation
+
+            //mesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI / 2);
+            //mesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
+            mesh.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
+            #endregion
+
+
             scene.add(mesh);
 
+
+
+            frame0.onclick += delegate
+            {
+                // http://paulbourke.net/papers/vsmm2006/vsmm2006.pdf
+                //            A method of creating synthetic stereoscopic panoramic images that can be implemented
+                //in most rendering packages has been presented. If single panoramic pairs can be created
+                //then stereoscopic panoramic movies are equally possible giving rise to the prospect of
+                //movies where the viewer can interact with, at least with regard to what they choose to look
+                //at.These images can be projected so as to engage the two features of the human visual
+                //system that assist is giving us a sense of immersion, the feeling of “being there”. That is,
+                //imagery that contains parallax information as captured from two horizontally separated eye
+                //positions (stereopsis)and imagery that fills our peripheral vision.The details that define
+                //how the two panoramic images should be created in rendering packages are provided, in
+                //particular, how to precisely configure the virtual cameras and control the distance to zero
+                //parallax.
+
+                // grab a frame
+
+                var base64 = gl.canvas.toDataURL();
+
+                frame0.src = base64;
+                // 7MB!
+
+            };
 
             new Models.ColladaS6Edge().Source.Task.ContinueWithResult(
                    dae =>
