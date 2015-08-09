@@ -77,3 +77,17 @@ namespace WebGLVRHZTeaser
 }
 
 //Unhandled Exception: System.TypeLoadException: Could not load type 'java.sql.Clob' from assembly 'ScriptCoreLibJava, Version=4.5.0.0, Culture=neutral, PublicKeyToken=null'.
+
+    // wtf?
+
+//    0001 0200003c WebGLVRHZTeaser.ApplicationWebService::<module>.SHA167d2c2bfcda3187338dda1cf4e60fe59240184da@1689064862
+//Y:\WebGLVRHZTeaser.ApplicationWebService\staging.java\web\files
+//X:\Program Files (x86)\Java\jdk1.7.0_79\bin\javac.exe  -encoding UTF-8 -cp Y:\WebGLVRHZTeaser.ApplicationWebService\staging.java\web\release;x:\util\appengine-java-sdk-1.9.22\lib\impl\*;x:\util\appengine-java-sdk-1.9.22\lib\shared\* -d "Y:\WebGLVRHZTeaser.ApplicationWebService\staging.java\web\release" @"Y:\WebGLVRHZTeaser.ApplicationWebService\staging.java\web\files"
+
+//Y:\WebGLVRHZTeaser.ApplicationWebService\staging.java\web\java\__AnonymousTypes__ScriptCoreLibJava_AppEngine\__f__AnonymousType0_1.java:27: error: not a statement
+//        new Object[1];
+//        ^
+//1 error
+//23bc:02:01:14 after worker yield...
+
+//Unhandled Exception: System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.

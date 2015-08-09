@@ -27,18 +27,22 @@ namespace WebGLVRHZTeaser
 	/// </summary>
 	public sealed class Application : ApplicationWebService
 	{
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150809/chrome360hz
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150809/chromeequirectangularcameraexperiment
+
         // "x:\util\android-sdk-windows\platform-tools\adb.exe" install -r "r:\jsc.svn\examples\javascript\WebGL\WebGLVRHZTeaser\WebGLVRHZTeaser\bin\Debug\staging\WebGLVRHZTeaser.ApplicationWebService\staging.apk\staging\apk\bin\WebGLVRHZTeaser.Activities-release.apk"
 
-		//I/Web Console(25108): 0ms NewInstanceConstructor restore fields.. at http://10.144.157.179:23222/view-source:50800
-		//I/Web Console(25108): THREE.WebGLRenderer at http://10.144.157.179:23222/view-source:90370
-		//E/Web Console(25108): Error creating WebGL context. at http://10.144.157.179:23222/view-source:90581
-		//E/Web Console(25108): Uncaught TypeError: Cannot read property 'getShaderPrecisionFormat' of null at http://10.144.157.179:23222/view-source:90585
+        //I/Web Console(25108): 0ms NewInstanceConstructor restore fields.. at http://10.144.157.179:23222/view-source:50800
+        //I/Web Console(25108): THREE.WebGLRenderer at http://10.144.157.179:23222/view-source:90370
+        //E/Web Console(25108): Error creating WebGL context. at http://10.144.157.179:23222/view-source:90581
+        //E/Web Console(25108): Uncaught TypeError: Cannot read property 'getShaderPrecisionFormat' of null at http://10.144.157.179:23222/view-source:90585
 
-		/// <summary>
-		/// This is a javascript application.
-		/// </summary>
-		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
-		public Application(IApp page)
+        /// <summary>
+        /// This is a javascript application.
+        /// </summary>
+        /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
+        public Application(IApp page)
 		{
 
 #if false
@@ -239,11 +243,12 @@ namespace WebGLVRHZTeaser
 				);
 
 			effect.setSize(1920, 1080);
-			//effect.setSize(2560, 1440);
+            //effect.setSize(2560, 1440);
 
-			#region WebGLRah66Comanche
-			// why isnt it being found?
-			new global::WebGLRah66Comanche.Comanche(
+            #region WebGLRah66Comanche
+            // why isnt it being found?
+            // "Z:\jsc.svn\examples\javascript\WebGL\collada\WebGLRah66Comanche\WebGLRah66Comanche\WebGLRah66Comanche.csproj"
+            new global::WebGLRah66Comanche.Comanche(
 			).Source.Task.ContinueWithResult(
 				dae =>
 				{

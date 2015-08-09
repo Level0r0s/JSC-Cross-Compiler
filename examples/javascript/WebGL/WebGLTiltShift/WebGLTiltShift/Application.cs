@@ -18,6 +18,7 @@ using WebGLTiltShift.Design;
 //using THREE = WebGLTiltShift.Design.THREE;
 using System.Threading.Tasks;
 
+// c# 6 vs2015!
 using static THREE;
 
 namespace WebGLTiltShift

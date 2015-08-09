@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using HeatZeekerRTS;
 
+// x86 build configuration?
 // not getting built?
 using HeatZeekerRTS.Design;
 using HeatZeekerRTS.HTML.Pages;

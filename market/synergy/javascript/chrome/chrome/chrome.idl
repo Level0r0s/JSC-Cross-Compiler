@@ -654,6 +654,9 @@ interface chrome.systemIndicator
 };
 
 
+// jsc idl could do away with https, http as comment uris
+// https://developer.chrome.com/apps/fileSystem
+
 
 
 //
