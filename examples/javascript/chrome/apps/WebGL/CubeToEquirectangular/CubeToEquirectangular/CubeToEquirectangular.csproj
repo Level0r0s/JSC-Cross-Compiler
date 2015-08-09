@@ -127,6 +127,9 @@
     <Reference Include="CubeToEquirectangular.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\CubeToEquirectangular.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="CSS3DPanoramaByHumus.AssetsLibrary">
+      <HintPath>..\..\..\..\..\synergy\css\CSS3DPanoramaByHumus\CSS3DPanoramaByHumus\bin\staging.AssetsLibrary\CSS3DPanoramaByHumus.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\ShaderToy.cs" />
@@ -150,12 +153,17 @@
     <None Include="packages.config" />
     <None Include="Shaders\Program.frag" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\synergy\css\CSS3DPanoramaByHumus\CSS3DPanoramaByHumus\CSS3DPanoramaByHumus.csproj">
+      <Project>{afb54cd6-f4ff-4c30-a983-5bb45be818d8}</Project>
+      <Name>CSS3DPanoramaByHumus</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>start /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe ConfigurationCreateNuGetPackage /AssemblyMergeExtension:$(TargetPath) /AssemblyMerge:$(TargetName).AssetsLibrary.dll /OutputDirectory:C:\util\jsc\nuget /PackageID:"WebGL.ShaderToy" /OutputName:"WebGL ShaderToy"
 
-start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /AssociateDriveForChrome:A /InferChromeAppManifest:true /FilterTo:$(SolutionDir)
+start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /AssociateDriveForChrome:A /InferChromeAppManifest:true /xFilterTo:$(SolutionDir)
 
 </PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget

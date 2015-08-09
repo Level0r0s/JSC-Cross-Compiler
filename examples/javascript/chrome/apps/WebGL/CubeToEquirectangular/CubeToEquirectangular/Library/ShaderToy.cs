@@ -362,24 +362,41 @@ namespace CubeToEquirectangular.Library
 
                             // um can there be only one samplerCube?
                             gl.activeTexture(gl.TEXTURE0);
-                            gl.enable(gl.TEXTURE_CUBE_MAP);
+                            //gl.enable(gl.TEXTURE_CUBE_MAP);
                             gl.bindTexture(gl.TEXTURE_CUBE_MAP, tex);
                             //gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_S, (int)gl.CLAMP_TO_EDGE);
                             //gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_T, (int)gl.CLAMP_TO_EDGE);
                             gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, (int)gl.LINEAR);
                             gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, (int)gl.LINEAR);
 
+                            //var cube0 = new IHTMLImage[] {
+                            //        new HTML.Images.FromAssets.cube02_0(),
+                            //        new HTML.Images.FromAssets.cube02_1(),
+                            //        new HTML.Images.FromAssets.cube02_2(),
+                            //        new HTML.Images.FromAssets.cube02_3(),
+                            //        new HTML.Images.FromAssets.cube02_4(),
+                            //        new HTML.Images.FromAssets.cube02_5()
+                            //};
+
+                            //public const uint TEXTURE_CUBE_MAP_POSITIVE_X = 34069;
+                            //public const uint TEXTURE_CUBE_MAP_NEGATIVE_X = 34070;
+                            //public const uint TEXTURE_CUBE_MAP_POSITIVE_Y = 34071;
+                            //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Y = 34072;
+                            //public const uint TEXTURE_CUBE_MAP_POSITIVE_Z = 34073;
+                            //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074;
+
+
                             var cube0 = new IHTMLImage[] {
-                                    new HTML.Images.FromAssets.cube02_0(),
-                                    new HTML.Images.FromAssets.cube02_1(),
-                                    new HTML.Images.FromAssets.cube02_2(),
-                                    new HTML.Images.FromAssets.cube02_3(),
-                                    new HTML.Images.FromAssets.cube02_4(),
-                                    new HTML.Images.FromAssets.cube02_5()
+                                    new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_px(),
+                                    new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nx(),
+
+                                    new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_py(),
+                                    new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_ny(),
+
+
+                                    new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_pz(),
+                                    new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nz()
                             };
-
-
-
 
                             cube0.WithEachIndex(
                                 (pendingimg, index) =>

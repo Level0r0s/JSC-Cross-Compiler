@@ -124,12 +124,36 @@ namespace CubeToEquirectangular
                     var vs = new Shaders.ProgramFragmentShader();
 
                     var mAudioContext = new AudioContext();
+
                     var gl = new WebGLRenderingContext(alpha: true);
                     var c = gl.canvas.AttachToDocument();
 
-                    c.style.SetSize(460, 237);
-                    c.width = 460;
-                    c.height = 237;
+                    //  3840x2160
+
+                    //c.style.SetSize(3840, 2160);
+
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150722/360-youtube
+
+                    c.width = 3840;
+                    c.height = 2160;
+
+
+                    // this has the wrong aspect?
+                    //c.width = 6466;
+                    //c.height = 3232;
+
+                    new IHTMLPre { new { c.width, c.height } }.AttachToDocument();
+
+                    //6466x3232
+
+                    var uizoom = 400f / c.width;
+
+                    c.style.transformOrigin = "0 0";
+                    c.style.transform = $"scale({uizoom})";
+
+                    c.style.position = IStyle.PositionEnum.absolute;
+
+                    c.style.SetLocation(500, 8, c.width, c.height);
 
                     var u = new UIKeepRendering
                     {
@@ -206,8 +230,15 @@ namespace CubeToEquirectangular
 
                     var sw = Stopwatch.StartNew();
 
+                    var paintsw = Stopwatch.StartNew();
+
+
+                    new IHTMLPre { () => new { paintsw.ElapsedMilliseconds } }.AttachToDocument();
+
                     do
                     {
+                        paintsw.Restart();
+
                         pass.Paint_Image(
                             sw.ElapsedMilliseconds / 1000.0f,
 
@@ -222,6 +253,9 @@ namespace CubeToEquirectangular
                         // need another way to scale
                         //zoom: 0.3f
                         );
+
+                        paintsw.Stop();
+
 
                         // what does it do?
                         gl.flush();
