@@ -24,11 +24,13 @@ namespace ChromeNetworkInterfaces
 	/// </summary>
 	public sealed class Application : ApplicationWebService
 	{
-		/// <summary>
-		/// This is a javascript application.
-		/// </summary>
-		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
-		public Application(IApp page)
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150809/chrome-filesystem
+
+        /// <summary>
+        /// This is a javascript application.
+        /// </summary>
+        /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
+        public Application(IApp page)
 		{
 			#region += Launched chrome.app.window
 			dynamic self = Native.self;

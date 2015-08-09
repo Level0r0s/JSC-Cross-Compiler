@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeNetworkInterfaces", "ChromeNetworkInterfaces\ChromeNetworkInterfaces.csproj", "{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}"
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeWriteFiles", "ChromeWriteFiles\ChromeWriteFiles.csproj", "{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chromelabs", "..\..\..\..\..\market\synergy\javascript\chrome\chrome\chromelabs.csproj", "{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7}"
 EndProject

@@ -13,6 +13,8 @@ namespace ScriptCoreLib.JavaScript.DOM
 	[Script(HasNoPrototype = true, ExternalTarget = "Blob")]
 	public class Blob
 	{
+        // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeWriteFiles\ChromeWriteFiles\Application.cs
+
 		public readonly ulong size;
 
 		public Blob()

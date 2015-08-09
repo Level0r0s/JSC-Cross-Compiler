@@ -656,6 +656,35 @@ interface chrome.systemIndicator
 
 // jsc idl could do away with https, http as comment uris
 // https://developer.chrome.com/apps/fileSystem
+// Z:\jsc.svn\examples\javascript\chrome\apps\ChromeWriteFiles\ChromeWriteFiles\Application.cs
+
+// not a real type?
+interface chrome.Volume
+{
+	attribute boolean writable;
+	attribute string volumeId;
+};
+
+
+// https://github.com/yuanyan/know-your-chrome/blob/master/Blink/Source/modules/filesystem/DirectoryEntry.idl
+// https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/file_system.idl
+interface chrome.fileSystem
+{
+
+	// ???
+	// async static void getVolumeList(function<chrome.Volume[]> callback);
+	
+	//async static void chooseEntry(any options, function<,> callback);
+	//async static void chooseEntry(any options, function<any,any> callback);
+
+	// async Task<,> ?
+	async static void chooseEntry(any options, function<any> callback);
+
+	// sdcard inserted?
+	event static attribute chrome.ChromeEventTarget<any> onVolumeListChanged;
+};
+
+
 
 
 

@@ -7,6 +7,7 @@ namespace ScriptCoreLib.JavaScript.DOM
 {
     // http://mxr.mozilla.org/mozilla-central/source/dom/webidl/FileReader.webidl
     // http://src.chromium.org/viewvc/blink/trunk/Source/core/fileapi/FileReader.idl
+    // http://src.chromium.org/viewvc/blink/trunk/Source/modules/filesystem/FileWriter.idl
 
     [Script(HasNoPrototype = true, ExternalTarget = "FileReader")]
     public class FileReader : IEventTarget

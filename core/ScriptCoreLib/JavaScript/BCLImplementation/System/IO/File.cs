@@ -17,6 +17,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.IO
     {
         // wuold service worker be able to enable file io via cached vhd?
 
+        // tested by?
         public static IEnumerable<ScriptCoreLib.JavaScript.DOM.File> InternalFiles;
 
 
@@ -29,6 +30,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.IO
             return false;
         }
 
+
+        // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeWriteFiles\ChromeWriteFiles\Application.cs
         public static string ReadAllText(string path)
         {
             var f = InternalFiles.FirstOrDefault(k => k.name == path);

@@ -117,6 +117,8 @@
     <Compile Include="JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.FromException.cs" />
     <Compile Include="JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.WhenAny.cs" />
     <Compile Include="JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.FromResult.cs" />
+    <Compile Include="JavaScript\DOM\FileWriter.cs" />
+    <Compile Include="JavaScript\DOM\DirectoryEntry.cs" />
     <Compile Include="JavaScript\DOM\Entry.cs" />
     <Compile Include="JavaScript\DOM\HTML\IHTMLDocument.currentScript.cs" />
     <Compile Include="JavaScript\DOM\JSON.cs" />
