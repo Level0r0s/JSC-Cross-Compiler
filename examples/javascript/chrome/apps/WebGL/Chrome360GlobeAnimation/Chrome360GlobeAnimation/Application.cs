@@ -51,6 +51,8 @@ namespace Chrome360GlobeAnimation
         //1556 KB/s(2714294 bytes in 1.703s)
 
         //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\hz2048c3840x2160.png" "/sdcard/oculus/360photos/"
+        //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push   "X:\vr\tape360globe1\0000.png" "/sdcard/oculus/360photos/tape360globe2.png"
+        //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push   "X:\vr\tape360globe1\0000.png" "/sdcard/oculus/360photos/tape360globenight.png"
 
 
 
@@ -186,11 +188,19 @@ namespace Chrome360GlobeAnimation
 
             // Earth params
             //var radius = 0.5;
-            var radius = 1024;
+            //var radius = 1024;
+            //var radius = 2048;
+            //var radius = 512;
+            //var radius = 256;
+            //var radius = 400;
+
+            // can we have not fly beyond moon too much?
+            //var radius = 500;
+            var radius = 480;
 
             //var segments = 32;
             var segments = 128;
-            var rotation = 6;
+            //var rotation = 6;
 
 
             //const int size = 128;
@@ -205,13 +215,15 @@ namespace Chrome360GlobeAnimation
 
             // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/Chrome360GlobeAnimation/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
             int cubefacesize = 2048; // 6 faces, ?
+                                     //int cubefacesize = 1024; // 6 faces, ?
                                      // "X:\vr\tape1\0000x2048.png"
                                      // for 60hz render we may want to use float camera percision, not available for ui.
                                      //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
                                      //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
-            //if (Environment.ProcessorCount < 8)
-            //    cubefacesize = 64; // 6 faces, ?
+            if (Environment.ProcessorCount < 8)
+                //cubefacesize = 64; // 6 faces, ?
+                cubefacesize = 1024; // 6 faces, ?
 
             new IHTMLPre { new { Environment.ProcessorCount, cubefacesize } }.AttachToDocument();
 
@@ -286,8 +298,21 @@ namespace Chrome360GlobeAnimation
             scene.add(new THREE.AmbientLight(0x333333));
 
 
+            //384,400 km
+
+            var distanceKM = 384400f;
+            var earthdiameterKM = 12742f;
+            var moondiameterKM = 3475f;
+            var virtualDistance = radius / earthdiameterKM * distanceKM;
+            // 12,742 km
+
+            // 2,159.2 miles (3,475 km).
+
+
             var light = new THREE.DirectionalLight(0xffffff, 1);
-            light.position.set(5, 3, 5);
+            // sun should be beyond moon
+            //light.position.set(-5 * virtualDistance, -3 * virtualDistance, -5 * virtualDistance);
+            light.position.set(-15 * virtualDistance, -1 * virtualDistance, -15 * virtualDistance);
             scene.add(light);
 
 
@@ -370,17 +395,17 @@ namespace Chrome360GlobeAnimation
 
 
 
-            var camerax = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048, max = 0 + 2048, valueAsNumber = -512, title = "camerax" }.AttachToDocument();
+            var camerax = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 0 + 2048 * 4, valueAsNumber = 0, title = "camerax" }.AttachToDocument();
             // up. whats the most high a rocket can go 120km?
             new IHTMLHorizontalRule { }.AttachToDocument();
 
 
             // how high is the bunker?
-            var cameray = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 64, max = 2048, valueAsNumber = 1024, title = "cameray" }.AttachToDocument();
+            var cameray = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 2048 * 4, valueAsNumber = 0, title = "cameray" }.AttachToDocument();
             new IHTMLBreak { }.AttachToDocument();
             var camerayHigh = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = cameray.max, max = 1024 * 256, valueAsNumber = cameray.max, title = "cameray" }.AttachToDocument();
             new IHTMLHorizontalRule { }.AttachToDocument();
-            var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048, max = 0 + 2048, valueAsNumber = 0, title = "cameraz" }.AttachToDocument();
+            var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 0 + 2048 * 4, valueAsNumber = 0, title = "cameraz" }.AttachToDocument();
 
             // for render server
             var fcamerax = 0.0;
@@ -864,7 +889,7 @@ namespace Chrome360GlobeAnimation
 
                 if (dir == null)
                 {
-                    dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
+                    //dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
                 }
 
                 total.Restart();
@@ -878,7 +903,8 @@ namespace Chrome360GlobeAnimation
 
                 var frameid = 0;
 
-                fcamerax = -15.0;
+                goto beforeframe;
+
 
                 // parallax offset?
 
@@ -899,17 +925,37 @@ namespace Chrome360GlobeAnimation
                 //await Native.window.async.onframe;
 
                 // https://code.google.com/p/chromium/issues/detail?id=404301
-                await dir.WriteAllBytes(filename, gl);
+                if (dir != null)
+                    await dir.WriteAllBytes(filename, gl);
                 //await dir.WriteAllBytes(filename, gl.canvas);
 
                 status = "WriteAllBytes... done " + new { fcamerax, filename, swcapture.ElapsedMilliseconds };
                 status = "rdy " + new { filename, fcamerax };
                 //await Native.window.async.onframe;
 
+
+                beforeframe:
+
                 // speed? S6 slow motion?
-                fcamerax += (1.0 / 60.0);
+                // this is really slow. if we do x4x2 =x8 
+                // https://www.youtube.com/watch?v=r76ULW16Ib8
+                //fcamerax += 16 * (1.0 / 60.0);
+                fcamerax = radius * Math.Cos(Math.PI * (frameid - (60 * 30 / 2f)) / (60 * 30 / 2f));
+
+                cameraz.valueAsNumber = (int)(cameraz.max * Math.Sin(Math.PI * (frameid - (60 * 30 / 2f)) / (60 * 30 / 2f)));
+
+
+                // up
+                //fcameray = 128 * Math.Cos(Math.PI * (frameid - (60 * 30 / 2f)) / (60 * 30 / 2f));
+
+                //fcamerax += (1.0 / 60.0);
+
                 //fcamerax += (1.0 / 60.0) * 120;
-                frameid++;
+
+                if (Environment.ProcessorCount < 8)
+                    frameid += 15;
+                else
+                    frameid++;
 
                 // 60hz 30sec
                 if (frameid < 60 * 30)
@@ -931,12 +977,9 @@ namespace Chrome360GlobeAnimation
             // "Z:\jsc.svn\examples\javascript\WebGL\WebGLColladaExperiment\WebGLColladaExperiment\WebGLColladaExperiment.csproj"
 
 
-
-
-
-            #region sphere
+            #region moonsphere
             var moonsphere = new THREE.Mesh(
-                    new THREE.SphereGeometry(radius * 0.33, segments, segments),
+                    new THREE.SphereGeometry(radius / earthdiameterKM * moondiameterKM, segments, segments),
                     new THREE.MeshPhongMaterial(
                             new
                             {
@@ -994,13 +1037,14 @@ namespace Chrome360GlobeAnimation
             #endregion
 
 
-            moonsphere.position.set(radius * 4, 0, 0);
+            //moonsphere.position.set(radius * 4, 0, 0);
+            //moonsphere.position.set(0, 0, -radius * 4);
 
             scene.add(moonsphere);
 
 
-            #region sphere
-            var sphere = new THREE.Mesh(
+            #region globesphere
+            var globesphere = new THREE.Mesh(
                     new THREE.SphereGeometry(radius, segments, segments),
                     new THREE.MeshPhongMaterial(
                             new
@@ -1058,18 +1102,20 @@ namespace Chrome360GlobeAnimation
                 );
             #endregion
 
+
+
             // http://stackoverflow.com/questions/12447734/three-js-updateing-texture-on-plane
 
 
-            sphere.rotation.y = rotation;
-            scene.add(sphere);
+            //globesphere.rotation.y = rotation;
+            scene.add(globesphere);
 
 
             #region clouds
             var clouds = new THREE.Mesh(
                     new THREE.SphereGeometry(
                         //radius + 0.003,
-                        radius + radius * 0.005,
+                        radius + radius * 0.01,
                         segments, segments),
                     new THREE.MeshPhongMaterial(
                         new
@@ -1096,9 +1142,40 @@ namespace Chrome360GlobeAnimation
                             transparent = true
                         })
                 );
-            clouds.rotation.y = rotation;
+            //clouds.rotation.y = rotation;
             scene.add(clouds);
             #endregion
+
+
+
+            //clouds.position.set(0, virtualDistance / -2, 0);
+            //globesphere.position.set(0, virtualDistance / -2, 0);
+
+            //moonsphere.position.set(0, virtualDistance / 2, 0);
+
+
+            //clouds.position.set(virtualDistance / -2, 0, 0);
+            //globesphere.position.set(virtualDistance / -2, 0, 0);
+
+            //moonsphere.position.set(virtualDistance / 2, 0, 0);
+
+            clouds.position.set(virtualDistance / 2, (int)(-radius * 1.06), 0);
+            globesphere.position.set(virtualDistance / 2, (int)(-radius * 1.06), 0);
+
+            // moon dark side away from earth?
+            //moonsphere.position.set(virtualDistance / -2, -radius, 0);
+            moonsphere.position.set(virtualDistance / -2, radius / earthdiameterKM * moondiameterKM, 0);
+
+            applycameraoffset += delegate
+            {
+                globesphere.rotation.y = Math.Sin((cameraz.max * 0.5 + cameraz.valueAsNumber) * 0.0005);
+                clouds.rotation.y = Math.Sin((cameraz.max * 0.5 + cameraz.valueAsNumber) * 0.0006);
+            };
+
+            //globesphere.position.set(0, radius / earthdiameterKM * distanceKM, 0);
+
+            //clouds.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2);
+            //globesphere.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2);
 
 
 
@@ -1233,8 +1310,8 @@ namespace Chrome360GlobeAnimation
                                // haha. a bit too flickery.
                                //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.01) * 50.0;
                                //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.001) * 190.0;
-                               sphere.position.y = Math.Sin(fcamerax * 0.001) * 90.0;
-                               clouds.position.y = Math.Cos(fcamerax * 0.001) * 90.0;
+                               //globesphere.position.y = Math.Sin(fcamerax * 0.001) * 90.0;
+                               //clouds.position.y = Math.Cos(fcamerax * 0.001) * 90.0;
 
                                //sphere.rotation.y += speed;
                                //clouds.rotation.y += speed;

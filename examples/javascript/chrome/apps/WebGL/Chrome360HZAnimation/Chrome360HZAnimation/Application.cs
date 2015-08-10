@@ -911,7 +911,7 @@ namespace Chrome360HZAnimation
 
                 if (dir == null)
                 {
-                    dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
+                    //dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
                 }
 
                 total.Restart();
@@ -923,9 +923,10 @@ namespace Chrome360HZAnimation
 
                 status = "rendering... vsync";
 
-                var frameid = 0;
+                var frameid = -1;
 
-                fcamerax = -15.0;
+                goto beforeframe;
+                //fcamerax = -15.0;
 
                 // parallax offset?
 
@@ -945,18 +946,39 @@ namespace Chrome360HZAnimation
                 status = "WriteAllBytes... " + new { filename };
                 //await Native.window.async.onframe;
 
-                // https://code.google.com/p/chromium/issues/detail?id=404301
-                await dir.WriteAllBytes(filename, gl);
+                if (dir != null)
+                    // https://code.google.com/p/chromium/issues/detail?id=404301
+                    await dir.WriteAllBytes(filename, gl);
+
                 //await dir.WriteAllBytes(filename, gl.canvas);
 
                 status = "WriteAllBytes... done " + new { fcamerax, filename, swcapture.ElapsedMilliseconds };
                 status = "rdy " + new { filename, fcamerax };
                 //await Native.window.async.onframe;
 
+
+
+                beforeframe:
+
                 // speed? S6 slow motion?
-                fcamerax += (1.0 / 60.0);
+                // this is really slow. if we do x4x2 =x8 
+                // https://www.youtube.com/watch?v=r76ULW16Ib8
+                //fcamerax += 16 * (1.0 / 60.0);
+                fcamerax = 128 * Math.Sin(Math.PI * (frameid - (60 * 30 / 2f)) / (60 * 30 / 2f));
+                fcameraz = 256 * Math.Cos(Math.PI * (frameid - (60 * 30 / 2f)) / (60 * 30 / 2f));
+
+
+                // up
+                fcameray = 128 * Math.Cos(Math.PI * (frameid - (60 * 30 / 2f)) / (60 * 30 / 2f));
+
+                //fcamerax += (1.0 / 60.0);
+
                 //fcamerax += (1.0 / 60.0) * 120;
-                frameid++;
+
+                if (Environment.ProcessorCount < 8)
+                    frameid += 30;
+                else
+                    frameid++;
 
                 // 60hz 30sec
                 if (frameid < 60 * 30)
