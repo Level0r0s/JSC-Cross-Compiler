@@ -357,7 +357,7 @@ namespace CubeToEquirectangular.Library
                         //if (inp != null && inp.mInfo.mType == "cubemap")
                         if (inp is samplerCube)
                         {
-                            new IHTMLPre { "add MakeHeader_Image samplerCube" }.AttachToDocument();
+                            //new IHTMLPre { "add MakeHeader_Image samplerCube" }.AttachToDocument();
 
                             this.tex = new WebGLTexture(gl);
 

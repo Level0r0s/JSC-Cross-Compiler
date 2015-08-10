@@ -67,7 +67,9 @@ namespace Chrome360HZAnimation
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150808/cubemapcamera
         // subst /D a:
         // subst a: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\bin\Debug\staging\Chrome360HZAnimation.Application\web
+        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\bin\Debug\staging\Chrome360HZAnimation.Application\web
         // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\bin\Debug\staging\Chrome360HZAnimation.Application\web
+        // what if we want to do subst in another winstat or session?
 
         // ColladaLoader: Empty or non-existing file (assets/Chrome360HZAnimation/S6Edge.dae)
 
@@ -191,14 +193,32 @@ namespace Chrome360HZAnimation
 
             //const int size = 720; // 6 faces, ?
             //const int size = 1024; // 6 faces, ?
-            //const int size = 1024; // 6 faces, ?
+            //const int cubefacesize = 1024; // 6 faces, ?
+
+            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/Chrome360HZAnimation/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
             const int cubefacesize = 2048; // 6 faces, ?
+                                           // "X:\vr\tape1\0000x2048.png"
+                                           // for 60hz render we may want to use float camera percision, not available for ui.
+                                           //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
+                                           //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
 
 
-            var uizoom = 0.05;
+            //const int cubefacesize = 64; // 6 faces, ?
 
-            var far = 0xfffff;
+            // can we keep fast fps yet highp?
+
+            // can we choose this on runtime? designtime wants fast fps, yet for end product we want highdef on our render farm?
+            //const int cubefacesize = 128; // 6 faces, ?
+
+            var cubecameraoffsetx = 256;
+
+
+            //var uizoom = 0.1;
+            //var uizoom = cubefacesize / 128f;
+            var uizoom = 128f / cubefacesize;
+
+            var far = 0xffffff;
 
             Native.css.style.backgroundColor = "blue";
             Native.css.style.overflow = IStyle.OverflowEnum.hidden;
@@ -206,28 +226,15 @@ namespace Chrome360HZAnimation
             Native.body.Clear();
             (Native.body.style as dynamic).webkitUserSelect = "text";
 
-            new IHTMLPre { "can we stream it into VR, shadertoy, youtube 360, youtube stereo yet?" }.AttachToDocument();
+            //new IHTMLPre { "can we stream it into VR, shadertoy, youtube 360, youtube stereo yet?" }.AttachToDocument();
 
 
             var sw = Stopwatch.StartNew();
 
-            var pause = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox, title = "pause" }.AttachToDocument();
 
-
-            pause.onchange += delegate
-            {
-
-                if (pause.@checked)
-                    sw.Stop();
-                else
-                    sw.Start();
-
-
-            };
 
             var oo = new List<THREE.Object3D>();
 
-            #region scene
             var window = Native.window;
 
 
@@ -249,8 +256,25 @@ namespace Chrome360HZAnimation
             // stream it to vr?
             var scene = new THREE.Scene();
 
-            var ambient = new THREE.AmbientLight(0x303030);
-            scene.add(ambient);
+            // since our cube camera is somewhat a fixed thing
+            // would it be easier to move mountains to come to us?
+            // once we change code would chrome app be able to let VR know that a new view is available?
+            var sceneg = new THREE.Group();
+            sceneg.AttachTo(scene);
+
+
+            // fly up?
+            //sceneg.translateZ(-1024);
+            // rotate the world, as the skybox then matches what we have on filesystem
+            scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
+            // yet for headtracking we shall rotate camera
+
+
+            //sceneg.position.set(0, 0, -1024);
+            //sceneg.position.set(0, -1024, 0);
+
+            var ambient = new THREE.AmbientLight(0x303030).AttachTo(sceneg);
+            //scene.add(ambient);
 
             // should we fix jsc to do a more correct IDL?
             //var directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
@@ -291,7 +315,8 @@ namespace Chrome360HZAnimation
             // wont show if we add skybox?
             xlight.shadowCameraVisible = true;
 
-            scene.add(light);
+            //scene.add(light);
+            light.AttachTo(sceneg);
             #endregion
 
 
@@ -349,18 +374,107 @@ namespace Chrome360HZAnimation
             //var cameraoffset = new THREE.Vector3(0, 800, 1200);
             // can we have linear animation fromcenter of the map to the edge and back?
             // then do the flat earth sun orbit?
-            var cameraoffset = new THREE.Vector3(0, 0, 1200);
+            var cameraoffset = new THREE.Vector3(
+                // left?
+                -512,
+                // height?
+                //0,
+                //1600,
+                //1024,
+
+                // if the camera is in the center, would we need to move the scene?
+                // we have to move the camera. as we move the scene the lights are messed up
+                //2014,
+                1024,
+
+                //1200
+                0
+                // can we hover top of the map?
+                );
 
             // original vieworigin
             //var cameraoffset = new THREE.Vector3(-1200, 800, 1200);
 
-            var cubecameraoffsetx = 300;
+
+
+            var camerax = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048, max = 0 + 2048, valueAsNumber = -512, title = "camerax" }.AttachToDocument();
+            // up. whats the most high a rocket can go 120km?
+            new IHTMLHorizontalRule { }.AttachToDocument();
+
+
+            // how high is the bunker?
+            var cameray = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 64, max = 2048, valueAsNumber = 1024, title = "cameray" }.AttachToDocument();
+            new IHTMLBreak { }.AttachToDocument();
+            var camerayHigh = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = cameray.max, max = 1024 * 256, valueAsNumber = cameray.max, title = "cameray" }.AttachToDocument();
+            new IHTMLHorizontalRule { }.AttachToDocument();
+            var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048, max = 0 + 2048, valueAsNumber = 0, title = "cameraz" }.AttachToDocument();
+
+            // for render server
+            var fcamerax = 0.0;
+            var fcameray = 0.0;
+            var fcameraz = 0.0;
+
+            //while (await camerax.async.onchange)
+
+            //cameray.onchange += delegate
+            //{
+            //    if (cameray.valueAsNumber < cameray.max)
+            //        camerayHigh.valueAsNumber = camerayHigh.min;
+            //};
+
+            camerayHigh.onmousedown += delegate
+            {
+                //if (camerayHigh.valueAsNumber > camerayHigh.min)
+                cameray.valueAsNumber = cameray.max;
+            };
+
+
+            Action applycameraoffset = delegate
+            {
+                // make sure UI and gpu sync up
+
+                var cy = cameray;
+
+                if (cameray.valueAsNumber < cameray.max)
+                    camerayHigh.valueAsNumber = camerayHigh.min;
+
+                if (camerayHigh.valueAsNumber > camerayHigh.min)
+                    cameray.valueAsNumber = cameray.max;
+
+                if (cameray.valueAsNumber == cameray.max)
+                    cy = camerayHigh;
+
+
+
+                cameraoffset = new THREE.Vector3(
+                  // left?
+                  camerax + fcamerax,
+                   // height?
+                   //0,
+                   //1600,
+                   //1024,
+
+                   // if the camera is in the center, would we need to move the scene?
+                   // we have to move the camera. as we move the scene the lights are messed up
+                   //2014,
+                   cy + fcameray,
+
+                   //1200
+                   cameraz + fcameraz
+                   // can we hover top of the map?
+                   );
+            };
+
 
             #region y
             // need to rotate90?
             var cameraNY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
-            cameraNY.lookAt(new THREE.Vector3(0, -1, 0));
-            cameraNY.position.add(cameraoffset);
+            applycameraoffset += delegate
+            {
+                cameraNY.position.copy(new THREE.Vector3(0, 0, 0));
+                cameraNY.lookAt(new THREE.Vector3(0, -1, 0));
+                cameraNY.position.add(cameraoffset);
+            };
 
             //cameraNY.lookAt(new THREE.Vector3(0, 1, 0));
             var canvasNY = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
@@ -371,8 +485,12 @@ namespace Chrome360HZAnimation
             canvasNY.canvas.style.transform = $"scale({uizoom})";
 
             var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
-            cameraPY.lookAt(new THREE.Vector3(0, 1, 0));
-            cameraPY.position.add(cameraoffset);
+            applycameraoffset += delegate
+            {
+                cameraPY.position.copy(new THREE.Vector3(0, 0, 0));
+                cameraPY.lookAt(new THREE.Vector3(0, 1, 0));
+                cameraPY.position.add(cameraoffset);
+            };
             //cameraPY.lookAt(new THREE.Vector3(0, -1, 0));
             var canvasPY = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
             canvasPY.canvas.style.SetLocation(cubecameraoffsetx + (int)(uizoom * cubefacesize + 8) * 1, 8 + (int)(uizoom * cubefacesize + 8) * 0);
@@ -386,8 +504,12 @@ namespace Chrome360HZAnimation
 
             #region x
             var cameraNX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
-            cameraNX.lookAt(new THREE.Vector3(0, 0, 1));
-            cameraNX.position.add(cameraoffset);
+            applycameraoffset += delegate
+            {
+                cameraNX.position.copy(new THREE.Vector3(0, 0, 0));
+                cameraNX.lookAt(new THREE.Vector3(0, 0, 1));
+                cameraNX.position.add(cameraoffset);
+            };
             //cameraNX.lookAt(new THREE.Vector3(0, 0, -1));
             //cameraNX.lookAt(new THREE.Vector3(-1, 0, 0));
             //cameraNX.lookAt(new THREE.Vector3(1, 0, 0));
@@ -399,8 +521,12 @@ namespace Chrome360HZAnimation
             canvasNX.canvas.style.transform = $"scale({uizoom})";
 
             var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
-            cameraPX.lookAt(new THREE.Vector3(0, 0, -1));
-            cameraPX.position.add(cameraoffset);
+            applycameraoffset += delegate
+            {
+                cameraPX.position.copy(new THREE.Vector3(0, 0, 0));
+                cameraPX.lookAt(new THREE.Vector3(0, 0, -1));
+                cameraPX.position.add(cameraoffset);
+            };
             //cameraPX.lookAt(new THREE.Vector3(0, 0, 1));
             //cameraPX.lookAt(new THREE.Vector3(1, 0, 0));
             //cameraPX.lookAt(new THREE.Vector3(-1, 0, 0));
@@ -417,8 +543,12 @@ namespace Chrome360HZAnimation
             #region z
             var cameraNZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             //cameraNZ.lookAt(new THREE.Vector3(0, 0, -1));
-            cameraNZ.lookAt(new THREE.Vector3(1, 0, 0));
-            cameraNZ.position.add(cameraoffset);
+            applycameraoffset += delegate
+            {
+                cameraNZ.position.copy(new THREE.Vector3(0, 0, 0));
+                cameraNZ.lookAt(new THREE.Vector3(1, 0, 0));
+                cameraNZ.position.add(cameraoffset);
+            };
             //cameraNX.lookAt(new THREE.Vector3(-1, 0, 0));
             //cameraNZ.lookAt(new THREE.Vector3(0, 0, 1));
             var canvasNZ = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
@@ -430,8 +560,12 @@ namespace Chrome360HZAnimation
 
             var cameraPZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             //cameraPZ.lookAt(new THREE.Vector3(1, 0, 0));
-            cameraPZ.lookAt(new THREE.Vector3(-1, 0, 0));
-            cameraPZ.position.add(cameraoffset);
+            applycameraoffset += delegate
+            {
+                cameraPZ.position.copy(new THREE.Vector3(0, 0, 0));
+                cameraPZ.lookAt(new THREE.Vector3(-1, 0, 0));
+                cameraPZ.position.add(cameraoffset);
+            };
             //cameraPZ.lookAt(new THREE.Vector3(0, 0, 1));
             //cameraPZ.lookAt(new THREE.Vector3(0, 0, -1));
             var canvasPZ = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
@@ -648,7 +782,9 @@ namespace Chrome360HZAnimation
 
 
             #region  skybox
-            var skybox = new THREE.Mesh(new THREE.SphereGeometry(far / 2, 50, 50),
+            // what shall the skybox do if we reach upper altitude?
+            // fade into space skybox ?
+            var skybox = new THREE.Mesh(new THREE.SphereGeometry(far * 0.9, 50, 50),
            new THREE.MeshBasicMaterial(new
            {
                map = THREE.ImageUtils.loadTexture(
@@ -661,6 +797,7 @@ namespace Chrome360HZAnimation
                    )
            }));
             skybox.scale.x = -1;
+            skybox.AttachTo(sceneg);
             #endregion
 
 
@@ -676,8 +813,10 @@ namespace Chrome360HZAnimation
 
             // hide the sky to see camera lines?
             //  can we show this as HUD on VR in webview?
-            skybox.visible = false;
-            scene.add(skybox);
+            //skybox.visible = false;
+            //scene.add(skybox);
+
+
 
 
             //new IHTMLButton { }
@@ -764,10 +903,10 @@ namespace Chrome360HZAnimation
             ).Source.Task.ContinueWithResult(
                 dae =>
                 {
-
+                    dae.AttachTo(sceneg);
                     //dae.position.y = -40;
                     //dae.position.z = 280;
-                    scene.add(dae);
+                    //scene.add(dae);
                     //oo.Add(dae);
 
                     // wont do it
@@ -834,36 +973,146 @@ namespace Chrome360HZAnimation
                     treeMesh.updateMatrix();
 
 
-                    treeMesh.AttachTo(scene);
+                    //treeMesh.AttachTo(scene);
+                    treeMesh.AttachTo(sceneg);
 
                 }
                 )
                 );
             #endregion
 
-            #region create field
+
+            // http://learningthreejs.com/blog/2013/09/16/how-to-make-the-earth-in-webgl/
+
+            #region create floor
 
             // THREE.PlaneGeometry: Consider using THREE.PlaneBufferGeometry for lower memory footprint.
             // can we have our checkerboard?
-            var planeGeometry = new THREE.CubeGeometry(2048, 2048, 1);
-            var plane = new THREE.Mesh(planeGeometry,
-                    new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
 
-                );
-            //plane.castShadow = false;
-            plane.receiveShadow = true;
+            var floorColors = new[] {
+                0xA26D41,
+                0xA06040,
+                0xAF6F4F,
+                // marker to detect horizon
+                0xAF0000,
 
+
+
+                0xA26D41,
+                0xA06040,
+                0xAF6F4F,
+                // marker to detect horizon
+                0x006D00,
+
+
+
+                0xA26D41,
+                0xA06040,
+                0xAF6F4F,
+                // marker to detect horizon
+                0x0000FF
+            };
+
+
+            // human eye can see up to 10miles, then horizion flattens out.
+            var planeGeometry = new THREE.CubeGeometry(2048, 1, 2048);
+            var planeGeometryMarkerH = new THREE.CubeGeometry(2048, 1, 2048 * 5);
+
+
+            var planeGeometryMarkerV = new THREE.CubeGeometry(2048 * 5 * 4, 1, 2048 * 4);
+            var planeGeometryV = new THREE.CubeGeometry(2048 * 4, 1, 2048 * 4);
+            ////var floor0 = new THREE.Mesh(planeGeometry,
+            ////        new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+
+            ////    );
+            //////plane.castShadow = false;
+            ////floor0.receiveShadow = true;
+            ////floor0.AttachTo(sceneg);
+
+            ////var floor1 = new THREE.Mesh(planeGeometry,
+            ////       //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+            ////       new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA06040, specular = 0xA26D41, shininess = 1 })
+
+            ////   );
+            //////plane.castShadow = false;
+            ////floor1.receiveShadow = true;
+            ////floor1.position.set(2048, 0, 1024);
+            ////floor1.AttachTo(sceneg);
+
+            // can we see horizon?
+            for (int i = 0; i < 3 * 256; i++)
             {
+                var planeGeometry0 = planeGeometry;
 
-                var parent = new THREE.Object3D();
-                parent.add(plane);
-                // why rotate?
-                parent.rotation.x = -Math.PI / 2;
-                //parent.scale.set(5, 5, 5);
-                //parent.scale.set(2, 2, 2);
+                if (i % 4 == 3)
+                {
+                    planeGeometry0 = planeGeometryMarkerH;
 
-                scene.add(parent);
+                    // for high altitude zoom level
+
+                    var i4 = (i / 4);
+
+
+                    var planeGeometryV0 = planeGeometryV;
+
+                    if (i4 % 4 == 3)
+                        planeGeometryV0 = planeGeometryMarkerV;
+
+                    {
+                        var floor2 = new THREE.Mesh(planeGeometryV0,
+                            //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+                            new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = floorColors[i4 % floorColors.Length], specular = 0xA26D41, shininess = 1 })
+
+                        );
+                        //plane.castShadow = false;
+                        floor2.receiveShadow = true;
+                        floor2.position.set(1024 * -i, 0, 2048 * i);
+                        floor2.AttachTo(sceneg);
+                    }
+
+
+                    {
+                        var floor2 = new THREE.Mesh(planeGeometryV0,
+                            //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+                            new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = floorColors[(i / 4) % floorColors.Length], specular = 0xA26D41, shininess = 1 })
+
+                        );
+                        //plane.castShadow = false;
+                        floor2.receiveShadow = true;
+                        floor2.position.set(-1024 * -i, 0, -2048 * i);
+                        floor2.AttachTo(sceneg);
+                    }
+                }
+
+                {
+                    var floor2 = new THREE.Mesh(planeGeometry0,
+                        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+                        new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = floorColors[i % floorColors.Length], specular = 0xA26D41, shininess = 1 })
+
+                    );
+                    //plane.castShadow = false;
+                    floor2.receiveShadow = true;
+                    floor2.position.set(2048 * i, 0, 1024 * i);
+                    floor2.AttachTo(sceneg);
+                }
+
+                // flipz
+                {
+                    var floor2 = new THREE.Mesh(planeGeometry0,
+                        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+                        new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = floorColors[i % floorColors.Length], specular = 0xA26D41, shininess = 1 })
+
+                    );
+                    //plane.castShadow = false;
+                    floor2.receiveShadow = true;
+                    floor2.position.set(2048 * -i, 0, 1024 * -i);
+                    floor2.AttachTo(sceneg);
+                }
             }
+
+            #endregion
+
+            #region create walls
 
             var random = new Random();
             var meshArray = new List<THREE.Mesh>();
@@ -891,8 +1140,9 @@ namespace Chrome360HZAnimation
                 ii.position.x = i % 7 * 200 - 2.5f;
 
                 // raise it up
-                ii.position.y = .5f * 100;
+                ii.position.y = .5f * 100 * i;
                 ii.position.z = -1 * i * 100;
+
                 ii.castShadow = true;
                 ii.receiveShadow = true;
                 //ii.scale.set(100, 100, 100 * i);
@@ -901,7 +1151,8 @@ namespace Chrome360HZAnimation
 
                 meshArray.Add(ii);
 
-                scene.add(ii);
+                //scene.add(ii);
+                ii.AttachTo(sceneg);
 
                 if (i % 2 == 0)
                 {
@@ -936,26 +1187,27 @@ namespace Chrome360HZAnimation
                                 blendMesh.setSpeed(1.0);
 
                                 // will in turn call THREE.AnimationHandler.play( this );
-                                //blendMesh.run.play();
+                                blendMesh.run.play();
                                 // this wont help. bokah does not see the animation it seems.
-                                //blendMesh.run.update(1);
+                                blendMesh.run.update(1);
 
                                 blendMesh.showSkeleton(!xtrue);
 
-                                scene.add(blendMesh);
+                                //scene.add(blendMesh);
+                                blendMesh.AttachTo(sceneg);
 
 
-                                Native.window.onframe +=
-                                 delegate
-                                 {
+                                //Native.window.onframe +=
+                                // delegate
+                                // {
 
-                                     blendMesh.rotation.y = Math.PI * 0.0002 * sw.ElapsedMilliseconds;
+                                //     blendMesh.rotation.y = Math.PI * 0.0002 * sw.ElapsedMilliseconds;
 
 
 
-                                     ii.rotation.y = Math.PI * 0.0002 * sw.ElapsedMilliseconds;
+                                //     ii.rotation.y = Math.PI * 0.0002 * sw.ElapsedMilliseconds;
 
-                                 };
+                                // };
 
                             }
                         )
@@ -1010,11 +1262,12 @@ namespace Chrome360HZAnimation
                     // if i want to rotate, how do I do it?
                     //cube.rotation.z = random() + Math.PI;
                     //cube.rotation.x = random() + Math.PI;
-                    var sw2 = Stopwatch.StartNew();
+                    //var sw2 = Stopwatch.StartNew();
 
 
 
-                    scene.add(cube);
+                    cube.AttachTo(sceneg);
+                    //scene.add(cube);
                     //interactiveObjects.Add(cube);
 
                     // offset is wrong
@@ -1082,7 +1335,8 @@ namespace Chrome360HZAnimation
 
 
 
-                    scene.add(cube);
+                    //scene.add(cube);
+                    cube.AttachTo(sceneg);
                     //interactiveObjects.Add(cube);
 
                     // offset is wrong
@@ -1131,7 +1385,8 @@ namespace Chrome360HZAnimation
                          //cube.position.y = (cube.scale.y * 50) / 2;
                          cube.position.z = 0;
 
-                         scene.add(cube);
+                         cube.AttachTo(sceneg);
+                         //scene.add(cube);
                      }
                  );
             #endregion
@@ -1184,7 +1439,8 @@ namespace Chrome360HZAnimation
 
                        //dae.position.y = -80;
 
-                       scene.add(dae);
+                       dae.AttachTo(sceneg);
+                       //scene.add(dae);
                        oo.Add(dae);
 
 
@@ -1210,7 +1466,7 @@ namespace Chrome360HZAnimation
                                // red compiler notifies laptop chrome of pending update
                                // app reloads
 
-
+                               applycameraoffset();
                                renderer0.clear();
                                //rendererPY.clear();
 
@@ -1329,7 +1585,7 @@ namespace Chrome360HZAnimation
                                    }
                                 );
 
-
+                               // could do dynamic resolution- fog of war or fog of FOV. where up to 150deg field of vision is encouragedm, not 360
                                pass.Paint_Image(
                                      0,
 
@@ -1358,7 +1614,6 @@ namespace Chrome360HZAnimation
                );
 
 
-            #endregion
 
 
 

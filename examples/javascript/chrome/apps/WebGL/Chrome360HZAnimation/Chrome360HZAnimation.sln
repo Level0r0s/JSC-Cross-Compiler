@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLHZBlendCharacter", "..
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{2DFC4727-E1F6-4BA7-92E5-097F50CB8D3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "THREE", "..\..\..\..\..\..\market\synergy\THREE\THREE\THREE.csproj", "{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -29,6 +31,10 @@ Global
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.Build.0 = Debug|x86
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.ActiveCfg = Release|x86
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.Build.0 = Release|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Debug|x86.ActiveCfg = Debug|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Debug|x86.Build.0 = Debug|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Release|x86.ActiveCfg = Release|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,5 +42,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9} = {2DFC4727-E1F6-4BA7-92E5-097F50CB8D3D}
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8} = {2DFC4727-E1F6-4BA7-92E5-097F50CB8D3D}
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC} = {2DFC4727-E1F6-4BA7-92E5-097F50CB8D3D}
 	EndGlobalSection
 EndGlobal

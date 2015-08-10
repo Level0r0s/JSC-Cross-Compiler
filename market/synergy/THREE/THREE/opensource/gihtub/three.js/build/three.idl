@@ -727,6 +727,10 @@ interface THREE.Object3D
 
 
 	string toJSON();
+
+	// Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\Application.cs
+	void rotateOnAxis(THREE.Vector3 vect, double angle);
+
 };
 
 
@@ -773,7 +777,6 @@ interface THREE.Mesh : THREE.Object3D
 
 
 
-	void rotateOnAxis(THREE.Vector3 vect, double angle);
 	void lookAt(THREE.Vector3 target);
 };
 
