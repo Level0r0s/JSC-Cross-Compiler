@@ -196,22 +196,24 @@ namespace Chrome360HZAnimation
             //const int cubefacesize = 1024; // 6 faces, ?
 
             // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/Chrome360HZAnimation/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
-            const int cubefacesize = 2048; // 6 faces, ?
-                                           // "X:\vr\tape1\0000x2048.png"
-                                           // for 60hz render we may want to use float camera percision, not available for ui.
-                                           //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
-                                           //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
+            int cubefacesize = 2048; // 6 faces, ?
+                                     // "X:\vr\tape1\0000x2048.png"
+                                     // for 60hz render we may want to use float camera percision, not available for ui.
+                                     //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
+                                     //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
+            if (Environment.ProcessorCount < 8)
+                cubefacesize = 64; // 6 faces, ?
 
-
-            //const int cubefacesize = 64; // 6 faces, ?
+            new IHTMLPre { new { Environment.ProcessorCount, cubefacesize } }.AttachToDocument();
 
             // can we keep fast fps yet highp?
 
             // can we choose this on runtime? designtime wants fast fps, yet for end product we want highdef on our render farm?
             //const int cubefacesize = 128; // 6 faces, ?
 
-            var cubecameraoffsetx = 256;
+            //var cubecameraoffsetx = 256;
+            var cubecameraoffsetx = 400;
 
 
             //var uizoom = 0.1;
@@ -893,6 +895,85 @@ namespace Chrome360HZAnimation
 
             #endregion
 
+            var vsync = default(TaskCompletionSource<object>);
+
+            new IHTMLButton {
+                "render 60hz 30sec"
+            }.AttachToDocument().onclick += async e =>
+            {
+                e.Element.disabled = true;
+
+
+                var total = Stopwatch.StartNew();
+                var status = "rendering... " + new { dir };
+
+                new IHTMLPre { () => status }.AttachToDocument();
+
+                if (dir == null)
+                {
+                    dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
+                }
+
+                total.Restart();
+
+
+
+                vsync = new TaskCompletionSource<object>();
+                await vsync.Task;
+
+                status = "rendering... vsync";
+
+                var frameid = 0;
+
+                fcamerax = -15.0;
+
+                // parallax offset?
+
+                await_nextframe:
+
+
+                var filename = frameid.ToString().PadLeft(4, '0') + ".png";
+                status = "rendering... " + new { frameid, filename };
+
+
+                vsync = new TaskCompletionSource<object>();
+                await vsync.Task;
+
+                // frame0 has been rendered
+
+                var swcapture = Stopwatch.StartNew();
+                status = "WriteAllBytes... " + new { filename };
+                //await Native.window.async.onframe;
+
+                // https://code.google.com/p/chromium/issues/detail?id=404301
+                await dir.WriteAllBytes(filename, gl);
+                //await dir.WriteAllBytes(filename, gl.canvas);
+
+                status = "WriteAllBytes... done " + new { fcamerax, filename, swcapture.ElapsedMilliseconds };
+                status = "rdy " + new { filename, fcamerax };
+                //await Native.window.async.onframe;
+
+                // speed? S6 slow motion?
+                fcamerax += (1.0 / 60.0);
+                //fcamerax += (1.0 / 60.0) * 120;
+                frameid++;
+
+                // 60hz 30sec
+                if (frameid < 60 * 30)
+                {
+                    // Blob GC? either this helms or the that we made a Blob static. 
+                    await Task.Delay(11);
+
+                    goto await_nextframe;
+                }
+
+                total.Stop();
+                status = "all done " + new { frameid, total.ElapsedMilliseconds };
+                vsync = default(TaskCompletionSource<object>);
+                // http://stackoverflow.com/questions/22899333/delete-javascript-blobs
+
+                e.Element.disabled = false;
+            };
 
             // "Z:\jsc.svn\examples\javascript\WebGL\WebGLColladaExperiment\WebGLColladaExperiment\WebGLColladaExperiment.csproj"
 
@@ -1451,6 +1532,12 @@ namespace Chrome360HZAnimation
                        Native.window.onframe +=
                            e =>
                            {
+                               // let render man know..
+                               if (vsync != null)
+                                   if (vsync.Task.IsCompleted)
+                                       return;
+
+
                                //if (pause) return;
                                //if (pause.@checked)
                                //    return;
@@ -1460,8 +1547,8 @@ namespace Chrome360HZAnimation
                                // haha. a bit too flickery.
                                //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.01) * 50.0;
                                //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.001) * 190.0;
-                               dae.position.x = Math.Sin(sw.ElapsedMilliseconds * 0.0001) * 190.0;
-                               dae.position.y = Math.Cos(sw.ElapsedMilliseconds * 0.0001) * 90.0;
+                               dae.position.x = Math.Sin(fcamerax * 0.001) * 190.0;
+                               dae.position.y = Math.Cos(fcamerax * 0.001) * 90.0;
                                // manual rebuild?
                                // red compiler notifies laptop chrome of pending update
                                // app reloads
@@ -1607,6 +1694,10 @@ namespace Chrome360HZAnimation
                                // what does it do?
                                gl.flush();
 
+                               // let render man know..
+                               if (vsync != null)
+                                   if (!vsync.Task.IsCompleted)
+                                       vsync.SetResult(null);
                            };
 
 

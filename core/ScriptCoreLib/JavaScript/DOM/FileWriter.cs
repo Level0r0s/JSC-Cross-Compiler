@@ -12,6 +12,18 @@ namespace ScriptCoreLib.JavaScript.DOM
     [Script(HasNoPrototype = true, ExternalTarget = "FileWriter")]
     public class FileWriter : IEventTarget
     {
+        public long position;
+
+        public void truncate(long size) { }
+
+         public FileError error;
+
+        //attribute EventHandler onerror;
+        public IFunction onerror;
+
+        // event? WriteAsync?
+        public IFunction onwriteend;
+
         public void write(Blob data)
         { }
     }

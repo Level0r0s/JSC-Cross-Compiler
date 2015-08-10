@@ -6,6 +6,9 @@ using System.Text;
 
 namespace ScriptCoreLib.JavaScript.DOM
 {
+    // http://src.chromium.org/viewvc/blink/trunk/Source/core/fileapi/Blob.h
+    // http://src.chromium.org/viewvc/blink/trunk/Source/core/fileapi/Blob.cpp
+
     // http://mxr.mozilla.org/mozilla-central/source/dom/webidl/Blob.webidl
     // http://src.chromium.org/viewvc/blink/trunk/Source/core/fileapi/Blob.idl
 
@@ -17,6 +20,9 @@ namespace ScriptCoreLib.JavaScript.DOM
         // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeWriteFiles\ChromeWriteFiles\Application.cs
 
         public readonly ulong size;
+
+        [Obsolete("chrome debugger tells, close method is not there. yikes.", error: true)]
+        public void close() { }
 
         public Blob()
         {
