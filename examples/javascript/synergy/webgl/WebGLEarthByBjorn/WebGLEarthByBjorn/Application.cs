@@ -143,13 +143,13 @@ namespace WebGLEarthByBjorn
 										s.needsUpdate = true;
 										Console.WriteLine("event: _2_no_clouds_4k_low done");
 
-										//await 20000;
+                                        //await 20000;
 
-										//Console.WriteLine("event: _2_no_clouds_4k");
-										//s.image = await new _2_no_clouds_4k();
-										//s.needsUpdate = true;
-										//Console.WriteLine("event: _2_no_clouds_4k done");
-									}
+                                        //Console.WriteLine("event: _2_no_clouds_4k");
+                                        s.image = await new _2_no_clouds_4k();
+                                        s.needsUpdate = true;
+                                        //Console.WriteLine("event: _2_no_clouds_4k done");
+                                    }
 								),
 
 
