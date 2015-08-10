@@ -16,6 +16,7 @@ using System.Xml.Linq;
 using ChromeWriteFiles;
 using ChromeWriteFiles.Design;
 using ChromeWriteFiles.HTML.Pages;
+using ScriptCoreLib.JavaScript.WebGL;
 
 namespace ChromeWriteFiles
 {
@@ -106,9 +107,9 @@ namespace ChromeWriteFiles
                     // X:\jsc.svn\examples\java\hybrid\JVMCLRNIC\JVMCLRNIC\Program.cs
                     // clr does not have it async. 
 
-                    var refresh = new IHTMLButton { "refresh" }.AttachToDocument();
-
-                    while (await refresh.async.onclick)
+                    //var refresh = 
+                    new IHTMLButton { "0000.txt" }.AttachToDocument().onclick += async delegate
+                    //while (await refresh.async.onclick)
                     {
                         new IHTMLHorizontalRule { }.AttachToDocument();
 
@@ -123,6 +124,93 @@ namespace ChromeWriteFiles
                         var entry = await chrome.fileSystem.chooseEntry(
                                             new { type = "openDirectory" }
                                         );
+
+                        // {{ entry = [object DirectoryEntry] }}
+                        new IHTMLPre { new { entry } }.AttachToDocument();
+
+                        // http://sharpkit.net/help/SharpKit.PhoneGap/SharpKit.PhoneGap/DirectoryEntry/getFile(JsString,Flags,FileEntry%5D%5D,JsAction).htm
+                        // https://developer.mozilla.org/en-US/docs/Web/API/DirectoryEntry#getFile
+                        var dir = (DirectoryEntry)entry;
+
+                        dir.getFile(
+                            "0000.txt",
+                            new
+                            {
+                                create = true,
+                                exclusive = false
+                            },
+                            fentry =>
+                            {
+                                // {{ fentry = [object FileEntry] }}
+                                new IHTMLPre { new { fentry } }.AttachToDocument();
+
+
+                                fentry.createWriter(
+                                    w =>
+                                    {
+                                        new IHTMLPre { new { w } }.AttachToDocument();
+
+                                        // new Blob([document.getElementById("HTMLFile").value],
+                                        //{ type: 'text/plain'}
+
+                                        var blob = new Blob(
+                                            blobParts: new[] { "hello\nworld" },
+                                            options: new { type = "text/plain" }
+                                        );
+
+                                        // http://stackoverflow.com/questions/12168909/blob-from-dataurl
+                                        w.write(blob);
+
+
+                                        //w.write()
+                                    }
+                                );
+
+                            }
+                        );
+                        //foreach (var item in n)
+                        //{
+                        //    new IHTMLPre { new { item, item.volumeId, item.writable } }.AttachToDocument();
+                        //}
+                    };
+
+
+
+                    IHTMLImage c0002 = new IHTMLDiv { "frame2 " + new { DateTime.Now } };
+                    IHTMLImage c0001 = new IHTMLDiv { "frame1 " + new { DateTime.Now } };
+                    IHTMLImage c = new IHTMLDiv { "lets render this div into file " + new { DateTime.Now } };
+
+                    c.AttachToDocument();
+
+                    // "Z:\jsc.svn\examples\javascript\chrome\apps\ChromeWriteFiles\ChromeWriteFiles\bin\Debug\staging\ChromeWriteFiles.Application\web\manifest.json"
+
+                    //var data = c.toDataURL();
+
+                    //new IHTMLPre { new { data } }.AttachToDocument();
+                    // { data = data:image/png;base64,iVBORw
+
+
+                    //var fileBytes = Convert.FromBase64String(data.SkipUntilOrEmpty("base64,"));
+                    // { Length = 1382 }
+
+                    //new IHTMLPre { new { fileBytes.Length, fileBytes } }.AttachToDocument();
+
+
+                    new IHTMLButton { "0000.jpg" }.AttachToDocument().onclick += async delegate
+                    //while (await refresh.async.onclick)
+                    {
+                        new IHTMLHorizontalRule { }.AttachToDocument();
+
+                        // TypeError: Cannot read property 'getVolumeList' of undefined
+                        //var n = await chrome.fileSystem.getVolumeList();
+
+
+                        //{
+                        //    "fileSystem" : ["write", "directory"]
+                        //    }
+                        // TypeError: Cannot read property 'chooseEntry' of undefined
+                        // 1757ms TypeError: Cannot read property 'chooseEntry' of undefined
+                        var entry = await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
 
                         // {{ entry = [object DirectoryEntry] }}
                         new IHTMLPre { new { entry } }.AttachToDocument();
@@ -147,18 +235,20 @@ namespace ChromeWriteFiles
                                 fentry.createWriter(
                                     w =>
                                     {
+
                                         new IHTMLPre { new { w } }.AttachToDocument();
 
                                         // new Blob([document.getElementById("HTMLFile").value],
                                         //{ type: 'text/plain'}
 
-                                        var blob = new Blob(
-                                            e: new[] { "hello" },
-                                            args: new { type = "text/plain" }
-                                        );
+                                        //var blob = new Blob(
+                                        //    blobParts: new ArrayBufferView[] { fileBytes },
+                                        //    options: new { type = "application/octet-stream" }
+                                        //);
 
                                         // http://stackoverflow.com/questions/12168909/blob-from-dataurl
-                                        w.write(blob);
+                                        //w.write(fileBytes);
+                                        w.write(c);
 
 
                                         //w.write()
@@ -171,7 +261,20 @@ namespace ChromeWriteFiles
                         //{
                         //    new IHTMLPre { new { item, item.volumeId, item.writable } }.AttachToDocument();
                         //}
-                    }
+                    };
+
+                    new IHTMLButton { "0001.png" }.AttachToDocument().onclick += async delegate
+                       {
+                           new IHTMLHorizontalRule { }.AttachToDocument();
+
+                           var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
+
+
+                           await dir.WriteAllBytes("0001.png", c0001);
+                           await dir.WriteAllBytes("0002.png", c0002);
+
+                           new IHTMLPre { "done" }.ToString();
+                       };
 
                 }
             );

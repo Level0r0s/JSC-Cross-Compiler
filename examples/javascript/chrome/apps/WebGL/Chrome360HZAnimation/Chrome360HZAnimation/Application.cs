@@ -1,3 +1,7 @@
+#define FWebGLHZBlendCharacter
+// can we animate our characters?
+
+
 //#define AsWEBSERVER
 // webserver cannot save images to foler tho
 // as webserver imgs will have saves context menu
@@ -19,13 +23,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Chrome360HZ;
-using Chrome360HZ.Design;
-using Chrome360HZ.HTML.Pages;
+using Chrome360HZAnimation;
+using Chrome360HZAnimation.Design;
+using Chrome360HZAnimation.HTML.Pages;
 using System.Diagnostics;
 using ScriptCoreLib.JavaScript.WebGL;
 
-namespace Chrome360HZ
+namespace Chrome360HZAnimation
 {
     using gl = WebGLRenderingContext;
 
@@ -61,10 +65,11 @@ namespace Chrome360HZ
 
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150808/cubemapcamera
-        // subst a: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZ\Chrome360HZ\bin\Debug\staging\Chrome360HZ.Application\web
-        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZ\Chrome360HZ\bin\Debug\staging\Chrome360HZ.Application\web
+        // subst /D a:
+        // subst a: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\bin\Debug\staging\Chrome360HZAnimation.Application\web
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\bin\Debug\staging\Chrome360HZAnimation.Application\web
 
-        // ColladaLoader: Empty or non-existing file (assets/Chrome360HZ/S6Edge.dae)
+        // ColladaLoader: Empty or non-existing file (assets/Chrome360HZAnimation/S6Edge.dae)
 
         /// <summary>
         /// This is a javascript application.
@@ -147,7 +152,7 @@ namespace Chrome360HZ
                         // 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
                         Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
 
-                        new chrome.Notification(title: "Chrome360HZ");
+                        new chrome.Notification(title: "Chrome360HZAnimation");
 
                         // https://developer.chrome.com/apps/app_window#type-CreateWindowOptions
                         var xappwindow = await chrome.app.window.create(
@@ -176,6 +181,8 @@ namespace Chrome360HZ
 
 #endif
 
+
+
             //const int size = 128;
             //const int size = 256; // 6 faces, 12KB
             //const int size = 512; // 6 faces, ?
@@ -197,6 +204,7 @@ namespace Chrome360HZ
             Native.css.style.overflow = IStyle.OverflowEnum.hidden;
 
             Native.body.Clear();
+            (Native.body.style as dynamic).webkitUserSelect = "text";
 
             new IHTMLPre { "can we stream it into VR, shadertoy, youtube 360, youtube stereo yet?" }.AttachToDocument();
 
@@ -280,6 +288,7 @@ namespace Chrome360HZ
             xlight.shadowCameraTop = 4000;
             xlight.shadowCameraBottom = -4000;
 
+            // wont show if we add skybox?
             xlight.shadowCameraVisible = true;
 
             scene.add(light);
@@ -307,7 +316,7 @@ namespace Chrome360HZ
             // https://github.com/mrdoob/three.js/issues/3836
 
             // the construct. white bg
-            renderer0.setClearColor(0xfffff, 1);
+            //renderer0.setClearColor(0xfffff, 1);
 
             //renderer.setSize(window.Width, window.Height);
             renderer0.setSize(cubefacesize, cubefacesize);
@@ -335,7 +344,17 @@ namespace Chrome360HZ
             // move up
             //camera.position.set(-1200, 800, 1200);
             //var cameraoffset = new THREE.Vector3(0, 15, 0);
-            var cameraoffset = new THREE.Vector3(-1200, 800, 1200);
+
+            // can we aniamte it?
+            //var cameraoffset = new THREE.Vector3(0, 800, 1200);
+            // can we have linear animation fromcenter of the map to the edge and back?
+            // then do the flat earth sun orbit?
+            var cameraoffset = new THREE.Vector3(0, 0, 1200);
+
+            // original vieworigin
+            //var cameraoffset = new THREE.Vector3(-1200, 800, 1200);
+
+            var cubecameraoffsetx = 300;
 
             #region y
             // need to rotate90?
@@ -345,7 +364,7 @@ namespace Chrome360HZ
 
             //cameraNY.lookAt(new THREE.Vector3(0, 1, 0));
             var canvasNY = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
-            canvasNY.canvas.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 1, 8 + (int)(uizoom * cubefacesize + 8) * 2);
+            canvasNY.canvas.style.SetLocation(cubecameraoffsetx + (int)(uizoom * cubefacesize + 8) * 1, 8 + (int)(uizoom * cubefacesize + 8) * 2);
             canvasNY.canvas.title = "NY";
             canvasNY.canvas.AttachToDocument();
             canvasNY.canvas.style.transformOrigin = "0 0";
@@ -356,7 +375,7 @@ namespace Chrome360HZ
             cameraPY.position.add(cameraoffset);
             //cameraPY.lookAt(new THREE.Vector3(0, -1, 0));
             var canvasPY = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
-            canvasPY.canvas.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 1, 8 + (int)(uizoom * cubefacesize + 8) * 0);
+            canvasPY.canvas.style.SetLocation(cubecameraoffsetx + (int)(uizoom * cubefacesize + 8) * 1, 8 + (int)(uizoom * cubefacesize + 8) * 0);
             canvasPY.canvas.title = "PY";
             canvasPY.canvas.AttachToDocument();
             canvasPY.canvas.style.transformOrigin = "0 0";
@@ -373,7 +392,7 @@ namespace Chrome360HZ
             //cameraNX.lookAt(new THREE.Vector3(-1, 0, 0));
             //cameraNX.lookAt(new THREE.Vector3(1, 0, 0));
             var canvasNX = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
-            canvasNX.canvas.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 2, 8 + (int)(uizoom * cubefacesize + 8) * 1);
+            canvasNX.canvas.style.SetLocation(cubecameraoffsetx + (int)(uizoom * cubefacesize + 8) * 2, 8 + (int)(uizoom * cubefacesize + 8) * 1);
             canvasNX.canvas.title = "NX";
             canvasNX.canvas.AttachToDocument();
             canvasNX.canvas.style.transformOrigin = "0 0";
@@ -386,7 +405,7 @@ namespace Chrome360HZ
             //cameraPX.lookAt(new THREE.Vector3(1, 0, 0));
             //cameraPX.lookAt(new THREE.Vector3(-1, 0, 0));
             var canvasPX = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
-            canvasPX.canvas.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 0, 8 + (int)(uizoom * cubefacesize + 8) * 1);
+            canvasPX.canvas.style.SetLocation(cubecameraoffsetx + (int)(uizoom * cubefacesize + 8) * 0, 8 + (int)(uizoom * cubefacesize + 8) * 1);
             canvasPX.canvas.title = "PX";
             canvasPX.canvas.AttachToDocument();
             canvasPX.canvas.style.transformOrigin = "0 0";
@@ -403,7 +422,7 @@ namespace Chrome360HZ
             //cameraNX.lookAt(new THREE.Vector3(-1, 0, 0));
             //cameraNZ.lookAt(new THREE.Vector3(0, 0, 1));
             var canvasNZ = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
-            canvasNZ.canvas.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 3, 8 + (int)(uizoom * cubefacesize + 8) * 1);
+            canvasNZ.canvas.style.SetLocation(cubecameraoffsetx + (int)(uizoom * cubefacesize + 8) * 3, 8 + (int)(uizoom * cubefacesize + 8) * 1);
             canvasNZ.canvas.title = "NZ";
             canvasNZ.canvas.AttachToDocument();
             canvasNZ.canvas.style.transformOrigin = "0 0";
@@ -416,7 +435,7 @@ namespace Chrome360HZ
             //cameraPZ.lookAt(new THREE.Vector3(0, 0, 1));
             //cameraPZ.lookAt(new THREE.Vector3(0, 0, -1));
             var canvasPZ = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
-            canvasPZ.canvas.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 1, 8 + (int)(uizoom * cubefacesize + 8) * 1);
+            canvasPZ.canvas.style.SetLocation(cubecameraoffsetx + (int)(uizoom * cubefacesize + 8) * 1, 8 + (int)(uizoom * cubefacesize + 8) * 1);
             canvasPZ.canvas.title = "PZ";
             canvasPZ.canvas.AttachToDocument();
             canvasPZ.canvas.style.transformOrigin = "0 0";
@@ -580,7 +599,7 @@ namespace Chrome360HZ
 
             c.style.transformOrigin = "0 0";
             c.style.transform = $"scale({suizoom})";
-            c.style.backgroundColor = "yellow";
+            //c.style.backgroundColor = "yellow";
             c.style.position = IStyle.PositionEnum.absolute;
 
             c.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 0, 8 + (int)(uizoom * cubefacesize + 8) * 3);
@@ -627,7 +646,9 @@ namespace Chrome360HZ
                 8 + (int)(uizoom * cubefacesize + 8) * 0 + 480 + 16, 8 + (int)(uizoom * cubefacesize + 8) * 3);
 
 
-            var mesh = new THREE.Mesh(new THREE.SphereGeometry(far / 2, 50, 50),
+
+            #region  skybox
+            var skybox = new THREE.Mesh(new THREE.SphereGeometry(far / 2, 50, 50),
            new THREE.MeshBasicMaterial(new
            {
                map = THREE.ImageUtils.loadTexture(
@@ -639,21 +660,29 @@ namespace Chrome360HZ
 
                    )
            }));
-            mesh.scale.x = -1;
+            skybox.scale.x = -1;
+            #endregion
+
 
             #region fixup rotation
 
             //mesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI / 2);
             //mesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
-            mesh.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
+
+            // dont need the fixup. unless we want to animate the sky rotate?
+            //mesh.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
             #endregion
 
 
-            scene.add(mesh);
+            // hide the sky to see camera lines?
+            //  can we show this as HUD on VR in webview?
+            skybox.visible = false;
+            scene.add(skybox);
 
 
             //new IHTMLButton { }
 
+            #region DirectoryEntry
             var dir = default(DirectoryEntry);
 
             new IHTMLButton { "openDirectory" }.AttachToDocument().onclick += async delegate
@@ -678,21 +707,23 @@ namespace Chrome360HZ
 
                 // grab a frame
 
-
-                var f0 = new IHTMLImage { src = gl.canvas.toDataURL() };
-
-                //var f0 = (IHTMLImage)gl.canvas;
-                //var f0 = (IHTMLImage)gl.canvas;
-                //var base64 = gl.canvas.toDataURL();
-
-
-                //frame0.src = base64;
-                frame0.src = f0.src;
-
-                // 7MB!
-
                 if (dir == null)
+                {
+                    // not exporting to file system?
+                    var f0 = new IHTMLImage { src = gl.canvas.toDataURL() };
+
+                    //var f0 = (IHTMLImage)gl.canvas;
+                    //var f0 = (IHTMLImage)gl.canvas;
+                    //var base64 = gl.canvas.toDataURL();
+
+
+                    //frame0.src = base64;
+                    frame0.src = f0.src;
+
+                    // 7MB!
+
                     return;
+                }
 
                 //                // ---------------------------
                 //IrfanView
@@ -707,12 +738,21 @@ namespace Chrome360HZ
                 // haha this will render the thumbnail.
                 //dir.WriteAllBytes("0000.png", frame0);
 
-                dir.WriteAllBytes("0000.png", f0);
+                //dir.WriteAllBytes("0000.png", gl.canvas);
+
+                var glsw = Stopwatch.StartNew();
+                dir.WriteAllBytes("0000.png", gl);
+
+                new IHTMLPre { new { glsw.ElapsedMilliseconds } }.AttachToDocument();
+
+                // {{ ElapsedMilliseconds = 1548 }}
+
                 // 3.7MB
                 // 3840x2160
 
             };
 
+            #endregion
 
 
             // "Z:\jsc.svn\examples\javascript\WebGL\WebGLColladaExperiment\WebGLColladaExperiment\WebGLColladaExperiment.csproj"
@@ -804,9 +844,8 @@ namespace Chrome360HZ
             #region create field
 
             // THREE.PlaneGeometry: Consider using THREE.PlaneBufferGeometry for lower memory footprint.
-
-            // could we get some film grain?
-            var planeGeometry = new THREE.CubeGeometry(512, 512, 1);
+            // can we have our checkerboard?
+            var planeGeometry = new THREE.CubeGeometry(2048, 2048, 1);
             var plane = new THREE.Mesh(planeGeometry,
                     new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
 
@@ -814,13 +853,14 @@ namespace Chrome360HZ
             //plane.castShadow = false;
             plane.receiveShadow = true;
 
-
             {
 
                 var parent = new THREE.Object3D();
                 parent.add(plane);
+                // why rotate?
                 parent.rotation.x = -Math.PI / 2;
-                parent.scale.set(10, 10, 10);
+                //parent.scale.set(5, 5, 5);
+                //parent.scale.set(2, 2, 2);
 
                 scene.add(parent);
             }
@@ -865,59 +905,61 @@ namespace Chrome360HZ
 
                 if (i % 2 == 0)
                 {
+
+                    // Z:\jsc.svn\examples\javascript\WebGL\WebGLHZBlendCharacter\WebGLHZBlendCharacter\Application.cs
 #if FWebGLHZBlendCharacter
                     #region SpeedBlendCharacter
-					var _i = i;
-					{ WebGLHZBlendCharacter.HTML.Pages.TexturesImages ref0; }
+                    var _i = i;
+                    { WebGLHZBlendCharacter.HTML.Pages.TexturesImages ref0; }
 
-					var blendMesh = new THREE.SpeedBlendCharacter();
-					blendMesh.load(
-						new WebGLHZBlendCharacter.Models.marine_anims().Content.src,
-						new Action(
-							delegate
-							{
-								// buildScene
-								//blendMesh.rotation.y = Math.PI * -135 / 180;
-								blendMesh.castShadow = true;
-								// we cannot scale down we want our shadows
-								//blendMesh.scale.set(0.1, 0.1, 0.1);
+                    var blendMesh = new THREE.SpeedBlendCharacter();
+                    blendMesh.load(
+                        new WebGLHZBlendCharacter.Models.marine_anims().Content.src,
+                        new Action(
+                            delegate
+                            {
+                                // buildScene
+                                //blendMesh.rotation.y = Math.PI * -135 / 180;
+                                blendMesh.castShadow = true;
+                                // we cannot scale down we want our shadows
+                                //blendMesh.scale.set(0.1, 0.1, 0.1);
 
-								blendMesh.position.x = (_i + 2) % 7 * 200 - 2.5f;
+                                blendMesh.position.x = (_i + 2) % 7 * 200 - 2.5f;
 
-								// raise it up
-								//blendMesh.position.y = .5f * 100;
-								blendMesh.position.z = -1 * _i * 100;
-
-
-								var xtrue = true;
-								// run
-								blendMesh.setSpeed(1.0);
-
-								// will in turn call THREE.AnimationHandler.play( this );
-								//blendMesh.run.play();
-								// this wont help. bokah does not see the animation it seems.
-								//blendMesh.run.update(1);
-
-								blendMesh.showSkeleton(!xtrue);
-
-								scene.add(blendMesh);
+                                // raise it up
+                                //blendMesh.position.y = .5f * 100;
+                                blendMesh.position.z = -1 * _i * 100;
 
 
-								Native.window.onframe +=
-								 delegate
-								 {
+                                var xtrue = true;
+                                // run
+                                blendMesh.setSpeed(1.0);
 
-									 blendMesh.rotation.y = Math.PI * 0.0002 * sw.ElapsedMilliseconds;
+                                // will in turn call THREE.AnimationHandler.play( this );
+                                //blendMesh.run.play();
+                                // this wont help. bokah does not see the animation it seems.
+                                //blendMesh.run.update(1);
+
+                                blendMesh.showSkeleton(!xtrue);
+
+                                scene.add(blendMesh);
+
+
+                                Native.window.onframe +=
+                                 delegate
+                                 {
+
+                                     blendMesh.rotation.y = Math.PI * 0.0002 * sw.ElapsedMilliseconds;
 
 
 
-									 ii.rotation.y = Math.PI * 0.0002 * sw.ElapsedMilliseconds;
+                                     ii.rotation.y = Math.PI * 0.0002 * sw.ElapsedMilliseconds;
 
-								 };
+                                 };
 
-							}
-						)
-					);
+                            }
+                        )
+                    );
                     #endregion
 #endif
                 }

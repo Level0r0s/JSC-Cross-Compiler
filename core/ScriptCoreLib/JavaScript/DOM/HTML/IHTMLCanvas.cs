@@ -267,6 +267,27 @@ interface HTMLCanvasElement : HTMLElement {
 
 			return c.canvas;
 		}
+
+
+
+
+        public static implicit operator Blob(IHTMLCanvas c)
+        {
+            // = new IHTMLImage { src = gl.canvas.toDataURL() };
+
+            var data = c.toDataURL();
+
+            //var fileBytes = System.Convert.FromBase64String(data.SkipUntilOrEmpty("base64,"));
+
+            var prefix = "base64,";
+
+
+
+            var fileBytes = System.Convert.FromBase64String(
+                data.Substring(data.IndexOf(prefix) + prefix.Length));
+
+            return fileBytes;
+        }
 	}
 
 	[Script]
