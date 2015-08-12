@@ -44,12 +44,16 @@ namespace com.abstractatech.gamification.craft
     /// <summary>
     /// Your client side code running inside a web browser as JavaScript.
     /// </summary>
-    public sealed class Application
+    public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150812/cssstereo
+
+        // https://zproxy.wordpress.com/2012/11/13/dos-warcraft/
+        // https://zproxy.wordpress.com/2015/07/14/warcraft-360/
+
         // jsc should do correctly uri escapes
         // \kennedy.greg%40gmail.com\warcraft\dungeon1.png
 
-        public readonly ApplicationWebService service = new ApplicationWebService();
 
 
         public static void SetDialogColor(IHTMLDiv toolbar, Color toolbar_color, bool up)

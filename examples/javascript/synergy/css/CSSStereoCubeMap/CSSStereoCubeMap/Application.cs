@@ -24,6 +24,8 @@ namespace CSSStereoCubeMap
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150812/cssstereo
+
         //2d50:02:01:1e RewriteToAssembly error: System.IO.FileNotFoundException: Could not find file 'W:/CSSStereoCubeMap.ApplicationWebService.AssetsLibrary.dll'.
         //File name: 'W:/CSSStereoCubeMap.ApplicationWebService.AssetsLibrary.dll'
         //   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
@@ -46,60 +48,69 @@ namespace CSSStereoCubeMap
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // haha this is rather messed up on android.
+            // perhaps the css3d runs out of memory?
+
             //var frame0 = Task.Delay(100);
             //var frame1 = Task.Delay(200);
 
-            //new { }.With(
-            //    async delegate
-            //    {
-            //        while (true)
-            //        {
-            //            await frame0;
 
-            //            frame0 = Task.Delay(100);
-
-            //            await frame1;
-
-            //            frame0 = Task.Delay(100);
-            //        }
-            //    }
-            //);
 
             var sw = Stopwatch.StartNew();
 
-            Action<long> activateeye = delegate { };
 
-            new { }.With(
-               async delegate
-               {
-                   while (true)
-                   {
-                       var eye = (sw.ElapsedMilliseconds / 5) % 2;
 
-                       var drawImage = Stopwatch.StartNew();
-                       activateeye(eye);
-                       drawImage.Stop();
-                       Native.document.title = "" + drawImage.ElapsedMilliseconds + "ms (6x drawImage)";
-                       // 120ms.
+            //var lon0 = 90.0;
+            var lon0 = 0.0;
+            var lon1 = 0.0;
 
-                       await Task.Delay(1000 / 7);
-                   }
-               }
+            var lon = new sum(
+                 () => lon0,
+                 () => lon1
+             );
+
+            var lat0 = 0.0;
+            var lat1 = 0.0;
+
+            // or could we do it with byref or pointers?
+            var lat = new sum(
+                () => lat0,
+                () => lat1
             );
 
+            var phi = 0.0;
+            var theta = 0.0;
 
-            new { }.With(
-                async delegate
+
+
+            var camera_rotation_z = 0.0;
+
+
+            var drag = false;
+
+
+
+            Action<int> draweye = async (int eyeid) =>
                 {
                     // view-source:file:///X:/opensource/github/three.js/examples/css3d_panorama.html
 
-                    var camera = new THREE.PerspectiveCamera(75, Native.window.aspect, 1, 1000);
+                    //var camera = new THREE.PerspectiveCamera(75, Native.window.aspect, 1, 1000);
+
+                    // wearality lenses?
+                    //var camera = new THREE.PerspectiveCamera(90, Native.window.aspect, 1, 1000);
+                    //var camera = new THREE.PerspectiveCamera(120, Native.window.aspect, 1, 1000);
+                    var camera = new THREE.PerspectiveCamera(96, Native.window.aspect, 1, 1000);
                     var scene = new THREE.Scene();
 
-                    var renderer = new THREE.CSS3DRenderer();
+                    var renderer0 = new THREE.CSS3DRenderer();
 
                     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150621
-                    var f12 = await new airplane().async.oncomplete;
+                    //var f12 = await new airplane().async.oncomplete;
+                    //var f12 = await new airplane_low().async.oncomplete;
+                    //var f12 = await new airplane_1024().async.oncomplete;
+                    //var f12 = await new airplane_729().async.oncomplete;
+                    // stop flickering damnet
+                    var f12 = await new airplane_400().async.oncomplete;
 
 
 
@@ -110,6 +121,8 @@ namespace CSSStereoCubeMap
 
 
                     //Func<int, var> f = i =>
+
+                    #region f
                     Func<int, IHTMLCanvas> f = i =>
                     {
                         // we do have a skybox example somewhere...
@@ -123,43 +136,44 @@ namespace CSSStereoCubeMap
 
                         //var stale = new IHTMLImage();
 
-                        activateeye += eye =>
+                        if (eyeid == 0)
                         {
-                            if (eye == 0)
-                            {
-                                // GearVR would have both eyes!
-                                // laptop has to flip between eyes to give similar effect?
-                                // if this were a chrome app. could gearvr request the frames into the photos360 app?
+                            // GearVR would have both eyes!
+                            // laptop has to flip between eyes to give similar effect?
+                            // if this were a chrome app. could gearvr request the frames into the photos360 app?
 
-                                f1.drawImage(f12, i * f12.height, 0, sw: f12.height, sh: f12.height,
-                                dx: 0, dy: 0, dw: f12.height, dh: f12.height);
+                            f1.drawImage(f12, i * f12.height, 0, sw: f12.height, sh: f12.height,
+                            dx: 0, dy: 0, dw: f12.height, dh: f12.height);
 
-                                // whenever we call drawImage ? callsite event monitoring?
-                                // this seems to be slow
-                                //stale.src = f1.canvas.toDataURL();
+                            // whenever we call drawImage ? callsite event monitoring?
+                            // this seems to be slow
+                            //stale.src = f1.canvas.toDataURL();
 
-                                // can we have a synchronized frame choreo?
-                                //await Task.Delay(1000 / 15);
-                            }
-                            else
-                            {
-                                //await frame0;
+                            // can we have a synchronized frame choreo?
+                            //await Task.Delay(1000 / 15);
+                        }
+                        else
+                        {
+                            //await frame0;
 
-                                // update!
+                            // update!
 
-                                f1.drawImage(f12, (i + 6) * f12.height, 0, sw: f12.height, sh: f12.height,
-                                dx: 0, dy: 0, dw: f12.height, dh: f12.height);
+                            f1.drawImage(f12, (i + 6) * f12.height, 0, sw: f12.height, sh: f12.height,
+                            dx: 0, dy: 0, dw: f12.height, dh: f12.height);
 
-                                //stale.src = f1.canvas.toDataURL();
+                            //stale.src = f1.canvas.toDataURL();
 
-                                //await frame1;
-                                //await Task.Delay(1000 / 15);
+                            //await frame1;
+                            //await Task.Delay(1000 / 15);
 
-                            };
                         };
+
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150812/cssstereo
 
                         return f1;
                     };
+                    #endregion
+
 
                     //var f0 = new CanvasRenderingContext2D(w: f12.height, h: f12.height);
                     //f0.drawImage(f12, 0, 0, sw: f12.height, sh: f12.height,
@@ -215,6 +229,7 @@ namespace CSSStereoCubeMap
                         var element = side.CSS3DObject_element;
 
                         element.style.SetSize(1026, 1026);
+                        //element.style.SetSize(256, 256);
 
                         //element.width = 1026; // 2 pixels extra to close the gap.
 
@@ -232,157 +247,259 @@ namespace CSSStereoCubeMap
                     // <img width="1026" src="textures/cube/Bridge2/posx.jpg"                                             style="position: absolute; -webkit-transform-style: preserve-3d; -webkit-transform: translate3d(-50%, -50%, 0px) matrix3d(0, 0, -1, 0, 0, -1, 0, 0, 1, 0, 0, 0, -512, 0, 0, 1);"><img width="1026" src="textures/cube/Bridge2/negx.jpg" style="position: absolute; -webkit-transform-style: preserve-3d; -webkit-transform: translate3d(-50%, -50%, 0px) matrix3d(0, 0, 1, 0, 0, -1, 0, 0, -1, 0, 0, 0, 512, 0, 0, 1);"><img width="1026" src="textures/cube/Bridge2/posy.jpg" style="position: absolute; -webkit-transform-style: preserve-3d; -webkit-transform: translate3d(-50%, -50%, 0px) matrix3d(-1, 0, 0, 0, 0, 0, 1, 0, 0, -1, 0, 0, 0, 512, 0, 1);"><img width="1026" src="textures/cube/Bridge2/negy.jpg" style="position: absolute; -webkit-transform-style: preserve-3d; -webkit-transform: translate3d(-50%, -50%, 0px) matrix3d(-1, 0, 0, 0, 0, 0, -1, 0, 0, 1, 0, 0, 0, -512, 0, 1);"><img width="1026" src="textures/cube/Bridge2/posz.jpg" style="position: absolute; -webkit-transform-style: preserve-3d; -webkit-transform: translate3d(-50%, -50%, 0px) matrix3d(-1, 0, 0, 0, 0, -1, 0, 0, 0, 0, -1, 0, 0, 0, 512, 1);"><img width="1026" src="textures/cube/Bridge2/negz.jpg" style="position: absolute; -webkit-transform-style: preserve-3d; -webkit-transform: translate3d(-50%, -50%, 0px) matrix3d(1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0, -512, 1);"></div> 
 
 
-                    renderer.setSize(Native.window.Width, Native.window.Height);
-                    renderer.domElement.AttachToDocument();
+                    renderer0.domElement.AttachToDocument();
 
                     #region onresize
-                    Native.window.onresize +=
-                        delegate
+                    new { }.With(
+                        async delegate
                         {
-                            camera.aspect = Native.window.aspect;
-                            camera.updateProjectionMatrix();
+                            do
+                            {
 
-                            renderer.setSize(Native.window.Width, Native.window.Height);
-                        };
+                                //camera.aspect = Native.window.aspect;
+                                camera.aspect = Native.window.Width / 2.0 / Native.window.Height;
+                                camera.updateProjectionMatrix();
+
+                                //renderer0.setSize(Native.window.Width / 2, Native.window.Height);
+                                renderer0.setSize(Native.window.Width / 2, Native.window.Height);
+                                //renderer0.domElement.style.SetLocation(Native.window.Width / 2 * eyeid, 0);
+                                renderer0.domElement.style.SetLocation(Native.window.Width / 2 * (1 - eyeid), 0);
+
+                            }
+                            while (await Native.window.async.onresize);
+                        });
                     #endregion
 
                     var target = new THREE.Vector3();
-
-                    var lon = 90.0;
-                    var lat = 0.0;
-                    var phi = 0.0;
-                    var theta = 0.0;
-
-
-
-
-
-                    var drag = false;
 
 
                     Native.window.onframe +=
                         delegate
                         {
-                            if (Native.document.pointerLockElement == Native.document.body)
-                                lon += 0.00;
-                            else
-                                lon += 0.01;
+                            //if (Native.document.pointerLockElement == Native.document.body)
+                            //    lon += 0.00;
+                            //else
+                            //    lon += 0.01;
 
-                            lat = Math.Max(-85, Math.Min(85, lat));
+                            //lat = Math.Max(-85, Math.Min(85, lat));
 
-                            //Native.document.title = new { lon, lat }.ToString();
+                            Native.document.title = new { lon, lat }.ToString();
+
+
+                            //phi = THREE.Math.degToRad(90 - lat);
+                            //theta = THREE.Math.degToRad(lon);
+
+                            //target.x = Math.Sin(phi) * Math.Cos(theta);
+                            //target.y = Math.Cos(phi);
+                            //target.z = Math.Sin(phi) * Math.Sin(theta);
+
+                            //camera.lookAt(target);
 
 
                             phi = THREE.Math.degToRad(90 - lat);
                             theta = THREE.Math.degToRad(lon);
 
-                            target.x = Math.Sin(phi) * Math.Cos(theta);
-                            target.y = Math.Cos(phi);
-                            target.z = Math.Sin(phi) * Math.Sin(theta);
+                            target.x = 500 * Math.Sin(phi) * Math.Cos(theta);
+                            target.y = 500 * Math.Cos(phi);
+                            target.z = 500 * Math.Sin(phi) * Math.Sin(theta);
 
                             camera.lookAt(target);
+                            camera.rotation.z += camera_rotation_z;
 
-                            renderer.render(scene, camera);
 
-                        };
-
-                    #region ontouchmove
-                    var touchX = 0;
-                    var touchY = 0;
-
-                    Native.document.body.ontouchstart +=
-                        e =>
-                        {
-                            e.preventDefault();
-
-                            var touch = e.touches[0];
-
-                            touchX = touch.screenX;
-                            touchY = touch.screenY;
-
+                            renderer0.render(scene, camera);
                         };
 
 
-                    Native.document.body.ontouchmove +=
-                      e =>
-                      {
-                          e.preventDefault();
+                };
 
-                          var touch = e.touches[0];
-
-                          lon -= (touch.screenX - touchX) * 0.1;
-                          lat += (touch.screenY - touchY) * 0.1;
-
-                          touchX = touch.screenX;
-                          touchY = touch.screenY;
-
-                      };
-                    #endregion
+            draweye(1);
+            draweye(0);
 
 
+            var compassHeadingOffset = 0.0;
+            var compassHeadingInitialized = 0;
+
+            #region compassHeading
+            // X:\jsc.svn\examples\javascript\android\Test\TestCompassHeading\TestCompassHeading\Application.cs
+            Native.window.ondeviceorientation +=
+              dataValues =>
+              {
+                  // Convert degrees to radians
+                  var alphaRad = dataValues.alpha * (Math.PI / 180);
+                  var betaRad = dataValues.beta * (Math.PI / 180);
+                  var gammaRad = dataValues.gamma * (Math.PI / 180);
+
+                  // Calculate equation components
+                  var cA = Math.Cos(alphaRad);
+                  var sA = Math.Sin(alphaRad);
+                  var cB = Math.Cos(betaRad);
+                  var sB = Math.Sin(betaRad);
+                  var cG = Math.Cos(gammaRad);
+                  var sG = Math.Sin(gammaRad);
+
+                  // Calculate A, B, C rotation components
+                  var rA = -cA * sG - sA * sB * cG;
+                  var rB = -sA * sG + cA * sB * cG;
+                  var rC = -cB * cG;
+
+                  // Calculate compass heading
+                  var compassHeading = Math.Atan(rA / rB);
+
+                  // Convert from half unit circle to whole unit circle
+                  if (rB < 0)
+                  {
+                      compassHeading += Math.PI;
+                  }
+                  else if (rA < 0)
+                  {
+                      compassHeading += 2 * Math.PI;
+                  }
+
+                  /*
+                  Alternative calculation (replacing lines 99-107 above):
+
+                    var compassHeading = Math.atan2(rA, rB);
+
+                    if(rA < 0) {
+                      compassHeading += 2 * Math.PI;
+                    }
+                  */
+
+                  // Convert radians to degrees
+                  compassHeading *= 180 / Math.PI;
+
+                  // Compass heading can only be derived if returned values are 'absolute'
+
+                  // X:\jsc.svn\examples\javascript\android\Test\TestCompassHeadingWithReset\TestCompassHeadingWithReset\Application.cs
+
+                  //Native.document.body.innerText = new { compassHeading }.ToString();
+                  if (compassHeadingInitialized > 0)
+                  {
+                      lon1 = compassHeading - compassHeadingOffset;
+                  }
+                  else
+                  {
+                      compassHeadingOffset = compassHeading;
+                      compassHeadingInitialized++;
+                  }
+
+              };
+            #endregion
+
+            #region gamma
+            Native.window.ondeviceorientation +=
+                //e => Native.body.innerText = new { e.alpha, e.beta, e.gamma }.ToString();
+                //e => lon = e.gamma;
+                e =>
+                {
+                    lat1 = e.gamma;
+
+                    // after servicing a running instance would be nice
+                    // either by patching or just re running the whole iteration in the backgrou
+                    //camera_rotation_z = e.beta * 0.02;
+                    camera_rotation_z = e.beta * -0.01;
+                };
+            #endregion
 
 
 
+            #region camera rotation
+            var old = new { clientX = 0, clientY = 0 };
 
-                    #region camera rotation
-                    Native.document.body.onmousemove +=
-                        e =>
-                        {
-                            e.preventDefault();
+            Native.document.body.ontouchstart +=
+                e =>
+                {
+                    var n = new { e.touches[0].clientX, e.touches[0].clientY };
+                    old = n;
+                };
 
-                            if (Native.document.pointerLockElement == Native.document.body)
-                            {
-                                lon += e.movementX * 0.1;
-                                lat -= e.movementY * 0.1;
+            Native.document.body.ontouchmove +=
+                    e =>
+                    {
+                        var n = new { e.touches[0].clientX, e.touches[0].clientY };
 
-                                //Console.WriteLine(new { lon, lat, e.movementX, e.movementY });
-                            }
-                        };
+                        e.preventDefault();
 
+                        lon0 += (n.clientX - old.clientX) * 0.2;
+                        lat0 -= (n.clientY - old.clientY) * 0.2;
 
-                    Native.document.body.onmouseup +=
-                      e =>
-                      {
-                          drag = false;
-                          e.preventDefault();
-                      };
-
-                    Native.document.body.onmousedown +=
-                        e =>
-                        {
-                            //e.CaptureMouse();
-
-                            drag = true;
-                            e.preventDefault();
-                            Native.document.body.requestPointerLock();
-
-                        };
+                        old = n;
+                    };
 
 
-                    Native.document.body.ondblclick +=
-                        e =>
-                        {
-                            e.preventDefault();
+            Native.document.body.onmousemove +=
+                e =>
+                {
+                    e.preventDefault();
 
-                            Console.WriteLine("requestPointerLock");
-                        };
+                    if (Native.document.pointerLockElement == Native.document.body)
+                    {
+                        lon0 += e.movementX * 0.1;
+                        lat0 -= e.movementY * 0.1;
 
-                    #endregion
+                        //Console.WriteLine(new { lon, lat, e.movementX, e.movementY });
+                    }
+                };
+
+
+            Native.document.body.onmouseup +=
+              e =>
+              {
+                  //drag = false;
+                  e.preventDefault();
+              };
+
+            Native.document.body.onmousedown +=
+                e =>
+                {
+                    //e.CaptureMouse();
+
+                    //drag = true;
+                    e.preventDefault();
+                    Native.document.body.requestPointerLock();
+
+                };
 
 
 
-                    Native.document.body.onmousewheel +=
-                        e =>
-                        {
-                            camera.fov -= e.WheelDirection * 5.0;
-                            camera.updateProjectionMatrix();
-                        };
-                }
-            );
-
+            #endregion
 
         }
 
+    }
+
+    internal class OculusRiftEffectOptions
+    {
+        internal double[] chromaAbParameter;
+        internal double[] distortionK;
+        internal double eyeToScreenDistance;
+        internal int hResolution;
+        internal double hScreenSize;
+        internal double interpupillaryDistance;
+        internal double lensSeparationDistance;
+        internal int vResolution;
+        internal double vScreenSize;
+    }
+
+    // http://stackoverflow.com/questions/32664/is-there-a-constraint-that-restricts-my-generic-method-to-numeric-types
+    class sum //<T>
+    {
+        public static implicit operator double(sum that)
+        {
+            return that.i.Sum(x => x());
+        }
+
+
+        Func<double>[] i;
+        public sum(params Func<double>[] i)
+        {
+            this.i = i;
+        }
+
+        //public sum(params ref double[] i)
+        //{
+        //}
     }
 }
 

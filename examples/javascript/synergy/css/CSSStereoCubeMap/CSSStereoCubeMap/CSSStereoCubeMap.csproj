@@ -139,6 +139,10 @@
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
     <Content Include="Textures\airplane.jpg" />
+    <Content Include="Textures\airplane_1024.jpg" />
+    <Content Include="Textures\airplane_400.jpg" />
+    <Content Include="Textures\airplane_729.jpg" />
+    <Content Include="Textures\airplane_low.jpg" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

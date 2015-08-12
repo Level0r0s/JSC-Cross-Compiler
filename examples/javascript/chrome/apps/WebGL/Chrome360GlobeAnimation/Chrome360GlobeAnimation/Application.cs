@@ -221,9 +221,9 @@ namespace Chrome360GlobeAnimation
                                      //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
                                      //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
-            if (Environment.ProcessorCount < 8)
-                //cubefacesize = 64; // 6 faces, ?
-                cubefacesize = 1024; // 6 faces, ?
+            //if (Environment.ProcessorCount < 8)
+            //    //cubefacesize = 64; // 6 faces, ?
+            //    cubefacesize = 1024; // 6 faces, ?
 
             new IHTMLPre { new { Environment.ProcessorCount, cubefacesize } }.AttachToDocument();
 
@@ -764,7 +764,8 @@ namespace Chrome360GlobeAnimation
 
 
             //var frame0 = new HTML.Images.FromAssets.tiles_regrid().AttachToDocument();
-            var frame0 = new HTML.Images.FromAssets.galaxy_starfield().AttachToDocument();
+            //var frame0 = new HTML.Images.FromAssets.galaxy_starfield().AttachToDocument();
+            var frame0 = new HTML.Images.FromAssets.galaxy_starfield150FOV().AttachToDocument();
             //var xor = new HTML.Images.FromAssets.Orion360_test_image_8192x4096().AttachToDocument();
             //var xor = new HTML.Images.FromAssets._2_no_clouds_4k().AttachToDocument();
             //var frame0 = new HTML.Images.FromAssets._2294472375_24a3b8ef46_o().AttachToDocument();
@@ -1188,7 +1189,8 @@ namespace Chrome360GlobeAnimation
             new THREE.Texture().With(
                 async s =>
                 {
-                    var i = new HTML.Images.FromAssets.galaxy_starfield();
+                    //var i = new HTML.Images.FromAssets.galaxy_starfield();
+                    var i = new HTML.Images.FromAssets.galaxy_starfield150FOV();
 
                     var bytes = await i.async.bytes;
 

@@ -180,6 +180,7 @@
     <Content Include="Textures\2_no_clouds_4k.jpg" />
     <Content Include="Textures\elev_bump_4k.jpg" />
     <Content Include="Textures\fair_clouds_4k.png" />
+    <Content Include="Textures\galaxy_starfield150FOV.png" />
     <Content Include="Textures\galaxy_starfield.png" />
     <Content Include="Textures\moon.gif" />
     <Content Include="Textures\tiles_regrid.png" />
@@ -194,9 +195,9 @@
       <Project>{f6ee5d37-a30a-438f-af72-d571b0ab257c}</Project>
       <Name>WebGLRah66Comanche</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\WebGL\HeatZeekerRTSOrto\HeatZeekerRTSOrto\HeatZeekerRTSOrto.csproj">
+    <ProjectReference Include="..\..\..\ChromeCreativeLeadership\ChromeCreativeLeadership\ChromeCreativeLeadership.csproj">
       <Project>{29947aad-0b14-4fb0-a3c3-a51322be2eda}</Project>
-      <Name>HeatZeekerRTSOrto</Name>
+      <Name>ChromeCreativeLeadership</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\..\WebGL\WebGLColladaExperiment\WebGLColladaExperiment\WebGLColladaExperiment.csproj">
       <Project>{5d093f42-02cc-4ed6-bd9f-3ac636479fb9}</Project>

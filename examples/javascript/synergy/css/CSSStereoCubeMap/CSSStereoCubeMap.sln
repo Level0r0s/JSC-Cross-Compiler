@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSSStereoCubeMap", "CSSStereoCubeMap\CSSStereoCubeMap.csproj", "{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chrome360GlobeAnimation", "..\..\..\chrome\apps\WebGL\Chrome360GlobeAnimation\Chrome360GlobeAnimation\Chrome360GlobeAnimation.csproj", "{426A9419-9287-4880-979F-29F29D3F2A22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeCreativeLeadership", "..\..\..\chrome\apps\ChromeCreativeLeadership\ChromeCreativeLeadership\ChromeCreativeLeadership.csproj", "{29947AAD-0B14-4FB0-A3C3-A51322BE2EDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLVRCreativeLeadership", "..\..\..\WebGL\WebGLVRCreativeLeadership\WebGLVRCreativeLeadership\WebGLVRCreativeLeadership.csproj", "{30943C78-5241-47E4-AD9F-DACE68FD1B8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{B09A3794-E512-4EA0-BED2-E91C8DDF4E6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +21,25 @@ Global
 		{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}.Debug|x86.Build.0 = Debug|x86
 		{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}.Release|x86.ActiveCfg = Release|x86
 		{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}.Release|x86.Build.0 = Release|x86
+		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.ActiveCfg = Debug|x86
+		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.Build.0 = Debug|x86
+		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.ActiveCfg = Release|x86
+		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.Build.0 = Release|x86
+		{29947AAD-0B14-4FB0-A3C3-A51322BE2EDA}.Debug|x86.ActiveCfg = Debug|x86
+		{29947AAD-0B14-4FB0-A3C3-A51322BE2EDA}.Debug|x86.Build.0 = Debug|x86
+		{29947AAD-0B14-4FB0-A3C3-A51322BE2EDA}.Release|x86.ActiveCfg = Release|x86
+		{29947AAD-0B14-4FB0-A3C3-A51322BE2EDA}.Release|x86.Build.0 = Release|x86
+		{30943C78-5241-47E4-AD9F-DACE68FD1B8E}.Debug|x86.ActiveCfg = Debug|x86
+		{30943C78-5241-47E4-AD9F-DACE68FD1B8E}.Debug|x86.Build.0 = Debug|x86
+		{30943C78-5241-47E4-AD9F-DACE68FD1B8E}.Release|x86.ActiveCfg = Release|x86
+		{30943C78-5241-47E4-AD9F-DACE68FD1B8E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{426A9419-9287-4880-979F-29F29D3F2A22} = {B09A3794-E512-4EA0-BED2-E91C8DDF4E6E}
+		{29947AAD-0B14-4FB0-A3C3-A51322BE2EDA} = {B09A3794-E512-4EA0-BED2-E91C8DDF4E6E}
+		{30943C78-5241-47E4-AD9F-DACE68FD1B8E} = {B09A3794-E512-4EA0-BED2-E91C8DDF4E6E}
 	EndGlobalSection
 EndGlobal

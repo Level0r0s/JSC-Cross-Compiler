@@ -194,9 +194,9 @@
       <Project>{c072d820-0808-40c8-af3a-b965b715bc81}</Project>
       <Name>WebGLNexus7</Name>
     </ProjectReference>
-    <ProjectReference Include="X:\jsc.svn\examples\javascript\WebGL\WebGLSVGSprite\WebGLSVGSprite\WebGLSVGSprite.csproj">
+    <ProjectReference Include="..\..\..\chrome\apps\WebGL\Chrome360GlobeAnimation\Chrome360GlobeAnimation\Chrome360GlobeAnimation.csproj">
       <Project>{426A9419-9287-4880-979F-29F29D3F2A22}</Project>
-      <Name>WebGLSVGSprite</Name>
+      <Name>Chrome360GlobeAnimation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

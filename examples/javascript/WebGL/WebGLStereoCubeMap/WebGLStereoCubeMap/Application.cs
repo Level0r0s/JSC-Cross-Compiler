@@ -32,6 +32,10 @@ namespace WebGLStereoCubeMap
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150812/cssstereo
+
+
+
             // https://www.reddit.com/r/GearVR/comments/35g8w7/real_world_stereoscopic_360_panoramas/
             // https://www.reddit.com/r/oculus/comments/35gcn2/real_world_stereoscopic_panoramas_with_gear_vr/
             // http://stackoverflow.com/questions/9032050/canvas-mask-an-image-and-preserve-its-alpha-channel
@@ -72,6 +76,7 @@ namespace WebGLStereoCubeMap
                  else
                      z = 1;
 
+                 // what does it do?
                  keys[e.KeyCode] = z;
 
                  // 4333ms {{ KeyCode = 83, S = 83, z = NaN }}
@@ -80,7 +85,7 @@ namespace WebGLStereoCubeMap
              };
 
 
-
+            // skybox cubemap
             var iii = new IHTMLImage[] {
                         new px(), new nx(),
                         new py(), new ny(),
@@ -335,6 +340,9 @@ gl_FragColor = c;
 
                    var skyCamera = new THREE.PerspectiveCamera(90, Native.window.aspect, 1, 20000);
                    //var skyCamera = new THREE.PerspectiveCamera(45, Native.window.aspect, 1, 20000);
+
+                   // not using css?
+                   // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150812/cssstereo
 
                    var renderer = new THREE.WebGLRenderer(new { antialias = true, alpha = false })
                    {
