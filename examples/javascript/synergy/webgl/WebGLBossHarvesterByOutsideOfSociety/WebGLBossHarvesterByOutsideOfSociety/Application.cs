@@ -30,6 +30,7 @@ namespace WebGLBossHarvesterByOutsideOfSociety
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // no animation no more?
 
         /// <summary>
         /// This is a javascript application.

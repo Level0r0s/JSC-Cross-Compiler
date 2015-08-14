@@ -7,6 +7,13 @@ namespace ScriptCoreLib.GLSL
 {
     public class FragmentShader : Shader
     {
+        //gl_FragData[0] = vec4(1.0, 0.0, 0.0, 1.0);
+        //gl_FragData[1] = vec4(0.0, 1.0, 0.0, 1.0);
+        //gl_FragData[2] = vec4(0.0, 0.0, 1.0, 1.0);
+        //gl_FragData[3] = vec4(1.0, 1.0, 1.0, 1.0);
+
+        // https://www.khronos.org/registry/webgl/extensions/WEBGL_draw_buffers/
+
 		// can we have a jsc nuget to analyse and rewrite glsl code?
 		// the CLR version could work like IDL parser, assets libray and link to GLSL types.
 		// the chrome version would need type info?

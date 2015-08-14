@@ -183,18 +183,42 @@ namespace TestYouTubeExtractor
 
             if (!File.Exists(pxa_mp4))
             {
-                var videoDownloader = new VideoDownloader(video, pxa_mp4);
-                videoDownloader.DownloadProgressChanged += (sender, args) =>
+                retry:;
+
+                try
                 {
-                    ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(0.01 * args.ProgressPercentage);
+                    // ?????369:Timelapse of Sahara @Morocco
+
+                    // pxa_mp4 = "x:/media\\HD Video 1080p - Time Lapse with Sunsets, Clouds, Stars by LoungeV studio : Relaxing Nature Videos.mp4"
+
+                    var videoDownloader = new VideoDownloader(video, pxa_mp4);
+                    videoDownloader.DownloadProgressChanged += (sender, args) =>
+                    {
+                        ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(0.01 * args.ProgressPercentage);
 
 
 
-                    Console.Title = "%" + args.ProgressPercentage.ToString("0.0");
+                        Console.Title = "%" + args.ProgressPercentage.ToString("0.0");
+                    }
+                        ;
+                    videoDownloader.Execute();
+                    awaitingToBeTagged = true;
                 }
-                    ;
-                videoDownloader.Execute();
-                awaitingToBeTagged = true;
+                catch (Exception err)
+                {
+                    Console.WriteLine(new { video, err });
+
+                    Debugger.Break();
+
+                    // retry?
+                    video = //videoInfos.FirstOrDefault(k => k.FormatCode == 299)
+                        mp4audio.OrderBy(info => info.Resolution).Take(mp4audio.Count() - 1).LastOrDefault();
+
+                    if (video == null)
+                        return;
+
+                    goto retry;
+                }
             }
 
             ;
@@ -591,7 +615,8 @@ namespace TestYouTubeExtractor
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150609/360
 
             //DoVideo(
-            //    "https://www.youtube.com/watch?v=ZABusb0bsnw"
+            //    //"https://www.youtube.com/watch?v=ZABusb0bsnw"
+            //    "https://www.youtube.com/watch?v=gRUk3po8TcA"
             //);
 
 #if REMOTE
@@ -902,7 +927,7 @@ namespace TestYouTubeExtractor
                 // Additional information: The remote name could not be resolved: 'youtube.com'
 
                 //DownloadAudio(videoInfos);
-                //DownloadVideo(link, videoInfos);
+                DownloadVideo("_", false, link, videoInfos);
 
                 //{
                 //    err = System.IO.IOException: Unable to read data from the transport connection: An established connection was aborted by the software in your host machine. --->System.Net.Sockets.SocketException: An established connection was aborted by the software in your host machine

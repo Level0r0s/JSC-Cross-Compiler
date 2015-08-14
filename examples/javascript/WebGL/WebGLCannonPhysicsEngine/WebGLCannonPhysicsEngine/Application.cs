@@ -30,6 +30,8 @@ namespace WebGLCannonPhysicsEngine
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20140815/webglcannonphysicsengine
+
         // inspired by http://granular.cs.umu.se/cannon.js/examples/threejs_fps.html
 
 

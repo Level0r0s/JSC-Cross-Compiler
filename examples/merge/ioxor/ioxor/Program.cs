@@ -85,7 +85,7 @@ namespace ioxor
                          // cutoff by date?
                          orderby fff.Length descending
 
-                         select fff, 3
+                         select fff, 8
                      ).ToArray();
 
             foreach (var i in seed3)
@@ -124,24 +124,27 @@ namespace ioxor
 
                                 var r = File.Open(f, FileMode.Open, FileAccess.ReadWrite);
 
-                                if (CrashManagerLastWriteback64 < r.Length)
-                                    if (MessageBox.Show("resume at " + new { CrashManagerLastWriteback64 }, "crash?", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                                        r.Position = CrashManagerLastWriteback64;
+
+                                // would it work?
+                                if (CrashManagerLastWriteback64 > 0)
+                                    if (CrashManagerLastWriteback64 < r.Length)
+                                        if (MessageBox.Show("resume at " + new { CrashManagerLastWriteback64 }, "crash?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                            r.Position = CrashManagerLastWriteback64;
 
                                 var seed3r = Enumerable.ToArray(
-                                    from fff in seed3
-                                    let fr = fff.OpenRead()
+                                    from SourceSeed in seed3
+                                    let SourceSeedStream = SourceSeed.OpenRead()
                                     // http://www.slideshare.net/DefCamp/defcamp-2013-doctrackr
                                     // SIGINT 55
                                     // offset by, ask UDP device
 
-                                    let peek = fr.ReadByte() + r.Position
+                                    let SourceSeedStreamOffset = SourceSeed.Length / 5 + r.Position
                                     //let peekdata = new byte[peek]
                                     //let x = fr.Read(peekdata, 0, peek)
 
-                                    let p = fr.Position = 1 + peek
+                                    let p = SourceSeedStream.Position = SourceSeedStreamOffset
 
-                                    select fr
+                                    select SourceSeedStream
                                 );
 
                                 Console.WriteLine(new { sw.ElapsedMilliseconds });
@@ -289,6 +292,9 @@ namespace ioxor
 
                                 sw.Restart();
                                 yield();
+
+                                // disable resume..
+                                File.WriteAllText("LastWriteback", "" + 0);
 
                             }
 

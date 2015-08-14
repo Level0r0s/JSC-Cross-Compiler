@@ -26,6 +26,8 @@ namespace WebGLDoomByInt13h
     /// </summary>
     public sealed class Application
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20140815/windstorm
+
         public readonly ApplicationWebService service = new ApplicationWebService();
 
         /// <summary>
@@ -34,6 +36,8 @@ namespace WebGLDoomByInt13h
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // ??
+
             { WebGLDoomByInt13h.Assets.he3d.Scripts ref0; }
             { WebGLDoomByInt13h.Assets.he3d.Shaders ref0; }
             { WebGLDoomByInt13h.Assets.webgldoom.Shaders ref1; }
@@ -109,69 +113,69 @@ namespace WebGLDoomByInt13h
                 }
             );
 
-
-            #region onclick
-            page.v.onclick +=
-                delegate
-                {
-
-
-                    Console.WriteLine("rec...");
+            // gif is cool. but now we need 4K 360!
+            //#region onclick
+            //page.v.onclick +=
+            //    delegate
+            //    {
 
 
-
-                    var frames = new List<byte[]>();
-                    var x = page.he3d.clientWidth;
-                    var y = page.he3d.clientHeight;
-
-                    new Timer(
-                        tt =>
-                        {
-                            var bytes = page.he3d.bytes;
-
-                            Console.WriteLine(new { tt.Counter, bytes.Length });
-
-                            // script: error JSC1000: No implementation found for this native method, please implement
-                            // [System.Threading.Tasks.TaskFactory`1.
-                            // StartNew(, System.Object, System.Threading.CancellationToken, System.Threading.Tasks.TaskCreationOptions, System.Threading.Tasks.TaskScheduler)]
-
-                            frames.Add(bytes);
-
-                            if (tt.Counter == 4)
-                            {
-                                tt.Stop();
-
-                                var e = new Stopwatch();
-                                e.Start();
-
-                                new GIFEncoderWorker(
-                                     x,
-                                     y,
-                                      delay: 1000 / 10,
-                                     frames: frames
-                                 ).Task.ContinueWith(
-                                     t =>
-                                     {
-                                         var src = t.Result;
-
-                                         Console.WriteLine("done!");
-                                         Console.WriteLine(e.Elapsed);
-
-                                         Native.document.body.style.position = IStyle.PositionEnum.absolute;
-                                         Native.document.body.style.zIndex = 1000;
-
-                                         new IHTMLImage { src = src }.AttachToDocument();
+            //        Console.WriteLine("rec...");
 
 
-                                         Console.WriteLine(new { e.Elapsed });
-                                     }
-                                 );
-                            }
-                        }
-                    ).StartInterval(1000 / 15);
 
-                };
-            #endregion
+            //        var frames = new List<byte[]>();
+            //        var x = page.he3d.clientWidth;
+            //        var y = page.he3d.clientHeight;
+
+            //        new Timer(
+            //            tt =>
+            //            {
+            //                var bytes = page.he3d.bytes;
+
+            //                Console.WriteLine(new { tt.Counter, bytes.Length });
+
+            //                // script: error JSC1000: No implementation found for this native method, please implement
+            //                // [System.Threading.Tasks.TaskFactory`1.
+            //                // StartNew(, System.Object, System.Threading.CancellationToken, System.Threading.Tasks.TaskCreationOptions, System.Threading.Tasks.TaskScheduler)]
+
+            //                frames.Add(bytes);
+
+            //                if (tt.Counter == 4)
+            //                {
+            //                    tt.Stop();
+
+            //                    var e = new Stopwatch();
+            //                    e.Start();
+
+            //                    new GIFEncoderWorker(
+            //                         x,
+            //                         y,
+            //                          delay: 1000 / 10,
+            //                         frames: frames
+            //                     ).Task.ContinueWith(
+            //                         t =>
+            //                         {
+            //                             var src = t.Result;
+
+            //                             Console.WriteLine("done!");
+            //                             Console.WriteLine(e.Elapsed);
+
+            //                             Native.document.body.style.position = IStyle.PositionEnum.absolute;
+            //                             Native.document.body.style.zIndex = 1000;
+
+            //                             new IHTMLImage { src = src }.AttachToDocument();
+
+
+            //                             Console.WriteLine(new { e.Elapsed });
+            //                         }
+            //                     );
+            //                }
+            //            }
+            //        ).StartInterval(1000 / 15);
+
+            //    };
+            //#endregion
 
 
             // wow. found it. that script is making a new copy of our dom. not nice

@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22310.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLCity", "WebGLCity\WebGLCity.csproj", "{7C0B6A91-F338-41A2-8879-E2E837D6D454}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC} = {7B5C94C5-F6AA-42BA-815B-34DD472A47AC}
@@ -13,6 +11,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Drawing", "..\..\..\..\..\core\ScriptCoreLib.Drawing\ScriptCoreLib.Drawing\ScriptCoreLib.Drawing.csproj", "{053C4547-E32B-458E-B295-1E3640BE96E9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{DD6C102F-9205-416C-A528-B41DEAA9E35D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Async", "..\..\..\..\..\core\ScriptCoreLib.Async\ScriptCoreLib.Async\ScriptCoreLib.Async.csproj", "{88C3C260-D1DA-4FB3-A53D-79462913E80C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,12 +54,23 @@ Global
 		{053C4547-E32B-458E-B295-1E3640BE96E9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{053C4547-E32B-458E-B295-1E3640BE96E9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{053C4547-E32B-458E-B295-1E3640BE96E9}.Release|x86.ActiveCfg = Release|Any CPU
+		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Debug|x86.ActiveCfg = Debug|x86
+		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Debug|x86.Build.0 = Debug|x86
+		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Release|Any CPU.ActiveCfg = Release|x86
+		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Release|Mixed Platforms.Build.0 = Release|x86
+		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Release|x86.ActiveCfg = Release|x86
+		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC} = {DD6C102F-9205-416C-A528-B41DEAA9E35D}
 		{053C4547-E32B-458E-B295-1E3640BE96E9} = {DD6C102F-9205-416C-A528-B41DEAA9E35D}
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC} = {DD6C102F-9205-416C-A528-B41DEAA9E35D}
+		{88C3C260-D1DA-4FB3-A53D-79462913E80C} = {DD6C102F-9205-416C-A528-B41DEAA9E35D}
 	EndGlobalSection
 EndGlobal

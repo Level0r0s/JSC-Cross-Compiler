@@ -32,3 +32,9 @@ namespace WebGLCity
 
     }
 }
+
+
+//........TypeDefinitionCache CreateType:  WebGLCity.ApplicationWebService
+//...............................................................................................................fault ToCustomAttributeBuilder yield CustomAttributeBuilder
+//2508:01:01:0f RewriteToAssembly error: System.IO.FileNotFoundException: Could not load file or assembly 'ScriptCoreLib.Async, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies. The system cannot find the file specified.
+//File name: 'ScriptCoreLib.Async, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'

@@ -24,6 +24,8 @@ namespace WoodsXmasByRobert
     /// </summary>
     public sealed class Application
     {
+        // what about THREE 70?
+
         public readonly ApplicationWebService service = new ApplicationWebService();
 
         /// <summary>
