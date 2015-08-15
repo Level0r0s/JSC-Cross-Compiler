@@ -22,14 +22,29 @@ using android.content.pm;
 
 namespace xandroidcardboardcxperiment.xactivities
 {
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150815/cardboard
+
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "16")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "16")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity :
+        // https://developers.google.com/cardboard/android/download
+
          com.google.vrtoolkit.cardboard.CardboardActivity,
         com.google.vrtoolkit.cardboard.CardboardView.StereoRenderer
     {
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" devices
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell netcfg
+
+        // should jsc remember last connected device and reconnect if disconnected?
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
+        // restart helps.
+
+
+
+
         // https://github.com/googlesamples/cardboard-java/blob/master/CardboardSample/src/main/java/com/google/vrtoolkit/cardboard/samples/treasurehunt/MainActivity.java
 
         // http://www.engadget.com/2014/06/25/google-vr-cardboard/
@@ -443,6 +458,8 @@ namespace xandroidcardboardcxperiment.xactivities
 
         private bool isLookingAtObject()
         {
+            // can we do this in gearVR too?
+
             float[] initVec = { 0, 0, 0, 1.0f };
             float[] objPositionVec = new float[4];
 

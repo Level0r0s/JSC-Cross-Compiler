@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}</ProjectGuid>
+    <ProjectGuid>{426A9419-9287-4880-979F-29F29D3F2A22}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Chrome360GlobeAnimation</RootNamespace>
-    <AssemblyName>Chrome360GlobeAnimation</AssemblyName>
+    <RootNamespace>Chrome360LightAnimation</RootNamespace>
+    <AssemblyName>Chrome360LightAnimation</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>Chrome360GlobeAnimation.Program</StartupObject>
+    <StartupObject>Chrome360LightAnimation.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -161,15 +161,15 @@
     <Reference Include="WebGLHZBlendCharacter.AssetsLibrary">
       <HintPath>..\..\..\..\..\WebGL\WebGLHZBlendCharacter\WebGLHZBlendCharacter\bin\staging.AssetsLibrary\WebGLHZBlendCharacter.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="Chrome360GlobeAnimation.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\Chrome360GlobeAnimation.AssetsLibrary.dll</HintPath>
+    <Reference Include="Chrome360LightAnimation.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\Chrome360LightAnimation.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\ShaderToy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shaders\ProgramFragmentShader.cs" />
-    <Compile Include="web\assets\Chrome360GlobeAnimation\S6Edge.cs" />
+    <Compile Include="web\assets\Chrome360LightAnimation\S6Edge.cs" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />
     <Compile Include="ApplicationWebService.cs" />
@@ -177,17 +177,13 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <Content Include="Textures\2_no_clouds_4k.jpg" />
-    <Content Include="Textures\elev_bump_4k.jpg" />
-    <Content Include="Textures\fair_clouds_4k.png" />
-    <Content Include="Textures\galaxy_starfield150FOV.png" />
+    <Content Include="Textures\anvil___spherical_hdri_panorama_skybox_by_macsix-d6vv4hs.jpg" />
+    <Content Include="Textures\checkerboard.jpg" />
     <Content Include="Textures\galaxy_starfield.png" />
-    <Content Include="Textures\moon.gif" />
     <Content Include="Textures\tiles_regrid.png" />
-    <Content Include="Textures\water_4k.png" />
     <None Include="app.config" />
     <None Include="packages.config" />
-    <EmbeddedResource Include="web\assets\Chrome360GlobeAnimation\S6Edge.dae" />
+    <EmbeddedResource Include="web\assets\Chrome360LightAnimation\S6Edge.dae" />
     <None Include="Shaders\Program.frag" />
   </ItemGroup>
   <ItemGroup>
@@ -195,9 +191,9 @@
       <Project>{f6ee5d37-a30a-438f-af72-d571b0ab257c}</Project>
       <Name>WebGLRah66Comanche</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\ChromeCreativeLeadership\ChromeCreativeLeadership\ChromeCreativeLeadership.csproj">
+    <ProjectReference Include="..\..\..\..\..\WebGL\HeatZeekerRTSOrto\HeatZeekerRTSOrto\HeatZeekerRTSOrto.csproj">
       <Project>{29947aad-0b14-4fb0-a3c3-a51322be2eda}</Project>
-      <Name>ChromeCreativeLeadership</Name>
+      <Name>HeatZeekerRTSOrto</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\..\WebGL\WebGLColladaExperiment\WebGLColladaExperiment\WebGLColladaExperiment.csproj">
       <Project>{5d093f42-02cc-4ed6-bd9f-3ac636479fb9}</Project>

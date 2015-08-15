@@ -66,6 +66,15 @@ namespace OVROculus360PhotosHUD.Activities
     //<meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_only"/>
     public class LocalApplication : Application
     {
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" devices
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell netcfg
+
+        // should jsc remember last connected device and reconnect if disconnected?
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
+        // restart helps.
+
+
         public override void onCreate()
         {
             base.onCreate();

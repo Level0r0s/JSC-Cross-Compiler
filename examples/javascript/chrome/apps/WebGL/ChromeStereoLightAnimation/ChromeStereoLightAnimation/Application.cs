@@ -1,7 +1,7 @@
 #define FWebGLHZBlendCharacter
 // can we animate our characters?
 
-
+// F5 to run in CLR mode, on server
 //#define AsWEBSERVER
 // webserver cannot save images to foler tho
 // as webserver imgs will have saves context menu
@@ -39,6 +39,8 @@ namespace ChromeStereoLightAnimation
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20140815/webglcannonphysicsengine
+
         // http://youtu.be/Lo1IU8UAutE
         // 60hz 2160 4K!
 
@@ -188,16 +190,32 @@ namespace ChromeStereoLightAnimation
 
             //new Action<int>(
 
+            var camera0 = default(THREE.PerspectiveCamera);
+
+
+
+
+
+
+            foreach (var y in
                 from eyeid in new[] { 0, 1 }
                 select (Action)
                 delegate
                 {
+                    var scene = new THREE.Scene();
+
+
+                    var floorTexture = THREE.ImageUtils.loadTexture(
+             new HTML.Images.FromAssets.checkerboard().src
+             //"images/checkerboard.jpg"
+             );
+
 
                     #region  function init()
                     // SCENE
-                    var scene = new THREE.Scene();
                     // CAMERA
-                    float SCREEN_WIDTH = Native.window.Width;
+                    float SCREEN_WIDTH = Native.window.Width / 2;
+                    //float SCREEN_WIDTH = Native.screen.width / 2;
                     float SCREEN_HEIGHT = Native.window.Height;
                     var VIEW_ANGLE = 45;
                     float ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT;
@@ -205,19 +223,18 @@ namespace ChromeStereoLightAnimation
                     var FAR = 20000;
 
 
-                    var camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
-                    scene.add(camera);
-                    camera.position.set(0, 150, 400);
-                    camera.lookAt(scene.position);
+
                     // RENDERER
+                    // WebGLDeferredRenderer
                     var renderer = new THREE.WebGLRenderer(new { antialias = true });
 
-                    renderer.setSize((int)SCREEN_WIDTH, (int)SCREEN_HEIGHT);
+                    //renderer.setSize((int)SCREEN_WIDTH, (int)SCREEN_HEIGHT);
 
                     renderer.domElement.AttachToDocument();
+                    //renderer.domElement.style.SetLocation(Native.window.Width / 2 * (1 - eyeid), 0);
+
                     // EVENTS
                     // CONTROLS
-                    var controls = new THREE.OrbitControls(camera, renderer.domElement);
                     // STATS
 
 
@@ -226,19 +243,23 @@ namespace ChromeStereoLightAnimation
                     //light.position.set(0,250,0);
                     //scene.add(light);
 
-                    // SKYBOX/FOG
-                    var skyBoxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
-                    var skyBoxMaterial = new THREE.MeshBasicMaterial(new { color = 0x9999ff, side = THREE.BackSide });
-                    var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
-                    // scene.add(skyBox);
-                    scene.fog = new THREE.FogExp2(0x9999ff, 0.00025);
-
                     ////////////
                     // CUSTOM //
                     ////////////
 
                     // must enable shadows on the renderer 
                     renderer.shadowMapEnabled = true;
+
+
+
+
+
+                    // SKYBOX/FOG
+                    var skyBoxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
+                    var skyBoxMaterial = new THREE.MeshBasicMaterial(new { color = 0x9999ff, side = THREE.BackSide });
+                    var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
+                    // scene.add(skyBox);
+                    scene.fog = new THREE.FogExp2(0x9999ff, 0.00025);
 
                     // "shadow cameras" show the light source and direction
 
@@ -254,6 +275,7 @@ namespace ChromeStereoLightAnimation
 
                     // spotlight #2 -- red, light shadow
                     var spotlight2 = new THREE.SpotLight(0xff0000);
+                    //var spotlight2 = new THREE.SpotLight(0xffff00);
                     spotlight2.position.set(60, 150, -60);
                     scene.add(spotlight2);
                     spotlight2.shadowCameraVisible = true;
@@ -261,57 +283,81 @@ namespace ChromeStereoLightAnimation
                     spotlight2.intensity = 2;
                     spotlight2.castShadow = true;
 
-                    // spotlight #3
-                    var spotlight3 = new THREE.SpotLight(0x0000ff);
-                    spotlight3.position.set(150, 80, -100);
-                    spotlight3.shadowCameraVisible = true;
-                    spotlight3.shadowDarkness = 0.95;
-                    spotlight3.intensity = 2;
-                    spotlight3.castShadow = true;
-                    scene.add(spotlight3);
-                    // change the direction this spotlight is facing
-                    var lightTarget = new THREE.Object3D();
-                    lightTarget.position.set(150, 10, -100);
-                    scene.add(lightTarget);
-                    spotlight3.target = lightTarget;
+
+                    // THREE.WebGLProgram: gl.getProgramInfoLog() Pixel shader sampler count exceeds MAX_TEXTURE_IMAGE_UNITS (16).
+                    for (int i = 0; i < 8; i++)
+                    {
+
+                        // spotlight #3 blue
+                        var spotlight3 = new THREE.SpotLight(0x0000ff);
+                        //var spotlight3 = new THREE.SpotLight(0x00ffff);
+                        spotlight3.position.set(150 * i, 80, -100);
+                        //spotlight3.shadowCameraVisible = true;
+                        spotlight3.shadowDarkness = 0.95;
+                        spotlight3.intensity = 2;
+                        spotlight3.castShadow = true;
+                        scene.add(spotlight3);
+                        // change the direction this spotlight is facing
+                        var lightTarget = new THREE.Object3D();
+                        lightTarget.position.set(150 * i, 10, -100);
+                        scene.add(lightTarget);
+                        spotlight3.target = lightTarget;
+
+
+
+                    }
+
+
 
                     // cube: mesh to cast shadows
+                    #region castShadow
                     var cubeGeometry = new THREE.CubeGeometry(50, 50, 50);
                     var cubeMaterial = new THREE.MeshLambertMaterial(new { color = 0x888888 });
 
-                    var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-                    cube.position.set(0, 50, 0);
+                    var cube0 = new THREE.Mesh(cubeGeometry, cubeMaterial);
+                    //cube.position.set(0, 50, 0);
+                    cube0.position.set(0, 100, 0);
                     // Note that the mesh is flagged to cast shadows
-                    cube.castShadow = true;
-                    scene.add(cube);
+                    cube0.castShadow = true;
+                    scene.add(cube0);
 
                     // floor: mesh to receive shadows
 
 
                     // public static ImageUtilsType ImageUtils;
                     //var floorTexture = new THREE.ImageUtils.loadTexture("images/checkerboard.jpg");
-                    var floorTexture = THREE.ImageUtils.loadTexture(
 
-                new HTML.Images.FromAssets.checkerboard().src
-                //"images/checkerboard.jpg"
-                );
 
                     floorTexture.wrapS = THREE.RepeatWrapping;
                     floorTexture.wrapT = THREE.RepeatWrapping;
                     floorTexture.repeat.set(10, 10);
+                    #endregion
 
 
 
 
                     // Note the change to Lambert material.
+                    #region receiveShadow
                     var floorMaterial = new THREE.MeshLambertMaterial(new { map = floorTexture, side = THREE.DoubleSide });
+                    //var floorGeometry = new THREE.PlaneGeometry(1000 * 8, 1000 * 8, 100, 100);
                     var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 100, 100);
-                    var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-                    floor.position.y = -0.5;
-                    floor.rotation.x = Math.PI / 2;
-                    // Note the mesh is flagged to receive shadows
-                    floor.receiveShadow = true;
-                    scene.add(floor);
+
+                    for (int i = 0; i < 8; i++)
+                    {
+
+                        var floor0 = new THREE.Mesh(floorGeometry, floorMaterial);
+                        floor0.position.y = -0.5;
+
+                        floor0.position.x = 1000 * i;
+
+                        floor0.rotation.x = Math.PI / 2;
+                        // Note the mesh is flagged to receive shadows
+                        floor0.receiveShadow = true;
+                        scene.add(floor0);
+
+                    }
+                    #endregion
+
 
                     // create "light-ball" meshes
                     var sphereGeometry = new THREE.SphereGeometry(10, 16, 8);
@@ -337,25 +383,93 @@ namespace ChromeStereoLightAnimation
                         scene.add(shape);
                     }
 
-                    {
-                        var wireframeMaterial = new THREE.MeshBasicMaterial(
-                        new { color = 0x0000ff, wireframe = true, transparent = true });
-                        var shape = THREE.SceneUtils.createMultiMaterialObject(
-                        sphereGeometry, new[] { darkMaterial, wireframeMaterial });
-                        shape.position = spotlight3.position;
-                        scene.add(shape);
-                    }
+                    //{
+                    //    var wireframeMaterial = new THREE.MeshBasicMaterial(
+                    //    new { color = 0x0000ff, wireframe = true, transparent = true });
+                    //    var shape = THREE.SceneUtils.createMultiMaterialObject(
+                    //    sphereGeometry, new[] { darkMaterial, wireframeMaterial });
+                    //    shape.position = spotlight3.position;
+                    //    scene.add(shape);
+                    //}
 
                     #endregion
 
 
-                    Native.window.onframe += delegate
+
+
+
+
+
+
+
+
+                    var camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+                    scene.add(camera);
+                    camera.position.set(0, 150, 400);
+                    camera.lookAt(scene.position);
+
+
+
+                    if (eyeid == 0)
                     {
-                        renderer.render(scene, camera);
-                        controls.update();
+                        camera0 = camera;
+
+                        var controls = new THREE.OrbitControls(camera0, renderer.domElement);
+                        //var controls = new THREE.OrbitControls(camera0, Native.document.body);
+
+                        Native.window.onframe += delegate
+                        {
+                            renderer.render(scene, camera0);
+                            controls.update();
                             //stats.update();
-                    };
+                        };
+                    }
+                    else
+                    {
+                        Native.window.onframe += delegate
+                        {
+                            camera.rotation.set(camera0.rotation.x, camera0.rotation.y, camera0.rotation.z);
+                            camera.position.set(camera0.position.x, camera0.position.y, camera0.position.z);
+
+                            // lets not add any stereo effect. as we may need to run in 360 mono mode anyway to gain speed?
+                            //camera.translateX()
+
+                            // scene is unique to renderer!!!!!
+                            // we are doing everything twice for now.
+                            renderer.render(scene, camera);
+                            //controls.update();
+                            //stats.update();
+                        };
+                    }
+
+
+
+                    #region onresize
+                    new { }.With(
+                        async delegate
+                        {
+                            do
+                            {
+                                // allow webview to behave in S6 multiview  mode
+                                //SCREEN_WIDTH = Native.screen.width / 2;
+                                SCREEN_WIDTH = Native.window.Width / 2;
+
+                                //camera.aspect = Native.window.aspect;
+                                camera.aspect = SCREEN_WIDTH / Native.window.Height;
+                                camera.updateProjectionMatrix();
+
+                                //renderer0.setSize(Native.window.Width / 2, Native.window.Height);
+                                renderer.setSize((int)SCREEN_WIDTH, Native.window.Height);
+                                //renderer0.domElement.style.SetLocation(Native.window.Width / 2 * eyeid, 0);
+                                renderer.domElement.style.SetLocation((int)SCREEN_WIDTH * (1 - eyeid), 0);
+
+                            }
+                            while (await Native.window.async.onresize);
+                        });
+                    #endregion
                 }
+             )
+                y();
 
 
 

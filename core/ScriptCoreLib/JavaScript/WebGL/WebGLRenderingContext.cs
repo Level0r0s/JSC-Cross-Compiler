@@ -35,6 +35,10 @@ namespace ScriptCoreLib.JavaScript.WebGL
     // : WebGLRenderingContextBase
     {
 
+
+        // https://github.com/kripken/webgl-worker/blob/master/webGLWorker.js
+
+
         // https://www.youtube.com/watch?v=zPNM3yOsP0I
         // https://www.transgaming.com/news/transgaming-announces-availability-directx-11-support-cross-platform-content-enablement
 
