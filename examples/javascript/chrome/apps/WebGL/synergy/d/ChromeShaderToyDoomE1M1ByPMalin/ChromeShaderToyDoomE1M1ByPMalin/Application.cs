@@ -30,6 +30,8 @@ namespace ChromeShaderToyDoomE1M1ByPMalin
 		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
 		public Application(IApp page)
 		{
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150815/shadertoy
+
 			// https://www.shadertoy.com/view/lsSXzD
 
 
