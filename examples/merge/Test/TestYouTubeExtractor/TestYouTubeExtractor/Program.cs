@@ -102,16 +102,32 @@ namespace TestYouTubeExtractor
 
             // apkfriendlytitle = "___360_ - __________find the truth 360 degree trick movie ."
 
+            // prefix it, and loose the keyword later to be less redundant...
+            if (Spherical)
+                apkfriendlytitle = "360 " + (apkfriendlytitle.Replace("360", " ")).Trim();
 
+            // remedy for bug run
+            var apkfriendlytitle_old2 = apkfriendlytitle;
+
+            if (!string.IsNullOrEmpty(chname))
+                apkfriendlytitle_old2 += " by " + (chname.Select(x => x < 127 && char.IsLetterOrDigit(x) ? x : '_').ToArray());
+
+
+            var apkfriendlytitle_old = apkfriendlytitle;
+
+            if (!string.IsNullOrEmpty(chname))
+                apkfriendlytitle_old += " by " + chname;
+
+
+
+
+            // pxa_mp4 = "x:/media\\HD Video 1080p - Time Lapse with Sunsets, Clouds, Stars by LoungeV studio : Relaxing Nature Videos.mp4"
+            if (!string.IsNullOrEmpty(chname))
+                apkfriendlytitle += " by " + new string(chname.Select(x => x < 127 && char.IsLetterOrDigit(x) ? x : '_').ToArray());
 
 
             // 
             //apkfriendlytitle = apkfriendlytitle.Replace("360", "_");
-
-
-            // prefix it, and loose the keyword later to be less redundant...
-            if (Spherical)
-                apkfriendlytitle = "360 " + (apkfriendlytitle.Replace("360", " ")).Trim();
 
 
 
@@ -122,10 +138,13 @@ namespace TestYouTubeExtractor
                 //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "x:/media",
 
-                apkfriendlytitle + video.VideoExtension);
+                apkfriendlytitle_old + video.VideoExtension);
 
-            if (!string.IsNullOrEmpty(chname))
-                apkfriendlytitle += " by " + chname;
+            var px_old2 = Path.Combine(
+          //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+          "x:/media",
+
+          apkfriendlytitle_old2 + video.VideoExtension);
 
             // pxa_mp4 = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp4"
             var pxa_mp4 = Path.Combine(
@@ -146,6 +165,15 @@ namespace TestYouTubeExtractor
             var pxa_old_mp3_mp4 = Path.ChangeExtension(px_old, ".mp3.mp4");
 
 
+
+
+            if (!File.Exists(pxa_mp4))
+                if (File.Exists(px_old2))
+                {
+                    Console.WriteLine("renamed " + new { pxa_mp4 });
+                    // upgrade old naming to apk friendly.
+                    File.Move(px_old2, pxa_mp4);
+                }
 
 
 
