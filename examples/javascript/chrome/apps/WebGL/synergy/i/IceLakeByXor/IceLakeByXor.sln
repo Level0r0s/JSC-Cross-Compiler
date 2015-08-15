@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyInfiniteRepetitionBySsdsa", "ChromeShaderToyInfiniteRepetitionBySsdsa\ChromeShaderToyInfiniteRepetitionBySsdsa.csproj", "{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceLakeByXor", "IceLakeByXor\IceLakeByXor.csproj", "{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyColumns", "..\..\..\ChromeShaderToyColumns\ChromeShaderToyColumns\ChromeShaderToyColumns.csproj", "{7A012980-513C-4B88-AB7F-BA67F52A10D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Debug|x86.Build.0 = Debug|x86
 		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Release|x86.ActiveCfg = Release|x86
 		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Release|x86.Build.0 = Release|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Debug|x86.ActiveCfg = Debug|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Debug|x86.Build.0 = Debug|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Release|x86.ActiveCfg = Release|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
