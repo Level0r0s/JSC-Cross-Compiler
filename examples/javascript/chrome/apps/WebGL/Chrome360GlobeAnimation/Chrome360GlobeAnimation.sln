@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chrome360GlobeAnimation", "Chrome360GlobeAnimation\Chrome360GlobeAnimation.csproj", "{426A9419-9287-4880-979F-29F29D3F2A22}"
+# Visual Studio Express 2012 for Web
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chrome360GlobeAnimation", "Chrome360GlobeAnimation\Chrome360GlobeAnimation.csproj", "{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLEarthByBjorn", "..\..\..\..\synergy\webgl\WebGLEarthByBjorn\WebGLEarthByBjorn\WebGLEarthByBjorn.csproj", "{9A1F5234-675E-4B8E-8E26-AAD983393A23}"
 EndProject
@@ -13,10 +11,10 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.ActiveCfg = Debug|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.Build.0 = Debug|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.ActiveCfg = Release|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.Build.0 = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.ActiveCfg = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.Build.0 = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.ActiveCfg = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.Build.0 = Release|x86
 		{9A1F5234-675E-4B8E-8E26-AAD983393A23}.Debug|x86.ActiveCfg = Debug|x86
 		{9A1F5234-675E-4B8E-8E26-AAD983393A23}.Debug|x86.Build.0 = Debug|x86
 		{9A1F5234-675E-4B8E-8E26-AAD983393A23}.Release|x86.ActiveCfg = Release|x86

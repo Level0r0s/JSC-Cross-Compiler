@@ -236,6 +236,15 @@ namespace TestYouTubeExtractor
                 {
                     Console.WriteLine(new { video, err });
 
+                    //                        url = http://youtube.com/watch?v=V0MWPJqVoUc }
+                    //{
+                    //                            url = http://s.ytimg.com/yts/jsbin/html5player-new-et_EE-vfl2stSNK/html5player-new.js }
+                    //25 Flat Geo Earth claims that 'Rocked' my world view 2 / 5
+                    //{
+                    //                                video = Full Title: 25 Flat Geo Earth claims that 'Rocked' my world view 2 / 5.mp4, Type: Mp4, Resolution: 720p, err = System.Net.WebException: The remote server returned an error: (403) Forbidden.
+
+                    return;
+
                     Debugger.Break();
 
                     // retry?

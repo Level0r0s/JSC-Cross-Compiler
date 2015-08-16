@@ -129,7 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="__AssetsLibrary__\ColladaAudiA4.cs" />
+    <Compile Include="__AssetsLibrary__\dae.cs" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />
     <Compile Include="ApplicationWebService.cs" />
@@ -139,7 +139,6 @@
     </Compile>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <EmbeddedResource Include="web\assets\WebGLMRAP\CARS_Audi_A4_B5.dae" />
     <EmbeddedResource Include="web\assets\WebGLMRAP\MRAP3.dae" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
