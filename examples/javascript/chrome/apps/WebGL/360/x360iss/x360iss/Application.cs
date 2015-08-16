@@ -57,6 +57,7 @@ namespace x360iss
         //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push   "X:\vr\tape360globe1\0000.png" "/sdcard/oculus/360photos/tape360globenight.png"
 
 
+        // "R:\vr\tape360iss\0000.png"
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150809/chrome360hz
 
@@ -848,7 +849,7 @@ namespace x360iss
                 status = "rendering... vsync";
 
                 //var frameid = 0;
-                frameIDslider.valueAsNumber = 0;
+                frameIDslider.valueAsNumber = -1;
 
                 goto beforeframe;
 
@@ -881,6 +882,18 @@ namespace x360iss
                 //await Native.window.async.onframe;
 
 
+
+
+
+                // design mode v render mode
+                if (cubefacesize < cubefacesizeMAX)
+                    frameIDslider.valueAsNumber += 15;
+                else
+                    frameIDslider.valueAsNumber++;
+
+
+
+
                 beforeframe:
 
                 // speed? S6 slow motion?
@@ -911,11 +924,6 @@ namespace x360iss
                 //fcamerax += (1.0 / 60.0) * 120;
 
 
-                // design mode v render mode
-                if (cubefacesize < cubefacesizeMAX)
-                    frameIDslider.valueAsNumber += 15;
-                else
-                    frameIDslider.valueAsNumber++;
 
                 // 60hz 30sec
                 if (frameIDslider.valueAsNumber < 60 * 30)
