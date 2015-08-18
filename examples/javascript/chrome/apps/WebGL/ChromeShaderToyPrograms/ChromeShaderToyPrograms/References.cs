@@ -40,26 +40,6 @@ namespace ChromeShaderToyPrograms
 
 			// can we have alt-tab pip ?
 
-			#region /a/
-			["ACloudByMu6k"] = () => new ACloudByMu6k.Shaders.ProgramFragmentShader(),
-			["AkiyoshisSnakesIllusionByHoskins"] = () => new AkiyoshisSnakesIllusionByHoskins.Shaders.ProgramFragmentShader(),
-			["AlienBeaconByOtavio"] = () => new AlienBeaconByOtavio.Shaders.ProgramFragmentShader(),
-			//["AlpineJetsByDr2"] = () => new AlpineJetsByDr2.Shaders.ProgramFragmentShader(),
-			["AngelsByIq"] = () => new AngelsByIq.Shaders.ProgramFragmentShader(),
-			["ApollonianByIq"] = () => new ApollonianByIq.Shaders.ProgramFragmentShader(),
-			["AsteroidsByArchee"] = () => new AsteroidsByArchee.Shaders.ProgramFragmentShader(),
-			["ATreeByGuil"] = () => new ATreeByGuil.Shaders.ProgramFragmentShader(),
-			["AttackOfTheFuzziesByEiffie"] = () => new AttackOfTheFuzziesByEiffie.Shaders.ProgramFragmentShader(),
-			["AtticByRobert"] = () => new AtticByRobert.Shaders.ProgramFragmentShader(),
-			["AudioClayByTekF"] = () => new AudioClayByTekF.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyAnalyticalMotionblurByIq"] = () => new ChromeShaderToyAnalyticalMotionblurByIq.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyAlbertArchesByDr2"] = () => new ChromeShaderToyAlbertArchesByDr2.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyAlpsByHoskins"] = () => new ChromeShaderToyAlpsByHoskins.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyAndroidsByGreen"] = () => new ChromeShaderToyAndroidsByGreen.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyAnimationByFlyguy"] = () => new ChromeShaderToyAnimationByFlyguy.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyAssBlockByDila"] = () => new ChromeShaderToyAssBlockByDila.Shaders.ProgramFragmentShader(),
-			#endregion
-
 			#region /b/
 			["BatmanLogoByIq"] = () => new BatmanLogoByIq.Shaders.ProgramFragmentShader(),
 			["BatsByGaz"] = () => new BatsByGaz.Shaders.ProgramFragmentShader(),
