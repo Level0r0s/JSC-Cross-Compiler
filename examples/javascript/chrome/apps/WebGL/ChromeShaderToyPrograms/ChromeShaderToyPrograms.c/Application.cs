@@ -278,7 +278,7 @@ namespace ChromeShaderToyPrograms.c
 
 
             //new IHTMLOption { value = "", innerText = $"{References.programs.Count} shaders available" }.AttachTo(combo);
-            new IHTMLOption { value = "", innerText = $"{d.programs.Count} shaders available" }.AttachTo(combo);
+            new IHTMLOption { value = "", innerText = $"{ChromeShaderToyPrograms.c.c.programs.Count} shaders available" }.AttachTo(combo);
 
 
             // should bind the selection to uri and reload if gpu crashes.
@@ -319,11 +319,11 @@ namespace ChromeShaderToyPrograms.c
 
             // http://stackoverflow.com/questions/25289390/html-how-to-make-input-type-list-only-accept-a-list-choice
             //References.programs.Keys.WithEachIndex(
-            d.programs.Keys.WithEachIndex(
+            ChromeShaderToyPrograms.c.c.programs.Keys.WithEachIndex(
                 async (key, index) =>
                 {
                     //var text = (1 + index) + " of " + References.programs.Count + " " + key.SkipUntilIfAny("ChromeShaderToy").Replace("By", " by ");
-                    var text = (1 + index) + " of " + d.programs.Count + " " + key.SkipUntilIfAny("ChromeShaderToy").Replace("By", " by ");
+                    var text = (1 + index) + " of " + ChromeShaderToyPrograms.c.c.programs.Count + " " + key.SkipUntilIfAny("ChromeShaderToy").Replace("By", " by ");
 
                     var blacklisted = Native.window.localStorage[new { hash = "#" + key }] == "blacklisted";
                     if (blacklisted)
@@ -347,7 +347,7 @@ namespace ChromeShaderToyPrograms.c
 
                     // we are about to create 100 objects. does it have any impact to UI?
                     //var frag = References.programs[key]();
-                    var frag = d.programs[key]();
+                    var frag = ChromeShaderToyPrograms.c.c.programs[key]();
 
                     // 0ms Error: {{ infoLog = WARNING: 0:13: '=' : global variable initializers should be constant expressions (uniforms and globals are allowed in global initializers for legacy compatibility)
                     // can we detect errors correctly?
@@ -392,6 +392,10 @@ namespace ChromeShaderToyPrograms.c
                     pass0.NewShader_Image(frag);
 
                     load.Stop();
+
+                    //LinqExtensions.With<global::<empty anonymous type>>(
+
+                    // what?
 
                     new { }.With(
                         async delegate

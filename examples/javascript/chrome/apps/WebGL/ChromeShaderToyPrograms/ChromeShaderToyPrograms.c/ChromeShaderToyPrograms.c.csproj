@@ -253,9 +253,75 @@
     <Reference Include="DubstepByAssByRez.AssetsLibrary">
       <HintPath>..\..\synergy\d\DubstepByAssByRez\DubstepByAssByRez\bin\staging.AssetsLibrary\DubstepByAssByRez.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="ChromeShaderToyPrograms.c.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeShaderToyPrograms.c.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CanyonRollerByDr2.AssetsLibrary">
+      <HintPath>..\..\synergy\c\CanyonRollerByDr2\CanyonRollerByDr2\bin\staging.AssetsLibrary\CanyonRollerByDr2.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChainReactionByEiffie.AssetsLibrary">
+      <HintPath>..\..\synergy\c\ChainReactionByEiffie\ChainReactionByEiffie\bin\staging.AssetsLibrary\ChainReactionByEiffie.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChaosTrendLogoByLuther.AssetsLibrary">
+      <HintPath>..\..\synergy\c\ChaosTrendLogoByLuther\ChaosTrendLogoByLuther\bin\staging.AssetsLibrary\ChaosTrendLogoByLuther.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CheeseByMu6k.AssetsLibrary">
+      <HintPath>..\..\synergy\c\CheeseByMu6k\CheeseByMu6k\bin\staging.AssetsLibrary\CheeseByMu6k.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CheesyByPMalin.AssetsLibrary">
+      <HintPath>..\..\synergy\c\CheesyByPMalin\CheesyByPMalin\bin\staging.AssetsLibrary\CheesyByPMalin.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyCarcarspacecarByEiffie.AssetsLibrary">
+      <HintPath>..\..\synergy\c\ChromeShaderToyCarcarspacecarByEiffie\ChromeShaderToyCarcarspacecarByEiffie\bin\staging.AssetsLibrary\ChromeShaderToyCarcarspacecarByEiffie.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyCatchByAhihi.AssetsLibrary">
+      <HintPath>..\..\synergy\c\ChromeShaderToyCatchByAhihi\ChromeShaderToyCatchByAhihi\bin\staging.AssetsLibrary\ChromeShaderToyCatchByAhihi.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyCCLatticesByPaniq.AssetsLibrary">
+      <HintPath>..\..\synergy\c\ChromeShaderToyCCLatticesByPaniq\ChromeShaderToyCCLatticesByPaniq\bin\staging.AssetsLibrary\ChromeShaderToyCCLatticesByPaniq.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyCentaursByErucipe.AssetsLibrary">
+      <HintPath>..\..\synergy\c\ChromeShaderToyCentaursByErucipe\ChromeShaderToyCentaursByErucipe\bin\staging.AssetsLibrary\ChromeShaderToyCentaursByErucipe.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyChainsGearsByPMalin.AssetsLibrary">
+      <HintPath>..\..\synergy\c\ChromeShaderToyChainsGearsByPMalin\ChromeShaderToyChainsGearsByPMalin\bin\staging.AssetsLibrary\ChromeShaderToyChainsGearsByPMalin.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyCookTorranceByXbe.AssetsLibrary">
+      <HintPath>..\..\synergy\c\ChromeShaderToyCookTorranceByXbe\ChromeShaderToyCookTorranceByXbe\bin\staging.AssetsLibrary\ChromeShaderToyCookTorranceByXbe.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyCubeOfCubesByFlyguy.AssetsLibrary">
+      <HintPath>..\..\synergy\c\ChromeShaderToyCubeOfCubesByFlyguy\ChromeShaderToyCubeOfCubesByFlyguy\bin\staging.AssetsLibrary\ChromeShaderToyCubeOfCubesByFlyguy.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyCubicEntanglementByEiffie.AssetsLibrary">
+      <HintPath>..\..\synergy\c\ChromeShaderToyCubicEntanglementByEiffie\ChromeShaderToyCubicEntanglementByEiffie\bin\staging.AssetsLibrary\ChromeShaderToyCubicEntanglementByEiffie.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ClawByGreen.AssetsLibrary">
+      <HintPath>..\..\synergy\c\ClawByGreen\ClawByGreen\bin\staging.AssetsLibrary\ClawByGreen.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ClippedDiscHypertextureByFabrice.AssetsLibrary">
+      <HintPath>..\..\synergy\c\ClippedDiscHypertextureByFabrice\ClippedDiscHypertextureByFabrice\bin\staging.AssetsLibrary\ClippedDiscHypertextureByFabrice.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CompassesByGijs.AssetsLibrary">
+      <HintPath>..\..\synergy\c\CompassesByGijs\CompassesByGijs\bin\staging.AssetsLibrary\CompassesByGijs.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ConformalPolarByFabrice.AssetsLibrary">
+      <HintPath>..\..\synergy\c\ConformalPolarByFabrice\ConformalPolarByFabrice\bin\staging.AssetsLibrary\ConformalPolarByFabrice.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalBallByAaecheve.AssetsLibrary">
+      <HintPath>..\..\synergy\c\CrystalBallByAaecheve\CrystalBallByAaecheve\bin\staging.AssetsLibrary\CrystalBallByAaecheve.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CubeOcubeByFred.AssetsLibrary">
+      <HintPath>..\..\synergy\c\CubeOcubeByFred\CubeOcubeByFred\bin\staging.AssetsLibrary\CubeOcubeByFred.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CubitreeByXt.AssetsLibrary">
+      <HintPath>..\..\synergy\c\CubitreeByXt\CubitreeByXt\bin\staging.AssetsLibrary\CubitreeByXt.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CyclonicSphereByNusso.AssetsLibrary">
+      <HintPath>..\..\synergy\c\CyclonicSphereByNusso\CyclonicSphereByNusso\bin\staging.AssetsLibrary\CyclonicSphereByNusso.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="d.cs" />
+    <Compile Include="c.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />
@@ -268,6 +334,90 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\synergy\c\CanyonRollerByDr2\CanyonRollerByDr2\CanyonRollerByDr2.csproj">
+      <Project>{18d81eab-6b23-45bf-9f7d-8460d9f637f2}</Project>
+      <Name>CanyonRollerByDr2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\ChainReactionByEiffie\ChainReactionByEiffie\ChainReactionByEiffie.csproj">
+      <Project>{723e11c5-ad5e-4551-8ca6-9ea69258ff68}</Project>
+      <Name>ChainReactionByEiffie</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\ChaosTrendLogoByLuther\ChaosTrendLogoByLuther\ChaosTrendLogoByLuther.csproj">
+      <Project>{4e599a73-18c6-4690-ae4b-1f966b728730}</Project>
+      <Name>ChaosTrendLogoByLuther</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\CheeseByMu6k\CheeseByMu6k\CheeseByMu6k.csproj">
+      <Project>{8221871a-8194-4f28-a6c2-950ae8e3e8d5}</Project>
+      <Name>CheeseByMu6k</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\CheesyByPMalin\CheesyByPMalin\CheesyByPMalin.csproj">
+      <Project>{486f816a-2fc5-48aa-8d76-c18532728e49}</Project>
+      <Name>CheesyByPMalin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\ChromeShaderToyCarcarspacecarByEiffie\ChromeShaderToyCarcarspacecarByEiffie\ChromeShaderToyCarcarspacecarByEiffie.csproj">
+      <Project>{47f52dd2-62de-4add-8359-c82f42dc8c4d}</Project>
+      <Name>ChromeShaderToyCarcarspacecarByEiffie</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\ChromeShaderToyCatchByAhihi\ChromeShaderToyCatchByAhihi\ChromeShaderToyCatchByAhihi.csproj">
+      <Project>{aceb89f6-34e7-48c6-9b86-a12c6d37ba51}</Project>
+      <Name>ChromeShaderToyCatchByAhihi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\ChromeShaderToyCCLatticesByPaniq\ChromeShaderToyCCLatticesByPaniq\ChromeShaderToyCCLatticesByPaniq.csproj">
+      <Project>{044bca80-b3c7-46ac-912c-ee63d4e8bda0}</Project>
+      <Name>ChromeShaderToyCCLatticesByPaniq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\ChromeShaderToyCentaursByErucipe\ChromeShaderToyCentaursByErucipe\ChromeShaderToyCentaursByErucipe.csproj">
+      <Project>{689d3bc0-5d54-44c1-b057-9d161c7c0426}</Project>
+      <Name>ChromeShaderToyCentaursByErucipe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\ChromeShaderToyChainsGearsByPMalin\ChromeShaderToyChainsGearsByPMalin\ChromeShaderToyChainsGearsByPMalin.csproj">
+      <Project>{232f7f07-417e-4f15-8df6-897de591258c}</Project>
+      <Name>ChromeShaderToyChainsGearsByPMalin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\ChromeShaderToyCookTorranceByXbe\ChromeShaderToyCookTorranceByXbe\ChromeShaderToyCookTorranceByXbe.csproj">
+      <Project>{559be153-db25-47f9-ae68-5f0654cf8db1}</Project>
+      <Name>ChromeShaderToyCookTorranceByXbe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\ChromeShaderToyCubeOfCubesByFlyguy\ChromeShaderToyCubeOfCubesByFlyguy\ChromeShaderToyCubeOfCubesByFlyguy.csproj">
+      <Project>{0d8fdb01-1edc-4eea-8f0d-3b8172ac73bf}</Project>
+      <Name>ChromeShaderToyCubeOfCubesByFlyguy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\ChromeShaderToyCubicEntanglementByEiffie\ChromeShaderToyCubicEntanglementByEiffie\ChromeShaderToyCubicEntanglementByEiffie.csproj">
+      <Project>{d9777746-7e32-4c93-b503-3d74eab67de3}</Project>
+      <Name>ChromeShaderToyCubicEntanglementByEiffie</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\ClawByGreen\ClawByGreen\ClawByGreen.csproj">
+      <Project>{396ceb6c-2ccd-485a-b185-71e35fa07c06}</Project>
+      <Name>ClawByGreen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\ClippedDiscHypertextureByFabrice\ClippedDiscHypertextureByFabrice\ClippedDiscHypertextureByFabrice.csproj">
+      <Project>{96b1f561-179e-4345-a1b4-dfac426fdb2b}</Project>
+      <Name>ClippedDiscHypertextureByFabrice</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\CompassesByGijs\CompassesByGijs\CompassesByGijs.csproj">
+      <Project>{43845b50-1535-44de-848f-ff355000f552}</Project>
+      <Name>CompassesByGijs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\ConformalPolarByFabrice\ConformalPolarByFabrice\ConformalPolarByFabrice.csproj">
+      <Project>{78b5fd9c-78c2-464b-a192-6a8caa1933a0}</Project>
+      <Name>ConformalPolarByFabrice</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\CrystalBallByAaecheve\CrystalBallByAaecheve\CrystalBallByAaecheve.csproj">
+      <Project>{29050a98-700e-43cc-ac87-1a25bf0b6a94}</Project>
+      <Name>CrystalBallByAaecheve</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\CubeOcubeByFred\CubeOcubeByFred\CubeOcubeByFred.csproj">
+      <Project>{d4211163-6747-4670-90c2-98fb068a2018}</Project>
+      <Name>CubeOcubeByFred</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\CubitreeByXt\CubitreeByXt\CubitreeByXt.csproj">
+      <Project>{101ed08d-9fd7-4ac0-9823-47ec98cba46d}</Project>
+      <Name>CubitreeByXt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\CyclonicSphereByNusso\CyclonicSphereByNusso\CyclonicSphereByNusso.csproj">
+      <Project>{7d3c31e7-83e6-45ff-bf5a-c7ca3ab71c13}</Project>
+      <Name>CyclonicSphereByNusso</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\d\ChromeShaderToyDalekByAntonalog\ChromeShaderToyDalekByAntonalog\ChromeShaderToyDalekByAntonalog.csproj">
       <Project>{66dda0a3-cc48-481b-b80b-a8b5e42b0343}</Project>
       <Name>ChromeShaderToyDalekByAntonalog</Name>
