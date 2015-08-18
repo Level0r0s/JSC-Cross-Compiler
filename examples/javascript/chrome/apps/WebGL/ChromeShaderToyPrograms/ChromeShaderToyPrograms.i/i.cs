@@ -9,6 +9,8 @@ namespace ChromeShaderToyPrograms.i
 {
     class i
     {
+        // https://www.youtube.com/watch?v=WkUzHQB0kcA
+
         // when can we get autodetection of subcomponents available?
 
         public static Dictionary<string, Func<FragmentShader>> programs = new Dictionary<string, Func<FragmentShader>>

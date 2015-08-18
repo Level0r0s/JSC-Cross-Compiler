@@ -117,11 +117,13 @@ namespace ChromeShaderToyPrograms.i
 
 
 
+            Console.WriteLine("create WebGLRenderingContext");
 
             var gl = new WebGLRenderingContext(alpha: true);
 
             if (gl == null)
             {
+                Native.body.style.backgroundColor = "yellow";
 
                 new IHTMLPre {
                     // https://code.google.com/p/chromium/issues/detail?id=294207
@@ -135,12 +137,38 @@ namespace ChromeShaderToyPrograms.i
 
             Native.body.style.backgroundColor = "blue";
 
-            gl.oncontextlost += delegate
+            gl.oncontextlost += async e =>
             {
+                //  The GPU process hung. Terminating after 10000 ms.
+
+                // GpuProcessHostUIShim: The GPU process crashed!
+
                 Native.body.style.backgroundColor = "red";
+
+                Native.body.Clear();
+
+                new IHTMLPre {
+                    // https://code.google.com/p/chromium/issues/detail?id=294207
+                    "The GPU process crashed! (or did the graphics driver crash?)",
+
+                    //new IHTMLAnchor { href = "about:gpu", innerText = "about:gpu" }
+                }.AttachToDocument();
 
                 // reload?
 
+                //if (Native.window.confirm("oncontextlost, retry or refresh later?"))
+                //{
+                //    Native.body.style.backgroundColor = "yellow";
+
+                //    //e.
+                //}
+
+                await new IHTMLButton { "blacklist " + new { Native.document.location.hash } + " shader,  reload tab to reload gpu. (or restart browser)" }.AttachToDocument().async.onclick;
+
+                Native.window.localStorage[new { Native.document.location.hash }] = "blacklisted";
+
+                // reload gpu?
+                Native.document.location.reload();
             };
 
             //gl.canvas.async.oncont
@@ -293,13 +321,33 @@ namespace ChromeShaderToyPrograms.i
                     //var text = (1 + index) + " of " + References.programs.Count + " " + key.SkipUntilIfAny("ChromeShaderToy").Replace("By", " by ");
                     var text = (1 + index) + " of " + i.programs.Count + " " + key.SkipUntilIfAny("ChromeShaderToy").Replace("By", " by ");
 
+                    var blacklisted = Native.window.localStorage[new { hash = "#" + key }] == "blacklisted";
+                    if (blacklisted)
+                    {
+                        var option0 = new IHTMLOption { value = key, innerText = "blacklisted " + text }.AttachTo(combo);
+                        return;
+                    }
+
+
                     var option = new IHTMLOption { value = key, innerText = text }.AttachTo(combo);
 
                     await Native.window.async.onframe;
 
+                    // um should we preselect it? did we come from a reload? did gpu crash?
+                    if (Native.document.location.hash == "#" + key)
+                    {
+                        // 0 is the header.. should it be a optionheader instead?
+                        combo.selectedIndex = 1 + index;
+                    }
+
+
                     // we are about to create 100 objects. does it have any impact to UI?
                     //var frag = References.programs[key]();
                     var frag = i.programs[key]();
+
+                    // 0ms Error: {{ infoLog = WARNING: 0:13: '=' : global variable initializers should be constant expressions (uniforms and globals are allowed in global initializers for legacy compatibility)
+                    // can we detect errors correctly?
+
                     var len = frag.ToString().Length;
 
                     option.innerText = text + " " + new
@@ -314,7 +362,18 @@ namespace ChromeShaderToyPrograms.i
 
                     // cant we get it if we manually set it?
                     await option.async.onselect;
-                    await Native.window.async.onframe;
+
+                    // first time select. before we try to load the shader, lets make sure we remember what causes the gpu crash
+                    // 2278ms select {{ key = InvadersByIapafoto, index = 10, hash = #InputTimeByIq }}
+                    await Native.document.location.replace("#" + key);
+
+                    // need two frames to see a change in hash?
+                    //await Native.window.async.onframe;
+                    //await Native.window.async.onframe;
+
+
+                    // unless from previous refresh it crashed gpu?
+                    Console.WriteLine("select " + new { key, index, Native.document.location.hash });
 
                     var load = Stopwatch.StartNew();
 
@@ -348,6 +407,11 @@ namespace ChromeShaderToyPrograms.i
                     var frame = 0;
                     do
                     {
+                        // can we change uri so a refresh would reload the same program?
+                        // perhaps its time to review historic api?
+                        Native.document.location.replace("#" + key);
+
+
                         frame++;
                         framesInSecond++;
 
