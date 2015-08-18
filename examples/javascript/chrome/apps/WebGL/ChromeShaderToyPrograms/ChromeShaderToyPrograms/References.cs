@@ -72,38 +72,6 @@ namespace ChromeShaderToyPrograms
 			#endregion
 
 
-			#region /f/
-			["ChromeShaderToyFastBallsByIq"] = () => new ChromeShaderToyFastBallsByIq.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyFastEdgeDetectionByNimitz"] = () => new ChromeShaderToyFastEdgeDetectionByNimitz.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyFireballByGreen"] = () => new ChromeShaderToyFireballByGreen.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyFireCounterByFabrice"] = () => new ChromeShaderToyFireCounterByFabrice.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyFlowingLavaByFizzer"] = () => new ChromeShaderToyFlowingLavaByFizzer.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyFlyingBoatByGaz"] = () => new ChromeShaderToyFlyingBoatByGaz.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyFogMountainByESpitz"] = () => new ChromeShaderToyFogMountainByESpitz.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyFrostedTorusByPwd"] = () => new ChromeShaderToyFrostedTorusByPwd.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyFrozenCrytekLogo"] = () => new ChromeShaderToyFrozenCrytekLogo.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyFrozenWastelandByDave"] = () => new ChromeShaderToyFrozenWastelandByDave.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyFutureBillboardByEiffie"] = () => new ChromeShaderToyFutureBillboardByEiffie.Shaders.ProgramFragmentShader(),
-			["FakeGlobalIlluminationByTz"] = () => new FakeGlobalIlluminationByTz.Shaders.ProgramFragmentShader(),
-			["FakeVolumeLightByEiffie"] = () => new FakeVolumeLightByEiffie.Shaders.ProgramFragmentShader(),
-			["FerrisWheelByGaz"] = () => new FerrisWheelByGaz.Shaders.ProgramFragmentShader(),
-			["FirstDistanceMapByChuckeles"] = () => new FirstDistanceMapByChuckeles.Shaders.ProgramFragmentShader(),
-			["FlappyBirdByMovAx"] = () => new FlappyBirdByMovAx.Shaders.ProgramFragmentShader(),
-			["FlatlandByPMalin"] = () => new FlatlandByPMalin.Shaders.ProgramFragmentShader(),
-			["FloatByAlex"] = () => new FloatByAlex.Shaders.ProgramFragmentShader(),
-			["FloatPrintByCasty"] = () => new FloatPrintByCasty.Shaders.ProgramFragmentShader(),
-			["FloorByStarboxByXilconic"] = () => new FloorByStarboxByXilconic.Shaders.ProgramFragmentShader(),
-			["FloorStarBoxMarbleByXilconic"] = () => new FloorStarBoxMarbleByXilconic.Shaders.ProgramFragmentShader(),
-			["FlossingSpaceByFlorian"] = () => new FlossingSpaceByFlorian.Shaders.ProgramFragmentShader(),
-			["FlowerByIq"] = () => new FlowerByIq.Shaders.ProgramFragmentShader(),
-			["ForestMurshroomBySquid"] = () => new ForestMurshroomBySquid.Shaders.ProgramFragmentShader(),
-			["FoldingByReinder"] = () => new FoldingByReinder.Shaders.ProgramFragmentShader(),
-			["FractalBridgeByDr2"] = () => new FractalBridgeByDr2.Shaders.ProgramFragmentShader(),
-			["FractalCondosByEiffie"] = () => new FractalCondosByEiffie.Shaders.ProgramFragmentShader(),
-			["FractalSphereByGuil"] = () => new FractalSphereByGuil.Shaders.ProgramFragmentShader(),
-			["FuturisticDoorKnobByDiLemming"] = () => new FuturisticDoorKnobByDiLemming.Shaders.ProgramFragmentShader(),
-			#endregion
-
 			#region /g/
 			["ChromeShaderToyGmetaballsByGermangb"] = () => new ChromeShaderToyGmetaballsByGermangb.Shaders.ProgramFragmentShader(),
 			["ChromeShaderToyGlassPolyhedronByNrx"] = () => new ChromeShaderToyGlassPolyhedronByNrx.Shaders.ProgramFragmentShader(),
