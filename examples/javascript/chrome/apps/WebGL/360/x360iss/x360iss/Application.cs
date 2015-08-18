@@ -55,9 +55,13 @@ namespace x360iss
         //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\hz2048c3840x2160.png" "/sdcard/oculus/360photos/"
         //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push   "X:\vr\tape360globe1\0000.png" "/sdcard/oculus/360photos/tape360globe2.png"
         //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push   "X:\vr\tape360globe1\0000.png" "/sdcard/oculus/360photos/tape360globenight.png"
+        //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push   "R:\vr\tape360iss\0000.png" "/sdcard/oculus/360photos/tape360iss.png"
+        //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push   "R:\vr\tape360iss\0230.png" "/sdcard/oculus/360photos/tape360iss0230.png"
 
+        //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push   "r:\vr\tape360iss\0415.png" "/sdcard/oculus/360photos/tape360iss0230x4086.png"
+        // 
 
-        // "R:\vr\tape360iss\0000.png"
+        // "R:\vr\tape360iss\0230.png"
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150809/chrome360hz
 
@@ -202,7 +206,7 @@ namespace x360iss
             var radius = 480;
 
             //var segments = 32;
-            var segments = 128;
+            var segments = 128 * 2;
             //var rotation = 6;
 
 
@@ -217,7 +221,10 @@ namespace x360iss
             //const int cubefacesize = 1024; // 6 faces, ?
 
             // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360iss/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
-            int cubefacesizeMAX = 2048; // 6 faces, ?
+
+            // crash
+            //int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
+            int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
             int cubefacesize = cubefacesizeMAX; // 6 faces, ?
                                                 //int cubefacesize = 1024; // 6 faces, ?
                                                 // "X:\vr\tape1\0000x2048.png"
@@ -229,7 +236,6 @@ namespace x360iss
             //    //cubefacesize = 64; // 6 faces, ?
             //cubefacesize = 1024; // 6 faces, ?
 
-            new IHTMLPre { new { Environment.ProcessorCount, cubefacesize } }.AttachToDocument();
 
             // can we keep fast fps yet highp?
 
@@ -251,6 +257,7 @@ namespace x360iss
 
             Native.body.Clear();
             (Native.body.style as dynamic).webkitUserSelect = "text";
+            new IHTMLPre { new { Environment.ProcessorCount, cubefacesize } }.AttachToDocument();
 
             //new IHTMLPre { "can we stream it into VR, shadertoy, youtube 360, youtube stereo yet?" }.AttachToDocument();
 
@@ -342,8 +349,8 @@ namespace x360iss
 
                 new
                 {
-                    antialias = true,
-                    alpha = true,
+                    //antialias = true,
+                    //alpha = true,
                     preserveDrawingBuffer = true
                 }
             );
@@ -1052,7 +1059,8 @@ namespace x360iss
 
 
                                 // applies onyl to shaders to create the shadow
-                                bumpScale = 0.005,
+                                //bumpScale = 0.005,
+                                bumpScale = 0.05,
 
                                 specularMap = new THREE.Texture().With(
                                     async s =>
