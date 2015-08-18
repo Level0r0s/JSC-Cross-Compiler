@@ -37,7 +37,7 @@ namespace ChromeShaderToyPrograms.i
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
-            
+
 
 
 
@@ -278,7 +278,10 @@ namespace ChromeShaderToyPrograms.i
             );
             #endregion
 
+            // do not add byref if bypackage is available!
 
+            //            Severity Code    Description Project File Line
+            //Error CS0433  The type 'ShaderToy' exists in both 'ChromeShaderToyColumns, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' and 'WebGL ShaderToy, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'    ChromeShaderToyPrograms.i Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyPrograms\ChromeShaderToyPrograms.i\Application.cs   283
 
             ShaderToy.EffectPass pip = null;
 

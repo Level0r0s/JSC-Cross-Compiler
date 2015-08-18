@@ -205,21 +205,6 @@ namespace ChromeShaderToyPrograms
 			#endregion
 
 
-			#region /i/
-			["ChromeShaderToyInfiniteRepetitionBySsdsa"] = () => new ChromeShaderToyInfiniteRepetitionBySsdsa.Shaders.ProgramFragmentShader(),
-			["IcyMoonByDr2"] = () => new IcyMoonByDr2.Shaders.ProgramFragmentShader(),
-			["IkaChanBy301"] = () => new IkaChanBy301.Shaders.ProgramFragmentShader(),
-			["IKSolverByIq"] = () => new IKSolverByIq.Shaders.ProgramFragmentShader(),
-			["ImpactByCabbibo"] = () => new ImpactByCabbibo.Shaders.ProgramFragmentShader(),
-			["ImpactTextTestByCabbibo"] = () => new ImpactTextTestByCabbibo.Shaders.ProgramFragmentShader(),
-			["InterleavedGradientNoiseByAlgorithm"] = () => new InterleavedGradientNoiseByAlgorithm.Shaders.ProgramFragmentShader(),
-			["InputMouseByIq"] = () => new InputMouseByIq.Shaders.ProgramFragmentShader(),
-			["InputTimeByIq"] = () => new InputTimeByIq.Shaders.ProgramFragmentShader(),
-			["InvadersByIapafoto"] = () => new InvadersByIapafoto.Shaders.ProgramFragmentShader(),
-			["InvasionByProtarget"] = () => new InvasionByProtarget.Shaders.ProgramFragmentShader(),
-			["InversionMachineByKali"] = () => new InversionMachineByKali.Shaders.ProgramFragmentShader(),
-			["IslandByVanburgler"] = () => new IslandByVanburgler.Shaders.ProgramFragmentShader(),
-			#endregion
 
 			#region /j/
 			["JackoLanternByPMalin"] = () => new JackoLanternByPMalin.Shaders.ProgramFragmentShader(),

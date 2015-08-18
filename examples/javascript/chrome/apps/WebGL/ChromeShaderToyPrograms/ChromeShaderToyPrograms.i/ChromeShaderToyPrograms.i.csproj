@@ -136,6 +136,42 @@
     <Reference Include="IceLakeByXor.AssetsLibrary">
       <HintPath>..\..\synergy\i\IceLakeByXor\IceLakeByXor\bin\staging.AssetsLibrary\IceLakeByXor.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="IcyMoonByDr2.AssetsLibrary">
+      <HintPath>..\..\synergy\i\IcyMoonByDr2\IcyMoonByDr2\bin\staging.AssetsLibrary\IcyMoonByDr2.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="IkaChanBy301.AssetsLibrary">
+      <HintPath>..\..\synergy\i\IkaChanBy301\IkaChanBy301\bin\staging.AssetsLibrary\IkaChanBy301.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="IKSolverByIq.AssetsLibrary">
+      <HintPath>..\..\synergy\i\IKSolverByIq\IKSolverByIq\bin\staging.AssetsLibrary\IKSolverByIq.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ImpactByCabbibo.AssetsLibrary">
+      <HintPath>..\..\synergy\i\ImpactByCabbibo\ImpactByCabbibo\bin\staging.AssetsLibrary\ImpactByCabbibo.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ImpactTextTestByCabbibo.AssetsLibrary">
+      <HintPath>..\..\synergy\i\ImpactTextTestByCabbibo\ImpactTextTestByCabbibo\bin\staging.AssetsLibrary\ImpactTextTestByCabbibo.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="InputMouseByIq.AssetsLibrary">
+      <HintPath>..\..\synergy\i\InputMouseByIq\InputMouseByIq\bin\staging.AssetsLibrary\InputMouseByIq.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="InputTimeByIq.AssetsLibrary">
+      <HintPath>..\..\synergy\i\InputTimeByIq\InputTimeByIq\bin\staging.AssetsLibrary\InputTimeByIq.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="InterleavedGradientNoiseByAlgorithm.AssetsLibrary">
+      <HintPath>..\..\synergy\i\InterleavedGradientNoiseByAlgorithm\InterleavedGradientNoiseByAlgorithm\bin\staging.AssetsLibrary\InterleavedGradientNoiseByAlgorithm.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="InvadersByIapafoto.AssetsLibrary">
+      <HintPath>..\..\synergy\i\InvadersByIapafoto\InvadersByIapafoto\bin\staging.AssetsLibrary\InvadersByIapafoto.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="InvasionByProtarget.AssetsLibrary">
+      <HintPath>..\..\synergy\i\InvasionByProtarget\InvasionByProtarget\bin\staging.AssetsLibrary\InvasionByProtarget.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="InversionMachineByKali.AssetsLibrary">
+      <HintPath>..\..\synergy\i\InversionMachineByKali\InversionMachineByKali\bin\staging.AssetsLibrary\InversionMachineByKali.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="IslandByVanburgler.AssetsLibrary">
+      <HintPath>..\..\synergy\i\IslandByVanburgler\IslandByVanburgler\bin\staging.AssetsLibrary\IslandByVanburgler.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="i.cs" />
@@ -158,6 +194,54 @@
     <ProjectReference Include="..\..\synergy\i\IceLakeByXor\IceLakeByXor\IceLakeByXor.csproj">
       <Project>{7e2e2eb0-d1b1-4006-a7d5-f99ad2f1e03f}</Project>
       <Name>IceLakeByXor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\IcyMoonByDr2\IcyMoonByDr2\IcyMoonByDr2.csproj">
+      <Project>{6893d375-cfdb-4a26-af7a-593bc8f9662c}</Project>
+      <Name>IcyMoonByDr2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\IkaChanBy301\IkaChanBy301\IkaChanBy301.csproj">
+      <Project>{d27c8a98-70a7-49e5-92c7-ab8d005bb17c}</Project>
+      <Name>IkaChanBy301</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\IKSolverByIq\IKSolverByIq\IKSolverByIq.csproj">
+      <Project>{95cebf37-5c29-4995-bf80-1808f26da3ce}</Project>
+      <Name>IKSolverByIq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\ImpactByCabbibo\ImpactByCabbibo\ImpactByCabbibo.csproj">
+      <Project>{652fbc14-f375-46bc-bb70-b106d6fa790a}</Project>
+      <Name>ImpactByCabbibo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\ImpactTextTestByCabbibo\ImpactTextTestByCabbibo\ImpactTextTestByCabbibo.csproj">
+      <Project>{9b5d2328-2c28-4bfb-8c18-3d11aa7cc2a0}</Project>
+      <Name>ImpactTextTestByCabbibo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\InputMouseByIq\InputMouseByIq\InputMouseByIq.csproj">
+      <Project>{3ef7b175-1c60-4938-bfa4-2b5b0a56e56c}</Project>
+      <Name>InputMouseByIq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\InputTimeByIq\InputTimeByIq\InputTimeByIq.csproj">
+      <Project>{0f9135b9-3dac-4aca-968b-4ec4fc05bfdf}</Project>
+      <Name>InputTimeByIq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\InterleavedGradientNoiseByAlgorithm\InterleavedGradientNoiseByAlgorithm\InterleavedGradientNoiseByAlgorithm.csproj">
+      <Project>{1a23708f-e51b-46f5-9b63-30c081d5d511}</Project>
+      <Name>InterleavedGradientNoiseByAlgorithm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\InvadersByIapafoto\InvadersByIapafoto\InvadersByIapafoto.csproj">
+      <Project>{94cce843-5a34-4687-a985-03ff3ce2dbd1}</Project>
+      <Name>InvadersByIapafoto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\InvasionByProtarget\InvasionByProtarget\InvasionByProtarget.csproj">
+      <Project>{e9344bd2-b8e3-42dd-a039-a552f0960ec7}</Project>
+      <Name>InvasionByProtarget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\InversionMachineByKali\InversionMachineByKali\InversionMachineByKali.csproj">
+      <Project>{85690caa-b7d2-4b73-b50b-4a73367160f6}</Project>
+      <Name>InversionMachineByKali</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\IslandByVanburgler\IslandByVanburgler\IslandByVanburgler.csproj">
+      <Project>{5839091d-de7f-42e8-a128-22df04679ce6}</Project>
+      <Name>IslandByVanburgler</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
