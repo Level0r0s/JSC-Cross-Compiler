@@ -1,0 +1,644 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ChromeShaderToyPrograms.f</RootNamespace>
+    <AssemblyName>ChromeShaderToyPrograms.f</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>ChromeShaderToyPrograms.f.Program</StartupObject>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Chrome Web Store">
+      <HintPath>..\packages\Chrome.Web.Store.1.0.0.0\lib\Chrome Web Store.dll</HintPath>
+    </Reference>
+    <Reference Include="jsc.meta">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\jsc.meta.exe</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="FSharp.Core">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="ScriptCoreLib">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Avalon">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Avalon.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Query">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Query.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Windows.Forms">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\util\jsc\bin\ScriptCoreLib.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Extensions">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\util\jsc\bin\ScriptCoreLib.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Ultra">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\util\jsc\bin\ScriptCoreLib.Ultra.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Ultra.Components">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Ultra.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Ultra.Library">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Ultra.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Ultra.VisualBasic">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Ultra.VisualBasic.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLibA">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLibA.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLibJava">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\util\jsc\bin\ScriptCoreLibJava.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WebGL ShaderToy, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>packages\WebGL.ShaderToy.1.0.0.0\lib\WebGL ShaderToy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="ChromeNetworkInterfaces.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeNetworkInterfaces.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Async">
+      <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyPrograms.i.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeShaderToyPrograms.i.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyInfiniteRepetitionBySsdsa.AssetsLibrary">
+      <HintPath>..\..\synergy\i\ChromeShaderToyInfiniteRepetitionBySsdsa\ChromeShaderToyInfiniteRepetitionBySsdsa\bin\staging.AssetsLibrary\ChromeShaderToyInfiniteRepetitionBySsdsa.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="IceLakeByXor.AssetsLibrary">
+      <HintPath>..\..\synergy\i\IceLakeByXor\IceLakeByXor\bin\staging.AssetsLibrary\IceLakeByXor.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="IcyMoonByDr2.AssetsLibrary">
+      <HintPath>..\..\synergy\i\IcyMoonByDr2\IcyMoonByDr2\bin\staging.AssetsLibrary\IcyMoonByDr2.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="IkaChanBy301.AssetsLibrary">
+      <HintPath>..\..\synergy\i\IkaChanBy301\IkaChanBy301\bin\staging.AssetsLibrary\IkaChanBy301.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="IKSolverByIq.AssetsLibrary">
+      <HintPath>..\..\synergy\i\IKSolverByIq\IKSolverByIq\bin\staging.AssetsLibrary\IKSolverByIq.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ImpactByCabbibo.AssetsLibrary">
+      <HintPath>..\..\synergy\i\ImpactByCabbibo\ImpactByCabbibo\bin\staging.AssetsLibrary\ImpactByCabbibo.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ImpactTextTestByCabbibo.AssetsLibrary">
+      <HintPath>..\..\synergy\i\ImpactTextTestByCabbibo\ImpactTextTestByCabbibo\bin\staging.AssetsLibrary\ImpactTextTestByCabbibo.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="InputMouseByIq.AssetsLibrary">
+      <HintPath>..\..\synergy\i\InputMouseByIq\InputMouseByIq\bin\staging.AssetsLibrary\InputMouseByIq.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="InputTimeByIq.AssetsLibrary">
+      <HintPath>..\..\synergy\i\InputTimeByIq\InputTimeByIq\bin\staging.AssetsLibrary\InputTimeByIq.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="InterleavedGradientNoiseByAlgorithm.AssetsLibrary">
+      <HintPath>..\..\synergy\i\InterleavedGradientNoiseByAlgorithm\InterleavedGradientNoiseByAlgorithm\bin\staging.AssetsLibrary\InterleavedGradientNoiseByAlgorithm.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="InvadersByIapafoto.AssetsLibrary">
+      <HintPath>..\..\synergy\i\InvadersByIapafoto\InvadersByIapafoto\bin\staging.AssetsLibrary\InvadersByIapafoto.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="InvasionByProtarget.AssetsLibrary">
+      <HintPath>..\..\synergy\i\InvasionByProtarget\InvasionByProtarget\bin\staging.AssetsLibrary\InvasionByProtarget.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="InversionMachineByKali.AssetsLibrary">
+      <HintPath>..\..\synergy\i\InversionMachineByKali\InversionMachineByKali\bin\staging.AssetsLibrary\InversionMachineByKali.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="IslandByVanburgler.AssetsLibrary">
+      <HintPath>..\..\synergy\i\IslandByVanburgler\IslandByVanburgler\bin\staging.AssetsLibrary\IslandByVanburgler.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyPrograms.d.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeShaderToyPrograms.d.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyDalekByAntonalog.AssetsLibrary">
+      <HintPath>..\..\synergy\d\ChromeShaderToyDalekByAntonalog\ChromeShaderToyDalekByAntonalog\bin\staging.AssetsLibrary\ChromeShaderToyDalekByAntonalog.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyDancingViriiByEntropyNine.AssetsLibrary">
+      <HintPath>..\..\synergy\d\ChromeShaderToyDancingViriiByEntropyNine\ChromeShaderToyDancingViriiByEntropyNine\bin\staging.AssetsLibrary\ChromeShaderToyDancingViriiByEntropyNine.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyDepthByGreen.AssetsLibrary">
+      <HintPath>..\..\synergy\d\ChromeShaderToyDepthByGreen\ChromeShaderToyDepthByGreen\bin\staging.AssetsLibrary\ChromeShaderToyDepthByGreen.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyDesertMorningByEPitz.AssetsLibrary">
+      <HintPath>..\..\synergy\d\ChromeShaderToyDesertMorningByEPitz\ChromeShaderToyDesertMorningByEPitz\bin\staging.AssetsLibrary\ChromeShaderToyDesertMorningByEPitz.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyDiamondsForeverByNrx.AssetsLibrary">
+      <HintPath>..\..\synergy\d\ChromeShaderToyDiamondsForeverByNrx\ChromeShaderToyDiamondsForeverByNrx\bin\staging.AssetsLibrary\ChromeShaderToyDiamondsForeverByNrx.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyDigitalHeartByJoshp.AssetsLibrary">
+      <HintPath>..\..\synergy\d\ChromeShaderToyDigitalHeartByJoshp\ChromeShaderToyDigitalHeartByJoshp\bin\staging.AssetsLibrary\ChromeShaderToyDigitalHeartByJoshp.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyDigitsByFabrice.AssetsLibrary">
+      <HintPath>..\..\synergy\d\ChromeShaderToyDigitsByFabrice\ChromeShaderToyDigitsByFabrice\bin\staging.AssetsLibrary\ChromeShaderToyDigitsByFabrice.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyDiningRoomBySquid.AssetsLibrary">
+      <HintPath>..\..\synergy\d\ChromeShaderToyDiningRoomBySquid\ChromeShaderToyDiningRoomBySquid\bin\staging.AssetsLibrary\ChromeShaderToyDiningRoomBySquid.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyDistanceFieldBlurByTekF.AssetsLibrary">
+      <HintPath>..\..\synergy\d\ChromeShaderToyDistanceFieldBlurByTekF\ChromeShaderToyDistanceFieldBlurByTekF\bin\staging.AssetsLibrary\ChromeShaderToyDistanceFieldBlurByTekF.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyDoomE1M1ByPMalin.AssetsLibrary">
+      <HintPath>..\..\synergy\d\ChromeShaderToyDoomE1M1ByPMalin\ChromeShaderToyDoomE1M1ByPMalin\bin\staging.AssetsLibrary\ChromeShaderToyDoomE1M1ByPMalin.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyDustStormByNimitz.AssetsLibrary">
+      <HintPath>..\..\synergy\d\ChromeShaderToyDustStormByNimitz\ChromeShaderToyDustStormByNimitz\bin\staging.AssetsLibrary\ChromeShaderToyDustStormByNimitz.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyDustyByHat.AssetsLibrary">
+      <HintPath>..\..\synergy\d\ChromeShaderToyDustyByHat\ChromeShaderToyDustyByHat\bin\staging.AssetsLibrary\ChromeShaderToyDustyByHat.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DancingJediByIapafoto.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DancingJediByIapafoto\DancingJediByIapafoto\bin\staging.AssetsLibrary\DancingJediByIapafoto.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DaRasterizerByTDM.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DaRasterizerByTDM\DaRasterizerByTDM\bin\staging.AssetsLibrary\DaRasterizerByTDM.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DataTransferBySrtuss.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DataTransferBySrtuss\DataTransferBySrtuss\bin\staging.AssetsLibrary\DataTransferBySrtuss.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DEDoFByEiffie.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DEDoFByEiffie\DEDoFByEiffie\bin\staging.AssetsLibrary\DEDoFByEiffie.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DesertChaseByNdxbxrme.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DesertChaseByNdxbxrme\DesertChaseByNdxbxrme\bin\staging.AssetsLibrary\DesertChaseByNdxbxrme.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DFLightingByTekF.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DFLightingByTekF\DFLightingByTekF\bin\staging.AssetsLibrary\DFLightingByTekF.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DigitalClockByAndre.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DigitalClockByAndre\DigitalClockByAndre\bin\staging.AssetsLibrary\DigitalClockByAndre.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DirectLightUsingMISByKoiava.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DirectLightUsingMISByKoiava\DirectLightUsingMISByKoiava\bin\staging.AssetsLibrary\DirectLightUsingMISByKoiava.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DiscoRobotByFizzer.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DiscoRobotByFizzer\DiscoRobotByFizzer\bin\staging.AssetsLibrary\DiscoRobotByFizzer.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DIYSpacemanByEiffie.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DIYSpacemanByEiffie\DIYSpacemanByEiffie\bin\staging.AssetsLibrary\DIYSpacemanByEiffie.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DNAByOtavio.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DNAByOtavio\DNAByOtavio\bin\staging.AssetsLibrary\DNAByOtavio.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Doom2ByReinder.AssetsLibrary">
+      <HintPath>..\..\synergy\d\Doom2ByReinder\Doom2ByReinder\bin\staging.AssetsLibrary\Doom2ByReinder.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DragonflyByDr2.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DragonflyByDr2\DragonflyByDr2\bin\staging.AssetsLibrary\DragonflyByDr2.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DubstepByAssByRez.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DubstepByAssByRez\DubstepByAssByRez\bin\staging.AssetsLibrary\DubstepByAssByRez.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyPrograms.f.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeShaderToyPrograms.f.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyFastBallsByIq.AssetsLibrary">
+      <HintPath>..\..\synergy\f\ChromeShaderToyFastBallsByIq\ChromeShaderToyFastBallsByIq\bin\staging.AssetsLibrary\ChromeShaderToyFastBallsByIq.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyFastEdgeDetectionByNimitz.AssetsLibrary">
+      <HintPath>..\..\synergy\f\ChromeShaderToyFastEdgeDetectionByNimitz\ChromeShaderToyFastEdgeDetectionByNimitz\bin\staging.AssetsLibrary\ChromeShaderToyFastEdgeDetectionByNimitz.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyFireballByGreen.AssetsLibrary">
+      <HintPath>..\..\synergy\f\ChromeShaderToyFireballByGreen\ChromeShaderToyFireballByGreen\bin\staging.AssetsLibrary\ChromeShaderToyFireballByGreen.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyFireCounterByFabrice.AssetsLibrary">
+      <HintPath>..\..\synergy\f\ChromeShaderToyFireCounterByFabrice\ChromeShaderToyFireCounterByFabrice\bin\staging.AssetsLibrary\ChromeShaderToyFireCounterByFabrice.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyFlowingLavaByFizzer.AssetsLibrary">
+      <HintPath>..\..\synergy\f\ChromeShaderToyFlowingLavaByFizzer\ChromeShaderToyFlowingLavaByFizzer\bin\staging.AssetsLibrary\ChromeShaderToyFlowingLavaByFizzer.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyFlyingBoatByGaz.AssetsLibrary">
+      <HintPath>..\..\synergy\f\ChromeShaderToyFlyingBoatByGaz\ChromeShaderToyFlyingBoatByGaz\bin\staging.AssetsLibrary\ChromeShaderToyFlyingBoatByGaz.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyFogMountainByESpitz.AssetsLibrary">
+      <HintPath>..\..\synergy\f\ChromeShaderToyFogMountainByESpitz\ChromeShaderToyFogMountainByESpitz\bin\staging.AssetsLibrary\ChromeShaderToyFogMountainByESpitz.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyFrostedTorusByPwd.AssetsLibrary">
+      <HintPath>..\..\synergy\f\ChromeShaderToyFrostedTorusByPwd\ChromeShaderToyFrostedTorusByPwd\bin\staging.AssetsLibrary\ChromeShaderToyFrostedTorusByPwd.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyFrozenCrytekLogo.AssetsLibrary">
+      <HintPath>..\..\synergy\f\ChromeShaderToyFrozenCrytekLogo\ChromeShaderToyFrozenCrytekLogo\bin\staging.AssetsLibrary\ChromeShaderToyFrozenCrytekLogo.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyFrozenWastelandByDave.AssetsLibrary">
+      <HintPath>..\..\synergy\f\ChromeShaderToyFrozenWastelandByDave\ChromeShaderToyFrozenWastelandByDave\bin\staging.AssetsLibrary\ChromeShaderToyFrozenWastelandByDave.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeShaderToyFutureBillboardByEiffie.AssetsLibrary">
+      <HintPath>..\..\synergy\f\ChromeShaderToyFutureBillboardByEiffie\ChromeShaderToyFutureBillboardByEiffie\bin\staging.AssetsLibrary\ChromeShaderToyFutureBillboardByEiffie.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FakeGlobalIlluminationByTz.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FakeGlobalIlluminationByTz\FakeGlobalIlluminationByTz\bin\staging.AssetsLibrary\FakeGlobalIlluminationByTz.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FakeVolumeLightByEiffie.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FakeVolumeLightByEiffie\FakeVolumeLightByEiffie\bin\staging.AssetsLibrary\FakeVolumeLightByEiffie.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FerrisWheelByGaz.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FerrisWheelByGaz\FerrisWheelByGaz\bin\staging.AssetsLibrary\FerrisWheelByGaz.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FlappyBirdByMovAx.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FlappyBirdByMovAx\FlappyBirdByMovAx\bin\staging.AssetsLibrary\FlappyBirdByMovAx.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FlatlandByPMalin.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FlatlandByPMalin\FlatlandByPMalin\bin\staging.AssetsLibrary\FlatlandByPMalin.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FloatByAlex.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FloatByAlex\FloatByAlex\bin\staging.AssetsLibrary\FloatByAlex.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FloatPrintByCasty.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FloatPrintByCasty\FloatPrintByCasty\bin\staging.AssetsLibrary\FloatPrintByCasty.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FloorByStarboxByXilconic.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FloorByStarboxByXilconic\FloorByStarboxByXilconic\bin\staging.AssetsLibrary\FloorByStarboxByXilconic.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FloorStarBoxMarbleByXilconic.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FloorStarBoxMarbleByXilconic\FloorStarBoxMarbleByXilconic\bin\staging.AssetsLibrary\FloorStarBoxMarbleByXilconic.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FlossingSpaceByFlorian.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FlossingSpaceByFlorian\FlossingSpaceByFlorian\bin\staging.AssetsLibrary\FlossingSpaceByFlorian.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FlowerByIq.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FlowerByIq\FlowerByIq\bin\staging.AssetsLibrary\FlowerByIq.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FoldingByReinder.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FoldingByReinder\FoldingByReinder\bin\staging.AssetsLibrary\FoldingByReinder.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ForestMurshroomBySquid.AssetsLibrary">
+      <HintPath>..\..\synergy\f\ForestMurshroomBySquid\ForestMurshroomBySquid\bin\staging.AssetsLibrary\ForestMurshroomBySquid.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FractalBridgeByDr2.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FractalBridgeByDr2\FractalBridgeByDr2\bin\staging.AssetsLibrary\FractalBridgeByDr2.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FractalCondosByEiffie.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FractalCondosByEiffie\FractalCondosByEiffie\bin\staging.AssetsLibrary\FractalCondosByEiffie.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FractalSphereByGuil.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FractalSphereByGuil\FractalSphereByGuil\bin\staging.AssetsLibrary\FractalSphereByGuil.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FuturisticDoorKnobByDiLemming.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FuturisticDoorKnobByDiLemming\FuturisticDoorKnobByDiLemming\bin\staging.AssetsLibrary\FuturisticDoorKnobByDiLemming.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FirstDistanceMapByChuckeles.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FirstDistanceMapByChuckeles\FirstDistanceMapByChuckeles\bin\staging.AssetsLibrary\FirstDistanceMapByChuckeles.AssetsLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="f.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Design\App.css" />
+    <Content Include="Design\App.htm" />
+    <Compile Include="ApplicationWebService.cs" />
+    <Compile Include="Application.cs" />
+    <Compile Include="Program.cs">
+      <DependentUpon>Application.cs</DependentUpon>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\synergy\d\ChromeShaderToyDalekByAntonalog\ChromeShaderToyDalekByAntonalog\ChromeShaderToyDalekByAntonalog.csproj">
+      <Project>{66dda0a3-cc48-481b-b80b-a8b5e42b0343}</Project>
+      <Name>ChromeShaderToyDalekByAntonalog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\ChromeShaderToyDancingViriiByEntropyNine\ChromeShaderToyDancingViriiByEntropyNine\ChromeShaderToyDancingViriiByEntropyNine.csproj">
+      <Project>{4d8a393b-9182-4117-b49c-3317893f13e2}</Project>
+      <Name>ChromeShaderToyDancingViriiByEntropyNine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\ChromeShaderToyDepthByGreen\ChromeShaderToyDepthByGreen\ChromeShaderToyDepthByGreen.csproj">
+      <Project>{957a522a-7bb8-4828-9f1a-7f59faf7ebcd}</Project>
+      <Name>ChromeShaderToyDepthByGreen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\ChromeShaderToyDesertMorningByEPitz\ChromeShaderToyDesertMorningByEPitz\ChromeShaderToyDesertMorningByEPitz.csproj">
+      <Project>{d6afcb80-4fb5-4b55-8e6c-926266bf2d85}</Project>
+      <Name>ChromeShaderToyDesertMorningByEPitz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\ChromeShaderToyDiamondsForeverByNrx\ChromeShaderToyDiamondsForeverByNrx\ChromeShaderToyDiamondsForeverByNrx.csproj">
+      <Project>{393e7154-c274-48a9-92a2-6bb1b006de26}</Project>
+      <Name>ChromeShaderToyDiamondsForeverByNrx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\ChromeShaderToyDigitalHeartByJoshp\ChromeShaderToyDigitalHeartByJoshp\ChromeShaderToyDigitalHeartByJoshp.csproj">
+      <Project>{9ea6c615-7ea4-449b-9020-637f957148a1}</Project>
+      <Name>ChromeShaderToyDigitalHeartByJoshp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\ChromeShaderToyDigitsByFabrice\ChromeShaderToyDigitsByFabrice\ChromeShaderToyDigitsByFabrice.csproj">
+      <Project>{d1822b34-ff99-4527-b1c6-5b19c51aeabb}</Project>
+      <Name>ChromeShaderToyDigitsByFabrice</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\ChromeShaderToyDiningRoomBySquid\ChromeShaderToyDiningRoomBySquid\ChromeShaderToyDiningRoomBySquid.csproj">
+      <Project>{6121df06-a881-47f3-9bb2-97c38078a6d8}</Project>
+      <Name>ChromeShaderToyDiningRoomBySquid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\ChromeShaderToyDistanceFieldBlurByTekF\ChromeShaderToyDistanceFieldBlurByTekF\ChromeShaderToyDistanceFieldBlurByTekF.csproj">
+      <Project>{bc9b4e1e-c410-48d5-a088-882af59ce636}</Project>
+      <Name>ChromeShaderToyDistanceFieldBlurByTekF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\ChromeShaderToyDoomE1M1ByPMalin\ChromeShaderToyDoomE1M1ByPMalin\ChromeShaderToyDoomE1M1ByPMalin.csproj">
+      <Project>{0470fa25-e610-4ce9-b572-5723ad57fb57}</Project>
+      <Name>ChromeShaderToyDoomE1M1ByPMalin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\ChromeShaderToyDustStormByNimitz\ChromeShaderToyDustStormByNimitz\ChromeShaderToyDustStormByNimitz.csproj">
+      <Project>{16ff9244-edee-481e-a7b1-72f00399edaf}</Project>
+      <Name>ChromeShaderToyDustStormByNimitz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\ChromeShaderToyDustyByHat\ChromeShaderToyDustyByHat\ChromeShaderToyDustyByHat.csproj">
+      <Project>{cbe287fc-3905-47c3-be2a-d63aa0138b32}</Project>
+      <Name>ChromeShaderToyDustyByHat</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DancingJediByIapafoto\DancingJediByIapafoto\DancingJediByIapafoto.csproj">
+      <Project>{deba877a-21b8-478c-be2f-3564ccac8951}</Project>
+      <Name>DancingJediByIapafoto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DaRasterizerByTDM\DaRasterizerByTDM\DaRasterizerByTDM.csproj">
+      <Project>{30a5cfb3-a469-4cfd-ab94-e16519ed83a8}</Project>
+      <Name>DaRasterizerByTDM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DataTransferBySrtuss\DataTransferBySrtuss\DataTransferBySrtuss.csproj">
+      <Project>{7dd732b7-134b-456d-8a78-c63a4b5a0bcc}</Project>
+      <Name>DataTransferBySrtuss</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DEDoFByEiffie\DEDoFByEiffie\DEDoFByEiffie.csproj">
+      <Project>{df6ea029-75dc-42ba-8791-d4dcd70e1e1f}</Project>
+      <Name>DEDoFByEiffie</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DesertChaseByNdxbxrme\DesertChaseByNdxbxrme\DesertChaseByNdxbxrme.csproj">
+      <Project>{c9d80ec7-a2c4-4dbd-be39-5477c611e3bf}</Project>
+      <Name>DesertChaseByNdxbxrme</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DFLightingByTekF\DFLightingByTekF\DFLightingByTekF.csproj">
+      <Project>{eedf5720-4339-409e-b8ee-635b95e62cdd}</Project>
+      <Name>DFLightingByTekF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DigitalClockByAndre\DigitalClockByAndre\DigitalClockByAndre.csproj">
+      <Project>{3ca53c54-75fd-46ae-882c-2a7b2817a92f}</Project>
+      <Name>DigitalClockByAndre</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DirectLightUsingMISByKoiava\DirectLightUsingMISByKoiava\DirectLightUsingMISByKoiava.csproj">
+      <Project>{b1c54240-3df7-4362-a7b0-a30c42efe0e9}</Project>
+      <Name>DirectLightUsingMISByKoiava</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DiscoRobotByFizzer\DiscoRobotByFizzer\DiscoRobotByFizzer.csproj">
+      <Project>{426a9419-9287-4880-979f-29f29d3f2a22}</Project>
+      <Name>DiscoRobotByFizzer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DIYSpacemanByEiffie\DIYSpacemanByEiffie\DIYSpacemanByEiffie.csproj">
+      <Project>{3973117b-4c59-421e-9f1d-7cb49ee96122}</Project>
+      <Name>DIYSpacemanByEiffie</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DNAByOtavio\DNAByOtavio\DNAByOtavio.csproj">
+      <Project>{253407dc-56bd-4af0-8761-2c173021c41d}</Project>
+      <Name>DNAByOtavio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\Doom2ByReinder\Doom2ByReinder\Doom2ByReinder.csproj">
+      <Project>{7ae2fb22-0cb3-45e7-8f10-0dd2a724fba6}</Project>
+      <Name>Doom2ByReinder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DragonflyByDr2\DragonflyByDr2\DragonflyByDr2.csproj">
+      <Project>{f5d8f133-e7db-4e6f-b4be-c38790d0982f}</Project>
+      <Name>DragonflyByDr2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DubstepByAssByRez\DubstepByAssByRez\DubstepByAssByRez.csproj">
+      <Project>{9b36f942-52cf-40d7-b838-56c334521c59}</Project>
+      <Name>DubstepByAssByRez</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\ChromeShaderToyFastBallsByIq\ChromeShaderToyFastBallsByIq\ChromeShaderToyFastBallsByIq.csproj">
+      <Project>{ba74a4c6-91dc-4a22-976b-1fdf2a0754bc}</Project>
+      <Name>ChromeShaderToyFastBallsByIq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\ChromeShaderToyFastEdgeDetectionByNimitz\ChromeShaderToyFastEdgeDetectionByNimitz\ChromeShaderToyFastEdgeDetectionByNimitz.csproj">
+      <Project>{8e5c4276-6bf2-4b97-b6f5-eb32a57cc88d}</Project>
+      <Name>ChromeShaderToyFastEdgeDetectionByNimitz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\ChromeShaderToyFireballByGreen\ChromeShaderToyFireballByGreen\ChromeShaderToyFireballByGreen.csproj">
+      <Project>{865c0952-047d-4193-8664-3422e30fd331}</Project>
+      <Name>ChromeShaderToyFireballByGreen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\ChromeShaderToyFireCounterByFabrice\ChromeShaderToyFireCounterByFabrice\ChromeShaderToyFireCounterByFabrice.csproj">
+      <Project>{28668f5f-68af-4bc7-af2d-076695beeab9}</Project>
+      <Name>ChromeShaderToyFireCounterByFabrice</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\ChromeShaderToyFlowingLavaByFizzer\ChromeShaderToyFlowingLavaByFizzer\ChromeShaderToyFlowingLavaByFizzer.csproj">
+      <Project>{03a867c7-264e-430e-b2c8-9f7fcefa0667}</Project>
+      <Name>ChromeShaderToyFlowingLavaByFizzer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\ChromeShaderToyFlyingBoatByGaz\ChromeShaderToyFlyingBoatByGaz\ChromeShaderToyFlyingBoatByGaz.csproj">
+      <Project>{431148fa-c0a9-4240-9380-655b10de0c08}</Project>
+      <Name>ChromeShaderToyFlyingBoatByGaz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\ChromeShaderToyFogMountainByESpitz\ChromeShaderToyFogMountainByESpitz\ChromeShaderToyFogMountainByESpitz.csproj">
+      <Project>{35cbee4f-96bf-4c5f-9616-755eee22b581}</Project>
+      <Name>ChromeShaderToyFogMountainByESpitz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\ChromeShaderToyFrostedTorusByPwd\ChromeShaderToyFrostedTorusByPwd\ChromeShaderToyFrostedTorusByPwd.csproj">
+      <Project>{f03b6284-c743-49cb-ac15-bd9dcbbcd9d2}</Project>
+      <Name>ChromeShaderToyFrostedTorusByPwd</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\ChromeShaderToyFrozenCrytekLogo\ChromeShaderToyFrozenCrytekLogo\ChromeShaderToyFrozenCrytekLogo.csproj">
+      <Project>{2293977f-fbe5-4adf-9ad9-0c50f66827de}</Project>
+      <Name>ChromeShaderToyFrozenCrytekLogo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\ChromeShaderToyFrozenWastelandByDave\ChromeShaderToyFrozenWastelandByDave\ChromeShaderToyFrozenWastelandByDave.csproj">
+      <Project>{08dd1523-824e-4bb3-b357-548ef16a870a}</Project>
+      <Name>ChromeShaderToyFrozenWastelandByDave</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\ChromeShaderToyFutureBillboardByEiffie\ChromeShaderToyFutureBillboardByEiffie\ChromeShaderToyFutureBillboardByEiffie.csproj">
+      <Project>{1677eb8b-970d-4777-b02a-29c97934fab5}</Project>
+      <Name>ChromeShaderToyFutureBillboardByEiffie</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FakeGlobalIlluminationByTz\FakeGlobalIlluminationByTz\FakeGlobalIlluminationByTz.csproj">
+      <Project>{2031f1b7-e70c-4a59-959e-8ef7036b8559}</Project>
+      <Name>FakeGlobalIlluminationByTz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FakeVolumeLightByEiffie\FakeVolumeLightByEiffie\FakeVolumeLightByEiffie.csproj">
+      <Project>{4cc5a53b-a4a0-4b54-b17f-7288713a2a21}</Project>
+      <Name>FakeVolumeLightByEiffie</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FerrisWheelByGaz\FerrisWheelByGaz\FerrisWheelByGaz.csproj">
+      <Project>{d82a1c26-ca03-4e8a-abe8-5f3bd5221091}</Project>
+      <Name>FerrisWheelByGaz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FirstDistanceMapByChuckeles\FirstDistanceMapByChuckeles\FirstDistanceMapByChuckeles.csproj">
+      <Project>{5612a314-5ba6-44bc-bd70-7072f8dd5ef2}</Project>
+      <Name>FirstDistanceMapByChuckeles</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FlappyBirdByMovAx\FlappyBirdByMovAx\FlappyBirdByMovAx.csproj">
+      <Project>{3a7bbe46-4413-4537-b781-f7365b519197}</Project>
+      <Name>FlappyBirdByMovAx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FlatlandByPMalin\FlatlandByPMalin\FlatlandByPMalin.csproj">
+      <Project>{4be4ef1a-ae51-4808-8ff8-f8ed5891274a}</Project>
+      <Name>FlatlandByPMalin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FloatByAlex\FloatByAlex\FloatByAlex.csproj">
+      <Project>{cf12ad67-f4c8-495e-91a2-8299a4dbbef0}</Project>
+      <Name>FloatByAlex</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FloatPrintByCasty\FloatPrintByCasty\FloatPrintByCasty.csproj">
+      <Project>{bc96aaec-51cf-432f-8744-f0309eecc7ac}</Project>
+      <Name>FloatPrintByCasty</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FloorByStarboxByXilconic\FloorByStarboxByXilconic\FloorByStarboxByXilconic.csproj">
+      <Project>{42e04870-b6b7-472e-852c-56fa5c1f104f}</Project>
+      <Name>FloorByStarboxByXilconic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FloorStarBoxMarbleByXilconic\FloorStarBoxMarbleByXilconic\FloorStarBoxMarbleByXilconic.csproj">
+      <Project>{e5744a49-a591-4aaf-bdf1-ed6d51c6e554}</Project>
+      <Name>FloorStarBoxMarbleByXilconic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FlossingSpaceByFlorian\FlossingSpaceByFlorian\FlossingSpaceByFlorian.csproj">
+      <Project>{703298be-03fc-495d-b5a5-9a84c8090909}</Project>
+      <Name>FlossingSpaceByFlorian</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FlowerByIq\FlowerByIq\FlowerByIq.csproj">
+      <Project>{303d680d-950e-4f28-a34e-48e39ad24c04}</Project>
+      <Name>FlowerByIq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FoldingByReinder\FoldingByReinder\FoldingByReinder.csproj">
+      <Project>{76fdf5f2-9d3f-4dc0-aa10-a699c87e9bd9}</Project>
+      <Name>FoldingByReinder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\ForestMurshroomBySquid\ForestMurshroomBySquid\ForestMurshroomBySquid.csproj">
+      <Project>{5107730d-6ae8-490f-999c-3105225bc30a}</Project>
+      <Name>ForestMurshroomBySquid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FractalBridgeByDr2\FractalBridgeByDr2\FractalBridgeByDr2.csproj">
+      <Project>{e3e36139-ca7c-467e-a05f-a2f579ea1ac5}</Project>
+      <Name>FractalBridgeByDr2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FractalCondosByEiffie\FractalCondosByEiffie\FractalCondosByEiffie.csproj">
+      <Project>{e66f5fe3-e62c-41db-8f84-732ee5eab7b4}</Project>
+      <Name>FractalCondosByEiffie</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FractalSphereByGuil\FractalSphereByGuil\FractalSphereByGuil.csproj">
+      <Project>{14ab7ab0-7612-4026-98f6-ebbae5cdf750}</Project>
+      <Name>FractalSphereByGuil</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FuturisticDoorKnobByDiLemming\FuturisticDoorKnobByDiLemming\FuturisticDoorKnobByDiLemming.csproj">
+      <Project>{74d9bc3a-e8e1-427c-ad2b-4bccc4789fbe}</Project>
+      <Name>FuturisticDoorKnobByDiLemming</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\ChromeShaderToyInfiniteRepetitionBySsdsa\ChromeShaderToyInfiniteRepetitionBySsdsa\ChromeShaderToyInfiniteRepetitionBySsdsa.csproj">
+      <Project>{30aa2be2-d946-4d99-8e4f-9bae113535b7}</Project>
+      <Name>ChromeShaderToyInfiniteRepetitionBySsdsa</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\IceLakeByXor\IceLakeByXor\IceLakeByXor.csproj">
+      <Project>{7e2e2eb0-d1b1-4006-a7d5-f99ad2f1e03f}</Project>
+      <Name>IceLakeByXor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\IcyMoonByDr2\IcyMoonByDr2\IcyMoonByDr2.csproj">
+      <Project>{6893d375-cfdb-4a26-af7a-593bc8f9662c}</Project>
+      <Name>IcyMoonByDr2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\IkaChanBy301\IkaChanBy301\IkaChanBy301.csproj">
+      <Project>{d27c8a98-70a7-49e5-92c7-ab8d005bb17c}</Project>
+      <Name>IkaChanBy301</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\IKSolverByIq\IKSolverByIq\IKSolverByIq.csproj">
+      <Project>{95cebf37-5c29-4995-bf80-1808f26da3ce}</Project>
+      <Name>IKSolverByIq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\ImpactByCabbibo\ImpactByCabbibo\ImpactByCabbibo.csproj">
+      <Project>{652fbc14-f375-46bc-bb70-b106d6fa790a}</Project>
+      <Name>ImpactByCabbibo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\ImpactTextTestByCabbibo\ImpactTextTestByCabbibo\ImpactTextTestByCabbibo.csproj">
+      <Project>{9b5d2328-2c28-4bfb-8c18-3d11aa7cc2a0}</Project>
+      <Name>ImpactTextTestByCabbibo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\InputMouseByIq\InputMouseByIq\InputMouseByIq.csproj">
+      <Project>{3ef7b175-1c60-4938-bfa4-2b5b0a56e56c}</Project>
+      <Name>InputMouseByIq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\InputTimeByIq\InputTimeByIq\InputTimeByIq.csproj">
+      <Project>{0f9135b9-3dac-4aca-968b-4ec4fc05bfdf}</Project>
+      <Name>InputTimeByIq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\InterleavedGradientNoiseByAlgorithm\InterleavedGradientNoiseByAlgorithm\InterleavedGradientNoiseByAlgorithm.csproj">
+      <Project>{1a23708f-e51b-46f5-9b63-30c081d5d511}</Project>
+      <Name>InterleavedGradientNoiseByAlgorithm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\InvadersByIapafoto\InvadersByIapafoto\InvadersByIapafoto.csproj">
+      <Project>{94cce843-5a34-4687-a985-03ff3ce2dbd1}</Project>
+      <Name>InvadersByIapafoto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\InvasionByProtarget\InvasionByProtarget\InvasionByProtarget.csproj">
+      <Project>{e9344bd2-b8e3-42dd-a039-a552f0960ec7}</Project>
+      <Name>InvasionByProtarget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\InversionMachineByKali\InversionMachineByKali\InversionMachineByKali.csproj">
+      <Project>{85690caa-b7d2-4b73-b50b-4a73367160f6}</Project>
+      <Name>InversionMachineByKali</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\i\IslandByVanburgler\IslandByVanburgler\IslandByVanburgler.csproj">
+      <Project>{5839091d-de7f-42e8-a128-22df04679ce6}</Project>
+      <Name>IslandByVanburgler</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /AssociateDriveForChrome:A</PostBuildEvent>
+    <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
+		            </PreBuildEvent>
+  </PropertyGroup>
+</Project>
