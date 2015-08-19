@@ -41,21 +41,6 @@ namespace ChromeShaderToyPrograms
 			// can we have alt-tab pip ?
 
 
-			
-			#region /e/
-			["ChromeShaderToyEdgeAAByTrisomie"] = () => new ChromeShaderToyEdgeAAByTrisomie.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyEiffieBallsByEiffie"] = () => new ChromeShaderToyEiffieBallsByEiffie.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyEiffieBox"] = () => new ChromeShaderToyEiffieBox.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyExplosionByGreen"] = () => new ChromeShaderToyExplosionByGreen.Shaders.ProgramFragmentShader(),
-			["EasterEggByNervus"] = () => new EasterEggByNervus.Shaders.ProgramFragmentShader(),
-			["EffusingLavaByNexor"] = () => new EffusingLavaByNexor.Shaders.ProgramFragmentShader(),
-			["ElectroPrimByAlex"] = () => new ElectroPrimByAlex.Shaders.ProgramFragmentShader(),
-			["EllingtonVisitsShaderToyByMPlanck"] = () => new EllingtonVisitsShaderToyByMPlanck.Shaders.ProgramFragmentShader(),
-			["EscherPlanariaByMattz"] = () => new EscherPlanariaByMattz.Shaders.ProgramFragmentShader(),
-			["ExovoidLogoByRoberto"] = () => new ExovoidLogoByRoberto.Shaders.ProgramFragmentShader(),
-			#endregion
-
-
 			#region /g/
 			["ChromeShaderToyGmetaballsByGermangb"] = () => new ChromeShaderToyGmetaballsByGermangb.Shaders.ProgramFragmentShader(),
 			["ChromeShaderToyGlassPolyhedronByNrx"] = () => new ChromeShaderToyGlassPolyhedronByNrx.Shaders.ProgramFragmentShader(),
