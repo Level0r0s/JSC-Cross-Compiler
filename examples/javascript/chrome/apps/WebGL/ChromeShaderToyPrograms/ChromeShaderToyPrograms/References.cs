@@ -51,12 +51,7 @@ namespace ChromeShaderToyPrograms
 			["JusterBeaverByMovax"] = () => new JusterBeaverByMovax.Shaders.ProgramFragmentShader(),
 			#endregion
 
-			#region /k/
-			["ChromeShaderToyKajastusByMarken"] = () => new ChromeShaderToyKajastusByMarken.Shaders.ProgramFragmentShader(),
-			["KalizylByBergi"] = () => new KalizylByBergi.Shaders.ProgramFragmentShader(),
-			["KMoonByKali"] = () => new KMoonByKali.Shaders.ProgramFragmentShader(),
-			#endregion
-
+		
 
 
 			["ChromeShaderToyQuadraticBezierByMattdesl"] = () => new ChromeShaderToyQuadraticBezierByMattdesl.Shaders.ProgramFragmentShader(),

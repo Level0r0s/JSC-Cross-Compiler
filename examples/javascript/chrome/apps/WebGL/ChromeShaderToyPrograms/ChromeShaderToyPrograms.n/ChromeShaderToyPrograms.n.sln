@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyPrograms.n", "ChromeShaderToyPrograms.n.csproj", "{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyNeonParallaxByNimitz", "..\..\synergy\n\ChromeShaderToyNeonParallaxByNimitz\ChromeShaderToyNeonParallaxByNimitz\ChromeShaderToyNeonParallaxByNimitz.csproj", "{0A5C1BDB-3347-4446-94B2-15949B9438CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyNoiseDistributionsByHornet", "..\..\synergy\n\ChromeShaderToyNoiseDistributionsByHornet\ChromeShaderToyNoiseDistributionsByHornet\ChromeShaderToyNoiseDistributionsByHornet.csproj", "{FFFC6E32-ED36-479D-A1ED-9C315361EFF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoTubesByTrisomie", "..\..\synergy\n\NanoTubesByTrisomie\NanoTubesByTrisomie\NanoTubesByTrisomie.csproj", "{56A6F117-718A-4BA2-AE23-443F98B3DA0D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReferences", "ByReferences", "{E631899C-69BB-4B59-9C7C-BF7018201955}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeptunianByEspitz", "..\..\synergy\n\NeptunianByEspitz\NeptunianByEspitz\NeptunianByEspitz.csproj", "{470407BC-7D8E-40AC-ADD0-95D160F6F933}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSAEyeballByEiffie", "..\..\synergy\n\NSAEyeballByEiffie\NSAEyeballByEiffie\NSAEyeballByEiffie.csproj", "{F8D3C5D3-3E00-4857-88A3-3D24EFBDF9D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumbersByPMalin", "..\..\synergy\n\NumbersByPMalin\NumbersByPMalin\NumbersByPMalin.csproj", "{54A8AC0D-B5F1-4425-B9E4-7018D766E247}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.ActiveCfg = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.Build.0 = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.ActiveCfg = Release|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.Build.0 = Release|x86
+		{0A5C1BDB-3347-4446-94B2-15949B9438CB}.Debug|x86.ActiveCfg = Debug|x86
+		{0A5C1BDB-3347-4446-94B2-15949B9438CB}.Debug|x86.Build.0 = Debug|x86
+		{0A5C1BDB-3347-4446-94B2-15949B9438CB}.Release|x86.ActiveCfg = Release|x86
+		{0A5C1BDB-3347-4446-94B2-15949B9438CB}.Release|x86.Build.0 = Release|x86
+		{FFFC6E32-ED36-479D-A1ED-9C315361EFF1}.Debug|x86.ActiveCfg = Debug|x86
+		{FFFC6E32-ED36-479D-A1ED-9C315361EFF1}.Debug|x86.Build.0 = Debug|x86
+		{FFFC6E32-ED36-479D-A1ED-9C315361EFF1}.Release|x86.ActiveCfg = Release|x86
+		{FFFC6E32-ED36-479D-A1ED-9C315361EFF1}.Release|x86.Build.0 = Release|x86
+		{56A6F117-718A-4BA2-AE23-443F98B3DA0D}.Debug|x86.ActiveCfg = Debug|x86
+		{56A6F117-718A-4BA2-AE23-443F98B3DA0D}.Debug|x86.Build.0 = Debug|x86
+		{56A6F117-718A-4BA2-AE23-443F98B3DA0D}.Release|x86.ActiveCfg = Release|x86
+		{56A6F117-718A-4BA2-AE23-443F98B3DA0D}.Release|x86.Build.0 = Release|x86
+		{470407BC-7D8E-40AC-ADD0-95D160F6F933}.Debug|x86.ActiveCfg = Debug|x86
+		{470407BC-7D8E-40AC-ADD0-95D160F6F933}.Debug|x86.Build.0 = Debug|x86
+		{470407BC-7D8E-40AC-ADD0-95D160F6F933}.Release|x86.ActiveCfg = Release|x86
+		{470407BC-7D8E-40AC-ADD0-95D160F6F933}.Release|x86.Build.0 = Release|x86
+		{F8D3C5D3-3E00-4857-88A3-3D24EFBDF9D9}.Debug|x86.ActiveCfg = Debug|x86
+		{F8D3C5D3-3E00-4857-88A3-3D24EFBDF9D9}.Debug|x86.Build.0 = Debug|x86
+		{F8D3C5D3-3E00-4857-88A3-3D24EFBDF9D9}.Release|x86.ActiveCfg = Release|x86
+		{F8D3C5D3-3E00-4857-88A3-3D24EFBDF9D9}.Release|x86.Build.0 = Release|x86
+		{54A8AC0D-B5F1-4425-B9E4-7018D766E247}.Debug|x86.ActiveCfg = Debug|x86
+		{54A8AC0D-B5F1-4425-B9E4-7018D766E247}.Debug|x86.Build.0 = Debug|x86
+		{54A8AC0D-B5F1-4425-B9E4-7018D766E247}.Release|x86.ActiveCfg = Release|x86
+		{54A8AC0D-B5F1-4425-B9E4-7018D766E247}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0A5C1BDB-3347-4446-94B2-15949B9438CB} = {E631899C-69BB-4B59-9C7C-BF7018201955}
+		{FFFC6E32-ED36-479D-A1ED-9C315361EFF1} = {E631899C-69BB-4B59-9C7C-BF7018201955}
+		{56A6F117-718A-4BA2-AE23-443F98B3DA0D} = {E631899C-69BB-4B59-9C7C-BF7018201955}
+		{470407BC-7D8E-40AC-ADD0-95D160F6F933} = {E631899C-69BB-4B59-9C7C-BF7018201955}
+		{F8D3C5D3-3E00-4857-88A3-3D24EFBDF9D9} = {E631899C-69BB-4B59-9C7C-BF7018201955}
+		{54A8AC0D-B5F1-4425-B9E4-7018D766E247} = {E631899C-69BB-4B59-9C7C-BF7018201955}
+	EndGlobalSection
+EndGlobal
