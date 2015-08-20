@@ -29,14 +29,18 @@ namespace ChromeWebGLFrameBufferToSquare
 	/// </summary>
 	public sealed class Application
 	{
-		/* This example will be a port of http://learningwebgl.com/blog/?p=28 by Giles
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150820
+
+
+
+        /* This example will be a port of http://learningwebgl.com/blog/?p=28 by Giles
          * 
          * 01. Created a new project of type Web Application
          * 02. initGL
          * 03. initShaders
          */
 
-		public readonly ApplicationWebService service = new ApplicationWebService();
+        public readonly ApplicationWebService service = new ApplicationWebService();
 
 		public bool IsDisposed;
 

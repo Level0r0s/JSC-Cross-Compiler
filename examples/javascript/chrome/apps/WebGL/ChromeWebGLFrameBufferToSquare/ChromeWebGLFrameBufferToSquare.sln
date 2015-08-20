@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22609.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeWebGLFrameBufferToSquare", "ChromeWebGLFrameBufferToSquare\ChromeWebGLFrameBufferToSquare.csproj", "{25011337-6813-4216-95E9-2B9BE5EB4611}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyColumns", "..\ChromeShaderToyColumns\ChromeShaderToyColumns\ChromeShaderToyColumns.csproj", "{EB93B081-4EDC-41A2-85B3-0487062617CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyColumns", "..\ChromeShaderToyColumns\ChromeShaderToyColumns\ChromeShaderToyColumns.csproj", "{7A012980-513C-4B88-AB7F-BA67F52A10D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,12 +18,12 @@ Global
 		{25011337-6813-4216-95E9-2B9BE5EB4611}.Debug|x86.Build.0 = Debug|x86
 		{25011337-6813-4216-95E9-2B9BE5EB4611}.Release|x86.ActiveCfg = Release|x86
 		{25011337-6813-4216-95E9-2B9BE5EB4611}.Release|x86.Build.0 = Release|x86
-		{EB93B081-4EDC-41A2-85B3-0487062617CC}.Assets|x86.ActiveCfg = Release|x86
-		{EB93B081-4EDC-41A2-85B3-0487062617CC}.Assets|x86.Build.0 = Release|x86
-		{EB93B081-4EDC-41A2-85B3-0487062617CC}.Debug|x86.ActiveCfg = Debug|x86
-		{EB93B081-4EDC-41A2-85B3-0487062617CC}.Debug|x86.Build.0 = Debug|x86
-		{EB93B081-4EDC-41A2-85B3-0487062617CC}.Release|x86.ActiveCfg = Release|x86
-		{EB93B081-4EDC-41A2-85B3-0487062617CC}.Release|x86.Build.0 = Release|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Assets|x86.ActiveCfg = Release|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Assets|x86.Build.0 = Release|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Debug|x86.ActiveCfg = Debug|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Debug|x86.Build.0 = Debug|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Release|x86.ActiveCfg = Release|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

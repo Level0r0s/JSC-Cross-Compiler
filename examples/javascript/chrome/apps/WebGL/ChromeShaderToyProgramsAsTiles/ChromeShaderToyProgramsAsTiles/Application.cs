@@ -110,7 +110,7 @@ namespace ChromeShaderToyProgramsAsTiles
 						// 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
 						Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
 
-						new chrome.Notification(title: "ChromeUDPSendAsync");
+						new chrome.Notification(title: "ChromeShaderToyProgramsAsTiles");
 
 						var xappwindow = await chrome.app.window.create(
 							   Native.document.location.pathname, options: null

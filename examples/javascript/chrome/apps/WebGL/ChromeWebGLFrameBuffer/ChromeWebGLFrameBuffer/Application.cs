@@ -25,11 +25,10 @@ namespace ChromeWebGLFrameBuffer
     using gl = ScriptCoreLib.JavaScript.WebGL.WebGLRenderingContext;
 
     [Description("This type will run as JavaScript.")]
-    public sealed class Application
+    public sealed class Application : ApplicationWebService
     {
         // based on http://learningwebgl.com/lessons/lesson16/index.html
 
-        public readonly ApplicationWebService service = new ApplicationWebService();
 
 
         public Action Dispose;
@@ -782,6 +781,7 @@ namespace ChromeWebGLFrameBuffer
                                 }
                                 lastTime = timeNow;
 
+                                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150820
 
                                 #region FRAMEBUFFER
                                 gl.bindFramebuffer(gl.FRAMEBUFFER, rttFramebuffer);

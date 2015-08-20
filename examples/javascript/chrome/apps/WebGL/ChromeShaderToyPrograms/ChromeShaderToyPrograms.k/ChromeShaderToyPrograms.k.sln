@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyPrograms.k", "ChromeShaderToyPrograms.k.csproj", "{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReferences", "ByReferences", "{04B21FF2-FC8D-43A6-AE77-2FAC5E087704}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyKajastusByMarken", "..\..\synergy\k\ChromeShaderToyKajastusByMarken\ChromeShaderToyKajastusByMarken\ChromeShaderToyKajastusByMarken.csproj", "{B94FB215-63FE-4652-A13A-BA2B49D69F0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KalizylByBergi", "..\..\synergy\k\KalizylByBergi\KalizylByBergi\KalizylByBergi.csproj", "{777E77BC-CEFB-4E21-89B5-9929DD79BA62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMoonByKali", "..\..\synergy\k\KMoonByKali\KMoonByKali\KMoonByKali.csproj", "{D73739D2-D2E3-4D75-B645-E93A67AEE4EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.ActiveCfg = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.Build.0 = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.ActiveCfg = Release|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.Build.0 = Release|x86
+		{B94FB215-63FE-4652-A13A-BA2B49D69F0C}.Debug|x86.ActiveCfg = Debug|x86
+		{B94FB215-63FE-4652-A13A-BA2B49D69F0C}.Debug|x86.Build.0 = Debug|x86
+		{B94FB215-63FE-4652-A13A-BA2B49D69F0C}.Release|x86.ActiveCfg = Release|x86
+		{B94FB215-63FE-4652-A13A-BA2B49D69F0C}.Release|x86.Build.0 = Release|x86
+		{777E77BC-CEFB-4E21-89B5-9929DD79BA62}.Debug|x86.ActiveCfg = Debug|x86
+		{777E77BC-CEFB-4E21-89B5-9929DD79BA62}.Debug|x86.Build.0 = Debug|x86
+		{777E77BC-CEFB-4E21-89B5-9929DD79BA62}.Release|x86.ActiveCfg = Release|x86
+		{777E77BC-CEFB-4E21-89B5-9929DD79BA62}.Release|x86.Build.0 = Release|x86
+		{D73739D2-D2E3-4D75-B645-E93A67AEE4EB}.Debug|x86.ActiveCfg = Debug|x86
+		{D73739D2-D2E3-4D75-B645-E93A67AEE4EB}.Debug|x86.Build.0 = Debug|x86
+		{D73739D2-D2E3-4D75-B645-E93A67AEE4EB}.Release|x86.ActiveCfg = Release|x86
+		{D73739D2-D2E3-4D75-B645-E93A67AEE4EB}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B94FB215-63FE-4652-A13A-BA2B49D69F0C} = {04B21FF2-FC8D-43A6-AE77-2FAC5E087704}
+		{777E77BC-CEFB-4E21-89B5-9929DD79BA62} = {04B21FF2-FC8D-43A6-AE77-2FAC5E087704}
+		{D73739D2-D2E3-4D75-B645-E93A67AEE4EB} = {04B21FF2-FC8D-43A6-AE77-2FAC5E087704}
+	EndGlobalSection
+EndGlobal
