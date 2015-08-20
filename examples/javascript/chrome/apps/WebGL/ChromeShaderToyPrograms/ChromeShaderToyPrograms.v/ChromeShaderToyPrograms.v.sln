@@ -1,0 +1,110 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyPrograms.v", "ChromeShaderToyPrograms.v.csproj", "{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{5A94E394-5DBD-43CB-ADAD-161B6F16D893}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyVornoiCubeMapByBenito", "..\..\synergy\v\ChromeShaderToyVornoiCubeMapByBenito\ChromeShaderToyVornoiCubeMapByBenito\ChromeShaderToyVornoiCubeMapByBenito.csproj", "{57EF1770-518A-4313-AD56-FCEF1A20F5C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyVRCardboardGrid", "..\..\synergy\v\ChromeShaderToyVRCardboardGrid\ChromeShaderToyVRCardboardGrid\ChromeShaderToyVRCardboardGrid.csproj", "{6549676F-7D04-49C4-B2F5-23AC901D4EB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValueToBitArrayByNikos", "..\..\synergy\v\ValueToBitArrayByNikos\ValueToBitArrayByNikos\ValueToBitArrayByNikos.csproj", "{43E05CE4-1AE5-47CC-9CB7-3288CA8DBFF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValveNoiseByImpossible", "..\..\synergy\v\ValveNoiseByImpossible\ValveNoiseByImpossible\ValveNoiseByImpossible.csproj", "{9385EC71-C8B2-4D2B-BC75-C66260B97F1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisibleClockByDr2", "..\..\synergy\v\VisibleClockByDr2\VisibleClockByDr2\VisibleClockByDr2.csproj", "{B55409C5-3972-4C1B-85D5-3E3D5F060355}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolumetricHelicesByNimitz", "..\..\synergy\v\VolumetricHelicesByNimitz\VolumetricHelicesByNimitz\VolumetricHelicesByNimitz.csproj", "{B60F7619-772B-4796-9CDC-FAC6491E0883}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolumetricRaycastingByXt95", "..\..\synergy\v\VolumetricRaycastingByXt95\VolumetricRaycastingByXt95\VolumetricRaycastingByXt95.csproj", "{37E5348B-ACDF-41BB-80EE-F8EB75682B01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoxelPacManByNrx", "..\..\synergy\v\VoxelPacManByNrx\VoxelPacManByNrx\VoxelPacManByNrx.csproj", "{A6E686CF-56CD-4533-9A2C-7E759CA71E33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoxelSaturnByGaz", "..\..\synergy\v\VoxelSaturnByGaz\VoxelSaturnByGaz\VoxelSaturnByGaz.csproj", "{FBB3D8B5-0783-4E85-A4B4-AE0512D3CE5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoxelTyreByHoskins", "..\..\synergy\v\VoxelTyreByHoskins\VoxelTyreByHoskins\VoxelTyreByHoskins.csproj", "{EAF7A7C7-7697-454D-AED5-2C5B316F71B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRMazeByNrx", "..\..\synergy\v\VRMazeByNrx\VRMazeByNrx\VRMazeByNrx.csproj", "{D1009903-0589-48C0-8D69-455D19670F93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRTestSceneByRaven", "..\..\synergy\v\VRTestSceneByRaven\VRTestSceneByRaven\VRTestSceneByRaven.csproj", "{EE715CE5-6ED9-433D-A0EE-0C45C5125D3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.ActiveCfg = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.Build.0 = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.ActiveCfg = Release|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.Build.0 = Release|x86
+		{57EF1770-518A-4313-AD56-FCEF1A20F5C2}.Debug|x86.ActiveCfg = Debug|x86
+		{57EF1770-518A-4313-AD56-FCEF1A20F5C2}.Debug|x86.Build.0 = Debug|x86
+		{57EF1770-518A-4313-AD56-FCEF1A20F5C2}.Release|x86.ActiveCfg = Release|x86
+		{57EF1770-518A-4313-AD56-FCEF1A20F5C2}.Release|x86.Build.0 = Release|x86
+		{6549676F-7D04-49C4-B2F5-23AC901D4EB3}.Debug|x86.ActiveCfg = Debug|x86
+		{6549676F-7D04-49C4-B2F5-23AC901D4EB3}.Debug|x86.Build.0 = Debug|x86
+		{6549676F-7D04-49C4-B2F5-23AC901D4EB3}.Release|x86.ActiveCfg = Release|x86
+		{6549676F-7D04-49C4-B2F5-23AC901D4EB3}.Release|x86.Build.0 = Release|x86
+		{43E05CE4-1AE5-47CC-9CB7-3288CA8DBFF0}.Debug|x86.ActiveCfg = Debug|x86
+		{43E05CE4-1AE5-47CC-9CB7-3288CA8DBFF0}.Debug|x86.Build.0 = Debug|x86
+		{43E05CE4-1AE5-47CC-9CB7-3288CA8DBFF0}.Release|x86.ActiveCfg = Release|x86
+		{43E05CE4-1AE5-47CC-9CB7-3288CA8DBFF0}.Release|x86.Build.0 = Release|x86
+		{9385EC71-C8B2-4D2B-BC75-C66260B97F1C}.Debug|x86.ActiveCfg = Debug|x86
+		{9385EC71-C8B2-4D2B-BC75-C66260B97F1C}.Debug|x86.Build.0 = Debug|x86
+		{9385EC71-C8B2-4D2B-BC75-C66260B97F1C}.Release|x86.ActiveCfg = Release|x86
+		{9385EC71-C8B2-4D2B-BC75-C66260B97F1C}.Release|x86.Build.0 = Release|x86
+		{B55409C5-3972-4C1B-85D5-3E3D5F060355}.Debug|x86.ActiveCfg = Debug|x86
+		{B55409C5-3972-4C1B-85D5-3E3D5F060355}.Debug|x86.Build.0 = Debug|x86
+		{B55409C5-3972-4C1B-85D5-3E3D5F060355}.Release|x86.ActiveCfg = Release|x86
+		{B55409C5-3972-4C1B-85D5-3E3D5F060355}.Release|x86.Build.0 = Release|x86
+		{B60F7619-772B-4796-9CDC-FAC6491E0883}.Debug|x86.ActiveCfg = Debug|x86
+		{B60F7619-772B-4796-9CDC-FAC6491E0883}.Debug|x86.Build.0 = Debug|x86
+		{B60F7619-772B-4796-9CDC-FAC6491E0883}.Release|x86.ActiveCfg = Release|x86
+		{B60F7619-772B-4796-9CDC-FAC6491E0883}.Release|x86.Build.0 = Release|x86
+		{37E5348B-ACDF-41BB-80EE-F8EB75682B01}.Debug|x86.ActiveCfg = Debug|x86
+		{37E5348B-ACDF-41BB-80EE-F8EB75682B01}.Debug|x86.Build.0 = Debug|x86
+		{37E5348B-ACDF-41BB-80EE-F8EB75682B01}.Release|x86.ActiveCfg = Release|x86
+		{37E5348B-ACDF-41BB-80EE-F8EB75682B01}.Release|x86.Build.0 = Release|x86
+		{A6E686CF-56CD-4533-9A2C-7E759CA71E33}.Debug|x86.ActiveCfg = Debug|x86
+		{A6E686CF-56CD-4533-9A2C-7E759CA71E33}.Debug|x86.Build.0 = Debug|x86
+		{A6E686CF-56CD-4533-9A2C-7E759CA71E33}.Release|x86.ActiveCfg = Release|x86
+		{A6E686CF-56CD-4533-9A2C-7E759CA71E33}.Release|x86.Build.0 = Release|x86
+		{FBB3D8B5-0783-4E85-A4B4-AE0512D3CE5F}.Debug|x86.ActiveCfg = Debug|x86
+		{FBB3D8B5-0783-4E85-A4B4-AE0512D3CE5F}.Debug|x86.Build.0 = Debug|x86
+		{FBB3D8B5-0783-4E85-A4B4-AE0512D3CE5F}.Release|x86.ActiveCfg = Release|x86
+		{FBB3D8B5-0783-4E85-A4B4-AE0512D3CE5F}.Release|x86.Build.0 = Release|x86
+		{EAF7A7C7-7697-454D-AED5-2C5B316F71B8}.Debug|x86.ActiveCfg = Debug|x86
+		{EAF7A7C7-7697-454D-AED5-2C5B316F71B8}.Debug|x86.Build.0 = Debug|x86
+		{EAF7A7C7-7697-454D-AED5-2C5B316F71B8}.Release|x86.ActiveCfg = Release|x86
+		{EAF7A7C7-7697-454D-AED5-2C5B316F71B8}.Release|x86.Build.0 = Release|x86
+		{D1009903-0589-48C0-8D69-455D19670F93}.Debug|x86.ActiveCfg = Debug|x86
+		{D1009903-0589-48C0-8D69-455D19670F93}.Debug|x86.Build.0 = Debug|x86
+		{D1009903-0589-48C0-8D69-455D19670F93}.Release|x86.ActiveCfg = Release|x86
+		{D1009903-0589-48C0-8D69-455D19670F93}.Release|x86.Build.0 = Release|x86
+		{EE715CE5-6ED9-433D-A0EE-0C45C5125D3D}.Debug|x86.ActiveCfg = Debug|x86
+		{EE715CE5-6ED9-433D-A0EE-0C45C5125D3D}.Debug|x86.Build.0 = Debug|x86
+		{EE715CE5-6ED9-433D-A0EE-0C45C5125D3D}.Release|x86.ActiveCfg = Release|x86
+		{EE715CE5-6ED9-433D-A0EE-0C45C5125D3D}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{57EF1770-518A-4313-AD56-FCEF1A20F5C2} = {5A94E394-5DBD-43CB-ADAD-161B6F16D893}
+		{6549676F-7D04-49C4-B2F5-23AC901D4EB3} = {5A94E394-5DBD-43CB-ADAD-161B6F16D893}
+		{43E05CE4-1AE5-47CC-9CB7-3288CA8DBFF0} = {5A94E394-5DBD-43CB-ADAD-161B6F16D893}
+		{9385EC71-C8B2-4D2B-BC75-C66260B97F1C} = {5A94E394-5DBD-43CB-ADAD-161B6F16D893}
+		{B55409C5-3972-4C1B-85D5-3E3D5F060355} = {5A94E394-5DBD-43CB-ADAD-161B6F16D893}
+		{B60F7619-772B-4796-9CDC-FAC6491E0883} = {5A94E394-5DBD-43CB-ADAD-161B6F16D893}
+		{37E5348B-ACDF-41BB-80EE-F8EB75682B01} = {5A94E394-5DBD-43CB-ADAD-161B6F16D893}
+		{A6E686CF-56CD-4533-9A2C-7E759CA71E33} = {5A94E394-5DBD-43CB-ADAD-161B6F16D893}
+		{FBB3D8B5-0783-4E85-A4B4-AE0512D3CE5F} = {5A94E394-5DBD-43CB-ADAD-161B6F16D893}
+		{EAF7A7C7-7697-454D-AED5-2C5B316F71B8} = {5A94E394-5DBD-43CB-ADAD-161B6F16D893}
+		{D1009903-0589-48C0-8D69-455D19670F93} = {5A94E394-5DBD-43CB-ADAD-161B6F16D893}
+		{EE715CE5-6ED9-433D-A0EE-0C45C5125D3D} = {5A94E394-5DBD-43CB-ADAD-161B6F16D893}
+	EndGlobalSection
+EndGlobal

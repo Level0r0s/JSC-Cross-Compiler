@@ -115,23 +115,6 @@ namespace ChromeShaderToyPrograms
 			["UglyBrickByPsykotic"] = () => new UglyBrickByPsykotic.Shaders.ProgramFragmentShader(),
 
 
-			#region /v/
-			["ChromeShaderToyVornoiCubeMapByBenito"] = () => new ChromeShaderToyVornoiCubeMapByBenito.Shaders.ProgramFragmentShader(),
-			["ValueToBitArrayByNikos"] = () => new ValueToBitArrayByNikos.Shaders.ProgramFragmentShader(),
-			["ValveNoiseByImpossible"] = () => new ValveNoiseByImpossible.Shaders.ProgramFragmentShader(),
-			["VisibleClockByDr2"] = () => new VisibleClockByDr2.Shaders.ProgramFragmentShader(),
-			["VolumetricHelicesByNimitz"] = () => new VolumetricHelicesByNimitz.Shaders.ProgramFragmentShader(),
-			["VolumetricRaycastingByXt95"] = () => new VolumetricRaycastingByXt95.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyVRCardboardGrid"] = () => new ChromeShaderToyVRCardboardGrid.Shaders.ProgramFragmentShader(),
-			["VoxelPacManByNrx"] = () => new VoxelPacManByNrx.Shaders.ProgramFragmentShader(),
-			["VoxelSaturnByGaz"] = () => new VoxelSaturnByGaz.Shaders.ProgramFragmentShader(),
-			["VoxelTyreByHoskins"] = () => new VoxelTyreByHoskins.Shaders.ProgramFragmentShader(),
-			["VRTestSceneByRaven"] = () => new VRTestSceneByRaven.Shaders.ProgramFragmentShader(),
-			["VRMazeByNrx"] = () => new VRMazeByNrx.Shaders.ProgramFragmentShader(),
-			#endregion
-
-
-
 			["Xor3DAlienLandByXor"] = () => new Xor3DAlienLandByXor.Shaders.ProgramFragmentShader(),
 			["XorMountainsByXor"] = () => new XorMountainsByXor.Shaders.ProgramFragmentShader(),
 			["XorStormByXor"] = () => new XorStormByXor.Shaders.ProgramFragmentShader(),
