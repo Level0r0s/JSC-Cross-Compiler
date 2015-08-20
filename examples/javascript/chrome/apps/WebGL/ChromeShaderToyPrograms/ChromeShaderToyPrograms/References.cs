@@ -57,18 +57,7 @@ namespace ChromeShaderToyPrograms
 			["GyratingGyroscopeByDr2"] = () => new GyratingGyroscopeByDr2.Shaders.ProgramFragmentShader(),
 			#endregion
 
-			#region /h/
-			// alpha! via discard
-			["ChromeShaderToyHardEdgeShadowByGltracy"] = () => new ChromeShaderToyHardEdgeShadowByGltracy.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyHetchyScketchyByXbe"] = () => new ChromeShaderToyHetchyScketchyByXbe.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyHolographicByTdm"] = () => new ChromeShaderToyHolographicByTdm.Shaders.ProgramFragmentShader(),
-			["HalfLife3ByNikos"] = () => new HalfLife3ByNikos.Shaders.ProgramFragmentShader(),
-			["HauntedForest2ByReinder"] = () => new HauntedForest2ByReinder.Shaders.ProgramFragmentShader(),
-			["HeliByAvix"] = () => new HeliByAvix.Shaders.ProgramFragmentShader(),
-			["HexafieldByKevs"] = () => new HexafieldByKevs.Shaders.ProgramFragmentShader(),
-			["HypercubeByElias"] = () => new HypercubeByElias.Shaders.ProgramFragmentShader(),
-			#endregion
-
+		
 
 
 			#region /j/
