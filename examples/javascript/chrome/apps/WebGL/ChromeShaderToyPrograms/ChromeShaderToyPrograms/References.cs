@@ -59,19 +59,6 @@ namespace ChromeShaderToyPrograms
 
 
 
-		
-
-			#region /n/
-			["ChromeShaderToyNeonParallaxByNimitz"] = () => new ChromeShaderToyNeonParallaxByNimitz.Shaders.ProgramFragmentShader(),
-			["ChromeShaderToyNoiseDistributionsByHornet"] = () => new ChromeShaderToyNoiseDistributionsByHornet.Shaders.ProgramFragmentShader(),
-			["NanoTubesByTrisomie"] = () => new NanoTubesByTrisomie.Shaders.ProgramFragmentShader(),
-			["NeptunianByEspitz"] = () => new NeptunianByEspitz.Shaders.ProgramFragmentShader(),
-			["NSAEyeballByEiffie"] = () => new NSAEyeballByEiffie.Shaders.ProgramFragmentShader(),
-			["NumbersByPMalin"] = () => new NumbersByPMalin.Shaders.ProgramFragmentShader(),
-			#endregion
-
-
-
 			["ChromeShaderToyQuadraticBezierByMattdesl"] = () => new ChromeShaderToyQuadraticBezierByMattdesl.Shaders.ProgramFragmentShader(),
 			["QuadraticBezierByIq"] = () => new QuadraticBezierByIq.Shaders.ProgramFragmentShader(),
 
