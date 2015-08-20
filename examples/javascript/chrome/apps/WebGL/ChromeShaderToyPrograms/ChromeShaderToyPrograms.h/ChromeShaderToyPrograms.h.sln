@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyPrograms.h", "ChromeShaderToyPrograms.h.csproj", "{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{366717F4-960C-4366-A969-365213D0FFFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyHardEdgeShadowByGltracy", "..\..\synergy\h\ChromeShaderToyHardEdgeShadowByGltracy\ChromeShaderToyHardEdgeShadowByGltracy\ChromeShaderToyHardEdgeShadowByGltracy.csproj", "{60199C63-FBE9-4D56-949D-DABFEC5AD181}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyHetchyScketchyByXbe", "..\..\synergy\h\ChromeShaderToyHetchyScketchyByXbe\ChromeShaderToyHetchyScketchyByXbe\ChromeShaderToyHetchyScketchyByXbe.csproj", "{7BAB9333-88DD-4994-BB02-12E9C389F89C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyHolographicByTdm", "..\..\synergy\h\ChromeShaderToyHolographicByTdm\ChromeShaderToyHolographicByTdm\ChromeShaderToyHolographicByTdm.csproj", "{B51DBBF6-44B8-4829-8499-ED47E2019F03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HalfLife3ByNikos", "..\..\synergy\h\HalfLife3ByNikos\HalfLife3ByNikos\HalfLife3ByNikos.csproj", "{E9781C75-C929-4903-A43F-B6F47DAB58E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HauntedForest2ByReinder", "..\..\synergy\h\HauntedForest2ByReinder\HauntedForest2ByReinder\HauntedForest2ByReinder.csproj", "{2FC3E8D6-2238-413F-80FE-87F3C6C2A281}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeliByAvix", "..\..\synergy\h\HeliByAvix\HeliByAvix\HeliByAvix.csproj", "{77856C0B-BEDD-4C5D-A972-073131D6A8A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexafieldByKevs", "..\..\synergy\h\HexafieldByKevs\HexafieldByKevs\HexafieldByKevs.csproj", "{0C2629DF-FD1E-4AE5-93E5-2F1308FD42FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HypercubeByElias", "..\..\synergy\h\HypercubeByElias\HypercubeByElias\HypercubeByElias.csproj", "{34E084EB-B631-4515-A346-02D5659A5970}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.ActiveCfg = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.Build.0 = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.ActiveCfg = Release|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.Build.0 = Release|x86
+		{60199C63-FBE9-4D56-949D-DABFEC5AD181}.Debug|x86.ActiveCfg = Debug|x86
+		{60199C63-FBE9-4D56-949D-DABFEC5AD181}.Debug|x86.Build.0 = Debug|x86
+		{60199C63-FBE9-4D56-949D-DABFEC5AD181}.Release|x86.ActiveCfg = Release|x86
+		{60199C63-FBE9-4D56-949D-DABFEC5AD181}.Release|x86.Build.0 = Release|x86
+		{7BAB9333-88DD-4994-BB02-12E9C389F89C}.Debug|x86.ActiveCfg = Debug|x86
+		{7BAB9333-88DD-4994-BB02-12E9C389F89C}.Debug|x86.Build.0 = Debug|x86
+		{7BAB9333-88DD-4994-BB02-12E9C389F89C}.Release|x86.ActiveCfg = Release|x86
+		{7BAB9333-88DD-4994-BB02-12E9C389F89C}.Release|x86.Build.0 = Release|x86
+		{B51DBBF6-44B8-4829-8499-ED47E2019F03}.Debug|x86.ActiveCfg = Debug|x86
+		{B51DBBF6-44B8-4829-8499-ED47E2019F03}.Debug|x86.Build.0 = Debug|x86
+		{B51DBBF6-44B8-4829-8499-ED47E2019F03}.Release|x86.ActiveCfg = Release|x86
+		{B51DBBF6-44B8-4829-8499-ED47E2019F03}.Release|x86.Build.0 = Release|x86
+		{E9781C75-C929-4903-A43F-B6F47DAB58E6}.Debug|x86.ActiveCfg = Debug|x86
+		{E9781C75-C929-4903-A43F-B6F47DAB58E6}.Debug|x86.Build.0 = Debug|x86
+		{E9781C75-C929-4903-A43F-B6F47DAB58E6}.Release|x86.ActiveCfg = Release|x86
+		{E9781C75-C929-4903-A43F-B6F47DAB58E6}.Release|x86.Build.0 = Release|x86
+		{2FC3E8D6-2238-413F-80FE-87F3C6C2A281}.Debug|x86.ActiveCfg = Debug|x86
+		{2FC3E8D6-2238-413F-80FE-87F3C6C2A281}.Debug|x86.Build.0 = Debug|x86
+		{2FC3E8D6-2238-413F-80FE-87F3C6C2A281}.Release|x86.ActiveCfg = Release|x86
+		{2FC3E8D6-2238-413F-80FE-87F3C6C2A281}.Release|x86.Build.0 = Release|x86
+		{77856C0B-BEDD-4C5D-A972-073131D6A8A4}.Debug|x86.ActiveCfg = Debug|x86
+		{77856C0B-BEDD-4C5D-A972-073131D6A8A4}.Debug|x86.Build.0 = Debug|x86
+		{77856C0B-BEDD-4C5D-A972-073131D6A8A4}.Release|x86.ActiveCfg = Release|x86
+		{77856C0B-BEDD-4C5D-A972-073131D6A8A4}.Release|x86.Build.0 = Release|x86
+		{0C2629DF-FD1E-4AE5-93E5-2F1308FD42FF}.Debug|x86.ActiveCfg = Debug|x86
+		{0C2629DF-FD1E-4AE5-93E5-2F1308FD42FF}.Debug|x86.Build.0 = Debug|x86
+		{0C2629DF-FD1E-4AE5-93E5-2F1308FD42FF}.Release|x86.ActiveCfg = Release|x86
+		{0C2629DF-FD1E-4AE5-93E5-2F1308FD42FF}.Release|x86.Build.0 = Release|x86
+		{34E084EB-B631-4515-A346-02D5659A5970}.Debug|x86.ActiveCfg = Debug|x86
+		{34E084EB-B631-4515-A346-02D5659A5970}.Debug|x86.Build.0 = Debug|x86
+		{34E084EB-B631-4515-A346-02D5659A5970}.Release|x86.ActiveCfg = Release|x86
+		{34E084EB-B631-4515-A346-02D5659A5970}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{60199C63-FBE9-4D56-949D-DABFEC5AD181} = {366717F4-960C-4366-A969-365213D0FFFC}
+		{7BAB9333-88DD-4994-BB02-12E9C389F89C} = {366717F4-960C-4366-A969-365213D0FFFC}
+		{B51DBBF6-44B8-4829-8499-ED47E2019F03} = {366717F4-960C-4366-A969-365213D0FFFC}
+		{E9781C75-C929-4903-A43F-B6F47DAB58E6} = {366717F4-960C-4366-A969-365213D0FFFC}
+		{2FC3E8D6-2238-413F-80FE-87F3C6C2A281} = {366717F4-960C-4366-A969-365213D0FFFC}
+		{77856C0B-BEDD-4C5D-A972-073131D6A8A4} = {366717F4-960C-4366-A969-365213D0FFFC}
+		{0C2629DF-FD1E-4AE5-93E5-2F1308FD42FF} = {366717F4-960C-4366-A969-365213D0FFFC}
+		{34E084EB-B631-4515-A346-02D5659A5970} = {366717F4-960C-4366-A969-365213D0FFFC}
+	EndGlobalSection
+EndGlobal
