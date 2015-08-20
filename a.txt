@@ -4,6 +4,8 @@ jsc sdk
 2012
 2015
 to igonre:
+.suo
+.user
 .vs
 packages
 bin 
