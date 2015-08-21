@@ -18,7 +18,8 @@ namespace FFMPEGInputReindex
             //var storage = @"X:\sdcard\skynet\20150728\tape1\720p";
             //var storage = @"X:\vr\tape1";
             //var storage = @"X:\vr\tape6";
-            var storage = @"X:\vr\tape6daymoon2";
+            //var storage = @"X:\vr\tape6daymoon2";
+            var storage = "x:/vr/tape6stars2";
 
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150801/hostednetwork
 

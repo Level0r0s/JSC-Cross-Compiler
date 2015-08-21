@@ -19,6 +19,8 @@ namespace TestThreadManager
     /// </summary>
     public class ApplicationWebService
     {
+        // "Z:\jsc.svn\core\ScriptCoreLibJava.Web\ScriptCoreLibJava.Web\ScriptCoreLibJava.Web.csproj"
+
         /// <summary>
         /// The static content defined in the HTML file will be update to the dynamic content once application is running.
         /// </summary>

@@ -115,6 +115,9 @@ interface chrome.tabs
 	event static attribute chrome.ChromeEventTarget<int, any> onRemoved;
 	event static attribute chrome.ChromeEventTarget<int, int> onReplaced;
 
+
+
+	// tested by?
 	async static void create(any createProperties, function<chrome.Tab> callback);
 
 	//static extension runtime.Port chrome.tabs.connect(chrome.TabIdInteger tabId, object connectInfo)
@@ -136,6 +139,14 @@ interface chrome.tabs
 
 	// X:\jsc.svn\examples\javascript\chrome\extensions\ChromeExtensionHopToTab\ChromeExtensionHopToTab\Application.cs
 	async static extension void insertCSS(chrome.TabIdInteger tabId, any details, function<any> callback);
+
+
+	// not available within tab itself
+	// https://developer.chrome.com/extensions/tabs
+	// Z:\jsc.svn\examples\javascript\chrome\extensions\ChromeTabsCapture\ChromeTabsCapture\Application.cs
+	//captureVisibleTab − chrome.tabs.captureVisibleTab(integer windowId, object options, function callback)
+	async static extension void captureVisibleTab(any windowId, any options, function<any> callback);
+
 };
 
 
@@ -146,8 +157,13 @@ interface chrome.pageAction
 {
 	event static attribute chrome.ChromeEventTarget<chrome.Tab> onClicked;
 
-	static extension void show(chrome.TabIdInteger tabId);
-	static extension void hide(chrome.TabIdInteger tabId);
+
+// Error: Invocation of form pageAction.show(object) doesn't match definition pageAction.show(integer tabId)
+static extension void show(chrome.TabIdInteger tabId);
+static extension void show(int tabId);
+
+static extension void hide(chrome.TabIdInteger tabId);
+static extension void hide(int tabId);
 
 	static  void setPopup(any details);
 	static  void setIcon(any details, function callback);

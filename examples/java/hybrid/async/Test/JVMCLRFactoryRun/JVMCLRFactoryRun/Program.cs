@@ -68,12 +68,7 @@ namespace JVMCLRFactoryRun
             //{ uu = sync value { ManagedThreadId = 3 } }  { ManagedThreadId = 1 }
             //System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
 
-            //            Implementation not found for type import :
-            //type: System.Threading.Tasks.TaskFactory
-            //method: System.Threading.Tasks.Task`1[TResult] StartNew[TResult](System.Func`1[TResult])
-            //Did you forget to add the [Script] attribute?
-            //Please double check the signature!
-
+  
 
             CLRProgram.CLRMain();
         }

@@ -61,6 +61,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
         //import javax.servlet.http.Cookie;
         //                         ^
 
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201508/20150817
+
 
         //[jsc.internal] UnhandledException:
         //{ FullName = System.InvalidOperationException, InnerException =  }

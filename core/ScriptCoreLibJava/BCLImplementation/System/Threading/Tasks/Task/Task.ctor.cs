@@ -19,6 +19,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
         { 
         }
 
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201508/20150817
+        // Z:\jsc.svn\examples\java\hybrid\async\Test\JVMCLRFactoryRun\JVMCLRFactoryRun\Program.cs
+
         public __Task(Func<TResult> function)
         {
             // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.Run.cs
