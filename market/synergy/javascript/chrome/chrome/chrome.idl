@@ -157,7 +157,8 @@ interface chrome.pageAction
 {
 	event static attribute chrome.ChromeEventTarget<chrome.Tab> onClicked;
 
-
+// Z:\jsc.svn\examples\javascript\chrome\extensions\ChromeTabsCapture\ChromeTabsCapture\Application.cs
+// wtf?
 // Error: Invocation of form pageAction.show(object) doesn't match definition pageAction.show(integer tabId)
 static extension void show(chrome.TabIdInteger tabId);
 static extension void show(int tabId);

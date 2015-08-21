@@ -61,6 +61,8 @@ namespace ChromeTabsCapture
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        private static IHTMLButton b;
+
         // subst a: Z:\jsc.svn\examples\javascript\chrome\extensions\ChromeTabsCapture\ChromeTabsCapture\bin\Debug\staging\ChromeTabsCapture.Application\web
 
 
@@ -71,6 +73,9 @@ namespace ChromeTabsCapture
 
         // jsc should package displayName  the end of the view-source?
         // should we gzip the string lookup?
+
+
+        static List<TabIdInteger> injectOnce = new List<TabIdInteger>();
 
         static Application()
         {
@@ -124,36 +129,47 @@ namespace ChromeTabsCapture
                 // async dont like ref?
                 var r = TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableFromContinuation(continuation);
 
-                // um. now what?
-                // send shadowstate over?
-                // first we have to open a channel
 
-                // do we have our view-source yet?
-                var code = await codetask;
+                if (injectOnce.Contains(that.id))
+                {
+                    Console.WriteLine("HopToChromeTab.VirtualOnCompleted again? " + new { that.id, r.shadowstate.state });
 
-                // 5240ms HopToChromeTab.VirtualOnCompleted {{ id = 449, state = 1, Length = 3232941 }}
-                Console.WriteLine("HopToChromeTab.VirtualOnCompleted " + new { that.id, r.shadowstate.state, code.Length });
+                }
+                else
+                {
+                    // um. now what?
+                    // send shadowstate over?
+                    // first we have to open a channel
 
-                //// how can we inject ourselves and send a signal back to set this thing up?
+                    // do we have our view-source yet?
+                    var code = await codetask;
 
-                //// https://developer.chrome.com/extensions/tabs#method-executeScript
-                //// https://developer.chrome.com/extensions/tabs#type-InjectDetails
-                //// https://developer.chrome.com/extensions/content_scripts#pi
+                    // 5240ms HopToChromeTab.VirtualOnCompleted {{ id = 449, state = 1, Length = 3232941 }}
+                    Console.WriteLine("HopToChromeTab.VirtualOnCompleted " + new { that.id, r.shadowstate.state, code.Length });
 
-                //// Content scripts execute in a special environment called an isolated world. 
-                //// They have access to the DOM of the page they are injected into, but not to any JavaScript variables or 
-                //// functions created by the page. It looks to each content script as if there is no other JavaScript executing
-                //// on the page it is running on. The same is true in reverse: JavaScript running on the page cannot call any 
-                //// functions or access any variables defined by content scripts.
+                    //// how can we inject ourselves and send a signal back to set this thing up?
 
-                var result = await that.id.executeScript(
-                    //new { file = url }
-                    new { code }
-                );
+                    //// https://developer.chrome.com/extensions/tabs#method-executeScript
+                    //// https://developer.chrome.com/extensions/tabs#type-InjectDetails
+                    //// https://developer.chrome.com/extensions/content_scripts#pi
 
-                // now what?
+                    //// Content scripts execute in a special environment called an isolated world. 
+                    //// They have access to the DOM of the page they are injected into, but not to any JavaScript variables or 
+                    //// functions created by the page. It looks to each content script as if there is no other JavaScript executing
+                    //// on the page it is running on. The same is true in reverse: JavaScript running on the page cannot call any 
+                    //// functions or access any variables defined by content scripts.
 
-                Console.WriteLine("HopToChromeTab.VirtualOnCompleted after executeScript");
+                    injectOnce.Add(that.id);
+
+                    var result = await that.id.executeScript(
+                        //new { file = url }
+                        new { code }
+                    );
+
+                    // now what?
+
+                    Console.WriteLine("HopToChromeTab.VirtualOnCompleted after executeScript");
+                }
 
                 // send a SETI message?
 
@@ -268,13 +284,80 @@ namespace ChromeTabsCapture
                     // can we goto back before to the hop?
 
                     // Error: Invocation of form pageAction.show(object) doesn't match definition pageAction.show(integer tabId)
-                    chrome.pageAction.show((TabIdInteger)(object)tabId);
+                    //chrome.pageAction.show((TabIdInteger)(object)tabId);
+                    chrome.pageAction.show(tabId);
 
-                    chrome.pageAction.Clicked += delegate
+                    chrome.pageAction.Clicked += async delegate
                     {
-                        chrome.pageAction.hide((TabIdInteger)(object)tabId);
+                        string captureVisibleTabImageSourceLengthString = "?";
+
+                        Console.WriteLine("enter Clicked");
+
+                        //chrome.pageAction.hide((TabIdInteger)(object)tabId);
+
+                        // TypeError: Cannot read property 'hide' of undefined
+                        chrome.pageAction.hide(tabId);
+
+                        // Extension manifest must request permission to access this host.
+                        // jpg data url!
+                        var captureVisibleTab = (string)await chrome.tabs.captureVisibleTab(null, null);
+
+                        var captureVisibleTabImage = new IHTMLImage { src = captureVisibleTab };
+                        await captureVisibleTabImage.async.oncomplete;
+
+                        captureVisibleTab = null;
+
+                        var captureVisibleTabImageSource = captureVisibleTabImage.toDataURL();
+
+                        // before await delay {{ captureVisibleTabImageSourceLength = 354874 }}
+                        var captureVisibleTabImageSourceLength = captureVisibleTabImageSource.Length;
+                        captureVisibleTabImageSourceLengthString = captureVisibleTabImageSourceLength + "";
+                        captureVisibleTabImageSource = null;
+
+
+                        Console.WriteLine("before await delay " + new { captureVisibleTabImageSourceLength });
+                        // statemachine fixup? off by one?
+                        await Task.Delay(1);
+
+                        new { }.With(
+                            async delegate
+                            {
+                                Console.WriteLine("before await HopToChromeTab");
+                                await (HopToChromeTab)tab;
+
+                                //Console.WriteLine("after await HopToChromeTab " + new { captureVisibleTabImageSource.Length });
+
+                                //b.innerText = "pageAction! " + new { captureVisibleTabImageSource.Length };
+
+                                Console.WriteLine("after await HopToChromeTab ");
+
+                                // 4200ms {{ AsyncStateMachineSourceField = _captureVisibleTabImageSourceLengthString_5__5, value = 385538 }}
+
+                                // 2038ms {{ AsyncStateMachineSourceField = _captureVisibleTabImageSourceLengthString_5__1 }}
+                                // ??? why wont it make it?
+
+                                // cuz we are not reading the sent variables.
+                                //b.innerText = "pageAction! " + new { captureVisibleTabImageSourceLengthString, captureVisibleTabImageSourceLength };
+                                //b.innerText = "pageAction! " + new { captureVisibleTabImageSourceLengthString, captureVisibleTabImageSourceLength };
+                                //b.innerText = "pageAction! only state seems to be synchronized here... for now... ";
+                                b.innerText = "pageAction! about to save!";
+                            }
+                        );
+
+                        // well. can we save it?
+                        // TypeError: Cannot read property 'chooseEntry' of undefined
+                        // {"fileSystem": ["write", "retainEntries", "directory"]} 
+
+                        // not available for tabs. need an app for that.
+                        //var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
+
+
+                        //await dir.WriteAllBytes("0001.png", captureVisibleTabImage);
+
                     };
 
+                    // keep simple scope
+                    var scope_tabId = tabId;
 
                     //await (HopToChromeTab)tab.id;
                     await (HopToChromeTab)tab;
@@ -301,8 +384,9 @@ namespace ChromeTabsCapture
                     // what api is available if we are in th tab context?
 
                     //var b = new IHTMLButton { "capture" }.AttachToDocument();
-                    var b = new IHTMLButton { "HUD " + new { tabId } }.AttachTo(Native.document.documentElement);
+                    ChromeTabsCapture.Application.b = new IHTMLButton { "click pageAction above. HUD " + new { scope_tabId } }.AttachTo(Native.document.documentElement);
 
+                    Console.WriteLine("do you see the HUD button?");
 
                     b.style.SetLocation(4, 4);
                     b.css.disabled.style.backgroundColor = "red";
