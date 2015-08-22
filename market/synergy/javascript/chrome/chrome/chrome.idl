@@ -158,8 +158,17 @@ interface chrome.tabs
 
 
 	// tested by?
+	// https://developer.chrome.com/extensions/tabs#method-create
+	// Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
 	async static void create(any createProperties, function<chrome.Tab> callback);
 
+	// https://developer.chrome.com/extensions/tabs#method-remove
+	//async static extension void remove(chrome.TabIdInteger tabId, function callback);
+	// jsc wont generate Task<void>?
+	async static extension void remove(chrome.TabIdInteger tabId, function<any> callback);
+
+
+	
 	//static extension runtime.Port chrome.tabs.connect(chrome.TabIdInteger tabId, object connectInfo)
 	static extension chrome.Port connect(chrome.TabIdInteger tabId, any connectInfo);
 	static extension chrome.Port connect(chrome.TabIdInteger tabId);

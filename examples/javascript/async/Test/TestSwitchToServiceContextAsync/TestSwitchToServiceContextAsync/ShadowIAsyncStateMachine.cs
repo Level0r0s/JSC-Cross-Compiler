@@ -27,9 +27,12 @@ namespace TestSwitchToServiceContextAsync
 	// json tranferable, jsc should make all methods static, if no interfaces and a sealed class?
 	public sealed class ArrayList<T>
 	{
-		// X:\jsc.svn\examples\javascript\chrome\extensions\ChromeExtensionHopToTabThenIFrame\ChromeExtensionHopToTabThenIFrame\Application.cs
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hybrid
+        // Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
 
-		public T[] items = new T[0];
+        // X:\jsc.svn\examples\javascript\chrome\extensions\ChromeExtensionHopToTabThenIFrame\ChromeExtensionHopToTabThenIFrame\Application.cs
+
+        public T[] items = new T[0];
 
 		//internal T[] items = new T[0];
 

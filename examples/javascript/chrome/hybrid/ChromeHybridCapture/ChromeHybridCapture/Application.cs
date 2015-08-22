@@ -23,6 +23,56 @@ using System.Runtime.Serialization;
 
 namespace ChromeHybridCapture
 {
+    public struct HopToChromeApp : System.Runtime.CompilerServices.INotifyCompletion
+    {
+        public static Action<HopToChromeApp, Action> VirtualOnCompleted;
+        public void OnCompleted(Action continuation)
+        {
+
+            VirtualOnCompleted(this, continuation);
+        }
+
+        //Error   CS1929	'HopToChromeExtension' does not contain a definition for 'GetAwaiter' and the best extension method overload 'IXMLHttpRequestAsyncExtensions.GetAwaiter(IXMLHttpRequest)' requires a receiver of type 'IXMLHttpRequest'	ChromeHybridCapture Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs	404	IntelliSense
+
+        public HopToChromeApp GetAwaiter() { return this; }
+
+
+
+        //Error   CS0117	'HopToChromeExtension' does not contain a definition for 'IsCompleted'	ChromeHybridCapture Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs	409	IntelliSense
+        public bool IsCompleted { get { return false; } }
+
+
+        //Error CS0117	'HopToChromeExtension' does not contain a definition for 'GetResult'	ChromeHybridCapture Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs	414	IntelliSense
+        public void GetResult() { }
+
+    }
+
+
+    public struct HopToChromeExtension : System.Runtime.CompilerServices.INotifyCompletion
+    {
+        public static Action<HopToChromeExtension, Action> VirtualOnCompleted;
+        public void OnCompleted(Action continuation)
+        {
+
+            VirtualOnCompleted(this, continuation);
+        }
+
+        //Error   CS1929	'HopToChromeExtension' does not contain a definition for 'GetAwaiter' and the best extension method overload 'IXMLHttpRequestAsyncExtensions.GetAwaiter(IXMLHttpRequest)' requires a receiver of type 'IXMLHttpRequest'	ChromeHybridCapture Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs	404	IntelliSense
+
+        public HopToChromeExtension GetAwaiter() { return this; }
+
+
+
+        //Error   CS0117	'HopToChromeExtension' does not contain a definition for 'IsCompleted'	ChromeHybridCapture Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs	409	IntelliSense
+        public bool IsCompleted { get { return false; } }
+
+
+        //Error CS0117	'HopToChromeExtension' does not contain a definition for 'GetResult'	ChromeHybridCapture Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs	414	IntelliSense
+        public void GetResult() { }
+
+    }
+
+
     #region HopToChromeTab
     public struct HopToChromeTab : System.Runtime.CompilerServices.INotifyCompletion
     {
@@ -79,6 +129,10 @@ namespace ChromeHybridCapture
 
         static Application()
         {
+            return;
+
+
+
 
             // what about console? consolidate all core apps into one?
 
@@ -304,32 +358,117 @@ namespace ChromeHybridCapture
                                             new Action<object>(
                                                 (message) =>
                                                 {
+                                                    // 4847ms extension  port.onMessage {{ message = do HopToChromeExtension {{ TypeName = <Namespace>.___ctor_b__4_9_d, state = 0 }}
+
+
+
                                                     // extension  port.onMessage {{ message = from app hello to extension }}
                                                     // extension  port.onMessage {{ message = [object Object] }}
 
                                                     // look app sent a message to extension
-                                                    Console.WriteLine("extension  port.onMessage " + new { message });
 
+                                                    // 191ms extension  port.onMessage {{ message = from app hello to extension, is_string = false, equals_typeofstring = false }}
+
+                                                    // 219ms extension  port.onMessage {{ message = from app hello to extension, expando_isstring = true, is_string = false, equals_typeofstring = false }}
+                                                    var expando_isstring = ScriptCoreLib.JavaScript.Runtime.Expando.Of(message).IsString;
+
+                                                    // roslyn? wtf
+                                                    var is_string = message is string;
+                                                    var equals_typeofstring = message.GetType() == typeof(string);
+
+                                                    Console.WriteLine("extension  port.onMessage " + new { expando_isstring, is_string, equals_typeofstring });
+
+                                                    // extension  port.onMessage {{ state = null, TypeName = null }}
+                                                    if (expando_isstring)
+                                                    {
+                                                        Console.WriteLine("extension  port.onMessage: " + message);
+
+                                                        // Z:\jsc.svn\examples\javascript\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\ShadowIAsyncStateMachine.cs
+                                                        return;
+                                                    }
+
+                                                    // casting from anonymous object.
+                                                    var xShadowIAsyncStateMachine = (TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine)message;
+
+                                                    // or constructor id?
+                                                    Console.WriteLine("extension  port.onMessage " + new { xShadowIAsyncStateMachine.state, xShadowIAsyncStateMachine.TypeName });
+
+                                                    // 12468ms extension  port.onMessage {{ message = do HopToChromeExtension {{ TypeName = <Namespace>.___ctor_b__4_9_d, state = 0 }}, expando_isstring = true, is_string = false, equals_typeofstring = false }}
+                                                    //2015-08-22 15:49:45.729 view-source:53670 12471ms extension  port.onMessage {{ message = do HopToChromeExtension {{ TypeName = <Namespace>.___ctor_b__4_9_d, state = 0 }} }}
+                                                    //2015-08-22 15:49:45.733 view-source:53670 12475ms extension  port.onMessage {{ message = [object Object], expando_isstring = false, is_string = false, equals_typeofstring = false }}
+                                                    //2015-08-22 15:49:45.737 view-source:53670 12479ms extension  port.onMessage {{ state = 0, TypeName = <Namespace>.___ctor_b__4_9_d }}
+
+
+                                                    #region xAsyncStateMachineType
+                                                    var xAsyncStateMachineType = typeof(Application).Assembly.GetTypes().FirstOrDefault(
+                                                        xAsyncStateMachineTypeCandidate =>
+                                                        {
+                                                            // safety check 1
+
+                                                            //Console.WriteLine(new { sw.ElapsedMilliseconds, item.FullName });
+
+                                                            var xisIAsyncStateMachine = typeof(IAsyncStateMachine).IsAssignableFrom(xAsyncStateMachineTypeCandidate);
+                                                            if (xisIAsyncStateMachine)
+                                                            {
+                                                                //Console.WriteLine(new { item.FullName, isIAsyncStateMachine });
+
+                                                                return xAsyncStateMachineTypeCandidate.FullName == xShadowIAsyncStateMachine.TypeName;
+                                                            }
+
+                                                            return false;
+                                                        }
+                                                    );
+                                                    #endregion
+
+
+                                                    var NewStateMachine = FormatterServices.GetUninitializedObject(xAsyncStateMachineType);
+                                                    var isIAsyncStateMachine = NewStateMachine is IAsyncStateMachine;
+
+                                                    var NewStateMachineI = (IAsyncStateMachine)NewStateMachine;
+
+                                                    #region 1__state
+                                                    xAsyncStateMachineType.GetFields(
+                                                      System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance
+                                                      ).WithEach(
+                                                       AsyncStateMachineSourceField =>
+                                                       {
+
+                                                           Console.WriteLine(new { AsyncStateMachineSourceField });
+
+                                                           if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
+                                                           {
+                                                               AsyncStateMachineSourceField.SetValue(
+                                                                   NewStateMachineI,
+                                                                   xShadowIAsyncStateMachine.state
+                                                                );
+                                                           }
+
+
+                                                       }
+                                                  );
+                                                    #endregion
+
+                                                    NewStateMachineI.MoveNext();
                                                 }
                                             )
                                         );
 
 
 
-                                        chrome.tabs.Created += async tab =>
-                                        {
-                                            port.postMessage("chrome.tabs.Created " + new { tab });
+                                        //chrome.tabs.Created += async tab =>
+                                        //{
+                                        //    port.postMessage("chrome.tabs.Created " + new { tab });
 
-                                        };
+                                        //};
 
-                                        chrome.tabs.Updated += async (tabId, x, tab) =>
-                                        {
-                                            //  Updated {{ i = 0, x = null, tab = null }}
+                                        //chrome.tabs.Updated += async (tabId, x, tab) =>
+                                        //{
+                                        //    //  Updated {{ i = 0, x = null, tab = null }}
 
-                                            port.postMessage("chrome.tabs.Updated  " + new { tabId, x, tab });
+                                        //    port.postMessage("chrome.tabs.Updated  " + new { tabId, x, tab });
 
 
-                                        };
+                                        //};
                                     }
                                 );
                             }
@@ -379,7 +518,7 @@ namespace ChromeHybridCapture
                     //Console.WriteLine("running as app " + new { typeof(Application).Assembly.FullName });
 
                     // running as app {{ Name = ChromeHybridCapture.Application }}
-                    Console.WriteLine("running as app " + new { typeof(Application).Assembly.GetName().Name });
+                    Console.WriteLine("running as app " + new { typeof(Application).Assembly.GetName().Name } + " now reenable extension..");
 
 
 
@@ -388,11 +527,44 @@ namespace ChromeHybridCapture
                     // either the user launches by a click or we launch from extension?
                     chrome.app.runtime.Launched += async delegate
                     {
-                        Console.WriteLine("app chrome.app.runtime.Launched");
+                        // state 0 ? or state -1 ?
 
-                        // dir?
+                        Console.WriteLine("app chrome.app.runtime.Launched before delay");
 
-                        var w = Native.window.open("http://example.com");
+                        await Task.Delay(1);
+
+                        Console.WriteLine("after delay");
+
+                        await default(HopToChromeExtension);
+
+                        // now this would be cool if it worked?
+                        Console.WriteLine("app to extension chrome.app.runtime.Launched, only state was sent over?");
+
+                        // can we do our thing and jump back with the capture now?
+
+                        // lets create a tab for us to jump into..
+                        var tab = await chrome.tabs.create(new { url = "http://example.com" });
+
+                        Console.WriteLine("extension chrome.tabs.create done. about to capture...");
+
+
+                        await Task.Delay(5000);
+
+
+                        await tab.id.remove();
+
+
+                        Console.WriteLine("extension to app chrome.tabs.create removed, jump back?");
+
+                        await default(HopToChromeApp);
+
+
+                        Console.WriteLine("extension to app chrome.tabs.create removed, jump back done!");
+
+
+                        //var w = Native.window.open("http://example.com");
+
+                        // can we jump to extension to open our tab?
 
 
                         // hop to tabs
@@ -415,21 +587,21 @@ namespace ChromeHybridCapture
                         //Console.WriteLine("app chrome.app.window content loaded!");
 
 
-                        Console.WriteLine("app chrome.app.runtime.Launched ready to exit");
-                        await Task.Delay(3000);
+                        //Console.WriteLine("app chrome.app.runtime.Launched ready to exit");
+                        //await Task.Delay(3000);
 
-                        // wont work?
-                        w.close();
+                        //// wont work?
+                        //w.close();
 
-                        //1343ms app chrome.runtime.MessageExternal {{ message = extension to app! }}
-                        //2015-08-22 15:18:44.738 view-source:53670 1357ms app chrome.runtime.ConnectExternal {{ id = jadmeogmbokffpkdfeiemjplohfgkidd }}
-                        //2015-08-22 15:18:52.314 view-source:53670 8933ms app chrome.app.runtime.Launched
-                        //2015-08-22 15:18:52.342 view-source:53670 8961ms app chrome.app.runtime.Launched exit
-                        //2015-08-22 15:18:52.348 view-source:53670 8967ms app  port.onMessage {{ message = chrome.tabs.Created {{ tab = [object Object] }} }}
-                        //2015-08-22 15:18:52.652 view-source:53670 9271ms app  port.onMessage {{ message = chrome.tabs.Updated  {{ tabId = 419, x = [object Object], tab = [object Object] }} }}
-                        //2015-08-22 15:18:52.690 view-source:53670 9308ms app  port.onMessage {{ message = chrome.tabs.Updated  {{ tabId = 419, x = [object Object], tab = [object Object] }} }}
+                        ////1343ms app chrome.runtime.MessageExternal {{ message = extension to app! }}
+                        ////2015-08-22 15:18:44.738 view-source:53670 1357ms app chrome.runtime.ConnectExternal {{ id = jadmeogmbokffpkdfeiemjplohfgkidd }}
+                        ////2015-08-22 15:18:52.314 view-source:53670 8933ms app chrome.app.runtime.Launched
+                        ////2015-08-22 15:18:52.342 view-source:53670 8961ms app chrome.app.runtime.Launched exit
+                        ////2015-08-22 15:18:52.348 view-source:53670 8967ms app  port.onMessage {{ message = chrome.tabs.Created {{ tab = [object Object] }} }}
+                        ////2015-08-22 15:18:52.652 view-source:53670 9271ms app  port.onMessage {{ message = chrome.tabs.Updated  {{ tabId = 419, x = [object Object], tab = [object Object] }} }}
+                        ////2015-08-22 15:18:52.690 view-source:53670 9308ms app  port.onMessage {{ message = chrome.tabs.Updated  {{ tabId = 419, x = [object Object], tab = [object Object] }} }}
 
-                        Console.WriteLine("app chrome.app.runtime.Launched exit");
+                        //Console.WriteLine("app chrome.app.runtime.Launched exit");
                     };
 
 
@@ -439,7 +611,7 @@ namespace ChromeHybridCapture
                         // app chrome.runtime.ConnectExternal {{ name = , id = jadmeogmbokffpkdfeiemjplohfgkidd }}
 
                         //Console.WriteLine("app chrome.runtime.ConnectExternal " + new { port.name, port.sender.id });
-                        Console.WriteLine("app chrome.runtime.ConnectExternal " + new { port.sender.id });
+                        Console.WriteLine("app chrome.runtime.ConnectExternal " + new { port.sender.id } + " now click launch!");
 
 
                         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hybrid
@@ -460,13 +632,41 @@ namespace ChromeHybridCapture
                             )
                         );
 
-                        port.postMessage(
-                            new
-                            {
+                        //port.postMessage(
+                        //    new
+                        //    {
+                        //        text = "from app hello to extension"
+                        //    }
+                        //);
 
-                                text = "from app hello to extension"
-                            }
-                        );
+                        port.postMessage("from app hello to extension, click launch?");
+
+                        // enable
+                        //await default(HopToChromeExtension);
+
+                        HopToChromeExtension.VirtualOnCompleted = async (that, continuation) =>
+                        {
+                            // state 0 ? or state -1 ?
+                            Console.WriteLine("app HopToChromeExtension VirtualOnCompleted enter ");
+
+                            // where is it defined?
+                            // z:\jsc.svn\examples\javascript\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\ShadowIAsyncStateMachine.cs
+
+                            // async dont like ref?
+                            TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableContinuation r = TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableFromContinuation(continuation);
+
+                            // 29035ms extension  port.onMessage {{ message = do HopToChromeExtension }}
+                            port.postMessage("do HopToChromeExtension " + new { r.shadowstate.TypeName, r.shadowstate.state });
+
+
+                            // now send the jump instruction... will it make it?
+                            port.postMessage(r.shadowstate);
+
+
+                            // how would we know to continue from current continuation?
+                            // or are we fine to rebuild the scope if we jump back?
+                        };
+
 
 
                     };
