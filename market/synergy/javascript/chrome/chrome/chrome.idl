@@ -72,7 +72,8 @@ attribute string[]        availableLaunchTypes;
 
 };
 
-
+// Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
+// extension only?
 // https://developer.chrome.com/extensions/management#method-getAll
 interface chrome.management
 {
@@ -270,6 +271,8 @@ interface chrome.runtime
 
 	// X:\jsc.svn\examples\javascript\chrome\extensions\ChromeExtensionWithWorker\ChromeExtensionWithWorker\Application.cs
 	event static attribute chrome.ChromeEventTarget<chrome.Port> onConnect;
+
+	// Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
 	event static attribute chrome.ChromeEventTarget<chrome.Port> onConnectExternal;
 
 	

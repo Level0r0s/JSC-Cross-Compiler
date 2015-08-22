@@ -206,7 +206,7 @@ namespace ChromeHybridCapture
 
 
 
-            #region self_chrome_tabs
+            #region self_chrome_tabs extension
             object self_chrome_tabs = self_chrome.tabs;
             if (self_chrome_tabs != null)
             {
@@ -274,7 +274,7 @@ namespace ChromeHybridCapture
                             //2015-08-22 13:41:33.608 view-source:53670 114ms ExtensionInfo {{ id = fkgibadjpabiongmgoeomdbcefhabmah, name = ChromeCaptureToFile.Application.exe }}
 
                             // typeof(self) ?
-                            if (item.name.StartsWith("ChromeCaptureToFile.Application"))
+                            if (item.name.StartsWith(typeof(Application).Assembly.GetName().Name))
                             {
                                 var __item = item;
 
@@ -282,12 +282,56 @@ namespace ChromeHybridCapture
 
                                 __ChromeCaptureToFile_Application_sendMessage = message =>
                                 {
-                                    Console.WriteLine(message + new { __item.id, __item.name });
+                                    Console.WriteLine("extension chrome.runtime.sendMessage " + new { message, __item.id, __item.name });
 
                                     chrome.runtime.sendMessage(item.id, message, null);
                                 };
 
                                 chrome.runtime.sendMessage(item.id, "extension to app!", null);
+
+
+                                // extension chrome.runtime.connect done {{ name = , sender = null }}
+                                chrome.runtime.connect(item.id).With(
+                                    port =>
+                                    {
+                                        //Console.WriteLine("extension chrome.runtime.connect done " + new { port.name, port.sender.id });
+                                        //Console.WriteLine("extension chrome.runtime.connect done " + new { port.name, port.sender });
+                                        Console.WriteLine("extension chrome.runtime.connect done");
+
+                                        // is the app now able to send extension messages?
+
+                                        port.onMessage.addListener(
+                                            new Action<object>(
+                                                (message) =>
+                                                {
+                                                    // extension  port.onMessage {{ message = from app hello to extension }}
+                                                    // extension  port.onMessage {{ message = [object Object] }}
+
+                                                    // look app sent a message to extension
+                                                    Console.WriteLine("extension  port.onMessage " + new { message });
+
+                                                }
+                                            )
+                                        );
+
+
+
+                                        chrome.tabs.Created += async tab =>
+                                        {
+                                            port.postMessage("chrome.tabs.Created " + new { tab });
+
+                                        };
+
+                                        chrome.tabs.Updated += async (tabId, x, tab) =>
+                                        {
+                                            //  Updated {{ i = 0, x = null, tab = null }}
+
+                                            port.postMessage("chrome.tabs.Updated  " + new { tabId, x, tab });
+
+
+                                        };
+                                    }
+                                );
                             }
                         }
 
@@ -296,7 +340,7 @@ namespace ChromeHybridCapture
 
                 chrome.tabs.Created += async tab =>
                 {
-                    Console.WriteLine(" chrome.tabs.Created " + new { tab });
+                    Console.WriteLine("chrome.tabs.Created " + new { tab });
 
                 };
 
@@ -304,214 +348,7 @@ namespace ChromeHybridCapture
                 {
                     //  Updated {{ i = 0, x = null, tab = null }}
 
-                    Console.WriteLine("Updated " + new { tabId, x, tab });
-
-                    // why the duck is it null?
-                    if (tab == null)
-                        tab = await chrome.tabs.get(tabId);
-
-                    Console.WriteLine("Updated 2 " + new { tabId, x, tab });
-
-
-                    // chrome://newtab/
-
-                    //  TypeError: Cannot read property 'url' of null
-
-                    if (tab == null)
-                        return;
-
-                    if (tab.url.StartsWith("chrome-devtools://"))
-                        return;
-
-                    if (tab.url.StartsWith("chrome://"))
-                        return;
-
-
-                    // while running tabs.insertCSS: The extensions gallery cannot be scripted.
-                    if (tab.url.StartsWith("https://chrome.google.com/webstore/"))
-                        return;
-
-
-                    if (tab.status != "complete")
-                        return;
-
-                    //new chrome.Notification
-                    //{
-                    //	Message = "chrome.tabs.Updated " + new
-                    //	{
-                    //		tab.id,
-                    //		tab.url,
-                    //		tab.status,
-                    //		tab.title
-                    //	}
-                    //};
-
-
-                    // while running tabs.insertCSS: The tab was closed.
-
-                    // 		public static Task<object> insertCSS(this TabIdInteger tabId, object details);
-                    // public static void insertCSS(this TabIdInteger tabId, object details, IFunction callback);
-
-
-                    // for some sites the bar wont show as they html element height is 0?
-
-
-
-                    // where is the hop to iframe?
-                    // X:\jsc.svn\examples\javascript\Test\TestSwitchToIFrame\TestSwitchToIFrame\Application.cs
-
-
-                    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201504/20150403
-
-
-                    // can we goto back before to the hop?
-
-                    // Error: Invocation of form pageAction.show(object) doesn't match definition pageAction.show(integer tabId)
-                    //chrome.pageAction.show((TabIdInteger)(object)tabId);
-                    chrome.pageAction.show(tabId);
-
-                    //chrome.pageAction.Clicked += async delegate
-                    new { }.With(async delegate
-                   {
-                       await tab.pageAction.async.onclick;
-
-
-                       __ChromeCaptureToFile_Application_sendMessage(" chrome.pageAction.Clicked ");
-
-
-                       string captureVisibleTabImageSourceLengthString = "?";
-
-                       Console.WriteLine("enter Clicked");
-
-                       //chrome.pageAction.hide((TabIdInteger)(object)tabId);
-
-                       // TypeError: Cannot read property 'hide' of undefined
-                       chrome.pageAction.hide(tabId);
-
-                       // Extension manifest must request permission to access this host.
-                       // jpg data url!
-                       var captureVisibleTab = (string)await chrome.tabs.captureVisibleTab(null, null);
-
-                       var captureVisibleTabImage = new IHTMLImage { src = captureVisibleTab };
-                       await captureVisibleTabImage.async.oncomplete;
-
-                       captureVisibleTab = null;
-
-                       var captureVisibleTabImageSource = captureVisibleTabImage.toDataURL();
-
-                       // before await delay {{ captureVisibleTabImageSourceLength = 354874 }}
-                       var captureVisibleTabImageSourceLength = captureVisibleTabImageSource.Length;
-                       captureVisibleTabImageSourceLengthString = captureVisibleTabImageSourceLength + "";
-                       captureVisibleTabImageSource = null;
-
-
-                       Console.WriteLine("before await delay " + new { captureVisibleTabImageSourceLength });
-                       // statemachine fixup? off by one?
-                       await Task.Delay(1);
-
-                       new { }.With(
-                           async delegate
-                           {
-                               Console.WriteLine("before await HopToChromeTab");
-                               await (HopToChromeTab)tab;
-
-                               //Console.WriteLine("after await HopToChromeTab " + new { captureVisibleTabImageSource.Length });
-
-                               //b.innerText = "pageAction! " + new { captureVisibleTabImageSource.Length };
-
-                               Console.WriteLine("after await HopToChromeTab ");
-
-                               // 4200ms {{ AsyncStateMachineSourceField = _captureVisibleTabImageSourceLengthString_5__5, value = 385538 }}
-
-                               // 2038ms {{ AsyncStateMachineSourceField = _captureVisibleTabImageSourceLengthString_5__1 }}
-                               // ??? why wont it make it?
-
-                               // cuz we are not reading the sent variables.
-                               //b.innerText = "pageAction! " + new { captureVisibleTabImageSourceLengthString, captureVisibleTabImageSourceLength };
-                               //b.innerText = "pageAction! " + new { captureVisibleTabImageSourceLengthString, captureVisibleTabImageSourceLength };
-                               //b.innerText = "pageAction! only state seems to be synchronized here... for now... ";
-                               b.innerText = "pageAction! about to save!";
-                           }
-                       );
-
-                       // well. can we save it?
-                       // TypeError: Cannot read property 'chooseEntry' of undefined
-                       // {"fileSystem": ["write", "retainEntries", "directory"]} 
-
-                       // not available for tabs. need an app for that.
-                       //var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
-
-
-                       //await dir.WriteAllBytes("0001.png", captureVisibleTabImage);
-
-                   });
-
-                    // keep simple scope
-                    var scope_tabId = tabId;
-
-                    //await (HopToChromeTab)tab.id;
-                    await (HopToChromeTab)tab;
-                    //await tab.id;
-
-                    // are we now on the tab?
-                    // can we jump back?
-
-                    // what about jumping with files/uploads?
-                    Console.WriteLine("// are we now on the tab yet?");
-
-                    Native.body.style.borderLeft = "1em solid red";
-                    Native.document.documentElement.style.borderLeft = "1em solid cyan";
-
-
-
-
-                    // lets start monitoring
-                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150821
-
-                    //chrome.tabs.captureVisibleTab
-
-                    //chrome.pageAction.show(tab.)
-                    // what api is available if we are in th tab context?
-
-                    //var b = new IHTMLButton { "capture" }.AttachToDocument();
-                    ChromeHybridCapture.Application.b = new IHTMLButton { "click pageAction above. HUD " + new { scope_tabId } }.AttachTo(Native.document.documentElement);
-
-                    Console.WriteLine("do you see the HUD button?");
-
-                    b.style.SetLocation(4, 4);
-                    b.css.disabled.style.backgroundColor = "red";
-
-                    //             488: { SourceMethod = Void.ctor(ChromeHybridCapture.HTML.Pages.IApp), i = [0x00eb] brtrue.s + 0 - 1 }
-                    //             2bf8: 02:01:1e RewriteToAssembly error: System.ArgumentException: Value does not fall within the expected range.
-                    //at jsc.ILInstruction.ByOffset(Int32 i) in x:\jsc.internal.git\compiler\jsc\CodeModel\ILInstruction.cs:line 1188
-                    //at jsc.ILInstruction.get_BranchTargets() in x:\jsc.internal.git\compiler\jsc\CodeModel\ILInstruction.cs:line 1229
-                    //at jsc.ILInstruction.get_BranchSources() in x:\jsc.internal.git\compiler\jsc\CodeModel\ILInstruction.cs:line 1205
-                    //at jsc.ILInstruction.get_IsFlowBreak() in x:\jsc.internal.git\compiler\jsc\CodeModel\ILInstruction.cs:line 863
-                    //at jsc.ILFlow.NextInstructionBranch() in x:\jsc.internal.git\compiler\jsc\CodeModel\ILFlow.cs:line 585
-
-                    //b.onclick += delegate
-                    //{
-                    //    b.disabled = true;
-
-                    //    Native.body.style.borderLeft = "1em solid red";
-
-                    //    // would the compiler let the chome extension know it has been updated?
-
-                    //};
-
-                    await b.async.onclick;
-
-
-                    b.disabled = true;
-
-                    //Native.body.style.borderLeft = "1em solid red";
-
-                    //  TypeError: Cannot read property 'captureVisibleTab' of undefined
-
-                    //var captureVisibleTab = await chrome.tabs.captureVisibleTab(null, null);
-
-                    //b.innerText = new { captureVisibleTab }.ToString();
-
+                    Console.WriteLine("chrome.tabs.Updated  " + new { tabId, x, tab });
 
 
                 };
@@ -523,7 +360,7 @@ namespace ChromeHybridCapture
             #endregion
 
 
-            #region self_chrome_socket
+            #region self_chrome_socket app
             object self_chrome_socket = self_chrome.socket;
 
             if (self_chrome_socket != null)
@@ -545,6 +382,107 @@ namespace ChromeHybridCapture
                     Console.WriteLine("running as app " + new { typeof(Application).Assembly.GetName().Name });
 
 
+
+
+
+                    // either the user launches by a click or we launch from extension?
+                    chrome.app.runtime.Launched += async delegate
+                    {
+                        Console.WriteLine("app chrome.app.runtime.Launched");
+
+                        // dir?
+
+                        var w = Native.window.open("http://example.com");
+
+
+                        // hop to tabs
+                        // capture
+                        // hop back
+                        // save file
+                        // exit?
+
+                        // jump to ui thread?
+                        //var xappwindow = await chrome.app.window.create(
+                        //       Native.document.location.pathname, options: null
+                        //);
+
+                        ////xappwindow.setAlwaysOnTop
+
+                        //xappwindow.show();
+
+                        //await xappwindow.contentWindow.async.onload;
+
+                        //Console.WriteLine("app chrome.app.window content loaded!");
+
+
+                        Console.WriteLine("app chrome.app.runtime.Launched ready to exit");
+                        await Task.Delay(3000);
+
+                        // wont work?
+                        w.close();
+
+                        //1343ms app chrome.runtime.MessageExternal {{ message = extension to app! }}
+                        //2015-08-22 15:18:44.738 view-source:53670 1357ms app chrome.runtime.ConnectExternal {{ id = jadmeogmbokffpkdfeiemjplohfgkidd }}
+                        //2015-08-22 15:18:52.314 view-source:53670 8933ms app chrome.app.runtime.Launched
+                        //2015-08-22 15:18:52.342 view-source:53670 8961ms app chrome.app.runtime.Launched exit
+                        //2015-08-22 15:18:52.348 view-source:53670 8967ms app  port.onMessage {{ message = chrome.tabs.Created {{ tab = [object Object] }} }}
+                        //2015-08-22 15:18:52.652 view-source:53670 9271ms app  port.onMessage {{ message = chrome.tabs.Updated  {{ tabId = 419, x = [object Object], tab = [object Object] }} }}
+                        //2015-08-22 15:18:52.690 view-source:53670 9308ms app  port.onMessage {{ message = chrome.tabs.Updated  {{ tabId = 419, x = [object Object], tab = [object Object] }} }}
+
+                        Console.WriteLine("app chrome.app.runtime.Launched exit");
+                    };
+
+
+
+                    chrome.runtime.ConnectExternal += port =>
+                    {
+                        // app chrome.runtime.ConnectExternal {{ name = , id = jadmeogmbokffpkdfeiemjplohfgkidd }}
+
+                        //Console.WriteLine("app chrome.runtime.ConnectExternal " + new { port.name, port.sender.id });
+                        Console.WriteLine("app chrome.runtime.ConnectExternal " + new { port.sender.id });
+
+
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hybrid
+
+                        // should we now be able to hop to our tab?
+                        // what about if we are in an app window?
+
+                        port.onMessage.addListener(
+                            new Action<object>(
+                                (message) =>
+                                {
+                                    // extension  port.onMessage {{ message = from app hello to extension }}
+
+                                    // look app sent a message to extension
+                                    Console.WriteLine("app  port.onMessage " + new { message });
+
+                                }
+                            )
+                        );
+
+                        port.postMessage(
+                            new
+                            {
+
+                                text = "from app hello to extension"
+                            }
+                        );
+
+
+                    };
+
+                    chrome.runtime.MessageExternal += (message, sender, sendResponse) =>
+                    {
+                        // was the extension able to pass us a message?
+
+                        //Console.WriteLine("chrome.runtime.MessageExternal " + new { message, sender, sendResponse });
+                        Console.WriteLine("app chrome.runtime.MessageExternal " + new { message });
+
+                        // app chrome.runtime.MessageExternal {{ message = extension to app! }}
+
+                        // remember the connection to enable hop to extension?
+                    };
+
                     return;
                 }
             }
@@ -554,6 +492,8 @@ namespace ChromeHybridCapture
             // running as regular web page?
 
             Console.WriteLine("running as content?");
+
+            // were we loaded into chrome.app.window?
 
             return;
 
