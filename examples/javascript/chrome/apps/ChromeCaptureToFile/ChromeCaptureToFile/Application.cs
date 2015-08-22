@@ -114,7 +114,8 @@ namespace ChromeCaptureToFile
                     {
                         // was the extension able to pass us a message?
 
-                        Console.WriteLine("chrome.runtime.MessageExternal " + new { message, sender, sendResponse });
+                        //Console.WriteLine("chrome.runtime.MessageExternal " + new { message, sender, sendResponse });
+                        Console.WriteLine("chrome.runtime.MessageExternal " + new { message });
 
 
 
@@ -182,6 +183,21 @@ namespace ChromeCaptureToFile
 
                      // whats our id? will extension connect once we run?
                      new IHTMLPre { new { chrome.runtime.id } }.AttachToDocument();
+
+                     //21071ms chrome.runtime.MessageExternal { { message = extension to app! } }
+                     //2015 - 08 - 22 14:09:50.192 view - source:53670 29562ms chrome.runtime.MessageExternal { { message = chrome.pageAction.Clicked  } }
+
+                     chrome.runtime.MessageExternal += (message, sender, sendResponse) =>
+                     {
+                         // was the extension able to pass us a message?
+
+                         //Console.WriteLine("chrome.runtime.MessageExternal " + new { message, sender, sendResponse });
+                         Console.WriteLine("appwindow chrome.runtime.MessageExternal " + new { message });
+
+
+
+                     };
+
 
 
                      // https://groups.google.com/a/chromium.org/forum/#!topic/chromium-apps/5JfAdZg9mzY

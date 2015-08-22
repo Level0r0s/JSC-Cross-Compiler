@@ -13,15 +13,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using ChromeTabsCapture;
-using ChromeTabsCapture.Design;
-using ChromeTabsCapture.HTML.Pages;
+using ChromeHybridCapture;
+using ChromeHybridCapture.Design;
+using ChromeHybridCapture.HTML.Pages;
 using chrome;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 
-namespace ChromeTabsCapture
+namespace ChromeHybridCapture
 {
     #region HopToChromeTab
     public struct HopToChromeTab : System.Runtime.CompilerServices.INotifyCompletion
@@ -63,7 +63,7 @@ namespace ChromeTabsCapture
     {
         private static IHTMLButton b;
 
-        // subst a: Z:\jsc.svn\examples\javascript\chrome\extensions\ChromeTabsCapture\ChromeTabsCapture\bin\Debug\staging\ChromeTabsCapture.Application\web
+        // subst a: Z:\jsc.svn\examples\javascript\chrome\extensions\ChromeHybridCapture\ChromeHybridCapture\bin\Debug\staging\ChromeHybridCapture.Application\web
 
 
         // X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPMultiPort\ChromeTCPMultiPort\Application.cs
@@ -198,35 +198,29 @@ namespace ChromeTabsCapture
         public Application(IApp page)
         {
             // X:\jsc.svn\examples\javascript\chrome\extensions\ChromeTabsExperiment\ChromeTabsExperiment\Application.cs
-            Console.WriteLine(" enter Application");
+            Console.WriteLine("enter ChromeHybridCapture Application");
 
 
             dynamic self = Native.self;
             dynamic self_chrome = self.chrome;
-            object self_chrome_tabs = self_chrome.tabs;
-
-            //if (self_chrome_tabs == null)
-            //	return;
 
 
-            //	....488: { SourceMethod = Void.ctor(ChromeTabsCapture.HTML.Pages.IApp), i = [0x00ba] brtrue.s + 0 - 1 }
-            //1984:02:01 RewriteToAssembly error: System.ArgumentException: Value does not fall within the expected range.
-            //at jsc.ILInstruction.ByOffset(Int32 i) in X:\jsc.internal.git\compiler\jsc\CodeModel\ILInstruction.cs:line 1184
-            //at jsc.ILInstruction.get_BranchTargets() in X:\jsc.internal.git\compiler\jsc\CodeModel\ILInstruction.cs:line 1225
 
             #region self_chrome_tabs
+            object self_chrome_tabs = self_chrome.tabs;
             if (self_chrome_tabs != null)
             {
-                Console.WriteLine("self_chrome_tabs");
+                // running as extension {{ FullName = <Namespace>.Application }}
 
-                //chrome.runtime.Startup +=
-                //chrome.runtime.Installed +=
+                //Console.WriteLine("running as extension " + new { typeof(Application).FullName });
+                //Console.WriteLine("running as extension " + new { typeof(Application).Assembly.FullName });
 
-
+                // can we find and connect to app?
+                Console.WriteLine("running as extension " + new { typeof(Application).Assembly.GetName().Name });
 
                 //70ms chrome.management.getAll
                 //2015-08-22 13:41:33.591 view-source:53670 98ms chrome.management.getAll {{ Length = 28 }}
-                //2015-08-22 13:41:33.594 view-source:53670 101ms ExtensionInfo {{ id = aemlnmcokphbneegoefdckonejmknohh, name = ChromeTabsCapture }}
+                //2015-08-22 13:41:33.594 view-source:53670 101ms ExtensionInfo {{ id = aemlnmcokphbneegoefdckonejmknohh, name = ChromeHybridCapture }}
                 //2015-08-22 13:41:33.597 view-source:53670 104ms ExtensionInfo {{ id = apdfllckaahabafndbhieahigkjlhalf, name = Google Drive }}
                 //2015-08-22 13:41:33.599 view-source:53670 106ms ExtensionInfo {{ id = blpcfgokakmgnkcojhhkbfbldkacnbeo, name = YouTube }}
                 //2015-08-22 13:41:33.602 view-source:53670 109ms ExtensionInfo {{ id = cgnjcccfcjhdnbfgjgllglbhfcgndmea, name = WebGLHZBlendCharacter }}
@@ -480,14 +474,14 @@ namespace ChromeTabsCapture
                     // what api is available if we are in th tab context?
 
                     //var b = new IHTMLButton { "capture" }.AttachToDocument();
-                    ChromeTabsCapture.Application.b = new IHTMLButton { "click pageAction above. HUD " + new { scope_tabId } }.AttachTo(Native.document.documentElement);
+                    ChromeHybridCapture.Application.b = new IHTMLButton { "click pageAction above. HUD " + new { scope_tabId } }.AttachTo(Native.document.documentElement);
 
                     Console.WriteLine("do you see the HUD button?");
 
                     b.style.SetLocation(4, 4);
                     b.css.disabled.style.backgroundColor = "red";
 
-                    //             488: { SourceMethod = Void.ctor(ChromeTabsCapture.HTML.Pages.IApp), i = [0x00eb] brtrue.s + 0 - 1 }
+                    //             488: { SourceMethod = Void.ctor(ChromeHybridCapture.HTML.Pages.IApp), i = [0x00eb] brtrue.s + 0 - 1 }
                     //             2bf8: 02:01:1e RewriteToAssembly error: System.ArgumentException: Value does not fall within the expected range.
                     //at jsc.ILInstruction.ByOffset(Int32 i) in x:\jsc.internal.git\compiler\jsc\CodeModel\ILInstruction.cs:line 1188
                     //at jsc.ILInstruction.get_BranchTargets() in x:\jsc.internal.git\compiler\jsc\CodeModel\ILInstruction.cs:line 1229
@@ -529,21 +523,39 @@ namespace ChromeTabsCapture
             #endregion
 
 
-            // we made the jump?
-            // need it to compile. why???
-            ;
-            //Native.body.style.borderLeft = "1em solid red";
+            #region self_chrome_socket
+            object self_chrome_socket = self_chrome.socket;
 
-            // yes we did. can we talk to the chrome extension?
+            if (self_chrome_socket != null)
+            {
+                if (!(Native.window.opener == null && Native.window.parent == Native.window.self))
+                {
+                    Console.WriteLine("chrome.app.window.create, is that you?");
 
-            // lets do some SETI
+                    // pass thru
+                }
+                else
+                {
+                    //Console.WriteLine("running as app");
 
-            // The runtime.onMessage event is fired in each content script running in the specified tab for the current extension.
+                    // running as app {{ FullName = ChromeHybridCapture.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null }}
+                    //Console.WriteLine("running as app " + new { typeof(Application).Assembly.FullName });
 
-            // Severity	Code	Description	Project	File	Line
-            //Error       'runtime.onMessage' is inaccessible due to its protection level ChromeTabsCapture X:\jsc.svn\examples\javascript\chrome\extensions\ChromeTabsCapture\ChromeTabsCapture\Application.cs 272
+                    // running as app {{ Name = ChromeHybridCapture.Application }}
+                    Console.WriteLine("running as app " + new { typeof(Application).Assembly.GetName().Name });
 
-            // public static event System.Action<object, object, object> Message
+
+                    return;
+                }
+            }
+            #endregion
+
+
+            // running as regular web page?
+
+            Console.WriteLine("running as content?");
+
+            return;
 
             #region chrome.runtime.Message
             chrome.runtime.Message += (object message, chrome.MessageSender sender, IFunction sendResponse) =>
@@ -583,24 +595,24 @@ namespace ChromeTabsCapture
 
                 #region 1__state
                 xAsyncStateMachineType.GetFields(
-                          System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance
-                      ).WithEach(
-                       AsyncStateMachineSourceField =>
-                       {
+                  System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance
+              ).WithEach(
+               AsyncStateMachineSourceField =>
+               {
 
-                           Console.WriteLine(new { AsyncStateMachineSourceField });
+                   Console.WriteLine(new { AsyncStateMachineSourceField });
 
-                           if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
-                           {
-                               AsyncStateMachineSourceField.SetValue(
-                                   NewStateMachineI,
-                                   s.state
-                                );
-                           }
+                   if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
+                   {
+                       AsyncStateMachineSourceField.SetValue(
+                           NewStateMachineI,
+                           s.state
+                        );
+                   }
 
 
-                       }
-                  );
+               }
+          );
                 #endregion
 
                 NewStateMachineI.MoveNext();
@@ -616,11 +628,7 @@ namespace ChromeTabsCapture
             #endregion
 
 
-            //         Native.window.onmessage += e =>
-            //{
 
-            //};
         }
-
     }
 }
