@@ -92,6 +92,11 @@ interface chrome.TabIdInteger // : int
 {
 };
 
+interface chrome.WindowIdInteger // : int
+{
+};
+
+
 
 interface chrome.Tab
 {
@@ -101,7 +106,7 @@ interface chrome.Tab
 	attribute int        index;
 
 	// WindowKey?
-	attribute int        windowId;
+	attribute chrome.WindowIdInteger        windowId;
 
 	attribute boolean        highlighted;
 	attribute boolean        active;
@@ -195,6 +200,9 @@ interface chrome.tabs
 	// Z:\jsc.svn\examples\javascript\chrome\extensions\ChromeTabsCapture\ChromeTabsCapture\Application.cs
 	//captureVisibleTab − chrome.tabs.captureVisibleTab(integer windowId, object options, function callback)
 	async static extension void captureVisibleTab(any windowId, any options, function<any> callback);
+
+	// Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
+	async static extension void captureVisibleTab(chrome.WindowIdInteger windowId, any options, function<string> callback);
 
 };
 

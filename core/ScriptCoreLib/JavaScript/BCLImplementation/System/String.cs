@@ -31,6 +31,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
 		// https://github.com/dotnet/coreclr/blob/master/src/classlibnative/bcltype/stringnative.cpp
 		// https://github.com/dotnet/coreclr/blob/master/src/classlibnative/bcltype/stringnative.h
 
+        // Z:\jsc.svn\examples\javascript\Test\TestObjectIsString\TestObjectIsString\Application.cs
+
 		// X:\jsc.svn\examples\javascript\Test\Test46StringInterpolation\Test46StringInterpolation\Class1.cs
 
 		// X:\jsc.svn\examples\javascript\test\Test46AnonymousTypeToString\Test46AnonymousTypeToString\Class1.cs

@@ -57,6 +57,10 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
 
 
 
+
+        // Z:\jsc.svn\examples\javascript\Test\TestObjectIsString\TestObjectIsString\Application.cs
+
+
         // what about string enums and complex enums, what about encypted enums?
         // "X:\jsc.svn\examples\javascript\Test\TestTypeOfEnum\TestTypeOfEnum.sln"
         public virtual bool IsEnum
