@@ -25,6 +25,8 @@ namespace ChromeHybridCapture
 {
     public struct HopToChromeApp : System.Runtime.CompilerServices.INotifyCompletion
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeapp
+
         public static Action<HopToChromeApp, Action> VirtualOnCompleted;
         public void OnCompleted(Action continuation)
         {
@@ -127,127 +129,7 @@ namespace ChromeHybridCapture
 
         static List<TabIdInteger> injectOnce = new List<TabIdInteger>();
 
-        static Application()
-        {
-            return;
 
-
-
-
-            // what about console? consolidate all core apps into one?
-
-            // 0ms  cctor Application did we make the jump yet? {{ href = http://example.com/ }}
-            Console.WriteLine(" cctor Application did we make the jump yet? " + new
-            {
-
-                // wont be available
-                //Native.document.currentScript.src,
-
-                Native.document.location.href
-            });
-
-            // X:\jsc.svn\examples\javascript\ScriptDynamicSourceBuilder\ScriptDynamicSourceBuilder\Application.cs
-            // X:\jsc.svn\examples\javascript\Test\TestRedirectWebWorker\TestRedirectWebWorker\Application.cs
-            // or. were we injected? then our source is different?
-            // makeURL ? did chrome extension prep the special url yet?
-            var codetask = new WebClient().DownloadStringTaskAsync(
-                         new Uri(Worker.ScriptApplicationSource, UriKind.Relative)
-                    );
-
-            #region HopToChromeTab.VirtualOnCompleted
-            HopToChromeTab.VirtualOnCompleted = async (that, continuation) =>
-            {
-                //Console.WriteLine("HopToChromeTab.VirtualOnCompleted ");
-                Console.WriteLine("HopToChromeTab.VirtualOnCompleted " + new { that.id });
-
-                // um. whats the tab we are to jump into?
-                // signal we are about to inject
-                //            await that.id.insertCSS(
-                //                    new
-                //                    {
-                //                        code = @"
-
-                //html { 
-                //border-left: 1em solid yellow;
-                //}
-
-
-                //"
-                //                    }
-                //                );
-
-
-                // where is it defined?
-                // z:\jsc.svn\examples\javascript\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\ShadowIAsyncStateMachine.cs
-
-                // async dont like ref?
-                var r = TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableFromContinuation(continuation);
-
-
-                if (injectOnce.Contains(that.id))
-                {
-                    Console.WriteLine("HopToChromeTab.VirtualOnCompleted again? " + new { that.id, r.shadowstate.state });
-
-                }
-                else
-                {
-                    // um. now what?
-                    // send shadowstate over?
-                    // first we have to open a channel
-
-                    // do we have our view-source yet?
-                    var code = await codetask;
-
-                    // 5240ms HopToChromeTab.VirtualOnCompleted {{ id = 449, state = 1, Length = 3232941 }}
-                    Console.WriteLine("HopToChromeTab.VirtualOnCompleted " + new { that.id, r.shadowstate.state, code.Length });
-
-                    //// how can we inject ourselves and send a signal back to set this thing up?
-
-                    //// https://developer.chrome.com/extensions/tabs#method-executeScript
-                    //// https://developer.chrome.com/extensions/tabs#type-InjectDetails
-                    //// https://developer.chrome.com/extensions/content_scripts#pi
-
-                    //// Content scripts execute in a special environment called an isolated world. 
-                    //// They have access to the DOM of the page they are injected into, but not to any JavaScript variables or 
-                    //// functions created by the page. It looks to each content script as if there is no other JavaScript executing
-                    //// on the page it is running on. The same is true in reverse: JavaScript running on the page cannot call any 
-                    //// functions or access any variables defined by content scripts.
-
-                    injectOnce.Add(that.id);
-
-                    var result = await that.id.executeScript(
-                        //new { file = url }
-                        new { code }
-                    );
-
-                    // now what?
-
-                    Console.WriteLine("HopToChromeTab.VirtualOnCompleted after executeScript");
-                }
-
-                // send a SETI message?
-
-                /// whats duplicate
-                var response = await that.id.sendMessage(
-                    //"hello"
-
-                    r.shadowstate
-                );
-
-                Console.WriteLine("HopToChromeTab.VirtualOnCompleted after sendMessage " + new { response });
-
-                // HopToChromeTab.VirtualOnCompleted after sendMessage {{ response = response }}
-
-                // https://developer.chrome.com/extensions/messaging#connect
-
-            };
-            #endregion
-
-        }
-
-        static void AtTab()
-        {
-        }
 
         public Application(IApp page)
         {
@@ -351,6 +233,30 @@ namespace ChromeHybridCapture
                                         //Console.WriteLine("extension chrome.runtime.connect done " + new { port.name, port.sender.id });
                                         //Console.WriteLine("extension chrome.runtime.connect done " + new { port.name, port.sender });
                                         Console.WriteLine("extension chrome.runtime.connect done");
+
+
+
+
+                                        #region HopToChromeApp.VirtualOnCompleted
+                                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeapp
+                                        HopToChromeApp.VirtualOnCompleted = async (that, continuation) =>
+                                       {
+                                           // state 0 ? or state -1 ?
+                                           Console.WriteLine("extension HopToChromeApp VirtualOnCompleted enter ");
+
+                                           TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableContinuation r = TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableFromContinuation(continuation);
+
+                                           // 29035ms extension  port.onMessage {{ message = do HopToChromeExtension }}
+                                           port.postMessage("do HopToChromeApp " + new { r.shadowstate.TypeName, r.shadowstate.state });
+
+
+                                           // now send the jump instruction... will it make it?
+                                           port.postMessage(r.shadowstate);
+                                       };
+                                        #endregion
+
+
+
 
                                         // is the app now able to send extension messages?
 
@@ -477,20 +383,20 @@ namespace ChromeHybridCapture
                     }
                     );
 
-                chrome.tabs.Created += async tab =>
-                {
-                    Console.WriteLine("chrome.tabs.Created " + new { tab });
+                //chrome.tabs.Created += async tab =>
+                //{
+                //    Console.WriteLine("chrome.tabs.Created " + new { tab });
 
-                };
+                //};
 
-                chrome.tabs.Updated += async (tabId, x, tab) =>
-                {
-                    //  Updated {{ i = 0, x = null, tab = null }}
+                //chrome.tabs.Updated += async (tabId, x, tab) =>
+                //{
+                //    //  Updated {{ i = 0, x = null, tab = null }}
 
-                    Console.WriteLine("chrome.tabs.Updated  " + new { tabId, x, tab });
+                //    Console.WriteLine("chrome.tabs.Updated  " + new { tabId, x, tab });
 
 
-                };
+                //};
 
 
 
@@ -522,8 +428,8 @@ namespace ChromeHybridCapture
 
 
 
-
-
+                    #region  Launched
+                    // can the extension launch us too?
                     // either the user launches by a click or we launch from extension?
                     chrome.app.runtime.Launched += async delegate
                     {
@@ -535,6 +441,7 @@ namespace ChromeHybridCapture
 
                         Console.WriteLine("after delay");
 
+                        // using IDisposable ?
                         await default(HopToChromeExtension);
 
                         // now this would be cool if it worked?
@@ -550,7 +457,7 @@ namespace ChromeHybridCapture
 
                         await Task.Delay(5000);
 
-
+                        // or just unload the window?
                         await tab.id.remove();
 
 
@@ -558,11 +465,12 @@ namespace ChromeHybridCapture
 
                         await default(HopToChromeApp);
 
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeapp
+                        Console.WriteLine("extension to app chrome.tabs.create removed, jump back done! did the strings make it?");
 
-                        Console.WriteLine("extension to app chrome.tabs.create removed, jump back done!");
 
-
-                        //var w = Native.window.open("http://example.com");
+                        // TypeError: Cannot read property 'chooseEntry' of undefined
+                        var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
 
                         // can we jump to extension to open our tab?
 
@@ -603,6 +511,7 @@ namespace ChromeHybridCapture
 
                         //Console.WriteLine("app chrome.app.runtime.Launched exit");
                     };
+                    #endregion
 
 
 
@@ -624,10 +533,84 @@ namespace ChromeHybridCapture
                                 (message) =>
                                 {
                                     // extension  port.onMessage {{ message = from app hello to extension }}
+                                    var expando_isstring = ScriptCoreLib.JavaScript.Runtime.Expando.Of(message).IsString;
 
                                     // look app sent a message to extension
-                                    Console.WriteLine("app  port.onMessage " + new { message });
+                                    //Console.WriteLine("app  port.onMessage " + new { message });
 
+                                    if (expando_isstring)
+                                    {
+                                        Console.WriteLine("app  port.onMessage: " + message);
+                                        return;
+                                    }
+
+                                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeapp
+
+
+
+
+                                    // casting from anonymous object.
+                                    var xShadowIAsyncStateMachine = (TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine)message;
+
+                                    // or constructor id?
+                                    Console.WriteLine("extension  port.onMessage " + new { xShadowIAsyncStateMachine.state, xShadowIAsyncStateMachine.TypeName });
+
+                                    // 12468ms extension  port.onMessage {{ message = do HopToChromeExtension {{ TypeName = <Namespace>.___ctor_b__4_9_d, state = 0 }}, expando_isstring = true, is_string = false, equals_typeofstring = false }}
+                                    //2015-08-22 15:49:45.729 view-source:53670 12471ms extension  port.onMessage {{ message = do HopToChromeExtension {{ TypeName = <Namespace>.___ctor_b__4_9_d, state = 0 }} }}
+                                    //2015-08-22 15:49:45.733 view-source:53670 12475ms extension  port.onMessage {{ message = [object Object], expando_isstring = false, is_string = false, equals_typeofstring = false }}
+                                    //2015-08-22 15:49:45.737 view-source:53670 12479ms extension  port.onMessage {{ state = 0, TypeName = <Namespace>.___ctor_b__4_9_d }}
+
+
+                                    #region xAsyncStateMachineType
+                                    var xAsyncStateMachineType = typeof(Application).Assembly.GetTypes().FirstOrDefault(
+                                        xAsyncStateMachineTypeCandidate =>
+                                        {
+                                            // safety check 1
+
+                                            //Console.WriteLine(new { sw.ElapsedMilliseconds, item.FullName });
+
+                                            var xisIAsyncStateMachine = typeof(IAsyncStateMachine).IsAssignableFrom(xAsyncStateMachineTypeCandidate);
+                                            if (xisIAsyncStateMachine)
+                                            {
+                                                //Console.WriteLine(new { item.FullName, isIAsyncStateMachine });
+
+                                                return xAsyncStateMachineTypeCandidate.FullName == xShadowIAsyncStateMachine.TypeName;
+                                            }
+
+                                            return false;
+                                        }
+                                    );
+                                    #endregion
+
+
+                                    var NewStateMachine = FormatterServices.GetUninitializedObject(xAsyncStateMachineType);
+                                    var isIAsyncStateMachine = NewStateMachine is IAsyncStateMachine;
+
+                                    var NewStateMachineI = (IAsyncStateMachine)NewStateMachine;
+
+                                    #region 1__state
+                                    xAsyncStateMachineType.GetFields(
+                                      System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance
+                                      ).WithEach(
+                                       AsyncStateMachineSourceField =>
+                                       {
+
+                                           Console.WriteLine(new { AsyncStateMachineSourceField });
+
+                                           if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
+                                           {
+                                               AsyncStateMachineSourceField.SetValue(
+                                                   NewStateMachineI,
+                                                   xShadowIAsyncStateMachine.state
+                                                );
+                                           }
+
+
+                                       }
+                                  );
+                                    #endregion
+
+                                    NewStateMachineI.MoveNext();
                                 }
                             )
                         );
@@ -695,77 +678,7 @@ namespace ChromeHybridCapture
 
             // were we loaded into chrome.app.window?
 
-            return;
 
-            #region chrome.runtime.Message
-            chrome.runtime.Message += (object message, chrome.MessageSender sender, IFunction sendResponse) =>
-            {
-                var s = (TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine)message;
-
-                // 59ms onmessage {{ message = hello, id = aemlnmcokphbneegoefdckonejmknohh }}
-                Console.WriteLine("xonmessage " + new { s.state, sender.id });
-                //Native.body.style.borderLeft = "1px solid blue";
-
-                #region xAsyncStateMachineType
-                var xAsyncStateMachineType = typeof(Application).Assembly.GetTypes().FirstOrDefault(
-                    item =>
-                    {
-                        // safety check 1
-
-                        //Console.WriteLine(new { sw.ElapsedMilliseconds, item.FullName });
-
-                        var xisIAsyncStateMachine = typeof(IAsyncStateMachine).IsAssignableFrom(item);
-                        if (xisIAsyncStateMachine)
-                        {
-                            //Console.WriteLine(new { item.FullName, isIAsyncStateMachine });
-
-                            return item.FullName == s.TypeName;
-                        }
-
-                        return false;
-                    }
-                );
-                #endregion
-
-
-                var NewStateMachine = FormatterServices.GetUninitializedObject(xAsyncStateMachineType);
-                var isIAsyncStateMachine = NewStateMachine is IAsyncStateMachine;
-
-                var NewStateMachineI = (IAsyncStateMachine)NewStateMachine;
-
-                #region 1__state
-                xAsyncStateMachineType.GetFields(
-                  System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance
-              ).WithEach(
-               AsyncStateMachineSourceField =>
-               {
-
-                   Console.WriteLine(new { AsyncStateMachineSourceField });
-
-                   if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
-                   {
-                       AsyncStateMachineSourceField.SetValue(
-                           NewStateMachineI,
-                           s.state
-                        );
-                   }
-
-
-               }
-          );
-                #endregion
-
-                NewStateMachineI.MoveNext();
-
-                //Task.Delay(1000).ContinueWith(
-                //	delegate
-                //	{
-                //		sendResponse.apply(null, "response");
-                //	}
-                //);
-
-            };
-            #endregion
 
 
 
