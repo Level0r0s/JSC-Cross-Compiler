@@ -755,6 +755,8 @@ interface chrome.fileSystem
 	//async static void chooseEntry(any options, function<any,any> callback);
 
 	// async Task<,> ?
+	// Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
+	// Unchecked runtime.lastError while running fileSystem.chooseEntry: Invalid calling page. This function can't be called from a background page.
 	async static void chooseEntry(any options, function<any> callback);
 
 	// sdcard inserted?

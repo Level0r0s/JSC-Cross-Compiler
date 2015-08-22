@@ -468,9 +468,12 @@ namespace ChromeHybridCapture
                         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeapp
                         Console.WriteLine("extension to app chrome.tabs.create removed, jump back done! did the strings make it?");
 
+                        Console.WriteLine("app chrome.fileSystem.chooseEntry");
 
+                        // not available in background?
                         // TypeError: Cannot read property 'chooseEntry' of undefined
-                        var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
+                        // Unchecked runtime.lastError while running fileSystem.chooseEntry: Invalid calling page. This function can't be called from a background page.
+                        //var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
 
                         // can we jump to extension to open our tab?
 
@@ -482,15 +485,15 @@ namespace ChromeHybridCapture
                         // exit?
 
                         // jump to ui thread?
-                        //var xappwindow = await chrome.app.window.create(
-                        //       Native.document.location.pathname, options: null
-                        //);
+                        var xappwindow = await chrome.app.window.create(
+                               Native.document.location.pathname, options: null
+                        );
 
                         ////xappwindow.setAlwaysOnTop
 
-                        //xappwindow.show();
+                        xappwindow.show();
 
-                        //await xappwindow.contentWindow.async.onload;
+                        await xappwindow.contentWindow.async.onload;
 
                         //Console.WriteLine("app chrome.app.window content loaded!");
 
@@ -679,8 +682,11 @@ namespace ChromeHybridCapture
             // were we loaded into chrome.app.window?
 
 
+            new IHTMLButton { "openDirectory" }.AttachToDocument().onclick += async delegate
+             {
+                 var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
 
-
+             };
 
         }
     }
