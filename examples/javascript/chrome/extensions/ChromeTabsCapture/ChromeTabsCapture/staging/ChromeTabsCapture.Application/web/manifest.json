@@ -30,13 +30,12 @@
   
 
   "permissions": [
-
+     "management",
   "<all_urls>",
 	  "tabs", 
     "unlimitedStorage",
 	    "notifications",
-    "storage",
-    {"fileSystem": ["write", "retainEntries", "directory"]} 
+    "storage"
 
   ]
 

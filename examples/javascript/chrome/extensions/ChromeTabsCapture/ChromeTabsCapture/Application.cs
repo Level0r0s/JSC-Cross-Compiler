@@ -198,6 +198,8 @@ namespace ChromeTabsCapture
         public Application(IApp page)
         {
             // X:\jsc.svn\examples\javascript\chrome\extensions\ChromeTabsExperiment\ChromeTabsExperiment\Application.cs
+            Console.WriteLine(" enter Application");
+
 
             dynamic self = Native.self;
             dynamic self_chrome = self.chrome;
@@ -217,6 +219,75 @@ namespace ChromeTabsCapture
             {
                 Console.WriteLine("self_chrome_tabs");
 
+                //chrome.runtime.Startup +=
+                //chrome.runtime.Installed +=
+
+
+
+                //70ms chrome.management.getAll
+                //2015-08-22 13:41:33.591 view-source:53670 98ms chrome.management.getAll {{ Length = 28 }}
+                //2015-08-22 13:41:33.594 view-source:53670 101ms ExtensionInfo {{ id = aemlnmcokphbneegoefdckonejmknohh, name = ChromeTabsCapture }}
+                //2015-08-22 13:41:33.597 view-source:53670 104ms ExtensionInfo {{ id = apdfllckaahabafndbhieahigkjlhalf, name = Google Drive }}
+                //2015-08-22 13:41:33.599 view-source:53670 106ms ExtensionInfo {{ id = blpcfgokakmgnkcojhhkbfbldkacnbeo, name = YouTube }}
+                //2015-08-22 13:41:33.602 view-source:53670 109ms ExtensionInfo {{ id = cgnjcccfcjhdnbfgjgllglbhfcgndmea, name = WebGLHZBlendCharacter }}
+                //2015-08-22 13:41:33.604 view-source:53670 111ms ExtensionInfo {{ id = coobgpohoikkiipiblmjeljniedjpjpf, name = Google Search }}
+                //2015-08-22 13:41:33.608 view-source:53670 114ms ExtensionInfo {{ id = fkgibadjpabiongmgoeomdbcefhabmah, name = ChromeCaptureToFile.Application.exe }}
+                //2015-08-22 13:41:33.610 view-source:53670 117ms ExtensionInfo {{ id = ghbmnnjooekpmoecnnnilnnbdlolhkhi, name = Google Docs Offline }}
+                //2015-08-22 13:41:33.612 view-source:53670 119ms ExtensionInfo {{ id = haebnnbpedcbhciplfhjjkbafijpncjl, name = TinEye Reverse Image Search }}
+                //2015-08-22 13:41:33.614 view-source:53670 121ms ExtensionInfo {{ id = lchcahaldakdnjlkchkgncecgpcnabgo, name = Heat Zeeker }}
+                //2015-08-22 13:41:33.616 view-source:53670 123ms ExtensionInfo {{ id = nhkcfbkpodjkallcfebgihcoglfaniep, name = freenode irc }}
+                //2015-08-22 13:41:33.619 view-source:53670 126ms ExtensionInfo {{ id = ogmpedngmnolclkmlpcdgmfonlagkejp, name = Private Joe: Urban Warfare }}
+                //2015-08-22 13:41:33.621 view-source:53670 128ms ExtensionInfo {{ id = pcklgpcdddecpmkiinpkhehanbijjepn, name = idea-remixer }}
+                //2015-08-22 13:41:33.624 view-source:53670 131ms ExtensionInfo {{ id = pjkljhegncpnkpknbcohdijeoejaedia, name = Gmail }}
+                //2015-08-22 13:41:33.626 view-source:53670 133ms ExtensionInfo {{ id = plgmlhohecdddhbmmkncjdmlhcmaachm, name = draw.io (Legacy) }}
+                //2015-08-22 13:41:33.629 view-source:53670 136ms ExtensionInfo {{ id = aapbdbdomjkkjkaonfhkkikfgjllcleb, name = Google Translate }}
+                //2015-08-22 13:41:33.631 view-source:53670 138ms ExtensionInfo {{ id = bcfddoencoiedfjgepnlhcpfikgaogdg, name = QR-Code Tag Extension }}
+                //2015-08-22 13:41:33.633 view-source:53670 139ms ExtensionInfo {{ id = coblegoildgpecccijneplifmeghcgip, name = Web Cache }}
+                //2015-08-22 13:41:33.635 view-source:53670 142ms ExtensionInfo {{ id = ganlifbpkcplnldliibcbegplfmcfigp, name = Collusion for Chrome }}
+                //2015-08-22 13:41:33.638 view-source:53670 145ms ExtensionInfo {{ id = gighmmpiobklfepjocnamgkkbiglidom, name = AdBlock }}
+                //2015-08-22 13:41:33.640 view-source:53670 147ms ExtensionInfo {{ id = iiabebggdceojiejhopnopmbkgandhha, name = Operation Heat Zeeker }}
+                //2015-08-22 13:41:33.642 view-source:53670 149ms ExtensionInfo {{ id = jkgfnfnagdnjicmonpfhhdnkdjgjdamo, name = Avalon Spider Solitaire }}
+                //2015-08-22 13:41:33.644 view-source:53670 151ms ExtensionInfo {{ id = kdifgkljkjhpflhalpkhehlldfakggdi, name = my.jsc-solutions.net }}
+                //2015-08-22 13:41:33.646 view-source:53670 153ms ExtensionInfo {{ id = lmjegmlicamnimmfhcmpkclmigmmcbeh, name = Application Launcher for Drive (by Google) }}
+                //2015-08-22 13:41:33.648 view-source:53670 155ms ExtensionInfo {{ id = mmfbcljfglbokpmkimbfghdkjmjhdgbg, name = Text }}
+                //2015-08-22 13:41:33.650 view-source:53670 157ms ExtensionInfo {{ id = molncoemjfmpgdkbdlbjmhlcgniigdnf, name = Project Naptha }}
+                //2015-08-22 13:41:33.652 view-source:53670 159ms ExtensionInfo {{ id = ogkcjmbhnfmlnielkjhedpcjomeaghda, name = WebGL Inspector }}
+                //2015-08-22 13:41:33.653 view-source:53670 160ms ExtensionInfo {{ id = pkngagjebplcgimojegcakmnlggmcjlc, name = LBA Redux }}
+                //2015-08-22 13:41:33.657 view-source:53670 164ms ExtensionInfo {{ id = ppmibgfeefcglejjlpeihfdimbkfbbnm, name = Change HTTP Request Header }}
+
+                new { }.With(
+                    async delegate
+                    {
+                        //  TypeError: chrome.management.getAll is not a function
+
+                        Console.WriteLine("chrome.management.getAll");
+                        var extensions = await chrome.management.getAll();
+
+                        Console.WriteLine("chrome.management.getAll " + new { extensions.Length });
+                        // https://developer.chrome.com/extensions/management#type-ExtensionInfo
+
+                        //                        view - source:53670 69ms chrome.management.getAll
+                        //2015 - 08 - 22 13:34:13.514 view - source:53670 89ms chrome.management.getAll { { Length = 28 } }
+                        //                        2015 - 08 - 22 13:34:13.518 view - source:53670 93ms ExtensionInfo { { item = [object Object] } }
+
+                        foreach (var item in extensions)
+                        {
+                            //Console.WriteLine("ExtensionInfo " + new { item });
+                            //Console.WriteLine("ExtensionInfo " + new { item.id, item.name });
+
+                            //2015-08-22 13:41:33.608 view-source:53670 114ms ExtensionInfo {{ id = fkgibadjpabiongmgoeomdbcefhabmah, name = ChromeCaptureToFile.Application.exe }}
+
+                            if (item.name.StartsWith("ChromeCaptureToFile.Application"))
+                            {
+                                // we will also know when it reloads? we have to reconnect then?
+                                Console.WriteLine("extension can signal apps? " + new { item.id, item.name });
+
+                                chrome.runtime.sendMessage(item.id, "extension to app!", null);
+                            }
+                        }
+
+                    }
+                    );
 
                 chrome.tabs.Created += async tab =>
                 {

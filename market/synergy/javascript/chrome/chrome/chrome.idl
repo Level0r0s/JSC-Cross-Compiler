@@ -44,11 +44,50 @@ interface chrome.webNavigation
 
 
 
+
+// https://developer.chrome.com/extensions/management#type-ExtensionInfo
+interface chrome.ExtensionInfo
+{
+	attribute string        id;
+attribute string        name;
+attribute string        shortName;
+attribute string        description;
+attribute string        version;
+attribute string        mayDisable;
+attribute boolean        enabled;
+attribute string        disabledReason;
+attribute boolean        isApp;
+attribute string        type;
+attribute string        appLaunchUrl;
+attribute string        homepageUrl;
+attribute string        updateUrl;
+attribute boolean        offlineEnabled;
+attribute string        optionsUrl;
+attribute any[]        icons;
+attribute string[]        permissions;
+attribute string[]        hostPermissions;
+attribute string        installType;
+attribute string        launchType;
+attribute string[]        availableLaunchTypes;
+
+};
+
+
+// https://developer.chrome.com/extensions/management#method-getAll
+interface chrome.management
+{
+
+	async static  void getAll(function<chrome.ExtensionInfo[]> callback);
+
+};
+
+
+
 // X:\jsc.svn\examples\javascript\chrome\extensions\ChromeExtensionHopToTabThenIFrame\ChromeExtensionHopToTabThenIFrame\Application.cs
 // http://developer.chrome.com/extensions/tabs.html#type-Tab
 // rename to TabKey as we use such naming for DLinq?
 // enum?
-interface chrome.TabIdInteger
+interface chrome.TabIdInteger // : int
 {
 };
 
@@ -157,14 +196,14 @@ interface chrome.pageAction
 {
 	event static attribute chrome.ChromeEventTarget<chrome.Tab> onClicked;
 
-// Z:\jsc.svn\examples\javascript\chrome\extensions\ChromeTabsCapture\ChromeTabsCapture\Application.cs
-// wtf?
-// Error: Invocation of form pageAction.show(object) doesn't match definition pageAction.show(integer tabId)
-static extension void show(chrome.TabIdInteger tabId);
-static extension void show(int tabId);
+	// Z:\jsc.svn\examples\javascript\chrome\extensions\ChromeTabsCapture\ChromeTabsCapture\Application.cs
+	// wtf?
+	// Error: Invocation of form pageAction.show(object) doesn't match definition pageAction.show(integer tabId)
+	static extension void show(chrome.TabIdInteger tabId);
+	static extension void show(int tabId);
 
-static extension void hide(chrome.TabIdInteger tabId);
-static extension void hide(int tabId);
+	static extension void hide(chrome.TabIdInteger tabId);
+	static extension void hide(int tabId);
 
 	static  void setPopup(any details);
 	static  void setIcon(any details, function callback);
@@ -192,10 +231,16 @@ interface chrome.notifications
 	static void clear(string notificationId, function callback);
 };
 
+
+
+
+
 // http://developer.chrome.com/apps/runtime.html
 interface chrome.runtime
 {
 	static attribute string        lastError;
+
+// Z:\jsc.svn\examples\javascript\chrome\apps\ChromeCaptureToFile\ChromeCaptureToFile\Application.cs
 	static attribute string        id;
 
 
@@ -209,6 +254,8 @@ interface chrome.runtime
 	static string getURL(string path);
 
 	//async static void postMessage(string id, any message, function<any> callback);
+	// https://developer.chrome.com/extensions/runtime#method-sendMessage
+	async static void sendMessage(string extensionId, any message, any options, function<any> responseCallback);
 
 	 static chrome.Port connect(string id);
 
@@ -683,6 +730,7 @@ interface chrome.Volume
 };
 
 
+// apps only
 // https://github.com/yuanyan/know-your-chrome/blob/master/Blink/Source/modules/filesystem/DirectoryEntry.idl
 // https://chromium.googlesource.com/chromium/src/+/master/chrome/common/extensions/api/file_system.idl
 interface chrome.fileSystem

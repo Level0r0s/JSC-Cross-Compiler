@@ -80,6 +80,59 @@ namespace ChromeCaptureToFile
                         Console.WriteLine("chrome.app.window loaded!");
                     };
 
+                    // TypeError: chrome.management.getAll is not a function
+                    //new { }.With(
+                    //   async delegate
+                    //   {
+                    //        //  TypeError: chrome.management.getAll is not a function
+
+                    //        Console.WriteLine("chrome.management.getAll");
+                    //       var extensions = await chrome.management.getAll();
+
+                    //       Console.WriteLine("chrome.management.getAll " + new { extensions.Length });
+                    //        // https://developer.chrome.com/extensions/management#type-ExtensionInfo
+
+                    //        //                        view - source:53670 69ms chrome.management.getAll
+                    //        //2015 - 08 - 22 13:34:13.514 view - source:53670 89ms chrome.management.getAll { { Length = 28 } }
+                    //        //                        2015 - 08 - 22 13:34:13.518 view - source:53670 93ms ExtensionInfo { { item = [object Object] } }
+
+                    //        foreach (var item in extensions)
+                    //       {
+                    //            //Console.WriteLine("ExtensionInfo " + new { item });
+                    //            Console.WriteLine("ExtensionInfo " + new { item.id, item.name });
+
+                    //       }
+
+                    //   }
+                    //   );
+
+
+
+                    // chrome.runtime.MessageExternal {{ message = extension to app!, sender = [object Object]
+
+                    chrome.runtime.MessageExternal += (message, sender, sendResponse) =>
+                    {
+                        // was the extension able to pass us a message?
+
+                        Console.WriteLine("chrome.runtime.MessageExternal " + new { message, sender, sendResponse });
+
+
+
+                    };
+
+
+
+                    chrome.runtime.Message += (x, sender, yield) =>
+                    {
+                        // was the extension able to pass us a message?
+
+                        Console.WriteLine("chrome.runtime.Message " + new { x, sender });
+
+
+
+                    };
+
+
 
                     return;
                 }
@@ -122,6 +175,13 @@ namespace ChromeCaptureToFile
 
 
                      //uri.ToDocumentTitle();
+
+
+
+
+
+                     // whats our id? will extension connect once we run?
+                     new IHTMLPre { new { chrome.runtime.id } }.AttachToDocument();
 
 
                      // https://groups.google.com/a/chromium.org/forum/#!topic/chromium-apps/5JfAdZg9mzY
