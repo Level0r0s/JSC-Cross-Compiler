@@ -113,7 +113,10 @@ namespace ChromeExtensionHopToTabThenIFrame
 	/// </summary>
 	public sealed class Application : ApplicationWebService
 	{
-		static Func<string, string> DecoratedString =
+
+        // why?
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
+        static Func<string, string> DecoratedString =
 	x => x.Replace("-", "_").Replace("+", "_").Replace("<", "_").Replace(">", "_");
 
 		// not available in extension, iframe. only in tab.
@@ -527,14 +530,15 @@ namespace ChromeExtensionHopToTabThenIFrame
 						);
 				   }
 
-				   // X:\jsc.svn\examples\javascript\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\CLRWebServiceInvoke.cs
-				   // field names/ tokens need to be encrypted like typeinfo.
+                   // X:\jsc.svn\examples\javascript\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\CLRWebServiceInvoke.cs
+                   // field names/ tokens need to be encrypted like typeinfo.
 
-				   // some do manual restore
-				   // X:\jsc.svn\examples\javascript\chrome\extensions\ChromeExtensionHopToTabThenIFrame\ChromeExtensionHopToTabThenIFrame\Application.cs
+                   // some do manual restore
+                   // X:\jsc.svn\examples\javascript\chrome\extensions\ChromeExtensionHopToTabThenIFrame\ChromeExtensionHopToTabThenIFrame\Application.cs
+                   // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
+                   // or, are we supposed to initialize a string value here?
 
-				   // or, are we supposed to initialize a string value here?
-				   var xStringField = that.StringFields.AsEnumerable().FirstOrDefault(
+                   var xStringField = that.StringFields.AsEnumerable().FirstOrDefault(
 					   f => DecoratedString(f.FieldName) == DecoratedString(AsyncStateMachineSourceField.Name)
 				   );
 

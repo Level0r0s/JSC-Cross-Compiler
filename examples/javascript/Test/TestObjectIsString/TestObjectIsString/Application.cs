@@ -33,8 +33,15 @@ namespace TestObjectIsString
 
             object goo = "hello world";
 
+            //d = (typeof c == typeof '' ? c : null);
+            //LyAABsIdETWGcpPJmN6_b2A('works');
+            //e = ('pTjQAPwogD2bZu0XDXN_a2g' in __this && c instanceof pTjQAPwogD2bZu0XDXN_a2g);
 
+            var asstring = goo as string;
+
+            Console.WriteLine("works");
             var isstring = goo is string;
+            Console.WriteLine("works not");
 
             var typeofgoo = goo.GetType();
             var typeofstring = typeof(string);
@@ -42,7 +49,11 @@ namespace TestObjectIsString
 
 
             // {{ isstring = false }}
-            new IHTMLPre { new { isstring, typeofstring, typeofgoo, istypeofstring } }.AttachToDocument();
+            new IHTMLPre { new { isstring, typeofstring, typeofgoo, istypeofstring, asstring } }.AttachToDocument();
+
+            // { isstring = true, typeofstring = [native] String, typeofgoo = ?function String() { [native code] }, istypeofstring = false, asstring = hello world }
+            // { isstring = false, typeofstring = [native] String, typeofgoo = ?function String() { [native code] }, istypeofstring = false, asstring = hello world }
+
             // {{ isstring = false, typeofstring = [native] String, typeofgoo = ?function String() { [native code] }, istypeofstring = false }}
         }
 

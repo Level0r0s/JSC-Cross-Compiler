@@ -20,6 +20,7 @@ using chrome;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using System.Diagnostics;
 
 namespace ChromeHybridCapture
 {
@@ -143,7 +144,13 @@ namespace ChromeHybridCapture
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
-        private static IHTMLButton b;
+        // why?
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
+        static Func<string, string> DecoratedString =
+             x => x.Replace("-", "_").Replace("+", "_").Replace("<", "_").Replace(">", "_");
+
+
+
 
         // subst a: Z:\jsc.svn\examples\javascript\chrome\extensions\ChromeHybridCapture\ChromeHybridCapture\bin\Debug\staging\ChromeHybridCapture.Application\web
 
@@ -156,8 +163,10 @@ namespace ChromeHybridCapture
         // jsc should package displayName  the end of the view-source?
         // should we gzip the string lookup?
 
+        static AppWindow outputWindow;
 
-        static List<TabIdInteger> injectOnce = new List<TabIdInteger>();
+        static DirectoryEntry dir;
+        static int index;
 
 
 
@@ -445,7 +454,7 @@ namespace ChromeHybridCapture
                     Console.WriteLine("appwindow chrome.app.window.create, is that you?");
 
                     // pass thru
-
+                    #region  Native.window.onmessage
                     Native.window.onmessage += e =>
                     {
                         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
@@ -458,12 +467,12 @@ namespace ChromeHybridCapture
 
 
                         // extension  port.onMessage {{ message = from app hello to extension }}
-                        var expando_isstring = ScriptCoreLib.JavaScript.Runtime.Expando.Of(message).IsString;
+                        //var expando_isstring = ScriptCoreLib.JavaScript.Runtime.Expando.Of(message).IsString;
 
                         // look app sent a message to extension
                         //Console.WriteLine("app  port.onMessage " + new { message });
 
-                        if (expando_isstring)
+                        if (message is string)
                         {
                             Console.WriteLine("appwindow    Native.window.onmessage: " + message);
                             return;
@@ -530,7 +539,30 @@ namespace ChromeHybridCapture
                                     );
                                }
 
+                               // X:\jsc.svn\examples\javascript\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\CLRWebServiceInvoke.cs
+                               // field names/ tokens need to be encrypted like typeinfo.
 
+                               // some do manual restore
+                               // X:\jsc.svn\examples\javascript\chrome\extensions\ChromeExtensionHopToTabThenIFrame\ChromeExtensionHopToTabThenIFrame\Application.cs
+                               // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
+                               // or, are we supposed to initialize a string value here?
+
+                               var xStringField = TestSwitchToServiceContextAsync.ArrayListExtensions.AsEnumerable(xShadowIAsyncStateMachine.StringFields).FirstOrDefault(
+                                   f => DecoratedString(f.FieldName) == DecoratedString(AsyncStateMachineSourceField.Name)
+                               );
+
+                               if (xStringField != null)
+                               {
+                                   // once we are to go back to client. we need to reverse it?
+
+                                   AsyncStateMachineSourceField.SetValue(
+                                       NewStateMachineI,
+                                       xStringField.value
+                                    );
+                                   // next xml?
+                                   // before lets send our strings back with the new state!
+                                   // what about exceptions?
+                               }
                            }
                       );
                         #endregion
@@ -538,6 +570,9 @@ namespace ChromeHybridCapture
                         NewStateMachineI.MoveNext();
 
                     };
+                    #endregion
+
+
                 }
                 else
                 {
@@ -553,7 +588,7 @@ namespace ChromeHybridCapture
 
 
 
-
+                    #region HopToChromeAppWindow
                     HopToChromeAppWindow.VirtualOnCompleted = async (that, continuation) =>
                     {
                         // state 0 ? or state -1 ?
@@ -564,7 +599,9 @@ namespace ChromeHybridCapture
                         {
                             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
 
-                            that.window = await chrome.app.window.create(
+                            if (outputWindow == null)
+                            {
+                                outputWindow = await chrome.app.window.create(
                                                        Native.document.location.pathname,
 
                                                        // https://developer.chrome.com/apps/app_window#type-CreateWindowOptions
@@ -572,12 +609,15 @@ namespace ChromeHybridCapture
                                                        options: new { hidden = true }
                                                 );
 
-                            ////xappwindow.setAlwaysOnTop
+                                ////xappwindow.setAlwaysOnTop
 
-                            // or can we stay hidden?
-                            //that.window.show();
+                                // or can we stay hidden?
+                                //that.window.show();
 
-                            await that.window.contentWindow.async.onload;
+                                await outputWindow.contentWindow.async.onload;
+                            }
+                            // reuse the window...
+                            that.window = outputWindow;
                         }
 
                         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
@@ -592,131 +632,13 @@ namespace ChromeHybridCapture
                         // now send the jump instruction... will it make it?
                         that.window.contentWindow.postMessage(r.shadowstate);
                     };
-
-
-                    #region  Launched
-                    // can the extension launch us too?
-                    // either the user launches by a click or we launch from extension?
-                    chrome.app.runtime.Launched += async delegate
-                    {
-                        // state 0 ? or state -1 ?
-
-                        Console.WriteLine("app chrome.app.runtime.Launched before delay");
-
-                        await Task.Delay(1);
-
-                        Console.WriteLine("after delay");
-
-                        // using IDisposable ?
-                        await default(HopToChromeExtension);
-
-                        // now this would be cool if it worked?
-                        Console.WriteLine("app to extension chrome.app.runtime.Launched, only state was sent over?");
-
-                        // can we do our thing and jump back with the capture now?
-
-                        // lets create a tab for us to jump into..
-                        var tab = await chrome.tabs.create(new { url = "http://example.com" });
-
-                        Console.WriteLine("extension chrome.tabs.create done. about to capture...");
-
-
-                        await Task.Delay(3000);
-
-                        // Error: Invocation of form tabs.captureVisibleTab(object, null, function) doesn't match definition tabs.captureVisibleTab(optional integer windowId, optional object options, function callback)
-
-                        var captureVisibleTab = await tab.windowId.captureVisibleTab(null);
-
-                        // extension captureVisibleTab {{ Length = 47743 }}
-                        Console.WriteLine("extension captureVisibleTab " + new { captureVisibleTab.Length });
-
-                        await Task.Delay(1000);
-
-                        // or just unload the window?
-                        await tab.id.remove();
-
-
-                        Console.WriteLine("extension to app chrome.tabs.create removed, jump back?");
-
-                        await default(HopToChromeApp);
-
-                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeapp
-                        Console.WriteLine("extension to app chrome.tabs.create removed, jump back done! did the strings make it?");
-                        if (captureVisibleTab == null)
-                            Console.WriteLine("extension to app chrome.tabs.create removed, jump back done! did the strings make it? no");
-                        else
-                            Console.WriteLine("extension to app chrome.tabs.create removed, jump back done! did the strings make it? yes " + new { captureVisibleTab.Length });
-
-
-
-                        Console.WriteLine("app chrome.fileSystem.chooseEntry");
-
-                        // not available in background?
-                        // TypeError: Cannot read property 'chooseEntry' of undefined
-                        // Unchecked runtime.lastError while running fileSystem.chooseEntry: Invalid calling page. This function can't be called from a background page.
-                        //var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
-
-                        // can we jump to extension to open our tab?
-
-
-                        // hop to tabs
-                        // capture
-                        // hop back
-                        // save file
-                        // exit?
-
-                        // jump to ui thread?
-                        //var xappwindow = await chrome.app.window.create(
-                        //       Native.document.location.pathname, options: null
-                        //);
-
-                        //////xappwindow.setAlwaysOnTop
-
-                        //xappwindow.show();
-
-                        //await xappwindow.contentWindow.async.onload;
-
-                        //// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
-
-                        //await new HopToChromeAppWindow { window = xappwindow };
-
-                        await default(HopToChromeAppWindow);
-
-                        // 182ms appwindow chrome.fileSystem.chooseEntry
-                        Console.WriteLine("appwindow chrome.fileSystem.chooseEntry");
-
-                        // Unchecked runtime.lastError while running fileSystem.chooseEntry: User cancelled
-
-                        new IHTMLPre { "openDirectory... " }.AttachToDocument();
-
-                        var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
-
-                        new IHTMLPre { "openDirectory... " + new { dir.name } }.AttachToDocument();
-                        Console.WriteLine("openDirectory... " + new { dir.name });
-
-                        //Console.WriteLine("app chrome.app.window content loaded!");
-
-
-                        //Console.WriteLine("app chrome.app.runtime.Launched ready to exit");
-                        //await Task.Delay(3000);
-
-                        //// wont work?
-                        //w.close();
-
-                        ////1343ms app chrome.runtime.MessageExternal {{ message = extension to app! }}
-                        ////2015-08-22 15:18:44.738 view-source:53670 1357ms app chrome.runtime.ConnectExternal {{ id = jadmeogmbokffpkdfeiemjplohfgkidd }}
-                        ////2015-08-22 15:18:52.314 view-source:53670 8933ms app chrome.app.runtime.Launched
-                        ////2015-08-22 15:18:52.342 view-source:53670 8961ms app chrome.app.runtime.Launched exit
-                        ////2015-08-22 15:18:52.348 view-source:53670 8967ms app  port.onMessage {{ message = chrome.tabs.Created {{ tab = [object Object] }} }}
-                        ////2015-08-22 15:18:52.652 view-source:53670 9271ms app  port.onMessage {{ message = chrome.tabs.Updated  {{ tabId = 419, x = [object Object], tab = [object Object] }} }}
-                        ////2015-08-22 15:18:52.690 view-source:53670 9308ms app  port.onMessage {{ message = chrome.tabs.Updated  {{ tabId = 419, x = [object Object], tab = [object Object] }} }}
-
-                        //Console.WriteLine("app chrome.app.runtime.Launched exit");
-                    };
                     #endregion
 
 
 
+
+
+                    #region ConnectExternal
                     chrome.runtime.ConnectExternal += port =>
                     {
                         // app chrome.runtime.ConnectExternal {{ name = , id = jadmeogmbokffpkdfeiemjplohfgkidd }}
@@ -724,6 +646,12 @@ namespace ChromeHybridCapture
                         //Console.WriteLine("app chrome.runtime.ConnectExternal " + new { port.name, port.sender.id });
                         Console.WriteLine("app chrome.runtime.ConnectExternal " + new { port.sender.id } + " now click launch!");
 
+                        new chrome.Notification(title: "ChromeHybridCapture", message: "service connected. click launch").Clicked += delegate
+                        {
+                            // https://developer.chrome.com/apps/app_runtime
+
+                            // management_api
+                        };
 
                         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hybrid
 
@@ -808,6 +736,30 @@ namespace ChromeHybridCapture
                                            }
 
 
+                                           // X:\jsc.svn\examples\javascript\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\CLRWebServiceInvoke.cs
+                                           // field names/ tokens need to be encrypted like typeinfo.
+
+                                           // some do manual restore
+                                           // X:\jsc.svn\examples\javascript\chrome\extensions\ChromeExtensionHopToTabThenIFrame\ChromeExtensionHopToTabThenIFrame\Application.cs
+                                           // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
+                                           // or, are we supposed to initialize a string value here?
+
+                                           var xStringField = TestSwitchToServiceContextAsync.ArrayListExtensions.AsEnumerable(xShadowIAsyncStateMachine.StringFields).FirstOrDefault(
+                                               f => DecoratedString(f.FieldName) == DecoratedString(AsyncStateMachineSourceField.Name)
+                                           );
+
+                                           if (xStringField != null)
+                                           {
+                                               // once we are to go back to client. we need to reverse it?
+
+                                               AsyncStateMachineSourceField.SetValue(
+                                                   NewStateMachineI,
+                                                   xStringField.value
+                                                );
+                                               // next xml?
+                                               // before lets send our strings back with the new state!
+                                               // what about exceptions?
+                                           }
                                        }
                                   );
                                     #endregion
@@ -816,6 +768,8 @@ namespace ChromeHybridCapture
                                 }
                             )
                         );
+
+
 
                         //port.postMessage(
                         //    new
@@ -829,6 +783,7 @@ namespace ChromeHybridCapture
                         // enable
                         //await default(HopToChromeExtension);
 
+                        #region HopToChromeExtension
                         HopToChromeExtension.VirtualOnCompleted = async (that, continuation) =>
                         {
                             // state 0 ? or state -1 ?
@@ -851,10 +806,13 @@ namespace ChromeHybridCapture
                             // how would we know to continue from current continuation?
                             // or are we fine to rebuild the scope if we jump back?
                         };
+                        #endregion
+
 
 
 
                     };
+                    #endregion
 
                     chrome.runtime.MessageExternal += (message, sender, sendResponse) =>
                     {
@@ -867,6 +825,169 @@ namespace ChromeHybridCapture
 
                         // remember the connection to enable hop to extension?
                     };
+
+                    #region  Launched
+                    // can the extension launch us too?
+                    // either the user launches by a click or we launch from extension?
+                    chrome.app.runtime.Launched += async delegate
+                    {
+                        // state 0 ? or state -1 ?
+
+                        Console.WriteLine("app chrome.app.runtime.Launched before delay");
+
+                        await Task.Delay(1);
+
+                        Console.WriteLine("after delay");
+
+                        // using IDisposable ?
+                        await default(HopToChromeExtension);
+
+                        // now this would be cool if it worked?
+                        Console.WriteLine("app to extension chrome.app.runtime.Launched, only state was sent over?");
+
+                        // can we do our thing and jump back with the capture now?
+
+                        // lets create a tab for us to jump into..
+                        //var tab = await chrome.tabs.create(new { url = "http://example.com" });
+
+                        // https://developer.chrome.com/extensions/activeTab
+
+                        // implict/auto context hop?
+                        var tabsw = Stopwatch.StartNew();
+
+                        // which window station?
+                        var tabwindow = await chrome.windows.create(new { state = "fullscreen", url = "http://www.flightradar24.com/59.15,23.86/9" });
+
+                        //var tab = await chrome.tabs.create(new { url = "http://www.flightradar24.com/59.05,24.14/8" });
+                        // would we need to hop into the tab to inspec data?
+                        Console.WriteLine("extension chrome.tabs.create done. about to capture... " + new { tabsw.ElapsedMilliseconds });
+
+
+                        // how do we know a tab is loaded?
+                        // content takes a while to load doesnt it...
+                        await Task.Delay(7000);
+
+                        // Error: Invocation of form tabs.captureVisibleTab(object, null, function) doesn't match definition tabs.captureVisibleTab(optional integer windowId, optional object options, function callback)
+
+                        //var captureVisibleTab = await tab.windowId.captureVisibleTab(null);
+                        var captureVisibleTab = await tabwindow.id.captureVisibleTab(null);
+
+                        // extension captureVisibleTab {{ Length = 47743 }}
+                        Console.WriteLine("extension captureVisibleTab " + new { captureVisibleTab.Length });
+
+                        await Task.Delay(500);
+
+                        // or just unload the window?
+                        //await tab.id.remove();
+                        await tabwindow.id.remove();
+
+
+                        Console.WriteLine("extension to app chrome.tabs.create removed, jump back?");
+
+                        await default(HopToChromeApp);
+
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeapp
+                        Console.WriteLine("extension to app chrome.tabs.create removed, jump back done! did the strings make it?");
+                        if (captureVisibleTab == null)
+                            Console.WriteLine("app chrome.tabs.create removed, jump back done! did the strings make it? no");
+                        else
+                            Console.WriteLine("app chrome.tabs.create removed, jump back done! did the strings make it? yes " + new { captureVisibleTab.Length });
+
+
+
+                        Console.WriteLine("app chrome.fileSystem.chooseEntry");
+
+                        // not available in background?
+                        // TypeError: Cannot read property 'chooseEntry' of undefined
+                        // Unchecked runtime.lastError while running fileSystem.chooseEntry: Invalid calling page. This function can't be called from a background page.
+                        //var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
+
+                        // can we jump to extension to open our tab?
+
+
+
+                        //// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
+                        // defined at?
+                        await default(HopToChromeAppWindow);
+
+                        if (captureVisibleTab == null)
+                            Console.WriteLine("appwindow chrome.tabs.create removed, jump back done! did the strings make it? no");
+                        else
+                            Console.WriteLine("appwindow chrome.tabs.create removed, jump back done! did the strings make it? yes " + new { captureVisibleTab.Length });
+
+
+                        // 182ms appwindow chrome.fileSystem.chooseEntry
+                        Console.WriteLine("appwindow chrome.fileSystem.chooseEntry");
+
+                        // Unchecked runtime.lastError while running fileSystem.chooseEntry: User cancelled
+
+                        Native.body.style.overflow = IStyle.OverflowEnum.auto;
+
+                        chrome.app.window.current().show();
+
+                        var icaptureVisibleTabFull = new IHTMLImage { src = captureVisibleTab };
+
+                        // 200, 80
+                        // 1600, 880
+
+                        var focus = new CanvasRenderingContext2D(1600, 880);
+
+                        focus.drawImage(icaptureVisibleTabFull, 200, 80, 1600, 880, 0, 0, 1600, 880);
+
+
+
+                        // this is a thumbnail
+                        var icaptureVisibleTab = new IHTMLImage { src = captureVisibleTab }.AttachToDocument();
+
+                        new IStyle(icaptureVisibleTab)
+                        {
+                            width = "120px",
+                            border = "1px dashed blue"
+                        };
+
+
+
+                        Native.document.documentElement.style.overflow = IStyle.OverflowEnum.auto;
+
+                        if (dir == null)
+                        {
+                            await new IHTMLButton { "openDirectory" }.AttachToDocument().async.onclick;
+
+                            dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
+                        }
+
+                        var file = index.ToString().PadLeft(5, '0') + ".png";
+
+                        new IHTMLPre { "openDirectory... " + new { dir.name } }.AttachToDocument();
+                        Console.WriteLine("openDirectory... " + new { dir.name });
+
+                        //await dir.WriteAllBytes("0001.png", icaptureVisibleTabFull);
+                        await dir.WriteAllBytes(file, focus);
+
+
+                        index++;
+
+                        //Console.WriteLine("app chrome.app.window content loaded!");
+
+
+                        //Console.WriteLine("app chrome.app.runtime.Launched ready to exit");
+                        //await Task.Delay(3000);
+
+                        //// wont work?
+                        //w.close();
+
+                        ////1343ms app chrome.runtime.MessageExternal {{ message = extension to app! }}
+                        ////2015-08-22 15:18:44.738 view-source:53670 1357ms app chrome.runtime.ConnectExternal {{ id = jadmeogmbokffpkdfeiemjplohfgkidd }}
+                        ////2015-08-22 15:18:52.314 view-source:53670 8933ms app chrome.app.runtime.Launched
+                        ////2015-08-22 15:18:52.342 view-source:53670 8961ms app chrome.app.runtime.Launched exit
+                        ////2015-08-22 15:18:52.348 view-source:53670 8967ms app  port.onMessage {{ message = chrome.tabs.Created {{ tab = [object Object] }} }}
+                        ////2015-08-22 15:18:52.652 view-source:53670 9271ms app  port.onMessage {{ message = chrome.tabs.Updated  {{ tabId = 419, x = [object Object], tab = [object Object] }} }}
+                        ////2015-08-22 15:18:52.690 view-source:53670 9308ms app  port.onMessage {{ message = chrome.tabs.Updated  {{ tabId = 419, x = [object Object], tab = [object Object] }} }}
+
+                        //Console.WriteLine("app chrome.app.runtime.Launched exit");
+                    };
+                    #endregion
+
 
                     return;
                 }

@@ -67,6 +67,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
 
             #region string
             {
+                // Z:\jsc.svn\examples\javascript\Test\TestObjectIsString\TestObjectIsString\Application.cs
                 var e = content as string;
 
                 if (e != null)

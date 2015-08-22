@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{549D5E74-AE4D-4173-96B4-52F03695A096}</ProjectGuid>
+    <ProjectGuid>{3C88197D-5E5D-4CC9-9901-A68642AFF0D3}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ChromeExtensionHopToTabThenIFrame</RootNamespace>

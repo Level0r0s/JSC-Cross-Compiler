@@ -195,5 +195,31 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
             return x.data;
         }
+
+
+
+
+
+
+        public static implicit operator Blob(CanvasRenderingContext2D c)
+        {
+            // Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
+            // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\Application.cs
+
+            // = new IHTMLImage { src = gl.canvas.toDataURL() };
+
+            var data = c.canvas.toDataURL();
+
+            //var fileBytes = System.Convert.FromBase64String(data.SkipUntilOrEmpty("base64,"));
+
+            var prefix = "base64,";
+
+
+
+            var fileBytes = System.Convert.FromBase64String(
+                data.Substring(data.IndexOf(prefix) + prefix.Length));
+
+            return fileBytes;
+        }
     }
 }

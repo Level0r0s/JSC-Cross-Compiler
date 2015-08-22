@@ -83,6 +83,34 @@ interface chrome.management
 };
 
 
+interface chrome.WindowIdInteger // : int
+{
+};
+
+
+// https://developer.chrome.com/extensions/windows#type-Window
+interface chrome.Window
+{
+	attribute chrome.WindowIdInteger        id;
+
+
+	attribute chrome.Tab[] tabs;
+
+
+	attribute string        type;
+	attribute string        state;
+
+
+};
+
+interface chrome.windows
+{
+	// await new?
+	async static void create(any createData, function<chrome.Window> callback);
+	async static extension void remove(chrome.WindowIdInteger tabId, function<any> callback);
+
+};
+
 
 // X:\jsc.svn\examples\javascript\chrome\extensions\ChromeExtensionHopToTabThenIFrame\ChromeExtensionHopToTabThenIFrame\Application.cs
 // http://developer.chrome.com/extensions/tabs.html#type-Tab
@@ -92,9 +120,6 @@ interface chrome.TabIdInteger // : int
 {
 };
 
-interface chrome.WindowIdInteger // : int
-{
-};
 
 
 
