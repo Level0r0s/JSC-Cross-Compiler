@@ -12,6 +12,8 @@ namespace ScriptCoreLib.JavaScript.DOM
     [Script(HasNoPrototype = true, ExternalTarget = "MessageChannel")]
     public class MessageChannel
     {
+        // Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
+
 		// tested by?
 		// X:\jsc.svn\core\ScriptCoreLib\JavaScript\DOM\IWindow.postMessage.cs
 

@@ -169,6 +169,9 @@ namespace ChromeHybridCapture
         static int index;
 
 
+        //static bool nexttakeenabled;
+
+        static Stopwatch countdown;
 
         public Application(IApp page)
         {
@@ -276,7 +279,7 @@ namespace ChromeHybridCapture
 
 
 
-                                        #region HopToChromeApp.VirtualOnCompleted
+                                        #region extension: HopToChromeApp.VirtualOnCompleted
                                         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeapp
                                         HopToChromeApp.VirtualOnCompleted = async (that, continuation) =>
                                        {
@@ -315,16 +318,16 @@ namespace ChromeHybridCapture
                                                     // 191ms extension  port.onMessage {{ message = from app hello to extension, is_string = false, equals_typeofstring = false }}
 
                                                     // 219ms extension  port.onMessage {{ message = from app hello to extension, expando_isstring = true, is_string = false, equals_typeofstring = false }}
-                                                    var expando_isstring = ScriptCoreLib.JavaScript.Runtime.Expando.Of(message).IsString;
+                                                    //var expando_isstring = ScriptCoreLib.JavaScript.Runtime.Expando.Of(message).IsString;
 
                                                     // roslyn? wtf
-                                                    var is_string = message is string;
-                                                    var equals_typeofstring = message.GetType() == typeof(string);
+                                                    //var is_string = message is string;
+                                                    //var equals_typeofstring = message.GetType() == typeof(string);
 
-                                                    Console.WriteLine("extension  port.onMessage " + new { expando_isstring, is_string, equals_typeofstring });
+                                                    //Console.WriteLine("extension  port.onMessage " + new { expando_isstring, is_string, equals_typeofstring });
 
                                                     // extension  port.onMessage {{ state = null, TypeName = null }}
-                                                    if (expando_isstring)
+                                                    if (message is string)
                                                     {
                                                         Console.WriteLine("extension  port.onMessage: " + message);
 
@@ -453,8 +456,10 @@ namespace ChromeHybridCapture
                 {
                     Console.WriteLine("appwindow chrome.app.window.create, is that you?");
 
-                    // pass thru
-                    #region  Native.window.onmessage
+                    MessagePort appwindow_to_app = null;
+
+                    // called by? 619  app:HopToChromeAppWindow
+                    #region  appwindow Native.window.onmessage
                     Native.window.onmessage += e =>
                     {
                         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
@@ -475,6 +480,18 @@ namespace ChromeHybridCapture
                         if (message is string)
                         {
                             Console.WriteLine("appwindow    Native.window.onmessage: " + message);
+                            //Console.WriteLine("appwindow    Native.window.onmessage: " + new { e.ports });
+
+                            if (e.ports != null)
+                                foreach (var port in e.ports)
+                                {
+                                    Console.WriteLine("appwindow    Native.window.onmessage " + new { port });
+
+                                    appwindow_to_app = port;
+                                }
+
+                            //e.po
+
                             return;
                         }
 
@@ -573,6 +590,25 @@ namespace ChromeHybridCapture
                     #endregion
 
 
+                    #region appwindow:HopToChromeApp
+                    HopToChromeApp.VirtualOnCompleted = async (that, continuation) =>
+                    {
+                        // do we have the port to send back our portal warp?
+
+                        // state 0 ? or state -1 ?
+                        Console.WriteLine("appwindow HopToChromeApp VirtualOnCompleted enter " + new { appwindow_to_app });
+
+                        //// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
+                        //// async dont like ref?
+                        TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableContinuation r = TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableFromContinuation(continuation);
+                        // 29035ms extension  port.onMessage {{ message = do HopToChromeExtension }}
+                        appwindow_to_app.postMessage("do HopToChromeAppWindow " + new { r.shadowstate.TypeName, r.shadowstate.state });
+                        // now send the jump instruction... will it make it?
+                        appwindow_to_app.postMessage(r.shadowstate);
+                    };
+                    #endregion
+
+
                 }
                 else
                 {
@@ -586,27 +622,108 @@ namespace ChromeHybridCapture
 
 
 
+                    Action<object> appwindow_to_app = data =>
+                    {
+                        var xShadowIAsyncStateMachine = (TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine)data;
 
+                        Console.WriteLine("app appwindow_to_app " + new { xShadowIAsyncStateMachine.TypeName });
 
-                    #region HopToChromeAppWindow
+                        #region xAsyncStateMachineType
+                        var xAsyncStateMachineType = typeof(Application).Assembly.GetTypes().FirstOrDefault(
+                            xAsyncStateMachineTypeCandidate =>
+                            {
+                                // safety check 1
+
+                                //Console.WriteLine(new { sw.ElapsedMilliseconds, item.FullName });
+
+                                var xisIAsyncStateMachine = typeof(IAsyncStateMachine).IsAssignableFrom(xAsyncStateMachineTypeCandidate);
+                                if (xisIAsyncStateMachine)
+                                {
+                                    //Console.WriteLine(new { item.FullName, isIAsyncStateMachine });
+
+                                    return xAsyncStateMachineTypeCandidate.FullName == xShadowIAsyncStateMachine.TypeName;
+                                }
+
+                                return false;
+                            }
+                        );
+                        #endregion
+
+                        Console.WriteLine("app appwindow_to_app " + new { xAsyncStateMachineType });
+
+                        var NewStateMachine = FormatterServices.GetUninitializedObject(xAsyncStateMachineType);
+                        var isIAsyncStateMachine = NewStateMachine is IAsyncStateMachine;
+
+                        var NewStateMachineI = (IAsyncStateMachine)NewStateMachine;
+
+                        #region 1__state
+                        xAsyncStateMachineType.GetFields(
+                          System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance
+                          ).WithEach(
+                           AsyncStateMachineSourceField =>
+                           {
+
+                               Console.WriteLine(new { AsyncStateMachineSourceField });
+
+                               if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
+                               {
+                                   AsyncStateMachineSourceField.SetValue(
+                                       NewStateMachineI,
+                                       xShadowIAsyncStateMachine.state
+                                    );
+                               }
+
+                               // X:\jsc.svn\examples\javascript\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\CLRWebServiceInvoke.cs
+                               // field names/ tokens need to be encrypted like typeinfo.
+
+                               // some do manual restore
+                               // X:\jsc.svn\examples\javascript\chrome\extensions\ChromeExtensionHopToTabThenIFrame\ChromeExtensionHopToTabThenIFrame\Application.cs
+                               // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
+                               // or, are we supposed to initialize a string value here?
+
+                               var xStringField = TestSwitchToServiceContextAsync.ArrayListExtensions.AsEnumerable(xShadowIAsyncStateMachine.StringFields).FirstOrDefault(
+                                       f => DecoratedString(f.FieldName) == DecoratedString(AsyncStateMachineSourceField.Name)
+                                   );
+
+                               if (xStringField != null)
+                               {
+                                   // once we are to go back to client. we need to reverse it?
+
+                                   AsyncStateMachineSourceField.SetValue(
+                                           NewStateMachineI,
+                                           xStringField.value
+                                        );
+                                   // next xml?
+                                   // before lets send our strings back with the new state!
+                                   // what about exceptions?
+                               }
+                           }
+                      );
+                        #endregion
+
+                        NewStateMachineI.MoveNext();
+                    };
+
+                    #region app:HopToChromeAppWindow
                     HopToChromeAppWindow.VirtualOnCompleted = async (that, continuation) =>
                     {
                         // state 0 ? or state -1 ?
                         Console.WriteLine("app HopToChromeAppWindow VirtualOnCompleted enter ");
 
-
+                        #region outputWindow
                         if (that.window == null)
                         {
                             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
 
                             if (outputWindow == null)
                             {
+                                // https://developer.chrome.com/apps/app_window#type-CreateWindowOptions
                                 outputWindow = await chrome.app.window.create(
                                                        Native.document.location.pathname,
 
                                                        // https://developer.chrome.com/apps/app_window#type-CreateWindowOptions
                                                        // this ctually works. but we wont see console on app log..
-                                                       options: new { hidden = true }
+                                                       options: new { hidden = true, alwaysOnTop = true }
                                                 );
 
                                 ////xappwindow.setAlwaysOnTop
@@ -619,15 +736,34 @@ namespace ChromeHybridCapture
                             // reuse the window...
                             that.window = outputWindow;
                         }
+                        #endregion
+
 
                         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
-
                         // async dont like ref?
                         TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableContinuation r = TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableFromContinuation(continuation);
-
                         // 29035ms extension  port.onMessage {{ message = do HopToChromeExtension }}
-                        that.window.contentWindow.postMessage("do HopToChromeAppWindow " + new { r.shadowstate.TypeName, r.shadowstate.state });
 
+
+
+                        // Z:\jsc.svn\core\ScriptCoreLib\JavaScript\DOM\IWindow.postMessage.cs
+                        // how do we use this thing?
+                        var c = new MessageChannel();
+
+                        c.port1.onmessage += e =>
+                        {
+                            Console.WriteLine("app HopToChromeAppWindow MessageChannel onmessage " + new { e.data });
+
+                            appwindow_to_app(e.data);
+                        };
+
+                        c.port1.start();
+                        c.port2.start();
+
+
+                        //                    15ms appwindow    Native.window.onmessage: {{ ports = [object MessagePort] }}
+                        //2015-08-22 20:50:18.019 view-source:53702 17ms appwindow    Native.window.onmessage: {{ port = [object MessagePort] }}
+                        that.window.contentWindow.postMessage("do HopToChromeAppWindow " + new { r.shadowstate.TypeName, r.shadowstate.state }, transfer: c.port2);
 
                         // now send the jump instruction... will it make it?
                         that.window.contentWindow.postMessage(r.shadowstate);
@@ -638,7 +774,7 @@ namespace ChromeHybridCapture
 
 
 
-                    #region ConnectExternal
+                    #region app:ConnectExternal
                     chrome.runtime.ConnectExternal += port =>
                     {
                         // app chrome.runtime.ConnectExternal {{ name = , id = jadmeogmbokffpkdfeiemjplohfgkidd }}
@@ -826,6 +962,8 @@ namespace ChromeHybridCapture
                         // remember the connection to enable hop to extension?
                     };
 
+                    //Action AtLaunch = delegate { };
+
                     #region  Launched
                     // can the extension launch us too?
                     // either the user launches by a click or we launch from extension?
@@ -837,11 +975,14 @@ namespace ChromeHybridCapture
 
                         await Task.Delay(1);
 
-                        Console.WriteLine("after delay");
+                        nexttake:
+                        //Console.WriteLine("nexttake " + new { index });
+                        Console.WriteLine("nexttake");
 
                         // using IDisposable ?
                         await default(HopToChromeExtension);
 
+                        #region HopToChromeExtension
                         // now this would be cool if it worked?
                         Console.WriteLine("app to extension chrome.app.runtime.Launched, only state was sent over?");
 
@@ -857,6 +998,7 @@ namespace ChromeHybridCapture
 
                         // which window station?
                         var tabwindow = await chrome.windows.create(new { state = "fullscreen", url = "http://www.flightradar24.com/59.15,23.86/9" });
+                        //var tabwindow = await chrome.windows.create(new { state = "fullscreen", url = "http://example.com" });
 
                         //var tab = await chrome.tabs.create(new { url = "http://www.flightradar24.com/59.05,24.14/8" });
                         // would we need to hop into the tab to inspec data?
@@ -870,7 +1012,7 @@ namespace ChromeHybridCapture
                         // Error: Invocation of form tabs.captureVisibleTab(object, null, function) doesn't match definition tabs.captureVisibleTab(optional integer windowId, optional object options, function callback)
 
                         //var captureVisibleTab = await tab.windowId.captureVisibleTab(null);
-                        var captureVisibleTab = await tabwindow.id.captureVisibleTab(null);
+                        var captureVisibleTab = await tabwindow.id.captureVisibleTab(options: new { format = "png" });
 
                         // extension captureVisibleTab {{ Length = 47743 }}
                         Console.WriteLine("extension captureVisibleTab " + new { captureVisibleTab.Length });
@@ -883,6 +1025,7 @@ namespace ChromeHybridCapture
 
 
                         Console.WriteLine("extension to app chrome.tabs.create removed, jump back?");
+                        #endregion
 
                         await default(HopToChromeApp);
 
@@ -910,6 +1053,7 @@ namespace ChromeHybridCapture
                         // defined at?
                         await default(HopToChromeAppWindow);
 
+                        #region HopToChromeAppWindow
                         if (captureVisibleTab == null)
                             Console.WriteLine("appwindow chrome.tabs.create removed, jump back done! did the strings make it? no");
                         else
@@ -958,14 +1102,17 @@ namespace ChromeHybridCapture
 
                         var file = index.ToString().PadLeft(5, '0') + ".png";
 
-                        new IHTMLPre { "openDirectory... " + new { dir.name } }.AttachToDocument();
-                        Console.WriteLine("openDirectory... " + new { dir.name });
+                        new IHTMLPre { "WriteAllBytes... " + new { file } }.AttachToDocument();
 
                         //await dir.WriteAllBytes("0001.png", icaptureVisibleTabFull);
                         await dir.WriteAllBytes(file, focus);
 
 
                         index++;
+                        #endregion
+
+
+
 
                         //Console.WriteLine("app chrome.app.window content loaded!");
 
@@ -985,6 +1132,55 @@ namespace ChromeHybridCapture
                         ////2015-08-22 15:18:52.690 view-source:53670 9308ms app  port.onMessage {{ message = chrome.tabs.Updated  {{ tabId = 419, x = [object Object], tab = [object Object] }} }}
 
                         //Console.WriteLine("app chrome.app.runtime.Launched exit");
+
+
+                        // or tcp?
+                        //await new IHTMLButton { "next take" }.AttachToDocument().async.onclick;
+
+
+                        // var countdown = Stopwatch.StartNew();
+
+                        //Error CS1929  'int' does not contain a definition for 'GetAwaiter' and the best extension method overload 'IXMLHttpRequestAsyncExtensions.GetAwaiter(IXMLHttpRequest)' requires a receiver of type 'IXMLHttpRequest'  ChromeHybridCapture Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs 1141    IntelliSense
+
+                        // script: error JSC1000: No implementation found for this native method, please implement [static System.TimeSpan.op_Subtraction(System.TimeSpan, System.TimeSpan)]
+
+                        // TypeError: Cannot set property 'countdown' of null
+
+                        //  Cannot set property 'sw' of null
+                        countdown = Stopwatch.StartNew();
+
+                        new IHTMLPre { () => "close to abort... " + countdown.ElapsedMilliseconds }.AttachToDocument();
+
+                        await Task.Delay(1000);
+
+                        //await Task.WhenAny(
+                        //      new IHTMLButton {
+                        //          "click next take or wait "
+                        //      }.AttachToDocument().async.onclick,
+                        //      Task.Delay(1000)
+                        //  );
+
+
+                        //await
+                        //  new IHTMLButton {
+                        //          "click next take "
+                        //  }.AttachToDocument().async.onclick;
+
+                        Native.body.Clear();
+
+                        new IHTMLPre { "WriteAllBytes done " + new { file } }.AttachToDocument();
+                        new IHTMLPre { "preparing..." }.AttachToDocument();
+
+                        Console.WriteLine("appwindow: appwindow to app");
+
+                        await default(HopToChromeApp);
+
+                        Console.WriteLine("app: appwindow to app");
+
+                        goto nexttake;
+
+
+
                     };
                     #endregion
 
