@@ -342,24 +342,37 @@ namespace ScriptCoreLib.JavaScript.WebGL
 
 
 
-        public static implicit operator Blob(WebGLRenderingContext c)
+
+
+
+        public static implicit operator IHTMLCanvas(WebGLRenderingContext c)
         {
-            // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\Application.cs
+            // chrome://blob-internals/
 
-            // = new IHTMLImage { src = gl.canvas.toDataURL() };
-
-            var data = c.canvas.toDataURL();
-
-            //var fileBytes = System.Convert.FromBase64String(data.SkipUntilOrEmpty("base64,"));
-
-            var prefix = "base64,";
-
-
-
-            var fileBytes = System.Convert.FromBase64String(
-                data.Substring(data.IndexOf(prefix) + prefix.Length));
-
-            return fileBytes;
+            // z:\jsc.svn\examples\javascript\chrome\hybrid\chromehybridcapture\chromehybridcapture\application.cs
+            // X:\jsc.svn\examples\javascript\chrome\apps\ChromeHTMLImageToGLSLBytes\ChromeHTMLImageToGLSLBytes\Application.cs
+            return c.canvas;
         }
+
+
+        //public static implicit operator Blob(WebGLRenderingContext c)
+        //{
+        //    // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\Application.cs
+
+        //    // = new IHTMLImage { src = gl.canvas.toDataURL() };
+
+        //    var data = c.canvas.toDataURL();
+
+        //    //var fileBytes = System.Convert.FromBase64String(data.SkipUntilOrEmpty("base64,"));
+
+        //    var prefix = "base64,";
+
+
+
+        //    var fileBytes = System.Convert.FromBase64String(
+        //        data.Substring(data.IndexOf(prefix) + prefix.Length));
+
+        //    return fileBytes;
+        //}
     }
 }

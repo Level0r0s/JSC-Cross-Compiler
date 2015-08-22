@@ -117,9 +117,13 @@ namespace ScriptCoreLib.JavaScript.DOM
 
         static Blob bytes;
 
-        public static Task WriteAllBytes(this DirectoryEntry that, string filename, WebGL.WebGLRenderingContext gl)
+        //public static Task WriteAllBytes(this DirectoryEntry that, string filename, WebGL.WebGLRenderingContext gl)
+        //{
+        //}
+
+        public static Task WriteAllBytes(this DirectoryEntry that, string filename, IHTMLCanvas canvas)
         {
-            var data = gl.canvas.toDataURL();
+            var data = canvas.toDataURL();
             //var data = canvas.toDataURL(quality: 0.1);
 
             var prefix = "base64,";
@@ -130,11 +134,15 @@ namespace ScriptCoreLib.JavaScript.DOM
                 data.Substring(data.IndexOf(prefix) + prefix.Length));
 
             // https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/jcrEI_jfYFs
+            // this blob wont delete?
             bytes = new Blob(
                 blobParts: new ArrayBufferView[] { fileBytes },
-                options: new { type = "application/octet-stream" }
+                options: new { type = "application/octet-stream;" + filename }
             );
 
+            fileBytes = null;
+            data = null;
+            canvas = null;
 
             var c = new TaskCompletionSource<DirectoryEntry>();
 

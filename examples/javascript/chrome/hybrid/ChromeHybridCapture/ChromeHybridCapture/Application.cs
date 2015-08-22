@@ -381,7 +381,7 @@ namespace ChromeHybridCapture
                                                        AsyncStateMachineSourceField =>
                                                        {
 
-                                                           Console.WriteLine(new { AsyncStateMachineSourceField });
+                                                           //Console.WriteLine(new { AsyncStateMachineSourceField });
 
                                                            if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
                                                            {
@@ -546,7 +546,7 @@ namespace ChromeHybridCapture
                            AsyncStateMachineSourceField =>
                            {
 
-                               Console.WriteLine(new { AsyncStateMachineSourceField });
+                               //Console.WriteLine(new { AsyncStateMachineSourceField });
 
                                if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
                                {
@@ -663,7 +663,7 @@ namespace ChromeHybridCapture
                            AsyncStateMachineSourceField =>
                            {
 
-                               Console.WriteLine(new { AsyncStateMachineSourceField });
+                               //Console.WriteLine(new { AsyncStateMachineSourceField });
 
                                if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
                                {
@@ -861,7 +861,7 @@ namespace ChromeHybridCapture
                                        AsyncStateMachineSourceField =>
                                        {
 
-                                           Console.WriteLine(new { AsyncStateMachineSourceField });
+                                           //Console.WriteLine(new { AsyncStateMachineSourceField });
 
                                            if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
                                            {
@@ -1012,7 +1012,19 @@ namespace ChromeHybridCapture
                         // Error: Invocation of form tabs.captureVisibleTab(object, null, function) doesn't match definition tabs.captureVisibleTab(optional integer windowId, optional object options, function callback)
 
                         //var captureVisibleTab = await tab.windowId.captureVisibleTab(null);
+
+                        // Unchecked runtime.lastError while running tabs.captureVisibleTab: Failed to capture tab: unknown error
+
+                        retry_captureVisibleTab:
                         var captureVisibleTab = await tabwindow.id.captureVisibleTab(options: new { format = "png" });
+
+
+                        if (captureVisibleTab == null)
+                        {
+                            await Task.Delay(500);
+                            Console.WriteLine("extension chrome.tabs.create done. about to capture... error");
+                            goto retry_captureVisibleTab;
+                        }
 
                         // extension captureVisibleTab {{ Length = 47743 }}
                         Console.WriteLine("extension captureVisibleTab " + new { captureVisibleTab.Length });
@@ -1066,17 +1078,25 @@ namespace ChromeHybridCapture
                         // Unchecked runtime.lastError while running fileSystem.chooseEntry: User cancelled
 
                         Native.body.style.overflow = IStyle.OverflowEnum.auto;
+                        Native.body.Clear();
 
                         chrome.app.window.current().show();
 
-                        var icaptureVisibleTabFull = new IHTMLImage { src = captureVisibleTab };
+                        var icaptureVisibleTabFull = await new IHTMLImage { src = captureVisibleTab }.async.oncomplete;
+                        ;
 
                         // 200, 80
                         // 1600, 880
 
-                        var focus = new CanvasRenderingContext2D(1600, 880);
+                        // 1920x1080
+                        var focusw = icaptureVisibleTabFull.width - 320;
+                        var focush = icaptureVisibleTabFull.height - 200;
 
-                        focus.drawImage(icaptureVisibleTabFull, 200, 80, 1600, 880, 0, 0, 1600, 880);
+                        new IHTMLPre { new { focusw, focush } }.AttachToDocument();
+
+                        var focus = new CanvasRenderingContext2D(focusw, focush);
+
+                        focus.drawImage(icaptureVisibleTabFull, 200, 80, focusw, focush, 0, 0, focusw, focush);
 
 
 
@@ -1105,8 +1125,15 @@ namespace ChromeHybridCapture
                         new IHTMLPre { "WriteAllBytes... " + new { file } }.AttachToDocument();
 
                         //await dir.WriteAllBytes("0001.png", icaptureVisibleTabFull);
-                        await dir.WriteAllBytes(file, focus);
 
+                        // chrome://blob-internals/
+                        // those blobs wont go away...
+                        // GC kicks in at 36 it seems.
+                        await dir.WriteAllBytes(file, focus);
+                        focus = null;
+
+
+                        new IHTMLPre { "WriteAllBytes... done " + new { file } }.AttachToDocument();
 
                         index++;
                         #endregion
@@ -1151,7 +1178,8 @@ namespace ChromeHybridCapture
 
                         new IHTMLPre { () => "close to abort... " + countdown.ElapsedMilliseconds }.AttachToDocument();
 
-                        await Task.Delay(1000);
+                        // GC?
+                        await Task.Delay(2000);
 
                         //await Task.WhenAny(
                         //      new IHTMLButton {
@@ -1166,9 +1194,7 @@ namespace ChromeHybridCapture
                         //          "click next take "
                         //  }.AttachToDocument().async.onclick;
 
-                        Native.body.Clear();
 
-                        new IHTMLPre { "WriteAllBytes done " + new { file } }.AttachToDocument();
                         new IHTMLPre { "preparing..." }.AttachToDocument();
 
                         Console.WriteLine("appwindow: appwindow to app");

@@ -108,24 +108,24 @@ namespace ADBS6CameraTimelapser
 
             // Additional information: Cannot create a file when that file already exists.
 
-            var ffmpegNNNNfiles = Directory.GetFiles(storage).OrderBy(x => new FileInfo(x).LastWriteTime).Select(
-                (x, i) =>
-                {
-                    var iNNNN = i.ToString("0000");
-                    var t = Path.GetDirectoryName(x) + "/" + iNNNN + ".jpg";
+            //var ffmpegNNNNfiles = Directory.GetFiles(storage).OrderBy(x => new FileInfo(x).LastWriteTime).Select(
+            //    (x, i) =>
+            //    {
+            //        var iNNNN = i.ToString("0000");
+            //        var t = Path.GetDirectoryName(x) + "/" + iNNNN + ".jpg";
 
-                    if (new FileInfo(x).FullName != new FileInfo(t).FullName)
-                    {
-                        File.Move(
-                            x, t
+            //        if (new FileInfo(x).FullName != new FileInfo(t).FullName)
+            //        {
+            //            File.Move(
+            //                x, t
 
-                        );
-                    }
+            //            );
+            //        }
 
 
-                    return new { x, i, iNNNN };
-                }
-            ).ToArray();
+            //        return new { x, i, iNNNN };
+            //    }
+            //).ToArray();
 
 
             var adb = @"x:\util\android-sdk-windows\platform-tools\adb.exe";
@@ -519,7 +519,7 @@ namespace ADBS6CameraTimelapser
 
                     var i = Directory.GetFiles(storage).Count();
 
-                    var iNNNN = i.ToString("0000");
+                    var iNNNN = i.ToString("00000");
 
                     //    var args = "shell dumpsys battery";
                 recheck: ;
@@ -580,6 +580,7 @@ namespace ADBS6CameraTimelapser
 
                 // error: closed
 
+                #region check camera
                 if (beep)
                 {
                     // http://community.spiceworks.com/topic/163415-we-want-the-beep-sound-from-remote-desktop-server
@@ -635,6 +636,10 @@ namespace ADBS6CameraTimelapser
                     do_adb("-s " + device + " shell \"am start -n com.sec.android.app.camera/.Camera\" ");
                     Thread.Sleep(4300);
                 }
+                #endregion
+
+
+
 
             }
 

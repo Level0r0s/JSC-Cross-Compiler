@@ -140,6 +140,9 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
 		public static implicit operator IHTMLCanvas(CanvasRenderingContext2D c)
 		{
+            // chrome://blob-internals/
+
+            // z:\jsc.svn\examples\javascript\chrome\hybrid\chromehybridcapture\chromehybridcapture\application.cs
 			// X:\jsc.svn\examples\javascript\chrome\apps\ChromeHTMLImageToGLSLBytes\ChromeHTMLImageToGLSLBytes\Application.cs
 			return c.canvas;
 		}
@@ -201,25 +204,27 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
 
 
-        public static implicit operator Blob(CanvasRenderingContext2D c)
-        {
-            // Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
-            // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\Application.cs
+        //public static implicit operator Blob(CanvasRenderingContext2D c)
+        //{
+        //    // leak?
 
-            // = new IHTMLImage { src = gl.canvas.toDataURL() };
+        //    // Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
+        //    // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\Application.cs
 
-            var data = c.canvas.toDataURL();
+        //    // = new IHTMLImage { src = gl.canvas.toDataURL() };
 
-            //var fileBytes = System.Convert.FromBase64String(data.SkipUntilOrEmpty("base64,"));
+        //    var data = c.canvas.toDataURL();
 
-            var prefix = "base64,";
+        //    //var fileBytes = System.Convert.FromBase64String(data.SkipUntilOrEmpty("base64,"));
+
+        //    var prefix = "base64,";
 
 
 
-            var fileBytes = System.Convert.FromBase64String(
-                data.Substring(data.IndexOf(prefix) + prefix.Length));
+        //    var fileBytes = System.Convert.FromBase64String(
+        //        data.Substring(data.IndexOf(prefix) + prefix.Length));
 
-            return fileBytes;
-        }
+        //    return fileBytes;
+        //}
     }
 }
