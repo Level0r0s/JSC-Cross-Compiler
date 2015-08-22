@@ -217,6 +217,13 @@ namespace ChromeTabsCapture
             {
                 Console.WriteLine("self_chrome_tabs");
 
+
+                chrome.tabs.Created += async tab =>
+                {
+                    Console.WriteLine(" chrome.tabs.Created " + new { tab });
+
+                };
+
                 chrome.tabs.Updated += async (tabId, x, tab) =>
                 {
                     //  Updated {{ i = 0, x = null, tab = null }}

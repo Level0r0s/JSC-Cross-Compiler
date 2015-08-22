@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeCaptureToFile", "ChromeCaptureToFile\ChromeCaptureToFile.csproj", "{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeTabsCapture", "..\..\extensions\ChromeTabsCapture\ChromeTabsCapture\ChromeTabsCapture.csproj", "{549D5E74-AE4D-4173-96B4-52F03695A096}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeWebviewElementExperiment", "..\ChromeWebviewElementExperiment\ChromeWebviewElementExperiment\ChromeWebviewElementExperiment.csproj", "{0D736B38-1399-47C6-993F-4916BAD03990}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{B1F7789F-6248-47D6-9EE2-0534B305BFE4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.ActiveCfg = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.Build.0 = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.ActiveCfg = Release|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.Build.0 = Release|x86
+		{549D5E74-AE4D-4173-96B4-52F03695A096}.Debug|x86.ActiveCfg = Debug|x86
+		{549D5E74-AE4D-4173-96B4-52F03695A096}.Debug|x86.Build.0 = Debug|x86
+		{549D5E74-AE4D-4173-96B4-52F03695A096}.Release|x86.ActiveCfg = Release|x86
+		{549D5E74-AE4D-4173-96B4-52F03695A096}.Release|x86.Build.0 = Release|x86
+		{0D736B38-1399-47C6-993F-4916BAD03990}.Debug|x86.ActiveCfg = Debug|x86
+		{0D736B38-1399-47C6-993F-4916BAD03990}.Debug|x86.Build.0 = Debug|x86
+		{0D736B38-1399-47C6-993F-4916BAD03990}.Release|x86.ActiveCfg = Release|x86
+		{0D736B38-1399-47C6-993F-4916BAD03990}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{549D5E74-AE4D-4173-96B4-52F03695A096} = {B1F7789F-6248-47D6-9EE2-0534B305BFE4}
+		{0D736B38-1399-47C6-993F-4916BAD03990} = {B1F7789F-6248-47D6-9EE2-0534B305BFE4}
+	EndGlobalSection
+EndGlobal
