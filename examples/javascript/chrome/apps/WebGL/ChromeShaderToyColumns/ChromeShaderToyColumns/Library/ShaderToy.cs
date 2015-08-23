@@ -261,6 +261,12 @@ namespace ChromeShaderToyColumns.Library
 
         public class EffectPass
         {
+            // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyProgramsAsTiles\ChromeShaderToyProgramsAsTiles\Application.cs
+            // WebGLFramebuffer
+            public WebGLFramebuffer xWebGLFramebuffer0;
+            public WebGLTexture xWebGLTexture0;
+            
+
             // x:\jsc.svn\examples\javascript\chrome\apps\webgl\chromeshadertoyprogramsasgazetiles\chromeshadertoyprogramsasgazetiles\application.cs
 
             public RenderTargetAtDetail target0;

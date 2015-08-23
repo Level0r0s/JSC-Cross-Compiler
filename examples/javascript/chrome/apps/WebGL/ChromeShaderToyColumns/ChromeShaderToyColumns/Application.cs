@@ -212,6 +212,7 @@ namespace ChromeShaderToyColumns
 						);
 
 						// what does it do?
+                        // need redux build..
 						gl.flush();
 
 						await u.animate.async.@checked;

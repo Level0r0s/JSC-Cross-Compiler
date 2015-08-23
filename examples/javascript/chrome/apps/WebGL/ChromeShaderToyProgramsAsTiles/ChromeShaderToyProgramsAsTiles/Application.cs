@@ -17,154 +17,157 @@ using ChromeShaderToyProgramsAsTiles;
 using ChromeShaderToyProgramsAsTiles.Design;
 using ChromeShaderToyProgramsAsTiles.HTML.Pages;
 using ScriptCoreLib.JavaScript.WebGL;
+// needs project to be loaded? x86 build configuration
+// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150823
 using ChromeShaderToyPrograms;
 using System.Diagnostics;
 using ChromeShaderToyColumns.Library;
 
 namespace ChromeShaderToyProgramsAsTiles
 {
-	using ScriptCoreLib.GLSL;
-	using gl = WebGLRenderingContext;
+    using ScriptCoreLib.GLSL;
+    using gl = WebGLRenderingContext;
 
-	/// <summary>
-	/// Your client side code running inside a web browser as JavaScript.
-	/// </summary>
-	public sealed class Application : ApplicationWebService
-	{
-		// This type of exception does happen when you are stuck inside unmanaged code which performs an uninterruptable blocking operation. Waiting for a native socket select would be such a case. If your Dll does cause socket connections make sure you close them before they your unload your AppDomain.
-		// https://social.msdn.microsoft.com/Forums/vstudio/en-US/01feeacf-883b-4058-b6c4-40ddbd67fa79/error-while-unloading-appdomain-exception-from-hresult-0x80131015?forum=clr
+    /// <summary>
+    /// Your client side code running inside a web browser as JavaScript.
+    /// </summary>
+    public sealed class Application : ApplicationWebService
+    {
+        // This type of exception does happen when you are stuck inside unmanaged code which performs an uninterruptable blocking operation. Waiting for a native socket select would be such a case. If your Dll does cause socket connections make sure you close them before they your unload your AppDomain.
+        // https://social.msdn.microsoft.com/Forums/vstudio/en-US/01feeacf-883b-4058-b6c4-40ddbd67fa79/error-while-unloading-appdomain-exception-from-hresult-0x80131015?forum=clr
 
-		//2ae8:01:01 [jsc.meta]
-		//		worker unloading... { Count = 0 }
+        //2ae8:01:01 [jsc.meta]
+        //		worker unloading... { Count = 0 }
 
-		//		Unhandled Exception: System.CannotUnloadAppDomainException: Error while unloading appdomain. (Exception from HRESULT: 0x80131015)
-		//   at System.AppDomain.Unload(AppDomain domain)
-		//   at MultiAssemblyLauncher.Invoke(String[] args, String id, WorkerStartAction yield) in X:\jsc.internal.git\compiler\jsc\Program.cs:line 290
+        //		Unhandled Exception: System.CannotUnloadAppDomainException: Error while unloading appdomain. (Exception from HRESULT: 0x80131015)
+        //   at System.AppDomain.Unload(AppDomain domain)
+        //   at MultiAssemblyLauncher.Invoke(String[] args, String id, WorkerStartAction yield) in X:\jsc.internal.git\compiler\jsc\Program.cs:line 290
 
-		/// <summary>
-		/// This is a javascript application.
-		/// </summary>
-		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
-		public Application(IApp page)
-		{
-			// https://forums.creativecow.net/thread/2/982779
+        /// <summary>
+        /// This is a javascript application.
+        /// </summary>
+        /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
+        public Application(IApp page)
+        {
+            // https://forums.creativecow.net/thread/2/982779
 
-			// https://www.shadertoy.com/view/MsfXDS
-
-
-			// show shader based on tab selection?
+            // https://www.shadertoy.com/view/MsfXDS
 
 
-
-			//Native.document.documentElement.style.overflow = IStyle.OverflowEnum.auto;
-
-
-			// chrome by default has no scrollbar, bowser does
-			Native.document.documentElement.style.overflow = IStyle.OverflowEnum.hidden;
-			Native.body.style.margin = "0px";
-			//Native.body.style.backgroundColor = "yellow";
-			Native.body.Clear();
-
-			// ipad?
-			Native.window.onerror +=
-				e =>
-				{
-					new IHTMLPre {
-						"error " + new { e.message, e.error }
-					}.AttachToDocument();
-				};
-
-			// https://www.youtube.com/watch?v=tnS8K0yhmZU
-			// http://www.reddit.com/r/oculus/comments/2sv5lk/new_release_of_shadertoy_vr/
-			// https://www.shadertoy.com/view/lsSGRz
-
-			// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201503/20150309
-			// https://zproxy.wordpress.com/2015/03/09/project-windstorm/
-			// https://github.com/jimbo00000/RiftRay
-
-
-			#region += Launched chrome.app.window
-			dynamic self = Native.self;
-			dynamic self_chrome = self.chrome;
-			object self_chrome_socket = self_chrome.socket;
-
-			if (self_chrome_socket != null)
-			{
-				if (!(Native.window.opener == null && Native.window.parent == Native.window.self))
-				{
-					Console.WriteLine("chrome.app.window.create, is that you?");
-
-					// pass thru
-				}
-				else
-				{
-					// should jsc send a copresence udp message?
-					chrome.runtime.UpdateAvailable += delegate
-					{
-						new chrome.Notification(title: "UpdateAvailable");
-
-					};
-
-					chrome.app.runtime.Launched += async delegate
-					{
-						// 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
-						Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
-
-						new chrome.Notification(title: "ChromeShaderToyProgramsAsTiles");
-
-						var xappwindow = await chrome.app.window.create(
-							   Native.document.location.pathname, options: null
-						);
-
-						//xappwindow.setAlwaysOnTop
-
-						xappwindow.show();
-
-						await xappwindow.contentWindow.async.onload;
-
-						Console.WriteLine("chrome.app.window loaded!");
-					};
-
-
-					return;
-				}
-			}
-			#endregion
-
-
-			// http://stackoverflow.com/questions/3433010/what-is-the-getcsscanvascontext-method-of-an-html5-element
-			// CanvasRenderingContext getCSSCanvasContext(in DOMString contextType, in DOMString identifier, in long width, in long height);
+            // show shader based on tab selection?
 
 
 
-			var gl = new WebGLRenderingContext(alpha: true);
+            //Native.document.documentElement.style.overflow = IStyle.OverflowEnum.auto;
 
-			if (gl == null)
-			{
 
-				new IHTMLPre {
-					// https://code.google.com/p/chromium/issues/detail?id=294207
-					"Rats! WebGL hit a snag."
-					//,
-					//new IHTMLAnchor { href = "about:gpu", innerText = "about:gpu" }
-				}.AttachToDocument();
-				return;
-			}
+            // chrome by default has no scrollbar, bowser does
+            Native.document.documentElement.style.overflow = IStyle.OverflowEnum.hidden;
+            Native.body.style.margin = "0px";
+            //Native.body.style.backgroundColor = "yellow";
+            Native.body.Clear();
 
-			#region oncontextlost
-			gl.oncontextlost +=
-				e =>
-				{
-					//[12144:10496:0311 / 120850:ERROR: gpu_watchdog_thread.cc(314)] : The GPU process hung. Terminating after 10000 ms.
-					//   GpuProcessHostUIShim: The GPU process crashed!
-					gl.canvas.Orphanize();
-					gl = null;
+            // ipad?
+            Native.window.onerror +=
+                e =>
+                {
+                    new IHTMLPre {
+                        "error " + new { e.message, e.error }
+                    }.AttachToDocument();
+                };
 
-					Native.document.body.Clear();
+            // https://www.youtube.com/watch?v=tnS8K0yhmZU
+            // http://www.reddit.com/r/oculus/comments/2sv5lk/new_release_of_shadertoy_vr/
+            // https://www.shadertoy.com/view/lsSGRz
 
-					new IHTMLPre {
-						// https://code.google.com/p/chromium/issues/detail?id=294207
-						@"Rats! WebGL hit a snag.
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201503/20150309
+            // https://zproxy.wordpress.com/2015/03/09/project-windstorm/
+            // https://github.com/jimbo00000/RiftRay
+            //            error CS0656: Missing compiler required member 'Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create'
+            //3 > Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyProgramsAsTiles\ChromeShaderToyProgramsAsTiles\Shaders\GeometryVertexShader.
+
+            #region += Launched chrome.app.window
+            dynamic self = Native.self;
+            dynamic self_chrome = self.chrome;
+            object self_chrome_socket = self_chrome.socket;
+
+            if (self_chrome_socket != null)
+            {
+                if (!(Native.window.opener == null && Native.window.parent == Native.window.self))
+                {
+                    Console.WriteLine("chrome.app.window.create, is that you?");
+
+                    // pass thru
+                }
+                else
+                {
+                    // should jsc send a copresence udp message?
+                    chrome.runtime.UpdateAvailable += delegate
+                    {
+                        new chrome.Notification(title: "UpdateAvailable");
+
+                    };
+
+                    chrome.app.runtime.Launched += async delegate
+                    {
+                        // 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
+                        Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
+
+                        new chrome.Notification(title: "ChromeShaderToyProgramsAsTiles");
+
+                        var xappwindow = await chrome.app.window.create(
+                               Native.document.location.pathname, options: null
+                        );
+
+                        //xappwindow.setAlwaysOnTop
+
+                        xappwindow.show();
+
+                        await xappwindow.contentWindow.async.onload;
+
+                        Console.WriteLine("chrome.app.window loaded!");
+                    };
+
+
+                    return;
+                }
+            }
+            #endregion
+
+
+            // http://stackoverflow.com/questions/3433010/what-is-the-getcsscanvascontext-method-of-an-html5-element
+            // CanvasRenderingContext getCSSCanvasContext(in DOMString contextType, in DOMString identifier, in long width, in long height);
+
+
+
+            var gl = new WebGLRenderingContext(alpha: true);
+
+            if (gl == null)
+            {
+
+                new IHTMLPre {
+                    // https://code.google.com/p/chromium/issues/detail?id=294207
+                    "Rats! WebGL hit a snag."
+                    //,
+                    //new IHTMLAnchor { href = "about:gpu", innerText = "about:gpu" }
+                }.AttachToDocument();
+                return;
+            }
+
+            #region oncontextlost
+            gl.oncontextlost +=
+                e =>
+                {
+                    //[12144:10496:0311 / 120850:ERROR: gpu_watchdog_thread.cc(314)] : The GPU process hung. Terminating after 10000 ms.
+                    //   GpuProcessHostUIShim: The GPU process crashed!
+                    gl.canvas.Orphanize();
+                    gl = null;
+
+                    Native.document.body.Clear();
+
+                    new IHTMLPre {
+                        // https://code.google.com/p/chromium/issues/detail?id=294207
+                        @"Rats! WebGL hit a snag.
 oncontextlost.
 The GPU process hung. Terminating. 
 check chrome://gpu for log messages.  
@@ -172,749 +175,757 @@ do we have a stack trace?
 
 " + new { e.statusMessage } ,
 
-						// chrome sends us to about:blank?
-						//new IHTMLAnchor {
+                        // chrome sends us to about:blank?
+                        //new IHTMLAnchor {
 
-						//	target = "_blank",
+                        //	target = "_blank",
 
-						//	href = "about:gpu", innerText = "about:gpu",
+                        //	href = "about:gpu", innerText = "about:gpu",
 
-						//	// http://tirania.org/blog/archive/2009/Jul-27-1.html
-						//	//onclick += de
-						//}
-						//.With(a => {  a.onclick += e => { e.preventDefault();  Native.window.open("about:gpu"); }; } )
-
-
-					}.AttachToDocument();
-				};
-			#endregion
+                        //	// http://tirania.org/blog/archive/2009/Jul-27-1.html
+                        //	//onclick += de
+                        //}
+                        //.With(a => {  a.onclick += e => { e.preventDefault();  Native.window.open("about:gpu"); }; } )
 
 
-
-
-
-
-			//// page by page
-			//var combo = new IHTMLSelect().AttachToDocument();
-
-			//combo.style.position = IStyle.PositionEnum.absolute;
-			//combo.style.left = "0px";
-			//combo.style.top = "0px";
-			////combo.style.right = "0px";
-			//combo.style.width = "100%";
-
-			//combo.style.backgroundColor = "rgba(255,255,255,0.5)";
-			////combo.style.backgroundColor = "rgba(255,255,0,0.5)";
-			////combo.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.5 0%,rgba(255,255,255,0.0 100%))";
-			//combo.style.border = "0px solid transparent";
-			//combo.style.fontSize = "large";
-			//combo.style.paddingLeft = "1em";
-			//combo.style.fontFamily = IStyle.FontFamilyEnum.Verdana;
-			//combo.style.cursor = IStyle.CursorEnum.pointer;
+                    }.AttachToDocument();
+                };
+            #endregion
 
 
 
 
 
-			var c = gl.canvas.AttachToDocument();
-			c.style.position = IStyle.PositionEnum.@fixed;
 
-			#region onresize
-			new { }.With(
-				async delegate
-				{
-					do
-					{
-						c.width = Native.window.Width;
-						c.height = Native.window.Height;
-						c.style.SetSize(c.width, c.height);
-					}
-					while (await Native.window.async.onresize);
-				}
-			);
-			#endregion
+            //// page by page
+            //var combo = new IHTMLSelect().AttachToDocument();
 
+            //combo.style.position = IStyle.PositionEnum.absolute;
+            //combo.style.left = "0px";
+            //combo.style.top = "0px";
+            ////combo.style.right = "0px";
+            //combo.style.width = "100%";
 
-			// middle mouse/two fingers to pan?
-			#region CaptureMouse
-			var mMouseOriX = 0;
-			var mMouseOriY = 0;
-			var mMousePosX = 0;
-			var mMousePosY = 0;
-
-			c.onmousedown += async ev =>
-			{
-				mMouseOriX = ev.CursorX;
-				mMouseOriY = ev.CursorY;
-				mMousePosX = mMouseOriX;
-				mMousePosY = mMouseOriY;
-
-				// why aint it canvas?
-				//ev.Element
-				//ev.CaptureMouse();
-
-				// using ?
-				ev.Element.requestPointerLock();
-				await ev.Element.async.onmouseup;
-				Native.document.exitPointerLock();
-
-				mMouseOriX = -Math.Abs(mMouseOriX);
-				mMouseOriY = -Math.Abs(mMouseOriY);
-			};
-
-			c.onmousemove += ev =>
-			{
-				if (ev.MouseButton == IEvent.MouseButtonEnum.Left)
-				{
-					mMousePosX += ev.movementX;
-					mMousePosY += ev.movementY;
-				}
-			};
-
-			//c.onmousewheel += ev =>
-			//{
-			//	ev.preventDefault();
-			//	ev.stopPropagation();
-
-			//	mMousePosY += 3 * ev.WheelDirection;
-			//};
-
-			#endregion
+            //combo.style.backgroundColor = "rgba(255,255,255,0.5)";
+            ////combo.style.backgroundColor = "rgba(255,255,0,0.5)";
+            ////combo.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.5 0%,rgba(255,255,255,0.0 100%))";
+            //combo.style.border = "0px solid transparent";
+            //combo.style.fontSize = "large";
+            //combo.style.paddingLeft = "1em";
+            //combo.style.fontFamily = IStyle.FontFamilyEnum.Verdana;
+            //combo.style.cursor = IStyle.CursorEnum.pointer;
 
 
 
 
-			//var xWebGLRenderbuffer0size = 128;
-			//var xWebGLRenderbuffer0size = 64;
-			//var xWebGLRenderbuffer0size = 16;
-			//var xWebGLRenderbuffer0size = 8;
-			//var xWebGLRenderbuffer0size = 4;
-			//var xWebGLRenderbuffer0size = 2;
-			var xWebGLRenderbuffer0size = 1;
+
+            var c = gl.canvas.AttachToDocument();
+            c.style.position = IStyle.PositionEnum.@fixed;
+
+            #region onresize
+            new { }.With(
+                async delegate
+                {
+                    do
+                    {
+                        c.width = Native.window.Width;
+                        c.height = Native.window.Height;
+                        c.style.SetSize(c.width, c.height);
+                    }
+                    while (await Native.window.async.onresize);
+                }
+            );
+            #endregion
+
+
+            // middle mouse/two fingers to pan?
+            #region CaptureMouse
+            var mMouseOriX = 0;
+            var mMouseOriY = 0;
+            var mMousePosX = 0;
+            var mMousePosY = 0;
+
+            c.onmousedown += async ev =>
+            {
+                mMouseOriX = ev.CursorX;
+                mMouseOriY = ev.CursorY;
+                mMousePosX = mMouseOriX;
+                mMousePosY = mMouseOriY;
+
+                // why aint it canvas?
+                //ev.Element
+                //ev.CaptureMouse();
+
+                // using ?
+                ev.Element.requestPointerLock();
+                await ev.Element.async.onmouseup;
+                Native.document.exitPointerLock();
+
+                mMouseOriX = -Math.Abs(mMouseOriX);
+                mMouseOriY = -Math.Abs(mMouseOriY);
+            };
+
+            c.onmousemove += ev =>
+            {
+                if (ev.MouseButton == IEvent.MouseButtonEnum.Left)
+                {
+                    mMousePosX += ev.movementX;
+                    mMousePosY += ev.movementY;
+                }
+            };
+
+            //c.onmousewheel += ev =>
+            //{
+            //	ev.preventDefault();
+            //	ev.stopPropagation();
+
+            //	mMousePosY += 3 * ev.WheelDirection;
+            //};
+
+            #endregion
 
 
 
-			#region createShader
-			// dont we have a better api already?
-			Func<ScriptCoreLib.GLSL.Shader, WebGLShader> createShader = (src) =>
-			{
-				var shader = gl.createShader(src);
 
-				// verify
-				if (gl.getShaderParameter(shader, gl.COMPILE_STATUS) == null)
-				{
-					Native.window.alert("error in SHADER:\n" + gl.getShaderInfoLog(shader));
-					throw new InvalidOperationException("shader failed");
-
-					return null;
-				}
-
-				return shader;
-			};
-			#endregion
-
-			var vs = createShader(new Shaders.GeometryVertexShader());
-			var fs = createShader(new Shaders.GeometryFragmentShader());
-
-			var shaderProgram = new WebGLProgram(gl);
-			gl.attachShader(shaderProgram, vs);
-			gl.attachShader(shaderProgram, fs);
-			gl.linkProgram(shaderProgram);
-
-			var vec3aVertexPositionBuffer = new WebGLBuffer(gl);
-			var vec2aTextureCoordBuffer = new WebGLBuffer(gl);
-
-			//gl.clearColor(0.0f, 0.0f, 0.0f, 1.0f);
-			gl.enable(gl.DEPTH_TEST);
+            //var xWebGLRenderbuffer0size = 128;
+            //var xWebGLRenderbuffer0size = 64;
+            //var xWebGLRenderbuffer0size = 16;
+            //var xWebGLRenderbuffer0size = 8;
+            //var xWebGLRenderbuffer0size = 4;
+            //var xWebGLRenderbuffer0size = 2;
+            var xWebGLRenderbuffer0size = 1;
 
 
-			#region newPass
-			Func<FragmentShader, ShaderToy.EffectPass> newPass = frag =>
-			{
-				var xWebGLFramebuffer0 = new WebGLFramebuffer(gl);
-				gl.bindFramebuffer(gl.FRAMEBUFFER, xWebGLFramebuffer0);
-				// generateMipmap: level 0 not power of 2 or not all the same size
-				//var rttFramebuffer_width = canvas.width;
-				// WebGL: INVALID_OPERATION: generateMipmap: level 0 not power of 2 or not all the same size
 
-				// Max Combined Texture Image Units:	8 ipad
-				// Max Combined Texture Image Units:	20 asus7
-				// Max Combined Texture Image Units:	32
-				// need to start reusing after 32?
-				// http://webglstats.com/
-				var xWebGLTexture0 = new WebGLTexture(gl);
-				gl.bindTexture(gl.TEXTURE_2D, xWebGLTexture0);
-				gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, (int)gl.LINEAR);
-				gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, (int)gl.LINEAR_MIPMAP_NEAREST);
+            #region createShader
+            // dont we have a better api already?
+            Func<ScriptCoreLib.GLSL.Shader, WebGLShader> createShader = (src) =>
+            {
+                var shader = gl.createShader(src);
 
-				gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, xWebGLRenderbuffer0size, xWebGLRenderbuffer0size, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+                // verify
+                if (gl.getShaderParameter(shader, gl.COMPILE_STATUS) == null)
+                {
+                    Native.window.alert("error in SHADER:\n" + gl.getShaderInfoLog(shader));
+                    throw new InvalidOperationException("shader failed");
 
-				gl.generateMipmap(gl.TEXTURE_2D);
+                    return null;
+                }
+
+                return shader;
+            };
+            #endregion
+
+            var vs = createShader(new Shaders.GeometryVertexShader());
+            var fs = createShader(new Shaders.GeometryFragmentShader());
+
+            var shaderProgram = new WebGLProgram(gl);
+            gl.attachShader(shaderProgram, vs);
+            gl.attachShader(shaderProgram, fs);
+            gl.linkProgram(shaderProgram);
+
+            var vec3aVertexPositionBuffer = new WebGLBuffer(gl);
+            var vec2aTextureCoordBuffer = new WebGLBuffer(gl);
+
+            //gl.clearColor(0.0f, 0.0f, 0.0f, 1.0f);
+            gl.enable(gl.DEPTH_TEST);
 
 
-				var xWebGLRenderbuffer0 = new WebGLRenderbuffer(gl);
-				gl.bindRenderbuffer(gl.RENDERBUFFER, xWebGLRenderbuffer0);
-				gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, xWebGLRenderbuffer0size, xWebGLRenderbuffer0size);
+            #region newPass
+            Func<FragmentShader, ShaderToy.EffectPass> newPass = frag =>
+            {
+                var xWebGLFramebuffer0 = new WebGLFramebuffer(gl);
+                gl.bindFramebuffer(gl.FRAMEBUFFER, xWebGLFramebuffer0);
+                // generateMipmap: level 0 not power of 2 or not all the same size
+                //var rttFramebuffer_width = canvas.width;
+                // WebGL: INVALID_OPERATION: generateMipmap: level 0 not power of 2 or not all the same size
 
-				gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, xWebGLTexture0, 0);
-				gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, xWebGLRenderbuffer0);
+                // Max Combined Texture Image Units:	8 ipad
+                // Max Combined Texture Image Units:	20 asus7
+                // Max Combined Texture Image Units:	32
+                // need to start reusing after 32?
+                // http://webglstats.com/
+                var xWebGLTexture0 = new WebGLTexture(gl);
+                gl.bindTexture(gl.TEXTURE_2D, xWebGLTexture0);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, (int)gl.LINEAR);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, (int)gl.LINEAR_MIPMAP_NEAREST);
 
-				gl.bindTexture(gl.TEXTURE_2D, null);
-				gl.bindRenderbuffer(gl.RENDERBUFFER, null);
-				gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, xWebGLRenderbuffer0size, xWebGLRenderbuffer0size, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
 
-				var pass0 = new ChromeShaderToyColumns.Library.ShaderToy.EffectPass(
-					gl: gl,
-					precission: ChromeShaderToyColumns.Library.ShaderToy.DetermineShaderPrecission(gl),
-					supportDerivatives: gl.getExtension("OES_standard_derivatives") != null
-				);
+                gl.generateMipmap(gl.TEXTURE_2D);
+
+
+                var xWebGLRenderbuffer0 = new WebGLRenderbuffer(gl);
+                gl.bindRenderbuffer(gl.RENDERBUFFER, xWebGLRenderbuffer0);
+                gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, xWebGLRenderbuffer0size, xWebGLRenderbuffer0size);
+
+                gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, xWebGLTexture0, 0);
+                gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, xWebGLRenderbuffer0);
+
+                gl.bindTexture(gl.TEXTURE_2D, null);
+                gl.bindRenderbuffer(gl.RENDERBUFFER, null);
+                gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
                 // defined at?
-				pass0.xWebGLFramebuffer0 = xWebGLFramebuffer0;
-				pass0.xWebGLTexture0 = xWebGLTexture0;
+                var pass0 = new ChromeShaderToyColumns.Library.ShaderToy.EffectPass(
+                    gl: gl,
+                    precission: ChromeShaderToyColumns.Library.ShaderToy.DetermineShaderPrecission(gl),
+                    supportDerivatives: gl.getExtension("OES_standard_derivatives") != null
+                );
 
-				pass0.MakeHeader_Image();
-				pass0.NewShader_Image(
-					frag
-					//new ChromeShaderToyColumns.Shaders.ProgramFragmentShader()
-					//new ChromeShaderToyTriangleDistanceByIq.Shaders.ProgramFragmentShader()
-					);
+                // why we need it ? https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150823
+                // defined at?
+                // set by newPass
+                // used by paintToTex
+                pass0.xWebGLFramebuffer0 = xWebGLFramebuffer0;
+                pass0.xWebGLTexture0 = xWebGLTexture0;
 
-				return pass0;
-			};
-			#endregion
+                pass0.MakeHeader_Image();
+                pass0.NewShader_Image(
+                    frag
+                    //new ChromeShaderToyColumns.Shaders.ProgramFragmentShader()
+                    //new ChromeShaderToyTriangleDistanceByIq.Shaders.ProgramFragmentShader()
+                    );
 
-			//// we need a share group? to reuse framebuffer?
-			//var frag0 =
-			//var frag1 =
-			//var frag2 =
-			//var frag3 =
+                return pass0;
+            };
+            #endregion
 
-			var sw = Stopwatch.StartNew();
-			var verticesBuffer = new WebGLBuffer(gl);
+            //// we need a share group? to reuse framebuffer?
+            //var frag0 =
+            //var frag1 =
+            //var frag2 =
+            //var frag3 =
 
-			#region paintToTex
-			Func<ShaderToy.EffectPass, ShaderToy.EffectPass> paintToTex = (xpass0) =>
-			{
-				gl.bindFramebuffer(gl.FRAMEBUFFER, xpass0.xWebGLFramebuffer0);
+            var sw = Stopwatch.StartNew();
+            var verticesBuffer = new WebGLBuffer(gl);
 
-				//// http://stackoverflow.com/questions/20362023/webgl-why-does-transparent-canvas-show-clearcolor-color-component-when-alpha-is
-				//gl.clearColor(1, 1, 0, 1.0f);
+            #region paintToTex
+            Func<ShaderToy.EffectPass, ShaderToy.EffectPass> paintToTex = (xpass0) =>
+            {
+                gl.bindFramebuffer(gl.FRAMEBUFFER, xpass0.xWebGLFramebuffer0);
 
-				gl.viewport(0, 0, xWebGLRenderbuffer0size, xWebGLRenderbuffer0size);
-				// need to clear, otherewise we see an old image?
-				gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+                //// http://stackoverflow.com/questions/20362023/webgl-why-does-transparent-canvas-show-clearcolor-color-component-when-alpha-is
+                //gl.clearColor(1, 1, 0, 1.0f);
 
+                gl.viewport(0, 0, xWebGLRenderbuffer0size, xWebGLRenderbuffer0size);
+                // need to clear, otherewise we see an old image?
+                gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-				#region Paint_Image
-				ChromeShaderToyColumns.Library.ShaderToy.EffectPass.Paint_ImageDelegate Paint_Image = (time, mouseOriX, mouseOriY, mousePosX, mousePosY, zoom) =>
-				{
-					var mProgram = xpass0.xCreateShader.mProgram;
 
+                #region Paint_Image
+                ChromeShaderToyColumns.Library.ShaderToy.EffectPass.Paint_ImageDelegate Paint_Image = (time, mouseOriX, mouseOriY, mousePosX, mousePosY, zoom) =>
+                {
+                    var mProgram = xpass0.xCreateShader.mProgram;
 
-					var xres = xWebGLRenderbuffer0size;
-					var yres = xWebGLRenderbuffer0size;
 
-					#region Paint_Image
+                    var xres = xWebGLRenderbuffer0size;
+                    var yres = xWebGLRenderbuffer0size;
 
-					//new IHTMLPre { "enter Paint_Image" }.AttachToDocument();
+                    #region Paint_Image
 
-					// this is enough to do pip to bottom left, no need to adjust vertex positions even?
-					//gl.viewport(0, 0, (int)xres, (int)yres);
+                    //new IHTMLPre { "enter Paint_Image" }.AttachToDocument();
 
-					// useProgram: program not valid
-					gl.useProgram(mProgram);
+                    // this is enough to do pip to bottom left, no need to adjust vertex positions even?
+                    //gl.viewport(0, 0, (int)xres, (int)yres);
 
-					// uniform4fv
-					var mouse = new[] { mousePosX, mousePosY, mouseOriX, mouseOriY };
+                    // useProgram: program not valid
+                    gl.useProgram(mProgram);
 
-					// X:\jsc.svn\examples\glsl\future\GLSLShaderToyPip\GLSLShaderToyPip\Application.cs
-					//gl.getUniformLocation(mProgram, "fZoom").With(fZoom => gl.uniform1f(fZoom, zoom));
+                    // uniform4fv
+                    var mouse = new[] { mousePosX, mousePosY, mouseOriX, mouseOriY };
 
+                    // X:\jsc.svn\examples\glsl\future\GLSLShaderToyPip\GLSLShaderToyPip\Application.cs
+                    //gl.getUniformLocation(mProgram, "fZoom").With(fZoom => gl.uniform1f(fZoom, zoom));
 
-					var l2 = gl.getUniformLocation(mProgram, "iGlobalTime"); if (l2 != null) gl.uniform1f(l2, time);
-					var l3 = gl.getUniformLocation(mProgram, "iResolution"); if (l3 != null) gl.uniform3f(l3, xres, yres, 1.0f);
-					var l4 = gl.getUniformLocation(mProgram, "iMouse"); if (l4 != null) gl.uniform4fv(l4, mouse);
-					//var l7 = gl.getUniformLocation(this.mProgram, "iDate"); if (l7 != null) gl.uniform4fv(l7, dates);
-					//var l9 = gl.getUniformLocation(this.mProgram, "iSampleRate"); if (l9 != null) gl.uniform1f(l9, this.mSampleRate);
 
-					var ich0 = gl.getUniformLocation(mProgram, "iChannel0"); if (ich0 != null) gl.uniform1i(ich0, 0);
-					var ich1 = gl.getUniformLocation(mProgram, "iChannel1"); if (ich1 != null) gl.uniform1i(ich1, 1);
-					var ich2 = gl.getUniformLocation(mProgram, "iChannel2"); if (ich2 != null) gl.uniform1i(ich2, 2);
-					var ich3 = gl.getUniformLocation(mProgram, "iChannel3"); if (ich3 != null) gl.uniform1i(ich3, 3);
+                    var l2 = gl.getUniformLocation(mProgram, "iGlobalTime"); if (l2 != null) gl.uniform1f(l2, time);
+                    var l3 = gl.getUniformLocation(mProgram, "iResolution"); if (l3 != null) gl.uniform3f(l3, xres, yres, 1.0f);
+                    var l4 = gl.getUniformLocation(mProgram, "iMouse"); if (l4 != null) gl.uniform4fv(l4, mouse);
+                    //var l7 = gl.getUniformLocation(this.mProgram, "iDate"); if (l7 != null) gl.uniform4fv(l7, dates);
+                    //var l9 = gl.getUniformLocation(this.mProgram, "iSampleRate"); if (l9 != null) gl.uniform1f(l9, this.mSampleRate);
 
+                    var ich0 = gl.getUniformLocation(mProgram, "iChannel0"); if (ich0 != null) gl.uniform1i(ich0, 0);
+                    var ich1 = gl.getUniformLocation(mProgram, "iChannel1"); if (ich1 != null) gl.uniform1i(ich1, 1);
+                    var ich2 = gl.getUniformLocation(mProgram, "iChannel2"); if (ich2 != null) gl.uniform1i(ich2, 2);
+                    var ich3 = gl.getUniformLocation(mProgram, "iChannel3"); if (ich3 != null) gl.uniform1i(ich3, 3);
 
-					// what if there are other textures too?
-					// X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeWebGLFrameBuffer\ChromeWebGLFrameBuffer\Application.cs
 
-					//for (var i = 0; i < mInputs.Length; i++)
-					//{
-					//	var inp = mInputs[i];
+                    // what if there are other textures too?
+                    // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeWebGLFrameBuffer\ChromeWebGLFrameBuffer\Application.cs
 
-					//	gl.activeTexture((uint)(gl.TEXTURE0 + i));
+                    //for (var i = 0; i < mInputs.Length; i++)
+                    //{
+                    //	var inp = mInputs[i];
 
-					//	if (inp == null)
-					//	{
-					//		gl.bindTexture(gl.TEXTURE_2D, null);
-					//	}
-					//}
+                    //	gl.activeTexture((uint)(gl.TEXTURE0 + i));
 
-					var times = new[] { 0.0f, 0.0f, 0.0f, 0.0f };
-					var l5 = gl.getUniformLocation(mProgram, "iChannelTime");
-					if (l5 != null) gl.uniform1fv(l5, times);
+                    //	if (inp == null)
+                    //	{
+                    //		gl.bindTexture(gl.TEXTURE_2D, null);
+                    //	}
+                    //}
 
-					var resos = new float[12] { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-					var l8 = gl.getUniformLocation(mProgram, "iChannelResolution");
-					if (l8 != null) gl.uniform3fv(l8, resos);
+                    var times = new[] { 0.0f, 0.0f, 0.0f, 0.0f };
+                    var l5 = gl.getUniformLocation(mProgram, "iChannelTime");
+                    if (l5 != null) gl.uniform1fv(l5, times);
 
+                    var resos = new float[12] { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+                    var l8 = gl.getUniformLocation(mProgram, "iChannelResolution");
+                    if (l8 != null) gl.uniform3fv(l8, resos);
 
 
 
-					// using ?
-					var vec2pos = (uint)gl.getAttribLocation(mProgram, "pos");
-					//gl.bindBuffer(gl.ARRAY_BUFFER, quadVBO);
 
+                    // using ?
+                    var vec2pos = (uint)gl.getAttribLocation(mProgram, "pos");
+                    //gl.bindBuffer(gl.ARRAY_BUFFER, quadVBO);
 
-					#region vertices
-					float left = -1.0f;
-					// y reversed?
-					float bottom = -1.0f;
-					float right = 1.0f;
-					float top = 1.0f;
 
-					var fvertices =
-						new float[]
-						{
-							// left top
-							left, bottom,
+                    #region vertices
+                    float left = -1.0f;
+                    // y reversed?
+                    float bottom = -1.0f;
+                    float right = 1.0f;
+                    float top = 1.0f;
 
-							// right top
-							//right, -1.0f,
-							right, bottom,
+                    var fvertices =
+                        new float[]
+                        {
+                            // left top
+                            left, bottom,
 
-							// left bottom
-							left, top,
+                            // right top
+                            //right, -1.0f,
+                            right, bottom,
 
-							// right top
-							//right, -1.0f,
-							right, bottom,
+                            // left bottom
+                            left, top,
 
-							// right bottom
-							//right, 1.0f,
-							right, top,
+                            // right top
+                            //right, -1.0f,
+                            right, bottom,
 
-							// left bottom
-							left,top
-						};
+                            // right bottom
+                            //right, 1.0f,
+                            right, top,
 
-					var vertices = new Float32Array(fvertices);
-					#endregion
+                            // left bottom
+                            left,top
+                        };
 
-					gl.bindBuffer(gl.ARRAY_BUFFER, verticesBuffer);
-					gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+                    var vertices = new Float32Array(fvertices);
+                    #endregion
 
-					gl.vertexAttribPointer(vec2pos, 2, gl.FLOAT, false, 0, 0);
-					gl.enableVertexAttribArray(vec2pos);
+                    gl.bindBuffer(gl.ARRAY_BUFFER, verticesBuffer);
+                    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
 
-					// GL ERROR :GL_INVALID_OPERATION : glDrawArrays: attempt to render with no buffer attached to enabled attribute 1
-					gl.drawArrays(gl.TRIANGLES, 0, 6);
+                    gl.vertexAttribPointer(vec2pos, 2, gl.FLOAT, false, 0, 0);
+                    gl.enableVertexAttribArray(vec2pos);
 
+                    // GL ERROR :GL_INVALID_OPERATION : glDrawArrays: attempt to render with no buffer attached to enabled attribute 1
+                    gl.drawArrays(gl.TRIANGLES, 0, 6);
 
-					// first frame is now visible
-					gl.disableVertexAttribArray(vec2pos);
-					gl.bindBuffer(gl.ARRAY_BUFFER, null);
-					#endregion
 
-					//mFrame++;
+                    // first frame is now visible
+                    gl.disableVertexAttribArray(vec2pos);
+                    gl.bindBuffer(gl.ARRAY_BUFFER, null);
+                    #endregion
 
-				};
-				#endregion
+                    //mFrame++;
 
-				Paint_Image(
-					sw.ElapsedMilliseconds / 1000.0f,
+                };
+                #endregion
 
-					0,
-					0,
-					0,
-					0
+                Paint_Image(
+                    sw.ElapsedMilliseconds / 1000.0f,
 
+                    0,
+                    0,
+                    0,
+                    0
 
-				);
 
-				gl.flush();
+                );
 
-				//// INVALID_OPERATION: generateMipmap: level 0 not power of 2 or not all the same size
-				gl.bindTexture(gl.TEXTURE_2D, xpass0.xWebGLTexture0);
-				gl.generateMipmap(gl.TEXTURE_2D);
-				gl.bindTexture(gl.TEXTURE_2D, null);
+                gl.flush();
 
-				gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150823
+                //// INVALID_OPERATION: generateMipmap: level 0 not power of 2 or not all the same size
+                gl.bindTexture(gl.TEXTURE_2D, xpass0.xWebGLTexture0);
+                gl.generateMipmap(gl.TEXTURE_2D);
+                gl.bindTexture(gl.TEXTURE_2D, null);
 
-				return xpass0;
-			};
-			#endregion
+                gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
+                return xpass0;
+            };
+            #endregion
 
-			#region drawArrays
-			Action<ShaderToy.EffectPass, float, float, float> drawArrays = (xpass0, x, y, zz) =>
-			{
-				// using has a spevial meaning here
-				//using (var u = new ChromeWebGLFrameBufferToSquare.Shaders.__GeometryVertexShader())
-				//{
-				//	// should jsc implement structs as BufferData so we could send them over?
-				//	u.pMatrix = pMatrix;
-				//	u.uMVMatrix = mvMatrix;
-				//}
 
+            #region drawArrays
+            Action<ShaderToy.EffectPass, float, float, float> drawArrays = (xpass0, x, y, zz) =>
+            {
+                // using has a spevial meaning here
+                //using (var u = new ChromeWebGLFrameBufferToSquare.Shaders.__GeometryVertexShader())
+                //{
+                //	// should jsc implement structs as BufferData so we could send them over?
+                //	u.pMatrix = pMatrix;
+                //	u.uMVMatrix = mvMatrix;
+                //}
 
-				gl.useProgram(shaderProgram);
 
+                gl.useProgram(shaderProgram);
 
-				var mvMatrix = glMatrix.mat4.create();
-				var pMatrix = glMatrix.mat4.create();
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150823
+                // can we switch to clr4 matrix4x4?
+                // glMatrixLibrary
+                var mvMatrix = glMatrix.mat4.create();
+                var pMatrix = glMatrix.mat4.create();
 
 
-				glMatrix.mat4.perspective(45f, (float)gl.canvas.aspect, 0.1f, 120.0f, pMatrix);
-				gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "uPMatrix"), false, pMatrix);
+                glMatrix.mat4.perspective(45f, (float)gl.canvas.aspect, 0.1f, 120.0f, pMatrix);
+                gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "uPMatrix"), false, pMatrix);
 
 
-				glMatrix.mat4.identity(mvMatrix);
-				glMatrix.mat4.translate(mvMatrix,
-					new float[] {
-					x
-					+ (float)Math.Cos(sw.ElapsedMilliseconds  *0.001f ) * 0.1f
-					, y,
-						//-( rttFramebuffer_height / gl.canvas.width )
+                glMatrix.mat4.identity(mvMatrix);
+                glMatrix.mat4.translate(mvMatrix,
+                    new float[] {
+                    x
+                    + (float)Math.Cos(sw.ElapsedMilliseconds  *0.001f ) * 0.1f
+                    , y,
+                        //-( rttFramebuffer_height / gl.canvas.width )
 
 
-						// we see 1 tile
-						//-1
+                        // we see 1 tile
+                        //-1
 
-						// we see 4 tiles
-						//-4
+                        // we see 4 tiles
+                        //-4
 
-						// jsc should be able to keep scanning the il for small changes
-						// and keep talking to live instances for hot patching if possible.
-						//-7
+                        // jsc should be able to keep scanning the il for small changes
+                        // and keep talking to live instances for hot patching if possible.
+                        //-7
 
-						zz
-					}
-					);
-				// if we were to inspect our viewsource would we know if we were to be updated?
+                        zz
+                    }
+                    );
+                // if we were to inspect our viewsource would we know if we were to be updated?
 
-				gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "uMVMatrix"), false, mvMatrix);
+                gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "uMVMatrix"), false, mvMatrix);
 
-				// jsc can we get audio comments?
+                // jsc can we get audio comments?
 
-				gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+                gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
-				gl.activeTexture(gl.TEXTURE0);
-				gl.bindTexture(gl.TEXTURE_2D, xpass0.xWebGLTexture0);
-				gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, (int)gl.NEAREST);
+                gl.activeTexture(gl.TEXTURE0);
+                gl.bindTexture(gl.TEXTURE_2D, xpass0.xWebGLTexture0);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, (int)gl.NEAREST);
 
-				for (int ihalf = 0; ihalf < 2; ihalf++)
-				{
+                for (int ihalf = 0; ihalf < 2; ihalf++)
+                {
 
-					#region vec2aTextureCoord
-					var vec2aTextureCoord = gl.getAttribLocation(shaderProgram, "aTextureCoord");
-					gl.bindBuffer(gl.ARRAY_BUFFER, vec2aTextureCoordBuffer);
-					// http://iphonedevelopment.blogspot.com/2009/05/opengl-es-from-ground-up-part-6_25.html
-					var textureCoords = new float[]{
-						// Front face
-						0.0f, 0.0f,
-				  0.0f, -1.0f,
-				  -1.0f, -1.0f,
-				  -1.0f, 0.0f,
+                    #region vec2aTextureCoord
+                    var vec2aTextureCoord = gl.getAttribLocation(shaderProgram, "aTextureCoord");
+                    gl.bindBuffer(gl.ARRAY_BUFFER, vec2aTextureCoordBuffer);
+                    // http://iphonedevelopment.blogspot.com/2009/05/opengl-es-from-ground-up-part-6_25.html
+                    var textureCoords = new float[]{
+                        // Front face
+                        0.0f, 0.0f,
+                  0.0f, -1.0f,
+                  -1.0f, -1.0f,
+                  -1.0f, 0.0f,
 
 
-				};
+                };
 
-					if (ihalf % 2 == 0)
-					{
-						textureCoords = new[]{
-	0.0f, 0.0f,
-				  0.0f, 1.0f,
-				  1.0f, 1.0f,
-				  1.0f, 0.0f,
+                    if (ihalf % 2 == 0)
+                    {
+                        textureCoords = new[]{
+    0.0f, 0.0f,
+                  0.0f, 1.0f,
+                  1.0f, 1.0f,
+                  1.0f, 0.0f,
 
 
-					};
+                    };
 
-					}
+                    }
 
-					gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoords), gl.STATIC_DRAW);
-					gl.vertexAttribPointer((uint)vec2aTextureCoord, 2, gl.FLOAT, false, 0, 0);
-					gl.enableVertexAttribArray((uint)vec2aTextureCoord);
+                    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoords), gl.STATIC_DRAW);
+                    gl.vertexAttribPointer((uint)vec2aTextureCoord, 2, gl.FLOAT, false, 0, 0);
+                    gl.enableVertexAttribArray((uint)vec2aTextureCoord);
 
 
-					gl.uniform1i(gl.getUniformLocation(shaderProgram, "uSampler"), 0);
-					#endregion
+                    gl.uniform1i(gl.getUniformLocation(shaderProgram, "uSampler"), 0);
+                    #endregion
 
 
-					#region aVertexPosition
-					var vec3aVertexPosition = gl.getAttribLocation(shaderProgram, "aVertexPosition");
-					gl.bindBuffer(gl.ARRAY_BUFFER, vec3aVertexPositionBuffer);
+                    #region aVertexPosition
+                    var vec3aVertexPosition = gl.getAttribLocation(shaderProgram, "aVertexPosition");
+                    gl.bindBuffer(gl.ARRAY_BUFFER, vec3aVertexPositionBuffer);
 
-					var rsize = 1f;
+                    var rsize = 1f;
 
-					#region vec3vertices
-					var vec3vertices = new[]{
-						rsize,  rsize,  0.0f,
-						rsize,  -rsize,  0.0f,
-						-rsize, -rsize,  0.0f,
+                    #region vec3vertices
+                    var vec3vertices = new[]{
+                        rsize,  rsize,  0.0f,
+                        rsize,  -rsize,  0.0f,
+                        -rsize, -rsize,  0.0f,
 
-						//-4.0f,  -4.0f,  0.0f,
-						//-4,  4f,  0.0f,
-						//4.0f, 4.0f,  0.0f,
-					};
+                        //-4.0f,  -4.0f,  0.0f,
+                        //-4,  4f,  0.0f,
+                        //4.0f, 4.0f,  0.0f,
+                    };
 
-					if (ihalf % 2 == 0)
-					{
-						vec3vertices = new[]{
+                    if (ihalf % 2 == 0)
+                    {
+                        vec3vertices = new[]{
 
 
-							-rsize,  -rsize,  0.0f,
-							-rsize,  rsize,  0.0f,
-							rsize, rsize,  0.0f,
-						};
+                            -rsize,  -rsize,  0.0f,
+                            -rsize,  rsize,  0.0f,
+                            rsize, rsize,  0.0f,
+                        };
 
-					}
-					#endregion
+                    }
+                    #endregion
 
-					gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vec3vertices), gl.STATIC_DRAW);
-					gl.vertexAttribPointer((uint)vec3aVertexPosition, 3, gl.FLOAT, false, 0, 0);
-					gl.enableVertexAttribArray((uint)vec3aVertexPosition);
-					#endregion
+                    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vec3vertices), gl.STATIC_DRAW);
+                    gl.vertexAttribPointer((uint)vec3aVertexPosition, 3, gl.FLOAT, false, 0, 0);
+                    gl.enableVertexAttribArray((uint)vec3aVertexPosition);
+                    #endregion
 
-					// using has a spevial meaning here
-					//using (var u = new ChromeWebGLFrameBufferToSquare.Shaders.__GeometryVertexShader())
-					//{
-					//	// should jsc implement structs as BufferData so we could send them over?
-					//	u.aVertexPosition  = vec3vertices;
-					//}
+                    // using has a spevial meaning here
+                    //using (var u = new ChromeWebGLFrameBufferToSquare.Shaders.__GeometryVertexShader())
+                    //{
+                    //	// should jsc implement structs as BufferData so we could send them over?
+                    //	u.aVertexPosition  = vec3vertices;
+                    //}
 
 
-					var vec3vertices_numItems = vec3vertices.Length / 3;
-					//gl.drawArrays(gl.TRIANGLE_STRIP, 0, vertices.Length / 3);
-					gl.drawArrays(gl.TRIANGLE_STRIP, 0, vec3vertices_numItems);
+                    var vec3vertices_numItems = vec3vertices.Length / 3;
+                    //gl.drawArrays(gl.TRIANGLE_STRIP, 0, vertices.Length / 3);
+                    gl.drawArrays(gl.TRIANGLE_STRIP, 0, vec3vertices_numItems);
 
-				}
+                }
 
-				gl.bindTexture(gl.TEXTURE_2D, null);
+                gl.bindTexture(gl.TEXTURE_2D, null);
 
-			};
-			#endregion
+            };
+            #endregion
 
-			// some programs are 2d, some support setting the camera.
-			// this would work if the shader knows how to play well with the camera projection
-			// http://http.developer.nvidia.com/GPUGems3/gpugems3_ch30.html
-			// volumeteric shaders for vr!
-			// http://forum.unity3d.com/threads/volume-shader.47188/
-			// we would need depth info to order such programs tho
-			// and by rotating the scene we need to recalculate visible sub programs
-			// and ahw we want from them
-			// we could event show "not responding" for slow programs
-			// essentially bounding box intel will be of interest.
-			// isnt it how the impossible structures can be made, the portal effect?
+            // some programs are 2d, some support setting the camera.
+            // this would work if the shader knows how to play well with the camera projection
+            // http://http.developer.nvidia.com/GPUGems3/gpugems3_ch30.html
+            // volumeteric shaders for vr!
+            // http://forum.unity3d.com/threads/volume-shader.47188/
+            // we would need depth info to order such programs tho
+            // and by rotating the scene we need to recalculate visible sub programs
+            // and ahw we want from them
+            // we could event show "not responding" for slow programs
+            // essentially bounding box intel will be of interest.
+            // isnt it how the impossible structures can be made, the portal effect?
 
-			// google images search
-			// or actually. we we could just select a sub tile to be rendered such a program?
-			// what if the sub programs have the base data? would be hard to merge with other effects, but would work for layer1 effects
+            // google images search
+            // or actually. we we could just select a sub tile to be rendered such a program?
+            // what if the sub programs have the base data? would be hard to merge with other effects, but would work for layer1 effects
 
 
-			// select the shader, program, texture, framebuffer
+            // select the shader, program, texture, framebuffer
 
-			//var frags = new[] {
-			//	newPass(new ChromeShaderToyColumns.Shaders.ProgramFragmentShader()),
-			//	newPass(new ChromeShaderToyTriangleDistanceByIq.Shaders.ProgramFragmentShader()),
-			//	newPass(new ChromeShaderToySphereAndWalls.Shaders.ProgramFragmentShader()),
-			//	newPass(new ChromeShaderToyPlasmaTriangleByElusivePete.Shaders.ProgramFragmentShader()),
-			//};
+            //var frags = new[] {
+            //	newPass(new ChromeShaderToyColumns.Shaders.ProgramFragmentShader()),
+            //	newPass(new ChromeShaderToyTriangleDistanceByIq.Shaders.ProgramFragmentShader()),
+            //	newPass(new ChromeShaderToySphereAndWalls.Shaders.ProgramFragmentShader()),
+            //	newPass(new ChromeShaderToyPlasmaTriangleByElusivePete.Shaders.ProgramFragmentShader()),
+            //};
 
 
 
-			// media rss cooliris
-			var rows = 5;
-			var columns = 6;
+            // media rss cooliris
+            var rows = 5;
+            var columns = 6;
 
-			// tested on ipad! 8
-			// make it an async list?
-			// add until fps low?
+            // tested on ipad! 8
+            // make it an async list?
+            // add until fps low?
 
-			// first load ready to go
-			var loadDelay = new TaskCompletionSource<object>();
-			loadDelay.SetResult(null);
+            // first load ready to go
+            var loadDelay = new TaskCompletionSource<object>();
+            loadDelay.SetResult(null);
 
-			var loadCount = 0;
-			//var loadTotal = new TimeSpan();
-			// async init missing?
+            var loadCount = 0;
+            //var loadTotal = new TimeSpan();
+            // async init missing?
 
-			var loadTotal = TimeSpan.FromMilliseconds(0);
+            var loadTotal = TimeSpan.FromMilliseconds(0);
 
-			new IHTMLPre { () => new { mMouseOriX, mMouseOriY, mMousePosX, mMousePosY, loadCount, loadTotal } }.AttachToDocument();
+            new IHTMLPre { () => new { mMouseOriX, mMouseOriY, mMousePosX, mMousePosY, loadCount, loadTotal } }.AttachToDocument();
 
-			var frags = Enumerable.ToArray(
-				from key in ChromeShaderToyPrograms.References.programs.Keys.Take(rows * columns)
+            var frags = Enumerable.ToArray(
+                from key in ChromeShaderToyPrograms.References.programs.Keys.Take(rows * columns)
 
-					//await
-				select new { }.WithAsync(
-					async delegate
-					{
-						var oldloadDelay = loadDelay;
-						var newloadDelay = new TaskCompletionSource<object>();
-						loadDelay = newloadDelay;
+                    //await
+                select new { }.WithAsync(
+                    async delegate
+                    {
+                        var oldloadDelay = loadDelay;
+                        var newloadDelay = new TaskCompletionSource<object>();
+                        loadDelay = newloadDelay;
 
-						await oldloadDelay.Task;
+                        await oldloadDelay.Task;
 
-						//var text = (1 + index) + " of " + References.programs.Count + " " + key.SkipUntilIfAny("ChromeShaderToy").Replace("By", " by ");
-						//var text = key.SkipUntilIfAny("ChromeShaderToy").Replace("By", " by ");
-						var text = key.SkipUntilIfAny("ChromeShaderToy").TakeUntilIfAny("By");
+                        //var text = (1 + index) + " of " + References.programs.Count + " " + key.SkipUntilIfAny("ChromeShaderToy").Replace("By", " by ");
+                        //var text = key.SkipUntilIfAny("ChromeShaderToy").Replace("By", " by ");
+                        var text = key.SkipUntilIfAny("ChromeShaderToy").TakeUntilIfAny("By");
 
-						var title = new IHTMLPre { text + " (loading)" }.AttachToDocument();
-						Native.document.title = text;
+                        var title = new IHTMLPre { text + " (loading)" }.AttachToDocument();
+                        Native.document.title = text;
 
-						//Native.document.body.style.backgroundColor = "cyan";
-						//await Task.Delay(2000);
+                        //Native.document.body.style.backgroundColor = "cyan";
+                        //await Task.Delay(2000);
 
 
-						// entering a blocking api...
-						//Native.document.body.style.backgroundColor = "red";
-						Native.document.body.style.borderBottom = "1em solid red";
-						// remote desktop takes a frame to show
-						//await Task.Delay(300);
-						//await Native.window.async.onframe;
-						await Native.window.async.onframe;
-						// red and title visible?
+                        // entering a blocking api...
+                        //Native.document.body.style.backgroundColor = "red";
+                        Native.document.body.style.borderBottom = "1em solid red";
+                        // remote desktop takes a frame to show
+                        //await Task.Delay(300);
+                        //await Native.window.async.onframe;
+                        await Native.window.async.onframe;
+                        // red and title visible?
 
-						// did we loose context?
-						if (gl == null)
-							await new TaskCompletionSource<object>().Task;
+                        // did we loose context?
+                        if (gl == null)
+                            await new TaskCompletionSource<object>().Task;
 
-						var blockingCall = Stopwatch.StartNew();
-						var ctor = ChromeShaderToyPrograms.References.programs[key];
-						var frag = ctor();
-						var pass = newPass(frag);
-						blockingCall.Stop();
-						loadTotal += blockingCall.Elapsed;
-						loadCount++;
+                        var blockingCall = Stopwatch.StartNew();
+                        var ctor = ChromeShaderToyPrograms.References.programs[key];
+                        var frag = ctor();
+                        var pass = newPass(frag);
+                        blockingCall.Stop();
+                        loadTotal += blockingCall.Elapsed;
+                        loadCount++;
 
-						// branch off, yet return early
-						new { }.With(
-							async delegate
-							{
-								// cool off
-								//Native.document.body.style.backgroundColor = "cyan";
-								Native.document.body.style.borderBottom = "0em solid red";
+                        // branch off, yet return early
+                        new { }.With(
+                            async delegate
+                            {
+                                // cool off
+                                //Native.document.body.style.backgroundColor = "cyan";
+                                Native.document.body.style.borderBottom = "0em solid red";
 
-								title.innerText = text + " " + blockingCall.ElapsedMilliseconds + $"ms ({loadCount})";
-								Native.document.title = title.innerText;
+                                title.innerText = text + " " + blockingCall.ElapsedMilliseconds + $"ms ({loadCount})";
+                                Native.document.title = title.innerText;
 
-								//await Native.window.async.onframe;
-								//await Task.Delay(2000);
+                                //await Native.window.async.onframe;
+                                //await Task.Delay(2000);
 
-								//// done?
-								//Native.document.body.style.backgroundColor = "yellow";
-								//Native.document.title = $"({loadCount}) total {loadTotal.TotalMilliseconds}ms";
+                                //// done?
+                                //Native.document.body.style.backgroundColor = "yellow";
+                                //Native.document.title = $"({loadCount}) total {loadTotal.TotalMilliseconds}ms";
 
-								//await Task.Delay(2000);
+                                //await Task.Delay(2000);
 
-								// moveNext
-								newloadDelay.SetResult(null);
-							}
-						);
+                                // moveNext
+                                newloadDelay.SetResult(null);
+                            }
+                        );
 
 
-						// return early
-						return new { key, pass };
-					}
-				)
-			);
+                        // return early
+                        return new { key, pass };
+                    }
+                )
+            );
 
 
-			var z = -15f;
+            var z = -15f;
 
-			#region onmousewheel
-			c.onmousewheel +=
-				e =>
-				{
-					//camera.position.z = 1.5;
+            #region onmousewheel
+            c.onmousewheel +=
+                e =>
+                {
+                    //camera.position.z = 1.5;
 
-					// min max. shall adjust speed also!
-					// max 4.0
-					// min 0.6
-					z -= 1.6f * e.WheelDirection;
+                    // min max. shall adjust speed also!
+                    // max 4.0
+                    // min 0.6
+                    z -= 1.6f * e.WheelDirection;
 
 
-					z = z.Max(-40f).Min(-1f);
+                    z = z.Max(-40f).Min(-1f);
 
-					//Native.document.title = new { camera.position.z }.ToString();
+                    //Native.document.title = new { camera.position.z }.ToString();
 
-				};
-			#endregion
+                };
+            #endregion
 
 
-			Native.window.onframe += e =>
-			{
-				// GL_INVALID_OPERATION : glDrawArrays: Source and destination textures of the draw are the same.
+            Native.window.onframe += e =>
+            {
+                // GL_INVALID_OPERATION : glDrawArrays: Source and destination textures of the draw are the same.
 
 
-				frags.WithEachIndex(
-					(f, i) =>
-					{
+                frags.WithEachIndex(
+                    (f, i) =>
+                    {
 
-						var x = (1) + (2.0f) * ((i / rows) - (frags.Length / rows) / 2);
+                        var x = (1) + (2.0f) * ((i / rows) - (frags.Length / rows) / 2);
 
-						//drawArrays(paintToTex(f), x, -2f, -15f);
+                        //drawArrays(paintToTex(f), x, -2f, -15f);
 
 
-						//var y = x % 2;
-						var y = (i % rows - rows / 2 + 0.5f) * 2.0f;
+                        //var y = x % 2;
+                        var y = (i % rows - rows / 2 + 0.5f) * 2.0f;
 
+                        //Error CS1061  'TSource' does not contain a definition for 'IsCompleted' and no extension method 'IsCompleted' accepting a first argument of type 'TSource' could be found(are you missing a using directive or an assembly reference ?)   ChromeShaderToyProgramsAsTiles Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyProgramsAsTiles\ChromeShaderToyProgramsAsTiles\Application.cs   880
 
-						if (f.IsCompleted)
-						{
-							// only draw the ones loaded
+                        if (f.IsCompleted)
+                        {
+                            // only draw the ones loaded
 
-							drawArrays(
-								paintToTex(f.Result.pass),
-								// neg mMouseOriX means mouse released
-								x + (mMousePosX - Math.Abs(mMouseOriX)) * 0.01f,
-								y + -(mMousePosY - Math.Abs(mMouseOriY)) * 0.01f,
-								z
-							);
-						}
+                            drawArrays(
+                                paintToTex(f.Result.pass),
+                                // neg mMouseOriX means mouse released
+                                x + (mMousePosX - Math.Abs(mMouseOriX)) * 0.01f,
+                                y + -(mMousePosY - Math.Abs(mMouseOriY)) * 0.01f,
+                                z
+                            );
+                        }
 
-					}
-				);
+                    }
+                );
 
-				// when can we do 3d shaders?
-				//drawArrays(paintToTex(frag2), -3, -1f);
+                // when can we do 3d shaders?
+                //drawArrays(paintToTex(frag2), -3, -1f);
 
-				//drawArrays(paintToTex(frag1), -3, 1f);
+                //drawArrays(paintToTex(frag1), -3, 1f);
 
-				//drawArrays(paintToTex(frag3), -1, 1f);
-				//drawArrays(paintToTex(frag0), -1, -1f);
-				//drawArrays(paintToTex(frag1), 1, 1f);
-				//drawArrays(paintToTex(frag3), 1, -1f);
+                //drawArrays(paintToTex(frag3), -1, 1f);
+                //drawArrays(paintToTex(frag0), -1, -1f);
+                //drawArrays(paintToTex(frag1), 1, 1f);
+                //drawArrays(paintToTex(frag3), 1, -1f);
 
-				//drawArrays(paintToTex(frag0), 3, -1f);
+                //drawArrays(paintToTex(frag0), 3, -1f);
 
-				//drawArrays(paintToTex(frag2), 3, 1f);
-			};
+                //drawArrays(paintToTex(frag2), 3, 1f);
+            };
 
 
-		}
+        }
 
 
-	}
+    }
 
-	public static class x
-	{
+    public static class x
+    {
 
-		public static Task<TResult> WithAsync<T, TResult>(this T that, Func<T, Task<TResult>> select)
-		{
-			return select(that);
-		}
-	}
+        public static Task<TResult> WithAsync<T, TResult>(this T that, Func<T, Task<TResult>> select)
+        {
+            return select(that);
+        }
+    }
 
 }
