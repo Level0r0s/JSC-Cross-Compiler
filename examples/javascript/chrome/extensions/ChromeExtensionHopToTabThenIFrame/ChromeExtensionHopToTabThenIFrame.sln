@@ -1,15 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22609.0
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeExtensionHopToTabThenIFrame", "ChromeExtensionHopToTabThenIFrame\ChromeExtensionHopToTabThenIFrame.csproj", "{549D5E74-AE4D-4173-96B4-52F03695A096}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeExtensionHopToTabThenIFrame", "ChromeExtensionHopToTabThenIFrame\ChromeExtensionHopToTabThenIFrame.csproj", "{3C88197D-5E5D-4CC9-9901-A68642AFF0D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSwitchToServiceContextAsync", "..\..\..\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync.csproj", "{5A6A3B8C-35E2-49E4-9856-73956C94D149}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib", "..\..\..\..\..\core\ScriptCoreLib\ScriptCoreLib.csproj", "{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chromelabs", "..\..\..\..\..\market\synergy\javascript\chrome\chrome\chromelabs.csproj", "{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{BF822DB6-8A38-4B26-A64F-F917AAF3AEE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestIFrameTaskRun", "..\..\..\async\Test\TestIFrameTaskRun\TestIFrameTaskRun\TestIFrameTaskRun.csproj", "{76843B5B-EB0A-4E49-8B36-037969E0545F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSwitchToIFrame", "..\..\..\Test\TestSwitchToIFrame\TestSwitchToIFrame\TestSwitchToIFrame.csproj", "{E88F583A-F361-4D97-8642-13EDB6DDC9C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHopFromIFrame", "..\..\..\Test\TestHopFromIFrame\TestHopFromIFrame\TestHopFromIFrame.csproj", "{15761EEE-9A9C-4159-A63E-A5556B11D809}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,12 +27,12 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{549D5E74-AE4D-4173-96B4-52F03695A096}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{549D5E74-AE4D-4173-96B4-52F03695A096}.Debug|x86.ActiveCfg = Debug|x86
-		{549D5E74-AE4D-4173-96B4-52F03695A096}.Debug|x86.Build.0 = Debug|x86
-		{549D5E74-AE4D-4173-96B4-52F03695A096}.Release|Any CPU.ActiveCfg = Release|x86
-		{549D5E74-AE4D-4173-96B4-52F03695A096}.Release|x86.ActiveCfg = Release|x86
-		{549D5E74-AE4D-4173-96B4-52F03695A096}.Release|x86.Build.0 = Release|x86
+		{3C88197D-5E5D-4CC9-9901-A68642AFF0D3}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{3C88197D-5E5D-4CC9-9901-A68642AFF0D3}.Debug|x86.ActiveCfg = Debug|x86
+		{3C88197D-5E5D-4CC9-9901-A68642AFF0D3}.Debug|x86.Build.0 = Debug|x86
+		{3C88197D-5E5D-4CC9-9901-A68642AFF0D3}.Release|Any CPU.ActiveCfg = Release|x86
+		{3C88197D-5E5D-4CC9-9901-A68642AFF0D3}.Release|x86.ActiveCfg = Release|x86
+		{3C88197D-5E5D-4CC9-9901-A68642AFF0D3}.Release|x86.Build.0 = Release|x86
 		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Debug|x86.ActiveCfg = Debug|x86
 		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Debug|x86.Build.0 = Debug|x86
@@ -45,8 +53,34 @@ Global
 		{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7}.Release|Any CPU.ActiveCfg = Release|x86
 		{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7}.Release|x86.ActiveCfg = Release|x86
 		{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7}.Release|x86.Build.0 = Release|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Debug|x86.ActiveCfg = Debug|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Debug|x86.Build.0 = Debug|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Release|Any CPU.ActiveCfg = Release|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Release|x86.ActiveCfg = Release|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Release|x86.Build.0 = Release|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Debug|x86.ActiveCfg = Debug|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Debug|x86.Build.0 = Debug|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Release|Any CPU.ActiveCfg = Release|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Release|x86.ActiveCfg = Release|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Release|x86.Build.0 = Release|x86
+		{15761EEE-9A9C-4159-A63E-A5556B11D809}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{15761EEE-9A9C-4159-A63E-A5556B11D809}.Debug|x86.ActiveCfg = Debug|x86
+		{15761EEE-9A9C-4159-A63E-A5556B11D809}.Debug|x86.Build.0 = Debug|x86
+		{15761EEE-9A9C-4159-A63E-A5556B11D809}.Release|Any CPU.ActiveCfg = Release|x86
+		{15761EEE-9A9C-4159-A63E-A5556B11D809}.Release|x86.ActiveCfg = Release|x86
+		{15761EEE-9A9C-4159-A63E-A5556B11D809}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149} = {BF822DB6-8A38-4B26-A64F-F917AAF3AEE5}
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6} = {BF822DB6-8A38-4B26-A64F-F917AAF3AEE5}
+		{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7} = {BF822DB6-8A38-4B26-A64F-F917AAF3AEE5}
+		{76843B5B-EB0A-4E49-8B36-037969E0545F} = {BF822DB6-8A38-4B26-A64F-F917AAF3AEE5}
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1} = {BF822DB6-8A38-4B26-A64F-F917AAF3AEE5}
+		{15761EEE-9A9C-4159-A63E-A5556B11D809} = {BF822DB6-8A38-4B26-A64F-F917AAF3AEE5}
 	EndGlobalSection
 EndGlobal

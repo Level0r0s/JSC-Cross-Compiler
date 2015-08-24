@@ -20,6 +20,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 	{
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150824
 
+        // Z:\jsc.svn\examples\javascript\WebGL\WebGLIFrameBuffer\Application.cs
         // z:\jsc.svn\examples\javascript\async\test\TestIFrameTaskRun\TestIFrameTaskRun\Application.cs
         // z:\jsc.svn\examples\javascript\test\TestSwitchToIFrame\TestSwitchToIFrame\Application.cs
         // z:\jsc.svn\examples\javascript\Test\TestHopFromIFrame\TestHopFromIFrame\Application.cs
@@ -100,6 +101,9 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 		public IWindow contentWindow;
 
 
+
+
+        // Z:\jsc.svn\examples\javascript\WebGL\WebGLIFrameBuffer\Application.cs
 
 		#region event onload
 		public event System.Action<IEvent> onload
@@ -183,10 +187,10 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 		[Script(DefineAsStatic = true)]
 		public void Add(System.Func<Task> yield)
 		{
-			// X:\jsc.svn\examples\javascript\async\Test\TestBytesToSemaphore\TestBytesToSemaphore\Application.cs
-			// X:\jsc.svn\examples\javascript\async\test\TestIFrameTaskRun\TestIFrameTaskRun\Application.cs
-			// X:\jsc.svn\examples\javascript\Test\TestHopFromIFrame\TestHopFromIFrame\Application.cs
-			// X:\jsc.svn\examples\javascript\Test\TestSwitchToIFrame\TestSwitchToIFrame\Application.cs
+			// z:\jsc.svn\examples\javascript\async\Test\TestBytesToSemaphore\TestBytesToSemaphore\Application.cs
+			// z:\jsc.svn\examples\javascript\async\test\TestIFrameTaskRun\TestIFrameTaskRun\Application.cs
+			// z:\jsc.svn\examples\javascript\Test\TestHopFromIFrame\TestHopFromIFrame\Application.cs
+			// z:\jsc.svn\examples\javascript\Test\TestSwitchToIFrame\TestSwitchToIFrame\Application.cs
 
 			System.Console.WriteLine("IHTMLIFrame Add");
 		}

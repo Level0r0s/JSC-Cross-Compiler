@@ -5,6 +5,16 @@ VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLIFrameBuffer", "WebGLIFrameBuffer.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeHybridCapture", "..\..\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\ChromeHybridCapture.csproj", "{549D5E74-AE4D-4173-96B4-52F03695A096}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{629EE653-9377-452D-927F-6E619C2E17C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSwitchToIFrame", "..\..\Test\TestSwitchToIFrame\TestSwitchToIFrame\TestSwitchToIFrame.csproj", "{E88F583A-F361-4D97-8642-13EDB6DDC9C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeThreadedCameraTracker", "..\..\chrome\apps\ChromeThreadedCameraTracker\ChromeThreadedCameraTracker\ChromeThreadedCameraTracker.csproj", "{6C647231-D3C5-4934-AFE4-697FF76A503E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSwitchToServiceContextAsync", "..\..\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync.csproj", "{5A6A3B8C-35E2-49E4-9856-73956C94D149}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,8 +25,30 @@ Global
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.Build.0 = Debug|x86
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.ActiveCfg = Release|x86
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.Build.0 = Release|x86
+		{549D5E74-AE4D-4173-96B4-52F03695A096}.Debug|x86.ActiveCfg = Debug|x86
+		{549D5E74-AE4D-4173-96B4-52F03695A096}.Debug|x86.Build.0 = Debug|x86
+		{549D5E74-AE4D-4173-96B4-52F03695A096}.Release|x86.ActiveCfg = Release|x86
+		{549D5E74-AE4D-4173-96B4-52F03695A096}.Release|x86.Build.0 = Release|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Debug|x86.ActiveCfg = Debug|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Debug|x86.Build.0 = Debug|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Release|x86.ActiveCfg = Release|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Release|x86.Build.0 = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Debug|x86.ActiveCfg = Debug|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Debug|x86.Build.0 = Debug|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Release|x86.ActiveCfg = Release|x86
+		{6C647231-D3C5-4934-AFE4-697FF76A503E}.Release|x86.Build.0 = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Debug|x86.ActiveCfg = Debug|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Debug|x86.Build.0 = Debug|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Release|x86.ActiveCfg = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{549D5E74-AE4D-4173-96B4-52F03695A096} = {629EE653-9377-452D-927F-6E619C2E17C0}
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1} = {629EE653-9377-452D-927F-6E619C2E17C0}
+		{6C647231-D3C5-4934-AFE4-697FF76A503E} = {629EE653-9377-452D-927F-6E619C2E17C0}
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149} = {629EE653-9377-452D-927F-6E619C2E17C0}
 	EndGlobalSection
 EndGlobal

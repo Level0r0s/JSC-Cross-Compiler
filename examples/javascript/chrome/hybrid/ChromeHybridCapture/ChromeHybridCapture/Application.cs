@@ -24,6 +24,8 @@ using System.Diagnostics;
 
 namespace ChromeHybridCapture
 {
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150824/webgliframebuffer
+
     public struct HopToChromeAppWindow : System.Runtime.CompilerServices.INotifyCompletion
     {
         public chrome.AppWindow window;
@@ -707,6 +709,8 @@ namespace ChromeHybridCapture
                     #region app:HopToChromeAppWindow
                     HopToChromeAppWindow.VirtualOnCompleted = async (that, continuation) =>
                     {
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150824/webgliframebuffer
+
                         // state 0 ? or state -1 ?
                         Console.WriteLine("app HopToChromeAppWindow VirtualOnCompleted enter ");
 
@@ -872,7 +876,7 @@ namespace ChromeHybridCapture
                                            }
 
 
-                                           // X:\jsc.svn\examples\javascript\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\CLRWebServiceInvoke.cs
+                                           // z:\jsc.svn\examples\javascript\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\CLRWebServiceInvoke.cs
                                            // field names/ tokens need to be encrypted like typeinfo.
 
                                            // some do manual restore
