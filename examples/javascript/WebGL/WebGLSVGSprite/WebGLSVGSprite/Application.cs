@@ -15,9 +15,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-// ?
+// need bg image
 using WebGLEquirectangularPanorama.HTML.Images.FromAssets;
-using WebGLRah66Comanche.Library;
+// why we need it?
+//using WebGLRah66Comanche.Library;
 using WebGLSVGSprite;
 using WebGLSVGSprite.Design;
 using WebGLSVGSprite.HTML.Pages;
@@ -38,6 +39,8 @@ namespace WebGLSVGSprite
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150824
+
             // http://stackoverflow.com/questions/14103986/canvas-and-spritematerial
 
             // X:\jsc.svn\examples\javascript\WebGL\WebGLSVGAnonymous\WebGLSVGAnonymous\Application.cs
@@ -756,15 +759,15 @@ namespace WebGLSVGSprite
 
 
 
-            var ze = new ZeProperties();
+            //var ze = new ZeProperties();
 
-            ze.Show();
-            ze.treeView1.Nodes.Clear();
+            //ze.Show();
+            //ze.treeView1.Nodes.Clear();
 
-            ze.Add(() => renderer);
-            //ze.Add(() => controls);
-            ze.Add(() => scene);
-            ze.Left = 0;
+            //ze.Add(() => renderer);
+            ////ze.Add(() => controls);
+            //ze.Add(() => scene);
+            //ze.Left = 0;
         }
 
     }

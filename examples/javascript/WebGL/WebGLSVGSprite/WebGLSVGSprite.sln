@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22609.0
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLSVGSprite", "WebGLSVGSprite\WebGLSVGSprite.csproj", "{426A9419-9287-4880-979F-29F29D3F2A22}"
 EndProject
@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeUDPNotification", "..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLSpeedBlendCharacter", "..\WebGLSpeedBlendCharacter\WebGLSpeedBlendCharacter\WebGLSpeedBlendCharacter.csproj", "{890F6FDF-577B-4100-9FE1-D0F228175984}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLEquirectangularPanorama", "..\..\synergy\webgl\WebGLEquirectangularPanorama\WebGLEquirectangularPanorama\WebGLEquirectangularPanorama.csproj", "{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLEquirectangularPanorama", "..\..\synergy\webgl\WebGLEquirectangularPanorama\WebGLEquirectangularPanorama\WebGLEquirectangularPanorama.csproj", "{A9E994CF-F125-4571-9BED-52B5B5A92826}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "THREE", "..\..\..\..\market\synergy\THREE\THREE\THREE.csproj", "{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}"
 EndProject
@@ -35,10 +35,10 @@ Global
 		{890F6FDF-577B-4100-9FE1-D0F228175984}.Debug|x86.Build.0 = Debug|x86
 		{890F6FDF-577B-4100-9FE1-D0F228175984}.Release|x86.ActiveCfg = Release|x86
 		{890F6FDF-577B-4100-9FE1-D0F228175984}.Release|x86.Build.0 = Release|x86
-		{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}.Debug|x86.ActiveCfg = Debug|x86
-		{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}.Debug|x86.Build.0 = Debug|x86
-		{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}.Release|x86.ActiveCfg = Release|x86
-		{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}.Release|x86.Build.0 = Release|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Debug|x86.ActiveCfg = Debug|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Debug|x86.Build.0 = Debug|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Release|x86.ActiveCfg = Release|x86
+		{A9E994CF-F125-4571-9BED-52B5B5A92826}.Release|x86.Build.0 = Release|x86
 		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Debug|x86.ActiveCfg = Debug|x86
 		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Debug|x86.Build.0 = Debug|x86
 		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Release|x86.ActiveCfg = Release|x86
@@ -54,7 +54,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{76843B5B-EB0A-4E49-8B36-037969E0545F} = {4818568E-E4A7-4ECF-BC56-A1A8B0092C85}
 		{890F6FDF-577B-4100-9FE1-D0F228175984} = {4818568E-E4A7-4ECF-BC56-A1A8B0092C85}
-		{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8} = {4818568E-E4A7-4ECF-BC56-A1A8B0092C85}
+		{A9E994CF-F125-4571-9BED-52B5B5A92826} = {4818568E-E4A7-4ECF-BC56-A1A8B0092C85}
 		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC} = {4818568E-E4A7-4ECF-BC56-A1A8B0092C85}
 		{F6EE5D37-A30A-438F-AF72-D571B0AB257C} = {4818568E-E4A7-4ECF-BC56-A1A8B0092C85}
 	EndGlobalSection

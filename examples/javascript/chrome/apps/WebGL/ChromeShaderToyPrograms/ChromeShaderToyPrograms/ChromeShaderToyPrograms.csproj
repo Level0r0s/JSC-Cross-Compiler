@@ -138,6 +138,9 @@
     <Reference Include="QuadraticBezierByIq.AssetsLibrary">
       <HintPath>..\..\synergy\QuadraticBezierByIq\QuadraticBezierByIq\bin\staging.AssetsLibrary\QuadraticBezierByIq.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="ChromeShaderToySimpleLoadingScreenByNdel.AssetsLibrary">
+      <HintPath>..\..\synergy\s\ChromeShaderToySimpleLoadingScreenByNdel\ChromeShaderToySimpleLoadingScreenByNdel\bin\staging.AssetsLibrary\ChromeShaderToySimpleLoadingScreenByNdel.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -177,6 +180,10 @@
     <ProjectReference Include="..\..\synergy\QuadraticBezierByIq\QuadraticBezierByIq\QuadraticBezierByIq.csproj">
       <Project>{cb66fa69-eadb-4b34-95f0-07cb9e78e39d}</Project>
       <Name>QuadraticBezierByIq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\s\ChromeShaderToySimpleLoadingScreenByNdel\ChromeShaderToySimpleLoadingScreenByNdel\ChromeShaderToySimpleLoadingScreenByNdel.csproj">
+      <Project>{2503cee7-2941-4c82-9014-9dd7570c4c23}</Project>
+      <Name>ChromeShaderToySimpleLoadingScreenByNdel</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\UglyBrickByPsykotic\UglyBrickByPsykotic\UglyBrickByPsykotic.csproj">
       <Project>{693e0621-5324-4922-8aa2-320809e85aef}</Project>

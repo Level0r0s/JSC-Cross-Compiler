@@ -878,7 +878,7 @@ do we have a stack trace?
 
 			var rows = 9;
 			var columns = (int)Math.Ceiling(
-				(double)References.programs.Count / rows
+				(double)ChromeShaderToyPrograms.References.programs.Count / rows
 			);
 
 			// tested on ipad! 8

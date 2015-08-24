@@ -62,6 +62,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xor3DAlienLandByXor", "..\s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x3DLightingByXor", "..\synergy\x3DLightingByXor\x3DLightingByXor\x3DLightingByXor.csproj", "{7C664C3B-EEAA-4EB1-BE5E-EBFA707F6D0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToySimpleLoadingScreenByNdel", "..\synergy\s\ChromeShaderToySimpleLoadingScreenByNdel\ChromeShaderToySimpleLoadingScreenByNdel\ChromeShaderToySimpleLoadingScreenByNdel.csproj", "{2503CEE7-2941-4C82-9014-9DD7570C4C23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -152,6 +154,10 @@ Global
 		{7C664C3B-EEAA-4EB1-BE5E-EBFA707F6D0B}.Debug|x86.Build.0 = Debug|x86
 		{7C664C3B-EEAA-4EB1-BE5E-EBFA707F6D0B}.Release|x86.ActiveCfg = Release|x86
 		{7C664C3B-EEAA-4EB1-BE5E-EBFA707F6D0B}.Release|x86.Build.0 = Release|x86
+		{2503CEE7-2941-4C82-9014-9DD7570C4C23}.Debug|x86.ActiveCfg = Debug|x86
+		{2503CEE7-2941-4C82-9014-9DD7570C4C23}.Debug|x86.Build.0 = Debug|x86
+		{2503CEE7-2941-4C82-9014-9DD7570C4C23}.Release|x86.ActiveCfg = Release|x86
+		{2503CEE7-2941-4C82-9014-9DD7570C4C23}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -182,5 +188,6 @@ Global
 		{693E0621-5324-4922-8AA2-320809E85AEF} = {69476EAB-54AF-42C0-940F-B49D97F96F44}
 		{7279466C-7E57-4148-B711-2B4635012226} = {463FB0C7-E5F1-48A0-8D8D-9F8302936430}
 		{7C664C3B-EEAA-4EB1-BE5E-EBFA707F6D0B} = {463FB0C7-E5F1-48A0-8D8D-9F8302936430}
+		{2503CEE7-2941-4C82-9014-9DD7570C4C23} = {30FF3663-3CBE-4541-B2CF-A3C0960E208B}
 	EndGlobalSection
 EndGlobal

@@ -26,13 +26,16 @@ namespace ChromeShaderToyPrograms
 		// like describe what we are seeing and have it stored as source code for the next iteration
 		public static Dictionary<string, Func<FragmentShader>> programs = new Dictionary<string, Func<FragmentShader>>
 		{
-			// should we want to generate it?
+            // should we want to generate it?
 
-			// group by runs on all devices, fps?
-			// tags?
+            // group by runs on all devices, fps?
+            // tags?
 
-			//  /FilterTo:$(SolutionDir)
-			// how will those shaders look like on VR?
+            //  /FilterTo:$(SolutionDir)
+            // how will those shaders look like on VR?
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150824
+            ["ChromeShaderToySimpleLoadingScreenByNdel"] = () => new ChromeShaderToySimpleLoadingScreenByNdel.Shaders.ProgramFragmentShader(),
 
 			["ChromeShaderToyColumns"] = () => new ChromeShaderToyColumns.Shaders.ProgramFragmentShader(),
 

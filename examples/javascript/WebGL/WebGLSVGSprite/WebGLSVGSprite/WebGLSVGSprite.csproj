@@ -123,17 +123,8 @@
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
     </Reference>
-    <Reference Include="WebGLSpeedBlendCharacter.AssetsLibrary">
-      <HintPath>..\..\WebGLSpeedBlendCharacter\WebGLSpeedBlendCharacter\bin\staging.AssetsLibrary\WebGLSpeedBlendCharacter.AssetsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="WebGLEquirectangularPanorama.AssetsLibrary">
       <HintPath>..\..\..\synergy\webgl\WebGLEquirectangularPanorama\WebGLEquirectangularPanorama\bin\staging.AssetsLibrary\WebGLEquirectangularPanorama.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="WebGLRah66Comanche.AssetsLibrary">
-      <HintPath>..\..\collada\WebGLRah66Comanche\WebGLRah66Comanche\bin\staging.AssetsLibrary\WebGLRah66Comanche.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="WebGLColladaExperiment.AssetsLibrary">
-      <HintPath>..\..\WebGLColladaExperiment\WebGLColladaExperiment\bin\staging.AssetsLibrary\WebGLColladaExperiment.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -156,16 +147,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\synergy\webgl\WebGLEquirectangularPanorama\WebGLEquirectangularPanorama\WebGLEquirectangularPanorama.csproj">
-      <Project>{afb54cd6-f4ff-4c30-a983-5bb45be818d8}</Project>
+      <Project>{a9e994cf-f125-4571-9bed-52b5b5a92826}</Project>
       <Name>WebGLEquirectangularPanorama</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\collada\WebGLRah66Comanche\WebGLRah66Comanche\WebGLRah66Comanche.csproj">
-      <Project>{5a75fa08-3af1-4d27-a726-20b58b6cd608}</Project>
-      <Name>WebGLRah66Comanche</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WebGLSpeedBlendCharacter\WebGLSpeedBlendCharacter\WebGLSpeedBlendCharacter.csproj">
-      <Project>{890f6fdf-577b-4100-9fe1-d0f228175984}</Project>
-      <Name>WebGLSpeedBlendCharacter</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
