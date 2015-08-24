@@ -8,24 +8,24 @@ using System.Runtime.Remoting.Contexts;
 
 namespace ScriptCoreLib.JavaScript.BCLImplementation.System
 {
-	// http://referencesource.microsoft.com/#mscorlib/system/threading/thread.cs
-	// https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Threading/Thread.cs
-	// https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.Process/src/System/Diagnostics/ProcessThread.cs
-	// https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Threading/Thread.cs
+    // http://referencesource.microsoft.com/#mscorlib/system/threading/thread.cs
+    // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Threading/Thread.cs
+    // https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.Process/src/System/Diagnostics/ProcessThread.cs
+    // https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Threading/Thread.cs
 
-	// https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/Threading/Thread.cs
-	// https://github.com/kswoll/WootzJs/blob/master/WootzJs.Runtime/Activator.cs
-	// https://github.com/konsoletyper/teavm/blob/master/teavm-classlib/src/main/java/org/teavm/classlib/java/lang/TThread.java
+    // https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/Threading/Thread.cs
+    // https://github.com/kswoll/WootzJs/blob/master/WootzJs.Runtime/Activator.cs
+    // https://github.com/konsoletyper/teavm/blob/master/teavm-classlib/src/main/java/org/teavm/classlib/java/lang/TThread.java
 
-	// X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Threading\Thread.cs
-	// X:\jsc.svn\core\ScriptCoreLib\ActionScript\BCLImplementation\System\Threading\Thread.cs
-	// X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Threading\Thread.cs
-	// X:\jsc.svn\core\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Threading\Thread.cs
+    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Threading\Thread.cs
+    // X:\jsc.svn\core\ScriptCoreLib\ActionScript\BCLImplementation\System\Threading\Thread.cs
+    // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Threading\Thread.cs
+    // X:\jsc.svn\core\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Threading\Thread.cs
     // X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\BCLImplementation\System\Threading\Thread.cs
 
-	[Script(Implements = typeof(global::System.Threading.Thread))]
-	internal class __Thread
-	{
+    [Script(Implements = typeof(global::System.Threading.Thread))]
+    internal class __Thread
+    {
         // NaCl applications must target the Pepper API (PPAPI) in order to interact with the underlying system. 
         // https://github.com/kswoll/WootzJs/wiki/Limitations
 
@@ -53,49 +53,53 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
         #region CurrentThread
         static __Thread InternalCurrentThreadValue;
 
-		public static __Thread InternalCurrentThread
-		{
-			get
-			{
-				// Web Worker needs to be told which it is
+        public static __Thread InternalCurrentThread
+        {
+            get
+            {
+                // Web Worker needs to be told which it is
 
-				if (InternalCurrentThreadValue == null)
-				{
-					InternalCurrentThreadValue = new __Thread(default(ThreadStart));
+                if (InternalCurrentThreadValue == null)
+                {
+                    InternalCurrentThreadValue = new __Thread(default(ThreadStart));
 
-					// service worker would be 0 ?
-					if (Native.window != null)
-						InternalCurrentThreadValue.ManagedThreadId = 1;
-
-
-				}
-
-				return InternalCurrentThreadValue;
-			}
-		}
-
-		public static Thread CurrentThread
-		{
-			get
-			{
-				return (Thread)(object)InternalCurrentThread;
-			}
-		}
-		#endregion
+                    // service worker would be 0 ?
+                    if (Native.window != null)
+                        InternalCurrentThreadValue.ManagedThreadId = 1;
 
 
+                }
 
-		[Obsolete("jsc updated for roslyn while yet? should be")]
-		public static void Sleep(int ms)
-		{
-			// tested by?
+                return InternalCurrentThreadValue;
+            }
+        }
 
-			// unless jsc now has learned how to do a global async?
-			// fake sleep. keep cpu busy!
-			throw null;
+        public static Thread CurrentThread
+        {
+            get
+            {
+                return (Thread)(object)InternalCurrentThread;
+            }
+        }
+        #endregion
 
-			// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201501/20150111
-#if false
+
+        public static void Sleep_nop()
+        {
+        }
+
+        [Obsolete("jsc updated for roslyn while yet? should be")]
+        public static void Sleep(int ms)
+        {
+            // tested by?
+            // Z:\jsc.svn\examples\javascript\WebGL\WebGLIFrameBuffer\Application.cs
+
+            // unless jsc now has learned how to do a global async?
+            // fake sleep. keep cpu busy!
+            //throw null;
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150824/webgliframebuffer
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201501/20150111
             Console.WriteLine("sleep " + new { ms, Thread.CurrentThread.ManagedThreadId });
 
             var e = new Stopwatch();
@@ -104,92 +108,92 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
             if (ms > 0)
                 while (e.ElapsedMilliseconds < ms)
                 {
-                    Thread.Yield();
+                    //Thread.Yield();
+                    Sleep_nop();
                 }
 
             Console.WriteLine("end of sleep " + new { ms, e.ElapsedMilliseconds, Thread.CurrentThread.ManagedThreadId });
-#endif
 
-		}
-
-
-		public static bool Yield()
-		{
-			// how do we yield? :P
-
-			return false;
-		}
-
-		public int ManagedThreadId { get; set; }
-
-		// test for terminated threads?
-		public bool IsAlive { get; set; }
-
-		// all non ui threads
-		public bool IsBackground { get; set; }
-
-		#region ThreadStart
-		public ThreadStart InternalMethod;
-
-		public __Thread(ThreadStart t)
-		{
-			InternalMethod = t;
-		}
-
-		public void Start()
-		{
-			// WebWorker?
-			// did jsc rewriter detect the threadstart correctly?
-			IsAlive = true;
-			InternalMethod();
-			IsAlive = false;
-
-		}
-		#endregion
-
-		#region ParameterizedThreadStart
-		public ParameterizedThreadStart InternalParameterizedThreadStart;
+        }
 
 
-		// tested by x:\jsc.svn\examples\javascript\Test\TestThreadStartAsWebWorker\TestThreadStartAsWebWorker\Application.cs
-		public __Thread(ParameterizedThreadStart t)
-		{
-			// it seems we should support scope sharing
-			// yet we implemented it in Task.Run instead.
-			// do we need to move it around?
-			// check with java and actionscript
+        public static bool Yield()
+        {
+            // how do we yield? :P
 
-			InternalParameterizedThreadStart = t;
-		}
+            return false;
+        }
 
-		public void Start(object e)
-		{
-			// what about serviceworker?
+        public int ManagedThreadId { get; set; }
 
-			// WebWorker?
-			// did jsc rewriter detect the threadstart correctly?
+        // test for terminated threads?
+        public bool IsAlive { get; set; }
 
-			IsAlive = true;
-			InternalParameterizedThreadStart(e);
-			IsAlive = false;
-		}
-		#endregion
+        // all non ui threads
+        public bool IsBackground { get; set; }
+
+        #region ThreadStart
+        public ThreadStart InternalMethod;
+
+        public __Thread(ThreadStart t)
+        {
+            InternalMethod = t;
+        }
+
+        public void Start()
+        {
+            // WebWorker?
+            // did jsc rewriter detect the threadstart correctly?
+            IsAlive = true;
+            InternalMethod();
+            IsAlive = false;
+
+        }
+        #endregion
+
+        #region ParameterizedThreadStart
+        public ParameterizedThreadStart InternalParameterizedThreadStart;
+
+
+        // tested by x:\jsc.svn\examples\javascript\Test\TestThreadStartAsWebWorker\TestThreadStartAsWebWorker\Application.cs
+        public __Thread(ParameterizedThreadStart t)
+        {
+            // it seems we should support scope sharing
+            // yet we implemented it in Task.Run instead.
+            // do we need to move it around?
+            // check with java and actionscript
+
+            InternalParameterizedThreadStart = t;
+        }
+
+        public void Start(object e)
+        {
+            // what about serviceworker?
+
+            // WebWorker?
+            // did jsc rewriter detect the threadstart correctly?
+
+            IsAlive = true;
+            InternalParameterizedThreadStart(e);
+            IsAlive = false;
+        }
+        #endregion
 
 
         // Error	39	'ScriptCoreLib.JavaScript.BCLImplementation.System.__Thread.CurrentContext.get' must declare a body because it is not marked abstract or extern. Automatically implemented properties must define both get and set accessors.	X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Threading\Thread.cs	179	42	ScriptCoreLib
 
-		public ExecutionContext ExecutionContext { get; set;}
+        public ExecutionContext ExecutionContext { get; set; }
 
         public static Context CurrentContext { get; set; }
 
 
-		public static void MemoryBarrier()
-		{
-			// sync memory across thread hops?
-			// PLINQ?
+        public static void MemoryBarrier()
+        {
+            // sync memory across thread hops?
+            // PLINQ?
 
-		}
-	}
+        }
+    }
 
 
 }

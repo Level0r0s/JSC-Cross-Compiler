@@ -401,7 +401,9 @@ namespace ChromeTCPServer
 			//return scope.Item2;
 		}
 
-		public static void Invoke(
+
+        // Z:\jsc.svn\examples\javascript\WebGL\WebGLIFrameBuffer\Application.cs
+        public static void Invoke(
 			 string PageSource,
 			 Action<string> open = null
 			 )

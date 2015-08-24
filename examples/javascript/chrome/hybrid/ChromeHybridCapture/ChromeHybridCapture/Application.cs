@@ -623,7 +623,7 @@ namespace ChromeHybridCapture
                     Console.WriteLine("running as app " + new { typeof(Application).Assembly.GetName().Name } + " now reenable extension..");
 
 
-
+                    #region app:appwindow_to_app
                     Action<object> appwindow_to_app = data =>
                     {
                         var xShadowIAsyncStateMachine = (TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine)data;
@@ -705,6 +705,8 @@ namespace ChromeHybridCapture
 
                         NewStateMachineI.MoveNext();
                     };
+                    #endregion
+
 
                     #region app:HopToChromeAppWindow
                     HopToChromeAppWindow.VirtualOnCompleted = async (that, continuation) =>
@@ -1135,6 +1137,31 @@ namespace ChromeHybridCapture
                         // GC kicks in at 36 it seems.
                         await dir.WriteAllBytes(file, focus);
                         focus = null;
+
+                        //                        [Window Title]
+                        //Location is not available
+
+                        //[Content]
+                        //R:\ is not accessible.
+
+                        //Logon failure: unknown user name or bad password.
+
+
+                        //[OK]
+
+                        //                        ---------------------------
+                        //                        Restoring Network Connections
+                        //---------------------------
+                        //An error occurred while reconnecting R:
+                        //                            to
+                        //\\192.168.1.12\x$
+                        //Microsoft Windows Network: The local device name is already in use.
+
+
+                        //This connection has not been restored.
+                        //---------------------------
+                        //OK
+                        //-------------------------- -
 
 
                         new IHTMLPre { "WriteAllBytes... done " + new { file } }.AttachToDocument();

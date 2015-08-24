@@ -16,7 +16,7 @@ namespace ADBS6CameraTimelapser
 
         static void Main(string[] args)
         {
-        restart: ;
+            restart:;
 
             //  prep for channel jump
 
@@ -73,7 +73,7 @@ namespace ADBS6CameraTimelapser
             //var device = "192.168.1.126:5555";
             //var device = "192.168.173.5:5555";
             var device = "02157df2d5d4e70b";
-            var storage = "x:/vr/tape6stars2";
+            var storage = "x:/vr/tape9stars2after334";
 
             if (args.Length == 2)
             {
@@ -228,13 +228,13 @@ namespace ADBS6CameraTimelapser
             Thread.Sleep(4300);
 
             //            < devices
-        //> connect 192.168.1.126:5555
-        //unable to connect to :5555
-        // error: device offline
-        // error: device offline
-        // error: device not found
-        //do_adb("disconnect " + device);
-        retry:
+            //> connect 192.168.1.126:5555
+            //unable to connect to :5555
+            // error: device offline
+            // error: device offline
+            // error: device not found
+            //do_adb("disconnect " + device);
+            retry:
             // did the wifi got disconnected?
 
             // restart adb or s6?
@@ -403,7 +403,9 @@ namespace ADBS6CameraTimelapser
             do_adb("-s " + device + " shell \"input tap 1200 900\" ");
 
             Thread.Sleep(300);
+            do_adb("-s " + device + " shell \"input tap 1200 900\" ");
 
+            Thread.Sleep(300);
             //do_adb("-s " + device + " shell \"input tap 1400 300\" ");
 
             //Thread.Sleep(300);
@@ -427,30 +429,30 @@ namespace ADBS6CameraTimelapser
             //    //do_adb("-s 192.168.1.126:5555 shell \"am start -a android.media.action.IMAGE_CAPTURE\" ");
 
             //    // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVRWindWheelActivity.Activities
-        //    // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVRWindWheelActivity.Activities/OVRWindWheelActivity.Activities.ApplicationActivity
+            //    // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVRWindWheelActivity.Activities/OVRWindWheelActivity.Activities.ApplicationActivity
 
             //    // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVRWindWheelActivity.Activities
 
             //    do_adb("-s 192.168.1.126:5555 shell \"am force-stop com.sec.android.app.camera\" ");
-        //    Thread.Sleep(1300);
-        //    do_adb("-s 192.168.1.126:5555 shell \"am start -n com.sec.android.app.camera/.Camera\" ");
-        //    Thread.Sleep(4300);
+            //    Thread.Sleep(1300);
+            //    do_adb("-s 192.168.1.126:5555 shell \"am start -n com.sec.android.app.camera/.Camera\" ");
+            //    Thread.Sleep(4300);
 
             //    do_adb("-s 192.168.1.126:5555 shell \"input tap 2300 1300\" ");
-        //    Thread.Sleep(3300);
-        //    do_adb("-s 192.168.1.126:5555 shell \"input tap 1200 400\" ");
+            //    Thread.Sleep(3300);
+            //    do_adb("-s 192.168.1.126:5555 shell \"input tap 1200 400\" ");
 
             //    Thread.Sleep(500);
 
             //    //if you know the exact position to touch for focusing the camera, you can use  adb shell input tap <x><y>
 
             //    // focus ´damnet
-        //    //do_adb("-s 192.168.1.126:5555 shell \"input tap 700 400\" ");
-        //    //Thread.Sleep(600);
-        //    //do_adb("-s 192.168.1.126:5555 shell \"input tap 700 400\" ");
-        //    //Thread.Sleep(600);
-        //    //do_adb("-s 192.168.1.126:5555 shell \"input tap 700 400\" ");
-        //    //Thread.Sleep(1600);
+            //    //do_adb("-s 192.168.1.126:5555 shell \"input tap 700 400\" ");
+            //    //Thread.Sleep(600);
+            //    //do_adb("-s 192.168.1.126:5555 shell \"input tap 700 400\" ");
+            //    //Thread.Sleep(600);
+            //    //do_adb("-s 192.168.1.126:5555 shell \"input tap 700 400\" ");
+            //    //Thread.Sleep(1600);
 
 
             //    do_adb("-s 192.168.1.126:5555 shell \"input keyevent 27\" ");
@@ -460,10 +462,10 @@ namespace ADBS6CameraTimelapser
             //    //Thread.Sleep(1000);
 
             //    //do_adb("-s 192.168.1.126:5555 shell input keyevent 22");
-        ////Thread.Sleep(1200);
-        ////do_adb("-s 192.168.1.126:5555 shell input keyevent 66");
+            ////Thread.Sleep(1200);
+            ////do_adb("-s 192.168.1.126:5555 shell input keyevent 66");
 
-            collect: ;
+            collect:;
 
             // how long will it take?
             //Thread.Sleep(600);
@@ -522,7 +524,7 @@ namespace ADBS6CameraTimelapser
                     var iNNNN = i.ToString("00000");
 
                     //    var args = "shell dumpsys battery";
-                recheck: ;
+                    recheck:;
                     var shell_dumpsys_battery = get_adb("-s " + device + " shell dumpsys battery");
 
                     //Unhandled Exception: System.FormatException: Input string was not in a correct format.
@@ -587,7 +589,7 @@ namespace ADBS6CameraTimelapser
                     Console.WriteLine("check camera.");
                     Console.Beep();
 
-                recheck: ;
+                    recheck:;
                     var shell_dumpsys_battery = get_adb("-s " + device + " shell dumpsys battery");
 
                     //Unhandled Exception: System.FormatException: Input string was not in a correct format.
@@ -603,8 +605,11 @@ namespace ADBS6CameraTimelapser
                     // temperature/10+"C" 
                     var xtemperature = shell_dumpsys_battery.SkipUntilIfAny("temperature: ").TakeUntilOrEmpty("\r");
                     if (string.IsNullOrEmpty(xtemperature))
-                        // adb failed?
-                        Debugger.Break();
+                    {
+                        Console.WriteLine(" adb failed? 3:34?");
+                        Thread.Sleep(10000);
+                        goto restart;
+                    }
 
 
                     var itemperature = int.Parse(xtemperature) / 10.0;
