@@ -327,7 +327,9 @@ namespace WebGLIFrameBuffer
                     new IHTMLPre { "window: inside iframe..." }.AttachToDocument();
 
 
-                    // TypeError: Cannot read property 'BiMABnBwfzaSPDOtW7Fjxw' of null
+                    // need intellisense to do some meaningful tests..
+                    // lets switch from red to asus..
+
                 }
             );
         }
