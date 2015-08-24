@@ -396,6 +396,7 @@ interface THREE.Color
 [Constructor(long x, long y)]
 interface THREE.Plane
 {
+	// tested by?
 };
 
 
@@ -562,6 +563,9 @@ interface THREE.SpotLight : THREE.Light
 Constructor(long x, long y, long z, long q)]
 interface THREE.PlaneGeometry
 {
+	// tested by?
+	// Z:\jsc.svn\examples\javascript\WebGL\WebGLSVGSprite\WebGLSVGSprite\Application.cs
+
 	attribute sequence<THREE.Vector3>        vertices;
 
 	void applyMatrix(any value);
@@ -1180,6 +1184,7 @@ interface THREE.ParticleSystem : THREE.Object3D
 	)]
 interface THREE.Sprite : THREE.Object3D
 {
+	//  Z:\jsc.svn\examples\javascript\WebGL\WebGLSVGSprite\WebGLSVGSprite\Application.cs
 	// X:\jsc.svn\examples\javascript\webgl\WebGLVRCreativeLeadership\WebGLVRCreativeLeadership\Application.cs
 
 

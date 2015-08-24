@@ -25,8 +25,10 @@ using System.Diagnostics;
 
 namespace ChromeExtensionHopToTabThenIFrame
 {
-	#region HopToExtension
-	public struct HopToExtension : System.Runtime.CompilerServices.INotifyCompletion
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150824
+
+    #region HopToExtension
+    public struct HopToExtension : System.Runtime.CompilerServices.INotifyCompletion
 	{
 		// basically we have to hibernate the current state to resume
 		public HopToExtension GetAwaiter() { return this; }
