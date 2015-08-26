@@ -558,20 +558,6 @@ interface THREE.SpotLight : THREE.Light
 };
 
 
-// http://threejs.org/docs/#Reference/Extras.Geometries/PlaneGeometry
-[Constructor(long x, long y),
-Constructor(long x, long y, long z, long q)]
-interface THREE.PlaneGeometry
-{
-	// tested by?
-	// Z:\jsc.svn\examples\javascript\WebGL\WebGLSVGSprite\WebGLSVGSprite\Application.cs
-
-	attribute sequence<THREE.Vector3>        vertices;
-
-	void applyMatrix(any value);
-};
-
-
 
 
 
@@ -994,6 +980,26 @@ interface THREE.Geometry
 
 	void computeLineDistances();
 };
+
+
+
+
+
+
+// http://threejs.org/docs/#Reference/Extras.Geometries/PlaneGeometry
+[Constructor(long x, long y),
+Constructor(long width, long height, long widthSegments, long heightSegments)]
+interface THREE.PlaneGeometry : THREE.Geometry
+{
+	// tested by?
+	// Z:\jsc.svn\examples\javascript\WebGL\WebGLSVGSprite\WebGLSVGSprite\Application.cs
+	// Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360LightAnimation\Chrome360LightAnimation\Application.cs
+
+	attribute sequence<THREE.Vector3>        vertices;
+
+void applyMatrix(any value);
+};
+
 
 
 
