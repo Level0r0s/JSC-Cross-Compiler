@@ -9,6 +9,13 @@ namespace ScriptCoreLibNative.SystemHeaders
     [Script(IsNative = true, Header = "Windows.h", IsSystemHeader = true)]
     public static class windows_h
     {
+        // "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include\Windows.h"
+        // http://stackoverflow.com/questions/12748896/cannot-open-windows-h
+        // "C:\util\RecStudioWin\support\Prototypes\WINDOWS.H"
+
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201508/20150827
+        // defined at?
+
         // https://msdn.microsoft.com/en-us/library/windows/desktop/ms681944(v=vs.85).aspx
         // cant we just use pinvoke, yet link it in as we have a header available?
         public static bool AllocConsole() { return default(bool); }

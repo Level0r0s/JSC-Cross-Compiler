@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360dual", "x360dual.csproj", "{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x2001SpaceStationByOtavio", "..\..\synergy\x2001SpaceStationByOtavio\x2001SpaceStationByOtavio\x2001SpaceStationByOtavio.csproj", "{D2467367-10EA-45B7-B09C-5FC9F7680F8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xor3DAlienLandByXor", "..\..\synergy\Xor3DAlienLandByXor\Xor3DAlienLandByXor\Xor3DAlienLandByXor.csproj", "{7279466C-7E57-4148-B711-2B4635012226}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{1990397F-1004-479F-8A61-97616BA992AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.ActiveCfg = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.Build.0 = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.ActiveCfg = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.Build.0 = Release|x86
+		{D2467367-10EA-45B7-B09C-5FC9F7680F8E}.Debug|x86.ActiveCfg = Debug|x86
+		{D2467367-10EA-45B7-B09C-5FC9F7680F8E}.Debug|x86.Build.0 = Debug|x86
+		{D2467367-10EA-45B7-B09C-5FC9F7680F8E}.Release|x86.ActiveCfg = Release|x86
+		{D2467367-10EA-45B7-B09C-5FC9F7680F8E}.Release|x86.Build.0 = Release|x86
+		{7279466C-7E57-4148-B711-2B4635012226}.Debug|x86.ActiveCfg = Debug|x86
+		{7279466C-7E57-4148-B711-2B4635012226}.Debug|x86.Build.0 = Debug|x86
+		{7279466C-7E57-4148-B711-2B4635012226}.Release|x86.ActiveCfg = Release|x86
+		{7279466C-7E57-4148-B711-2B4635012226}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D2467367-10EA-45B7-B09C-5FC9F7680F8E} = {1990397F-1004-479F-8A61-97616BA992AF}
+		{7279466C-7E57-4148-B711-2B4635012226} = {1990397F-1004-479F-8A61-97616BA992AF}
+	EndGlobalSection
+EndGlobal
