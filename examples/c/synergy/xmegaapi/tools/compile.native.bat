@@ -17,10 +17,16 @@ call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd"
 set _targetpath=bin\Debug\web
 ::set _sourcefiles=foo/foo.c *.c
 
-set _sourcefiles=zlib/contrib/blast/*.c
+::set _sourcefiles=zlib/contrib/blast/*.c
 ::set _sourcefiles=%_sourcefiles% zlib/contrib/minizip/*.c
-set _sourcefiles=%_sourcefiles% zlib/*.c
+::set _sourcefiles=%_sourcefiles% zlib/*.c
 ::set _sourcefiles=%_sourcefiles% zlib/contrib/puff/*.c
+set _sourcefiles=%_sourcefiles% bar/bar.cpp 
+set _sourcefiles=%_sourcefiles% Ws2_32.lib
+set _sourcefiles=%_sourcefiles% cryptopp/*.cpp 
+ 
+ 
+
 set _sourcefiles=%_sourcefiles% foo/foo.c *.c
 
 
@@ -30,11 +36,18 @@ set _sourcefiles=%_sourcefiles% foo/foo.c *.c
 :: not to be used?
 :: used by zlib\contrib\minizip\ioapi.h
 set _args=%_args% /I "zlib"
-set _args=%_args% /TC /Zm200 
+set _args=%_args% /I "bar"
+
+rem this wont work ..
+rem set _args=%_args% /DCRYPTOPP_GENERATE_X64_MASM
+ set _args=%_args% /DCRYPTOPP_DISABLE_ASM
+ 
+ 
+::set _args=%_args% /TC /Zm200 
+set _args=%_args% /Zm200 
 ::set _args=%_args% /nologo /EHsc  %_sourcefiles% 
 set _args=%_args% /EHsc  %_sourcefiles% 
 set _args=%_args% /Fe%_libname%
-
 
 
 
