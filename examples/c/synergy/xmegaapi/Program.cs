@@ -107,6 +107,12 @@ namespace xmegaapi
 
         static void Main(string[] args)
         {
+            // X:\opensource\github\meganz\sdk\src\megaapi.cpp
+
+            // X:\opensource\github\meganz\sdk\examples\win32\testmega\main.cpp
+            // X:\opensource\github\meganz\sdk\include\megaapi.h
+            // X:\opensource\github\meganz\sdk\include
+
             ScriptCoreLibNative.SystemHeaders.stdio_h.puts("enter");
 
             // xmegaapi.exe.c(1025) : warning C4047: '=' : 'const char *' differs in levels of indirection from 'int'

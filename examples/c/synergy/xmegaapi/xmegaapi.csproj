@@ -74,15 +74,39 @@
   <ItemGroup>
     <None Include="X:\opensource\sourceforge\cryptopp-code\c5\**\*.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>web\cryptopp\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <Link>web\cryptopp\cryptopp\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="X:\opensource\sourceforge\cryptopp-code\c5\**\*.cpp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>web\cryptopp\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <Link>web\cryptopp\cryptopp\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\meganz\sdk\include\**\*.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>web\meganz\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\meganz\sdk\src\**\*.c">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>web\meganz\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="X:\opensource\github\meganz\sdk\src\**\*.cpp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>web\meganz\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+  
   <ItemGroup>
     <Content Include="web\bar\bar.cpp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

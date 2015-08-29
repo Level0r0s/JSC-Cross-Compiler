@@ -23,7 +23,8 @@ set _targetpath=bin\Debug\web
 ::set _sourcefiles=%_sourcefiles% zlib/contrib/puff/*.c
 set _sourcefiles=%_sourcefiles% bar/bar.cpp 
 set _sourcefiles=%_sourcefiles% Ws2_32.lib
-set _sourcefiles=%_sourcefiles% cryptopp/*.cpp 
+::set _sourcefiles=%_sourcefiles% cryptopp/*.cpp 
+set _sourcefiles=%_sourcefiles% meganz/*.cpp 
  
  
 
@@ -35,12 +36,20 @@ set _sourcefiles=%_sourcefiles% foo/foo.c *.c
 
 :: not to be used?
 :: used by zlib\contrib\minizip\ioapi.h
+:: X:\opensource\github\meganz\sdk\include\mega\win32\meganet.h
 set _args=%_args% /I "zlib"
 set _args=%_args% /I "bar"
+::set _args=%_args% /I "meganz/mega/posix"
+set _args=%_args% /I "meganz/mega/win32"
+::set _args=%_args% /I "meganz/mega"
+set _args=%_args% /I "meganz"
 
-rem this wont work ..
-rem set _args=%_args% /DCRYPTOPP_GENERATE_X64_MASM
+:: need nested include?
+set _args=%_args% /I "cryptopp"
+
+ 
  set _args=%_args% /DCRYPTOPP_DISABLE_ASM
+ set _args=%_args% /DUSE_CRYPTOPP
  
  
 ::set _args=%_args% /TC /Zm200 
