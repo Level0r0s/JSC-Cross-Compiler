@@ -59,6 +59,22 @@
     <None Include="tools\build.bat" />
     <None Include="tools\compile.native.bat" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\libsqlite3\**\*.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>web\libsqlite3\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\libsqlite3\sqlite3.c">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>web\libsqlite3\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+
   <ItemGroup>
     <None Include="X:\opensource\github\zlib\**\*.c">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -95,14 +111,14 @@
   <ItemGroup>
     <None Include="X:\opensource\github\meganz\sdk\src\**\*.c">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>web\meganz\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <Link>web\meganz\mega\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
   
   <ItemGroup>
     <None Include="X:\opensource\github\meganz\sdk\src\**\*.cpp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>web\meganz\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <Link>web\meganz\mega\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
 
