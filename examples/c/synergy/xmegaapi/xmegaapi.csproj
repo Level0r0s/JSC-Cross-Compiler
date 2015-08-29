@@ -59,6 +59,25 @@
     <None Include="tools\build.bat" />
     <None Include="tools\compile.native.bat" />
   </ItemGroup>
+
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\zlib\**\*.c">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>web\zlib\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+  
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\zlib\**\*.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>web\zlib\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
   <ItemGroup>
     <Content Include="web\foo\foo.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
