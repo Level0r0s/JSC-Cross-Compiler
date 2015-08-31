@@ -118,6 +118,7 @@
     <Compile Include="JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.FromException.cs" />
     <Compile Include="JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.WhenAny.cs" />
     <Compile Include="JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.FromResult.cs" />
+    <Compile Include="JavaScript\DOM\DirectoryReader.cs" />
     <Compile Include="JavaScript\DOM\FileError.cs" />
     <Compile Include="JavaScript\DOM\FileWriter.cs" />
     <Compile Include="JavaScript\DOM\DirectoryEntry.cs" />

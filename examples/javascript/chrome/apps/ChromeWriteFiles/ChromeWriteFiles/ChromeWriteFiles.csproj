@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}</ProjectGuid>
+    <ProjectGuid>{CAAB91EF-8580-48AB-A516-48271371F0E4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ChromeWriteFiles</RootNamespace>

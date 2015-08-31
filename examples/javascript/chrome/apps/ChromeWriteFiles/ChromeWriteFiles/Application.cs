@@ -25,6 +25,8 @@ namespace ChromeWriteFiles
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150831
+
         // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeWriteFiles\ChromeWriteFiles\bin\Debug\staging\ChromeWriteFiles.Application\web
 
         //        subst /D b:

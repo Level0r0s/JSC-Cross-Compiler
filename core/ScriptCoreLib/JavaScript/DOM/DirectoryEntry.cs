@@ -17,6 +17,8 @@ namespace ScriptCoreLib.JavaScript.DOM
     [Script(HasNoPrototype = true, ExternalTarget = "")]
     public class DirectoryEntry : Entry
     {
+        // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeReadFiles\Application.cs
+
         // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeWriteFiles\ChromeWriteFiles\Application.cs
 
         //void getFile([TreatUndefinedAs=NullString] DOMString? path, optional FileSystemFlags options, optional EntryCallback successCallback, optional ErrorCallback errorCallback);
