@@ -26,6 +26,11 @@ namespace ScriptCoreLib.JavaScript.DOM
         {
             // can chrome do vhd?
         }
+
+        public DirectoryReader createReader()
+        {
+            return null;
+        }
     }
 
 

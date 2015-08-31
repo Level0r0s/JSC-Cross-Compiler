@@ -118,76 +118,133 @@ namespace ChromeReadFiles
 
                     // https://code.google.com/p/chromium/issues/detail?id=322952
 
+
+                    new IHTMLButton { "read" }.AttachToDocument().onclick += async delegate
+                    {
+                        new IHTMLHorizontalRule { }.AttachToDocument();
+
+                        var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
+
+
+                        var files = await dir.createReader().readFileEntries();
+
+
+                        foreach (var item in files)
+                        {
+                            var item0 = item;
+
+                            new IHTMLButton { new { item0.name } }.AttachToDocument().onclick += async delegate
+                            {
+                                var f = await item0.file();
+
+                                new IHTMLPre { new { f.name, f.size } }.AttachToDocument();
+
+                                Blob imgblob = await f.readAsBytes();
+
+                                new IHTMLImage { src = imgblob.ToObjectURL() }.AttachToDocument();
+
+
+                            };
+
+                        }
+                    };
+
+
+
                     new IHTMLButton { "render c0001 and write to 0001.png" }.AttachToDocument().onclick += async delegate
-                       {
-                           new IHTMLHorizontalRule { }.AttachToDocument();
+                    {
+                        new IHTMLHorizontalRule { }.AttachToDocument();
 
-                           var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
-                           // https://developer.chrome.com/apps/fileSystem#method-retainEntry
+                        var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
+                        // https://developer.chrome.com/apps/fileSystem#method-retainEntry
 
-                           new IHTMLPre { "WriteAllBytes 0001" }.AttachToDocument();
+                        new IHTMLPre { "WriteAllBytes 0001" }.AttachToDocument();
 
-                           await dir.WriteAllBytes("0001.png", c0001);
-                           new IHTMLPre { "WriteAllBytes 0002" }.AttachToDocument();
-                           await dir.WriteAllBytes("0002.png", c0002);
+                        await dir.WriteAllBytes("0001.png", c0001);
+                        new IHTMLPre { "WriteAllBytes 0002" }.AttachToDocument();
+                        await dir.WriteAllBytes("0002.png", c0002);
 
-                           new IHTMLPre { "done" }.AttachToDocument();
+                        new IHTMLPre { "done" }.AttachToDocument();
 
-                           //new IHTMLButton { "read" }.AttachToDocument().onclick += async delegate
-                           new IHTMLButton { "read" }.AttachToDocument().onclick += delegate
-                           {
-                               new IHTMLHorizontalRule { }.AttachToDocument();
+                        //new IHTMLButton { "read" }.AttachToDocument().onclick += async delegate
+                        new IHTMLButton { "read" }.AttachToDocument().onclick += delegate
+                     {
+                         new IHTMLHorizontalRule { }.AttachToDocument();
 
-                               //var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
-
-
-                               // https://developer.mozilla.org/en/docs/Web/API/DirectoryReader
-
-                               // first. can we read back the files we just wrote?
-                               // first step is to make sure we even have a api
-
-                               //var createReader = (dir as dynamic).createReader();
-                               //object createReader = (dir as dynamic).createReader();
-                               DirectoryReader createReader = (dir as dynamic).createReader();
-
-                               new IHTMLPre { createReader }.AttachToDocument();
-
-                               // [object DirectoryReader]
-
-                               // [object FileEntry],[object FileEntry]
-
-                               new IHTMLPre { "readEntries 0" }.AttachToDocument();
-
-                               createReader.readEntries(
-                                   entries =>
-                                   {
-                                       new IHTMLPre { entries }.AttachToDocument();
-                                   }
-                               );
-
-                               new IHTMLPre { "readEntries 1" }.AttachToDocument();
-
-                               createReader.readEntries(
-                                   entries =>
-                                   {
-                                       new IHTMLPre { entries }.AttachToDocument();
-                                   }
-                               );
+                         //var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
 
 
-                               //9240ms { Name = createReader, ReturnType = , IsReturnVoid = false, Count = 1 }
-                               //view - source:54032 9240ms { target = [object DirectoryEntry], Name = createReader }
-                               //view - source:54032 9240ms { Name = Add, ReturnType = , IsReturnVoid = true, Count = 2 }
-                               //view - source:54032 9245ms { target = [object HTMLPreElement], Name = Add, arg1 = [object DirectoryReader] }
-                               //view - source:73991 Uncaught TypeError: Cannot read property 'apply' of undefined
+                         // https://developer.mozilla.org/en/docs/Web/API/DirectoryReader
+
+                         // first. can we read back the files we just wrote?
+                         // first step is to make sure we even have a api
+
+                         //var createReader = (dir as dynamic).createReader();
+                         //object createReader = (dir as dynamic).createReader();
+                         DirectoryReader createReader = (dir as dynamic).createReader();
+
+                         new IHTMLPre { createReader }.AttachToDocument();
+
+                         // [object DirectoryReader]
+
+                         // [object FileEntry],[object FileEntry]
+
+                         new IHTMLPre { "readEntries 0" }.AttachToDocument();
+
+                         createReader.readEntries(
+                             entries =>
+                             {
+                                 //new IHTMLPre { "readEntries 0 done " + new { entries } }.AttachToDocument();
+                                 new IHTMLPre { "readEntries 0 done " }.AttachToDocument();
+
+                                 foreach (var item in entries)
+                                 {
+                                     new IHTMLPre { "readEntries 0 done " + new { item } }.AttachToDocument();
+                                 }
+
+                                 new IHTMLPre { "readEntries 1" }.AttachToDocument();
+
+                                 //                                       readEntries 0
+                                 //readEntries 0 done { { entries = [object FileEntry],[object FileEntry] }}
+                                 //readEntries 1
+                                 //readEntries 1 done { { entries1 =  } }
+
+                                 createReader.readEntries(
+                               entries1 =>
+                               {
+                                   // readEntries 1 done {{ entries1isnull = false }}
+
+                                   var entries1isnull = entries1 == null;
+
+                                   new IHTMLPre { "readEntries 1 done " + new { entries1isnull } }.AttachToDocument();
 
 
-                               //await dir.WriteAllBytes("0001.png", c0001);
-                               //await dir.WriteAllBytes("0002.png", c0002);
+                                   new IHTMLPre { "readEntries 1 done " + new { entries1.Length } }.AttachToDocument();
+                                   //new IHTMLPre { "readEntries 1 done " + new { entries1 } }.AttachToDocument();
 
-                               //new IHTMLPre { "done" }.ToString();
-                           };
-                       };
+                               }
+                           );
+
+
+                             }
+                         );
+
+
+
+
+                         //9240ms { Name = createReader, ReturnType = , IsReturnVoid = false, Count = 1 }
+                         //view - source:54032 9240ms { target = [object DirectoryEntry], Name = createReader }
+                         //view - source:54032 9240ms { Name = Add, ReturnType = , IsReturnVoid = true, Count = 2 }
+                         //view - source:54032 9245ms { target = [object HTMLPreElement], Name = Add, arg1 = [object DirectoryReader] }
+                         //view - source:73991 Uncaught TypeError: Cannot read property 'apply' of undefined
+
+
+                         //await dir.WriteAllBytes("0001.png", c0001);
+                         //await dir.WriteAllBytes("0002.png", c0002);
+
+                         //new IHTMLPre { "done" }.ToString();
+                     };
+                    };
 
 
 

@@ -334,6 +334,10 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         //    return e.bytes;
         //}
 
+
+
+        // basically jsc could use byte[] as Blob or ByteArray or both?
+        [Obsolete("Blob leak?")]
         public static implicit operator Blob(IHTMLImage c)
         {
             // = new IHTMLImage { src = gl.canvas.toDataURL() };

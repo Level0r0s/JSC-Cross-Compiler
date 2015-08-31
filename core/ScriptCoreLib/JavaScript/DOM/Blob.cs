@@ -65,9 +65,12 @@ namespace ScriptCoreLib.JavaScript.DOM
     {
         // X:\jsc.svn\examples\javascript\Test\TestRedirectWebWorker\TestRedirectWebWorker\Application.cs
 
+        //  var RwkABtukxDiJdWzyVGZ9zQ = function () { return _1gUABg9YbjqvwTcHdCatWw.apply(null, arguments); };
         [Obsolete("jsc faults?")]
         public static string ToObjectURL(this Blob e)
         {
+            donotinline();
+
             // tested by
             // X:\jsc.svn\examples\javascript\ScriptDynamicSourceBuilder\ScriptDynamicSourceBuilder\Application.cs
 
@@ -75,6 +78,10 @@ namespace ScriptCoreLib.JavaScript.DOM
 
             // is jsc trying to inline without the line above?
             return URL.createObjectURL(e);
+        }
+
+        static void donotinline()
+        {
         }
     }
 }
