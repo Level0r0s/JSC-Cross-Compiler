@@ -20,6 +20,7 @@ using ChromeReadFiles;
 using ChromeReadFiles.Design;
 using ChromeReadFiles.HTML.Pages;
 using ScriptCoreLib.JavaScript.WebGL;
+using System.Diagnostics;
 
 namespace ChromeReadFiles
 {
@@ -28,6 +29,7 @@ namespace ChromeReadFiles
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://chrome.google.com/webstore/detail/pink-default-theme/odibiblpllhihdjljanngdbcfcfbpfpc?hl=en
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150831
 
         // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeReadFiles\ChromeReadFiles\bin\Debug\staging\ChromeReadFiles.Application\web
@@ -108,7 +110,22 @@ namespace ChromeReadFiles
                     (Native.body.style as dynamic).webkitUserSelect = "text";
 
                     IHTMLImage c0002 = new IHTMLDiv { "frame2 " + new { DateTime.Now } };
-                    IHTMLImage c0001 = new IHTMLDiv { "frame1 " + new { DateTime.Now } };
+
+
+                    var div0001 = new IHTMLDiv { "frame1 " + new { DateTime.Now } };
+
+                    //WriteAllBytes 0001 { { size = 309688 } }
+                    //WriteAllBytes 0001 { { ElapsedMilliseconds = 108 } } 3024,296875 KBps
+
+                    //WriteAllBytes 0001 { { size = 305319 } }
+                    //WriteAllBytes 0001 { { ElapsedMilliseconds = 12 } }
+
+                    div0001.style.backgroundColor = "yellow";
+                    div0001.style.SetSize(4096, 4096);
+
+
+                    IHTMLImage c0001 = div0001;
+
                     IHTMLImage c = new IHTMLDiv { "lets render this div into file " + new { DateTime.Now } };
 
                     c.AttachToDocument();
@@ -158,11 +175,43 @@ namespace ChromeReadFiles
                         var dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
                         // https://developer.chrome.com/apps/fileSystem#method-retainEntry
 
-                        new IHTMLPre { "WriteAllBytes 0001" }.AttachToDocument();
 
-                        await dir.WriteAllBytes("0001.png", c0001);
-                        new IHTMLPre { "WriteAllBytes 0002" }.AttachToDocument();
-                        await dir.WriteAllBytes("0002.png", c0002);
+                        dir.getDirectory("shader0", new { create = true },
+                            sub =>
+                            {
+                                // may want to render each frame as cubemap?
+
+                                //new IHTMLPre { "WriteAllBytes 0002" }.AttachToDocument();
+                                sub.WriteAllBytes("0002.png", c0002);
+
+                                //sub.WriteAllBytes()
+                            }
+                        );
+
+                        // will it make it bigger on disk?
+                        //c0001.width = 4096;
+                        //c0001.style.width = "4096px";
+
+
+                        Blob blob0 = c0001;
+
+                        new IHTMLPre { "WriteAllBytes 0001 " + new { blob0.size } }.AttachToDocument();
+
+                        var w0 = Stopwatch.StartNew();
+
+                        await dir.WriteAllBytes("0001.png", blob0);
+
+                        //WriteAllBytes 0001 { { size = 308915 } }
+                        //WriteAllBytes 0001 { { ElapsedMilliseconds = 103, KBps = 2928.881598907767 } }
+
+                        //WriteAllBytes 0001 { { size = 995 } }
+                        //WriteAllBytes 0001 { { ElapsedMilliseconds = 9 } }
+
+                        var KBps = blob0.size / (w0.ElapsedMilliseconds / 1000.0) / 1024;
+
+                        new IHTMLPre { "WriteAllBytes 0001 " + new { w0.ElapsedMilliseconds, KBps } }.AttachToDocument();
+
+
 
                         new IHTMLPre { "done" }.AttachToDocument();
 

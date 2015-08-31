@@ -27,6 +27,13 @@ namespace ScriptCoreLib.JavaScript.DOM
             // can chrome do vhd?
         }
 
+        //void getDirectory([TreatUndefinedAs=NullString] DOMString? path, optional FileSystemFlags options, optional EntryCallback successCallback, optional ErrorCallback errorCallback);
+        public void getDirectory(string path, object options, Action<DirectoryEntry> successCallback)
+        {
+            // can chrome do vhd?
+        }
+
+
         public DirectoryReader createReader()
         {
             return null;
