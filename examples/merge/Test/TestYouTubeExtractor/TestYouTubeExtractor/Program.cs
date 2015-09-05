@@ -54,7 +54,15 @@ namespace TestYouTubeExtractor
 
         //Error CS0246  The type or namespace name 'VideoInfo' could not be found(are you missing a using directive or an assembly reference?)	TestYouTubeExtractor X:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\Program.cs	47
 
+        //            ---------------------------
+        //Microsoft Visual Studio
+        //---------------------------
+        //The project file 'x:\opensource\github\taglib-sharp\src\taglib-sharp.csproj' has been moved, renamed or is not on your computer.
+        //---------------------------
+        //OK
+        //---------------------------
 
+        // { err = System.IO.FileNotFoundException: Could not load file or assembly 'taglib-sharp,
         private static void DownloadVideo(
             string chname,
             bool Spherical,
@@ -130,6 +138,11 @@ namespace TestYouTubeExtractor
             //apkfriendlytitle = apkfriendlytitle.Replace("360", "_");
 
 
+
+            //  System.IO.DirectoryNotFoundException: Could not find a part of the path 'x:\media\360 tape columns 4096x3840x2160p60 py by zproxy.mp4'.
+
+            // clean slate?
+            new DirectoryInfo("x:/media").Create();
 
 
 

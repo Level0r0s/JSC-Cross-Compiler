@@ -367,12 +367,19 @@ namespace HybridHopToUDPChromeApp
                     Console.WriteLine("running as app " + new { typeof(Application).Assembly.GetName().Name } + " now reenable extension..");
 
 
+                    // called by?
                     #region app:appwindow_to_app
                     Action<object> appwindow_to_app = data =>
                     {
+                        // what if its a string not a dictinary?
+
                         var xShadowIAsyncStateMachine = (TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine)data;
 
-                        Console.WriteLine("app appwindow_to_app " + new { xShadowIAsyncStateMachine.TypeName });
+                        Console.WriteLine("app:appwindow_to_app " + new { xShadowIAsyncStateMachine.TypeName });
+
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150905/hoptoudpchromeapp
+                        //13882ms app HopToChromeAppWindow MessageChannel onmessage {{ data = do HopToChromeAppWindow {{ TypeName = <Namespace>.___ctor_b__5_19_d, state = 2 }} }}
+                        //view-source:54032 13883ms app appwindow_to_app {{ TypeName = null }}
 
                         #region xAsyncStateMachineType
                         var xAsyncStateMachineType = typeof(Application).Assembly.GetTypes().FirstOrDefault(
@@ -385,7 +392,7 @@ namespace HybridHopToUDPChromeApp
                                 var xisIAsyncStateMachine = typeof(IAsyncStateMachine).IsAssignableFrom(xAsyncStateMachineTypeCandidate);
                                 if (xisIAsyncStateMachine)
                                 {
-                                    //Console.WriteLine(new { item.FullName, isIAsyncStateMachine });
+                                    Console.WriteLine(new { xAsyncStateMachineTypeCandidate.FullName, xisIAsyncStateMachine });
 
                                     return xAsyncStateMachineTypeCandidate.FullName == xShadowIAsyncStateMachine.TypeName;
                                 }
@@ -395,7 +402,12 @@ namespace HybridHopToUDPChromeApp
                         );
                         #endregion
 
-                        Console.WriteLine("app appwindow_to_app " + new { xAsyncStateMachineType });
+                        Console.WriteLine("app:appwindow_to_app " + new { xAsyncStateMachineType });
+
+                        if (xAsyncStateMachineType == null)
+                            Debugger.Break();
+
+
 
                         var NewStateMachine = FormatterServices.GetUninitializedObject(xAsyncStateMachineType);
                         var isIAsyncStateMachine = NewStateMachine is IAsyncStateMachine;
@@ -502,6 +514,16 @@ namespace HybridHopToUDPChromeApp
 
                         c.port1.onmessage += e =>
                         {
+                            //10818ms app HopToChromeAppWindow MessageChannel onmessage {{ data = do HopToChromeAppWindow {{ TypeName = <Namespace>.___ctor_b__5_19_d, state = 2 }} }}
+                            //view-source:54032 10820ms app:appwindow_to_app {{ TypeName = null }}
+
+                            if (e.data is string)
+                            {
+                                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150905/hoptoudpchromeapp
+                                Console.WriteLine("app   c.port1.onmessage: " + e.data);
+                                return;
+                            }
+
                             Console.WriteLine("app HopToChromeAppWindow MessageChannel onmessage " + new { e.data });
 
                             appwindow_to_app(e.data);
@@ -544,18 +566,22 @@ namespace HybridHopToUDPChromeApp
                         // should we now be able to hop to our tab?
                         // what about if we are in an app window?
 
+                        // called by?
                         port.onMessage.addListener(
                             new Action<object>(
                                 (message) =>
                                 {
                                     // extension  port.onMessage {{ message = from app hello to extension }}
-                                    var expando_isstring = ScriptCoreLib.JavaScript.Runtime.Expando.Of(message).IsString;
+                                    //var expando_isstring = ScriptCoreLib.JavaScript.Runtime.Expando.Of(message).IsString;
 
                                     // look app sent a message to extension
                                     //Console.WriteLine("app  port.onMessage " + new { message });
 
-                                    if (expando_isstring)
+
+                                    // did we not fix jsc?
+                                    if (message is string)
                                     {
+                                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150905/hoptoudpchromeapp
                                         Console.WriteLine("app  port.onMessage: " + message);
                                         return;
                                     }
@@ -738,9 +764,9 @@ namespace HybridHopToUDPChromeApp
                         Native.body.Clear();
                         chrome.app.window.current().show();
                         new IHTMLPre { "appwindow:  chrome.app.window.current().show();" }.AttachToDocument();
-                        
+
                         // this is causing issues?
-                        
+
                         Console.WriteLine("appwindow: appwindow to app");
                         await default(HopToChromeApp);
                         Console.WriteLine("app: appwindow to app");
