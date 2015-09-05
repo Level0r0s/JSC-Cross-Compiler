@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using ChromeAppWindowUDPPointerLock;
+// ?
 using ChromeAppWindowUDPPointerLock.Design;
 using ChromeAppWindowUDPPointerLock.HTML.Pages;
 using System.Net.Sockets;
@@ -274,7 +275,7 @@ namespace ChromeAppWindowUDPPointerLock
                                                  var port = new Random().Next(16000, 40000);
 
                                                  //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
-
+                                                 // Z:\jsc.svn\examples\javascript\chrome\hybrid\HybridHopToUDPChromeApp\Application.cs
                                                  // where is bind async?
                                                  var socket = new UdpClient();
                                                  socket.Client.Bind(

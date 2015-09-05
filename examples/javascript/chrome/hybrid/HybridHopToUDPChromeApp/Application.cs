@@ -21,6 +21,7 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Diagnostics;
+using System.Net.Sockets;
 
 namespace HybridHopToUDPChromeApp
 {
@@ -545,7 +546,7 @@ namespace HybridHopToUDPChromeApp
 
 
 
-
+                    // called by?
                     #region app:ConnectExternal
                     chrome.runtime.ConnectExternal += port =>
                     {
@@ -731,7 +732,7 @@ namespace HybridHopToUDPChromeApp
                         // was the extension able to pass us a message?
 
                         //Console.WriteLine("chrome.runtime.MessageExternal " + new { message, sender, sendResponse });
-                        Console.WriteLine("app chrome.runtime.MessageExternal " + new { message });
+                        Console.WriteLine("app: chrome.runtime.MessageExternal " + new { message });
 
                         // app chrome.runtime.MessageExternal {{ message = extension to app! }}
 
@@ -760,19 +761,85 @@ namespace HybridHopToUDPChromeApp
                         // defined at?
                         await default(HopToChromeAppWindow);
 
+                        // cant select ffs
+                        (Native.body.style as dynamic).webkitUserSelect = "text";
+
                         Native.body.style.overflow = IStyle.OverflowEnum.auto;
                         Native.body.Clear();
                         chrome.app.window.current().show();
                         new IHTMLPre { "appwindow:  chrome.app.window.current().show();" }.AttachToDocument();
 
-                        // this is causing issues?
+                        var NetworkList = await chrome.socket.getNetworkList();
+
+                        //appwindow:  chrome.app.window.current().show();
+                        //appwindow:  {{ prefixLength = 64, name = {5AE7FDA4-3FE5-42B2-905A-90962F983884}, address = 2001:7d0:8424:1f01:18fb:7bdf:54a7:e32 }}
+                        //appwindow:  {{ prefixLength = 64, name = {5AE7FDA4-3FE5-42B2-905A-90962F983884}, address = fe80::18fb:7bdf:54a7:e32 }}
+                        //appwindow:  {{ prefixLength = 24, name = {5AE7FDA4-3FE5-42B2-905A-90962F983884}, address = 192.168.1.13 }}
+                        //appwindow:  {{ prefixLength = 64, name = {7F261BE1-E637-4E3E-B766-BD56F87515A5}, address = fe80::9cb1:846a:f8c0:ae4d }}
+                        //appwindow:  {{ prefixLength = 16, name = {7F261BE1-E637-4E3E-B766-BD56F87515A5}, address = 169.254.174.77 }}
+                        //appwindow:  {{ prefixLength = 64, name = {296E36A9-A4D6-4994-9496-69CCFD248303}, address = fe80::742a:74b2:f2a0:d632 }}
+                        //appwindow:  {{ prefixLength = 16, name = {296E36A9-A4D6-4994-9496-69CCFD248303}, address = 169.254.214.50 }}
+                        //appwindow:  {{ prefixLength = 64, name = {A588C792-795A-49EA-B7B7-FF2791BD0DDA}, address = fe80::b102:9f72:e61b:59b6 }}
+                        //appwindow:  {{ prefixLength = 24, name = {A588C792-795A-49EA-B7B7-FF2791BD0DDA}, address = 192.168.81.1 }}
+
+                        // should figure out which nics to broadcast to by default?
+
+                        foreach (var item in NetworkList)
+                        {
+                            new IHTMLPre { "appwindow:  " + new { item.prefixLength, item.name, item.address } }.AttachToDocument();
+
+                            // if we have multiple NICs broadcast em all?
+                            // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\Application.cs
+                        }
+
 
                         Console.WriteLine("appwindow: appwindow to app");
                         await default(HopToChromeApp);
                         Console.WriteLine("app: appwindow to app");
+
+                        // send intent over udp?
+
+
                     };
                     #endregion
 
+
+                    chrome.runtime.Startup += async delegate
+                    {
+                        Console.WriteLine(@"app: chrome.runtime.Startup
+                        // lets start listening for udp. as the other device may want to click launch and jump into us. 
+                        ");
+
+                        // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPReceiveAsync\ChromeUDPReceiveAsync\Application.cs
+                        // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPFloats\ChromeUDPFloats\Application.cs
+
+                        var socket = new UdpClient(40014);
+
+                        //socket.Client.Bind(
+                        //    //new IPEndPoint(IPAddress.Any, port: 40000)
+                        //    new IPEndPoint(IPAddress.Any, port)
+                        //);
+
+
+                        // no port?
+                        socket.JoinMulticastGroup(
+                            IPAddress.Parse("239.1.2.3")
+                        );
+
+                        while (true)
+                        {
+                            Console.WriteLine(@"app: chrome.runtime.Startup await socket.ReceiveAsync");
+
+                            // Z:\jsc.svn\examples\javascript\chrome\hybrid\HybridHopToUDPChromeApp\Application.cs
+
+                            // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                            // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                            var s = await socket.ReceiveAsync();
+
+                            Console.WriteLine($"app: recvFrom: {s.Buffer.Length}");
+
+                        }
+                    };
 
                     return;
                 }

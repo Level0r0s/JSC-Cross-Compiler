@@ -95,6 +95,8 @@ namespace ChromeUDPFloats
                     };
 
                     var n = await chrome.socket.getNetworkList();
+
+                    // Z:\jsc.svn\examples\javascript\chrome\hybrid\HybridHopToUDPChromeApp\Application.cs
                     var n24 = n.Where(x => x.prefixLength == 24).ToArray();
 
                     n24.WithEach(
@@ -103,7 +105,7 @@ namespace ChromeUDPFloats
                             var status = new IHTMLPre { new { nic.address } }.AttachToDocument();
                             var buffer = new IHTMLPre { }.AttachToDocument();
 
-
+                            // Z:\jsc.svn\examples\javascript\chrome\hybrid\HybridHopToUDPChromeApp\Application.cs
                             var uu = new UdpClient(40014);
 
                             //args.mouse = "awaiting vertexTransform at " + nic + " :40014";
