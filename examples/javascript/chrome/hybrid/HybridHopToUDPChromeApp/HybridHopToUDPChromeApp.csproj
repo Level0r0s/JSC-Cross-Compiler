@@ -152,9 +152,9 @@
   <PropertyGroup>
     <PostBuildEvent>start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /AssociateDriveForChrome:B /InferChromeAppManifest:true  /FilterTo:$(SolutionDir)
 
-xcopy "$(TargetDir)staging\ChromeHybridCapture.Application\web\assets" "$(TargetDir)staging\ChromeHybridCapture.Application\web\extension\assets\" /Y /E
+rem xcopy "$(TargetDir)staging\ChromeHybridCapture.Application\web\assets" "$(TargetDir)staging\ChromeHybridCapture.Application\web\extension\assets\" /Y /E
 
-copy "$(TargetDir)staging\ChromeHybridCapture.Application\web\view-source" "$(TargetDir)staging\ChromeHybridCapture.Application\web\extension\view-source"</PostBuildEvent>
+rem copy "$(TargetDir)staging\ChromeHybridCapture.Application\web\view-source" "$(TargetDir)staging\ChromeHybridCapture.Application\web\extension\view-source"</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
 		            </PreBuildEvent>
   </PropertyGroup>

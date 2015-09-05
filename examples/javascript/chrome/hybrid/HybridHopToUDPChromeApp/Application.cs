@@ -813,6 +813,7 @@ namespace HybridHopToUDPChromeApp
                         // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPReceiveAsync\ChromeUDPReceiveAsync\Application.cs
                         // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPFloats\ChromeUDPFloats\Application.cs
 
+                        // can we run this on CLR too?
                         var socket = new UdpClient(40014);
 
                         //socket.Client.Bind(
@@ -860,6 +861,43 @@ namespace HybridHopToUDPChromeApp
 
             // };
 
+        }
+
+        // what about hopping to CLR?
+
+  
+    }
+
+    public static class UDPServer
+    {
+        public static async Task Invoke()
+        {
+            var socket = new UdpClient(40014);
+
+            //socket.Client.Bind(
+            //    //new IPEndPoint(IPAddress.Any, port: 40000)
+            //    new IPEndPoint(IPAddress.Any, port)
+            //);
+
+
+            // no port?
+            socket.JoinMulticastGroup(
+                IPAddress.Parse("239.1.2.3")
+            );
+
+            while (true)
+            {
+                Console.WriteLine(@"await socket.ReceiveAsync");
+
+                // Z:\jsc.svn\examples\javascript\chrome\hybrid\HybridHopToUDPChromeApp\Application.cs
+
+                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                var s = await socket.ReceiveAsync();
+
+                Console.WriteLine($"ReceiveAsync: {s.Buffer.Length}");
+
+            }
         }
     }
 }

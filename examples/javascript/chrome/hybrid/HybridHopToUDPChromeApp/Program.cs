@@ -10,7 +10,11 @@ namespace HybridHopToUDPChromeApp
     {
         public static void Main(string[] args)
         {
-            RewriteToUltraApplication.AsProgram.Launch(typeof(Application));
+            // chrome app is build via post build event
+
+            UDPServer.Invoke().Wait();
+
+            // RewriteToUltraApplication.AsProgram.Launch(typeof(Application));
         }
 
     }
