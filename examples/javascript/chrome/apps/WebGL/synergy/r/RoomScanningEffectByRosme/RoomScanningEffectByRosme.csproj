@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}</ProjectGuid>
+    <ProjectGuid>{30A5A451-E119-45CA-BE2E-6A4221854AB9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RoomScanningEffectByRosme</RootNamespace>

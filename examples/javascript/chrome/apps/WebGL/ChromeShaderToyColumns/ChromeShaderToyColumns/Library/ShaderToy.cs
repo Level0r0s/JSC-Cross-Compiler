@@ -265,7 +265,7 @@ namespace ChromeShaderToyColumns.Library
             // WebGLFramebuffer
             public WebGLFramebuffer xWebGLFramebuffer0;
             public WebGLTexture xWebGLTexture0;
-            
+
 
             // x:\jsc.svn\examples\javascript\chrome\apps\webgl\chromeshadertoyprogramsasgazetiles\chromeshadertoyprogramsasgazetiles\application.cs
 
@@ -293,7 +293,16 @@ namespace ChromeShaderToyColumns.Library
 
                 float zoom = 1.0f
                 );
+
+
+
+
+
             public Paint_ImageDelegate Paint_Image;
+
+
+            public Action<WebGLProgram> ProgramSelected;
+
 
             public CreateShaderResult xCreateShader;
 
@@ -437,6 +446,12 @@ color.a = 1.0;
 
                             // useProgram: program not valid
                             gl.useProgram(mProgram);
+
+
+                            if (this.ProgramSelected != null)
+                                this.ProgramSelected(mProgram);
+
+
 
                             // uniform4fv
                             var uniform4fv_mouse = new[] { mousePosX, mousePosY, mouseOriX, mouseOriY };

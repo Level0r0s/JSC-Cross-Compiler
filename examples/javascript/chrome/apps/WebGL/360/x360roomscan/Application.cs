@@ -226,7 +226,8 @@ namespace x360roomscan
             //cubefacesize = 64; // 6 faces, ?
 
             // fast gif?
-            cubefacesize = 128; // 6 faces, ?
+            //cubefacesize = 128; // 6 faces, ?
+            cubefacesize = 512; // 6 faces, ?
                                 //    [GroupMarkerNotSet(crbug.com / 242999)!:247F0809]
                                 //RENDER WARNING: texture bound to texture unit 0 is not renderable.It maybe non-power-of-2 and have incompatible texture filtering.
 
@@ -448,6 +449,137 @@ namespace x360roomscan
             var frameIDslider = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0, max = maxframes, valueAsNumber = 137, title = "frameIDslider" }.AttachToDocument();
             frameIDslider.onchange += delegate { frameIDslider.title = "frameIDslider " + frameIDslider.valueAsNumber; };
 
+
+
+            // left
+            IHTMLCanvas shader0canvas = null;
+
+            // locCameraTargetOffset to look left?
+            #region shader0canvas
+            new { }.With(
+              async delegate
+              {
+                  //return;
+
+                  Native.body.style.margin = "0px";
+                  (Native.body.style as dynamic).webkitUserSelect = "auto";
+
+                  // https://sites.google.com/a/jsc-solutions.net/work/x3
+                  //var vs0 = new ChromeShaderToyColumns.Shaders.ProgramFragmentShader();
+                  //var vs0 = new x2001SpaceStationByOtavio.Shaders.ProgramFragmentShader();
+                  //var vs0 = new Xor3DAlienLandByXor.Shaders.ProgramFragmentShader();
+                  var vs0 = new RoomScanningEffectByRosme.Shaders.ProgramFragmentShader();
+                  // now we have an empty shell
+                  // which tostrings to the glsl code for gpu
+                  // and if we were to initialize 
+
+
+
+                  // enable intellisense
+                  //var vs0i = (RoomScanningEffectByRosme.Shaders.__ProgramFragmentUniforms)(object)vs0;
+
+
+                  // script: error JSC1000: No implementation found for this native method, please implement [static ScriptCoreLib.GLSL.Shader.vec3(System.Single, System.Single, System.Single)]
+
+                  //     b.__this._vs0i_5__2.uCameraTargetOffset = new ctor$aQ8ABjj5gzW_aEh4Cmq2oMg(1, 0, 0);
+
+                  // 270ms ReferenceError: ctor$aQ8ABjj5gzW_aEh4Cmq2oMg is not defined
+
+                  // wishful thinking eh
+                  //vec3 uCameraTargetOffset = vec3(0.0f, 0.0f, -1.0f);
+                  //vs0i.uCameraTargetOffset = new ScriptCoreLib.GLSL.vec3(1.0f, 0.0f, 0.0f);
+                  // this would mean the program was selected and uniform was uploaded to gpu
+
+
+
+
+                  var gl0 = new WebGLRenderingContext(alpha: true);
+                  shader0canvas = gl0.canvas;
+
+                  var c0 = gl0.canvas.AttachToDocument();
+
+                  //c0.style.SetSize(460, 237);
+                  //c0.width = 460;
+                  //c0.height = 237;
+
+                  //c0.style.SetSize((int)uizoom * 3, (int)uizoom * 3);
+                  c0.style.SetSize(128, 128);
+                  c0.width = cubefacesize;
+                  c0.height = cubefacesize;
+
+                  //c0.style.SetLocation(720, 8);
+                  c0.style.SetLocation(800, 360);
+
+                  var mMouseOriX = 0;
+                  var mMouseOriY = 0;
+                  var mMousePosX = 0;
+                  var mMousePosY = 0;
+
+
+                  var pass0 = new ChromeShaderToyColumns.Library.ShaderToy.EffectPass(
+                    null,
+                    gl0,
+                    precission: ChromeShaderToyColumns.Library.ShaderToy.DetermineShaderPrecission(gl0),
+                    supportDerivatives: gl0.getExtension("OES_standard_derivatives") != null,
+                    callback: null,
+                    obj: null,
+                    forceMuted: false,
+                    forcePaused: false,
+                    //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
+                    outputGainNode: null
+                );
+                  pass0.MakeHeader_Image();
+                  pass0.NewShader_Image(vs0);
+
+                  var sw0 = Stopwatch.StartNew();
+
+                  pass0.ProgramSelected += mProgram =>
+                  {
+                      // ldflda?
+                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, -1.0f, 0, 0);
+
+                  };
+
+                  do
+                  {
+                      // 1800 is 30sec is 30 000
+                      // frameIDslider?
+
+                      //var fps60 = frameIDslider * 1000 / 60.0f;
+                      var fps60 = frameIDslider * (1 / 60.0f);
+
+                      pass0.Paint_Image(
+                        fps60,
+
+                        mMouseOriX,
+                        mMouseOriY,
+                        mMousePosX,
+                        mMousePosY
+                    //,
+
+                    // gl_FragCoord
+                    // cannot be scaled, and can be referenced directly.
+                    // need another way to scale
+                    //zoom: 0.3f
+                    );
+
+                      // what does it do?
+                      // need redux build..
+                      gl0.flush();
+
+                      //await u.animate.async.@checked;
+                  }
+                  while (await Native.window.async.onframe);
+
+              }
+          );
+            #endregion
+
+
+
+
+
+            // front
             IHTMLCanvas shader1canvas = null;
 
 
@@ -537,6 +669,7 @@ namespace x360roomscan
           );
             #endregion
 
+            // right
             IHTMLCanvas shader2canvas = null;
 
             // locCameraTargetOffset to look right?
@@ -554,14 +687,25 @@ namespace x360roomscan
                   //var vs0 = new x2001SpaceStationByOtavio.Shaders.ProgramFragmentShader();
                   //var vs0 = new Xor3DAlienLandByXor.Shaders.ProgramFragmentShader();
                   var vs0 = new RoomScanningEffectByRosme.Shaders.ProgramFragmentShader();
+                  // now we have an empty shell
+                  // which tostrings to the glsl code for gpu
+                  // and if we were to initialize 
+
+
+
                   // enable intellisense
-                  var vs0i = (RoomScanningEffectByRosme.Shaders.__ProgramFragmentShader)(object)vs0;
+                  //var vs0i = (RoomScanningEffectByRosme.Shaders.__ProgramFragmentUniforms)(object)vs0;
 
 
+                  // script: error JSC1000: No implementation found for this native method, please implement [static ScriptCoreLib.GLSL.Shader.vec3(System.Single, System.Single, System.Single)]
+
+                  //     b.__this._vs0i_5__2.uCameraTargetOffset = new ctor$aQ8ABjj5gzW_aEh4Cmq2oMg(1, 0, 0);
+
+                  // 270ms ReferenceError: ctor$aQ8ABjj5gzW_aEh4Cmq2oMg is not defined
 
                   // wishful thinking eh
                   //vec3 uCameraTargetOffset = vec3(0.0f, 0.0f, -1.0f);
-                  vs0i.uCameraTargetOffset = new ScriptCoreLib.GLSL.vec3(1.0f, 0.0f, 0.0f);
+                  //vs0i.uCameraTargetOffset = new ScriptCoreLib.GLSL.vec3(1.0f, 0.0f, 0.0f);
                   // this would mean the program was selected and uniform was uploaded to gpu
 
 
@@ -606,6 +750,13 @@ namespace x360roomscan
                   pass0.NewShader_Image(vs0);
 
                   var sw0 = Stopwatch.StartNew();
+
+                  pass0.ProgramSelected += mProgram =>
+                  {
+                      // ldflda?
+                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 1.0f, 0, 0);
+
+                  };
 
                   do
                   {
@@ -1244,7 +1395,7 @@ namespace x360roomscan
                 //var tex0 = new THREE.Texture { image = new moon(), needsUpdate = true };
                 //var tex0 = new THREE.Texture(new moon());
                 //var tex0 = new THREE.Texture(new moon()) { needsUpdate = true };
-                var tex0 = new THREE.Texture(shader2canvas) { needsUpdate = true };
+                var tex0 = new THREE.Texture(shader0canvas) { needsUpdate = true };
 
                 applycameraoffset += delegate { tex0.needsUpdate = true; };
 
@@ -1260,7 +1411,7 @@ namespace x360roomscan
                             map = tex0,
 
 
-                            ambient = 0xff0000,
+                            //ambient = 0xff0000,
 
                             // can we color mark it?
                             //color = 0x00ff00
@@ -1300,7 +1451,7 @@ namespace x360roomscan
                             map = tex0,
 
 
-                            ambient = 0x00ff00,
+                            //ambient = 0x00ff00,
 
                             // can we color mark it?
                             //color = 0x00ff00
@@ -1345,7 +1496,9 @@ namespace x360roomscan
                 floor2.position.set(cubefacesize * 0.5, 0, 0);
                 floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
 
-                floor2.AttachTo(scene);
+
+                // do the floor instead?
+                //floor2.AttachTo(scene);
             }
 
 

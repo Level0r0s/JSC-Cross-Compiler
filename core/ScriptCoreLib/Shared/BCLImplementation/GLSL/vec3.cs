@@ -7,6 +7,9 @@ using ScriptCoreLib.Extensions;
 
 namespace ScriptCoreLib.Shared.BCLImplementation.GLSL
 {
+    // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360roomscan\Application.cs
+
+
     using genType = Single;
     using thisType = __vec3;
 

@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomScanningEffectByRosme",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{9EFEB058-29C1-4A4E-A69D-44673D53AF8B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByPackage", "ByPackage", "{8E8D0DBE-DAA2-4501-90F2-9A223495F5ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyColumns", "..\..\ChromeShaderToyColumns\ChromeShaderToyColumns\ChromeShaderToyColumns.csproj", "{7A012980-513C-4B88-AB7F-BA67F52A10D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -23,11 +27,16 @@ Global
 		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}.Debug|x86.Build.0 = Debug|x86
 		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}.Release|x86.ActiveCfg = Release|x86
 		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}.Release|x86.Build.0 = Release|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Debug|x86.ActiveCfg = Debug|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Debug|x86.Build.0 = Debug|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Release|x86.ActiveCfg = Release|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769} = {9EFEB058-29C1-4A4E-A69D-44673D53AF8B}
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6} = {8E8D0DBE-DAA2-4501-90F2-9A223495F5ED}
 	EndGlobalSection
 EndGlobal

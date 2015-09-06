@@ -8,8 +8,7 @@ using ScriptCoreLib.GLSL;
 
 namespace RoomScanningEffectByRosme.Shaders
 {
-    // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360roomscan\Application.cs
-    public class __ProgramFragmentShader : FragmentShader
+    public abstract class __ProgramFragmentUniforms : FragmentShader
     {
         // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\r\RoomScanningEffectByRosme\Shaders\ProgramFragmentShader.cs
         // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360dual\Shaders\ProgramFragmentShader.cs
@@ -22,20 +21,20 @@ namespace RoomScanningEffectByRosme.Shaders
 
         #region generic
         [uniform]
-        vec3 iResolution;           // viewport resolution (in pixels)
+        public vec3 iResolution;           // viewport resolution (in pixels)
         [uniform]
-        float iGlobalTime;           // shader playback time (in seconds)
+        public float iGlobalTime;           // shader playback time (in seconds)
         //[uniform]
         //float iChannelTime[4];       // channel playback time (in seconds)
         //[uniform]
         //vec3 iChannelResolution[4]; // channel resolution (in pixels)
         [uniform]
-        vec4 iMouse;                // mouse pixel coords. xy: current (if MLB down), zw: click
+        public vec4 iMouse;                // mouse pixel coords. xy: current (if MLB down), zw: click
 
         [uniform]
-        vec4 iDate;                 // (year, month, day, time in seconds)
+        public vec4 iDate;                 // (year, month, day, time in seconds)
         [uniform]
-        float iSampleRate;           // sound sample rate (i.e., 44100)
+        public float iSampleRate;           // sound sample rate (i.e., 44100)
         #endregion
 
 
@@ -48,7 +47,7 @@ namespace RoomScanningEffectByRosme.Shaders
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150808/equirectangular
         // set by?
         [uniform]
-        samplerCube iChannel0;
+        public samplerCube iChannel0;
 
 
 
@@ -63,9 +62,19 @@ namespace RoomScanningEffectByRosme.Shaders
 
 
         [uniform]
-        public
+        public vec3 uCameraTargetOffset;
 
-            vec3 uCameraTargetOffset = vec3(0.0f, 0.0f, -1.0f);
+        //vec3 uCameraTargetOffset = vec3(0.0f, 0.0f, -1.0f);
+    }
+
+    // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360roomscan\Application.cs
+    public class __ProgramFragmentShader : __ProgramFragmentUniforms
+
+    // does jsc know not to process those members?
+
+    //public class __ProgramFragmentShader : ProgramFragmentShader
+    {
+
 
 
         // Based on shaders:

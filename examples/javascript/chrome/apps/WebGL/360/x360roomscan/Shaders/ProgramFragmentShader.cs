@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace CubeToEquirectangular.Shaders
 {
+    
+
     class __ProgramFragmentShader : FragmentShader
     {
         // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\r\RoomScanningEffectByRosme\Shaders\ProgramFragmentShader.cs
