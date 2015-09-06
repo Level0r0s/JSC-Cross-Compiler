@@ -9,6 +9,9 @@ namespace CubeToEquirectangular.Shaders
 {
     class __ProgramFragmentShader : FragmentShader
     {
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\r\RoomScanningEffectByRosme\Shaders\ProgramFragmentShader.cs
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360dual\Shaders\ProgramFragmentShader.cs
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150906/roomscanningeffectbyrosme
         // https://www.shadertoy.com/view/XsBSDR#
 
         // all fields are inferred to be uniform?

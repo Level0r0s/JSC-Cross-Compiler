@@ -30,7 +30,10 @@ namespace RoomScanningEffectByRosme
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // ANGLE (Intel(R) HD Graphics 4000 Direct3D11 vs_5_0 ps_5_0)
+
             // https://www.shadertoy.com/view/4tlXWs
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150906/roomscanningeffectbyrosme
 
 
             #region += Launched chrome.app.window

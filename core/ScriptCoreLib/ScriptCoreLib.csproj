@@ -88,6 +88,7 @@
     <Compile Include="ActionScript\BCLImplementation\System\Reflection\MethodBase.cs" />
     <Compile Include="ActionScript\BCLImplementation\System\Reflection\MethodInfo.cs" />
     <Compile Include="ActionScript\BCLImplementation\System\Threading\Tasks\Task\Task.FromResult.cs" />
+    <Compile Include="GLSL\in.cs" />
     <Compile Include="GLSL\Precision Qualifiers\highp.cs" />
     <Compile Include="GLSL\Precision Qualifiers\mediump.cs" />
     <Compile Include="JavaScript\BCLImplementation\System\AggregateException.cs" />

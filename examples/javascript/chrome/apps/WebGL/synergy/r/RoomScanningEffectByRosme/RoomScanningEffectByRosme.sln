@@ -5,6 +5,14 @@ VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomScanningEffectByRosme", "RoomScanningEffectByRosme.csproj", "{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyColumns", "..\..\..\ChromeShaderToyColumns\ChromeShaderToyColumns\ChromeShaderToyColumns.csproj", "{7A012980-513C-4B88-AB7F-BA67F52A10D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByPackage", "ByPackage", "{97B20DA1-F6E3-4898-9E14-18BCB6350169}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{62D27280-1C6F-4B3B-96F3-DDDDB3E75309}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360dual", "..\..\..\360\x360dual\x360dual.csproj", "{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,8 +23,20 @@ Global
 		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}.Debug|x86.Build.0 = Debug|x86
 		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}.Release|x86.ActiveCfg = Release|x86
 		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}.Release|x86.Build.0 = Release|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Debug|x86.ActiveCfg = Debug|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Debug|x86.Build.0 = Debug|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Release|x86.ActiveCfg = Release|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Release|x86.Build.0 = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.ActiveCfg = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.Build.0 = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.ActiveCfg = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6} = {97B20DA1-F6E3-4898-9E14-18BCB6350169}
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD} = {62D27280-1C6F-4B3B-96F3-DDDDB3E75309}
 	EndGlobalSection
 EndGlobal
