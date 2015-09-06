@@ -227,7 +227,7 @@ namespace x360relentless
 
             // fast gif?
             //cubefacesize = 128; // 6 faces, ?
-            cubefacesize = 512; // 6 faces, ?
+            //cubefacesize = 512; // 6 faces, ?
                                 //    [GroupMarkerNotSet(crbug.com / 242999)!:247F0809]
                                 //RENDER WARNING: texture bound to texture unit 0 is not renderable.It maybe non-power-of-2 and have incompatible texture filtering.
 
@@ -456,8 +456,10 @@ namespace x360relentless
             var bottomRotate100 = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -314, max = 314, valueAsNumber = 0, title = "bottomRotate" }.AttachToDocument();
 
 
+            var maxfps = 60;
+            var maxlengthseconds = 60;
 
-            var maxframes = 60 * 60;
+            var maxframes = maxlengthseconds * maxfps;
 
             // whatif we want more than 30sec video? 2min animation? more frames to render? 2gb disk?
             var frameIDslider = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0, max = maxframes, valueAsNumber = 137, title = "frameIDslider" }.AttachToDocument();
@@ -1642,7 +1644,7 @@ namespace x360relentless
 
             #region render 60hz 30sec
             new IHTMLButton {
-                "render 60hz 30sec"
+                $"render {maxfps}hz {maxlengthseconds}sec"
             }.AttachToDocument().onclick += async e =>
             {
                 e.Element.disabled = true;
@@ -1678,7 +1680,7 @@ namespace x360relentless
                 await_nextframe:
 
 
-                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(4, '0') + ".png";
+                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(5, '0') + ".png";
                 status = "rendering... " + new { filename };
 
 
