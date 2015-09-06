@@ -39,8 +39,12 @@ namespace x360dual
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150906/roomscanningeffectbyrosme
+
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150816/iss
 
+        // https://www.youtube.com/watch?v=UWiq-qgedws
+        // https://www.youtube.com/watch?v=TwRSOEG-Gx4
         // http://youtu.be/Lo1IU8UAutE
         // 60hz 2160 4K!
 
