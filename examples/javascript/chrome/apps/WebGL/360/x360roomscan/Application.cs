@@ -539,7 +539,7 @@ namespace x360roomscan
 
             IHTMLCanvas shader2canvas = null;
 
-
+            // locCameraTargetOffset to look right?
             #region shader2canvas
             new { }.With(
               async delegate
@@ -554,6 +554,18 @@ namespace x360roomscan
                   //var vs0 = new x2001SpaceStationByOtavio.Shaders.ProgramFragmentShader();
                   //var vs0 = new Xor3DAlienLandByXor.Shaders.ProgramFragmentShader();
                   var vs0 = new RoomScanningEffectByRosme.Shaders.ProgramFragmentShader();
+                  // enable intellisense
+                  var vs0i = (RoomScanningEffectByRosme.Shaders.__ProgramFragmentShader)(object)vs0;
+
+
+
+                  // wishful thinking eh
+                  //vec3 uCameraTargetOffset = vec3(0.0f, 0.0f, -1.0f);
+                  vs0i.uCameraTargetOffset = new ScriptCoreLib.GLSL.vec3(1.0f, 0.0f, 0.0f);
+                  // this would mean the program was selected and uniform was uploaded to gpu
+
+
+
 
                   var gl0 = new WebGLRenderingContext(alpha: true);
                   shader2canvas = gl0.canvas;
@@ -1224,6 +1236,46 @@ namespace x360roomscan
                 floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2);
                 floor2.AttachTo(scene);
             }
+
+
+
+            // right?
+            {
+                //var tex0 = new THREE.Texture { image = new moon(), needsUpdate = true };
+                //var tex0 = new THREE.Texture(new moon());
+                //var tex0 = new THREE.Texture(new moon()) { needsUpdate = true };
+                var tex0 = new THREE.Texture(shader2canvas) { needsUpdate = true };
+
+                applycameraoffset += delegate { tex0.needsUpdate = true; };
+
+                var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize, cubefacesize, 8, 8);
+                var floor2 = new THREE.Mesh(planeGeometry0,
+                    //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+                    //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
+                    //new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000, specular = 0xff0000 })
+                    new THREE.MeshPhongMaterial(
+                        new
+                        {
+
+                            map = tex0,
+
+
+                            ambient = 0xff0000,
+
+                            // can we color mark it?
+                            //color = 0x00ff00
+                        })
+
+                );
+                //floor2.position.set(0, -cubefacesize * 0.5, 0);
+                floor2.position.set(0, 0, cubefacesize * 0.5);
+                //floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
+                floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI);
+
+                floor2.AttachTo(scene);
+            }
+
+
 
 
 

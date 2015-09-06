@@ -8,7 +8,8 @@ using ScriptCoreLib.GLSL;
 
 namespace RoomScanningEffectByRosme.Shaders
 {
-    class __ProgramFragmentShader : FragmentShader
+    // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360roomscan\Application.cs
+    public class __ProgramFragmentShader : FragmentShader
     {
         // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\r\RoomScanningEffectByRosme\Shaders\ProgramFragmentShader.cs
         // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360dual\Shaders\ProgramFragmentShader.cs
@@ -61,7 +62,10 @@ namespace RoomScanningEffectByRosme.Shaders
 
 
 
+        [uniform]
+        public
 
+            vec3 uCameraTargetOffset = vec3(0.0f, 0.0f, -1.0f);
 
 
         // Based on shaders:
@@ -103,7 +107,7 @@ namespace RoomScanningEffectByRosme.Shaders
         //
         // The background color. In this case it's just a black color.
         //------------------------------------------------------------------------
-        vec3 doBackground( )
+        vec3 doBackground()
         {
             return vec3(0.0f, 0.0f, 0.1f);
         }
@@ -200,7 +204,7 @@ namespace RoomScanningEffectByRosme.Shaders
         // at every point based on its position and normal. In this case, it simply
         // returns a constant yellow color.
         //------------------------------------------------------------------------
-        vec3 doMaterial( [In] vec3 pos, [In] vec3 nor)
+        vec3 doMaterial([In] vec3 pos, [In] vec3 nor)
         {
             float d = length(pos.xz - vec2(0.0f, 2.0f) + 0.5f * cos(2.0f * pos.xz + vec2(3.0f, 1.0f) * iGlobalTime)) + pos.y + 0.2f * cos(pos.y - iGlobalTime);
             float border = 12.0f * mod(iGlobalTime * 0.2f, 1.0f);
@@ -271,10 +275,10 @@ namespace RoomScanningEffectByRosme.Shaders
         {
             const float eps = 0.002f;             // precision of the normal computation
 
-             vec3 v1 = vec3(1.0f, -1.0f, -1.0f);
-             vec3 v2 = vec3(-1.0f, -1.0f, 1.0f);
-             vec3 v3 = vec3(-1.0f, 1.0f, -1.0f);
-             vec3 v4 = vec3(1.0f, 1.0f, 1.0f);
+            vec3 v1 = vec3(1.0f, -1.0f, -1.0f);
+            vec3 v2 = vec3(-1.0f, -1.0f, 1.0f);
+            vec3 v3 = vec3(-1.0f, 1.0f, -1.0f);
+            vec3 v4 = vec3(1.0f, 1.0f, 1.0f);
 
             return normalize(v1 * doModel(pos + v1 * eps) +
                               v2 * doModel(pos + v2 * eps) +

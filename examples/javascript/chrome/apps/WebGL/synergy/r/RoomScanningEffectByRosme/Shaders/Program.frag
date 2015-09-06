@@ -10,6 +10,14 @@
 float planeDistance = 0.2;
 float offset;
 
+
+// can we have a default value?
+//uniform vec3 uCameraTargetOffset = vec3(0.0,0.0,-1.0);   
+uniform vec3 uCameraTargetOffset;   
+// 31ms Error: {{ infoLog = WARNING: 0:4: '
+//' : extension directive should occur before any non-preprocessor tokens 
+//ERROR: 0:30: 'uniform' :  cannot initialize this type of qualifier  
+
 //------------------------------------------------------------------------
 // Camera
 //
@@ -28,8 +36,22 @@ void doCamera( out vec3 camPos, out vec3 camTar, in float time, in vec2 mouse )
 	// NX?
     // camTar = camPos + vec3(0.0,0.0,1.0);
     
+
+
+//
+//	ERROR: 0:62: '' : methods supported in GLSL ES 3.00 only  
+//ERROR: 0:62: 'length' : length can only be called on arrays 
+//ERROR: 0:55: '==' :  wrong operand types  no operation '==' exists that takes a left-hand operand of type 'uniform highp 3-component vector of float' and a right operand of type 'const int' (or there is no acceptable conversion)
+//ERROR: 0:56: 'assign' :  l-value required "uCameraTargetOffset" (can't modify a uniform)
+	// http://wiki.lwjgl.org/wiki/GLSL_Tutorial:_Syntax
+	vec3 locCameraTargetOffset = uCameraTargetOffset;
+	// float length(vec v) returns the magnitude of the given vector.
+	if (length(locCameraTargetOffset) == 0.0 )
+		locCameraTargetOffset = vec3(0.0,0.0,-1.0);   
+
 	// PX?
-	camTar = camPos + vec3(0.0,0.0,-1.0);
+	//camTar = camPos + vec3(0.0,0.0,-1.0);
+	camTar = camPos + locCameraTargetOffset;
 
 	// rebuild. reload.
 }
