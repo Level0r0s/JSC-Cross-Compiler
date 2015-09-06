@@ -77,6 +77,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoseByHoskins", "..\..\syne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RutherfordAtomByMattz", "..\..\synergy\r\RutherfordAtomByMattz\RutherfordAtomByMattz\RutherfordAtomByMattz.csproj", "{41F39010-C6C0-4273-94D3-4F1C0D4D3EC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomScanningEffectByRosme", "..\..\synergy\r\RoomScanningEffectByRosme\RoomScanningEffectByRosme.csproj", "{30A5A451-E119-45CA-BE2E-6A4221854AB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -223,6 +225,10 @@ Global
 		{41F39010-C6C0-4273-94D3-4F1C0D4D3EC4}.Debug|x86.Build.0 = Debug|x86
 		{41F39010-C6C0-4273-94D3-4F1C0D4D3EC4}.Release|x86.ActiveCfg = Release|x86
 		{41F39010-C6C0-4273-94D3-4F1C0D4D3EC4}.Release|x86.Build.0 = Release|x86
+		{30A5A451-E119-45CA-BE2E-6A4221854AB9}.Debug|x86.ActiveCfg = Debug|x86
+		{30A5A451-E119-45CA-BE2E-6A4221854AB9}.Debug|x86.Build.0 = Debug|x86
+		{30A5A451-E119-45CA-BE2E-6A4221854AB9}.Release|x86.ActiveCfg = Release|x86
+		{30A5A451-E119-45CA-BE2E-6A4221854AB9}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -263,5 +269,6 @@ Global
 		{72BC5B0D-6E97-4BCD-8B2D-D80E65AEFF33} = {4D5B6C39-68F5-4E61-9B1C-A5A58F9E46DD}
 		{C43E99B1-142D-4A57-BD4B-B298F50DB055} = {4D5B6C39-68F5-4E61-9B1C-A5A58F9E46DD}
 		{41F39010-C6C0-4273-94D3-4F1C0D4D3EC4} = {4D5B6C39-68F5-4E61-9B1C-A5A58F9E46DD}
+		{30A5A451-E119-45CA-BE2E-6A4221854AB9} = {4D5B6C39-68F5-4E61-9B1C-A5A58F9E46DD}
 	EndGlobalSection
 EndGlobal

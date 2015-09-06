@@ -30,6 +30,7 @@ namespace ChromeShaderToyPrograms.r
         // could assetslibrary auto byref those projects ?
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150818
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150809/chrome-filesystem
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150906/x
 
         /// <summary>
         /// This is a javascript application.
@@ -37,6 +38,8 @@ namespace ChromeShaderToyPrograms.r
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // chrome app seems to fault
+            // running as webapp seems to work, yet gpu is slow?
 
 
 
@@ -127,7 +130,7 @@ namespace ChromeShaderToyPrograms.r
 
                 new IHTMLPre {
                     // https://code.google.com/p/chromium/issues/detail?id=294207
-                    "Rats! WebGL hit a snag.",
+                    "Rats! WebGL hit a snag. check chrome://gpu/",
 
                     //new IHTMLAnchor { href = "about:gpu", innerText = "about:gpu" }
                 }.AttachToDocument();

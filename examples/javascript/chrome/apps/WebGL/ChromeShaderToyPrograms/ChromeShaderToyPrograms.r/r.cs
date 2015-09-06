@@ -46,6 +46,7 @@ namespace ChromeShaderToyPrograms.r
             ["RiverFlightByDr2"] = () => new RiverFlightByDr2.Shaders.ProgramFragmentShader(),
             ["RoadToHellByRez"] = () => new RoadToHellByRez.Shaders.ProgramFragmentShader(),
             ["RockShapesWIPByAsteropaeus"] = () => new RockShapesWIPByAsteropaeus.Shaders.ProgramFragmentShader(),
+            ["RoomScanningEffectByRosme"] = () => new RoomScanningEffectByRosme.Shaders.ProgramFragmentShader(),
             ["RoseByHoskins"] = () => new RoseByHoskins.Shaders.ProgramFragmentShader(),
             ["RutherfordAtomByMattz"] = () => new RutherfordAtomByMattz.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyRubikSolverByKali"] = () => new ChromeShaderToyRubikSolverByKali.Shaders.ProgramFragmentShader(),
