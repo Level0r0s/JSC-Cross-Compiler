@@ -253,6 +253,8 @@ namespace OVRUDPMatrix
 
         public static void Send(this float[][,] e, string hostname, int port)
         {
+            // Z:\jsc.svn\examples\javascript\chrome\hybrid\HybridHopToUDPChromeApp\Program.cs
+
             var nicport = new Random().Next(16000, 40000);
             var socket = new UdpClient();
             // we assume we know our nic
