@@ -153,7 +153,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 	// using an iq styled camera this time :)
 	// ray origin
 	vec3 ro = 0.7 * vec3(cos(0.2 * time), 0.0, sin(0.2 * time));
-	ro.y = cos(0.6 * time) * 0.3 + 0.65;
+	ro.y = cos(0.6 * time) * 0.3 ;
 
 
 	vec3 locCameraTargetOffset = uCameraTargetOffset;
@@ -161,25 +161,32 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 	if (length(locCameraTargetOffset) == 0.0 )
 		locCameraTargetOffset = vec3(0.0, 0.2,0.0);   
 
-	// camera look at
-	//vec3 ta = vec3(0.0, 0.2, 0.0);
-	vec3 ta = ro + locCameraTargetOffset;
-	
+
 	// camera shake intensity
 	float shake = clamp(3.0 * (1.0 - length(ro.yz)), 0.3, 1.0);
 	float st = mod(time, 10.0) * 143.0;
 	
+
+
+	// shaking and movement
+	ro += noise31(-st) * shake * 0.015;
+	ro.x += time * 2.0;
+
+
+
+		// camera look at
+	//vec3 ta = vec3(0.0, 0.2, 0.0);
+	vec3 ta = ro + locCameraTargetOffset;
+	
+
 	// build camera matrix
-	vec3 ww = normalize(ta - ro + noise31(st) * shake * 0.01);
-	//vec3 uu = normalize(cross(ww, normalize(vec3(0.0, 1.0, 0.2 * sin(time)))));
+	vec3 ww = normalize(ta - ro + shake * 0.01);
 	vec3 uu = normalize(cross(ww, normalize(vec3(0.0, 1.0, 0.2 * sin(0.0)))));
 	vec3 vv = normalize(cross(uu, ww));
 	// obtain ray direction
 	vec3 rd = normalize(uv.x * uu + uv.y * vv + 1.0 * ww);
 	
-	// shaking and movement
-	ro += noise31(-st) * shake * 0.015;
-	ro.x += time * 2.0;
+
 	
 	float inten = 0.0;
 	

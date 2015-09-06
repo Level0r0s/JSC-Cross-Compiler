@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360roomscan", "..\x360room
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomScanningEffectByRosme", "..\..\synergy\r\RoomScanningEffectByRosme\RoomScanningEffectByRosme.csproj", "{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chrome360LightAnimation", "..\..\Chrome360LightAnimation\Chrome360LightAnimation\Chrome360LightAnimation.csproj", "{5B50A405-EB5A-41C3-8FE4-C3001F74DBFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -37,6 +39,10 @@ Global
 		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}.Debug|x86.Build.0 = Debug|x86
 		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}.Release|x86.ActiveCfg = Release|x86
 		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}.Release|x86.Build.0 = Release|x86
+		{5B50A405-EB5A-41C3-8FE4-C3001F74DBFD}.Debug|x86.ActiveCfg = Debug|x86
+		{5B50A405-EB5A-41C3-8FE4-C3001F74DBFD}.Debug|x86.Build.0 = Debug|x86
+		{5B50A405-EB5A-41C3-8FE4-C3001F74DBFD}.Release|x86.ActiveCfg = Release|x86
+		{5B50A405-EB5A-41C3-8FE4-C3001F74DBFD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,5 +51,6 @@ Global
 		{91BC0D94-1E92-436D-9147-92E42E560A76} = {DF904D6F-CCA9-4C75-B8B5-C128E656452E}
 		{DE5CBE45-073F-4B8C-B0B8-45CD12908D21} = {D1F4C32A-D644-4352-8B8C-BC712AFECE67}
 		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769} = {D1F4C32A-D644-4352-8B8C-BC712AFECE67}
+		{5B50A405-EB5A-41C3-8FE4-C3001F74DBFD} = {D1F4C32A-D644-4352-8B8C-BC712AFECE67}
 	EndGlobalSection
 EndGlobal
