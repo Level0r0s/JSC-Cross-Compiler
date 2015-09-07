@@ -12,6 +12,7 @@ namespace ScriptCoreLib.ActionScript.flash.display
     [Script(IsNative = true)]
     public class Sprite : DisplayObjectContainer
     {
+        // http://tech.slashdot.org/story/15/09/01/2212215/chrome-45-launches-automatically-pauses-less-important-flash-content-like-ads
         // http://labsdownload.adobe.com/pub/labs/flashruntimes/shared/air18_flashplayer18_releasenotes.pdf
 
 		// http://blogs.adobe.com/flashplayer/

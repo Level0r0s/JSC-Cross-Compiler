@@ -865,39 +865,77 @@ namespace HybridHopToUDPChromeApp
 
         // what about hopping to CLR?
 
-  
+
     }
 
     public static class UDPServer
     {
         public static async Task Invoke()
         {
-            var socket = new UdpClient(40014);
-
-            //socket.Client.Bind(
-            //    //new IPEndPoint(IPAddress.Any, port: 40000)
-            //    new IPEndPoint(IPAddress.Any, port)
-            //);
-
-
-            // no port?
-            socket.JoinMulticastGroup(
-                IPAddress.Parse("239.1.2.3")
-            );
-
-            while (true)
+            Action<IPAddress> f = async Address =>
             {
-                Console.WriteLine(@"await socket.ReceiveAsync");
+                //Additional information: Only one usage of each socket address(protocol / network address / port) is normally permitted
+                //  Additional information: The requested address is not valid in its context
 
-                // Z:\jsc.svn\examples\javascript\chrome\hybrid\HybridHopToUDPChromeApp\Application.cs
+                var socket = new UdpClient(new IPEndPoint(Address, 40014));
 
-                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
-                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
-                var s = await socket.ReceiveAsync();
+                //socket.Client.Bind(
+                //    //new IPEndPoint(IPAddress.Any, port: 40000)
+                //    new IPEndPoint(IPAddress.Any, port)
+                //);
 
-                Console.WriteLine($"ReceiveAsync: {s.Buffer.Length}");
 
-            }
+                // no port?
+                socket.JoinMulticastGroup(
+                    IPAddress.Parse("239.1.2.3") //, localAddress: Address
+                );
+
+                while (true)
+                {
+                    Console.WriteLine(@"await socket.ReceiveAsync " + new { Address });
+
+                    // Z:\jsc.svn\examples\javascript\chrome\hybrid\HybridHopToUDPChromeApp\Application.cs
+
+                    // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                    // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                    var s = await socket.ReceiveAsync();
+
+                    Console.WriteLine($"ReceiveAsync: {s.Buffer.Length}");
+
+                }
+            };
+
+
+
+            System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces().WithEach(
+              n =>
+              {
+                  // Z:\jsc.svn\examples\javascript\chrome\hybrid\HybridHopToUDPChromeApp\Application.cs
+                  // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                  // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
+
+                  var IPProperties = n.GetIPProperties();
+                  var PhysicalAddress = n.GetPhysicalAddress();
+
+
+
+                  foreach (var ip in IPProperties.UnicastAddresses)
+                  {
+                      // ipv4
+                      if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                      {
+                          if (!IPAddress.IsLoopback(ip.Address))
+                              if (n.SupportsMulticast)
+                                  f(ip.Address);
+                      }
+                  }
+
+
+
+
+              }
+          );
+
         }
     }
 }

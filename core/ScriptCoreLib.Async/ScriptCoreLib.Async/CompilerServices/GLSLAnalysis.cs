@@ -33,17 +33,19 @@ namespace ScriptCoreLib.CompilerServices
 	[Obsolete("experimental")]
 	public class GLSLAnalysis
 	{
-		// where is our glsl highlighter?
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150907/glsl
 
-		// how to run it from commandline?
-		// jsc.meta "X:\jsc.svn\examples\javascript\chrome\apps\WebGL"
+        // where is our glsl highlighter?
 
-		// https://msdn.microsoft.com/en-us/library/windows/desktop/cc948910(v=vs.85).aspx
+        // how to run it from commandline?
+        // jsc.meta "X:\jsc.svn\examples\javascript\chrome\apps\WebGL"
 
-		// we should not be on UI thread, nor should we switch threads ourselves
-		// when will it work for js workers?
-		// can we do syntax highlighting?
-		public static async Task WorkerThreadAnalyzeFragmentShaders(
+        // https://msdn.microsoft.com/en-us/library/windows/desktop/cc948910(v=vs.85).aspx
+
+        // we should not be on UI thread, nor should we switch threads ourselves
+        // when will it work for js workers?
+        // can we do syntax highlighting?
+        public static async Task WorkerThreadAnalyzeFragmentShaders(
 			string[] SourceFiles,
 			Action<double> AtProgress
 			)

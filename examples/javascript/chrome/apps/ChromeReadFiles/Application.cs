@@ -29,6 +29,7 @@ namespace ChromeReadFiles
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://chrome.google.com/webstore/detail/simple-red-theme/ealcinkolodcnkokioepdoheohkffejc?hl=en
         // https://chrome.google.com/webstore/detail/pink-default-theme/odibiblpllhihdjljanngdbcfcfbpfpc?hl=en
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150831
 
