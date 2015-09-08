@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanyonRollerByDr2", "CanyonRollerByDr2\CanyonRollerByDr2.csproj", "{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudsTunnelByAvix", "CloudsTunnelByAvix.csproj", "{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

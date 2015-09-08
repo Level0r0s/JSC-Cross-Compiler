@@ -161,22 +161,6 @@
       <Project>{34c9e1dc-defb-4bb0-b040-25ef787cab23}</Project>
       <Name>ChromeShaderToyQuadraticBezierByMattdesl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\synergy\JackoLanternByPMalin\JackoLanternByPMalin\JackoLanternByPMalin.csproj">
-      <Project>{8e59d42e-787e-4c40-aee6-7fe77d837803}</Project>
-      <Name>JackoLanternByPMalin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\JellyfishByVlad\JellyfishByVlad\JellyfishByVlad.csproj">
-      <Project>{22f614c7-e7c7-448e-8146-dc86e8d0943b}</Project>
-      <Name>JellyfishByVlad</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\JoyDivisionByXbe\JoyDivisionByXbe\JoyDivisionByXbe.csproj">
-      <Project>{d135df02-c39e-4036-bf46-502703e496c8}</Project>
-      <Name>JoyDivisionByXbe</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\JusterBeaverByMovax\JusterBeaverByMovax\JusterBeaverByMovax.csproj">
-      <Project>{556fdc09-e0ed-46b2-bb12-a0ce6c72356d}</Project>
-      <Name>JusterBeaverByMovax</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\synergy\QuadraticBezierByIq\QuadraticBezierByIq\QuadraticBezierByIq.csproj">
       <Project>{cb66fa69-eadb-4b34-95f0-07cb9e78e39d}</Project>
       <Name>QuadraticBezierByIq</Name>

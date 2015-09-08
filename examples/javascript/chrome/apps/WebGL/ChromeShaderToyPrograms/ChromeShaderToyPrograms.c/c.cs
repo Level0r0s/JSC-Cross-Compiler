@@ -22,7 +22,10 @@ namespace ChromeShaderToyPrograms.c
             ["CheesyByPMalin"] = () => new CheesyByPMalin.Shaders.ProgramFragmentShader(),
             ["ChaosTrendLogoByLuther"] = () => new ChaosTrendLogoByLuther.Shaders.ProgramFragmentShader(),
             ["CheeseByMu6k"] = () => new CheeseByMu6k.Shaders.ProgramFragmentShader(),
+
             ["ClawByGreen"] = () => new ClawByGreen.Shaders.ProgramFragmentShader(),
+            ["CloudsTunnelByAvix"] = () => new CloudsTunnelByAvix.Shaders.ProgramFragmentShader(),
+
             ["ClippedDiscHypertextureByFabrice"] = () => new ClippedDiscHypertextureByFabrice.Shaders.ProgramFragmentShader(),
             ["CompassesByGijs"] = () => new CompassesByGijs.Shaders.ProgramFragmentShader(),
             ["ConformalPolarByFabrice"] = () => new ConformalPolarByFabrice.Shaders.ProgramFragmentShader(),
