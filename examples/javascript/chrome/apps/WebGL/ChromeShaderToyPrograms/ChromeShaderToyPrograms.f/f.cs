@@ -41,6 +41,8 @@ namespace ChromeShaderToyPrograms.f
             ["FloorStarBoxMarbleByXilconic"] = () => new FloorStarBoxMarbleByXilconic.Shaders.ProgramFragmentShader(),
             ["FlossingSpaceByFlorian"] = () => new FlossingSpaceByFlorian.Shaders.ProgramFragmentShader(),
             ["FlowerByIq"] = () => new FlowerByIq.Shaders.ProgramFragmentShader(),
+            ["FlyByNightByMhnewman"] = () => new FlyByNightByMhnewman.Shaders.ProgramFragmentShader(),
+
             ["ForestMurshroomBySquid"] = () => new ForestMurshroomBySquid.Shaders.ProgramFragmentShader(),
             ["FoldingByReinder"] = () => new FoldingByReinder.Shaders.ProgramFragmentShader(),
             ["FractalBridgeByDr2"] = () => new FractalBridgeByDr2.Shaders.ProgramFragmentShader(),
