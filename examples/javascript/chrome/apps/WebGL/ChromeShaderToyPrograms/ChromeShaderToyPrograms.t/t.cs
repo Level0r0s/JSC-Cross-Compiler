@@ -45,6 +45,9 @@ namespace ChromeShaderToyPrograms.t
             ["TruePinballPhysicsByArchee"] = () => new TruePinballPhysicsByArchee.Shaders.ProgramFragmentShader(),
             ["TrumpetByBaldand"] = () => new TrumpetByBaldand.Shaders.ProgramFragmentShader(),
             ["Tunnel1ByWaha"] = () => new Tunnel1ByWaha.Shaders.ProgramFragmentShader(),
+
+
+            ["TwistedLinksByFelixfaire"] = () => new TwistedLinksByFelixfaire.Shaders.ProgramFragmentShader(),
             ["TwistyTorusByBloxard"] = () => new TwistyTorusByBloxard.Shaders.ProgramFragmentShader(),
             #endregion
 

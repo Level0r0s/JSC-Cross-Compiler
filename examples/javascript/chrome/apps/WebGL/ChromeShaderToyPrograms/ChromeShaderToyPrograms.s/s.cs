@@ -70,8 +70,11 @@ namespace ChromeShaderToyPrograms.s
             ["SomedayByEiffie"] = () => new SomedayByEiffie.Shaders.ProgramFragmentShader(),
             ["SomeSortOfGridByGermangb"] = () => new SomeSortOfGridByGermangb.Shaders.ProgramFragmentShader(),
             ["SoundAcidJamBySrtuss"] = () => new SoundAcidJamBySrtuss.Shaders.ProgramFragmentShader(),
+
             ["SpaceByReinder"] = () => new SpaceByReinder.Shaders.ProgramFragmentShader(),
+            ["SpaceEggByMattz"] = () => new SpaceEggByMattz.Shaders.ProgramFragmentShader(),
             ["SpaceRingsByMu6k"] = () => new SpaceRingsByMu6k.Shaders.ProgramFragmentShader(),
+
             ["SparksByVanburgler"] = () => new SparksByVanburgler.Shaders.ProgramFragmentShader(),
             ["SparseGridMarchingByNimitz"] = () => new SparseGridMarchingByNimitz.Shaders.ProgramFragmentShader(),
             ["SpeedingInTheDarkByWilddev"] = () => new SpeedingInTheDarkByWilddev.Shaders.ProgramFragmentShader(),
@@ -82,7 +85,10 @@ namespace ChromeShaderToyPrograms.s
             ["SpriteEncodingByNikos"] = () => new SpriteEncodingByNikos.Shaders.ProgramFragmentShader(),
             ["StairsByDila"] = () => new StairsByDila.Shaders.ProgramFragmentShader(),
             ["StairwayToHeavenByEiffie"] = () => new StairwayToHeavenByEiffie.Shaders.ProgramFragmentShader(),
+
             ["StarMapByMorgan"] = () => new StarMapByMorgan.Shaders.ProgramFragmentShader(),
+            ["StarwarsShipThingByAlleycatsphinx"] = () => new StarwarsShipThingByAlleycatsphinx.Shaders.ProgramFragmentShader(),
+
             ["SteamLogoByYakoudbz"] = () => new SteamLogoByYakoudbz.Shaders.ProgramFragmentShader(),
             ["SubmergedByFizzer"] = () => new SubmergedByFizzer.Shaders.ProgramFragmentShader(),
             ["SunsetCloudByKuvkar"] = () => new SunsetCloudByKuvkar.Shaders.ProgramFragmentShader(),

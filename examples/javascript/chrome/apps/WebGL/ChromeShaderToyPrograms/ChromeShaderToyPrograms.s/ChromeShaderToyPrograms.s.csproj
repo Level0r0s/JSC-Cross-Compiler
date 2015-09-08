@@ -313,6 +313,12 @@
     <Reference Include="Simlicity3DByRunouw.AssetsLibrary">
       <HintPath>..\..\synergy\s\Simlicity3DByRunouw\Simlicity3DByRunouw\bin\staging.AssetsLibrary\Simlicity3DByRunouw.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="SpaceEggByMattz.AssetsLibrary">
+      <HintPath>..\..\synergy\s\SpaceEggByMattz\bin\staging.AssetsLibrary\SpaceEggByMattz.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="StarwarsShipThingByAlleycatsphinx.AssetsLibrary">
+      <HintPath>..\..\synergy\s\StarwarsShipThingByAlleycatsphinx\StarwarsShipThingByAlleycatsphinx\bin\staging.AssetsLibrary\StarwarsShipThingByAlleycatsphinx.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="s.cs" />
@@ -504,6 +510,10 @@
       <Project>{d23d3804-de75-4922-a1a3-f620b9b43273}</Project>
       <Name>SpaceByReinder</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\s\SpaceEggByMattz\SpaceEggByMattz.csproj">
+      <Project>{18d81eab-6b23-45bf-9f7d-8460d9f637f2}</Project>
+      <Name>SpaceEggByMattz</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\s\SpaceRingsByMu6k\SpaceRingsByMu6k\SpaceRingsByMu6k.csproj">
       <Project>{449a9283-adaf-40c5-90c8-81e1033ae708}</Project>
       <Name>SpaceRingsByMu6k</Name>
@@ -551,6 +561,10 @@
     <ProjectReference Include="..\..\synergy\s\StarMapByMorgan\StarMapByMorgan\StarMapByMorgan.csproj">
       <Project>{5f83b768-7584-4a35-9e84-550ce2517047}</Project>
       <Name>StarMapByMorgan</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\s\StarwarsShipThingByAlleycatsphinx\StarwarsShipThingByAlleycatsphinx\StarwarsShipThingByAlleycatsphinx.csproj">
+      <Project>{426a9419-9287-4880-979f-29f29d3f2a22}</Project>
+      <Name>StarwarsShipThingByAlleycatsphinx</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\s\SteamLogoByYakoudbz\SteamLogoByYakoudbz\SteamLogoByYakoudbz.csproj">
       <Project>{f1d82c30-c689-40ac-a57d-57f80f6aeca1}</Project>

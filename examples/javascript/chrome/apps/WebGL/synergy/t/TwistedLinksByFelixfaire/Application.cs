@@ -13,35 +13,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using ShapeLightByBeyondTheStatic;
-using ShapeLightByBeyondTheStatic.Design;
-using ShapeLightByBeyondTheStatic.HTML.Pages;
+using TwistedLinksByFelixfaire;
+using TwistedLinksByFelixfaire.Design;
+using TwistedLinksByFelixfaire.HTML.Pages;
 
-namespace ShapeLightByBeyondTheStatic
+namespace TwistedLinksByFelixfaire
 {
     /// <summary>
     /// Your client side code running inside a web browser as JavaScript.
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
-        // lets tune down the loggin
-        // ChromeShaderToyColumns
-
-        //        C:\Windows\system32>netsh wlan stop hostednetwork
-        //The hosted network stopped.
-
-
-
         /// <summary>
         /// This is a javascript application.
         /// </summary>
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
-            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150807/shadertoy
-            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150908/shapelight
-
-            // https://www.shadertoy.com/view/XtfXRX
+            // https://www.shadertoy.com/view/lllSRX
 
 
             #region += Launched chrome.app.window
@@ -92,8 +81,6 @@ namespace ShapeLightByBeyondTheStatic
             }
             #endregion
 
-
-            Native.body.Clear();
             ChromeShaderToyColumns.Library.ShaderToy.AttachToDocument(
                 new Shaders.ProgramFragmentShader()
             );
@@ -101,4 +88,3 @@ namespace ShapeLightByBeyondTheStatic
 
     }
 }
- 
