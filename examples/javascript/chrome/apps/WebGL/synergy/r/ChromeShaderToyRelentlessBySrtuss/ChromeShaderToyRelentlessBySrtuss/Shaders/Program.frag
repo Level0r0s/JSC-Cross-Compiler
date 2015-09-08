@@ -7,7 +7,7 @@
 // http://www.youtube.com/watch?v=1uFAu65tZpo
 
 
-//#define GREEN_VERSION
+#define GREEN_VERSION
 
 // ** improved camera shaking
 // ** cleaned up code

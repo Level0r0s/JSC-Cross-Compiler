@@ -206,6 +206,19 @@ namespace x360relentless
 
 
 #endif
+            // onframe need syncs to enable GC!
+            var vsync = default(TaskCompletionSource<object>);
+            Func<bool> vsyncReady = delegate
+            {
+
+                if (vsync != null)
+                    if (vsync.Task.IsCompleted)
+                        return true;
+
+
+                return false;
+            };
+
 
 
             // crash
@@ -228,8 +241,8 @@ namespace x360relentless
             // fast gif?
             //cubefacesize = 128; // 6 faces, ?
             //cubefacesize = 512; // 6 faces, ?
-                                //    [GroupMarkerNotSet(crbug.com / 242999)!:247F0809]
-                                //RENDER WARNING: texture bound to texture unit 0 is not renderable.It maybe non-power-of-2 and have incompatible texture filtering.
+            //    [GroupMarkerNotSet(crbug.com / 242999)!:247F0809]
+            //RENDER WARNING: texture bound to texture unit 0 is not renderable.It maybe non-power-of-2 and have incompatible texture filtering.
 
             // can we keep fast fps yet highp?
 
@@ -567,8 +580,13 @@ namespace x360relentless
 
                   };
 
-                  do
+
+                  Native.window.onframe += delegate
                   {
+                      // let render man know..
+                      if (vsyncReady())
+                          return;
+
                       // 1800 is 30sec is 30 000
                       // frameIDslider?
 
@@ -595,8 +613,9 @@ namespace x360relentless
                       gl0.flush();
 
                       //await u.animate.async.@checked;
-                  }
-                  while (await Native.window.async.onframe);
+                  };
+
+
 
               }
           );
@@ -673,8 +692,13 @@ namespace x360relentless
 
                   var sw0 = Stopwatch.StartNew();
 
-                  do
+                  Native.window.onframe += delegate
                   {
+                      // let render man know..
+                      // let render man know..
+                      if (vsyncReady())
+                          return;
+
                       // 1800 is 30sec is 30 000
                       // frameIDslider?
 
@@ -701,8 +725,7 @@ namespace x360relentless
                       gl0.flush();
 
                       //await u.animate.async.@checked;
-                  }
-                  while (await Native.window.async.onframe);
+                  };
 
               }
           );
@@ -773,8 +796,13 @@ namespace x360relentless
 
                   var sw0 = Stopwatch.StartNew();
 
-                  do
+                  Native.window.onframe += delegate
                   {
+                      // let render man know..
+                      // let render man know..
+                      if (vsyncReady())
+                          return;
+
                       // 1800 is 30sec is 30 000
                       // frameIDslider?
 
@@ -801,8 +829,7 @@ namespace x360relentless
                       gl0.flush();
 
                       //await u.animate.async.@checked;
-                  }
-                  while (await Native.window.async.onframe);
+                  };
 
               }
           );
@@ -902,8 +929,12 @@ namespace x360relentless
 
                   };
 
-                  do
+                  Native.window.onframe += delegate
                   {
+                      // let render man know..
+                      // let render man know..
+                      if (vsyncReady())
+                          return;
                       // 1800 is 30sec is 30 000
                       // frameIDslider?
 
@@ -930,8 +961,7 @@ namespace x360relentless
                       gl0.flush();
 
                       //await u.animate.async.@checked;
-                  }
-                  while (await Native.window.async.onframe);
+                  };
 
               }
           );
@@ -1055,8 +1085,13 @@ namespace x360relentless
 
                   };
 
-                  do
+                  Native.window.onframe += delegate
                   {
+                      // let render man know..
+                      // let render man know..
+                      if (vsyncReady())
+                          return;
+
                       // 1800 is 30sec is 30 000
                       // frameIDslider?
 
@@ -1083,8 +1118,7 @@ namespace x360relentless
                       gl0.flush();
 
                       //await u.animate.async.@checked;
-                  }
-                  while (await Native.window.async.onframe);
+                  };
 
               }
           );
@@ -1207,8 +1241,17 @@ namespace x360relentless
 
                   };
 
-                  do
+                  Native.window.onframe += delegate
                   {
+                      //d = a[0].CS___8__locals1.vsync != null;
+                      //e = a[0].CS___8__locals1.vsync.kAcABp_b1ITCbIktNs3el5Q().dgQABqwxMjO1zVAJb5WXKA();
+
+
+                      // let render man know..
+                      // let render man know..
+                      if (vsyncReady())
+                          return;
+
                       // 1800 is 30sec is 30 000
                       // frameIDslider?
 
@@ -1235,8 +1278,7 @@ namespace x360relentless
                       gl0.flush();
 
                       //await u.animate.async.@checked;
-                  }
-                  while (await Native.window.async.onframe);
+                  };
 
               }
           );
@@ -1640,7 +1682,6 @@ namespace x360relentless
 
             #endregion
 
-            var vsync = default(TaskCompletionSource<object>);
 
             #region render 60hz 30sec
             new IHTMLButton {
@@ -1753,8 +1794,9 @@ namespace x360relentless
                 if (frameIDslider.valueAsNumber < maxframes)
                 {
                     // Blob GC? either this helms or the that we made a Blob static. 
-                    await Task.Delay(11);
-
+                    //await Task.Delay(11);
+                    await Task.Delay(33);
+                    // gc at 260 happened twice?
                     goto await_nextframe;
                 }
 
@@ -2161,9 +2203,9 @@ namespace x360relentless
 
 
                                // let render man know..
-                               if (vsync != null)
-                                   if (vsync.Task.IsCompleted)
-                                       return;
+                               // let render man know..
+                               if (vsyncReady())
+                                   return;
 
 
                                //if (pause) return;

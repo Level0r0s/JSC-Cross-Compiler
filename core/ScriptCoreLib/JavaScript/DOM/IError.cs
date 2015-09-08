@@ -18,6 +18,7 @@ namespace ScriptCoreLib.JavaScript.DOM
         // http://msdn.microsoft.com/en-us/library/ie/hh699850(v=vs.94).aspx
 
         public string name;
+        public string message;
 
         // ??
         // X:\jsc.svn\examples\javascript\async\AsyncWindowUncaughtError\AsyncWindowUncaughtError\Application.cs
