@@ -44,6 +44,8 @@
 #define float4 vec4
 #define float3x3 mat3
 
+uniform vec3 uCameraTargetOffset;  
+
 float3 campos=float3(-10.0,2.0,0.0);
 float3 look_at=float3(0.0,1.0,0.0);
 float3 up=float3(0,1,0);
@@ -958,14 +960,52 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     
     float a1=-(mposy/iResolution.y)*PI/2.1+0.1;
     float a2=mposx/iResolution.x*PI*2.0-0.3;
-    campos.y=sin(a1)*campos.x;
-    float camx=cos(a1)*6.0;
-    campos.x=cos(a2)*camx;
-    campos.z=sin(a2)*camx;
-    campos+=look_at;
+
+
+
+
+	// campos=float3(-5.0,1.0,0.0);
+	campos=float3(-10.0,5.0,0.0);
+	
+
+	// float camx=cos(a1)*6.0;
+
+	//look_at=float3( 0.0 , 1.0 ,0.0);
+
+    //campos.y=sin(a1)*campos.x;
+    //float camx=cos(a1)*6.0;
+    //campos.x=cos(a2)*camx;
+    //campos.z=sin(a2)*camx;
+    //campos+=look_at;
     
-    forward=normalize(look_at-campos);
-    right=normalize(cross(up,forward));
+    //forward=normalize(look_at-campos);
+    //forward=normalize(float3(5.0 , 0.0 ,0.0));
+    //forward=float3(1.0 , 0.0 ,0.0);
+    forward=float3(uCameraTargetOffset.x , uCameraTargetOffset.y ,uCameraTargetOffset.z);
+	
+	// up?
+	//forward=normalize(float3(0.1 , 1.0 ,0.0));
+	
+	// down?
+	// forward=normalize(float3(0.1 , -1.0 ,0.0));
+	//forward=float3(0.1 , -1.0 ,0.0);
+
+
+	// front
+    //forward=normalize(float3(1.0 , 0.0 ,0.0));
+    
+	// back
+	//forward=normalize(float3(-1.0 , 0.0 ,0.0));
+	
+	// left?
+    //forward=normalize(float3(0.0 , 0.0 ,1.0));
+    
+	// right
+    //forward=normalize(float3(0.0 , 0.0 ,-1.0));
+
+
+
+	right=normalize(cross(up,forward));
     up=normalize(cross(forward,right));
     
 	float2 scr = fragCoord.xy /iResolution.xy;
@@ -975,7 +1015,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     
     float2 dscr;
     dscr=floor(scr*iResolution.xy/6.0)*6.0;
-    if(keyToggled(KEY_F))
+    if(!keyToggled(KEY_F))
         dscr=scr*iResolution.xy;
 
     scr=dscr/iResolution.xy;

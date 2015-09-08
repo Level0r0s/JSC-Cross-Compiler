@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360tracecone", "x360tracecone.csproj", "{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraceConeWithCRTByKlk", "..\..\synergy\t\TraceConeWithCRTByKlk\TraceConeWithCRTByKlk\TraceConeWithCRTByKlk.csproj", "{D6DF6318-CAA7-433F-A173-2D838130CA96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyRelentlessBySrtuss", "..\..\synergy\r\ChromeShaderToyRelentlessBySrtuss\ChromeShaderToyRelentlessBySrtuss\ChromeShaderToyRelentlessBySrtuss.csproj", "{91BC0D94-1E92-436D-9147-92E42E560A76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{0CD2F213-4FF9-477D-BA73-5E35DA4FD46C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.ActiveCfg = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.Build.0 = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.ActiveCfg = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.Build.0 = Release|x86
+		{D6DF6318-CAA7-433F-A173-2D838130CA96}.Debug|x86.ActiveCfg = Debug|x86
+		{D6DF6318-CAA7-433F-A173-2D838130CA96}.Debug|x86.Build.0 = Debug|x86
+		{D6DF6318-CAA7-433F-A173-2D838130CA96}.Release|x86.ActiveCfg = Release|x86
+		{D6DF6318-CAA7-433F-A173-2D838130CA96}.Release|x86.Build.0 = Release|x86
+		{91BC0D94-1E92-436D-9147-92E42E560A76}.Debug|x86.ActiveCfg = Debug|x86
+		{91BC0D94-1E92-436D-9147-92E42E560A76}.Debug|x86.Build.0 = Debug|x86
+		{91BC0D94-1E92-436D-9147-92E42E560A76}.Release|x86.ActiveCfg = Release|x86
+		{91BC0D94-1E92-436D-9147-92E42E560A76}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D6DF6318-CAA7-433F-A173-2D838130CA96} = {0CD2F213-4FF9-477D-BA73-5E35DA4FD46C}
+		{91BC0D94-1E92-436D-9147-92E42E560A76} = {0CD2F213-4FF9-477D-BA73-5E35DA4FD46C}
+	EndGlobalSection
+EndGlobal
