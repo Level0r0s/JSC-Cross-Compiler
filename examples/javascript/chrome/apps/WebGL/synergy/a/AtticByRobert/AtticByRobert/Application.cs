@@ -55,7 +55,9 @@ namespace AtticByRobert
 
 					};
 
-					chrome.app.runtime.Launched += async delegate
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150908/shadertoy
+                    // jsc could use roslyn to detect missing keywords and attempt nuget download?
+                    chrome.app.runtime.Launched += async delegate
 					{
 						// 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
 						Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });

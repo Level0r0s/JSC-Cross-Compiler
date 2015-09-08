@@ -8,11 +8,11 @@
     <ProjectGuid>{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChromeShaderToyPrograms.a</RootNamespace>
-    <AssemblyName>ChromeShaderToyPrograms.a</AssemblyName>
+    <RootNamespace>ChromeShaderToyPrograms.x</RootNamespace>
+    <AssemblyName>ChromeShaderToyPrograms.x</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>ChromeShaderToyPrograms.a.Program</StartupObject>
+    <StartupObject>ChromeShaderToyPrograms.x.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -178,9 +178,42 @@
     <Reference Include="ChromeShaderToyAssBlockByDila.AssetsLibrary">
       <HintPath>..\..\synergy\a\ChromeShaderToyAssBlockByDila\ChromeShaderToyAssBlockByDila\bin\staging.AssetsLibrary\ChromeShaderToyAssBlockByDila.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="ChromeShaderToyPrograms.x.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeShaderToyPrograms.x.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="x2001SpaceStationByOtavio.AssetsLibrary">
+      <HintPath>..\..\synergy\x\x2001SpaceStationByOtavio\x2001SpaceStationByOtavio\bin\staging.AssetsLibrary\x2001SpaceStationByOtavio.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="x2DFoldingByGaz.AssetsLibrary">
+      <HintPath>..\..\synergy\x\x2DFoldingByGaz\x2DFoldingByGaz\bin\staging.AssetsLibrary\x2DFoldingByGaz.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="x2DShadowCastingByTharich.AssetsLibrary">
+      <HintPath>..\..\synergy\x\x2DShadowCastingByTharich\x2DShadowCastingByTharich\bin\staging.AssetsLibrary\x2DShadowCastingByTharich.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="x2DSkullByStanton.AssetsLibrary">
+      <HintPath>..\..\synergy\x\x2DSkullByStanton\x2DSkullByStanton\bin\staging.AssetsLibrary\x2DSkullByStanton.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="x3DExcQByGaz.AssetsLibrary">
+      <HintPath>..\..\synergy\x\x3DExcQByGaz\x3DExcQByGaz\bin\staging.AssetsLibrary\x3DExcQByGaz.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="x3DLightingByXor.AssetsLibrary">
+      <HintPath>..\..\synergy\x\x3DLightingByXor\x3DLightingByXor\bin\staging.AssetsLibrary\x3DLightingByXor.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="x3DMetashapesByLewiz.AssetsLibrary">
+      <HintPath>..\..\synergy\x\x3DMetashapesByLewiz\x3DMetashapesByLewiz\bin\staging.AssetsLibrary\x3DMetashapesByLewiz.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Xor3DAlienLandByXor.AssetsLibrary">
+      <HintPath>..\..\synergy\x\Xor3DAlienLandByXor\Xor3DAlienLandByXor\bin\staging.AssetsLibrary\Xor3DAlienLandByXor.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="XorMountainsByXor.AssetsLibrary">
+      <HintPath>..\..\synergy\x\XorMountainsByXor\XorMountainsByXor\bin\staging.AssetsLibrary\XorMountainsByXor.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="XorStormByXor.AssetsLibrary">
+      <HintPath>..\..\synergy\x\XorStormByXor\XorStormByXor\bin\staging.AssetsLibrary\XorStormByXor.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="a.cs" />
+    <Compile Include="x.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />
@@ -260,6 +293,46 @@
     <ProjectReference Include="..\..\synergy\a\ChromeShaderToyAssBlockByDila\ChromeShaderToyAssBlockByDila\ChromeShaderToyAssBlockByDila.csproj">
       <Project>{55ff5c23-c75d-4284-a449-46b435fdaff8}</Project>
       <Name>ChromeShaderToyAssBlockByDila</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\x\x2001SpaceStationByOtavio\x2001SpaceStationByOtavio\x2001SpaceStationByOtavio.csproj">
+      <Project>{d2467367-10ea-45b7-b09c-5fc9f7680f8e}</Project>
+      <Name>x2001SpaceStationByOtavio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\x\x2DFoldingByGaz\x2DFoldingByGaz\x2DFoldingByGaz.csproj">
+      <Project>{9dcf1991-99c8-49f6-93fe-0b7ee8c0a589}</Project>
+      <Name>x2DFoldingByGaz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\x\x2DShadowCastingByTharich\x2DShadowCastingByTharich\x2DShadowCastingByTharich.csproj">
+      <Project>{57314e6e-83a2-4267-b2b3-a3ccbddc0349}</Project>
+      <Name>x2DShadowCastingByTharich</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\x\x2DSkullByStanton\x2DSkullByStanton\x2DSkullByStanton.csproj">
+      <Project>{6790f73f-72f8-4175-a8cf-e062e0b62e54}</Project>
+      <Name>x2DSkullByStanton</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\x\x3DExcQByGaz\x3DExcQByGaz\x3DExcQByGaz.csproj">
+      <Project>{6c2ae8b7-b6ac-4c9a-84d2-ad0b835d0e1c}</Project>
+      <Name>x3DExcQByGaz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\x\x3DLightingByXor\x3DLightingByXor\x3DLightingByXor.csproj">
+      <Project>{7c664c3b-eeaa-4eb1-be5e-ebfa707f6d0b}</Project>
+      <Name>x3DLightingByXor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\x\x3DMetashapesByLewiz\x3DMetashapesByLewiz\x3DMetashapesByLewiz.csproj">
+      <Project>{fc580905-625d-4b1c-865b-a5620b319c9c}</Project>
+      <Name>x3DMetashapesByLewiz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\x\Xor3DAlienLandByXor\Xor3DAlienLandByXor\Xor3DAlienLandByXor.csproj">
+      <Project>{7279466c-7e57-4148-b711-2b4635012226}</Project>
+      <Name>Xor3DAlienLandByXor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\x\XorMountainsByXor\XorMountainsByXor\XorMountainsByXor.csproj">
+      <Project>{0c3cdf26-eb73-413a-a3fb-76999bcb69f0}</Project>
+      <Name>XorMountainsByXor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\x\XorStormByXor\XorStormByXor\XorStormByXor.csproj">
+      <Project>{1b1c77ab-2008-444b-9185-39a11bb9b80f}</Project>
+      <Name>XorStormByXor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
