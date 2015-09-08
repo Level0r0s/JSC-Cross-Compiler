@@ -229,6 +229,9 @@
     <Reference Include="RoomScanningEffectByRosme.AssetsLibrary">
       <HintPath>..\..\synergy\r\RoomScanningEffectByRosme\bin\staging.AssetsLibrary\RoomScanningEffectByRosme.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="RelativisticLatticeByMakc.AssetsLibrary">
+      <HintPath>..\..\synergy\r\RelativisticLatticeByMakc\bin\staging.AssetsLibrary\RelativisticLatticeByMakc.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="r.cs" />
@@ -355,6 +358,10 @@
     <ProjectReference Include="..\..\synergy\r\ReflectingCatByDr2\ReflectingCatByDr2\ReflectingCatByDr2.csproj">
       <Project>{8a0bb7bd-c604-44aa-8ea3-af75dbc53d7d}</Project>
       <Name>ReflectingCatByDr2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\r\RelativisticLatticeByMakc\RelativisticLatticeByMakc.csproj">
+      <Project>{18d81eab-6b23-45bf-9f7d-8460d9f637f2}</Project>
+      <Name>RelativisticLatticeByMakc</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\r\RiseOfShroomByAlgorithm\RiseOfShroomByAlgorithm\RiseOfShroomByAlgorithm.csproj">
       <Project>{374391e4-4f63-46d4-a09f-0e392432524e}</Project>

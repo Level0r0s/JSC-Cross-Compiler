@@ -40,8 +40,11 @@ namespace ChromeShaderToyPrograms.r
             ["RaymarchingTutorialByObjelisks"] = () => new RaymarchingTutorialByObjelisks.Shaders.ProgramFragmentShader(),
             ["RaymarchingTweaksByLanza"] = () => new RaymarchingTweaksByLanza.Shaders.ProgramFragmentShader(),
             ["RedCellsByPMalin"] = () => new RedCellsByPMalin.Shaders.ProgramFragmentShader(),
+
             ["RefelectingCubeByTriggerHLM"] = () => new RefelectingCubeByTriggerHLM.Shaders.ProgramFragmentShader(),
             ["ReflectingCatByDr2"] = () => new ReflectingCatByDr2.Shaders.ProgramFragmentShader(),
+            ["RelativisticLatticeByMakc"] = () => new RelativisticLatticeByMakc.Shaders.ProgramFragmentShader(),
+
             ["RiseOfShroomByAlgorithm"] = () => new RiseOfShroomByAlgorithm.Shaders.ProgramFragmentShader(),
             ["RiverFlightByDr2"] = () => new RiverFlightByDr2.Shaders.ProgramFragmentShader(),
             ["RoadToHellByRez"] = () => new RoadToHellByRez.Shaders.ProgramFragmentShader(),
