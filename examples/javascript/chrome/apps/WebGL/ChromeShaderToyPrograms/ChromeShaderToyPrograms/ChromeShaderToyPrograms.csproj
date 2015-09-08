@@ -193,46 +193,6 @@
       <Project>{f52898fe-2a88-4518-b529-51a475209cdb}</Project>
       <Name>UselessBoxByMovax</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\synergy\x2001SpaceStationByOtavio\x2001SpaceStationByOtavio\x2001SpaceStationByOtavio.csproj">
-      <Project>{d2467367-10ea-45b7-b09c-5fc9f7680f8e}</Project>
-      <Name>x2001SpaceStationByOtavio</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\x2DFoldingByGaz\x2DFoldingByGaz\x2DFoldingByGaz.csproj">
-      <Project>{9dcf1991-99c8-49f6-93fe-0b7ee8c0a589}</Project>
-      <Name>x2DFoldingByGaz</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\x2DShadowCastingByTharich\x2DShadowCastingByTharich\x2DShadowCastingByTharich.csproj">
-      <Project>{57314e6e-83a2-4267-b2b3-a3ccbddc0349}</Project>
-      <Name>x2DShadowCastingByTharich</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\x2DSkullByStanton\x2DSkullByStanton\x2DSkullByStanton.csproj">
-      <Project>{6790f73f-72f8-4175-a8cf-e062e0b62e54}</Project>
-      <Name>x2DSkullByStanton</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\x3DExcQByGaz\x3DExcQByGaz\x3DExcQByGaz.csproj">
-      <Project>{6c2ae8b7-b6ac-4c9a-84d2-ad0b835d0e1c}</Project>
-      <Name>x3DExcQByGaz</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\x3DLightingByXor\x3DLightingByXor\x3DLightingByXor.csproj">
-      <Project>{7c664c3b-eeaa-4eb1-be5e-ebfa707f6d0b}</Project>
-      <Name>x3DLightingByXor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\x3DMetashapesByLewiz\x3DMetashapesByLewiz\x3DMetashapesByLewiz.csproj">
-      <Project>{fc580905-625d-4b1c-865b-a5620b319c9c}</Project>
-      <Name>x3DMetashapesByLewiz</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\Xor3DAlienLandByXor\Xor3DAlienLandByXor\Xor3DAlienLandByXor.csproj">
-      <Project>{7279466c-7e57-4148-b711-2b4635012226}</Project>
-      <Name>Xor3DAlienLandByXor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\XorMountainsByXor\XorMountainsByXor\XorMountainsByXor.csproj">
-      <Project>{0c3cdf26-eb73-413a-a3fb-76999bcb69f0}</Project>
-      <Name>XorMountainsByXor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\XorStormByXor\XorStormByXor\XorStormByXor.csproj">
-      <Project>{1b1c77ab-2008-444b-9185-39a11bb9b80f}</Project>
-      <Name>XorStormByXor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\synergy\YellowMothByDr2\YellowMothByDr2\YellowMothByDr2.csproj">
       <Project>{d7e3ca28-54cf-41a6-9099-d49ba758cacb}</Project>
       <Name>YellowMothByDr2</Name>

@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyPrograms.j", "ChromeShaderToyPrograms.j.csproj", "{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{D8E5FEC5-EDC1-459C-8A42-CE31404E8109}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackoLanternByPMalin", "..\..\synergy\j\JackoLanternByPMalin\JackoLanternByPMalin\JackoLanternByPMalin.csproj", "{8E59D42E-787E-4C40-AEE6-7FE77D837803}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JellyfishByVlad", "..\..\synergy\j\JellyfishByVlad\JellyfishByVlad\JellyfishByVlad.csproj", "{22F614C7-E7C7-448E-8146-DC86E8D0943B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoyDivisionByXbe", "..\..\synergy\j\JoyDivisionByXbe\JoyDivisionByXbe\JoyDivisionByXbe.csproj", "{D135DF02-C39E-4036-BF46-502703E496C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JusterBeaverByMovax", "..\..\synergy\j\JusterBeaverByMovax\JusterBeaverByMovax\JusterBeaverByMovax.csproj", "{556FDC09-E0ED-46B2-BB12-A0CE6C72356D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2D", "2D", "{EE755A94-85A0-46E4-A362-FA68DA00A953}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.ActiveCfg = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.Build.0 = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.ActiveCfg = Release|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.Build.0 = Release|x86
+		{8E59D42E-787E-4C40-AEE6-7FE77D837803}.Debug|x86.ActiveCfg = Debug|x86
+		{8E59D42E-787E-4C40-AEE6-7FE77D837803}.Debug|x86.Build.0 = Debug|x86
+		{8E59D42E-787E-4C40-AEE6-7FE77D837803}.Release|x86.ActiveCfg = Release|x86
+		{8E59D42E-787E-4C40-AEE6-7FE77D837803}.Release|x86.Build.0 = Release|x86
+		{22F614C7-E7C7-448E-8146-DC86E8D0943B}.Debug|x86.ActiveCfg = Debug|x86
+		{22F614C7-E7C7-448E-8146-DC86E8D0943B}.Debug|x86.Build.0 = Debug|x86
+		{22F614C7-E7C7-448E-8146-DC86E8D0943B}.Release|x86.ActiveCfg = Release|x86
+		{22F614C7-E7C7-448E-8146-DC86E8D0943B}.Release|x86.Build.0 = Release|x86
+		{D135DF02-C39E-4036-BF46-502703E496C8}.Debug|x86.ActiveCfg = Debug|x86
+		{D135DF02-C39E-4036-BF46-502703E496C8}.Debug|x86.Build.0 = Debug|x86
+		{D135DF02-C39E-4036-BF46-502703E496C8}.Release|x86.ActiveCfg = Release|x86
+		{D135DF02-C39E-4036-BF46-502703E496C8}.Release|x86.Build.0 = Release|x86
+		{556FDC09-E0ED-46B2-BB12-A0CE6C72356D}.Debug|x86.ActiveCfg = Debug|x86
+		{556FDC09-E0ED-46B2-BB12-A0CE6C72356D}.Debug|x86.Build.0 = Debug|x86
+		{556FDC09-E0ED-46B2-BB12-A0CE6C72356D}.Release|x86.ActiveCfg = Release|x86
+		{556FDC09-E0ED-46B2-BB12-A0CE6C72356D}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8E59D42E-787E-4C40-AEE6-7FE77D837803} = {D8E5FEC5-EDC1-459C-8A42-CE31404E8109}
+		{22F614C7-E7C7-448E-8146-DC86E8D0943B} = {D8E5FEC5-EDC1-459C-8A42-CE31404E8109}
+		{D135DF02-C39E-4036-BF46-502703E496C8} = {D8E5FEC5-EDC1-459C-8A42-CE31404E8109}
+		{556FDC09-E0ED-46B2-BB12-A0CE6C72356D} = {EE755A94-85A0-46E4-A362-FA68DA00A953}
+		{EE755A94-85A0-46E4-A362-FA68DA00A953} = {D8E5FEC5-EDC1-459C-8A42-CE31404E8109}
+	EndGlobalSection
+EndGlobal
