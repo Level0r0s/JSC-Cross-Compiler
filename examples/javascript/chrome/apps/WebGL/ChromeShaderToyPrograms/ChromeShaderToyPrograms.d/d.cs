@@ -43,6 +43,7 @@ namespace ChromeShaderToyPrograms.d
             ["Doom2ByReinder"] = () => new Doom2ByReinder.Shaders.ProgramFragmentShader(),
             ["DragonflyByDr2"] = () => new DragonflyByDr2.Shaders.ProgramFragmentShader(),
             ["DubstepByAssByRez"] = () => new DubstepByAssByRez.Shaders.ProgramFragmentShader(),
+            ["DyingUniverseByBigWings"] = () => new DyingUniverseByBigWings.Shaders.ProgramFragmentShader(),
             #endregion
 
         };

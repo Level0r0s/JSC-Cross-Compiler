@@ -205,6 +205,9 @@
     <Reference Include="DubstepByAssByRez.AssetsLibrary">
       <HintPath>..\..\synergy\d\DubstepByAssByRez\DubstepByAssByRez\bin\staging.AssetsLibrary\DubstepByAssByRez.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="DyingUniverseByBigWings.AssetsLibrary">
+      <HintPath>..\..\synergy\d\DyingUniverseByBigWings\bin\staging.AssetsLibrary\DyingUniverseByBigWings.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="d.cs" />
@@ -323,6 +326,10 @@
     <ProjectReference Include="..\..\synergy\d\DubstepByAssByRez\DubstepByAssByRez\DubstepByAssByRez.csproj">
       <Project>{9b36f942-52cf-40d7-b838-56c334521c59}</Project>
       <Name>DubstepByAssByRez</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DyingUniverseByBigWings\DyingUniverseByBigWings.csproj">
+      <Project>{18d81eab-6b23-45bf-9f7d-8460d9f637f2}</Project>
+      <Name>DyingUniverseByBigWings</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
