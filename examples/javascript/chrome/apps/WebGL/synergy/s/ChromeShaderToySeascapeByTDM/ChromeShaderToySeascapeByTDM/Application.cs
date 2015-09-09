@@ -33,13 +33,15 @@ namespace ChromeShaderToySeascapeByTDM
 		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
 		public Application(IApp page)
 		{
-			// X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyColumns\ChromeShaderToyColumns\Application.cs
-			// X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToySeascapeByTDM\ChromeShaderToySeascapeByTDM\Application.cs
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150908/chromeshadertoyseascapebytdm
 
-			// https://www.shadertoy.com/view/Ms2SD1
+            // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyColumns\ChromeShaderToyColumns\Application.cs
+            // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToySeascapeByTDM\ChromeShaderToySeascapeByTDM\Application.cs
 
-			#region += Launched chrome.app.window
-			dynamic self = Native.self;
+            // https://www.shadertoy.com/view/Ms2SD1
+
+            #region += Launched chrome.app.window
+            dynamic self = Native.self;
 			dynamic self_chrome = self.chrome;
 			object self_chrome_socket = self_chrome.socket;
 
@@ -84,109 +86,12 @@ namespace ChromeShaderToySeascapeByTDM
 					return;
 				}
 			}
-			#endregion
+            #endregion
 
-			new { }.With(
-			async delegate
-			{
-				Native.body.style.margin = "0px";
-
-				var vs = new Shaders.ProgramFragmentShader();
-
-				var mAudioContext = new AudioContext();
-				var gl = new WebGLRenderingContext(alpha: true);
-				var c = gl.canvas.AttachToDocument();
-
-				#region onresize
-				new { }.With(
-					async delegate
-					{
-						do
-						{
-							c.width = Native.window.Width;
-							c.height = Native.window.Height;
-							c.style.SetSize(c.width, c.height);
-						}
-						while (await Native.window.async.onresize);
-					}
-				);
-				#endregion
-
-
-
-
-				#region CaptureMouse
-				var mMouseOriX = 0;
-				var mMouseOriY = 0;
-				var mMousePosX = 0;
-				var mMousePosY = 0;
-
-				c.onmousedown += ev =>
-				{
-					mMouseOriX = ev.CursorX;
-					mMouseOriY = ev.CursorY;
-					mMousePosX = mMouseOriX;
-					mMousePosY = mMouseOriY;
-
-					ev.CaptureMouse();
-				};
-
-				c.onmousemove += ev =>
-				{
-					if (ev.MouseButton == IEvent.MouseButtonEnum.Left)
-					{
-						mMousePosX = ev.CursorX;
-						mMousePosY = c.height - ev.CursorY;
-					}
-				};
-
-
-				c.onmouseup += ev =>
-				{
-					mMouseOriX = -Math.Abs(mMouseOriX);
-					mMouseOriY = -Math.Abs(mMouseOriY);
-				};
-				#endregion
-
-				var mEffect = new ChromeShaderToyColumns.Library.ShaderToy.Effect(
-					mAudioContext,
-					gl,
-
-					callback: delegate
-					{
-						new IHTMLPre { "at callback" }.AttachToDocument();
-
-					},
-					obj: null,
-					forceMuted: false,
-					forcePaused: false
-				);
-
-				mEffect.mPasses[0].MakeHeader_Image();
-				mEffect.mPasses[0].NewShader_Image(vs);
-
-				var sw = Stopwatch.StartNew();
-				do
-				{
-					mEffect.mPasses[0].Paint_Image(
-						sw.ElapsedMilliseconds / 1000.0f,
-
-						mMouseOriX,
-						mMouseOriY,
-						mMousePosX,
-						mMousePosY
-
-					);
-
-					// what does it do?
-					gl.flush();
-
-				}
-				while (await Native.window.async.onframe);
-
-			}
-		);
-		}
+            ChromeShaderToyColumns.Library.ShaderToy.AttachToDocument(
+                        new Shaders.ProgramFragmentShader()
+                    );
+        }
 
 	}
 }

@@ -1,10 +1,13 @@
 ﻿// "Seascape" by Alexander Alekseev aka TDM - 2014
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 
+uniform vec3 uCameraTargetOffset;   
+
+
 const int NUM_STEPS = 8;
 const float PI	 	= 3.1415;
 const float EPSILON	= 1e-3;
-float EPSILON_NRM	= 0.1 / iResolution.x;
+float EPSILON_NRM	= 0.5 / iResolution.x;
 
 // sea
 const int ITER_GEOMETRY = 3;
@@ -158,13 +161,65 @@ float heightMapTracing(vec3 ori, vec3 dir, out vec3 p) {
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 	vec2 uv = fragCoord.xy / iResolution.xy;
     uv = uv * 2.0 - 1.0;
-    uv.x *= iResolution.x / iResolution.y;    
-    float time = iGlobalTime * 0.3 + iMouse.x*0.01;
+    //uv.x *= iResolution.x / iResolution.y;    
+    //float time = iGlobalTime * 0.3 + iMouse.x*0.01;
+    float time = iGlobalTime * 0.3 ;
         
     // ray
-    vec3 ang = vec3(sin(time*3.0)*0.1,sin(time)*0.2+0.3,time);    
+	
+	  
     vec3 ori = vec3(0.0,3.5,time*5.0);
-    vec3 dir = normalize(vec3(uv.xy,-2.0)); dir.z += length(uv) * 0.15;
+    
+	// front?
+	vec3 dir = normalize(vec3(uv.x, uv.y, -2.0)); 
+
+	// flat earth style
+	//dir.z += length(uv) * 0.15;
+    //dir = normalize(dir);
+	// dir = vec3(1.0, 0.0, 0.0);
+
+    //vec3 ang = vec3(sin(time*3.0)*0.1,sin(time)*0.2+0.3,time);  
+    //vec3 ang = vec3(iMouse.x*0.01,iMouse.y*0.01,0.0);  
+    vec3 ang = vec3(0.0,iMouse.y*0.01,iMouse.x*0.01);  
+
+	if (uCameraTargetOffset.y == -1.0)
+	{
+		// bottom
+		ang = vec3(0.0,1.0*3.14/2.0,-1.0*3.14/2.0);  
+	}
+
+	
+	if (uCameraTargetOffset.y == 1.0)
+	{
+		// top
+		ang = vec3(0.0,-1.0*3.14/2.0,0.0);  
+	}
+
+
+	if (uCameraTargetOffset.z == -1.0)
+	{
+		// left
+		ang = vec3(0.0,0.0,-1.0*3.14/2.0);  
+	}
+
+	if (uCameraTargetOffset.z == 1.0)
+	{
+		// right
+		ang = vec3(0.0,0.0,1.0*3.14/2.0);  
+	}
+
+	if (uCameraTargetOffset.x == -1.0)
+	{
+		// back
+		ang = vec3(0.0,0.0,0.0*3.14);  
+	}
+
+	if (uCameraTargetOffset.x == 1.0)
+	{
+		// front
+		ang = vec3(0.0,0.0,1.0*3.14);  
+	}
+
     dir = normalize(dir) * fromEuler(ang);
     
     // tracing
@@ -181,5 +236,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     	pow(smoothstep(0.0,-0.05,dir.y),0.3));
         
     // post
+	//fragColor = vec4(color, 1.0);
 	fragColor = vec4(pow(color,vec3(0.75)), 1.0);
 }

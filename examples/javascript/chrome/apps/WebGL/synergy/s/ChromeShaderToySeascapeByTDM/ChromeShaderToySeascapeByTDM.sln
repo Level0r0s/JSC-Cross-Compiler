@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22609.0
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToySeascapeByTDM", "ChromeShaderToySeascapeByTDM\ChromeShaderToySeascapeByTDM.csproj", "{426A9419-9287-4880-979F-29F29D3F2A22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToySeascapeByTDM", "ChromeShaderToySeascapeByTDM\ChromeShaderToySeascapeByTDM.csproj", "{637D133F-4975-4BF2-9ECF-364E8E569BF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyColumns", "..\ChromeShaderToyColumns\ChromeShaderToyColumns\ChromeShaderToyColumns.csproj", "{227E87F8-F14F-470E-8A9A-CCF1DCD8EB02}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyRelentlessBySrtuss", "..\..\r\ChromeShaderToyRelentlessBySrtuss\ChromeShaderToyRelentlessBySrtuss\ChromeShaderToyRelentlessBySrtuss.csproj", "{91BC0D94-1E92-436D-9147-92E42E560A76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{148C44F1-1DC4-47D3-8C79-726592D56E92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,16 +15,19 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.ActiveCfg = Debug|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.Build.0 = Debug|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.ActiveCfg = Release|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.Build.0 = Release|x86
-		{227E87F8-F14F-470E-8A9A-CCF1DCD8EB02}.Debug|x86.ActiveCfg = Debug|x86
-		{227E87F8-F14F-470E-8A9A-CCF1DCD8EB02}.Debug|x86.Build.0 = Debug|x86
-		{227E87F8-F14F-470E-8A9A-CCF1DCD8EB02}.Release|x86.ActiveCfg = Release|x86
-		{227E87F8-F14F-470E-8A9A-CCF1DCD8EB02}.Release|x86.Build.0 = Release|x86
+		{637D133F-4975-4BF2-9ECF-364E8E569BF9}.Debug|x86.ActiveCfg = Debug|x86
+		{637D133F-4975-4BF2-9ECF-364E8E569BF9}.Debug|x86.Build.0 = Debug|x86
+		{637D133F-4975-4BF2-9ECF-364E8E569BF9}.Release|x86.ActiveCfg = Release|x86
+		{637D133F-4975-4BF2-9ECF-364E8E569BF9}.Release|x86.Build.0 = Release|x86
+		{91BC0D94-1E92-436D-9147-92E42E560A76}.Debug|x86.ActiveCfg = Debug|x86
+		{91BC0D94-1E92-436D-9147-92E42E560A76}.Debug|x86.Build.0 = Debug|x86
+		{91BC0D94-1E92-436D-9147-92E42E560A76}.Release|x86.ActiveCfg = Release|x86
+		{91BC0D94-1E92-436D-9147-92E42E560A76}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{91BC0D94-1E92-436D-9147-92E42E560A76} = {148C44F1-1DC4-47D3-8C79-726592D56E92}
 	EndGlobalSection
 EndGlobal
