@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyPrograms.u", "ChromeShaderToyPrograms.u.csproj", "{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{78060568-76AD-47AB-919D-A45C082DBAB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UglyBrickByPsykotic", "..\..\synergy\u\UglyBrickByPsykotic\UglyBrickByPsykotic\UglyBrickByPsykotic.csproj", "{693E0621-5324-4922-8AA2-320809E85AEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UmbrellarByCandycat", "..\..\synergy\u\UmbrellarByCandycat\UmbrellarByCandycat.csproj", "{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UselessBoxByMovax", "..\..\synergy\u\UselessBoxByMovax\UselessBoxByMovax\UselessBoxByMovax.csproj", "{F52898FE-2A88-4518-B529-51A475209CDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2D", "2D", "{26C0F2C4-E39D-4C51-8BCA-424E5970FE95}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.ActiveCfg = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Debug|x86.Build.0 = Debug|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.ActiveCfg = Release|x86
+		{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}.Release|x86.Build.0 = Release|x86
+		{693E0621-5324-4922-8AA2-320809E85AEF}.Debug|x86.ActiveCfg = Debug|x86
+		{693E0621-5324-4922-8AA2-320809E85AEF}.Debug|x86.Build.0 = Debug|x86
+		{693E0621-5324-4922-8AA2-320809E85AEF}.Release|x86.ActiveCfg = Release|x86
+		{693E0621-5324-4922-8AA2-320809E85AEF}.Release|x86.Build.0 = Release|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Debug|x86.ActiveCfg = Debug|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Debug|x86.Build.0 = Debug|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.ActiveCfg = Release|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.Build.0 = Release|x86
+		{F52898FE-2A88-4518-B529-51A475209CDB}.Debug|x86.ActiveCfg = Debug|x86
+		{F52898FE-2A88-4518-B529-51A475209CDB}.Debug|x86.Build.0 = Debug|x86
+		{F52898FE-2A88-4518-B529-51A475209CDB}.Release|x86.ActiveCfg = Release|x86
+		{F52898FE-2A88-4518-B529-51A475209CDB}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{693E0621-5324-4922-8AA2-320809E85AEF} = {78060568-76AD-47AB-919D-A45C082DBAB2}
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2} = {26C0F2C4-E39D-4C51-8BCA-424E5970FE95}
+		{F52898FE-2A88-4518-B529-51A475209CDB} = {78060568-76AD-47AB-919D-A45C082DBAB2}
+		{26C0F2C4-E39D-4C51-8BCA-424E5970FE95} = {78060568-76AD-47AB-919D-A45C082DBAB2}
+	EndGlobalSection
+EndGlobal

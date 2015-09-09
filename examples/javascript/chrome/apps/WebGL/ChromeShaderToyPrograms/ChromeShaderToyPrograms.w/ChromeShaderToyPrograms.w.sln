@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wolf128ByFinalPatch", "..\.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WormsByIq", "..\..\synergy\w\WormsByIq\WormsByIq\WormsByIq.csproj", "{44768918-0326-4561-816F-E9473D7E8631}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WobblyBlobByDr2", "..\..\synergy\w\WobblyBlobByDr2\WobblyBlobByDr2.csproj", "{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -77,6 +79,10 @@ Global
 		{44768918-0326-4561-816F-E9473D7E8631}.Debug|x86.Build.0 = Debug|x86
 		{44768918-0326-4561-816F-E9473D7E8631}.Release|x86.ActiveCfg = Release|x86
 		{44768918-0326-4561-816F-E9473D7E8631}.Release|x86.Build.0 = Release|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Debug|x86.ActiveCfg = Debug|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Debug|x86.Build.0 = Debug|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.ActiveCfg = Release|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,5 +98,6 @@ Global
 		{5F36A402-7B9E-4E59-A061-70F0FF88CFA6} = {5CA70D03-A7D8-436B-9482-3E80E6CDF4B0}
 		{897079CC-25C8-4982-A504-5BA52F311DE5} = {5CA70D03-A7D8-436B-9482-3E80E6CDF4B0}
 		{44768918-0326-4561-816F-E9473D7E8631} = {5CA70D03-A7D8-436B-9482-3E80E6CDF4B0}
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2} = {5CA70D03-A7D8-436B-9482-3E80E6CDF4B0}
 	EndGlobalSection
 EndGlobal

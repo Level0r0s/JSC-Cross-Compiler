@@ -160,6 +160,9 @@
     <Reference Include="x2013ByW23.AssetsLibrary">
       <HintPath>..\..\synergy\x\x2013ByW23\bin\staging.AssetsLibrary\x2013ByW23.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="x16SegmentDisplayByFlyguy.AssetsLibrary">
+      <HintPath>..\..\synergy\x\x16SegmentDisplayByFlyguy\bin\staging.AssetsLibrary\x16SegmentDisplayByFlyguy.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="x.cs" />
@@ -175,6 +178,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\synergy\x\x16SegmentDisplayByFlyguy\x16SegmentDisplayByFlyguy.csproj">
+      <Project>{2bd643ef-de34-4b68-bcda-780752e1e82b}</Project>
+      <Name>x16SegmentDisplayByFlyguy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\x\x2001SpaceStationByOtavio\x2001SpaceStationByOtavio\x2001SpaceStationByOtavio.csproj">
       <Project>{d2467367-10ea-45b7-b09c-5fc9f7680f8e}</Project>
       <Name>x2001SpaceStationByOtavio</Name>

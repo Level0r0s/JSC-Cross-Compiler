@@ -8,11 +8,11 @@
     <ProjectGuid>{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChromeShaderToyPrograms.w</RootNamespace>
-    <AssemblyName>ChromeShaderToyPrograms.w</AssemblyName>
+    <RootNamespace>ChromeShaderToyPrograms.u</RootNamespace>
+    <AssemblyName>ChromeShaderToyPrograms.u</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>ChromeShaderToyPrograms.w.Program</StartupObject>
+    <StartupObject>ChromeShaderToyPrograms.u.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -124,45 +124,21 @@
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
     </Reference>
-    <Reference Include="ChromeShaderToyPrograms.w.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\ChromeShaderToyPrograms.w.AssetsLibrary.dll</HintPath>
+    <Reference Include="ChromeShaderToyPrograms.u.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeShaderToyPrograms.u.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="WaterfallByZtri.AssetsLibrary">
-      <HintPath>..\..\synergy\w\WaterfallByZtri\WaterfallByZtri\bin\staging.AssetsLibrary\WaterfallByZtri.AssetsLibrary.dll</HintPath>
+    <Reference Include="UglyBrickByPsykotic.AssetsLibrary">
+      <HintPath>..\..\synergy\u\UglyBrickByPsykotic\UglyBrickByPsykotic\bin\staging.AssetsLibrary\UglyBrickByPsykotic.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="WindWakerOceanByPolyflare.AssetsLibrary">
-      <HintPath>..\..\synergy\w\WindWakerOceanByPolyflare\WindWakerOceanByPolyflare\bin\staging.AssetsLibrary\WindWakerOceanByPolyflare.AssetsLibrary.dll</HintPath>
+    <Reference Include="UmbrellarByCandycat.AssetsLibrary">
+      <HintPath>..\..\synergy\u\UmbrellarByCandycat\bin\staging.AssetsLibrary\UmbrellarByCandycat.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="WinterByIapafoto.AssetsLibrary">
-      <HintPath>..\..\synergy\w\WinterByIapafoto\WinterByIapafoto\bin\staging.AssetsLibrary\WinterByIapafoto.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="WireEggsByEiffie.AssetsLibrary">
-      <HintPath>..\..\synergy\w\WireEggsByEiffie\WireEggsByEiffie\bin\staging.AssetsLibrary\WireEggsByEiffie.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="WobblyThingByAvix.AssetsLibrary">
-      <HintPath>..\..\synergy\w\WobblyThingByAvix\WobblyThingByAvix\bin\staging.AssetsLibrary\WobblyThingByAvix.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Wolf128ByFinalPatch.AssetsLibrary">
-      <HintPath>..\..\synergy\w\Wolf128ByFinalPatch\Wolf128ByFinalPatch\bin\staging.AssetsLibrary\Wolf128ByFinalPatch.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="WormsByIq.AssetsLibrary">
-      <HintPath>..\..\synergy\w\WormsByIq\WormsByIq\bin\staging.AssetsLibrary\WormsByIq.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="ChromeShaderToyWetStoneByTDM.AssetsLibrary">
-      <HintPath>..\..\synergy\w\ChromeShaderToyWetStoneByTDM\ChromeShaderToyWetStoneByTDM\bin\staging.AssetsLibrary\ChromeShaderToyWetStoneByTDM.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="ChromeShaderToyWireframeByYasuo.AssetsLibrary">
-      <HintPath>..\..\synergy\w\ChromeShaderToyWireframeByYasuo\ChromeShaderToyWireframeByYasuo\bin\staging.AssetsLibrary\ChromeShaderToyWireframeByYasuo.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="ChromeShaderToyWolfensteinByReinder.AssetsLibrary">
-      <HintPath>..\..\synergy\w\ChromeShaderToyWolfensteinByReinder\ChromeShaderToyWolfensteinByReinder\bin\staging.AssetsLibrary\ChromeShaderToyWolfensteinByReinder.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="WobblyBlobByDr2.AssetsLibrary">
-      <HintPath>..\..\synergy\w\WobblyBlobByDr2\bin\staging.AssetsLibrary\WobblyBlobByDr2.AssetsLibrary.dll</HintPath>
+    <Reference Include="UselessBoxByMovax.AssetsLibrary">
+      <HintPath>..\..\synergy\u\UselessBoxByMovax\UselessBoxByMovax\bin\staging.AssetsLibrary\UselessBoxByMovax.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="w.cs" />
+    <Compile Include="u.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />
@@ -175,49 +151,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\synergy\w\ChromeShaderToyWetStoneByTDM\ChromeShaderToyWetStoneByTDM\ChromeShaderToyWetStoneByTDM.csproj">
-      <Project>{b40b0232-287b-4489-b023-d8f2a496a691}</Project>
-      <Name>ChromeShaderToyWetStoneByTDM</Name>
+    <ProjectReference Include="..\..\synergy\u\UglyBrickByPsykotic\UglyBrickByPsykotic\UglyBrickByPsykotic.csproj">
+      <Project>{693e0621-5324-4922-8aa2-320809e85aef}</Project>
+      <Name>UglyBrickByPsykotic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\synergy\w\ChromeShaderToyWireframeByYasuo\ChromeShaderToyWireframeByYasuo\ChromeShaderToyWireframeByYasuo.csproj">
-      <Project>{6902cb16-5145-4cef-9587-70103b3bd657}</Project>
-      <Name>ChromeShaderToyWireframeByYasuo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\w\ChromeShaderToyWolfensteinByReinder\ChromeShaderToyWolfensteinByReinder\ChromeShaderToyWolfensteinByReinder.csproj">
-      <Project>{e7c90b88-3c6e-479e-a32c-49fab8db76d2}</Project>
-      <Name>ChromeShaderToyWolfensteinByReinder</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\w\WaterfallByZtri\WaterfallByZtri\WaterfallByZtri.csproj">
-      <Project>{b209c2f1-c8b0-441d-9a21-17d665cfd03c}</Project>
-      <Name>WaterfallByZtri</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\w\WindWakerOceanByPolyflare\WindWakerOceanByPolyflare\WindWakerOceanByPolyflare.csproj">
-      <Project>{63f34366-1907-400d-bd5b-6572ef6742f3}</Project>
-      <Name>WindWakerOceanByPolyflare</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\w\WinterByIapafoto\WinterByIapafoto\WinterByIapafoto.csproj">
-      <Project>{3a90cebf-454b-4e38-a0b5-79d165e8882e}</Project>
-      <Name>WinterByIapafoto</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\w\WireEggsByEiffie\WireEggsByEiffie\WireEggsByEiffie.csproj">
-      <Project>{8e6cbc59-86a1-4bd7-b64a-710b2a7ce0d6}</Project>
-      <Name>WireEggsByEiffie</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\w\WobblyBlobByDr2\WobblyBlobByDr2.csproj">
+    <ProjectReference Include="..\..\synergy\u\UmbrellarByCandycat\UmbrellarByCandycat.csproj">
       <Project>{18d81eab-6b23-45bf-9f7d-8460d9f637f2}</Project>
-      <Name>WobblyBlobByDr2</Name>
+      <Name>UmbrellarByCandycat</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\synergy\w\WobblyThingByAvix\WobblyThingByAvix\WobblyThingByAvix.csproj">
-      <Project>{5f36a402-7b9e-4e59-a061-70f0ff88cfa6}</Project>
-      <Name>WobblyThingByAvix</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\w\Wolf128ByFinalPatch\Wolf128ByFinalPatch\Wolf128ByFinalPatch.csproj">
-      <Project>{897079cc-25c8-4982-a504-5ba52f311de5}</Project>
-      <Name>Wolf128ByFinalPatch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\w\WormsByIq\WormsByIq\WormsByIq.csproj">
-      <Project>{44768918-0326-4561-816f-e9473d7e8631}</Project>
-      <Name>WormsByIq</Name>
+    <ProjectReference Include="..\..\synergy\u\UselessBoxByMovax\UselessBoxByMovax\UselessBoxByMovax.csproj">
+      <Project>{f52898fe-2a88-4518-b529-51a475209cdb}</Project>
+      <Name>UselessBoxByMovax</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -25,6 +25,8 @@ namespace ChromeShaderToyPrograms.w
             ["ChromeShaderToyWolfensteinByReinder"] = () => new ChromeShaderToyWolfensteinByReinder.Shaders.ProgramFragmentShader(),
             ["WinterByIapafoto"] = () => new WinterByIapafoto.Shaders.ProgramFragmentShader(),
             ["WireEggsByEiffie"] = () => new WireEggsByEiffie.Shaders.ProgramFragmentShader(),
+
+            ["WobblyBlobByDr2"] = () => new WobblyBlobByDr2.Shaders.ProgramFragmentShader(),
             ["WobblyThingByAvix"] = () => new WobblyThingByAvix.Shaders.ProgramFragmentShader(),
             ["Wolf128ByFinalPatch"] = () => new Wolf128ByFinalPatch.Shaders.ProgramFragmentShader(),
             ["WormsByIq"] = () => new WormsByIq.Shaders.ProgramFragmentShader(),
