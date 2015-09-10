@@ -52,3 +52,9 @@ namespace ChromeShaderToyPrograms.m
 
     }
 }
+
+//Closing partial types...
+//3268:02:01:1e RewriteToAssembly error: System.InvalidOperationException: Sequence contains no elements
+//   at System.Linq.Enumerable.Last[TSource](IEnumerable`1 source)
+//   at jsc.meta.Library.VolumeFunctions.VolumeFunctionsExtensions.GetnextAvailableDrive() in x:\jsc.internal.git\compiler\jsc.meta\jsc.meta\Library\VolumeFunctions\VolumeFunctionsExtensions.cs:line 200
+//   at jsc.meta.Library.VolumeFunctions.VolumeFunctionsExtensions.ToVirtualDrive(DirectoryInfo SourceDirectory) in x:\jsc.internal.git\compiler\jsc.meta\jsc.meta\Library\VolumeFunctions\VolumeFunctionsExtensions.cs:line 156

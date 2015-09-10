@@ -169,14 +169,6 @@
       <Project>{2503cee7-2941-4c82-9014-9dd7570c4c23}</Project>
       <Name>ChromeShaderToySimpleLoadingScreenByNdel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\synergy\UglyBrickByPsykotic\UglyBrickByPsykotic\UglyBrickByPsykotic.csproj">
-      <Project>{693e0621-5324-4922-8aa2-320809e85aef}</Project>
-      <Name>UglyBrickByPsykotic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\synergy\UselessBoxByMovax\UselessBoxByMovax\UselessBoxByMovax.csproj">
-      <Project>{f52898fe-2a88-4518-b529-51a475209cdb}</Project>
-      <Name>UselessBoxByMovax</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\synergy\YellowMothByDr2\YellowMothByDr2\YellowMothByDr2.csproj">
       <Project>{d7e3ca28-54cf-41a6-9099-d49ba758cacb}</Project>
       <Name>YellowMothByDr2</Name>

@@ -52,10 +52,7 @@ namespace ChromeShaderToyPrograms
 
 
 	
-			["UselessBoxByMovax"] = () => new UselessBoxByMovax.Shaders.ProgramFragmentShader(),
-			["UglyBrickByPsykotic"] = () => new UglyBrickByPsykotic.Shaders.ProgramFragmentShader(),
-
-
+		
 		
 			["YellowMothByDr2"] = () => new YellowMothByDr2.Shaders.ProgramFragmentShader(),
 
