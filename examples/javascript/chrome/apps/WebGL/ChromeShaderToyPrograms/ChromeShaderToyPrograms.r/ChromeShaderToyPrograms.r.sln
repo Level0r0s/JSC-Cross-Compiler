@@ -85,6 +85,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelativisticLatticeByMakc",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "obj", "obj", "{40A8376F-C78E-4E24-8D51-51A8D049F28F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhumbLineByBeyondTheStatic", "..\..\synergy\r\RhumbLineByBeyondTheStatic\RhumbLineByBeyondTheStatic.csproj", "{9279C89F-763D-4808-B5EC-9567BBA87097}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -239,6 +241,10 @@ Global
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Debug|x86.Build.0 = Debug|x86
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.ActiveCfg = Release|x86
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.Build.0 = Release|x86
+		{9279C89F-763D-4808-B5EC-9567BBA87097}.Debug|x86.ActiveCfg = Debug|x86
+		{9279C89F-763D-4808-B5EC-9567BBA87097}.Debug|x86.Build.0 = Debug|x86
+		{9279C89F-763D-4808-B5EC-9567BBA87097}.Release|x86.ActiveCfg = Release|x86
+		{9279C89F-763D-4808-B5EC-9567BBA87097}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -283,5 +289,6 @@ Global
 		{0DDD298E-2D9B-462C-8F16-53FE7E189174} = {0C9C7C35-D49D-44F2-B671-4F1053714000}
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2} = {4D5B6C39-68F5-4E61-9B1C-A5A58F9E46DD}
 		{40A8376F-C78E-4E24-8D51-51A8D049F28F} = {4D5B6C39-68F5-4E61-9B1C-A5A58F9E46DD}
+		{9279C89F-763D-4808-B5EC-9567BBA87097} = {4D5B6C39-68F5-4E61-9B1C-A5A58F9E46DD}
 	EndGlobalSection
 EndGlobal

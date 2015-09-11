@@ -44,6 +44,7 @@ namespace ChromeShaderToyPrograms.r
             ["RefelectingCubeByTriggerHLM"] = () => new RefelectingCubeByTriggerHLM.Shaders.ProgramFragmentShader(),
             ["ReflectingCatByDr2"] = () => new ReflectingCatByDr2.Shaders.ProgramFragmentShader(),
             ["RelativisticLatticeByMakc"] = () => new RelativisticLatticeByMakc.Shaders.ProgramFragmentShader(),
+            ["RhumbLineByBeyondTheStatic"] = () => new RhumbLineByBeyondTheStatic.Shaders.ProgramFragmentShader(),
 
             ["RiseOfShroomByAlgorithm"] = () => new RiseOfShroomByAlgorithm.Shaders.ProgramFragmentShader(),
             ["RiverFlightByDr2"] = () => new RiverFlightByDr2.Shaders.ProgramFragmentShader(),
