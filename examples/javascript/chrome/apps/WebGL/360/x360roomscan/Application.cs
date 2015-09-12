@@ -44,6 +44,8 @@ namespace x360roomscan
         // R:\util\android-sdk-windows\platform-tools\adb.exe push "X:\vr\0000.png" /sdcard/oculus/360photos/
         // 2649 KB/s (1085134 bytes in 0.400s)
 
+        // 
+        // R:\util\android-sdk-windows\platform-tools\adb.exe push "X:\vr\scan1.png" /sdcard/oculus/360photos/
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150906/roomscanningeffectbyrosme
 
@@ -68,7 +70,7 @@ namespace x360roomscan
         //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push   "R:\vr\tape360iss\0000.png" "/sdcard/oculus/360photos/tape360iss.png"
         //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push   "R:\vr\tape360iss\0230.png" "/sdcard/oculus/360photos/tape360iss0230.png"
 
-        //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\sh1\0000.png" "/sdcard/oculus/360photos/sh1.png"
+        //  "r:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\scan2.png" "/sdcard/oculus/360photos/"
         //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push     "R:\vr\tape360columns\0000.png" "/sdcard/oculus/360photos/tape360columns.png"
         // 4041 KB/s (3248448 bytes in 0.785s)
 
@@ -227,7 +229,7 @@ namespace x360roomscan
 
             // fast gif?
             //cubefacesize = 128; // 6 faces, ?
-            cubefacesize = 512; // 6 faces, ?
+            //cubefacesize = 512; // 6 faces, ?
                                 //    [GroupMarkerNotSet(crbug.com / 242999)!:247F0809]
                                 //RENDER WARNING: texture bound to texture unit 0 is not renderable.It maybe non-power-of-2 and have incompatible texture filtering.
 
@@ -449,6 +451,7 @@ namespace x360roomscan
             var frameIDslider = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0, max = maxframes, valueAsNumber = 137, title = "frameIDslider" }.AttachToDocument();
             frameIDslider.onchange += delegate { frameIDslider.title = "frameIDslider " + frameIDslider.valueAsNumber; };
 
+            var vs0 = new RoomScanningEffectByRosme.Shaders.Program360FragmentShader();
 
 
             // left
@@ -468,7 +471,6 @@ namespace x360roomscan
                   //var vs0 = new ChromeShaderToyColumns.Shaders.ProgramFragmentShader();
                   //var vs0 = new x2001SpaceStationByOtavio.Shaders.ProgramFragmentShader();
                   //var vs0 = new Xor3DAlienLandByXor.Shaders.ProgramFragmentShader();
-                  var vs0 = new RoomScanningEffectByRosme.Shaders.ProgramFragmentShader();
                   // now we have an empty shell
                   // which tostrings to the glsl code for gpu
                   // and if we were to initialize 
@@ -593,7 +595,6 @@ namespace x360roomscan
                   // https://sites.google.com/a/jsc-solutions.net/work/x3
                   //var vs0 = new ChromeShaderToyColumns.Shaders.ProgramFragmentShader();
                   //var vs0 = new x2001SpaceStationByOtavio.Shaders.ProgramFragmentShader();
-                  var vs0 = new RoomScanningEffectByRosme.Shaders.ProgramFragmentShader();
 
                   var gl0 = new WebGLRenderingContext(alpha: true);
                   shader1canvas = gl0.canvas;
@@ -686,7 +687,6 @@ namespace x360roomscan
                   //var vs0 = new ChromeShaderToyColumns.Shaders.ProgramFragmentShader();
                   //var vs0 = new x2001SpaceStationByOtavio.Shaders.ProgramFragmentShader();
                   //var vs0 = new Xor3DAlienLandByXor.Shaders.ProgramFragmentShader();
-                  var vs0 = new RoomScanningEffectByRosme.Shaders.ProgramFragmentShader();
                   // now we have an empty shell
                   // which tostrings to the glsl code for gpu
                   // and if we were to initialize 

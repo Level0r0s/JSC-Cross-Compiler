@@ -33,6 +33,7 @@ namespace ChromeShaderToyPrograms.x
             ["Xor3DAlienLandByXor"] = () => new Xor3DAlienLandByXor.Shaders.ProgramFragmentShader(),
             ["XorMountainsByXor"] = () => new XorMountainsByXor.Shaders.ProgramFragmentShader(),
             ["XorStormByXor"] = () => new XorStormByXor.Shaders.ProgramFragmentShader(),
+            ["XyptonjtrozByNimitz"] = () => new XyptonjtrozByNimitz.Shaders.ProgramFragmentShader(),
             #endregion
 
 

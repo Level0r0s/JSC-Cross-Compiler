@@ -17,60 +17,72 @@ namespace ScriptCoreLib
 
         public static ScriptAttribute OfProvider(ICustomAttributeProvider m)
         {
-
-            if (m is Type)
+            try
             {
-                var t = m as Type;
-
-            
-                if (t.IsArray)
-                    t = t.GetElementType();
-
-                if (t.IsGenericParameter)
-                    return null;
-
-                if (t.IsGenericType && !t.IsGenericTypeDefinition)
-                    t = t.GetGenericTypeDefinition();
 
 
-
-                if (!CachedOfProvider.ContainsKey(t))
+                if (m is Type)
                 {
-                    // ah must be the first time.
-                    // let's cache all types.. are we breaking anything by doing this?
+                    var t = m as Type;
 
-                    var Types = t.Assembly.GetTypes();
 
-                    Action<Type> f = null;
+                    if (t.IsArray)
+                        t = t.GetElementType();
 
-                    f = item =>
-                        {
-                            CachedOfProvider[item] = InternalOfProvider(item);
+                    if (t.IsGenericParameter)
+                        return null;
 
-                            foreach (var item2 in item.GetNestedTypes(BindingFlags.Public | BindingFlags.NonPublic))
-	                        {
-                                f(item2);
-	                        }
-                           
-                        };
+                    if (t.IsGenericType && !t.IsGenericTypeDefinition)
+                        t = t.GetGenericTypeDefinition();
 
 
 
-                    foreach (var item in Types)
+                    if (!CachedOfProvider.ContainsKey(t))
                     {
-                        f(item);
+                        // ah must be the first time.
+                        // let's cache all types.. are we breaking anything by doing this?
+
+                        var Types = t.Assembly.GetTypes();
+
+                        Action<Type> f = null;
+
+                        f = item =>
+                            {
+                                CachedOfProvider[item] = InternalOfProvider(item);
+
+                                foreach (var item2 in item.GetNestedTypes(BindingFlags.Public | BindingFlags.NonPublic))
+                                {
+                                    f(item2);
+                                }
+
+                            };
+
+
+
+                        foreach (var item in Types)
+                        {
+                            f(item);
+                        }
+
+
                     }
 
-                    
+                    if (CachedOfProvider.ContainsKey(t))
+                    {
+                        return CachedOfProvider[t];
+                    }
                 }
 
-                if (CachedOfProvider.ContainsKey(t))
-                {
-                    return CachedOfProvider[t];
-                }
+                return InternalOfProvider(m);
+
             }
-
-            return InternalOfProvider(m);
+            catch (Exception err)
+            {
+                // n/a
+                // https://sites.google.com/a/jsc-solutions.net/work/20150911
+                // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201409/20140902
+                return null;
+            }
         }
 
         static ScriptAttribute InternalOfProvider(ICustomAttributeProvider m)
@@ -142,8 +154,8 @@ namespace ScriptCoreLib
                             where ScriptLibraries != null
                             from l in ScriptLibraries
 
-                            // A library which takes matters in its own hand
-                            // should keep doing that...
+                                // A library which takes matters in its own hand
+                                // should keep doing that...
 
                             where l.Assembly.GetCustomAttributes(typeof(ScriptAttribute), false).Length == 0
                             where l.Assembly == t.Assembly

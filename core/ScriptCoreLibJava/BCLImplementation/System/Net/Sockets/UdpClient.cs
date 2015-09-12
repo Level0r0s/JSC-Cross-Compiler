@@ -21,6 +21,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
     [Script(Implements = typeof(global::System.Net.Sockets.UdpClient))]
     internal class __UdpClient
     {
+        // http://www.nax.cz/2014/10/03/send-udp-packet/
+        // echo -n "hello" >/dev/udp/localhost/8000
+
         public const int MaxData = 1048576;
 
         // http://www.acc.umu.se/~bosse/High%20performance%20kernel%20mode%20web%20server%20for%20Windows.pdf

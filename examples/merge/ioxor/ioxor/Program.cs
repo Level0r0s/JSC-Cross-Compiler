@@ -85,7 +85,8 @@ namespace ioxor
                          // cutoff by date?
                          orderby fff.Length descending
 
-                         select fff, 8
+                         //select fff, 8
+                         select fff, 16
                      ).ToArray();
 
             foreach (var i in seed3)

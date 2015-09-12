@@ -226,6 +226,10 @@
       <Project>{1b1c77ab-2008-444b-9185-39a11bb9b80f}</Project>
       <Name>XorStormByXor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\x\XyptonjtrozByNimitz\XyptonjtrozByNimitz.csproj">
+      <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
+      <Name>XyptonjtrozByNimitz</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

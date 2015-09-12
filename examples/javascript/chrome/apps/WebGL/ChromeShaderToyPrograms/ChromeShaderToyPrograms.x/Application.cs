@@ -467,6 +467,7 @@ namespace ChromeShaderToyPrograms.x
 
                         }
 
+                        // redux build?
                         // what does it do?
                         gl.flush();
 
