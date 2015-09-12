@@ -11,6 +11,12 @@ namespace System.Threading.Tasks
     // name clash!
     public static class ScriptCoreLib_TaskExtensions
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150911/mysql
+        // Z:\jsc.svn\examples\javascript\appengine\XSLXAssetWithXElement\XSLXAssetWithXElement\ApplicationWebService.cs
+
+
+
+
         //[Obsolete]
         //public static void await<T>(this Task<T> x, Action<T> y)
         public static void ContinueWithResult<T>(this Task<T> x, Action<T> y)

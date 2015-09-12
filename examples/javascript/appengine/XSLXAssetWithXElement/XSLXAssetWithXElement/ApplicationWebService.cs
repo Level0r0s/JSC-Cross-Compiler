@@ -21,6 +21,7 @@ namespace XSLXAssetWithXElement
     /// </summary>
     public class ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150911/mysql
 
 
         //Implementation not found for type import :
@@ -52,6 +53,7 @@ namespace XSLXAssetWithXElement
                     var cc = new SQLiteConnection(
                         new SQLiteConnectionStringBuilder
                         {
+                            // "Z:\jsc.svn\examples\javascript\appengine\XSLXAssetWithXElement\XSLXAssetWithXElement\bin\Debug\staging\XSLXAssetWithXElement.ApplicationWebService\staging.net.debug\Book1.xlsx.sqlite"
                             DataSource = "file:Book1.xlsx.sqlite"
                         }.ToString()
                     );
@@ -132,7 +134,7 @@ namespace XSLXAssetWithXElement
 #endif
         }
 
-        public void WebMethod2()
+        public void WebMethod2(Action<int> yield)
         {
             //  <h2> <i>Could not load file or assembly 'ScriptCoreLib.Extensions
 
@@ -148,7 +150,7 @@ namespace XSLXAssetWithXElement
             var newKey = x.Insert(data);
 
             var data2 = new Data.Book1Sheet1Row { Zoo = 77, Element = new XElement("foo"), Sheet2 = Data.Sheet2.EUR, Flag = false, Sheet14 = Data.Sheet2.ZEN };
-            // implemented for appengine yet?
+            // implemented for appengine yet? almost.
             var newKey2 = x.InsertAsync(data2);
             // newKey2 = Id = 0x00000001, Status = WaitingForActivation, Method = "{null}", Result = "{Not yet computed}"
 
@@ -174,8 +176,19 @@ namespace XSLXAssetWithXElement
 
             Console.WriteLine(new { y.Length });
 
-
+            yield(y.Length);
         }
 
     }
 }
+
+//Implementation not found for type import :
+//type: TaskFactory`1
+//method: System.Threading.Tasks.Task`1[TResult] StartNew(System.Func`2[System.Object,TResult], System.Object, System.Threading.CancellationToken, System.Threading.Tasks.TaskCreationOptions, System.Threading.Tasks.TaskScheduler)
+//Did you forget to add the [Script] attribute?
+//Please double check the signature!
+
+//assembly: V:\XSLXAssetWithXElement.ApplicationWebService.exe
+//type: System.Threading.Tasks.ScriptCoreLib_TaskExtensions, XSLXAssetWithXElement.ApplicationWebService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+//offset: 0x0042
+// method:System.Threading.Tasks.Task`1[TResult] StartNew[TSource,TResult](System.Threading.Tasks.TaskFactory, TSource, System.Func`2[TSource,TResult], System.Threading.CancellationToken, System.Threading.Tasks.TaskCreationOptions, System.Threading.Tasks.TaskScheduler)

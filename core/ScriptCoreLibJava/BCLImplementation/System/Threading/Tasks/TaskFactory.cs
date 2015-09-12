@@ -3,14 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
 {
     // http://referencesource.microsoft.com/#mscorlib/system/threading/Tasks/TaskFactory.cs
     // https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Threading.Tasks/TaskFactory.cs
-    // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Threading\Tasks\TaskFactory.cs
-    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\TaskFactory.cs
+
+    // z:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Threading\Tasks\TaskFactory.cs
+    // z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\TaskFactory.cs
 
     [Script(Implements = typeof(global::System.Threading.Tasks.TaskFactory))]
     internal class __TaskFactory
@@ -34,10 +36,50 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
             return t;
         }
 
-        //Implementation not found for type import :
-        //type: System.Threading.Tasks.TaskFactory
-        //method: System.Threading.Tasks.Task`1[TResult] StartNew[TResult](System.Func`2[System.Object,TResult], System.Object)
-        //Did you forget to add the [Script] attribute?
-        //Please double check the signature!
+
+
+        public Task<TResult> StartNew<TResult>(Func<object, TResult> function, object state)
+        {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150911/mysql
+
+            // tested by?
+
+            return null;
+        }
     }
+
+    [Script(Implements = typeof(global::System.Threading.Tasks.TaskFactory<>))]
+    internal class __TaskFactory<TResult>
+    {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150911/mysql
+
+        public Task<TResult> StartNew(
+      Func<TResult> function
+      )
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Task<TResult> StartNew(
+            Func<object, TResult> function,
+            object state
+            )
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Task<TResult> StartNew(
+            Func<object, TResult> function,
+            object state,
+            CancellationToken c,
+            TaskCreationOptions o,
+            TaskScheduler s)
+        {
+            throw new NotImplementedException();
+
+        }
+    }
+
 }

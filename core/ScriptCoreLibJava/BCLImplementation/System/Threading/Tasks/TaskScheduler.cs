@@ -1,10 +1,12 @@
-﻿using System;
+﻿using ScriptCoreLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
+namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
 {
     // http://referencesource.microsoft.com/#mscorlib/system/threading/Tasks/TaskScheduler.cs
     // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Threading/Tasks/TaskScheduler.cs
@@ -37,4 +39,5 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
             return (TaskScheduler)(object)e;
         }
     }
+
 }

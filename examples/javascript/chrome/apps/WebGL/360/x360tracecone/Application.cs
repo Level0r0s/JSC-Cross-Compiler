@@ -39,6 +39,11 @@ namespace x360tracecone
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150912/x360tracecone
+
+
+
+
         //  ls sdcard/oculus/360photos/
         // "X:\vr\0000.png"
         // R:\util\android-sdk-windows\platform-tools\adb.exe push "X:\vr\0000.png" /sdcard/oculus/360photos/
@@ -47,6 +52,10 @@ namespace x360tracecone
         // "X:\vr\tr.png"
         // R:\util\android-sdk-windows\platform-tools\adb.exe push "X:\vr\tr.png" /sdcard/oculus/360photos/
 
+
+        // R:\util\android-sdk-windows\platform-tools\adb.exe push  "X:\vr\code.png" /sdcard/oculus/360photos/
+        // R:\util\android-sdk-windows\platform-tools\adb.exe push  "X:\vr\cone2.png" /sdcard/oculus/360photos/
+        // "X:\vr\code.png"
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150906/roomscanningeffectbyrosme
 
@@ -238,8 +247,9 @@ namespace x360tracecone
                                                 //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
                                                 //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
-            //if (Environment.ProcessorCount < 8)
-            //cubefacesize = 64; // 6 faces, ?
+            // force laptop into preview. when can we have a button for it?
+            if (Environment.ProcessorCount < 8)
+                cubefacesize = 64; // 6 faces, ?
 
             // fast gif?
             //cubefacesize = 128; // 6 faces, ?
@@ -473,7 +483,8 @@ namespace x360tracecone
 
 
             var maxfps = 60;
-            var maxlengthseconds = 60;
+            //var maxlengthseconds = 60;
+            var maxlengthseconds = 120;
 
             var maxframes = maxlengthseconds * maxfps;
 
@@ -485,7 +496,8 @@ namespace x360tracecone
 
 
             //var vs0 = new ChromeShaderToyRelentlessBySrtuss.Shaders.ProgramFragmentShader();
-            var vs0 = new TraceConeWithCRTByKlk.Shaders.ProgramFragmentShader();
+            //var vs0 = new TraceConeWithCRTByKlk.Shaders.ProgramFragmentShader();
+            var vs0 = new TraceConeWithCRTByKlk.Shaders.Program360FragmentShader();
 
 
 
@@ -1099,7 +1111,7 @@ namespace x360tracecone
 
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.01f, -1, 0.01f);
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.001f, -1, 0f);
-                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0, -1, -0.001f);
+                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0, -1, -0.0001f);
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, .0001f, -1, 0);
 
                   };
@@ -1256,7 +1268,7 @@ namespace x360tracecone
 
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.01f, -1, 0.01f);
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.001f, 1, 0f);
-                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0, 1, 0.001f);
+                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0, 1, -0.0001f);
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, .0001f, -1, 0);
 
                   };

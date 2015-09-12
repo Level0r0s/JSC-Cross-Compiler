@@ -18,6 +18,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
     [Script(ImplementsViaAssemblyQualifiedName = "System.Data.MySQL.MySQLCommand")]
     internal class __MySQLCommand : __DbCommand
     {
+        // tested by?
+
+
         // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Data\SQLite\SQLiteCommand.cs
 
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2012/20121001-solutionbuilderv1/20121014-gae-data

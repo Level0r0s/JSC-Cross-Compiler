@@ -17,7 +17,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
         // Void .ctor(System.Data.Common.DbCommand)\n Did you forget to add the [Script] attribute? \n Please double check the signature! \n \n assembly: W:\\XSLXA...
 
         // tested by
-        // X:\jsc.svn\examples\javascript\appengine\XSLXAssetWithXElement\XSLXAssetWithXElement\ApplicationWebService.cs
+        // Z:\jsc.svn\examples\javascript\appengine\XSLXAssetWithXElement
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150911/mysql
 
         public __MySQLDataAdapter(DbCommand __SelectCommand)
         {

@@ -234,48 +234,19 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 	vec2 p = fragCoord.xy/iResolution.xy-0.5;
     vec2 bp = p+0.5;
 	p.x*=iResolution.x/iResolution.y;
-    
-    
-    
 	vec2 um = vec2(0);
-    um.x = 0.;
-    um.y = 0.;
+    um.x = 0.5+(smoothstep(-2.,2.,sin(time*.7-0.1))-0.5)*.1;
+    um.y = sin(time+1.)*0.02;
 	
     //camera
-    vec3 ro = vec3(
-        0., 
-        
-        // not used?
-        0., 
-        
-        // beginning of race
-        iGlobalTime * 100.0
-    );
-    
-    //um.x *= 3.;
-    
-    // look front
-    vec3 eye = normalize(vec3(0.,0.,1.));
-    vec3 right = normalize(vec3(-1.,0.,0.0));
-
-    // look left?
-    //vec3 eye = normalize(vec3(1.,0.,0.));
-    //vec3 right = normalize(vec3(0.,0.,1.0));
-
-    
-    
-    // mat2 mm2(in float a){float c = cos(a), s = sin(a);return mat2(c,-s,s,c);}
-    
-    //mat2 ori = mm2(iMouse[0] );
-    //right.xy *= ori;
+    vec3 ro = vec3((smoothstep(-2., 2., sin(time*0.7+1.57))-0.5)*50., sin(time)*5.-1., time*50.);
+    um.x *= 3.;
+    vec3 eye = normalize(vec3(cos(um.x),um.y*5.,sin(um.x)));
+    vec3 right = normalize(vec3(cos(um.x+1.5708),0.,sin(um.x+1.5708)));
+    mat2 ori = mm2( smoothstep(-.5,.5,sin(time*0.7+0.78))-.5 + smoothfloor(time*0.04,.45)*6.28 );
+    right.xy *= ori;
     vec3 up = normalize(cross(right,eye));
-	
-    // 180?
-    float FOV = 3.14 /2.;
-    
-    vec3 rd=normalize(
-        (p.x*right+p.y*up)*FOV + eye
-    );
+	vec3 rd=normalize((p.x*right+p.y*up)*.75+eye);
 	
     vec3 bg = sin(vec3(0.35,0.4,0.48)*11.3*PALETTE)*0.5+.5;
     vec3 col = bg*floor(-rd.y*50.+6.)*0.06;
@@ -300,7 +271,39 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         col = col*dif + col*0.4 + .3*fre*col;
     }
     
-  
+    //lasers
+    vec3 enp =enpos();
+    enp.z += time*50.;
+    vec3 rn = enp - ro;
+    float tgt = dot(eye, normalize(rn));
+    if (tgt > .997)
+    {
+        vec3 ray1 = vec3(0.7, 1., -1);
+        vec3 ray2 = vec3(-0.7, 1., -1);
+        ray1.xy *= ori; ray2.xy *= ori;
+        float lz = segm(ro,rd,ro-ray1,up*0.5+ro+(eye-ray1*0.01)*30.);
+        lz += segm(ro,rd,ro-ray2,up*.5+ro+(eye-ray2*0.01)*30.);
+        float sw = mod(floor(time*20.),2.);
+        lz *= sw;
+        col = col*(1.-smoothstep(0.0,1.,lz))+lz*vec3(1.,0.,0.);
+        //hit (cant really have explosions since I don't have a function for hit times)
+        if (tgt > .999)
+        {
+            vec2 d = hash2(time);
+            rd.xy += d*0.03;
+            rn.xy += d*10.;
+            float s = sw*smoothstep(0.9998, .9999,dot(rd,normalize(rn)));
+            col = col*(1.-smoothstep(0., 1., s))+s*vec3(1.-d.x, .0, 0.1);
+        }
+    }
+    
+    //hud
+    float lk = 0.;
+    if (tgt > .99)lk = 4.;
+    vec3 hud = makeHud(p,tgt);
+    col = col*(1.-smoothstep(0., 1., hud.y+hud.x+hud.z))+hud;   
+    //scanlines
+    col *= (sin(p.y*1.3*iResolution.x)*0.15)*(sin(p.y*10.+time*410.)*0.4)+1.;
     
 	fragColor = vec4( col, 1.0 );
 }

@@ -11,6 +11,11 @@ namespace ScriptCoreLib.Extensions
     // X:\jsc.svn\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\Extensions\LinqExtensions.cs
     public static class LinqExtensions
     {
+        // nonroslyn
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150911/appengine
+        // Z:\jsc.svn\examples\java\appengine\Test\TestThreadManager\TestThreadManager\ApplicationWebService.cs
+
         // tested by?
 
         // java does not support much of generics just yet

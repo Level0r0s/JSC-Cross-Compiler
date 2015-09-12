@@ -21,6 +21,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
     [Script(Implements = typeof(global::System.Threading.Tasks.TaskFactory))]
     public partial class __TaskFactory
     {
+
         public static implicit operator TaskFactory(__TaskFactory e)
         {
             return (TaskFactory)(object)e;
@@ -66,6 +67,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
     [Script(Implements = typeof(global::System.Threading.Tasks.TaskFactory<>))]
     internal class __TaskFactory<TResult>
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150911/mysql
 
 
         public Task<TResult> StartNew(

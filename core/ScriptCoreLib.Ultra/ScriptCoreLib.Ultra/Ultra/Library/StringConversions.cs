@@ -295,6 +295,9 @@ namespace ScriptCoreLib.Library
 
     public static partial class StringConversions
     {
+        // nonroslyn
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150911/appengine
+        // Z:\jsc.svn\examples\java\appengine\Test\TestThreadManager\TestThreadManager\ApplicationWebService.cs
 
 
         #region string[]

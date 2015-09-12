@@ -135,7 +135,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
 
 
 
- 
+
     }
 
     [Script(Implements = typeof(global::System.Threading.Tasks.Task<>))]
@@ -199,9 +199,25 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
         #endregion
 
 
-       
 
+        // script: error JSC1000: Java : class import: no implementation for System.Threading.Tasks.TaskFactory`1 at ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks.__Task`1
+        public static TaskFactory<TResult> Factory
+        {
+            get
+            {
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150911/mysql
+                // tested by?
 
+                return null;
+            }
+        }
 
     }
+
+
+    //Implementation not found for type import :
+    //type: Task`1
+    //method: System.Threading.Tasks.TaskFactory`1[TResult] get_Factory()
+    //Did you forget to add the [Script] attribute?
+    //Please double check the signature!
 }

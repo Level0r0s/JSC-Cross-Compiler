@@ -44,6 +44,8 @@
 #define float4 vec4
 #define float3x3 mat3
 
+uniform vec3 uCameraTargetOffset;  
+
 float3 campos=float3(-10.0,2.0,0.0);
 float3 look_at=float3(0.0,1.0,0.0);
 float3 up=float3(0,1,0);
@@ -53,6 +55,15 @@ float3 right;
 float3 light=float3(0,10,10);
 
 const float MAX_RAY_LENGTH=10000.0;
+
+float3 pixelRay(float2 uv)
+{
+	//uv*=0.75;
+	// FOV
+	//uv*=3.14/2.0;
+	uv*=1.0;
+    return normalize(forward+up*uv.y+right*uv.x);
+}
 
 void RP(float3 tp0, float3 dp1, float3 dp2, float3 rp0, float3 rd, out float t, out float3 uv, out float3 n)
 {
@@ -712,9 +723,7 @@ void shade(float3 rp0, float3 rd, out float t, out float3 col, out float3 n)
 
     float3 fogcol=mix(float3(0.87,0.8,0.83),float3(0.3,0.6,1.0),1.0-(1.0-rd.y)*(1.0-rd.y));
     float sun=clamp(dot(normalize(light-rp0),rd),0.0,1.0);
-    fogcol+=
-        pow(sun,1200.0)*float3(1.0,0.7,0.3)*0.5
-        +pow(sun,5.0)*float3(1.0,0.7,0.5)*0.15;
+    fogcol+=pow(sun,900.0)*float3(1.0,0.7,0.3)*1.7+pow(sun,5.0)*float3(1.0,0.7,0.5)*0.35;
     col=mix(fogcol,col,clamp(1.8/(exp(t*0.025)),0.0,1.0));
     
     
@@ -844,12 +853,12 @@ float3 c64col(int c)
 float3 cgacol(int c)    
 {
     float3 col;
-/*
+
     col = float3(  0.0,   0.0,   0.0);
     if      (c ==  1)col = float3(  1.0,   1.0,   1.0);
     return col;
 
-  col = float3(  0.0,   0.0,   0.5);
+/*  col = float3(  0.0,   0.0,   0.5);
     if      (c ==  1)col = float3(  0.0,   0.5,   0.25);
     else if (c ==  2)col = float3(  1.0,  0.65,  0.0);
     else if (c ==  3)col = float3(  1.0,   0.85,   0.85);
@@ -920,23 +929,16 @@ float3 palette(int c)
 
 float3 nearestcol(float3 col)
 {
-    const float3 W=float3(0.299,0.587,0.114);
-//    const float3 W=float3(0.21,0.72,0.07);
     float3 res;
     float rv=100.0;
-    float luma0=dot(col,W);
     for(int i=0;i<16;i++)
     {
         float3 icol=palette(i);
         float3 dist=col-icol;
-//        dist*=dist;
+        dist*=dist;
 		if(keyToggled(KEY_I))
-        	dist*=W;
-        
+        	dist*=float3(0.21,0.72,0.07);
         float d=dot(dist,dist);
-        float luma=luma0-dot(icol,W);
-		if(keyToggled(KEY_O))
-	        d=d*0.75+luma*luma*0.25;
         if(d<rv)
         {
             res=icol;
@@ -945,29 +947,6 @@ float3 nearestcol(float3 col)
     }
     return res;
 }
-
-
-float3 pixelRay(float2 uv)
-{
-    if(!keyToggled(KEY_R))
-    {
-		uv*=0.75;
-	  	return normalize(forward+up*uv.y+right*uv.x);
-    }
-    else
-    {
-		uv*=0.65;
-        if(dot(uv,uv)>1.0)
-            return float3(0.0);
-        
-        float z=sqrt(1.0-uv.x*uv.x-uv.y*uv.y)*1.95-0.95;
-        float3 uvz=float3(uv,z);
-        uvz=normalize(uvz);
-        return normalize(forward*uvz.z+up*uvz.y+right*uvz.x);
-    }
-}
-
-
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
@@ -984,14 +963,64 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     
     float a1=-(mposy/iResolution.y)*PI/2.1+0.1;
     float a2=mposx/iResolution.x*PI*2.0-0.3;
-    campos.y=sin(a1)*campos.x;
-    float camx=cos(a1)*6.0;
-    campos.x=cos(a2)*camx;
-    campos.z=sin(a2)*camx;
-    campos+=look_at;
+
+
+
+	// 90sec loop ?
+
+	// youtube 360 stereo?
+
+	// campos=float3(-5.0,1.0,0.0);
+	campos=float3(
+	//-10.0,
+
+	// how do we do a full animation cycle in 30sec 60fps in 3600frames?
+	-1.0 + cos(0.1 * iGlobalTime ) * 3.0,
+
+	// animate altitude two times faster, yet lesser max amplitude
+	5.0 + cos(0.1 * iGlobalTime * 0.5) * 0.1,
+
+	0.0 + sin(0.1 * iGlobalTime) * 3.0);
+	
+
+	// float camx=cos(a1)*6.0;
+
+	//look_at=float3( 0.0 , 1.0 ,0.0);
+
+    //campos.y=sin(a1)*campos.x;
+    //float camx=cos(a1)*6.0;
+    //campos.x=cos(a2)*camx;
+    //campos.z=sin(a2)*camx;
+    //campos+=look_at;
     
-    forward=normalize(look_at-campos);
-    right=normalize(cross(up,forward));
+    //forward=normalize(look_at-campos);
+    //forward=normalize(float3(5.0 , 0.0 ,0.0));
+    //forward=float3(1.0 , 0.0 ,0.0);
+    forward=float3(uCameraTargetOffset.x , uCameraTargetOffset.y ,uCameraTargetOffset.z);
+	
+	// up?
+	//forward=normalize(float3(0.1 , 1.0 ,0.0));
+	
+	// down?
+	// forward=normalize(float3(0.1 , -1.0 ,0.0));
+	//forward=float3(0.1 , -1.0 ,0.0);
+
+
+	// front
+    //forward=normalize(float3(1.0 , 0.0 ,0.0));
+    
+	// back
+	//forward=normalize(float3(-1.0 , 0.0 ,0.0));
+	
+	// left?
+    //forward=normalize(float3(0.0 , 0.0 ,1.0));
+    
+	// right
+    //forward=normalize(float3(0.0 , 0.0 ,-1.0));
+
+
+
+	right=normalize(cross(up,forward));
     up=normalize(cross(forward,right));
     
 	float2 scr = fragCoord.xy /iResolution.xy;
@@ -1001,15 +1030,14 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     
     float2 dscr;
     dscr=floor(scr*iResolution.xy/6.0)*6.0;
-    if(keyToggled(KEY_F))
+    if(!keyToggled(KEY_F))
         dscr=scr*iResolution.xy;
 
     scr=dscr/iResolution.xy;
     float2 scruv=scr;
     
     float2 scr2ray=scruv;
-    float ratio=(iResolution.x/iResolution.y);
-    scr2ray.x*=ratio;
+    scr2ray.x*=(iResolution.x/iResolution.y);
 
     float3 ray=pixelRay(scr2ray);
 
@@ -1043,50 +1071,12 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         }
     }
   	col=col/w;
+    
+    fragColor = float4(col,1.0);return;
 
-    
-    float3 suncol=float3(0.0,0.0,0.0);
-    float sunvis=0.0;
-    for(int i=-4;i<5;i++)
-    {
-        float t;
-        float3 col1;
-        float3 n; 
-    	trace(campos,normalize(light-campos+0.05*right*(float(i))),t,col1,n);
-        if(t==MAX_RAY_LENGTH)
-        {
-			float sun=clamp(dot(normalize(light-campos),pixelRay(scr2ray)),0.0,1.0);
-			suncol+=pow(sun,25.0)*float3(1.0,0.7,0.5)*0.1;
-            sunvis+=1.0;
-        }
-            
-    }
-    for(int i=-3;i<3;i++)
-    {
-        float t;
-        float3 col1;
-        float3 n;
-        float3 tolight=normalize(light-campos);
-        float3 tolight0=tolight;
-        
-        tolight=normalize(forward+(-up*dot(up,tolight)-right*dot(right,tolight)*ratio)*(1.0+float(i)*0.15));
-//        tolight=normalize(forward-(tolight-forward));
-    	trace(campos,tolight0,t,col1,n);
-        if(t==MAX_RAY_LENGTH)
-        {
-			float sun=clamp(dot(tolight,pixelRay(scr2ray)),0.0,1.0);
-			suncol+=clamp(pow(sun,350.0-float(i)*30.0),0.0,0.25)*float3(1.0,0.7,0.5);
-        }
-            
-    }
-	col=col*(1.0-sunvis/25.0)+suncol;
-    
-  
-    col=col-0.25*dot(scruv.xy*abs(scruv.xy),scruv.xy);
+	// what does this do?
+	col=col-0.25*dot(scruv.xy*abs(scruv.xy),scruv.xy);
 
-    
-    
-    
 //    fragColor = float4(col,1.0);return;
 	if(keyToggled(KEY_Z))
     {
@@ -1140,6 +1130,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     	);
     }
     fragColor = float4(col,1.0);
+
+	// this gives us a box crt effect
     if(keyToggled(KEY_B))
 	    fragColor = clamp(fragColor,0.0,1.0)*crt(fragCoord.xy);
 }

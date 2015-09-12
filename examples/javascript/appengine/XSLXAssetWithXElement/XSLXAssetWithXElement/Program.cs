@@ -11,7 +11,7 @@ namespace XSLXAssetWithXElement
         public static void Main(string[] args)
         {
             var x = new ApplicationWebService();
-            x.WebMethod2();
+            x.WebMethod2(delegate { });
 
             RewriteToUltraApplication.AsProgram.Launch(typeof(Application));
         }

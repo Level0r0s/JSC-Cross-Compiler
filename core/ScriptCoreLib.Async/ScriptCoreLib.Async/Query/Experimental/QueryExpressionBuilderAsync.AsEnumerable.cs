@@ -15,6 +15,11 @@ namespace ScriptCoreLib.Query.Experimental
 {
     public static partial class QueryExpressionBuilderAsync
     {
+        // will this work for jvm yet?
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150911/mysql
+
+
+
 
 
         public static Task<IEnumerable<TElement>> AsEnumerableAsync<TElement>(this IQueryStrategy<TElement> source)
