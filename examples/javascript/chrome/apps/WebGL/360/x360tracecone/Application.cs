@@ -218,6 +218,11 @@ namespace x360tracecone
 
 
 #endif
+
+
+            var vs0 = new TraceConeWithCRTByKlk.Shaders.Program360FragmentShader();
+
+
             // onframe need syncs to enable GC!
             var vsync = default(TaskCompletionSource<object>);
             Func<bool> vsyncReady = delegate
@@ -497,7 +502,6 @@ namespace x360tracecone
 
             //var vs0 = new ChromeShaderToyRelentlessBySrtuss.Shaders.ProgramFragmentShader();
             //var vs0 = new TraceConeWithCRTByKlk.Shaders.ProgramFragmentShader();
-            var vs0 = new TraceConeWithCRTByKlk.Shaders.Program360FragmentShader();
 
 
 

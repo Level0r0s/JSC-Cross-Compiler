@@ -13,6 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByPackage", "ByPackage", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyColumns", "..\..\ChromeShaderToyColumns\ChromeShaderToyColumns\ChromeShaderToyColumns.csproj", "{7A012980-513C-4B88-AB7F-BA67F52A10D6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{BD60873E-7ACB-46AF-A549-F44B6381CA6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360tracecone", "..\x360tracecone\x360tracecone.csproj", "{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360relentless", "..\x360relentless\x360relentless.csproj", "{E5F16937-C8CA-4023-8A69-8682D52F6487}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -31,6 +37,14 @@ Global
 		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Debug|x86.Build.0 = Debug|x86
 		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Release|x86.ActiveCfg = Release|x86
 		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Release|x86.Build.0 = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.ActiveCfg = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.Build.0 = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.ActiveCfg = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.Build.0 = Release|x86
+		{E5F16937-C8CA-4023-8A69-8682D52F6487}.Debug|x86.ActiveCfg = Debug|x86
+		{E5F16937-C8CA-4023-8A69-8682D52F6487}.Debug|x86.Build.0 = Debug|x86
+		{E5F16937-C8CA-4023-8A69-8682D52F6487}.Release|x86.ActiveCfg = Release|x86
+		{E5F16937-C8CA-4023-8A69-8682D52F6487}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,5 +52,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{30A5A451-E119-45CA-BE2E-6A4221854AB9} = {9EFEB058-29C1-4A4E-A69D-44673D53AF8B}
 		{7A012980-513C-4B88-AB7F-BA67F52A10D6} = {8E8D0DBE-DAA2-4501-90F2-9A223495F5ED}
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD} = {BD60873E-7ACB-46AF-A549-F44B6381CA6E}
+		{E5F16937-C8CA-4023-8A69-8682D52F6487} = {BD60873E-7ACB-46AF-A549-F44B6381CA6E}
 	EndGlobalSection
 EndGlobal
