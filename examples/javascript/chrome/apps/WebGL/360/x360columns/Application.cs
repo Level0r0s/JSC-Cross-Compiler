@@ -39,6 +39,8 @@ namespace x360columns
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150912/x83
+
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150816/iss
 
         // http://youtu.be/Lo1IU8UAutE
@@ -202,11 +204,11 @@ namespace x360columns
             //int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
             int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
             int cubefacesize = cubefacesizeMAX; // 6 faces, ?
-                                                    //int cubefacesize = 1024; // 6 faces, ?
-                                                    // "X:\vr\tape1\0000x2048.png"
-                                                    // for 60hz render we may want to use float camera percision, not available for ui.
-                                                    //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
-                                                    //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
+                                                //int cubefacesize = 1024; // 6 faces, ?
+                                                // "X:\vr\tape1\0000x2048.png"
+                                                // for 60hz render we may want to use float camera percision, not available for ui.
+                                                //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
+                                                //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
             if (Environment.ProcessorCount < 8)
                 //cubefacesize = 64; // 6 faces, ?
@@ -271,7 +273,7 @@ namespace x360columns
 
             // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360columns/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
 
-          
+
             var far = 0xffffff;
 
             new IHTMLPre { new { Environment.ProcessorCount, cubefacesize } }.AttachToDocument();
