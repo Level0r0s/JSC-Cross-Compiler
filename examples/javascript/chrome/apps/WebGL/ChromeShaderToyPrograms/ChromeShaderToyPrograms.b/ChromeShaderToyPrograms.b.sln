@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyBenderByIq",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyBokehBlurByKabuto", "..\..\synergy\b\ChromeShaderToyBokehBlurByKabuto\ChromeShaderToyBokehBlurByKabuto\ChromeShaderToyBokehBlurByKabuto.csproj", "{B4A8FFEA-433E-4629-9F28-379C3BC9AFEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeenoxGoesBlackOps3ByFungos", "..\..\synergy\b\BeenoxGoesBlackOps3ByFungos\BeenoxGoesBlackOps3ByFungos.csproj", "{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -101,6 +103,10 @@ Global
 		{B4A8FFEA-433E-4629-9F28-379C3BC9AFEF}.Debug|x86.Build.0 = Debug|x86
 		{B4A8FFEA-433E-4629-9F28-379C3BC9AFEF}.Release|x86.ActiveCfg = Release|x86
 		{B4A8FFEA-433E-4629-9F28-379C3BC9AFEF}.Release|x86.Build.0 = Release|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Debug|x86.ActiveCfg = Debug|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Debug|x86.Build.0 = Debug|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.ActiveCfg = Release|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -120,5 +126,6 @@ Global
 		{3CF6B23A-1EDF-4D2D-8446-AD5D58FE8D6F} = {0225343B-16B2-4188-9690-703A2A422EA8}
 		{2174EEA7-9777-4F20-B648-FD3458371D2C} = {0225343B-16B2-4188-9690-703A2A422EA8}
 		{B4A8FFEA-433E-4629-9F28-379C3BC9AFEF} = {0225343B-16B2-4188-9690-703A2A422EA8}
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2} = {0225343B-16B2-4188-9690-703A2A422EA8}
 	EndGlobalSection
 EndGlobal

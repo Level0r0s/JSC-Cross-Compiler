@@ -46,7 +46,7 @@ namespace x360seascape
 
         // "X:\vr\tr.png"
         // R:\util\android-sdk-windows\platform-tools\adb.exe push "X:\vr\seascape.png" /sdcard/oculus/360photos/
-
+        // R:\util\android-sdk-windows\platform-tools\adb.exe push "P:\vr\x360seascape\00188.png" /sdcard/oculus/360photos/
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150906/roomscanningeffectbyrosme
 
@@ -240,7 +240,7 @@ namespace x360seascape
 
             //if (Environment.ProcessorCount < 8)
             //cubefacesize = 64; // 6 faces, ?
-            cubefacesize = 256; // 6 faces, ?
+            //cubefacesize = 256; // 6 faces, ?
 
             // fast gif?
             //cubefacesize = 128; // 6 faces, ?
@@ -474,7 +474,8 @@ namespace x360seascape
 
 
             var maxfps = 60;
-            var maxlengthseconds = 60;
+            //var maxlengthseconds = 60;
+            var maxlengthseconds = 120;
 
             var maxframes = maxlengthseconds * maxfps;
 
@@ -487,7 +488,8 @@ namespace x360seascape
 
             //var vs0 = new ChromeShaderToyRelentlessBySrtuss.Shaders.ProgramFragmentShader();
             //var vs0 = new TraceConeWithCRTByKlk.Shaders.ProgramFragmentShader();
-            var vs0 = new ChromeShaderToySeascapeByTDM.Shaders.ProgramFragmentShader();
+            //var vs0 = new ChromeShaderToySeascapeByTDM.Shaders.ProgramFragmentShader();
+            var vs0 = new ChromeShaderToySeascapeByTDM.Shaders.Program360FragmentShader();
 
 
 

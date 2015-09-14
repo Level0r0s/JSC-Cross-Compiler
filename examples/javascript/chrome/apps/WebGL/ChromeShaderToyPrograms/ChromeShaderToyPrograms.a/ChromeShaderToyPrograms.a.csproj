@@ -178,6 +178,9 @@
     <Reference Include="ChromeShaderToyAssBlockByDila.AssetsLibrary">
       <HintPath>..\..\synergy\a\ChromeShaderToyAssBlockByDila\ChromeShaderToyAssBlockByDila\bin\staging.AssetsLibrary\ChromeShaderToyAssBlockByDila.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="AbstractThings0BySquid.AssetsLibrary">
+      <HintPath>..\..\synergy\a\AbstractThings0BySquid\bin\staging.AssetsLibrary\AbstractThings0BySquid.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="a.cs" />
@@ -193,6 +196,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\synergy\a\AbstractThings0BySquid\AbstractThings0BySquid.csproj">
+      <Project>{18d81eab-6b23-45bf-9f7d-8460d9f637f2}</Project>
+      <Name>AbstractThings0BySquid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\a\ACloudByMu6k\ACloudByMu6k\ACloudByMu6k.csproj">
       <Project>{236dea6f-185b-4cd7-9b2e-e0fa7b8d8439}</Project>
       <Name>ACloudByMu6k</Name>

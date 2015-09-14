@@ -18,6 +18,7 @@ namespace ChromeShaderToyPrograms.a
 
 
             #region /a/
+            ["AbstractThings0BySquid"] = () => new AbstractThings0BySquid.Shaders.ProgramFragmentShader(),
             ["ACloudByMu6k"] = () => new ACloudByMu6k.Shaders.ProgramFragmentShader(),
             ["AkiyoshisSnakesIllusionByHoskins"] = () => new AkiyoshisSnakesIllusionByHoskins.Shaders.ProgramFragmentShader(),
             ["AlienBeaconByOtavio"] = () => new AlienBeaconByOtavio.Shaders.ProgramFragmentShader(),

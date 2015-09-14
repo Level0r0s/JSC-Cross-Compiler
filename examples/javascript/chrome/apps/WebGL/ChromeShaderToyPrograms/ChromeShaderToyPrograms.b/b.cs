@@ -21,6 +21,9 @@ namespace ChromeShaderToyPrograms.b
             ["BatsByGaz"] = () => new BatsByGaz.Shaders.ProgramFragmentShader(),
             ["BeautypiByIq"] = () => new BeautypiByIq.Shaders.ProgramFragmentShader(),
             ["BeeHiveByMovax"] = () => new BeeHiveByMovax.Shaders.ProgramFragmentShader(),
+            ["BeenoxGoesBlackOps3ByFungos"] = () => new BeenoxGoesBlackOps3ByFungos.Shaders.ProgramFragmentShader(),
+
+            
             //["BiplanesInTheBadlandsByDr2"] = () => new BiplanesInTheBadlandsByDr2.Shaders.ProgramFragmentShader(),
             ["BlankspaceByNBickford"] = () => new BlankspaceByNBickford.Shaders.ProgramFragmentShader(),
             ["BlobsByPaulo"] = () => new BlobsByPaulo.Shaders.ProgramFragmentShader(),

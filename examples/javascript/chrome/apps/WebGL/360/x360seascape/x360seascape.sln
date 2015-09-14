@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToySeascapeByTD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyRelentlessBySrtuss", "..\..\synergy\r\ChromeShaderToyRelentlessBySrtuss\ChromeShaderToyRelentlessBySrtuss\ChromeShaderToyRelentlessBySrtuss.csproj", "{91BC0D94-1E92-436D-9147-92E42E560A76}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{719B6B79-D356-40CD-8DF2-0F624447713E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{7FB9DA5B-A403-43B7-A3E3-BB2EA73C3142}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -30,5 +34,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{637D133F-4975-4BF2-9ECF-364E8E569BF9} = {7FB9DA5B-A403-43B7-A3E3-BB2EA73C3142}
+		{91BC0D94-1E92-436D-9147-92E42E560A76} = {719B6B79-D356-40CD-8DF2-0F624447713E}
 	EndGlobalSection
 EndGlobal
