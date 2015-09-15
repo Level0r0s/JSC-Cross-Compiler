@@ -26,12 +26,22 @@ namespace ChromeShaderToyPrograms.g
             ["GalaxySpiralsByGuil"] = () => new GalaxySpiralsByGuil.Shaders.ProgramFragmentShader(),
             ["GameLogoByVladstorm"] = () => new GameLogoByVladstorm.Shaders.ProgramFragmentShader(),
             ["GammaCorrectnessByZavie"] = () => new GammaCorrectnessByZavie.Shaders.ProgramFragmentShader(),
+
+
+
             ["GeneratorsByKali"] = () => new GeneratorsByKali.Shaders.ProgramFragmentShader(),
+            ["GhostInTheNoiseByTomkh"] = () => new GhostInTheNoiseByTomkh.Shaders.ProgramFragmentShader(),
+            
+
             ["GlassWithCausticByAndregc"] = () => new GlassWithCausticByAndregc.Shaders.ProgramFragmentShader(),
             ["GlxgearsByBear"] = () => new GlxgearsByBear.Shaders.ProgramFragmentShader(),
             ["GoGoLegoManByIapafoto"] = () => new GoGoLegoManByIapafoto.Shaders.ProgramFragmentShader(),
+
+            ["GotthardTunnelByDr2"] = () => new GotthardTunnelByDr2.Shaders.ProgramFragmentShader(),
             ["GrapheneByFabrice"] = () => new GrapheneByFabrice.Shaders.ProgramFragmentShader(),
             ["GraphingByNimitz"] = () => new GraphingByNimitz.Shaders.ProgramFragmentShader(),
+
+
             ["GuitarByAtyuwen"] = () => new GuitarByAtyuwen.Shaders.ProgramFragmentShader(),
             ["GyratingGyroscopeByDr2"] = () => new GyratingGyroscopeByDr2.Shaders.ProgramFragmentShader(),
             #endregion

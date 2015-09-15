@@ -66,7 +66,9 @@ namespace ChromeShaderToyPrograms.s
             ["SminTestByHughsk"] = () => new SminTestByHughsk.Shaders.ProgramFragmentShader(),
             ["SmoothedCSGByTekF"] = () => new SmoothedCSGByTekF.Shaders.ProgramFragmentShader(),
             ["SnowBallByIapafoto"] = () => new SnowBallByIapafoto.Shaders.ProgramFragmentShader(),
+
             ["SoftShadowTestByDila"] = () => new SoftShadowTestByDila.Shaders.ProgramFragmentShader(),
+            ["SoftSphereShadowsByBen"] = () => new SoftSphereShadowsByBen.Shaders.ProgramFragmentShader(),
             ["SomedayByEiffie"] = () => new SomedayByEiffie.Shaders.ProgramFragmentShader(),
             ["SomeSortOfGridByGermangb"] = () => new SomeSortOfGridByGermangb.Shaders.ProgramFragmentShader(),
             ["SoundAcidJamBySrtuss"] = () => new SoundAcidJamBySrtuss.Shaders.ProgramFragmentShader(),

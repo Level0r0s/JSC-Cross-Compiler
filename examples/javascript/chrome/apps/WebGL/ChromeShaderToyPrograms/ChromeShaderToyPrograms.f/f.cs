@@ -33,6 +33,7 @@ namespace ChromeShaderToyPrograms.f
             ["FakeVolumeLightByEiffie"] = () => new FakeVolumeLightByEiffie.Shaders.ProgramFragmentShader(),
             ["FerrisWheelByGaz"] = () => new FerrisWheelByGaz.Shaders.ProgramFragmentShader(),
             ["FirstDistanceMapByChuckeles"] = () => new FirstDistanceMapByChuckeles.Shaders.ProgramFragmentShader(),
+
             ["FlappyBirdByMovAx"] = () => new FlappyBirdByMovAx.Shaders.ProgramFragmentShader(),
             ["FlatlandByPMalin"] = () => new FlatlandByPMalin.Shaders.ProgramFragmentShader(),
             ["FloatByAlex"] = () => new FloatByAlex.Shaders.ProgramFragmentShader(),
@@ -41,6 +42,7 @@ namespace ChromeShaderToyPrograms.f
             ["FloorStarBoxMarbleByXilconic"] = () => new FloorStarBoxMarbleByXilconic.Shaders.ProgramFragmentShader(),
             ["FlossingSpaceByFlorian"] = () => new FlossingSpaceByFlorian.Shaders.ProgramFragmentShader(),
             ["FlowerByIq"] = () => new FlowerByIq.Shaders.ProgramFragmentShader(),
+            ["FluxCoreByOtaviogood"] = () => new FluxCoreByOtaviogood.Shaders.ProgramFragmentShader(),
             ["FlyByNightByMhnewman"] = () => new FlyByNightByMhnewman.Shaders.ProgramFragmentShader(),
 
             ["ForestMurshroomBySquid"] = () => new ForestMurshroomBySquid.Shaders.ProgramFragmentShader(),

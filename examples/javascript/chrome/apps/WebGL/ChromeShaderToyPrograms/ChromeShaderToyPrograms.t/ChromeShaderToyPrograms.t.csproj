@@ -211,6 +211,9 @@
     <Reference Include="TwistedLinksByFelixfaire.AssetsLibrary">
       <HintPath>..\..\synergy\t\TwistedLinksByFelixfaire\bin\staging.AssetsLibrary\TwistedLinksByFelixfaire.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="TracedMinkowskiTubeByShane.AssetsLibrary">
+      <HintPath>..\..\synergy\t\TracedMinkowskiTubeByShane\bin\staging.AssetsLibrary\TracedMinkowskiTubeByShane.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="t.cs" />
@@ -301,6 +304,10 @@
     <ProjectReference Include="..\..\synergy\t\TraceConeWithCRTByKlk\TraceConeWithCRTByKlk\TraceConeWithCRTByKlk.csproj">
       <Project>{d6df6318-caa7-433f-a173-2d838130ca96}</Project>
       <Name>TraceConeWithCRTByKlk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\t\TracedMinkowskiTubeByShane\TracedMinkowskiTubeByShane.csproj">
+      <Project>{cee83d2f-9837-4ff5-8882-89720604321c}</Project>
+      <Name>TracedMinkowskiTubeByShane</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\t\TreeInGrassBySphinx\TreeInGrassBySphinx\TreeInGrassBySphinx.csproj">
       <Project>{ebedbf43-877d-485b-969d-624d6edec105}</Project>

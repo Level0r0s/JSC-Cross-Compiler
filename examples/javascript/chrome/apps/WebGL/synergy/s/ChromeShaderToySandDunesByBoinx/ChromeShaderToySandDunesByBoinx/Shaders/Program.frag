@@ -185,5 +185,6 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     	pow(smoothstep(0.0,-0.675,dir.y),0.23));
         
     // post
-	fragColor = vec4(pow(color,vec3(0.85)), .5);
+	//fragColor = vec4(pow(color,vec3(0.85)), .5);
+	fragColor = vec4(pow(color,vec3(0.85)), 1.);
 }

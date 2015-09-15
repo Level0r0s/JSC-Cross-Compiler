@@ -217,6 +217,9 @@
     <Reference Include="FlyByNightByMhnewman.AssetsLibrary">
       <HintPath>..\..\synergy\f\FlyByNightByMhnewman\bin\staging.AssetsLibrary\FlyByNightByMhnewman.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="FluxCoreByOtaviogood.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FluxCoreByOtaviogood\bin\staging.AssetsLibrary\FluxCoreByOtaviogood.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="f.cs" />
@@ -323,6 +326,10 @@
     <ProjectReference Include="..\..\synergy\f\FlowerByIq\FlowerByIq\FlowerByIq.csproj">
       <Project>{303d680d-950e-4f28-a34e-48e39ad24c04}</Project>
       <Name>FlowerByIq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FluxCoreByOtaviogood\FluxCoreByOtaviogood.csproj">
+      <Project>{45c06b48-e294-4c72-8fc3-3d42695b535a}</Project>
+      <Name>FluxCoreByOtaviogood</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\f\FlyByNightByMhnewman\FlyByNightByMhnewman.csproj">
       <Project>{18d81eab-6b23-45bf-9f7d-8460d9f637f2}</Project>

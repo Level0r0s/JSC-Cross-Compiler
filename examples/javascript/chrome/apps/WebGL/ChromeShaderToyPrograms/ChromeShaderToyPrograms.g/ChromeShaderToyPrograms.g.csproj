@@ -169,6 +169,12 @@
     <Reference Include="GoogleNewLogoByTatsunoru.AssetsLibrary">
       <HintPath>..\..\synergy\g\GoogleNewLogoByTatsunoru\bin\staging.AssetsLibrary\GoogleNewLogoByTatsunoru.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="GotthardTunnelByDr2.AssetsLibrary">
+      <HintPath>..\..\synergy\g\GotthardTunnelByDr2\bin\staging.AssetsLibrary\GotthardTunnelByDr2.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="GhostInTheNoiseByTomkh.AssetsLibrary">
+      <HintPath>..\..\synergy\g\GhostInTheNoiseByTomkh\bin\staging.AssetsLibrary\GhostInTheNoiseByTomkh.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="g.cs" />
@@ -208,6 +214,10 @@
       <Project>{b414c9a8-6964-4ede-8eb2-80edd0798041}</Project>
       <Name>GeneratorsByKali</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\g\GhostInTheNoiseByTomkh\GhostInTheNoiseByTomkh.csproj">
+      <Project>{9cd8e3a6-17a5-4ae2-a609-9cfff20f9543}</Project>
+      <Name>GhostInTheNoiseByTomkh</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\g\GlassWithCausticByAndregc\GlassWithCausticByAndregc\GlassWithCausticByAndregc.csproj">
       <Project>{b9fc915c-e2fe-4dce-ba84-dc8779d565c9}</Project>
       <Name>GlassWithCausticByAndregc</Name>
@@ -223,6 +233,10 @@
     <ProjectReference Include="..\..\synergy\g\GoogleNewLogoByTatsunoru\GoogleNewLogoByTatsunoru.csproj">
       <Project>{18d81eab-6b23-45bf-9f7d-8460d9f637f2}</Project>
       <Name>GoogleNewLogoByTatsunoru</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\g\GotthardTunnelByDr2\GotthardTunnelByDr2.csproj">
+      <Project>{0d77bc12-9249-4689-a08f-fab87f3869df}</Project>
+      <Name>GotthardTunnelByDr2</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\g\GrapheneByFabrice\GrapheneByFabrice\GrapheneByFabrice.csproj">
       <Project>{e29a1030-0fe3-4e08-a7bd-7ad681577399}</Project>

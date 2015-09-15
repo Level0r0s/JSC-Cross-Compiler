@@ -37,7 +37,11 @@ namespace ChromeShaderToyPrograms.t
             ["TopologicaByOtavio"] = () => new TopologicaByOtavio.Shaders.ProgramFragmentShader(),
             ["TorusJourneyByFalcao"] = () => new TorusJourneyByFalcao.Shaders.ProgramFragmentShader(),
             ["ToTheRoadOfRibbon"] = () => new ToTheRoadOfRibbon.Shaders.ProgramFragmentShader(),
+
+
             ["TraceConeWithCRTByKlk"] = () => new TraceConeWithCRTByKlk.Shaders.ProgramFragmentShader(),
+            ["TracedMinkowskiTubeByShane"] = () => new TracedMinkowskiTubeByShane.Shaders.ProgramFragmentShader(),
+
             ["TreeInGrassBySphinx"] = () => new TreeInGrassBySphinx.Shaders.ProgramFragmentShader(),
             ["TreesByGuil"] = () => new TreesByGuil.Shaders.ProgramFragmentShader(),
             ["TrollsCaveByFatumR"] = () => new TrollsCaveByFatumR.Shaders.ProgramFragmentShader(),

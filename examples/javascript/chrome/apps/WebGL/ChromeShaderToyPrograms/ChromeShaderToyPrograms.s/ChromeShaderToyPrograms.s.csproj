@@ -319,6 +319,9 @@
     <Reference Include="StarwarsShipThingByAlleycatsphinx.AssetsLibrary">
       <HintPath>..\..\synergy\s\StarwarsShipThingByAlleycatsphinx\StarwarsShipThingByAlleycatsphinx\bin\staging.AssetsLibrary\StarwarsShipThingByAlleycatsphinx.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="SoftSphereShadowsByBen.AssetsLibrary">
+      <HintPath>..\..\synergy\s\SoftSphereShadowsByBen\bin\staging.AssetsLibrary\SoftSphereShadowsByBen.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="s.cs" />
@@ -493,6 +496,10 @@
     <ProjectReference Include="..\..\synergy\s\SoftShadowTestByDila\SoftShadowTestByDila\SoftShadowTestByDila.csproj">
       <Project>{edf5f161-aef4-4b36-a039-20bf85855502}</Project>
       <Name>SoftShadowTestByDila</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\s\SoftSphereShadowsByBen\SoftSphereShadowsByBen.csproj">
+      <Project>{3f79f314-94cb-4ca5-a298-3b68c6578ff1}</Project>
+      <Name>SoftSphereShadowsByBen</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\s\SomedayByEiffie\SomedayByEiffie\SomedayByEiffie.csproj">
       <Project>{8b358dde-78dd-46f5-a544-66b1807e372a}</Project>
