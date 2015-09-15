@@ -141,6 +141,8 @@ namespace ScriptCoreLib.GLSL
 		//  fvalue1.x + fvalue1.y 
 		// Dot products are to be to be generated!
 		public vec2 xy { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\s\SpheresByFelipevsfbr\Shaders\ProgramFragmentShader.cs
+        public vec2 yx { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
 
         // Dot products are to be to be generated!
         public vec3 rgb { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
