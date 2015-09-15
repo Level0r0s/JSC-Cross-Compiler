@@ -17,6 +17,7 @@ namespace SpheresByFelipevsfbr.Shaders
         // 0. becomes 0.0f
         // what about float vs double?
         // mat3 becomes new mat3
+        // out becomes ref. as then we can return without setting the out value?
 
         #region generic
         [uniform]
@@ -43,8 +44,11 @@ namespace SpheresByFelipevsfbr.Shaders
         // called by vec3 getTexture(HitInfo hitInfo)
 
         //#define pixProj(p) sqrt(dot(dFdx(p),dFdx(p)) + dot(dFdy(p),dFdy(p)))
+        float pixProj(vec3 p) => sqrt(dot(dFdx(p), dFdx(p)) + dot(dFdy(p), dFdy(p)));
 
 
+        // created by
+        //Ray getRays(Ray R, HitInfo hit, out Ray refracted, out bool internalRefl)
         struct Ray
         {
             public vec3 origin;
@@ -83,6 +87,10 @@ namespace SpheresByFelipevsfbr.Shaders
             public float cntAt, linAt, quaAt;
         };
 
+        // created by
+        //bool intersect(Ray R, out HitInfo Info)
+        //vec3 trace(Ray R)
+
         struct HitInfo
         {
             public vec3 hitPos;
@@ -92,40 +100,57 @@ namespace SpheresByFelipevsfbr.Shaders
             public Material m;
         };
 
-        Material mb = Material(
-            vec3(0.0),
-            vec3(0.0),
-            vec3(0.0),
-            0.);
+        Material mb = new Material {
+            ambient = vec3(0.0f),
+            diffuse=vec3(0.0f),
+            specular= vec3(0.0f),
+            shin = 0.0f
+        };
 
-        Material mee = Material(
-            vec3(0.2), vec3(0.9, 0.3, 0.1),
-            vec3(0.9), 120.);
+        Material mee = new Material {
+            ambient = vec3(0.2f), diffuse = vec3(0.9f, 0.3f, 0.1f),
+            specular = vec3(0.9f), shin = 120.0f
+            };
 
-        Material me = Material(
-            vec3(0.2, 0.2, 0.2),
-            vec3(0.3, 0.8, 0.3),
-            vec3(0.9, 0.9, 0.9),
-            120.);
+        Material me = new Material
+        {
+            ambient = vec3(0.2f, 0.2f, 0.2f),
+            diffuse = vec3(0.3f, 0.8f, 0.3f),
+            specular = vec3(0.9f, 0.9f, 0.9f),
+            shin = 120.0f
+        };
 
-        Material mp = Material(
-            vec3(0.5, 1., 1),
-            vec3(1, 1, 1),
-            vec3(0.0),
-            0.);
+        // used by 
+        //  Plane P
+        static Material mp = new Material
+        {
+            ambient = vec3(0.5f, 1.0f, 1f),
+            diffuse = vec3(1, 1, 1),
+            specular = vec3(0.0f),
+            shin = 0.0f
+        };
 
-        Esfera es[2];
+        //Esfera es[2];
+        Esfera[] es = new Esfera[2];
 
-        Plane P = Plane(
-            vec3(0.0, -3.0, 0.0),
-            vec3(0.0, 1.0, 0.0),
-            1, mp);
 
-        Light L = Light(
-            vec3(30.0, 90.0, 50.0),
-            vec3(1.0, 1.0, 1.0),
-            vec3(1.0, 1.0, 1.0),
-            0., 1., 0.03);
+        Plane P = new Plane
+        {
+            p0 = vec3(0.0f, -3.0f, 0.0f),
+            n = vec3(0.0f, 1.0f, 0.0f),
+            id = 1,
+            m = mp
+        };
+
+        Light L = new Light
+        {
+            position = vec3(30.0f, 90.0f, 50.0f),
+            diffuse = vec3(1.0f, 1.0f, 1.0f),
+            specular = vec3(1.0f, 1.0f, 1.0f),
+            cntAt = 0.0f,
+            linAt = 1.0f,
+            quaAt = 0.03f
+        };
         //Ray getRays(Ray R, HitInfo hit, out Ray refracted, out bool internalRefl);
         //bool ray_esfera(Ray R, Esfera E, out HitInfo hit);
         //bool ray_plane(Ray R, Plane P, out HitInfo hit);
@@ -140,7 +165,7 @@ namespace SpheresByFelipevsfbr.Shaders
         {
             vec3 resolution = iResolution;
             vec3 col = vec3(0.0f);
-            HitInfo info = HitInfo(vec3(0.0f), vec3(0.0f), 1000.0f, -1, mb);
+            HitInfo info = new HitInfo { hitPos = vec3(0.0f), hitNrm = vec3(0.0f), dist = 1000.0f, obj = -1, m = mb };
             HitInfo refl2, refr;
             Ray temp = R, refracted;
             bool c;
@@ -159,7 +184,7 @@ namespace SpheresByFelipevsfbr.Shaders
                 vec2 p = gl_FragCoord.xy / resolution.xy;
                 col = vec3(0.0f, 0.0f, .4f);
                 col += fbm(vec3(gl_FragCoord.xy / resolution.xy, 1.0f))
-                         + 0.4f * fbm(vec3(gl_FragCoord.yx / resolution.xy, 0.0));
+                         + 0.4f * fbm(vec3(gl_FragCoord.yx / resolution.xy, 0.0f));
                 float dist = 0.1f * distance(p, vec2(0.0f));
                 col *= exp(-dist * sin(iGlobalTime));
             }
@@ -178,16 +203,24 @@ namespace SpheresByFelipevsfbr.Shaders
             vec2 m = iMouse.xy / resolution.xy;
             m = 2.0f * m - 1.0f;
             m.x *= resolution.x / resolution.y;
-            es[0] = Esfera(
-            vec3(3.0f, -1.0f, 0.0f),
-            2.0, 0, mee);
+            es[0] = new Esfera
+            {
+                center = vec3(3.0f, -1.0f, 0.0f),
+                r = 2.0f,
+                id = 0,
+                m = mee
+            };
 
-            es[1] = Esfera(
-            vec3(-3.0f, -1.0f, -5.0f),
-            2.0, 0, me);
+            es[1] = new Esfera
+            {
+                center = vec3(-3.0f, -1.0f, -5.0f),
+                r = 2.0f,
+                id = 0,
+                m = me
+            };
 
             vec3 at = vec3(0.0f);
-            vec3 eye = vec3(6.f* 2.f* sin(0.5f * iGlobalTime), 5, 10);
+            vec3 eye = vec3(6.0f * 2.0f * sin(0.5f * iGlobalTime), 5, 10);
             vec3 look = normalize(at - eye);
             vec3 up = vec3(0.0f, 1.0f, 0.0f);
             vec3 ww = cross(look, up);
@@ -195,7 +228,7 @@ namespace SpheresByFelipevsfbr.Shaders
             vec3 dx = tan(radians(30.0f)) * ww;
             vec3 dy = tan(radians(30.0f)) * vv;
             eye.xy *= abs(m.xy);
-            Ray R = Ray(eye, normalize(look + dx * uv.x + dy * uv.y));
+            Ray R = new Ray { origin = eye, direction = normalize(look + dx * uv.x + dy * uv.y) };
             vec3 col = trace(R);
             fragColor = vec4(col, 1.0f);
 
@@ -212,7 +245,7 @@ namespace SpheresByFelipevsfbr.Shaders
         }
 
         //float noise( in vec3 x)
-        float noise( vec3 x)
+        float noise(vec3 x)
         {
             vec3 p = floor(x);
             vec3 f = fract(x);
@@ -243,8 +276,8 @@ namespace SpheresByFelipevsfbr.Shaders
         bool shadow(HitInfo Info, Light L)
         {
             vec3 lightv = normalize(L.position - Info.hitPos);
-            Ray sh = Ray(Info.hitPos, lightv);
-            HitInfo hit = HitInfo(vec3(0.0f), vec3(0.0f), 1000.0, -1, mb);
+            Ray sh = new Ray { origin = Info.hitPos, direction = lightv };
+            HitInfo hit = new HitInfo { hitPos = vec3(0.0f), hitNrm = vec3(0.0f), dist = 1000.0f, obj = -1, m = mb };
             if (intersect(sh, out hit))
             {
                 float distToLight = distance(Info.hitPos, L.position);
@@ -259,13 +292,13 @@ namespace SpheresByFelipevsfbr.Shaders
         {
             Ray reflected;
             vec3 dir = reflect(R.direction, hit.hitNrm);
-            reflected = Ray(hit.hitPos, normalize(dir));
+            reflected = new Ray { origin = hit.hitPos, direction = normalize(dir) };
             vec3 nl = hit.hitNrm;
             float nls = dot(hit.hitNrm, R.direction);
             if (nls > 0.0) nl *= -1.0f;
             float nc = 1.0f, nt = 1.5f;
             float eta = nt / nc;
-            bool into = dot(nl, hit.hitNrm) > 0.;
+            bool into = dot(nl, hit.hitNrm) > 0.0f;
             float ddn = dot(R.direction, nl);
             if (into)
                 eta = nc / nt;
@@ -273,25 +306,27 @@ namespace SpheresByFelipevsfbr.Shaders
             if (c2 < 0.0)
             {
                 internalRefl = true;
-                refracted = Ray(vec3(0.0f), vec3(0.0f));
+                refracted = new Ray { origin = vec3(0.0f), direction = vec3(0.0f) };
             }
             else
             {
                 internalRefl = false;
-                refracted = Ray(hit.hitPos, normalize(refract(R.direction, hit.hitNrm, eta)));
+                refracted = new Ray { origin = hit.hitPos, direction = normalize(refract(R.direction, hit.hitNrm, eta)) };
             }
             return reflected;
         }
 
         bool intersect(Ray R, out HitInfo Info)
         {
-            HitInfo hit = HitInfo(vec3(0.0f), vec3(0.0f), 10000.0, -1, mb);
-            HitInfo hitz;
+            //HitInfo hit = HitInfo(vec3(0.0f), vec3(0.0f), 10000.0, -1, mb);
+            HitInfo hit = new HitInfo { hitPos = vec3(0.0f), hitNrm = vec3(0.0f), dist = 10000.0f, obj = -1, m = mb };
+            //HitInfo hitz;
+            var hitz = default(HitInfo);
             for (int i = 0; i < 2; i++)
-                if (ray_esfera(R, es[i], out hitz))
+                if (ray_esfera(R, es[i], ref hitz))
                     if (hitz.dist < hit.dist)
                         hit = hitz;
-            if (ray_plane(R, P, out hitz))
+            if (ray_plane(R, P, ref hitz))
                 if (hitz.dist < hit.dist)
                     hit = hitz;
             Info = hit;
@@ -330,14 +365,15 @@ namespace SpheresByFelipevsfbr.Shaders
             return col;
         }
 
-        bool ray_esfera(Ray R, Esfera E, out HitInfo hit)
+        //bool ray_esfera(Ray R, Esfera E, out HitInfo hit)
+        bool ray_esfera(Ray R, Esfera E, ref HitInfo hit)
         {
             vec3 or = R.origin - E.center;
             vec3 dir = R.direction;
             float a = dot(dir, dir);
             float b = 2.0f * dot(or, dir);
             float c = dot(or, or) - E.r * E.r;
-            float delt = b * b - 4.0f* a * c;
+            float delt = b * b - 4.0f * a * c;
             if (delt > 0.0)
             {
                 float t0 = -b - sqrt(delt);
@@ -357,7 +393,8 @@ namespace SpheresByFelipevsfbr.Shaders
             return false;
         }
 
-        bool ray_plane(Ray R, Plane P, out HitInfo hit)
+        //bool ray_plane(Ray R, Plane P, out HitInfo hit)
+        bool ray_plane(Ray R, Plane P, ref HitInfo hit)
         {
             float t = dot(P.p0 - R.origin, P.n) / dot(R.direction, P.n);
             if (t > 0.001 && t < 70.0)

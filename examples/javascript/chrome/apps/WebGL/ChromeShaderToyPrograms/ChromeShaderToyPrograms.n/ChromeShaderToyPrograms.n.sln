@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSAEyeballByEiffie", "..\..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumbersByPMalin", "..\..\synergy\n\NumbersByPMalin\NumbersByPMalin\NumbersByPMalin.csproj", "{54A8AC0D-B5F1-4425-B9E4-7018D766E247}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoiseTutorialByAkaitora", "..\..\synergy\n\NoiseTutorialByAkaitora\NoiseTutorialByAkaitora.csproj", "{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -53,6 +55,10 @@ Global
 		{54A8AC0D-B5F1-4425-B9E4-7018D766E247}.Debug|x86.Build.0 = Debug|x86
 		{54A8AC0D-B5F1-4425-B9E4-7018D766E247}.Release|x86.ActiveCfg = Release|x86
 		{54A8AC0D-B5F1-4425-B9E4-7018D766E247}.Release|x86.Build.0 = Release|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Debug|x86.ActiveCfg = Debug|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Debug|x86.Build.0 = Debug|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.ActiveCfg = Release|x86
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,5 +70,6 @@ Global
 		{470407BC-7D8E-40AC-ADD0-95D160F6F933} = {E631899C-69BB-4B59-9C7C-BF7018201955}
 		{F8D3C5D3-3E00-4857-88A3-3D24EFBDF9D9} = {E631899C-69BB-4B59-9C7C-BF7018201955}
 		{54A8AC0D-B5F1-4425-B9E4-7018D766E247} = {E631899C-69BB-4B59-9C7C-BF7018201955}
+		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2} = {E631899C-69BB-4B59-9C7C-BF7018201955}
 	EndGlobalSection
 EndGlobal

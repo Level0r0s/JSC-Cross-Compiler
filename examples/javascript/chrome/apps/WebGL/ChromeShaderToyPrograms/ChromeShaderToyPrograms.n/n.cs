@@ -25,6 +25,7 @@ namespace ChromeShaderToyPrograms.n
             ["ChromeShaderToyNoiseDistributionsByHornet"] = () => new ChromeShaderToyNoiseDistributionsByHornet.Shaders.ProgramFragmentShader(),
             ["NanoTubesByTrisomie"] = () => new NanoTubesByTrisomie.Shaders.ProgramFragmentShader(),
             ["NeptunianByEspitz"] = () => new NeptunianByEspitz.Shaders.ProgramFragmentShader(),
+            ["NoiseTutorialByAkaitora"] = () => new NoiseTutorialByAkaitora.Shaders.ProgramFragmentShader(),
             ["NSAEyeballByEiffie"] = () => new NSAEyeballByEiffie.Shaders.ProgramFragmentShader(),
             ["NumbersByPMalin"] = () => new NumbersByPMalin.Shaders.ProgramFragmentShader(),
             #endregion

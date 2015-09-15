@@ -15,6 +15,8 @@ namespace ScriptCoreLib.GLSL
         // https://www.opengl.org/wiki/Cubemap_Texture
         // http://gamedev.stackexchange.com/questions/19461/opengl-glsl-render-to-cube-map
 
+        // we now have atleast 5 shader inputs for this 
+        // list them here?
 
     }
 }

@@ -145,6 +145,9 @@
     <Reference Include="NumbersByPMalin.AssetsLibrary">
       <HintPath>..\..\synergy\n\NumbersByPMalin\NumbersByPMalin\bin\staging.AssetsLibrary\NumbersByPMalin.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="NoiseTutorialByAkaitora.AssetsLibrary">
+      <HintPath>..\..\synergy\n\NoiseTutorialByAkaitora\bin\staging.AssetsLibrary\NoiseTutorialByAkaitora.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="n.cs" />
@@ -175,6 +178,10 @@
     <ProjectReference Include="..\..\synergy\n\NeptunianByEspitz\NeptunianByEspitz\NeptunianByEspitz.csproj">
       <Project>{470407bc-7d8e-40ac-add0-95d160f6f933}</Project>
       <Name>NeptunianByEspitz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\n\NoiseTutorialByAkaitora\NoiseTutorialByAkaitora.csproj">
+      <Project>{18d81eab-6b23-45bf-9f7d-8460d9f637f2}</Project>
+      <Name>NoiseTutorialByAkaitora</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\n\NSAEyeballByEiffie\NSAEyeballByEiffie\NSAEyeballByEiffie.csproj">
       <Project>{f8d3c5d3-3e00-4857-88a3-3d24efbdf9d9}</Project>

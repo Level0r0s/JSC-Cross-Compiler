@@ -16,6 +16,27 @@ namespace ScriptCoreLib.GLSL
 
     partial class Shader
     {
+        #region  https://www.opengl.org/sdk/docs/man/html/dFdx.xhtml
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\s\SpheresByFelipevsfbr\Shaders\ProgramFragmentShader.cs
+
+
+        /// <summary>
+        /// dFdx, dFdy — return the partial derivative of an argument with respect to x or y
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        protected genType dFdx(genType p) { throw new NotImplementedException(); }
+
+        /// <summary>
+        /// dFdx, dFdy — return the partial derivative of an argument with respect to x or y
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        protected genType dFdy(genType p) { throw new NotImplementedException(); }
+        #endregion
+
+
+
         /// <summary>
         /// Returns x if x >= 0, otherwise it returns –x.
         /// </summary>

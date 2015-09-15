@@ -12,6 +12,26 @@ namespace ScriptCoreLib.GLSL
 
     partial class Shader
     {
+        #region  https://www.opengl.org/sdk/docs/man/html/dFdx.xhtml
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\s\SpheresByFelipevsfbr\Shaders\ProgramFragmentShader.cs
+
+
+        /// <summary>
+        /// dFdx, dFdy — return the partial derivative of an argument with respect to x or y
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        protected genType dFdx(genType p) { throw new NotImplementedException(); }
+
+        /// <summary>
+        /// dFdx, dFdy — return the partial derivative of an argument with respect to x or y
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        protected genType dFdy(genType p) { throw new NotImplementedException(); }
+        #endregion
+
+
         /// <summary>
         /// Returns x if x >= 0, otherwise it returns –x.
         /// </summary>
@@ -51,20 +71,20 @@ namespace ScriptCoreLib.GLSL
         /// <param name="y"></param>
         /// <returns></returns>
         public genType mod(genType x, float y) { throw new NotImplementedException(); }
-		// X:\jsc.svn\examples\javascript\chrome\apps\ChromeHTMLTextToGLSLBytes\ChromeHTMLTextToGLSLBytes\Application.cs
+        // X:\jsc.svn\examples\javascript\chrome\apps\ChromeHTMLTextToGLSLBytes\ChromeHTMLTextToGLSLBytes\Application.cs
 
 
 
 
-		/// <summary>
-		/// Returns y if y < x, otherwise it returns x
-		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		/// <returns></returns>
-		protected genType min(genType x, float y) { throw new NotImplementedException(); }
+        /// <summary>
+        /// Returns y if y < x, otherwise it returns x
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        protected genType min(genType x, float y) { throw new NotImplementedException(); }
 
-    
+
 
         /// <summary>
         /// Returns y if x < y, otherwise it returns x.
@@ -85,7 +105,8 @@ namespace ScriptCoreLib.GLSL
         /// <returns></returns>
         protected genType clamp(genType x,
         float minVal,
-        float maxVal) { throw new NotImplementedException(); }
+        float maxVal)
+        { throw new NotImplementedException(); }
 
 
 
@@ -99,9 +120,10 @@ namespace ScriptCoreLib.GLSL
         /// <returns></returns>
         protected genType mix(genType x,
         genType y,
-        float a) { throw new NotImplementedException(); }
+        float a)
+        { throw new NotImplementedException(); }
 
-        
+
         /// <summary>
         /// Returns 0.0 if x < edge, otherwise it returns 1.0
         /// </summary>
@@ -111,7 +133,7 @@ namespace ScriptCoreLib.GLSL
         /// <returns></returns>
         protected genType step(float edge, genType x) { throw new NotImplementedException(); }
 
-        
+
         /// <summary>
         /// <summary>
         /// Returns 0.0 if x &lt;= edge0 and 1.0 if x &gt;= edge1 and
@@ -127,6 +149,7 @@ namespace ScriptCoreLib.GLSL
         /// </summary>
         protected genType smoothstep(float edge0,
                 float edge1,
-                genType x) { throw new NotImplementedException(); }
+                genType x)
+        { throw new NotImplementedException(); }
     }
 }
