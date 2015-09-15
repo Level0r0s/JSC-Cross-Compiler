@@ -322,6 +322,9 @@
     <Reference Include="SoftSphereShadowsByBen.AssetsLibrary">
       <HintPath>..\..\synergy\s\SoftSphereShadowsByBen\bin\staging.AssetsLibrary\SoftSphereShadowsByBen.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="SpheresByFelipevsfbr.AssetsLibrary">
+      <HintPath>..\..\synergy\s\SpheresByFelipevsfbr\bin\staging.AssetsLibrary\SpheresByFelipevsfbr.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="s.cs" />
@@ -540,6 +543,10 @@
     <ProjectReference Include="..\..\synergy\s\SphereMappingsByNimitz\SphereMappingsByNimitz\SphereMappingsByNimitz.csproj">
       <Project>{468bb917-135c-4d48-b806-a2a4d968e124}</Project>
       <Name>SphereMappingsByNimitz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\s\SpheresByFelipevsfbr\SpheresByFelipevsfbr.csproj">
+      <Project>{7a735698-2468-45d7-b4ab-d8151fdc7985}</Project>
+      <Name>SpheresByFelipevsfbr</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\s\SphericalVoronoiByMattz\SphericalVoronoiByMattz\SphericalVoronoiByMattz.csproj">
       <Project>{ff7c34bc-805a-4fb1-9129-23065b4f2cd1}</Project>

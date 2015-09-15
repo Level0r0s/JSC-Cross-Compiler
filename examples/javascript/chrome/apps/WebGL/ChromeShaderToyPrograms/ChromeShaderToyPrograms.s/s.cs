@@ -34,8 +34,10 @@ namespace ChromeShaderToyPrograms.s
             ["ChromeShaderToyShadyBuildingByZtri"] = () => new ChromeShaderToyShadyBuildingByZtri.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToySomewhere1993ByNimitz"] = () => new ChromeShaderToySomewhere1993ByNimitz.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToySpaceRaceByKali"] = () => new ChromeShaderToySpaceRaceByKali.Shaders.ProgramFragmentShader(),
+
             ["ChromeShaderToySphereAndWalls"] = () => new ChromeShaderToySphereAndWalls.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToySphereProjectionByIq"] = () => new ChromeShaderToySphereProjectionByIq.Shaders.ProgramFragmentShader(),
+
             ["ChromeShaderToySpitfirePursuitByDr2"] = () => new ChromeShaderToySpitfirePursuitByDr2.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToySymmetricOriginsByGood"] = () => new ChromeShaderToySymmetricOriginsByGood.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToySubmarinePillars"] = () => new ChromeShaderToySubmarinePillars.Shaders.ProgramFragmentShader(),
@@ -79,9 +81,12 @@ namespace ChromeShaderToyPrograms.s
 
             ["SparksByVanburgler"] = () => new SparksByVanburgler.Shaders.ProgramFragmentShader(),
             ["SparseGridMarchingByNimitz"] = () => new SparseGridMarchingByNimitz.Shaders.ProgramFragmentShader(),
+
             ["SpeedingInTheDarkByWilddev"] = () => new SpeedingInTheDarkByWilddev.Shaders.ProgramFragmentShader(),
             ["SphereMappingsByNimitz"] = () => new SphereMappingsByNimitz.Shaders.ProgramFragmentShader(),
+            ["SpheresByFelipevsfbr"] = () => new SpheresByFelipevsfbr.Shaders.ProgramFragmentShader(),
             ["SphericalVoronoiByMattz"] = () => new SphericalVoronoiByMattz.Shaders.ProgramFragmentShader(),
+
             ["SpiningRingsBySquid"] = () => new SpiningRingsBySquid.Shaders.ProgramFragmentShader(),
             ["SpoutByPMalin"] = () => new SpoutByPMalin.Shaders.ProgramFragmentShader(),
             ["SpriteEncodingByNikos"] = () => new SpriteEncodingByNikos.Shaders.ProgramFragmentShader(),
