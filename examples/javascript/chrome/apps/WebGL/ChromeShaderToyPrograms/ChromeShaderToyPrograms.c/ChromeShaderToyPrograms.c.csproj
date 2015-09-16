@@ -193,6 +193,9 @@
     <Reference Include="CloudsTunnelByAvix.AssetsLibrary">
       <HintPath>..\..\synergy\c\CloudsTunnelByAvix\bin\staging.AssetsLibrary\CloudsTunnelByAvix.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="CloudsPhysicallyBasedByJamiep.AssetsLibrary">
+      <HintPath>..\..\synergy\c\CloudsPhysicallyBasedByJamiep\bin\staging.AssetsLibrary\CloudsPhysicallyBasedByJamiep.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="c.cs" />
@@ -267,6 +270,10 @@
     <ProjectReference Include="..\..\synergy\c\ClippedDiscHypertextureByFabrice\ClippedDiscHypertextureByFabrice\ClippedDiscHypertextureByFabrice.csproj">
       <Project>{96b1f561-179e-4345-a1b4-dfac426fdb2b}</Project>
       <Name>ClippedDiscHypertextureByFabrice</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\CloudsPhysicallyBasedByJamiep\CloudsPhysicallyBasedByJamiep.csproj">
+      <Project>{2413feb0-ae5c-4109-b36c-86775a92d00e}</Project>
+      <Name>CloudsPhysicallyBasedByJamiep</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\c\CloudsTunnelByAvix\CloudsTunnelByAvix.csproj">
       <Project>{c0ff543d-6cb3-4de5-a993-88dcd007f327}</Project>

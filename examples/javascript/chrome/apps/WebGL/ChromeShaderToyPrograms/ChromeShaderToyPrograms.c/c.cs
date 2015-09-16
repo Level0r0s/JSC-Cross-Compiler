@@ -25,7 +25,8 @@ namespace ChromeShaderToyPrograms.c
 
             ["ClawByGreen"] = () => new ClawByGreen.Shaders.ProgramFragmentShader(),
             ["CloudsTunnelByAvix"] = () => new CloudsTunnelByAvix.Shaders.ProgramFragmentShader(),
-
+            ["CloudsPhysicallyBasedByJamiep"] = () => new CloudsPhysicallyBasedByJamiep.Shaders.ProgramFragmentShader(),
+            
             ["ClippedDiscHypertextureByFabrice"] = () => new ClippedDiscHypertextureByFabrice.Shaders.ProgramFragmentShader(),
             ["CompassesByGijs"] = () => new CompassesByGijs.Shaders.ProgramFragmentShader(),
             ["ConformalPolarByFabrice"] = () => new ConformalPolarByFabrice.Shaders.ProgramFragmentShader(),

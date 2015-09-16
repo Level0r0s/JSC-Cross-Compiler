@@ -23,15 +23,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using x360seascape;
-using x360seascape.Design;
-using x360seascape.HTML.Pages;
+using x360clouds;
+using x360clouds.Design;
+using x360clouds.HTML.Pages;
 using System.Diagnostics;
 using ScriptCoreLib.JavaScript.WebGL;
 
-namespace x360seascape
+namespace x360clouds
 {
-    using x360seascape.HTML.Images.FromAssets;
+    using x360clouds.HTML.Images.FromAssets;
     using gl = WebGLRenderingContext;
 
     /// <summary>
@@ -49,7 +49,7 @@ namespace x360seascape
 
         // "X:\vr\tr.png"
         // R:\util\android-sdk-windows\platform-tools\adb.exe push "X:\vr\seascape.png" /sdcard/oculus/360photos/
-        // R:\util\android-sdk-windows\platform-tools\adb.exe push "P:\vr\x360seascape\00188.png" /sdcard/oculus/360photos/
+        // R:\util\android-sdk-windows\platform-tools\adb.exe push "P:\vr\x360clouds\00188.png" /sdcard/oculus/360photos/
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150906/roomscanningeffectbyrosme
 
@@ -96,12 +96,12 @@ namespace x360seascape
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150808/cubemapcamera
         // subst /D b:
-        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360seascape\x360seascape\bin\Debug\staging\x360seascape.Application\web
-        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360seascape\x360seascape\bin\Debug\staging\x360seascape.Application\web
-        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360seascape\x360seascape\bin\Debug\staging\x360seascape.Application\web
+        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360clouds\x360clouds\bin\Debug\staging\x360clouds.Application\web
+        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360clouds\x360clouds\bin\Debug\staging\x360clouds.Application\web
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360clouds\x360clouds\bin\Debug\staging\x360clouds.Application\web
         // what if we want to do subst in another winstat or session?
 
-        // ColladaLoader: Empty or non-existing file (assets/x360seascape/S6Edge.dae)
+        // ColladaLoader: Empty or non-existing file (assets/x360clouds/S6Edge.dae)
 
         /// <summary>
         /// This is a javascript application.
@@ -184,7 +184,7 @@ namespace x360seascape
                         // 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
                         Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
 
-                        new chrome.Notification(title: "x360seascape");
+                        new chrome.Notification(title: "x360clouds");
 
                         // https://developer.chrome.com/apps/app_window#type-CreateWindowOptions
                         var xappwindow = await chrome.app.window.create(
@@ -243,7 +243,7 @@ namespace x360seascape
 
             //if (Environment.ProcessorCount < 8)
             //cubefacesize = 64; // 6 faces, ?
-            //cubefacesize = 256; // 6 faces, ?
+            cubefacesize = 256; // 6 faces, ?
 
             // fast gif?
             //cubefacesize = 128; // 6 faces, ?
@@ -304,7 +304,7 @@ namespace x360seascape
             //const int size = 1024; // 6 faces, ?
             //const int cubefacesize = 1024; // 6 faces, ?
 
-            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360seascape/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
+            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360clouds/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
 
 
             var far = 0xffffff;
@@ -492,7 +492,8 @@ namespace x360seascape
             //var vs0 = new ChromeShaderToyRelentlessBySrtuss.Shaders.ProgramFragmentShader();
             //var vs0 = new TraceConeWithCRTByKlk.Shaders.ProgramFragmentShader();
             //var vs0 = new ChromeShaderToySeascapeByTDM.Shaders.ProgramFragmentShader();
-            var vs0 = new ChromeShaderToySeascapeByTDM.Shaders.Program360FragmentShader();
+            //var vs0 = new ChromeShaderToySeascapeByTDM.Shaders.Program360FragmentShader();
+            var vs0 = new CloudsPhysicallyBasedByJamiep.Shaders.Program360FragmentShader();
 
 
 

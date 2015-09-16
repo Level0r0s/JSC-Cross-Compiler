@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{91BC0D94-1E92-436D-9147-92E42E560A76}</ProjectGuid>
+    <ProjectGuid>{2413FEB0-AE5C-4109-B36C-86775A92D00E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChromeShaderToyRelentlessBySrtuss</RootNamespace>
-    <AssemblyName>ChromeShaderToyRelentlessBySrtuss</AssemblyName>
+    <RootNamespace>CloudsPhysicallyBasedByJamiep</RootNamespace>
+    <AssemblyName>CloudsPhysicallyBasedByJamiep</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>ChromeShaderToyRelentlessBySrtuss.Program</StartupObject>
+    <StartupObject>CloudsPhysicallyBasedByJamiep.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -126,8 +126,11 @@
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
     </Reference>
-    <Reference Include="ChromeShaderToyRelentlessBySrtuss.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\ChromeShaderToyRelentlessBySrtuss.AssetsLibrary.dll</HintPath>
+    <Reference Include="CanyonRollerByDr2.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\CanyonRollerByDr2.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CloudsPhysicallyBasedByJamiep.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\CloudsPhysicallyBasedByJamiep.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
