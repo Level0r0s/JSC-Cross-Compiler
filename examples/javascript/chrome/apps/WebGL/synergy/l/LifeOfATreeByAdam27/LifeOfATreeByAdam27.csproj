@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{45C06B48-E294-4C72-8FC3-3D42695B535A}</ProjectGuid>
+    <ProjectGuid>{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FluxCoreByOtaviogood</RootNamespace>
-    <AssemblyName>FluxCoreByOtaviogood</AssemblyName>
+    <RootNamespace>LifeOfATreeByAdam27</RootNamespace>
+    <AssemblyName>LifeOfATreeByAdam27</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>FluxCoreByOtaviogood.Program</StartupObject>
+    <StartupObject>LifeOfATreeByAdam27.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -129,8 +129,8 @@
     <Reference Include="CanyonRollerByDr2.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\CanyonRollerByDr2.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="FluxCoreByOtaviogood.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\FluxCoreByOtaviogood.AssetsLibrary.dll</HintPath>
+    <Reference Include="LifeOfATreeByAdam27.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\LifeOfATreeByAdam27.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

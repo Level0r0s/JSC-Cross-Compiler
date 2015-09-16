@@ -220,6 +220,9 @@
     <Reference Include="FluxCoreByOtaviogood.AssetsLibrary">
       <HintPath>..\..\synergy\f\FluxCoreByOtaviogood\bin\staging.AssetsLibrary\FluxCoreByOtaviogood.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="FurTreesByEiffie.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FurTreesByEiffie\bin\staging.AssetsLibrary\FurTreesByEiffie.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="f.cs" />
@@ -354,6 +357,10 @@
     <ProjectReference Include="..\..\synergy\f\FractalSphereByGuil\FractalSphereByGuil\FractalSphereByGuil.csproj">
       <Project>{14ab7ab0-7612-4026-98f6-ebbae5cdf750}</Project>
       <Name>FractalSphereByGuil</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FurTreesByEiffie\FurTreesByEiffie.csproj">
+      <Project>{24cb45fd-79d7-4596-98ad-056e36d461dd}</Project>
+      <Name>FurTreesByEiffie</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\f\FuturisticDoorKnobByDiLemming\FuturisticDoorKnobByDiLemming\FuturisticDoorKnobByDiLemming.csproj">
       <Project>{74d9bc3a-e8e1-427c-ad2b-4bccc4789fbe}</Project>

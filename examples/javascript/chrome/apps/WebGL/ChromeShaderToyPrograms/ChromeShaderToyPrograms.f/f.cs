@@ -50,6 +50,8 @@ namespace ChromeShaderToyPrograms.f
             ["FractalBridgeByDr2"] = () => new FractalBridgeByDr2.Shaders.ProgramFragmentShader(),
             ["FractalCondosByEiffie"] = () => new FractalCondosByEiffie.Shaders.ProgramFragmentShader(),
             ["FractalSphereByGuil"] = () => new FractalSphereByGuil.Shaders.ProgramFragmentShader(),
+
+            ["FurTreesByEiffie"] = () => new FurTreesByEiffie.Shaders.ProgramFragmentShader(),
             ["FuturisticDoorKnobByDiLemming"] = () => new FuturisticDoorKnobByDiLemming.Shaders.ProgramFragmentShader(),
             #endregion
 

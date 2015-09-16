@@ -24,7 +24,10 @@ namespace ChromeShaderToyPrograms.l
             // 32 crash xt7
             ["ChromeShaderToyLimboByDaeken"] = () => new ChromeShaderToyLimboByDaeken.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyLittleMonsterByHLorenzi"] = () => new ChromeShaderToyLittleMonsterByHLorenzi.Shaders.ProgramFragmentShader(),
+
             ["LaDecimaByCiberxtrem"] = () => new LaDecimaByCiberxtrem.Shaders.ProgramFragmentShader(),
+            ["LifeOfATreeByAdam27"] = () => new LifeOfATreeByAdam27.Shaders.ProgramFragmentShader(),
+
             ["LegendOfZeldaByHLorenzi"] = () => new LegendOfZeldaByHLorenzi.Shaders.ProgramFragmentShader(),
             ["LightingRoomByCaosdoar"] = () => new LightingRoomByCaosdoar.Shaders.ProgramFragmentShader(),
             ["LightiningByAsti"] = () => new LightiningByAsti.Shaders.ProgramFragmentShader(),

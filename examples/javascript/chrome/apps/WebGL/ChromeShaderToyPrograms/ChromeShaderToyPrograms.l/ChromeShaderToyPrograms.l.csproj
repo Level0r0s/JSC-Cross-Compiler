@@ -172,6 +172,9 @@
     <Reference Include="LostInTheFieldByRk.AssetsLibrary">
       <HintPath>..\..\synergy\l\LostInTheFieldByRk\LostInTheFieldByRk\bin\staging.AssetsLibrary\LostInTheFieldByRk.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="LifeOfATreeByAdam27.AssetsLibrary">
+      <HintPath>..\..\synergy\l\LifeOfATreeByAdam27\bin\staging.AssetsLibrary\LifeOfATreeByAdam27.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="l.cs" />
@@ -218,6 +221,10 @@
     <ProjectReference Include="..\..\synergy\l\LegendOfZeldaByHLorenzi\LegendOfZeldaByHLorenzi\LegendOfZeldaByHLorenzi.csproj">
       <Project>{a00b0267-107f-4b46-8494-08b7d36102bc}</Project>
       <Name>LegendOfZeldaByHLorenzi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\l\LifeOfATreeByAdam27\LifeOfATreeByAdam27.csproj">
+      <Project>{18d81eab-6b23-45bf-9f7d-8460d9f637f2}</Project>
+      <Name>LifeOfATreeByAdam27</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\l\LightingRoomByCaosdoar\LightingRoomByCaosdoar\LightingRoomByCaosdoar.csproj">
       <Project>{252bb489-6ca7-4885-be6a-d22b01ed7ada}</Project>
