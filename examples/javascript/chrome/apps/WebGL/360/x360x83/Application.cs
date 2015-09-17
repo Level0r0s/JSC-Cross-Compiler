@@ -68,6 +68,9 @@ namespace x360x83
         //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push     "R:\vr\tape360columns\0000.png" "/sdcard/oculus/360photos/tape360columns.png"
         // 4041 KB/s (3248448 bytes in 0.785s)
 
+        // "X:\vr\zoomout.jpg"
+        //  "r:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\zoomout.jpg" "/sdcard/oculus/360photos/"
+        //  "r:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\zoominx.jpg" "/sdcard/oculus/360photos/"
 
         // could we udp our 360 image from webgl to vr yet?
 
@@ -92,6 +95,26 @@ namespace x360x83
         // what if we want to do subst in another winstat or session?
 
         // ColladaLoader: Empty or non-existing file (assets/x360x83/S6Edge.dae)
+
+
+
+
+
+
+
+
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150917/x360x83
+
+        //var vsync0ambient = default(TaskCompletionSource<object>);
+        //var vsync1renderman = default(TaskCompletionSource<object>);
+
+        static TaskCompletionSource<object> vsync0ambient;
+        static TaskCompletionSource<object> vsync1renderman;
+
+
+        static void nop() { }
+
 
         /// <summary>
         /// This is a javascript application.
@@ -204,21 +227,39 @@ namespace x360x83
 #endif
 
 
+            // GpuProcessHostUIShim: The GPU process crashed!
+
+            var poke = new WebGLRenderingContext();
+
+            if (poke == null)
+            {
+                new IHTMLPre { "GpuProcessHostUIShim: The GPU process crashed! restart process."
+                }.AttachToDocument();
+                return;
+            }
+
+            // are we in a RemoteApp ? software renderer?
+            // this may hang the buggy rdp protocol...
+
+
+
+
             // crash
             //int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
             int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
             int cubefacesize = cubefacesizeMAX; // 6 faces, ?
-                                                //int cubefacesize = 1024; // 6 faces, ?
-                                                // "X:\vr\tape1\0000x2048.png"
-                                                // for 60hz render we may want to use float camera percision, not available for ui.
-                                                //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
-                                                //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
+            //int cubefacesize = 1024; // 6 faces, ?
+            // "X:\vr\tape1\0000x2048.png"
+            // for 60hz render we may want to use float camera percision, not available for ui.
+            //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
+            //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
-            if (Environment.ProcessorCount < 8)
-                //cubefacesize = 64; // 6 faces, ?
+            //if (Environment.ProcessorCount < 8)
+            //    //cubefacesize = 64; // 6 faces, ?
 
-                // fast gif?
-                cubefacesize = cubefacesizeMAX / 16; // 6 faces, ?
+            //    // fast gif?
+            cubefacesize = 512; // 6 faces, ?
+            // big cubeface may be draw only half of itself?
 
 
             // can we keep fast fps yet highp?
@@ -258,11 +299,11 @@ namespace x360x83
 
             // can we have not fly beyond moon too much?
             //var radius = 500;
-            var radius = 480;
+            //var radius = 480;
             //var radius = -480;
 
             //var segments = 32;
-            var segments = 128 * 2;
+            //var segments = 128 * 2;
             //var rotation = 6;
 
 
@@ -283,7 +324,12 @@ namespace x360x83
 
             // need a zoom effect
             // 5pixels to 33%
-            var skyboxradius = 0 + 2048 * 4;
+
+
+            // radius needs to be a bit bigger so wa cant zoom thru it
+            var skyboxradius0 = 0 + 2048 * 4;
+            var skyboxradius = skyboxradius0 + 512;
+
             var far = skyboxradius * 2;
 
             new IHTMLPre { new { Environment.ProcessorCount, cubefacesize } }.AttachToDocument();
@@ -297,7 +343,6 @@ namespace x360x83
 
             var oo = new List<THREE.Object3D>();
 
-            var window = Native.window;
 
 
             // what about physics and that portal rendering?
@@ -325,6 +370,14 @@ namespace x360x83
             // once we change code would chrome app be able to let VR know that a new view is available?
             var sceneg = new THREE.Group();
             sceneg.AttachTo(scene);
+
+            // whatif we reuse the skybox as is and skip rendering it?
+            // that means we cannot rotate via sky, we have to rotate other elements in reverse.
+            // can we have a checkbox to hide or render the skybox?
+            var scenezooms = new THREE.Group();
+            scenezooms.AttachTo(scene);
+
+
 
 
             // fly up?
@@ -376,7 +429,9 @@ namespace x360x83
                 new
                 {
                     //antialias = true,
-                    //alpha = true,
+
+                    alpha = true,
+
                     preserveDrawingBuffer = true
                 }
             );
@@ -384,8 +439,12 @@ namespace x360x83
             // https://github.com/mrdoob/three.js/issues/3836
 
             // the construct. white bg
+
+            // cyan?
             //renderer0.setClearColor(0xfffff, 1);
-            renderer0.setClearColor(0x0, 1);
+            //renderer0.setClearColor(0xfffff, 0);
+            renderer0.setClearColor(0x0, 0);
+            //renderer0.setClearColor(0x0, 1);
 
             //renderer.setSize(window.Width, window.Height);
             renderer0.setSize(cubefacesize, cubefacesize);
@@ -445,87 +504,55 @@ namespace x360x83
 
 
 
-            #region shader1canvas
+
+
+
+
+
+
+
+
+            var xframeID = 0;
+
+
+
             new { }.With(
-              async delegate
-              {
-                  Native.body.style.margin = "0px";
-                  (Native.body.style as dynamic).webkitUserSelect = "auto";
 
-                  var vs0 = new ChromeShaderToyColumns.Shaders.ProgramFragmentShader();
+                async delegate
+                {
 
-                  var gl0 = new WebGLRenderingContext(alpha: true);
-                  shader1canvas = gl0.canvas;
+                next:
 
-                  var c0 = gl0.canvas.AttachToDocument();
-
-                  //c0.style.SetSize(460, 237);
-                  //c0.width = 460;
-                  //c0.height = 237;
-
-                  c0.style.SetSize((int)uizoom * 3, (int)uizoom * 3);
-                  c0.width = cubefacesize;
-                  c0.height = cubefacesize;
-
-                  c0.style.SetLocation(720, 8);
-
-                  var mMouseOriX = 0;
-                  var mMouseOriY = 0;
-                  var mMousePosX = 0;
-                  var mMousePosY = 0;
+                    //Console.WriteLine("enter vsync0ambient");
+                    Native.document.title = new { xframeID }.ToString();
 
 
-                  var pass0 = new ChromeShaderToyColumns.Library.ShaderToy.EffectPass(
-                    null,
-                    gl0,
-                    precission: ChromeShaderToyColumns.Library.ShaderToy.DetermineShaderPrecission(gl0),
-                    supportDerivatives: gl0.getExtension("OES_standard_derivatives") != null,
-                    callback: null,
-                    obj: null,
-                    forceMuted: false,
-                    forcePaused: false,
-                    //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
-                    outputGainNode: null
-                );
-                  pass0.MakeHeader_Image();
-                  pass0.NewShader_Image(vs0);
+                    vsync0ambient = new TaskCompletionSource<object>();
 
-                  var sw0 = Stopwatch.StartNew();
+                    await vsync0ambient.Task;
 
-                  do
-                  {
-                      // 1800 is 30sec is 30 000
-                      // frameIDslider?
+                    await Task.Delay(1000 / 15);
+                    //await Task.Delay(1000);
+                    //Console.WriteLine("await vsync0ambient 5");
+                    //await Task.Delay(5000);
 
-                      //var fps60 = frameIDslider * 1000 / 60.0f;
-                      var fps60 = frameIDslider * (1 / 60.0f);
+                    xframeID++;
 
-                      pass0.Paint_Image(
-                        fps60,
+                    goto next;
+                }
 
-                        mMouseOriX,
-                        mMouseOriY,
-                        mMousePosX,
-                        mMousePosY
-                    //,
+            );
 
-                    // gl_FragCoord
-                    // cannot be scaled, and can be referenced directly.
-                    // need another way to scale
-                    //zoom: 0.3f
-                    );
 
-                      // what does it do?
-                      // need redux build..
-                      gl0.flush();
 
-                      //await u.animate.async.@checked;
-                  }
-                  while (await Native.window.async.onframe);
 
-              }
-          );
-            #endregion
+
+
+
+
+
+
+
 
 
 
@@ -541,8 +568,29 @@ namespace x360x83
             new IHTMLBreak { }.AttachToDocument();
             var camerayHigh = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = cameray.max, max = 1024 * 256, valueAsNumber = cameray.max, title = "cameray" }.AttachToDocument();
             new IHTMLHorizontalRule { }.AttachToDocument();
-            var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 0 + 2048 * 4, valueAsNumber = 0, title = "cameraz" }.AttachToDocument();
+            //var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 0 + 2048 * 4, valueAsNumber = 0, title = "cameraz" }.AttachToDocument();
+            //var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 0 + 2048 * 4, valueAsNumber = 0 - 2048 * 4, title = "cameraz" }.AttachToDocument();
+            var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 0, valueAsNumber = 0 - 2048 * 4, title = "cameraz" }.AttachToDocument();
             // the zoom hting..
+
+
+            new IHTMLHorizontalRule { }.AttachToDocument();
+
+            var skyrotup = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -450, max = 450, valueAsNumber = 0, title = "skyrotup" }.AttachToDocument();
+            var skyrotright = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -450, max = 450, valueAsNumber = 0, title = "skyrotright" }.AttachToDocument();
+
+            new IHTMLPre { () => new { skyrotup = skyrotup.valueAsNumber, skyrotright = skyrotright.valueAsNumber } }.AttachToDocument();
+
+
+            new IHTMLHorizontalRule { }.AttachToDocument();
+
+            // were we able to test for it?
+            var zoomrotup = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -450, max = 450, valueAsNumber = -12, title = "up" }.AttachToDocument();
+            var zoomrotright = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -450, max = 450, valueAsNumber = 0, title = "right" }.AttachToDocument();
+
+            new IHTMLPre { () => new { zoomrotup = zoomrotup.valueAsNumber, zoomrotright = zoomrotright.valueAsNumber } }.AttachToDocument();
+
+
 
             // for render server
             var fcamerax = 0.0;
@@ -582,21 +630,21 @@ namespace x360x83
 
 
                 cameraoffset = new THREE.Vector3(
-                  // left?
+                    // left?
                   1.0 * (camerax + fcamerax),
-                   // height?
-                   //0,
-                   //1600,
-                   //1024,
+                    // height?
+                    //0,
+                    //1600,
+                    //1024,
 
                    // if the camera is in the center, would we need to move the scene?
-                   // we have to move the camera. as we move the scene the lights are messed up
-                   //2014,
+                    // we have to move the camera. as we move the scene the lights are messed up
+                    //2014,
                    1.0 * (cy + fcameray),
 
                  //1200
                  1.0 * (cameraz + fcameraz)
-                   // can we hover top of the map?
+                    // can we hover top of the map?
                    );
             };
 
@@ -618,7 +666,8 @@ namespace x360x83
             canvasNY.canvas.AttachToDocument();
             canvasNY.canvas.style.transformOrigin = "0 0";
             // roslyn!
-            canvasNY.canvas.style.transform = $"scale({uizoom})";
+            //canvasNY.canvas.style.transform = $"scale({uizoom})";
+            canvasNY.canvas.style.transform = "scale(" + uizoom + ")";
 
             var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             applycameraoffset += delegate
@@ -633,7 +682,8 @@ namespace x360x83
             canvasPY.canvas.title = "PY";
             canvasPY.canvas.AttachToDocument();
             canvasPY.canvas.style.transformOrigin = "0 0";
-            canvasPY.canvas.style.transform = $"scale({uizoom})";
+            //canvasPY.canvas.style.transform = $"scale({uizoom})";
+            canvasPY.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
 
             // transpose xz?
@@ -654,8 +704,11 @@ namespace x360x83
             canvasNX.canvas.title = "NX";
             canvasNX.canvas.AttachToDocument();
             canvasNX.canvas.style.transformOrigin = "0 0";
-            canvasNX.canvas.style.transform = $"scale({uizoom})";
+            //canvasNX.canvas.style.transform = $"scale({uizoom})";
+            canvasNX.canvas.style.transform = "scale(" + uizoom + ")";
 
+
+            // front??
             var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             applycameraoffset += delegate
             {
@@ -671,7 +724,8 @@ namespace x360x83
             canvasPX.canvas.title = "PX";
             canvasPX.canvas.AttachToDocument();
             canvasPX.canvas.style.transformOrigin = "0 0";
-            canvasPX.canvas.style.transform = $"scale({uizoom})";
+            //canvasPX.canvas.style.transform = $"scale({uizoom})";
+            canvasPX.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
 
 
@@ -692,7 +746,8 @@ namespace x360x83
             canvasNZ.canvas.title = "NZ";
             canvasNZ.canvas.AttachToDocument();
             canvasNZ.canvas.style.transformOrigin = "0 0";
-            canvasNZ.canvas.style.transform = $"scale({uizoom})";
+            //canvasNZ.canvas.style.transform = $"scale({uizoom})";
+            canvasNZ.canvas.style.transform = "scale(" + uizoom + ")";
 
             var cameraPZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             //cameraPZ.lookAt(new THREE.Vector3(1, 0, 0));
@@ -709,7 +764,8 @@ namespace x360x83
             canvasPZ.canvas.title = "PZ";
             canvasPZ.canvas.AttachToDocument();
             canvasPZ.canvas.style.transformOrigin = "0 0";
-            canvasPZ.canvas.style.transform = $"scale({uizoom})";
+            //canvasPZ.canvas.style.transform = $"scale({uizoom})";
+            canvasPZ.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
 
 
@@ -797,11 +853,15 @@ namespace x360x83
             var suizoom = 480f / c.width;
 
             c.style.transformOrigin = "0 0";
-            c.style.transform = $"scale({suizoom})";
+            //c.style.transform = $"scale({suizoom})";
+            c.style.transform = "scale(" + suizoom + ")";
             //c.style.backgroundColor = "yellow";
             c.style.position = IStyle.PositionEnum.absolute;
 
-            c.style.SetLocation(8 + (int)(uizoom * cubefacesize + 8) * 0, 8 + (int)(uizoom * cubefacesize + 8) * 3);
+            c.style.SetLocation(
+                8 + (int)(uizoom * cubefacesize + 8) * 0,
+                8 + (int)(uizoom * cubefacesize + 8) * 3 + 120
+                );
 
             var pass = new CubeToEquirectangular.Library.ShaderToy.EffectPass(
                        null,
@@ -812,7 +872,7 @@ namespace x360x83
                        obj: null,
                        forceMuted: false,
                        forcePaused: false,
-                       //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
+                //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
                        outputGainNode: null
                    );
 
@@ -834,6 +894,7 @@ namespace x360x83
             //var frame0 = new HTML.Images.FromAssets.tiles_regrid().AttachToDocument();
             //var frame0 = new HTML.Images.FromAssets.galaxy_starfield().AttachToDocument();
             var frame0 = new HTML.Images.FromAssets._20150912_154522().AttachToDocument();
+            //var frame0 = new HTML.Images.FromAssets._20150912_154522recenter().AttachToDocument();
 
 
             //var frame0 = new HTML.Images.FromAssets.galaxy_starfield150FOV().AttachToDocument();
@@ -847,7 +908,8 @@ namespace x360x83
             frame0.style.height = "270px";
             frame0.style.width = "480px";
             frame0.style.SetLocation(
-                8 + (int)(uizoom * cubefacesize + 8) * 0 + 480 + 16, 8 + (int)(uizoom * cubefacesize + 8) * 3);
+                8 + (int)(uizoom * cubefacesize + 8) * 0 + 480 + 16,
+                8 + (int)(uizoom * cubefacesize + 8) * 3 + 120);
 
 
 
@@ -927,7 +989,6 @@ namespace x360x83
 
             #endregion
 
-            var vsync = default(TaskCompletionSource<object>);
 
             #region render 60hz 30sec
             new IHTMLButton {
@@ -951,8 +1012,8 @@ namespace x360x83
 
 
 
-                vsync = new TaskCompletionSource<object>();
-                await vsync.Task;
+                vsync1renderman = new TaskCompletionSource<object>();
+                await vsync1renderman.Task;
 
                 status = "rendering... vsync";
 
@@ -971,8 +1032,8 @@ namespace x360x83
                 status = "rendering... " + new { filename };
 
 
-                vsync = new TaskCompletionSource<object>();
-                await vsync.Task;
+                vsync1renderman = new TaskCompletionSource<object>();
+                await vsync1renderman.Task;
 
                 // frame0 has been rendered
 
@@ -1002,7 +1063,7 @@ namespace x360x83
 
 
 
-                beforeframe:
+            beforeframe:
 
                 // speed? S6 slow motion?
                 // this is really slow. if we do x4x2 =x8 
@@ -1047,7 +1108,7 @@ namespace x360x83
 
                 total.Stop();
                 status = "all done " + new { frameid = frameIDslider.valueAsNumber, total.ElapsedMilliseconds };
-                vsync = default(TaskCompletionSource<object>);
+                vsync1renderman = default(TaskCompletionSource<object>);
                 // http://stackoverflow.com/questions/22899333/delete-javascript-blobs
 
                 e.Element.disabled = false;
@@ -1097,15 +1158,22 @@ namespace x360x83
             //    floor2.AttachTo(scene);
             //}
 
+
+            // front?
             {
                 //var tex0 = new THREE.Texture { image = new moon(), needsUpdate = true };
                 //var tex0 = new THREE.Texture(new moon());
                 //var tex0 = new THREE.Texture(new moon()) { needsUpdate = true };
-                var tex0 = new THREE.Texture(shader1canvas) { needsUpdate = true };
+                //var tex0 = new THREE.Texture(shader1canvas) { needsUpdate = true };
+
+
+                //var tex0 = new THREE.Texture(new output01027()) { needsUpdate = true };
+                var tex0 = new THREE.Texture(new output00630()) { needsUpdate = true };
 
                 applycameraoffset += delegate { tex0.needsUpdate = true; };
 
-                var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize, cubefacesize, 8, 8);
+                //var planeGeometry0 = new THREE.PlaneGeometry(1920, 1080, 8, 8);
+                var planeGeometry0 = new THREE.PlaneGeometry((int)(1920 * 0.2), (int)(1080 * 0.2), 8, 8);
                 var floor2 = new THREE.Mesh(planeGeometry0,
                     //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
                     //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
@@ -1113,6 +1181,8 @@ namespace x360x83
                     new THREE.MeshPhongMaterial(
                         new
                         {
+                            // black otherwise?
+                            transparent = true,
 
                             map = tex0,
 
@@ -1123,42 +1193,45 @@ namespace x360x83
 
                 );
                 //floor2.position.set(0, 0, -cubefacesize  * 0.55);
-                floor2.position.set(-cubefacesize * 0.55, 0, 0);
+
+                // zoom in and get 90FOV clouseup?
+                floor2.position.set(-skyboxradius0 - 128, 0, 0);
                 floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2);
-                floor2.AttachTo(scene);
+                //floor2.AttachTo(scene);
+                floor2.AttachTo(scenezooms);
             }
 
 
-            {
-                //var tex0 = new THREE.Texture { image = new moon(), needsUpdate = true };
-                //var tex0 = new THREE.Texture(new moon());
-                //var tex0 = new THREE.Texture(new moon()) { needsUpdate = true };
-                var tex0 = new THREE.Texture(shader1canvas) { needsUpdate = true };
+            //{
+            //    //var tex0 = new THREE.Texture { image = new moon(), needsUpdate = true };
+            //    //var tex0 = new THREE.Texture(new moon());
+            //    //var tex0 = new THREE.Texture(new moon()) { needsUpdate = true };
+            //    var tex0 = new THREE.Texture(shader1canvas) { needsUpdate = true };
 
-                applycameraoffset += delegate { tex0.needsUpdate = true; };
+            //    applycameraoffset += delegate { tex0.needsUpdate = true; };
 
-                var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize, cubefacesize, 8, 8);
-                var floor2 = new THREE.Mesh(planeGeometry0,
-                    //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
-                    //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
-                    //new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000, specular = 0xff0000 })
-                    new THREE.MeshPhongMaterial(
-                        new
-                        {
+            //    var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize, cubefacesize, 8, 8);
+            //    var floor2 = new THREE.Mesh(planeGeometry0,
+            //        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+            //        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
+            //        //new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000, specular = 0xff0000 })
+            //        new THREE.MeshPhongMaterial(
+            //            new
+            //            {
 
-                            map = tex0,
+            //                map = tex0,
 
 
-                            //ambient = 0x00ff00,
-                            //color = 0x00ff00
-                        })
+            //                //ambient = 0x00ff00,
+            //                //color = 0x00ff00
+            //            })
 
-                );
-                floor2.position.set(cubefacesize * 0.55, 0, 0);
-                floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
+            //    );
+            //    floor2.position.set(cubefacesize * 0.55, 0, 0);
+            //    floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
 
-                floor2.AttachTo(scene);
-            }
+            //    floor2.AttachTo(scene);
+            //}
 
 
 
@@ -1169,7 +1242,6 @@ namespace x360x83
             // hidden for alpha AppWindows
             //#if FBACKGROUND
 
-            // "X:\vr\zoomout.jpg"
 
             #region galaxy_starfield
             new THREE.Texture().With(
@@ -1211,9 +1283,47 @@ namespace x360x83
                             });
 
 
+
+                    // THREE.SphereGeometry = function ( radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength ) {
+                    // http://learningthreejs.com/blog/2011/10/05/performance-merging-geometry/
+
+                    // how are we to construct geometry that has higher detail in one spot for zoom in
+                    var skyboxsphere = new THREE.SphereGeometry(skyboxradius, 512, 512
+
+                    // left to right
+                        // 0 .. 45 deg
+
+                    // center it?
+                        //Math.PI - Math.PI / 4
+                        //, Math.PI / 4,
+
+
+
+                    //// up to down
+                        //// 0 .. 22 deg
+                        //0, Math.PI / 2
+                    );
+
+
+                    //
                     var stars = new THREE.Mesh(
-                            // radius not used?
-                            new THREE.SphereGeometry(skyboxradius, 64, 64),
+                        // radius not used?
+                        //new THREE.SphereGeometry(skyboxradius, 64, 64),
+                        //new THREE.SphereGeometry(skyboxradius, 8, 8),
+
+                            // we need to be able to zoom in!
+                        //new THREE.SphereGeometry(skyboxradius, 256, 256),
+
+                            // chrome will crash on laptop?
+                        // chrome will crash on red!
+                        //new THREE.SphereGeometry(skyboxradius, 1024, 1024),
+                        //new THREE.SphereGeometry(skyboxradius, 1024, 1024),
+                        //new THREE.SphereGeometry(skyboxradius, 512, 512),
+                        //new THREE.SphereGeometry(skyboxradius, 600, 600),
+
+                            // orr perhaps do we need detailed geometry only in specific spot?
+                            skyboxsphere,
+
                            stars_material
                         );
 
@@ -1222,209 +1332,321 @@ namespace x360x83
 
                     stars.scale.x = -1;
 
+
+                    // can we get our hrozion recentered?
+                    //stars.rotateOnAxis(new THREE.Vector3(0, 0, 1), (Math.PI / 2) * (3 / 90.0));
+                    //stars.rotateOnAxis(new THREE.Vector3(0, 0, 1), (Math.PI / 2) * (1.3 / 90.0));
+                    //stars.rotateOnAxis(new THREE.Vector3(0, 0, 1), (Math.PI / 2) * (1.5 / 90.0));
+
+                    applycameraoffset += delegate
+                    {
+                        stars.rotation.set(0, 0, 0);
+
+                        //    skyrotright
+                        stars.rotateOnAxis(new THREE.Vector3(0, 0, 1), (Math.PI / 2) * (skyrotup.valueAsNumber / 900.0));
+                        stars.rotateOnAxis(new THREE.Vector3(0, 1, 0), (Math.PI / 2) * (skyrotright.valueAsNumber / 900.0));
+
+
+                        scenezooms.rotation.set(0, 0, 0);
+                        // keep skybox where it is
+
+                        scenezooms.rotateOnAxis(new THREE.Vector3(0, 0, 1), (Math.PI / 2) * (zoomrotup.valueAsNumber / 900.0));
+                        scenezooms.rotateOnAxis(new THREE.Vector3(0, 1, 0), (Math.PI / 2) * (zoomrotright.valueAsNumber / 900.0));
+
+                    };
+
+
+                    var hideskybox = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox, title = "hide skybox", @checked = true }.AttachToDocument();
+
+                    //Native.window.onframe += delegate
+                    //{
+                    //    //
+                    //    stars.visible = !hideskybox.@checked;
+                    //};
+
+                    hideskybox.onchange += delegate
+                    {
+                        //
+                        stars.visible = !hideskybox.@checked;
+                    };
+                    stars.visible = !hideskybox.@checked;
+
+
+
                     scene.add(stars);
                 }
            );
             #endregion
 
 
+            //var NYonly = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox, title = "NY only" }.AttachToDocument();
+            var PXonly = new IHTMLInput
+            {
+                type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox,
+                @checked = true,
+                title = "PX only"
+            }.AttachToDocument();
 
 
-            new Models.ColladaS6Edge().Source.Task.ContinueWithResult(
-                   dae =>
-                   {
-
-
-
-                       //dae.position.y = -80;
-
-                       //dae.AttachTo(sceneg);
-                       //scene.add(dae);
-                       //oo.Add(dae);
-
-
-
-
-                       // view-source:http://threejs.org/examples/webgl_multiple_canvases_circle.html
-                       // https://threejsdoc.appspot.com/doc/three.js/src.source/extras/cameras/CubeCamera.js.html
-                       Native.window.onframe +=
-                           e =>
-                           {
-                               // let render man know..
-                               if (vsync != null)
-                                   if (vsync.Task.IsCompleted)
-                                       return;
-
-
-                               //if (pause) return;
-                               //if (pause.@checked)
-                               //    return;
-
-
-                               // can we float out of frame?
-                               // haha. a bit too flickery.
-                               //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.01) * 50.0;
-                               //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.001) * 190.0;
-                               //globesphere.position.y = Math.Sin(fcamerax * 0.001) * 90.0;
-                               //clouds.position.y = Math.Cos(fcamerax * 0.001) * 90.0;
-
-                               //sphere.rotation.y += speed;
-                               //clouds.rotation.y += speed;
-
-                               // manual rebuild?
-                               // red compiler notifies laptop chrome of pending update
-                               // app reloads
-
-                               applycameraoffset();
-                               renderer0.clear();
-                               //rendererPY.clear();
-
-                               //cameraPX.aspect = canvasPX.aspect;
-                               //cameraPX.updateProjectionMatrix();
-
-                               // um what does this do?
-                               //cameraPX.position.z += (z - cameraPX.position.z) * e.delay.ElapsedMilliseconds / 200.0;
-                               // mousewheel allos the camera to move closer
-                               // once we see the frame in vr, can we udp sync vr tracking back to laptop?
-
-
-                               //this.targetPX.x += 1;
-                               //this.targetNX.x -= 1;
-
-                               //this.targetPY.y += 1;
-                               //this.targetNY.y -= 1;
-
-                               //this.targetPZ.z += 1;
-                               //this.targetNZ.z -= 1;
-
-                               // how does the 360 or shadertoy want our cubemaps?
-
-
-                               // and then rotate right?
-
-                               // how can we render cubemap?
-
-
-                               #region x
-                               // upside down?
-                               renderer0.render(scene, cameraPX);
-                               canvasPX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
-
-                               renderer0.render(scene, cameraNX);
-                               canvasNX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
-                               #endregion
-
-                               #region z
-                               renderer0.render(scene, cameraPZ);
-                               canvasPZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
-
-                               renderer0.render(scene, cameraNZ);
-                               canvasNZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
-                               #endregion
+            //new Models.ColladaS6Edge().Source.Task.ContinueWithResult(
+            //       dae =>
+            {
 
 
 
-                               #region y
-                               renderer0.render(scene, cameraPY);
+                //dae.position.y = -80;
 
-                               //canvasPY.save();
-                               //canvasPY.translate(0, size);
-                               //canvasPY.rotate((float)(-Math.PI / 2));
-                               canvasPY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
-                               //canvasPY.restore();
+                //dae.AttachTo(sceneg);
+                //scene.add(dae);
+                //oo.Add(dae);
 
 
-                               renderer0.render(scene, cameraNY);
-                               //canvasNY.save();
-                               //canvasNY.translate(size, 0);
-                               //canvasNY.rotate((float)(Math.PI / 2));
-                               canvasNY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
-                               //canvasNY.restore();
-                               // ?
-                               #endregion
 
 
-                               //renderer0.render(scene, cameraPX);
+                // view-source:http://threejs.org/examples/webgl_multiple_canvases_circle.html
+                // https://threejsdoc.appspot.com/doc/three.js/src.source/extras/cameras/CubeCamera.js.html
+                Native.window.onframe +=
+                    e =>
+                    {
+                        // Z:\jsc.svn\examples\javascript\test\TestDelegateIfIfReturn\Application.cs
+
+                        // let render man know..
+
+                        var flag1 = vsync1renderman != null;
+                        // nonroslyn!!
+                        if (flag1)
+                        // this if block is not detected?
+                        {
+                            // whats going on  with if clauses?
+                            nop();
+
+                            // wtf???
+                            var flag0 = vsync1renderman.Task.IsCompleted;
+                            if (flag0)
+                                return;
+                        }
+                        if (vsync0ambient != null)
+                            if (vsync0ambient.Task.IsCompleted)
+                                return;
+
+                        // 38045ms Native.window.onframe { vsync1renderman = , vsync0ambient = [object Object] }
+
+                        //Console.WriteLine("Native.window.onframe " + new { vsync1renderman, vsync0ambient });
+
+                        //return;
+
+                        //if (pause) return;
+                        //if (pause.@checked)
+                        //    return;
 
 
-                               //rendererPY.render(scene, cameraPY);
+                        // can we float out of frame?
+                        // haha. a bit too flickery.
+                        //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.01) * 50.0;
+                        //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.001) * 190.0;
+                        //globesphere.position.y = Math.Sin(fcamerax * 0.001) * 90.0;
+                        //clouds.position.y = Math.Cos(fcamerax * 0.001) * 90.0;
 
-                               // at this point we should be able to render the sphere texture
+                        //sphere.rotation.y += speed;
+                        //clouds.rotation.y += speed;
 
-                               //public const uint TEXTURE_CUBE_MAP_POSITIVE_X = 34069;
-                               //public const uint TEXTURE_CUBE_MAP_NEGATIVE_X = 34070;
-                               //public const uint TEXTURE_CUBE_MAP_POSITIVE_Y = 34071;
-                               //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Y = 34072;
-                               //public const uint TEXTURE_CUBE_MAP_POSITIVE_Z = 34073;
-                               //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074;
+                        // manual rebuild?
+                        // red compiler notifies laptop chrome of pending update
+                        // app reloads
+
+                        applycameraoffset();
+                        renderer0.clear();
+                        //rendererPY.clear();
+
+                        //cameraPX.aspect = canvasPX.aspect;
+                        //cameraPX.updateProjectionMatrix();
+
+                        // um what does this do?
+                        //cameraPX.position.z += (z - cameraPX.position.z) * e.delay.ElapsedMilliseconds / 200.0;
+                        // mousewheel allos the camera to move closer
+                        // once we see the frame in vr, can we udp sync vr tracking back to laptop?
 
 
-                               //var cube0 = new IHTMLImage[] {
-                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_px(),
-                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nx(),
+                        //this.targetPX.x += 1;
+                        //this.targetNX.x -= 1;
 
-                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_py(),
-                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_ny(),
+                        //this.targetPY.y += 1;
+                        //this.targetNY.y -= 1;
+
+                        //this.targetPZ.z += 1;
+                        //this.targetNZ.z -= 1;
+
+                        // how does the 360 or shadertoy want our cubemaps?
 
 
-                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_pz(),
-                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nz()
-                               //};
+                        // and then rotate right?
 
-                               new[] {
+                        // how can we render cubemap?
+
+
+
+                        new[] {
                                    canvasPX, canvasNX,
                                    canvasPY, canvasNY,
                                    canvasPZ, canvasNZ
-                               }.WithEachIndex(
-                                   (img, index) =>
-                                   {
-                                       gl.bindTexture(gl.TEXTURE_CUBE_MAP, pass.tex);
+                        }.WithEach(cc => cc.clearRect(0, 0, cubefacesize, cubefacesize));
 
-                                       //gl.pixelStorei(gl.UNPACK_FLIP_X_WEBGL, false);
-                                       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+                        //gl.clear()
 
-                                       // http://stackoverflow.com/questions/15364517/pixelstoreigl-unpack-flip-y-webgl-true
+                        if (PXonly.@checked)
+                        {
+                            var cameraPXsw = Stopwatch.StartNew();
 
-                                       // https://msdn.microsoft.com/en-us/library/dn302429(v=vs.85).aspx
-                                       //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
-                                       //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+                            renderer0.render(scene, cameraPX);
+                            //75505ms { cameraPXsw = 00:00:00.61 }
+                            Console.WriteLine(new { cameraPXsw });
 
-                                       gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X + (uint)index, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img.canvas);
+                            // clear if transparent?
+                            canvasPX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
 
-                                   }
-                                );
+                            //return;
 
-                               // could do dynamic resolution- fog of war or fog of FOV. where up to 150deg field of vision is encouragedm, not 360
-                               pass.Paint_Image(
-                                     0,
+                        }
+                        else
+                        {
 
-                                     0,
-                                     0,
-                                     0,
-                                     0
+                            #region x
+                            // upside down?
+                            renderer0.render(scene, cameraPX);
+                            canvasPX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
+
+                            renderer0.render(scene, cameraNX);
+                            canvasNX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
+                            #endregion
+
+                            #region z
+                            renderer0.render(scene, cameraPZ);
+                            canvasPZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
+
+                            renderer0.render(scene, cameraNZ);
+                            canvasNZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
+                            #endregion
+
+
+
+                            #region y
+                            renderer0.render(scene, cameraPY);
+
+                            //canvasPY.save();
+                            //canvasPY.translate(0, size);
+                            //canvasPY.rotate((float)(-Math.PI / 2));
+                            canvasPY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
+                            //canvasPY.restore();
+
+
+                            // the floor?
+
+                            // render only this one?
+                            renderer0.render(scene, cameraNY);
+                            //canvasNY.save();
+                            //canvasNY.translate(size, 0);
+                            //canvasNY.rotate((float)(Math.PI / 2));
+                            canvasNY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
+                            //canvasNY.restore();
+                            // ?
+                            #endregion
+
+
+                            //renderer0.render(scene, cameraPX);
+
+
+                            //rendererPY.render(scene, cameraPY);
+
+                            // at this point we should be able to render the sphere texture
+
+                            //public const uint TEXTURE_CUBE_MAP_POSITIVE_X = 34069;
+                            //public const uint TEXTURE_CUBE_MAP_NEGATIVE_X = 34070;
+                            //public const uint TEXTURE_CUBE_MAP_POSITIVE_Y = 34071;
+                            //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Y = 34072;
+                            //public const uint TEXTURE_CUBE_MAP_POSITIVE_Z = 34073;
+                            //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074;
+
+
+                            //var cube0 = new IHTMLImage[] {
+                            //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_px(),
+                            //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nx(),
+
+                            //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_py(),
+                            //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_ny(),
+
+
+                            //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_pz(),
+                            //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nz()
+                            //};
+
+                            #region Paint_Image
+                            new[] {
+                                   canvasPX, canvasNX,
+                                   canvasPY, canvasNY,
+                                   canvasPZ, canvasNZ
+                        }.WithEachIndex(
+                         (img, index) =>
+                         {
+                             gl.bindTexture(gl.TEXTURE_CUBE_MAP, pass.tex);
+
+                             //gl.pixelStorei(gl.UNPACK_FLIP_X_WEBGL, false);
+                             gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+
+                             // http://stackoverflow.com/questions/15364517/pixelstoreigl-unpack-flip-y-webgl-true
+
+                             // https://msdn.microsoft.com/en-us/library/dn302429(v=vs.85).aspx
+                             //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
+                             //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+
+                             gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X + (uint)index, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img.canvas);
+
+                         }
+                      );
+
+
+                            // http://stackoverflow.com/questions/11544608/how-to-clear-a-rectangle-area-in-webgl
+
+                            gl.clear(gl.COLOR_BUFFER_BIT);
+
+                            // could do dynamic resolution- fog of war or fog of FOV. where up to 150deg field of vision is encouragedm, not 360
+                            pass.Paint_Image(
+                           0,
+
+                           0,
+                           0,
+                           0,
+                           0
                                 //,
 
-                                // gl_FragCoord
+                      // gl_FragCoord
                                 // cannot be scaled, and can be referenced directly.
                                 // need another way to scale
                                 //zoom: 0.3f
-                                );
+                      );
 
-                               //paintsw.Stop();
-
-
-                               // what does it do?
-                               gl.flush();
-
-                               // let render man know..
-                               if (vsync != null)
-                                   if (!vsync.Task.IsCompleted)
-                                       vsync.SetResult(null);
-                           };
+                            //paintsw.Stop();
 
 
-                   }
-               );
+                            // what does it do?
+                            gl.flush();
+                            #endregion
+
+
+                        }
+
+                        // let render man know..
+                        if (vsync1renderman != null)
+                            if (!vsync1renderman.Task.IsCompleted)
+                                vsync1renderman.SetResult(null);
+
+                        if (vsync0ambient != null)
+                            if (!vsync0ambient.Task.IsCompleted)
+                                vsync0ambient.SetResult(null);
+                    };
+
+
+            }
+            //);
 
 
 
@@ -1456,3 +1678,19 @@ namespace x360x83
 //1c48:02:01:14 after worker yield...
 
 //Unhandled Exception: System.IO.FileNotFoundException: Could not load file or assembly 'Chrome Web Server Styled Form, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies. The system cannot find the file specified.
+
+
+
+// wtf??
+
+//020000e7 CubeToEquirectangular.Library.ShaderToy+<AttachToDocument>d__14+<MoveNext>06000038
+//script: error JSC1000: *** stack is empty, invalid pop?
+//script: error JSC1000: error at CubeToEquirectangular.Library.ShaderToy+<AttachToDocument>d__14+<MoveNext>06000038.<00a9> ldarg.0.try,
+// assembly: W:\x360x83.Application.exe
+// type: CubeToEquirectangular.Library.ShaderToy+<AttachToDocument>d__14+<MoveNext>06000038, x360x83.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// offset: 0x0154
+//  method:Int32 <00a9> ldarg.0.try(<MoveNext>06000038, <AttachToDocument>d__14 ByRef, System.Runtime.CompilerServices.TaskAwaiter`1[ScriptCoreLib.JavaScript.DOM.IWindow+FrameEvent] ByRef, System.Runtime.Co
+//*** Compiler cannot continue... press enter to quit.
+
+
+

@@ -31,11 +31,7 @@ void doCamera( out vec3 camPos, out vec3 camTar, in float time, in vec2 mouse )
 
     //float an = 0.0*iGlobalTime + se.x;
 	//camPos = vec3(0.0, 2.0, 5.0);
-    camPos = vec3(
-		0.+1.*sin(iGlobalTime*0.1), 
-		2.0, 
-		3.+1.0*cos(iGlobalTime*0.1)
-		);
+    camPos = vec3(3.5*sin(mouse.x*10.0), 1.0, 5.0*cos(mouse.x*10.0));
     
 	// NX?
     // camTar = camPos + vec3(0.0,0.0,1.0);
