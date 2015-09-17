@@ -177,8 +177,10 @@
     </Compile>
     <Content Include="Textures\20150912_154522.jpg" />
     <Content Include="Textures\20150912_154522recenter.jpg" />
+    <Content Include="Textures\output00609.png" />
     <Content Include="Textures\output00630.png" />
     <Content Include="Textures\output01027.png" />
+    <Content Include="Textures\output01085.png" />
     <Content Include="Textures\tiles_regrid.png" />
     <None Include="app.config" />
     <None Include="packages.config" />

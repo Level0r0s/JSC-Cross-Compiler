@@ -72,6 +72,17 @@ namespace x360x83
         //  "r:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\zoomout.jpg" "/sdcard/oculus/360photos/"
         //  "r:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\zoominx.jpg" "/sdcard/oculus/360photos/"
 
+        //  "r:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\zoom8192.png" "/sdcard/oculus/360photos/"
+        // perhaps the sky needs to be dimmed or radial blurred if zoomed in?
+        // but it needs to be front center for sure.
+
+        // "X:\vr\c8k.jpg"
+        //  "r:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\c8k.jpg" "/sdcard/oculus/360photos/"
+        //  "r:\util\android-sdk-windows\platform-tools\adb.exe" push   "X:\vr\z83x1.jpg" "/sdcard/oculus/360photos/"
+
+        //  "r:\util\android-sdk-windows\platform-tools\adb.exe" push   "r:\vr\x83.jpg" "/sdcard/oculus/360photos/"
+        // 
+
         // could we udp our 360 image from webgl to vr yet?
 
         // "R:\vr\tape360iss\0230.png"
@@ -258,7 +269,11 @@ namespace x360x83
             //    //cubefacesize = 64; // 6 faces, ?
 
             //    // fast gif?
+            //cubefacesize = 1024; // 6 faces, ?
+
+            // not 8k..
             cubefacesize = 512; // 6 faces, ?
+
             // big cubeface may be draw only half of itself?
 
 
@@ -327,10 +342,18 @@ namespace x360x83
 
 
             // radius needs to be a bit bigger so wa cant zoom thru it
+            // far image at this distance 
             var skyboxradius0 = 0 + 2048 * 4;
-            var skyboxradius = skyboxradius0 + 512;
+
+            var near = cubefacesize * 0.33;
+
+
+            var skyboxradius = skyboxradius0 * 1.2;
 
             var far = skyboxradius * 2;
+            //var near = cubefacesize * 0.5;
+            //var near = cubefacesize * 0.4;
+            //var near = cubefacesize * 0.25;
 
             new IHTMLPre { new { Environment.ProcessorCount, cubefacesize } }.AttachToDocument();
 
@@ -558,6 +581,8 @@ namespace x360x83
 
             new IHTMLHorizontalRule { }.AttachToDocument();
 
+            var camerazMIN = 0 - 2048 * 4;
+
             var camerax = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 0 + 2048 * 4, valueAsNumber = 0, title = "camerax" }.AttachToDocument();
             // up. whats the most high a rocket can go 120km?
             new IHTMLHorizontalRule { }.AttachToDocument();
@@ -570,7 +595,7 @@ namespace x360x83
             new IHTMLHorizontalRule { }.AttachToDocument();
             //var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 0 + 2048 * 4, valueAsNumber = 0, title = "cameraz" }.AttachToDocument();
             //var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 0 + 2048 * 4, valueAsNumber = 0 - 2048 * 4, title = "cameraz" }.AttachToDocument();
-            var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 0, valueAsNumber = 0 - 2048 * 4, title = "cameraz" }.AttachToDocument();
+            var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = camerazMIN, max = 0, valueAsNumber = camerazMIN, title = "cameraz" }.AttachToDocument();
             // the zoom hting..
 
 
@@ -585,10 +610,17 @@ namespace x360x83
             new IHTMLHorizontalRule { }.AttachToDocument();
 
             // were we able to test for it?
-            var zoomrotup = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -450, max = 450, valueAsNumber = -12, title = "up" }.AttachToDocument();
+            //var zoomrotup = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -450, max = 450, valueAsNumber = -12, title = "up" }.AttachToDocument();
+            var zoomrotup = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -450, max = 450, valueAsNumber = 0, title = "up" }.AttachToDocument();
             var zoomrotright = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -450, max = 450, valueAsNumber = 0, title = "right" }.AttachToDocument();
 
-            new IHTMLPre { () => new { zoomrotup = zoomrotup.valueAsNumber, zoomrotright = zoomrotright.valueAsNumber } }.AttachToDocument();
+            new IHTMLPre { () => new { 
+                
+
+                // on 0 zoom we should rely on the original skybox?
+                cameraz = cameraz.valueAsNumber, 
+                
+                zoomrotup = zoomrotup.valueAsNumber, zoomrotright = zoomrotright.valueAsNumber } }.AttachToDocument();
 
 
 
@@ -651,7 +683,7 @@ namespace x360x83
 
             #region y
             // need to rotate90?
-            var cameraNY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
+            var cameraNY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: near, far: far);
             applycameraoffset += delegate
             {
                 cameraNY.position.copy(new THREE.Vector3(0, 0, 0));
@@ -669,7 +701,7 @@ namespace x360x83
             //canvasNY.canvas.style.transform = $"scale({uizoom})";
             canvasNY.canvas.style.transform = "scale(" + uizoom + ")";
 
-            var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
+            var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: near, far: far);
             applycameraoffset += delegate
             {
                 cameraPY.position.copy(new THREE.Vector3(0, 0, 0));
@@ -689,7 +721,7 @@ namespace x360x83
             // transpose xz?
 
             #region x
-            var cameraNX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
+            var cameraNX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: near, far: far);
             applycameraoffset += delegate
             {
                 cameraNX.position.copy(new THREE.Vector3(0, 0, 0));
@@ -709,7 +741,7 @@ namespace x360x83
 
 
             // front??
-            var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
+            var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: near, far: far);
             applycameraoffset += delegate
             {
                 cameraPX.position.copy(new THREE.Vector3(0, 0, 0));
@@ -731,7 +763,7 @@ namespace x360x83
 
 
             #region z
-            var cameraNZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
+            var cameraNZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: near, far: far);
             //cameraNZ.lookAt(new THREE.Vector3(0, 0, -1));
             applycameraoffset += delegate
             {
@@ -749,7 +781,7 @@ namespace x360x83
             //canvasNZ.canvas.style.transform = $"scale({uizoom})";
             canvasNZ.canvas.style.transform = "scale(" + uizoom + ")";
 
-            var cameraPZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
+            var cameraPZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: near, far: far);
             //cameraPZ.lookAt(new THREE.Vector3(1, 0, 0));
             applycameraoffset += delegate
             {
@@ -804,9 +836,10 @@ namespace x360x83
 
 
 
-            #region spherical
-            var gl = new WebGLRenderingContext(alpha: true, preserveDrawingBuffer: true);
-            var c = gl.canvas.AttachToDocument();
+            #region gl4K spherical
+            var gl4K = new WebGLRenderingContext(alpha: true, preserveDrawingBuffer: true);
+            var c4k = gl4K.canvas.AttachToDocument();
+
 
             //  3840x2160
 
@@ -815,8 +848,20 @@ namespace x360x83
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150722/360-youtube
 
 
-            c.width = 3840;
-            c.height = 2160;
+            // when can we go up?
+            c4k.width = 3840;
+            c4k.height = 2160;
+
+            // https://www.youtube.com/watch?v=sLprVF6d7Ug
+            // 8K is 7680 4320
+
+            // https://www.youtube.com/watch?v=RNdHaeBhT9Q
+            // 8K is 7680 3840
+
+            //c.width = 7680;
+            ////c.height = 3840;
+            //c.height = 4320;
+
 
 
             //c.width = 3840 * 2;
@@ -844,30 +889,58 @@ namespace x360x83
             //c.width = 6466;
             //c.height = 3232;
 
-            new IHTMLPre { new { c.width, c.height } }.AttachToDocument();
+            new IHTMLPre { new { c4k.width, c4k.height } }.AttachToDocument();
 
             //6466x3232
 
             //var suizoom = 720f / c.height;
             //var suizoom = 360f / c.height;
-            var suizoom = 480f / c.width;
+            var suizoom = 480f / c4k.width;
 
-            c.style.transformOrigin = "0 0";
+            c4k.style.backgroundColor = "yellow";
+            c4k.style.transformOrigin = "0 0";
             //c.style.transform = $"scale({suizoom})";
-            c.style.transform = "scale(" + suizoom + ")";
+            c4k.style.transform = "scale(" + suizoom + ")";
             //c.style.backgroundColor = "yellow";
-            c.style.position = IStyle.PositionEnum.absolute;
+            c4k.style.position = IStyle.PositionEnum.absolute;
 
-            c.style.SetLocation(
+            c4k.style.SetLocation(
                 8 + (int)(uizoom * cubefacesize + 8) * 0,
                 8 + (int)(uizoom * cubefacesize + 8) * 3 + 120
                 );
 
+
+            // until we figure out how to fix the shader, we can try to fake it?
+            // will allow atleast a nice static 8K image?
+            // S6 did a 6546x3272 image. 5k?
+
+            // 1.77
+            var c8k = new CanvasRenderingContext2D(3840 * 2, 2160 * 2);
+
+            //var c8k = new CanvasRenderingContext2D(5120, 2880);
+
+            // 5120 x 2880 pixel
+
+            // 8k canvas wont load in chrome?
+            c8k.canvas.AttachToDocument();
+
+
+            c8k.canvas.style.backgroundColor = "cyan";
+            c8k.canvas.style.transformOrigin = "0% 0%";
+            c8k.canvas.style.transform = "scale(" + (suizoom / 2) + ")";
+
+            c8k.canvas.style.SetLocation(
+                8 + (int)(uizoom * cubefacesize + 8) * 0 + 120,
+                8 + (int)(uizoom * cubefacesize + 8) * 3 + 120 + 320
+                );
+
+
+
             var pass = new CubeToEquirectangular.Library.ShaderToy.EffectPass(
                        null,
-                       gl,
-                       precission: CubeToEquirectangular.Library.ShaderToy.DetermineShaderPrecission(gl),
-                       supportDerivatives: gl.getExtension("OES_standard_derivatives") != null,
+                       gl4K,
+                       precission: CubeToEquirectangular.Library.ShaderToy.DetermineShaderPrecission(gl4K),
+                       supportDerivatives: gl4K.getExtension("OES_standard_derivatives") != null,
                        callback: null,
                        obj: null,
                        forceMuted: false,
@@ -944,8 +1017,20 @@ namespace x360x83
 
                 if (dir == null)
                 {
+                    var c8ksw = Stopwatch.StartNew();
+
+                    c8k.drawImage(frame0, 0, 0, c8k.canvas.width, c8k.canvas.height);
+                    c8k.drawImage(gl4K, 0, 0, c8k.canvas.width, c8k.canvas.height);
+
+
                     // not exporting to file system?
-                    var f0 = new IHTMLImage { src = gl.canvas.toDataURL() };
+                    //var f0 = new IHTMLImage { src = gl4K.canvas.toDataURL() };
+                    //var f0 = new IHTMLImage { src = c8k.canvas.toDataURL() };
+
+                    // png would be 50mb?
+                    var f0 = new IHTMLImage { src = c8k.canvas.toDataURL(quality: 0.9) };
+                    // 22989ms { c8ksw = 00:00:12.12976 }
+                    Console.WriteLine(new { c8ksw });
 
                     //var f0 = (IHTMLImage)gl.canvas;
                     //var f0 = (IHTMLImage)gl.canvas;
@@ -976,7 +1061,7 @@ namespace x360x83
                 //dir.WriteAllBytes("0000.png", gl.canvas);
 
                 var glsw = Stopwatch.StartNew();
-                dir.WriteAllBytes("0000.png", gl);
+                dir.WriteAllBytes("0000.png", gl4K);
 
                 new IHTMLPre { new { glsw.ElapsedMilliseconds } }.AttachToDocument();
 
@@ -1043,7 +1128,7 @@ namespace x360x83
 
                 // https://code.google.com/p/chromium/issues/detail?id=404301
                 if (dir != null)
-                    await dir.WriteAllBytes(filename, gl);
+                    await dir.WriteAllBytes(filename, gl4K);
                 //await dir.WriteAllBytes(filename, gl.canvas);
 
                 status = "WriteAllBytes... done " + new { fcamerax, filename, swcapture.ElapsedMilliseconds };
@@ -1158,6 +1243,21 @@ namespace x360x83
             //    floor2.AttachTo(scene);
             //}
 
+            //var p900toCubeSize = cubefacesize / 1080f;
+            var p900toCubeSize = cubefacesize / 1920f;
+
+            //p900toCubeSize *= 0.7f;
+
+            // where is this magic number coming from??
+            p900toCubeSize *= 0.65f;
+            //p900toCubeSize *= 0.5f;
+
+            // http://stackoverflow.com/questions/17648067/three-js-drawing-two-overlapping-transparent-spheres-and-hiding-intersection
+
+
+
+            var farimage = new output00609();
+            var nearimage = new output01085();
 
             // front?
             {
@@ -1168,12 +1268,66 @@ namespace x360x83
 
 
                 //var tex0 = new THREE.Texture(new output01027()) { needsUpdate = true };
-                var tex0 = new THREE.Texture(new output00630()) { needsUpdate = true };
+                //var tex0 = new THREE.Texture(new output00630()) { needsUpdate = true };
+                var tex0 = new THREE.Texture(farimage) { needsUpdate = true, minFilter = THREE.LinearFilter };
+                applycameraoffset += delegate { tex0.needsUpdate = true; };
+
+                //var planeGeometry0 = new THREE.PlaneGeometry(1920, 1080, 8, 8);
+                var planeGeometry0 = new THREE.PlaneGeometry((int)(1920 * p900toCubeSize), (int)(1080 * p900toCubeSize), 8, 8);
+                var floor2 = new THREE.Mesh(planeGeometry0,
+                    //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+                    //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
+                    //new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000, specular = 0xff0000 })
+                    new THREE.MeshPhongMaterial(
+                        new
+                        {
+                            // black otherwise?
+                            transparent = true,
+
+                            map = tex0,
+
+
+                            //ambient = 0x00ff00,
+                            //color = 0x00ff00
+                        })
+
+                );
+
+                //(floor2 as dynamic).renderDepth = 0.2;
+
+                //floor2.position.set(0, 0, -cubefacesize  * 0.55);
+
+                // zoom in and get 90FOV clouseup?
+                floor2.position.set(-cubefacesize * 0.50 - skyboxradius0, 0, 0);
+                //floor2.position.set(-skyboxradius0 - 128, 0, 0);
+                floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2);
+                //floor2.AttachTo(scene);
+                floor2.AttachTo(scenezooms);
+            }
+
+
+
+
+
+            {
+                //var tex0 = new THREE.Texture { image = new moon(), needsUpdate = true };
+                //var tex0 = new THREE.Texture(new moon());
+                //var tex0 = new THREE.Texture(new moon()) { needsUpdate = true };
+                //var tex0 = new THREE.Texture(shader1canvas) { needsUpdate = true };
+
+
+                //var tex0 = new THREE.Texture(new output01027()) { needsUpdate = true };
+                var tex0 = new THREE.Texture(nearimage) { needsUpdate = true, minFilter = THREE.LinearFilter };
+                //var tex0 = new THREE.Texture(new output00630()) { needsUpdate = true };
 
                 applycameraoffset += delegate { tex0.needsUpdate = true; };
 
                 //var planeGeometry0 = new THREE.PlaneGeometry(1920, 1080, 8, 8);
-                var planeGeometry0 = new THREE.PlaneGeometry((int)(1920 * 0.2), (int)(1080 * 0.2), 8, 8);
+                //var planeGeometry0 = new THREE.PlaneGeometry((int)(1920 * 0.1), (int)(1080 * 0.1), 8, 8);
+
+
+
+                var planeGeometry0 = new THREE.PlaneGeometry((int)(1920 * p900toCubeSize), (int)(1080 * p900toCubeSize), 8, 8);
                 var floor2 = new THREE.Mesh(planeGeometry0,
                     //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
                     //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
@@ -1193,13 +1347,65 @@ namespace x360x83
 
                 );
                 //floor2.position.set(0, 0, -cubefacesize  * 0.55);
+                //(floor2 as dynamic).renderDepth = 0.3;
 
                 // zoom in and get 90FOV clouseup?
-                floor2.position.set(-skyboxradius0 - 128, 0, 0);
+                floor2.position.set(-cubefacesize * 0.50, 0, 0);
                 floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2);
                 //floor2.AttachTo(scene);
                 floor2.AttachTo(scenezooms);
             }
+
+            new IHTMLButton { "load frames from disk " }.AttachToDocument().onclick += async e =>
+            {
+                e.Element.disabled = true;
+
+                // how do we load the files?
+                var dir2 = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
+
+                var dir2r = dir2.createReader();
+
+                var files2 = await dir2r.readFileEntries();
+
+                var files2count = files2.Count();
+
+                Console.WriteLine(new { files2count });
+
+                // does this dir have the first and last image we already know of?
+                // 55390ms { files2count = 4324 }
+
+                var firstcandidate = files2.First();
+
+                //Console.WriteLine(new { firstcandidate, farimage.src });
+                // 19230ms { firstcandidate = [object FileEntry], src = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360x83/output00609.png }
+
+                // 10903ms { firstcandidate = output00001.png, farimage = output00609.png }
+
+                var files2skip = files2.SkipWhile(firstcandidate1 => firstcandidate1.name != farimage.src.SkipUntilLastOrEmpty("/"));
+                //Console.WriteLine(new { files2skip = files2skip.Count() });
+
+                var files2take = files2skip.TakeWhile(firstcandidate1 => firstcandidate1.name != nearimage.src.SkipUntilLastOrEmpty("/"));
+
+                //6228ms { files2count = 4324 }
+                //view-source:54116 6377ms { files2take = 476 }
+
+                var files3 = files2take.ToArray();
+                var files3count = files3.Count();
+
+
+                //Console.WriteLine(new { files2take = files2take.Count() });
+
+                var step = (int)(files3count * 0.25);
+
+                for (int i = step; i < files3count; i += step)
+                {
+
+
+                    //files3[i].
+                }
+
+
+            };
 
 
             //{
@@ -1279,8 +1485,11 @@ namespace x360x83
                                 map = s,
                                 // both?
                                 //side = THREE.BackSide,
-                                //transparent = true
+                                transparent = true
                             });
+
+                    // nice
+                    //stars_material.opacity = 0.5;
 
 
 
@@ -1333,6 +1542,36 @@ namespace x360x83
                     stars.scale.x = -1;
 
 
+                    // http://stackoverflow.com/questions/31797871/three-js-alpha-on-entire-object
+                    applycameraoffset += delegate
+                    {
+                        if (cameraz.valueAsNumber == 0)
+                        {
+                            // static 5k image should take over...
+                            stars_material.opacity = 0.0;
+                            return;
+                        }
+
+
+                        var a = (cameraz.valueAsNumber / (double)camerazMIN);
+
+                        stars.rotation.set(0, 0, 0);
+
+                        //    skyrotright
+                        //stars.rotateOnAxis(new THREE.Vector3(0, 0, 1), (Math.PI / 2) * (skyrotup.valueAsNumber / 900.0));
+                        stars.rotateOnAxis(new THREE.Vector3(0, 1, 0), (Math.PI / 2) * (skyrotright.valueAsNumber / 900.0));
+
+
+
+                        stars.rotateOnAxis(new THREE.Vector3(0, 0, 1), (Math.PI / 2) * ((a * 35.0 + skyrotup.valueAsNumber) / 900.0));
+
+
+                        stars_material.opacity = (1.0 - a) * 0.7 + 0.3;
+                    };
+
+
+
+
                     // can we get our hrozion recentered?
                     //stars.rotateOnAxis(new THREE.Vector3(0, 0, 1), (Math.PI / 2) * (3 / 90.0));
                     //stars.rotateOnAxis(new THREE.Vector3(0, 0, 1), (Math.PI / 2) * (1.3 / 90.0));
@@ -1340,12 +1579,6 @@ namespace x360x83
 
                     applycameraoffset += delegate
                     {
-                        stars.rotation.set(0, 0, 0);
-
-                        //    skyrotright
-                        stars.rotateOnAxis(new THREE.Vector3(0, 0, 1), (Math.PI / 2) * (skyrotup.valueAsNumber / 900.0));
-                        stars.rotateOnAxis(new THREE.Vector3(0, 1, 0), (Math.PI / 2) * (skyrotright.valueAsNumber / 900.0));
-
 
                         scenezooms.rotation.set(0, 0, 0);
                         // keep skybox where it is
@@ -1483,13 +1716,24 @@ namespace x360x83
 
                         // how can we render cubemap?
 
-
+                        if (cameraz.valueAsNumber == 0)
+                            renderer0.setClearColor(0x0, 0);
+                        else
+                            renderer0.setClearColor(0x0, 1);
 
                         new[] {
                                    canvasPX, canvasNX,
                                    canvasPY, canvasNY,
                                    canvasPZ, canvasNZ
-                        }.WithEach(cc => cc.clearRect(0, 0, cubefacesize, cubefacesize));
+                        }.WithEach(cc =>
+                            {
+
+
+
+
+                                cc.clearRect(0, 0, cubefacesize, cubefacesize);
+                            }
+                        );
 
                         //gl.clear()
 
@@ -1498,8 +1742,10 @@ namespace x360x83
                             var cameraPXsw = Stopwatch.StartNew();
 
                             renderer0.render(scene, cameraPX);
+
+                            // 35207ms { cameraPXsw = 00:00:00.88 }
                             //75505ms { cameraPXsw = 00:00:00.61 }
-                            Console.WriteLine(new { cameraPXsw });
+                            //Console.WriteLine(new { cameraPXsw });
 
                             // clear if transparent?
                             canvasPX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
@@ -1587,10 +1833,10 @@ namespace x360x83
                         }.WithEachIndex(
                          (img, index) =>
                          {
-                             gl.bindTexture(gl.TEXTURE_CUBE_MAP, pass.tex);
+                             gl4K.bindTexture(gl.TEXTURE_CUBE_MAP, pass.tex);
 
                              //gl.pixelStorei(gl.UNPACK_FLIP_X_WEBGL, false);
-                             gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+                             gl4K.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
 
                              // http://stackoverflow.com/questions/15364517/pixelstoreigl-unpack-flip-y-webgl-true
 
@@ -1598,7 +1844,7 @@ namespace x360x83
                              //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
                              //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
 
-                             gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X + (uint)index, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img.canvas);
+                             gl4K.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X + (uint)index, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img.canvas);
 
                          }
                       );
@@ -1606,7 +1852,12 @@ namespace x360x83
 
                             // http://stackoverflow.com/questions/11544608/how-to-clear-a-rectangle-area-in-webgl
 
-                            gl.clear(gl.COLOR_BUFFER_BIT);
+                            if (cameraz.valueAsNumber == 0)
+                                gl4K.clearColor(0, 0, 0, 0);
+                            else
+                                gl4K.clearColor(0, 0, 0, 1);
+
+                            gl4K.clear(gl.COLOR_BUFFER_BIT);
 
                             // could do dynamic resolution- fog of war or fog of FOV. where up to 150deg field of vision is encouragedm, not 360
                             pass.Paint_Image(
@@ -1628,7 +1879,7 @@ namespace x360x83
 
 
                             // what does it do?
-                            gl.flush();
+                            gl4K.flush();
                             #endregion
 
 
