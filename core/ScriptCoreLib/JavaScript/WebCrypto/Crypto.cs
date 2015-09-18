@@ -13,6 +13,9 @@ namespace ScriptCoreLib.JavaScript.DOM
     [Script(HasNoPrototype = true)]
     public class Crypto
     {
+        // https://boringssl.googlesource.com/boringssl/+log/1d128f369c797b8bae996d5e973fc0b8a099a1b8..231cb8214511ea5784dd94a59f3e5f5fb7d39f8e
+        // https://boringssl.googlesource.com/boringssl/+/231cb8214511ea5784dd94a59f3e5f5fb7d39f8e
+
         // https://github.com/fantapsody/webgl-aes/tree/master/shader
 
         // http://keithwiley.com/mindRamblings/unbreakableEncryption.shtml

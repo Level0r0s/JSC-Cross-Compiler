@@ -1356,6 +1356,56 @@ namespace x360x83
                 floor2.AttachTo(scenezooms);
             }
 
+
+            Action<IHTMLImage, double> AddFrame = (img, z) =>
+            {
+                {
+                    //var tex0 = new THREE.Texture { image = new moon(), needsUpdate = true };
+                    //var tex0 = new THREE.Texture(new moon());
+                    //var tex0 = new THREE.Texture(new moon()) { needsUpdate = true };
+                    //var tex0 = new THREE.Texture(shader1canvas) { needsUpdate = true };
+
+
+                    //var tex0 = new THREE.Texture(new output01027()) { needsUpdate = true };
+                    //var tex0 = new THREE.Texture(new output00630()) { needsUpdate = true };
+                    var tex0 = new THREE.Texture(img) { needsUpdate = true, minFilter = THREE.LinearFilter };
+                    applycameraoffset += delegate { tex0.needsUpdate = true; };
+
+                    //var planeGeometry0 = new THREE.PlaneGeometry(1920, 1080, 8, 8);
+                    var planeGeometry0 = new THREE.PlaneGeometry((int)(1920 * p900toCubeSize), (int)(1080 * p900toCubeSize), 8, 8);
+                    var floor2 = new THREE.Mesh(planeGeometry0,
+                        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+                        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
+                        //new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000, specular = 0xff0000 })
+                        new THREE.MeshPhongMaterial(
+                            new
+                            {
+                                // black otherwise?
+                                transparent = true,
+
+                                map = tex0,
+
+
+                                //ambient = 0x00ff00,
+                                //color = 0x00ff00
+                            })
+
+                    );
+
+                    //(floor2 as dynamic).renderDepth = 0.2;
+
+                    //floor2.position.set(0, 0, -cubefacesize  * 0.55);
+
+                    // zoom in and get 90FOV clouseup?
+                    floor2.position.set(-cubefacesize * 0.50 - skyboxradius0 * z, 0, 0);
+                    //floor2.position.set(-skyboxradius0 - 128, 0, 0);
+                    floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2);
+                    //floor2.AttachTo(scene);
+                    floor2.AttachTo(scenezooms);
+                }
+
+            };
+
             new IHTMLButton { "load frames from disk " }.AttachToDocument().onclick += async e =>
             {
                 e.Element.disabled = true;
@@ -1389,21 +1439,52 @@ namespace x360x83
                 //6228ms { files2count = 4324 }
                 //view-source:54116 6377ms { files2take = 476 }
 
+                // reverse?
                 var files3 = files2take.ToArray();
                 var files3count = files3.Count();
 
 
                 //Console.WriteLine(new { files2take = files2take.Count() });
 
-                var step = (int)(files3count * 0.25);
+                var step = 8;
+                //var step = (int)(files3count * 0.05);
+                //var step = (int)(files3count * 0.25);
 
                 for (int i = step; i < files3count; i += step)
                 {
+                    //files3[i].
 
+                    Console.WriteLine(new { i });
+
+                    e.Element.innerText = new { step, i, files3count }.ToString();
+
+
+                    //files3[i].file()
+                    var ff = await files3[i].file();
+
+                    var url = ff.ToObjectURL();
+                    var img = new IHTMLImage(url);
+
+
+                    await img.async.oncomplete;
+
+                    //async ff =>
+                    //{
+                    //    var ffbytes = await ff.readAsBytes();
+
+                    //var ffimage = (IHTMLImage)ffbytes;
+
+                    var aa = (double)i / files3count;
+
+                    AddFrame(img, 1.0 - aa);
+
+                    //    }
+                    //);
 
                     //files3[i].
                 }
 
+                e.Element.innerText = "done " + new { step, files3count }.ToString();
 
             };
 

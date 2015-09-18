@@ -16,6 +16,8 @@ namespace ScriptCoreLib.JavaScript.DOM
 		public readonly string type;
 		public readonly string name;
 
-		// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201409/20140910
-	}
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201409/20140910
+
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360x83\Application.cs
+    }
 }
