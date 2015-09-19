@@ -23,15 +23,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using x360clouds;
-using x360clouds.Design;
-using x360clouds.HTML.Pages;
+using x360faceedgevertex;
+using x360faceedgevertex.Design;
+using x360faceedgevertex.HTML.Pages;
 using System.Diagnostics;
 using ScriptCoreLib.JavaScript.WebGL;
 
-namespace x360clouds
+namespace x360faceedgevertex
 {
-    using x360clouds.HTML.Images.FromAssets;
+    using x360faceedgevertex.HTML.Images.FromAssets;
     using gl = WebGLRenderingContext;
 
     /// <summary>
@@ -39,7 +39,9 @@ namespace x360clouds
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
-        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150916/x360clouds
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150912/x360faceedgevertex
+
+
 
 
         //  ls sdcard/oculus/360photos/
@@ -48,8 +50,12 @@ namespace x360clouds
         // 2649 KB/s (1085134 bytes in 0.400s)
 
         // "X:\vr\tr.png"
-        // R:\util\android-sdk-windows\platform-tools\adb.exe push "X:\vr\seascape.png" /sdcard/oculus/360photos/
-        // R:\util\android-sdk-windows\platform-tools\adb.exe push "P:\vr\x360clouds\00188.png" /sdcard/oculus/360photos/
+        // R:\util\android-sdk-windows\platform-tools\adb.exe push "X:\vr\tr.png" /sdcard/oculus/360photos/
+
+
+        // R:\util\android-sdk-windows\platform-tools\adb.exe push  "X:\vr\code.png" /sdcard/oculus/360photos/
+        // R:\util\android-sdk-windows\platform-tools\adb.exe push  "X:\vr\cone2.png" /sdcard/oculus/360photos/
+        // "X:\vr\code.png"
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150906/roomscanningeffectbyrosme
 
@@ -96,12 +102,12 @@ namespace x360clouds
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150808/cubemapcamera
         // subst /D b:
-        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360clouds\x360clouds\bin\Debug\staging\x360clouds.Application\web
-        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360clouds\x360clouds\bin\Debug\staging\x360clouds.Application\web
-        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360clouds\x360clouds\bin\Debug\staging\x360clouds.Application\web
+        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360faceedgevertex\x360faceedgevertex\bin\Debug\staging\x360faceedgevertex.Application\web
+        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360faceedgevertex\x360faceedgevertex\bin\Debug\staging\x360faceedgevertex.Application\web
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360faceedgevertex\x360faceedgevertex\bin\Debug\staging\x360faceedgevertex.Application\web
         // what if we want to do subst in another winstat or session?
 
-        // ColladaLoader: Empty or non-existing file (assets/x360clouds/S6Edge.dae)
+        // ColladaLoader: Empty or non-existing file (assets/x360faceedgevertex/S6Edge.dae)
 
         /// <summary>
         /// This is a javascript application.
@@ -184,7 +190,7 @@ namespace x360clouds
                         // 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
                         Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
 
-                        new chrome.Notification(title: "x360clouds");
+                        new chrome.Notification(title: "x360faceedgevertex");
 
                         // https://developer.chrome.com/apps/app_window#type-CreateWindowOptions
                         var xappwindow = await chrome.app.window.create(
@@ -212,6 +218,12 @@ namespace x360clouds
 
 
 #endif
+
+
+            //var vs0 = new TraceConeWithCRTByKlk.Shaders.Program360FragmentShader();
+            var vs0 = new FaceEdgeVertexByPaniq.Shaders.Program360FragmentShader();
+
+
             // onframe need syncs to enable GC!
             var vsync = default(TaskCompletionSource<object>);
             Func<bool> vsyncReady = delegate
@@ -241,9 +253,9 @@ namespace x360clouds
                                                 //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
                                                 //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
-            //if (Environment.ProcessorCount < 8)
-            //cubefacesize = 64; // 6 faces, ?
-            //cubefacesize = 256; // 6 faces, ?
+            // force laptop into preview. when can we have a button for it?
+            if (Environment.ProcessorCount < 8)
+                cubefacesize = 64; // 6 faces, ?
 
             // fast gif?
             //cubefacesize = 128; // 6 faces, ?
@@ -304,7 +316,7 @@ namespace x360clouds
             //const int size = 1024; // 6 faces, ?
             //const int cubefacesize = 1024; // 6 faces, ?
 
-            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360clouds/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
+            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360faceedgevertex/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
 
 
             var far = 0xffffff;
@@ -491,9 +503,6 @@ namespace x360clouds
 
             //var vs0 = new ChromeShaderToyRelentlessBySrtuss.Shaders.ProgramFragmentShader();
             //var vs0 = new TraceConeWithCRTByKlk.Shaders.ProgramFragmentShader();
-            //var vs0 = new ChromeShaderToySeascapeByTDM.Shaders.ProgramFragmentShader();
-            //var vs0 = new ChromeShaderToySeascapeByTDM.Shaders.Program360FragmentShader();
-            var vs0 = new CloudsPhysicallyBasedByJamiep.Shaders.Program360FragmentShader();
 
 
 
@@ -588,7 +597,8 @@ namespace x360clouds
                   {
                       // ldflda?
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, -1.0f, 0, 0.0f);
-                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, 1.0f);
+                      //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, 1.0f);
+                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, -1.0f);
 
                       // left?
                       //forward=normalize(float3(0.0 , 0.0 ,1.0));
@@ -948,7 +958,8 @@ namespace x360clouds
                   {
                       // ldflda?
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 1.0f, 0, 1.0f);
-                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, -1.0f);
+                      //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, -1.0f);
+                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, 1.0f);
 
                       // right
                       //forward=normalize(float3(0.0 , 0.0 ,-1.0));
@@ -1107,7 +1118,8 @@ namespace x360clouds
 
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.01f, -1, 0.01f);
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.001f, -1, 0f);
-                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0, -1, -0.001f);
+                      //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0, -1, -0.0001f);
+                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0, 1, -0.0001f);
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, .0001f, -1, 0);
 
                   };
@@ -1264,7 +1276,9 @@ namespace x360clouds
 
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.01f, -1, 0.01f);
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.001f, 1, 0f);
-                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0, 1, 0.001f);
+                      //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0, 1, -0.0001f);
+                      //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0, -1, -0.0001f);
+                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0, -1, 0.0001f);
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, .0001f, -1, 0);
 
                   };
@@ -2080,7 +2094,7 @@ namespace x360clouds
                     //floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1), Math.PI / 2);
                     //floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1), Math.PI );
                     //floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1), Math.PI);
-                    floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1), bottomRotate100 * 0.01f);
+                    floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1), -Math.PI + bottomRotate100 * 0.01f);
 
                 };
 

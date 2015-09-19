@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E5F16937-C8CA-4023-8A69-8682D52F6487}</ProjectGuid>
+    <ProjectGuid>{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>x360relentless</RootNamespace>
-    <AssemblyName>x360relentless</AssemblyName>
+    <RootNamespace>x360faceedgevertex</RootNamespace>
+    <AssemblyName>x360faceedgevertex</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>x360relentless.Program</StartupObject>
+    <StartupObject>x360faceedgevertex.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -138,8 +138,17 @@
     <Reference Include="x360relentless.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\x360relentless.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="ChromeShaderToyRelentlessBySrtuss.AssetsLibrary">
-      <HintPath>..\..\synergy\r\ChromeShaderToyRelentlessBySrtuss\ChromeShaderToyRelentlessBySrtuss\bin\staging.AssetsLibrary\ChromeShaderToyRelentlessBySrtuss.AssetsLibrary.dll</HintPath>
+    <Reference Include="x360tracecone.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\x360tracecone.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="TraceConeWithCRTByKlk.AssetsLibrary">
+      <HintPath>..\..\synergy\t\TraceConeWithCRTByKlk\TraceConeWithCRTByKlk\bin\staging.AssetsLibrary\TraceConeWithCRTByKlk.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="x360faceedgevertex.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\x360faceedgevertex.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FaceEdgeVertexByPaniq.AssetsLibrary">
+      <HintPath>..\..\synergy\f\FaceEdgeVertexByPaniq\bin\staging.AssetsLibrary\FaceEdgeVertexByPaniq.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +173,9 @@
     <Folder Include="web\assets\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\synergy\r\ChromeShaderToyRelentlessBySrtuss\ChromeShaderToyRelentlessBySrtuss\ChromeShaderToyRelentlessBySrtuss.csproj">
-      <Project>{91bc0d94-1e92-436d-9147-92e42e560a76}</Project>
-      <Name>ChromeShaderToyRelentlessBySrtuss</Name>
+    <ProjectReference Include="..\..\synergy\f\FaceEdgeVertexByPaniq\FaceEdgeVertexByPaniq.csproj">
+      <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
+      <Name>FaceEdgeVertexByPaniq</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

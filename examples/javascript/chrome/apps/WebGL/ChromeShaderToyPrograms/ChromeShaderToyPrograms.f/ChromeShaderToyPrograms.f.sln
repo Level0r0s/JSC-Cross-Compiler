@@ -75,6 +75,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluxCoreByOtaviogood", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurTreesByEiffie", "..\..\synergy\f\FurTreesByEiffie\FurTreesByEiffie.csproj", "{24CB45FD-79D7-4596-98AD-056E36D461DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceEdgeVertexByPaniq", "..\..\synergy\f\FaceEdgeVertexByPaniq\FaceEdgeVertexByPaniq.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -213,6 +215,10 @@ Global
 		{24CB45FD-79D7-4596-98AD-056E36D461DD}.Debug|x86.Build.0 = Debug|x86
 		{24CB45FD-79D7-4596-98AD-056E36D461DD}.Release|x86.ActiveCfg = Release|x86
 		{24CB45FD-79D7-4596-98AD-056E36D461DD}.Release|x86.Build.0 = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.ActiveCfg = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -252,5 +258,6 @@ Global
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2} = {8003BE99-2C77-4F84-8476-B67BC07113F7}
 		{45C06B48-E294-4C72-8FC3-3D42695B535A} = {8003BE99-2C77-4F84-8476-B67BC07113F7}
 		{24CB45FD-79D7-4596-98AD-056E36D461DD} = {8003BE99-2C77-4F84-8476-B67BC07113F7}
+		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {8003BE99-2C77-4F84-8476-B67BC07113F7}
 	EndGlobalSection
 EndGlobal

@@ -160,6 +160,9 @@
     <Reference Include="WobblyBlobByDr2.AssetsLibrary">
       <HintPath>..\..\synergy\w\WobblyBlobByDr2\bin\staging.AssetsLibrary\WobblyBlobByDr2.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="WeirdCanyonByAiekick.AssetsLibrary">
+      <HintPath>..\..\synergy\w\WeirdCanyonByAiekick\bin\staging.AssetsLibrary\WeirdCanyonByAiekick.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="w.cs" />
@@ -190,6 +193,10 @@
     <ProjectReference Include="..\..\synergy\w\WaterfallByZtri\WaterfallByZtri\WaterfallByZtri.csproj">
       <Project>{b209c2f1-c8b0-441d-9a21-17d665cfd03c}</Project>
       <Name>WaterfallByZtri</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\w\WeirdCanyonByAiekick\WeirdCanyonByAiekick.csproj">
+      <Project>{b84c84b0-d491-4d89-9ff8-55ab7fb48295}</Project>
+      <Name>WeirdCanyonByAiekick</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\w\WindWakerOceanByPolyflare\WindWakerOceanByPolyflare\WindWakerOceanByPolyflare.csproj">
       <Project>{63f34366-1907-400d-bd5b-6572ef6742f3}</Project>

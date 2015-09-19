@@ -19,6 +19,8 @@ namespace ChromeShaderToyPrograms.w
 
             #region /w/
             ["WaterfallByZtri"] = () => new WaterfallByZtri.Shaders.ProgramFragmentShader(),
+            ["WeirdCanyonByAiekick"] = () => new WeirdCanyonByAiekick.Shaders.ProgramFragmentShader(),
+
             ["WindWakerOceanByPolyflare"] = () => new WindWakerOceanByPolyflare.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyWireframeByYasuo"] = () => new ChromeShaderToyWireframeByYasuo.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyWetStoneByTDM"] = () => new ChromeShaderToyWetStoneByTDM.Shaders.ProgramFragmentShader(),

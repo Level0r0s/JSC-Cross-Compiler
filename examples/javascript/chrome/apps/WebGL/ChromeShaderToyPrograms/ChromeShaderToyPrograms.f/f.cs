@@ -29,6 +29,8 @@ namespace ChromeShaderToyPrograms.f
             ["ChromeShaderToyFrozenCrytekLogo"] = () => new ChromeShaderToyFrozenCrytekLogo.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyFrozenWastelandByDave"] = () => new ChromeShaderToyFrozenWastelandByDave.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyFutureBillboardByEiffie"] = () => new ChromeShaderToyFutureBillboardByEiffie.Shaders.ProgramFragmentShader(),
+
+            ["FaceEdgeVertexByPaniq"] = () => new FaceEdgeVertexByPaniq.Shaders.ProgramFragmentShader(),
             ["FakeGlobalIlluminationByTz"] = () => new FakeGlobalIlluminationByTz.Shaders.ProgramFragmentShader(),
             ["FakeVolumeLightByEiffie"] = () => new FakeVolumeLightByEiffie.Shaders.ProgramFragmentShader(),
             ["FerrisWheelByGaz"] = () => new FerrisWheelByGaz.Shaders.ProgramFragmentShader(),

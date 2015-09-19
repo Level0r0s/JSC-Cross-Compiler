@@ -282,6 +282,10 @@
       <Project>{1677eb8b-970d-4777-b02a-29c97934fab5}</Project>
       <Name>ChromeShaderToyFutureBillboardByEiffie</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FaceEdgeVertexByPaniq\FaceEdgeVertexByPaniq.csproj">
+      <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
+      <Name>FaceEdgeVertexByPaniq</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\f\FakeGlobalIlluminationByTz\FakeGlobalIlluminationByTz\FakeGlobalIlluminationByTz.csproj">
       <Project>{2031f1b7-e70c-4a59-959e-8ef7036b8559}</Project>
       <Name>FakeGlobalIlluminationByTz</Name>
