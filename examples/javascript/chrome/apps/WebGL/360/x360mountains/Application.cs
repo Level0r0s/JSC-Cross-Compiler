@@ -23,15 +23,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using x360faceedgevertex;
-using x360faceedgevertex.Design;
-using x360faceedgevertex.HTML.Pages;
+using x360mountains;
+using x360mountains.Design;
+using x360mountains.HTML.Pages;
 using System.Diagnostics;
 using ScriptCoreLib.JavaScript.WebGL;
 
-namespace x360faceedgevertex
+namespace x360mountains
 {
-    using x360faceedgevertex.HTML.Images.FromAssets;
+    using x360mountains.HTML.Images.FromAssets;
     using gl = WebGLRenderingContext;
 
     /// <summary>
@@ -39,7 +39,7 @@ namespace x360faceedgevertex
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
-        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150912/x360faceedgevertex
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150912/x360mountains
 
 
 
@@ -85,6 +85,7 @@ namespace x360faceedgevertex
         //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\edge.png" "/sdcard/oculus/360photos/tape360columns.png"
         // 4041 KB/s (3248448 bytes in 0.785s)
 
+        //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push      "X:\vr\terrain.png" "/sdcard/oculus/360photos/"
 
         // could we udp our 360 image from webgl to vr yet?
 
@@ -103,12 +104,12 @@ namespace x360faceedgevertex
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150808/cubemapcamera
         // subst /D b:
-        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360faceedgevertex\x360faceedgevertex\bin\Debug\staging\x360faceedgevertex.Application\web
-        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360faceedgevertex\x360faceedgevertex\bin\Debug\staging\x360faceedgevertex.Application\web
-        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360faceedgevertex\x360faceedgevertex\bin\Debug\staging\x360faceedgevertex.Application\web
+        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360mountains\x360mountains\bin\Debug\staging\x360mountains.Application\web
+        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360mountains\x360mountains\bin\Debug\staging\x360mountains.Application\web
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360mountains\x360mountains\bin\Debug\staging\x360mountains.Application\web
         // what if we want to do subst in another winstat or session?
 
-        // ColladaLoader: Empty or non-existing file (assets/x360faceedgevertex/S6Edge.dae)
+        // ColladaLoader: Empty or non-existing file (assets/x360mountains/S6Edge.dae)
 
         /// <summary>
         /// This is a javascript application.
@@ -191,7 +192,7 @@ namespace x360faceedgevertex
                         // 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
                         Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
 
-                        new chrome.Notification(title: "x360faceedgevertex");
+                        new chrome.Notification(title: "x360mountains");
 
                         // https://developer.chrome.com/apps/app_window#type-CreateWindowOptions
                         var xappwindow = await chrome.app.window.create(
@@ -222,7 +223,8 @@ namespace x360faceedgevertex
 
 
             //var vs0 = new TraceConeWithCRTByKlk.Shaders.Program360FragmentShader();
-            var vs0 = new FaceEdgeVertexByPaniq.Shaders.Program360FragmentShader();
+            //var vs0 = new FaceEdgeVertexByPaniq.Shaders.Program360FragmentShader();
+            var vs0 = new ChromeShaderToyMountainsByHoskins.Shaders.Program360FragmentShader();
 
 
             // onframe need syncs to enable GC!
@@ -255,8 +257,8 @@ namespace x360faceedgevertex
                                                 //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
             // force laptop into preview. when can we have a button for it?
-            if (Environment.ProcessorCount < 8)
-                cubefacesize = 64; // 6 faces, ?
+            //if (Environment.ProcessorCount < 8)
+            //    cubefacesize = 64; // 6 faces, ?
 
             // fast gif?
             //cubefacesize = 128; // 6 faces, ?
@@ -317,7 +319,7 @@ namespace x360faceedgevertex
             //const int size = 1024; // 6 faces, ?
             //const int cubefacesize = 1024; // 6 faces, ?
 
-            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360faceedgevertex/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
+            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360mountains/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
 
 
             var far = 0xffffff;

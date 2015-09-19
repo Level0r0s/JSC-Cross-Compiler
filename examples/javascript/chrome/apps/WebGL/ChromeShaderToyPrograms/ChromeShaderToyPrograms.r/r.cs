@@ -33,10 +33,12 @@ namespace ChromeShaderToyPrograms.r
             ["ChromeShaderToyRotatePyramidByGyabo"] = () => new ChromeShaderToyRotatePyramidByGyabo.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyRotatingByGa2arch"] = () => new ChromeShaderToyRotatingByGa2arch.Shaders.ProgramFragmentShader(),
             ["RainbowSlicesByFizzer"] = () => new RainbowSlicesByFizzer.Shaders.ProgramFragmentShader(),
+
             ["RayBertByHoskins"] = () => new RayBertByHoskins.Shaders.ProgramFragmentShader(),
             ["RayConeRayFrustumByRobert"] = () => new RayConeRayFrustumByRobert.Shaders.ProgramFragmentShader(),
             ["RaymarchingAttempt2ByCraxic"] = () => new RaymarchingAttempt2ByCraxic.Shaders.ProgramFragmentShader(),
             ["RaymarchingDisplacementByJcanabald"] = () => new RaymarchingDisplacementByJcanabald.Shaders.ProgramFragmentShader(),
+            ["RayMarchingPlayByHagerman"] = () => new RayMarchingPlayByHagerman.Shaders.ProgramFragmentShader(),
             ["RaymarchingTutorialByObjelisks"] = () => new RaymarchingTutorialByObjelisks.Shaders.ProgramFragmentShader(),
             ["RaymarchingTweaksByLanza"] = () => new RaymarchingTweaksByLanza.Shaders.ProgramFragmentShader(),
             ["RedCellsByPMalin"] = () => new RedCellsByPMalin.Shaders.ProgramFragmentShader(),
@@ -49,7 +51,10 @@ namespace ChromeShaderToyPrograms.r
             ["RiseOfShroomByAlgorithm"] = () => new RiseOfShroomByAlgorithm.Shaders.ProgramFragmentShader(),
             ["RiverFlightByDr2"] = () => new RiverFlightByDr2.Shaders.ProgramFragmentShader(),
             ["RoadToHellByRez"] = () => new RoadToHellByRez.Shaders.ProgramFragmentShader(),
+
             ["RockShapesWIPByAsteropaeus"] = () => new RockShapesWIPByAsteropaeus.Shaders.ProgramFragmentShader(),
+            ["RocketScienceByMu6k"] = () => new RocketScienceByMu6k.Shaders.ProgramFragmentShader(),
+
             ["RoomScanningEffectByRosme"] = () => new RoomScanningEffectByRosme.Shaders.ProgramFragmentShader(),
             ["RoseByHoskins"] = () => new RoseByHoskins.Shaders.ProgramFragmentShader(),
             ["RutherfordAtomByMattz"] = () => new RutherfordAtomByMattz.Shaders.ProgramFragmentShader(),

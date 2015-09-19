@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F3442623-D462-4C4D-A043-9BD924FDC739}</ProjectGuid>
+    <ProjectGuid>{A61C1A16-3435-4B0F-9002-04A952924BE4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChromeShaderToyMountainsByHoskins</RootNamespace>
-    <AssemblyName>ChromeShaderToyMountainsByHoskins</AssemblyName>
+    <RootNamespace>SkateboardByYasuo</RootNamespace>
+    <AssemblyName>SkateboardByYasuo</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>ChromeShaderToyMountainsByHoskins.Program</StartupObject>
+    <StartupObject>SkateboardByYasuo.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -120,15 +120,26 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="ChromeShaderToyMountainsByHoskins.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\ChromeShaderToyMountainsByHoskins.AssetsLibrary.dll</HintPath>
+    <Reference Include="ChromeShaderToyPortalByHLorenzi.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeShaderToyPortalByHLorenzi.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
     </Reference>
+    <Reference Include="WobblyThingByAvix.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\WobblyThingByAvix.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="OblivionByHoskins.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\OblivionByHoskins.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SkateboardByYasuo.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\SkateboardByYasuo.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="app.config" />
+    <None Include="Shaders\Program.frag" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />
     <Compile Include="ApplicationWebService.cs" />
@@ -136,10 +147,7 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Shaders\Program360.frag" />
-    <None Include="Shaders\Program.frag" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

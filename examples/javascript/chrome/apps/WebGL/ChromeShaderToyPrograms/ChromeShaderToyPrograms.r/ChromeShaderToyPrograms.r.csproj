@@ -235,6 +235,12 @@
     <Reference Include="RhumbLineByBeyondTheStatic.AssetsLibrary">
       <HintPath>..\..\synergy\r\RhumbLineByBeyondTheStatic\bin\staging.AssetsLibrary\RhumbLineByBeyondTheStatic.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="RocketScienceByMu6k.AssetsLibrary">
+      <HintPath>..\..\synergy\r\RocketScienceByMu6k\bin\staging.AssetsLibrary\RocketScienceByMu6k.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="RayMarchingPlayByHagerman.AssetsLibrary">
+      <HintPath>..\..\synergy\r\RayMarchingPlayByHagerman\bin\staging.AssetsLibrary\RayMarchingPlayByHagerman.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="r.cs" />
@@ -342,6 +348,10 @@
       <Project>{3fe6471f-1f37-4278-b0c7-538cbc7c3b80}</Project>
       <Name>RaymarchingDisplacementByJcanabald</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\r\RayMarchingPlayByHagerman\RayMarchingPlayByHagerman.csproj">
+      <Project>{5bb93e61-9160-4a11-8cd9-bc5d02eaa821}</Project>
+      <Name>RayMarchingPlayByHagerman</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\r\RaymarchingTutorialByObjelisks\RaymarchingTutorialByObjelisks\RaymarchingTutorialByObjelisks.csproj">
       <Project>{0cb9e221-1b12-4f67-beda-50607c128951}</Project>
       <Name>RaymarchingTutorialByObjelisks</Name>
@@ -381,6 +391,10 @@
     <ProjectReference Include="..\..\synergy\r\RoadToHellByRez\RoadToHellByRez\RoadToHellByRez.csproj">
       <Project>{82bed3f4-c6ff-4d2e-a6ee-941b78122b2a}</Project>
       <Name>RoadToHellByRez</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\r\RocketScienceByMu6k\RocketScienceByMu6k.csproj">
+      <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
+      <Name>RocketScienceByMu6k</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\r\RockShapesWIPByAsteropaeus\RockShapesWIPByAsteropaeus\RockShapesWIPByAsteropaeus.csproj">
       <Project>{72bc5b0d-6e97-4bcd-8b2d-d80e65aeff33}</Project>

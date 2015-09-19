@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360mountains", "x360mountains.csproj", "{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{D0DB9561-F68B-43D3-8C0B-137FAA3F8C7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyMountainsByHoskins", "..\..\synergy\m\ChromeShaderToyMountainsByHoskins\ChromeShaderToyMountainsByHoskins\ChromeShaderToyMountainsByHoskins.csproj", "{F3442623-D462-4C4D-A043-9BD924FDC739}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{07C5C32C-BBE9-4473-9391-52FEF5C7BBB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceEdgeVertexByPaniq", "..\..\synergy\f\FaceEdgeVertexByPaniq\FaceEdgeVertexByPaniq.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.ActiveCfg = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.Build.0 = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.ActiveCfg = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.Build.0 = Release|x86
+		{F3442623-D462-4C4D-A043-9BD924FDC739}.Debug|x86.ActiveCfg = Debug|x86
+		{F3442623-D462-4C4D-A043-9BD924FDC739}.Debug|x86.Build.0 = Debug|x86
+		{F3442623-D462-4C4D-A043-9BD924FDC739}.Release|x86.ActiveCfg = Release|x86
+		{F3442623-D462-4C4D-A043-9BD924FDC739}.Release|x86.Build.0 = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.ActiveCfg = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F3442623-D462-4C4D-A043-9BD924FDC739} = {D0DB9561-F68B-43D3-8C0B-137FAA3F8C7A}
+		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {07C5C32C-BBE9-4473-9391-52FEF5C7BBB8}
+	EndGlobalSection
+EndGlobal

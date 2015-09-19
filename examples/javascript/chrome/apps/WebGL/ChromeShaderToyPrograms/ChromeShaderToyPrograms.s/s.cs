@@ -64,7 +64,10 @@ namespace ChromeShaderToyPrograms.s
             ["Simlicity3DByRunouw"] = () => new Simlicity3DByRunouw.Shaders.ProgramFragmentShader(),
             ["SimpleDigitalClockByMikeCAT"] = () => new SimpleDigitalClockByMikeCAT.Shaders.ProgramFragmentShader(),
             ["SimpleVoxelsByElias"] = () => new SimpleVoxelsByElias.Shaders.ProgramFragmentShader(),
+
             ["SinMountainsByFred"] = () => new SinMountainsByFred.Shaders.ProgramFragmentShader(),
+            ["SkateboardByYasuo"] = () => new SkateboardByYasuo.Shaders.ProgramFragmentShader(),
+            
             ["SminTestByHughsk"] = () => new SminTestByHughsk.Shaders.ProgramFragmentShader(),
             ["SmoothedCSGByTekF"] = () => new SmoothedCSGByTekF.Shaders.ProgramFragmentShader(),
             ["SnowBallByIapafoto"] = () => new SnowBallByIapafoto.Shaders.ProgramFragmentShader(),
