@@ -1,4 +1,6 @@
-﻿#define REFLECTION_COUNT 1
+﻿//#define REFLECTION_COUNT 1
+#define REFLECTION_COUNT 5
+uniform vec3 uCameraTargetOffset;   
 
 float map(in vec3 pos)
 {
@@ -94,8 +96,37 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     vec3 rd = normalize(vec3(p.x, p.y, 1.0));
     
     
-    rd *= rotationMatrix(vec3(0., 1., 0.), radians(iGlobalTime * 50.0));
+    //rd *= rotationMatrix(vec3(0., 1., 0.), radians(iGlobalTime * 50.0));
    
+mat3 camRotate = 
+	
+		// bottom
+		(uCameraTargetOffset.y == -1.0) ? rotationMatrix(vec3(1., 0., 0.), radians(90.0)) * rotationMatrix(vec3(0., 1., 0.), radians(90.0)):
+
+		// top
+		(uCameraTargetOffset.y == 1.0) ? rotationMatrix(vec3(1., 0., 0.), radians(-90.0)) * rotationMatrix(vec3(0., 1., 0.), radians(90.0)):
+	
+		rotationMatrix(vec3(0., 1., 0.), radians(
+        
+		
+		// left
+		(uCameraTargetOffset.z == -1.0) ? 270. :
+
+		// right
+		(uCameraTargetOffset.z == 1.0) ? 90. :
+
+		// back
+		 (uCameraTargetOffset.x == -1.0) ?  180. : 
+		
+		
+		// front
+		/* (uCameraTargetOffset.x == 1.0) ? */ 0. 
+
+    ));
+
+	rd *= camRotate;
+
+
     vec3 lightPos = vec3(cos(iGlobalTime * 0.1) * 3.0, 0.0, sin(iGlobalTime * 0.4) * 3.0);
     
     vec3 hitp = castRay(ro, rd, 1.0, 32.0);
@@ -119,4 +150,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     }
     
     fragColor = sqrt(color);
+
+
+	fragColor.a = 1.0;
 }

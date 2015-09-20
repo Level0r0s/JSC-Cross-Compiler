@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360mirrorbox", "x360mirrorbox.csproj", "{77234670-3487-477E-9F24-73AB75E6D82E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{4015CD5B-DE44-449C-9F6A-91414D2017F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeLightByBeyondTheStatic", "..\..\synergy\s\ShapeLightByBeyondTheStatic\ShapeLightByBeyondTheStatic\ShapeLightByBeyondTheStatic.csproj", "{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{CDA0D501-F361-4858-AE01-26276A0E0041}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MirrorBoxByPurton", "..\..\synergy\m\MirrorBoxByPurton\MirrorBoxByPurton\MirrorBoxByPurton.csproj", "{4CDA760A-2206-4927-8733-3683EDB877AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.ActiveCfg = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.Build.0 = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.ActiveCfg = Release|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.Build.0 = Release|x86
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}.Debug|x86.ActiveCfg = Debug|x86
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}.Debug|x86.Build.0 = Debug|x86
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}.Release|x86.ActiveCfg = Release|x86
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}.Release|x86.Build.0 = Release|x86
+		{4CDA760A-2206-4927-8733-3683EDB877AB}.Debug|x86.ActiveCfg = Debug|x86
+		{4CDA760A-2206-4927-8733-3683EDB877AB}.Debug|x86.Build.0 = Debug|x86
+		{4CDA760A-2206-4927-8733-3683EDB877AB}.Release|x86.ActiveCfg = Release|x86
+		{4CDA760A-2206-4927-8733-3683EDB877AB}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C} = {4015CD5B-DE44-449C-9F6A-91414D2017F6}
+		{4CDA760A-2206-4927-8733-3683EDB877AB} = {CDA0D501-F361-4858-AE01-26276A0E0041}
+	EndGlobalSection
+EndGlobal
