@@ -36,6 +36,8 @@ namespace ChromeShaderToyPrograms.m
             ["MarbleSculptureByTekF"] = () => new MarbleSculptureByTekF.Shaders.ProgramFragmentShader(),
             ["MikeByIq"] = () => new MikeByIq.Shaders.ProgramFragmentShader(),
             ["MissileGameByAsti"] = () => new MissileGameByAsti.Shaders.ProgramFragmentShader(),
+            ["MobiusHeartsByXMunkki"] = () => new MobiusHeartsByXMunkki.Shaders.ProgramFragmentShader(),
+
             ["MirrorBoxByPurton"] = () => new MirrorBoxByPurton.Shaders.ProgramFragmentShader(),
             ["MirrorRoomByDiLemming"] = () => new MirrorRoomByDiLemming.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyMorningCityByDevin"] = () => new ChromeShaderToyMorningCityByDevin.Shaders.ProgramFragmentShader(),

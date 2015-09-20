@@ -205,6 +205,9 @@
     <Reference Include="MyAstronautByLio.AssetsLibrary">
       <HintPath>..\..\synergy\m\MyAstronautByLio\MyAstronautByLio\bin\staging.AssetsLibrary\MyAstronautByLio.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="MobiusHeartsByXMunkki.AssetsLibrary">
+      <HintPath>..\..\synergy\m\MobiusHeartsByXMunkki\bin\staging.AssetsLibrary\MobiusHeartsByXMunkki.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="m.cs" />
@@ -311,6 +314,10 @@
     <ProjectReference Include="..\..\synergy\m\MissileGameByAsti\MissileGameByAsti\MissileGameByAsti.csproj">
       <Project>{2755c882-4bdf-4370-bcd7-2619a4bd1ca5}</Project>
       <Name>MissileGameByAsti</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\m\MobiusHeartsByXMunkki\MobiusHeartsByXMunkki.csproj">
+      <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
+      <Name>MobiusHeartsByXMunkki</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\m\MonumentValleyByGltracy\MonumentValleyByGltracy\MonumentValleyByGltracy.csproj">
       <Project>{d8aa7897-a436-4927-8404-507373e2605f}</Project>
