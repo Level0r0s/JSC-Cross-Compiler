@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360relentless", "x360relentless.csproj", "{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360relentless", "x360relentless.csproj", "{E5F16937-C8CA-4023-8A69-8682D52F6487}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyRelentlessBySrtuss", "..\..\synergy\r\ChromeShaderToyRelentlessBySrtuss\ChromeShaderToyRelentlessBySrtuss\ChromeShaderToyRelentlessBySrtuss.csproj", "{91BC0D94-1E92-436D-9147-92E42E560A76}"
 EndProject
@@ -13,11 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360roomscan", "..\x360roomscan\x360roomscan.csproj", "{DE5CBE45-073F-4B8C-B0B8-45CD12908D21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomScanningEffectByRosme", "..\..\synergy\r\RoomScanningEffectByRosme\RoomScanningEffectByRosme.csproj", "{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomScanningEffectByRosme", "..\..\synergy\r\RoomScanningEffectByRosme\RoomScanningEffectByRosme.csproj", "{30A5A451-E119-45CA-BE2E-6A4221854AB9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chrome360LightAnimation", "..\..\Chrome360LightAnimation\Chrome360LightAnimation\Chrome360LightAnimation.csproj", "{5B50A405-EB5A-41C3-8FE4-C3001F74DBFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360tracecone", "..\x360tracecone\x360tracecone.csproj", "{2B1564EC-EE1A-4C9F-9183-1CAB24C86556}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360tracecone", "..\x360tracecone\x360tracecone.csproj", "{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,10 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.ActiveCfg = Debug|x86
-		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.Build.0 = Debug|x86
-		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.ActiveCfg = Release|x86
-		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.Build.0 = Release|x86
+		{E5F16937-C8CA-4023-8A69-8682D52F6487}.Debug|x86.ActiveCfg = Debug|x86
+		{E5F16937-C8CA-4023-8A69-8682D52F6487}.Debug|x86.Build.0 = Debug|x86
+		{E5F16937-C8CA-4023-8A69-8682D52F6487}.Release|x86.ActiveCfg = Release|x86
+		{E5F16937-C8CA-4023-8A69-8682D52F6487}.Release|x86.Build.0 = Release|x86
 		{91BC0D94-1E92-436D-9147-92E42E560A76}.Debug|x86.ActiveCfg = Debug|x86
 		{91BC0D94-1E92-436D-9147-92E42E560A76}.Debug|x86.Build.0 = Debug|x86
 		{91BC0D94-1E92-436D-9147-92E42E560A76}.Release|x86.ActiveCfg = Release|x86
@@ -37,18 +37,18 @@ Global
 		{DE5CBE45-073F-4B8C-B0B8-45CD12908D21}.Debug|x86.Build.0 = Debug|x86
 		{DE5CBE45-073F-4B8C-B0B8-45CD12908D21}.Release|x86.ActiveCfg = Release|x86
 		{DE5CBE45-073F-4B8C-B0B8-45CD12908D21}.Release|x86.Build.0 = Release|x86
-		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}.Debug|x86.ActiveCfg = Debug|x86
-		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}.Debug|x86.Build.0 = Debug|x86
-		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}.Release|x86.ActiveCfg = Release|x86
-		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769}.Release|x86.Build.0 = Release|x86
+		{30A5A451-E119-45CA-BE2E-6A4221854AB9}.Debug|x86.ActiveCfg = Debug|x86
+		{30A5A451-E119-45CA-BE2E-6A4221854AB9}.Debug|x86.Build.0 = Debug|x86
+		{30A5A451-E119-45CA-BE2E-6A4221854AB9}.Release|x86.ActiveCfg = Release|x86
+		{30A5A451-E119-45CA-BE2E-6A4221854AB9}.Release|x86.Build.0 = Release|x86
 		{5B50A405-EB5A-41C3-8FE4-C3001F74DBFD}.Debug|x86.ActiveCfg = Debug|x86
 		{5B50A405-EB5A-41C3-8FE4-C3001F74DBFD}.Debug|x86.Build.0 = Debug|x86
 		{5B50A405-EB5A-41C3-8FE4-C3001F74DBFD}.Release|x86.ActiveCfg = Release|x86
 		{5B50A405-EB5A-41C3-8FE4-C3001F74DBFD}.Release|x86.Build.0 = Release|x86
-		{2B1564EC-EE1A-4C9F-9183-1CAB24C86556}.Debug|x86.ActiveCfg = Debug|x86
-		{2B1564EC-EE1A-4C9F-9183-1CAB24C86556}.Debug|x86.Build.0 = Debug|x86
-		{2B1564EC-EE1A-4C9F-9183-1CAB24C86556}.Release|x86.ActiveCfg = Release|x86
-		{2B1564EC-EE1A-4C9F-9183-1CAB24C86556}.Release|x86.Build.0 = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.ActiveCfg = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.Build.0 = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.ActiveCfg = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,8 +56,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{91BC0D94-1E92-436D-9147-92E42E560A76} = {DF904D6F-CCA9-4C75-B8B5-C128E656452E}
 		{DE5CBE45-073F-4B8C-B0B8-45CD12908D21} = {D1F4C32A-D644-4352-8B8C-BC712AFECE67}
-		{4B0EF444-83A7-49D9-A3E6-1492A1FEF769} = {D1F4C32A-D644-4352-8B8C-BC712AFECE67}
+		{30A5A451-E119-45CA-BE2E-6A4221854AB9} = {D1F4C32A-D644-4352-8B8C-BC712AFECE67}
 		{5B50A405-EB5A-41C3-8FE4-C3001F74DBFD} = {D1F4C32A-D644-4352-8B8C-BC712AFECE67}
-		{2B1564EC-EE1A-4C9F-9183-1CAB24C86556} = {D1F4C32A-D644-4352-8B8C-BC712AFECE67}
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD} = {D1F4C32A-D644-4352-8B8C-BC712AFECE67}
 	EndGlobalSection
 EndGlobal

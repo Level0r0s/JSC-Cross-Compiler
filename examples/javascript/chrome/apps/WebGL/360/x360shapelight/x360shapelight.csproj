@@ -8,11 +8,11 @@
     <ProjectGuid>{77234670-3487-477E-9F24-73AB75E6D82E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>x360seascape</RootNamespace>
-    <AssemblyName>x360seascape</AssemblyName>
+    <RootNamespace>x360shapelight</RootNamespace>
+    <AssemblyName>x360shapelight</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>x360seascape.Program</StartupObject>
+    <StartupObject>x360shapelight.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -141,6 +141,12 @@
     <Reference Include="ChromeShaderToySeascapeByTDM.AssetsLibrary">
       <HintPath>..\..\synergy\s\ChromeShaderToySeascapeByTDM\ChromeShaderToySeascapeByTDM\bin\staging.AssetsLibrary\ChromeShaderToySeascapeByTDM.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="x360shapelight.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\x360shapelight.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ShapeLightByBeyondTheStatic.AssetsLibrary">
+      <HintPath>..\..\synergy\s\ShapeLightByBeyondTheStatic\ShapeLightByBeyondTheStatic\bin\staging.AssetsLibrary\ShapeLightByBeyondTheStatic.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\ShaderToy.cs" />
@@ -164,9 +170,9 @@
     <Folder Include="web\assets\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\synergy\s\ChromeShaderToySeascapeByTDM\ChromeShaderToySeascapeByTDM\ChromeShaderToySeascapeByTDM.csproj">
-      <Project>{637d133f-4975-4bf2-9ecf-364e8e569bf9}</Project>
-      <Name>ChromeShaderToySeascapeByTDM</Name>
+    <ProjectReference Include="..\..\synergy\s\ShapeLightByBeyondTheStatic\ShapeLightByBeyondTheStatic\ShapeLightByBeyondTheStatic.csproj">
+      <Project>{ecfe9c03-6452-41dd-9c6c-c9ec38fc2f6c}</Project>
+      <Name>ShapeLightByBeyondTheStatic</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

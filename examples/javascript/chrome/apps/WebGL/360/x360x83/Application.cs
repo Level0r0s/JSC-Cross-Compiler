@@ -257,7 +257,8 @@ namespace x360x83
 
             // crash
             //int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
-            int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
+            //int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
+            int cubefacesizeMAX = 2048 * 1; // 6 faces, ?
             int cubefacesize = cubefacesizeMAX; // 6 faces, ?
             //int cubefacesize = 1024; // 6 faces, ?
             // "X:\vr\tape1\0000x2048.png"
@@ -272,7 +273,7 @@ namespace x360x83
             //cubefacesize = 1024; // 6 faces, ?
 
             // not 8k..
-            cubefacesize = 512; // 6 faces, ?
+            //cubefacesize = 512; // 6 faces, ?
 
             // big cubeface may be draw only half of itself?
 
@@ -1113,7 +1114,8 @@ namespace x360x83
                 await_nextframe:
 
 
-                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(4, '0') + ".png";
+                //var filename = frameIDslider.valueAsNumber.ToString().PadLeft(4, '0') + ".png";
+                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(5, '0') + ".jpg";
                 status = "rendering... " + new { filename };
 
 
@@ -1128,7 +1130,15 @@ namespace x360x83
 
                 // https://code.google.com/p/chromium/issues/detail?id=404301
                 if (dir != null)
-                    await dir.WriteAllBytes(filename, gl4K);
+                {
+                    c8k.drawImage(frame0, 0, 0, c8k.canvas.width, c8k.canvas.height);
+                    c8k.drawImage(gl4K, 0, 0, c8k.canvas.width, c8k.canvas.height);
+
+
+                    //await dir.WriteAllBytes(filename, gl4K);
+                    await dir.WriteAllBytes(filename, c8k);
+                }
+
                 //await dir.WriteAllBytes(filename, gl.canvas);
 
                 status = "WriteAllBytes... done " + new { fcamerax, filename, swcapture.ElapsedMilliseconds };
@@ -1181,12 +1191,24 @@ namespace x360x83
                 //fcamerax += (1.0 / 60.0) * 120;
 
 
+                // in 30 sec can we have a zoom in and out?
+
+                // so 15 sec at 60 fps needs to be -max z
+
+
+                var a = Math.Abs(frameIDslider.valueAsNumber - (60 * 15));
+                var aa = a / (60f * 15);
+
+                //cameraz.valueAsNumber = (int)(camerazMIN * aa);
+                cameraz.valueAsNumber = (int)(camerazMIN * (1.0 - aa));
+
 
                 // 60hz 30sec
                 if (frameIDslider.valueAsNumber < 60 * 30)
                 {
                     // Blob GC? either this helms or the that we made a Blob static. 
-                    await Task.Delay(11);
+                    //await Task.Delay(11);
+                    await Task.Delay(33);
 
                     goto await_nextframe;
                 }
@@ -1446,7 +1468,11 @@ namespace x360x83
 
                 //Console.WriteLine(new { files2take = files2take.Count() });
 
-                var step = 8;
+                //var step = 8;
+                //var step = 1;//crashes
+                //var step = 2;//crashes after load
+                var step = 4;//crashes after load
+                //var step = 3;//
                 //var step = (int)(files3count * 0.05);
                 //var step = (int)(files3count * 0.25);
 
@@ -1461,6 +1487,16 @@ namespace x360x83
 
                     //files3[i].file()
                     var ff = await files3[i].file();
+
+                    //83fc21e4-a2da-408d-9831-571313ead641
+                    //Refcount: 1
+                    //Content Type: image/png
+                    //Type: file
+                    //Path: X:\p900\7\DCIM\100NIKON\DSCN0018\output00767.png
+                    //Modification Time: Sunday, September 13, 2015 at 10:24:01 AM
+                    //Length: 2,131,791
+
+                    // are we running out of blobs?
 
                     var url = ff.ToObjectURL();
                     var img = new IHTMLImage(url);

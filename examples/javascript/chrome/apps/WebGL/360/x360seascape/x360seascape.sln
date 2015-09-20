@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360seascape", "x360seascape.csproj", "{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360seascape", "x360seascape.csproj", "{77234670-3487-477E-9F24-73AB75E6D82E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToySeascapeByTDM", "..\..\synergy\s\ChromeShaderToySeascapeByTDM\ChromeShaderToySeascapeByTDM\ChromeShaderToySeascapeByTDM.csproj", "{637D133F-4975-4BF2-9ECF-364E8E569BF9}"
 EndProject
@@ -19,10 +19,10 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.ActiveCfg = Debug|x86
-		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.Build.0 = Debug|x86
-		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.ActiveCfg = Release|x86
-		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.Build.0 = Release|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.ActiveCfg = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.Build.0 = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.ActiveCfg = Release|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.Build.0 = Release|x86
 		{637D133F-4975-4BF2-9ECF-364E8E569BF9}.Debug|x86.ActiveCfg = Debug|x86
 		{637D133F-4975-4BF2-9ECF-364E8E569BF9}.Debug|x86.Build.0 = Debug|x86
 		{637D133F-4975-4BF2-9ECF-364E8E569BF9}.Release|x86.ActiveCfg = Release|x86
