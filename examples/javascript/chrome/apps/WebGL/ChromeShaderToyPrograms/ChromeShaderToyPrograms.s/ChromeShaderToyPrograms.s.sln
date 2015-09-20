@@ -149,6 +149,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpheresByFelipevsfbr", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkateboardByYasuo", "..\..\synergy\s\SkateboardByYasuo\SkateboardByYasuo.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpriteFontsByNikos", "..\..\synergy\s\SpriteFontsByNikos\SpriteFontsByNikos.csproj", "{315F9733-BDAB-464E-B7D5-2E3CABCE5ECA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -427,6 +429,10 @@ Global
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
+		{315F9733-BDAB-464E-B7D5-2E3CABCE5ECA}.Debug|x86.ActiveCfg = Debug|x86
+		{315F9733-BDAB-464E-B7D5-2E3CABCE5ECA}.Debug|x86.Build.0 = Debug|x86
+		{315F9733-BDAB-464E-B7D5-2E3CABCE5ECA}.Release|x86.ActiveCfg = Release|x86
+		{315F9733-BDAB-464E-B7D5-2E3CABCE5ECA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -503,5 +509,6 @@ Global
 		{1C1AECB2-D196-42EF-BA7D-923D9CAAC9A2} = {AAED4DB3-2226-4EBD-B46E-E26C375CA269}
 		{7A735698-2468-45D7-B4AB-D8151FDC7985} = {AAED4DB3-2226-4EBD-B46E-E26C375CA269}
 		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {4149B720-7F18-4044-9024-FC2E994DBD9F}
+		{315F9733-BDAB-464E-B7D5-2E3CABCE5ECA} = {DAEE2487-2EC3-4BD4-ADDC-CD69383654BD}
 	EndGlobalSection
 EndGlobal

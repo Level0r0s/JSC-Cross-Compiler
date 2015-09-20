@@ -78,6 +78,8 @@ namespace x360shapelight
         //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push     "R:\vr\tape360columns\0000.png" "/sdcard/oculus/360photos/tape360columns.png"
         // 4041 KB/s (3248448 bytes in 0.785s)
 
+        // 
+        //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\light.png" "/sdcard/oculus/360photos/"
 
         // could we udp our 360 image from webgl to vr yet?
 
@@ -247,7 +249,7 @@ namespace x360shapelight
 
             // fast gif?
             //cubefacesize = 128; // 6 faces, ?
-            cubefacesize = 512; // 6 faces, ?
+            //cubefacesize = 512; // 6 faces, ?
             //    [GroupMarkerNotSet(crbug.com / 242999)!:247F0809]
             //RENDER WARNING: texture bound to texture unit 0 is not renderable.It maybe non-power-of-2 and have incompatible texture filtering.
 
@@ -2084,7 +2086,7 @@ namespace x360shapelight
                     //floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1), Math.PI);
                     floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1),
 
-                        Math.PI / 2 +
+                        //Math.PI / 2 +
                         bottomRotate100 * 0.01f);
 
                 };

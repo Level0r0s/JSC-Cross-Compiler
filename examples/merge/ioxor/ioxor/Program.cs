@@ -236,20 +236,42 @@ namespace ioxor
                                                 //at ioxor.Program.Main(String[] args) in X:\jsc.svn\examples\merge\ioxor\ioxor\Program.cs:line 233
 
 
-                                                r.Position = Position0;
 
                                                 // data corruption...
                                                 retry:
+                                                var reopen = false;
                                                 try
                                                 {
+                                                    if (reopen)
+                                                    {
+                                                        r = File.Open(f, FileMode.Open, FileAccess.ReadWrite);
+                                                        reopen = false;
+                                                    }
+
+                                                    r.Position = Position0;
+
                                                     r.Write(data, 0, c0);
                                                 }
                                                 catch (Exception err)
                                                 {
+                                                    //379584331 written in 319822
+                                                    //{ err = System.OperationCanceledException: The operation was canceled.
+                                                    //   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+                                                    //   at System.IO.FileStream.WriteCore(Byte[] buffer, Int32 offset, Int32 count)
+                                                    //   at System.IO.FileStream.Write(Byte[] array, Int32 offset, Int32 count)
+                                                    //   at ioxor.Program.<>c__DisplayClass0_1.<Main>b__9() in Z:\jsc.svn\examples\merge\ioxor\ioxor\Program.cs:line 245 }
+                                                    //{ err = System.IO.IOException: An unexpected network error occurred.
                                                     Console.WriteLine(new { err });
                                                     Thread.Sleep(10000);
                                                     if (MessageBox.Show("retry at " + new { Position0 }, "crash?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+                                                    // r needs to be recreated?
+                                                    {
+                                                        reopen = true;
+
                                                         goto retry;
+                                                    }
+
                                                 }
                                                 r.Flush();
 

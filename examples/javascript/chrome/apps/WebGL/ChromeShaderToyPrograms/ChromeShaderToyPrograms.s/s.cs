@@ -93,6 +93,9 @@ namespace ChromeShaderToyPrograms.s
             ["SpiningRingsBySquid"] = () => new SpiningRingsBySquid.Shaders.ProgramFragmentShader(),
             ["SpoutByPMalin"] = () => new SpoutByPMalin.Shaders.ProgramFragmentShader(),
             ["SpriteEncodingByNikos"] = () => new SpriteEncodingByNikos.Shaders.ProgramFragmentShader(),
+            ["SpriteFontsByNikos"] = () => new SpriteFontsByNikos.Shaders.ProgramFragmentShader(),
+
+
             ["StairsByDila"] = () => new StairsByDila.Shaders.ProgramFragmentShader(),
             ["StairwayToHeavenByEiffie"] = () => new StairwayToHeavenByEiffie.Shaders.ProgramFragmentShader(),
 

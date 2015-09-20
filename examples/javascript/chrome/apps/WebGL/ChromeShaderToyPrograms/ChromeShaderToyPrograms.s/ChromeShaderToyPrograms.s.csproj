@@ -328,6 +328,9 @@
     <Reference Include="SkateboardByYasuo.AssetsLibrary">
       <HintPath>..\..\synergy\s\SkateboardByYasuo\bin\staging.AssetsLibrary\SkateboardByYasuo.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="SpriteFontsByNikos.AssetsLibrary">
+      <HintPath>..\..\synergy\s\SpriteFontsByNikos\bin\staging.AssetsLibrary\SpriteFontsByNikos.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="s.cs" />
@@ -570,6 +573,10 @@
     <ProjectReference Include="..\..\synergy\s\SpriteEncodingByNikos\SpriteEncodingByNikos\SpriteEncodingByNikos.csproj">
       <Project>{0d892c86-a39b-43bb-bd8e-df8f8666988a}</Project>
       <Name>SpriteEncodingByNikos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\s\SpriteFontsByNikos\SpriteFontsByNikos.csproj">
+      <Project>{315f9733-bdab-464e-b7d5-2e3cabce5eca}</Project>
+      <Name>SpriteFontsByNikos</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\s\StairsByDila\StairsByDila\StairsByDila.csproj">
       <Project>{d0816360-0927-4e6f-8809-b4e30dc078e5}</Project>

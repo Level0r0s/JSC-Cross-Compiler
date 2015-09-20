@@ -153,7 +153,12 @@ namespace ScriptCoreLib.JavaScript.DOM
             //view-source:54105 760626ms what happened? retry! retry7?
             //view-source:38832 Uncaught TypeError: Cannot read property 'toDataURL' of null
 
-            var data = canvas.toDataURL();
+            //var data = canvas.toDataURL();
+
+
+            //Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360x83\Application.cs
+            // 8K img png will be 50mb
+            var data = canvas.toDataURL(quality: 0.9);
             //var data = canvas.toDataURL(quality: 0.1);
 
             var prefix = "base64,";

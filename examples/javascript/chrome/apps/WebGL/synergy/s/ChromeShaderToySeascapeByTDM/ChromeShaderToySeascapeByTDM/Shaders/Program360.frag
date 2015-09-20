@@ -1,7 +1,7 @@
-﻿// "Seascape" by Alexander Alekseev aka TDM - 2014
+﻿uniform vec3 uCameraTargetOffset;   
+// "Seascape" by Alexander Alekseev aka TDM - 2014
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 
-uniform vec3 uCameraTargetOffset;   
 
 
 const int NUM_STEPS = 8;
