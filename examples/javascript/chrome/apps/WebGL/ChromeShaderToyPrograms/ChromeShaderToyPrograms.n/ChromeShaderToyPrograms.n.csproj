@@ -190,6 +190,10 @@
       <Project>{18d81eab-6b23-45bf-9f7d-8460d9f637f2}</Project>
       <Name>NoiseTutorialByAkaitora</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\n\NonEuclideanGeometryTestByFlyguy\NonEuclideanGeometryTestByFlyguy.csproj">
+      <Project>{9b9e2789-3077-4bcf-9f06-78c023f85797}</Project>
+      <Name>NonEuclideanGeometryTestByFlyguy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\n\NSAEyeballByEiffie\NSAEyeballByEiffie\NSAEyeballByEiffie.csproj">
       <Project>{f8d3c5d3-3e00-4857-88a3-3d24efbdf9d9}</Project>
       <Name>NSAEyeballByEiffie</Name>

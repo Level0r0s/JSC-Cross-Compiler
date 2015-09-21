@@ -181,6 +181,9 @@
     <Reference Include="AbstractThings0BySquid.AssetsLibrary">
       <HintPath>..\..\synergy\a\AbstractThings0BySquid\bin\staging.AssetsLibrary\AbstractThings0BySquid.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="AquariumByDr2.AssetsLibrary">
+      <HintPath>..\..\synergy\a\AquariumByDr2\bin\staging.AssetsLibrary\AquariumByDr2.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="a.cs" />
@@ -223,6 +226,10 @@
     <ProjectReference Include="..\..\synergy\a\ApollonianByIq\ApollonianByIq\ApollonianByIq.csproj">
       <Project>{f5f9d3eb-f10c-4d2b-8598-311a94b22461}</Project>
       <Name>ApollonianByIq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\a\AquariumByDr2\AquariumByDr2.csproj">
+      <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
+      <Name>AquariumByDr2</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\a\AsteroidsByArchee\AsteroidsByArchee\AsteroidsByArchee.csproj">
       <Project>{38a9cc7f-ea86-4c0a-8aa9-903e873e49a9}</Project>

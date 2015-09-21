@@ -35,6 +35,7 @@ namespace ChromeShaderToyPrograms.f
             ["FakeVolumeLightByEiffie"] = () => new FakeVolumeLightByEiffie.Shaders.ProgramFragmentShader(),
             ["FerrisWheelByGaz"] = () => new FerrisWheelByGaz.Shaders.ProgramFragmentShader(),
             ["FirstDistanceMapByChuckeles"] = () => new FirstDistanceMapByChuckeles.Shaders.ProgramFragmentShader(),
+            ["FishbowlByDr2"] = () => new FishbowlByDr2.Shaders.ProgramFragmentShader(),
 
             ["FlappyBirdByMovAx"] = () => new FlappyBirdByMovAx.Shaders.ProgramFragmentShader(),
             ["FlatlandByPMalin"] = () => new FlatlandByPMalin.Shaders.ProgramFragmentShader(),

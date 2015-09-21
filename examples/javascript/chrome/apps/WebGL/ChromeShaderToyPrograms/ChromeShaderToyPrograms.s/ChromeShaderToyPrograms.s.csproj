@@ -331,6 +331,9 @@
     <Reference Include="SpriteFontsByNikos.AssetsLibrary">
       <HintPath>..\..\synergy\s\SpriteFontsByNikos\bin\staging.AssetsLibrary\SpriteFontsByNikos.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="StairwayToTheStarsByDr2.AssetsLibrary">
+      <HintPath>..\..\synergy\s\StairwayToTheStarsByDr2\bin\staging.AssetsLibrary\StairwayToTheStarsByDr2.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="s.cs" />
@@ -586,6 +589,10 @@
       <Project>{84da417b-0b7a-4f25-b61a-d05598f1979c}</Project>
       <Name>StairwayToHeavenByEiffie</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\s\StairwayToTheStarsByDr2\StairwayToTheStarsByDr2.csproj">
+      <Project>{610a76f8-307c-4682-9fba-1814339b4ab3}</Project>
+      <Name>StairwayToTheStarsByDr2</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\s\StarMapByMorgan\StarMapByMorgan\StarMapByMorgan.csproj">
       <Project>{5f83b768-7584-4a35-9e84-550ce2517047}</Project>
       <Name>StarMapByMorgan</Name>
@@ -601,6 +608,10 @@
     <ProjectReference Include="..\..\synergy\s\StillLoadingByTony\StillLoadingByTony\StillLoadingByTony.csproj">
       <Project>{965ff526-275d-43a1-b8d4-e6428d38ad55}</Project>
       <Name>StillLoadingByTony</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\s\StromboliByDr2\StromboliByDr2.csproj">
+      <Project>{cdca5f37-df5c-4407-8ddd-e6349644ef4d}</Project>
+      <Name>StromboliByDr2</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\s\SubmergedByFizzer\SubmergedByFizzer\SubmergedByFizzer.csproj">
       <Project>{3e2c629b-a827-40bc-96f8-2eafd02c10fd}</Project>

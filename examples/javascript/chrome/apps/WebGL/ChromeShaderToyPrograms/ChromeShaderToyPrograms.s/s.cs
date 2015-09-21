@@ -98,11 +98,14 @@ namespace ChromeShaderToyPrograms.s
 
             ["StairsByDila"] = () => new StairsByDila.Shaders.ProgramFragmentShader(),
             ["StairwayToHeavenByEiffie"] = () => new StairwayToHeavenByEiffie.Shaders.ProgramFragmentShader(),
+            ["StairwayToTheStarsByDr2"] = () => new StairwayToTheStarsByDr2.Shaders.ProgramFragmentShader(),
 
             ["StarMapByMorgan"] = () => new StarMapByMorgan.Shaders.ProgramFragmentShader(),
             ["StarwarsShipThingByAlleycatsphinx"] = () => new StarwarsShipThingByAlleycatsphinx.Shaders.ProgramFragmentShader(),
 
             ["SteamLogoByYakoudbz"] = () => new SteamLogoByYakoudbz.Shaders.ProgramFragmentShader(),
+
+            ["StromboliByDr2"] = () => new StromboliByDr2.Shaders.ProgramFragmentShader(),
             ["SubmergedByFizzer"] = () => new SubmergedByFizzer.Shaders.ProgramFragmentShader(),
             ["SunsetCloudByKuvkar"] = () => new SunsetCloudByKuvkar.Shaders.ProgramFragmentShader(),
             ["SunsetOnTheSeaByRiccardo"] = () => new SunsetOnTheSeaByRiccardo.Shaders.ProgramFragmentShader(),

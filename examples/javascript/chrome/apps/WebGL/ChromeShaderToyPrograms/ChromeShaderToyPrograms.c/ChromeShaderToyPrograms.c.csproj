@@ -287,6 +287,10 @@
       <Project>{78b5fd9c-78c2-464b-a192-6a8caa1933a0}</Project>
       <Name>ConformalPolarByFabrice</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\CongratsLuxoJrByMplanck\CongratsLuxoJrByMplanck.csproj">
+      <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
+      <Name>CongratsLuxoJrByMplanck</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\c\CrystalBallByAaecheve\CrystalBallByAaecheve\CrystalBallByAaecheve.csproj">
       <Project>{29050a98-700e-43cc-ac87-1a25bf0b6a94}</Project>
       <Name>CrystalBallByAaecheve</Name>

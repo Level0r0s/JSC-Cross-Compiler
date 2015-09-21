@@ -28,7 +28,11 @@ namespace ChromeShaderToyPrograms.c
             ["CloudsPhysicallyBasedByJamiep"] = () => new CloudsPhysicallyBasedByJamiep.Shaders.ProgramFragmentShader(),
             
             ["ClippedDiscHypertextureByFabrice"] = () => new ClippedDiscHypertextureByFabrice.Shaders.ProgramFragmentShader(),
+
+
             ["CompassesByGijs"] = () => new CompassesByGijs.Shaders.ProgramFragmentShader(),
+            ["CongratsLuxoJrByMplanck"] = () => new CongratsLuxoJrByMplanck.Shaders.ProgramFragmentShader(),
+
             ["ConformalPolarByFabrice"] = () => new ConformalPolarByFabrice.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyCarcarspacecarByEiffie"] = () => new ChromeShaderToyCarcarspacecarByEiffie.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyCatchByAhihi"] = () => new ChromeShaderToyCatchByAhihi.Shaders.ProgramFragmentShader(),

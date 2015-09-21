@@ -30,6 +30,7 @@ namespace ChromeShaderToyPrograms.n
             ["NanoTubesByTrisomie"] = () => new NanoTubesByTrisomie.Shaders.ProgramFragmentShader(),
             ["NeptunianByEspitz"] = () => new NeptunianByEspitz.Shaders.ProgramFragmentShader(),
             ["NoiseTutorialByAkaitora"] = () => new NoiseTutorialByAkaitora.Shaders.ProgramFragmentShader(),
+            ["NonEuclideanGeometryTestByFlyguy"] = () => new NonEuclideanGeometryTestByFlyguy.Shaders.ProgramFragmentShader(),
             ["NSAEyeballByEiffie"] = () => new NSAEyeballByEiffie.Shaders.ProgramFragmentShader(),
             ["NumbersByPMalin"] = () => new NumbersByPMalin.Shaders.ProgramFragmentShader(),
             #endregion

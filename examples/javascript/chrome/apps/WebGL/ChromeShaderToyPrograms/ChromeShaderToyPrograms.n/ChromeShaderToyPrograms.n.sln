@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2D", "2D", "{1A8912DA-50E9-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoiseAnimationElectricByNimitz", "..\..\synergy\n\NoiseAnimationElectricByNimitz\NoiseAnimationElectricByNimitz.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NonEuclideanGeometryTestByFlyguy", "..\..\synergy\n\NonEuclideanGeometryTestByFlyguy\NonEuclideanGeometryTestByFlyguy.csproj", "{9B9E2789-3077-4BCF-9F06-78C023F85797}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -67,6 +69,10 @@ Global
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
+		{9B9E2789-3077-4BCF-9F06-78C023F85797}.Debug|x86.ActiveCfg = Debug|x86
+		{9B9E2789-3077-4BCF-9F06-78C023F85797}.Debug|x86.Build.0 = Debug|x86
+		{9B9E2789-3077-4BCF-9F06-78C023F85797}.Release|x86.ActiveCfg = Release|x86
+		{9B9E2789-3077-4BCF-9F06-78C023F85797}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,5 +87,6 @@ Global
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2} = {E631899C-69BB-4B59-9C7C-BF7018201955}
 		{1A8912DA-50E9-4AF6-9B35-F4036E0F6C6C} = {E631899C-69BB-4B59-9C7C-BF7018201955}
 		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {1A8912DA-50E9-4AF6-9B35-F4036E0F6C6C}
+		{9B9E2789-3077-4BCF-9F06-78C023F85797} = {E631899C-69BB-4B59-9C7C-BF7018201955}
 	EndGlobalSection
 EndGlobal

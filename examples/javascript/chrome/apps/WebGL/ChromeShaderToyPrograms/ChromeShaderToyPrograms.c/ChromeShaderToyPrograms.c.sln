@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudsTunnelByAvix", "..\..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudsPhysicallyBasedByJamiep", "..\..\synergy\c\CloudsPhysicallyBasedByJamiep\CloudsPhysicallyBasedByJamiep.csproj", "{2413FEB0-AE5C-4109-B36C-86775A92D00E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongratsLuxoJrByMplanck", "..\..\synergy\c\CongratsLuxoJrByMplanck\CongratsLuxoJrByMplanck.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -159,6 +161,10 @@ Global
 		{2413FEB0-AE5C-4109-B36C-86775A92D00E}.Debug|x86.Build.0 = Debug|x86
 		{2413FEB0-AE5C-4109-B36C-86775A92D00E}.Release|x86.ActiveCfg = Release|x86
 		{2413FEB0-AE5C-4109-B36C-86775A92D00E}.Release|x86.Build.0 = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.ActiveCfg = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -189,5 +195,6 @@ Global
 		{E5E6C1EC-2CDE-4A96-A2FF-0A831B0CE263} = {92E84D3B-561B-4270-94D2-DAB99041F13B}
 		{C0FF543D-6CB3-4DE5-A993-88DCD007F327} = {92E84D3B-561B-4270-94D2-DAB99041F13B}
 		{2413FEB0-AE5C-4109-B36C-86775A92D00E} = {92E84D3B-561B-4270-94D2-DAB99041F13B}
+		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {92E84D3B-561B-4270-94D2-DAB99041F13B}
 	EndGlobalSection
 EndGlobal

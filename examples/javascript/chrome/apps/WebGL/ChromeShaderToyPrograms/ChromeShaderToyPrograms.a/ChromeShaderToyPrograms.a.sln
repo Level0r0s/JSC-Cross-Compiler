@@ -49,6 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2D", "2D", "{C48AE0F5-9ADF-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractThings0BySquid", "..\..\synergy\a\AbstractThings0BySquid\AbstractThings0BySquid.csproj", "{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquariumByDr2", "..\..\synergy\a\AquariumByDr2\AquariumByDr2.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -135,6 +137,10 @@ Global
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Debug|x86.Build.0 = Debug|x86
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.ActiveCfg = Release|x86
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.Build.0 = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.ActiveCfg = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -160,5 +166,6 @@ Global
 		{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7} = {EA1A5471-34E3-4071-888D-32756F211FDB}
 		{C48AE0F5-9ADF-4336-B6CC-384B2143276E} = {80368FFC-736F-4053-A1AB-21AC870D58F3}
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2} = {80368FFC-736F-4053-A1AB-21AC870D58F3}
+		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {80368FFC-736F-4053-A1AB-21AC870D58F3}
 	EndGlobalSection
 EndGlobal

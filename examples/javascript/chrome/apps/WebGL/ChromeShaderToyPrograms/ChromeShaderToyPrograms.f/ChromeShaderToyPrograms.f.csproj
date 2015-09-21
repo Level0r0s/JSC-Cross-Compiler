@@ -302,6 +302,10 @@
       <Project>{5612a314-5ba6-44bc-bd70-7072f8dd5ef2}</Project>
       <Name>FirstDistanceMapByChuckeles</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\f\FishbowlByDr2\FishbowlByDr2.csproj">
+      <Project>{48d6745b-17dd-42e9-a481-e43de44fc8e5}</Project>
+      <Name>FishbowlByDr2</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\f\FlappyBirdByMovAx\FlappyBirdByMovAx\FlappyBirdByMovAx.csproj">
       <Project>{3a7bbe46-4413-4537-b781-f7365b519197}</Project>
       <Name>FlappyBirdByMovAx</Name>

@@ -24,7 +24,10 @@ namespace ChromeShaderToyPrograms.a
             ["AlienBeaconByOtavio"] = () => new AlienBeaconByOtavio.Shaders.ProgramFragmentShader(),
             //["AlpineJetsByDr2"] = () => new AlpineJetsByDr2.Shaders.ProgramFragmentShader(),
             ["AngelsByIq"] = () => new AngelsByIq.Shaders.ProgramFragmentShader(),
+
             ["ApollonianByIq"] = () => new ApollonianByIq.Shaders.ProgramFragmentShader(),
+            ["AquariumByDr2"] = () => new AquariumByDr2.Shaders.ProgramFragmentShader(),
+
             ["AsteroidsByArchee"] = () => new AsteroidsByArchee.Shaders.ProgramFragmentShader(),
             ["ATreeByGuil"] = () => new ATreeByGuil.Shaders.ProgramFragmentShader(),
             ["AttackOfTheFuzziesByEiffie"] = () => new AttackOfTheFuzziesByEiffie.Shaders.ProgramFragmentShader(),

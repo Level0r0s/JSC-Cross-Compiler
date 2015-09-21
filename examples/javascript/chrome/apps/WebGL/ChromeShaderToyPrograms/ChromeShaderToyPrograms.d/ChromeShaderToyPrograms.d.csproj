@@ -307,6 +307,10 @@
       <Project>{426a9419-9287-4880-979f-29f29d3f2a22}</Project>
       <Name>DiscoRobotByFizzer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\d\DistanceFieldBuzzByHat\DistanceFieldBuzzByHat.csproj">
+      <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
+      <Name>DistanceFieldBuzzByHat</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\d\DIYSpacemanByEiffie\DIYSpacemanByEiffie\DIYSpacemanByEiffie.csproj">
       <Project>{3973117b-4c59-421e-9f1d-7cb49ee96122}</Project>
       <Name>DIYSpacemanByEiffie</Name>
