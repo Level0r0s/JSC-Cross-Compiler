@@ -36,6 +36,7 @@ namespace ChromeShaderToyPrograms.g
             ["GlassWithCausticByAndregc"] = () => new GlassWithCausticByAndregc.Shaders.ProgramFragmentShader(),
             ["GlxgearsByBear"] = () => new GlxgearsByBear.Shaders.ProgramFragmentShader(),
             ["GoGoLegoManByIapafoto"] = () => new GoGoLegoManByIapafoto.Shaders.ProgramFragmentShader(),
+            ["GoldenTunesByPassion"] = () => new GoldenTunesByPassion.Shaders.ProgramFragmentShader(),
 
             ["GotthardTunnelByDr2"] = () => new GotthardTunnelByDr2.Shaders.ProgramFragmentShader(),
             ["GrapheneByFabrice"] = () => new GrapheneByFabrice.Shaders.ProgramFragmentShader(),

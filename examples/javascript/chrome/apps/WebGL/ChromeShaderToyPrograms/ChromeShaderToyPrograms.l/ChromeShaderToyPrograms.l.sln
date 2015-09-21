@@ -41,6 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2D", "2D", "{C9C7CF4D-C769-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeOfATreeByAdam27", "..\..\synergy\l\LifeOfATreeByAdam27\LifeOfATreeByAdam27.csproj", "{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivingMarbleByDiviaki", "..\..\synergy\l\LivingMarbleByDiviaki\LivingMarbleByDiviaki.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -115,6 +117,10 @@ Global
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Debug|x86.Build.0 = Debug|x86
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.ActiveCfg = Release|x86
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.Build.0 = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.ActiveCfg = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,5 +143,6 @@ Global
 		{72190CC0-7878-4310-A2D1-568EE14D0A27} = {64840129-E5DA-4C97-BDFF-6F46B14C802F}
 		{C9C7CF4D-C769-467D-BFF7-075F14C93113} = {64840129-E5DA-4C97-BDFF-6F46B14C802F}
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2} = {64840129-E5DA-4C97-BDFF-6F46B14C802F}
+		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {C9C7CF4D-C769-467D-BFF7-075F14C93113}
 	EndGlobalSection
 EndGlobal

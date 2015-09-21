@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x16SegmentDisplayByFlyguy",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XyptonjtrozByNimitz", "..\..\synergy\x\XyptonjtrozByNimitz\XyptonjtrozByNimitz.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XorInfinitePerlinNoiseByXor", "..\..\synergy\x\XorInfinitePerlinNoiseByXor\XorInfinitePerlinNoiseByXor.csproj", "{F9DBF9AA-35ED-417D-B9EB-753D456FB848}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -97,6 +99,10 @@ Global
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
+		{F9DBF9AA-35ED-417D-B9EB-753D456FB848}.Debug|x86.ActiveCfg = Debug|x86
+		{F9DBF9AA-35ED-417D-B9EB-753D456FB848}.Debug|x86.Build.0 = Debug|x86
+		{F9DBF9AA-35ED-417D-B9EB-753D456FB848}.Release|x86.ActiveCfg = Release|x86
+		{F9DBF9AA-35ED-417D-B9EB-753D456FB848}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,5 +122,6 @@ Global
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2} = {3BDCDB93-EFBC-42E1-81BA-FD18C9E56BF9}
 		{2BD643EF-DE34-4B68-BCDA-780752E1E82B} = {2330AC53-E8C4-4DF8-826E-91EA7773EF01}
 		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {3BDCDB93-EFBC-42E1-81BA-FD18C9E56BF9}
+		{F9DBF9AA-35ED-417D-B9EB-753D456FB848} = {2330AC53-E8C4-4DF8-826E-91EA7773EF01}
 	EndGlobalSection
 EndGlobal

@@ -148,6 +148,9 @@
     <Reference Include="NoiseTutorialByAkaitora.AssetsLibrary">
       <HintPath>..\..\synergy\n\NoiseTutorialByAkaitora\bin\staging.AssetsLibrary\NoiseTutorialByAkaitora.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="NoiseAnimationElectricByNimitz.AssetsLibrary">
+      <HintPath>..\..\synergy\n\NoiseAnimationElectricByNimitz\bin\staging.AssetsLibrary\NoiseAnimationElectricByNimitz.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="n.cs" />
@@ -178,6 +181,10 @@
     <ProjectReference Include="..\..\synergy\n\NeptunianByEspitz\NeptunianByEspitz\NeptunianByEspitz.csproj">
       <Project>{470407bc-7d8e-40ac-add0-95d160f6f933}</Project>
       <Name>NeptunianByEspitz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\n\NoiseAnimationElectricByNimitz\NoiseAnimationElectricByNimitz.csproj">
+      <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
+      <Name>NoiseAnimationElectricByNimitz</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\n\NoiseTutorialByAkaitora\NoiseTutorialByAkaitora.csproj">
       <Project>{18d81eab-6b23-45bf-9f7d-8460d9f637f2}</Project>

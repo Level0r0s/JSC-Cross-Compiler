@@ -163,6 +163,12 @@
     <Reference Include="x16SegmentDisplayByFlyguy.AssetsLibrary">
       <HintPath>..\..\synergy\x\x16SegmentDisplayByFlyguy\bin\staging.AssetsLibrary\x16SegmentDisplayByFlyguy.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="XorInfinitePerlinNoiseByXor.AssetsLibrary">
+      <HintPath>..\..\synergy\x\XorInfinitePerlinNoiseByXor\bin\staging.AssetsLibrary\XorInfinitePerlinNoiseByXor.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="XyptonjtrozByNimitz.AssetsLibrary">
+      <HintPath>..\..\synergy\x\XyptonjtrozByNimitz\bin\staging.AssetsLibrary\XyptonjtrozByNimitz.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="x.cs" />
@@ -217,6 +223,10 @@
     <ProjectReference Include="..\..\synergy\x\Xor3DAlienLandByXor\Xor3DAlienLandByXor\Xor3DAlienLandByXor.csproj">
       <Project>{7279466c-7e57-4148-b711-2b4635012226}</Project>
       <Name>Xor3DAlienLandByXor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\x\XorInfinitePerlinNoiseByXor\XorInfinitePerlinNoiseByXor.csproj">
+      <Project>{f9dbf9aa-35ed-417d-b9eb-753d456fb848}</Project>
+      <Name>XorInfinitePerlinNoiseByXor</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\x\XorMountainsByXor\XorMountainsByXor\XorMountainsByXor.csproj">
       <Project>{0c3cdf26-eb73-413a-a3fb-76999bcb69f0}</Project>

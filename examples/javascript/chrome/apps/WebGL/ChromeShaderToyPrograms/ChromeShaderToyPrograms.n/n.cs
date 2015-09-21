@@ -21,6 +21,10 @@ namespace ChromeShaderToyPrograms.n
 
 
             #region /n/
+
+            ["NoiseAnimationElectricByNimitz"] = () => new NoiseAnimationElectricByNimitz.Shaders.ProgramFragmentShader(),
+
+
             ["ChromeShaderToyNeonParallaxByNimitz"] = () => new ChromeShaderToyNeonParallaxByNimitz.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyNoiseDistributionsByHornet"] = () => new ChromeShaderToyNoiseDistributionsByHornet.Shaders.ProgramFragmentShader(),
             ["NanoTubesByTrisomie"] = () => new NanoTubesByTrisomie.Shaders.ProgramFragmentShader(),

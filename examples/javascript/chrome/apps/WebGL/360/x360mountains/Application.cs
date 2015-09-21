@@ -1654,10 +1654,23 @@ namespace x360mountains
 
             #region DirectoryEntry
             var dir = default(DirectoryEntry);
+            int files2count = 0;
 
             new IHTMLButton { "openDirectory" }.AttachToDocument().onclick += async delegate
             {
                 dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
+
+                var dir2r = dir.createReader();
+
+                var files2 = await dir2r.readFileEntries();
+
+                files2count = files2.Count();
+
+                if (files2count > 0)
+                {
+                    new IHTMLPre { new { files2count } }.AttachToDocument();
+
+                }
             };
             frame0.style.cursor = IStyle.CursorEnum.pointer;
             frame0.title = "save frame";
@@ -1756,7 +1769,10 @@ namespace x360mountains
                 status = "rendering... vsync";
 
                 //var frameid = 0;
-                frameIDslider.valueAsNumber = -1;
+
+
+                //frameIDslider.valueAsNumber = -1;
+                frameIDslider.valueAsNumber = files2count - 1;
 
                 goto beforeframe;
 

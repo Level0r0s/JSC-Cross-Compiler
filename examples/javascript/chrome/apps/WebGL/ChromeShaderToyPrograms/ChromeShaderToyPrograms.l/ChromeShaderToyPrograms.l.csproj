@@ -175,6 +175,9 @@
     <Reference Include="LifeOfATreeByAdam27.AssetsLibrary">
       <HintPath>..\..\synergy\l\LifeOfATreeByAdam27\bin\staging.AssetsLibrary\LifeOfATreeByAdam27.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="LivingMarbleByDiviaki.AssetsLibrary">
+      <HintPath>..\..\synergy\l\LivingMarbleByDiviaki\bin\staging.AssetsLibrary\LivingMarbleByDiviaki.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="l.cs" />
@@ -245,6 +248,10 @@
     <ProjectReference Include="..\..\synergy\l\LittleFluffyCloudsByGreen\LittleFluffyCloudsByGreen\LittleFluffyCloudsByGreen.csproj">
       <Project>{5afe1eec-581a-4618-9fcf-1efc5226bfce}</Project>
       <Name>LittleFluffyCloudsByGreen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\l\LivingMarbleByDiviaki\LivingMarbleByDiviaki.csproj">
+      <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
+      <Name>LivingMarbleByDiviaki</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\l\LoadingOrbByBjarnia\LoadingOrbByBjarnia\LoadingOrbByBjarnia.csproj">
       <Project>{bc2e5476-b5c7-4d0e-99a2-6fdb24a391c4}</Project>

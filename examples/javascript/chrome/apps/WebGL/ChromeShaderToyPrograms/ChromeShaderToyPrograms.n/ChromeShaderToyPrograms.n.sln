@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumbersByPMalin", "..\..\sy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoiseTutorialByAkaitora", "..\..\synergy\n\NoiseTutorialByAkaitora\NoiseTutorialByAkaitora.csproj", "{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2D", "2D", "{1A8912DA-50E9-4AF6-9B35-F4036E0F6C6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoiseAnimationElectricByNimitz", "..\..\synergy\n\NoiseAnimationElectricByNimitz\NoiseAnimationElectricByNimitz.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -59,6 +63,10 @@ Global
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Debug|x86.Build.0 = Debug|x86
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.ActiveCfg = Release|x86
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2}.Release|x86.Build.0 = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.ActiveCfg = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,5 +79,7 @@ Global
 		{F8D3C5D3-3E00-4857-88A3-3D24EFBDF9D9} = {E631899C-69BB-4B59-9C7C-BF7018201955}
 		{54A8AC0D-B5F1-4425-B9E4-7018D766E247} = {E631899C-69BB-4B59-9C7C-BF7018201955}
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2} = {E631899C-69BB-4B59-9C7C-BF7018201955}
+		{1A8912DA-50E9-4AF6-9B35-F4036E0F6C6C} = {E631899C-69BB-4B59-9C7C-BF7018201955}
+		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {1A8912DA-50E9-4AF6-9B35-F4036E0F6C6C}
 	EndGlobalSection
 EndGlobal

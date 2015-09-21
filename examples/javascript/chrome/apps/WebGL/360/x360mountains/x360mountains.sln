@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceEdgeVertexByPaniq", "..\..\synergy\f\FaceEdgeVertexByPaniq\FaceEdgeVertexByPaniq.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeReadFiles", "..\..\..\ChromeReadFiles\ChromeReadFiles.csproj", "{55CEF96C-5C10-4056-BD35-15AC3799B361}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360x83", "..\x360x83\x360x83.csproj", "{9D9E8255-8352-49D4-8EB3-22851F76EDDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -31,6 +35,14 @@ Global
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
+		{55CEF96C-5C10-4056-BD35-15AC3799B361}.Debug|x86.ActiveCfg = Debug|x86
+		{55CEF96C-5C10-4056-BD35-15AC3799B361}.Debug|x86.Build.0 = Debug|x86
+		{55CEF96C-5C10-4056-BD35-15AC3799B361}.Release|x86.ActiveCfg = Release|x86
+		{55CEF96C-5C10-4056-BD35-15AC3799B361}.Release|x86.Build.0 = Release|x86
+		{9D9E8255-8352-49D4-8EB3-22851F76EDDA}.Debug|x86.ActiveCfg = Debug|x86
+		{9D9E8255-8352-49D4-8EB3-22851F76EDDA}.Debug|x86.Build.0 = Debug|x86
+		{9D9E8255-8352-49D4-8EB3-22851F76EDDA}.Release|x86.ActiveCfg = Release|x86
+		{9D9E8255-8352-49D4-8EB3-22851F76EDDA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,5 +50,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F3442623-D462-4C4D-A043-9BD924FDC739} = {D0DB9561-F68B-43D3-8C0B-137FAA3F8C7A}
 		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {07C5C32C-BBE9-4473-9391-52FEF5C7BBB8}
+		{55CEF96C-5C10-4056-BD35-15AC3799B361} = {07C5C32C-BBE9-4473-9391-52FEF5C7BBB8}
+		{9D9E8255-8352-49D4-8EB3-22851F76EDDA} = {07C5C32C-BBE9-4473-9391-52FEF5C7BBB8}
 	EndGlobalSection
 EndGlobal
