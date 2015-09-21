@@ -1,4 +1,6 @@
-﻿// "Aquarium" by dr2 - 2014
+﻿uniform vec3 uCameraTargetOffset;   
+
+// "Aquarium" by dr2 - 2014
 // License: Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
 
 // Includes refraction, total internal reflection and Fresnel reflection
@@ -606,27 +608,57 @@ void FishPM (float t)
   fishMat = mat3 (ca, 0., - sa, 0., 1., 0., sa, 0., ca);
 }
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+
+
+
+
+mat3 rotationMatrix(vec3 axis, float angle)
 {
-  vec2 uv = 2. * fragCoord.xy / iResolution.xy - 1.;
-  uv.x *= iResolution.x / iResolution.y;
+    axis = normalize(axis);
+    float s = sin(angle);
+    float c = cos(angle);
+    float oc = 1. - c;
+    return mat3(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,
+                oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,
+                oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c);
+}
+
+
+
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+	vec2 res	= iResolution.xy;
+    vec2 uv		= (fragCoord-.5*res) / iResolution.y;
+    
+	// this zooms in real close
+	//uv *= 0.25;
+	//uv *= .1 * iGlobalTime;
+	uv *= .1 * 3600.0 / 60.0;
+	//uv *= 0.5;
+	//uv /= 0.5;
+	//uv /= 0.25;
+
+
+  //vec2 uv = 2. * fragCoord.xy / iResolution.xy - 1.;
+  //uv.x *= iResolution.x / iResolution.y;
     
     
     // 90 FOV
-    uv /= 0.5;
+    //uv /= 0.5;
     
-  tCur = iGlobalTime;
+  //tCur = iGlobalTime;
+  tCur = 0.0;
   vec3 ro, rd;
   float el, az, zmFac;
   tankSize = vec3 (5., 2.5, 3.);
-  FishPM (tCur);
+  FishPM (iGlobalTime);
   fishLen = 0.2 * tankSize.x;
-  angTail = 0.1 * pi * sin (5. * tCur);
-  angFin = pi * (0.8 + 0.1 * sin (2.5 * tCur));
+  angTail = 0.1 * pi * sin (5. * iGlobalTime);
+  angFin = pi * (0.8 + 0.1 * sin (2.5 * iGlobalTime));
   posMth = 1.04 + 0.01 * sin (5. * tCur);
   zmFac = clamp (3. + 0.4 * tCur, 3., 7.);
-  waterDisp = 0.1 * tCur * vec3 (1., 0., 1.);
-  cloudDisp = 4. * tCur * vec3 (1., 0., 1.);
+  waterDisp = 0.1 * iGlobalTime * vec3 (1., 0., 1.);
+  cloudDisp = 4. * iGlobalTime * vec3 (1., 0., 1.);
   el = pi * (-0.25 + 0.7 * SmoothBump (0.25, 0.75, 0.25,
      mod (0.071 * tCur + 0.4 * pi, 2. * pi) / (2. * pi)));
   az = 0.6 * pi * (1. - 0.5 * abs (el)) * sin (0.21 * tCur);
@@ -635,8 +667,47 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   vec2 sf = sin (vf);
   vuMat = mat3 (1., 0., 0., 0., cf.x, - sf.x, 0., sf.x, cf.x) *
      mat3 (cf.y, 0., sf.y, 0., 1., 0., - sf.y, 0., cf.y);
-  rd = normalize (vec3 (uv, zmFac)) * vuMat;
-  ro = vec3 (0., 0., -20.) * vuMat;
+  
+ // rd = normalize (vec3 (uv, zmFac)) * vuMat;
+  rd = normalize (vec3 (uv, zmFac));
+  
+  ro = vec3 (
+	3. + sin(iGlobalTime * 0.1 + 0.17) * 5.0, 
+	3. + cos(iGlobalTime * 0.1) * 3.0, 
+	-5.5 + sin(iGlobalTime * 0.05) * 2.0
+	) * vuMat;
+
+  //ro = vec3 (2., 0., -10. ) * vuMat;
+
+     mat3 camRotate = 
+	
+		// bottom
+		(uCameraTargetOffset.y == -1.0) ? rotationMatrix(vec3(1., 0., 0.), radians(90.0)) * rotationMatrix(vec3(0., 1., 0.), radians(90.0)):
+
+		// top
+		(uCameraTargetOffset.y == 1.0) ? rotationMatrix(vec3(1., 0., 0.), radians(-90.0)) * rotationMatrix(vec3(0., 1., 0.), radians(90.0)):
+	
+		rotationMatrix(vec3(0., 1., 0.), radians(
+        
+		
+		// left
+		(uCameraTargetOffset.z == -1.0) ? 270. :
+
+		// right
+		(uCameraTargetOffset.z == 1.0) ? 90. :
+
+		// back
+		 (uCameraTargetOffset.x == -1.0) ?  180. : 
+		
+		
+		// front
+		/* (uCameraTargetOffset.x == 1.0) ? */ 0. 
+
+    ));
+
+	rd *= camRotate;
+
+
   sunDir = normalize (vec3 (-0.2, 0.2, -1.)) * vuMat;
   vec3 col = ShowScene (ro, rd);
   fragColor = vec4 (col, 1.);
