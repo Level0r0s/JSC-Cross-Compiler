@@ -27,6 +27,7 @@ namespace ChromeShaderToyPrograms.a
 
             ["ApollonianByIq"] = () => new ApollonianByIq.Shaders.ProgramFragmentShader(),
             ["AquariumByDr2"] = () => new AquariumByDr2.Shaders.ProgramFragmentShader(),
+            ["AtlantisByDr2"] = () => new AtlantisByDr2.Shaders.ProgramFragmentShader(),
 
             ["AsteroidsByArchee"] = () => new AsteroidsByArchee.Shaders.ProgramFragmentShader(),
             ["ATreeByGuil"] = () => new ATreeByGuil.Shaders.ProgramFragmentShader(),

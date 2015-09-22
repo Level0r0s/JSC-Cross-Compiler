@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractThings0BySquid", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquariumByDr2", "..\..\synergy\a\AquariumByDr2\AquariumByDr2.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtlantisByDr2", "..\..\synergy\a\AtlantisByDr2\AtlantisByDr2.csproj", "{6C6FF8EA-C1BB-46A3-9123-3DC447199DE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -141,6 +143,10 @@ Global
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
+		{6C6FF8EA-C1BB-46A3-9123-3DC447199DE6}.Debug|x86.ActiveCfg = Debug|x86
+		{6C6FF8EA-C1BB-46A3-9123-3DC447199DE6}.Debug|x86.Build.0 = Debug|x86
+		{6C6FF8EA-C1BB-46A3-9123-3DC447199DE6}.Release|x86.ActiveCfg = Release|x86
+		{6C6FF8EA-C1BB-46A3-9123-3DC447199DE6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -167,5 +173,6 @@ Global
 		{C48AE0F5-9ADF-4336-B6CC-384B2143276E} = {80368FFC-736F-4053-A1AB-21AC870D58F3}
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2} = {80368FFC-736F-4053-A1AB-21AC870D58F3}
 		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {80368FFC-736F-4053-A1AB-21AC870D58F3}
+		{6C6FF8EA-C1BB-46A3-9123-3DC447199DE6} = {80368FFC-736F-4053-A1AB-21AC870D58F3}
 	EndGlobalSection
 EndGlobal

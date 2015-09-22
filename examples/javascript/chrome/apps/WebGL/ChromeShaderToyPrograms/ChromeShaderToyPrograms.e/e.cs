@@ -29,6 +29,7 @@ namespace ChromeShaderToyPrograms.e
             ["ElectroPrimByAlex"] = () => new ElectroPrimByAlex.Shaders.ProgramFragmentShader(),
             ["EllingtonVisitsShaderToyByMPlanck"] = () => new EllingtonVisitsShaderToyByMPlanck.Shaders.ProgramFragmentShader(),
             ["EscherPlanariaByMattz"] = () => new EscherPlanariaByMattz.Shaders.ProgramFragmentShader(),
+            ["EveArrivesByIq"] = () => new EveArrivesByIq.Shaders.ProgramFragmentShader(),
             ["ExovoidLogoByRoberto"] = () => new ExovoidLogoByRoberto.Shaders.ProgramFragmentShader(),
             #endregion
 

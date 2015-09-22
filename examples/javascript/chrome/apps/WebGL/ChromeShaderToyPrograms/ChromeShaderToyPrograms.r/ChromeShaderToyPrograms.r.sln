@@ -91,6 +91,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketScienceByMu6k", "..\.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayMarchingPlayByHagerman", "..\..\synergy\r\RayMarchingPlayByHagerman\RayMarchingPlayByHagerman.csproj", "{5BB93E61-9160-4A11-8CD9-BC5D02EAA821}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaytracedRefractionByDemofox", "..\..\synergy\r\RaytracedRefractionByDemofox\RaytracedRefractionByDemofox.csproj", "{D031F58F-F3FC-4026-9244-91E0B148CF35}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -257,6 +259,10 @@ Global
 		{5BB93E61-9160-4A11-8CD9-BC5D02EAA821}.Debug|x86.Build.0 = Debug|x86
 		{5BB93E61-9160-4A11-8CD9-BC5D02EAA821}.Release|x86.ActiveCfg = Release|x86
 		{5BB93E61-9160-4A11-8CD9-BC5D02EAA821}.Release|x86.Build.0 = Release|x86
+		{D031F58F-F3FC-4026-9244-91E0B148CF35}.Debug|x86.ActiveCfg = Debug|x86
+		{D031F58F-F3FC-4026-9244-91E0B148CF35}.Debug|x86.Build.0 = Debug|x86
+		{D031F58F-F3FC-4026-9244-91E0B148CF35}.Release|x86.ActiveCfg = Release|x86
+		{D031F58F-F3FC-4026-9244-91E0B148CF35}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -304,5 +310,6 @@ Global
 		{9279C89F-763D-4808-B5EC-9567BBA87097} = {4D5B6C39-68F5-4E61-9B1C-A5A58F9E46DD}
 		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {4D5B6C39-68F5-4E61-9B1C-A5A58F9E46DD}
 		{5BB93E61-9160-4A11-8CD9-BC5D02EAA821} = {4D5B6C39-68F5-4E61-9B1C-A5A58F9E46DD}
+		{D031F58F-F3FC-4026-9244-91E0B148CF35} = {4D5B6C39-68F5-4E61-9B1C-A5A58F9E46DD}
 	EndGlobalSection
 EndGlobal

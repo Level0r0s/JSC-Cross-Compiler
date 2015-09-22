@@ -41,6 +41,7 @@ namespace ChromeShaderToyPrograms.r
             ["RayMarchingPlayByHagerman"] = () => new RayMarchingPlayByHagerman.Shaders.ProgramFragmentShader(),
             ["RaymarchingTutorialByObjelisks"] = () => new RaymarchingTutorialByObjelisks.Shaders.ProgramFragmentShader(),
             ["RaymarchingTweaksByLanza"] = () => new RaymarchingTweaksByLanza.Shaders.ProgramFragmentShader(),
+            ["RaytracedRefractionByDemofox"] = () => new RaytracedRefractionByDemofox.Shaders.ProgramFragmentShader(),
             ["RedCellsByPMalin"] = () => new RedCellsByPMalin.Shaders.ProgramFragmentShader(),
 
             ["RefelectingCubeByTriggerHLM"] = () => new RefelectingCubeByTriggerHLM.Shaders.ProgramFragmentShader(),

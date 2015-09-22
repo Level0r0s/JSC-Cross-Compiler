@@ -163,6 +163,9 @@
     <Reference Include="VRTestSceneByRaven.AssetsLibrary">
       <HintPath>..\..\synergy\v\VRTestSceneByRaven\VRTestSceneByRaven\bin\staging.AssetsLibrary\VRTestSceneByRaven.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="VoronoiFastByDavidbargo.AssetsLibrary">
+      <HintPath>..\..\synergy\v\VoronoiFastByDavidbargo\bin\staging.AssetsLibrary\VoronoiFastByDavidbargo.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="v.cs" />
@@ -205,6 +208,10 @@
     <ProjectReference Include="..\..\synergy\v\VolumetricRaycastingByXt95\VolumetricRaycastingByXt95\VolumetricRaycastingByXt95.csproj">
       <Project>{37e5348b-acdf-41bb-80ee-f8eb75682b01}</Project>
       <Name>VolumetricRaycastingByXt95</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\v\VoronoiFastByDavidbargo\VoronoiFastByDavidbargo.csproj">
+      <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
+      <Name>VoronoiFastByDavidbargo</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\v\VoxelPacManByNrx\VoxelPacManByNrx\VoxelPacManByNrx.csproj">
       <Project>{a6e686cf-56cd-4533-9a2c-7e759ca71e33}</Project>

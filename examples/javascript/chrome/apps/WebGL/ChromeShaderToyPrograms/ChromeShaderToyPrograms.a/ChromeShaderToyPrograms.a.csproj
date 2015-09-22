@@ -184,6 +184,9 @@
     <Reference Include="AquariumByDr2.AssetsLibrary">
       <HintPath>..\..\synergy\a\AquariumByDr2\bin\staging.AssetsLibrary\AquariumByDr2.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="AtlantisByDr2.AssetsLibrary">
+      <HintPath>..\..\synergy\a\AtlantisByDr2\bin\staging.AssetsLibrary\AtlantisByDr2.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="a.cs" />
@@ -234,6 +237,10 @@
     <ProjectReference Include="..\..\synergy\a\AsteroidsByArchee\AsteroidsByArchee\AsteroidsByArchee.csproj">
       <Project>{38a9cc7f-ea86-4c0a-8aa9-903e873e49a9}</Project>
       <Name>AsteroidsByArchee</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\a\AtlantisByDr2\AtlantisByDr2.csproj">
+      <Project>{6c6ff8ea-c1bb-46a3-9123-3dc447199de6}</Project>
+      <Name>AtlantisByDr2</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\a\ATreeByGuil\ATreeByGuil\ATreeByGuil.csproj">
       <Project>{919e403a-b4d4-4cb9-bc33-85387088335b}</Project>

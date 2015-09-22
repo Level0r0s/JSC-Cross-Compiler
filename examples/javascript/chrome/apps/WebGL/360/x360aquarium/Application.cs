@@ -249,7 +249,7 @@ namespace x360aquarium
 
             // fast gif?
             //cubefacesize = 128; // 6 faces, ?
-            cubefacesize = 512; // 6 faces, ?
+            //cubefacesize = 512; // 6 faces, ?
             //    [GroupMarkerNotSet(crbug.com / 242999)!:247F0809]
             //RENDER WARNING: texture bound to texture unit 0 is not renderable.It maybe non-power-of-2 and have incompatible texture filtering.
 
