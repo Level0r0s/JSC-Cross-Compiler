@@ -133,6 +133,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="app.config" />
+    <None Include="Shaders\Program360.frag" />
     <None Include="Shaders\Program.frag" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />

@@ -1,4 +1,6 @@
-﻿//Eiffie Balls (you don't want to know)
+﻿uniform vec3 uCameraTargetOffset;   
+
+//Eiffie Balls (you don't want to know)
 
 #define TAO 6.283
 
@@ -114,10 +116,55 @@ mat3 lookat(vec3 fw){
 	fw=normalize(fw);vec3 rt=normalize(cross(fw,vec3(0.0,1.0,0.0)));return mat3(rt,cross(rt,fw),fw);
 }
 vec3 path(float tyme){return vec3(cos(tyme),abs(sin(tyme*0.7))*0.1,sin(tyme))*(7.5+sin(tyme));}
+
+
+
+mat3 rotationMatrix(vec3 axis, float angle)
+{
+    axis = normalize(axis);
+    float s = sin(angle);
+    float c = cos(angle);
+    float oc = 1. - c;
+    return mat3(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,
+                oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,
+                oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c);
+}
+
+
+
 void SetCamera(inout vec3 ro, inout vec3 rd, float tyme, vec2 uv){
 	ro=path(tyme);
 	vec3 ta=path(tyme+0.2);ta.y=0.0;
-	rd=lookat(ta-ro)*normalize(vec3(uv,1.0));
+	//rd=lookat(ta-ro)*normalize(vec3(uv,1.0));
+	rd=normalize(vec3(uv,1.0));
+
+	mat3 camRotate = 
+	
+		// bottom
+		(uCameraTargetOffset.y == -1.0) ? rotationMatrix(vec3(1., 0., 0.), radians(90.0)) * rotationMatrix(vec3(0., 1., 0.), radians(90.0)):
+
+		// top
+		(uCameraTargetOffset.y == 1.0) ? rotationMatrix(vec3(1., 0., 0.), radians(-90.0)) * rotationMatrix(vec3(0., 1., 0.), radians(90.0)):
+	
+		rotationMatrix(vec3(0., 1., 0.), radians(
+        
+		
+		// left
+		(uCameraTargetOffset.z == -1.0) ? 270. :
+
+		// right
+		(uCameraTargetOffset.z == 1.0) ? 90. :
+
+		// back
+		 (uCameraTargetOffset.x == -1.0) ?  180. : 
+		
+		
+		// front
+		/* (uCameraTargetOffset.x == 1.0) ? */ 0. 
+
+    ));
+
+	rd *= camRotate;
 }
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )

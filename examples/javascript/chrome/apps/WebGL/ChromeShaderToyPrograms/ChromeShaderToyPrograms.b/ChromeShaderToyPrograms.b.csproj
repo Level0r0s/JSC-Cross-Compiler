@@ -224,6 +224,10 @@
       <Project>{91fe127c-a954-4034-9c0d-da574671136f}</Project>
       <Name>BlueWallClockByC3d</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\b\BobsledByDr2\BobsledByDr2.csproj">
+      <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
+      <Name>BobsledByDr2</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\b\BoingBallByUnitZeroOne\BoingBallByUnitZeroOne\BoingBallByUnitZeroOne.csproj">
       <Project>{bbb1792b-1de0-4b2b-b4ac-9dfaaee9eb98}</Project>
       <Name>BoingBallByUnitZeroOne</Name>

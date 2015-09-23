@@ -1,6 +1,7 @@
-﻿//#define REFLECTION_COUNT 1
+﻿uniform vec3 uCameraTargetOffset;   
+
+//#define REFLECTION_COUNT 1
 #define REFLECTION_COUNT 5
-uniform vec3 uCameraTargetOffset;   
 
 float map(in vec3 pos)
 {

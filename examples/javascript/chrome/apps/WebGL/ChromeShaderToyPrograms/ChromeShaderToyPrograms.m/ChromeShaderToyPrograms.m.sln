@@ -65,6 +65,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2D", "2D", "{9F0911D4-F95A-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobiusHeartsByXMunkki", "..\..\synergy\m\MobiusHeartsByXMunkki\MobiusHeartsByXMunkki.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegaWaveByAiekick", "..\..\synergy\m\MegaWaveByAiekick\MegaWaveByAiekick.csproj", "{684EDB28-29E2-4959-A229-02EA7B19BB36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -187,6 +189,10 @@ Global
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
+		{684EDB28-29E2-4959-A229-02EA7B19BB36}.Debug|x86.ActiveCfg = Debug|x86
+		{684EDB28-29E2-4959-A229-02EA7B19BB36}.Debug|x86.Build.0 = Debug|x86
+		{684EDB28-29E2-4959-A229-02EA7B19BB36}.Release|x86.ActiveCfg = Release|x86
+		{684EDB28-29E2-4959-A229-02EA7B19BB36}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -221,5 +227,6 @@ Global
 		{FAC6B396-94ED-4B8E-81F1-4FD616DD25CC} = {19A52DD7-553D-46B6-81D3-0EAA7734A97D}
 		{9F0911D4-F95A-4FB5-B231-FDD7FE101EAB} = {19A52DD7-553D-46B6-81D3-0EAA7734A97D}
 		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {19A52DD7-553D-46B6-81D3-0EAA7734A97D}
+		{684EDB28-29E2-4959-A229-02EA7B19BB36} = {19A52DD7-553D-46B6-81D3-0EAA7734A97D}
 	EndGlobalSection
 EndGlobal

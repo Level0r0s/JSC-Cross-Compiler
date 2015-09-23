@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudsPhysicallyBasedByJami
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongratsLuxoJrByMplanck", "..\..\synergy\c\CongratsLuxoJrByMplanck\CongratsLuxoJrByMplanck.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrumpledPaperByFizzer", "..\..\synergy\c\CrumpledPaperByFizzer\CrumpledPaperByFizzer.csproj", "{2425D162-064F-45AF-9B1D-8DC51D4B8D84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -165,6 +167,10 @@ Global
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
+		{2425D162-064F-45AF-9B1D-8DC51D4B8D84}.Debug|x86.ActiveCfg = Debug|x86
+		{2425D162-064F-45AF-9B1D-8DC51D4B8D84}.Debug|x86.Build.0 = Debug|x86
+		{2425D162-064F-45AF-9B1D-8DC51D4B8D84}.Release|x86.ActiveCfg = Release|x86
+		{2425D162-064F-45AF-9B1D-8DC51D4B8D84}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -196,5 +202,6 @@ Global
 		{C0FF543D-6CB3-4DE5-A993-88DCD007F327} = {92E84D3B-561B-4270-94D2-DAB99041F13B}
 		{2413FEB0-AE5C-4109-B36C-86775A92D00E} = {92E84D3B-561B-4270-94D2-DAB99041F13B}
 		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {92E84D3B-561B-4270-94D2-DAB99041F13B}
+		{2425D162-064F-45AF-9B1D-8DC51D4B8D84} = {2E654AE6-A44C-4C5C-8052-992D61E6B163}
 	EndGlobalSection
 EndGlobal

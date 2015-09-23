@@ -28,7 +28,10 @@ namespace ChromeShaderToyPrograms.b
             ["BlankspaceByNBickford"] = () => new BlankspaceByNBickford.Shaders.ProgramFragmentShader(),
             ["BlobsByPaulo"] = () => new BlobsByPaulo.Shaders.ProgramFragmentShader(),
             ["BlueWallClockByC3d"] = () => new BlueWallClockByC3d.Shaders.ProgramFragmentShader(),
+
+            ["BobsledByDr2"] = () => new BobsledByDr2.Shaders.ProgramFragmentShader(),
             ["BoingBallByUnitZeroOne"] = () => new BoingBallByUnitZeroOne.Shaders.ProgramFragmentShader(),
+
             ["BRDFsRUsByAntonalog"] = () => new BRDFsRUsByAntonalog.Shaders.ProgramFragmentShader(),
             ["BokehBlurByKabuto"] = () => new ChromeShaderToyBokehBlurByKabuto.Shaders.ProgramFragmentShader(),
             ["ButterfliesByFizzer"] = () => new ButterfliesByFizzer.Shaders.ProgramFragmentShader(),

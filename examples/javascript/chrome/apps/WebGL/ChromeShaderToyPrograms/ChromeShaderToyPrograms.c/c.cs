@@ -15,6 +15,9 @@ namespace ChromeShaderToyPrograms.c
 
         public static Dictionary<string, Func<FragmentShader>> programs = new Dictionary<string, Func<FragmentShader>>
         {
+            ["ClippedDiscHypertextureByFabrice"] = () => new ClippedDiscHypertextureByFabrice.Shaders.ProgramFragmentShader(),
+            ["ConformalPolarByFabrice"] = () => new ConformalPolarByFabrice.Shaders.ProgramFragmentShader(),
+            ["CrumpledPaperByFizzer"] = () => new CrumpledPaperByFizzer.Shaders.ProgramFragmentShader(),
 
             #region /c/
             ["CanyonRollerByDr2"] = () => new CanyonRollerByDr2.Shaders.ProgramFragmentShader(),
@@ -27,13 +30,11 @@ namespace ChromeShaderToyPrograms.c
             ["CloudsTunnelByAvix"] = () => new CloudsTunnelByAvix.Shaders.ProgramFragmentShader(),
             ["CloudsPhysicallyBasedByJamiep"] = () => new CloudsPhysicallyBasedByJamiep.Shaders.ProgramFragmentShader(),
             
-            ["ClippedDiscHypertextureByFabrice"] = () => new ClippedDiscHypertextureByFabrice.Shaders.ProgramFragmentShader(),
 
 
             ["CompassesByGijs"] = () => new CompassesByGijs.Shaders.ProgramFragmentShader(),
             ["CongratsLuxoJrByMplanck"] = () => new CongratsLuxoJrByMplanck.Shaders.ProgramFragmentShader(),
 
-            ["ConformalPolarByFabrice"] = () => new ConformalPolarByFabrice.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyCarcarspacecarByEiffie"] = () => new ChromeShaderToyCarcarspacecarByEiffie.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyCatchByAhihi"] = () => new ChromeShaderToyCatchByAhihi.Shaders.ProgramFragmentShader(),
             ["ChromeShaderToyCCLatticesByPaniq"] = () => new ChromeShaderToyCCLatticesByPaniq.Shaders.ProgramFragmentShader(),

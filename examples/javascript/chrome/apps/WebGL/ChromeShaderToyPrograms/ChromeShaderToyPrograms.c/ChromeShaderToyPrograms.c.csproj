@@ -196,6 +196,12 @@
     <Reference Include="CloudsPhysicallyBasedByJamiep.AssetsLibrary">
       <HintPath>..\..\synergy\c\CloudsPhysicallyBasedByJamiep\bin\staging.AssetsLibrary\CloudsPhysicallyBasedByJamiep.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="CongratsLuxoJrByMplanck.AssetsLibrary">
+      <HintPath>..\..\synergy\c\CongratsLuxoJrByMplanck\bin\staging.AssetsLibrary\CongratsLuxoJrByMplanck.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="CrumpledPaperByFizzer.AssetsLibrary">
+      <HintPath>..\..\synergy\c\CrumpledPaperByFizzer\bin\staging.AssetsLibrary\CrumpledPaperByFizzer.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="c.cs" />
@@ -290,6 +296,10 @@
     <ProjectReference Include="..\..\synergy\c\CongratsLuxoJrByMplanck\CongratsLuxoJrByMplanck.csproj">
       <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
       <Name>CongratsLuxoJrByMplanck</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\c\CrumpledPaperByFizzer\CrumpledPaperByFizzer.csproj">
+      <Project>{2425d162-064f-45af-9b1d-8dc51d4b8d84}</Project>
+      <Name>CrumpledPaperByFizzer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\c\CrystalBallByAaecheve\CrystalBallByAaecheve\CrystalBallByAaecheve.csproj">
       <Project>{29050a98-700e-43cc-ac87-1a25bf0b6a94}</Project>

@@ -155,10 +155,11 @@ namespace ScriptCoreLib.JavaScript.DOM
 
             //var data = canvas.toDataURL();
 
-
+            // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360eiffieballs\Application.cs
             //Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360x83\Application.cs
             // 8K img png will be 50mb
-            var data = canvas.toDataURL(quality: 0.9);
+            //var data = canvas.toDataURL(quality: 0.9);
+            var data = canvas.toDataURL(quality: 1.0);
             //var data = canvas.toDataURL(quality: 0.1);
 
             var prefix = "base64,";

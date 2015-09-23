@@ -208,6 +208,9 @@
     <Reference Include="MobiusHeartsByXMunkki.AssetsLibrary">
       <HintPath>..\..\synergy\m\MobiusHeartsByXMunkki\bin\staging.AssetsLibrary\MobiusHeartsByXMunkki.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="MegaWaveByAiekick.AssetsLibrary">
+      <HintPath>..\..\synergy\m\MegaWaveByAiekick\bin\staging.AssetsLibrary\MegaWaveByAiekick.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="m.cs" />
@@ -286,6 +289,10 @@
     <ProjectReference Include="..\..\synergy\m\MechanicalByIq\MechanicalByIq\MechanicalByIq.csproj">
       <Project>{8d1a9236-ef6d-41f5-924a-cc9453c8e463}</Project>
       <Name>MechanicalByIq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\m\MegaWaveByAiekick\MegaWaveByAiekick.csproj">
+      <Project>{684edb28-29e2-4959-a229-02ea7b19bb36}</Project>
+      <Name>MegaWaveByAiekick</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\m\MercuryCratersByGuil\MercuryCratersByGuil\MercuryCratersByGuil.csproj">
       <Project>{5638645a-bc35-4742-a450-1de8822bcd32}</Project>

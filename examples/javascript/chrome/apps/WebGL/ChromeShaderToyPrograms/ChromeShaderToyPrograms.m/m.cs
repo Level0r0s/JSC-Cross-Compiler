@@ -31,6 +31,8 @@ namespace ChromeShaderToyPrograms.m
             ["MechanicalByIq"] = () => new MechanicalByIq.Shaders.ProgramFragmentShader(),
             ["MercuryCratersByGuil"] = () => new MercuryCratersByGuil.Shaders.ProgramFragmentShader(),
             ["MarioCrossEye3DByHLorenzi"] = () => new MarioCrossEye3DByHLorenzi.Shaders.ProgramFragmentShader(),
+            ["MegaWaveByAiekick"] = () => new MegaWaveByAiekick.Shaders.ProgramFragmentShader(),
+
             ["MidnightCommsByFizzer"] = () => new MidnightCommsByFizzer.Shaders.ProgramFragmentShader(),
             ["MidnightSnowByRavenWorks"] = () => new MidnightSnowByRavenWorks.Shaders.ProgramFragmentShader(),
             ["MarbleSculptureByTekF"] = () => new MarbleSculptureByTekF.Shaders.ProgramFragmentShader(),
