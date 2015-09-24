@@ -1,4 +1,5 @@
-﻿//Somewhere in 1993 by nimitz (twitter: @stormoid)
+﻿uniform vec3 uCameraTargetOffset;   
+//Somewhere in 1993 by nimitz (twitter: @stormoid)
 
 #define PALETTE 6.8
 
@@ -229,14 +230,38 @@ float segm(vec3 ro, vec3 rd, vec3 p1, vec3 p2)
     return smoothstep(0.9985,.999,1.-dot(p,p));
 }
 
+
+
+
+
+
+
+mat3 rotationMatrix(vec3 axis, float angle)
+{
+    axis = normalize(axis);
+    float s = sin(angle);
+    float c = cos(angle);
+    float oc = 1. - c;
+    return mat3(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,
+                oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,
+                oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c);
+}
+
+
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {	
 	vec2 p = fragCoord.xy/iResolution.xy-0.5;
     vec2 bp = p+0.5;
 	p.x*=iResolution.x/iResolution.y;
+
+	//uv /= 0.5;
+	p /= 0.5;
+
+
 	vec2 um = vec2(0);
-    um.x = 0.5+(smoothstep(-2.,2.,sin(time*.7-0.1))-0.5)*.1;
-    um.y = sin(time+1.)*0.02;
+    // no roll thanks
+	//um.x = 0.5+(smoothstep(-2.,2.,sin(time*.7-0.1))-0.5)*.1;
+    //um.y = sin(time+1.)*0.02;
 	
     //camera
     vec3 ro = vec3((smoothstep(-2., 2., sin(time*0.7+1.57))-0.5)*50., sin(time)*5.-1., time*50.);
@@ -246,8 +271,37 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     mat2 ori = mm2( smoothstep(-.5,.5,sin(time*0.7+0.78))-.5 + smoothfloor(time*0.04,.45)*6.28 );
     right.xy *= ori;
     vec3 up = normalize(cross(right,eye));
-	vec3 rd=normalize((p.x*right+p.y*up)*.75+eye);
+	vec3 rd=normalize((p.x*right+p.y*up)*1.0+eye);
 	
+	   mat3 camRotate = 
+	
+		// bottom
+		(uCameraTargetOffset.y == -1.0) ? rotationMatrix(vec3(0., 0., 1.), radians(-90.0)) * rotationMatrix(vec3(0., 1., 0.), radians(90.0)):
+
+		// top
+		(uCameraTargetOffset.y == 1.0) ? rotationMatrix(vec3(0., 0., 1.), radians(90.0)) * rotationMatrix(vec3(0., 1., 0.), radians(90.0)):
+	
+		rotationMatrix(vec3(0., 1., 0.), radians(
+        
+		
+		// left
+		(uCameraTargetOffset.z == -1.0) ? 270. :
+
+		// right
+		(uCameraTargetOffset.z == 1.0) ? 90. :
+
+		// back
+		 (uCameraTargetOffset.x == 1.0) ?  180. : 
+		
+		
+		// front
+		/* (uCameraTargetOffset.x == -1.0) ? */ 0. 
+
+    ));
+
+	rd*= camRotate;
+
+
     vec3 bg = sin(vec3(0.35,0.4,0.48)*11.3*PALETTE)*0.5+.5;
     vec3 col = bg*floor(-rd.y*50.+6.)*0.06;
     
@@ -298,12 +352,19 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     }
     
     //hud
+
+	if
+	//(uCameraTargetOffset.x == -1.0)
+	//(uCameraTargetOffset.y == 1.0)
+	(uCameraTargetOffset.z == -1.0)
+	{
     float lk = 0.;
     if (tgt > .99)lk = 4.;
-    vec3 hud = makeHud(p,tgt);
-    col = col*(1.-smoothstep(0., 1., hud.y+hud.x+hud.z))+hud;   
-    //scanlines
-    col *= (sin(p.y*1.3*iResolution.x)*0.15)*(sin(p.y*10.+time*410.)*0.4)+1.;
-    
+		vec3 hud = makeHud(p,tgt);
+		col = col*(1.-smoothstep(0., 1., hud.y+hud.x+hud.z))+hud;   
+		//scanlines
+		col *= (sin(p.y*1.3*iResolution.x)*0.15)*(sin(p.y*10.+time*410.)*0.4)+1.;
+    }
+
 	fragColor = vec4( col, 1.0 );
 }

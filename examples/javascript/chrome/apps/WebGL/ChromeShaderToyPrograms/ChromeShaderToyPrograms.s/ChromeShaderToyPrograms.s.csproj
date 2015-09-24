@@ -334,6 +334,12 @@
     <Reference Include="StairwayToTheStarsByDr2.AssetsLibrary">
       <HintPath>..\..\synergy\s\StairwayToTheStarsByDr2\bin\staging.AssetsLibrary\StairwayToTheStarsByDr2.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="SkylineByOtaviogood.AssetsLibrary">
+      <HintPath>..\..\synergy\s\SkylineByOtaviogood\bin\staging.AssetsLibrary\SkylineByOtaviogood.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="StromboliByDr2.AssetsLibrary">
+      <HintPath>..\..\synergy\s\StromboliByDr2\bin\staging.AssetsLibrary\StromboliByDr2.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="s.cs" />
@@ -496,6 +502,10 @@
     <ProjectReference Include="..\..\synergy\s\SkateboardByYasuo\SkateboardByYasuo.csproj">
       <Project>{a61c1a16-3435-4b0f-9002-04a952924be4}</Project>
       <Name>SkateboardByYasuo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\s\SkylineByOtaviogood\SkylineByOtaviogood.csproj">
+      <Project>{06b9f540-3e2a-4d32-86ae-01c8ff7f50ba}</Project>
+      <Name>SkylineByOtaviogood</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\s\SminTestByHughsk\SminTestByHughsk\SminTestByHughsk.csproj">
       <Project>{27b66600-734d-46f1-8d67-398224e78a1c}</Project>

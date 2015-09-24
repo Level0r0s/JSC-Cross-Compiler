@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CDCA5F37-DF5C-4407-8DDD-E6349644EF4D}</ProjectGuid>
+    <ProjectGuid>{06B9F540-3E2A-4D32-86AE-01C8FF7F50BA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StromboliByDr2</RootNamespace>
-    <AssemblyName>StromboliByDr2</AssemblyName>
+    <RootNamespace>SkylineByOtaviogood</RootNamespace>
+    <AssemblyName>SkylineByOtaviogood</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>StromboliByDr2.Program</StartupObject>
+    <StartupObject>SkylineByOtaviogood.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -132,8 +132,8 @@
     <Reference Include="OblivionByHoskins.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\OblivionByHoskins.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="StromboliByDr2.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\StromboliByDr2.AssetsLibrary.dll</HintPath>
+    <Reference Include="SkylineByOtaviogood.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\SkylineByOtaviogood.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

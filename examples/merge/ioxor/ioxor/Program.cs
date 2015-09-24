@@ -165,9 +165,18 @@ namespace ioxor
 
                                     var c0 = 0;
 
+                                    var readreopen = false;
+
                                     reread:
                                     try
                                     {
+                                        if (readreopen)
+                                        {
+                                            readreopen = false;
+                                            r = File.Open(f, FileMode.Open, FileAccess.ReadWrite);
+                                            r.Position = Position0;
+                                        }
+
                                         // a hybrid app needs to be resillien while lengthy data sync may be interupted
                                         c0 = r.Read(data, 0, data.Length);
                                         c = c0;
@@ -176,7 +185,26 @@ namespace ioxor
                                     {
                                         Console.WriteLine(new { readfault });
 
+                                        //                                        reading...done in 163
+                                        //{
+                                        //                                            readfault = System.OperationCanceledException: The operation was canceled.
+                                        //   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+                                        //   at System.IO.FileStream.ReadCore(Byte[] buffer, Int32 offset, Int32 count)
+                                        //   at System.IO.FileStream.Read(Byte[] array, Int32 offset, Int32 count)
+                                        //   at ioxor.Program.Main(String[] args) in Z:\jsc.svn\examples\merge\ioxor\ioxor\Program.cs:line 172 }
+                                        //                                        {
+                                        //                                            readfault = System.IO.IOException: An unexpected network error occurred.
+
+                                        //                                             at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+                                        //                                           at System.IO.FileStream.ReadCore(Byte[] buffer, Int32 offset, Int32 count)
+                                        //                                           at System.IO.FileStream.Read(Byte[] array, Int32 offset, Int32 count)
+                                        //                                           at ioxor.Program.Main(String[] args) in Z:\jsc.svn\examples\merge\ioxor\ioxor\Program.cs:line 172 }
+
                                         MessageBox.Show("reread?");
+
+                                        readreopen = true;
+
+
                                         goto reread;
                                     }
 
@@ -238,8 +266,8 @@ namespace ioxor
 
 
                                                 // data corruption...
-                                                retry:
                                                 var reopen = false;
+                                                retry:
                                                 try
                                                 {
                                                     if (reopen)

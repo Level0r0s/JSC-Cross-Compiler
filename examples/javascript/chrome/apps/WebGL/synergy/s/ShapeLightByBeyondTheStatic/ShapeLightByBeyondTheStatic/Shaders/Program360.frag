@@ -1,4 +1,4 @@
-﻿uniform vec3 uCameraTargetOffset;   
+﻿uniform vec3 uCameraTargetOffset
 /*
 ShapeLight
 2015 BeyondTheStatic
