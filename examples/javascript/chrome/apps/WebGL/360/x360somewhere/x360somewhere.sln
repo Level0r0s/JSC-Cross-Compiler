@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360somewhere", "x360somewhere.csproj", "{77234670-3487-477E-9F24-73AB75E6D82E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{A957CA03-0A70-49F4-823C-865E402FD70F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeLightByBeyondTheStatic", "..\..\synergy\s\ShapeLightByBeyondTheStatic\ShapeLightByBeyondTheStatic\ShapeLightByBeyondTheStatic.csproj", "{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{66396EF3-0502-45D3-B0B6-0DEC3C60448B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToySomewhere1993ByNimitz", "..\..\synergy\s\ChromeShaderToySomewhere1993ByNimitz\ChromeShaderToySomewhere1993ByNimitz\ChromeShaderToySomewhere1993ByNimitz.csproj", "{3380346F-D6CD-4A5E-A4D7-6ACDEBA6C6AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.ActiveCfg = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.Build.0 = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.ActiveCfg = Release|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.Build.0 = Release|x86
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}.Debug|x86.ActiveCfg = Debug|x86
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}.Debug|x86.Build.0 = Debug|x86
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}.Release|x86.ActiveCfg = Release|x86
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C}.Release|x86.Build.0 = Release|x86
+		{3380346F-D6CD-4A5E-A4D7-6ACDEBA6C6AF}.Debug|x86.ActiveCfg = Debug|x86
+		{3380346F-D6CD-4A5E-A4D7-6ACDEBA6C6AF}.Debug|x86.Build.0 = Debug|x86
+		{3380346F-D6CD-4A5E-A4D7-6ACDEBA6C6AF}.Release|x86.ActiveCfg = Release|x86
+		{3380346F-D6CD-4A5E-A4D7-6ACDEBA6C6AF}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ECFE9C03-6452-41DD-9C6C-C9EC38FC2F6C} = {A957CA03-0A70-49F4-823C-865E402FD70F}
+		{3380346F-D6CD-4A5E-A4D7-6ACDEBA6C6AF} = {66396EF3-0502-45D3-B0B6-0DEC3C60448B}
+	EndGlobalSection
+EndGlobal
