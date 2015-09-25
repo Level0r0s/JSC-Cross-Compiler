@@ -1,4 +1,5 @@
-﻿uniform vec3 uCameraTargetOffset
+﻿uniform vec3 uCameraTargetOffset;
+
 /*
 ShapeLight
 2015 BeyondTheStatic
@@ -15,7 +16,7 @@ My apologies if this has been done before!
 const int	MaxRaySteps	= 72;		// maximum # of ray steps
 //const float	MaxDist		= 15.0;		// maximum distance a ray travels before giving up
 const float	MaxDist		= 24.0;		// maximum distance a ray travels before giving up
-const float	FudgeFactor	= 1.0;		// lower this if artifacts appear
+const float	FudgeFactor	= 1.0;		// lower this if artifacts pear
 const float	Accuracy	= 0.005;	// minimum ray step
 const float	NormAcc		= 0.005;	// surface normal accuracy
 

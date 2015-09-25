@@ -134,12 +134,12 @@ vec3 q=p;
         //river        
         if ( p.x<lrv && rrv<p.x ) {  //water surface
             mat=MAT2;
-            ss=texture2D(iChannel0, p.xz).x*0.01; 
+            ss=0.7*0.01; 
             h+=ss;
         } else { //terrain
 
-            float t=texture2D(iChannel0, p.xz*0.001).x*1.25; //hills 
-            float g=texture2D(iChannel0, vec2(p.x*0.2,p.z*0.5*0.2)).x*0.05;  //greens
+            float t=0.7*1.25; //hills 
+            float g=0.7*0.05;  //greens
             t+=g;
             //soft shore transition
             if ( p.x>lrv ) sw=t*clamp( (p.x - lrv  )*sw ,0.0,3.0); else

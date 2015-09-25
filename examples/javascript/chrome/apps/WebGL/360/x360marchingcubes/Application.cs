@@ -23,15 +23,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using x360somewhere;
-using x360somewhere.Design;
-using x360somewhere.HTML.Pages;
+using x360marchingcubes;
+using x360marchingcubes.Design;
+using x360marchingcubes.HTML.Pages;
 using System.Diagnostics;
 using ScriptCoreLib.JavaScript.WebGL;
 
-namespace x360somewhere
+namespace x360marchingcubes
 {
-    using x360somewhere.HTML.Images.FromAssets;
+    using x360marchingcubes.HTML.Images.FromAssets;
     using gl = WebGLRenderingContext;
 
     /// <summary>
@@ -49,7 +49,7 @@ namespace x360somewhere
 
         // "X:\vr\tr.png"
         // R:\util\android-sdk-windows\platform-tools\adb.exe push "X:\vr\seascape.png" /sdcard/oculus/360photos/
-        // R:\util\android-sdk-windows\platform-tools\adb.exe push "P:\vr\x360somewhere\00188.png" /sdcard/oculus/360photos/
+        // R:\util\android-sdk-windows\platform-tools\adb.exe push "P:\vr\x360marchingcubes\00188.png" /sdcard/oculus/360photos/
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150906/roomscanningeffectbyrosme
 
@@ -98,12 +98,12 @@ namespace x360somewhere
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150808/cubemapcamera
         // subst /D b:
-        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360somewhere\x360somewhere\bin\Debug\staging\x360somewhere.Application\web
-        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360somewhere\x360somewhere\bin\Debug\staging\x360somewhere.Application\web
-        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360somewhere\x360somewhere\bin\Debug\staging\x360somewhere.Application\web
+        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360marchingcubes\x360marchingcubes\bin\Debug\staging\x360marchingcubes.Application\web
+        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360marchingcubes\x360marchingcubes\bin\Debug\staging\x360marchingcubes.Application\web
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360marchingcubes\x360marchingcubes\bin\Debug\staging\x360marchingcubes.Application\web
         // what if we want to do subst in another winstat or session?
 
-        // ColladaLoader: Empty or non-existing file (assets/x360somewhere/S6Edge.dae)
+        // ColladaLoader: Empty or non-existing file (assets/x360marchingcubes/S6Edge.dae)
 
         /// <summary>
         /// This is a javascript application.
@@ -186,7 +186,7 @@ namespace x360somewhere
                         // 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
                         Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
 
-                        new chrome.Notification(title: "x360somewhere");
+                        new chrome.Notification(title: "x360marchingcubes");
 
                         // https://developer.chrome.com/apps/app_window#type-CreateWindowOptions
                         var xappwindow = await chrome.app.window.create(
@@ -306,7 +306,7 @@ namespace x360somewhere
             //const int size = 1024; // 6 faces, ?
             //const int cubefacesize = 1024; // 6 faces, ?
 
-            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360somewhere/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
+            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360marchingcubes/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
 
 
             var far = 0xffffff;
@@ -355,8 +355,7 @@ namespace x360somewhere
             // fly up?
             //sceneg.translateZ(-1024);
             // rotate the world, as the skybox then matches what we have on filesystem
-            //scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2);
-            scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI );
+            scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
             // yet for headtracking we shall rotate camera
 
 
@@ -497,7 +496,7 @@ namespace x360somewhere
             //var vs0 = new ChromeShaderToySeascapeByTDM.Shaders.ProgramFragmentShader();
             //var vs0 = new ChromeShaderToySeascapeByTDM.Shaders.Program360FragmentShader();
             //var vs0 = new ShapeLightByBeyondTheStatic.Shaders.Program360FragmentShader();
-            var vs0 = new ChromeShaderToySomewhere1993ByNimitz.Shaders.Program360FragmentShader();
+            var vs0 = new ChromeShaderToyMarchingCubesByFizzer.Shaders.Program360FragmentShader();
 
 
 
@@ -1769,7 +1768,7 @@ namespace x360somewhere
                 await_nextframe:
 
 
-                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(5, '0') + ".jpg";
+                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(5, '0') + ".png";
                 status = "rendering... " + new { filename };
 
 

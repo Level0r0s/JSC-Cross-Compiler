@@ -37,8 +37,10 @@ namespace GearVR360VideoPush
                 let fff = new FileInfo(ff)
 
                 //orderby ff.Contains("Quake") descending, fff.Length descending
-                orderby ff.ToLower().Contains("volcano") descending, fff.LastWriteTime descending
-
+                //orderby ff.ToLower().Contains("volcano") descending, fff.LastWriteTime descending
+                orderby ff.ToLower().Contains("Star Wars".ToLower()) descending, fff.LastWriteTime descending
+                //orderby fff.LastWriteTime descending
+                
                 select fff
                 );
 
@@ -46,7 +48,9 @@ namespace GearVR360VideoPush
             var totalIndex = 0;
             var totalBytes = 0L;
 
-            foreach (var path0 in forfiles0)
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150925
+
+            foreach (var path0 in forfiles0.Take(1))
             {
                 var path = path0.FullName;
 
