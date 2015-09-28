@@ -78,6 +78,21 @@ namespace ioxor
 
             Console.WriteLine(new { CrashManagerLastWriteback });
 
+
+            var f2 = new Form2();
+
+            // or should we jump from RED to android ui?
+            if (f2.ShowDialog() != DialogResult.OK)
+            {
+                // no seed
+                return;
+            }
+
+            var f2seedCount = int.Parse(f2.textBox1.Text);
+
+            Console.WriteLine(new { f2seedCount });
+
+
             var seed3 = Enumerable.Take(
 
                          from ff in Directory.GetFiles("x:/media/")
@@ -86,7 +101,8 @@ namespace ioxor
                          orderby fff.Length descending
 
                          //select fff, 8
-                         select fff, 16
+                         //select fff, 16
+                         select fff, f2seedCount
                      ).ToArray();
 
             foreach (var i in seed3)
@@ -100,7 +116,9 @@ namespace ioxor
 
                 Console.WriteLine(new { item, exists });
 
-                if (exists)
+                if (!exists)
+                    MessageBox.Show("folder not available/ reconect? check drivestoredirect");
+                else
                     foreach (var f in Directory.GetFiles(item))
                     {
                         if (File.Exists(f))

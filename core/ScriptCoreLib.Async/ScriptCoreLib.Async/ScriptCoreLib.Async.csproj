@@ -153,7 +153,6 @@
     <Compile Include="Query\Experimental\QueryExpressionBuilderAsync.AsEnumerable.cs" />
     <Compile Include="Query\Experimental\QueryExpressionBuilderAsync.IDbConnection.Count.cs" />
     <Compile Include="Query\Experimental\QueryExpressionBuilderAsync.IDbConnection.Insert.cs" />
-    <Compile Include="Query\Experimental\TInsertAsyncKey.cs" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />
     <Compile Include="ApplicationWebService.cs" />

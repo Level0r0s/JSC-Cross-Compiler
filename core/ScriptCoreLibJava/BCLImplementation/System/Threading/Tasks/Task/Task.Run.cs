@@ -55,5 +55,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
             // X:\jsc.svn\examples\java\hybrid\async\Test\JVMCLRUnwrap\JVMCLRUnwrap\Program.cs
             return __Task.InternalFactory.StartNew(function).Unwrap();
         }
+
+        // Z:\jsc.svn\examples\java\hybrid\JVMCLRWSDLMID\Program.cs
+        public static Task Run<TResult>(Func<Task> function)
+        {
+            // X:\jsc.svn\examples\java\hybrid\async\Test\JVMCLRUnwrap\JVMCLRUnwrap\Program.cs
+            return __Task.InternalFactory.StartNew(function).Unwrap();
+        }
     }
 }

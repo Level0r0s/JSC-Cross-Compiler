@@ -122,6 +122,9 @@
     <Compile Include="BCLImplementation\System\Security\Cryptography\X509Certificates\X509Certificate2.cs" />
     <Compile Include="BCLImplementation\System\Security\Cryptography\X509Certificates\X509Certificate.cs" />
     <Compile Include="BCLImplementation\System\Security\SecureString.cs" />
+    <Compile Include="BCLImplementation\System\ServiceModel\Channels\Binding.cs" />
+    <Compile Include="BCLImplementation\System\ServiceModel\ClientBase.cs" />
+    <Compile Include="BCLImplementation\System\ServiceModel\EndpointAddress.cs" />
     <Compile Include="BCLImplementation\System\Threading\ExecutionContext.cs" />
     <Compile Include="BCLImplementation\System\Threading\Monitor.cs" />
     <Compile Include="BCLImplementation\System\Threading\RegisteredWaitHandle.cs" />
