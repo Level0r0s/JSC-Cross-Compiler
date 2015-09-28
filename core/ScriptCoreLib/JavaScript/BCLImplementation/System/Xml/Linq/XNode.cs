@@ -28,6 +28,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
 
         }
 
+        // X:\jsc.svn\examples\javascript\GoogleMapsInfoWindow\GoogleMapsInfoWindow\Application.cs
+        // is it also available for DOM or shoudl ew go AsXElement? see  refdiv.async.onmutation
         public override void InternalAddChanged(EventHandler<XObjectChangeEventArgs> e)
         {
             //X:\jsc.svn\examples\javascript\Test\TestXMLChangedEvent\TestXMLChangedEvent

@@ -73,7 +73,7 @@ namespace ADBS6CameraTimelapser
             //var device = "192.168.1.126:5555";
             //var device = "192.168.173.5:5555";
             var device = "02157df2d5d4e70b";
-            var storage = "x:/vr/tape9stars2after334";
+            var storage = "x:/vr/tape9moon77a";
 
             if (args.Length == 2)
             {
@@ -222,10 +222,12 @@ namespace ADBS6CameraTimelapser
 
             do_adb("devices");
 
+            goto noreset;
             do_adb("-s " + device + " shell \"am force-stop com.sec.android.app.camera\" ");
             Thread.Sleep(1300);
             do_adb("-s " + device + " shell \"am start -n com.sec.android.app.camera/.Camera\" ");
             Thread.Sleep(4300);
+            noreset:;
 
             //            < devices
             //> connect 192.168.1.126:5555

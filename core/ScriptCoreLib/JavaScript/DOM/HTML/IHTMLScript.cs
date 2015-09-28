@@ -4,6 +4,7 @@ using ScriptCoreLib.JavaScript;
 
 using ScriptCoreLib.JavaScript.DOM.HTML;
 using System;
+using System.Threading.Tasks;
 
 namespace ScriptCoreLib.JavaScript.DOM.HTML
 {
@@ -13,14 +14,14 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
     [Script(InternalConstructor = true)]
     public class IHTMLScript : IHTMLElement
     {
-		// http://blog.chromium.org/2015/03/new-javascript-techniques-for-rapid.html
-		// https://developers.google.com/speed/docs/insights/BlockingJS
+        // http://blog.chromium.org/2015/03/new-javascript-techniques-for-rapid.html
+        // https://developers.google.com/speed/docs/insights/BlockingJS
 
-		// https://w3c.github.io/webappsec/specs/subresourceintegrity/
+        // https://w3c.github.io/webappsec/specs/subresourceintegrity/
 
-		#region Constructor
+        #region Constructor
 
-		public IHTMLScript()
+        public IHTMLScript()
         {
             // InternalConstructor
         }
@@ -120,5 +121,45 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
             }
         }
+
+
+        #region async
+        [Script]
+        public new class Tasks : IHTMLElement.Tasks<IHTMLScript>
+        {
+
+            [System.Obsolete("should jsc expose events as async tasks until C# chooses to allow that?")]
+            public Task onload
+            {
+                [Script(DefineAsStatic = true)]
+                get
+                {
+                    // X:\jsc.svn\examples\javascript\GoogleMapsInfoWindow\GoogleMapsInfoWindow\Application.cs
+
+                    var i = that;
+
+                    var y = new TaskCompletionSource<object>();
+
+                    i.onload +=
+                       delegate
+                       {
+                           y.SetResult(null);
+                       };
+
+                    return y.Task;
+                }
+            }
+        }
+
+        [System.Obsolete("is this the best way to expose events as async?")]
+        public new Tasks async
+        {
+            [Script(DefineAsStatic = true)]
+            get
+            {
+                return new Tasks { that = this };
+            }
+        }
+        #endregion
     }
 }
