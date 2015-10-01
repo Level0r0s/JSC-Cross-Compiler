@@ -41,6 +41,7 @@ namespace ChromeShaderToyPrograms.g
             ["GotthardTunnelByDr2"] = () => new GotthardTunnelByDr2.Shaders.ProgramFragmentShader(),
             ["GrapheneByFabrice"] = () => new GrapheneByFabrice.Shaders.ProgramFragmentShader(),
             ["GraphingByNimitz"] = () => new GraphingByNimitz.Shaders.ProgramFragmentShader(),
+            ["GreyCamoByAirtight"] = () => new GreyCamoByAirtight.Shaders.ProgramFragmentShader(),
 
 
             ["GuitarByAtyuwen"] = () => new GuitarByAtyuwen.Shaders.ProgramFragmentShader(),

@@ -128,6 +128,7 @@
     <Compile Include="JavaScript\DOM\JSON.cs" />
     <Compile Include="JavaScript\DOM\DeviceOrientationEvent.cs" />
     <Compile Include="JavaScript\DOM\HTML\IHTMLHorizontalRule.cs" />
+    <Compile Include="JavaScript\DOM\PointerEvent.cs" />
     <Compile Include="JavaScript\WebAudio\AudioDestinationNode.cs" />
     <Compile Include="JavaScript\WebAudio\AudioParam.cs" />
     <Compile Include="JavaScript\WebAudio\AudioNode.cs" />

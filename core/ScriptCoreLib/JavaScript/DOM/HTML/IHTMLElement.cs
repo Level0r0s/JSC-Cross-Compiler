@@ -1125,6 +1125,28 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         }
         #endregion
 
+
+
+
+        public event System.Action<PointerEvent> onpointermove
+        {
+            // Z:\jsc.svn\examples\javascript\Test\TestPointerEvent\Application.cs
+            // https://code.google.com/p/chromium/issues/detail?id=162757
+
+            [Script(DefineAsStatic = true)]
+            add
+            {
+                this.addEventListener("pointermove", value, false);
+
+            }
+            [Script(DefineAsStatic = true)]
+            remove
+            {
+                this.removeEventListener("pointermove", value, false);
+            }
+        }
+
+        // tested by?
         #region event ontouchmove
         public event System.Action<TouchEvent> ontouchmove
         {
@@ -1270,7 +1292,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
 
         static string[] InternalCaptureMouseEvents = new string[] {
-			"click", "mousedown", "mouseup", "mousemove", "mouseover", "mouseout" };
+            "click", "mousedown", "mouseup", "mousemove", "mouseover", "mouseout" };
 
         static System.Action InternalCaptureMouse(IHTMLElement self)
         {
@@ -1294,7 +1316,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             bool flag = false;
 
             System.Action<IEvent> _capture =
-                delegate(IEvent e)
+                delegate (IEvent e)
                 {
                     if (flag)
                         return;
@@ -1460,7 +1482,8 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
                     delegate { value(); };
             }
             [Script(DefineAsStatic = true)]
-            remove { }
+            remove
+            { }
         }
 
         public event System.Action requestAnimationFrame

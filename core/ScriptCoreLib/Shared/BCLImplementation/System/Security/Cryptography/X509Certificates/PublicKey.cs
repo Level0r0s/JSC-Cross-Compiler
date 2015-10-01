@@ -11,6 +11,8 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Security.Cryptography.X5
 	[Script(Implements = typeof(global::System.Security.Cryptography.X509Certificates.PublicKey))]
 	public class __PublicKey
 	{
+        // http://it.slashdot.org/story/15/09/29/0134232/how-the-fbi-hacks-around-encryption
+
 		// X:\jsc.svn\examples\javascript\Test\TestCryptoUIThreadIdentityKeyPair\TestCryptoUIThreadIdentityKeyPair\Application.cs
 		// X:\jsc.svn\examples\java\hybrid\crypto\JVMCLRRSADuplex\JVMCLRRSADuplex\Program.cs
 

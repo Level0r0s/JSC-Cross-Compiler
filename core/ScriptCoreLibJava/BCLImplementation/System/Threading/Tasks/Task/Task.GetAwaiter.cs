@@ -44,8 +44,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
 
     internal partial class __Task<TResult>
     {
-
-
+        // Z:\jsc.svn\examples\java\hybrid\JVMCLRWSDLMID\Program.cs
         public __TaskAwaiter<TResult> GetAwaiter()
         {
             //Console.WriteLine("enter __Task GetAwaiter " + new { __Environment.CurrentManagedThreadId });

@@ -14,6 +14,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
     [Script(ImplementsViaAssemblyQualifiedName = "System.ServiceModel.ClientBase`1")]
     public class __ClientBase<TChannel>
     {
+        // Z:\jsc.svn\examples\java\Test\TestInheritGeneric\TestInheritGeneric\DigiDocServicePortTypeClient.cs
+
         // public abstract class ClientBase<TChannel> : ICommunicationObject, IDisposable where TChannel : class
 
 

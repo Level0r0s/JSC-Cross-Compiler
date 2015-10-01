@@ -39,18 +39,23 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
                 var jj = j;
                 j++;
 
+                //  task_11.ContinueWith_060001b0(new ScriptCoreLib.Shared.BCLImplementation.System.__Action_1<ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks.__Task_1<TResult>>(classb_12, 
+                // Z:\jsc.svn\examples\java\hybrid\JVMCLRWSDLMID\Program.cs
+
                 item.ContinueWith(
-                    task =>
-                    {
-                        i--;
-
-                        a[jj] = task.Result;
-
-                        if (i == 0)
+                    continuationAction: (Action<Task<TResult>>)(
+                        task =>
                         {
-                            x.SetResult(a);
+                            i--;
+
+                            a[jj] = task.Result;
+
+                            if (i == 0)
+                            {
+                                x.SetResult(a);
+                            }
                         }
-                    }
+                    )
                 );
             }
 

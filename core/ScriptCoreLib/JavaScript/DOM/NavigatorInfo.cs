@@ -100,6 +100,12 @@ namespace ScriptCoreLib.JavaScript.DOM
         // Chrome Canary. Type: "chrome://flags/" in the URL bar and turn on "enable-service-worker" and "experimental-web-platform-features".
         public readonly ServiceWorkerContainer serviceWorker;
 
+
+        // Z:\jsc.svn\core\ScriptCoreLib\ActionScript\flash\ui\Multitouch.cs
+        // http://www.w3.org/Submission/pointer-events/#the-pointermove-event
+
+        // http://www.w3.org/TR/pointerevents/#widl-Navigator-maxTouchPoints
+
     }
 
 }

@@ -24,6 +24,13 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
         // do we have a dispatcher in jvm yet?
 
 
+
+        //public static Task<TResult> Run<TResult>(Func<Task<TResult>> function);
+        //public static Task Run(Func<Task> function);
+        //public static Task<TResult> Run<TResult>(Func<TResult> function);
+
+
+
         //method: System.Threading.Tasks.Task Run(System.Action)
         // X:\jsc.svn\examples\java\hybrid\test\JVMCLRWhenAll\JVMCLRWhenAll\Program.cs
         public static Task Run(Action y)
@@ -57,10 +64,13 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
         }
 
         // Z:\jsc.svn\examples\java\hybrid\JVMCLRWSDLMID\Program.cs
-        public static Task Run<TResult>(Func<Task> function)
+        //public static Task Run<TResult>(Func<Task> function)
+        public static Task Run(Func<Task> function)
         {
             // X:\jsc.svn\examples\java\hybrid\async\Test\JVMCLRUnwrap\JVMCLRUnwrap\Program.cs
             return __Task.InternalFactory.StartNew(function).Unwrap();
         }
+
+
     }
 }

@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhostInTheNoiseByTomkh", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenTunesByPassion", "..\..\synergy\g\GoldenTunesByPassion\GoldenTunesByPassion.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreyCamoByAirtight", "..\..\synergy\g\GreyCamoByAirtight\GreyCamoByAirtight.csproj", "{ACB2518C-5BD5-4BA5-86F5-238543EB671F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -123,6 +125,10 @@ Global
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
+		{ACB2518C-5BD5-4BA5-86F5-238543EB671F}.Debug|x86.ActiveCfg = Debug|x86
+		{ACB2518C-5BD5-4BA5-86F5-238543EB671F}.Debug|x86.Build.0 = Debug|x86
+		{ACB2518C-5BD5-4BA5-86F5-238543EB671F}.Release|x86.ActiveCfg = Release|x86
+		{ACB2518C-5BD5-4BA5-86F5-238543EB671F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -147,5 +153,6 @@ Global
 		{0D77BC12-9249-4689-A08F-FAB87F3869DF} = {55D0DF60-2380-4C2A-8503-F75139C0E627}
 		{9CD8E3A6-17A5-4AE2-A609-9CFFF20F9543} = {55D0DF60-2380-4C2A-8503-F75139C0E627}
 		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {55D0DF60-2380-4C2A-8503-F75139C0E627}
+		{ACB2518C-5BD5-4BA5-86F5-238543EB671F} = {C7EF1272-F637-4356-A454-26E4A8046677}
 	EndGlobalSection
 EndGlobal

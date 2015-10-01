@@ -253,6 +253,10 @@
       <Project>{448d9b7b-039a-4f45-aba0-d5f3e30c5702}</Project>
       <Name>GraphingByNimitz</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\g\GreyCamoByAirtight\GreyCamoByAirtight.csproj">
+      <Project>{acb2518c-5bd5-4ba5-86f5-238543eb671f}</Project>
+      <Name>GreyCamoByAirtight</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\g\GuitarByAtyuwen\GuitarByAtyuwen\GuitarByAtyuwen.csproj">
       <Project>{6a2cfeac-f611-42d2-9516-7d026293a229}</Project>
       <Name>GuitarByAtyuwen</Name>
