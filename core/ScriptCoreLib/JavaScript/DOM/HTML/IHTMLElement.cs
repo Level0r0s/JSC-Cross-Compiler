@@ -1128,6 +1128,50 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
 
 
+
+
+
+
+        public event System.Action<PointerEvent> onpointerdown
+        {
+            // Z:\jsc.svn\examples\javascript\Test\TestPointerEvent\Application.cs
+            // https://code.google.com/p/chromium/issues/detail?id=162757
+
+            [Script(DefineAsStatic = true)]
+            add
+            {
+                this.addEventListener("pointerdown", value, false);
+
+            }
+            [Script(DefineAsStatic = true)]
+            remove
+            {
+                this.removeEventListener("pointerdown", value, false);
+            }
+        }
+
+
+
+        public event System.Action<PointerEvent> onpointerover
+        {
+            // Z:\jsc.svn\examples\javascript\Test\TestPointerEvent\Application.cs
+            // https://code.google.com/p/chromium/issues/detail?id=162757
+
+            [Script(DefineAsStatic = true)]
+            add
+            {
+                this.addEventListener("pointerover", value, false);
+
+            }
+            [Script(DefineAsStatic = true)]
+            remove
+            {
+                this.removeEventListener("pointerover", value, false);
+            }
+        }
+
+
+
         public event System.Action<PointerEvent> onpointermove
         {
             // Z:\jsc.svn\examples\javascript\Test\TestPointerEvent\Application.cs

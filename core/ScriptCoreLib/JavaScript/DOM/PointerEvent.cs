@@ -26,7 +26,31 @@ namespace ScriptCoreLib.JavaScript.DOM
         public long pointerId;
         public double width;
         public double height;
+
+
+
+
+        // https://msdn.microsoft.com/en-us/library/hh772360(v=vs.85).aspx
+        //  requires Windows 8.
+        //Starting with Internet Explorer 11, this property returns a value of 0.5 for active contact (such as mouse button push) and 0 otherwise on hardware that does not support pressure.
+
+        // X:\opensource\unmonitored\PressureTest\PressureTest\PressureTest.cpp
+        // until chrome apps can do pen pressure, we should go native?
+
+        // can we have a UDP stream of pen pressure for VR. as a chrome app in the future, native for xt for now...
+        // should we provide PPAPI plugin for chrome?
+        // http://stackoverflow.com/questions/2648512/pen-pressure-in-flash
+        // http://www.wacomeng.com/web/index.html
+        // http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/events/TouchEvent.html#pressure
         public float pressure;
+
+        // xt not supporint it?
+        // diagnostics tell it should be there
+        // https://web.archive.org/web/20150316135525/http://www.wacomeng.com/windows/index.html
+        // X:\opensource\unmonitored\WintabDN\FormTestApp\TestForm.cs
+        // xt always reports orAltitude 900?
+
+        // "X:\opensource\unmonitored\TiltTest\TILTTEST.C"
         public long tiltX;
         public long tiltY;
         public string pointerType;

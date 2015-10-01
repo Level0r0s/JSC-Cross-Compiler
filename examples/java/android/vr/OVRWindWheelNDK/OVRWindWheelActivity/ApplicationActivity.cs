@@ -33,6 +33,8 @@ namespace OVRWindWheelActivity.Activities
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/pui_global_menu
     public class LocalApplication : Application
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151001/udppenpressure
+
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150703
 
         public override void onCreate()
@@ -159,6 +161,8 @@ namespace OVRWindWheelActivity.Activities
             // our VR thread will stop at 64MB
             public long total_allocated_space;
 
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151001/udppenpressure
+            public string pen;
 
             public string parallax;
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150712-1
@@ -267,6 +271,8 @@ namespace OVRWindWheelActivity.Activities
                 uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
                 while (true)
                 {
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151001/udppenpressure
+                    // did we break async Continue ??
                     var x = await uu.ReceiveAsync(); // did we jump to ui thread?
 
 
@@ -447,6 +453,7 @@ namespace OVRWindWheelActivity.Activities
                         + args.mouse + "\n"
                         + args.parallax + "\n"
                         + args.vertexTransform.Length + "bytes udp\n"
+                        + new { args.pen } + "\n"
                         //+ new { args.mousex, args.mousey } + "\n"
                         + new
                         {
@@ -548,7 +555,7 @@ namespace OVRWindWheelActivity.Activities
             };
 
             new Thread(
-                delegate()
+                delegate ()
                 {
                     // bg thread
 

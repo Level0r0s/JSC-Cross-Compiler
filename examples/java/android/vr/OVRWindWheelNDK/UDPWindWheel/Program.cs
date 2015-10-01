@@ -11,6 +11,8 @@ namespace UDPWindWheel
 {
     class Program
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151001/udppenpressure
+
         static Stopwatch sw = Stopwatch.StartNew();
 
 

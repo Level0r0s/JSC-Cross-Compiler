@@ -14,6 +14,12 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 	[Script(InternalConstructor = true)]
 	public class IHTMLApplet : IHTMLElement
 	{
+        // Plugins that use NPAPI, including Silverlight, Java, and Unity, won’t work.
+
+
+        // Chrome support for these plugins ended September 1, 2015.
+        // https://support.google.com/chrome/answer/6213033?hl=en
+
         // https://twitter.com/wjarek/status/571549576412327936/photo/1
 
         // http://www.robovm.com/

@@ -65,6 +65,8 @@ namespace TestPointerEvent
             // yet oly if we had tilt and pressure
             // does xt even have em natively?
 
+            var onpointerover = new IHTMLPre { "onpointerover ?" }.AttachToDocument();
+            var onpointerdown = new IHTMLPre { "onpointerdown ?" }.AttachToDocument();
             var onpointermove = new IHTMLPre { "onpointermove ?" }.AttachToDocument();
 
             var c = new CanvasRenderingContext2D(800, 200);
@@ -77,12 +79,44 @@ namespace TestPointerEvent
 
             c.beginPath();
             c.moveTo(0, 0);
+
+            // whatif xt does not have tilt data available?
+            // X:\opensource\unmonitored\WintabDN\FormTestApp\TestForm.cs
+
+            c.canvas.onpointerover += e =>
+            {
+                // got a stylus dell xt?
+                // make sure ip is set to dhcp to get into wifi
+                // make sure onenote still works...
+
+                e.stopPropagation();
+                e.preventDefault();
+
+                onpointerover.innerText = "onpointerover " + new { e.pointerType, e.tiltX, e.tiltY, e.pressure, e.movementX };
+
+            };
+
+            c.canvas.onpointerdown += e =>
+            {
+                // got a stylus dell xt?
+                // make sure ip is set to dhcp to get into wifi
+                // make sure onenote still works...
+
+                e.stopPropagation();
+                e.preventDefault();
+
+                onpointerdown.innerText = "onpointerdown " + new { e.pointerType, e.tiltX, e.tiltY, e.pressure, e.movementX };
+
+            };
+
             //Native.document.body.onpointermove += e =>
             c.canvas.onpointermove += e =>
             {
                 // got a stylus dell xt?
                 // make sure ip is set to dhcp to get into wifi
                 // make sure onenote still works...
+                e.stopPropagation();
+                e.preventDefault();
 
 
                 onpointermove.innerText = "onpointermove " + new { e.pointerType, e.tiltX, e.tiltY, e.pressure, e.movementX };

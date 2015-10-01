@@ -27,6 +27,9 @@ namespace ChromeAppWindowUDPPointerLock
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151001/udppenpressure
+        
+
         // net use
         // OK           R:        \\192.168.1.12\x$         Microsoft Windows Network
 
