@@ -132,6 +132,7 @@
     <Compile Include="BCLImplementation\System\Threading\Tasks\TaskScheduler.cs" />
     <Compile Include="BCLImplementation\System\Threading\Tasks\TaskFactory.cs" />
     <Compile Include="BCLImplementation\System\Threading\Tasks\Task\Task.Result.cs" />
+    <Compile Include="BCLImplementation\System\Threading\Tasks\Task\Task.ContinueWith.cs" />
     <Compile Include="BCLImplementation\System\Threading\Tasks\Task\Task.Start.cs" />
     <Compile Include="BCLImplementation\System\Threading\Tasks\Task\Task.ctor.cs" />
     <Compile Include="BCLImplementation\System\Threading\Tasks\Task\Task.GetAwaiter.cs" />

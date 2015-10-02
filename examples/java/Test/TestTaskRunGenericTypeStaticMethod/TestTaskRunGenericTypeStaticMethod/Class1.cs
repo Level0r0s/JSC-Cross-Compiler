@@ -11,6 +11,8 @@ namespace TestTaskRunGenericTypeStaticMethod
 {
     public class Class1 : ScriptCoreLibJava.IAssemblyReferenceToken
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151002
+
         static void Invoke()
         {
             //   public static <TResult> ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks.__Task_1<TResult> Run_06000195(ScriptCoreLib.Shared.BCLImplementation.System.__Func_1<ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks.__Task_1<TResult>> function)
@@ -24,7 +26,22 @@ namespace TestTaskRunGenericTypeStaticMethod
 
                     return Task.CompletedTask;
                 }
+            //).Wait();
+            ).ContinueWith(
+                t =>
+                {
+                    //  )).<__Task>ContinueWith(new ScriptCoreLib.Shared.BCLImplementation.System.__Func_2<__Task, __Task>(new Class1___c(), 
+
+                    return Task.CompletedTask;
+                }
             ).Wait();
         }
     }
 }
+
+//1>   Implementation not found for type import : 
+//1>   type: System.Threading.Tasks.Task
+//1>   method: System.Threading.Tasks.Task`1[TResult]
+//ContinueWith[TResult](System.Func`2[System.Threading.Tasks.Task, TResult])
+//1>   Did you forget to add the[Script] attribute? 
+//1>   Please double check the signature! 

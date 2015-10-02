@@ -79,45 +79,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
 
 
 
-
-
-        public Task ContinueWith(Action<Task> continuationAction)
-        {
-            return ContinueWith(continuationAction, default(TaskContinuationOptions));
-        }
-
-        public Task ContinueWith(Action<Task> continuationAction, TaskContinuationOptions continuationOptions)
-        {
-            var u = new TaskCompletionSource<object>();
-
-            InvokeWhenComplete(
-                delegate
-                {
-                    continuationAction(this);
-
-                    u.SetResult(null);
-                }
-            );
-
-
-            return u.Task;
-        }
-
-
-
-        public void InvokeWhenComplete(Action e)
-        {
-            if (this.IsCompleted)
-            {
-                e();
-                return;
-            }
-
-            InvokeWhenCompleteLater += e;
-        }
-
-        public Action InvokeWhenCompleteLater;
-
+     
 
         public AutoResetEvent WaitEvent = new AutoResetEvent(false);
 
@@ -156,47 +118,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
 
 
 
-        #region ContinueWith
-        public Task ContinueWith(Action<Task<TResult>> continuationAction)
-        {
-            return ContinueWith(continuationAction, default(TaskContinuationOptions));
-        }
-
-        public Task ContinueWith(Action<Task<TResult>> continuationAction, TaskContinuationOptions continuationOptions)
-        {
-            var u = new TaskCompletionSource<object>();
-
-            // X:\jsc.svn\examples\java\Test\JVMCLRTaskStartNew\JVMCLRTaskStartNew\Program.cs
-
-            //y { ManagedThreadId = 8, IsCompleted = true, Result = done }
-            //x { ManagedThreadId = 9, IsCompleted = true, Result = done }
-            //{ ManagedThreadId = 9 } and then some
-
-            InvokeWhenComplete(
-                delegate
-                {
-                    // tested by ?
-                    if (continuationOptions == TaskContinuationOptions.ExecuteSynchronously)
-                    {
-                        continuationAction(this);
-                        u.SetResult(null);
-                        return;
-                    }
-
-                    // shall we use threadpool instead?
-                    new Thread(
-                        delegate()
-                        {
-                            continuationAction(this);
-                            u.SetResult(null);
-                        }
-                    ) { IsBackground = true }.Start();
-                }
-            );
-
-            return u.Task;
-        }
-        #endregion
+  
 
 
 
