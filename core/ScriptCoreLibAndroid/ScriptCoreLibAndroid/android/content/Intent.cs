@@ -189,5 +189,9 @@ namespace android.content
         {
             throw new System.NotImplementedException();
         }
+
+
+
+        public string getDataString() { return null; }
     }
 }

@@ -799,7 +799,7 @@ namespace OVRWindWheelActivity.Activities
 
 
 
-
+        // why we need this?
         protected override void onNewIntent(android.content.Intent value)
         {
             base.onNewIntent(value);

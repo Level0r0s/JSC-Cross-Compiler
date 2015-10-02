@@ -7,6 +7,7 @@ namespace android.hardware
     // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/hardware/Camera.java
 
 
+    // This class was deprecated in API level 21.
     [Script(IsNative = true)]
     public partial class Camera
     {
@@ -19,6 +20,9 @@ namespace android.hardware
         // tested by ?
 
 
+
+
+
         public void release()
         {
         }
@@ -27,6 +31,12 @@ namespace android.hardware
         public static int getNumberOfCameras()
         {
             return default(int);
+        }
+
+
+        public static Camera open()
+        {
+            return default(Camera);
         }
 
         public static Camera open(int cameraId)
@@ -111,12 +121,19 @@ namespace android.hardware
             void onAutoFocus(bool arg0, global::android.hardware.Camera arg1);
         }
 
+
+
+
+
+        // http://developer.android.com/reference/android/hardware/Camera.Parameters.html
         [Script(IsNative = true)]
         public class Parameters
         {
             // Parameter keys to communicate with the camera driver.
             public static readonly string FOCUS_MODE_FIXED = "fixed";
             public static readonly string FOCUS_MODE_INFINITY = "infinity";
+            public static readonly string FLASH_MODE_TORCH;
+            public static readonly string FLASH_MODE_OFF;
 
             public void setRotation(int rotation)
             {
@@ -145,6 +162,11 @@ namespace android.hardware
             public void setFocusMode(string value)
             {
             }
+
+
+
+            public void setFlashMode(string value)
+            { }
         }
 
         [Script(IsNative = true)]

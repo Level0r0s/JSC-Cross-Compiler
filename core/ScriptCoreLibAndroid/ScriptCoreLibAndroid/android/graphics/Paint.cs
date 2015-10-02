@@ -16,14 +16,19 @@ namespace android.graphics
         public class Style
         {
             public static Style STROKE = new Style();
+            public static Style FILL_AND_STROKE = new Style();
 
         }
 
+
+
+        public void setStrokeWidth(float width) { }
+
         public void setStyle(Style style) { }
         public void setAlpha(int a) { }
-            public void setColor(int color){}
+        public void setColor(int color) { }
 
-          public  void setTextSize(float textSize){}
+        public void setTextSize(float textSize) { }
 
     }
 }

@@ -17,6 +17,7 @@ namespace android.graphics
         public static int WHITE;
         public static int GREEN;
         public static int RED;
+        public static int YELLOW;
 
 
         public static int argb(int alpha, int red, int green, int blue)

@@ -11,9 +11,15 @@ namespace android.graphics
     [Script(IsNative = true)]
     public class Canvas
     {
+
+
+        public void drawRect(float left, float top, float right, float bottom, Paint paint)
+        { }
+
         // members and types are to be extended by jsc at release build
-        public void drawText(string text, float x, float y, Paint paint) { 
-//X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorld\ApplicationActivity.cs        
+        public void drawText(string text, float x, float y, Paint paint)
+        {
+            //X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorld\ApplicationActivity.cs        
         }
     }
 
