@@ -27,6 +27,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
             // X:\jsc.svn\examples\java\hybrid\Test\TestGenericArray\TestGenericArray\Program.cs
 
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201412/20141209
+            // Z:\jsc.svn\examples\java\hybrid\Test\JVMCLRTaskRunContinueWait\JVMCLRTaskRunContinueWait\Program.cs
+            // Z:\jsc.svn\examples\java\Test\TestResolveTaskContinueWith\TestResolveTaskContinueWith\Program.cs
 
             var x = new TaskCompletionSource<TResult[]>();
 

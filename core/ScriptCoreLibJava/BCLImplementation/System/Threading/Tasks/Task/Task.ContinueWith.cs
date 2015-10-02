@@ -13,6 +13,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
     // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.Start.cs
     // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.Start.cs
 
+    // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Threading/Tasks/TaskContinuation.cs
+    // Z:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.ContinueWith.cs
+    // Z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.ContinueWith.cs
+
+
     internal partial class __Task
     {
         // Z:\jsc.svn\examples\java\Test\TestTaskRunGenericTypeStaticMethod\TestTaskRunGenericTypeStaticMethod\Class1.cs

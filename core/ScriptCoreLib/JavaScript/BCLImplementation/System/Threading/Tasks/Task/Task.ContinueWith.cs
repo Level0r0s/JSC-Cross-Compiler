@@ -17,6 +17,8 @@ using System.Threading.Tasks;
 namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 {
     // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Threading/Tasks/TaskContinuation.cs
+    // Z:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.ContinueWith.cs
+    // Z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.ContinueWith.cs
 
     public partial class __Task
     {
