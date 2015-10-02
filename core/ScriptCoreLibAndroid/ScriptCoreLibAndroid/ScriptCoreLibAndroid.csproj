@@ -1030,6 +1030,9 @@
     <Compile Include="android\service\media\MediaBrowserService.cs" />
     <Compile Include="android\speech\tts\AndroidKeyStore.cs" />
     <Compile Include="android\system\Os.cs" />
+    <Compile Include="android\telephony\ServiceState.cs" />
+    <Compile Include="android\telephony\SignalStrength.cs" />
+    <Compile Include="android\telephony\PhoneStateListener.cs" />
     <Compile Include="android\telephony\SubscriptionManager.cs" />
     <Compile Include="android\telephony\TelephonyManager.cs" />
     <Compile Include="android\test\ActivityTestCase.cs" />
@@ -1051,6 +1054,7 @@
     <Compile Include="android\content\BroadcastReceiver.cs" />
     <Compile Include="android\content\Context.cs" />
     <Compile Include="android\os\Bundle.cs" />
+    <Compile Include="android\view\Choreographer.cs" />
     <Compile Include="android\view\Surface.cs" />
     <Compile Include="android\view\SurfaceHolder.cs" />
     <Compile Include="android\view\InputEvent.cs" />

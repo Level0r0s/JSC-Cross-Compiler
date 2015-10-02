@@ -24,7 +24,21 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
 
         public Task<TResult> ContinueWith<TResult>(Func<Task, TResult> continuationFunction)
         {
-            return null;
+            // Z:\jsc.svn\examples\java\hybrid\Test\JVMCLRTaskRunContinueWait\JVMCLRTaskRunContinueWait\Program.cs
+
+            var x = new TaskCompletionSource<TResult>();
+
+
+            InvokeWhenComplete(
+                delegate
+                {
+                    var r = continuationFunction(this);
+
+                    x.SetResult(r);
+                }
+            );
+
+            return x.Task;
         }
 
         public Task ContinueWith(Action<Task> continuationAction)
@@ -98,13 +112,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
 
                     // shall we use threadpool instead?
                     new Thread(
-                        delegate ()
+                        delegate()
                         {
                             continuationAction(this);
                             u.SetResult(null);
                         }
-                    )
-                    { IsBackground = true }.Start();
+                    ) { IsBackground = true }.Start();
                 }
             );
 

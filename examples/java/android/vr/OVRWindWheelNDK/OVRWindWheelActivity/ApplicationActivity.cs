@@ -285,6 +285,8 @@ namespace OVRWindWheelActivity.Activities
                     #region await webcam feed
                     if (nogc == null)
                     {
+                        
+                        // partial ?
                         var camera = android.hardware.Camera.open();
                         android.hardware.Camera.Parameters p = camera.getParameters();
                         p.setFlashMode(android.hardware.Camera.Parameters.FLASH_MODE_TORCH);

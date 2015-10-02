@@ -20,10 +20,10 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
     internal partial class __Task
     {
 
-        public static Task<TResult[]> WhenAll<TResult>(params Task<TResult>[] tasks)
+        public static Task<methodTResult[]> WhenAll<methodTResult>(params Task<methodTResult>[] tasks)
         {
             // tasks[0].ContinueWith_06000004(null);
-            tasks[0].ContinueWith(default(Action<Task<TResult>>));
+            tasks[0].ContinueWith(default(Action<Task<methodTResult>>));
 
             return null;
         }
@@ -31,11 +31,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
     }
 
     [Script(Implements = typeof(global::System.Threading.Tasks.Task<>))]
-    internal partial class __Task<TResult> : __Task
+    internal partial class __Task<typeTResult> : __Task
     {
+        // the metadata should be of the member visible here or the BCL?
 
         //  public final  __Task ContinueWith_06003dd3(
-        public Task ContinueWith(Action<Task<TResult>> continuationAction)
+        public Task ContinueWith(Action<Task<typeTResult>> continuationAction)
         {
             return null;
         }

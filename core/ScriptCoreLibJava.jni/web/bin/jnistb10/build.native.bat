@@ -3,7 +3,7 @@ pushd
 echo + compile native
 setlocal
 
-
+rem https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151002
 rem 2011 :) 2015
 set _toolkit=x:\Program Files (x86)\Microsoft Visual Studio 14.0\VC
 set _init=%_toolkit%\..\Common7\Tools\vsvars32.bat
