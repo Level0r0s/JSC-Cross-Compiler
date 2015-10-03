@@ -11,7 +11,10 @@ namespace android.graphics
     [Script(IsNative = true)]
     public class Canvas
     {
-
+        // Z:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelActivity\ApplicationActivity.cs
+        public void drawLine(float startX, float startY, float stopX, float stopY, Paint paint)
+        { 
+        }
 
         public void drawRect(float left, float top, float right, float bottom, Paint paint)
         { }

@@ -261,6 +261,21 @@ namespace OVRWindWheelActivity.Activities
 
 
 
+            var HUDStylusList = new List<Action<android.graphics.Canvas>>();
+
+            Action<android.graphics.Canvas> HUDStylus = canvas =>
+            {
+                // so cool. we get to use pen in vr!s
+                while (HUDStylusList.Count > 768)
+                    HUDStylusList.RemoveAt(0);
+
+
+                foreach (var item in HUDStylusList)
+                {
+                    item(canvas);
+
+                }
+            };
 
             #region fUDPPressure
             Action<IPAddress> fUDPPressure = async nic =>
@@ -271,6 +286,9 @@ namespace OVRWindWheelActivity.Activities
 
                 // X:\jsc.svn\examples\javascript\chrome\apps\ChromeFlashlightTracker\ChromeFlashlightTracker\Application.cs
                 //args.pre = "awaiting Parallax at " + nic + " :40094";
+
+                var oldx = 0f;
+                var oldy = 0f;
 
                 // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
                 // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
@@ -291,10 +309,50 @@ namespace OVRWindWheelActivity.Activities
 
                     var m = new BinaryReader(new MemoryStream(ux.Buffer));
 
-                    var x = m.ReadSingle();
-                    var y = m.ReadSingle();
+                    var x0 = m.ReadSingle();
+
+                    var x = 200 + x0 * 0.1f;
+
+                    var y0 = m.ReadSingle();
+
+                    var y = 1200 - y0 * 0.1f;
+
                     var pressure = m.ReadSingle();
 
+
+                    new { x, y, oldx, oldy, pressure }.With(
+                        segment =>
+                        {
+                            var paint = new android.graphics.Paint();
+
+                            HUDStylusList.Add(
+                                canvas =>
+                                {
+                                    //c.lineTo((int)(x * 0.1), 400 - (int)(y * 0.1));
+
+                                    //c.lineWidth = 1 + (pressure / 255.0 * 7);
+                                    // 
+                                    paint.setStrokeWidth((int)(1 + (pressure / 255.0 * 15)));
+
+                                    paint.setStyle(android.graphics.Paint.Style.STROKE);
+
+                                    if (pressure > 0)
+                                        paint.setColor(android.graphics.Color.YELLOW);
+                                    else
+                                        paint.setColor(android.graphics.Color.RED);
+
+                                    canvas.drawLine(segment.x, segment.y, segment.oldx, segment.oldy, paint);
+
+                                    canvas.drawLine(2560 / 2 + segment.x, segment.y, segment.oldx + 2560 / 2, segment.oldy, paint);
+                                }
+
+                            );
+                        }
+                    );
+
+
+                    oldx = x;
+                    oldy = y;
 
                     args.pen = new { x, y, pressure }.ToString();
 
@@ -491,6 +549,9 @@ namespace OVRWindWheelActivity.Activities
 
             // can we draw on back?
 
+
+
+
             #region mDraw
             var mDraw = new DrawOnTop(this)
             {
@@ -560,8 +621,32 @@ namespace OVRWindWheelActivity.Activities
                     + "GC safe mode / malloc limit..";
             };
 
+
+
+
+            //    canvas.drawText(text, x + 2560 / 2, y + i * 24, paint);
             mDraw.AtDraw = canvas =>
             {
+
+
+                {
+                    var paint = new android.graphics.Paint();
+
+
+                    paint.setStrokeWidth(16);
+                    paint.setStyle(android.graphics.Paint.Style.STROKE);
+
+                    paint.setColor(android.graphics.Color.RED);
+
+                    canvas.drawLine(0, 0, 400, 400, paint);
+
+                    canvas.drawLine(2560 / 2, 0, 400 + 2560 / 2, 400, paint);
+
+
+                    HUDStylus(canvas);
+                }
+
+
                 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150717/replay
                 // can w visually store tracking intel. like tvs do.
                 {
@@ -572,7 +657,6 @@ namespace OVRWindWheelActivity.Activities
 
                     paint.setStrokeWidth(0);
                     paint.setStyle(android.graphics.Paint.Style.FILL_AND_STROKE);
-                    //paint.setColor(android.graphics.Color.RED);
 
                     // lets have left to right recorder as a color block
 
