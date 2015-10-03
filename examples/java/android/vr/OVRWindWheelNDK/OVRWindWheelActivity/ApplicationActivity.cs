@@ -17,6 +17,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using android.hardware;
+using System.IO;
 
 namespace OVRWindWheelActivity.Activities
 {
@@ -258,6 +259,67 @@ namespace OVRWindWheelActivity.Activities
             // https://www.youtube.com/watch?v=GpmKq_qg3Tk
 
 
+
+
+
+            #region fUDPPressure
+            Action<IPAddress> fUDPPressure = async nic =>
+            {
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151003/ovrwindwheelactivity
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150712-1
+                var uu = new UdpClient(40094);
+
+                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeFlashlightTracker\ChromeFlashlightTracker\Application.cs
+                //args.pre = "awaiting Parallax at " + nic + " :40094";
+
+                // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
+                uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
+                while (true)
+                {
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151001/udppenpressure
+                    // did we break async Continue ??
+                    var ux = await uu.ReceiveAsync(); // did we jump to ui thread?
+
+
+                    // discard input?
+                    if (ActivityPaused)
+                        continue;
+
+                    // while we have the signal turn on torch/.
+
+
+                    var m = new BinaryReader(new MemoryStream(ux.Buffer));
+
+                    var x = m.ReadSingle();
+                    var y = m.ReadSingle();
+                    var pressure = m.ReadSingle();
+
+
+                    args.pen = new { x, y, pressure }.ToString();
+
+                    //Console.WriteLine(new { args.parallax });
+
+                    //// or marshal memory?
+                    //var xy = args.mouse.Split(':');
+
+
+                    //args.mousey = int.Parse(xy[1]);
+
+                    //// getchar?
+                    //args.ad = int.Parse(xy[2]);
+                    //args.ws = int.Parse(xy[3]);
+
+                    //// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+                    //args.c = int.Parse(xy[4]);
+                    //// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/mousedown
+                    //args.mousebutton = int.Parse(xy[5]);
+                    //args.mousewheel = int.Parse(xy[6]);
+                }
+            };
+            #endregion
+
+
             #region fParallax
             Action<IPAddress> fParallax = async nic =>
             {
@@ -286,7 +348,7 @@ namespace OVRWindWheelActivity.Activities
                     #region await webcam feed
                     if (nogc == null)
                     {
-                        
+
                         // partial ?
                         var camera = android.hardware.Camera.open();
                         android.hardware.Camera.Parameters p = camera.getParameters();
@@ -407,6 +469,7 @@ namespace OVRWindWheelActivity.Activities
                             if (!IPAddress.IsLoopback(ip.Address))
                                 if (n.SupportsMulticast)
                                 {
+                                    fUDPPressure(ip.Address);
                                     fWASDC(ip.Address);
                                     fParallax(ip.Address);
                                     fvertexTransform(ip.Address);
@@ -527,6 +590,7 @@ namespace OVRWindWheelActivity.Activities
                     paint.setColor(
                         (int)(0xff000000 | rgb_left_to_right));
 
+
                     canvas.drawRect(16, 0, 32, 32, paint);
                 }
 
@@ -558,7 +622,7 @@ namespace OVRWindWheelActivity.Activities
             };
 
             new Thread(
-                delegate ()
+                delegate()
                 {
                     // bg thread
 

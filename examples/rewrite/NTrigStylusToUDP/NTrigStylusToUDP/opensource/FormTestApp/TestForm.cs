@@ -729,8 +729,8 @@ namespace FormTestApp
                         if (m_graphics == null)
                         {
                             // display data mode
-                            TraceMsg("Received WT_PACKET event[" + pktID + "]: X/Y/P = " +
-                                pkt.pkX + " / " + pkt.pkY + " / " + pkt.pkNormalPressure + "\n");
+                            //TraceMsg("Received WT_PACKET event[" + pktID + "]: X/Y/P = " +
+                            //    pkt.pkX + " / " + pkt.pkY + " / " + pkt.pkNormalPressure + "\n");
 
                             // udp!
 

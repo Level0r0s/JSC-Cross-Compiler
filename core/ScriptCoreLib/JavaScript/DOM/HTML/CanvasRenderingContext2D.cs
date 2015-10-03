@@ -37,6 +37,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
         public void moveTo(int x, int y) { }
         // Z:\jsc.svn\examples\javascript\Test\TestPointerEvent\Application.cs
+        public double lineWidth;
         public void lineTo(int x, int y) { }
 
         public string fillStyle;

@@ -697,14 +697,29 @@
     <Compile Include="..\..\ScriptCoreLibJava\java\nio\Buffer.cs">
       <Link>java\nio\Buffer.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\java\nio\ByteBuffer.cs">
+      <Link>java\nio\ByteBuffer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\java\nio\ByteOrder.cs">
+      <Link>java\nio\ByteOrder.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\java\nio\channels\ServerSocketChannel.cs">
       <Link>java\nio\channels\ServerSocketChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\java\nio\CharBuffer.cs">
+      <Link>java\nio\CharBuffer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\java\nio\DoubleBuffer.cs">
+      <Link>java\nio\DoubleBuffer.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\java\nio\FloatBuffer.cs">
       <Link>java\nio\FloatBuffer.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\java\nio\IntBuffer.cs">
       <Link>java\nio\IntBuffer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\java\nio\LongBuffer.cs">
+      <Link>java\nio\LongBuffer.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\java\nio\ShortBuffer.cs">
       <Link>java\nio\ShortBuffer.cs</Link>

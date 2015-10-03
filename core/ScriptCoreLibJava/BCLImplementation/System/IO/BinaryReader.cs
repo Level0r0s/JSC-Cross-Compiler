@@ -17,52 +17,52 @@ namespace ScriptCoreLibJava.BCLImplementation.System.IO
     // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\IO\BinaryReader.cs
     // X:\jsc.svn\core\ScriptCoreLib\ActionScript\BCLImplementation\System\IO\BinaryReader.cs
 
-	[Script(Implements = typeof(global::System.IO.BinaryReader))]
-	internal class __BinaryReader : __IDisposable
-	{
+    [Script(Implements = typeof(global::System.IO.BinaryReader))]
+    internal class __BinaryReader : __IDisposable
+    {
         // Buffer
         // BitConverter
         //  IEEE 754 
         // http://docs.oracle.com/javase/1.5.0/docs/api/java/lang/Float.html#intBitsToFloat(int
 
-		internal Stream InternalStream;
+        internal Stream InternalStream;
 
-		public virtual Stream BaseStream { get { return this.InternalStream; } }
+        public virtual Stream BaseStream { get { return this.InternalStream; } }
 
-		public __BinaryReader(Stream input)
-		{
-			this.InternalStream = input;
-		}
+        public __BinaryReader(Stream input)
+        {
+            this.InternalStream = input;
+        }
 
-		#region __IDisposable Members
+        #region __IDisposable Members
 
-		public void Dispose()
-		{
+        public void Dispose()
+        {
 
-		}
+        }
 
-		#endregion
+        #endregion
 
-		public virtual byte ReadByte()
-		{
-			var i = this.InternalStream.ReadByte();
+        public virtual byte ReadByte()
+        {
+            var i = this.InternalStream.ReadByte();
 
-			// yay, we are throwing the wrong exception
-			if (i < 0)
-				throw new InvalidOperationException();
+            // yay, we are throwing the wrong exception
+            if (i < 0)
+                throw new InvalidOperationException();
 
-			return (byte)i;
-		}
+            return (byte)i;
+        }
 
-		public virtual byte[] ReadBytes(int count)
-		{
-			var buffer = new byte[count];
-			var c = this.InternalStream.Read(buffer, 0, count);
-			if (c != count)
-				throw new InvalidOperationException();
+        public virtual byte[] ReadBytes(int count)
+        {
+            var buffer = new byte[count];
+            var c = this.InternalStream.Read(buffer, 0, count);
+            if (c != count)
+                throw new InvalidOperationException();
 
-			return buffer;
-		}
+            return buffer;
+        }
 
         public virtual long ReadInt64()
         {
@@ -79,73 +79,91 @@ namespace ScriptCoreLibJava.BCLImplementation.System.IO
                 (i[0] << (8 * 0));
         }
 
-		public virtual int ReadInt32()
-		{
-			var i = ReadBytes(4);
+        public virtual int ReadInt32()
+        {
+            var i = ReadBytes(4);
 
-			return
-				(i[3] << (8 * 3)) +
-				(i[2] << (8 * 2)) +
-				(i[1] << (8 * 1)) +
-				(i[0] << (8 * 0));
-		}
+            return
+                (i[3] << (8 * 3)) +
+                (i[2] << (8 * 2)) +
+                (i[1] << (8 * 1)) +
+                (i[0] << (8 * 0));
+        }
 
-		public virtual uint ReadUInt32()
-		{
-			var i = ReadBytes(4);
+        public virtual uint ReadUInt32()
+        {
+            var i = ReadBytes(4);
 
-			return (uint)(
-				(i[3] << (8 * 3)) +
-				(i[2] << (8 * 2)) +
-				(i[1] << (8 * 1)) +
-				(i[0] << (8 * 0))
-			);
-		}
+            return (uint)(
+                (i[3] << (8 * 3)) +
+                (i[2] << (8 * 2)) +
+                (i[1] << (8 * 1)) +
+                (i[0] << (8 * 0))
+            );
+        }
 
-		public virtual short ReadInt16()
-		{
-			var i = ReadBytes(2);
+        public virtual short ReadInt16()
+        {
+            var i = ReadBytes(2);
 
-			return (short)(
-				(i[1] << (8 * 1)) +
-				(i[0] << (8 * 0))
-			);
-		}
+            return (short)(
+                (i[1] << (8 * 1)) +
+                (i[0] << (8 * 0))
+            );
+        }
 
-		public virtual int Read(byte[] buffer, int index, int count)
-		{
-			return this.InternalStream.Read(buffer, index, count);
-		}
+        public virtual int Read(byte[] buffer, int index, int count)
+        {
+            return this.InternalStream.Read(buffer, index, count);
+        }
 
-		public virtual string ReadString()
-		{
-			var length = this.Read7BitEncodedInt();
-			var bytes = this.ReadBytes(length);
+        public virtual string ReadString()
+        {
+            var length = this.Read7BitEncodedInt();
+            var bytes = this.ReadBytes(length);
 
-			return Encoding.UTF8.GetString(bytes);
-		}
+            return Encoding.UTF8.GetString(bytes);
+        }
 
-		protected internal int Read7BitEncodedInt()
-		{
-			byte num3;
-			int num = 0;
-			int num2 = 0;
-			bool loop = true;
-			while (loop)
-			{
-				if (num2 == 0x23)
-				{
-					throw new InvalidOperationException();
-				}
-				num3 = this.ReadByte();
-				num |= (num3 & 0x7f) << num2;
-				num2 += 7;
+        protected internal int Read7BitEncodedInt()
+        {
+            byte num3;
+            int num = 0;
+            int num2 = 0;
+            bool loop = true;
+            while (loop)
+            {
+                if (num2 == 0x23)
+                {
+                    throw new InvalidOperationException();
+                }
+                num3 = this.ReadByte();
+                num |= (num3 & 0x7f) << num2;
+                num2 += 7;
 
-				loop = ((num3 & 0x80) != 0);
-			}
+                loop = ((num3 & 0x80) != 0);
+            }
 
-			return num;
-		}
+            return num;
+        }
 
-	}
+        public virtual float ReadSingle()
+        {
+            var bytes = ReadBytes(4);
+
+            // http://stackoverflow.com/questions/14308746/how-to-convert-from-a-float-to-4-bytes-in-java
+            // http://stackoverflow.com/questions/13469681/how-to-convert-4-bytes-array-to-float-in-java
+            // Z:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\OVRWindWheelActivity\ApplicationActivity.cs
+
+            //  Float.intBitsToFloat() ?
+
+            var f = java.nio.ByteBuffer.wrap((sbyte[])(object)bytes)
+
+                .order(java.nio.ByteOrder.LITTLE_ENDIAN)
+                .getFloat();
+
+
+            return f;
+        }
+    }
 }

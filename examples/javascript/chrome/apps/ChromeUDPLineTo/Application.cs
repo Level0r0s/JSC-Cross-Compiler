@@ -75,6 +75,7 @@ namespace ChromeUDPLineTo
                         );
 
                         //xappwindow.setAlwaysOnTop
+                        xappwindow.setAlwaysOnTop(true);
 
                         xappwindow.show();
 
@@ -98,16 +99,24 @@ namespace ChromeUDPLineTo
             //{{ prefixLength = 64, name = {A8657A4E-8BFA-41CC-87BE-6847E33E1A81}, address = fe80::20a6:2815:3f57:d4e3 }}
 
 
-            var c = new CanvasRenderingContext2D(800, 200);
+            var c = new CanvasRenderingContext2D(800, 400);
 
             c.canvas.style.border = "1px solid blue";
             c.canvas.AttachToDocument();
             c.canvas.style.SetLocation(0, 0);
 
-            Native.document.body.style.marginTop = "200px";
+            Native.document.body.style.marginTop = "400px";
 
-            c.beginPath();
-            c.moveTo(0, 0);
+            new IHTMLButton { "clear" }.AttachToDocument().onclick += delegate
+            {
+                c.clearRect(0, 0, 800, 400);
+            };
+
+            Action begin = delegate
+            {
+                c.beginPath();
+                c.moveTo(0, 0);
+            };
 
             // ok his app needs to run as a chrome app.
             new { }.With(
@@ -148,8 +157,8 @@ namespace ChromeUDPLineTo
                             while (true)
                             {
                                 var ux = await uu.ReceiveAsync(); // did we jump to ui thread?
-                                                                 //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
-                                                                 //args.vertexTransform = x.Buffer;
+                                                                  //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
+                                                                  //args.vertexTransform = x.Buffer;
 
 
                                 buffer.innerText = new { ux.Buffer.Length }.ToString();
@@ -175,15 +184,27 @@ namespace ChromeUDPLineTo
                                     var y = f[1];
                                     var pressure = f[2];
 
+
+                                    begin();
+
+                                    c.lineWidth = 1 + (pressure / 255.0 * 7);
+
                                     if (pressure > 0)
-                                        c.strokeStyle = "red";
-                                    else
                                         c.strokeStyle = "blue";
-                                    c.lineTo((int)(x * 0.1), (int)(y * 0.1));
+                                    else
+                                        c.strokeStyle = "rgba(0,0,255,0.25)";
+
+                                    c.lineTo((int)(x * 0.1), 400 - (int)(y * 0.1));
 
                                     //c.lineTo(e.OffsetX, e.OffsetY);
                                     //c.lineTo(e.movementX, e.movementY);
                                     c.stroke();
+
+                                    begin = delegate
+                                    {
+                                        c.beginPath();
+                                        c.moveTo((int)(x * 0.1), 400 - (int)(y * 0.1));
+                                    };
 
                                 }
                                 //new Float32Array()
