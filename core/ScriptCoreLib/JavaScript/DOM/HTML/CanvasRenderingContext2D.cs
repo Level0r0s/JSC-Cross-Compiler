@@ -27,6 +27,18 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
         // X:\jsc.svn\examples\javascript\synergy\webgl\WebGLCity\WebGLCity\Application.cs
 
+        // Z:\jsc.svn\examples\javascript\Test\TestPointerEvent\Application.cs
+        public void beginPath() { }
+
+        public string strokeStyle;
+        public void stroke() {
+        }
+
+
+        public void moveTo(int x, int y) { }
+        // Z:\jsc.svn\examples\javascript\Test\TestPointerEvent\Application.cs
+        public void lineTo(int x, int y) { }
+
         public string fillStyle;
         public void fillRect(int x, int y, int cx, int cy) { }
         public void clearRect( float x,  float y,  float w,  float h) {}

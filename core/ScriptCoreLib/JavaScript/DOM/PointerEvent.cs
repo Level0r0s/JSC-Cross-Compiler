@@ -48,6 +48,8 @@ namespace ScriptCoreLib.JavaScript.DOM
         // diagnostics tell it should be there
         // https://web.archive.org/web/20150316135525/http://www.wacomeng.com/windows/index.html
         // X:\opensource\unmonitored\WintabDN\FormTestApp\TestForm.cs
+        // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPLineTo\Application.cs
+
         // xt always reports orAltitude 900?
 
         // "X:\opensource\unmonitored\TiltTest\TILTTEST.C"
