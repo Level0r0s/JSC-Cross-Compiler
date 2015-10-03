@@ -263,10 +263,12 @@ namespace OVRWindWheelActivity.Activities
 
             var HUDStylusList = new List<Action<android.graphics.Canvas>>();
 
+            // http://uploadvr.com/vr-hmd-specs/
+
             Action<android.graphics.Canvas> HUDStylus = canvas =>
             {
                 // so cool. we get to use pen in vr!s
-                while (HUDStylusList.Count > 768)
+                while (HUDStylusList.Count > 1024)
                     HUDStylusList.RemoveAt(0);
 
 
@@ -332,7 +334,7 @@ namespace OVRWindWheelActivity.Activities
 
                                     //c.lineWidth = 1 + (pressure / 255.0 * 7);
                                     // 
-                                    paint.setStrokeWidth((int)(1 + (pressure / 255.0 * 15)));
+                                    paint.setStrokeWidth((int)(1 + (pressure / 255.0 * 6) * (pressure / 255.0 * 6)));
 
                                     paint.setStyle(android.graphics.Paint.Style.STROKE);
 

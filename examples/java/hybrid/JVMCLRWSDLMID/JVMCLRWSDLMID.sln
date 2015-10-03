@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JVMCLRWSDLMID", "JVMCLRWSDLMID.csproj", "{DFA12B74-06FA-4360-AA69-0E36C76AF308}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5F295F12-F93F-4347-B417-AA89990652A3} = {5F295F12-F93F-4347-B417-AA89990652A3}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib", "..\..\..\..\core\ScriptCoreLib\ScriptCoreLib.csproj", "{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}"
 EndProject

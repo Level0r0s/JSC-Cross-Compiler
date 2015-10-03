@@ -11,6 +11,8 @@ namespace NTrigStylusToUDP
         [STAThread]
         static void Main(string[] args)
         {
+            System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.High;
+
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151003/udppenpressure
 
             // Severity	Code	Description	Project	File	Line

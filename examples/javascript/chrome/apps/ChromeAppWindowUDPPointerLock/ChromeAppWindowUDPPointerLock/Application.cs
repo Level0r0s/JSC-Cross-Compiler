@@ -33,7 +33,9 @@ namespace ChromeAppWindowUDPPointerLock
         // net use
         // OK           R:        \\192.168.1.12\x$         Microsoft Windows Network
 
-        // subst a: r:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\bin\Debug\staging\ChromeAppWindowUDPPointerLock.Application\web
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151003/ovrwindwheelactivity
+        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\bin\Debug\staging\ChromeAppWindowUDPPointerLock.Application\web
 
         // X:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\bin\Debug\staging\ChromeAppWindowUDPPointerLock.Application\web
 

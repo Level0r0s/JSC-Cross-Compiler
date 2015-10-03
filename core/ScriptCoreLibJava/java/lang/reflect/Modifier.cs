@@ -2,7 +2,8 @@ using ScriptCoreLib;
 
 namespace java.lang.reflect
 {
-    [Script(IsNative=true)]
+
+    [Script(IsNative = true)]
     public class Modifier
     {
         #region methods

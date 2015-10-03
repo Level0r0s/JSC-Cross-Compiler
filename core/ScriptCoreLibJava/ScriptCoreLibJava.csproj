@@ -768,6 +768,8 @@
     <Compile Include="java\lang\LinkageError.cs" />
     <Compile Include="java\lang\Error.cs" />
     <Compile Include="java\lang\ProcessBuilder.cs" />
+    <Compile Include="java\lang\reflect\InvocationHandler.cs" />
+    <Compile Include="java\lang\reflect\Proxy.cs" />
     <Compile Include="java\lang\reflect\ParameterizedType.cs" />
     <Compile Include="java\lang\reflect\Type.cs" />
     <Compile Include="java\lang\reflect\TypeVariable.cs" />
