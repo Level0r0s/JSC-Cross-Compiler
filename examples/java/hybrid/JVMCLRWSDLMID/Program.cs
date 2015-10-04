@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using System.Text;
@@ -50,6 +51,21 @@ namespace JVMCLRWSDLMID
 
             public object BeforeSendRequest(ref System.ServiceModel.Channels.Message request, System.ServiceModel.IClientChannel channel)
             {
+                //HttpRequestMessageProperty property = new HttpRequestMessageProperty();
+
+                //var userAgent = "MyUserAgent/1.0.0.0";
+
+                //if (request.Properties.Count == 0 || request.Properties[HttpRequestMessageProperty.Name] == null)
+                //{
+                //    var property = new HttpRequestMessageProperty();
+                //    property.Headers["User-Agent"] = userAgent;
+                //    request.Properties.Add(HttpRequestMessageProperty.Name, property);
+                //}
+                //else
+                //{
+                //    ((HttpRequestMessageProperty)request.Properties[HttpRequestMessageProperty.Name]).Headers["User-Agent"] = userAgent;
+                //}
+
                 LastRequestXML = request.ToString();
                 return request;
             }
@@ -113,15 +129,71 @@ namespace JVMCLRWSDLMID
             //        at JVMCLRWSDLMID.sk.DigiDocServicePortTypeClient.MobileAuthenticateAsync(DigiDocServicePortTypeClient.java:108)
             //        at JVMCLRWSDLMID.Program.main(Program.java:54)
 
+            //xPOST.Headers[HttpRequestHeader.ContentLength] = "" + data.Length;
+
+
+            // +		InnerException	{"The 'Content-Length' header must be modified using the appropriate property or method.\r\nParameter name: name"}	System.Exception {System.ArgumentException}
+
+
+            // http://referencesource.microsoft.com/#System/net/System/Net/webclient.cs
+            //   internal UploadBitsState(WebRequest request, Stream readStream, byte[] buffer, int chunkSize, byte[] header, byte[] footer, CompletionDelegate uploadCompletionDelegate, CompletionDelegate downloadCompletionDelegate, AsyncOperation asyncOp, ProgressData progress, WebClient webClient) {
+
+            // http://stackoverflow.com/questions/2131245/c-webclient-assigning-chunk-size-when-using-asyncuploaddata
+
+
             try
             {
+
+                var xPOST = new WebClient();
+
+
+                // http://stackoverflow.com/questions/287126/how-to-post-soap-request-from-net
+
+                // https://magedfarag.wordpress.com/2012/12/14/call-wcf-sevice-using-only-webclient-and-soap-xml/
+
+                //xPOST.Headers[HttpRequestHeader.ContentType] = "application/soap+xml;charset=UTF-8";
+                //xPOST.Headers[HttpRequestHeader.ContentType] = "text/xml; charset=UTF-8";
+
+                //{ Message = , StackTrace = java.lang.NullPointerException
+                //        at JVMCLRWSDLMID.Program.main(Program.java:46)
+                // }
+
+                xPOST.Headers["Content-Type"] = "text/xml; charset=UTF-8";
+                xPOST.Headers["SOAPAction"] = "\"\"";
+
+                // webclient chunks if data is more than
+                // Content-Length: 1023
+                var data = @"<s:Envelope xmlns:s=""http://schemas.xmlsoap.org/soap/envelope/""><s:Body s:encodingStyle=""http://schemas.xmlsoap.org/soap/encoding/"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema""><q1:MobileAuthenticate xmlns:q1=""http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl""><IDCode xsi:type=""xsd:string"">14212128025</IDCode><CountryCode xsi:type=""xsd:string"">EE</CountryCode><PhoneNo xsi:type=""xsd:string"">37200007</PhoneNo><Language xsi:type=""xsd:string"">EST</Language><ServiceName xsi:type=""xsd:string"">Testimine</ServiceName><MessageToDisplay xsi:type=""xsd:string"">Testimine</MessageToDisplay><SPChallenge xsi:type=""xsd:string"">03010400000000000000</SPChallenge><MessagingMode xsi:type=""xsd:string"">asynchClientServer</MessagingMode><AsyncConfiguration xsi:type=""xsd:int"">0</AsyncConfiguration><ReturnCertData xsi:type=""xsd:boolean"">true</ReturnCertData><ReturnRevocationData xsi:type=""xsd:boolean"">false</ReturnRevocationData></q1:MobileAuthenticate></s:Body></s:Envelope>".Trim();
+
+                // { xPOSTresponse =  }
+                var xPOSTresponse = xPOST.UploadString("https://tsp.demo.sk.ee/", "POST", data);
+
+                //var xPOSTresponse = xPOST.UploadString("https://tsp.demo.sk.ee/", data);
+                Console.WriteLine(new { xPOSTresponse });
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(new { err.Message, err.StackTrace });
+            }
+
+            try
+            {
+            // http://www.microsoft.com/en-us/download/details.aspx?id=44226
+
                 // java.lang.reflect.Proxy to the rescue!
 
+                // goto x1;
+
+
+
+            x1:
+
+                //System.ServiceModel.OperationContext.Current.
                 var c = new sk.DigiDocServicePortTypeClient();
 
-                var requestInterceptor = new InspectorBehavior();
+                //var requestInterceptor = new InspectorBehavior();
 
-                c.Endpoint.EndpointBehaviors.Add(requestInterceptor);
+                //c.Endpoint.EndpointBehaviors.Add(requestInterceptor);
 
                 //<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
                 //  <s:Header>
@@ -187,6 +259,7 @@ namespace JVMCLRWSDLMID
                 //  </SOAP-ENV:Body>
                 //</SOAP-ENV:Envelope>
 
+                Console.WriteLine("invoke MobileAuthenticateAsync");
                 var xa = c.MobileAuthenticateAsync(new sk.MobileAuthenticateRequest
                 {
                     // http://www.id.ee/?id=30340
@@ -295,6 +368,7 @@ namespace JVMCLRWSDLMID
                 });
 
                 sk.MobileAuthenticateResponse x = xa.Result;
+                Console.WriteLine("after MobileAuthenticateAsync");
 
                 // did we actually do wsdl coms or was it intercepted by core?
                 // { Sesscode = 0, Status = , UserIDCode = , UserCN = , ChallengeID = , Challenge =  }

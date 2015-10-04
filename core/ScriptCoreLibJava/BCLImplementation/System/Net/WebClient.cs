@@ -32,6 +32,14 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
         public WebHeaderCollection Headers { get; set; }
 
 
+        //required: ScriptCoreLib.Shared.BCLImplementation.System.Net.__WebHeaderCollection
+        //found:    ScriptCoreLibJava.BCLImplementation.System.Net.__WebHeaderCollection
+        public __WebClient()
+        {
+            var x = new __WebHeaderCollection();
+            this.Headers = (WebHeaderCollection)(object)x;
+        }
+
         public byte[] UploadValues(string address, NameValueCollection data)
         {
             return UploadValues(new Uri(address), data);
@@ -357,6 +365,14 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
         #endregion
 
         #region UploadString
+
+        public string UploadString(string u, string data)
+        {
+            // Z:\jsc.svn\examples\java\hybrid\JVMCLRWSDLMID\Program.cs
+
+            return UploadString(new Uri(u), method: "POST", data: data);
+        }
+
         public string UploadString(string u, string method, string data)
         {
             return UploadString(new Uri(u), data, method);
@@ -364,6 +380,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 
         public string UploadString(Uri u, string method, string data)
         {
+            Console.WriteLine("enter UploadString " + new { u, method });
+
             var w = new StringBuilder();
 
             HttpURLConnection conn = null;
@@ -375,12 +393,14 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
                 conn = (HttpURLConnection)url.openConnection();
                 conn.setDoOutput(true);
                 conn.setDoInput(true);
-                conn.setInstanceFollowRedirects(false);
+                //conn.setInstanceFollowRedirects(false);
+                conn.setInstanceFollowRedirects(true);
+
                 conn.setRequestMethod(method);
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                conn.setRequestProperty("charset", "utf-8");
-                conn.setRequestProperty("content-length", "" + data.Length);
-                conn.setUseCaches(false);
+
+
+                var xContentType = default(string);
+
 
                 try
                 {
@@ -388,13 +408,33 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
                     if (Headers != null)
                     {
                         foreach (string key in Headers.AllKeys)
+                        {
+                            if (key == "Content-Type")
+                            {
+                                xContentType = Headers[key];
+                            }
+
+
                             conn.addRequestProperty(key, Headers[key]);
+                        }
                     }
                 }
                 catch (Exception e)
                 {
                     //System.Console.WriteLine("ERROR: Failed to write headers. Exception was:" + e.Message);
                 }
+
+                if (xContentType == null)
+                {
+                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                    conn.setRequestProperty("charset", "utf-8");
+                }
+
+                conn.setRequestProperty("content-length", "" + data.Length);
+
+                conn.setUseCaches(false);
+
+
 
                 DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
                 wr.writeBytes(data);
@@ -417,10 +457,13 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
                 }
                 reader.close();
             }
-            catch
+            catch (Exception err)
             {
                 // oops
+                Console.WriteLine("UploadString " + new { err });
             }
+
+            Console.WriteLine("exit UploadString " + new { conn });
 
             if (conn != null)
                 conn.disconnect();

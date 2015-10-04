@@ -9,5 +9,7 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Net
     [Script(Implements = typeof(global::System.Net.WebHeaderCollection))]
     public class __WebHeaderCollection : __NameValueCollection
     {
+        // Z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\WebClient.cs
+
     }
 }
