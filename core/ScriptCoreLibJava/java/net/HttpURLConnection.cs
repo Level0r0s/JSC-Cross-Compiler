@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ScriptCoreLib;
 using java.io;
+using javax.net.ssl;
 
 namespace java.net
 {
@@ -11,6 +12,9 @@ namespace java.net
     [Script(IsNative = true)]
     public abstract class HttpURLConnection : URLConnection
     {
+        //public void setHostnameVerifier(HostnameVerifier v) { }
+
+
         public int getResponseCode()
         {
             return default(int);

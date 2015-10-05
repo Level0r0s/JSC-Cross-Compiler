@@ -124,6 +124,7 @@
     <Compile Include="BCLImplementation\System\Security\SecureString.cs" />
     <Compile Include="BCLImplementation\System\ServiceModel\Channels\Binding.cs" />
     <Compile Include="BCLImplementation\System\ServiceModel\ClientBase.cs" />
+    <Compile Include="BCLImplementation\System\ServiceModel\MessageContractAttribute.cs" />
     <Compile Include="BCLImplementation\System\ServiceModel\EndpointAddress.cs" />
     <Compile Include="BCLImplementation\System\Threading\ExecutionContext.cs" />
     <Compile Include="BCLImplementation\System\Threading\Monitor.cs" />
@@ -368,6 +369,13 @@
     <Compile Include="javax\accessibility\AccessibleState.cs" />
     <Compile Include="javax\accessibility\AccessibleStateSet.cs" />
     <Compile Include="javax\crypto\spec\OAEPParameterSpec.cs" />
+    <Compile Include="javax\net\KeyManager.cs" />
+    <Compile Include="javax\net\ssl\SSLSocketFactory.cs" />
+    <Compile Include="javax\net\ssl\SSLContext.cs" />
+    <Compile Include="javax\net\ssl\X509TrustManager.cs" />
+    <Compile Include="javax\net\ssl\TrustManager.cs" />
+    <Compile Include="javax\net\ssl\SSLSession.cs" />
+    <Compile Include="javax\net\ssl\HostnameVerifier.cs" />
     <Compile Include="javax\net\ssl\HttpsURLConnection.cs" />
     <Compile Include="javax\net\ssl\SSLServerSocket.cs" />
     <Compile Include="javax\servlet\GenericServlet.cs" />
@@ -883,6 +891,7 @@
     <Compile Include="java\security\cert\X509Certificate.cs" />
     <Compile Include="java\security\CodeSource.cs" />
     <Compile Include="javax\crypto\Cipher.cs" />
+    <Compile Include="java\security\SecureRandom.cs" />
     <Compile Include="java\security\KeyFactory.cs" />
     <Compile Include="java\security\interfaces\RSAKey.cs" />
     <Compile Include="java\security\interfaces\RSAPublicKey.cs" />

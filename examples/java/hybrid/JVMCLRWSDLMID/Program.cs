@@ -140,7 +140,7 @@ namespace JVMCLRWSDLMID
 
             // http://stackoverflow.com/questions/2131245/c-webclient-assigning-chunk-size-when-using-asyncuploaddata
 
-
+            #region oldschool SOAP
             try
             {
 
@@ -166,15 +166,54 @@ namespace JVMCLRWSDLMID
                 var data = @"<s:Envelope xmlns:s=""http://schemas.xmlsoap.org/soap/envelope/""><s:Body s:encodingStyle=""http://schemas.xmlsoap.org/soap/encoding/"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema""><q1:MobileAuthenticate xmlns:q1=""http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl""><IDCode xsi:type=""xsd:string"">14212128025</IDCode><CountryCode xsi:type=""xsd:string"">EE</CountryCode><PhoneNo xsi:type=""xsd:string"">37200007</PhoneNo><Language xsi:type=""xsd:string"">EST</Language><ServiceName xsi:type=""xsd:string"">Testimine</ServiceName><MessageToDisplay xsi:type=""xsd:string"">Testimine</MessageToDisplay><SPChallenge xsi:type=""xsd:string"">03010400000000000000</SPChallenge><MessagingMode xsi:type=""xsd:string"">asynchClientServer</MessagingMode><AsyncConfiguration xsi:type=""xsd:int"">0</AsyncConfiguration><ReturnCertData xsi:type=""xsd:boolean"">true</ReturnCertData><ReturnRevocationData xsi:type=""xsd:boolean"">false</ReturnRevocationData></q1:MobileAuthenticate></s:Body></s:Envelope>".Trim();
 
                 // { xPOSTresponse =  }
-                var xPOSTresponse = xPOST.UploadString("https://tsp.demo.sk.ee/", "POST", data);
+                //var xPOSTresponse = xPOST.UploadString("https://tsp.demo.sk.ee/", "POST", data);
+                var xPOSTresponse = xPOST.UploadString("https://tsp.demo.sk.ee:443/", "POST", data);
+
+                //UploadString { err = javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target }
+                //exit UploadString { conn = sun.net.www.protocol.https.DelegateHttpsURLConnection:https://tsp.demo.sk.ee:443/ }
 
                 //var xPOSTresponse = xPOST.UploadString("https://tsp.demo.sk.ee/", data);
+
                 Console.WriteLine(new { xPOSTresponse });
+
+                // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151005
+                var Envelope = XElement.Parse(xPOSTresponse);
+                // <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:dig="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><SOAP-ENV:Header/>
+                // <SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><dig:MobileAuthenticateResponse><Sesscode xsi:type="xsd:int">471237527</Sesscode><Status xsi:type="xsd:string">OK</Status><UserIDCode xsi:type="xsd:string">14212128025</UserIDCode>
+
+
+
+                // Body = <SOAP-ENV:Header xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" />
+                var Body = Envelope.Elements().Skip(1).FirstOrDefault();
+
+
+                //Body = <SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+                //  <dig:MobileAuthenticateResponse xmlns:dig="http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl">
+                //    <Sessc...
+
+
+                // loooky isnt jsc serializing api calls the same way?
+                var Response = Body.Elements().FirstOrDefault();
+
+                var fields = Response.Elements();
+
+                // { field = <UserIDCode xsi:type="xsd:string" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">14212128025</UserIDCode> }
+                foreach (var field in fields)
+                {
+                    //Console.WriteLine(new { field });
+                    Console.WriteLine(new { field.Name.LocalName, field.Value });
+                }
+
+
+                //
+                //Console.WriteLine(new { Response });
+
             }
             catch (Exception err)
             {
                 Console.WriteLine(new { err.Message, err.StackTrace });
             }
+            #endregion
 
             try
             {

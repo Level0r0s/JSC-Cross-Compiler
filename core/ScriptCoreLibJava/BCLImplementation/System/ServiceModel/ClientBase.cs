@@ -53,16 +53,39 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
             {
                 vinvoke = (proxy, method, args) =>
                 {
+                    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151005
+
                     var xMethod = new __MethodInfo { InternalMethod = method };
 
 
                     //   at ScriptCoreLib.Shared.BCLImplementation.System.Linq.__Enumerable.FirstOrDefault(__Enumerable.java:2016)
                     var arg1 = xMethod.GetParameters().FirstOrDefault();
                     var arg1value = args.FirstOrDefault();
+                    var arg1valueType = args.FirstOrDefault().GetType();
+
+
+
 
                     //Console.WriteLine("enter Proxy invocationHandler " + new { method = method.getName() });
                     //Console.WriteLine("enter Proxy invocationHandler " + new { xMethod.Name, xMethod.ReturnType, proxy, args });
-                    Console.WriteLine("enter Proxy invocationHandler " + new { xMethod.Name, xMethod.ReturnType, arg1, arg1value });
+                    Console.WriteLine("enter Proxy invocationHandler " + new { xMethod.Name, xMethod.ReturnType, arg1, arg1value, arg1valueType });
+
+                    // which wsdl is in use?
+
+                    foreach (var xCustomAttributesData in arg1valueType.GetCustomAttributesData())
+                    {
+                        Console.WriteLine(new { xCustomAttributesData });
+                    }
+
+
+                    foreach (var field in arg1valueType.GetFields())
+                    {
+                        var fieldvalue = field.GetValue(arg1value);
+
+                        Console.WriteLine(new { field.Name, fieldvalue });
+
+                    }
+
 
                     // arg1 = ScriptCoreLibJava.BCLImplementation.System.Reflection.__ParameterInfo@1bb9a58, args = [Ljava.lang.Object;@1922f46 }
                     // enter Proxy invocationHandler { Name = JVMCLRWSDLMID_sk_DigiDocServicePortType_MobileAuthenticateAsync, ReturnType = ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks.__Task_1, 

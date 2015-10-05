@@ -151,11 +151,17 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Xml.Linq
                 #endregion
 
             }
-            catch
+            catch (Exception err)
             {
+                //  Message = java.lang.RuntimeException: Namespace for prefix 'xsi' has not been declared., StackTrace = jav
                 // The input node can not be null for a DOMSource for newTemplates!
 
-                throw;
+
+                // Z:\jsc.svn\examples\java\hybrid\JVMCLRWSDLMID\Program.cs
+
+                //throw;
+
+                value = err.Message;
             }
 
             return value;
@@ -165,6 +171,6 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Xml.Linq
         {
             return (XNode)(object)n;
         }
-        
+
     }
 }

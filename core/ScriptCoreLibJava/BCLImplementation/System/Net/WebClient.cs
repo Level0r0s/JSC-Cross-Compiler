@@ -364,6 +364,48 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
         }
         #endregion
 
+
+
+
+
+
+
+
+
+        // http://www.rgagnon.com/javadetails/java-fix-certificate-problem-in-HTTPS.html
+
+
+        [Script]
+        class localX509TrustManager : X509TrustManager
+        {
+            public void checkServerTrusted(java.security.cert.X509Certificate[] chain, string authType)
+            {
+                Console.WriteLine("enter checkServerTrusted");
+            }
+
+            public void checkClientTrusted(java.security.cert.X509Certificate[] chain, string authType)
+            {
+                Console.WriteLine("enter checkClientTrusted");
+            }
+
+            public java.security.cert.X509Certificate[] getAcceptedIssuers()
+            {
+                Console.WriteLine("enter getAcceptedIssuers");
+                return null;
+            }
+        }
+
+        [Script]
+        class localHostnameVerifier : HostnameVerifier
+        {
+
+            public bool verify(string hostname, SSLSession session)
+            {
+                Console.WriteLine("localHostnameVerifier " + new { hostname });
+
+                return true;
+            }
+        }
         #region UploadString
 
         public string UploadString(string u, string data)
@@ -375,7 +417,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 
         public string UploadString(string u, string method, string data)
         {
-            return UploadString(new Uri(u), data, method);
+            return UploadString(new Uri(u), method: method, data: data);
         }
 
         public string UploadString(Uri u, string method, string data)
@@ -388,13 +430,46 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 
             try
             {
+                #region NSA is that you? intercept? we can only trust pinned off device certs
+                var trustAllCerts = new[] { 
+                    
+                        new localX509TrustManager{}
+                    };
+
+                SSLContext sc = SSLContext.getInstance("SSL");
+                sc.init(null, trustAllCerts, new java.security.SecureRandom());
+                HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+
+                HttpsURLConnection.setDefaultHostnameVerifier(new localHostnameVerifier { });
+                #endregion
+
+
+                //UploadString getOutputStream
+                //enter checkServerTrusted
+                //enter getAcceptedIssuers
+                //UploadString writeBytes
+
                 var url = new java.net.URL(u.ToString());
 
                 conn = (HttpURLConnection)url.openConnection();
+
+
+
+                var https = conn as HttpsURLConnection;
+                if (https != null)
+                {
+                    Console.WriteLine(new { https });
+
+
+                }
+
+
+                //conn.setHostnameVerifier(new localHostnameVerifier { });
+
                 conn.setDoOutput(true);
                 conn.setDoInput(true);
-                //conn.setInstanceFollowRedirects(false);
-                conn.setInstanceFollowRedirects(true);
+                conn.setInstanceFollowRedirects(false);
+                //conn.setInstanceFollowRedirects(true);
 
                 conn.setRequestMethod(method);
 
@@ -435,13 +510,21 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
                 conn.setUseCaches(false);
 
 
+                //Console.WriteLine("UploadString getOutputStream");
+                var o = conn.getOutputStream();
 
-                DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+                //Console.WriteLine("UploadString writeBytes");
+
+                // 
+                DataOutputStream wr = new DataOutputStream(o);
                 wr.writeBytes(data);
+                //Console.WriteLine("UploadString flush");
                 wr.flush();
+                //Console.WriteLine("UploadString close");
                 wr.close();
 
 
+                //Console.WriteLine("UploadString readLine");
 
                 //var i = new java.io.InputStreamReader(url.openStream(), "UTF-8");
                 var i = new java.io.InputStreamReader(conn.getInputStream(), "UTF-8");
@@ -459,11 +542,13 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
             }
             catch (Exception err)
             {
+                // = java.net.ProtocolException: Invalid HTTP method:
+
                 // oops
                 Console.WriteLine("UploadString " + new { err });
             }
 
-            Console.WriteLine("exit UploadString " + new { conn });
+            //Console.WriteLine("exit UploadString " + new { conn });
 
             if (conn != null)
                 conn.disconnect();

@@ -9,8 +9,15 @@ namespace javax.net.ssl
     [Script(IsNative = true)]
     public abstract class HttpsURLConnection : HttpURLConnection
     {
+        // Z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\WebClient.cs
 
 
+        public static void setDefaultSSLSocketFactory(SSLSocketFactory sf)
+        { 
+        }
 
+        public static void setDefaultHostnameVerifier(HostnameVerifier v)
+        { 
+        }
     }
 }
