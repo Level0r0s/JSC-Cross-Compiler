@@ -381,17 +381,17 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
         {
             public void checkServerTrusted(java.security.cert.X509Certificate[] chain, string authType)
             {
-                Console.WriteLine("enter checkServerTrusted");
+                //Console.WriteLine("enter checkServerTrusted");
             }
 
             public void checkClientTrusted(java.security.cert.X509Certificate[] chain, string authType)
             {
-                Console.WriteLine("enter checkClientTrusted");
+                //Console.WriteLine("enter checkClientTrusted");
             }
 
             public java.security.cert.X509Certificate[] getAcceptedIssuers()
             {
-                Console.WriteLine("enter getAcceptedIssuers");
+                //Console.WriteLine("enter getAcceptedIssuers");
                 return null;
             }
         }
@@ -402,7 +402,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 
             public bool verify(string hostname, SSLSession session)
             {
-                Console.WriteLine("localHostnameVerifier " + new { hostname });
+                //Console.WriteLine("localHostnameVerifier " + new { hostname });
 
                 return true;
             }
@@ -443,7 +443,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 
         public string UploadString(Uri u, string method, string data)
         {
-            Console.WriteLine("enter UploadString " + new { u, method });
+            //Console.WriteLine("enter UploadString " + new { u, method });
 
             var w = new StringBuilder();
 
@@ -479,7 +479,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
                 var https = conn as HttpsURLConnection;
                 if (https != null)
                 {
-                    Console.WriteLine(new { https });
+                    //Console.WriteLine(new { https });
 
 
                 }

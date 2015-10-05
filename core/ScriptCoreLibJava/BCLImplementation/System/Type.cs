@@ -510,6 +510,13 @@ namespace ScriptCoreLibJava.BCLImplementation.System
             if (k.InternalTypeDescription == java.lang.Boolean.TYPE)
                 k = typeof(bool);
 
+
+            // Z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\ClientBase.cs
+            if (e.InternalTypeDescription == java.lang.Integer.TYPE)
+                e = typeof(int);
+            if (k.InternalTypeDescription == java.lang.Integer.TYPE)
+                k = typeof(int);
+
             // .net 4.0 seems to also add == operator. jsc should choose equals until then?
             if (k.InternalTypeDescription.isAssignableFrom(e.InternalTypeDescription))
                 return k.FullName == e.FullName;

@@ -413,6 +413,8 @@ namespace JVMCLRWSDLMID
 
                 // did we actually do wsdl coms or was it intercepted by core?
                 // { Sesscode = 0, Status = , UserIDCode = , UserCN = , ChallengeID = , Challenge =  }
+                // { Sesscode = 0, Status = OK, UserIDCode = 14212128025, UserCN = TESTNUMBER,SEITSMES,14212128025, ChallengeID = 0045, Challenge = 03010400000000000000EFC2B87DBF2FF80CE0AD }
+                // { Sesscode = 2070798858, Status = OK, UserIDCode = 14212128025, UserCN = TESTNUMBER,SEITSMES,14212128025, ChallengeID = 0126, Challenge = 03010400000000000000A611E8BFBABA7F76E07E }
 
                 Console.WriteLine(new
                 {

@@ -211,13 +211,43 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
                     xPOSTresponse.ContinueWith(
                         task =>
                         {
+                            var Envelope = XElement.Parse(task.Result);
+                            var Body = Envelope.Elements().Skip(1).FirstOrDefault();
+                            var Response = Body.Elements().FirstOrDefault();
+                            var fields = Response.Elements();
 
-                            // { Result =
 
-                            Console.WriteLine(new { task.Result });
+                            var Result = Activator.CreateInstance(xResponseType);
+
+                            var ResultFields = xResponseType.GetFields(
+                                global::System.Reflection.BindingFlags.DeclaredOnly | global::System.Reflection.BindingFlags.Instance | global::System.Reflection.BindingFlags.Public);
+
+                            foreach (var ResultField in ResultFields)
+                            {
+                                var ResultValueElement = fields.FirstOrDefault(x => x.Name.LocalName == ResultField.Name);
+                                if (ResultValueElement == null)
+                                    Console.WriteLine(new { ResultField.Name, ResultField.FieldType });
+                                else
+                                {
+                                    // { Name = Sesscode, FieldType = int, IsInt = false, Value = 158266114 }
+                                    var IsInt = ResultField.FieldType == typeof(int);
+                                    if (IsInt)
+                                    {
+                                        ResultField.SetValue(Result, int.Parse(ResultValueElement.Value));
+                                    }
+                                    else if (ResultField.FieldType == typeof(string))
+                                    {
+                                        ResultField.SetValue(Result, ResultValueElement.Value);
+                                    }
+
+                                    Console.WriteLine(new { ResultField.Name, ResultField.FieldType, IsInt, ResultValueElement.Value });
+                                }
+
+
+                            }
 
                             c.SetResult(
-                                Activator.CreateInstance(xResponseType)
+                              Result
                             );
                         }
                     );

@@ -6,6 +6,9 @@ namespace java.lang
     [Script(IsNative = true)]
     public sealed class Integer
     {
+        public static Class TYPE;
+
+
         public Integer(int i)
         {
         }

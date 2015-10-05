@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAttribute", "TestAttribute\TestAttribute.csproj", "{A7B3B9E8-3CF3-484E-BAED-9462DA3D8555}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibJava", "..\..\..\core\ScriptCoreLibJava\ScriptCoreLibJava.csproj", "{5F295F12-F93F-4347-B417-AA89990652A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAnnotations", "..\Test\TestAnnotations\TestAnnotations\TestAnnotations.csproj", "{F4DFD3F3-9B3D-436D-96CB-27234174A79A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7B3B9E8-3CF3-484E-BAED-9462DA3D8555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7B3B9E8-3CF3-484E-BAED-9462DA3D8555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7B3B9E8-3CF3-484E-BAED-9462DA3D8555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7B3B9E8-3CF3-484E-BAED-9462DA3D8555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4DFD3F3-9B3D-436D-96CB-27234174A79A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4DFD3F3-9B3D-436D-96CB-27234174A79A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4DFD3F3-9B3D-436D-96CB-27234174A79A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4DFD3F3-9B3D-436D-96CB-27234174A79A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
