@@ -10,7 +10,11 @@ namespace java.lang.annotation
     [Script(IsNative = true)]
     public interface Annotation
     {
-         Class annotationType();
+        // tested by?
+        // Z:\jsc.svn\examples\java\hybrid\Test\TestMessageContractAttribute\TestMessageContractAttribute\Program.cs
+
+
+        Class annotationType();
 
     }
 

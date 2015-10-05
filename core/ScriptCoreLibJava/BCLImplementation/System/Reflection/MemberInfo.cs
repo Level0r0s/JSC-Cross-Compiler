@@ -33,5 +33,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Reflection
             return (object)left == (object)right;
 
         }
+
+        public virtual object[] GetCustomAttributes(bool inherit)
+        {
+            return null;
+
+
+        }
     }
 }

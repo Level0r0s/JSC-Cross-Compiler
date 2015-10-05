@@ -169,6 +169,7 @@ namespace JVMCLRWSDLMID
                 //var xPOSTresponse = xPOST.UploadString("https://tsp.demo.sk.ee/", "POST", data);
                 var xPOSTresponse = xPOST.UploadString("https://tsp.demo.sk.ee:443/", "POST", data);
 
+                //xPOST.UploadStringTaskAsync
                 //UploadString { err = javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target }
                 //exit UploadString { conn = sun.net.www.protocol.https.DelegateHttpsURLConnection:https://tsp.demo.sk.ee:443/ }
 
@@ -228,7 +229,8 @@ namespace JVMCLRWSDLMID
             x1:
 
                 //System.ServiceModel.OperationContext.Current.
-                var c = new sk.DigiDocServicePortTypeClient();
+                //var c = new sk.DigiDocServicePortTypeClient();
+                var c = new sk.DigiDocServicePortTypeClient("DigiDocService", "https://tsp.demo.sk.ee:443");
 
                 //var requestInterceptor = new InspectorBehavior();
 
@@ -454,6 +456,9 @@ namespace JVMCLRWSDLMID
             }
             catch (Exception err)
             {
+
+                // err = {"Could not find endpoint element with name '' and contract 'sk.DigiDocServicePortType' in the ServiceModel client configuration section. This might be because no configuration file was found for your application, or because no endpoint element matching thi...
+
                 Console.WriteLine(new { err.Message, err.StackTrace });
 
             }

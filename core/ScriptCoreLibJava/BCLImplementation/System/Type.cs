@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ScriptCoreLib;
+using ScriptCoreLibJava.Extensions;
 using ScriptCoreLibJava.BCLImplementation.System.Reflection;
 using System.Reflection;
 using java.lang.reflect;
@@ -758,6 +759,119 @@ namespace ScriptCoreLibJava.BCLImplementation.System
         public override string ToString()
         {
             return this.FullName;
+        }
+
+
+
+
+        public override object[] GetCustomAttributes(bool inherit)
+        {
+            Console.WriteLine("enter GetCustomAttributes " + new { this.InternalTypeDescription, this.InternalFullName });
+
+            // Z:\jsc.svn\examples\java\hybrid\Test\TestMessageContractAttribute\TestMessageContractAttribute\Program.cs
+            var aa = this.InternalTypeDescription.getAnnotations();
+
+
+            // for now jsc makes sure all CLRattributes are JVMannotations. this means all are field based.
+            // now if user code requests a property from CLRattribute, will it have to ask a field instead?
+
+
+            // need to translate annotation back to attribute
+
+
+
+
+            //enter GetCustomAttributes
+            //{ aaType = com.sun.proxy.$Proxy2 }
+            //{ aAtributeType =  }
+            //{ aaType = com.sun.proxy.$Proxy1 }
+            //{ aAtributeType =  }
+
+            var a = new List<Attribute>();
+
+            foreach (java.lang.annotation.Annotation proxy in aa)
+            {
+                // { item = @ScriptCoreLibJava.BCLImplementation.System.ServiceModel.__MessageContract(WrapperName=MobileAuthenticate, WrapperNamespace=http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl, IsWrapped=true), 
+                // annotationType = interface ScriptCoreLibJava.BCLImplementation.System.ServiceModel.__MessageContract, aaType = com.sun.proxy.$Proxy2, FullName = com.sun.proxy.$Proxy2 }
+                var annotationClass = proxy.annotationType();
+
+                //var aaType = item.GetType();
+                //Console.WriteLine(new { item, annotationType, aaType, aaType.FullName });
+
+
+                var aAttributeType = global::System.Type.GetType(annotationClass.getName() + "Attribute");
+
+                //Console.WriteLine(new { aAtributeType, annotationType });
+
+                // { aAtributeType = ScriptCoreLibJava.BCLImplementation.System.ServiceModel.__MessageContractAttribute, annotationType = interface ScriptCoreLibJava.BCLImplementation.System.ServiceModel.__MessageContract }
+
+                if (aAttributeType != null)
+                {
+                    // this is somehat the async hop we don in js.
+                    // deerialize the data now...
+                    var v = (Attribute)Activator.CreateInstance(aAttributeType);
+                    var annotationType = annotationClass.ToType();
+
+                    //annotationType.FromCl();
+
+                    // "Z:\jsc.svn\examples\java\TestAttribute\TestAttribute\bin\Debug\web\java\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\__MessageContract.java"
+
+                    // fields, methods or properties?
+
+                    // { xMethod = java.lang.String WrapperNamespace() }
+
+                    // we cannot ask for properties can we..
+
+                    //foreach (var xStoreField in aAttributeType.GetFields(BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Instance))
+                    //{
+                    //    Console.WriteLine(new { xStoreField });
+                    //}
+
+                    //foreach (var xStoreMethod in aAttributeType.GetMethods(BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Instance))
+                    //{
+                    //    Console.WriteLine(new { xStoreMethod });
+                    //}
+
+                    foreach (var xLoadMethod in annotationType.GetMethods(BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Instance))
+                    {
+
+                        // Z:\jsc.svn\examples\java\hybrid\Test\TestMessageContractAttribute\TestMessageContractAttribute\Program.cs
+                        //Console.WriteLine(new { xLoadMethod });
+
+                        //{ xStoreMethod = boolean get_IsWrapped() }
+                        //{ xStoreMethod = void set_IsWrapped(boolean) }
+                        //{ xStoreMethod = java.lang.String get_WrapperNamespace() }
+                        //{ xStoreMethod = java.lang.String get_WrapperName() }
+                        //{ xStoreMethod = void set_WrapperName(java.lang.String) }
+                        //{ xStoreMethod = void set_WrapperNamespace(java.lang.String) }
+                        //{ xLoadMethod = java.lang.String WrapperName() }
+                        //{ xLoadMethod = boolean IsWrapped() }
+                        //{ xLoadMethod = java.lang.String WrapperNamespace() }
+
+                        // now. how are we to store the value?
+
+                        var xStoreMethod = aAttributeType.GetMethods(BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Instance).FirstOrDefault(x => x.Name == "set_" + xLoadMethod.Name);
+
+                        if (xStoreMethod != null)
+                        {
+                            xStoreMethod.Invoke(v,
+                                parameters: new[] { xLoadMethod.Invoke(proxy, null) }
+
+                            );
+
+
+
+
+
+                        }
+                    }
+
+                    a.Add(v);
+                }
+            }
+            //var xAttribute = 
+
+            return a.ToArray();
         }
     }
 }

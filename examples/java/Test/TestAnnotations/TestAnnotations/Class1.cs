@@ -96,6 +96,11 @@ namespace TestAnnotations
 
     }
 
+
+    //@Documented
+    //@Foo(Text = "hello world")
+    //@Bar
+
     [Script]
     [Foo(Text = "hello world"), ZooAttribute, Bar, Documented]
     public class Class2
@@ -113,3 +118,9 @@ namespace TestAnnotations
         }
     }
 }
+
+//script: error JSC1000: Java : class import: no implementation for System.String at OtherNamespace.FooAttribute
+//{ exc = System.InvalidOperationException: Java : class import: no implementation for System.String at OtherNamespace.FooAttribute
+//   at jsc.Script.CompilerBase.BreakToDebugger(String e) in x:\jsc.internal.git\compiler\jsc\Languages\CompilerBase.cs:line 267
+//   at jsc.Script.CompilerBase.Break(String e) in x:\jsc.internal.git\compiler\jsc\Languages\CompilerBase.cs:line 227
+//   at jsc.Languages.Java.JavaCompiler.GetImportTypes(Type t, Boolean bExcludeJavaLang) in x:\jsc.internal.git\compiler\jsc\Language

@@ -10,12 +10,15 @@ namespace java.lang.annotation
     [Script(IsNative = true)]
     public interface Documented : Annotation
     {
+        // Z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\MessageContractAttribute.cs
 
     }
 
     [Script(IsNative = true)]
     public class DocumentedAttribute : Attribute
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151005
+
     }
 }
 

@@ -6,7 +6,9 @@ namespace java.lang.reflect
     [Script(IsNative = true)]
     public class Proxy
     {
-        public static object newProxyInstance (ClassLoader loader, Class[] interfaces, InvocationHandler invocationHandler)
+        // Z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\ClientBase.cs
+
+        public static object newProxyInstance(ClassLoader loader, Class[] interfaces, InvocationHandler invocationHandler)
         {
             return null;
         }

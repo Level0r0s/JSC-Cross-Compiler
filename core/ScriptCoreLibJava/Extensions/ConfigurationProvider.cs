@@ -8,6 +8,7 @@ namespace ScriptCoreLibJava.Extensions
 {
 	public static class ConfigurationProvider
 	{
+        // tested by?
 		[global::System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
 		public sealed class UrlPatternAttribute : Attribute
 		{

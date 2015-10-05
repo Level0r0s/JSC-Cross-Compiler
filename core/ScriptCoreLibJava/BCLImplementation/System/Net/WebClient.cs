@@ -13,6 +13,7 @@ using ScriptCoreLib.Shared.BCLImplementation.System.Net;
 using System.IO;
 using javax.net.ssl;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Net
 {
@@ -418,6 +419,26 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
         public string UploadString(string u, string method, string data)
         {
             return UploadString(new Uri(u), method: method, data: data);
+        }
+
+        public Task<string> UploadStringTaskAsync(string address, string method, string data)
+        {
+            // Z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\ClientBase.cs
+
+            var x = new TaskCompletionSource<string>();
+
+            new Thread(
+                delegate()
+                {
+                    var Result = UploadString(address, method, data);
+
+
+                    x.SetResult(Result);
+
+                }
+            ) { IsBackground = true }.Start();
+
+            return x.Task;
         }
 
         public string UploadString(Uri u, string method, string data)

@@ -7,6 +7,9 @@ using ScriptCoreLibJava.BCLImplementation.System.ServiceModel.Channels;
 using ScriptCoreLibJava.Extensions;
 using ScriptCoreLibJava.BCLImplementation.System.Reflection;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Net;
+using ScriptCoreLibJava.BCLImplementation.System.Net;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
 {
@@ -44,7 +47,15 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
 
             var xTypeInterface = xType.GetInterfaces().FirstOrDefault();
 
-            Console.WriteLine("enter __ClientBase Channel " + new { xType, xTypeBase, xMe, xTypeInterface });
+
+            //Y:\staging\web\java\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\__ClientBaseGetChannel.java:57: error: illegal generic type for instanceof
+            //        base_14 = ((((Object)that) instanceof  ScriptCoreLibJava.BCLImplementation.System.ServiceModel.__ClientBase_1<Object>) ? (ScriptCoreLibJava.BCLI
+
+            //var xClientBase = that as __ClientBase<object>;
+            var xClientBase = that as __ClientBase__remoteAddress;
+            // , xClientBase = __ClientBase { __remoteAddress = https://tsp.demo.sk.ee:443 } }
+
+            Console.WriteLine("enter __ClientBase Channel " + new { xType, xTypeBase, xMe, xTypeInterface, xClientBase });
 
 
             // return __ClientBase_1<TChannel>._get_Channel_b__1(proxy, method, args);
@@ -72,20 +83,100 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
 
                     // which wsdl is in use?
 
-                    foreach (var xCustomAttributesData in arg1valueType.GetCustomAttributesData())
+                    var xMessageContractAttribute = default(__MessageContractAttribute);
+
+                    foreach (var xCustomAttribute in arg1valueType.GetCustomAttributes(false))
                     {
-                        Console.WriteLine(new { xCustomAttributesData });
+                        var locMessageContractAttribute = xCustomAttribute as __MessageContractAttribute;
+                        if (locMessageContractAttribute != null)
+                        {
+                            xMessageContractAttribute = locMessageContractAttribute;
+
+                            Console.WriteLine(new { xMessageContractAttribute.WrapperName, xMessageContractAttribute.WrapperNamespace });
+                        }
                     }
 
+
+
+                    #region Envelope
+                    var data = new StringBuilder();
+
+
+                    data.Append(@"<s:Envelope xmlns:s=""http://schemas.xmlsoap.org/soap/envelope/"">");
+                    data.Append(@"<s:Body s:encodingStyle=""http://schemas.xmlsoap.org/soap/encoding/"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">");
+
+
+                    data.Append(@"<q1:" + xMessageContractAttribute.WrapperName + @" xmlns:q1=""" + xMessageContractAttribute.WrapperNamespace + @""">");
+
+                    // <q1:MobileAuthenticate xmlns:q1=""http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl"">
 
                     foreach (var field in arg1valueType.GetFields())
                     {
                         var fieldvalue = field.GetValue(arg1value);
 
-                        Console.WriteLine(new { field.Name, fieldvalue });
+                        Console.WriteLine(new { field.Name, field.FieldType, fieldvalue });
 
+                        //var x = new XElement(field.Name, fieldvalue).ToString();
+                        var x = new XElement(field.Name, "" + fieldvalue).ToString();
+
+                        if (field.FieldType == typeof(string))
+                        {
+                            x = x.Replace(@"<" + field.Name, @"<" + field.Name + @" xsi:type=""xsd:string""");
+                        }
+                        else if (field.FieldType == typeof(int))
+                        {
+                            x = x.Replace(@"<" + field.Name, @"<" + field.Name + @" xsi:type=""xsd:int""");
+                        }
+                        else if (field.FieldType == typeof(bool))
+                        {
+                            x = x.Replace(@"<" + field.Name, @"<" + field.Name + @" xsi:type=""xsd:boolean""");
+                        }
+
+                        data.Append(x);
                     }
 
+                    data.Append(@"</q1:" + xMessageContractAttribute.WrapperName + @">");
+
+                    data.Append(@"</s:Body>");
+                    data.Append(@"</s:Envelope>");
+                    #endregion
+
+
+
+                    // <s:Envelope xmlns:s=""http://schemas.xmlsoap.org/soap/envelope/""><s:Body s:encodingStyle=""http://schemas.xmlsoap.org/soap/encoding/"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+
+                    // <q1:MobileAuthenticate xmlns:q1=""http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl"">
+
+                    // <IDCode xsi:type=""xsd:string"">14212128025</IDCode>
+                    // <CountryCode xsi:type=""xsd:string"">EE</CountryCode>
+                    // <PhoneNo xsi:type=""xsd:string"">37200007</PhoneNo>
+                    // <Language xsi:type=""xsd:string"">EST</Language>
+                    // <ServiceName xsi:type=""xsd:string"">Testimine</ServiceName>
+                    // <MessageToDisplay xsi:type=""xsd:string"">Testimine</MessageToDisplay>
+                    // <SPChallenge xsi:type=""xsd:string"">03010400000000000000</SPChallenge>
+                    // <MessagingMode xsi:type=""xsd:string"">asynchClientServer</MessagingMode>
+                    // <AsyncConfiguration xsi:type=""xsd:int"">0</AsyncConfiguration>
+                    // <ReturnCertData xsi:type=""xsd:boolean"">true</ReturnCertData>
+                    //<ReturnRevocationData xsi:type=""xsd:boolean"">false</ReturnRevocationData>
+                    // </q1:MobileAuthenticate>
+
+                    // </s:Body></s:Envelope>
+
+                    Console.WriteLine(new { data });
+
+
+                    //{ WrapperName = MobileAuthenticate, WrapperNamespace = http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl }
+                    //{ Name = IDCode, fieldvalue = 14212128025 }
+                    //{ Name = CountryCode, fieldvalue = EE }
+                    //{ Name = PhoneNo, fieldvalue = 37200007 }
+                    //{ Name = Language, fieldvalue = EST }
+                    //{ Name = ServiceName, fieldvalue = Testimine }
+                    //{ Name = MessageToDisplay, fieldvalue = Testimine }
+                    //{ Name = SPChallenge, fieldvalue = 03010400000000000000 }
+                    //{ Name = MessagingMode, fieldvalue = asynchClientServer }
+                    //{ Name = AsyncConfiguration, fieldvalue = 0 }
+                    //{ Name = ReturnCertData, fieldvalue = true }
+                    //{ Name = ReturnRevocationData, fieldvalue = false }
 
                     // arg1 = ScriptCoreLibJava.BCLImplementation.System.Reflection.__ParameterInfo@1bb9a58, args = [Ljava.lang.Object;@1922f46 }
                     // enter Proxy invocationHandler { Name = JVMCLRWSDLMID_sk_DigiDocServicePortType_MobileAuthenticateAsync, ReturnType = ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks.__Task_1, 
@@ -106,9 +197,31 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
 
                     var c = new TaskCompletionSource<object>();
 
-                    c.SetResult(
-                        Activator.CreateInstance(xResponseType)
+
+
+                    var xPOST = new __WebClient();
+
+                    xPOST.Headers["Content-Type"] = "text/xml; charset=UTF-8";
+                    xPOST.Headers["SOAPAction"] = "\"\"";
+
+
+                    var xPOSTresponse = xPOST.UploadStringTaskAsync(xClientBase.__remoteAddress, "POST", data.ToString());
+
+
+                    xPOSTresponse.ContinueWith(
+                        task =>
+                        {
+
+                            // { Result =
+
+                            Console.WriteLine(new { task.Result });
+
+                            c.SetResult(
+                                Activator.CreateInstance(xResponseType)
+                            );
+                        }
                     );
+
 
 
                     //                    enter Proxy invocationHandler { method = JVMCLRWSDLMID_sk_DigiDocServicePortType_MobileAuthenticateAsync }
@@ -140,9 +253,15 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
         }
     }
 
+    [Script]
+    public interface __ClientBase__remoteAddress
+    {
+        string __remoteAddress { get; set; }
+    }
+
     //[Script(Implements = typeof(global::System.ServiceModel.ClientBase))]
     [Script(ImplementsViaAssemblyQualifiedName = "System.ServiceModel.ClientBase`1")]
-    public class __ClientBase<TChannel>
+    public class __ClientBase<TChannel> : __ClientBase__remoteAddress
     {
         // Z:\jsc.svn\examples\java\Test\TestInheritGeneric\TestInheritGeneric\DigiDocServicePortTypeClient.cs
 
@@ -181,11 +300,25 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
             Console.WriteLine(" System.ServiceModel.ClientBase`1 .ctor " + new { endpointConfigurationName });
         }
 
+        //   var c = new sk.DigiDocServicePortTypeClient("DigiDocService", "https://tsp.demo.sk.ee:443");
+
+        public string __endpointConfigurationName;
+        public string __remoteAddress { get; set; }
+
+        public override string ToString()
+        {
+            return "__ClientBase " + new { __remoteAddress };
+
+        }
+
         public __ClientBase(string endpointConfigurationName, string remoteAddress)
         {
             // https://msdn.microsoft.com/en-us/library/ms574922(v=vs.110).aspx
 
-            Console.WriteLine(" System.ServiceModel.ClientBase`1 .ctor " + new { endpointConfigurationName, remoteAddress });
+            //Console.WriteLine(" System.ServiceModel.ClientBase`1 .ctor " + new { endpointConfigurationName, remoteAddress });
+
+            this.__endpointConfigurationName = endpointConfigurationName;
+            this.__remoteAddress = remoteAddress;
         }
 
         public __ClientBase(string endpointConfigurationName, __EndpointAddress remoteAddress)
