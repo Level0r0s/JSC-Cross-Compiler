@@ -44,6 +44,14 @@ namespace OVROculus360Photos.Activities
 
 namespace OVROculus360PhotosHUD.Activities
 {
+
+    //enter AndroidLauncher { AndroidPayload =  }
+    //ADB server didn't ACK
+    //* failed to start daemon *
+    //error: cannot connect to daemon
+
+
+
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/ovroculus360photoshud
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150613/record
     // "x:\util\android-sdk-windows\platform-tools\adb.exe" shell am start -n OVROculus360PhotosHUD.Activities/OVROculus360PhotosHUD.Activities.ApplicationActivity
@@ -326,10 +334,32 @@ namespace OVROculus360PhotosHUD.Activities
             copy("2_no_clouds_4k.jpg", "/sdcard/oculus/360Photos/0.jpg");
             //copy("1.jpg", "/sdcard/oculus/360Photos/1.jpg");
 
+
+
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150724/invaders
             //copy("celestial-joshua-trees-milky-way-in-saline-va.jpg", "/sdcard/oculus/360Photos/2.jpg");
 
 
+            //Implementation not found for type import :
+            //type: System.IO.DirectoryInfo
+            //method: System.IO.FileInfo[] GetFiles()
+            //Did you forget to add the [Script] attribute?
+            //Please double check the signature!
+
+            //Path.get
+
+            var emptyFiles =
+                from pf in new DirectoryInfo("/sdcard/oculus/360Photos/").GetFiles()
+                where pf.Extension.ToLower() == ".jpg"
+                where pf.Length == 0
+                select pf;
+
+            foreach (var emptyFile in emptyFiles.ToArray())
+            {
+                Console.WriteLine(new { emptyFile });
+
+                emptyFile.Delete();
+            }
 
 
             Console.WriteLine("about to convince NDK what the first image should be... done");
@@ -535,97 +565,107 @@ namespace OVROculus360PhotosHUD.Activities
                                     // now broadcast. at 500KBps in segments.
                                     // 8MB is 16 segments then.
 
-
-                                    NetworkInterface.GetAllNetworkInterfaces().WithEach(
-                                          n =>
-                                          {
-                                              // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
-                                              // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
-
-                                              var IPProperties = n.GetIPProperties();
-                                              var PhysicalAddress = n.GetPhysicalAddress();
-
-
-
-                                              foreach (var ip in IPProperties.UnicastAddresses)
+                                    if (bytes.Length > 0)
+                                        NetworkInterface.GetAllNetworkInterfaces().WithEach(
+                                              n =>
                                               {
-                                                  // ipv4
-                                                  if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                                                  // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                                                  // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
+
+                                                  var IPProperties = n.GetIPProperties();
+                                                  var PhysicalAddress = n.GetPhysicalAddress();
+
+
+
+                                                  foreach (var ip in IPProperties.UnicastAddresses)
                                                   {
-                                                      if (!IPAddress.IsLoopback(ip.Address))
-                                                          if (n.SupportsMulticast)
-                                                          {
-                                                              //fWASDC(ip.Address);
-                                                              //fParallax(ip.Address);
-                                                              //fvertexTransform(ip.Address);
-                                                              //sendTracking(ip.Address);
+                                                      // ipv4
+                                                      if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                                                      {
+                                                          if (!IPAddress.IsLoopback(ip.Address))
+                                                              if (n.SupportsMulticast)
+                                                              {
+                                                                  //fWASDC(ip.Address);
+                                                                  //fParallax(ip.Address);
+                                                                  //fvertexTransform(ip.Address);
+                                                                  //sendTracking(ip.Address);
 
-                                                              var port = new Random().Next(16000, 40000);
+                                                                  var port = new Random().Next(16000, 40000);
 
-                                                              //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
+                                                                  //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
 
-                                                              // where is bind async?
-                                                              var socket = new UdpClient(
-                                                                   new IPEndPoint(ip.Address, port)
+                                                                  // where is bind async?
+                                                                  var socket = new UdpClient(
+                                                                       new IPEndPoint(ip.Address, port)
+                                                                      );
+
+
+                                                                  //// who is on the other end?
+                                                                  //var nmessage = args.x + ":" + args.y + ":" + args.z + ":0:" + args.filename;
+
+                                                                  //var data = Encoding.UTF8.GetBytes(nmessage);      //creates a variable b of type byte
+
+                                                                  // http://stackoverflow.com/questions/25841/maximum-buffer-length-for-sendto
+
+                                                                  new { }.With(
+                                                                      async delegate
+                                                                      {
+                                                                          // reached too far?
+                                                                          if (bytes.Length == 0)
+                                                                              return;
+
+                                                                          var current0 = current;
+
+                                                                          var r = new MemoryStream(bytes);
+                                                                          uploadLength = r.Length;
+
+                                                                          var data = new byte[65507];
+
+                                                                      next:
+
+                                                                          if (current0 != current)
+                                                                              return;
+
+                                                                          var cc = r.Read(data, 0, data.Length);
+
+                                                                          uploadPosition = r.Position;
+
+                                                                          if (cc <= 0)
+                                                                              return;
+
+                                                                          //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
+
+                                                                          // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                                                                          //Console.WriteLine("about to Send");
+                                                                          // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularPanorama\ChromeEquirectangularPanorama\Application.cs
+                                                                          await socket.SendAsync(
+                                                                               data,
+                                                                               cc,
+                                                                               hostname: "239.1.2.3",
+                                                                               port: 49000
+                                                                           );
+
+                                                                          //await Task.Delay(1000 / 15);
+                                                                          //await Task.Delay(1000 / 30);
+
+                                                                          // no corruption
+                                                                          await Task.Delay(1000 / 20);
+
+                                                                          goto next;
+
+                                                                      }
                                                                   );
 
-
-                                                              //// who is on the other end?
-                                                              //var nmessage = args.x + ":" + args.y + ":" + args.z + ":0:" + args.filename;
-
-                                                              //var data = Encoding.UTF8.GetBytes(nmessage);      //creates a variable b of type byte
-
-                                                              // http://stackoverflow.com/questions/25841/maximum-buffer-length-for-sendto
-
-                                                              new { }.With(
-                                                                  async delegate
-                                                                  {
-                                                                      var r = new MemoryStream(bytes);
-                                                                      uploadLength = r.Length;
-
-                                                                      var data = new byte[65507];
-
-                                                                  next:
-                                                                      var cc = r.Read(data, 0, 65507);
-
-                                                                      uploadPosition = r.Position;
-
-                                                                      if (cc <= 0)
-                                                                          return;
-
-                                                                      //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
-
-                                                                      // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
-                                                                      //Console.WriteLine("about to Send");
-                                                                      // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularPanorama\ChromeEquirectangularPanorama\Application.cs
-                                                                      await socket.SendAsync(
-                                                                           data,
-                                                                           cc,
-                                                                           hostname: "239.1.2.3",
-                                                                           port: 49000
-                                                                       );
-
-                                                                      //await Task.Delay(1000 / 15);
-                                                                      //await Task.Delay(1000 / 30);
-
-                                                                      // no corruption
-                                                                      await Task.Delay(1000 / 20);
-
-                                                                      goto next;
-
-                                                                  }
-                                                              );
-
-                                                              //socket.Close();
-                                                          }
+                                                                  //socket.Close();
+                                                              }
+                                                      }
                                                   }
+
+
+
+
                                               }
-
-
-
-
-                                          }
-                                      );
+                                          );
                                 }
                             }
 

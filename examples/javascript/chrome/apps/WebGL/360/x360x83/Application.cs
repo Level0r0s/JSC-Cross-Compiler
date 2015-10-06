@@ -39,6 +39,8 @@ namespace x360x83
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151006/360
+
         // R:\p900\7\DCIM\100NIKON\DSCN0018
         // https://www.google.ee/maps/@59.3803632,24.6605239,3a,15y,295.32h,98.91t/data=!3m7!1e1!3m5!1spwLJuYM6Ie410vJtVdTvEw!2e0!6s%2F%2Fgeo0.ggpht.com%2Fcbk%3Fpanoid%3DpwLJuYM6Ie410vJtVdTvEw%26output%3Dthumbnail%26cb_client%3Dmaps_sv.tactile.gps%26thumb%3D2%26w%3D203%26h%3D100%26yaw%3D30.668749%26pitch%3D0!7i13312!8i6656?hl=en
 

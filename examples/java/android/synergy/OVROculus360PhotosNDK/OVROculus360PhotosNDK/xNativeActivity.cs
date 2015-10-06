@@ -55,7 +55,7 @@ namespace OVROculus360PhotosNDK
 
 
 
-
+        // used for?
         static ByteArrayWithLength malloc_filename;
 
         //static byte[] 

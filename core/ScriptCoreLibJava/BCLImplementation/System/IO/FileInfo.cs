@@ -26,7 +26,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.IO
         }
 
 
-      
+
 
 
         public override string Name
@@ -58,7 +58,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.IO
 
         public override void Delete()
         {
-            throw new NotImplementedException();
+            new java.io.File(this.InternalPath).delete();
         }
 
         public override DateTime LastWriteTimeUtc
