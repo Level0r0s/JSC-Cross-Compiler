@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using android.content;
 using ScriptCoreLib;
+using android.util;
 
 namespace android.view
 {
@@ -21,6 +22,10 @@ namespace android.view
         public int getHeight()
         {
             throw null;
+        }
+
+        public void getMetrics(DisplayMetrics outMetrics)
+        { 
         }
     }
 }

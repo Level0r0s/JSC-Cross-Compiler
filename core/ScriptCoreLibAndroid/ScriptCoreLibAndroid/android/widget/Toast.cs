@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using android.content;
 using ScriptCoreLib;
+using android.view;
 
 namespace android.widget
 {
@@ -11,7 +12,7 @@ namespace android.widget
 
     // http://developer.android.com/reference/android/widget/Toast.html
     [Script(IsNative = true)]
-    public  class Toast
+    public class Toast
     {
         public static readonly int LENGTH_SHORT = 0;
         public static readonly int LENGTH_LONG = 1;
@@ -27,5 +28,8 @@ namespace android.widget
         {
 
         }
+
+
+        public View getView() { throw null; }
     }
 }

@@ -211,9 +211,6 @@
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Net\WebClient.cs">
       <Link>BCLImplementation\System\Net\WebClient.cs</Link>
     </Compile>
-    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Net\WebHeaderCollection.cs">
-      <Link>BCLImplementation\System\Net\WebHeaderCollection.cs</Link>
-    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\NotImplementedException.cs">
       <Link>BCLImplementation\System\NotImplementedException.cs</Link>
     </Compile>
@@ -279,6 +276,24 @@
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Security\SecureString.cs">
       <Link>BCLImplementation\System\Security\SecureString.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\BasicHttpsBinding.cs">
+      <Link>BCLImplementation\System\ServiceModel\BasicHttpsBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\Channels\Binding.cs">
+      <Link>BCLImplementation\System\ServiceModel\Channels\Binding.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\ClientBase.cs">
+      <Link>BCLImplementation\System\ServiceModel\ClientBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\EndpointAddress.cs">
+      <Link>BCLImplementation\System\ServiceModel\EndpointAddress.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\MessageContractAttribute.cs">
+      <Link>BCLImplementation\System\ServiceModel\MessageContractAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\ServiceContractAttribute.cs">
+      <Link>BCLImplementation\System\ServiceModel\ServiceContractAttribute.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Single.cs">
       <Link>BCLImplementation\System\Single.cs</Link>
@@ -412,8 +427,32 @@
     <Compile Include="..\..\ScriptCoreLibJava\javax\crypto\Cipher.cs">
       <Link>javax\crypto\Cipher.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\KeyManager.cs">
+      <Link>javax\net\KeyManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\HostnameVerifier.cs">
+      <Link>javax\net\ssl\HostnameVerifier.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\HttpsURLConnection.cs">
       <Link>javax\net\ssl\HttpsURLConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\SSLContext.cs">
+      <Link>javax\net\ssl\SSLContext.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\SSLServerSocket.cs">
+      <Link>javax\net\ssl\SSLServerSocket.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\SSLSession.cs">
+      <Link>javax\net\ssl\SSLSession.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\SSLSocketFactory.cs">
+      <Link>javax\net\ssl\SSLSocketFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\TrustManager.cs">
+      <Link>javax\net\ssl\TrustManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\X509TrustManager.cs">
+      <Link>javax\net\ssl\X509TrustManager.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\javax\xml\parsers\DocumentBuilder.cs">
       <Link>javax\xml\parsers\DocumentBuilder.cs</Link>
@@ -577,6 +616,9 @@
     <Compile Include="..\..\ScriptCoreLibJava\java\lang\ProcessBuilder.cs">
       <Link>java\lang\ProcessBuilder.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\java\lang\ReflectiveOperationException.cs">
+      <Link>java\lang\ReflectiveOperationException.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\java\lang\reflect\AccessibleObject.cs">
       <Link>java\lang\reflect\AccessibleObject.cs</Link>
     </Compile>
@@ -589,6 +631,12 @@
     <Compile Include="..\..\ScriptCoreLibJava\java\lang\reflect\Field.cs">
       <Link>java\lang\reflect\Field.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\java\lang\reflect\InvocationHandler.cs">
+      <Link>java\lang\reflect\InvocationHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\java\lang\reflect\InvocationTargetException.cs">
+      <Link>java\lang\reflect\InvocationTargetException.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\java\lang\reflect\Method.cs">
       <Link>java\lang\reflect\Method.cs</Link>
     </Compile>
@@ -597,6 +645,9 @@
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\java\lang\reflect\ParameterizedType.cs">
       <Link>java\lang\reflect\ParameterizedType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\java\lang\reflect\Proxy.cs">
+      <Link>java\lang\reflect\Proxy.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\java\lang\reflect\Type.cs">
       <Link>java\lang\reflect\Type.cs</Link>
@@ -784,6 +835,9 @@
     <Compile Include="..\..\ScriptCoreLibJava\java\security\SecureClassLoader.cs">
       <Link>java\security\SecureClassLoader.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\java\security\SecureRandom.cs">
+      <Link>java\security\SecureRandom.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\java\security\Security.cs">
       <Link>java\security\Security.cs</Link>
     </Compile>
@@ -954,6 +1008,7 @@
     <Compile Include="android\app\Application.cs" />
     <Compile Include="android\app\Activity.cs" />
     <Compile Include="android\app\AlertDialog.cs" />
+    <Compile Include="android\app\ActivityGroup.cs" />
     <Compile Include="android\app\job\JobScheduler.cs" />
     <Compile Include="android\app\NativeActivity.cs" />
     <Compile Include="android\app\Dialog.cs" />
@@ -990,6 +1045,7 @@
     <Compile Include="android\graphics\Bitmap.cs" />
     <Compile Include="android\graphics\BitmapFactory.cs" />
     <Compile Include="android\graphics\Canvas.cs" />
+    <Compile Include="android\graphics\Rect.cs" />
     <Compile Include="android\graphics\Paint.cs" />
     <Compile Include="android\graphics\SurfaceTexture.cs" />
     <Compile Include="android\graphics\drawable\BitmapDrawable.cs" />
@@ -1004,7 +1060,12 @@
     <Compile Include="android\hardware\SensorEvent.cs" />
     <Compile Include="android\hardware\Sensor.cs" />
     <Compile Include="android\hardware\SensorEventListener.cs" />
+    <Compile Include="android\media\AudioManager.cs" />
+    <Compile Include="android\media\SoundPool.cs" />
     <Compile Include="android\media\MediaPlayer.cs" />
+    <Compile Include="android\net\ConnectivityManager.cs" />
+    <Compile Include="android\net\Network.cs" />
+    <Compile Include="android\net\NetworkInfo.cs" />
     <Compile Include="android\net\LocalSocket.cs" />
     <Compile Include="android\net\LocalServerSocket.cs" />
     <Compile Include="android\net\LocalSocketAddress.cs" />
@@ -1029,6 +1090,8 @@
     <Compile Include="android\os\BatteryManager.cs" />
     <Compile Include="android\os\BaseBundle.cs" />
     <Compile Include="android\os\Build.cs" />
+    <Compile Include="android\os\StatFs.cs" />
+    <Compile Include="android\os\SystemClock.cs" />
     <Compile Include="android\os\ParcelFileDescriptor.cs" />
     <Compile Include="android\os\MemoryFile.cs" />
     <Compile Include="android\os\Process.cs" />
@@ -1042,6 +1105,7 @@
     <Compile Include="android\os\storage\StorageManager.cs" />
     <Compile Include="android\os\Vibrator.cs" />
     <Compile Include="android\provider\ContactsContract.cs" />
+    <Compile Include="android\provider\Settings.cs" />
     <Compile Include="android\provider\MediaStore.cs" />
     <Compile Include="android\R.cs" />
     <Compile Include="android\security\TextToSpeech.cs" />
@@ -1073,6 +1137,7 @@
     <Compile Include="android\content\Context.cs" />
     <Compile Include="android\os\Bundle.cs" />
     <Compile Include="android\view\Choreographer.cs" />
+    <Compile Include="android\view\InputDevice.cs" />
     <Compile Include="android\view\Surface.cs" />
     <Compile Include="android\view\SurfaceHolder.cs" />
     <Compile Include="android\view\InputEvent.cs" />

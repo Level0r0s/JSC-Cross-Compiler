@@ -6,6 +6,7 @@ using System.Text;
 
 namespace android.provider
 {
+    // http://developer.android.com/reference/android/provider/MediaStore.html
     // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/provider/MediaStore.java
 
     [Script(IsNative = true)]

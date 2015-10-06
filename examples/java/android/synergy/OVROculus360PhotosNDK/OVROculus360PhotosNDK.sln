@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVROculus360PhotosNDK", "OVROculus360PhotosNDK\OVROculus360PhotosNDK.csproj", "{4E6A75A0-AAFE-450E-B9BF-FF666A64D5CB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRVrCubeWorldSurfaceViewNDK", "..\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceViewNDK\OVRVrCubeWorldSurfaceViewNDK.csproj", "{E32F254D-823D-41D5-99EE-ABDF240AF011}"
@@ -21,6 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibAndroid", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVROculus360PhotosHUD", "OVROculus360PhotosHUD\OVROculus360PhotosHUD.csproj", "{FC4FA0EA-F76F-4932-863E-3980F7587C34}"
 	ProjectSection(ProjectDependencies) = postProject
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9} = {1CE7D22F-52C8-4164-8955-CD89609E48A9}
 		{4E6A75A0-AAFE-450E-B9BF-FF666A64D5CB} = {4E6A75A0-AAFE-450E-B9BF-FF666A64D5CB}
 	EndProjectSection
 EndProject

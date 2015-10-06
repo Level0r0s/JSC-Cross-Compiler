@@ -13,5 +13,10 @@ namespace android.content.pm
     {
         // X:\jsc.svn\examples\javascript\android\AndroidListApplications\AndroidListApplications\ApplicationWebService.cs
 
+
+        // Z:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosHUD\VrActivity.cs
+        public string className;
+
+        public string sourceDir;
     }
 }

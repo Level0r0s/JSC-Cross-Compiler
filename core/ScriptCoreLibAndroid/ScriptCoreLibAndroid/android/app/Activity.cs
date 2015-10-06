@@ -8,15 +8,17 @@ using android.widget;
 using ScriptCoreLib;
 using java.lang;
 using android.content;
+using android.content.res;
+using java.io;
 
 namespace android.app
 {
-    // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/app/Activity.java
     // http://developer.android.com/reference/android/app/Activity.html
+    // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/app/Activity.java
     // https://github.com/blue112/android-externs-haxe/blob/master/android/app/Activity.hx
 
     [Script(IsNative = true)]
-    public class Activity : ContextThemeWrapper
+    public  class Activity : ContextThemeWrapper
     {
         // http://redmondmag.com/articles/2014/02/01/could-android-be-coming-to-windows.aspx
 
@@ -47,6 +49,12 @@ namespace android.app
         //public void setRequestedOrientation(@ActivityInfo.ScreenOrientation int requestedOrientation)
         public void setRequestedOrientation(int requestedOrientation)
         {
+        }
+
+        // 
+        public virtual void onConfigurationChanged(Configuration newConfig)
+        {
+            throw null;
         }
 
         public virtual bool onOptionsItemSelected(MenuItem item)
@@ -221,6 +229,12 @@ namespace android.app
         public void recreate()
         {
         }
+
+        // getExternalFilesDirs
+        public File getExternalFilesDir(string type) { throw null; }
+        public File[] getExternalCacheDirs() { throw null; }
+        public File getExternalCacheDir() { throw null; }
+        public File getCacheDir() { throw null; }
 
     }
 }

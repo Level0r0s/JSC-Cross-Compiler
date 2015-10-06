@@ -1,4 +1,5 @@
-﻿using ScriptCoreLib;
+﻿using java.lang;
+using ScriptCoreLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,19 @@ namespace android.os
     public class Handler
     {
         // X:\jsc.svn\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\android\webkit\SslErrorHandler.cs
+
+        public Handler(Looper looper)
+        {
+
+        }
+        public Handler()
+        {
+
+        }
+
+        public bool post(Runnable r)
+        {
+            throw null;
+        }
     }
 }

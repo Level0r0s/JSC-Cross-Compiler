@@ -25,6 +25,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
 
         // Z:\jsc.svn\examples\java\hybrid\JVMCLRWSDLMID\Program.cs
 
-      
+        // Z:\jsc.svn\examples\java\android\MobileAuthenticateExperiment\MobileAuthenticateExperiment\Application.cs
+
+        public string uri;
+        public __EndpointAddress(string uri)
+        {
+            this.uri = uri;
+        }
     }
 }

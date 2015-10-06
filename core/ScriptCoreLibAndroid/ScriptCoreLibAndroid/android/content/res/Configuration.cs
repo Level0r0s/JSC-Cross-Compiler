@@ -6,9 +6,11 @@ using android.os;
 using android.widget;
 using ScriptCoreLib;
 using java.io;
+using java.util;
 
 namespace android.content.res
 {
+    // http://developer.android.com/reference/android/content/res/Configuration.html
     [Script(IsNative = true)]
     public class Configuration 
     {
@@ -16,6 +18,6 @@ namespace android.content.res
 
         // members and types are to be extended by jsc at release build
 
-      
+        public Locale locale;
     }
 }

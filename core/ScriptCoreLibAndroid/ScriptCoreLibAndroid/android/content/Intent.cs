@@ -193,5 +193,8 @@ namespace android.content
 
 
         public string getDataString() { return null; }
+
+
+        public string getType() { return null; }
     }
 }

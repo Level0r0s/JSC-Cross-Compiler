@@ -18,8 +18,12 @@ namespace android.content
     // http://developer.android.com/reference/android/content/SharedPreferences.html
     [Script(IsNative = true)]
     public interface SharedPreferences
-    {
+    {// Z:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosHUD\VrActivity.cs
+
         SharedPreferences_Editor edit();
+
+
+        string getString(string key, string defValue);
 
         int getInt(string arg0, int arg1);
     }

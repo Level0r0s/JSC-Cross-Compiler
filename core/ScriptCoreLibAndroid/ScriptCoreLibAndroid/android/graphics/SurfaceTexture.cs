@@ -21,6 +21,10 @@ namespace android.graphics
     {
         // members and types are to be extended by jsc at release build
 
+
+
+
+        public void setDefaultBufferSize(int width, int height) { }
     }
 
 }

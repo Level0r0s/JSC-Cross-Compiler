@@ -25,5 +25,10 @@ namespace android.os
         {
             return null;
         }
+
+        public static Looper getMainLooper()
+        {
+            return null;
+        }
     }
 }

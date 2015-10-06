@@ -23,13 +23,16 @@ namespace android.os
 
         // X:\jsc.svn\examples\javascript\android\AndroidListApplications\AndroidListApplications\ApplicationWebService.cs
         public static string DIRECTORY_DOWNLOADS;
-        
+
         public static string DIRECTORY_PICTURES = "Pictures";
 
         public static File getExternalStoragePublicDirectory(string type)
         {
             return default(File);
         }
+
+        public static File getExternalStorageDirectory() { throw null; }
+        public static File getDataDirectory() { throw null; }
 
     }
 }

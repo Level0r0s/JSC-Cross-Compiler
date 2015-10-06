@@ -17,6 +17,26 @@ namespace MobileAuthenticateExperiment
     /// </summary>
     public partial class ApplicationWebService
     {
-     
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+        // restarting in TCP mode port: 5555
+
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
+        // connected to 192.168.1.126:5555
+
     }
 }
+
+//enter AndroidLauncher { AndroidPayload = Y:\staging\MobileAuthenticateExperiment.Applicati
+//192.168.1.126:5555
+//enter InstallToDevice { AndroidPayload = Y:\staging\MobileAuthenticateExperiment.Applicati
+//Y:\staging\MobileAuthenticateExperiment.ApplicationWebService\staging.apk\staging\apk\bin\
+//1628520 bytes
+//x:\util\android-sdk-windows\platform-tools\adb.exe
+// -s 192.168.1.126:5555 install -r "Y:\staging\MobileAuthenticateExperiment.ApplicationWebS
+//        pkg: /data/local/tmp/MobileAuthenticateExperiment.Activities-debug.apk
+//Success
+//480 KB/s (1628520 bytes in 3.307s)
+
+//all done!
+
+

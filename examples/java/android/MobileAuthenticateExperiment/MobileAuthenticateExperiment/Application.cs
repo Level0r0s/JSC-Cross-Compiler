@@ -17,6 +17,7 @@ using MobileAuthenticateExperiment;
 using MobileAuthenticateExperiment.Design;
 using MobileAuthenticateExperiment.HTML.Pages;
 using System.Diagnostics;
+using System.Data;
 
 namespace MobileAuthenticateExperiment
 {
@@ -34,28 +35,84 @@ namespace MobileAuthenticateExperiment
 
         public Application(IApp page)
         {
+            Native.window.onerror += e =>
+            {
+                new IHTMLPre { new { e.error, e.message } }.AttachToDocument();
+
+            };
+
+            // this will go full screen
+            //var sheet1 = new UserControl1 { }.AttachControlToDocument();
+
+
+            // wont load on S1, why?
+
+            //- waiting for device -
+            //error: protocol fault (status read)
+            //- waiting for device -
+            //error: more than one device and emulator
+
+            //C:\Users\Arvo>x:\util\android-sdk-windows\platform-tools\adb.exe devices
+            //List of devices attached
+            //3330A17632C000EC        device
+
+            var o = new IHTMLOutput { }.AttachToDocument();
+
+            o.style.position = IStyle.PositionEnum.relative;
+            o.style.display = IStyle.DisplayEnum.block;
+
+            //width: 600px; height: 300px; display: block; position: relative; background: red;
+            o.style.SetSize(800, 200);
+
+
+            //var sheet1 = new UserControl1 { }.AttachControlTo(Native.document.body);
+            var sheet1 = new UserControl1 { }.AttachControlTo(o);
 
             new { }.With(
                 async delegate
                 {
                     var enter = new IHTMLButton { "authenticate with MobileID as +37200007" }.AttachToDocument();
 
+
+                    //sheet1.identitySheet1BindingSourceBindingSource.PositionChanged +=
+                    sheet1.identitySheet1BindingSourceBindingSource.CurrentChanged +=
+                        delegate
+                        {
+                            //var xDataRowView = sheet1.identitySheet1BindingSourceBindingSource.Current as DataRowView;
+                            Data.identitySheet1Row row = sheet1.identitySheet1BindingSourceBindingSource.Current as DataRowView;
+
+
+
+                            enter.innerText = "authenticate with MobileID as " + new
+                            {
+                                row.Tel_nr,
+                                row.Isikukood,
+
+
+                                //sheet1.identitySheet1BindingSourceBindingSource.Current
+                                //row
+
+                            };
+
+                        };
+
                 retry:
                     enter.disabled = false;
 
                     await enter.async.onclick;
+                    {
+                        Data.identitySheet1Row row = sheet1.identitySheet1BindingSourceBindingSource.Current as DataRowView;
 
-                    enter.disabled = true;
+                        enter.disabled = true;
 
-                    // done { Sesscode = 1832228359, Status = OK, UserIDCode = 14212128025, UserCN = TESTNUMBER,SEITSMES,14212128025, ChallengeID = 0101, Challenge = 03010400000000000000F4EC792BF7FEB1263A65 }
+                        // done { Sesscode = 1832228359, Status = OK, UserIDCode = 14212128025, UserCN = TESTNUMBER,SEITSMES,14212128025, ChallengeID = 0101, Challenge = 03010400000000000000F4EC792BF7FEB1263A65 }
 
-                    var sw = Stopwatch.StartNew();
+                        var sw = Stopwatch.StartNew();
+                        new IHTMLPre { () => new { sw.ElapsedMilliseconds, row.Tel_nr, row.Isikukood } }.AttachToDocument();
 
-                    new IHTMLPre { () => new { sw.ElapsedMilliseconds } }.AttachToDocument();
+                        var x = await MobileID(PhoneNo: row.Tel_nr, IDCode: row.Isikukood);
 
-                    var x = await MobileID();
-
-                    new IHTMLPre { 
+                        new IHTMLPre { 
                         "done " + new{
                     
                          // loodud sessiooni identifikaator
@@ -95,8 +152,10 @@ namespace MobileAuthenticateExperiment
                     } }.AttachToDocument();
 
 
-                    sw.Stop();
+                        sw.Stop();
 
+
+                    }
                     goto retry;
                 }
             );
@@ -106,16 +165,23 @@ namespace MobileAuthenticateExperiment
 
     public partial class ApplicationWebService
     {
+        // { exc = System.NotSupportedException: The interface was not marked as [ScriptAttribute.ExplicitInterface]. { SourceInterface = MobileAuthenticateExperiment.sk.DigiDocServicePortType, SourceType = MobileAuthenticateExperiment.sk.DigiDocServicePortTypeClient, TargetMethod = MobileAuthenticateExperiment.sk.StartSessionResponse MobileAuthenticateExperiment.sk.DigiDocServicePortType.StartSession(MobileAuthenticateExperiment.sk.StartSessionRequest) }
+        //[ScriptCoreLib.Script.ExplicitInterface]
+
         public async Task<sk.MobileAuthenticateResponse> MobileID(string PhoneNo = "37200007", string IDCode = "14212128025")
         {
             // Could not find endpoint element with name 'DigiDocService' and contract 'sk.DigiDocServicePortType' in the ServiceModel client configuration section.
-            //var c = new sk.DigiDocServicePortTypeClient("DigiDocService", "https://tsp.demo.sk.ee:443");
 
+
+#if !DEBUG
+            var c = new sk.DigiDocServicePortTypeClient("DigiDocService", "https://tsp.demo.sk.ee:443");
+#else
             // http://stackoverflow.com/questions/352654/could-not-find-default-endpoint-element
             var c = new sk.DigiDocServicePortTypeClient(
                 new System.ServiceModel.BasicHttpsBinding(),
                 new System.ServiceModel.EndpointAddress("https://tsp.demo.sk.ee:443")
             );
+#endif
 
             // will it work on appengine, android  too?
             var xa = await c.MobileAuthenticateAsync(new sk.MobileAuthenticateRequest
@@ -231,3 +297,16 @@ namespace MobileAuthenticateExperiment
         }
     }
 }
+
+
+//I/browser (15935): Console: 1ms css[type] { descendantMode = true } http://178.23.119.87:30297/view-source:53831
+//I/browser (15935): Console: 262ms css[type] { descendantMode = true } http://178.23.119.87:30297/view-source:53831
+//I/browser (15935): Console: 300ms css[type] { descendantMode = true } http://178.23.119.87:30297/view-source:53831
+//I/browser (15935): Console: 333ms css[type] { descendantMode = true } http://178.23.119.87:30297/view-source:53831
+//I/browser (15935): Console: 366ms css[type] { descendantMode = true } http://178.23.119.87:30297/view-source:53831
+//I/browser (15935): Console: 459ms GetInternalFields load fromlocalstorage!  http://178.23.119.87:30297/view-source:53831
+//I/browser (15935): Console: 704ms NewInstanceConstructor restore fields.. http://178.23.119.87:30297/view-source:53831
+//I/browser (15935): Console: %c838ms event: enter new DataGridView() http://178.23.119.87:30297/view-source:53863
+//E/browser (15935): Console: Uncaught Error: ArgumentNullException: source http://178.23.119.87:30297/view-source:24355
+//V/browser (15935): BrowserActivity.onPageFinished: url = http://178.23.119.87:30297/webview = android.webkit.WebView@4050b5b0
+//V/browser (15935): BrowserActivity.onProgressChanged: progress == 100 truefalsefalsefalse

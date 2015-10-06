@@ -23,5 +23,10 @@ namespace android.content.pm
         public abstract java.util.List queryIntentActivities(Intent intent, int flags);
         public abstract Intent getLaunchIntentForPackage(string packageName);
         public abstract PackageInfo getPackageInfo(string packageName, int flags);
+
+        public abstract java.util.List<ApplicationInfo> getInstalledApplications(int flags);
+
+
+        public abstract ApplicationInfo getApplicationInfo(string packageName, int flags);
     }
 }

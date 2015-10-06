@@ -13,6 +13,8 @@ namespace android.app
 	[Script(IsNative = true)]
     internal class ActivityThread
 	{
+        // tested by?
+
 		// members and types are to be extended by jsc at release build
 		// http://stackoverflow.com/questions/2002288/static-way-to-get-context-on-android
 

@@ -5,6 +5,7 @@ using System.Text;
 using ScriptCoreLib;
 using android.content.res;
 using android.content.pm;
+using java.io;
 
 namespace android.content
 {
@@ -29,6 +30,11 @@ namespace android.content
         public static string NOTIFICATION_SERVICE;
         public static string WINDOW_SERVICE;
         public static string VIBRATOR_SERVICE;
+        public static string CONNECTIVITY_SERVICE;
+
+
+        // http://developer.android.com/reference/android/media/AudioManager.html
+        public static string AUDIO_SERVICE;
 
         // members and types are to be extended by jsc at release build
 
@@ -57,5 +63,9 @@ namespace android.content
 
 
         public abstract string getPackageName();
+
+
+        public abstract File[] getExternalFilesDirs(string type);
+
     }
 }

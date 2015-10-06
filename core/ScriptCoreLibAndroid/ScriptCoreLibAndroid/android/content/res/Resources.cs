@@ -15,6 +15,22 @@ namespace android.content.res
     {
         // members and types are to be extended by jsc at release build
 
+        public Configuration getConfiguration()
+        {
+            throw null;
+        }
+
+        public int getIdentifier(string name, string defType, string defPackage)
+        {
+
+            throw null;
+        }
+
+        public AssetFileDescriptor openRawResourceFd(int id)
+        {
+            throw null;
+        }
+
         public DisplayMetrics getDisplayMetrics()
         {
             throw null;
@@ -30,5 +46,7 @@ namespace android.content.res
         {
             return default(AssetManager);
         }
+
+        public string getText(int id) { throw null; }
     }
 }

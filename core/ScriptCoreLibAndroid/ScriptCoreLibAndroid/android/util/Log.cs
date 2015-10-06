@@ -24,10 +24,28 @@ namespace android.util
             return default(string);
         }
 
+
+
+        public static int v(string tag, string msg)
+        {
+            return default(int);
+        }
+
+     
+
+        public static int d(string tag, string msg)
+        {
+            return default(int);
+        }
+
+
+
+
         public static int e(string tag, int msg)
         {
             return default(int);
         }
+
 
 
         public static int e(string tag, string msg)

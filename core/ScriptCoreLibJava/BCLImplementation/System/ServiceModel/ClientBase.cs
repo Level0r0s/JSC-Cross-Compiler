@@ -205,7 +205,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
                     xPOST.Headers["SOAPAction"] = "\"\"";
 
 
-                    var xPOSTresponse = xPOST.UploadStringTaskAsync(xClientBase.__remoteAddress, "POST", data.ToString());
+                    var xPOSTresponse = xPOST.UploadStringTaskAsync(xClientBase.__remoteAddress.uri, "POST", data.ToString());
 
 
                     xPOSTresponse.ContinueWith(
@@ -286,7 +286,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
     [Script]
     public interface __ClientBase__remoteAddress
     {
-        string __remoteAddress { get; set; }
+        __EndpointAddress __remoteAddress { get; set; }
     }
 
     //[Script(Implements = typeof(global::System.ServiceModel.ClientBase))]
@@ -333,7 +333,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
         //   var c = new sk.DigiDocServicePortTypeClient("DigiDocService", "https://tsp.demo.sk.ee:443");
 
         public string __endpointConfigurationName;
-        public string __remoteAddress { get; set; }
+
+        // __ClientBase__remoteAddress
+        public __EndpointAddress __remoteAddress { get; set; }
 
         public override string ToString()
         {
@@ -348,7 +350,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
             //Console.WriteLine(" System.ServiceModel.ClientBase`1 .ctor " + new { endpointConfigurationName, remoteAddress });
 
             this.__endpointConfigurationName = endpointConfigurationName;
-            this.__remoteAddress = remoteAddress;
+            this.__remoteAddress = new __EndpointAddress(remoteAddress);
         }
 
         public __ClientBase(string endpointConfigurationName, __EndpointAddress remoteAddress)
@@ -358,11 +360,13 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
             Console.WriteLine(" System.ServiceModel.ClientBase`1 .ctor " + new { endpointConfigurationName, remoteAddress });
         }
 
-        public __ClientBase(__Binding endpointConfigurationName, __EndpointAddress remoteAddress)
+        public __ClientBase(__Binding binding, __EndpointAddress remoteAddress)
         {
             // https://msdn.microsoft.com/en-us/library/ms574922(v=vs.110).aspx
 
-            Console.WriteLine(" System.ServiceModel.ClientBase`1 .ctor " + new { endpointConfigurationName, remoteAddress });
+            this.__remoteAddress = remoteAddress;
+
+            //Console.WriteLine(" System.ServiceModel.ClientBase`1 .ctor " + new { endpointConfigurationName, remoteAddress });
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using android.content;
+using android.graphics;
 using ScriptCoreLib;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,11 @@ namespace android.view
         // X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\SystemHeaders\android\native_window_jni.cs
 
 
+        public Surface(SurfaceTexture tex)
+        {
+
+        }
+
+        public Canvas lockCanvas(Rect inOutDirty) { throw null; }
     }
 }

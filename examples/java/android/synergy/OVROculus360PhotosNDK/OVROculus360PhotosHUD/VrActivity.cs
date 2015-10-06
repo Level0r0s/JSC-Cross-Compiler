@@ -168,6 +168,7 @@ namespace com.oculus.vrappframework
 
         protected override void onCreate(android.os.Bundle savedInstanceState)
         {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151006
             base.onCreate(savedInstanceState);
 
 
@@ -184,13 +185,13 @@ namespace com.oculus.vrappframework
             audioMgr = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
             var rate = audioMgr.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
             var size = audioMgr.getProperty(AudioManager.PROPERTY_OUTPUT_FRAMES_PER_BUFFER);
-            Log.d(TAG, "rate = " + rate);
-            Log.d(TAG, "size = " + size);
+            System.Console.WriteLine(TAG, "rate = " + rate);
+            System.Console.WriteLine(TAG, "size = " + size);
 
             // Check preferences
             SharedPreferences prefs = getApplicationContext().getSharedPreferences("oculusvr", MODE_PRIVATE);
             var username = prefs.getString("username", "guest");
-            Log.d(TAG, "username = " + username);
+            System.Console.WriteLine(TAG, "username = " + username);
 
             // Check for being launched with a particular intent
             Intent intent = getIntent();
@@ -199,11 +200,11 @@ namespace com.oculus.vrappframework
             var fromPackageNameString = getPackageStringFromIntent(intent);
             var uriString = getUriStringFromIntent(intent);
 
-            Log.d(TAG, "action:" + intent.getAction());
-            Log.d(TAG, "type:" + intent.getType());
-            Log.d(TAG, "fromPackageName:" + fromPackageNameString);
-            Log.d(TAG, "command:" + commandString);
-            Log.d(TAG, "uri:" + uriString);
+            System.Console.WriteLine( "action:" + intent.getAction());
+            System.Console.WriteLine( "type:" + intent.getType());
+            System.Console.WriteLine( "fromPackageName:" + fromPackageNameString);
+            System.Console.WriteLine( "command:" + commandString);
+            System.Console.WriteLine( "uri:" + uriString);
 
             SurfaceView sv = new SurfaceView(this);
             setContentView(sv);
@@ -332,7 +333,7 @@ namespace com.oculus.vrappframework
 
 
             var a = down ? KeyEvent.ACTION_DOWN : KeyEvent.ACTION_UP;
-            KeyEvent ev = new KeyEvent(0, 0, a, keyCode, repeatCount);
+            ////KeyEvent ev = new KeyEvent(0, 0, a, keyCode, repeatCount);
 
             // This was confusing because it called VrActivity::onKeyDown.  Activity::onKeyDown is only supposed to be 
             // called if the app views didn't consume any keys. Since we intercept dispatchKeyEvent and always returning true
@@ -342,7 +343,8 @@ namespace com.oculus.vrappframework
             // here directly.
             if (down)
             {
-                nativeKeyEvent(appPtr, keyCode, true, ev.getRepeatCount());
+                //nativeKeyEvent(appPtr, keyCode, true, ev.getRepeatCount());
+                nativeKeyEvent(appPtr, keyCode, true, repeatCount);
             }
             else
             {
@@ -417,6 +419,7 @@ namespace com.oculus.vrappframework
 
 
         #region onAudioFocusChange
+        // how about 360 audio?
         // For trivial feedback sound effects
         private SoundPool soundPool;
         private java.util.ArrayList<int> soundPoolSoundIds;
