@@ -12,6 +12,14 @@ namespace android.view
     [Script(IsNative = true)]
     public class KeyEvent : InputEvent
     {
+        public static int KEYCODE_VOLUME_UP;
+        public static int KEYCODE_VOLUME_DOWN;
+
+
+
+        public int getDeviceId() { throw null; }
+        public int getRepeatCount() { throw null; }
+        public int getSource (){throw null;}
         // X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\SystemHeaders\android\keycodes.cs
 
         // http://developer.android.com/reference/android/view/KeyEvent.Callback.html

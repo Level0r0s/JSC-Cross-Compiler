@@ -23,5 +23,7 @@ namespace android.view
         }
 
         public Canvas lockCanvas(Rect inOutDirty) { throw null; }
+
+        public void unlockCanvasAndPost(Canvas canvas) { throw null; }
     }
 }

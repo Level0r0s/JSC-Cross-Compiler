@@ -13,6 +13,10 @@ namespace android.content.res
     [Script(IsNative = true)]
     public class Resources
     {
+        public Resources(AssetManager assets, DisplayMetrics metrics, Configuration config)
+        { }
+
+
         // members and types are to be extended by jsc at release build
 
         public Configuration getConfiguration()

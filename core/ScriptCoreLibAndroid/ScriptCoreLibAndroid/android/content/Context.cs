@@ -15,6 +15,8 @@ namespace android.content
     [Script(IsNative = true)]
     public abstract class Context
     {
+        public abstract AssetManager getAssets();
+
         // X:\jsc.svn\examples\java\android\AndroidMultiProcTCPServerAsync\AndroidMultiProcTCPServerAsync\ApplicationActivity.cs
         public abstract java.io.File getFilesDir();
 

@@ -185,13 +185,13 @@ namespace com.oculus.vrappframework
             audioMgr = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
             var rate = audioMgr.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
             var size = audioMgr.getProperty(AudioManager.PROPERTY_OUTPUT_FRAMES_PER_BUFFER);
-            System.Console.WriteLine(TAG, "rate = " + rate);
-            System.Console.WriteLine(TAG, "size = " + size);
+            System.Console.WriteLine("rate = " + rate);
+            System.Console.WriteLine("size = " + size);
 
             // Check preferences
             SharedPreferences prefs = getApplicationContext().getSharedPreferences("oculusvr", MODE_PRIVATE);
             var username = prefs.getString("username", "guest");
-            System.Console.WriteLine(TAG, "username = " + username);
+            System.Console.WriteLine("username = " + username);
 
             // Check for being launched with a particular intent
             Intent intent = getIntent();
@@ -200,16 +200,16 @@ namespace com.oculus.vrappframework
             var fromPackageNameString = getPackageStringFromIntent(intent);
             var uriString = getUriStringFromIntent(intent);
 
-            System.Console.WriteLine( "action:" + intent.getAction());
-            System.Console.WriteLine( "type:" + intent.getType());
-            System.Console.WriteLine( "fromPackageName:" + fromPackageNameString);
-            System.Console.WriteLine( "command:" + commandString);
-            System.Console.WriteLine( "uri:" + uriString);
+            System.Console.WriteLine("action:" + intent.getAction());
+            System.Console.WriteLine("type:" + intent.getType());
+            System.Console.WriteLine("fromPackageName:" + fromPackageNameString);
+            System.Console.WriteLine("command:" + commandString);
+            System.Console.WriteLine("uri:" + uriString);
 
             SurfaceView sv = new SurfaceView(this);
             setContentView(sv);
 
-         
+
             #region xCallback
             // X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldSurfaceView\OVRVrCubeWorldSurfaceView\ApplicationActivity.cs
             var xCallback = new xCallback
@@ -765,7 +765,7 @@ namespace com.oculus.vrappframework
 
 
 
-     
+
 
         public static bool getBluetoothEnabled(Activity act)
         {

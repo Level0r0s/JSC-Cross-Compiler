@@ -7,6 +7,9 @@ namespace java.util
     [Script(IsNative=true)]
     public sealed class Locale
     {
+        public string getLanguage() { throw null; }
+        public static Locale getDefault() { throw null; }
+        public string getDisplayLanguage (){throw null;}
         public Locale(string lang)
         {
 

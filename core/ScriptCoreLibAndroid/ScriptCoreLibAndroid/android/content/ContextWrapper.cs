@@ -95,5 +95,10 @@ namespace android.content
         {
             throw new NotImplementedException();
         }
+
+        public override AssetManager getAssets()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

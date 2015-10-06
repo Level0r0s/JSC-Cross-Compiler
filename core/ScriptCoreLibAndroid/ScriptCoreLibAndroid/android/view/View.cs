@@ -138,5 +138,18 @@ namespace android.view
         {
             throw null;
         }
+
+        public int getMeasuredHeight() { throw null; }
+        public int getMeasuredWidth() { throw null; }
+        public void layout(int l, int t, int r, int b) { }
+
+        public void measure(int widthMeasureSpec, int heightMeasureSpec)
+        { }
+
+        public void draw(Canvas canvas) { }
+
+
+
+        public bool dispatchTouchEvent(MotionEvent e) { throw null; }
     }
 }
