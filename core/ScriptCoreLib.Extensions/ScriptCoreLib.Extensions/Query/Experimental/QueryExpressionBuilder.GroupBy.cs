@@ -90,6 +90,10 @@ namespace ScriptCoreLib.Query.Experimental
             };
         }
 
+
+
+        // tested by?
+        // Z:\jsc.svn\examples\javascript\LINQ\test\auto\TestSelect\SyntaxGroupByField\Program.cs
     }
 
 }

@@ -19,7 +19,7 @@ using GoogleMapsTracker.HTML.Pages;
 
 // v2. available as a nuget yet?
 using ScriptCoreLib.Query.Experimental;
-
+using System.Diagnostics;
 
 namespace GoogleMapsTracker
 {
@@ -38,19 +38,17 @@ namespace GoogleMapsTracker
 
             new IHTMLAnchor { href = "/jsc", innerText = "enter diagnostic mode" }.AttachToDocument();
 
-            // we are to record a new 
-            var replayID = "replayID" + new Random().Next().ToString("x8");
 
-            // lets use this id to stream to database. can be used for later replay?
-            new IHTMLPre { replayID }.AttachToDocument();
 
-            // replayID	lat as double	lng as double	comment
+
 
 
 
             new { }.With(
                 async delegate
                 {
+
+
                     // Severity	Code	Description	Project	File	Line
                     //Error CS7069  Reference to type 'TaskAwaiter<>' claims it is defined in 'mscorlib', but it could not be found GoogleMapsTracker Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\Application.cs    40
 
@@ -125,6 +123,84 @@ namespace GoogleMapsTracker
 
                     // like a stlus huh.
                     flightPath.setMap(map);
+
+
+                    // alternative is we play a pre recored session.
+
+
+                    new { }.With(
+                        async delegate
+                        {
+                            await new IHTMLButton { "load other replays (?)" }.AttachToDocument().async.onclick;
+
+                            var other = new IHTMLSelect { }.AttachToDocument();
+
+                            var replayIDs = await base.GetAllReplays();
+
+                            if (replayIDs.Length == 0)
+                            {
+                                other.Add("n/a");
+                                return;
+                            }
+
+                            other.Add(replayIDs);
+
+                            var btn = new IHTMLButton { "select one of them!" }.AttachToDocument();
+
+                            other.onchange += async delegate
+                            {
+                                var xreplayID = other[other.selectedIndex].value;
+
+                                btn.innerText = "show " + new { other.selectedIndex, xreplayID }.ToString();
+
+                                var count = await base.GetReplayCount(xreplayID);
+
+                                btn.innerText = "show " + new { other.selectedIndex, xreplayID, count }.ToString();
+
+                            };
+
+                            btn.onclick += async delegate
+                            {
+                                // draw polygon onto map from database.
+
+                                var xreplayID = other[other.selectedIndex].value;
+
+                                var sw = Stopwatch.StartNew();
+
+                                new IHTMLPre { () => new { sw.ElapsedMilliseconds } }.AttachToDocument();
+
+                                var xreplay = await base.GetReplay(xreplayID);
+
+                                sw.Stop();
+
+                                new IHTMLPre { () => new { xreplay.Length } }.AttachToDocument();
+
+                                // can gmaps use our datarows too? yes.
+                                // will this work on android? and appengine, mysql? and ubuntu?
+                                var xreplayPath = new google.maps.Polyline(new
+                                {
+                                    path = xreplay.ToArray(),
+                                    geodesic = true,
+                                    strokeColor = "#00FF00",
+                                    strokeOpacity = 1.0,
+                                    strokeWeight = 4
+                                });
+
+                                // like a stlus huh.
+                                xreplayPath.setMap(map);
+                            };
+                        }
+                    );
+
+
+
+                    // replayID	lat as double	lng as double	comment
+                    // we are to record a new 
+                    var replayID = "replayID" + new Random().Next().ToString("x8");
+
+                    // lets use this id to stream to database. can be used for later replay?
+                    await new IHTMLButton { "record new session as " + replayID }.AttachToDocument().async.onclick;
+
 
 
                     // can we now do the autodrawer?
@@ -205,7 +281,7 @@ namespace GoogleMapsTracker
 
                     // lets keep polling where are we looking at
                     //new IHTMLPre { () => new { Position = marker.getPosition() } }.AttachToDocument();
-                    new IHTMLPre { () => new { getCenter = map.getCenter(), map.getCenter().lat, map.getCenter().lng } }.AttachToDocument();
+                    new IHTMLPre { () => new { history.Count, getCenter = map.getCenter(), map.getCenter().lat, map.getCenter().lng } }.AttachToDocument();
                     //new IHTMLPre { map.getCenter }.AttachToDocument();
                     //new IHTMLPre().Add()
                     next:
@@ -235,9 +311,34 @@ namespace GoogleMapsTracker
 
     public partial class ApplicationWebService
     {
+        // Error CS0029  Cannot implicitly convert type 'ScriptCoreLib.Query.Experimental.IQueryStrategy<string>' to 'string[]'	GoogleMapsTracker Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\Application.cs	239
+
+        // instead of returning the IQueryable, jsc should allow server code inside client code, to allow anonymous type passing
+        // how many replays could there be?
+        public async Task<string[]> GetAllReplays() => (
+             from x in new Data.replayhistory()
+             group x by x.replayID into g
+             select g.Key
+        ).ToArray();
+
+        // get everything? or limit?
+        public async Task<Data.replayhistoryRow[]> GetReplay(string replayID) => (
+             from x in new Data.replayhistory()
+             where x.replayID == replayID
+             select x
+        ).ToArray();
+
+        public async Task<long> GetReplayCount(string replayID) => (
+           from x in new Data.replayhistory()
+           where x.replayID == replayID
+           select x
+      ).Count();
+
+
+
         public async Task AddHistory(string replayID, double lng, double lat)
         {
-            Console.WriteLine(new { replayID, lng, lat });
+            Console.WriteLine(new { replayID, lng, lat, ScriptCoreLib.Query.Experimental.QueryExpressionBuilder.WithConnection });
 
             // we have the data from the client.
             // lets keep it around.
@@ -252,7 +353,7 @@ namespace GoogleMapsTracker
 
             // first the project needs to include xlsx
             // sheet1 should be named.
-            // then rebuild project to generate the datalayer.
+            // then rebuild project to generate the da-talayer.
 
             // slow it down.
             await Task.Delay(1000 / 15);

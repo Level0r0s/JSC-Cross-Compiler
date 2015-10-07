@@ -1847,7 +1847,7 @@ namespace ScriptCoreLib.Query.Experimental
                 #region WriteProjection
 
                 WriteProjection =
-                    // do we need zsource?
+                      // do we need zsource?
                       (zsource, zExpression, Target) =>
                       {
                           //WriteCommentLine(1, "WriteProjection");
@@ -2589,7 +2589,7 @@ namespace ScriptCoreLib.Query.Experimental
                               zNewArrayExpression.Expressions.WithEachIndex(
                                    (SourceArgument, SourceArgumentIndex) =>
                                        WriteScalarExpression(
-                                       //zsource,
+                                        //zsource,
 
                                         true,
                                            SourceArgument
@@ -2615,13 +2615,13 @@ namespace ScriptCoreLib.Query.Experimental
                                             WriteScalarExpression(
 
                                                 true,
-                                            //zsource,
+                                                //zsource,
                                                 SourceArgument //,
-                                            //Target.Concat(new[] { Tuple.Create(
-                                            //                  default(MemberInfo) ,
-                                            //                  SourceArgumentIndex
-                                            //                  )
-                                            //              }).ToArray()
+                                                               //Target.Concat(new[] { Tuple.Create(
+                                                               //                  default(MemberInfo) ,
+                                                               //                  SourceArgumentIndex
+                                                               //                  )
+                                                               //              }).ToArray()
                                             )
                                     );
                                   return;
@@ -2631,13 +2631,13 @@ namespace ScriptCoreLib.Query.Experimental
                                   (SourceArgument, SourceArgumentIndex) =>
                                       WriteScalarExpression(
                                       true,
-                                      //zsource,
+                                          //zsource,
                                           SourceArgument //,
-                                      //Target.Concat(new[] { Tuple.Create(
-                                      //    zNewExpression.Members[SourceArgumentIndex],
-                                      //    SourceArgumentIndex
-                                      //    )
-                                      //}).ToArray()
+                                                         //Target.Concat(new[] { Tuple.Create(
+                                                         //    zNewExpression.Members[SourceArgumentIndex],
+                                                         //    SourceArgumentIndex
+                                                         //    )
+                                                         //}).ToArray()
                                       )
                               );
                               return;
@@ -2687,6 +2687,21 @@ namespace ScriptCoreLib.Query.Experimental
 
 
                     // Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\Program.cs
+                    if (xxSelect == null)
+                    {
+
+                        var xxWhere = xScalar.source as xWhere;
+                        if (xxWhere != null)
+                        {
+                            // implict identity select?
+
+                            xxSelect = xxWhere.source as xSelect;
+                        }
+
+
+                        if (xxSelect == null)
+                            Debugger.Break();
+                    }
 
                     #region xxMemberExpression
                     var xxMemberExpression = xxSelect.selector.Body as MemberExpression;
@@ -2995,13 +3010,13 @@ namespace ScriptCoreLib.Query.Experimental
 
                                     WriteProjectionProxy(
                                        xGroupBy.source,
-                                        //aa,
+                                   //aa,
                                    __xGroupBy_source_inner_selector,
-                                        new[] { 
+                                        new[] {
                                             new Tuple<MemberInfo, int>(xReferencesOfLong.LastReference.Method, 1)
                                             , new Tuple<MemberInfo, int>(a0.Member, 1)
 
-                                        
+
                                         },
                                         new[] {
 
@@ -3017,7 +3032,7 @@ namespace ScriptCoreLib.Query.Experimental
 
                                     WriteProjectionProxy(
                                         xGroupBy.source,
-                                        //aa,
+                                    //aa,
                                     __xGroupBy_source_outer_selector,
                                          new[] { new Tuple<MemberInfo, int>(xReferencesOfLong.LastReference.Method, 1)
                                             , new Tuple<MemberInfo, int>(a1.Member, 1)
@@ -3309,7 +3324,7 @@ namespace ScriptCoreLib.Query.Experimental
                 WriteLine(0, "select");
 
 
-
+                #region WriteSelectProjection
                 Action WriteSelectProjection =
                     delegate
                     {
@@ -3476,8 +3491,8 @@ namespace ScriptCoreLib.Query.Experimental
                                 //WriteScalarExpression(false, sMemberExpression);
 
                                 WriteProjection(xSelect, sMemberExpression, new Tuple<MemberInfo, int>[] {
-                                // Tuple.Create(item.m, index)
-                            });
+                                    // Tuple.Create(item.m, index)
+                                });
                             }
 
                             return;
@@ -3526,6 +3541,8 @@ namespace ScriptCoreLib.Query.Experimental
                     };
 
                 WriteSelectProjection();
+                #endregion
+
 
 
 

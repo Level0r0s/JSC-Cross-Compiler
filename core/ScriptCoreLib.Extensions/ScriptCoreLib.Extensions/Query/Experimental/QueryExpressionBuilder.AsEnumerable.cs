@@ -92,7 +92,8 @@ namespace ScriptCoreLib.Query.Experimental
 
         public static IEnumerable<TElement> ReadToElements<TElement>(DbDataReader r, IQueryStrategy<TElement> source)
         {
-            Console.WriteLine("enter ReadToElements ");
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007/where
+            Console.WriteLine("enter QueryExpressionBuilder ReadToElements ");
 
             while (r.Read())
             {
@@ -101,13 +102,26 @@ namespace ScriptCoreLib.Query.Experimental
                 yield return ReadToElement<TElement>(r, source, new Tuple<MemberInfo, int>[0]);
             }
 
-            Console.WriteLine("exit ReadToElements ");
+            Console.WriteLine("exit QueryExpressionBuilder ReadToElements ");
             r.Dispose();
         }
 
         public static TElement ReadToElement<TElement>(DbDataReader r, IQueryStrategy source, Tuple<MemberInfo, int>[] Target)
         {
-            Console.WriteLine("ReadToElement");
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007/where
+            Console.WriteLine("enter QueryExpressionBuilder ReadToElement " + new { source});
+
+            // what if the one goes straight from where to toarray?
+            #region xWhere
+            // Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\Program.cs
+            var xWhere = source as xWhere;
+            if (xWhere != null)
+            {
+                // source = {select replayhistory}
+
+                return ReadToElement<TElement>(r, xWhere.source, Target);
+            }
+            #endregion
 
             #region xTake
             var xTake = source as xTake;
@@ -235,7 +249,7 @@ namespace ScriptCoreLib.Query.Experimental
             #endregion
 
 
-
+            #region xSelect
             var xSelect = source as xSelect;
             if (xSelect != null)
             {
@@ -451,6 +465,11 @@ namespace ScriptCoreLib.Query.Experimental
 
                 Debugger.Break();
             }
+            #endregion
+
+
+        
+
 
             return default(TElement);
         }

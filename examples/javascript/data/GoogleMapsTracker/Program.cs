@@ -13,20 +13,27 @@ namespace GoogleMapsTracker
     /// <summary>
     /// You can debug your application by hitting F5.
     /// </summary>
-    internal static class Program
+    internal class Program
     {
         //static string replayID = "replayID" + new Random().Next().ToString("x8");
 
         //static void EditAndContinue(string replayID = "demo1")
-        static void EditAndContinue()
+        //static void EditAndContinue()
+        void EditAndContinue()
         {
+            return;
+
             // manually restart method if modified?
             // some changes require full process restart. like LINQ?
             Console.WriteLine("enter EditAndContinue");
 
             //var capture = new { replayID = "demo1" };
 
-            var replayID = "demo1";
+            var replayID = "demo2";
+
+
+            //var myHistory = new Data.replayhistory().Where(x => x.replayID == replayID);
+            //var myHistory = new Data.replayhistory().Where(x => x.replayID == replayID).Select(x => x);
 
 
             var service = new ApplicationWebService { };
@@ -34,6 +41,51 @@ namespace GoogleMapsTracker
 
             //await service.AddHistory("headless1", 1, 1);
             service.AddHistory(replayID, 1, 1).Wait();
+
+            var myHistory =
+                from x in new Data.replayhistory()
+                where x.replayID == replayID
+                select x;
+
+
+
+
+            // this now works without identity select
+            var myHistoryAll = myHistory.ToArray();
+
+            var myHistoryCount = myHistory.Count();
+
+
+            var distinctReplays0 =
+              from x in new Data.replayhistory()
+                  //group x by new { x.replayID } into g
+                  //select new { g.Key.replayID, gCount = g.Count() };
+
+              group x by x.replayID into g
+              select g.Key;
+
+            var distinctReplays0All = distinctReplays0.ToArray();
+
+
+            var distinctReplays =
+                from x in new Data.replayhistory()
+                    //group x by new { x.replayID } into g
+                    //select new { g.Key.replayID, gCount = g.Count() };
+
+                group x by x.replayID into g
+                select new
+                {
+                    replayID = g.Key
+
+                    // cant ask for a count can we.?
+                    //, gCount = g.Count()
+                };
+
+            var distinctReplaysAll = distinctReplays.ToArray();
+
+
+            Debugger.Break();
+
 
             // how many are there now?
 
@@ -48,12 +100,14 @@ namespace GoogleMapsTracker
             var all2 = new Data.replayhistory().Count();
             var all3 = new Data.replayhistory().Count();
 
-            var myHistory = from x in new Data.replayhistory()
-                            where x.replayID == replayID
-                            select x;
+            //var myHistory = from x in new Data.replayhistory()
+            //                where x.replayID == replayID
+            //                select x;
+
+
+
 
             // Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\Program.cs
-            var myHistoryCount = myHistory.Count();
 
 
             Debugger.Break();
@@ -98,7 +152,7 @@ namespace GoogleMapsTracker
 
 
 
-            new Action(EditAndContinue).InvokeAndReinvokeIfCodeModified();
+            new Action(new Program().EditAndContinue).InvokeAndReinvokeIfCodeModified();
             //xDebugger.InvokeAndReinvokeIfCodeModified(EditAndContinue);
 
 

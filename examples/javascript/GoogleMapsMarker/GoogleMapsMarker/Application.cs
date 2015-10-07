@@ -189,9 +189,9 @@ namespace google
             // Latitude ranges between -90 and 90 degrees, inclusive
 
             // TypeError: this.map.getCenter(...).get_lat is not a function
-            public double lat {[method: Script(ExternalTarget = "lat")]get; }
+            public double lat { [method: Script(ExternalTarget = "lat")]get; private set; }
 
-            public double lng {[method: Script(ExternalTarget = "lng")]get; }
+            public double lng { [method: Script(ExternalTarget = "lng")]get; private set; }
             // LatLngLiteral 
             //public double lat;
 
@@ -382,10 +382,10 @@ namespace GoogleMapsMarker
                      );
 
                     //marker.onclick += delegate
-                    //{
-                    //    map.setZoom(8.0);
-                    //    map.setCenter(marker.getPosition());
-                    //};
+                //{
+                //    map.setZoom(8.0);
+                //    map.setCenter(marker.getPosition());
+                //};
 
 
                     //while (await marker.async.onclick)
