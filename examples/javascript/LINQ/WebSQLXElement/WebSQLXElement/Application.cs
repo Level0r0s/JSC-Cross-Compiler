@@ -91,7 +91,7 @@ namespace WebSQLXElement
                     n.Create(cc0);
                     #endregion
 
-
+                    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151006/xlsx
                     await n.InsertAsync(cc0,
                          new xRow
                     {

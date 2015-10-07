@@ -15,11 +15,23 @@ namespace ScriptCoreLib.Query.Experimental
 {
     public static partial class QueryExpressionBuilder
     {
+        // Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\Application.cs
+
         // X:\jsc.svn\core\ScriptCoreLib.Async\ScriptCoreLib.Async\Query\Experimental\QueryExpressionBuilderAsync.IDbConnection.Insert.cs
 
+
+        // called by? Insert
         #region GetInsertCommand
         public static DbCommand GetInsertCommand<TElement>(this IQueryStrategy<TElement> source, IDbConnection cc, TElement value)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007
+            // Z:\jsc.svn\examples\javascript\GoogleMapsMarker\GoogleMapsMarker\Application.cs
+            if (cc == null)
+                if (Debugger.IsAttached)
+                    Debugger.Break();
+
+
+
             // cc null?
             // X:\jsc.svn\examples\javascript\appengine\WebNotificationsViaDataAdapter\WebNotificationsViaDataAdapter\ApplicationWebService.cs
 
@@ -139,6 +151,8 @@ namespace ScriptCoreLib.Query.Experimental
         }
 
 
+
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007
         // shall the caller expose the callsite and source too?
         [Obsolete("whats the default? what about async calls?")]
         public static Action<Action<IDbConnection>> WithConnection;
@@ -173,6 +187,9 @@ namespace ScriptCoreLib.Query.Experimental
         {
             var LastInsertRowId = default(TKey);
 
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007
+            // can we have a default? at if in CLR perhaps sqlite at appcache?
+
             WithConnection(
                 cc =>
                 {
@@ -187,6 +204,10 @@ namespace ScriptCoreLib.Query.Experimental
         //public static void Insert<TElement>(this IQueryStrategy<TElement> source, IDbConnection cc, TElement value)
         public static TKey Insert<TElement, TKey>(this xSelect<TKey, TElement> source, IDbConnection cc, TElement value)
         {
+            if (cc == null)
+                if (Debugger.IsAttached)
+                    Debugger.Break();
+
             // X:\jsc.svn\core\ScriptCoreLib.Async\ScriptCoreLib.Async\Query\Experimental\QueryExpressionBuilderAsync.IDbConnection.Insert.cs
 
             // tested by

@@ -1252,6 +1252,10 @@ interface THREE.Material
 	attribute boolean needsUpdate;
 
 
+	// Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularPanorama\ChromeEquirectangularPanorama\Application.cs
+	attribute THREE.Texture map;
+
+
 	// set by initMaterial
 	attribute any program;
 	attribute any type;
@@ -1265,7 +1269,7 @@ interface THREE.MeshLambertMaterial : THREE.Material
 	attribute THREE.Color color;
 	attribute THREE.Color ambient;
 	attribute THREE.Color emissive;
-	attribute THREE.Texture map;
+	
 };
 
 

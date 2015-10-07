@@ -21,6 +21,7 @@ namespace XSLXAssetWithXElement
     /// </summary>
     public class ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151006/xlsx
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150911/mysql
 
 

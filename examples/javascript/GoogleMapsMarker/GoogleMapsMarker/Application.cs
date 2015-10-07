@@ -138,7 +138,7 @@ namespace google
                 throw new NotImplementedException();
             }
 
-            internal object getPosition()
+            public object getPosition()
             {
                 throw new NotImplementedException();
             }
@@ -155,17 +155,49 @@ namespace google
 
             }
 
-            internal void setPosition(object v)
+            public void setPosition(object v)
             {
                 throw new NotImplementedException();
             }
 
-            internal void setContent(string v)
+            // Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\Application.cs
+            public void setContent(string v)
             {
                 throw new NotImplementedException();
             }
         }
 
+        // https://developers.google.com/maps/documentation/javascript/examples/polyline-simple
+        [Script(HasNoPrototype = true, ExternalTarget = "google.maps.Polyline")]
+        public class Polyline
+        {
+            public Polyline(object args)
+            {
+
+            }
+
+            public void setMap(Map map) { }
+        }
+
+
+
+        // Z:\jsc.svn\examples\javascript\Test\TestNativeMethodAsProperty\TestNativeMethodAsProperty\Class1.cs
+        // https://developers.google.com/maps/documentation/javascript/reference?hl=en#LatLng
+        [Script(HasNoPrototype = true, ExternalTarget = "google.maps.LatLng")]
+        public class LatLng
+        {
+            // Latitude ranges between -90 and 90 degrees, inclusive
+
+            // TypeError: this.map.getCenter(...).get_lat is not a function
+            public double lat {[method: Script(ExternalTarget = "lat")]get; }
+
+            public double lng {[method: Script(ExternalTarget = "lng")]get; }
+            // LatLngLiteral 
+            //public double lat;
+
+            // Longitude ranges between -180 and 180 degrees, inclusive. 
+            //public double lng;
+        }
 
         [Script(HasNoPrototype = true, ExternalTarget = "google.maps.Map")]
         public class Map
@@ -175,17 +207,17 @@ namespace google
 
             }
 
-            internal object getCenter()
+            public LatLng getCenter()
             {
                 throw new NotImplementedException();
             }
 
-            internal void setZoom(double v)
+            public void setZoom(double v)
             {
                 throw new NotImplementedException();
             }
 
-            internal void setCenter(object v)
+            public void setCenter(object v)
             {
                 throw new NotImplementedException();
             }
@@ -206,6 +238,7 @@ namespace GoogleMapsMarker
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007
             // https://developers.google.com/maps/documentation/javascript/examples/map-geolocation
 
             //chrome.AppWindow
@@ -314,10 +347,10 @@ namespace GoogleMapsMarker
                     var map = new google.maps.Map(div,
                         new
                         {
-                            
+
                             //center = new { lat = -34.397, lng = 150.644 },
                             center = new { lat = 59.4329527, lng = 24.7023564 },
-                            
+
                             //https://www.google.ee/maps/@59.4329527,24.7023564,14z?hl=en
                             zoom = 6.0
                         }
@@ -341,17 +374,18 @@ namespace GoogleMapsMarker
                         new
                         {
                             position = map.getCenter(),
-                            label = "X",
+                            //label = new { lat = 59.4329527, lng = 24.7023564 }.ToString(),
+                            label = "23",
                             title = "click to zoom",
                             map
                         }
                      );
 
                     //marker.onclick += delegate
-                //{
-                //    map.setZoom(8.0);
-                //    map.setCenter(marker.getPosition());
-                //};
+                    //{
+                    //    map.setZoom(8.0);
+                    //    map.setCenter(marker.getPosition());
+                    //};
 
 
                     //while (await marker.async.onclick)

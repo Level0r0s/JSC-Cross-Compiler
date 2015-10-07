@@ -21,6 +21,8 @@ namespace WebNotificationsViaDataAdapter
     [System.ComponentModel.DesignerCategory("Code")]
     public class ApplicationWebService : Component
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151006/xlsx
+
         //02000027 WebNotificationsViaDataAdapter.AssetsLibrary.<0200000dArray\+ConvertToString>
         //02000028 WebNotificationsViaDataAdapter.Design.ScriptedNotificationsV2ScriptedNotificationsKey
         //02000029 ScriptCoreLib.Shared.Data.Diagnostics.WithConnectionLambda

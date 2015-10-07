@@ -94,6 +94,8 @@ namespace System.Data
                 // for where arguments we need to do the same.
                 // X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Ultra\Library\StringConversionsForStopwatch.cs
 
+
+                // yikes. not available? ref Ultra!
                 var i8 = ScriptCoreLib.Library.StringConversionsForStopwatch.DateTimeConvertToInt64((DateTime)Value);
                 // shouldnt this happen in AddParam anyhow?
                 Value = i8;

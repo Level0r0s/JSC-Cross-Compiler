@@ -14,6 +14,11 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 	[Script(InternalConstructor = true)]
 	public class IHTMLVideo : IHTMLMedia
 	{
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151006/360
+        // https://code.google.com/p/chromium/issues/detail?id=25573
+        // https://code.google.com/p/chromium/issues/detail?id=109652#c2
+        // http://stackoverflow.com/questions/24152810/encoding-from-ffmpeg-to-mpeg-dash-webm-with-keyframe-clusters-to-work-with-medi
+
         // web content could be archived into a DVD like experience with a DVD MENU
         // can a data stream be extracted from such a video?
 

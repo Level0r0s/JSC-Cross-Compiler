@@ -37,6 +37,7 @@ namespace ClickCounter
             QueryExpressionBuilder.WithConnection =
                 y =>
                 {
+                    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151006/xlsx
                     var cc = new SQLiteConnection();
                     cc.Open();
                     y(cc);

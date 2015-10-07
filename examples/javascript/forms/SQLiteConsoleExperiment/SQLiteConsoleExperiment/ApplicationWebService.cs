@@ -13,9 +13,8 @@ using System.Xml.Linq;
 
 namespace SQLiteConsoleExperiment
 {
-    /// <summary>
-    /// Methods defined in this type can be used from JavaScript. The method calls will seamlessly be proxied to the server.
-    /// </summary>
+    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007
+    [DesignerCategory("Code")]
     public sealed partial class ApplicationWebService : Component
     {
 

@@ -125,9 +125,13 @@ namespace ScriptCoreLib.JavaScript.DOM
 			this.appendChild(x);
 		}
 
+
+        // tested by? C# seems to have an issue?
 		[Script(DefineAsStatic = true)]
 		public void Add(System.Func<object> e)
 		{
+            // Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\Application.cs
+
 			// what about implicit operators for other elements?
 			// X:\jsc.svn\examples\javascript\async\AsyncHistoricActivities\AsyncHistoricActivities\Application.cs
 

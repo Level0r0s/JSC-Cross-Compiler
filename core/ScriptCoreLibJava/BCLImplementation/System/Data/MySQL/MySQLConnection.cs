@@ -12,6 +12,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
     [Script(ImplementsViaAssemblyQualifiedName = "System.Data.SQLite.SQLiteConnection")]
     internal class __XSQLiteConnection : __DbConnection
     {
+        // tested by?
         public int LastInsertRowId
         {
             get

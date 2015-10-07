@@ -87,6 +87,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360x83", "..\..\..\..\java
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.abstractatech.dcimgalleryapp", "..\..\..\..\javascript\android\com.abstractatech.dcimgalleryapp\com.abstractatech.dcimgalleryapp\com.abstractatech.dcimgalleryapp.csproj", "{48A0B7BA-BD8F-49EC-858B-09774A8413B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "THREE", "..\..\..\..\..\market\synergy\THREE\THREE\THREE.csproj", "{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -427,6 +429,16 @@ Global
 		{48A0B7BA-BD8F-49EC-858B-09774A8413B2}.Release|Mixed Platforms.Build.0 = Release|x86
 		{48A0B7BA-BD8F-49EC-858B-09774A8413B2}.Release|x86.ActiveCfg = Release|x86
 		{48A0B7BA-BD8F-49EC-858B-09774A8413B2}.Release|x86.Build.0 = Release|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Debug|x86.ActiveCfg = Debug|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Debug|x86.Build.0 = Debug|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Release|Any CPU.ActiveCfg = Release|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Release|Mixed Platforms.Build.0 = Release|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Release|x86.ActiveCfg = Release|x86
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -446,6 +458,7 @@ Global
 		{1EFE6347-91DB-4173-AACC-6873F657C5C1} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
 		{A67831B0-60FC-4F79-852D-A9F5B7ABF28F} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
 		{9D9E8255-8352-49D4-8EB3-22851F76EDDA} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
+		{7B5C94C5-F6AA-42BA-815B-34DD472A47AC} = {79888291-1DF1-4A00-AC84-9BB21E801A4C}
 		{1CE7D22F-52C8-4164-8955-CD89609E48A9} = {368B28D8-8941-41A2-BD6A-2E2095A75589}
 		{E9A0E839-8BEC-4B5C-B967-2E55A2078A77} = {368B28D8-8941-41A2-BD6A-2E2095A75589}
 		{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7} = {368B28D8-8941-41A2-BD6A-2E2095A75589}
