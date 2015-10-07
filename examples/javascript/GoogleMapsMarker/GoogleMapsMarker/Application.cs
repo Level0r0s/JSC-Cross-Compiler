@@ -22,6 +22,57 @@ namespace google
 
     public static class maps
     {
+        // enable nested .ctors 
+        static public Task api
+        {
+            get
+            {
+                var x = new TaskCompletionSource<object>();
+
+                var api = new IHTMLScript
+                {
+                    //src = "https://maps.googleapis.com/maps/api/js?key=API_KEY&signed_in=true&callback=initMap"
+                    src = "https://maps.googleapis.com/maps/api/js?&callback=mapsapi"
+
+                    //async
+                    //defer
+                    //src = "https://maps.googleapis.com/maps/api/js?"
+                };
+
+
+                //Native.document.head.onm
+
+
+                //var initMapTask = new TaskCompletionSource<object>();
+
+                // jsc is not exposing delegate as IFunction?
+                // Uncaught TypeError: window.initMap is not a function
+                //(Native.window as dynamic)["initMap"] = (Action)delegate
+
+                (Native.window as dynamic).mapsapi = (Action)delegate
+                {
+
+                    //Native.document.body.style.backgroundColor = "cyan";
+
+                    x.SetResult(null);
+                };
+
+
+                api.AttachToHead();
+
+
+                //await api.AttachToHead().async.onload;
+
+
+                //new IHTMLPre { new { (Native.window as dynamic).google } }.AttachToDocument();
+                //new IHTMLPre { new { (Native.window as dynamic).google.maps } }.AttachToDocument();
+
+                //await initMapTask.Task;
+
+                return x.Task;
+            }
+        }
+
         [Script(HasNoPrototype = true, ExternalTarget = "google.maps.Marker")]
         public class Marker // : IEventTarget
         {
@@ -161,38 +212,48 @@ namespace GoogleMapsMarker
             new { }.With(
                 async delegate
                 {
+                    // tested with
+                    // s6, s1, tab7, ipad2
+
+                    // tested via nfc
+                    //   SERIALNUMBER=38505300414, G=ARVO, SN=SULAKATKO, CN="SULAKATKO,ARVO,38505300414", OU=authentication, O=ESTEID (DIGI-ID), C=EE
+
                     Native.document.body.style.backgroundColor = "yellow";
+
+                    new IHTMLPre { " await google.maps.api" }.AttachToDocument();
+                    await google.maps.api;
+                    new IHTMLPre { " await google.maps.api done" }.AttachToDocument();
 
 
                     // Failed to execute 'write' on 'Document': It isn't possible to write into a document from an asynchronously-loaded external script unless it is explicitly opened.
 
-                    var api = new IHTMLScript
-                    {
-                        //src = "https://maps.googleapis.com/maps/api/js?key=API_KEY&signed_in=true&callback=initMap"
-                        src = "https://maps.googleapis.com/maps/api/js?&callback=initMap"
+                    //var api = new IHTMLScript
+                    //{
+                    //    //src = "https://maps.googleapis.com/maps/api/js?key=API_KEY&signed_in=true&callback=initMap"
+                    //    src = "https://maps.googleapis.com/maps/api/js?&callback=initMap"
 
-                        //async
-                        //defer
-                        //src = "https://maps.googleapis.com/maps/api/js?"
-                    };
-
-
-                    //Native.document.head.onm
+                    //    //async
+                    //    //defer
+                    //    //src = "https://maps.googleapis.com/maps/api/js?"
+                    //};
 
 
-                    var initMapTask = new TaskCompletionSource<object>();
+                    ////Native.document.head.onm
 
-                    // jsc is not exposing delegate as IFunction?
-                    // Uncaught TypeError: window.initMap is not a function
-                    //(Native.window as dynamic)["initMap"] = (Action)delegate
 
-                    (Native.window as dynamic).initMap = (Action)delegate
-                    {
+                    //var initMapTask = new TaskCompletionSource<object>();
 
-                        //Native.document.body.style.backgroundColor = "cyan";
+                    //// jsc is not exposing delegate as IFunction?
+                    //// Uncaught TypeError: window.initMap is not a function
+                    ////(Native.window as dynamic)["initMap"] = (Action)delegate
 
-                        initMapTask.SetResult(null);
-                    };
+                    //(Native.window as dynamic).initMap = (Action)delegate
+                    //{
+
+                    //    //Native.document.body.style.backgroundColor = "cyan";
+
+                    //    initMapTask.SetResult(null);
+                    //};
 
 
 
@@ -219,14 +280,14 @@ namespace GoogleMapsMarker
                         //id = "map"
                     }.AttachToDocument();
 
-                    //map.id = "map_canvas";
-                    await api.AttachToHead().async.onload;
+                    ////map.id = "map_canvas";
+                    //await api.AttachToHead().async.onload;
 
 
-                    new IHTMLPre { new { (Native.window as dynamic).google } }.AttachToDocument();
-                    new IHTMLPre { new { (Native.window as dynamic).google.maps } }.AttachToDocument();
+                    //new IHTMLPre { new { (Native.window as dynamic).google } }.AttachToDocument();
+                    //new IHTMLPre { new { (Native.window as dynamic).google.maps } }.AttachToDocument();
 
-                    await initMapTask.Task;
+                    //await initMapTask.Task;
 
                     //new IHTMLPre { new { (Native.window as dynamic).google.maps.Map } }.AttachToDocument();
 
@@ -238,9 +299,11 @@ namespace GoogleMapsMarker
 
 
                     div.style.border = "1px dashed red";
+                    div.style.height = "300px";
+                    div.style.left = "0px";
+                    div.style.right = "0px";
 
-
-                    div.style.SetSize(400, 300);
+                    //div.style.SetSize(400, 300);
 
 
                     // b: "projectionTopLeft"
@@ -251,7 +314,11 @@ namespace GoogleMapsMarker
                     var map = new google.maps.Map(div,
                         new
                         {
-                            center = new { lat = -34.397, lng = 150.644 },
+                            
+                            //center = new { lat = -34.397, lng = 150.644 },
+                            center = new { lat = 59.4329527, lng = 24.7023564 },
+                            
+                            //https://www.google.ee/maps/@59.4329527,24.7023564,14z?hl=en
                             zoom = 6.0
                         }
                     );
@@ -281,10 +348,10 @@ namespace GoogleMapsMarker
                      );
 
                     //marker.onclick += delegate
-                    //{
-                    //    map.setZoom(8.0);
-                    //    map.setCenter(marker.getPosition());
-                    //};
+                //{
+                //    map.setZoom(8.0);
+                //    map.setCenter(marker.getPosition());
+                //};
 
 
                     //while (await marker.async.onclick)
