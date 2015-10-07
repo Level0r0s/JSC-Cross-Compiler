@@ -59,6 +59,8 @@ namespace GoogleMapsTracker
                     // 4.6
                     // stored at Z:\jsc.svn\examples\javascript\data\packages
                     // is that where jsc and nuget both agree to store it? no. jsc needs to mimick nuget here.
+
+                    // did we build it?
                     await google.maps.api;
 
 

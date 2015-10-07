@@ -7,41 +7,45 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Threading.Tasks
 {
     // X:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\System\Threading\Tasks\TaskExtensions.cs
 
-	// http://referencesource.microsoft.com/#System.Core/System/Threading/Tasks/TaskExtensions.cs
-	// https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Threading.Tasks/TaskExtensionsImpl.cs
-	// https://githubcom/mono/mono/blob/master/mcs/class/System.Core/System.Threading.Tasks/TaskExtensions.cs
+    // http://referencesource.microsoft.com/#System.Core/System/Threading/Tasks/TaskExtensions.cs
+    // https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Threading.Tasks/TaskExtensionsImpl.cs
+    // https://githubcom/mono/mono/blob/master/mcs/class/System.Core/System.Threading.Tasks/TaskExtensions.cs
 
-	[Script(Implements = typeof(global::System.Threading.Tasks.TaskExtensions))]
-	public static class __TaskExtensions
-	{
+    [Script(Implements = typeof(global::System.Threading.Tasks.TaskExtensions))]
+    public static class __TaskExtensions
+    {
         // X:\jsc.svn\examples\java\android\gles\AndroidOpenGLESLesson6Activity\AndroidOpenGLESLesson6Activity\Shaders\ApplicationSurface.cs
 
-		// X:\jsc.svn\examples\java\hybrid\async\Test\JVMCLRUnwrap\JVMCLRUnwrap\Program.cs
+        // X:\jsc.svn\examples\java\hybrid\async\Test\JVMCLRUnwrap\JVMCLRUnwrap\Program.cs
 
-		// could this be part of .async instead?
-		// called by?
-		//   // ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks.__Task`1+<>c__DisplayClass1_0.<ContinueWith>b__0
+        // could this be part of .async instead?
+        // called by?
+        //   // ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks.__Task`1+<>c__DisplayClass1_0.<ContinueWith>b__0
 
 
 
-		public static Task<TResult> Unwrap<TResult>(Task<Task<TResult>> task)
-		{
-			return Unwrap(task, "");
-		}
+        public static Task<TResult> Unwrap<TResult>(Task<Task<TResult>> task)
+        {
+            return Unwrap(task, "");
+        }
 
-		public static Task<TResult> Unwrap<TResult>(Task<Task<TResult>> task, string Trace)
-		{
-			// X:\jsc.svn\examples\javascript\async\test\TestBytesToSemaphore\TestBytesToSemaphore\Application.cs
+        public static Task<TResult> Unwrap<TResult>(Task<Task<TResult>> task, string Trace)
+        {
+            // X:\jsc.svn\examples\javascript\async\test\TestBytesToSemaphore\TestBytesToSemaphore\Application.cs
 
-			//Console.WriteLine("enter TaskExtensions.Unwrap");
+            //Console.WriteLine("enter TaskExtensions.Unwrap");
 
-			// X:\jsc.svn\examples\javascript\async\test\TaskAsyncTaskRun\TaskAsyncTaskRun\Application.cs
+            // X:\jsc.svn\examples\javascript\async\test\TaskAsyncTaskRun\TaskAsyncTaskRun\Application.cs
 
-			//async worker done0:3872ms 
-			//0:3872ms Task ContinueWithResult
-			//0:3873ms async worker running ? { xTask = [object Object] }
-			//Uncaught TypeError: undefined is not a function 
-			var x = new TaskCompletionSource<TResult>();
+            //async worker done0:3872ms 
+            //0:3872ms Task ContinueWithResult
+            //0:3873ms async worker running ? { xTask = [object Object] }
+            //Uncaught TypeError: undefined is not a function 
+            var x = new TaskCompletionSource<TResult>();
+
+#if FIXED
+            // Z:\jsc.svn\examples\javascript\GoogleMapsMarker\GoogleMapsMarker\Application.cs
+
 
 			task.ContinueWith(
 				r =>
@@ -69,30 +73,32 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Threading.Tasks
 					);
 				}
 			);
+#endif
 
-			return x.Task;
-		}
+            return x.Task;
+        }
 
 
-		public static Task Unwrap(Task<Task> task)
-		{
-			return Unwrap(task, "");
-		}
+        public static Task Unwrap(Task<Task> task)
+        {
+            return Unwrap(task, "");
+        }
 
-		public static Task Unwrap(Task<Task> task, string Trace)
-		{
-			//Console.WriteLine("enter TaskExtensions.Unwrap");
+        public static Task Unwrap(Task<Task> task, string Trace)
+        {
+            //Console.WriteLine("enter TaskExtensions.Unwrap");
 
-			// X:\jsc.svn\examples\javascript\async\test\TestBytesToSemaphore\TestBytesToSemaphore\Application.cs
-			// X:\jsc.svn\examples\javascript\async\test\TestWorkerScopeProgress\TestWorkerScopeProgress\Application.cs
-			// X:\jsc.svn\examples\javascript\async\test\TaskAsyncTaskRun\TaskAsyncTaskRun\Application.cs
+            // X:\jsc.svn\examples\javascript\async\test\TestBytesToSemaphore\TestBytesToSemaphore\Application.cs
+            // X:\jsc.svn\examples\javascript\async\test\TestWorkerScopeProgress\TestWorkerScopeProgress\Application.cs
+            // X:\jsc.svn\examples\javascript\async\test\TaskAsyncTaskRun\TaskAsyncTaskRun\Application.cs
 
-			//async worker done0:3872ms 
-			//0:3872ms Task ContinueWithResult
-			//0:3873ms async worker running ? { xTask = [object Object] }
-			//Uncaught TypeError: undefined is not a function 
-			var x = new TaskCompletionSource<object>();
+            //async worker done0:3872ms 
+            //0:3872ms Task ContinueWithResult
+            //0:3873ms async worker running ? { xTask = [object Object] }
+            //Uncaught TypeError: undefined is not a function 
+            var x = new TaskCompletionSource<object>();
 
+#if FIXED
 			task.ContinueWith(
 				(Task<Task> r) =>
 				{
@@ -117,8 +123,10 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Threading.Tasks
 					);
 				}
 			);
+#endif
 
-			return x.Task;
-		}
-	}
+
+            return x.Task;
+        }
+    }
 }

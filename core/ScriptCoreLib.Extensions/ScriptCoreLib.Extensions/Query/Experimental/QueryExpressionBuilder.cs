@@ -2685,6 +2685,9 @@ namespace ScriptCoreLib.Query.Experimental
 
                     var xxSelect = xScalar.source as xSelect;
 
+
+                    // Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\Program.cs
+
                     #region xxMemberExpression
                     var xxMemberExpression = xxSelect.selector.Body as MemberExpression;
                     if (xxMemberExpression != null)
