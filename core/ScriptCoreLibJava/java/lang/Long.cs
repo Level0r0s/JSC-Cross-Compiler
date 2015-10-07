@@ -5,6 +5,8 @@ namespace java.lang
     [Script(IsNative = true)]
     public sealed class Long
     {
+        public static Class TYPE;
+
         public Long(long e)
         {
 

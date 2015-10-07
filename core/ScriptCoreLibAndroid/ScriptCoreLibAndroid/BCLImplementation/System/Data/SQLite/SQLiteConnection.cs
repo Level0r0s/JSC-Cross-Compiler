@@ -53,7 +53,7 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Data.SQLite
             {
                 // I/System.Console( 4328): enter InternalDatabaseName { InternalConnectionString = ScriptCoreLib.Android.BCLImplementation.System.Data.SQLite.__SQLiteConnectionStringBuilder@407714e0 }
                 // X:\jsc.svn\examples\javascript\LINQ\test\auto\TestSelect\TestAndroidOrderByThenGroupBy\ApplicationWebService.cs
-                Console.WriteLine("enter InternalDatabaseName " + new { InternalConnectionString });
+                Console.WriteLine("enter __SQLiteConnection InternalDatabaseName " + new { InternalConnectionString });
 
                 var prefix = "Data Source=";
                 var suffix = ";";
@@ -68,7 +68,7 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Data.SQLite
                 if (__DataSource.StartsWith("file:"))
                     __DataSource = __DataSource.Substring("file:".Length);
 
-                Console.WriteLine("exit InternalDatabaseName " + new { __DataSource });
+                Console.WriteLine("exit __SQLiteConnection InternalDatabaseName " + new { __DataSource });
 
                 return __DataSource;
             }
@@ -168,7 +168,7 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Data.SQLite
         {
             get
             {
-                Console.WriteLine("enter LastInsertRowId");
+                Console.WriteLine("enter __SQLiteConnection LastInsertRowId");
 
                 //I/System.Console( 4342): enter GetLastInsertRowId
                 //I/System.Console( 4342): enter GetLastInsertRowId {{ xSQLiteConnection = ScriptCoreLib.Android.BCLImplementation.System.Data.SQLite.__SQLiteConnection }}

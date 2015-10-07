@@ -202,6 +202,16 @@ namespace GoogleMapsTracker
                     await new IHTMLButton { "record new session as " + replayID }.AttachToDocument().async.onclick;
 
 
+                    new IHTMLButton { "reload" }.AttachToDocument().onclick += delegate
+                    {
+                        Native.document.location.reload();
+                    };
+
+
+                    var sw1 = Stopwatch.StartNew();
+                    var stop = new IHTMLButton { "stop" }.AttachToDocument().async.onclick;
+                    var stop2 = false;
+
 
                     // can we now do the autodrawer?
 
@@ -219,7 +229,7 @@ namespace GoogleMapsTracker
                             // at every so often remember the point and redraw.
 
                             //while  await Task.Delay()
-                            while (true)
+                            do
                             {
                                 // 1 fps?
                                 //await Task.Delay(1000 / 1);
@@ -264,6 +274,9 @@ namespace GoogleMapsTracker
                                 div.style.borderBottom = "1px dashed blue";
 
                             }
+                            while (!stop.IsCompleted);
+
+                            sw1.Stop();
                         }
                     );
 
@@ -279,14 +292,23 @@ namespace GoogleMapsTracker
                                 }
                              );
 
+
+
+
                     // lets keep polling where are we looking at
                     //new IHTMLPre { () => new { Position = marker.getPosition() } }.AttachToDocument();
-                    new IHTMLPre { () => new { history.Count, getCenter = map.getCenter(), map.getCenter().lat, map.getCenter().lng } }.AttachToDocument();
+                    new IHTMLPre { () => new { stop = stop.IsCompleted, sw1.ElapsedMilliseconds, history.Count, getCenter = map.getCenter(), map.getCenter().lat, map.getCenter().lng } }.AttachToDocument();
+
+
+
                     //new IHTMLPre { map.getCenter }.AttachToDocument();
                     //new IHTMLPre().Add()
-                    next:
-                    await marker.async.onclick;
+                    //while (!stop.IsCompleted)
+                    while (true)
                     {
+                        await marker.async.onclick;
+
+
                         // can we make the poly dissapear?
                         flightPath.setMap(null);
 
@@ -301,9 +323,13 @@ namespace GoogleMapsTracker
                         map.setZoom(6.0);
                         map.setCenter(marker.getPosition());
 
-                        goto next;
                     }
+
+
+
                 }
+
+
             );
         }
 
@@ -311,34 +337,47 @@ namespace GoogleMapsTracker
 
     public partial class ApplicationWebService
     {
+        //Error	13	Method must have a return type	Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\Application.cs	322	11	GoogleMapsTracker
+
         // Error CS0029  Cannot implicitly convert type 'ScriptCoreLib.Query.Experimental.IQueryStrategy<string>' to 'string[]'	GoogleMapsTracker Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\Application.cs	239
 
         // instead of returning the IQueryable, jsc should allow server code inside client code, to allow anonymous type passing
         // how many replays could there be?
-        public async Task<string[]> GetAllReplays() => (
-             from x in new Data.replayhistory()
-             group x by x.replayID into g
-             select g.Key
-        ).ToArray();
+        public Task<string[]> GetAllReplays()
+        {
+            return (
+                from x in new Data.replayhistory()
+                group x by x.replayID into g
+                select g.Key
+            ).ToArray().AsResult();
+        }
 
         // get everything? or limit?
-        public async Task<Data.replayhistoryRow[]> GetReplay(string replayID) => (
-             from x in new Data.replayhistory()
-             where x.replayID == replayID
-             select x
-        ).ToArray();
-
-        public async Task<long> GetReplayCount(string replayID) => (
-           from x in new Data.replayhistory()
-           where x.replayID == replayID
-           select x
-      ).Count();
-
-
-
-        public async Task AddHistory(string replayID, double lng, double lat)
+        public Task<Data.replayhistoryRow[]> GetReplay(string replayID)
         {
-            Console.WriteLine(new { replayID, lng, lat, ScriptCoreLib.Query.Experimental.QueryExpressionBuilder.WithConnection });
+            // with logging on, 471 items will take 22sec on android!
+            return (
+                from x in new Data.replayhistory()
+                where x.replayID == replayID
+                select x
+                ).ToArray().AsResult();
+        }
+
+        public async Task<long> GetReplayCount(string replayID)
+        {
+            return (
+                from x in new Data.replayhistory()
+                where x.replayID == replayID
+                select x
+                ).Count();
+        }
+
+
+
+        //public async Task AddHistory(string replayID, double lng, double lat)
+        public Task AddHistory(string replayID, double lng, double lat)
+        {
+            Console.WriteLine(new { replayID, lng, lat });
 
             // we have the data from the client.
             // lets keep it around.
@@ -356,7 +395,11 @@ namespace GoogleMapsTracker
             // then rebuild project to generate the da-talayer.
 
             // slow it down.
-            await Task.Delay(1000 / 15);
+            //await Task.Delay(1000 / 15);
+
+            return Task.CompletedTask;
+
+            // android runtime wont show the async error yet
         }
     }
 }

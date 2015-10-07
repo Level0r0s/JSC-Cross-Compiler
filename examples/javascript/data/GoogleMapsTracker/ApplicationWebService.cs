@@ -17,8 +17,16 @@ namespace GoogleMapsTracker
     /// </summary>
     public partial class ApplicationWebService
     {
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+        // restarting in TCP mode port: 5555
+
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
+        // connected to 192.168.1.126:5555
+
         static ApplicationWebService()
         {
+            // will this work for android?
+
             Console.WriteLine("ApplicationWebService cctor " + new { Environment.CurrentDirectory });
 
             // ApplicationWebService cctor { CurrentDirectory = W:\staging.net.debug }
@@ -48,6 +56,3 @@ namespace GoogleMapsTracker
     }
 }
 
-//[NullReferenceException: Object reference not set to an instance of an object.]
-//ScriptCoreLib.Query.Experimental.QueryExpressionBuilder.GetInsertCommand(IQueryStrategy`1 source, IDbConnection cc, TElement value) +285
-//   ScriptCoreLib.Query.Experimental.QueryExpressionBuilder.Insert(xSelect`2 source, IDbConnection cc, TElement value) +200

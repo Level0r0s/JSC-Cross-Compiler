@@ -59,9 +59,13 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Data.SQLite
         {
             get
             {
-                var t = GetFieldType(i);
+                var xName = GetName(i);
 
-                if (t == typeof(long))
+                var xFieldType = GetFieldType(i);
+
+                Console.WriteLine("SQLiteDataReader " + new { i, xName, xFieldType });
+
+                if (xFieldType == typeof(long))
                     return this.GetInt64(i);
 
                 return this.GetString(i);
@@ -123,6 +127,7 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Data.SQLite
             // can this be an extension method?
             public static Func<Cursor, int, int> Cursor_getType = (cursor, ordinal) =>
             {
+                // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007/where
                 // X:\jsc.svn\examples\javascript\p2p\SharedBrowserSessionExperiment\SharedBrowserSessionExperiment\ApplicationWebService.cs
 
                 if (refCursor_getType == null)
@@ -146,7 +151,7 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Data.SQLite
 
         public override Type GetFieldType(int ordinal)
         {
-            Console.WriteLine("enter GetFieldType " + new { ordinal });
+            Console.WriteLine("enter SQLiteDataReader GetFieldType " + new { ordinal });
 
             var t = OptionalAPI.Cursor_getType(this.cursor, ordinal);
 

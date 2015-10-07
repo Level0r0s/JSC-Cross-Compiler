@@ -109,7 +109,7 @@ namespace ScriptCoreLib.Query.Experimental
         public static TElement ReadToElement<TElement>(DbDataReader r, IQueryStrategy source, Tuple<MemberInfo, int>[] Target)
         {
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007/where
-            Console.WriteLine("enter QueryExpressionBuilder ReadToElement " + new { source});
+            Console.WriteLine("enter QueryExpressionBuilder ReadToElement " + new { source });
 
             // what if the one goes straight from where to toarray?
             #region xWhere
@@ -275,6 +275,13 @@ namespace ScriptCoreLib.Query.Experimental
                             var xMemberName = "" + SourceBinding.Member.Name;
 
                             var __value = r[xMemberName];
+                            var __valueType = default(Type);
+
+                            if (__value != null)
+                                __valueType = __value.GetType();
+
+
+
 
                             // Additional information: Object of type 'System.Int64' cannot be converted to type 'System.DateTime'.
                             var f = SourceBinding.Member as FieldInfo;
@@ -296,11 +303,11 @@ namespace ScriptCoreLib.Query.Experimental
                                 FieldType = f.FieldType;
                             }
 
-                            Console.WriteLine(new { xMemberName, FieldType });
+                            Console.WriteLine("ReadToElement " + new { xMemberName, FieldType, __valueType });
 
                             // X:\jsc.svn\examples\javascript\LINQ\test\auto\TestSelect\TestSelectMath\Program.cs
                             if (FieldType == typeof(XElement))
-								// ?
+                                // ?
                                 __value = ScriptCoreLib.Library.StringConversions.ConvertStringToXElement(
                                     ScriptCoreLib.Library.StringConversions.UTF8FromBase64StringOrDefault(
                                         (string)__value
@@ -315,6 +322,17 @@ namespace ScriptCoreLib.Query.Experimental
 
                             if (FieldType == typeof(bool))
                                 __value = Convert.ToBoolean((long)__value);
+
+                            // S6 stores Key as string? API8?
+                            if (__valueType == typeof(string))
+                            {
+                                // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007/where
+
+                                if (FieldType == typeof(long))
+                                    __value = long.Parse((string)__value);
+                                else if (FieldType == typeof(double))
+                                    __value = double.Parse((string)__value);
+                            }
 
                             f.SetValue(xRow, __value);
                         }
@@ -468,7 +486,7 @@ namespace ScriptCoreLib.Query.Experimental
             #endregion
 
 
-        
+
 
 
             return default(TElement);

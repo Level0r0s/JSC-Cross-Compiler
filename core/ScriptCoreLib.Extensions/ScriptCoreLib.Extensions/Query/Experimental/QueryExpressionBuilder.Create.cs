@@ -40,6 +40,8 @@ namespace ScriptCoreLib.Query.Experimental
             return source;
         }
 
+
+        // called by?
         //public static IQueryStrategy<TElement> Create<TElement>(this IQueryStrategy<TElement> source, IDbConnection cc)
         public static IQueryStrategy<TElement> Create<TElement>(this IQueryStrategy<TElement> source, IDbConnection cc)
         {
@@ -122,20 +124,20 @@ namespace ScriptCoreLib.Query.Experimental
 
                     // x:\jsc.svn\examples\javascript\linq\ggearalpha\ggearalpha\library\googlegearsadvanced.cs
                     // this we now seem to have, in chrome.. :)
-                    if (f.FieldType == typeof(int))
+                    if (FieldType == typeof(int))
                     {
                         w.Append(" BIGINT NOT NULL");
                         return;
                     }
 
-                    if (f.FieldType == typeof(bool))
+                    if (FieldType == typeof(bool))
                     {
                         w.Append(" BIGINT NOT NULL");
                         return;
                     }
 
                     // foreign keys
-                    if (f.FieldType.IsEnum)
+                    if (FieldType.IsEnum)
                     {
                         w.Append(" BIGINT NOT NULL");
                         return;
@@ -144,12 +146,17 @@ namespace ScriptCoreLib.Query.Experimental
                     // https://www.sqlite.org/datatype3.html
                     // X:\jsc.svn\examples\javascript\test\TestXLSXDouble\TestXLSXDouble\ApplicationWebService.cs
                     // X:\jsc.svn\examples\javascript\appengine\XSLXAssetWithXElement\XSLXAssetWithXElement\ApplicationWebService.cs
-                    if (f.FieldType == typeof(double))
+                    if (FieldType == typeof(double))
                     {
                         w.Append(" REAL NOT NULL");
                         return;
                     }
 
+
+
+                    // Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\ApplicationWebService.cs
+                    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007/where
+                    Console.WriteLine("QueryExpressionBuilder Create whats the type? " + new { SourceBinding.Member.Name, FieldType });
                     Debugger.Break();
                 }
             );

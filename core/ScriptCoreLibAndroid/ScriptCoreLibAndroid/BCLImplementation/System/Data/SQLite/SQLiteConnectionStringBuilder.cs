@@ -14,6 +14,7 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Data.SQLite
     [Script(ImplementsViaAssemblyQualifiedName = "System.Data.SQLite.SQLiteConnectionStringBuilder")]
     internal class __SQLiteConnectionStringBuilder : __DbConnectionStringBuilder
     {
+        // Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\ApplicationWebService.cs
         public string DataSource { get; set; }
 
         public int Version { get; set; }

@@ -8,6 +8,9 @@ namespace java.lang
 	[Script(IsNative = true)]
 	public sealed class Double
 	{
+        public static Class TYPE;
+
+
 		/// <summary>
 		/// Constructs a newly allocated <code>Double</code> object that
 		/// represents the primitive <code>double</code> argument.
