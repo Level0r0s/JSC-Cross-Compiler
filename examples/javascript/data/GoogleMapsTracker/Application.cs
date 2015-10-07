@@ -219,7 +219,10 @@ namespace GoogleMapsTracker
                     var history = new List<google.maps.LatLng> { };
 
                     //var delete = delegate
-                    Action delete = delegate
+                    //  Console: Uncaught SyntaxError: Unexpected token delete http://192.168.1.126:15175/view-source:80480
+
+                    // should jsc rename delete token like we do for catch?
+                    Action dodelete = delegate
                     {
                     };
 
@@ -247,7 +250,7 @@ namespace GoogleMapsTracker
                                 while (history.Count > 128)
                                     history.RemoveAt(0);
 
-                                delete();
+                                dodelete();
 
                                 var historyPath = new google.maps.Polyline(new
                                 {
@@ -261,7 +264,7 @@ namespace GoogleMapsTracker
                                 // like a stlus huh.
                                 historyPath.setMap(map);
 
-                                delete = delegate
+                                dodelete = delegate
                                 {
                                     historyPath.setMap(null);
                                 };

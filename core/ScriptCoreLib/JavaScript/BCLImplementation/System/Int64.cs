@@ -27,8 +27,12 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
                 return value;
 
             // tested by X:\jsc.svn\examples\javascript\Test\TestLongParse\TestLongParse\Application.cs
+            // Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\Application.cs
 
-            throw new InvalidOperationException("parseInt failed for " + e);
+
+            // Uncaught Error: InvalidOperationException: parseInt failed for 84727352424136816
+
+            throw new InvalidOperationException("Int64 parseInt failed for " + e);
         }
 
         [Script(OptimizedCode = "return parseInt(e);")]
