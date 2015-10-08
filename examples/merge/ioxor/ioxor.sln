@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ioxor", "ioxor\ioxor.csproj", "{D10AA16C-6BEB-4369-993D-F0D611555124}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestYouTubeExtractor", "..\Test\TestYouTubeExtractor\TestYouTubeExtractor\TestYouTubeExtractor.csproj", "{D668D3F3-A1DE-44A5-A055-813A6B705350}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D10AA16C-6BEB-4369-993D-F0D611555124}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D10AA16C-6BEB-4369-993D-F0D611555124}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D10AA16C-6BEB-4369-993D-F0D611555124}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D668D3F3-A1DE-44A5-A055-813A6B705350}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

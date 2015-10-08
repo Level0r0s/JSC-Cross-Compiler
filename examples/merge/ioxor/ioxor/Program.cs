@@ -107,7 +107,7 @@ namespace ioxor
 
             foreach (var i in seed3)
             {
-                Console.WriteLine(new { i.Name, i.Length, i.LastWriteTimeUtc });
+                Console.WriteLine(new { i.LastWriteTimeUtc.Date, i.Name, i.Length });
             }
 
             foreach (var item in args)
@@ -174,6 +174,7 @@ namespace ioxor
 
                                 Action yield = delegate { };
 
+
                                 do
                                 {
                                     var Position0 = r.Position;
@@ -183,6 +184,7 @@ namespace ioxor
 
                                     var c0 = 0;
 
+                                    #region data <- read
                                     var readreopen = false;
 
                                     reread:
@@ -225,6 +227,7 @@ namespace ioxor
 
                                         goto reread;
                                     }
+                                    #endregion
 
                                     // 255 read in 14
                                     // 65535 read in 15
@@ -234,7 +237,7 @@ namespace ioxor
                                     Console.Title = (int)(100 * ((double)r.Position / (double)Length)) + "%";
                                     Console.WriteLine(r.Position + " read in " + sw.ElapsedMilliseconds);
 
-                                    Task.Run(
+                                    var task0 = Task.Run(
                                         delegate
                                         {
                                             var sw0 = Stopwatch.StartNew();
@@ -268,8 +271,25 @@ namespace ioxor
 
                                             Console.WriteLine("reading... done in " + sw0.ElapsedMilliseconds);
 
+                                            if (Position0 == 0)
+                                            {
+                                                var Position0bytes8 = Encoding.ASCII.GetString(data, 0, 8);
+
+
+                                                Console.WriteLine(new { f2seedCount, Position0bytes8 });
+                                                if (
+                                                        MessageBox.Show(new { Position0bytes8 }.ToString(), "sky is blue?", MessageBoxButtons.OKCancel) == DialogResult.Cancel
+                                                )
+                                                {
+                                                    Environment.Exit(1);
+                                                }
+
+
+                                            }
+
                                             File.WriteAllText("ReadyForWriteback", "" + Position0);
 
+                                            #region write
                                             yield += delegate
                                             {
 
@@ -336,13 +356,31 @@ namespace ioxor
                                                 // if we crash we should fast forward to thisone?
                                                 File.WriteAllText("LastWriteback", "" + Position0);
                                             };
+                                            #endregion
+
+
                                         }
                                     );
+
+
+                                    if (Position0 == 0)
+                                    {
+                                        Console.WriteLine(
+                                            "ask the xor thread to do a status check."
+                                        );
+
+
+                                        task0.Wait();
+                                    }
 
                                     Thread.Yield();
 
                                 }
                                 while (c > 0);
+
+
+
+
 
                                 // 1073742336 read in 414878
                                 // 1 073 742 336 read in 414 878
