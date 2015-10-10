@@ -1,5 +1,7 @@
+using java.security;
 using java.security.cert;
 using java.util.zip;
+using javax.net.ssl;
 using ScriptCoreLib;
 using ScriptCoreLib.Delegates;
 using ScriptCoreLib.Extensions;
@@ -25,7 +27,26 @@ namespace JVMCLRSSLServerSocket
         public void checkServerTrusted(X509Certificate[] arg0, String arg1) { }
         public X509Certificate[] getAcceptedIssuers()
         {
-            return null;
+            //startHandshake...
+            //{ Message = java.lang.NullPointerException, StackTrace = javax.net.ssl.SSLException: java.lang.NullPointerException
+            //        at sun.security.ssl.Alerts.getSSLException(Unknown Source)
+            //        at sun.security.ssl.SSLSocketImpl.fatal(Unknown Source)
+            //        at sun.security.ssl.SSLSocketImpl.fatal(Unknown Source)
+            //        at sun.security.ssl.SSLSocketImpl.handleException(Unknown Source)
+            //        at sun.security.ssl.SSLSocketImpl.startHandshake(Unknown Source)
+            //        at sun.security.ssl.SSLSocketImpl.startHandshake(Unknown Source)
+            //        at JVMCLRSSLServerSocket.Program.main(Program.java:138)
+            //Caused by: java.lang.NullPointerException
+            //        at sun.security.ssl.HandshakeMessage$CertificateRequest.<init>(Unknown Source)
+            //        at sun.security.ssl.ServerHandshaker.clientHello(Unknown Source)
+            //        at sun.security.ssl.ServerHandshaker.processMessage(Unknown Source)
+            //        at sun.security.ssl.Handshaker.processLoop(Unknown Source)
+            //        at sun.security.ssl.Handshaker.process_record(Unknown Source)
+            //        at sun.security.ssl.SSLSocketImpl.readRecord(Unknown Source)
+            //        at sun.security.ssl.SSLSocketImpl.performInitialHandshake(Unknown Source)
+            //        ... 3 more
+
+            return new X509Certificate[0];
         }
     }
 
@@ -42,21 +63,75 @@ namespace JVMCLRSSLServerSocket
         //chooseServerAlias { keyType = RSA }
         //getClientAliases
 
+
+        public static KeyManager[] WindowsMYKeyManagers()
+        {
+            Console.WriteLine("enter WindowsMYKeyManagers");
+            var KeyManagers = new KeyManager[0];
+
+
+            try
+            {
+                var xKeyStore = KeyStore.getInstance("Windows-MY");
+
+                Console.WriteLine("WindowsMYKeyManagers " + new { xKeyStore });
+
+                xKeyStore.load(null, null);
+
+                KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
+
+                Console.WriteLine("WindowsMYKeyManagers " + new { kmf });
+
+
+                kmf.init(xKeyStore, null);
+
+                KeyManagers = kmf.getKeyManagers();
+
+                Console.WriteLine("WindowsMYKeyManagers " + new { KeyManagers });
+
+                //KeyStore ks = KeyStore.getInstance("JKS");
+                //// initialize KeyStore object using keystore name
+                //ks.load(new FileInputStream(keyFile), null);
+                //kmf.init(ks, keystorePasswd.toCharArray());
+                //ret = kmf.getKeyManagers();
+
+                // chooseServerAlias { keyType = RSA, StackTrace = <__StackTrace> }
+
+                //java.security.KeyStore ks = null;
+
+                //KeyManagerFactory kmf
+
+                // http://stackoverflow.com/questions/15076820/java-sslhandshakeexception-no-cipher-suites-in-common
+                // http://stackoverflow.com/questions/7535154/chrome-closing-connection-on-handshake-with-java-ssl-server
+            }
+            catch
+            {
+                throw;
+
+            }
+
+            return KeyManagers;
+        }
+
         public localKeyManager()
         {
-            //KeyStore ks = KeyStore.getInstance("JKS");
-            //// initialize KeyStore object using keystore name
-            //ks.load(new FileInputStream(keyFile), null);
-            //kmf.init(ks, keystorePasswd.toCharArray());
-            //ret = kmf.getKeyManagers();
 
-            // chooseServerAlias { keyType = RSA, StackTrace = <__StackTrace> }
+            //enter localKeyManager
+            //localKeyManager { xKeyStore = java.security.KeyStore@1496e57 }
+            //localKeyManager { kmf = javax.net.ssl.KeyManagerFactory@1408325 }
+            //{ Message = Uninitialized keystore, StackTrace = java.lang.RuntimeException: Uninitialized keystore
+            //        at JVMCLRSSLServerSocket.localKeyManager.<init>(localKeyManager.java:55)
+            //        at JVMCLRSSLServerSocket.Program.main(Program.java:83)
+            //Caused by: java.security.KeyStoreException: Uninitialized keystore
+            //        at java.security.KeyStore.aliases(Unknown Source)
+            //        at sun.security.ssl.SunX509KeyManagerImpl.<init>(Unknown Source)
+            //        at sun.security.ssl.KeyManagerFactoryImpl$SunX509.engineInit(Unknown Source)
+            //        at javax.net.ssl.KeyManagerFactory.init(Unknown Source)
+            //        at JVMCLRSSLServerSocket.localKeyManager.<init>(localKeyManager.java:49)
+            //        ... 1 more
+            // }
 
-            //java.security.KeyStore ks = null;
 
-             //KeyManagerFactory kmf
-
-            // http://stackoverflow.com/questions/15076820/java-sslhandshakeexception-no-cipher-suites-in-common
         }
 
         // the alias name of a matching key or null if there are no matches.
@@ -181,7 +256,7 @@ namespace JVMCLRSSLServerSocket
                 // http://stackoverflow.com/questions/11832672/how-can-a-java-client-use-the-native-windows-my-store-to-provide-its-client-cert
                 // http://docs.oracle.com/javase/7/docs/technotes/guides/security/jsse/ReadDebug.html
 
-                java.lang.System.setProperty("javax.net.debug", "all");
+                //java.lang.System.setProperty("javax.net.debug", "all");
 
                 // http://stackoverflow.com/questions/7615645/ssl-handshake-alert-unrecognized-name-error-since-upgrade-to-java-1-7-0
                 java.lang.System.setProperty("jsse.enableSNIExtension", "false");
@@ -219,13 +294,13 @@ namespace JVMCLRSSLServerSocket
 
 
                 // https://android.googlesource.com/platform/libcore/+/jb-mr2-release/luni/src/main/java/javax/net/ssl/KeyManagerFactory.java
-                var localKeyManager = new[] { new localKeyManager() };
+                //var localKeyManager = new[] { new localKeyManager() };
                 var myTrustManagerArray = new[] { new TrustEveryoneManager() };
 
                 // null?
                 xSSLContext.init(
                     // SunMSCAPI ?
-                    localKeyManager,
+                    localKeyManager.WindowsMYKeyManagers(),
 
                     myTrustManagerArray, new java.security.SecureRandom());
 
@@ -419,7 +494,10 @@ namespace JVMCLRSSLServerSocket
                     //"TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
                 };
 
-                xSSLServerSocket.setEnabledCipherSuites(enabledCipherSuites);
+                xSSLServerSocket.setNeedClientAuth(true);
+                //xSSLServerSocket.setWantClientAuth(true);
+
+                //xSSLServerSocket.setEnabledCipherSuites(enabledCipherSuites);
 
                 var ok = true;
                 while (ok)
@@ -438,6 +516,8 @@ namespace JVMCLRSSLServerSocket
                     Console.WriteLine("startHandshake...");
                     try
                     {
+                        // http://developer.android.com/reference/javax/net/ssl/HandshakeCompletedEvent.html
+
                         xSSLSocket.startHandshake();
 
 
@@ -462,7 +542,9 @@ namespace JVMCLRSSLServerSocket
                         // http://www.e2college.com/blogs/java_security/ssl_handshake_failure_due_to_unsupported_cipher_su.html
 
 
-                        xSSLSocket.setNeedClientAuth(true);
+
+
+
 
                         // Error	573	The type 'ScriptCoreLib.Shared.BCLImplementation.System.IO.__Stream' is defined in an assembly that is not referenced. You must add a reference to assembly 'ScriptCoreLib, Version=4.6.0.0, Culture=neutral, PublicKeyToken=null'.	Z:\jsc.svn\examples\java\hybrid\Test\JVMCLRSSLServerSocket\JVMCLRSSLServerSocket\Program.cs	68	17	JVMCLRSSLServerSocket
 
@@ -479,7 +561,9 @@ namespace JVMCLRSSLServerSocket
                         // http://www.java2s.com/Tutorial/Java/0320__Network/CreatinganSSLServerSocket.htm
                         // http://192.168.1.12:8443/
                         // chrome does a download of NAK EXT SOH NUL STX STX ??
-                        var byte0 = xNetworkStream.ReadByte();
+
+                        // { byte0 = 71 }
+                        //var byte0 = xNetworkStream.ReadByte();
 
                         //{ cf = sun.security.ssl.SSLSocketFactoryImpl@93f13f }
                         //{ ssf = sun.security.ssl.SSLServerSocketFactoryImpl@15dc721 }
@@ -488,16 +572,44 @@ namespace JVMCLRSSLServerSocket
                         //{ xNetworkStream = ScriptCoreLibJava.BCLImplementation.System.Net.Sockets.__NetworkStream@538cc2 }
                         //{ byte0 = -1 }
 
-                        Console.WriteLine(new { byte0 });
+                        //Console.WriteLine(new { byte0 });
+                        //Console.WriteLine(new { byte0 });
 
 
-                        //var xStreamReader = new StreamReader(xNetworkStream);
-                        //var line0 = xStreamReader.ReadLine();
-                        //Console.WriteLine(new { line0 });
+
+
+                        //{ Message = Java heap space, StackTrace = java.lang.OutOfMemoryError: Java heap space
+                        //        at ScriptCoreLibJava.BCLImplementation.System.IO.__MemoryStream.set_Capacity(__MemoryStream.java:110)
+                        //        at ScriptCoreLibJava.BCLImplementation.System.IO.__MemoryStream.InternalEnsureCapacity(__MemoryStream.java:156)
+                        //        at ScriptCoreLibJava.BCLImplementation.System.IO.__MemoryStream.WriteByte(__MemoryStream.java:140)
+                        //        at ScriptCoreLibJava.BCLImplementation.System.IO.__StreamReader.ReadLine(__StreamReader.java:51)
+                        //        at JVMCLRSSLServerSocket.Program.main(Program.java:145)
+
+                        var xStreamReader = new StreamReader(xNetworkStream);
+                        var line0 = xStreamReader.ReadLine();
+                        Console.WriteLine(new { line0 });
+
+                        // { line0 = GET / HTTP/1.1 }
 
 
                         // http://stackoverflow.com/questions/3662837/java-no-cipher-suites-in-common-issue-when-trying-to-securely-connect-to-serve
                         // http://stackoverflow.com/questions/15076820/java-sslhandshakeexception-no-cipher-suites-in-common
+
+
+                        //Implementation not found for type import :
+                        //type: System.IO.StreamWriter
+                        //method: Void .ctor(System.IO.Stream)
+                        //var xStreamWriter = new StreamWriter(xNetworkStream);
+
+                        var data =
+                            "HTTP/1.0 200 OK\r\nConnection: close\r\n\r\n<h1>hello world</h1>";
+
+                        var bytes = Encoding.UTF8.GetBytes(data);
+
+                        xNetworkStream.Write(bytes, 0, bytes.Length);
+
+
+                        xNetworkStream.Close();
 
                     }
                     catch (Exception fault)
@@ -512,7 +624,7 @@ namespace JVMCLRSSLServerSocket
 
                     }
 
-                    Thread.Sleep(5000);
+                    //Thread.Sleep(5000);
                 }
             }
             catch (Exception err)

@@ -11,7 +11,8 @@ namespace javax.net.ssl
     {
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151009
 
-
+        public abstract void setWantClientAuth(bool want);
+        public abstract void setNeedClientAuth(bool need);
 
         public abstract void setEnabledProtocols(string[] protocols);
 

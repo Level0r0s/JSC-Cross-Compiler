@@ -11,6 +11,8 @@ namespace javax.net.ssl
     {
         public abstract void startHandshake();
 
+
+        public abstract void setWantClientAuth(bool want);
         public abstract void setNeedClientAuth(bool need);
     }
 }

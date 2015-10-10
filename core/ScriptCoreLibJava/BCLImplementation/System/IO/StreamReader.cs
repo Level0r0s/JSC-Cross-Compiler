@@ -8,63 +8,70 @@ using ScriptCoreLib.Shared.BCLImplementation.System.IO;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.IO
 {
-	[Script(Implements = typeof(global::System.IO.StreamReader))]
-	internal class __StreamReader : __TextReader
-	{
+    [Script(Implements = typeof(global::System.IO.StreamReader))]
+    internal class __StreamReader : __TextReader
+    {
         // X:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\System\IO\TextReader.cs
 
-		readonly Stream _BaseStream;
+        readonly Stream _BaseStream;
 
 
-		public __StreamReader(Stream s)
-		{
-			this._BaseStream = s;
-		}
+        public __StreamReader(Stream s)
+        {
+            this._BaseStream = s;
+        }
 
-		public override string ReadLine()
-		{
-			var m = new MemoryStream();
+        public override string ReadLine()
+        {
+            Console.WriteLine("enter ReadLine");
 
-			var r = true;
+            var m = new MemoryStream();
 
-			while (r)
-			{
-				var x = _BaseStream.ReadByte();
+            var r = true;
 
-				if (x == '\n')
-				{
-					r = false;
-				}
-				else if (x == '\r')
-				{
-					x = _BaseStream.ReadByte();
+            while (r)
+            {
+                if (m.Length > 1024)
+                {
+                    r = false;
+                }
 
-					// it better be '\n' or we have just swallowed it
-					// needs more code here...
-					r = false;
-				}
-				else
-				{
-					m.WriteByte((byte)x);
-				}
-			}
+                var x = _BaseStream.ReadByte();
 
-			return Encoding.UTF8.GetString(m.ToArray());
-		}
+                if (x == '\n')
+                {
+                    r = false;
+                }
+                else if (x == '\r')
+                {
+                    x = _BaseStream.ReadByte();
 
-		public override string ReadToEnd()
-		{
-			var m = new MemoryStream();
-			// real slow implementation
-			var i = _BaseStream.ReadByte();
+                    // it better be '\n' or we have just swallowed it
+                    // needs more code here...
+                    r = false;
+                }
+                else
+                {
+                    m.WriteByte((byte)x);
+                }
+            }
 
-			while (i >= 0)
-			{
-				m.WriteByte((byte)i);
-				i = _BaseStream.ReadByte();
-			}
+            return Encoding.UTF8.GetString(m.ToArray());
+        }
 
-			return Encoding.UTF8.GetString(m.ToArray());
-		}
-	}
+        public override string ReadToEnd()
+        {
+            var m = new MemoryStream();
+            // real slow implementation
+            var i = _BaseStream.ReadByte();
+
+            while (i >= 0)
+            {
+                m.WriteByte((byte)i);
+                i = _BaseStream.ReadByte();
+            }
+
+            return Encoding.UTF8.GetString(m.ToArray());
+        }
+    }
 }
