@@ -8,11 +8,19 @@ namespace javax.net.ssl
     [Script(IsNative = true)]
     public class SSLContext
     {
+        // Z:\jsc.svn\examples\java\hybrid\Test\JVMCLRSSLServerSocket\JVMCLRSSLServerSocket\Program.cs
+        public SSLServerSocketFactory getServerSocketFactory () {throw null;}
+
+
+
         public SSLSocketFactory getSocketFactory() { return null; }
         public void init(KeyManager[] km, TrustManager[] tm, SecureRandom sr)
         {
         }
 
+
+
+        // tested by?
         public static SSLContext getInstance(string protocol) { return null; }
     }
 }

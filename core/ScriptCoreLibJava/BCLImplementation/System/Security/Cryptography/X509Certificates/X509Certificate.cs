@@ -17,10 +17,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography.X509C
 
 
     [Script(Implements = typeof(global::System.Security.Cryptography.X509Certificates.X509Certificate))]
-    internal class __X509Certificate
+    public class __X509Certificate
     {
         // can we extract rsakey from .cer?
 
+
+        public virtual string Issuer { get; set; }
         public virtual string Subject { get; set; }
     }
 }

@@ -21,11 +21,25 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography.X509C
 
 
     [Script(Implements = typeof(global::System.Security.Cryptography.X509Certificates.X509Certificate2))]
-    internal class __X509Certificate2 : __X509Certificate
+    public class __X509Certificate2 : __X509Certificate
     {
+        // Z:\jsc.svn\examples\java\hybrid\Test\TestKeyStoreWindowsROOT\TestKeyStoreWindowsROOT\Program.cs
+
         // can we extract rsakey from .cer?
 
         public X509Certificate InternalElement;
+
+        public static implicit operator global::System.Security.Cryptography.X509Certificates.X509Certificate2(__X509Certificate2 e)
+        {
+            return (global::System.Security.Cryptography.X509Certificates.X509Certificate2)(object)e;
+        }
+
+
+
+        public __X509Certificate2()
+        {
+
+        }
 
         public __X509Certificate2(byte[] rawData)
         {
@@ -43,6 +57,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography.X509C
             }
         }
 
+
+
+        public override string Issuer { get { return "issuer"; } }
 
 
         public string SerialNumber
@@ -92,6 +109,13 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography.X509C
 
             // https://supportforums.cisco.com/discussion/11041586/extracting-username-x509-certificate
             var subjectName = extractFromQuote(Subject, "CN=");
+
+
+            // Z:\jsc.svn\examples\java\hybrid\Test\TestKeyStoreWindowsROOT\TestKeyStoreWindowsROOT\Program.cs
+            // play safe?
+            if (subjectName == null)
+                return "";
+
             return subjectName;
         }
 

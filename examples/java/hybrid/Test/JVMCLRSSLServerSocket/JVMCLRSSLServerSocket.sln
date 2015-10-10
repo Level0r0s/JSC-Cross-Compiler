@@ -2,8 +2,17 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JVMCLRSSLServerSocket", "JVMCLRSSLServerSocket\JVMCLRSSLServerSocket.csproj", "{A0A72609-60E7-42AE-920B-E2A84A340633}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5F295F12-F93F-4347-B417-AA89990652A3} = {5F295F12-F93F-4347-B417-AA89990652A3}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibJava", "..\..\..\..\..\core\ScriptCoreLibJava\ScriptCoreLibJava.csproj", "{5F295F12-F93F-4347-B417-AA89990652A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JVMCLRTCPMultiplex", "..\..\JVMCLRTCPMultiplex\JVMCLRTCPMultiplex\JVMCLRTCPMultiplex.csproj", "{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JVMCLRSSLTCPListener", "..\..\JVMCLRSSLTCPListener\JVMCLRSSLTCPListener\JVMCLRSSLTCPListener.csproj", "{20C2541B-72C2-4C65-8BE9-EB2E3BC3D17C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeTCPServer", "..\..\..\..\javascript\chrome\apps\ChromeTCPServer\ChromeTCPServer\ChromeTCPServer.csproj", "{9672D112-D806-49D3-B5C8-3B3A2278AD18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +44,36 @@ Global
 		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|x86.ActiveCfg = Release|Any CPU
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Debug|x86.ActiveCfg = Debug|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Debug|x86.Build.0 = Debug|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Release|Any CPU.ActiveCfg = Release|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Release|Mixed Platforms.Build.0 = Release|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Release|x86.ActiveCfg = Release|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Release|x86.Build.0 = Release|x86
+		{20C2541B-72C2-4C65-8BE9-EB2E3BC3D17C}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{20C2541B-72C2-4C65-8BE9-EB2E3BC3D17C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{20C2541B-72C2-4C65-8BE9-EB2E3BC3D17C}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{20C2541B-72C2-4C65-8BE9-EB2E3BC3D17C}.Debug|x86.ActiveCfg = Debug|x86
+		{20C2541B-72C2-4C65-8BE9-EB2E3BC3D17C}.Debug|x86.Build.0 = Debug|x86
+		{20C2541B-72C2-4C65-8BE9-EB2E3BC3D17C}.Release|Any CPU.ActiveCfg = Release|x86
+		{20C2541B-72C2-4C65-8BE9-EB2E3BC3D17C}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{20C2541B-72C2-4C65-8BE9-EB2E3BC3D17C}.Release|Mixed Platforms.Build.0 = Release|x86
+		{20C2541B-72C2-4C65-8BE9-EB2E3BC3D17C}.Release|x86.ActiveCfg = Release|x86
+		{20C2541B-72C2-4C65-8BE9-EB2E3BC3D17C}.Release|x86.Build.0 = Release|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Debug|x86.ActiveCfg = Debug|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Debug|x86.Build.0 = Debug|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Release|Any CPU.ActiveCfg = Release|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Release|Mixed Platforms.Build.0 = Release|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Release|x86.ActiveCfg = Release|x86
+		{9672D112-D806-49D3-B5C8-3B3A2278AD18}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

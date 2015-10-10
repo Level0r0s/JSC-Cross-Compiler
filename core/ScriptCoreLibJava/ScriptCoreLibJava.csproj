@@ -371,8 +371,11 @@
     <Compile Include="javax\accessibility\AccessibleState.cs" />
     <Compile Include="javax\accessibility\AccessibleStateSet.cs" />
     <Compile Include="javax\crypto\spec\OAEPParameterSpec.cs" />
+    <Compile Include="javax\net\ServerSocketFactory.cs" />
     <Compile Include="javax\net\SocketFactory.cs" />
     <Compile Include="javax\net\KeyManager.cs" />
+    <Compile Include="javax\net\ssl\SSLSocket.cs" />
+    <Compile Include="javax\net\ssl\SSLServerSocketFactory.cs" />
     <Compile Include="javax\net\ssl\SSLSocketFactory.cs" />
     <Compile Include="javax\net\ssl\SSLContext.cs" />
     <Compile Include="javax\net\ssl\X509TrustManager.cs" />

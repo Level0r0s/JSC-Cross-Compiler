@@ -21,6 +21,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
     [Script(Implements = typeof(global::System.Net.Sockets.NetworkStream))]
     public class __NetworkStream : __Stream
     {
+        // Z:\jsc.svn\examples\java\hybrid\Test\JVMCLRSSLServerSocket\JVMCLRSSLServerSocket\Program.cs
+
         // tested by?
 
         // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/IO/Stream.cs

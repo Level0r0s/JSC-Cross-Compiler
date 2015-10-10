@@ -1,3 +1,4 @@
+using java.net;
 using java.security;
 using ScriptCoreLib;
 
@@ -12,6 +13,10 @@ namespace javax.net.ssl
 
         //  The default is defined by the security property 'ssl.SocketFactory.provider'.
         public static SocketFactory getDefault() { throw null; }
+
+
+        // android?
+        public abstract Socket createSocket(Socket s, string host, int port, bool autoClose);
 
     }
 }
