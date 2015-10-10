@@ -94,6 +94,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="oracle\UnlimitedJCEPolicy\README.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName)==Debug (

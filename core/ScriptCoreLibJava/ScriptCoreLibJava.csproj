@@ -373,7 +373,10 @@
     <Compile Include="javax\crypto\spec\OAEPParameterSpec.cs" />
     <Compile Include="javax\net\ServerSocketFactory.cs" />
     <Compile Include="javax\net\SocketFactory.cs" />
-    <Compile Include="javax\net\KeyManager.cs" />
+    <Compile Include="javax\net\ssl\SSLEngine.cs" />
+    <Compile Include="javax\net\ssl\X509ExtendedKeyManager.cs" />
+    <Compile Include="javax\net\ssl\X509KeyManager.cs" />
+    <Compile Include="javax\net\ssl\KeyManager.cs" />
     <Compile Include="javax\net\ssl\SSLSocket.cs" />
     <Compile Include="javax\net\ssl\SSLServerSocketFactory.cs" />
     <Compile Include="javax\net\ssl\SSLSocketFactory.cs" />

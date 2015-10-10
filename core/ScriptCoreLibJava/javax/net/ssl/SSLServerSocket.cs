@@ -13,12 +13,11 @@ namespace javax.net.ssl
 
 
 
-        //22e0:02:01 007a:04c1 ScriptCoreLibJava create ScriptCoreLibJava::javax.net.ssl.SSLServerSocket
+        public abstract void setEnabledProtocols(string[] protocols);
 
-        //error at CopyType:
-        //         * Type must be declared abstract if any of its methods are abstract.
-        //         * javax.net.ssl.SSLServerSocket 020000a1
-        //22e0:02:01 RewriteToAssembly error: System.InvalidOperationException: Type must be declared abstract if any of its methods are abstract.       
+        public abstract void setEnabledCipherSuites(string[] suites);
+
+        public abstract string[] getSupportedCipherSuites();
 
     }
 }

@@ -29,12 +29,132 @@ namespace JVMCLRSSLServerSocket
         }
     }
 
+    class localKeyManager : javax.net.ssl.X509ExtendedKeyManager
+    {
+        //chooseServerAlias { keyType = EC_EC }
+        //getClientAliases
+        //chooseServerAlias { keyType = RSA }
+        //getClientAliases
+        //chooseServerAlias { keyType = RSA }
+        //getClientAliases
+        //chooseServerAlias { keyType = RSA }
+        //getClientAliases
+        //chooseServerAlias { keyType = RSA }
+        //getClientAliases
+
+        public localKeyManager()
+        {
+            //KeyStore ks = KeyStore.getInstance("JKS");
+            //// initialize KeyStore object using keystore name
+            //ks.load(new FileInputStream(keyFile), null);
+            //kmf.init(ks, keystorePasswd.toCharArray());
+            //ret = kmf.getKeyManagers();
+
+            // chooseServerAlias { keyType = RSA, StackTrace = <__StackTrace> }
+
+            //java.security.KeyStore ks = null;
+
+             //KeyManagerFactory kmf
+
+            // http://stackoverflow.com/questions/15076820/java-sslhandshakeexception-no-cipher-suites-in-common
+        }
+
+        // the alias name of a matching key or null if there are no matches.
+        // Chooses an alias for the server side of an SSL connection to authenticate it with the specified public key type and certificate issuers.
+        public override string chooseServerAlias(string keyType, java.security.Principal[] issuers, java.net.Socket socket)
+        {
+            // chooseServerAlias { keyType = EC_EC }
+            Console.WriteLine("chooseServerAlias " + new { keyType, StackTrace = new System.Diagnostics.StackTrace() });
+
+            if (issuers != null)
+                foreach (var issuer in issuers)
+                {
+                    Console.WriteLine("chooseServerAlias " + new { keyType, issuer });
+                }
+
+            // { aliasKey = 192.168.1.12, SerialNumber = c7ef5d7ff74627934e4f863f4a766a89, SimpleName = 192.168.1.12, Issuer = issuer }
+
+            return "192.168.1.12";
+        }
+
+        // %% Invalidated:  [Session-1, SSL_NULL_WITH_NULL_NULL]
+
+
+        public override string chooseClientAlias(string[] keyType, java.security.Principal[] issuers, java.net.Socket socket)
+        {
+            Console.WriteLine("chooseClientAlias " + new { StackTrace = new System.Diagnostics.StackTrace() });
+
+            if (keyType != null)
+                foreach (var keyType0 in keyType)
+                {
+                    Console.WriteLine("chooseClientAlias " + new { keyType0 });
+                }
+
+
+            if (issuers != null)
+                foreach (var issuer in issuers)
+                {
+                    Console.WriteLine("chooseClientAlias " + new { issuer });
+                }
+
+
+            // client does not have an alies does it?
+            return "wtf";
+        }
+
+
+        public override X509Certificate[] getCertificateChain(string alias)
+        {
+            Console.WriteLine("getCertificateChain");
+            return null;
+        }
+
+        public override string[] getClientAliases(string keyType, java.security.Principal[] issuers)
+        {
+            Console.WriteLine("getClientAliases");
+            return null;
+        }
+
+        public override java.security.PrivateKey getPrivateKey(string alias)
+        {
+            Console.WriteLine("getClientAliases");
+            return null;
+        }
+
+        public override string[] getServerAliases(string keyType, java.security.Principal[] issuers)
+        {
+            Console.WriteLine("getServerAliases");
+            return null;
+        }
+
+        public override string chooseEngineClientAlias(string[] keyType, java.security.Principal[] issuers, javax.net.ssl.SSLEngine engine)
+        {
+            Console.WriteLine("chooseEngineClientAlias");
+            return null;
+        }
+
+        public override string chooseEngineServerAlias(string keyType, java.security.Principal[] issuers, javax.net.ssl.SSLEngine engine)
+        {
+            //%% Initialized:  [Session-2, SSL_NULL_WITH_NULL_NULL]
+            //chooseServerAlias { keyType = EC_EC, StackTrace = <__StackTrace> }
+            //Finalizer, called close()
+            //getClientAliases
+            //Finalizer, called closeInternal(true)
+
+            Console.WriteLine("chooseEngineServerAlias " + new { keyType });
+
+            return "192.168.1.12";
+        }
+    }
+
     static class Program
     {
 
         [STAThread]
         public static void Main(string[] args)
         {
+            // http://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html
+
             // https://alesaudate.wordpress.com/2010/08/09/how-to-dynamically-select-a-certificate-alias-when-invoking-web-services/
 
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151010
@@ -43,7 +163,12 @@ namespace JVMCLRSSLServerSocket
                           new
                           {
                               typeof(object).AssemblyQualifiedName,
-                              Environment.CurrentDirectory
+                              Environment.CurrentDirectory,
+
+                              // "X:\Program Files (x86)\Java\jre7\lib\security\local_policy.jar"
+                              // Location = X:\Program Files (x86)\Java\jre7\lib\rt.jar }
+                              typeof(object).Assembly.Location,
+
                           }
                       );
 
@@ -51,31 +176,57 @@ namespace JVMCLRSSLServerSocket
 
             try
             {
+                // http://developer.android.com/reference/android/net/SSLCertificateSocketFactory.html
+
                 // http://stackoverflow.com/questions/11832672/how-can-a-java-client-use-the-native-windows-my-store-to-provide-its-client-cert
                 // http://docs.oracle.com/javase/7/docs/technotes/guides/security/jsse/ReadDebug.html
 
                 java.lang.System.setProperty("javax.net.debug", "all");
 
+                // http://stackoverflow.com/questions/7615645/ssl-handshake-alert-unrecognized-name-error-since-upgrade-to-java-1-7-0
+                java.lang.System.setProperty("jsse.enableSNIExtension", "false");
+
+
+                // http://www.angelfire.com/or/abhilash/site/articles/jsse-km/customKeyManager.html
 
 
                 // the reason for the SSLEngine’s complaint is that you enabled only the RSA cipher, but your certificate uses DSA keys. 
                 CLRProgram.makecert(host: "192.168.1.12", port: 8443);
 
+                // ERR_SSL_VERSION_OR_CIPHER_MISMATCH
+
                 //var xSSLContext = javax.net.ssl.SSLContext.getInstance("SSL");
 
-                // ?
+                // For 256 bit security you need to install Oracle's unlimited strength policy files.
+                // http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
+
+                //var xSSLContext = javax.net.ssl.SSLContext.getInstance("SSLv3");
+
+                // { Message = TLSv1.3 SSLContext not available, StackTrace = java.security.NoSuchAlgorithmException: TLSv1.3 SSLContext not available
+                //var xSSLContext = javax.net.ssl.SSLContext.getInstance("TLSv1.3");
+                //var xSSLContext = javax.net.ssl.SSLContext.getInstance("TLSv1.2");
+                //var xSSLContext = javax.net.ssl.SSLContext.getInstance("TLSv1.1");
+
+
+                // { Message = TLS_RSA_WITH_AES_256_CBC_SHA256 SSLContext not available, StackTrace = java.security.NoSuchAlgorithmException: TLS_RSA_WITH_AES_256_CBC_SHA256 SSLContext not available
+
                 var xSSLContext = javax.net.ssl.SSLContext.getInstance("TLSv1.2");
+
 
                 Console.WriteLine(new { xSSLContext });
 
 
+
+
+                // https://android.googlesource.com/platform/libcore/+/jb-mr2-release/luni/src/main/java/javax/net/ssl/KeyManagerFactory.java
+                var localKeyManager = new[] { new localKeyManager() };
                 var myTrustManagerArray = new[] { new TrustEveryoneManager() };
 
                 // null?
                 xSSLContext.init(
                     // SunMSCAPI ?
-                    null, 
-                    
+                    localKeyManager,
+
                     myTrustManagerArray, new java.security.SecureRandom());
 
 
@@ -166,46 +317,203 @@ namespace JVMCLRSSLServerSocket
 
                 var ss443 = xSSLServerSocketFactory.createServerSocket(8443);
 
+
                 Console.WriteLine(new { ss443 });
 
-                var xSSLSocket = ss443.accept() as javax.net.ssl.SSLSocket;
 
-                Console.WriteLine(new { xSSLSocket });
+                // http://developer.android.com/reference/javax/net/ssl/SSLServerSocket.html
+                var xSSLServerSocket = ss443 as javax.net.ssl.SSLServerSocket;
 
-                xSSLSocket.setNeedClientAuth(true);
 
-                // Error	573	The type 'ScriptCoreLib.Shared.BCLImplementation.System.IO.__Stream' is defined in an assembly that is not referenced. You must add a reference to assembly 'ScriptCoreLib, Version=4.6.0.0, Culture=neutral, PublicKeyToken=null'.	Z:\jsc.svn\examples\java\hybrid\Test\JVMCLRSSLServerSocket\JVMCLRSSLServerSocket\Program.cs	68	17	JVMCLRSSLServerSocket
+                // https://www.chromium.org/Home/chromium-security/education/tls
+                // http://stackoverflow.com/questions/21289293/java-7-support-of-aes-gcm-in-ssl-tls
+                // http://superuser.com/questions/747377/enable-tls-1-1-and-1-2-for-clients-on-java-7
+                // https://blogs.oracle.com/java-platform-group/entry/java_8_will_use_tls
 
-                var xNetworkStream = new __NetworkStream
-                {
-                    InternalInputStream = xSSLSocket.getInputStream(),
-                    InternalOutputStream = xSSLSocket.getOutputStream()
+
+
+
+
+                xSSLServerSocket.setEnabledProtocols(new[] { "TLSv1.2", "SSLv2Hello" });
+
+
+                //  Cipher suites with SHA384 and SHA256 are available only for TLS 1.2 or later.
+
+
+                // http://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html#ciphersuites
+                // http://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#ciphersuites
+
+                xSSLServerSocket.getSupportedCipherSuites().WithEach(
+                    SupportedCipherSuite =>
+                    {
+                        Console.WriteLine(new { SupportedCipherSuite });
+                    }
+                );
+
+
+                // https://googleonlinesecurity.blogspot.com.ee/2013/11/a-roster-of-tls-cipher-suites-weaknesses.html
+                // http://stackoverflow.com/questions/21289293/java-7-support-of-aes-gcm-in-ssl-tls
+
+                // need java 8?
+
+
+                //xSSLServerSocket.setEnabledCipherSuites("");
+
+
+                // https://blogs.oracle.com/java-platform-group/entry/diagnosing_tls_ssl_and_https
+                // https://community.oracle.com/thread/2382681?tstart=0
+
+                //Cipher Suites: [
+                //    TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, 
+                //    TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, 
+                //    TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, 
+                //    Unknown 0xcc:0x14, 
+                //                Unknown 0xcc:0x13, 
+                //                TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, 
+                //                TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, 
+                //                TLS_DHE_RSA_WITH_AES_256_CBC_SHA, 
+                //                TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, 
+                //                TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, 
+                //                TLS_DHE_RSA_WITH_AES_128_CBC_SHA, 
+                //                TLS_RSA_WITH_AES_128_GCM_SHA256, 
+                //                TLS_RSA_WITH_AES_256_CBC_SHA, 
+                //                TLS_RSA_WITH_AES_128_CBC_SHA, 
+                //                SSL_RSA_WITH_3DES_EDE_CBC_SHA]
+
+
+
+                // Cipher Suites: [TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, 
+                // TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, 
+                // TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, 
+                // Unknown 0xcc:0x14, Unknown 0xcc:0x13, 
+                //TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, 
+                //TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, 
+                //TLS_DHE_RSA_WITH_AES_256_CBC_SHA, 
+                //TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, 
+                //TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, 
+                //TLS_DHE_RSA_WITH_AES_128_CBC_SHA, 
+                //TLS_RSA_WITH_AES_128_GCM_SHA256, 
+                //TLS_RSA_WITH_AES_256_CBC_SHA, 
+                //TLS_RSA_WITH_AES_128_CBC_SHA, 
+                //SSL_RSA_WITH_3DES_EDE_CBC_SHA
+                //]
+
+                var enabledCipherSuites = new[] { 
+                    //"TLS_DHE_DSS_WITH_AES_128_CBC_SHA256" 
+
+                    // { Message = Unsupported ciphersuite TLS_RSA_WITH_AES_128_GCM_SHA256, StackTrace = java.lang.IllegalArgumentException: Unsupported ciphersuite TLS_RSA_WITH_AES_128_GCM_SHA256
+                    //"TLS_RSA_WITH_AES_128_GCM_SHA256" 
+
+                    //"TLS_RSA_WITH_AES_256_CBC_SHA" 
+                    "TLS_RSA_WITH_AES_128_CBC_SHA"
+
+                    //"SSL_RSA_WITH_3DES_EDE_CBC_SHA" 
+
+                    // { Message = Unsupported ciphersuite TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, StackTrace = java.lang.IllegalArgumentException: Unsupported ciphersuite TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+                    //"TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256" 
+
+                    // { Message = Unsupported ciphersuite TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, StackTrace = java.lang.IllegalArgumentException: Unsupported ciphersuite TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+                    //"TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+
+                    // { Message = Unsupported ciphersuite TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, StackTrace = java.lang.IllegalArgumentException: Unsupported ciphersuite TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
+                    //"TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
                 };
 
-                Console.WriteLine(new { xNetworkStream });
+                xSSLServerSocket.setEnabledCipherSuites(enabledCipherSuites);
 
-                // http://stackoverflow.com/questions/13874387/create-app-with-sslsocket-java
-
-                // http://www.java2s.com/Tutorial/Java/0320__Network/CreatinganSSLServerSocket.htm
-                // http://192.168.1.12:8443/
-                // chrome does a download of NAK EXT SOH NUL STX STX ??
-                var byte0 = xNetworkStream.ReadByte();
-
-                //{ cf = sun.security.ssl.SSLSocketFactoryImpl@93f13f }
-                //{ ssf = sun.security.ssl.SSLServerSocketFactoryImpl@15dc721 }
-                //{ ss443 = [SSL: ServerSocket[addr=0.0.0.0/0.0.0.0,localport=8443]] }
-                //{ xSSLSocket = 1747f59[SSL_NULL_WITH_NULL_NULL: Socket[addr=/192.168.1.196,port=55953,localport=8443]] }
-                //{ xNetworkStream = ScriptCoreLibJava.BCLImplementation.System.Net.Sockets.__NetworkStream@538cc2 }
-                //{ byte0 = -1 }
-
-                Console.WriteLine(new { byte0 });
+                var ok = true;
+                while (ok)
+                {
+                    Console.WriteLine("accept...");
+                    var xSSLSocket = ss443.accept() as javax.net.ssl.SSLSocket;
 
 
-                //var xStreamReader = new StreamReader(xNetworkStream);
-                //var line0 = xStreamReader.ReadLine();
-                //Console.WriteLine(new { line0 });
 
 
+                    Console.WriteLine(new { xSSLSocket });
+
+                    // http://security.stackexchange.com/questions/76993/now-that-it-is-2015-what-ssl-tls-cipher-suites-should-be-used-in-a-high-securit
+                    // java u suck.
+
+                    Console.WriteLine("startHandshake...");
+                    try
+                    {
+                        xSSLSocket.startHandshake();
+
+
+
+                        //Cipher Suites: [
+                        //    TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, 
+                        //    TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, 
+                        //    TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, 
+                        //    Unknown 0xcc:0x14, 
+                        //Unknown 0xcc:0x13, 
+                        //TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, 
+                        //TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, 
+                        //TLS_DHE_RSA_WITH_AES_256_CBC_SHA, 
+                        //TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, 
+                        //TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, 
+                        //TLS_DHE_RSA_WITH_AES_128_CBC_SHA, 
+                        //TLS_RSA_WITH_AES_128_GCM_SHA256, 
+                        //TLS_RSA_WITH_AES_256_CBC_SHA, 
+                        //TLS_RSA_WITH_AES_128_CBC_SHA, 
+                        //SSL_RSA_WITH_3DES_EDE_CBC_SHA]
+
+                        // http://www.e2college.com/blogs/java_security/ssl_handshake_failure_due_to_unsupported_cipher_su.html
+
+
+                        xSSLSocket.setNeedClientAuth(true);
+
+                        // Error	573	The type 'ScriptCoreLib.Shared.BCLImplementation.System.IO.__Stream' is defined in an assembly that is not referenced. You must add a reference to assembly 'ScriptCoreLib, Version=4.6.0.0, Culture=neutral, PublicKeyToken=null'.	Z:\jsc.svn\examples\java\hybrid\Test\JVMCLRSSLServerSocket\JVMCLRSSLServerSocket\Program.cs	68	17	JVMCLRSSLServerSocket
+
+                        var xNetworkStream = new __NetworkStream
+                        {
+                            InternalInputStream = xSSLSocket.getInputStream(),
+                            InternalOutputStream = xSSLSocket.getOutputStream()
+                        };
+
+                        Console.WriteLine(new { xNetworkStream });
+
+                        // http://stackoverflow.com/questions/13874387/create-app-with-sslsocket-java
+
+                        // http://www.java2s.com/Tutorial/Java/0320__Network/CreatinganSSLServerSocket.htm
+                        // http://192.168.1.12:8443/
+                        // chrome does a download of NAK EXT SOH NUL STX STX ??
+                        var byte0 = xNetworkStream.ReadByte();
+
+                        //{ cf = sun.security.ssl.SSLSocketFactoryImpl@93f13f }
+                        //{ ssf = sun.security.ssl.SSLServerSocketFactoryImpl@15dc721 }
+                        //{ ss443 = [SSL: ServerSocket[addr=0.0.0.0/0.0.0.0,localport=8443]] }
+                        //{ xSSLSocket = 1747f59[SSL_NULL_WITH_NULL_NULL: Socket[addr=/192.168.1.196,port=55953,localport=8443]] }
+                        //{ xNetworkStream = ScriptCoreLibJava.BCLImplementation.System.Net.Sockets.__NetworkStream@538cc2 }
+                        //{ byte0 = -1 }
+
+                        Console.WriteLine(new { byte0 });
+
+
+                        //var xStreamReader = new StreamReader(xNetworkStream);
+                        //var line0 = xStreamReader.ReadLine();
+                        //Console.WriteLine(new { line0 });
+
+
+                        // http://stackoverflow.com/questions/3662837/java-no-cipher-suites-in-common-issue-when-trying-to-securely-connect-to-serve
+                        // http://stackoverflow.com/questions/15076820/java-sslhandshakeexception-no-cipher-suites-in-common
+
+                    }
+                    catch (Exception fault)
+                    {
+                        Console.WriteLine(
+                            new
+                            {
+                                fault.Message,
+                                fault.StackTrace
+                            }
+                            );
+
+                    }
+
+                    Thread.Sleep(5000);
+                }
             }
             catch (Exception err)
             {

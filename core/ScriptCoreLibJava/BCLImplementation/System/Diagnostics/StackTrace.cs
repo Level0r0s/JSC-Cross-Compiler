@@ -19,6 +19,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Diagnostics
             this.t = new java.lang.Throwable();
 
         }
+
         public override string ToString()
         {
 

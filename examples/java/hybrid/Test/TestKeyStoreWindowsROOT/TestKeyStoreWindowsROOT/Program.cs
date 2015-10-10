@@ -212,18 +212,23 @@ namespace TestKeyStoreWindowsROOT
                 //Caused by: java.lang.NullPointerException
                 //        at TestKeyStoreWindowsROOT.Program._Main_b__4(Program.java:214)
 
-                Certificates("Windows-MY").WithEach(
-                    crt =>
-                    {
-                        // aliasKey = peer integrity authority for cpu BFEBFBFF000306A9
+                // https://msdn.microsoft.com/en-us/library/system.security.cryptography.x509certificates.x509certificate2.friendlyname(v=vs.110).aspx
 
-                        // SimpleName = peer integrity authority for cpu BFEBFBFF000306A9
-                        var SimpleName = crt.GetNameInfo(System.Security.Cryptography.X509Certificates.X509NameType.SimpleName, false);
 
-                        //if (SimpleName.StartsWith("peer integrity authority for cpu"))
-                        Console.WriteLine(new { SimpleName, crt.SerialNumber, crt.Issuer });
-                    }
-                );
+                f("Windows-MY");
+
+                //Certificates("Windows-MY").WithEach(
+                //    crt =>
+                //    {
+                //        // aliasKey = peer integrity authority for cpu BFEBFBFF000306A9
+
+                //        // SimpleName = peer integrity authority for cpu BFEBFBFF000306A9
+                //        var SimpleName = crt.GetNameInfo(System.Security.Cryptography.X509Certificates.X509NameType.SimpleName, false);
+
+                //        //if (SimpleName.StartsWith("peer integrity authority for cpu"))
+                //        Console.WriteLine(new { SimpleName, crt.SerialNumber, crt.Issuer });
+                //    }
+                //);
 
             }
             catch (Exception err)

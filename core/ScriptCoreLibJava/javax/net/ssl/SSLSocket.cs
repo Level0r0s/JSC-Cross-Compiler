@@ -9,6 +9,8 @@ namespace javax.net.ssl
     [Script(IsNative = true)]
     public abstract class SSLSocket : Socket
     {
+        public abstract void startHandshake();
+
         public abstract void setNeedClientAuth(bool need);
     }
 }
