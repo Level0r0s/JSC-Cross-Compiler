@@ -14,6 +14,8 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 	[Script(InternalConstructor = true)]
 	public class IHTMLApplet : IHTMLElement
 	{
+        // http://news.slashdot.org/story/15/10/10/0415223/firefox-support-for-npapi-plugins-ends-next-year
+
         // Plugins that use NPAPI, including Silverlight, Java, and Unity, won’t work.
 
 
@@ -40,7 +42,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         // alternatives to Chrome as soon as possible. Instead, we recommend Firefox, 
         // Internet Explorer and Safari as longer-term options.
 
-		public string code;
+        public string code;
 		public string codebase;
 		public string archive;
 		public bool mayscript;
