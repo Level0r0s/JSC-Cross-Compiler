@@ -11,6 +11,7 @@ namespace javax.net.ssl
     {
 
         bool verify(string hostname, SSLSession session);
-       
+
     }
+
 }

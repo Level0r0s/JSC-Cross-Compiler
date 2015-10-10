@@ -6,6 +6,7 @@ using ScriptCoreLib;
 using ScriptCoreLib.Delegates;
 using ScriptCoreLib.Extensions;
 using ScriptCoreLibJava.BCLImplementation.System.Net.Sockets;
+using ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography.X509Certificates;
 using ScriptCoreLibJava.Extensions;
 using System;
 using System.Collections;
@@ -224,6 +225,17 @@ namespace JVMCLRSSLServerSocket
 
     static class Program
     {
+
+
+        class xHandshakeCompletedListener : HandshakeCompletedListener
+        {
+            public Action<HandshakeCompletedEvent> yield;
+
+            public void handshakeCompleted(HandshakeCompletedEvent _event)
+            {
+                yield(_event);
+            }
+        }
 
         [STAThread]
         public static void Main(string[] args)
@@ -518,6 +530,40 @@ namespace JVMCLRSSLServerSocket
                     {
                         // http://developer.android.com/reference/javax/net/ssl/HandshakeCompletedEvent.html
 
+                        Func<string> getdata = () =>
+                             "HTTP/1.0 200 OK\r\nConnection: close\r\n\r\n<h1>hello world</h1>";
+
+                        xSSLSocket.addHandshakeCompletedListener(
+                            new xHandshakeCompletedListener
+                            {
+                                yield = e =>
+                                {
+                                    try
+                                    {
+                                        Console.WriteLine("xHandshakeCompletedListener " + new { e.getPeerCertificates().Length });
+
+                                        var c = e.getPeerCertificates().FirstOrDefault() as X509Certificate;
+
+                                        var x509 = new __X509Certificate2 { InternalElement = c };
+
+
+                                        if (c != null)
+                                        {
+
+                                            getdata = () =>
+                                                "HTTP/1.0 200 OK\r\nConnection: close\r\n\r\n<h1>authenticated!</h1>"
+                                                + new XElement("pre", new { x509.Subject, x509.SerialNumber }.ToString()
+                                                    );
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        throw;
+                                    }
+                                }
+                            }
+                        );
+
                         xSSLSocket.startHandshake();
 
 
@@ -602,7 +648,7 @@ namespace JVMCLRSSLServerSocket
                         //var xStreamWriter = new StreamWriter(xNetworkStream);
 
                         var data =
-                            "HTTP/1.0 200 OK\r\nConnection: close\r\n\r\n<h1>hello world</h1>";
+                           getdata();
 
                         var bytes = Encoding.UTF8.GetBytes(data);
 
