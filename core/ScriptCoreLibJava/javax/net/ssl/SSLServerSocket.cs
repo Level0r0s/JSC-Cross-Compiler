@@ -8,6 +8,10 @@ namespace javax.net.ssl
     [Script(IsNative = true)]
     public abstract class SSLServerSocket
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151009
+
+
+
         //22e0:02:01 007a:04c1 ScriptCoreLibJava create ScriptCoreLibJava::javax.net.ssl.SSLServerSocket
 
         //error at CopyType:

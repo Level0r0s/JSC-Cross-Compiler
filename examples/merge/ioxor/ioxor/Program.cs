@@ -112,12 +112,35 @@ namespace ioxor
 
             foreach (var item in args)
             {
+                after_tsdiscon:;
+
+
                 var exists = Directory.Exists(item);
 
                 Console.WriteLine(new { item, exists });
 
                 if (!exists)
-                    MessageBox.Show("folder not available/ reconect? check drivestoredirect");
+                {
+                    // http://weblogs.asp.net/jeffwids/remote-desktop-to-console-session-on-windows-server-2003
+                    //Microsoft.Win32.SystemEvents.SessionEnding
+
+                    if (MessageBox.Show("folder not available/ reconect? check drivestoredirect. disconnect to reconnect. May cause session to be closed after Preparing Your Desktop.", "?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        // https://technet.microsoft.com/en-us/library/bb490805.aspx
+                        // https://books.google.ee/books?id=GJoBXKrdG7gC&pg=PA208&lpg=PA208&dq=tskill+disconnect&source=bl&ots=i3Qj6Lb7ye&sig=WFAI7mmC209Due3U7YI9mZxiZqs&hl=en&sa=X&ved=0CB8Q6AEwAGoVChMI9v--uq2yyAIVATYaCh0NEgpG#v=onepage&q=tskill%20disconnect&f=false
+
+
+                        // If no session ID or session name is specified, tsdiscon disconnects the current session.
+                        Process.Start("tsdiscon").WaitForExit();
+
+			    // await reconnect?
+			    // http://stackoverflow.com/questions/12759567/remote-desktop-connection-c-sharp-events
+                        if (MessageBox.Show("retry?", "?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            goto after_tsdiscon;
+                    }
+
+                    Environment.Exit(1);
+                }
                 else
                     foreach (var f in Directory.GetFiles(item))
                     {
@@ -244,6 +267,13 @@ namespace ioxor
 
                                             //Console.WriteLine("reading...");
 
+                                            if (Position0 == 0)
+                                            {
+                                                // from
+                                                var Position0bytes8 = Encoding.ASCII.GetString(data, 0, 8);
+                                                Console.WriteLine(new { Position0bytes8 });
+                                            }
+
                                             foreach (var seed0 in seed3r)
                                             {
                                                 var data0 = new byte[data.Length];
@@ -273,6 +303,7 @@ namespace ioxor
 
                                             if (Position0 == 0)
                                             {
+                                                // to
                                                 var Position0bytes8 = Encoding.ASCII.GetString(data, 0, 8);
 
 

@@ -21,6 +21,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
     [Script(Implements = typeof(global::System.Net.Sockets.Socket))]
     internal class __Socket : IDisposable
     {
+        // http://www.bbc.co.uk/rd/blog/2015/10/streaming-video-on-10-gigabit-ethernet-and-beyond
+        // Our application programs have become more complicated as they are now responsible for dealing with the packet headers, a job normally handled by the operating system. But in return, we have measured ten-fold performance gains when sending and receiving very high bitrate video streams. Using this technique, we can send or receive uncompressed UHD 2160p50 video (more than 8 Gbps) using a single CPU core, leaving all the rest of the server's cores free for video processing.
+
         // http://ftp.arl.mil/mike/ping.html
         // "X:\opensource\android-ndk-r10c\platforms\android-21\arch-arm\usr\include\sys\socket.h"
 

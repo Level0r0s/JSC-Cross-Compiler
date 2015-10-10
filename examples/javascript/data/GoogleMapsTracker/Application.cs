@@ -79,6 +79,7 @@ namespace GoogleMapsTracker
 
                     Native.body.style.marginTop = "420px";
 
+                    // Free until exceeding 25,000 map loads per day for 90 consecutive days
                     var map = new google.maps.Map(div,
                         new
                         {

@@ -21,6 +21,12 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
     [Script(Implements = typeof(global::System.Net.WebClient))]
     public class __WebClient
     {
+        // http://tech.slashdot.org/story/15/10/10/0158202/bbc-optimizing-uhd-video-streaming-over-ip
+        // http://www.bbc.co.uk/rd/blog/2015/10/streaming-video-on-10-gigabit-ethernet-and-beyond
+
+
+
+
         // can we do encrypted/signed  web client yet?
 
         public WebHeaderCollection ResponseHeaders { get; set; }
