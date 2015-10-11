@@ -32,7 +32,8 @@ namespace HybridCLRJVMAPKWebServer
             // "Y:\jsc.svn\examples\java\android\xavalon.net\xavalon.net.sln"
             // "Y:\jsc.svn\examples\java\android\AndroidTcpListenerActivity\AndroidTcpListenerActivity.sln"
 
-            var ipa = Dns.GetHostAddresses("127.0.0.1")[0];
+            //var ipa = Dns.GetHostAddresses("127.0.0.1")[0];
+            var ipa = Dns.GetHostAddresses("192.168.1.189")[0];
 
             Action<string> Console_WriteLine = x => Console.WriteLine(x);
 
@@ -45,7 +46,9 @@ namespace HybridCLRJVMAPKWebServer
             t.Join();
 
             // without using it jsc causes pain.
-            CLRProgram.CLRMain();
+            //CLRProgram.CLRMain();
+
+            Console.ReadLine();
         }
 
     }

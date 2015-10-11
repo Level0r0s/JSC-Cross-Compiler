@@ -669,7 +669,10 @@ namespace JVMCLRWSDLMID
 
 
 
-            CLRProgram.CLRMain();
+            //CLRProgram.CLRMain();
+
+            Console.ReadLine();
+
         }
 
 

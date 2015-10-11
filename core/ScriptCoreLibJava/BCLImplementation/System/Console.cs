@@ -9,6 +9,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System
     [Script(Implements = typeof(global::System.Console))]
     internal class __Console
     {
+        // ubuntu!
+        // Z:\jsc.svn\examples\java\hybrid\UbuntuHello\UbuntuHello\Program.cs
+
         // http://java.sun.com/javase/6/docs/api/java/text/Normalizer.html
         // http://stackoverflow.com/questions/1272032/java-utf-8-strange-behaviour
         // http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4038677

@@ -216,7 +216,13 @@ namespace JVMCLRNIC
 			}
 #endif
 
-			CLRProgram.CLRMain();
+            //CLRProgram.CLRMain();
+
+
+            // Please install javac! { javac = C:\Program Files\Java\jdk1.8.0_25\bin\javac.exe }
+
+            Console.ReadLine();
+
 		}
 
 

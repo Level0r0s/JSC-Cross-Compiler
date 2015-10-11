@@ -38,11 +38,17 @@ namespace JVMCLRProcessorCount
             //java.lang.Object, rt
             //{{ x = {{ ProcessorCount = 4 }} }}
 
+
+            // modifying vmware ProcessorCount  requires a reboot of the client vm.
             var x = new { Environment.ProcessorCount };
+
+            // \\192.168.1.189\staging
 
             Console.WriteLine(new { x });
 
-            CLRProgram.CLRMain();
+            //CLRProgram.CLRMain();
+
+            Console.ReadLine();
         }
 
 

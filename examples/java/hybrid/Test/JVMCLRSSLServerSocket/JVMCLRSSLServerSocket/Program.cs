@@ -533,6 +533,7 @@ namespace JVMCLRSSLServerSocket
                         Func<string> getdata = () =>
                              "HTTP/1.0 200 OK\r\nConnection: close\r\n\r\n<h1>hello world</h1>";
 
+                        // can we await for it?
                         xSSLSocket.addHandshakeCompletedListener(
                             new xHandshakeCompletedListener
                             {

@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A0A72609-60E7-42AE-920B-E2A84A340633}</ProjectGuid>
+    <ProjectGuid>{3FD637D7-2FDC-45E2-8255-45B1BD938AA2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>JVMCLRNIC</RootNamespace>
@@ -95,7 +95,10 @@ start /WAIT c:\util\jsc\bin\jsc.meta.exe RewriteToMVSProjectTemplate /ProjectFil
 )
 
 if $(ConfigurationName)==Release (
-start  /WAIT  cmd /C C:\util\jsc\bin\jsc.meta.exe  RewriteToHybridJavaApplication /assembly:$(TargetPath) /JavaSDK_bin:"C:\Program Files\Java\jdk1.8.0_25\bin"
+start  /WAIT  cmd /C C:\util\jsc\bin\jsc.meta.exe  RewriteToHybridJavaApplication /assembly:$(TargetPath) /xJavaSDK_bin:"C:\Program Files\Java\jdk1.8.0_25\bin"
+
+copy $(TargetPath) U:\
+
 )
 </PostBuildEvent>
   </PropertyGroup>

@@ -35,7 +35,7 @@ namespace JVMCLRTCPServerAsync
 
             // first are we able to run async?
 
-            
+
             var s = new SemaphoreSlim(0);
 
             //java.lang.Object, rt
@@ -85,9 +85,12 @@ namespace JVMCLRTCPServerAsync
                         href
                     );
 
-                    Process.Start(
-                        href
-                    );
+
+                    // running on ubuntu?
+
+                    //Process.Start(
+                    //    href
+                    //);
 
 
                     new { }.With(
@@ -158,7 +161,10 @@ namespace JVMCLRTCPServerAsync
 
             Console.WriteLine("--");
 
-            CLRProgram.CLRMain();
+
+            Console.ReadLine();
+
+            //CLRProgram.CLRMain();
         }
 
         static async void yield(TcpClient c)

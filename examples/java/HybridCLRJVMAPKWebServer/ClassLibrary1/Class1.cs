@@ -357,7 +357,8 @@ namespace ClassLibrary1
 
                 if (Text != "")
                 {
-                    while (formatx++ % bytes_shown != 0)
+                    // nt java friendly?
+                    //while (formatx++ % bytes_shown != 0)
                         w.Append("   ");
 
                     w.AppendLine(" | " + Text);
