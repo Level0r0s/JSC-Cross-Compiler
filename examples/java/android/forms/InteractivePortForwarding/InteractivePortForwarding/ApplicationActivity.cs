@@ -30,6 +30,9 @@ namespace InteractivePortForwarding.Activities
 
 
 			base.onCreate(savedInstanceState);
+            
+            // USB tether 
+            // SAMSUNG Android USB Remote NDIS Network Device
 
             ((WifiManager)this.getSystemService(Context.WIFI_SERVICE)).createWifiLock(
                 WifiManager.WIFI_MODE_FULL_HIGH_PERF,
@@ -55,3 +58,11 @@ namespace InteractivePortForwarding.Activities
 //I/System.Console(25237): { text = 307 UDP > { Length = 103, RemoteEndPoint = 24.77.172.104:35202 } UDP < { replyCounter = 1, Length = 268, RemoteEndPoint = 192.168.43.10:8080 } }
 //I/StatusBarPolicy(  207): onSignalStrengthsChanged
 //I/System.Console(25237): { text = 308 UDP > { Length = 103, RemoteEndPoint = 24.77.172.104:35202 } UDP < { replyCounter = 1, Length = 268, RemoteEndPoint = 192.168.43.10:8080 } }
+
+   //[javac] W:\src\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\__Task.java:248: error: cannot find symbol
+   //[javac]         return  __TaskExtensions.<TResult>Unwrap_06000a11(__Task.get_InternalFactory().<__Task_1<TResult>>StartNew(function));
+   //[javac]                                 ^
+   //[javac]   symbol:   method <TResult>Unwrap_06000a11(__Task_1<__Task_1<TResult>>)
+
+// wtf?
+// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151012/proxy
