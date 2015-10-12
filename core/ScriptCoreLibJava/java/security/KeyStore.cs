@@ -18,6 +18,11 @@ namespace java.security
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201408/20140829
         // tested by?
 
+
+        // Z:\jsc.svn\examples\java\hybrid\Test\TestKeyStoreDefault\TestKeyStoreDefault\Program.cs
+        public static string getDefaultType() { throw null; }
+
+
         public Certificate getCertificate(string alias) { throw null; }
         public Enumeration aliases()
         {

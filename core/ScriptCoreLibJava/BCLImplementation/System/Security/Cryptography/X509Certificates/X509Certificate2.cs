@@ -23,6 +23,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography.X509C
     [Script(Implements = typeof(global::System.Security.Cryptography.X509Certificates.X509Certificate2))]
     public class __X509Certificate2 : __X509Certificate
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151012
         // Z:\jsc.svn\examples\java\hybrid\Test\TestKeyStoreWindowsROOT\TestKeyStoreWindowsROOT\Program.cs
 
         // can we extract rsakey from .cer?
