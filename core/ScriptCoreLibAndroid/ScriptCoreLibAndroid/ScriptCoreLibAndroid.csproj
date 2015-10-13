@@ -427,8 +427,17 @@
     <Compile Include="..\..\ScriptCoreLibJava\javax\crypto\Cipher.cs">
       <Link>javax\crypto\Cipher.cs</Link>
     </Compile>
-    <Compile Include="..\..\ScriptCoreLibJava\javax\net\KeyManager.cs">
-      <Link>javax\net\KeyManager.cs</Link>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ServerSocketFactory.cs">
+      <Link>javax\net\ServerSocketFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\SocketFactory.cs">
+      <Link>javax\net\SocketFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\HandshakeCompletedEvent.cs">
+      <Link>javax\net\ssl\HandshakeCompletedEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\HandshakeCompletedListener.cs">
+      <Link>javax\net\ssl\HandshakeCompletedListener.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\HostnameVerifier.cs">
       <Link>javax\net\ssl\HostnameVerifier.cs</Link>
@@ -436,11 +445,23 @@
     <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\HttpsURLConnection.cs">
       <Link>javax\net\ssl\HttpsURLConnection.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\KeyManager.cs">
+      <Link>javax\net\ssl\KeyManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\KeyManagerFactory.cs">
+      <Link>javax\net\ssl\KeyManagerFactory.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\SSLContext.cs">
       <Link>javax\net\ssl\SSLContext.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\SSLEngine.cs">
+      <Link>javax\net\ssl\SSLEngine.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\SSLServerSocket.cs">
       <Link>javax\net\ssl\SSLServerSocket.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\SSLServerSocketFactory.cs">
+      <Link>javax\net\ssl\SSLServerSocketFactory.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\SSLSession.cs">
       <Link>javax\net\ssl\SSLSession.cs</Link>
@@ -450,6 +471,12 @@
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\TrustManager.cs">
       <Link>javax\net\ssl\TrustManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\X509ExtendedKeyManager.cs">
+      <Link>javax\net\ssl\X509ExtendedKeyManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\X509KeyManager.cs">
+      <Link>javax\net\ssl\X509KeyManager.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\javax\net\ssl\X509TrustManager.cs">
       <Link>javax\net\ssl\X509TrustManager.cs</Link>
@@ -882,6 +909,9 @@
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\java\util\Enumeration.cs">
       <Link>java\util\Enumeration.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\java\util\EventObject.cs">
+      <Link>java\util\EventObject.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\java\util\GregorianCalendar.cs">
       <Link>java\util\GregorianCalendar.cs</Link>

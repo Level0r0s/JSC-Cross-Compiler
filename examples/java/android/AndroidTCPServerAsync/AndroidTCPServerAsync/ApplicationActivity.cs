@@ -23,8 +23,18 @@ namespace AndroidTCPServerAsync.Activities
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class ApplicationActivity : Activity
     {
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+        // restarting in TCP mode port: 5555
+
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
+        // connected to 192.168.1.126:5555
+
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150513
 
+        // lets verify this thing . deploy over wifi.
+
+        //C:\Windows\system32> "x:\util\android-sdk-windows\platform-tools\adb.exe" shell netcfg
+        //wlan0    UP                               192.168.1.126/24  0x00001043 e8:50:8b:7d:27:7c
 
         protected override void onCreate(Bundle savedInstanceState)
         {

@@ -15,18 +15,9 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         // "X:\jsc.svn\examples\javascript\async\AsyncButtonSequence\AsyncButtonSequence.sln"
 
         //[Obsolete("use button.async.onclick instead?")]
-        public static TaskAwaiter<IHTMLButton> GetAwaiter(this IHTMLButton button)
+        public static TaskAwaiter<IEvent<IHTMLButton>> GetAwaiter(this IHTMLButton button)
         {
-            var y = new TaskCompletionSource<IHTMLButton>();
-
-            button.async.onclick.ContinueWith(
-                t =>
-                {
-                    y.SetResult(button);
-                }
-            );
-
-            return y.Task.GetAwaiter();
+            return button.async.onclick.GetAwaiter();
         }
 
 
@@ -91,14 +82,14 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
             Console.WriteLine(
                 "enter Historic: " + new
-            {
-                Native.document.domain,
-                Native.document.baseURI,
+                {
+                    Native.document.domain,
+                    Native.document.baseURI,
 
-                location = Native.document.location.href,
-                xlocation,
-                href = e.href
-            }
+                    location = Native.document.location.href,
+                    xlocation,
+                    href = e.href
+                }
             );
 
 

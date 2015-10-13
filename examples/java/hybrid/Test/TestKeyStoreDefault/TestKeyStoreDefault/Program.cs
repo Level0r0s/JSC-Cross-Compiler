@@ -98,7 +98,7 @@ namespace TestKeyStoreDefault
 
                         Console.WriteLine(new { aliasKey });
 
-                        // PCSC?
+                        // PCSC?hhhhhhhhhhhh
                         var c509 = xKeyStore.getCertificate(aliasKey) as java.security.cert.X509Certificate;
                         if (c509 != null)
                         {

@@ -9,6 +9,8 @@ namespace javax.net.ssl
     [Script(IsNative = true)]
     public abstract class SSLServerSocket : ServerSocket
     {
+        // https://www.stunnel.org/index.html
+
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151009
 
         public abstract void setWantClientAuth(bool want);

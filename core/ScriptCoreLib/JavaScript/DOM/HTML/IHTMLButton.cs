@@ -102,6 +102,14 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
 
 
+        // Z:\jsc.svn\core\ScriptCoreLib.Async\ScriptCoreLib.Async\JavaScript\DOM\HTML\IHTMLButtonAsyncExtensions.cs
+        //public static TaskAwaiter<IHTMLButton> GetAwaiter(this IHTMLButton button)
+
+        // C# seems to need GetAwaiter?
+        //public static implicit operator Task<IEvent>(IHTMLButton x)
+        //{
+        //    return x.async.onclick;
+        //}
 
 
         #region async
@@ -110,14 +118,14 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         {
 
             [System.Obsolete("should jsc expose events as async tasks until C# chooses to allow that?")]
-            public Task<IEvent> onclick
+            public Task<IEvent<IHTMLButton>> onclick
             {
                 [Script(DefineAsStatic = true)]
                 get
                 {
                     var i = that;
 
-                    var y = new TaskCompletionSource<IEvent>();
+                    var y = new TaskCompletionSource<IEvent<IHTMLButton>>();
                     //i.InvokeOnComplete(y.SetResult);
 
                     var old = new { i.disabled };
