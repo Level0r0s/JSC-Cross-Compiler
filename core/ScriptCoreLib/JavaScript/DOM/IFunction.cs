@@ -15,6 +15,9 @@ namespace ScriptCoreLib.JavaScript.DOM
 	[Script(HasNoPrototype = true, ExternalTarget = "Function")]
 	public class IFunction
 	{
+        // "X:\opensource\github\project64\Source\Project64\N64 System\Recompiler\Loop Analysis.cpp"
+        // Nintendo64 !
+
 		// https://code.google.com/p/chromium/issues/detail?id=17356
 		// https://code.google.com/p/chromium/issues/detail?id=393431
 		// profiler is showing the encoded function names still..
