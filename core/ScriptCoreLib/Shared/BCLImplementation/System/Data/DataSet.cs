@@ -20,5 +20,12 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Data
             this.Tables = new __DataTableCollection();
         }
         public DataTableCollection Tables { get; set; }
+
+
+        public override string ToString()
+        {
+
+            return "DataSet " + new { Tables.Count };
+        }
     }
 }

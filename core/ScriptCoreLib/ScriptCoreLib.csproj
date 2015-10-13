@@ -124,6 +124,7 @@
     <Compile Include="JavaScript\DOM\FileWriter.cs" />
     <Compile Include="JavaScript\DOM\DirectoryEntry.cs" />
     <Compile Include="JavaScript\DOM\Entry.cs" />
+    <Compile Include="JavaScript\DOM\HTML\IHTMLBlockquote.cs" />
     <Compile Include="JavaScript\DOM\HTML\IHTMLDocument.currentScript.cs" />
     <Compile Include="JavaScript\DOM\JSON.cs" />
     <Compile Include="JavaScript\DOM\DeviceOrientationEvent.cs" />

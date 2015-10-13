@@ -16,6 +16,19 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Data
     {
         // X:\jsc.svn\core\ScriptCoreLib.Windows.Forms\ScriptCoreLib.Windows.Forms\JavaScript\BCLImplementation\System\Windows\Forms\DataGridView.cs
 
+
+
+        public override string ToString()
+        {
+
+            return "DataTable " + new
+            {
+                this.TableName,
+                Columns = this.Columns.Count,
+                Rows = this.Rows.Count
+            };
+        }
+
         //        Implementation not found for type import :
         //type: System.Data.DataTable
         //method: Void Merge(System.Data.DataTable)
