@@ -31,6 +31,11 @@ namespace CubeToEquirectangular
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151016/azimuthal
+        // works. ssl needs to be trusted tho, othwerwise chrome abuses tcp connections..
+
+
+
         // once this actually works. we can then perhaps start reviewing other shaders that also relay on cubemaps?
         // where we get to generate the cubemaps?
         // https://www.shadertoy.com/view/XsBSDR#
@@ -126,6 +131,14 @@ namespace CubeToEquirectangular
                     var mAudioContext = new AudioContext();
 
                     var gl = new WebGLRenderingContext(alpha: true);
+
+                    if (gl == null)
+                    {
+                        new IHTMLPre { "webgl disabled?" }.AttachToDocument();
+                        return;
+
+                    }
+
                     var c = gl.canvas.AttachToDocument();
 
                     //  3840x2160
@@ -157,7 +170,10 @@ namespace CubeToEquirectangular
 
                     var u = new UIKeepRendering
                     {
-                        animate = true
+                        //animate = true
+
+                        // is chrome portscanning the server??
+                        animate = false
                     }.AttachToDocument();
 
                     //new IHTMLPre { "init..." }.AttachToDocument();

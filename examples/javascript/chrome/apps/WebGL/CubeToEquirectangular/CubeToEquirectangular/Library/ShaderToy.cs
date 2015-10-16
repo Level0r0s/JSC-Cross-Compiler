@@ -385,6 +385,10 @@ namespace CubeToEquirectangular.Library
                             //public const uint TEXTURE_CUBE_MAP_POSITIVE_Z = 34073;
                             //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074;
 
+                            //rawArrays: texture bound to texture unit 0 is not renderable.It maybe non - power - of - 2 and have incompatible texture filtering or is not 'texture complete'.
+
+
+                            new IHTMLPre { "about to load TEXTURE_CUBE_MAP" }.AttachToDocument();
 
                             var cube0 = new IHTMLImage[] {
                                     new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_px(),

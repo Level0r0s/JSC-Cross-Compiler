@@ -507,6 +507,10 @@
       <Project>{06b9f540-3e2a-4d32-86ae-01c8ff7f50ba}</Project>
       <Name>SkylineByOtaviogood</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\synergy\s\SmashEffectByDila\SmashEffectByDila.csproj">
+      <Project>{7b064efc-efa4-4be6-bcbc-e2f305507bf3}</Project>
+      <Name>SmashEffectByDila</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\s\SminTestByHughsk\SminTestByHughsk\SminTestByHughsk.csproj">
       <Project>{27b66600-734d-46f1-8d67-398224e78a1c}</Project>
       <Name>SminTestByHughsk</Name>

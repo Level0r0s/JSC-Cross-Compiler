@@ -9,19 +9,25 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Diagnostics;
 using System.Net.Security;
+using System.Threading.Tasks;
 
 namespace ScriptCoreLib.Extensions
 {
     public static class TcpListenerExtensions
     {
         //static void BridgeStreamTo(this NetworkStream x, NetworkStream y, int ClientCounter, string prefix = "#")
-        static void BridgeStreamTo(this Stream x, Stream y, int ClientCounter, string prefix = "#")
+        static void BridgeStreamTo(this Stream x, Stream y, int ClientCounter, string prefix = "#",
+            TaskCompletionSource<byte> firstByte = null,
+            TaskCompletionSource<object> exitBeforeFirstByte = null
+            )
         {
             //Console.WriteLine("BridgeStreamTo x: " + x.GetType().AssemblyQualifiedName);
 
             new Thread(
-               delegate()
+               delegate ()
                {
+                   var rereadonzerobyte = 64;
+
                    var buffer = new byte[0x100000];
 
                    while (true)
@@ -29,11 +35,40 @@ namespace ScriptCoreLib.Extensions
                        //
                        try
                        {
-
+                           retry:
                            var c = x.Read(buffer, 0, buffer.Length);
 
+                           // is chrome trying to be smart?
+
+                           if (c == 0)
+                               if (rereadonzerobyte > 0)
+                               {
+                                   rereadonzerobyte--;
+                                   // will we get 0 twice??
+
+                                   // why send 0 bytes??
+                                   // chrome is testing server timer?
+                                   Thread.Sleep(500);
+                                   goto retry;
+                               }
+
                            if (c <= 0)
+                           {
+                               if (firstByte != null && !firstByte.Task.IsCompleted)
+                                   Console.WriteLine(prefix + ClientCounter.ToString("x4") + " exitBeforeFirstByte " + new { c });
+                               //else
+                               //Console.WriteLine(prefix + ClientCounter.ToString("x4") + " exit");
+
+                               if (firstByte != null && !firstByte.Task.IsCompleted)
+                                   if (exitBeforeFirstByte != null)
+                                       exitBeforeFirstByte.SetResult(null);
+
+
                                return;
+                           }
+
+                           if (firstByte != null)
+                               firstByte.SetResult(buffer[0]);
 
 
                            Console.WriteLine(prefix + ClientCounter.ToString("x4") + " 0x" + c.ToString("x4") + " bytes");
@@ -49,7 +84,7 @@ namespace ScriptCoreLib.Extensions
                        }
                        catch
                        {
-                           //Console.WriteLine("#" + ClientCounter + " error");
+                           Console.WriteLine(prefix + ClientCounter.ToString("x4") + " fault");
 
                            return;
                        }
@@ -149,8 +184,15 @@ namespace ScriptCoreLib.Extensions
             }
         }
 
+        // threadsafe?
+        static int ClientCounter = 0;
+
+        static int SSLEmptyConnections = 0;
+        static int SSLDataConnections = 0;
+
+
         // called by?
-        public static void BridgeConnectionToPort(this TcpListener x, int port, string rx, string tx)
+        public static void BridgeConnectionToPort(this TcpListener xTcpListener, int port, string rx, string tx)
         {
             // X:\jsc.svn\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\Extensions\TcpListenerExtensions.cs
 
@@ -187,7 +229,7 @@ namespace ScriptCoreLib.Extensions
                         delegate
                         {
                             X509Store store = new X509Store(
-                                //StoreName.Root,
+                                    //StoreName.Root,
                                     StoreName.My,
                                 StoreLocation.CurrentUser);
                             // https://syfuhs.net/2011/05/12/making-the-x509store-more-friendly/
@@ -258,7 +300,7 @@ namespace ScriptCoreLib.Extensions
 
                         // chrome will fault on multiple CN
                         var args =
-                            //" -eku 1.3.6.1.5.5.7.3.1 -a SHA1 -n \"CN=" + upstream + ",CN=" + host + "\"  -len 2048 -m 1 -sky exchange  -ss MY -sr currentuser -sk deviceSSLcontainer  -is Root -in \"" + rootCN + "\" -l \"" + link + "\"";
+                //" -eku 1.3.6.1.5.5.7.3.1 -a SHA1 -n \"CN=" + upstream + ",CN=" + host + "\"  -len 2048 -m 1 -sky exchange  -ss MY -sr currentuser -sk deviceSSLcontainer  -is Root -in \"" + rootCN + "\" -l \"" + link + "\"";
                 " -eku 1.3.6.1.5.5.7.3.1 -a SHA1 -n \"CN=" + host + "\"  -len 2048 -m 1 -sky exchange  -ss MY -sr currentuser -sk deviceSSLcontainer  -is Root -in \"" + rootCN + "\" -l \"" + link + "\"";
 
                         Console.WriteLine(
@@ -384,7 +426,7 @@ namespace ScriptCoreLib.Extensions
                     var p = Process.Start(
                         new ProcessStartInfo(
                             makecert,
-                        // this cert is constant
+                           // this cert is constant
                            args
                         )
                         {
@@ -403,7 +445,7 @@ namespace ScriptCoreLib.Extensions
 
 
 
-            x.Start();
+            xTcpListener.Start();
 
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201410/20141019
             // X:\jsc.svn\examples\javascript\async\AsyncWorkerSourceSHA1\AsyncWorkerSourceSHA1\Application.cs
@@ -412,7 +454,7 @@ namespace ScriptCoreLib.Extensions
             //CertificateFromCurrentUserByLocalEndPoint((IPEndPoint)x.LocalEndpoint);
             //Console.WriteLine("prefetching SSL certificate... done");
 
-            var ClientCounter = 0;
+            // Z:\jsc.svn\examples\javascript\Test\TestSSLConnectionLimit\ApplicationWebService.cs
 
             Action<TcpClient> yield =
                 clientSocket =>
@@ -435,15 +477,62 @@ namespace ScriptCoreLib.Extensions
                         //ScriptCoreLib.Ultra.Library.dll	C:\Users\Arvo\AppData\Local\Temp\Temporary ASP.NET Files\root\859044d8\ccb7784\assembly\dl3\a7ce0579\776f278d_d913d001\ScriptCoreLib.Ultra.Library.dll	No	N/A	Symbols loaded.	x:\jsc.svn\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\obj\Debug\ScriptCoreLib.Ultra.Library.pdb	103	4.5.0.0	2014-12-09 07:57 PM	12AD0000-12B66000	[0x2888] TestEIDPIN2.exe: Managed (v4.0.30319)		
 
 
+
+
+                        // is the request coming from the gateway router?
+                        var isPeerProxyUSBS1 = ((IPEndPoint)clientSocket.Client.RemoteEndPoint).Address.ToString() == "192.168.43.1";
+                        var isPeerProxyUSBS6 = ((IPEndPoint)clientSocket.Client.RemoteEndPoint).Address.ToString() == "192.168.42.129";
+                        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151012/proxy
+
+                        // Z:\jsc.svn\examples\java\android\forms\InteractivePortForwarding\InteractivePortForwarding\UserControl1.cs
+                        var isPeerProxy = isPeerProxyUSBS1 || isPeerProxyUSBS6;
+
+                        // is chrome testing how many connections it can have?
+
+
                         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201412/20141209
                         // how do we get a break point here?
-                        Console.WriteLine("enter https "
-                            //    + new
-                            //{
-                            //    Debugger.IsAttached,
-                            //    System.Reflection.Assembly.GetExecutingAssembly().Location
-                            //}
+                        Console.WriteLine(
+                             "#" + ClientCounter.ToString("x2") + " "
+                            + "TCP enter https "
+                                + new
+                                {
+                                    ClientCounter,
+                                    SSLEmptyConnections,
+                                    SSLDataConnections,
+
+                                    clientSocket.Client.RemoteEndPoint,
+                                    isPeerProxy
+                                    //Debugger.IsAttached,
+                                    //System.Reflection.Assembly.GetExecutingAssembly().Location
+                                }
                         );
+
+                        // https://code.google.com/p/chromium/issues/detail?id=543982&thanks=543982&ts=1444983390
+                        // if we dont stop chrome it will become greedy??
+
+                        //#0f TCP enter https { ClientCounter = 15, SSLEmptyConnections = 7, SSLDataConnections = 3 }
+
+                        // signal chrome to cut it off?
+                        if (SSLEmptyConnections > 6)
+                        {
+                            // Z:\jsc.svn\examples\javascript\Test\TestSSLConnectionLimit\Application.cs
+
+                            //#0e { RemoteEndPoint = 192.168.1.199:52616, isPeerProxy = False }
+                            //#0f TCP enter https { ClientCounter = 15, SSLEmptyConnections = 7, SSLDataConnections = 3 }
+                            //                            chrome is that you? stop being greedy!
+
+                            Console.WriteLine("chrome is that you? stop being greedy! chrome://net-internals/");
+
+                            Thread.Sleep(1500);
+
+                            // close this or some other empty connection?
+                            //clientSocket.Close();
+
+                            // will it start sending data on other empty data connections?
+
+                            //return;
+                        }
 
 
                         //using (
@@ -465,18 +554,20 @@ namespace ScriptCoreLib.Extensions
                                        // what if the app would also like to know
                                        // how did the client authenticate?
 
-                                       Console.WriteLine(
-                                           new { certificate, chain }
-                                           );
-
-                                       //        SERIALNUMBER=47101010033, G=MARI-LIIS, SN=MÄNNIK, CN="MÄNNIK,MARI-LIIS,47101010033", OU=authentication, O=ESTEID, C=EE
-
-                                       // can we get the data to the web handler in another appdomain this way?
-
-
                                        if (certificate != null)
+                                       {
+                                           Console.WriteLine(
+                                               new { certificate, chain }
+                                               );
+
+                                           //        SERIALNUMBER=47101010033, G=MARI-LIIS, SN=MÄNNIK, CN="MÄNNIK,MARI-LIIS,47101010033", OU=authentication, O=ESTEID, C=EE
+
+                                           // can we get the data to the web handler in another appdomain this way?
+
+
                                            //Console.Title = certificate.GetSerialNumberString();
                                            Console.Title = new { certificate }.ToString();
+                                       }
 
                                        //RemoteCertificateValidationCallbackReplay[sender] =
                                        // y => y(sender, certificate, chain, sslPolicyErrors);
@@ -519,22 +610,15 @@ namespace ScriptCoreLib.Extensions
                                 // is the tcp being forwarded? translate local gateway to wan
                                 // { RemoteEndPoint = 192.168.43.1:51835, isPeerProxy = False }
 
-                                // is the request coming from the gateway router?
-                                var isPeerProxyUSBS1 = ((IPEndPoint)clientSocket.Client.RemoteEndPoint).Address.ToString() == "192.168.43.1";
-                                var isPeerProxyUSBS6 = ((IPEndPoint)clientSocket.Client.RemoteEndPoint).Address.ToString() == "192.168.42.129";
-                                // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151012/proxy
 
-                                // Z:\jsc.svn\examples\java\android\forms\InteractivePortForwarding\InteractivePortForwarding\UserControl1.cs
-                                var isPeerProxy = isPeerProxyUSBS1 || isPeerProxyUSBS6;
 
-                                Console.WriteLine(new { clientSocket.Client.RemoteEndPoint, isPeerProxy });
                                 var serverCertificate =
 
                                 isPeerProxy ?
 
                                     CertificateFromCurrentUserByLocalEndPoint(
                                         new IPEndPoint(
-                                    //address: IPAddress.Parse(""),
+                                            //address: IPAddress.Parse(""),
 
                                             // how do we know our ip?
                                             address:
@@ -566,10 +650,14 @@ namespace ScriptCoreLib.Extensions
                             }
                             catch (Exception ex)
                             {
-                                Console.WriteLine(new { ex.Message });
+                                Console.WriteLine(
+                                    "#" + ClientCounter.ToString("x2") + " AuthenticateAsServer failed. " +
+                                    new { ex.Message, InnerException = ex.InnerException == null ? null : ex.InnerException.Message });
 
-                                if (ex.InnerException != null)
-                                    Console.WriteLine(new { ex.InnerException.Message });
+
+
+                                // ?
+                                clientSocket.Close();
 
                                 return;
                             }
@@ -577,11 +665,50 @@ namespace ScriptCoreLib.Extensions
                             //Console.WriteLine("read " + sslStream.GetHashCode());
 
 
+                            SSLEmptyConnections++;
+
+                            var exitBeforeFirstDataByte = new TaskCompletionSource<object>();
+                            var firstDataByte = new TaskCompletionSource<byte>();
+
+                            // Z:\jsc.svn\examples\javascript\Test\TestSSLConnectionLimit\Application.cs
+                            // are those greedy tcp connections from chrome?
                             var y = new TcpClient();
                             y.Connect(new System.Net.IPEndPoint(IPAddress.Loopback, port));
 
-                            sslStream.BridgeStreamTo(y.GetStream(), ClientCounter, rx);
-                            y.GetStream().BridgeStreamTo(sslStream, ClientCounter, tx);
+                            sslStream.BridgeStreamTo(y.GetStream(), ClientCounter, prefix: "#" + ClientCounter.ToString("x2") + " " + rx,
+
+                                firstByte: firstDataByte,
+                                exitBeforeFirstByte: exitBeforeFirstDataByte
+                            );
+
+                            exitBeforeFirstDataByte.Task.ContinueWith(
+                                delegate
+                                {
+                                    // probe connection from chrome just got canceled?
+                                    SSLEmptyConnections--;
+                                }
+                            );
+
+                            firstDataByte.Task.ContinueWith(
+                                continuationAction: delegate
+                                {
+                                    SSLEmptyConnections--;
+                                    SSLDataConnections++;
+
+
+
+                                    y.GetStream().BridgeStreamTo(sslStream, ClientCounter, prefix: "#" + ClientCounter.ToString("x2") + " " + tx);
+
+                                }
+                            );
+
+                            // whats this about?
+                            //                            05#< 0005 0x0576 bytes
+                            //07#< 0007 0x0576 bytes
+                            //09#< 0009 0x0576 bytes
+                            //0a#< 000a 0x0576 bytes
+                            //0b#< 000b 0x0576 bytes
+                            //0f#< 000f 0x0576 bytes
 
                             //sslStream.Close();
                         }
@@ -610,11 +737,11 @@ namespace ScriptCoreLib.Extensions
 
 
             new Thread(
-               delegate()
+               delegate ()
                {
                    while (true)
                    {
-                       var clientSocket = x.AcceptTcpClient();
+                       var clientSocket = xTcpListener.AcceptTcpClient();
                        ClientCounter++;
 
                        //Console.WriteLine("#" + ClientCounter + " BridgeConnectionToPort");

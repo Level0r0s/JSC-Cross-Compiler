@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AFB54CD6-F4FF-4C30-A983-5BB45BE818D8}</ProjectGuid>
+    <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CSS3DPanoramaByHumus</RootNamespace>
-    <AssemblyName>CSS3DPanoramaByHumus</AssemblyName>
+    <RootNamespace>TestSSLConnectionLimit</RootNamespace>
+    <AssemblyName>TestSSLConnectionLimit</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>CSS3DPanoramaByHumus.Program</StartupObject>
+    <StartupObject>TestSSLConnectionLimit.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -56,9 +56,6 @@
     <Reference Include="ScriptCoreLib">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\ScriptCoreLib.dll</HintPath>
-    </Reference>
-    <Reference Include="ScriptCoreLib.Async">
-      <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Avalon">
       <SpecificVersion>False</SpecificVersion>
@@ -113,8 +110,9 @@
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="THREE">
-      <HintPath>..\packages\THREE.1.0.0.0\lib\THREE.dll</HintPath>
+    <Reference Include="THREE, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\..\synergy\css\CSSAzimuthMapViz\packages\THREE.1.0.0.0\lib\THREE.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -122,8 +120,14 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="CSS3DPanoramaByHumus.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\CSS3DPanoramaByHumus.AssetsLibrary.dll</HintPath>
+    <Reference Include="TestSSLConnectionLimit.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\TestSSLConnectionLimit.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Async">
+      <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="CSSAzimuthMapViz.AssetsLibrary">
+      <HintPath>..\..\synergy\css\CSSAzimuthMapViz\CSSAzimuthMapViz\bin\staging.AssetsLibrary\CSSAzimuthMapViz.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -135,26 +139,21 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <Content Include="Textures\cubecamera_nx.png" />
-    <Content Include="Textures\cubecamera_ny.png" />
-    <Content Include="Textures\cubecamera_nz.png" />
-    <Content Include="Textures\cubecamera_px.png" />
-    <Content Include="Textures\cubecamera_py.png" />
-    <Content Include="Textures\cubecamera_pz.png" />
-    <Content Include="Textures\humus_nx.jpg" />
-    <Content Include="Textures\humus_ny.jpg" />
-    <Content Include="Textures\humus_nz.jpg" />
-    <Content Include="Textures\humus_px.jpg" />
-    <Content Include="Textures\humus_py.jpg" />
-    <Content Include="Textures\humus_pz.jpg" />
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\synergy\css\CSSAzimuthMapViz\CSSAzimuthMapViz\CSSAzimuthMapViz.csproj">
+      <Project>{69c8d784-e9b0-4a72-ad41-d0b530dfc654}</Project>
+      <Name>CSSAzimuthMapViz</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-		rem start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:false /DisableWebServiceChrome:true 
-</PostBuildEvent>
+		if $(ConfigurationName)==Release (
+		rem start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /FilterTo:"$(SolutionDir)"
+		)</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
 		            </PreBuildEvent>
   </PropertyGroup>

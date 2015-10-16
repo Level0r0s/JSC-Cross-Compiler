@@ -14,15 +14,24 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         [Obsolete("experimental")]
         public IHTMLImage icon
         {
+            // Z:\jsc.svn\examples\javascript\Test\TestSSLConnectionLimit\Application.cs
+            // https://code.google.com/p/chromium/issues/detail?can=2&start=0&num=100&q=&colspec=ID%20Pri%20M%20Stars%20ReleaseBlock%20Cr%20Status%20Owner%20Summary%20OS%20Modified&groupby=&sort=&id=543982
+
             [Script(DefineAsStatic = true)]
             set
             {
+                {
+                }
                 var link = new IHTMLLink
                 {
                     rel = "icon",
                     type = "image/png",
-                    href = value.src
                 };
+
+                if (value != null)
+                    link.href = value.src;
+                else
+                    link.href = "";
 
                 // X:\jsc.svn\examples\javascript\Test\TestDocumentIcon\TestDocumentIcon\Application.cs
 

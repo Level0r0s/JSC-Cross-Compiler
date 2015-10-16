@@ -17,69 +17,102 @@ using CSSAzimuthMapViz.HTML.Images.FromAssets;
 
 namespace CSSAzimuthMapViz
 {
+    public class side
+    {
+        public IHTMLImage img;
+        public THREE.Vector3 position;
+        public THREE.Vector3 rotation;
+    }
+
     /// <summary>
     /// Your client side code running inside a web browser as JavaScript.
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // example broken by sf data loss?
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151016/azimuthal
 
-        public class side
-        {
-            public IHTMLImage img;
-            public THREE.Vector3 position;
-            public THREE.Vector3 rotation;
-        }
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // chrome 48 opens too many connections to download pngs?
+            // Version 48.0.2536.0 canary (64-bit)
+
+            //TCP enter https { ClientCounter = 395 }
+            //{ RemoteEndPoint = 192.168.1.199:65133, isPeerProxy = False }
+            //{ certificate = , chain =  }
+
+            //Unhandled Exception: OutOfMemoryException.
+
             // view-source:file:///X:/opensource/github/three.js/examples/css3d_panorama.html
+
+            // http://security.stackexchange.com/questions/53765/router-detecting-port-scan-and-ack-flood-attack
+            // what causes the port flood
+
+            ////TCP enter https { ClientCounter = 12 }
+            ////{ RemoteEndPoint = 192.168.1.199:65188, isPeerProxy = False }
+            //new azi_ny().AttachToDocument();
+            //// what happens if we add two of them?
+
+            //var __threejs = new THREE.Vector3(-512, 0, 0);
+
+
+
+
+            //var camera = new THREE.PerspectiveCamera(75, Native.window.aspect, 1, 1000);
+            //var scene = new THREE.Scene();
+
+            //var renderer = new THREE.CSS3DRenderer();
+
+            Console.WriteLine("about to init sides...");
+            #region sides
+            var sides = new[]
+            {
+                new side
+                {
+                    img=  new azi_px(),
+
+                    // glsl, clr46, Vector3?
+                    position= new THREE.Vector3( -512, 0, 0 ),
+                    rotation= new THREE.Vector3( 0, Math.PI / 2, 0 )
+                },
+                new side {
+                    img=  new azi_nx(),
+                    position= new THREE.Vector3( 512, 0, 0 ),
+                    rotation= new THREE.Vector3( 0, -Math.PI / 2, 0 )
+                },
+                new side{
+                    img=  new azi_py(),
+                    position= new THREE.Vector3( 0,  512, 0 ),
+                    rotation= new THREE.Vector3( Math.PI / 2, 0, Math.PI )
+                },
+                new side{
+                    img=  new azi_ny(),
+                    position= new THREE.Vector3( 0, -512, 0 ),
+                    rotation= new THREE.Vector3( - Math.PI / 2, 0, Math.PI )
+                },
+                new side{
+                    img=  new azi_pz(),
+                    position= new THREE.Vector3( 0, 0,  512 ),
+                    rotation= new THREE.Vector3( 0, Math.PI, 0 )
+                },
+                new side{
+                    img=  new azi_nz(),
+                    position= new THREE.Vector3( 0, 0, -512 ),
+                    rotation= new THREE.Vector3( 0, 0, 0 )
+                }
+            };
+            #endregion
+            Console.WriteLine("about to init CSS3DObject sides... did chrome just abuse TCP ?");
 
             var camera = new THREE.PerspectiveCamera(75, Native.window.aspect, 1, 1000);
             var scene = new THREE.Scene();
 
             var renderer = new THREE.CSS3DRenderer();
-
-            #region sides
-            var sides = new[] 
-            {
-                new side
-			    {
-                    img=  new humus_px(),
-
-                    // glsl, clr46, Vector3?
-				    position= new THREE.Vector3( -512, 0, 0 ),
-				    rotation= new THREE.Vector3( 0, Math.PI / 2, 0 )
-                },
-			    new side {
-                    img=  new humus_nx(),
-				    position= new THREE.Vector3( 512, 0, 0 ),
-				    rotation= new THREE.Vector3( 0, -Math.PI / 2, 0 )
-			    },
-			    new side{
-                    img=  new humus_py(),
-				    position= new THREE.Vector3( 0,  512, 0 ),
-				    rotation= new THREE.Vector3( Math.PI / 2, 0, Math.PI )
-			    },
-			    new side{
-				    img=  new humus_ny(),
-				    position= new THREE.Vector3( 0, -512, 0 ),
-				    rotation= new THREE.Vector3( - Math.PI / 2, 0, Math.PI )
-			    },
-			    new side{
-                    img=  new humus_pz(),
-				    position= new THREE.Vector3( 0, 0,  512 ),
-				    rotation= new THREE.Vector3( 0, Math.PI, 0 )
-			    },
-			    new side{
-				    img=  new humus_nz(),
-				    position= new THREE.Vector3( 0, 0, -512 ),
-				    rotation= new THREE.Vector3( 0, 0, 0 )
-			    }
-		    };
-            #endregion
 
             for (var i = 0; i < sides.Length; i++)
             {
@@ -97,6 +130,13 @@ namespace CSSAzimuthMapViz
                 scene.add(xobject);
 
             }
+
+            //// c48 floods the ports by now.
+            //TCP enter https { ClientCounter = 344 }
+            //{ RemoteEndPoint = 192.168.1.199:49221, isPeerProxy = False }
+
+            //Unhandled Exception: OutOfMemoryException.
+            //return;
 
 
             //<div style="-webkit-transform-style: preserve-3d; width: 978px; height: 664px; -webkit-transform: translate3d(0px, 0px, 432.6708237832803px) matrix3d(0.34382355213165283, -0.024581052362918854, -0.938712477684021, 0, 0, -0.9996572732925415, 0.026176948100328445, 0, 0.9390342831611633, 0.00900025200098753, 0.34370577335357666, 0, 0, 0, 0, 0.9999999403953552) translate3d(489px, 332px, 0px);">

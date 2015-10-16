@@ -46,7 +46,7 @@ namespace CubeToEquirectangular.Shaders
         samplerCube iChannel0;
 
 
-
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151016/azimuthal
         void mainImage(out vec4 fragColor, vec2 fragCoord)
         {
             vec2 texCoord = fragCoord.xy / iResolution.xy;

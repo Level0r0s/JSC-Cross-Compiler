@@ -19,6 +19,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
     [Script(Implements = typeof(global::System.Net.Sockets.TcpListener))]
     internal class __TcpListener
     {
+        // https://freedom-to-tinker.com/blog/haldermanheninger/how-is-nsa-breaking-so-much-crypto/
+
         // X:\jsc.svn\examples\java\async\test\JVMCLRTCPServerAsync\JVMCLRTCPServerAsync\Program.cs
 
         // X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerAsync\ChromeTCPServerAsync\Application.cs
