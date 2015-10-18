@@ -1432,6 +1432,9 @@ namespace x360x83
 
             new IHTMLButton { "load frames from disk " }.AttachToDocument().onclick += async e =>
             {
+                // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360x83\Application.cs
+                // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360azimuthal\Application.cs
+
                 e.Element.disabled = true;
 
                 // how do we load the files?

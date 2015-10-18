@@ -45,6 +45,7 @@ namespace WebGLIFrameBuffer
 
         public Application(IApp page)
         {
+#if FCHROME
             #region += Launched chrome.app.window
             // X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerAppWindow\ChromeTCPServerAppWindow\Application.cs
             dynamic self = Native.self;
@@ -110,7 +111,7 @@ namespace WebGLIFrameBuffer
 
 
 
-
+#endif
 
 
 

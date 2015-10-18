@@ -164,7 +164,6 @@
     <Compile Include="Library\ShaderToy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shaders\ProgramFragmentShader.cs" />
-    <Compile Include="web\assets\x360columns\S6Edge.cs" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />
     <Compile Include="ApplicationWebService.cs" />
@@ -172,20 +171,15 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <Content Include="Textures\2_no_clouds_4k.jpg" />
-    <Content Include="Textures\elev_bump_4k.jpg" />
-    <Content Include="Textures\fair_clouds_4k.png" />
     <Content Include="Textures\galaxy_starfield.png" />
-    <Content Include="Textures\moon.gif" />
     <Content Include="Textures\tiles_regrid.png" />
-    <Content Include="Textures\water_4k.png" />
     <None Include="app.config" />
     <None Include="packages.config" />
-    <EmbeddedResource Include="web\assets\x360columns\S6Edge.dae" />
     <None Include="Shaders\Program.frag" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Diagnostics\" />
+    <Folder Include="web\assets\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

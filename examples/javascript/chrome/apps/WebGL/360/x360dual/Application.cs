@@ -220,7 +220,9 @@ namespace x360dual
                 //cubefacesize = 64; // 6 faces, ?
 
                 // fast gif?
-                cubefacesize = cubefacesizeMAX / 16; // 6 faces, ?
+
+                // can we see skybox?
+                cubefacesize = 512; // 6 faces, ?
 
 
             // can we keep fast fps yet highp?

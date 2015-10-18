@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EB93B081-4EDC-41A2-85B3-0487062617CC}</ProjectGuid>
+    <ProjectGuid>{0AD78ED2-767B-4EAB-BFEB-DABFDC8A44C5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CubeToEquirectangular</RootNamespace>
