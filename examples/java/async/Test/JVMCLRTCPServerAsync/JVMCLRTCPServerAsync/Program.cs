@@ -20,7 +20,7 @@ using System.Xml.Linq;
 namespace JVMCLRTCPServerAsync
 {
 
-    static class Program
+    public static class Program2
     {
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151012
 
@@ -28,7 +28,16 @@ namespace JVMCLRTCPServerAsync
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
+
         public static void Main(string[] args)
+        {
+            // Z:\jsc.svn\examples\java\hybrid\ubuntu\UbuntuBootExperiment\UbuntuBootExperiment\Program.cs
+
+            Main2(args);
+        }
+
+
+        public static void Main2(string[] args)
         {
             System.Console.WriteLine(
                typeof(object).AssemblyQualifiedName
@@ -180,15 +189,20 @@ namespace JVMCLRTCPServerAsync
             // why no implict buffer?
             var count = await s.ReadAsync(buffer, 0, buffer.Length);
 
-            var input = Encoding.UTF8.GetString(buffer, 0, count);
+            if (count > 0)
+            {
+                var input = Encoding.UTF8.GetString(buffer, 0, count);
 
-            //new IHTMLPre { new { input } }.AttachToDocument();
-            Console.WriteLine(new { Thread.CurrentThread.ManagedThreadId, input });
+                //new IHTMLPre { new { input } }.AttachToDocument();
+                Console.WriteLine(new { Thread.CurrentThread.ManagedThreadId, input });
 
-            var outputString = "HTTP/1.0 200 OK \r\nConnection: close\r\n\r\nhello world. jvm clr android async tcp? udp?\r\n";
-            var obuffer = Encoding.UTF8.GetBytes(outputString);
+                var outputString = "HTTP/1.0 200 OK \r\nConnection: close\r\n\r\n"
+                + "hello world. jvm clr android async tcp? udp?" + new { Environment.ProcessorCount } + "\r\n";
+                var obuffer = Encoding.UTF8.GetBytes(outputString);
 
-            await s.WriteAsync(obuffer, 0, obuffer.Length);
+                await s.WriteAsync(obuffer, 0, obuffer.Length);
+
+            }
 
             c.Close();
         }

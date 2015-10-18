@@ -1,0 +1,9 @@
+[Unit]
+Description=UbuntuBootExperiment
+
+[Service]
+ExecStart=/usr/bin/java -jar /home/xmikro/Desktop/staging/UbuntuBootExperiment.exe
+User=user
+
+[Install]
+WantedBy=multi-user.target

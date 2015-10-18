@@ -30,6 +30,9 @@ namespace ScriptCoreLibJava.Extensions
 
         public static FileInfo GetDeclaringFile(this Class cls)
         {
+            // Z:\jsc.svn\examples\java\hybrid\ubuntu\UbuntuBootExperiment\UbuntuBootExperiment\Program.cs
+            //Console.WriteLine("enter BCLImplementationExtensions GetDeclaringFile");
+
             //Console.WriteLine("enter GetDeclaringFile");
             // for some reason void cannot be resolved...
             if (cls.getName() == "void")
@@ -80,15 +83,22 @@ namespace ScriptCoreLibJava.Extensions
             // spaces are urlencoded?
             var ff0 = loc.getFile();
             //Console.WriteLine(ff0);
+
+            //Console.WriteLine(" BCLImplementationExtensions GetDeclaringFile " + new { ff0 });
+
+
             var ff = ff0.Replace("%20", " ");
             //Console.WriteLine(ff);
 
-            {
-                var prefix = "file:/";
 
-                if (prefix == ff.Substring(0, prefix.Length))
-                    ff = ff.Substring(prefix.Length);
-            }
+            // keep it at root path, absolute
+
+            //{
+            //    var prefix = "file:/";
+
+            //    if (prefix == ff.Substring(0, prefix.Length))
+            //        ff = ff.Substring(prefix.Length);
+            //}
 
             // sometimes the prefix is shorter?
             {
@@ -110,6 +120,7 @@ namespace ScriptCoreLibJava.Extensions
 
             //global::System.Console.WriteLine("ff: " + ff);
 
+            //Console.WriteLine(" BCLImplementationExtensions GetDeclaringFile " + new { ff });
             return new FileInfo(ff);
         }
 

@@ -42,7 +42,14 @@ namespace ScriptCoreLibJava.BCLImplementation.System.IO
             }
         }
 
-
+        public DirectoryInfo Directory
+        {
+            get
+            {
+                // Z:\jsc.svn\examples\java\hybrid\ubuntu\UbuntuBootExperiment\UbuntuBootExperiment\Program.cs
+                return new DirectoryInfo(Path.GetDirectoryName(this.FullName));
+            }
+        }
 
         public long Length
         {

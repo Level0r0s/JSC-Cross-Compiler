@@ -19,6 +19,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.IO
             return files.Where(x => x.isFile()).Select(x => x.getAbsolutePath()).ToArray();
         }
 
+        // called by?
         public static string __GetFullPath(string e)
         {
             // http://www.devx.com/tips/Tip/13804
