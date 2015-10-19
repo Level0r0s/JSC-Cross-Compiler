@@ -80,7 +80,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
             // Z:\jsc.svn\examples\javascript\LINQ\test\auto\TestSelect\TestXMySQLCLRInsert\Program.cs
             // X:\jsc.svn\examples\java\appengine\Test\TestThreadManager\TestThreadManager\ApplicationWebService.cs
 
-            throw null;
+            //throw null;
 
             // tested by?
 
@@ -89,7 +89,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
 
             var sql = this.InternalCommandText;
 
-            //Console.WriteLine("InternalCreateStatement" + new { sql });
+            Console.WriteLine("enter InternalCreateStatement" + new { sql });
             try
             {
                 // http://www.javaworld.com/javaworld/jw-04-2007/jw-04-jdbc.html
@@ -122,6 +122,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
                         c++;
 
                         // X:\jsc.svn\examples\java\appengine\Test\TestThreadManager\TestThreadManager\ApplicationWebService.cs
+                        // Z:\jsc.svn\examples\java\Test\TestIsinst\TestIsinst\Class1.cs
 
                         if (item.p.Value == null)
                         {

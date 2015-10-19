@@ -71,7 +71,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System
         {
             // Z:\jsc.svn\examples\java\Test\TestNullArgument\TestNullArgument\Class1.cs
 
-            //         return  (__Delegate)null;
+            //public  __Delegate[] GetInvocationList()
+            //{
+            //    return  (__Delegate)null;
+            //}
+
             return default(__Delegate[]);
         }
 
