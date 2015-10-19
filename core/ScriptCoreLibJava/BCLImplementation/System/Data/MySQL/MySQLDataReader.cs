@@ -12,7 +12,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
 
     //[Script(Implements = typeof(global::System.Data.SQLite.SQLiteDataReader))]
     [Script(ImplementsViaAssemblyQualifiedName = "System.Data.MySQL.MySQLDataReader")]
-    internal class __MySQLDataReader : __DbDataReader
+    public class __MySQLDataReader : __DbDataReader
     {
         // X:\jsc.svn\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\BCLImplementation\System\Data\SQLite\SQLiteDataReader.cs
         // X:\jsc.svn\core\ScriptCoreLib\PHP\BCLImplementation\System\Data\SQLite\SQLiteDataReader.cs

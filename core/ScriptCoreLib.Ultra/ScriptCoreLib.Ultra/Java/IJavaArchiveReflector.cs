@@ -131,6 +131,11 @@ namespace ScriptCoreLib.Java
         public int ConstructorIndex;
         public string[] ParameterTypes;
 
+
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151019/methodthrows
+        public string[] MethodThrows;
+
+
         public JavaArchiveReflectorConstructor()
         {
 
@@ -153,6 +158,7 @@ namespace ScriptCoreLib.Java
 
         public string ReturnType;
 
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151019/methodthrows
         public string[] MethodThrows;
 
         public JavaArchiveReflectorMethod()
@@ -366,6 +372,47 @@ namespace ScriptCoreLib.Java
             return y;
         }
 
+
+
+
+
+
+        private static string[] GetExceptionTypes(ConstructorInfo fi)
+        {
+            var MethodThrowsList = new List<string>();
+
+
+            //Error	268	The call is ambiguous between the following methods or properties: 'java.lang.reflect.Method.getExceptionTypes()' and 'java.lang.reflect.Method.getExceptionTypes()'	X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Java\IJavaArchiveReflector.cs	329	13	ScriptCoreLib.Ultra
+
+            var c = (jvm::ScriptCoreLibJava.BCLImplementation.System.Reflection.__ConstructorInfo)(object)fi;
+
+            var Method = c.InternalConstructor;
+
+            //public Class[] getExceptionTypes();
+            //        public Class[] getExceptionTypes();
+
+            Method.getExceptionTypes().WithEach(
+                (jvm::java.lang.Class e) =>
+                {
+                    //Error	276	Argument 1: cannot convert from 'java.lang.Class [c:\util\jsc\bin\ScriptCoreLibJava.dll]' to 'java.lang.Class [C:\util\jsc\bin\ScriptCoreLibAndroid.dll]'	X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Java\IJavaArchiveReflector.cs	353	29	ScriptCoreLib.Ultra
+                    //Error	2	The best overloaded method match for 'ScriptCoreLibJava.Extensions.BCLImplementationExtensions.ToType(java.lang.Class)' has some invalid arguments	X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Java\IJavaArchiveReflector.cs	362	29	ScriptCoreLib.Ultra
+
+                    var t = jvm::ScriptCoreLibJava.Extensions.BCLImplementationExtensions.ToType(
+
+                        // Error	3	Argument 1: cannot convert from 'java.lang.Class [c:\util\jsc\bin\ScriptCoreLibJava.dll]' to 'java.lang.Class [C:\util\jsc\bin\ScriptCoreLibAndroid.dll]'	X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Java\IJavaArchiveReflector.cs	365	26	ScriptCoreLib.Ultra
+                        c: (jvm::java.lang.Class)e
+                    );
+
+                    MethodThrowsList.Add(
+                        t.FullName
+                    );
+                }
+            );
+
+            var MethodThrows = MethodThrowsList.ToArray();
+            return MethodThrows;
+        }
+
         private static string[] GetExceptionTypes(MethodInfo fi)
         {
             var MethodThrowsList = new List<string>();
@@ -425,11 +472,17 @@ namespace ScriptCoreLib.Java
 
                 for (int i = 0; i < f.Length; i++)
                 {
+
+                    var MethodThrows = GetExceptionTypes(f[i]);
+
+
                     y[i] = new JavaArchiveReflectorConstructor
                     {
                         ConstructorIndex = i,
 
-                        ParameterTypes = f[i].GetParameterTypeFullNames()
+                        ParameterTypes = f[i].GetParameterTypeFullNames(),
+
+                        MethodThrows = MethodThrows
                     };
                 }
             }

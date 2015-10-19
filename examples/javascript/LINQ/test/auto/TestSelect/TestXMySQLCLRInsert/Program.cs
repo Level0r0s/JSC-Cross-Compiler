@@ -24,7 +24,7 @@ class Program
         // the idea is to test MySQL as we have LINQ to SQL also running in chrome now
         //var mysqld = @"C:\util\xampp-win32-1.8.0-VC9\xampp\mysql\bin\mysqld.exe";
         var mysqld = @"X:\util\xampp-win32-1.8.3-5-VC11\xampp\mysql\bin\mysqld.exe";
-        
+
         // --standalone --console
 
         var mysqldp = Process.Start(mysqld, " --standalone --console");
@@ -87,8 +87,8 @@ class Program
                     var QLengthb = QDataSource.Length;
 
                     // Database	64
-                    cc0.CreateCommand("CREATE DATABASE IF NOT EXISTS `" + QDataSource + "`").ExecuteScalar();
-                    cc0.CreateCommand("use `" + QDataSource + "`").ExecuteScalar();
+                    cc0.CreateCommand("CREATE DATABASE IF NOT EXISTS `" + QDataSource + "`").ExecuteNonQuery();
+                    cc0.CreateCommand("use `" + QDataSource + "`").ExecuteNonQuery();
                 }
                 #endregion
 
@@ -121,10 +121,38 @@ class Program
         Console.WriteLine(new { c, rid });
 
 
-        // +		$exception	{"Process has exited, so the requested information is not available."}	System.Exception {System.InvalidOperationException}
-        mysqldp.CloseMainWindow();
 
         Debugger.Break();
 
+        // +		$exception	{"Process has exited, so the requested information is not available."}	System.Exception {System.InvalidOperationException}
+        mysqldp.CloseMainWindow();
+
     }
 }
+
+
+//__SQLiteCommand.InternalCreateStatement { sql = CREATE DATABASE IF NOT EXISTS `TestUbuntuMySQLInsert` }
+//{ Message = , StackTrace = java.lang.RuntimeException
+//        at ScriptCoreLibJava.BCLImplementation.System.Reflection.__MethodInfo.InternalInvoke(__MethodInfo.java:98)
+//        at ScriptCoreLibJava.BCLImplementation.System.Reflection.__MethodBase.Invoke(__MethodBase.java:73)
+//        at ScriptCoreLib.Shared.BCLImplementation.System.__Action_1.Invoke(__Action_1.java:28)
+//        at TestUbuntuMySQLInsert__i__d.Internal.Query.Experimental.QueryExpressionBuilder.Create(QueryExpressionBuilder.java:1200)
+//        at TestUbuntuMySQLInsert.PerformanceResourceTimingData2ApplicationPerformance.<init>(PerformanceResourceTimingData2ApplicationPerformance.java:114)
+//        at TestUbuntuMySQLInsert.Program.main(Program.java:70)
+//Caused by: java.lang.reflect.InvocationTargetException
+//        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+//        at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+//        at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+//        at java.lang.reflect.Method.invoke(Unknown Source)
+//        at ScriptCoreLibJava.BCLImplementation.System.Reflection.__MethodInfo.InternalInvoke(__MethodInfo.java:94)
+//        ... 5 more
+//Caused by: java.lang.RuntimeException: { Message = Can not issue data manipulation statements with executeQuery()., StackTrace = java.sql.SQLException: Can not issue data manipulation statements with executeQuery().
+//        at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:959)
+//        at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:898)
+//        at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:887)
+//        at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:862)
+//        at com.mysql.jdbc.StatementImpl.checkForDml(StatementImpl.java:465)
+//        at com.mysql.jdbc.StatementImpl.executeQuery(StatementImpl.java:1325)
+//        at ScriptCoreLibJava.BCLImplementation.System.Data.SQLite.__MySQLCommand.ExecuteReader_0600007e(__MySQLCommand.java:356)
+//        at ScriptCoreLibJava.BCLImplementation.System.Data.SQLite.__MySQLCommand.ExecuteScalar(__MySQLCommand.java:391)
+//        at ScriptCoreLibJava.BCLImplementation.System.Data.SQLite.__MySQLCommand.System_Data_IDbCommand_ExecuteScalar(__MySQLCommand.java:436)

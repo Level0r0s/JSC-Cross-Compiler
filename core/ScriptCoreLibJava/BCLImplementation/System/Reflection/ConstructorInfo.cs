@@ -11,7 +11,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Reflection
     // http://referencesource.microsoft.com/#mscorlib/system/reflection/ConstructorInfo.cs
 
     [Script(Implements = typeof(ConstructorInfo))]
-    internal class __ConstructorInfo : __MethodBase
+    public class __ConstructorInfo : __MethodBase
     {
         // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Reflection\ConstructorInfo.cs
 

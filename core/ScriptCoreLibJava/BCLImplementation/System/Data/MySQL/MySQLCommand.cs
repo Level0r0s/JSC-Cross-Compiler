@@ -16,7 +16,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
 {
     //[Script(Implements = typeof(global::System.Data.SQLite.SQLiteCommand))]
     [Script(ImplementsViaAssemblyQualifiedName = "System.Data.MySQL.MySQLCommand")]
-    internal class __MySQLCommand : __DbCommand
+    public class __MySQLCommand : __DbCommand
     {
         // tested by?
 

@@ -62,12 +62,12 @@ namespace java.util
 		/// <summary>
 		/// Converts  the current millisecond time value <code>time</code> to field values in <code>fields[]</code>.
 		/// </summary>
-		protected abstract void computeFields();
+        protected virtual void computeFields() { }
 
 		/// <summary>
 		/// Converts the current field values in <code>fields[]</code> to the millisecond time value <code>time</code>.
 		/// </summary>
-		protected abstract void computeTime();
+        protected virtual void computeTime() { }
 
 		/// <summary>
 		/// Gets the value for a given time field.

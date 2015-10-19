@@ -49,14 +49,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
 
     //[Script(Implements = typeof(global::System.Data.SQLite.SQLiteConnection))]
     [Script(ImplementsViaAssemblyQualifiedName = "System.Data.MySQL.MySQLConnection")]
-    internal class __MySQLConnection : __DbConnection
+    public class __MySQLConnection : __DbConnection
     {
-        //Y:\TestAppEngineOrderByThenGroupBy.ApplicationWebService\staging.java\web\java\TestAppEngineOrderByThenGroupBy\ApplicationWebService.java:81: error: cannot find symbol
-        //        connection0.Dispose_060000a2();
-        //                   ^
-        //  symbol:   method Dispose_060000a2()
-        //  location: variable connection0 of type __SQLiteConnection
-
         // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Data\SQLite\SQLiteConnection.cs
 
         public int BusyTimeout { get; set; }
@@ -88,6 +82,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
             ConnectionString = connectionstring;
         }
 
+        // should be set via ? ConnectionStringBuilder
+        public static string OpenConnectionPrefix = "jdbc:google:rdbms://";
 
         public override void Open()
         {
@@ -97,12 +93,6 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
             // 39ms __SQLiteConnection ctor { connectionstring = Data Source=file:StressData.s3db }
 
             //Console.WriteLine("__SQLiteConnection.Open");
-
-            //java.lang.RuntimeException: __SQLiteConnection { Message = , StackTrace = java.lang.NullPointerException
-            //   at ScriptCoreLibJava.BCLImplementation.System.Data.SQLite.__SQLiteConnection.Open(__SQLiteConnection.java:55)
-            //   at SQLiteWithDataGridView.Schema.XX._xAsWithConnection_b__0(XX.java:54)
-            //   at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-            //   at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 
             try
             {
@@ -137,8 +127,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
 
                 // https://groups.google.com/forum/?fromgroups=#!topic/google-appengine-java/Vm5PTq4_0lg
                 // Instance == Your Google API Project ID:InstanceName
+
                 this.InternalConnection = DriverManager.getConnection(
-                    "jdbc:google:rdbms://" + x.Server,
+                    OpenConnectionPrefix + x.Server,
                     x.UserID,
                     x.Password
                 );
