@@ -11,7 +11,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
 	[Script(Implements = typeof(global::System.Web.HttpApplication))]
 	internal class __HttpApplication : __IHttpAsyncHandler, __IHttpHandler, __IComponent, IDisposable
 	{
-		public HttpRequest Request { get; set; }
+        // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuWebApplication\ApplicationWebService.cs
+
+        public HttpRequest Request { get; set; }
 		public HttpResponse Response { get; set; }
 
 		HttpContext _Context;

@@ -600,14 +600,19 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 		}
 
 
-		// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201503/20150323
-		// x:\jsc.svn\examples\javascript\test\test46anonymoustypetostring\test46anonymoustypetostring\class1.cs
-		// 4.6	
-		public static string Format(IFormatProvider provider, string format, object[] args)
-		{
-			// called by anonymous type tostring
-			return Format(format, args);
-		}
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201503/20150323
+        // x:\jsc.svn\examples\javascript\test\test46anonymoustypetostring\test46anonymoustypetostring\class1.cs
+        // 4.6	
+        public static string Format(IFormatProvider provider, string format, object[] args)
+        {
+            // called by 2012async compiler?
+            // Z:\jsc.svn\examples\javascript\appengine\Test\TestAppEngineApplicationId\TestAppEngineApplicationId\ApplicationWebService.cs
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151019/ubuntuwebapplication
+
+            // called by anonymous type tostring
+            return Format(format, args);
+        }
+
 
 		//script: error JSC1000: No implementation found for this native method, please implement[static System.String.Format(System.String, System.Object, System.Object, System.Object)]
 		public static string Format(string format, object args0, object args1, object args2)

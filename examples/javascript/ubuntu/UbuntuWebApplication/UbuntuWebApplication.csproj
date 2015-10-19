@@ -5,15 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{95262275-0CB2-4B02-9338-159607037A3B}</ProjectGuid>
+    <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChromeHybridCapture</RootNamespace>
-    <AssemblyName>ChromeHybridCapture</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <RootNamespace>UbuntuWebApplication</RootNamespace>
+    <AssemblyName>UbuntuWebApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>ChromeHybridCapture.Program</StartupObject>
-    <TargetFrameworkProfile />
+    <StartupObject>UbuntuWebApplication.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,9 +36,6 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Chrome Web Store">
-      <HintPath>..\packages\Chrome.Web.Store.1.0.0.0\lib\Chrome Web Store.dll</HintPath>
-    </Reference>
     <Reference Include="jsc.meta">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\jsc.meta.exe</HintPath>
@@ -117,20 +113,11 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="ChromeExtensionHopToTab.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\ChromeExtensionHopToTab.AssetsLibrary.dll</HintPath>
+    <Reference Include="UbuntuWebApplication.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\UbuntuWebApplication.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
-    </Reference>
-    <Reference Include="TestSwitchToServiceContextAsync.AssetsLibrary">
-      <HintPath>..\..\..\..\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\bin\staging.AssetsLibrary\TestSwitchToServiceContextAsync.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="ChromeTabsCapture.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\ChromeTabsCapture.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="ChromeHybridCapture.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\ChromeHybridCapture.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -142,25 +129,14 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="staging\ChromeHybridCapture.Application\web\extension\manifest.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync.csproj">
-      <Project>{5a6a3b8c-35e2-49e4-9856-73956c94d149}</Project>
-      <Name>TestSwitchToServiceContextAsync</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /AssociateDriveForChrome:B /InferChromeAppManifest:true  /FilterTo:$(SolutionDir)
-
-xcopy "$(TargetDir)staging\ChromeHybridCapture.Application\web\assets" "$(TargetDir)staging\ChromeHybridCapture.Application\web\extension\assets\" /Y /E
-
-copy "$(TargetDir)staging\ChromeHybridCapture.Application\web\view-source" "$(TargetDir)staging\ChromeHybridCapture.Application\web\extension\view-source"</PostBuildEvent>
+    <PostBuildEvent>
+		if $(ConfigurationName)==Release (
+		rem start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false   /DisableWebServiceUbuntufalse 
+		)</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
 		            </PreBuildEvent>
   </PropertyGroup>

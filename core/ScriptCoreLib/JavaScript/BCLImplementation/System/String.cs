@@ -109,6 +109,10 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
 		// 4.6	
 		public static string Format(IFormatProvider provider, string format, object[] args)
 		{
+            // called by 2012async compiler?
+            // Z:\jsc.svn\examples\javascript\appengine\Test\TestAppEngineApplicationId\TestAppEngineApplicationId\ApplicationWebService.cs
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151019/ubuntuwebapplication
+
 			// called by anonymous type tostring
 			return Format(format, args);
 		}

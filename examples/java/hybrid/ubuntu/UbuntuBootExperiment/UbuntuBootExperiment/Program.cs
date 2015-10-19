@@ -25,6 +25,9 @@ namespace UbuntuBootExperiment
         [STAThread]
         public static void Main(string[] args)
         {
+            // https://javacruft.wordpress.com/2014/06/18/168k-instances/
+            // http://www.ubuntu.com/cloud
+
             //File.WriteAllText(f, w.ToString());
 
             try

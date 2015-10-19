@@ -29,11 +29,14 @@ namespace TestAppEngineApplicationId
             // https://code.google.com/p/googleappengine/source/browse/trunk/java/src/main/com/google/appengine/api/utils/SystemProperty.java?r=219
             // https://developers.google.com/appengine/docs/adminconsole/performancesettings
 
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151019/ubuntuwebapplication
+
             //var environment = com.google.appengine.api.utils.SystemProperty.environment.value().value();
 
             var applicationId = com.google.appengine.api.utils.SystemProperty.applicationId.get();
             var applicationVersion = com.google.appengine.api.utils.SystemProperty.applicationVersion.get();
 
+            // { applicationId = jsc-project, applicationVersion = 5.1 }
 
             title.Value = new
             {
@@ -42,10 +45,9 @@ namespace TestAppEngineApplicationId
                 //, environment 
             }.ToString();
 
-        //    Y:\TestAppEngineApplicationId.ApplicationWebService\staging.java\web\java\__AnonymousTypes__TestAppEngineApplica
-        //return __String.Format(null, "{{ applicationId = {0}, applicationVersion = {1} }}", objectArray4);
-
+ 
             //return "".AsResult();
         }
     }
 }
+ 

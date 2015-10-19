@@ -79,7 +79,7 @@ namespace x360azimuthal
         //1975 KB/s(3452001 bytes in 1.706s)
 
         // "X:\vr\sun360\0000.jpg"
-        //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\sun360\0000.jpg" "/sdcard/oculus/360photos/azi0000.jpg"
+        //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\sun360\00000.jpg" "/sdcard/oculus/360photos/azi00000.jpg"
 
         // could we udp our 360 image from webgl to vr yet?
 
@@ -229,8 +229,7 @@ namespace x360azimuthal
                                                 //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
             //if (Environment.ProcessorCount < 8)
-
-            //cubefacesize = 512; // 6 faces, ?
+            //cubefacesize = 256; // 6 faces, ?
 
             // not responding aint good.
             //cubefacesize = 96; // 6 faces, ?
@@ -343,7 +342,7 @@ namespace x360azimuthal
             // fly up?
             //sceneg.translateZ(-1024);
             // rotate the world, as the skybox then matches what we have on filesystem
-            scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
+            //scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
             // yet for headtracking we shall rotate camera
 
 
@@ -451,8 +450,15 @@ namespace x360azimuthal
             // original vieworigin
             //var cameraoffset = new THREE.Vector3(-1200, 800, 1200);
 
+
+            var maxfps = 60;
+            //var maxlengthseconds = 60;
+            var maxlengthseconds = 120;
+
+            var maxframes = maxlengthseconds * maxfps;
+
             // whatif we want more than 30sec video? 2min animation? more frames to render? 2gb disk?
-            var frameIDslider = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0, max = 3600, valueAsNumber = 0, title = "frameIDslider" }.AttachToDocument();
+            var frameIDslider = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0, max = maxframes, valueAsNumber = 0, title = "frameIDslider" }.AttachToDocument();
 
 
 
@@ -945,7 +951,8 @@ namespace x360azimuthal
 
             #region render 60hz 30sec
             new IHTMLButton {
-                "render 60hz 30sec"
+                //"render 60hz 30sec"
+                $"render {maxfps}hz {maxlengthseconds}sec"
             }.AttachToDocument().onclick += async e =>
             {
                 e.Element.disabled = true;
@@ -1056,7 +1063,7 @@ namespace x360azimuthal
 
 
                 // 60hz 30sec
-                if (frameIDslider.valueAsNumber < 60 * 30)
+                if (frameIDslider.valueAsNumber < maxframes)
                 {
                     // Blob GC? either this helms or the that we made a Blob static. 
                     await Task.Delay(11);
@@ -1129,7 +1136,7 @@ namespace x360azimuthal
 
                 applycameraoffset += delegate { tex0.needsUpdate = true; };
 
-                var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize * 2, cubefacesize * 2, 8, 8);
+                var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize * 4, cubefacesize * 4, 8, 8);
                 var floor2 = new THREE.Mesh(planeGeometry0,
                     //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
                     //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
@@ -1137,8 +1144,9 @@ namespace x360azimuthal
                     new THREE.MeshBasicMaterial(
                         new
                         {
-                            transparency = true,
-
+                            //transparency = true,
+                            transparent = true,
+                            opacity = 1.0,
                             map = tex0,
 
 
@@ -1151,6 +1159,7 @@ namespace x360azimuthal
                 //floor2.position.set(-cubefacesize * 0.50, 0, 0);
                 //floor2.position.set(0, -cubefacesize * 0.5, 0);
                 floor2.position.set(0, -cubefacesize * 0.25, 0);
+                //floor2.position.set(0, -cubefacesize * 0.125, 0);
                 floor2.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
                 floor2.AttachTo(scene);
             }
@@ -1308,6 +1317,7 @@ namespace x360azimuthal
 
                                 await xsampler2D.upload(img);
 
+                                URL.revokeObjectURL(url);
 
 
 
