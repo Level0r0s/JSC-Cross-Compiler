@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestAndroidInsert</RootNamespace>
     <AssemblyName>TestAndroidInsert</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>TestAndroidInsert.Program</StartupObject>
     <TargetFrameworkProfile />

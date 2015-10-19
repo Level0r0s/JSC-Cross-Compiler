@@ -11,7 +11,7 @@ namespace System.Data
     {
         public static Func<IDbConnection, string, IDbCommand> VirtualCreateCommand;
 
-
+        // called by?
         public static int GetLastInsertRowId(this IDbConnection c)
         {
             Console.WriteLine("enter GetLastInsertRowId");
@@ -27,8 +27,8 @@ namespace System.Data
             }
 
 
-// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201411/20141102
-//#if FSQLiteConnection
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201411/20141102
+            //#if FSQLiteConnection
             var xSQLiteConnection = c as SQLite.SQLiteConnection;
 
             Console.WriteLine("enter GetLastInsertRowId " + new { xSQLiteConnection });
@@ -37,7 +37,7 @@ namespace System.Data
             {
                 return xSQLiteConnection.LastInsertRowId;
             }
-//#endif
+            //#endif
 
             // http://stackoverflow.com/questions/12858588/mysql-last-inserted-row-id
             // http://dev.mysql.com/doc/refman/5.6/en/information-functions.html#function_last-insert-id
@@ -56,7 +56,12 @@ namespace System.Data
 
             }
 
-            return (int)value;
+            // 		value	1	object {ulong}
+            // Z:\jsc.svn\examples\javascript\LINQ\test\auto\TestSelect\TestXMySQLCLRInsert\Program.cs
+
+
+            //return (int)value;
+            return Convert.ToInt32(value);
         }
 
         // used by the asset compiler

@@ -1,7 +1,9 @@
+using java.security.spec;
 using ScriptCoreLib;
 
 namespace java.security
 {
+    // Z:\jsc.svn\core\ScriptCoreLibJava\java\security\KeyFactory.cs
     // http://developer.android.com/reference/java/security/KeyFactory.html
     [Script(IsNative = true)]
     public class KeyFactory

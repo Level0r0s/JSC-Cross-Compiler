@@ -11,6 +11,12 @@ namespace TestNullArgument
 {
     class Program
     {
+        public virtual Program[] GetInvocationList()
+        {
+            //  return  (Program[])null;
+            return null;
+        }
+
         static void Main(Program e = null)
         {
         }

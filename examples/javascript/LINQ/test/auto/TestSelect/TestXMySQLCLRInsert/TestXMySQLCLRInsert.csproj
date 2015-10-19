@@ -62,9 +62,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TestXMySQL.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\TestXMySQL.AssetsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="TestXMySQLCLRInsert.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\TestXMySQLCLRInsert.AssetsLibrary.dll</HintPath>

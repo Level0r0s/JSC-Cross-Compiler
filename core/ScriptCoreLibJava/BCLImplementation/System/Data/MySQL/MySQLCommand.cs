@@ -77,11 +77,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
 
         private void InternalCreateStatement()
         {
+            // Z:\jsc.svn\examples\javascript\LINQ\test\auto\TestSelect\TestXMySQLCLRInsert\Program.cs
             // X:\jsc.svn\examples\java\appengine\Test\TestThreadManager\TestThreadManager\ApplicationWebService.cs
 
             throw null;
 
-#if FTESTED
             // tested by?
 
             if (this.InternalStatement != null)
@@ -211,7 +211,6 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
             {
 
             }
-#endif
 
         }
 

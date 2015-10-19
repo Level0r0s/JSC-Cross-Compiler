@@ -19,6 +19,7 @@ namespace TestAppEngineInsert
     /// </summary>
     public class ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151019/testappengineinsert
 
         static ApplicationWebService()
         {
@@ -131,3 +132,9 @@ namespace TestAppEngineInsert
 
     }
 }
+
+// http://dev.mysql.com/downloads/connector/j/
+// "X:\util\appengine-java-sdk-1.9.27\lib\impl\mysql-connector-java-5.1.37.tar.gz"
+
+//!!! did you set up the mysql jar? check C:\util\appengine-java-sdk-1.9.9\lib\impl\mysql-connector-java-5.1.30-bin.jar
+//java.lang.RuntimeException

@@ -69,6 +69,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
         public virtual __Delegate[] GetInvocationList()
         {
+            // Z:\jsc.svn\examples\java\Test\TestNullArgument\TestNullArgument\Class1.cs
+
+            //         return  (__Delegate)null;
             return default(__Delegate[]);
         }
 

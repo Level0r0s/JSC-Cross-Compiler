@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SyntaxAndroidOrderByThenGroupBy</RootNamespace>
     <AssemblyName>SyntaxAndroidOrderByThenGroupBy</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>SyntaxAndroidOrderByThenGroupBy.Program</StartupObject>
     <TargetFrameworkProfile />

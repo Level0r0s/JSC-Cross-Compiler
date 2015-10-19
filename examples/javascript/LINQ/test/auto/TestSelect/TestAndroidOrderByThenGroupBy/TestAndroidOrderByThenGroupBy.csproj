@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestAndroidOrderByThenGroupBy</RootNamespace>
     <AssemblyName>TestAndroidOrderByThenGroupBy</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>TestAndroidOrderByThenGroupBy.Program</StartupObject>
     <TargetFrameworkProfile />
