@@ -24,6 +24,8 @@ namespace JVMCLRSSLTCPListener
 
     static class Program
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151020
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

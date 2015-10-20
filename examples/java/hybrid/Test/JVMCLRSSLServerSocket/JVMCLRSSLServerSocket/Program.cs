@@ -73,7 +73,25 @@ namespace JVMCLRSSLServerSocket
 
             try
             {
-                var xKeyStore = KeyStore.getInstance("Windows-MY");
+                var xKeyStore = default(KeyStore);
+                // certmgr.msc
+                var xKeyStoreDefaultType = "Windows-MY";
+
+                try
+                {
+                    Console.WriteLine(new { xKeyStoreDefaultType });
+                    xKeyStore = KeyStore.getInstance(xKeyStoreDefaultType);
+                }
+                catch
+                {
+                    xKeyStoreDefaultType = java.security.KeyStore.getDefaultType();
+                    xKeyStoreDefaultType = "/usr/lib/jvm/default-java/jre/lib/security/cacerts";
+                    // http://www.coderanch.com/t/377172/java/java/cacerts-JAVA-HOME-jre-lib
+                    // /usr/lib/jvm/default-java/jre/lib/security/cacerts
+
+                    Console.WriteLine(new { xKeyStoreDefaultType });
+                    xKeyStore = KeyStore.getInstance(xKeyStoreDefaultType);
+                }
 
                 Console.WriteLine("WindowsMYKeyManagers " + new { xKeyStore });
 
@@ -225,6 +243,7 @@ namespace JVMCLRSSLServerSocket
 
     static class Program
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151020
 
 
         class xHandshakeCompletedListener : HandshakeCompletedListener
@@ -246,23 +265,35 @@ namespace JVMCLRSSLServerSocket
 
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151010
 
-            Console.WriteLine(
-                          new
-                          {
-                              typeof(object).AssemblyQualifiedName,
-                              Environment.CurrentDirectory,
-
-                              // "X:\Program Files (x86)\Java\jre7\lib\security\local_policy.jar"
-                              // Location = X:\Program Files (x86)\Java\jre7\lib\rt.jar }
-                              typeof(object).Assembly.Location,
-
-                          }
-                      );
-
-            // ok lets do a server.
-
             try
             {
+
+                Console.WriteLine(
+                              new
+                              {
+                                  typeof(object).AssemblyQualifiedName,
+                                  Environment.CurrentDirectory,
+
+                                  // "X:\Program Files (x86)\Java\jre7\lib\security\local_policy.jar"
+                                  // Location = X:\Program Files (x86)\Java\jre7\lib\rt.jar }
+                                  typeof(object).Assembly.Location,
+
+                              }
+                          );
+
+
+                #region useless
+                // You can't do it with the system properties. You would have to write and load your own X509KeyManager and create your own SSLContext with it.
+
+                var keyStore = java.lang.System.getProperty("javax.net.ssl.keyStore");
+                Console.WriteLine(new { keyStore });
+                var keyStorePassword = java.lang.System.getProperty("javax.net.ssl.keyStorePassword");
+                Console.WriteLine(new { keyStorePassword });
+                #endregion
+
+                // ok lets do a server.
+
+
                 // http://developer.android.com/reference/android/net/SSLCertificateSocketFactory.html
 
                 // http://stackoverflow.com/questions/11832672/how-can-a-java-client-use-the-native-windows-my-store-to-provide-its-client-cert
@@ -278,7 +309,7 @@ namespace JVMCLRSSLServerSocket
 
 
                 // the reason for the SSLEngine’s complaint is that you enabled only the RSA cipher, but your certificate uses DSA keys. 
-                CLRProgram.makecert(host: "192.168.1.12", port: 8443);
+                //CLRProgram.makecert(host: "192.168.1.12", port: 8443);
 
                 // ERR_SSL_VERSION_OR_CIPHER_MISMATCH
 
@@ -357,14 +388,6 @@ namespace JVMCLRSSLServerSocket
 
                 //  hg https://bitbucket.org/mfichman/mitm
 
-                #region useless
-                // You can't do it with the system properties. You would have to write and load your own X509KeyManager and create your own SSLContext with it.
-
-                var keyStore = java.lang.System.getProperty("javax.net.ssl.keyStore");
-                Console.WriteLine(new { keyStore });
-                var keyStorePassword = java.lang.System.getProperty("javax.net.ssl.keyStorePassword");
-                Console.WriteLine(new { keyStorePassword });
-                #endregion
 
 
                 //var ssf = javax.net.ssl.SSLServerSocketFactory.getDefault() as javax.net.ssl.SSLServerSocketFactory;
@@ -430,13 +453,17 @@ namespace JVMCLRSSLServerSocket
                 // http://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html#ciphersuites
                 // http://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#ciphersuites
 
-                xSSLServerSocket.getSupportedCipherSuites().WithEach(
+
+                var SystemSupportedCipherSuites = xSSLServerSocket.getSupportedCipherSuites();
+
+                SystemSupportedCipherSuites.WithEach(
                     SupportedCipherSuite =>
                     {
                         Console.WriteLine(new { SupportedCipherSuite });
                     }
                 );
 
+                //if (SystemSupportedCipherSuites.Contains())
 
                 // https://googleonlinesecurity.blogspot.com.ee/2013/11/a-roster-of-tls-cipher-suites-weaknesses.html
                 // http://stackoverflow.com/questions/21289293/java-7-support-of-aes-gcm-in-ssl-tls
@@ -444,7 +471,7 @@ namespace JVMCLRSSLServerSocket
                 // need java 8?
 
 
-                //xSSLServerSocket.setEnabledCipherSuites("");
+                //xSSLServerSocket.setEnabledCipherSuites("TLS_RSA_WITH_AES_128_CBC_SHA");
 
 
                 // https://blogs.oracle.com/java-platform-group/entry/diagnosing_tls_ssl_and_https
@@ -485,7 +512,7 @@ namespace JVMCLRSSLServerSocket
                 //SSL_RSA_WITH_3DES_EDE_CBC_SHA
                 //]
 
-                var enabledCipherSuites = new[] { 
+                var enabledCipherSuites = new[] {
                     //"TLS_DHE_DSS_WITH_AES_128_CBC_SHA256" 
 
                     // { Message = Unsupported ciphersuite TLS_RSA_WITH_AES_128_GCM_SHA256, StackTrace = java.lang.IllegalArgumentException: Unsupported ciphersuite TLS_RSA_WITH_AES_128_GCM_SHA256
@@ -514,18 +541,18 @@ namespace JVMCLRSSLServerSocket
                 var ok = true;
                 while (ok)
                 {
-                    Console.WriteLine("accept...");
+                    //Console.WriteLine("accept...");
                     var xSSLSocket = ss443.accept() as javax.net.ssl.SSLSocket;
 
 
 
 
-                    Console.WriteLine(new { xSSLSocket });
+                    //Console.WriteLine(new { xSSLSocket });
 
                     // http://security.stackexchange.com/questions/76993/now-that-it-is-2015-what-ssl-tls-cipher-suites-should-be-used-in-a-high-securit
                     // java u suck.
 
-                    Console.WriteLine("startHandshake...");
+                    //Console.WriteLine("startHandshake...");
                     try
                     {
                         // http://developer.android.com/reference/javax/net/ssl/HandshakeCompletedEvent.html
@@ -661,13 +688,8 @@ namespace JVMCLRSSLServerSocket
                     }
                     catch (Exception fault)
                     {
-                        Console.WriteLine(
-                            new
-                            {
-                                fault.Message,
-                                fault.StackTrace
-                            }
-                            );
+                        reportHansshakeFault(fault);
+
 
                     }
 
@@ -686,7 +708,33 @@ namespace JVMCLRSSLServerSocket
 
             }
 
-            CLRProgram.CLRMain();
+            //CLRProgram.CLRMain();
+
+            Console.WriteLine("done");
+            Console.ReadLine();
+        }
+
+        private static void reportHansshakeFault(Exception fault)
+        {
+            var skipTLSv1 = fault.Message.Contains("Client requested protocol TLSv1");
+            var skipTLSv11 = fault.Message.Contains("Client requested protocol TLSv1.1");
+
+            // unable to recover from if/else detection at JVMCLRSSLServerSocket.Program.Main
+
+            var skip = skipTLSv1 || skipTLSv11;
+
+            if (skip)
+                return;
+
+            Console.WriteLine(
+                "startHandshake " +
+                new
+                {
+                    fault.Message
+                    //,
+                    //fault.StackTrace
+                }
+                );
         }
 
 
@@ -781,3 +829,23 @@ namespace JVMCLRSSLServerSocket
 
 
 
+
+
+
+//    0001 020002c5 ScriptCoreLibJava::ScriptCoreLibJava.BCLImplementation.System.Text.xEncoding
+//{
+//    Location =
+// assembly: C:\util\jsc\bin\ScriptCoreLibJava.dll
+// type: ScriptCoreLibJava.BCLImplementation.System.Text.__StringBuilder, ScriptCoreLibJava, Version=4.5.0.0, Culture=neutral, PublicKeyToken=null
+// offset: 0x0018
+//  method:ScriptCoreLibJava.BCLImplementation.System.Text.__StringBuilder Append(Boolean) }
+//{ Location =
+// assembly: C:\util\jsc\bin\ScriptCoreLibJava.dll
+// type: ScriptCoreLibJava.BCLImplementation.System.Text.__StringBuilder, ScriptCoreLibJava, Version=4.5.0.0, Culture=neutral, PublicKeyToken=null
+// offset: 0x000f
+//  method:ScriptCoreLibJava.BCLImplementation.System.Text.__StringBuilder Append(Boolean) }
+//System.NotSupportedException: multiple stack entries instead of one
+//   at jsc.ILFlowStackItem.get_SingleStackInstruction() in x:\jsc.internal.git\compiler\jsc\CodeModel\ILFlow.cs:line 139
+//   at jsc.Script.CompilerCLike.WriteParameters(Prestatement p, MethodBase _method, ILFlowStackItem[] s, Int32 offset, ParameterInfo[] pi, Boolean pWritten, String op) in x:\jsc.internal.git\compiler\jsc\Languages\CompilerCLike.cs:line 297
+//   at jsc.Script.CompilerCLike.WriteParameterInfoFromStack(MethodBase m, Prestatement p, ILFlowStackItem[] s, Int32 offset) in x:\jsc.internal.git\compiler\jsc\Languages\CompilerCLike.cs:line 235
+//   at jsc.Languages.Java.JavaCompiler.WriteMethodCallVerified(Prestatement p, ILInstruction i, MethodBase SourceMethod) in x:\jsc.internal.git\compiler\jsc\Languages\Java\JavaCompiler.WriteMethodCallVerified.cs:line 217
