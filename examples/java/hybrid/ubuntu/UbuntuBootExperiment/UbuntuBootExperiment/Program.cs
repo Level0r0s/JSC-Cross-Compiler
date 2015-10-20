@@ -69,6 +69,7 @@ namespace UbuntuBootExperiment
                 //Environment.CurrentDirectory =;
 
                 var fa = new FileInfo(typeof(Program).Assembly.Location);
+                var keystorepath = fa.Directory.FullName + "/domain.keystore";
 
                 //var fadir = new DirectoryInfo(Path.GetDirectoryName(fa.FullName));
 
@@ -76,7 +77,6 @@ namespace UbuntuBootExperiment
 
                 Console.WriteLine(new { fa.Directory });
 
-                var keystorepath = fa.Directory.FullName + "/domain.keystore";
 
                 #region truststore/keystore
                 {

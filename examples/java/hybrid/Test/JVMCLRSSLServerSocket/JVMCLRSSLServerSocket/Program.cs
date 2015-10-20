@@ -1,3 +1,4 @@
+using java.io;
 using java.security;
 using java.security.cert;
 using java.util.zip;
@@ -73,6 +74,9 @@ namespace JVMCLRSSLServerSocket
 
             try
             {
+                var xFileInputStream = default(FileInputStream);
+
+
                 var xKeyStore = default(KeyStore);
                 // certmgr.msc
                 var xKeyStoreDefaultType = "Windows-MY";
@@ -85,17 +89,25 @@ namespace JVMCLRSSLServerSocket
                 catch
                 {
                     xKeyStoreDefaultType = java.security.KeyStore.getDefaultType();
-                    xKeyStoreDefaultType = "/usr/lib/jvm/default-java/jre/lib/security/cacerts";
                     // http://www.coderanch.com/t/377172/java/java/cacerts-JAVA-HOME-jre-lib
                     // /usr/lib/jvm/default-java/jre/lib/security/cacerts
 
                     Console.WriteLine(new { xKeyStoreDefaultType });
                     xKeyStore = KeyStore.getInstance(xKeyStoreDefaultType);
+
+                    var fa = new FileInfo(typeof(Program).Assembly.Location);
+                    var keystorepath = fa.Directory.FullName + "/domain.keystore";
+
+                    try
+                    {
+                        xFileInputStream = new FileInputStream(keystorepath);
+                    }
+                    catch { throw; }
                 }
 
                 Console.WriteLine("WindowsMYKeyManagers " + new { xKeyStore });
 
-                xKeyStore.load(null, null);
+                xKeyStore.load(xFileInputStream, null);
 
                 KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
 
