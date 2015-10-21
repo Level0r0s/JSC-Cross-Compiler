@@ -17,6 +17,9 @@ namespace ChromeShaderToyPrograms.b
         {
 
             #region /b/
+
+            
+            ["BasicRayMarchingByQueenkong"] = () => new BasicRayMarchingByQueenkong.Shaders.ProgramFragmentShader(),
             ["BatmanLogoByIq"] = () => new BatmanLogoByIq.Shaders.ProgramFragmentShader(),
             ["BatsByGaz"] = () => new BatsByGaz.Shaders.ProgramFragmentShader(),
             ["BeautypiByIq"] = () => new BeautypiByIq.Shaders.ProgramFragmentShader(),

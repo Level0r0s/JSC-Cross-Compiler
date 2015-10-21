@@ -27,6 +27,9 @@ namespace ChromeShaderToyPrograms.s
 
 
             #region /s/
+
+            
+            ["ShaderHSQByHsiqi"] = () => new ShaderHSQByHsiqi.Shaders.ProgramFragmentShader(),
             ["SkylineByOtaviogood"] = () => new SkylineByOtaviogood.Shaders.ProgramFragmentShader(),
 
             ["ChromeShaderToySadRobotByGreen"] = () => new ChromeShaderToySadRobotByGreen.Shaders.ProgramFragmentShader(),

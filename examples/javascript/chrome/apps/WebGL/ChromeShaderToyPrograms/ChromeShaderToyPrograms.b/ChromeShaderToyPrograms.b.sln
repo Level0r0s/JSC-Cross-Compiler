@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeenoxGoesBlackOps3ByFungos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BobsledByDr2", "..\..\synergy\b\BobsledByDr2\BobsledByDr2.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicRayMarchingByQueenkong", "..\..\synergy\b\BasicRayMarchingByQueenkong\BasicRayMarchingByQueenkong.csproj", "{F4B656D0-0212-4B90-8194-BE49109B7258}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -113,6 +115,10 @@ Global
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
 		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
+		{F4B656D0-0212-4B90-8194-BE49109B7258}.Debug|x86.ActiveCfg = Debug|x86
+		{F4B656D0-0212-4B90-8194-BE49109B7258}.Debug|x86.Build.0 = Debug|x86
+		{F4B656D0-0212-4B90-8194-BE49109B7258}.Release|x86.ActiveCfg = Release|x86
+		{F4B656D0-0212-4B90-8194-BE49109B7258}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -134,5 +140,6 @@ Global
 		{B4A8FFEA-433E-4629-9F28-379C3BC9AFEF} = {0225343B-16B2-4188-9690-703A2A422EA8}
 		{18D81EAB-6B23-45BF-9F7D-8460D9F637F2} = {0225343B-16B2-4188-9690-703A2A422EA8}
 		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {0225343B-16B2-4188-9690-703A2A422EA8}
+		{F4B656D0-0212-4B90-8194-BE49109B7258} = {0225343B-16B2-4188-9690-703A2A422EA8}
 	EndGlobalSection
 EndGlobal

@@ -159,6 +159,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkylineByOtaviogood", "..\.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmashEffectByDila", "..\..\synergy\s\SmashEffectByDila\SmashEffectByDila.csproj", "{7B064EFC-EFA4-4BE6-BCBC-E2F305507BF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaderHSQByHsiqi", "..\..\synergy\s\ShaderHSQByHsiqi\ShaderHSQByHsiqi.csproj", "{9C9B1BF8-E685-4DC4-AAAA-897184823473}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -457,6 +459,10 @@ Global
 		{7B064EFC-EFA4-4BE6-BCBC-E2F305507BF3}.Debug|x86.Build.0 = Debug|x86
 		{7B064EFC-EFA4-4BE6-BCBC-E2F305507BF3}.Release|x86.ActiveCfg = Release|x86
 		{7B064EFC-EFA4-4BE6-BCBC-E2F305507BF3}.Release|x86.Build.0 = Release|x86
+		{9C9B1BF8-E685-4DC4-AAAA-897184823473}.Debug|x86.ActiveCfg = Debug|x86
+		{9C9B1BF8-E685-4DC4-AAAA-897184823473}.Debug|x86.Build.0 = Debug|x86
+		{9C9B1BF8-E685-4DC4-AAAA-897184823473}.Release|x86.ActiveCfg = Release|x86
+		{9C9B1BF8-E685-4DC4-AAAA-897184823473}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -538,5 +544,6 @@ Global
 		{CDCA5F37-DF5C-4407-8DDD-E6349644EF4D} = {AAED4DB3-2226-4EBD-B46E-E26C375CA269}
 		{06B9F540-3E2A-4D32-86AE-01C8FF7F50BA} = {AAED4DB3-2226-4EBD-B46E-E26C375CA269}
 		{7B064EFC-EFA4-4BE6-BCBC-E2F305507BF3} = {AAED4DB3-2226-4EBD-B46E-E26C375CA269}
+		{9C9B1BF8-E685-4DC4-AAAA-897184823473} = {AAED4DB3-2226-4EBD-B46E-E26C375CA269}
 	EndGlobalSection
 EndGlobal
