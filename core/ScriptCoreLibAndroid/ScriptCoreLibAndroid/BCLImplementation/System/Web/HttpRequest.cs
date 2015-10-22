@@ -23,13 +23,15 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Web
 
         // X:\jsc.svn\core\ScriptCoreLibJava.Web\ScriptCoreLibJava.Web\BCLImplementation\System\Web\HttpRequest.cs
         // X:\jsc.svn\examples\java\android\ApplicationWebService\ApplicationWebService\ApplicationActivity.cs
-
+        // Z:\jsc.svn\examples\javascript\appengine\test\TestUserHostAddress\Application.cs
         public string UserHostAddress { get; set; }
 
         public string Path { get; set; }
 
         public string HttpMethod { get; set; }
 
+
+        // Url?
 
         public NameValueCollection QueryString { get; internal set; }
 

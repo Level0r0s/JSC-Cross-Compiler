@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerSideContent", "..\..\..\xml\ServerSideContent\ServerSideContent\ServerSideContent.csproj", "{765E576C-E6EC-4FEF-893D-24BC2133C594}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUserHostAddress", "..\..\test\TestUserHostAddress\TestUserHostAddress.csproj", "{DF91AB39-13A6-4F39-898F-04E52A519F63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -43,6 +45,10 @@ Global
 		{765E576C-E6EC-4FEF-893D-24BC2133C594}.Debug|x86.Build.0 = Debug|x86
 		{765E576C-E6EC-4FEF-893D-24BC2133C594}.Release|x86.ActiveCfg = Release|x86
 		{765E576C-E6EC-4FEF-893D-24BC2133C594}.Release|x86.Build.0 = Release|x86
+		{DF91AB39-13A6-4F39-898F-04E52A519F63}.Debug|x86.ActiveCfg = Debug|x86
+		{DF91AB39-13A6-4F39-898F-04E52A519F63}.Debug|x86.Build.0 = Debug|x86
+		{DF91AB39-13A6-4F39-898F-04E52A519F63}.Release|x86.ActiveCfg = Release|x86
+		{DF91AB39-13A6-4F39-898F-04E52A519F63}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,5 +58,6 @@ Global
 		{38E685AC-F637-4765-B19A-306EBB04D25E} = {D10F4EAB-5D9B-409B-B6DD-BC67C7E695B7}
 		{76843B5B-EB0A-4E49-8B36-037969E0545F} = {D10F4EAB-5D9B-409B-B6DD-BC67C7E695B7}
 		{765E576C-E6EC-4FEF-893D-24BC2133C594} = {D10F4EAB-5D9B-409B-B6DD-BC67C7E695B7}
+		{DF91AB39-13A6-4F39-898F-04E52A519F63} = {D10F4EAB-5D9B-409B-B6DD-BC67C7E695B7}
 	EndGlobalSection
 EndGlobal

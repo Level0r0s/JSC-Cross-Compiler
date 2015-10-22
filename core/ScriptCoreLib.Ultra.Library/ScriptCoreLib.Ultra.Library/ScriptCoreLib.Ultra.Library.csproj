@@ -219,6 +219,7 @@
     <Compile Include="Ultra\WebService\InternalGlobal.cs" />
     <Compile Include="Ultra\WebService\InternalGlobalExtensions.cs" />
     <Compile Include="Extensions\InternalXMLExtensions.cs" />
+    <Compile Include="Ultra\WebService\InternalQueryStringParser.cs" />
     <Compile Include="Ultra\WebService\WebServiceScriptApplication.cs" />
     <Compile Include="Ultra\WebService\InternalWebMethodInfo.cs" />
     <Compile Include="Ultra\WebService\InternalWebMethodParameterInfo.cs" />
