@@ -27,7 +27,28 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Web
         {
             get
             {
-                return new __HttpCachePolicy { InternalResponse = this };
+                return new __HttpCachePolicy
+                {
+                    //InternalResponse = this
+
+                    vSetExpires = date =>
+                   {
+                       this.AddHeader("Expires", "Wed, 19 Sep 2022 08:37:33 GMT");
+
+                   },
+
+                    vSetCacheability = cacheability =>
+                        {
+                            // Cache-Control:private
+
+                            if (cacheability == HttpCacheability.Private)
+                            {
+                                this.AddHeader("Cache-Control", "private");
+                                return;
+                            }
+                            this.AddHeader("Cache-Control", "public");
+                        }
+                };
             }
         }
 

@@ -13,26 +13,29 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Web
     [Script(Implements = typeof(global::System.Web.HttpCachePolicy))]
     public class __HttpCachePolicy
     {
-        public __HttpResponse InternalResponse;
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151022/httpapplication
+        // tested by?
 
+        //public __HttpResponse InternalResponse;
 
+        public Action<HttpCacheability> vSetCacheability;
         public void SetCacheability(HttpCacheability cacheability)
         {
-            // Cache-Control:private
+            // set by
+            // Z:\jsc.svn\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\BCLImplementation\System\Web\HttpResponse.cs
 
-            if (cacheability == HttpCacheability.Private)
-            {
-                this.InternalResponse.AddHeader("Cache-Control", "private");
-                return;
-            }
-            this.InternalResponse.AddHeader("Cache-Control", "public");
+            if (vSetCacheability != null)
+                vSetCacheability(cacheability);
+
+
 
         }
 
+        public Action<DateTime> vSetExpires;
         public void SetExpires(DateTime date)
         {
-            this.InternalResponse.AddHeader("Expires", "Wed, 19 Sep 2022 08:37:33 GMT");
-
+            if (vSetExpires != null)
+                vSetExpires(date);
         }
     }
 }
