@@ -16,6 +16,8 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Web
     [Script(Implements = typeof(global::System.Web.HttpApplication))]
     public class __HttpApplication : __IHttpAsyncHandler, __IHttpHandler, __IComponent, IDisposable
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151022
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151021
         // X:\jsc.svn\examples\java\android\ApplicationWebService\ApplicationWebService\ApplicationActivity.cs
 
         public HttpRequest Request { get; set; }

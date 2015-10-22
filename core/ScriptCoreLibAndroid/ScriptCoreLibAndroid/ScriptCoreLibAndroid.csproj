@@ -394,6 +394,12 @@
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\UInt64.cs">
       <Link>BCLImplementation\System\UInt64.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Web\Profile\DefaultProfile.cs">
+      <Link>BCLImplementation\System\Web\Profile\DefaultProfile.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Web\Profile\ProfileBase.cs">
+      <Link>BCLImplementation\System\Web\Profile\ProfileBase.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Xml\Linq\XAttribute.cs">
       <Link>BCLImplementation\System\Xml\Linq\XAttribute.cs</Link>
     </Compile>
@@ -1226,8 +1232,6 @@
     <Compile Include="BCLImplementation\System\Web\HttpContext.cs" />
     <Compile Include="BCLImplementation\System\Web\HttpApplication.cs" />
     <Compile Include="BCLImplementation\System\Web\HttpRequest.cs" />
-    <Compile Include="BCLImplementation\System\Web\Profile\DefaultProfile.cs" />
-    <Compile Include="BCLImplementation\System\Web\Profile\ProfileBase.cs" />
     <Compile Include="dalvik\system\DexClassLoader.cs" />
     <Compile Include="Extensions\ActivityExtensions.cs" />
     <Compile Include="IAssemblyReferenceToken.cs" />

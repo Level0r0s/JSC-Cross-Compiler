@@ -55,6 +55,10 @@ namespace GearVR360VideoPush
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150910/360
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151006/360
 
+            // https://www.youtube.com/watch?v=2fhjdtQDcOo
+            // not detected as 360
+            // why?
+
             // forfiles0 = {System.IO.FileInfo[295]}
             var forfiles0 = Enumerable.ToArray(
                 from ff in forfiles
@@ -63,7 +67,9 @@ namespace GearVR360VideoPush
                 //orderby ff.Contains("Quake") descending, fff.Length descending
                 //orderby ff.ToLower().Contains("volcano") descending, fff.LastWriteTime descending
                 //orderby ff.ToLower().Contains("Star Wars".ToLower()) descending, fff.LastWriteTime descending
-                orderby ff.ToLower().Contains("1941".ToLower()) descending, fff.LastWriteTime descending
+                //orderby ff.ToLower().Contains("1941".ToLower()) descending, fff.LastWriteTime descending
+                //orderby ff.ToLower().Contains("Eminem".ToLower()) descending, fff.LastWriteTime descending
+                orderby ff.ToLower().Contains("cockpit".ToLower()) descending, fff.LastWriteTime descending
                 //orderby fff.LastWriteTime descending
 
                 select fff
@@ -77,7 +83,8 @@ namespace GearVR360VideoPush
 
             Action mp4uploads = delegate { };
 
-            foreach (var path0 in forfiles0.Take(295))
+            //foreach (var path0 in forfiles0.Take(295))
+            foreach (var path0 in forfiles0.Take(1))
             {
                 var path = path0.FullName;
 
@@ -233,6 +240,12 @@ namespace GearVR360VideoPush
 
 
             }
+
+            // wait for it to upload. then check it out.
+            mp4uploads();
+
+            Console.WriteLine("done");
+            Console.ReadLine();
         }
     }
 }

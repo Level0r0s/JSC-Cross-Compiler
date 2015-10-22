@@ -65,6 +65,9 @@ namespace TestYouTubeExtractor
         // { err = System.IO.FileNotFoundException: Could not load file or assembly 'taglib-sharp,
         private static void DownloadVideo(
             string chname,
+
+
+            // not detected via metadata?
             bool Spherical,
             string link,
             IEnumerable<VideoInfo> videoInfos)
@@ -857,7 +860,16 @@ namespace TestYouTubeExtractor
                             // rewrite broke JObject Parse.
                             // Additional information: Bad JSON escape sequence: \5.Path 'args.afv_ad_tag_restricted_to_instream', line 1, position 3029.
 
-                            var Spherical = new WebClient().DownloadString("https://www.youtube.com/get_video_info?html5=1&video_id=" + id).Contains("projection_type%3D2");
+                            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151022
+
+                            var get_video_info = new WebClient().DownloadString("https://www.youtube.com/get_video_info?html5=1&video_id=" + id);
+
+                            var statusfail = get_video_info.Contains("status=fail");
+
+                            if (statusfail)
+                                continue;
+
+                            var Spherical = get_video_info.Contains("projection_type%3D2");
 
 
                             // jsc rewriter breaks it?
