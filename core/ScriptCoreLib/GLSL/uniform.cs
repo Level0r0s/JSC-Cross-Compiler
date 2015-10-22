@@ -20,6 +20,8 @@ namespace ScriptCoreLib.GLSL
     [Description("Vertex Shader max: 254 vectors, 1016 floats, Fragment Shader max: 29 vectors, 116 floats")]
     public sealed class uniform : Attribute
     {
+        // https://github.com/OpenSWR/openswr-mesa/blob/11.0-openswr/src/glsl/link_uniforms.cpp
+
 		// 4.3.9 Interface Blocks
 
 		// http://webglreport.com/?v=2

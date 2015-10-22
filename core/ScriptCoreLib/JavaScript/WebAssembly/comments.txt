@@ -1,0 +1,18 @@
+﻿when will it be reasonable to implement webassembly output for jsc?
+before or after glsl gen? what about vulkan api?
+
+http://caniuse.com/#feat=asmjs
+
+http://arstechnica.com/information-technology/2015/06/the-web-is-getting-its-bytecode-webassembly/
+
+will it be basically java applets, flash spirites try 2?
+
+http://arstechnica.com/information-technology/2015/06/the-web-is-getting-its-bytecode-webassembly/?comments=1&post=29227533
+
+https://github.com/WebAssembly/spec/blob/master/ml-proto/spec/ast.ml
+
+
+http://www.2ality.com/2015/06/web-assembly.html
+
+reference implementation found at:
+https://github.com/WebAssembly/ilwasm

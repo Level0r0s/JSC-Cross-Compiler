@@ -7,6 +7,8 @@ namespace ScriptCoreLib.GLSL
 {
     public partial class Shader
     {
+        // https://github.com/OpenSWR/openswr-mesa/tree/11.0-openswr/src/glsl
+
 		// http://msdn.microsoft.com/en-us/library/ie/dn611835(v=vs.85).aspx
 		// see also: http://www.opengl.org/sdk/docs/manglsl/
 

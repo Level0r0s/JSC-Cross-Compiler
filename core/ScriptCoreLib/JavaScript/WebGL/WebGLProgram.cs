@@ -11,6 +11,8 @@ namespace ScriptCoreLib.JavaScript.WebGL
 	[Script(HasNoPrototype = true, InternalConstructor = true)]
 	public class WebGLProgram
 	{
+        // "X:\opensource\github\openswr-mesa\src\glsl\linker.cpp"
+
         // m_vertexShader
 
 		// --enable-unsafe-es3-apis 
