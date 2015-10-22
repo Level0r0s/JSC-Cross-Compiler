@@ -13,6 +13,13 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Web
     public sealed class __HttpRequest
     {
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151022/httpapplication
+        // how does a jsc app get access to here?
+        // via Z:\jsc.svn\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\Ultra\WebService\WebServiceHandler.cs
+        // would there be a better way to expose it? 
+        // see also 
+        // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuWebApplication\ApplicationWebService.cs
+        // Z:\jsc.svn\examples\javascript\xml\ServerSideContent\ServerSideContent\Application.cs
+
 
         // X:\jsc.svn\core\ScriptCoreLibJava.Web\ScriptCoreLibJava.Web\BCLImplementation\System\Web\HttpRequest.cs
         // X:\jsc.svn\examples\java\android\ApplicationWebService\ApplicationWebService\ApplicationActivity.cs

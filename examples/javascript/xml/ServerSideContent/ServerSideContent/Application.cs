@@ -30,11 +30,15 @@ namespace ServerSideContent
 	/// </summary>
 	public sealed class Application : ApplicationWebService
 	{
-		/// <summary>
-		/// This is a javascript application.
-		/// </summary>
-		/// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
-		public Application(JanusVRExperiment.HTML.Pages.IApp page)
+        // Z:\jsc.svn\examples\javascript\appengine\xml\AppEngineServerSideContent\Application.cs
+        // Z:\jsc.svn\examples\javascript\xml\ServerSideContent\ServerSideContent\Application.cs
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151022/httpapplication
+
+        /// <summary>
+        /// This is a javascript application.
+        /// </summary>
+        /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
+        public Application(JanusVRExperiment.HTML.Pages.IApp page)
 		{
 			// jsc, look this s empty. 
 			// starting an edit and continue session should be a snap
@@ -45,7 +49,7 @@ namespace ServerSideContent
 			// the ssl keygen could be started a head of time in another thread..
 
 
-			// forward
+			// forward. ..
 			new JanusVRExperiment.Application(page);
 
 			new { }.With(
