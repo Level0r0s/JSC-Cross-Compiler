@@ -142,6 +142,24 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
             }
         }
 
+
+
+
+        public void Close()
+        {
+            if (this.InternalOutputStream != null)
+                return;
+
+            try
+            {
+                this.InternalContext.getWriter().flush();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public void Flush()
         {
             try

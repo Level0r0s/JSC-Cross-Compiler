@@ -21,6 +21,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.IO
 
 
         // virtual override by?
+        // X:\jsc.internal.git\compiler\jsc.meta\jsc.meta\Library\Templates\Java\InternalAndroidWebServiceActivity.cs
+
         public static Func<string, FileStream> InternalOpenRead =
             path =>
             {

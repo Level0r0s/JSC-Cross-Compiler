@@ -139,6 +139,8 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Web
 
         }
 
+
+        // called by CompleteRequest
         public void Close()
         {
 

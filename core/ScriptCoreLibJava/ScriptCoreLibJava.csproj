@@ -348,6 +348,7 @@
     <Compile Include="BCLImplementation\System\UInt32.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BCLImplementation\System\Web\HttpApplication.cs" />
     <Compile Include="BCLImplementation\System\Web\HttpCachePolicy.cs" />
     <Compile Include="BCLImplementation\System\Web\HttpContext.cs" />
     <Compile Include="BCLImplementation\System\Web\HttpFileCollection.cs" />
