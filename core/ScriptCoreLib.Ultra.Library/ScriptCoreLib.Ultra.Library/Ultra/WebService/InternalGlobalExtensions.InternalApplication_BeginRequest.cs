@@ -15,10 +15,17 @@ namespace ScriptCoreLib.Ultra.WebService
 {
     public static partial class InternalGlobalExtensions
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151022/httprequest
+
         public static void InternalApplication_BeginRequest(InternalGlobal g)
         {
             // is it ROSLYN friendly? no?
             // need to compile it by 2012?
+            //AppDomain.CurrentDomain.UnhandledException +=
+            //    (s, e) =>
+            //    {
+
+            //    };
 
 
             var BeginRequestStopwatch = Stopwatch.StartNew();
@@ -509,13 +516,21 @@ namespace ScriptCoreLib.Ultra.WebService
                 // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201401/20140110-xml
 
                 //var WebMethodMetadataToken = Context.Request.QueryString[InternalWebMethodInfo.QueryKey];
-                var WebMethodMetadataToken = Context.Request.Form["WebMethodMetadataToken"];
-                //var value_Form = that.InternalContext.Request.Form[key];
 
-                handler.WebMethod = InternalWebMethodInfo.First(
-                    WebMethods,
-                   WebMethodMetadataToken
-                );
+                if (Context.Request.Form.AllKeys.Contains("WebMethodMetadataToken"))
+                {
+                    var WebMethodMetadataToken = Context.Request.Form["WebMethodMetadataToken"];
+                    //var value_Form = that.InternalContext.Request.Form[key];
+
+                    // Z:\jsc.svn\examples\javascript\appengine\Test\TestUserHostAddress\ApplicationWebService.cs
+
+                    if (WebMethodMetadataToken != null)
+                        handler.WebMethod = InternalWebMethodInfo.First(
+                            WebMethods,
+                           WebMethodMetadataToken
+                        );
+
+                }
             }
             #endregion
 

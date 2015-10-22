@@ -67,6 +67,67 @@ hello world! will prerender janusVR scene, as API wont enable all of the feature
                 }
             );
 
+
+            // { key = formtext1, index = 0, Form = hello }
+            h.Context.Request.Form.AllKeys.WithEachIndex(
+                (key, index) =>
+                {
+                    var Form = h.Context.Request.Form[key];
+                    x.Element("body").Add(
+                        //new XElement("pre", new { key, index, QueryString }
+                        new XElement("pre", new { key, index, Form }.ToString()
+                        )
+                    );
+
+                }
+            );
+
+            h.Context.Request.Headers.AllKeys.WithEachIndex(
+              (key, index) =>
+              {
+                  var Header = h.Context.Request.Headers[key];
+                  x.Element("body").Add(
+                      //new XElement("pre", new { key, index, QueryString }
+                      new XElement("pre", new { key, index, Header }.ToString()
+                      )
+                  );
+
+              }
+          );
+
+            h.Context.Request.Cookies.AllKeys.WithEachIndex(
+             (key, index) =>
+             {
+                 var Cookie = h.Context.Request.Cookies[key].Value;
+                 x.Element("body").Add(
+                     //new XElement("pre", new { key, index, QueryString }
+                     new XElement("pre", new { key, index, Cookie }.ToString()
+                     )
+                 );
+
+             }
+         );
+
+
+            // { key = file1, index = 0, ContentLength = 1704 }
+            h.Context.Request.Files.AllKeys.WithEachIndex(
+               (key, index) =>
+               {
+                   var File = h.Context.Request.Files[key];
+                   x.Element("body").Add(
+                       //new XElement("pre", new { key, index, QueryString }
+                       new XElement("pre", new { key, index, File.ContentLength }.ToString()
+                       )
+                   );
+
+               }
+           );
+
+
+            h.Context.Response.SetCookie(
+                new System.Web.HttpCookie("hello", "world")
+            );
+
             // view-source ?
 
             h.Context.Response.Write(x.ToString());

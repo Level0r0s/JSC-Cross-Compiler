@@ -68,8 +68,10 @@ namespace ScriptCoreLib.Extensions
                            }
 
                            if (firstByte != null)
+                           {
                                firstByte.SetResult(buffer[0]);
-
+                               firstByte = null;
+                           }
 
                            Console.WriteLine(prefix + ClientCounter.ToString("x4") + " 0x" + c.ToString("x4") + " bytes");
 
@@ -82,9 +84,9 @@ namespace ScriptCoreLib.Extensions
                            // why is sleep a good idea here?
                            Thread.Sleep(1);
                        }
-                       catch
+                       catch (Exception fault)
                        {
-                           Console.WriteLine(prefix + ClientCounter.ToString("x4") + " fault");
+                           Console.WriteLine(prefix + ClientCounter.ToString("x4") + " fault " + new { fault.Message });
 
                            return;
                        }

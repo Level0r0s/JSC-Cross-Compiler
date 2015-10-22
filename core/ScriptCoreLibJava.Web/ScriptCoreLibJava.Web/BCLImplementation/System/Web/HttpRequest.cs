@@ -82,7 +82,10 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
         public string Path { get; set; }
         public string HttpMethod { get; set; }
         public NameValueCollection QueryString { get; internal set; }
-
+        public NameValueCollection Form { get; internal set; }
+        public NameValueCollection Headers { get; internal set; }
+        
+        public HttpCookieCollection Cookies { get; set; }
 
 
         public javax.servlet.http.HttpServletRequest InternalContext;
@@ -101,124 +104,16 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
             }
         }
 
-        #region Form
-        NameValueCollection InternalForm;
+        
+ 
 
-        public NameValueCollection Form
-        {
-            get
-            {
-                //Console.WriteLine("get_Form");
-
-                if (InternalForm == null)
-                {
-                    InternalForm = new NameValueCollection();
-                    InitializeForm();
-                }
-
-                //Console.WriteLine("return get_Form");
-
-                return InternalForm;
-            }
-        }
-
-        private void InitializeForm()
-        {
-            //Console.WriteLine("get_Form = new");
-
-#if FFORM
-            var e = this.InternalContext.getParameterNames();
-
-            // For HTTP servlets, parameters are contained in 
-            // the query string or posted form data.
-
-            // see: http://209.85.229.132/search?q=cache:0aKqPR_HgIUJ:g.oswego.edu/dl/classes/collections/SimpleTest.java+while+hasMoreElements&cd=1&hl=en&ct=clnk
-            // see: http://java.sun.com/j2ee/1.4/docs/api/javax/servlet/ServletRequest.html#getParameter(java.lang.String)
-            // see: http://java.sun.com/j2ee/1.4/docs/api/javax/servlet/http/HttpServletRequest.html#getQueryString()
-
-            var qs = this.InternalContext.getQueryString();
-            var q = new InternalQueryStringParser(qs);
-
-            while (e.hasMoreElements())
-            {
-                var name = (string)e.nextElement();
-
-                if (q[name] == null)
-                {
-                    var value = this.InternalContext.getParameter(name);
-
-                    //Console.WriteLine("Form add: " + name + " = " + value);
-                    InternalForm[name] = value;
-                }
-                else
-                {
-                    //Console.WriteLine("Form skip: " + name);
-
-                }
-            }
-#endif
-        }
-        #endregion
-
-
-
-        #region Headers
-        NameValueCollection InternalHeaders;
-        public NameValueCollection Headers
-        {
-            get
-            {
-                if (InternalHeaders == null)
-                {
-                    InternalHeaders = new NameValueCollection();
-
-                    var e = this.InternalContext.getHeaderNames();
-
-                    while (e.hasMoreElements())
-                    {
-                        var name = (string)e.nextElement();
-
-                        var value = this.InternalContext.getHeader(name);
-
-                        InternalHeaders[name] = value;
-                    }
-
-                }
-
-                return InternalHeaders;
-            }
-        }
-        #endregion
-
-        public HttpCookieCollection Cookies
-        {
-            get
-            {
-                // X:\jsc.svn\examples\java\appengine\Test\TestThreadManager\TestThreadManager\ApplicationWebService.cs
-
-                var Cookies = new HttpCookieCollection();
-
-                if (this.InternalContext != null)
-                {
-                    var i = this.InternalContext.getCookies();
-
-                    if (i != null)
-                        foreach (var item in i)
-                        {
-                            if (item != null)
-                                Cookies.Add(
-                                    new HttpCookie(item.getName(), item.getValue())
-                                );
-                        }
-                }
-
-                return Cookies;
-            }
-        }
 
         public __HttpRequest()
         {
             this.QueryString = new NameValueCollection();
+            this.Form = new NameValueCollection();
+            this.Headers = new NameValueCollection();
+            this.Cookies = new HttpCookieCollection();
 
         }
 

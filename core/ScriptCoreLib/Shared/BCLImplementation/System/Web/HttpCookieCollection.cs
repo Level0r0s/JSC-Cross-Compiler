@@ -22,8 +22,18 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Web
             get
             {
                 var y = InternalItems.FirstOrDefault(x => x.Name == name);
- 
+
                 return y;
+            }
+        }
+
+        public string[] AllKeys
+        {
+            get
+            {
+                // Z:\jsc.svn\examples\javascript\appengine\Test\TestUserHostAddress\ApplicationWebService.cs
+
+                return this.InternalItems.Select(x => x.Name).ToArray();
             }
         }
     }
