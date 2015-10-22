@@ -53,5 +53,37 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Web
 
         public HttpFileCollection Files { get; set; }
 
+
+        public Uri Url { get; set; }
+
+
+        public Uri UrlReferrer
+        {
+            get
+            {
+                return new Uri(this.Headers["Referer"]);
+            }
+        }
+
+
+
+
+        public string ContentType
+        {
+            get
+            {
+                var __Request = this;
+                var __RequestContentType = __Request.Headers["Content-Type"];
+
+                return __RequestContentType;
+            }
+        }
+
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201508/20150817
+        // X:\jsc.svn\examples\javascript\appengine\AppEngineUserAgentLoggerWithXSLXAsset\AppEngineUserAgentLoggerWithXSLXAsset\ApplicationWebService.cs
+        // X:\jsc.smokescreen.svn\core\javascript\com.abstractatech.analytics\com.abstractatech.analytics\ApplicationWebService.cs
+        // http://stackoverflow.com/questions/4780474/appengine-howto-see-content-from-a-post-request
+
+
     }
 }

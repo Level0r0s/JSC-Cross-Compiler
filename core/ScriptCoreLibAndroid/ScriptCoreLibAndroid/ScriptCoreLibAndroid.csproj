@@ -406,6 +406,9 @@
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Web\HttpPostedFile.cs">
       <Link>BCLImplementation\System\Web\HttpPostedFile.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Web\HttpRequest.cs">
+      <Link>BCLImplementation\System\Web\HttpRequest.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Web\IHttpAsyncHandler.cs">
       <Link>BCLImplementation\System\Web\IHttpAsyncHandler.cs</Link>
     </Compile>
@@ -1243,7 +1246,6 @@
     <Compile Include="BCLImplementation\System\IntPtr.cs" />
     <Compile Include="BCLImplementation\System\Web\HttpResponse.cs" />
     <Compile Include="BCLImplementation\System\Web\HttpApplication.cs" />
-    <Compile Include="BCLImplementation\System\Web\HttpRequest.cs" />
     <Compile Include="dalvik\system\DexClassLoader.cs" />
     <Compile Include="Extensions\ActivityExtensions.cs" />
     <Compile Include="IAssemblyReferenceToken.cs" />

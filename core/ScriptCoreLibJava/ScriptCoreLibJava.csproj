@@ -352,6 +352,7 @@
     <Compile Include="BCLImplementation\System\Web\HttpContext.cs" />
     <Compile Include="BCLImplementation\System\Web\HttpFileCollection.cs" />
     <Compile Include="BCLImplementation\System\Web\HttpPostedFile.cs" />
+    <Compile Include="BCLImplementation\System\Web\HttpRequest.cs" />
     <Compile Include="BCLImplementation\System\Web\IHttpAsyncHandler.cs" />
     <Compile Include="BCLImplementation\System\Web\IHttpHandler.cs" />
     <Compile Include="BCLImplementation\System\Web\Profile\DefaultProfile.cs" />
