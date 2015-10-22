@@ -11,7 +11,7 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Web
     // http://referencesource.microsoft.com/#System.Web/xsp/system/Web/HttpFileCollection.cs
 
     [Script(Implements = typeof(global::System.Web.HttpFileCollection))]
-    internal sealed class __HttpFileCollection : __NameObjectCollectionBase
+    public sealed class __HttpFileCollection : __NameObjectCollectionBase
     {
         public Dictionary<string, __HttpPostedFile> InternalDictionary = new Dictionary<string, __HttpPostedFile>();
 

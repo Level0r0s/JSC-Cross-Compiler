@@ -108,7 +108,7 @@ hello world! will prerender janusVR scene, as API wont enable all of the feature
              }
          );
 
-
+            // { key = file1, index = 0, ContentLength = 1704 }
             // { key = file1, index = 0, ContentLength = 1704 }
             h.Context.Request.Files.AllKeys.WithEachIndex(
                (key, index) =>

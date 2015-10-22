@@ -10,7 +10,7 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Web
     // http://referencesource.microsoft.com/#System.Web/xsp/system/Web/HttpPostedFile.cs
 
     [Script(Implements = typeof(global::System.Web.HttpPostedFile))]
-    internal class __HttpPostedFile
+    public class __HttpPostedFile
     {
         public int ContentLength { get; set; }
 
