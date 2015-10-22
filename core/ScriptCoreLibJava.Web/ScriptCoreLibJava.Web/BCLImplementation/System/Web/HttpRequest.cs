@@ -18,7 +18,7 @@ using System.Threading;
 
 
 using java.io;
-
+using ScriptCoreLib.Android.BCLImplementation.System.Web;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Web
 {
@@ -338,12 +338,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
             }
         }
 
-        //        Implementation not found for type import :
-        //type: System.Web.HttpRequest
-        //method: System.Web.HttpFileCollection get_Files()
-        //Did you forget to add the [Script] attribute?
-        //Please double check the signature!
-
+   
         __HttpFileCollection __Files;
         public HttpFileCollection Files
         {

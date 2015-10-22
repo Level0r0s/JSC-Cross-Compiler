@@ -394,6 +394,9 @@
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\UInt64.cs">
       <Link>BCLImplementation\System\UInt64.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Web\HttpCachePolicy.cs">
+      <Link>BCLImplementation\System\Web\HttpCachePolicy.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Web\HttpContext.cs">
       <Link>BCLImplementation\System\Web\HttpContext.cs</Link>
     </Compile>
@@ -1239,7 +1242,6 @@
     <Compile Include="BCLImplementation\System\Data\SQLite\SQLiteDataReader.cs" />
     <Compile Include="BCLImplementation\System\IntPtr.cs" />
     <Compile Include="BCLImplementation\System\Web\HttpResponse.cs" />
-    <Compile Include="BCLImplementation\System\Web\HttpCachePolicy.cs" />
     <Compile Include="BCLImplementation\System\Web\HttpApplication.cs" />
     <Compile Include="BCLImplementation\System\Web\HttpRequest.cs" />
     <Compile Include="dalvik\system\DexClassLoader.cs" />

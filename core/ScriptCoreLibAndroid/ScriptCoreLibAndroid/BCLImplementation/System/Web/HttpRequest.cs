@@ -12,6 +12,8 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Web
     [Script(Implements = typeof(global::System.Web.HttpRequest))]
     public sealed class __HttpRequest
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151022/httpapplication
+
         // X:\jsc.svn\core\ScriptCoreLibJava.Web\ScriptCoreLibJava.Web\BCLImplementation\System\Web\HttpRequest.cs
         // X:\jsc.svn\examples\java\android\ApplicationWebService\ApplicationWebService\ApplicationActivity.cs
 

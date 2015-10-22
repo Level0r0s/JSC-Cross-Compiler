@@ -8,6 +8,7 @@ using ScriptCoreLibJava.BCLImplementation.System.IO;
 using ScriptCoreLibJava.BCLImplementation.System.Net.Sockets;
 using System.Net.Sockets;
 using System.Web;
+using ScriptCoreLib.Android.BCLImplementation.System.Web;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Web
 {

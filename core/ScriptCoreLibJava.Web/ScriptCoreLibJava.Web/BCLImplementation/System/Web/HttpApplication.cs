@@ -5,6 +5,7 @@ using System.Text;
 using ScriptCoreLib;
 using System.Web;
 using ScriptCoreLib.Shared.BCLImplementation.System.ComponentModel;
+using ScriptCoreLib.Android.BCLImplementation.System.Web;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Web
 {
