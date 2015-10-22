@@ -347,6 +347,13 @@
     <Compile Include="BCLImplementation\System\UInt32.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BCLImplementation\System\Web\HttpContext.cs" />
+    <Compile Include="BCLImplementation\System\Web\HttpFileCollection.cs" />
+    <Compile Include="BCLImplementation\System\Web\HttpPostedFile.cs" />
+    <Compile Include="BCLImplementation\System\Web\IHttpAsyncHandler.cs" />
+    <Compile Include="BCLImplementation\System\Web\IHttpHandler.cs" />
+    <Compile Include="BCLImplementation\System\Web\Profile\DefaultProfile.cs" />
+    <Compile Include="BCLImplementation\System\Web\Profile\ProfileBase.cs" />
     <Compile Include="BCLImplementation\System\Web\Services\WebService.cs" />
     <Compile Include="BCLImplementation\System\Xml\Linq\XText.cs" />
     <Compile Include="BCLImplementation\System\Xml\Linq\XAttribute.cs" />
@@ -1038,7 +1045,6 @@
     <Folder Include="BCLImplementation\System\Globalization\" />
     <Folder Include="BCLImplementation\System\Runtime\InteropServices\" />
     <Folder Include="BCLImplementation\System\Runtime\Serialization\" />
-    <Folder Include="BCLImplementation\System\Web\Profile\" />
     <Folder Include="javax\microedition\lcdui\" />
     <Folder Include="javax\microedition\media\" />
     <Folder Include="javax\microedition\midlet\" />
