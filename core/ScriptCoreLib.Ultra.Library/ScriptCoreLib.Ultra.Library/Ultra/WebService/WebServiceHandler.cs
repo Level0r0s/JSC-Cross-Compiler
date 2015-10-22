@@ -13,11 +13,13 @@ namespace ScriptCoreLib.Ultra.WebService
     [Obsolete("experimental")]
     public class WebServiceHandler
     {
-		// X:\jsc.svn\examples\javascript\xml\ServerSideContent\ServerSideContent\ApplicationWebService.cs
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151022/httprequest
+        // Z:\jsc.svn\examples\javascript\appengine\xml\AppEngineServerSideContent\Application.cs
+        // X:\jsc.svn\examples\javascript\xml\ServerSideContent\ServerSideContent\ApplicationWebService.cs
 
 
-		// saved before Serve and for Invoke
-		public InternalWebMethodInfo WebMethod;
+        // saved before Serve and for Invoke
+        public InternalWebMethodInfo WebMethod;
 
 
         public HttpContext Context;

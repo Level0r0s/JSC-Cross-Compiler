@@ -16,10 +16,11 @@ using System.Xml.Linq;
 using AppEngineServerSideContent;
 using AppEngineServerSideContent.Design;
 using AppEngineServerSideContent.HTML.Pages;
+using AppEngineServerSideContent.HTML.Images.FromAssets;
 
 namespace AppEngineServerSideContent
 {
-    using ServerSideContent.HTML.Images.FromAssets;
+    // like gmaps api?
     using static FireBoxRoom;
     using static JanusVRExperiment.Application;
 

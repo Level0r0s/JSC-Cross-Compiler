@@ -5,6 +5,18 @@ VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppEngineServerSideContent", "AppEngineServerSideContent.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByPackage", "ByPackage", "{7BF564C0-C826-4EAF-8C49-DE503F98640E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JanusVRExperiment", "..\..\..\JanusVRExperiment\JanusVRExperiment\JanusVRExperiment.csproj", "{426A9419-9287-4880-979F-29F29D3F2A22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMapsInfoWindow", "..\..\..\GoogleMapsInfoWindow\GoogleMapsInfoWindow\GoogleMapsInfoWindow.csproj", "{38E685AC-F637-4765-B19A-306EBB04D25E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMapsMarker", "..\..\..\GoogleMapsMarker\GoogleMapsMarker\GoogleMapsMarker.csproj", "{76843B5B-EB0A-4E49-8B36-037969E0545F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{D10F4EAB-5D9B-409B-B6DD-BC67C7E695B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerSideContent", "..\..\..\xml\ServerSideContent\ServerSideContent\ServerSideContent.csproj", "{765E576C-E6EC-4FEF-893D-24BC2133C594}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,8 +27,30 @@ Global
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.Build.0 = Debug|x86
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.ActiveCfg = Release|x86
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.Build.0 = Release|x86
+		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.ActiveCfg = Debug|x86
+		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.Build.0 = Debug|x86
+		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.ActiveCfg = Release|x86
+		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.Build.0 = Release|x86
+		{38E685AC-F637-4765-B19A-306EBB04D25E}.Debug|x86.ActiveCfg = Debug|x86
+		{38E685AC-F637-4765-B19A-306EBB04D25E}.Debug|x86.Build.0 = Debug|x86
+		{38E685AC-F637-4765-B19A-306EBB04D25E}.Release|x86.ActiveCfg = Release|x86
+		{38E685AC-F637-4765-B19A-306EBB04D25E}.Release|x86.Build.0 = Release|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Debug|x86.ActiveCfg = Debug|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Debug|x86.Build.0 = Debug|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Release|x86.ActiveCfg = Release|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Release|x86.Build.0 = Release|x86
+		{765E576C-E6EC-4FEF-893D-24BC2133C594}.Debug|x86.ActiveCfg = Debug|x86
+		{765E576C-E6EC-4FEF-893D-24BC2133C594}.Debug|x86.Build.0 = Debug|x86
+		{765E576C-E6EC-4FEF-893D-24BC2133C594}.Release|x86.ActiveCfg = Release|x86
+		{765E576C-E6EC-4FEF-893D-24BC2133C594}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{426A9419-9287-4880-979F-29F29D3F2A22} = {7BF564C0-C826-4EAF-8C49-DE503F98640E}
+		{38E685AC-F637-4765-B19A-306EBB04D25E} = {D10F4EAB-5D9B-409B-B6DD-BC67C7E695B7}
+		{76843B5B-EB0A-4E49-8B36-037969E0545F} = {D10F4EAB-5D9B-409B-B6DD-BC67C7E695B7}
+		{765E576C-E6EC-4FEF-893D-24BC2133C594} = {D10F4EAB-5D9B-409B-B6DD-BC67C7E695B7}
 	EndGlobalSection
 EndGlobal
