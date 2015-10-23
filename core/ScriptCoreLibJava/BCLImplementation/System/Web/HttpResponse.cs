@@ -9,6 +9,7 @@ using ScriptCoreLibJava.BCLImplementation.System.Net.Sockets;
 using System.Net.Sockets;
 using System.Web;
 using ScriptCoreLib.Android.BCLImplementation.System.Web;
+using System.Collections.Specialized;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Web
 {
@@ -109,12 +110,16 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
                     if (this.vInternalOutputStream != null)
                         this.InternalOutputStream = this.vInternalOutputStream();
 
-                 
+
 
                 return this.InternalOutputStream;
             }
         }
         #endregion
+
+
+
+        public NameValueCollection Headers { get; set; }
 
 
         #region AddHeader
@@ -126,8 +131,14 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
         }
         #endregion
 
+
+        // called by?
         public void WriteFile(string filename)
         {
+            Console.WriteLine("enter WriteFile " + new { filename });
+            Console.WriteLine("enter WriteFile " + new { typeof(__HttpResponse).Assembly.Location });
+            Console.WriteLine("enter WriteFile " + new { Environment.CurrentDirectory });
+
             // we only work with absolute paths anyway
             if (filename.StartsWith("/"))
                 filename = filename.Substring(1);
@@ -135,11 +146,18 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
             // X:\jsc.smokescreen.svn\core\javascript\com.abstractatech.analytics\com.abstractatech.analytics\ApplicationWebService.cs
             // should we also report file size?
 
-            var bytes = File.ReadAllBytes(filename);
+            try
+            {
+                var bytes = File.ReadAllBytes(filename);
 
-            Console.WriteLine("WriteFile " + new { filename, bytes.Length });
+                Console.WriteLine("WriteFile " + new { filename, bytes.Length });
 
-            this.OutputStream.Write(bytes, 0, bytes.Length);
+                this.OutputStream.Write(bytes, 0, bytes.Length);
+            }
+            catch (Exception fault)
+            {
+                Console.WriteLine("fault WriteFile " + new { filename, fault.Message });
+            }
         }
 
         public __HttpCachePolicy Cache
@@ -160,16 +178,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
 
         }
 
+        public Action vFlush;
         public void Flush()
         {
-            try
-            {
-                this.OutputStream.Flush();
-            }
-            catch
-            {
-                //IsClientConnected = false;
-            }
+            if (vFlush != null)
+                vFlush();
+
         }
 
 
@@ -181,6 +195,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
         public __HttpResponse()
         {
             Cookies = new HttpCookieCollection();
+            Headers = new NameValueCollection { };
         }
 
         public void SetCookie(HttpCookie e)
@@ -195,5 +210,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
 
         }
         #endregion
+
+
+        public bool IsClientConnected
+        {
+            get;
+            set;
+        }
     }
 }

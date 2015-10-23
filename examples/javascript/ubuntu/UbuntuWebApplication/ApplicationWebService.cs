@@ -32,6 +32,34 @@ namespace UbuntuWebApplication
 
         public void Handler(ScriptCoreLib.Ultra.WebService.WebServiceHandler h)
         {
+            Console.WriteLine("enter Handler");
+
+            if (h.IsDefaultPath)
+            {
+                //h.Context.Response.Redirect("/redirect" + DateTime.Now.Millisecond);
+                h.Context.Response.Redirect("/redirect" + DateTime.Now.Second);
+                h.CompleteRequest();
+            }
+            else
+            {
+                // { UserHostAddress = 127.0.0.1, Path = /redirect168, HttpMethod = GET }
+
+                h.Context.Response.AddHeader("hello", "world");
+
+                h.Context.Response.Write(
+
+                    new XElement("pre",
+                        new
+                        {
+                            h.Context.Request.UserHostAddress,
+                            h.Context.Request.Path,
+                            h.Context.Request.HttpMethod
+                        }.ToString()
+                    ).ToString()
+
+                );
+                h.CompleteRequest();
+            }
         }
 
 

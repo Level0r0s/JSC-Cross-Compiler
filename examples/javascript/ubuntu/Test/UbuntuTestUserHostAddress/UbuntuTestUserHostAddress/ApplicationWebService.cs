@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace TestUserHostAddress
+namespace UbuntuTestUserHostAddress
 {
     /// <summary>
     /// Methods defined in this type can be used from JavaScript. The method calls will seamlessly be proxied to the server.
@@ -24,6 +24,8 @@ namespace TestUserHostAddress
 
         public void Handler(ScriptCoreLib.Ultra.WebService.WebServiceHandler h)
         {
+            if (h.Context.Request.Path == "/jsc")
+                return;
 
             //if (!h.IsDefaultPath)
             //    return;
@@ -36,6 +38,7 @@ hello world! will prerender janusVR scene, as API wont enable all of the feature
 				");
 
             var x = XElement.Parse(HTML.Pages.AppSource.Text);
+
 
             // port rewriter for cassini?
             // { UserHostAddress = 127.0.0.1 }
@@ -138,6 +141,7 @@ hello world! will prerender janusVR scene, as API wont enable all of the feature
             h.CompleteRequest();
             return;
         }
+
 
     }
 }

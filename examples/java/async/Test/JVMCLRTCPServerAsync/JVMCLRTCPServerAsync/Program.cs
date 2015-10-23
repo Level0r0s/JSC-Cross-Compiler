@@ -22,6 +22,7 @@ namespace JVMCLRTCPServerAsync
 
     public static class Program2
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151023/ubuntuwebapplication
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151012
 
         /// <summary>
