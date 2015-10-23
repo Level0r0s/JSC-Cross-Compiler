@@ -24,6 +24,15 @@ namespace UbuntuTestUserHostAddress
 
         public void Handler(ScriptCoreLib.Ultra.WebService.WebServiceHandler h)
         {
+            // enable GetColor
+            if (h.Context.Request.Path.StartsWith("/xml/"))
+                return;
+
+
+            if (h.Context.Request.Path == "/view-source")
+                return;
+
+
             if (h.Context.Request.Path == "/jsc")
                 return;
 
@@ -130,6 +139,14 @@ hello world! will prerender janusVR scene, as API wont enable all of the feature
            );
 
 
+            x.Add(
+                new XElement("script",
+                    new XAttribute("src", "view-source"),
+                    " "
+                )
+            );
+
+
             h.Context.Response.SetCookie(
                 new System.Web.HttpCookie("hello", "world")
             );
@@ -143,5 +160,12 @@ hello world! will prerender janusVR scene, as API wont enable all of the feature
         }
 
 
+
+        public async Task<string> GetColor()
+        {
+            Console.WriteLine("enter GetColor");
+
+            return "cyan";
+        }
     }
 }

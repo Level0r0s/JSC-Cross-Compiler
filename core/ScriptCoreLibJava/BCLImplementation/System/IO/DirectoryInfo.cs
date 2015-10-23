@@ -60,5 +60,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System.IO
             // Z:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosHUD\ApplicationActivity.cs
             return Directory.GetFiles(this.InternalPath).Select(x => new FileInfo(x)).ToArray();
         }
+
+
+        public override string ToString()
+        {
+            return new { this.FullName, this.Exists }.ToString();
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.IO
 
 
     [Script(Implements = typeof(global::System.IO.File))]
-    internal class __File
+    public class __File
     {
 
 
@@ -94,22 +94,27 @@ namespace ScriptCoreLibJava.BCLImplementation.System.IO
 
 
         // tested by ?
-        public static Func<string, byte[]> InternalReadAllBytes;
+        public static Func<string, byte[]> InternalReadAllBytes = path =>
+        {
+            var x = getBytesFromFile(new java.io.File(path));
+
+            return (byte[])(object)(x);
+        };
+
 
         public static byte[] ReadAllBytes(string path)
         {
             // what if our files are virtual? like android assets.
 
+            var z = new byte[0];
+
             if (InternalReadAllBytes != null)
             {
-                var z = InternalReadAllBytes(path);
-                if (z != null)
-                    return z;
+                z = InternalReadAllBytes(path);
             }
 
-            var x = getBytesFromFile(new java.io.File(path));
 
-            return (byte[])(object)(x);
+            return z;
         }
 
         [Obsolete("Should use (sbyte[])(object)e instead!")]

@@ -30,7 +30,25 @@ namespace UbuntuTestUserHostAddress
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
-           
+            Native.body.style.backgroundColor = "yellow";
+
+            // cool we are running on ubuntu!
+
+            // did we get a SSL client certificate too?
+            // what about mysql?
+
+            new { }.With(
+                async delegate
+                {
+                    await new IHTMLButton { "go" }.AttachToDocument().async.onclick;
+
+                    var color = await base.GetColor();
+
+                    Native.body.style.backgroundColor = color;
+
+                }
+            );
+
         }
 
     }

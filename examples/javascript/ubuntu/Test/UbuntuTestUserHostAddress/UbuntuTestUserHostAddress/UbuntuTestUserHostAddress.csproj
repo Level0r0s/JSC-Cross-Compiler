@@ -126,7 +126,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Design\App.css" />
-    <Content Include="Design\App.htm" />
+    <Content Include="Design\App.htm">
+      <SubType>Designer</SubType>
+    </Content>
     <Compile Include="ApplicationWebService.cs" />
     <Compile Include="Application.cs" />
     <Compile Include="Program.cs">
@@ -142,6 +144,9 @@
 		start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false   /DisableWebServiceUbuntu:false 
 
 
+
+robocopy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\UbuntuTestUserHostAddress.ApplicationWebService.assets u:\UbuntuTestUserHostAddress.ApplicationWebService.assets /E
+ 
 copy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe U:\
 		)</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
