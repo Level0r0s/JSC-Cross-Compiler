@@ -9,6 +9,7 @@ namespace ScriptCoreLib.Desktop
 //namespace TestTaskbarStates
 {
     using System;
+    using System.Reflection;
     using System.Runtime.InteropServices;
 
     // http://stackoverflow.com/questions/1295890/windows-7-progress-bar-in-taskbar-in-c
@@ -22,7 +23,10 @@ namespace ScriptCoreLib.Desktop
     //            TaskbarProgress.SetState(this.Handle, TaskbarProgress.TaskbarStates.Error);
 
 
-    public static class TaskbarProgress
+
+    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151023
+    [Obfuscation(Feature = "invalidmerge")]
+    internal static class TaskbarProgress
     {
         // X:\jsc.svn\examples\javascript\Test\TestTaskbarStates\TestTaskbarStates\Program.cs
 
