@@ -12,13 +12,16 @@ using ScriptCoreLib.Android.BCLImplementation.System.Web;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Web
 {
+    // http://referencesource.microsoft.com/#System.Web/xsp/system/Web/HttpResponse.cs
+
     [Script(Implements = typeof(global::System.Web.HttpResponse))]
-    internal class __HttpResponse
+    public class __HttpResponse
     {
-        public javax.servlet.http.HttpServletResponse InternalContext;
+        //public javax.servlet.http.HttpServletResponse InternalContext;
 
+        #region StatusCode
         internal int InternalStatusCode;
-
+        public Action<int> vStatusCode;
         public int StatusCode
         {
             get
@@ -28,12 +31,19 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
             set
             {
                 InternalStatusCode = value;
-                this.InternalContext.setStatus(value);
+
+                if (vStatusCode != null)
+                    vStatusCode(value);
             }
         }
+        #endregion
+
+
+
 
         #region ContentType
         internal string InternalContentType;
+        public Action<string> vContentType;
         public string ContentType
         {
             get
@@ -44,7 +54,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
             set
             {
                 InternalContentType = value;
-                this.InternalContext.setContentType(value);
+                if (vContentType != null)
+                    vContentType(value);
             }
         }
         #endregion
@@ -75,48 +86,45 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
             }
         }
 
+
+
+
+        #region Redirect
+        public Action<string> vRedirect;
         public void Redirect(string url)
         {
-            try
-            {
-                this.InternalContext.sendRedirect(url);
-            }
-            catch
-            {
-                throw;
-            }
+            if (vRedirect != null)
+                vRedirect(url);
         }
+        #endregion
 
         #region OutputStream
         public NetworkStream InternalOutputStream;
+        public Func<NetworkStream> vInternalOutputStream;
         public Stream OutputStream
         {
             get
             {
                 if (this.InternalOutputStream == null)
-                    try
-                    {
-                        this.InternalOutputStream = (NetworkStream)(object)new __NetworkStream
-                        {
-                            InternalOutputStream = this.InternalContext.getOutputStream()
-                        };
+                    if (this.vInternalOutputStream != null)
+                        this.InternalOutputStream = this.vInternalOutputStream();
 
-                    }
-                    catch
-                    {
-                        throw;
-                    }
+                 
 
-                return InternalOutputStream;
+                return this.InternalOutputStream;
             }
         }
         #endregion
 
 
+        #region AddHeader
+        public Action<string, string> vAddHeader;
         public void AddHeader(string name, string value)
         {
-            this.InternalContext.addHeader(name, value);
+            if (vAddHeader != null)
+                vAddHeader(name, value);
         }
+        #endregion
 
         public void WriteFile(string filename)
         {
@@ -144,20 +152,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
 
 
 
-
+        public Action vClose;
         public void Close()
         {
-            if (this.InternalOutputStream != null)
-                return;
+            if (this.vClose != null)
+                this.vClose();
 
-            try
-            {
-                this.InternalContext.getWriter().flush();
-            }
-            catch
-            {
-                throw;
-            }
         }
 
         public void Flush()
@@ -172,6 +172,10 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
             }
         }
 
+
+
+
+        #region SetCookie
         public HttpCookieCollection Cookies { get; set; }
 
         public __HttpResponse()
@@ -190,5 +194,6 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
                 e.Name + "=" + e.Value + ";  path=/");
 
         }
+        #endregion
     }
 }

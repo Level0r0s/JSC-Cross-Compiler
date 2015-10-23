@@ -237,22 +237,30 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Web
 
             InternalWriteHeaders();
 
-            try
-            {
-                // assets only?
-                var assets = InternalContext.getResources().getAssets();
+
+            // tested by?
+            var bytes = global::System.IO.File.ReadAllBytes(filename);
+
+            this.InternalStream.Write(bytes, 0, bytes.Length);
+            this.Flush();
+
+            //try
+            //{
+
+            //    // assets only?
+            //    var assets = InternalContext.getResources().getAssets();
 
 
-                var s = assets.open(filename).ToNetworkStream();
-                // should we report the size?
-                s.CopyTo(InternalStream);
+            //    var s = assets.open(filename).ToNetworkStream();
+            //    // should we report the size?
+            //    s.CopyTo(InternalStream);
 
-                InternalStream.Flush();
-            }
-            catch
-            {
-                throw;
-            }
+            //    InternalStream.Flush();
+            //}
+            //catch
+            //{
+            //    throw;
+            //}
         }
 
         public void Flush()

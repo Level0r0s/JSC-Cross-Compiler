@@ -18,6 +18,8 @@ namespace TestUserHostAddress
     public class ApplicationWebService
     {
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151022/httprequest
+        // Z:\jsc.svn\examples\javascript\appengine\test\TestRedirect\ApplicationWebService.cs
+
 
         public void Handler(ScriptCoreLib.Ultra.WebService.WebServiceHandler h)
         {

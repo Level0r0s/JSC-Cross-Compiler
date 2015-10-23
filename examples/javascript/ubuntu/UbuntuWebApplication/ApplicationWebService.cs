@@ -30,6 +30,11 @@ namespace UbuntuWebApplication
             y(e);
         }
 
+        public void Handler(ScriptCoreLib.Ultra.WebService.WebServiceHandler h)
+        {
+        }
+
+
     }
 }
 
