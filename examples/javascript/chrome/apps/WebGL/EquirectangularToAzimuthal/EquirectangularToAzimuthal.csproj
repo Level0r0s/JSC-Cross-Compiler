@@ -143,30 +143,7 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <Content Include="Textures2.vhd\20151016T0000.png" />
-    <Content Include="Textures2.vhd\20151016T0100.png" />
-    <Content Include="Textures2.vhd\20151016T0200.png" />
-    <Content Include="Textures2.vhd\20151016T0300.png" />
-    <Content Include="Textures2.vhd\20151016T0400.png" />
-    <Content Include="Textures2.vhd\20151016T0500.png" />
-    <Content Include="Textures2.vhd\20151016T0600.png" />
-    <Content Include="Textures2.vhd\20151016T0700.png" />
-    <Content Include="Textures2.vhd\20151016T0800.png" />
-    <Content Include="Textures2.vhd\20151016T0900.png" />
-    <Content Include="Textures2.vhd\20151016T1000.png" />
-    <Content Include="Textures2.vhd\20151016T1100.png" />
-    <Content Include="Textures2.vhd\20151016T1200.png" />
-    <Content Include="Textures2.vhd\20151016T1300.png" />
-    <Content Include="Textures2.vhd\20151016T1400.png" />
-    <Content Include="Textures2.vhd\20151016T1500.png" />
-    <Content Include="Textures2.vhd\20151016T1600.png" />
-    <Content Include="Textures2.vhd\20151016T1700.png" />
-    <Content Include="Textures2.vhd\20151016T1800.png" />
-    <Content Include="Textures2.vhd\20151016T1900.png" />
-    <Content Include="Textures2.vhd\20151016T2000.png" />
-    <Content Include="Textures2.vhd\20151016T2100.png" />
-    <Content Include="Textures2.vhd\20151016T2200.png" />
-    <Content Include="Textures2.vhd\20151016T2300.png" />
+    <Content Include="Textures\20151001T0100.jpg" />
     <Content Include="Textures\BKlgO.jpg" />
     <Content Include="Textures\sunmap.png" />
     <None Include="app.config">

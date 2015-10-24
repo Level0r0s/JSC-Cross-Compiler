@@ -24,6 +24,8 @@ namespace EquirectangularToAzimuthal
     using ScriptCoreLib.GLSL;
     using System.Diagnostics;
     using gl = WebGLRenderingContext;
+    using EquirectangularToAzimuthal.HTML.Images.FromAssets;
+
 
 
     /// <summary>
@@ -255,7 +257,8 @@ namespace EquirectangularToAzimuthal
                     pass.MakeHeader_Image();
                     pass.NewShader_Image(vs);
 
-                    var all = new Textures2 { }.Images;
+                    //var all = new Textures2 { }.Images;
+                    var all = new[] { new _20151001T0100() };
 
                     new { }.With(
                         async delegate
@@ -312,6 +315,7 @@ namespace EquirectangularToAzimuthal
 
 
                         // what does it do?
+                        // need nonpartial code.
                         gl.flush();
 
                     }

@@ -8,11 +8,11 @@
     <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UbuntuTestUserHostAddress</RootNamespace>
-    <AssemblyName>UbuntuTestUserHostAddress</AssemblyName>
+    <RootNamespace>UbuntuTestMySQLInsert</RootNamespace>
+    <AssemblyName>UbuntuTestMySQLInsert</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>UbuntuTestUserHostAddress.Program</StartupObject>
+    <StartupObject>UbuntuTestMySQLInsert.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -102,6 +102,10 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.XMySQL, Version=6.8.3.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\System.Data.XMySQL.1.0.0.0\lib\System.Data.XMySQL.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Design" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Web" />
@@ -116,8 +120,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="UbuntuTestUserHostAddress.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\UbuntuTestUserHostAddress.AssetsLibrary.dll</HintPath>
+    <Reference Include="UbuntuTestMySQLInsert.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\UbuntuTestMySQLInsert.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
@@ -126,17 +130,20 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Design\App.css" />
-    <Content Include="Design\App.htm">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Design\App.htm" />
     <Compile Include="ApplicationWebService.cs" />
     <Compile Include="Application.cs" />
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
+    <Content Include="References\mysql-connector-java-5.1.37-bin.jar" />
     <None Include="app.config" />
+    <None Include="Data\PerformanceResourceTimingData2.xlsx" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\PerformanceResourceTimingData2ApplicationPerformanceBindingSource.datasource" />
+    <None Include="Properties\DataSources\PerformanceResourceTimingData2ApplicationResourcePerformanceBindingSource.datasource" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
