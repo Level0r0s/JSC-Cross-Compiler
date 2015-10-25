@@ -33,14 +33,44 @@ namespace UbuntuTestMySQLInsert
             new { }.With(
                 async delegate
                 {
+                    new IHTMLButton { "ReadAll" }.AttachToDocument().onclick += async delegate
+                    {
+                        new IHTMLHorizontalRule { }.AttachToDocument();
+                        foreach (var row in await base.ReadAll())
+                        {
+                            new IHTMLPre { new { row.Key, row.z } }.AttachToDocument();
+                        }
+
+                    };
+
+                    new IHTMLButton { "TakeLastOne" }.AttachToDocument().onclick += async delegate
+                    {
+                        new IHTMLHorizontalRule { }.AttachToDocument();
+                        var row = await base.TakeLastOne();
+                        new IHTMLPre { new { row.Key, row.z } }.AttachToDocument();
+
+                    };
+
+                    new IHTMLButton { "TakeOne" }.AttachToDocument().onclick += async delegate
+                    {
+                        new IHTMLHorizontalRule { }.AttachToDocument();
+                        var row = await base.TakeOne();
+                        new IHTMLPre { new { row.Key, row.z } }.AttachToDocument();
+
+                    };
+
                     var AddAndCount = new IHTMLButton { "AddAndCount" }.AttachToDocument();
+
+                    var content = "world";
 
                     while (await AddAndCount.async.onclick)
                     {
 
                         var count = await base.AddAndCount(
-                            new XElement("hello", "world")
+                            new XElement("hello", content)
                         );
+
+                        content = "the one after " + new { count };
 
                         new IHTMLPre { new { count } }.AttachToDocument();
                     }

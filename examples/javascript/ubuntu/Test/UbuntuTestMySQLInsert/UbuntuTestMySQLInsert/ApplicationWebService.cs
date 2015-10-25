@@ -180,7 +180,7 @@ namespace UbuntuTestMySQLInsert
                     //EventTime = DateTime.Now.AddDays(-0),
 
                     // conversion done in Insert?
-                    z = new XElement("goo", "foo")
+                    z = new XElement("goo", value)
                 }
             );
 
@@ -197,5 +197,58 @@ namespace UbuntuTestMySQLInsert
             return c;
         }
 
+        public async Task<PerformanceResourceTimingData2ApplicationPerformanceRow> TakeOne()
+        {
+            Console.WriteLine("enter TakeOne ascending");
+
+            return (
+                from x in new PerformanceResourceTimingData2ApplicationPerformance()
+
+                where x.connectStart == 5
+
+                orderby x.Key ascending
+
+                select x
+
+            ).FirstOrDefault();
+        }
+
+        public async Task<PerformanceResourceTimingData2ApplicationPerformanceRow> TakeLastOne()
+        {
+            Console.WriteLine("enter TakeOne descending");
+
+            var value = (
+                from x in new PerformanceResourceTimingData2ApplicationPerformance()
+
+                where x.connectStart == 5
+
+                // can we get get the last one thanks?
+                orderby x.Key descending
+
+                select x
+
+            ).FirstOrDefault();
+
+            Console.WriteLine("exit TakeOne descending " + new { value.Key });
+            return value;
+        }
+
+
+        public async Task<PerformanceResourceTimingData2ApplicationPerformanceRow[]> ReadAll()
+        {
+            Console.WriteLine("enter ReadAll");
+
+            return (
+                from x in new PerformanceResourceTimingData2ApplicationPerformance()
+
+                where x.connectStart == 5
+
+                // can we get get the last one thanks?
+                orderby x.Key descending
+
+                select x
+
+            ).ToArray();
+        }
     }
 }

@@ -25,12 +25,12 @@ namespace System.Data
     public static partial class QueryStrategyOfTRowExtensions
     {
         // X:\jsc.svn\examples\javascript\LINQ\test\TestOrderBy\TestOrderBy\ApplicationWebService.cs
-
+        [Obsolete]
         public static void MutableOrderBy(IQueryStrategy that, Expression selector, bool desc = false)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151025
 
-
-            Console.WriteLine("MutableOrderBy " + new { selector });
+            Console.WriteLine("MutableOrderBy " + new { selector, desc });
 
             that.GetCommandBuilder().Add(
              state =>

@@ -303,7 +303,8 @@ namespace ScriptCoreLib.Query.Experimental
                                 FieldType = f.FieldType;
                             }
 
-                            Console.WriteLine("ReadToElement " + new { xMemberName, FieldType, __valueType });
+                            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151025
+                            Console.WriteLine("ReadToElement :306 " + new { xMemberName, FieldType, __valueType, __value });
 
                             // X:\jsc.svn\examples\javascript\LINQ\test\auto\TestSelect\TestSelectMath\Program.cs
                             if (FieldType == typeof(XElement))

@@ -32,7 +32,12 @@ namespace ScriptCoreLib.Query.Experimental
 
             public override string ToString()
             {
-                return "orderby ?";
+                var f = keySelector.FirstOrDefault();
+
+                if (f.ascending)
+                    return "orderby ascending";
+
+                return "orderby descending";
             }
         }
 
@@ -83,6 +88,10 @@ namespace ScriptCoreLib.Query.Experimental
         //[Obsolete("mutable")]
         public static IQueryStrategy<TElement> OrderBy<TElement, TKey>(this IQueryStrategy<TElement> source, Expression<Func<TElement, TKey>> keySelector)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151025
+            // where is this command rendered?
+            // tested by Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuTestMySQLInsert\UbuntuTestMySQLInsert\ApplicationWebService.cs
+
             return new xOrderBy<TElement>
             {
                 source = source,
