@@ -12,7 +12,8 @@
     <AssemblyName>TestXMLSelect</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Console</MyType>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -139,6 +140,7 @@
     <Compile Include="Program.vb">
       <DependentUpon>Application.vb</DependentUpon>
     </Compile>
+    <None Include="app.config" />
     <None Include="Data\PerformanceResourceTimingData2.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\PerformanceResourceTimingData2ApplicationPerformanceBindingSource.datasource" />

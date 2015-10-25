@@ -83,6 +83,8 @@ namespace AsyncWebMethod
             return xml;
         }
 
+
+        // this conflicts with our datarows?
         public static implicit operator data(XElement e)
         {
             //Console.WriteLine(new { e });

@@ -8,6 +8,9 @@ namespace ScriptCoreLib.Ultra.Reflection
 {
     public class ConversionPattern
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151025/testdatarowkey
+        // z:\jsc.svn\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\Ultra\Reflection\XElementConversionPattern.cs
+
         public readonly MethodInfo LocalToTarget;
         public readonly MethodInfo TargetToLocal;
 

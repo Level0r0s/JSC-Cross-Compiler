@@ -18,6 +18,16 @@ namespace TestDataRowKey
     /// </summary>
     public class ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151025/testdatarowkey
+
+        public void TakeLastOne(Action<PerformanceResourceTimingData2ApplicationPerformanceRow> yield)
+        {
+            Console.WriteLine("enter TakeOne descending");
+            var value = new PerformanceResourceTimingData2ApplicationPerformanceRow { Key = (PerformanceResourceTimingData2ApplicationPerformanceKey)13, z = new XElement("hello", "world") };
+            Console.WriteLine("exit TakeOne descending " + new { value.Key });
+            yield(value);
+        }
+
         public async Task<PerformanceResourceTimingData2ApplicationPerformanceRow> TakeLastOne()
         {
             Console.WriteLine("enter TakeOne descending");

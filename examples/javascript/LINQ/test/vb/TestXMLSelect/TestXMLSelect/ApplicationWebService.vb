@@ -48,6 +48,7 @@ Public Class ApplicationWebService
 
 
         x.Insert(
+            ' disabled
             <div style='color:red;'>boo1! count: <%= x.Count() %></div>,
             <div style='color:red;'>boo2! count: <%= x.Count() %></div>,
             <div style='color:red;'>boo3! count: <%= x.Count() %></div>

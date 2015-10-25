@@ -148,7 +148,7 @@ namespace ScriptCoreLib.Ultra.WebService
 
                         var value = x.InternalFields[InternalFieldName];
 
-                        Console.WriteLine(new { InternalFieldName, value });
+                        Console.WriteLine("WriteInternalFields " + new { InternalFieldName, value });
 
                         if (value != null)
                         {

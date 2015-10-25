@@ -47,6 +47,18 @@ namespace TestDataRowKey
                 new IHTMLPre { new { row.Key, row.z } }.AttachToDocument();
 
             };
+
+            new IHTMLButton { "TakeLastOne yield" }.AttachToDocument().onclick += delegate
+           {
+               new IHTMLHorizontalRule { }.AttachToDocument();
+               base.TakeLastOne(
+                   row =>
+                   {
+                       new IHTMLPre { new { row.Key, row.z } }.AttachToDocument();
+                   }
+               );
+
+           };
         }
 
     }
