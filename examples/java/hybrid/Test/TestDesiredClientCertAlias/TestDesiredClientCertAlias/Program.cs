@@ -29,47 +29,39 @@ namespace TestDesiredClientCertAlias
         public void checkServerTrusted(X509Certificate[] arg0, String arg1) { }
         public X509Certificate[] getAcceptedIssuers()
         {
-            //startHandshake...
-            //{ Message = java.lang.NullPointerException, StackTrace = javax.net.ssl.SSLException: java.lang.NullPointerException
-            //        at sun.security.ssl.Alerts.getSSLException(Unknown Source)
-            //        at sun.security.ssl.SSLSocketImpl.fatal(Unknown Source)
-            //        at sun.security.ssl.SSLSocketImpl.fatal(Unknown Source)
-            //        at sun.security.ssl.SSLSocketImpl.handleException(Unknown Source)
-            //        at sun.security.ssl.SSLSocketImpl.startHandshake(Unknown Source)
-            //        at sun.security.ssl.SSLSocketImpl.startHandshake(Unknown Source)
-            //        at TestDesiredClientCertAlias.Program.main(Program.java:138)
-            //Caused by: java.lang.NullPointerException
-            //        at sun.security.ssl.HandshakeMessage$CertificateRequest.<init>(Unknown Source)
-            //        at sun.security.ssl.ServerHandshaker.clientHello(Unknown Source)
-            //        at sun.security.ssl.ServerHandshaker.processMessage(Unknown Source)
-            //        at sun.security.ssl.Handshaker.processLoop(Unknown Source)
-            //        at sun.security.ssl.Handshaker.process_record(Unknown Source)
-            //        at sun.security.ssl.SSLSocketImpl.readRecord(Unknown Source)
-            //        at sun.security.ssl.SSLSocketImpl.performInitialHandshake(Unknown Source)
-            //        ... 3 more
-
             return new X509Certificate[0];
         }
     }
 
     class localKeyManager : javax.net.ssl.X509ExtendedKeyManager
     {
-        //chooseServerAlias { keyType = EC_EC }
-        //getClientAliases
-        //chooseServerAlias { keyType = RSA }
-        //getClientAliases
-        //chooseServerAlias { keyType = RSA }
-        //getClientAliases
-        //chooseServerAlias { keyType = RSA }
-        //getClientAliases
-        //chooseServerAlias { keyType = RSA }
-        //getClientAliases
+        // this basically works.
+        // yet in windows keystore we seem to reuse the same alias for all ports and this confuses java
 
 
-        public static KeyManager[] WindowsMYKeyManagers()
+
+        //enter localKeyManager
+        //{ xKeyStoreDefaultType = Windows-MY }
+        //localKeyManager { xKeyStore = java.security.KeyStore@10ce397 }
+        //localKeyManager { kmf = javax.net.ssl.KeyManagerFactory@1ba4159 }
+        //localKeyManager { Length = 1 }
+        //localKeyManager { xX509KeyManager = sun.security.ssl.SunX509KeyManagerImpl@1bb9829 }
+        //{ ss443 = [SSL: ServerSocket[addr=0.0.0.0/0.0.0.0,localport=8443]] }
+        //chooseServerAlias { keyType = EC_EC, StackTrace = <__StackTrace> }
+        //getPrivateKey
+        //getCertificateChain { alias = 192.168.1.12 }
+        //chooseServerAlias { keyType = RSA, StackTrace = <__StackTrace> }
+        //getPrivateKey
+        //getCertificateChain { alias = 192.168.1.12 }
+
+        KeyManager[] KeyManagers = new KeyManager[0];
+
+
+        X509KeyManager InternalX509KeyManager;
+
+        public localKeyManager()
         {
-            Console.WriteLine("enter WindowsMYKeyManagers");
-            var KeyManagers = new KeyManager[0];
+            Console.WriteLine("enter localKeyManager");
 
 
             try
@@ -88,37 +80,40 @@ namespace TestDesiredClientCertAlias
                 }
                 catch
                 {
-                    xKeyStoreDefaultType = java.security.KeyStore.getDefaultType();
-                    // http://www.coderanch.com/t/377172/java/java/cacerts-JAVA-HOME-jre-lib
-                    // /usr/lib/jvm/default-java/jre/lib/security/cacerts
+                    //xKeyStoreDefaultType = java.security.KeyStore.getDefaultType();
+                    //// http://www.coderanch.com/t/377172/java/java/cacerts-JAVA-HOME-jre-lib
+                    //// /usr/lib/jvm/default-java/jre/lib/security/cacerts
 
-                    Console.WriteLine(new { xKeyStoreDefaultType });
-                    xKeyStore = KeyStore.getInstance(xKeyStoreDefaultType);
+                    //Console.WriteLine(new { xKeyStoreDefaultType });
+                    //xKeyStore = KeyStore.getInstance(xKeyStoreDefaultType);
 
-                    var fa = new FileInfo(typeof(Program).Assembly.Location);
-                    var keystorepath = fa.Directory.FullName + "/domain.keystore";
+                    //var fa = new FileInfo(typeof(Program).Assembly.Location);
+                    //var keystorepath = fa.Directory.FullName + "/domain.keystore";
 
-                    try
+                    //try
+                    //{
+                    //    xFileInputStream = new FileInputStream(keystorepath);
+                    //}
+                    //catch 
                     {
-                        xFileInputStream = new FileInputStream(keystorepath);
+                        throw;
                     }
-                    catch { throw; }
                 }
 
-                Console.WriteLine("WindowsMYKeyManagers " + new { xKeyStore });
+                Console.WriteLine("localKeyManager " + new { xKeyStore });
 
                 xKeyStore.load(xFileInputStream, null);
 
                 KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
 
-                Console.WriteLine("WindowsMYKeyManagers " + new { kmf });
+                Console.WriteLine("localKeyManager " + new { kmf });
 
 
                 kmf.init(xKeyStore, null);
 
                 KeyManagers = kmf.getKeyManagers();
 
-                Console.WriteLine("WindowsMYKeyManagers " + new { KeyManagers.Length });
+                Console.WriteLine("localKeyManager " + new { KeyManagers.Length });
 
 
                 //{ xKeyStoreDefaultType = Windows-MY }
@@ -135,26 +130,13 @@ namespace TestDesiredClientCertAlias
                     var xX509KeyManager = KeyManager as X509KeyManager;
                     if (xX509KeyManager != null)
                     {
-                        Console.WriteLine("WindowsMYKeyManagers " + new { xX509KeyManager });
+                        Console.WriteLine("localKeyManager " + new { xX509KeyManager });
 
+                        InternalX509KeyManager = xX509KeyManager;
                     }
                 }
 
-                //WindowsMYKeyManagers { Length = 1 }
-                //WindowsMYKeyManagers { xX509KeyManager = sun.security.ssl.SunX509KeyManagerImpl@ea3932 }
 
-
-                //KeyStore ks = KeyStore.getInstance("JKS");
-                //// initialize KeyStore object using keystore name
-                //ks.load(new FileInputStream(keyFile), null);
-                //kmf.init(ks, keystorePasswd.toCharArray());
-                //ret = kmf.getKeyManagers();
-
-                // chooseServerAlias { keyType = RSA, StackTrace = <__StackTrace> }
-
-                //java.security.KeyStore ks = null;
-
-                //KeyManagerFactory kmf
 
                 // http://stackoverflow.com/questions/15076820/java-sslhandshakeexception-no-cipher-suites-in-common
                 // http://stackoverflow.com/questions/7535154/chrome-closing-connection-on-handshake-with-java-ssl-server
@@ -164,29 +146,6 @@ namespace TestDesiredClientCertAlias
                 throw;
 
             }
-
-            return KeyManagers;
-        }
-
-        public localKeyManager()
-        {
-
-            //enter localKeyManager
-            //localKeyManager { xKeyStore = java.security.KeyStore@1496e57 }
-            //localKeyManager { kmf = javax.net.ssl.KeyManagerFactory@1408325 }
-            //{ Message = Uninitialized keystore, StackTrace = java.lang.RuntimeException: Uninitialized keystore
-            //        at TestDesiredClientCertAlias.localKeyManager.<init>(localKeyManager.java:55)
-            //        at TestDesiredClientCertAlias.Program.main(Program.java:83)
-            //Caused by: java.security.KeyStoreException: Uninitialized keystore
-            //        at java.security.KeyStore.aliases(Unknown Source)
-            //        at sun.security.ssl.SunX509KeyManagerImpl.<init>(Unknown Source)
-            //        at sun.security.ssl.KeyManagerFactoryImpl$SunX509.engineInit(Unknown Source)
-            //        at javax.net.ssl.KeyManagerFactory.init(Unknown Source)
-            //        at TestDesiredClientCertAlias.localKeyManager.<init>(localKeyManager.java:49)
-            //        ... 1 more
-            // }
-
-
         }
 
         // the alias name of a matching key or null if there are no matches.
@@ -207,9 +166,6 @@ namespace TestDesiredClientCertAlias
             return "192.168.1.12";
         }
 
-        // %% Invalidated:  [Session-1, SSL_NULL_WITH_NULL_NULL]
-
-
         public override string chooseClientAlias(string[] keyType, java.security.Principal[] issuers, java.net.Socket socket)
         {
             Console.WriteLine("chooseClientAlias " + new { StackTrace = new System.Diagnostics.StackTrace() });
@@ -229,32 +185,32 @@ namespace TestDesiredClientCertAlias
 
 
             // client does not have an alies does it?
-            return "wtf";
+            return this.InternalX509KeyManager.chooseClientAlias(keyType, issuers, socket);
         }
 
 
         public override X509Certificate[] getCertificateChain(string alias)
         {
-            Console.WriteLine("getCertificateChain");
-            return null;
+            Console.WriteLine("getCertificateChain " + new { alias });
+            return this.InternalX509KeyManager.getCertificateChain(alias);
         }
 
         public override string[] getClientAliases(string keyType, java.security.Principal[] issuers)
         {
             Console.WriteLine("getClientAliases");
-            return null;
+            return this.InternalX509KeyManager.getClientAliases(keyType, issuers);
         }
 
         public override java.security.PrivateKey getPrivateKey(string alias)
         {
-            Console.WriteLine("getClientAliases");
-            return null;
+            Console.WriteLine("getPrivateKey");
+            return this.InternalX509KeyManager.getPrivateKey(alias);
         }
 
         public override string[] getServerAliases(string keyType, java.security.Principal[] issuers)
         {
             Console.WriteLine("getServerAliases");
-            return null;
+            return new[] { "192.168.1.12" };
         }
 
         public override string chooseEngineClientAlias(string[] keyType, java.security.Principal[] issuers, javax.net.ssl.SSLEngine engine)
@@ -422,8 +378,195 @@ namespace TestDesiredClientCertAlias
                     }
                 );
 
+                Console.WriteLine("-");
 
                 // now lets start a ssl server and convince jvm to use the first friendly name we found..
+
+                var xSSLContext = javax.net.ssl.SSLContext.getInstance("TLSv1.2");
+                Console.WriteLine(new { xSSLContext });
+                var xTrustEveryoneManager = new[] { new TrustEveryoneManager() };
+                var xKeyManager = new[] { new localKeyManager() };
+
+                xSSLContext.init(
+                    // SunMSCAPI ?
+                    xKeyManager,
+                    xTrustEveryoneManager,
+                    new java.security.SecureRandom()
+                );
+
+                var xSSLServerSocketFactory = xSSLContext.getServerSocketFactory();
+                var ss443 = xSSLServerSocketFactory.createServerSocket(8443);
+                Console.WriteLine(new { ss443 });
+
+                // http://developer.android.com/reference/javax/net/ssl/SSLServerSocket.html
+                var xSSLServerSocket = ss443 as javax.net.ssl.SSLServerSocket;
+                xSSLServerSocket.setEnabledProtocols(new[] { "TLSv1.2", "SSLv2Hello" });
+
+
+                var ok = true;
+                while (ok)
+                {
+                    //Console.WriteLine("accept...");
+                    var xSSLSocket = ss443.accept() as javax.net.ssl.SSLSocket;
+
+
+
+
+                    //Console.WriteLine(new { xSSLSocket });
+
+                    // http://security.stackexchange.com/questions/76993/now-that-it-is-2015-what-ssl-tls-cipher-suites-should-be-used-in-a-high-securit
+                    // java u suck.
+
+                    //Console.WriteLine("startHandshake...");
+                    try
+                    {
+                        // http://developer.android.com/reference/javax/net/ssl/HandshakeCompletedEvent.html
+
+                        Func<string> getdata = () =>
+                             "HTTP/1.0 200 OK\r\nConnection: close\r\n\r\n<h1>hello world</h1>";
+
+                        // can we await for it?
+                        xSSLSocket.addHandshakeCompletedListener(
+                            new xHandshakeCompletedListener
+                            {
+                                yield = e =>
+                                {
+                                    try
+                                    {
+                                        Console.WriteLine("xHandshakeCompletedListener " + new { e.getPeerCertificates().Length });
+
+                                        var c = e.getPeerCertificates().FirstOrDefault() as X509Certificate;
+
+                                        var x509 = new __X509Certificate2 { InternalElement = c };
+
+
+                                        if (c != null)
+                                        {
+
+                                            getdata = () =>
+                                                "HTTP/1.0 200 OK\r\nConnection: close\r\n\r\n<h1>authenticated!</h1>"
+                                                + new XElement("pre", new { x509.Subject, x509.SerialNumber }.ToString()
+                                                    );
+                                        }
+                                    }
+                                    catch (Exception fault)
+                                    {
+                                        //Caused by: javax.net.ssl.SSLPeerUnverifiedException: peer not authenticated
+                                        //        at sun.security.ssl.SSLSessionImpl.getPeerCertificates(Unknown Source)
+                                        //        at javax.net.ssl.HandshakeCompletedEvent.getPeerCertificates(Unknown Source)
+
+                                        //throw;
+
+                                        Console.WriteLine("getPeerCertificates " + new { fault.Message });
+                                    }
+                                }
+                            }
+                        );
+
+                        xSSLSocket.startHandshake();
+
+
+
+                        //Cipher Suites: [
+                        //    TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, 
+                        //    TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, 
+                        //    TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, 
+                        //    Unknown 0xcc:0x14, 
+                        //Unknown 0xcc:0x13, 
+                        //TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, 
+                        //TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, 
+                        //TLS_DHE_RSA_WITH_AES_256_CBC_SHA, 
+                        //TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, 
+                        //TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, 
+                        //TLS_DHE_RSA_WITH_AES_128_CBC_SHA, 
+                        //TLS_RSA_WITH_AES_128_GCM_SHA256, 
+                        //TLS_RSA_WITH_AES_256_CBC_SHA, 
+                        //TLS_RSA_WITH_AES_128_CBC_SHA, 
+                        //SSL_RSA_WITH_3DES_EDE_CBC_SHA]
+
+                        // http://www.e2college.com/blogs/java_security/ssl_handshake_failure_due_to_unsupported_cipher_su.html
+
+
+
+
+
+
+                        // Error	573	The type 'ScriptCoreLib.Shared.BCLImplementation.System.IO.__Stream' is defined in an assembly that is not referenced. You must add a reference to assembly 'ScriptCoreLib, Version=4.6.0.0, Culture=neutral, PublicKeyToken=null'.	Z:\jsc.svn\examples\java\hybrid\Test\JVMCLRSSLServerSocket\JVMCLRSSLServerSocket\Program.cs	68	17	JVMCLRSSLServerSocket
+
+                        var xNetworkStream = new __NetworkStream
+                        {
+                            InternalInputStream = xSSLSocket.getInputStream(),
+                            InternalOutputStream = xSSLSocket.getOutputStream()
+                        };
+
+                        Console.WriteLine(new { xNetworkStream });
+
+                        // http://stackoverflow.com/questions/13874387/create-app-with-sslsocket-java
+
+                        // http://www.java2s.com/Tutorial/Java/0320__Network/CreatinganSSLServerSocket.htm
+                        // http://192.168.1.12:8443/
+                        // chrome does a download of NAK EXT SOH NUL STX STX ??
+
+                        // { byte0 = 71 }
+                        //var byte0 = xNetworkStream.ReadByte();
+
+                        //{ cf = sun.security.ssl.SSLSocketFactoryImpl@93f13f }
+                        //{ ssf = sun.security.ssl.SSLServerSocketFactoryImpl@15dc721 }
+                        //{ ss443 = [SSL: ServerSocket[addr=0.0.0.0/0.0.0.0,localport=8443]] }
+                        //{ xSSLSocket = 1747f59[SSL_NULL_WITH_NULL_NULL: Socket[addr=/192.168.1.196,port=55953,localport=8443]] }
+                        //{ xNetworkStream = ScriptCoreLibJava.BCLImplementation.System.Net.Sockets.__NetworkStream@538cc2 }
+                        //{ byte0 = -1 }
+
+                        //Console.WriteLine(new { byte0 });
+                        //Console.WriteLine(new { byte0 });
+
+
+
+
+                        //{ Message = Java heap space, StackTrace = java.lang.OutOfMemoryError: Java heap space
+                        //        at ScriptCoreLibJava.BCLImplementation.System.IO.__MemoryStream.set_Capacity(__MemoryStream.java:110)
+                        //        at ScriptCoreLibJava.BCLImplementation.System.IO.__MemoryStream.InternalEnsureCapacity(__MemoryStream.java:156)
+                        //        at ScriptCoreLibJava.BCLImplementation.System.IO.__MemoryStream.WriteByte(__MemoryStream.java:140)
+                        //        at ScriptCoreLibJava.BCLImplementation.System.IO.__StreamReader.ReadLine(__StreamReader.java:51)
+                        //        at JVMCLRSSLServerSocket.Program.main(Program.java:145)
+
+                        var xStreamReader = new StreamReader(xNetworkStream);
+                        var line0 = xStreamReader.ReadLine();
+                        Console.WriteLine(new { line0 });
+
+                        // { line0 = GET / HTTP/1.1 }
+
+
+                        // http://stackoverflow.com/questions/3662837/java-no-cipher-suites-in-common-issue-when-trying-to-securely-connect-to-serve
+                        // http://stackoverflow.com/questions/15076820/java-sslhandshakeexception-no-cipher-suites-in-common
+
+
+                        //Implementation not found for type import :
+                        //type: System.IO.StreamWriter
+                        //method: Void .ctor(System.IO.Stream)
+                        //var xStreamWriter = new StreamWriter(xNetworkStream);
+
+                        var data =
+                           getdata();
+
+                        var bytes = Encoding.UTF8.GetBytes(data);
+
+                        xNetworkStream.Write(bytes, 0, bytes.Length);
+
+
+                        xNetworkStream.Close();
+
+                    }
+                    catch (Exception fault)
+                    {
+                        reportHansshakeFault(fault);
+
+
+                    }
+
+                    //Thread.Sleep(5000);
+                }
+
 
             }
             catch (Exception err)
@@ -442,7 +585,30 @@ namespace TestDesiredClientCertAlias
             Console.ReadLine();
         }
 
+        private static void reportHansshakeFault(Exception fault)
+        {
+            //startHandshake { Message = Unrecognized SSL message, plaintext connection? }
+            //startHandshake { Message = Remote host closed connection during handshake }
+            var skipTLSv1 = fault.Message.Contains("Client requested protocol TLSv1");
+            var skipTLSv11 = fault.Message.Contains("Client requested protocol TLSv1.1");
 
+            // unable to recover from if/else detection at JVMCLRSSLServerSocket.Program.Main
+
+            var skip = skipTLSv1 || skipTLSv11;
+
+            if (skip)
+                return;
+
+            Console.WriteLine(
+                "startHandshake " +
+                new
+                {
+                    fault.Message
+                    //,
+                    //fault.StackTrace
+                }
+                );
+        }
 
     }
 
