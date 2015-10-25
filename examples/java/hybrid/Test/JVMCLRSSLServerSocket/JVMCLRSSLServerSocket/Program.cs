@@ -118,7 +118,31 @@ namespace JVMCLRSSLServerSocket
 
                 KeyManagers = kmf.getKeyManagers();
 
-                Console.WriteLine("WindowsMYKeyManagers " + new { KeyManagers });
+                Console.WriteLine("WindowsMYKeyManagers " + new { KeyManagers.Length });
+
+
+                //{ xKeyStoreDefaultType = Windows-MY }
+                //WindowsMYKeyManagers { xKeyStore = java.security.KeyStore@ac4d3b }
+                //WindowsMYKeyManagers { kmf = javax.net.ssl.KeyManagerFactory@1c7d56b }
+                //WindowsMYKeyManagers { KeyManagers = [Ljavax.net.ssl.KeyManager;@f77511 }
+
+                // http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/KeyManager.html
+                // http://stackoverflow.com/questions/5292074/how-to-specify-outbound-certificate-alias-for-https-calls
+                // http://www.angelfire.com/or/abhilash/site/articles/jsse-km/customKeyManager.html
+
+                foreach (var KeyManager in KeyManagers)
+                {
+                    var xX509KeyManager = KeyManager as X509KeyManager;
+                    if (xX509KeyManager != null)
+                    {
+                        Console.WriteLine("WindowsMYKeyManagers " + new { xX509KeyManager });
+
+                    }
+                }
+
+                //WindowsMYKeyManagers { Length = 1 }
+                //WindowsMYKeyManagers { xX509KeyManager = sun.security.ssl.SunX509KeyManagerImpl@ea3932 }
+
 
                 //KeyStore ks = KeyStore.getInstance("JKS");
                 //// initialize KeyStore object using keystore name
@@ -545,8 +569,10 @@ namespace JVMCLRSSLServerSocket
                     //"TLS_DHE_RSA_WITH_AES_128_GCM_SHA256"
                 };
 
-                xSSLServerSocket.setNeedClientAuth(true);
-                //xSSLServerSocket.setWantClientAuth(true);
+                // need id?
+                //xSSLServerSocket.setNeedClientAuth(true);
+
+                ////xSSLServerSocket.setWantClientAuth(true);
 
                 //xSSLServerSocket.setEnabledCipherSuites(enabledCipherSuites);
 
@@ -596,9 +622,15 @@ namespace JVMCLRSSLServerSocket
                                                     );
                                         }
                                     }
-                                    catch
+                                    catch (Exception fault)
                                     {
-                                        throw;
+                                        //Caused by: javax.net.ssl.SSLPeerUnverifiedException: peer not authenticated
+                                        //        at sun.security.ssl.SSLSessionImpl.getPeerCertificates(Unknown Source)
+                                        //        at javax.net.ssl.HandshakeCompletedEvent.getPeerCertificates(Unknown Source)
+
+                                        //throw;
+
+                                        Console.WriteLine("getPeerCertificates " + new { fault.Message });
                                     }
                                 }
                             }
@@ -728,6 +760,8 @@ namespace JVMCLRSSLServerSocket
 
         private static void reportHansshakeFault(Exception fault)
         {
+            //startHandshake { Message = Unrecognized SSL message, plaintext connection? }
+            //startHandshake { Message = Remote host closed connection during handshake }
             var skipTLSv1 = fault.Message.Contains("Client requested protocol TLSv1");
             var skipTLSv11 = fault.Message.Contains("Client requested protocol TLSv1.1");
 

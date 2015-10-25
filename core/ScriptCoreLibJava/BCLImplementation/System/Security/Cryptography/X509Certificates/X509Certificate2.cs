@@ -30,6 +30,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography.X509C
 
         public X509Certificate InternalElement;
 
+        public string FriendlyName { get; set; }
+
         public static implicit operator global::System.Security.Cryptography.X509Certificates.X509Certificate2(__X509Certificate2 e)
         {
             return (global::System.Security.Cryptography.X509Certificates.X509Certificate2)(object)e;

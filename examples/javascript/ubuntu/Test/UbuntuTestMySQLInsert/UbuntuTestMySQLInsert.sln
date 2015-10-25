@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuTestMySQLInsert", "UbuntuTestMySQLInsert\UbuntuTestMySQLInsert.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUbuntuMySQLInsert", "..\..\..\LINQ\test\auto\TestSelect\TestUbuntuMySQLInsert\TestUbuntuMySQLInsert.csproj", "{63C46938-EE36-47CD-AB5A-054828B7CE66}"
@@ -14,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Extensions", "..\..\..\..\..\core\ScriptCoreLib.Extensions\ScriptCoreLib.Extensions\ScriptCoreLib.Extensions.csproj", "{94719DE7-1C09-4026-A948-D78EE589F1DC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataRowKey", "..\..\..\data\test\TestDataRowKey\TestDataRowKey.csproj", "{8F2AB681-8490-4A89-BAB5-DE6BE4515F65}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{32042BCB-52EF-42AB-B539-E83599FD613C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -212,5 +216,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{63C46938-EE36-47CD-AB5A-054828B7CE66} = {32042BCB-52EF-42AB-B539-E83599FD613C}
+		{7DA61298-9254-4199-B207-A54801CCDF03} = {32042BCB-52EF-42AB-B539-E83599FD613C}
+		{653234A5-6ACD-46D2-AEA3-2C7C33EC2DA1} = {32042BCB-52EF-42AB-B539-E83599FD613C}
+		{132EB43F-19B4-42AC-8025-3249B129867A} = {32042BCB-52EF-42AB-B539-E83599FD613C}
+		{94719DE7-1C09-4026-A948-D78EE589F1DC} = {32042BCB-52EF-42AB-B539-E83599FD613C}
+		{8F2AB681-8490-4A89-BAB5-DE6BE4515F65} = {32042BCB-52EF-42AB-B539-E83599FD613C}
 	EndGlobalSection
 EndGlobal

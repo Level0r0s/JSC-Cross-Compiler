@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5BC859F8-3F9D-4417-9EC8-7B03C8BD8646}</ProjectGuid>
+    <ProjectGuid>{A8CDE394-B876-453A-B719-922DD86084FE}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JVMCLRSSLServerSocket</RootNamespace>
-    <AssemblyName>JVMCLRSSLServerSocket</AssemblyName>
+    <RootNamespace>TestDesiredClientCertAlias</RootNamespace>
+    <AssemblyName>TestDesiredClientCertAlias</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -100,14 +100,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName)==Debug (
-start /WAIT c:\util\jsc\bin\jsc.meta.exe SkipRewriteToMVSProjectTemplate /ProjectFileName:"$(ProjectPath)" /Assembly:"$(TargetPath)" /AttachDebugger:false /DefaultToDev11:true
-)
+    <PostBuildEvent>
 
 if $(ConfigurationName)==Release (
 start  /WAIT  cmd /C C:\util\jsc\bin\jsc.meta.exe  RewriteToHybridJavaApplication /assembly:$(TargetPath) /xAttachDebugger:true /xDiagnosticsShowStagingFolder:true
 
-copy $(TargetPath) U:\
+rem copy $(TargetPath) U:\
 )
 </PostBuildEvent>
   </PropertyGroup>
