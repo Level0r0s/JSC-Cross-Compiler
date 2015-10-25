@@ -238,7 +238,7 @@ namespace TestYouTubeExtractor
                     var videoDownloader = new VideoDownloader(video, pxa_mp4);
                     videoDownloader.DownloadProgressChanged += (sender, args) =>
                     {
-                        ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(0.01 * args.ProgressPercentage);
+                        //ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(0.01 * args.ProgressPercentage);
 
 
 
@@ -331,7 +331,7 @@ namespace TestYouTubeExtractor
                         var videoDownloader = new VideoDownloader(upgradeTargets.Peek(), pxa_mp4_mp4);
                         videoDownloader.DownloadProgressChanged += (sender, args) =>
                         {
-                            ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(0.01 * args.ProgressPercentage);
+                            //ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(0.01 * args.ProgressPercentage);
 
 
 
@@ -547,7 +547,7 @@ namespace TestYouTubeExtractor
                     // Register the ProgressChanged event and print the current progress
                     videoDownloader.DownloadProgressChanged += (sender, args) =>
                     {
-                        ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(0.01 * args.ProgressPercentage);
+                        //ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowProgress(0.01 * args.ProgressPercentage);
 
 
 
@@ -889,14 +889,14 @@ namespace TestYouTubeExtractor
                         }
                         catch (Exception err)
                         {
-                            ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowError();
+                            //ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowError();
 
                             // https://discutils.codeplex.com/
                             // Message = "Result cannot be called on a failed Match."
                             Console.WriteLine(new { err });
 
                             Thread.Sleep(3000);
-                            ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowNoProgress();
+                            //ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowNoProgress();
 
                         }
 
@@ -1001,14 +1001,14 @@ namespace TestYouTubeExtractor
             }
             catch (Exception err)
             {
-                ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowError();
+                //ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowError();
 
                 // https://discutils.codeplex.com/
                 // Message = "Result cannot be called on a failed Match."
                 Console.WriteLine(new { err });
 
                 Thread.Sleep(3000);
-                ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowNoProgress();
+                //ScriptCoreLib.Desktop.TaskbarProgress.SetMainWindowNoProgress();
 
             }
         }

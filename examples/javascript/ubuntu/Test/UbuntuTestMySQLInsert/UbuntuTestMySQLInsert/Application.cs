@@ -33,13 +33,17 @@ namespace UbuntuTestMySQLInsert
             new { }.With(
                 async delegate
                 {
-                    await new IHTMLButton { "AddAndCount" }.AttachToDocument().async.onclick;
+                    var AddAndCount = new IHTMLButton { "AddAndCount" }.AttachToDocument();
 
-                    var count = await base.AddAndCount(
-                        new XElement("hello", "world")
-                    );
+                    while (await AddAndCount.async.onclick)
+                    {
 
-                    new IHTMLPre { new { count } }.AttachToDocument();
+                        var count = await base.AddAndCount(
+                            new XElement("hello", "world")
+                        );
+
+                        new IHTMLPre { new { count } }.AttachToDocument();
+                    }
 
                 }
             );

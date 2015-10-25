@@ -124,6 +124,8 @@ namespace ScriptCoreLib
                     if (ts.NonScriptTypes != null && ts.NonScriptTypes.Contains(t))
                         return null;
 
+                    // t.Assembly = {ScriptCoreLibJava, Version=4.5.0.0, Culture=neutral, PublicKeyToken=null}
+
                     if (ts.IsScriptLibrary)
                     {
                         // we should not be overriding the script attribute if it already exists.

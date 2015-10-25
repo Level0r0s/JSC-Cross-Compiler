@@ -11,6 +11,11 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using UbuntuTestMySQLInsert.Data;
 
+
+// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151025
+// need it?
+//[assembly: ScriptCoreLib.Shared.ScriptResources("assets/UbuntuTestMySQLInsert")]
+
 namespace UbuntuTestMySQLInsert
 {
     using ScriptCoreLib.Query.Experimental;

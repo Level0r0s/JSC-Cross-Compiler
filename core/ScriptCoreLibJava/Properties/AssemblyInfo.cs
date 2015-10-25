@@ -28,10 +28,12 @@ using ScriptCoreLib;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("4.5.0.0")]
-[assembly: AssemblyFileVersion("4.5.0.0")]
+[assembly: AssemblyVersion("4.6.0.0")]
+[assembly: AssemblyFileVersion("4.6.0.0")]
 
 [assembly: ScriptTypeFilter(ScriptType.Java)]
+
+// Script version cannot change unless this assembly is rebuilt.
 [assembly: Script(IsCoreLib = true)]
 
 [assembly: InternalsVisibleTo("ScriptCoreLibJava.jni")]
