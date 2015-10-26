@@ -17,15 +17,9 @@ namespace TestHopToIFrameAndBack
     /// </summary>
     public class ApplicationWebService
     {
-        /// <summary>
-        /// This Method is a javascript callable method.
-        /// </summary>
-        /// <param name="e">A parameter from javascript.</param>
-        /// <param name="y">A callback to javascript.</param>
-        public void WebMethod2(string e, Action<string> y)
+        public async Task<string> Color()
         {
-            // Send it back to the caller.
-            y(e);
+            return "yellow";
         }
 
     }

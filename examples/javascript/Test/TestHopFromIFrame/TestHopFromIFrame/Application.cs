@@ -23,6 +23,7 @@ using TestHopFromIFrame.HTML.Pages;
 namespace TestHopFromIFrame
 {
     #region HopToParent
+    // Z:\jsc.svn\examples\javascript\Test\TestHopFromIFrame\TestHopFromIFrame\Application.cs
     public struct HopToParent : System.Runtime.CompilerServices.INotifyCompletion
     {
         // basically we have to hibernate the current state to resume
@@ -37,6 +38,7 @@ namespace TestHopFromIFrame
     #endregion
 
     #region HopToIFrame
+    // Z:\jsc.svn\examples\javascript\Test\TestHopFromIFrame\TestHopFromIFrame\Application.cs
     public struct HopToIFrame : System.Runtime.CompilerServices.INotifyCompletion
     {
         // basically we have to hibernate the current state to resume
