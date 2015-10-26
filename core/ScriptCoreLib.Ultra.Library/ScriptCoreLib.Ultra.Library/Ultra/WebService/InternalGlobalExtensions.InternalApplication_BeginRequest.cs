@@ -508,6 +508,9 @@ namespace ScriptCoreLib.Ultra.WebService
             #region WebMethodMetadataToken
             if (Context.Request.HttpMethod == "POST")
             {
+                var cWebMethodMetadataToken = Context.Request.Form.AllKeys.Contains("WebMethodMetadataToken");
+
+                Console.WriteLine("POST is expected to include WebMethodMetadataToken " + new { cWebMethodMetadataToken });
                 // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Net\WebClient.cs
 
                 // who sets WebMethodMetadataToken ?
@@ -523,7 +526,7 @@ namespace ScriptCoreLib.Ultra.WebService
 
                 //var WebMethodMetadataToken = Context.Request.QueryString[InternalWebMethodInfo.QueryKey];
 
-                if (Context.Request.Form.AllKeys.Contains("WebMethodMetadataToken"))
+                if (cWebMethodMetadataToken)
                 {
                     var WebMethodMetadataToken = Context.Request.Form["WebMethodMetadataToken"];
                     //var value_Form = that.InternalContext.Request.Form[key];
@@ -551,7 +554,7 @@ namespace ScriptCoreLib.Ultra.WebService
             if (Context.Request.HttpMethod == "POST")
             {
                 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/04-monese/2014/201401/20140101
-                //Console.WriteLine("about to load params for " + new { handler.WebMethod });
+                Console.WriteLine("about to load params for " + new { handler.WebMethod });
 
                 if (handler.WebMethod == null)
                 {
@@ -743,6 +746,9 @@ namespace ScriptCoreLib.Ultra.WebService
 
             if (Context.Request.HttpMethod == "POST")
             {
+                // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuDualSSLWebApplication\UbuntuDualSSLWebApplication\ApplicationWebService.cs
+                Console.WriteLine("invalid invoke? IE is that you?");
+
                 // we dont know what to do with this POST..
                 Context.Response.StatusCode = 404;
                 that.CompleteRequest();

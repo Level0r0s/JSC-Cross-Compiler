@@ -37,7 +37,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
 
         public void UploadValuesAsync(Uri address, NameValueCollection data)
         {
-            //Console.WriteLine("enter WebClient.UploadValuesAsync");
+            Console.WriteLine("enter WebClient.UploadValuesAsync");
 
             // called by
             // X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\JavaScript\Remoting\InternalWebMethodRequest.cs
@@ -48,7 +48,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
             var x = new IXMLHttpRequest();
 
 
-        
+
 
             x.open(Shared.HTTPMethodEnum.POST, address.ToString(), async: true);
             x.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -180,7 +180,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
             //x.responseType = "text";
 
 
-            //Console.WriteLine("WebClient.UploadValuesAsync IXMLHttpRequest " + new { xFormDataString });
+            // is IE actually sending it? or is our server decoding it wrong?
+            Console.WriteLine("WebClient.UploadValuesAsync IXMLHttpRequest " + new { xFormDataString });
             x.send(xFormDataString);
 
 

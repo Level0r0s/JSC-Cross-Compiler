@@ -24,6 +24,7 @@ using TestSwitchToServiceContextAsync;
 namespace TestHopToIFrameAndBack
 {
     #region HopToParent
+    // Z:\jsc.svn\examples\javascript\Test\TestHopToIFrameAndBack\Application.cs
     // Z:\jsc.svn\examples\javascript\Test\TestHopFromIFrame\TestHopFromIFrame\Application.cs
     public struct HopToParent : System.Runtime.CompilerServices.INotifyCompletion
     {
@@ -65,8 +66,7 @@ namespace TestHopToIFrameAndBack
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
-        static Func<string, string> DecoratedString =
-x => x.Replace("-", "_").Replace("+", "_").Replace("<", "_").Replace(">", "_");
+        static Func<string, string> DecoratedString = x => x.Replace("-", "_").Replace("+", "_").Replace("<", "_").Replace(">", "_");
 
 
         // cuz state jumping wont restore in memory refs yet...
