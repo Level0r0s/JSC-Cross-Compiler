@@ -37,7 +37,10 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography.X509C
             return (global::System.Security.Cryptography.X509Certificates.X509Certificate2)(object)e;
         }
 
-
+        public override string ToString()
+        {
+            return "X509Certificate2 " + new { this.Subject };
+        }
 
         public __X509Certificate2()
         {

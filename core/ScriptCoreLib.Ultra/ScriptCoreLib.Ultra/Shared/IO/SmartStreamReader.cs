@@ -163,7 +163,9 @@ namespace ScriptCoreLib.Shared.IO
 
         public MemoryStream ReadToMemoryStream()
         {
-            Console.WriteLine("enter ReadToMemoryStream");
+            // Z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Web\HttpResponse.cs
+
+            //Console.WriteLine("enter ReadToMemoryStream");
             var target = new MemoryStream();
 
             var xNetworkStream = this.BaseStream as NetworkStream;
@@ -172,9 +174,9 @@ namespace ScriptCoreLib.Shared.IO
             var flag = true;
             while (flag)
             {
-                Console.WriteLine("ReadToMemoryStream before Write " + new { this.InternalBufferCount, xNetworkStream });
+                //Console.WriteLine("ReadToMemoryStream before Write " + new { this.InternalBufferCount, xNetworkStream });
                 target.Write(this.InternalBuffer, 0, this.InternalBufferCount);
-                Console.WriteLine("ReadToMemoryStream after Write " + new { this.InternalBufferCount, xNetworkStream });
+                //Console.WriteLine("ReadToMemoryStream after Write " + new { this.InternalBufferCount, xNetworkStream });
 
                 if (xNetworkStream != null)
                 {
@@ -203,10 +205,10 @@ namespace ScriptCoreLib.Shared.IO
                 else
                     this.InternalBufferCount = this.BaseStream.Read(this.InternalBuffer, 0, InternalBufferCapacity);
 
-                Console.WriteLine("ReadToMemoryStream " + new { this.InternalBufferCount });
+                //Console.WriteLine("ReadToMemoryStream " + new { this.InternalBufferCount });
                 flag = (this.InternalBufferCount > 0);
             }
-            Console.WriteLine("exit ReadToMemoryStream");
+            //Console.WriteLine("exit ReadToMemoryStream");
             return target;
         }
 

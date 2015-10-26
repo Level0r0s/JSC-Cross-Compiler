@@ -47,6 +47,9 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
 
             var x = new IXMLHttpRequest();
 
+
+        
+
             x.open(Shared.HTTPMethodEnum.POST, address.ToString(), async: true);
             x.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
@@ -170,6 +173,11 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
                );
 
             x.responseType = "arraybuffer";
+
+            // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuSSLWebApplication\UbuntuSSLWebApplication\Application.cs
+            // allow basejump?
+            // breaks Task<> call?
+            //x.responseType = "text";
 
 
             //Console.WriteLine("WebClient.UploadValuesAsync IXMLHttpRequest " + new { xFormDataString });

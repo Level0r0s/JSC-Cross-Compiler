@@ -135,9 +135,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
         // called by?
         public void WriteFile(string filename)
         {
-            Console.WriteLine("enter WriteFile " + new { filename });
-            Console.WriteLine("enter WriteFile " + new { typeof(__HttpResponse).Assembly.Location });
-            Console.WriteLine("enter WriteFile " + new { Environment.CurrentDirectory });
+            // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuSSLWebApplication\UbuntuSSLWebApplication\ApplicationWebService.cs
+
+            //Console.WriteLine("enter WriteFile " + new { filename });
+            //Console.WriteLine("enter WriteFile " + new { typeof(__HttpResponse).Assembly.Location });
+            //Console.WriteLine("enter WriteFile " + new { Environment.CurrentDirectory });
 
             // we only work with absolute paths anyway
             if (filename.StartsWith("/"))
@@ -150,7 +152,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Web
             {
                 var bytes = File.ReadAllBytes(filename);
 
-                Console.WriteLine("WriteFile " + new { filename, bytes.Length });
+                //Console.WriteLine("WriteFile " + new { filename, bytes.Length });
 
                 this.OutputStream.Write(bytes, 0, bytes.Length);
             }

@@ -145,9 +145,11 @@ namespace ScriptCoreLib.Ultra.WebService
 
         public static string GetParameterValue(InternalWebMethodInfo that, string name)
         {
+            // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuSSLWebApplication\UbuntuSSLWebApplication\ApplicationWebService.cs
+
             var r = default(string);
 
-            Console.WriteLine("GetParameterValue: " + new { name, that.Parameters.Length });
+            //Console.WriteLine("GetParameterValue: " + new { name, that.Parameters.Length });
 
 
             // do we support null parameters?
@@ -157,7 +159,7 @@ namespace ScriptCoreLib.Ultra.WebService
 
             var key = "_" + that.MetadataToken + "_" + name;
 
-            Console.WriteLine("GetParameterValue: " + new { key });
+            //Console.WriteLine("GetParameterValue: " + new { key });
 
             var value_Form = that.InternalContext.Request.Form[key];
 
@@ -166,14 +168,14 @@ namespace ScriptCoreLib.Ultra.WebService
                 value = value_Form;
             }
 
-            Console.WriteLine("GetParameterValue: " + new { value });
+            //Console.WriteLine("GetParameterValue: " + new { value });
 
             //Console.WriteLine("LoadParameters: value: " + value);
 
             //Parameter.Value = value.FromXMLString();
             r = value.FromXMLString();
 
-            Console.WriteLine("GetParameterValue: " + new { r });
+            //Console.WriteLine("GetParameterValue: " + new { r });
 
             return r;
         }
@@ -226,6 +228,7 @@ namespace ScriptCoreLib.Ultra.WebService
 
 
         // called by?
+        // X:\jsc.internal.git\compiler\jsc.meta\jsc.meta\Library\Templates\Java\InternalUbuntuWebServiceActivity.cs
         public static string InternalURLDecode(string Value)
         {
             // X:\jsc.internal.git\compiler\jsc.meta\jsc.meta\Library\Templates\Java\InternalAndroidWebServiceActivity.cs
@@ -240,7 +243,7 @@ namespace ScriptCoreLib.Ultra.WebService
 
             var sw = Stopwatch.StartNew();
 
-            Console.WriteLine("enter InternalURLDecode " + new { Value });
+            //Console.WriteLine("enter InternalURLDecode " + new { Value });
 
             // http://www.w3schools.com/tags/ref_urlencode.asp
             // http://www.albionresearch.com/misc/urlencode.php
@@ -257,7 +260,7 @@ namespace ScriptCoreLib.Ultra.WebService
                 Value = Value.Replace(__InternalURLDecode_lookup.xToLower[i], __InternalURLDecode_lookup.xi[i]);
             }
 
-            Console.WriteLine("exit InternalURLDecode " + new { sw.ElapsedMilliseconds, Value });
+            //Console.WriteLine("exit InternalURLDecode " + new { sw.ElapsedMilliseconds, Value });
             return Value;
         }
 

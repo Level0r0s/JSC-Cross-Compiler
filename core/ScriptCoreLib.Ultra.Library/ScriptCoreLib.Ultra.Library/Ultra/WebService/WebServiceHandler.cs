@@ -22,6 +22,13 @@ namespace ScriptCoreLib.Ultra.WebService
         public InternalWebMethodInfo WebMethod;
 
 
+
+
+
+        // set by ssl port at login
+        // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuSSLWebApplication\UbuntuSSLWebApplication\ApplicationWebService.cs
+        public global::System.Security.Cryptography.X509Certificates.X509Certificate2 ClientCertificate;
+
         public HttpContext Context;
 
         public Action CompleteRequest;

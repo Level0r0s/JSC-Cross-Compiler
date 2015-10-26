@@ -17,11 +17,33 @@ namespace UbuntuSSLWebApplication
     /// </summary>
     public class ApplicationWebService
     {
+        public XElement status = new XElement("ready");
+
+        string id = "guest";
+
+        public async Task<string> Identity()
+        {
+            Console.WriteLine("enter Identity " + new { this.id });
+
+            return this.id;
+        }
 
         public async Task<string> Color()
         {
             return "yellow";
         }
 
+
+        public void Handler(ScriptCoreLib.Ultra.WebService.WebServiceHandler h)
+        {
+            // ssl handshake gives certificate to global, it gives it to the handler, we give it to UI
+
+            Console.WriteLine("enter Handler " + new { h.ClientCertificate });
+
+            this.id = new { h.ClientCertificate }.ToString();
+
+            this.status.Value = this.id;
+
+        }
     }
 }

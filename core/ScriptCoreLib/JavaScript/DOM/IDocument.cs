@@ -100,6 +100,7 @@ namespace ScriptCoreLib.JavaScript.DOM
         readonly internal IDOMImplementation implementation;
 
 
+        // cannot be set directly?
         // http://www.w3schools.com/jsref/prop_doc_baseuri.asp
         public string baseURI;
 

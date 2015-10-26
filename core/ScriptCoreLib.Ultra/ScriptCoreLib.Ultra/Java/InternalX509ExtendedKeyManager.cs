@@ -41,7 +41,7 @@ namespace ScriptCoreLib.Java
             string keystorepath
             )
         {
-            Console.WriteLine("enter localKeyManager");
+            //Console.WriteLine("enter localKeyManager");
 
 
             try
@@ -81,7 +81,7 @@ namespace ScriptCoreLib.Java
                     }
                 }
 
-                Console.WriteLine("localKeyManager " + new { xKeyStore });
+                //Console.WriteLine("localKeyManager " + new { xKeyStore });
 
                 xKeyStore.load(xFileInputStream, xKeyStorePassword);
 
@@ -96,14 +96,14 @@ namespace ScriptCoreLib.Java
 
                 var kmf = jvm::javax.net.ssl.KeyManagerFactory.getInstance("SunX509");
 
-                Console.WriteLine("localKeyManager " + new { kmf, alias });
+                Console.WriteLine("localKeyManager " + new { kmf, xKeyStore, alias });
 
 
                 kmf.init(xKeyStore, xKeyStorePassword);
 
                 KeyManagers = kmf.getKeyManagers();
 
-                Console.WriteLine("localKeyManager " + new { KeyManagers.Length });
+                //Console.WriteLine("localKeyManager " + new { KeyManagers.Length });
 
 
                 //{ xKeyStoreDefaultType = Windows-MY }
@@ -120,7 +120,7 @@ namespace ScriptCoreLib.Java
                     var xX509KeyManager = KeyManager as jvm::javax.net.ssl.X509KeyManager;
                     if (xX509KeyManager != null)
                     {
-                        Console.WriteLine("localKeyManager " + new { xX509KeyManager });
+                        //Console.WriteLine("localKeyManager " + new { xX509KeyManager });
 
                         InternalX509KeyManager = xX509KeyManager;
                     }
@@ -146,7 +146,7 @@ namespace ScriptCoreLib.Java
                 return null;
 
             // chooseServerAlias { keyType = EC_EC }
-            Console.WriteLine("chooseServerAlias " + new { keyType });
+            //Console.WriteLine("chooseServerAlias " + new { keyType });
 
             //if (issuers != null)
             //    foreach (var issuer in issuers)
@@ -174,7 +174,7 @@ namespace ScriptCoreLib.Java
 
         public override jvm::java.security.cert.X509Certificate[] getCertificateChain(string alias)
         {
-            Console.WriteLine("getCertificateChain " + new { alias });
+            //Console.WriteLine("getCertificateChain " + new { alias });
             return this.InternalX509KeyManager.getCertificateChain(alias);
         }
 
@@ -186,13 +186,13 @@ namespace ScriptCoreLib.Java
 
         public override jvm::java.security.PrivateKey getPrivateKey(string alias)
         {
-            Console.WriteLine("getPrivateKey");
+            //Console.WriteLine("getPrivateKey");
             return this.InternalX509KeyManager.getPrivateKey(alias);
         }
 
         public override string[] getServerAliases(string keyType, jvm::java.security.Principal[] issuers)
         {
-            Console.WriteLine("getServerAliases");
+            //Console.WriteLine("getServerAliases");
             return new[] { 
             
                 alias

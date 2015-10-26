@@ -128,6 +128,9 @@ namespace ScriptCoreLib.Ultra.WebService
             Action<InternalWebMethodInfo> WriteInternalFields =
                 x =>
                 {
+                    // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuSSLWebApplication\UbuntuSSLWebApplication\ApplicationWebService.cs
+
+
                     // does 304 check also look at 
                     // fields?
 
@@ -148,7 +151,7 @@ namespace ScriptCoreLib.Ultra.WebService
 
                         var value = x.InternalFields[InternalFieldName];
 
-                        Console.WriteLine("WriteInternalFields " + new { InternalFieldName, value });
+                        //Console.WriteLine("WriteInternalFields " + new { InternalFieldName, value });
 
                         if (value != null)
                         {
@@ -193,6 +196,8 @@ namespace ScriptCoreLib.Ultra.WebService
             #region handler = WebServiceHandler
             var handler = new WebServiceHandler
             {
+                ClientCertificate = g.ClientCertificate,
+
                 Context = that.Context,
 
                 CompleteRequest = delegate
@@ -213,6 +218,7 @@ namespace ScriptCoreLib.Ultra.WebService
                 Default = delegate
                 {
                     that.Response.ContentType = "text/html";
+                    //that.Response.AddHeader("Access-Control-Allow-Origin", "*");
 
                     // todo: jsc: PHP workaround required
                     var apps = g.GetScriptApplications();
@@ -586,6 +592,7 @@ namespace ScriptCoreLib.Ultra.WebService
 
                     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/04-monese/2014/201401/20140110-stats
                     that.Response.AddHeader("X-ElapsedMilliseconds", "" + WebMethodStopwatch.ElapsedMilliseconds);
+                    //that.Response.AddHeader("Access-Control-Allow-Origin", "*");
 
                     if (handler.WebMethod.AtElapsedMilliseconds != null)
                         handler.WebMethod.AtElapsedMilliseconds(WebMethodStopwatch.ElapsedMilliseconds);
