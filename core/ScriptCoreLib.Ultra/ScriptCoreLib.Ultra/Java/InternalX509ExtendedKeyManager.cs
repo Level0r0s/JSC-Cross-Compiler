@@ -1,14 +1,14 @@
 ﻿extern alias jvm;
-
-
-
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
 namespace ScriptCoreLib.Java
 {
+    // Z:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Java\InternalX509ExtendedKeyManager.cs
+
     public class xHandshakeCompletedListener : jvm::javax.net.ssl.HandshakeCompletedListener
     {
         public Action<jvm::javax.net.ssl.HandshakeCompletedEvent> yield;
@@ -21,15 +21,56 @@ namespace ScriptCoreLib.Java
 
     public class TrustEveryoneManager : jvm::javax.net.ssl.X509TrustManager
     {
-        public void checkClientTrusted(jvm::java.security.cert.X509Certificate[] arg0, String arg1) { }
-        public void checkServerTrusted(jvm::java.security.cert.X509Certificate[] arg0, String arg1) { }
+        public void checkClientTrusted(jvm::java.security.cert.X509Certificate[] arg0, string arg1)
+        {
+            Console.WriteLine("X509TrustManager checkClientTrusted " + new { arg0.Length, arg1 });
+
+        }
+        public void checkServerTrusted(jvm::java.security.cert.X509Certificate[] arg0, string arg1) { }
         public jvm::java.security.cert.X509Certificate[] getAcceptedIssuers()
         {
-            return new jvm::java.security.cert.X509Certificate[0];
+            var dir = new FileInfo(typeof(TrustEveryoneManager).Assembly.Location).Directory;
+
+            // firefox needs a cert here?
+            //Console.WriteLine("X509TrustManager getAcceptedIssuers " + new { dir });
+
+
+            var ff = from f in dir.GetFiles()
+                     where f.Name.EndsWith(".crt")
+
+                     //jvm::java.security.cert.CertificateFactory.getInstance("X.509").generateCertificate(
+                     //let crt = jvm::java.security.cert.X509Certificate.
+                     select f;
+
+
+            var a = new List<jvm::java.security.cert.X509Certificate> { };
+            foreach (var item in ff)
+            {
+                //Console.WriteLine("X509TrustManager getAcceptedIssuers " + new { item.FullName });
+
+                try
+                {
+                    var ksfis = new jvm::java.io.FileInputStream(item.FullName);
+                    var certificate = (jvm::java.security.cert.X509Certificate)
+                      jvm::java.security.cert.CertificateFactory.getInstance("X.509").generateCertificate(ksfis);
+
+                    // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuSSLWebApplication\UbuntuSSLWebApplication\ApplicationWebService.cs
+
+                    Console.WriteLine("X509TrustManager getAcceptedIssuers " + new { SubjectDN = certificate.getSubjectDN() });
+                    a.Add(certificate);
+                }
+                catch
+                {
+
+                }
+
+            }
+
+            return a.ToArray();
         }
     }
 
-    public  class localKeyManager : jvm::javax.net.ssl.X509ExtendedKeyManager
+    public class localKeyManager : jvm::javax.net.ssl.X509ExtendedKeyManager
     {
         jvm::javax.net.ssl.KeyManager[] KeyManagers = new jvm::javax.net.ssl.KeyManager[0];
         jvm::javax.net.ssl.X509KeyManager InternalX509KeyManager;
@@ -174,8 +215,23 @@ namespace ScriptCoreLib.Java
 
         public override jvm::java.security.cert.X509Certificate[] getCertificateChain(string alias)
         {
+            // firefox complains?
             //Console.WriteLine("getCertificateChain " + new { alias });
-            return this.InternalX509KeyManager.getCertificateChain(alias);
+
+            // http://serverfault.com/questions/346278/firefox-does-not-load-certificate-chain
+
+            var c = this.InternalX509KeyManager.getCertificateChain(alias);
+
+            Console.WriteLine("getCertificateChain " + new { c.Length });
+
+            foreach (var item in c)
+            {
+                //Console.WriteLine("getCertificateChain " + new { item });
+                //Console.WriteLine("getCertificateChain " + new { SubjectDN = item.getSubjectDN() });
+
+            }
+
+            return c;
         }
 
         public override string[] getClientAliases(string keyType, jvm::java.security.Principal[] issuers)

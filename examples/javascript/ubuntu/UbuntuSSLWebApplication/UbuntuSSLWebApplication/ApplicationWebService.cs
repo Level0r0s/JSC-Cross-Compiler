@@ -17,9 +17,31 @@ namespace UbuntuSSLWebApplication
     /// </summary>
     public class ApplicationWebService
     {
+        // http://stackoverflow.com/questions/25553813/ssl-error-from-java-client-but-works-form-poster-in-firefox
+
         public XElement status = new XElement("ready");
 
         string id = "guest";
+
+        static ApplicationWebService()
+        {
+
+            // EmbeddedResource
+            var ref1 = "assets/UbuntuSSLWebApplication/ESTEID-SK_2011.der.crt";
+
+            Console.WriteLine("ApplicationWebService " + new { ref1 });
+
+            //  In the case of Estonian ID cards, the issuer is SK and the certificates are available from their homepage.
+            // https://eid.eesti.ee/index.php/Using_eID_with_existing_applications
+
+            //  To work with Estonian ID card 
+            // JUUR-SK, 
+            // EE Certification Centre Root CA, 
+            // ESTEID-SK 2007, and 
+
+            // ESTEID-SK 2011 must be installed.
+
+        }
 
         public async Task<string> Identity()
         {

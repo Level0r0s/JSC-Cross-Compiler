@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHopToIFrameAndBack", "TestHopToIFrameAndBack.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeExtensionHopToTabThenIFrame", "..\..\chrome\extensions\ChromeExtensionHopToTabThenIFrame\ChromeExtensionHopToTabThenIFrame\ChromeExtensionHopToTabThenIFrame.csproj", "{3C88197D-5E5D-4CC9-9901-A68642AFF0D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHopFromIFrame", "..\TestHopFromIFrame\TestHopFromIFrame\TestHopFromIFrame.csproj", "{15761EEE-9A9C-4159-A63E-A5556B11D809}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSwitchToIFrame", "..\TestSwitchToIFrame\TestSwitchToIFrame\TestSwitchToIFrame.csproj", "{E88F583A-F361-4D97-8642-13EDB6DDC9C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuSSLWebApplication", "..\..\ubuntu\UbuntuSSLWebApplication\UbuntuSSLWebApplication\UbuntuSSLWebApplication.csproj", "{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{60313DC5-07B0-4EA1-B442-B4679DDCBB7C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.ActiveCfg = Debug|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.Build.0 = Debug|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.ActiveCfg = Release|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.Build.0 = Release|x86
+		{3C88197D-5E5D-4CC9-9901-A68642AFF0D3}.Debug|x86.ActiveCfg = Debug|x86
+		{3C88197D-5E5D-4CC9-9901-A68642AFF0D3}.Debug|x86.Build.0 = Debug|x86
+		{3C88197D-5E5D-4CC9-9901-A68642AFF0D3}.Release|x86.ActiveCfg = Release|x86
+		{3C88197D-5E5D-4CC9-9901-A68642AFF0D3}.Release|x86.Build.0 = Release|x86
+		{15761EEE-9A9C-4159-A63E-A5556B11D809}.Debug|x86.ActiveCfg = Debug|x86
+		{15761EEE-9A9C-4159-A63E-A5556B11D809}.Debug|x86.Build.0 = Debug|x86
+		{15761EEE-9A9C-4159-A63E-A5556B11D809}.Release|x86.ActiveCfg = Release|x86
+		{15761EEE-9A9C-4159-A63E-A5556B11D809}.Release|x86.Build.0 = Release|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Debug|x86.ActiveCfg = Debug|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Debug|x86.Build.0 = Debug|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Release|x86.ActiveCfg = Release|x86
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1}.Release|x86.Build.0 = Release|x86
+		{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB}.Debug|x86.ActiveCfg = Debug|x86
+		{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB}.Debug|x86.Build.0 = Debug|x86
+		{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB}.Release|x86.ActiveCfg = Release|x86
+		{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3C88197D-5E5D-4CC9-9901-A68642AFF0D3} = {60313DC5-07B0-4EA1-B442-B4679DDCBB7C}
+		{15761EEE-9A9C-4159-A63E-A5556B11D809} = {60313DC5-07B0-4EA1-B442-B4679DDCBB7C}
+		{E88F583A-F361-4D97-8642-13EDB6DDC9C1} = {60313DC5-07B0-4EA1-B442-B4679DDCBB7C}
+		{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB} = {60313DC5-07B0-4EA1-B442-B4679DDCBB7C}
+	EndGlobalSection
+EndGlobal

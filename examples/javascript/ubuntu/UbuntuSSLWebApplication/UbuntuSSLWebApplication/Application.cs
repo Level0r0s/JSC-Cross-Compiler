@@ -46,6 +46,14 @@ namespace UbuntuSSLWebApplication
                     {
                         // we have the id now.
 
+                        Native.window.onmessage += e =>
+                        {
+                            // lets test messages to see if we could do a hop
+
+                            new IHTMLPre { e.data }.AttachToDocument();
+
+                        };
+
                         new IHTMLButton { "Identity" }.AttachToDocument().onclick += async e =>
                         {
                             var Identity = await base.Identity();
@@ -79,9 +87,24 @@ namespace UbuntuSSLWebApplication
 
                     var baseURI1 = "https://" + host1;
 
-                    var iframeloaded = await new IHTMLIFrame { src = baseURI1 }.AttachToDocument().async.onload;
+                    var iframe = new IHTMLIFrame { src = baseURI1 }.AttachToDocument();
+                    var iframeloaded = await iframe.async.onload;
 
                     new IHTMLPre { "ready! " + new { Native.document.baseURI } }.AttachToDocument();
+
+                    // http://blog.teamtreehouse.com/cross-domain-messaging-with-postmessage
+                    var iframeContentWindowIsNull = iframe.contentWindow == null;
+
+                    new IHTMLButton { "send " + new { iframeContentWindowIsNull } }.AttachToDocument().onclick += delegate
+                    {
+                        //((IHTMLIFrame)iframeloaded.Element).contentWindow.postMessage("hello from above");
+                        iframe.contentWindow.postMessage("hello from above");
+
+                        // this now works.
+                        // in chrome
+                        // in IE
+                        // firefox complains null cert chain.
+                    };
 
                     // change base?
                     // would be cool if we were to be able to do that huh.

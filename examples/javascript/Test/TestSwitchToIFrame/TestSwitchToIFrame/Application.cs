@@ -305,3 +305,21 @@ namespace TestSwitchToIFrame
 
 	}
 }
+
+//erase { Consumer0 = [0x000c]
+//dup        +2 -1{[0x0007]
+//newarr     +1 -1{[0x0006]
+//ldc.i4.1   +1 -0} }  }
+//...{ Location =
+// assembly: Z:\jsc.svn\examples\javascript\Test\TestSwitchToIFrame\TestSwitchToIFrame\bin\Debug\ScriptCoreLib.Extensions.dll
+// type: ScriptCoreLib.JavaScript.Extensions.MessageEventExtensions+<>c__DisplayClass1, ScriptCoreLib.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// offset: 0x0007
+//  method:Void<postMessage> b__0(ScriptCoreLib.JavaScript.DOM.MessagePort) }
+
+//{ trace = X:\jsc.internal.svn\compiler\jsc\Languages\IL\ILTranslationExtensions.EmitToArguments.cs, TargetMethod = Void postMessage(ScriptCoreLib.JavaScript.DOM.MessageEvent, System.Object), DeclaringType = ScriptCoreLib.JavaScript.Extensions.MessageEventExtensions, Location =
+// assembly: Z:\jsc.svn\examples\javascript\Test\TestSwitchToIFrame\TestSwitchToIFrame\bin\Debug\TestSwitchToIFrame.exe
+// type: TestSwitchToIFrame.Application+<>c__DisplayClass0_0+<<-cctor>b__1>d, TestSwitchToIFrame, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// offset: 0x01a3
+//  method:Void MoveNext(), ex = System.MissingMethodException: Method not found: 'Void ScriptCoreLib.JavaScript.DOM.MessagePort.postMessage(System.Object)'.
+//   at System.ModuleHandle.ResolveMethod(RuntimeModule module, Int32 methodToken, IntPtr* typeInstArgs, Int32 typeInstCount, IntPtr* methodInstArgs, Int32 methodInstCount)
+//   at System.ModuleHandle.ResolveMethodHandleInternalCore(RuntimeModule module, Int32 methodToken, IntPtr[] typeInstantiationContext, Int32 typeInstCount, IntPtr[] methodInstantiationContext, Int32 methodInstCount)

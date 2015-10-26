@@ -186,13 +186,15 @@ namespace TestSwitchToServiceContextAsync
 	{
 		public string text;
 
-		public override string ToString() => new { text }.ToString();
+        //public override string ToString() => new { text }.ToString();
+		public override string ToString() { return  new { text }.ToString();}
 
 
 		// X:\jsc.svn\examples\java\hybrid\JVMCLRSwitchToCLRContextAsync\JVMCLRSwitchToCLRContextAsync\Program.cs
 		// X:\jsc.svn\examples\javascript\async\test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\Application.cs
 
-		public Task Invoke() => Invoke(this.text);
+        //public Task Invoke() => Invoke(this.text);
+		public Task Invoke() { return Invoke(this.text); }
 		public static async Task Invoke(string e)
 		{
 			Console.WriteLine(typeof(object) + " enter " + typeof(SharedProgram) + new { Thread.CurrentThread.ManagedThreadId });
