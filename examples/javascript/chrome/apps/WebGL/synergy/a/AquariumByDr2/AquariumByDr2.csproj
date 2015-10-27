@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A61C1A16-3435-4B0F-9002-04A952924BE4}</ProjectGuid>
+    <ProjectGuid>{AA303CE2-04F8-4EA7-A88F-19986920E86B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AquariumByDr2</RootNamespace>
