@@ -1,0 +1,112 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360doomE1M1", "x360doomE1M1.csproj", "{77234670-3487-477E-9F24-73AB75E6D82E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{6F1B60FE-B720-442B-82ED-CD62DB9AB715}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{120BA800-5119-489E-8F9B-308A61A65C68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DottedGridByMacint", "..\..\synergy\d\DottedGridByMacint\DottedGridByMacint.csproj", "{A61C1A16-3435-4B0F-9002-04A952924BE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyDoomE1M1ByPMalin", "..\..\synergy\d\ChromeShaderToyDoomE1M1ByPMalin\ChromeShaderToyDoomE1M1ByPMalin\ChromeShaderToyDoomE1M1ByPMalin.csproj", "{0470FA25-E610-4CE9-B572-5723AD57FB57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360aquarium", "..\x360aquarium\x360aquarium.csproj", "{DE068612-6D43-48EB-8C15-94AFE1A8D843}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquariumByDr2", "..\..\synergy\a\AquariumByDr2\AquariumByDr2.csproj", "{AA303CE2-04F8-4EA7-A88F-19986920E86B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360marchingcubes", "..\x360marchingcubes\x360marchingcubes.csproj", "{7C204B78-EE19-4EDA-BC39-624B22D37E21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyMarchingCubesByFizzer", "..\..\synergy\m\ChromeShaderToyMarchingCubesByFizzer\ChromeShaderToyMarchingCubesByFizzer\ChromeShaderToyMarchingCubesByFizzer.csproj", "{FC89B60D-6C9D-4E18-A467-EBE462A1820A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360somewhere", "..\x360somewhere\x360somewhere.csproj", "{10239C1A-8BCA-40D0-B335-B6C5CF3D28AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToySomewhere1993ByNimitz", "..\..\synergy\s\ChromeShaderToySomewhere1993ByNimitz\ChromeShaderToySomewhere1993ByNimitz\ChromeShaderToySomewhere1993ByNimitz.csproj", "{3380346F-D6CD-4A5E-A4D7-6ACDEBA6C6AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360mountains", "..\x360mountains\x360mountains.csproj", "{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyMountainsByHoskins", "..\..\synergy\m\ChromeShaderToyMountainsByHoskins\ChromeShaderToyMountainsByHoskins\ChromeShaderToyMountainsByHoskins.csproj", "{F3442623-D462-4C4D-A043-9BD924FDC739}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360eiffieballs", "..\x360eiffieballs\x360eiffieballs.csproj", "{EC1EE810-7E1B-4100-A2BE-76AB8FABBB1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyEiffieBallsByEiffie", "..\..\synergy\e\ChromeShaderToyEiffieBallsByEiffie\ChromeShaderToyEiffieBallsByEiffie\ChromeShaderToyEiffieBallsByEiffie.csproj", "{C9C2746A-B3D7-4E35-B168-8EFB1189ABCE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.ActiveCfg = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.Build.0 = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.ActiveCfg = Release|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.Build.0 = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.ActiveCfg = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Debug|x86.Build.0 = Debug|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.ActiveCfg = Release|x86
+		{A61C1A16-3435-4B0F-9002-04A952924BE4}.Release|x86.Build.0 = Release|x86
+		{0470FA25-E610-4CE9-B572-5723AD57FB57}.Debug|x86.ActiveCfg = Debug|x86
+		{0470FA25-E610-4CE9-B572-5723AD57FB57}.Debug|x86.Build.0 = Debug|x86
+		{0470FA25-E610-4CE9-B572-5723AD57FB57}.Release|x86.ActiveCfg = Release|x86
+		{0470FA25-E610-4CE9-B572-5723AD57FB57}.Release|x86.Build.0 = Release|x86
+		{DE068612-6D43-48EB-8C15-94AFE1A8D843}.Debug|x86.ActiveCfg = Debug|x86
+		{DE068612-6D43-48EB-8C15-94AFE1A8D843}.Debug|x86.Build.0 = Debug|x86
+		{DE068612-6D43-48EB-8C15-94AFE1A8D843}.Release|x86.ActiveCfg = Release|x86
+		{DE068612-6D43-48EB-8C15-94AFE1A8D843}.Release|x86.Build.0 = Release|x86
+		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Debug|x86.ActiveCfg = Debug|x86
+		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Debug|x86.Build.0 = Debug|x86
+		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Release|x86.ActiveCfg = Release|x86
+		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Release|x86.Build.0 = Release|x86
+		{7C204B78-EE19-4EDA-BC39-624B22D37E21}.Debug|x86.ActiveCfg = Debug|x86
+		{7C204B78-EE19-4EDA-BC39-624B22D37E21}.Debug|x86.Build.0 = Debug|x86
+		{7C204B78-EE19-4EDA-BC39-624B22D37E21}.Release|x86.ActiveCfg = Release|x86
+		{7C204B78-EE19-4EDA-BC39-624B22D37E21}.Release|x86.Build.0 = Release|x86
+		{FC89B60D-6C9D-4E18-A467-EBE462A1820A}.Debug|x86.ActiveCfg = Debug|x86
+		{FC89B60D-6C9D-4E18-A467-EBE462A1820A}.Debug|x86.Build.0 = Debug|x86
+		{FC89B60D-6C9D-4E18-A467-EBE462A1820A}.Release|x86.ActiveCfg = Release|x86
+		{FC89B60D-6C9D-4E18-A467-EBE462A1820A}.Release|x86.Build.0 = Release|x86
+		{10239C1A-8BCA-40D0-B335-B6C5CF3D28AE}.Debug|x86.ActiveCfg = Debug|x86
+		{10239C1A-8BCA-40D0-B335-B6C5CF3D28AE}.Debug|x86.Build.0 = Debug|x86
+		{10239C1A-8BCA-40D0-B335-B6C5CF3D28AE}.Release|x86.ActiveCfg = Release|x86
+		{10239C1A-8BCA-40D0-B335-B6C5CF3D28AE}.Release|x86.Build.0 = Release|x86
+		{3380346F-D6CD-4A5E-A4D7-6ACDEBA6C6AF}.Debug|x86.ActiveCfg = Debug|x86
+		{3380346F-D6CD-4A5E-A4D7-6ACDEBA6C6AF}.Debug|x86.Build.0 = Debug|x86
+		{3380346F-D6CD-4A5E-A4D7-6ACDEBA6C6AF}.Release|x86.ActiveCfg = Release|x86
+		{3380346F-D6CD-4A5E-A4D7-6ACDEBA6C6AF}.Release|x86.Build.0 = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.ActiveCfg = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.Build.0 = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.ActiveCfg = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.Build.0 = Release|x86
+		{F3442623-D462-4C4D-A043-9BD924FDC739}.Debug|x86.ActiveCfg = Debug|x86
+		{F3442623-D462-4C4D-A043-9BD924FDC739}.Debug|x86.Build.0 = Debug|x86
+		{F3442623-D462-4C4D-A043-9BD924FDC739}.Release|x86.ActiveCfg = Release|x86
+		{F3442623-D462-4C4D-A043-9BD924FDC739}.Release|x86.Build.0 = Release|x86
+		{EC1EE810-7E1B-4100-A2BE-76AB8FABBB1D}.Debug|x86.ActiveCfg = Debug|x86
+		{EC1EE810-7E1B-4100-A2BE-76AB8FABBB1D}.Debug|x86.Build.0 = Debug|x86
+		{EC1EE810-7E1B-4100-A2BE-76AB8FABBB1D}.Release|x86.ActiveCfg = Release|x86
+		{EC1EE810-7E1B-4100-A2BE-76AB8FABBB1D}.Release|x86.Build.0 = Release|x86
+		{C9C2746A-B3D7-4E35-B168-8EFB1189ABCE}.Debug|x86.ActiveCfg = Debug|x86
+		{C9C2746A-B3D7-4E35-B168-8EFB1189ABCE}.Debug|x86.Build.0 = Debug|x86
+		{C9C2746A-B3D7-4E35-B168-8EFB1189ABCE}.Release|x86.ActiveCfg = Release|x86
+		{C9C2746A-B3D7-4E35-B168-8EFB1189ABCE}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {120BA800-5119-489E-8F9B-308A61A65C68}
+		{0470FA25-E610-4CE9-B572-5723AD57FB57} = {6F1B60FE-B720-442B-82ED-CD62DB9AB715}
+		{DE068612-6D43-48EB-8C15-94AFE1A8D843} = {120BA800-5119-489E-8F9B-308A61A65C68}
+		{AA303CE2-04F8-4EA7-A88F-19986920E86B} = {120BA800-5119-489E-8F9B-308A61A65C68}
+		{7C204B78-EE19-4EDA-BC39-624B22D37E21} = {120BA800-5119-489E-8F9B-308A61A65C68}
+		{FC89B60D-6C9D-4E18-A467-EBE462A1820A} = {120BA800-5119-489E-8F9B-308A61A65C68}
+		{10239C1A-8BCA-40D0-B335-B6C5CF3D28AE} = {120BA800-5119-489E-8F9B-308A61A65C68}
+		{3380346F-D6CD-4A5E-A4D7-6ACDEBA6C6AF} = {120BA800-5119-489E-8F9B-308A61A65C68}
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD} = {120BA800-5119-489E-8F9B-308A61A65C68}
+		{F3442623-D462-4C4D-A043-9BD924FDC739} = {120BA800-5119-489E-8F9B-308A61A65C68}
+		{EC1EE810-7E1B-4100-A2BE-76AB8FABBB1D} = {120BA800-5119-489E-8F9B-308A61A65C68}
+		{C9C2746A-B3D7-4E35-B168-8EFB1189ABCE} = {120BA800-5119-489E-8F9B-308A61A65C68}
+	EndGlobalSection
+EndGlobal
