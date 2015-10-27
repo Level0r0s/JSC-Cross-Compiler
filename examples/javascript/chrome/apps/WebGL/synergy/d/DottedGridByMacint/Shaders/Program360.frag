@@ -3,6 +3,7 @@
 #define GRIDINTERVAL 40.0/(2.0*PI)
 #define DASHINTERVAL 200.0/(2.0*PI)
 uniform vec3 uCameraTargetOffset;   
+// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151027/x360dottedgrid
 
 struct Intersection
 {
