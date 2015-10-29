@@ -181,6 +181,18 @@ namespace google
 
 
 
+
+        // https://developers.google.com/maps/documentation/javascript/reference?hl=en#LatLngBounds
+        [Script(HasNoPrototype = true, ExternalTarget = "google.maps.LatLngBounds")]
+        public class LatLngBounds
+        {
+            public LatLng getCenter() { throw null; }
+            public LatLng getNorthEast() { throw null; }
+            public LatLng getSouthWest() { throw null; }
+
+        }
+
+
         // Z:\jsc.svn\examples\javascript\Test\TestNativeMethodAsProperty\TestNativeMethodAsProperty\Class1.cs
         // https://developers.google.com/maps/documentation/javascript/reference?hl=en#LatLng
         [Script(HasNoPrototype = true, ExternalTarget = "google.maps.LatLng")]
@@ -189,9 +201,9 @@ namespace google
             // Latitude ranges between -90 and 90 degrees, inclusive
 
             // TypeError: this.map.getCenter(...).get_lat is not a function
-            public double lat { [method: Script(ExternalTarget = "lat")]get; private set; }
+            public double lat {[method: Script(ExternalTarget = "lat")]get; private set; }
 
-            public double lng { [method: Script(ExternalTarget = "lng")]get; private set; }
+            public double lng {[method: Script(ExternalTarget = "lng")]get; private set; }
             // LatLngLiteral 
             //public double lat;
 
@@ -205,6 +217,14 @@ namespace google
             public Map(IHTMLDiv map, object options)
             {
 
+            }
+
+
+
+
+            public LatLngBounds getBounds()
+            {
+                throw new NotImplementedException();
             }
 
             public LatLng getCenter()
@@ -382,10 +402,10 @@ namespace GoogleMapsMarker
                      );
 
                     //marker.onclick += delegate
-                //{
-                //    map.setZoom(8.0);
-                //    map.setCenter(marker.getPosition());
-                //};
+                    //{
+                    //    map.setZoom(8.0);
+                    //    map.setCenter(marker.getPosition());
+                    //};
 
 
                     //while (await marker.async.onclick)

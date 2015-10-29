@@ -70,26 +70,26 @@ namespace GoogleMapsMarkerLEST97
                       }
                   );
 
+                  var all = new[] { Helsinki, Tallinn, Haapsalu, Narva, Tartu };
 
-
-                  new[] { Helsinki, Tallinn, Haapsalu, Narva, Tartu }.WithEach(
-                      data =>
-                      {
-                          var marker = new google.maps.Marker(
-                             new
-                             {
-                                 position = new
-                                 {
-                                     lat = LEST97.lest_function_vba.lest_geo(data.x, data.y, 0),
-                                     lng = LEST97.lest_function_vba.lest_geo(data.x, data.y, 1)
-                                 },
-                                 //label = "T",
-                                 //title = "Tallinn",
-                                 map
-                             }
-                          );
-                      }
-                    );
+                  all.WithEach(
+                       data =>
+                       {
+                           var marker = new google.maps.Marker(
+                              new
+                              {
+                                  position = new
+                                  {
+                                      lat = LEST97.lest_function_vba.lest_geo(data.x, data.y, 0),
+                                      lng = LEST97.lest_function_vba.lest_geo(data.x, data.y, 1)
+                                  },
+                                  //label = "T",
+                                  //title = "Tallinn",
+                                  map
+                              }
+                           );
+                       }
+                     );
 
 
 
@@ -108,8 +108,62 @@ namespace GoogleMapsMarkerLEST97
                           }
                   }.AttachToDocument();
 
-                  new IHTMLButton { "Add" }.AttachToDocument().onclick +=
-                  delegate
+
+                  // Cannot read property 'getSouthWest' of undefined
+                  new IHTMLPre
+                  {
+                      delegate
+                      {
+
+                          if (map.getBounds() == null)
+                          {
+                              return "n/a";
+                          }
+
+                          var getSouthWest_lat = map.getBounds().getSouthWest().lat;
+                          var getSouthWest_lng = map.getBounds().getSouthWest().lng;
+
+                          var getNorthEast_lat = map.getBounds().getNorthEast().lat;
+                          var getNorthEast_lng = map.getBounds().getNorthEast().lng;
+
+
+                          var count = (
+                            from data in all
+
+                            let lat = (double)LEST97.lest_function_vba.lest_geo(data.x, data.y, 0)
+                            let lng = (double)LEST97.lest_function_vba.lest_geo(data.x, data.y, 1)
+
+
+                            // lng left to right
+                            // lng bottom to top
+
+                            where lat <= getNorthEast_lat
+                            where lng <= getNorthEast_lng
+
+                            where lat >= getSouthWest_lat
+                            where lng >= getSouthWest_lng
+
+                            select data
+                          ).Count();
+
+                          return new
+                          {
+                              getSouthWest_lat,
+                              getSouthWest_lng,
+
+                              getNorthEast_lat,
+                              getNorthEast_lng,
+
+                              count
+                          }.ToString();
+                      }
+                  }.AttachToDocument();
+
+                  // http://stackoverflow.com/questions/2472957/how-can-i-change-the-color-of-a-google-maps-marker
+
+
+                  #region Add
+                  new IHTMLButton { "Add" }.AttachToDocument().onclick += delegate
                   {
                       var data = new
                       {
@@ -135,8 +189,64 @@ namespace GoogleMapsMarkerLEST97
                             map
                         }
                      );
-
                   };
+                  #endregion
+
+
+
+                  #region Add Bounds
+                  new IHTMLButton { "Add Bounds" }.AttachToDocument().onclick += delegate
+                  {
+                      new google.maps.Marker(
+                        new
+                        {
+                            position = new
+                            {
+                                map.getBounds().getSouthWest().lat,
+                                map.getBounds().getSouthWest().lng,
+                            },
+                            map
+                        }
+                     );
+
+                      new google.maps.Marker(
+                        new
+                        {
+                            position = new
+                            {
+                                map.getBounds().getNorthEast().lat,
+                                map.getBounds().getNorthEast().lng,
+                            },
+                            map
+                        }
+                     );
+
+                      new google.maps.Marker(
+                    new
+                    {
+                        position = new
+                        {
+                            map.getBounds().getSouthWest().lat,
+                            map.getBounds().getNorthEast().lng,
+                        },
+                        map
+                    }
+                 );
+
+                      new google.maps.Marker(
+                        new
+                        {
+                            position = new
+                            {
+                                map.getBounds().getNorthEast().lat,
+                                map.getBounds().getSouthWest().lng,
+                            },
+                            map
+                        }
+                     );
+                  };
+                  #endregion
+
               }
 
             );
