@@ -15,20 +15,20 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System
     [Script(Implements = typeof(global::System.Uri))]
     public class __Uri
     {
-		// http://referencesource.microsoft.com/#System/net/System/_UriSyntax.cs
-		// http://referencesource.microsoft.com/#System/net/System/GenericUriParser.cs
+        // http://referencesource.microsoft.com/#System/net/System/_UriSyntax.cs
+        // http://referencesource.microsoft.com/#System/net/System/GenericUriParser.cs
 
-		// see: http://blogs.msdn.com/ncl/archive/2010/02/23/system-uri-f-a-q.aspx
+        // see: http://blogs.msdn.com/ncl/archive/2010/02/23/system-uri-f-a-q.aspx
 
-		// fixme: shared BCL is not the way to go!  or is it?
+        // fixme: shared BCL is not the way to go!  or is it?
 
-		// what about magnet links?
-		//
+        // what about magnet links?
+        //
 
 
-		//public static readonly string SchemeDelimiter = "://";
+        //public static readonly string SchemeDelimiter = "://";
 
-		public string OriginalString { get; set; }
+        public string OriginalString { get; set; }
 
         public string Scheme { get; set; }
 
@@ -105,8 +105,19 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System
                 // no host
                 Port = -1;
                 scheme_i = uriString.IndexOf(":");
-                this.Scheme = uriString.Substring(0, scheme_i);
-                this.PathAndQuery = uriString.Substring(scheme_i + 1);
+
+                if (scheme_i < 0)
+                {
+                    // no scheme
+
+                    //this.Scheme = -1;
+                    this.PathAndQuery = uriString;
+                }
+                else
+                {
+                    this.Scheme = uriString.Substring(0, scheme_i);
+                    this.PathAndQuery = uriString.Substring(scheme_i + 1);
+                }
             }
 
             InitializeFragment();
@@ -210,8 +221,12 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System
             {
                 // what if we do not have these details?
 
-                w.Append(this.Scheme);
-                w.Append(":");
+                // Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuTestUploadValues\Application.cs
+                if (!string.IsNullOrEmpty(this.Scheme))
+                {
+                    w.Append(this.Scheme);
+                    w.Append(":");
+                }
 
                 if (!string.IsNullOrEmpty(Host))
                 {

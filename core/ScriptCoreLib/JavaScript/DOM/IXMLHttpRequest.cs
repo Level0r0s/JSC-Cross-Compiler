@@ -26,6 +26,8 @@ namespace ScriptCoreLib.JavaScript.DOM
     [Script(InternalConstructor = true)]
     public partial class IXMLHttpRequest : IEventTarget
     {
+        // Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuTestUploadValues\ApplicationWebService.cs
+
         // http://src.chromium.org/viewvc/blink/trunk/Source/core/xml/XMLHttpRequest.idl
         // http://src.chromium.org/viewvc/blink/trunk/Source/core/xml/XMLHttpRequest.idl?pathrev=156290
         // http://src.chromium.org/viewvc/blink/trunk/Source/core/xml/XMLHttpRequest.cpp?pathrev=156290
@@ -86,6 +88,8 @@ namespace ScriptCoreLib.JavaScript.DOM
             }
             catch
             {
+                // https://social.msdn.microsoft.com/Forums/ie/en-US/677af000-d029-496b-b907-79e652858780/post-data-not-sent-in-ie-11-using-the-webbrowser-control?forum=iewebdevelopment
+
                 // do we need this?
                 n = (IXMLHttpRequest)((object)new IActiveX("Msxml2.XMLHTTP.3.0", "Microsoft.XMLHTTP"));
             }

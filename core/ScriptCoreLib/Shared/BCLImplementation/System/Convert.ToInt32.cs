@@ -26,6 +26,11 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System
 
         public static int ToInt32(string e)
         {
+            // Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuTestUploadValues\ApplicationWebService.cs
+
+            if (string.IsNullOrEmpty(e))
+                return 0;
+
             return int.Parse(e);
         }
 

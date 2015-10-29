@@ -15,6 +15,12 @@ namespace ScriptCoreLib.Extensions
 {
     public static class TcpListenerExtensions
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151029
+
+
+
+        // called by?
+
         //static void BridgeStreamTo(this NetworkStream x, NetworkStream y, int ClientCounter, string prefix = "#")
         static void BridgeStreamTo(this Stream x, Stream y, int ClientCounter, string prefix = "#",
             TaskCompletionSource<byte> firstByte = null,
@@ -24,7 +30,7 @@ namespace ScriptCoreLib.Extensions
             //Console.WriteLine("BridgeStreamTo x: " + x.GetType().AssemblyQualifiedName);
 
             new Thread(
-               delegate ()
+               delegate()
                {
                    var rereadonzerobyte = 64;
 
@@ -35,7 +41,7 @@ namespace ScriptCoreLib.Extensions
                        //
                        try
                        {
-                           retry:
+                       retry:
                            var c = x.Read(buffer, 0, buffer.Length);
 
                            // is chrome trying to be smart?
@@ -75,8 +81,17 @@ namespace ScriptCoreLib.Extensions
 
                            Console.WriteLine(prefix + ClientCounter.ToString("x4") + " 0x" + c.ToString("x4") + " bytes");
 
-                           if (prefix.StartsWith("?"))
-                               Console.WriteLine(Encoding.ASCII.GetString(buffer, 0, c));
+
+
+                           // not for binary data. it will crash RemoteApp console.
+                           // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151029
+                           if (prefix.Contains("?"))
+                           {
+                               var x8 = Encoding.ASCII.GetString(buffer, 0, Math.Min(8, c));
+
+                               if (x8.All(xx => xx < 127))
+                                   Console.WriteLine(Encoding.ASCII.GetString(buffer, 0, Math.Min(512, c)));
+                           }
 
                            y.Write(buffer, 0, c);
 
@@ -106,6 +121,8 @@ namespace ScriptCoreLib.Extensions
             y.GetStream().BridgeStreamTo(x.GetStream(), ClientCounter, tx);
         }
 
+
+        // called by?
         public static void BridgeConnectionToPort(this TcpListener x, int port)
         {
             BridgeConnectionToPort(x, port, "> ", "< ");
@@ -231,7 +248,7 @@ namespace ScriptCoreLib.Extensions
                         delegate
                         {
                             X509Store store = new X509Store(
-                                    //StoreName.Root,
+                                //StoreName.Root,
                                     StoreName.My,
                                 StoreLocation.CurrentUser);
                             // https://syfuhs.net/2011/05/12/making-the-x509store-more-friendly/
@@ -302,7 +319,7 @@ namespace ScriptCoreLib.Extensions
 
                         // chrome will fault on multiple CN
                         var args =
-                //" -eku 1.3.6.1.5.5.7.3.1 -a SHA1 -n \"CN=" + upstream + ",CN=" + host + "\"  -len 2048 -m 1 -sky exchange  -ss MY -sr currentuser -sk deviceSSLcontainer  -is Root -in \"" + rootCN + "\" -l \"" + link + "\"";
+                            //" -eku 1.3.6.1.5.5.7.3.1 -a SHA1 -n \"CN=" + upstream + ",CN=" + host + "\"  -len 2048 -m 1 -sky exchange  -ss MY -sr currentuser -sk deviceSSLcontainer  -is Root -in \"" + rootCN + "\" -l \"" + link + "\"";
                 " -eku 1.3.6.1.5.5.7.3.1 -a SHA1 -n \"CN=" + host + "\"  -len 2048 -m 1 -sky exchange  -ss MY -sr currentuser -sk deviceSSLcontainer  -is Root -in \"" + rootCN + "\" -l \"" + link + "\"";
 
                         Console.WriteLine(
@@ -428,7 +445,7 @@ namespace ScriptCoreLib.Extensions
                     var p = Process.Start(
                         new ProcessStartInfo(
                             makecert,
-                           // this cert is constant
+                        // this cert is constant
                            args
                         )
                         {
@@ -620,7 +637,7 @@ namespace ScriptCoreLib.Extensions
 
                                     CertificateFromCurrentUserByLocalEndPoint(
                                         new IPEndPoint(
-                                            //address: IPAddress.Parse(""),
+                                    //address: IPAddress.Parse(""),
 
                                             // how do we know our ip?
                                             address:
@@ -739,7 +756,7 @@ namespace ScriptCoreLib.Extensions
 
 
             new Thread(
-               delegate ()
+               delegate()
                {
                    while (true)
                    {

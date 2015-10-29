@@ -27,6 +27,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
         // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/IO/Stream.cs
 
+        public bool InternalDiagnostics;
+
         public global::java.io.OutputStream InternalOutputStream;
         public global::java.io.InputStream InternalInputStream;
 
@@ -43,6 +45,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         //[Obsolete("does not work for android? why?")]
         public virtual bool DataAvailable
         {
+            // wont work for ubuntu either.
             get
             {
                 // X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Shared\IO\SmartStreamReader.cs
@@ -119,6 +122,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             }
             catch
             {
+                Console.WriteLine("err Flush ");
+
                 throw;
             }
         }
@@ -167,6 +172,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
 
         #region Read
+        // called by?
         public override global::System.Threading.Tasks.Task<int> ReadAsync(byte[] buffer, int offset, int count)
         {
             //Console.WriteLine("enter ReadAsync");
@@ -217,9 +223,19 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             try
             {
                 i = this.InternalInputStream.read((sbyte[])(object)buffer, offset, count);
+
+                // InternalDiagnostics
+
+                if (i > 0)
+                    if (InternalDiagnostics)
+                    {
+                        //Console.WriteLine("rx " + Encoding.ASCII.GetString(buffer, offset, i));
+                        Console.WriteLine("rx 0x" + i.ToString("x4") + " bytes\n" + Encoding.UTF8.GetString(buffer, offset, i));
+                    }
             }
             catch
             {
+                Console.WriteLine("err Read ");
                 // bail
             }
 
@@ -267,10 +283,18 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         {
             try
             {
+                if (InternalDiagnostics)
+                {
+                    //Console.WriteLine("tx " + Encoding.ASCII.GetString(buffer, offset, count));
+                    Console.WriteLine("tx 0x" + count.ToString("x4") + " bytes\n" + Encoding.UTF8.GetString(buffer, offset, count));
+                }
+
                 this.InternalOutputStream.write((sbyte[])(object)buffer, offset, count);
             }
             catch
             {
+                Console.WriteLine("err Write ");
+
                 throw;
             }
 

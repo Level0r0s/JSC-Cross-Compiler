@@ -109,7 +109,7 @@ namespace ScriptCoreLib.Shared.IO
         public static int InternalBufferCapacity = 0x2000;
 
         byte[] InternalBuffer = new byte[InternalBufferCapacity];
-        int InternalBufferCount = 0;
+        public int InternalBufferCount = 0;
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -161,54 +161,95 @@ namespace ScriptCoreLib.Shared.IO
             return value;
         }
 
-        public MemoryStream ReadToMemoryStream()
+        public MemoryStream ReadToMemoryStream(int ContentLength = 0)
         {
-            // Z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Web\HttpResponse.cs
+            //Console.WriteLine("enter ReadToMemoryStream " + new { ContentLength });
 
-            //Console.WriteLine("enter ReadToMemoryStream");
+            // Z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Web\HttpResponse.cs
+            // Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuTestUploadValues\ApplicationWebService.cs
+
             var target = new MemoryStream();
 
-            var xNetworkStream = this.BaseStream as NetworkStream;
-
+            //var xNetworkStream = this.BaseStream as NetworkStream;
+            var xNetworkStream = default(NetworkStream);
 
             var flag = true;
             while (flag)
             {
-                //Console.WriteLine("ReadToMemoryStream before Write " + new { this.InternalBufferCount, xNetworkStream });
-                target.Write(this.InternalBuffer, 0, this.InternalBufferCount);
-                //Console.WriteLine("ReadToMemoryStream after Write " + new { this.InternalBufferCount, xNetworkStream });
 
-                if (xNetworkStream != null)
+
+                if (this.InternalBufferCount > 0)
                 {
-                    // what are the timeouts to be?
-                    xNetworkStream.ReadTimeout = 100;
+                    // any pending input?
+                    //Console.WriteLine("ReadToMemoryStream before Write " + new { this.InternalBufferCount, xNetworkStream });
+                    Console.WriteLine("ReadToMemoryStream any pending input? " + new { this.InternalBufferCount });
+                    target.Write(this.InternalBuffer, 0, this.InternalBufferCount);
+                    this.InternalBufferCount = 0;
+                }
 
 
-                    this.InternalBufferCount = -1;
+                if (target.Length == ContentLength)
+                {
+                    // done!
+                }
+                else
+                {
 
-                    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\Sockets\NetworkStream.cs
+                    //Console.WriteLine("ReadToMemoryStream after Write " + new { this.InternalBufferCount, xNetworkStream });
+
+                    //if (xNetworkStream != null)
+                    //{
+                    //    // what are the timeouts to be?
+                    //    xNetworkStream.ReadTimeout = 33;
 
 
-                    // I/System.Console(17511): ReadToMemoryStream Write { InternalBufferCount = 179 }
+                    //    this.InternalBufferCount = -1;
 
-                    if (!xNetworkStream.DataAvailable)
-                    {
-                        Thread.Sleep(100);
-                        // are we sure?
-                    }
+                    //    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\Sockets\NetworkStream.cs
 
-                    if (xNetworkStream.DataAvailable)
+
+                    //    // I/System.Console(17511): ReadToMemoryStream Write { InternalBufferCount = 179 }
+
+                    //    if (!xNetworkStream.DataAvailable)
+                    //    {
+                    //        //Console.WriteLine("DataAvailable?");
+                    //        Thread.Sleep(33);
+                    //        // are we sure?
+                    //    }
+
+                    //    if (!xNetworkStream.DataAvailable)
+                    //    {
+                    //        //Console.WriteLine("DataAvailable?");
+                    //        Thread.Sleep(33);
+                    //        // are we sure?
+                    //    }
+
+                    //    if (!xNetworkStream.DataAvailable)
+                    //    {
+                    //        //Console.WriteLine("DataAvailable?");
+                    //        Thread.Sleep(33);
+                    //        // are we sure?
+                    //    }
+
+                    //    if (xNetworkStream.DataAvailable)
+                    //    {
+                    //        this.InternalBufferCount = this.BaseStream.Read(this.InternalBuffer, 0, InternalBufferCapacity);
+                    //    }
+                    //}
+                    //else
                     {
                         this.InternalBufferCount = this.BaseStream.Read(this.InternalBuffer, 0, InternalBufferCapacity);
                     }
-                }
-                else
-                    this.InternalBufferCount = this.BaseStream.Read(this.InternalBuffer, 0, InternalBufferCapacity);
 
-                //Console.WriteLine("ReadToMemoryStream " + new { this.InternalBufferCount });
+                }
+
+                Console.WriteLine("ReadToMemoryStream, continue? " + new { this.InternalBufferCount });
                 flag = (this.InternalBufferCount > 0);
             }
-            //Console.WriteLine("exit ReadToMemoryStream");
+
+            //Console.WriteLine("exit ReadToMemoryStream " + new { target.Length });
+
+            this.InternalBufferCount = 0;
             return target;
         }
 
@@ -232,6 +273,8 @@ namespace ScriptCoreLib.Shared.IO
             return a.ToString();
         }
 
+
+        // called by?
         void DiscardBuffer(int bytes)
         {
             if (bytes < 1)

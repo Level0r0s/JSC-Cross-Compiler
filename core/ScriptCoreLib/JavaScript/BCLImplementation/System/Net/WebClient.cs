@@ -37,17 +37,46 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
 
         public void UploadValuesAsync(Uri address, NameValueCollection data)
         {
-            Console.WriteLine("enter WebClient.UploadValuesAsync");
+
+            this.UploadValuesTaskAsync(
+                address,
+                data
+            ).ContinueWith(
+                t =>
+                {
+                    var e = new __UploadValuesCompletedEventArgs { Result = t.Result };
+
+                    if (UploadValuesCompleted != null)
+                        UploadValuesCompleted(null, (UploadValuesCompletedEventArgs)(object)e);
+
+                }
+            );
+
+        }
+
+        public Task<byte[]> UploadValuesTaskAsync(Uri address, NameValueCollection data)
+        {
+            var r = new TaskCompletionSource<byte[]> { };
+
+            // Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuTestUploadValues\Application.cs
+            //  "Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuTestUserHostAddress\UbuntuTestUserHostAddress.sln"
+
+            Console.WriteLine("enter WebClient.UploadValuesTaskAsync! " + new { address });
 
             // called by
             // X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\JavaScript\Remoting\InternalWebMethodRequest.cs
 
-
+            // http://stackoverflow.com/questions/9713058/sending-post-data-with-a-xmlhttprequest
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201401/20140119
+            // http://stackoverflow.com/questions/8286934/post-formdata-via-xmlhttprequest-object-in-js-cross-browser
+            // http://stackoverflow.com/questions/16917772/ie-lags-on-sending-post-data
+            // http://robertnyman.com/2013/02/11/using-formdata-to-send-forms-with-xhr-as-keyvalue-pairs/
+            // https://blog.yorkxin.org/posts/2014/02/06/ajax-with-formdata-is-broken-on-ie10-ie11/
 
             var x = new IXMLHttpRequest();
 
-
+            // InvalidStateException
+            //x.withCredentials = true;
 
 
             x.open(Shared.HTTPMethodEnum.POST, address.ToString(), async: true);
@@ -132,7 +161,6 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
 
                     //Console.WriteLine("UploadValuesAsync " + new { x.status, x.responseType, response });
 
-                    var e = new __UploadValuesCompletedEventArgs { Result = response };
 
                     #region ResponseHeaders
                     this.ResponseHeaders = new WebHeaderCollection();
@@ -164,8 +192,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
                     //Console.WriteLine(new { ResponseHeaders });
 
 
-                    if (UploadValuesCompleted != null)
-                        UploadValuesCompleted(null, (UploadValuesCompletedEventArgs)(object)e);
+                    r.SetResult(response);
+
                     #endregion
 
 
@@ -185,7 +213,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
             x.send(xFormDataString);
 
 
-
+            return r.Task;
         }
 
         public static string ToFormDataString(NameValueCollection data)
