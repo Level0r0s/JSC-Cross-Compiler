@@ -109,6 +109,10 @@ namespace ScriptCoreLib.JavaScript.Extensions
 
 		public static void ReplaceWith(this INodeConvertible<IHTMLElement> ee, INodeConvertible<IHTMLElement> evalue)
 		{
+            // unless its from vb
+            // then it could be just a number coming in...
+            // Z:\jsc.svn\examples\javascript\vb\LEST97\LEST97\Application.vb
+
 			var e = ee.AsNode();
 			var value = evalue.AsNode();
 

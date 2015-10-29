@@ -8,6 +8,39 @@ namespace ScriptCoreLib.Shared.BCLImplementation.Microsoft.VisualBasic.CompilerS
     [Script(Implements = typeof(global::Microsoft.VisualBasic.CompilerServices.Operators))]
     internal class __Operators
     {
+        public static bool ConditionalCompareObjectEqual(object Left, object Right, bool TextCompare)
+        {
+            // https://javascriptweblog.wordpress.com/2010/09/27/the-secret-life-of-javascript-primitives/
+
+            // LINQ orderby?
+            //return (double)Left == (double)Right;
+            return ((double)Left).CompareTo((double)Right) == 0;
+        }
+
+        public static object AddObject(object Left, object Right)
+        {
+            return (double)Left + (double)Right;
+        }
+
+        public static object SubtractObject(object Left, object Right)
+        {
+            return (double)Left - (double)Right;
+        }
+
+        public static object DivideObject(object Left, object Right)
+        {
+            // Z:\jsc.svn\examples\javascript\vb\LEST97\LEST97\Library\lest_function_vba.vb
+
+            return (double)Left / (double)Right;
+        }
+
+        public static object MultiplyObject(object Left, object Right)
+        {
+            // Z:\jsc.svn\examples\javascript\vb\LEST97\LEST97\Library\lest_function_vba.vb
+
+            return (double)Left * (double)Right;
+        }
+
         public static int CompareString(string Left, string Right, bool TextCompare)
         {
             int num2;
@@ -46,9 +79,15 @@ namespace ScriptCoreLib.Shared.BCLImplementation.Microsoft.VisualBasic.CompilerS
             return -1;
         }
 
+        public static object ExponentObject(object Left, object Right)
+        {
+            return Math.Pow((double)Left, (double)Right);
 
+        }
 
 
 
     }
 }
+
+// script: error JSC1000: No implementation found for this native method, please implement [static Microsoft.VisualBasic.CompilerServices.Operators.ConditionalCompareObjectEqual(System.Object, System.Object, System.Boolean)]

@@ -20,6 +20,8 @@ namespace ScriptCoreLib.JavaScript.DOM
         [Script]
         public class FrameEvent
         {
+            // Z:\jsc.svn\examples\javascript\GoogleMapsMarkerLEST97\Application.cs
+
             public int counter;
 
 			// is it too costly to do for each frame?

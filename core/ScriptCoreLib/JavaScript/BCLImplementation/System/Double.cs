@@ -78,6 +78,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
         [Script(DefineAsStatic = true)]
         public int CompareTo(__Double e)
         {
+            // Z:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\Microsoft\VisualBasic\CompilerServices\Operators.cs
+
             return Expando.Compare(this, e);
         }
     }

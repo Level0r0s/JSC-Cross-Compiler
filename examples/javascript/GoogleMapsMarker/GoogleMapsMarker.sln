@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMapsMarker", "GoogleMapsMarker\GoogleMapsMarker.csproj", "{76843B5B-EB0A-4E49-8B36-037969E0545F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMapsInfoWindow", "..\GoogleMapsInfoWindow\GoogleMapsInfoWindow\GoogleMapsInfoWindow.csproj", "{38E685AC-F637-4765-B19A-306EBB04D25E}"
@@ -16,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractivePortForwarding", "..\..\java\android\forms\InteractivePortForwarding\InteractivePortForwarding\InteractivePortForwarding.csproj", "{9D280B94-A86D-496D-940A-7C0C1C270590}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Ultra.Library", "..\..\..\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library.csproj", "{132EB43F-19B4-42AC-8025-3249B129867A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{664DC53A-94B3-4205-863B-A390E032D3D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -196,5 +200,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{38E685AC-F637-4765-B19A-306EBB04D25E} = {664DC53A-94B3-4205-863B-A390E032D3D9}
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9} = {664DC53A-94B3-4205-863B-A390E032D3D9}
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6} = {664DC53A-94B3-4205-863B-A390E032D3D9}
+		{5F295F12-F93F-4347-B417-AA89990652A3} = {664DC53A-94B3-4205-863B-A390E032D3D9}
+		{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7} = {664DC53A-94B3-4205-863B-A390E032D3D9}
+		{9D280B94-A86D-496D-940A-7C0C1C270590} = {664DC53A-94B3-4205-863B-A390E032D3D9}
+		{132EB43F-19B4-42AC-8025-3249B129867A} = {664DC53A-94B3-4205-863B-A390E032D3D9}
 	EndGlobalSection
 EndGlobal

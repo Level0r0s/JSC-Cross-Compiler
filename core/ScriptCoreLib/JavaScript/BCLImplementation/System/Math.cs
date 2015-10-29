@@ -33,6 +33,9 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
         [Script(ExternalTarget = "Math")]
         readonly static DOM.IMath m;
 
+
+        public static double Log(double d) { return m.log(d); }
+
         public static double Floor(double d) { return m.floor(d); }
         public static double Ceiling(double d) { return m.ceil(d); }
         public static double Atan(double d) { return m.atan(d); }

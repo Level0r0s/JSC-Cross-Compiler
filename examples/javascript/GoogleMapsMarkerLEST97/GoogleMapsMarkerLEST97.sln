@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMapsMarkerLEST97", "GoogleMapsMarkerLEST97.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByPackage", "ByPackage", "{5F85B42F-7CE0-4529-80F4-1BBEA7B49286}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMapsMarker", "..\GoogleMapsMarker\GoogleMapsMarker\GoogleMapsMarker.csproj", "{76843B5B-EB0A-4E49-8B36-037969E0545F}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "LEST97", "..\vb\LEST97\LEST97\LEST97.vbproj", "{3D66C881-9682-4FA7-A3A0-E27B7A303ADD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.ActiveCfg = Debug|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.Build.0 = Debug|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.ActiveCfg = Release|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.Build.0 = Release|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Debug|x86.ActiveCfg = Debug|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Debug|x86.Build.0 = Debug|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Release|x86.ActiveCfg = Release|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Release|x86.Build.0 = Release|x86
+		{3D66C881-9682-4FA7-A3A0-E27B7A303ADD}.Debug|x86.ActiveCfg = Debug|x86
+		{3D66C881-9682-4FA7-A3A0-E27B7A303ADD}.Debug|x86.Build.0 = Debug|x86
+		{3D66C881-9682-4FA7-A3A0-E27B7A303ADD}.Release|x86.ActiveCfg = Release|x86
+		{3D66C881-9682-4FA7-A3A0-E27B7A303ADD}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{76843B5B-EB0A-4E49-8B36-037969E0545F} = {5F85B42F-7CE0-4529-80F4-1BBEA7B49286}
+		{3D66C881-9682-4FA7-A3A0-E27B7A303ADD} = {5F85B42F-7CE0-4529-80F4-1BBEA7B49286}
+	EndGlobalSection
+EndGlobal
