@@ -56,7 +56,6 @@ namespace ScriptCoreLib.Java
 
                     // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuSSLWebApplication\UbuntuSSLWebApplication\ApplicationWebService.cs
 
-                    Console.WriteLine("X509TrustManager getAcceptedIssuers " + new { SubjectDN = certificate.getSubjectDN() });
                     a.Add(certificate);
                 }
                 catch
@@ -66,6 +65,7 @@ namespace ScriptCoreLib.Java
 
             }
 
+            Console.WriteLine("X509TrustManager getAcceptedIssuers " + new { a.Count });
             return a.ToArray();
         }
     }
@@ -227,7 +227,7 @@ namespace ScriptCoreLib.Java
             foreach (var item in c)
             {
                 //Console.WriteLine("getCertificateChain " + new { item });
-                //Console.WriteLine("getCertificateChain " + new { SubjectDN = item.getSubjectDN() });
+                Console.WriteLine("getCertificateChain " + new { SubjectDN = item.getSubjectDN() });
 
             }
 
@@ -249,10 +249,10 @@ namespace ScriptCoreLib.Java
         public override string[] getServerAliases(string keyType, jvm::java.security.Principal[] issuers)
         {
             //Console.WriteLine("getServerAliases");
-            return new[] { 
-            
+            return new[] {
+
                 alias
-                
+
                 //"192.168.1.12" 
             };
         }

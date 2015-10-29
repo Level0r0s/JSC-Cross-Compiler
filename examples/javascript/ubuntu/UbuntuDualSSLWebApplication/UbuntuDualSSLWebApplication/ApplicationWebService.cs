@@ -37,9 +37,12 @@ namespace UbuntuDualSSLWebApplication
             return "yellow";
         }
 
+
+        public string Foo;
+
         public async Task<string> GetSpecialData()
         {
-            return "GetSpecialData for " + new { id };
+            return "GetSpecialData for " + new { id, Foo };
         }
 
         public void Handler(ScriptCoreLib.Ultra.WebService.WebServiceHandler h)

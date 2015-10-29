@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuDualSSLWebApplication", "UbuntuDualSSLWebApplication\UbuntuDualSSLWebApplication.csproj", "{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHopToIFrameAndBack", "..\..\Test\TestHopToIFrameAndBack\TestHopToIFrameAndBack.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
@@ -16,6 +18,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Ultra.Library", "..\..\..\..\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library.csproj", "{132EB43F-19B4-42AC-8025-3249B129867A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Extensions", "..\..\..\..\core\ScriptCoreLib.Extensions\ScriptCoreLib.Extensions\ScriptCoreLib.Extensions.csproj", "{94719DE7-1C09-4026-A948-D78EE589F1DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuTestUploadValues", "..\Test\UbuntuTestUploadValues\UbuntuTestUploadValues.csproj", "{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Ultra", "..\..\..\..\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra.csproj", "{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -236,8 +244,77 @@ Global
 		{94719DE7-1C09-4026-A948-D78EE589F1DC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{94719DE7-1C09-4026-A948-D78EE589F1DC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{94719DE7-1C09-4026-A948-D78EE589F1DC}.Release|x86.ActiveCfg = Release|Any CPU
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Android|Any CPU.ActiveCfg = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Android|Any CPU.Build.0 = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Android|Mixed Platforms.ActiveCfg = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Android|Mixed Platforms.Build.0 = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Android|x86.ActiveCfg = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Android|x86.Build.0 = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Assets|Any CPU.ActiveCfg = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Assets|Any CPU.Build.0 = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Assets|Mixed Platforms.ActiveCfg = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Assets|Mixed Platforms.Build.0 = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Assets|x86.ActiveCfg = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Assets|x86.Build.0 = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Debug|x86.ActiveCfg = Debug|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Debug|x86.Build.0 = Debug|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.PHP|Any CPU.ActiveCfg = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.PHP|Any CPU.Build.0 = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.PHP|Mixed Platforms.ActiveCfg = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.PHP|Mixed Platforms.Build.0 = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.PHP|x86.ActiveCfg = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.PHP|x86.Build.0 = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Release|Any CPU.ActiveCfg = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Release|Mixed Platforms.Build.0 = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Release|x86.ActiveCfg = Release|x86
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE}.Release|x86.Build.0 = Release|x86
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Android|Any CPU.ActiveCfg = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Android|Any CPU.Build.0 = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Android|Mixed Platforms.ActiveCfg = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Android|Mixed Platforms.Build.0 = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Android|x86.ActiveCfg = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Android|x86.Build.0 = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Assets|Any CPU.ActiveCfg = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Assets|Any CPU.Build.0 = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Assets|Mixed Platforms.ActiveCfg = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Assets|Mixed Platforms.Build.0 = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Assets|x86.ActiveCfg = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Assets|x86.Build.0 = Assets|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Debug|x86.Build.0 = Debug|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.PHP|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.PHP|Any CPU.Build.0 = Release|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.PHP|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.PHP|Mixed Platforms.Build.0 = Release|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.PHP|x86.ActiveCfg = Release|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.PHP|x86.Build.0 = Release|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Release|x86.ActiveCfg = Release|Any CPU
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
+		{3C88197D-5E5D-4CC9-9901-A68642AFF0D3} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
+		{5F295F12-F93F-4347-B417-AA89990652A3} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
+		{132EB43F-19B4-42AC-8025-3249B129867A} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
+		{94719DE7-1C09-4026-A948-D78EE589F1DC} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
+		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
 	EndGlobalSection
 EndGlobal

@@ -79,6 +79,9 @@ namespace UbuntuDualSSLWebApplication
 
         public Application(IApp page)
         {
+            // https://www.ssllabs.com/ssltest/analyze.html
+            // https://sslanalyzer.comodoca.com/
+            // https://support.comodo.com/index.php?/Default/Knowledgebase/Article/View/683/17/firefox-error-code-sec_error_unknown_issuer
 
             new { }.With(
                 async delegate
@@ -407,26 +410,30 @@ namespace UbuntuDualSSLWebApplication
                     //new IHTMLPre { "did we make it into parent yet? " + new { id } }.AttachToDocument();
                     Native.document.body.style.backgroundColor = "yellow";
 
-                    new IHTMLButton { "GetSpecialData " + new { id }  }.AttachToDocument().onclick += async delegate
-                    {
-                        #region statemachine fixup?
-                        await Task.CompletedTask;
-                        #endregion
+                    new IHTMLButton { "GetSpecialData " + new { id } }.AttachToDocument().onclick += async delegate
+                   {
+                       #region statemachine fixup?
+                       await Task.CompletedTask;
+                       #endregion
 
-                        //new IHTMLPre { "ready to call GetSpecialData" }.AttachToDocument();
+                       //new IHTMLPre { "ready to call GetSpecialData" }.AttachToDocument();
 
-                        await (HopToIFrame)iframe;
-                        var data = await new ApplicationWebService { }.GetSpecialData();
-                        await default(HopToParent);
+                       Native.document.body.style.backgroundColor = "white";
+                       var foo = "foo1";
+                       await (HopToIFrame)iframe;
+                       Native.document.body.style.backgroundColor = "cyan";
+                       var data = await new ApplicationWebService { Foo = foo }.GetSpecialData();
+                       Native.document.body.style.backgroundColor = "white";
+                       await default(HopToParent);
 
-                        // forks for chrome
-                        // ie gives 404
-                        // firefox bails
+                       // forks for chrome
+                       // ie gives 404
+                       // firefox bails
 
-                        new IHTMLPre { new { data } }.AttachToDocument();
+                       new IHTMLPre { new { data } }.AttachToDocument();
 
-                        Native.document.body.style.backgroundColor = "cyan";
-                    };
+                       Native.document.body.style.backgroundColor = "cyan";
+                   };
                 }
 
             );

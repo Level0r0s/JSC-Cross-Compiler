@@ -182,7 +182,7 @@ namespace ScriptCoreLib.Shared.IO
                 {
                     // any pending input?
                     //Console.WriteLine("ReadToMemoryStream before Write " + new { this.InternalBufferCount, xNetworkStream });
-                    Console.WriteLine("ReadToMemoryStream any pending input? " + new { this.InternalBufferCount });
+                    //Console.WriteLine("ReadToMemoryStream any pending input? " + new { this.InternalBufferCount });
                     target.Write(this.InternalBuffer, 0, this.InternalBufferCount);
                     this.InternalBufferCount = 0;
                 }
@@ -243,7 +243,7 @@ namespace ScriptCoreLib.Shared.IO
 
                 }
 
-                Console.WriteLine("ReadToMemoryStream, continue? " + new { this.InternalBufferCount });
+                //Console.WriteLine("ReadToMemoryStream, continue? " + new { this.InternalBufferCount });
                 flag = (this.InternalBufferCount > 0);
             }
 
