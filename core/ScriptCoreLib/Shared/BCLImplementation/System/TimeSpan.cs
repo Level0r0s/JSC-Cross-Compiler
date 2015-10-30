@@ -185,5 +185,13 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System
 				x.TotalMilliseconds + y.TotalMilliseconds
 			);
 		}
+
+        public static TimeSpan operator -(__TimeSpan x, __TimeSpan y)
+        {
+
+            return TimeSpan.FromMilliseconds(
+                x.TotalMilliseconds - y.TotalMilliseconds
+            );
+        }
 	}
 }

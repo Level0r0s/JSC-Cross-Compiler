@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A1BABC89-22F6-4609-BB6A-B53471088CCF}</ProjectGuid>
+    <ProjectGuid>{39D10EAC-910D-49B0-A2E1-C7070C1E0AD9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GoogleMapsMarkerLEST97</RootNamespace>
-    <AssemblyName>GoogleMapsMarkerLEST97</AssemblyName>
+    <RootNamespace>TestTaskConditionalButton</RootNamespace>
+    <AssemblyName>TestTaskConditionalButton</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>GoogleMapsMarkerLEST97.Program</StartupObject>
+    <StartupObject>TestTaskConditionalButton.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -39,17 +39,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google Maps, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <HintPath>packages\Google.Maps.1.0.0.0\lib\Google Maps.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="jsc.meta">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\jsc.meta.exe</HintPath>
-    </Reference>
-    <Reference Include="LEST97, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <HintPath>packages\LEST97.1.0.0.0\lib\LEST97.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="FSharp.Core">
@@ -124,8 +116,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="GoogleMapsMarkerLEST97.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\GoogleMapsMarkerLEST97.AssetsLibrary.dll</HintPath>
+    <Reference Include="TestTaskConditionalButton.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\TestTaskConditionalButton.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>

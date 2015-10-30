@@ -29,7 +29,21 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
         public static void Exit(int exitCode)
         {
+            // http://stackoverflow.com/questions/3715967/when-should-we-call-system-exit-in-java
+
+            // any critical operations?
+
             java.lang.System.exit(exitCode);
+
+            // will ubuntu upstart restart the service?
+
+            //      respawn
+              //A service or task with this stanza will be automatically started
+              //if  it  should  stop  abnormally.   All  reasons  for  a service
+              //stopping, except the  stop(8)  command  itself,  are  considered
+              //abnormal.   Tasks  may  exit  with a zero exit status to prevent
+              //being respawned.
+
         }
 
         public static int CurrentManagedThreadId

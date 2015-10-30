@@ -71,7 +71,6 @@ namespace UbuntuDualSSLWebApplication
     {
         static Func<string, string> DecoratedString = x => x.Replace("-", "_").Replace("+", "_").Replace("<", "_").Replace(">", "_");
 
-
         // cuz state jumping wont restore in memory refs yet...
         static IHTMLIFrame iframe;
 
@@ -380,10 +379,10 @@ namespace UbuntuDualSSLWebApplication
 
                     var hostport1 = Convert.ToInt32(hostport) + 1;
                     var host1 = hostname + ":" + hostport1;
+                    var baseURI1 = "https://" + host1;
 
                     new IHTMLPre { new { host1 } }.AttachToDocument();
 
-                    var baseURI1 = "https://" + host1;
 
                     iframe = new IHTMLIFrame { src = baseURI1, frameBorder = "0" }.AttachToDocument();
 

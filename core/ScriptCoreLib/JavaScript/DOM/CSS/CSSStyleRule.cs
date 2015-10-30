@@ -1727,6 +1727,22 @@ namespace ScriptCoreLib.JavaScript.DOM
 
 
 
+
+
+
+        // is it a good idea to expose primitiv elements this way?
+        // would a roslyn vs extension be able to disblay a different keyword icon or color for such members?
+        public CSSStyleRuleMonkier button
+        {
+            get
+            {
+                // Z:\jsc.svn\examples\javascript\css\test\TestTaskConditionalButton\Application.cs
+
+                return this[IHTMLElement.HTMLElementEnum.button];
+            }
+        }
+
+
         // how will it relate to registered element?
         [Obsolete("when can we also do typeof(div) ?")]
         public CSSStyleRuleMonkier this[IHTMLElement.HTMLElementEnum className]
@@ -1901,6 +1917,29 @@ namespace ScriptCoreLib.JavaScript.DOM
         // X:\jsc.svn\examples\javascript\css\Test\CSSSearchUserFeedback\CSSSearchUserFeedback\Application.cs
 
         public Task __task;
+
+
+
+
+        //public new CSSStyleRuleMonkier this[TaskComletionSource<> task]
+        // dynamic?
+        public new CSSStyleRuleMonkier this[object task]
+        {
+            get
+            {
+                // Z:\jsc.svn\examples\javascript\css\test\TestTaskConditionalButton\Application.cs
+
+                // could move to signature if we retarget to 4.6
+                var xTaskComletionSource = task as __TaskCompletionSource<object>;
+                if (xTaskComletionSource != null)
+                {
+                    return this[xTaskComletionSource.Task];
+                }
+
+                // dont know what to do with it. fault or ignore?
+                return this;
+            }
+        }
 
         [Obsolete("experimental")]
         public new CSSStyleRuleMonkier this[Task task]

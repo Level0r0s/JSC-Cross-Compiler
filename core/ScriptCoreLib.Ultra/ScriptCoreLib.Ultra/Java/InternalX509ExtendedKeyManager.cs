@@ -106,7 +106,7 @@ namespace ScriptCoreLib.Java
                     // http://www.coderanch.com/t/377172/java/java/cacerts-JAVA-HOME-jre-lib
                     // /usr/lib/jvm/default-java/jre/lib/security/cacerts
 
-                    Console.WriteLine(new { xKeyStoreDefaultType });
+                    //Console.WriteLine(new { xKeyStoreDefaultType });
                     xKeyStore = jvm::java.security.KeyStore.getInstance(xKeyStoreDefaultType);
 
                     //var fa = new FileInfo(typeof(Program).Assembly.Location);

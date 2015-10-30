@@ -112,6 +112,8 @@ namespace GoogleMapsMarkerLEST97
                   // Cannot read property 'getSouthWest' of undefined
                   new IHTMLPre
                   {
+                      //  rectangle.addListener('bounds_changed', showNewRect);
+
                       delegate
                       {
 

@@ -16,10 +16,10 @@ using System.Threading.Tasks;
 
 namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 {
-	// X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.Delay.cs
-	// X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.Delay.cs
+    // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Threading\Tasks\Task\Task.Delay.cs
+    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Threading\Tasks\Task\Task.Delay.cs
 
-	public partial class __Task
+    public partial class __Task
     {
         // X:\jsc.svn\core\ScriptCoreLib\ActionScript\BCLImplementation\System\Threading\Tasks\Task\Task.Delay.cs
 
@@ -32,6 +32,12 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 
         //}
 
+        public static Task Delay(TimeSpan millisecondsDelay)
+        {
+            return Delay((int)millisecondsDelay.TotalMilliseconds);
+        }
+
+
         public static Task Delay(int millisecondsDelay)
         {
             // X:\jsc.svn\examples\javascript\Test\TestTaskDelay\TestTaskDelay\ApplicationControl.cs
@@ -40,19 +46,21 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
 
             // tested by?
 
-            var t = new __Task { };
+            var t = new __TaskCompletionSource<object> { };
 
 
-			//Native.setTimeout
+            //Native.setTimeout
             new ScriptCoreLib.JavaScript.Runtime.Timer(
                 delegate
                 {
-                    t.InternalSetCompleteAndYield();
+                    //t.InternalSetCompleteAndYield();
+
+                    t.SetResult(null);
                 }
             ).StartTimeout(millisecondsDelay);
 
 
-            return t;
+            return t.Task;
         }
 
     }
