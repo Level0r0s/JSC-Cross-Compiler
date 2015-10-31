@@ -30,7 +30,7 @@ namespace ScriptCoreLib.Extensions
             //Console.WriteLine("BridgeStreamTo x: " + x.GetType().AssemblyQualifiedName);
 
             new Thread(
-               delegate()
+               delegate ()
                {
                    var rereadonzerobyte = 64;
 
@@ -41,7 +41,7 @@ namespace ScriptCoreLib.Extensions
                        //
                        try
                        {
-                       retry:
+                           retry:
                            var c = x.Read(buffer, 0, buffer.Length);
 
                            // is chrome trying to be smart?
@@ -123,10 +123,10 @@ namespace ScriptCoreLib.Extensions
 
 
         // called by?
-        public static void BridgeConnectionToPort(this TcpListener x, int port)
-        {
-            BridgeConnectionToPort(x, port, "> ", "< ");
-        }
+        //public static void BridgeConnectionToPort(this TcpListener x, int port)
+        //{
+        //    BridgeConnectionToPort(x, port, "> ", "< ");
+        //}
 
         // X:\jsc.svn\examples\javascript\Test\TestEIDPIN2\TestEIDPIN2\ApplicationWebService.cs
         //  (object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) =>
@@ -211,8 +211,14 @@ namespace ScriptCoreLib.Extensions
 
 
         // called by?
-        public static void BridgeConnectionToPort(this TcpListener xTcpListener, int port, string rx, string tx)
+        //    BridgeConnectionToPort(x, port, "> ", "< ");
+        public static void BridgeConnectionToPort(this TcpListener xTcpListener, int port, string rx = "> ", string tx = "< ",
+
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151031
+            // port +1 scheduled to ask for client certificate
+            bool GetClientCertificate = false)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151031
             // X:\jsc.svn\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\Extensions\TcpListenerExtensions.cs
 
             // http://stackoverflow.com/questions/5510063/makecert-exe-missing-in-windows-7-how-to-get-it-and-use-it
@@ -239,7 +245,13 @@ namespace ScriptCoreLib.Extensions
 
 
                     var host = LocalEndPoint.Address.ToString();
-                    var link = "http://" + host + ":" + LocalEndPoint.Port;
+
+
+                    var link = !GetClientCertificate ?
+                        ("http://" + host + ":" + LocalEndPoint.Port) :
+
+                        // keep the same cert
+                        ("http://" + host + ":" + (LocalEndPoint.Port - 1));
 
                     //link += " " + upstreamlink;
 
@@ -248,7 +260,7 @@ namespace ScriptCoreLib.Extensions
                         delegate
                         {
                             X509Store store = new X509Store(
-                                //StoreName.Root,
+                                    //StoreName.Root,
                                     StoreName.My,
                                 StoreLocation.CurrentUser);
                             // https://syfuhs.net/2011/05/12/making-the-x509store-more-friendly/
@@ -319,7 +331,7 @@ namespace ScriptCoreLib.Extensions
 
                         // chrome will fault on multiple CN
                         var args =
-                            //" -eku 1.3.6.1.5.5.7.3.1 -a SHA1 -n \"CN=" + upstream + ",CN=" + host + "\"  -len 2048 -m 1 -sky exchange  -ss MY -sr currentuser -sk deviceSSLcontainer  -is Root -in \"" + rootCN + "\" -l \"" + link + "\"";
+                //" -eku 1.3.6.1.5.5.7.3.1 -a SHA1 -n \"CN=" + upstream + ",CN=" + host + "\"  -len 2048 -m 1 -sky exchange  -ss MY -sr currentuser -sk deviceSSLcontainer  -is Root -in \"" + rootCN + "\" -l \"" + link + "\"";
                 " -eku 1.3.6.1.5.5.7.3.1 -a SHA1 -n \"CN=" + host + "\"  -len 2048 -m 1 -sky exchange  -ss MY -sr currentuser -sk deviceSSLcontainer  -is Root -in \"" + rootCN + "\" -l \"" + link + "\"";
 
                         Console.WriteLine(
@@ -361,7 +373,7 @@ namespace ScriptCoreLib.Extensions
                             );
 
                         p.WaitForExit();
-                        Console.WriteLine(new { p.ExitCode });
+                        //Console.WriteLine(new { p.ExitCode });
 
                         n = CertificateFromCurrentUser();
 
@@ -445,7 +457,7 @@ namespace ScriptCoreLib.Extensions
                     var p = Process.Start(
                         new ProcessStartInfo(
                             makecert,
-                        // this cert is constant
+                           // this cert is constant
                            args
                         )
                         {
@@ -475,6 +487,7 @@ namespace ScriptCoreLib.Extensions
 
             // Z:\jsc.svn\examples\javascript\Test\TestSSLConnectionLimit\ApplicationWebService.cs
 
+            // AtConnection ?
             Action<TcpClient> yield =
                 clientSocket =>
                 {
@@ -532,7 +545,7 @@ namespace ScriptCoreLib.Extensions
 
                         //#0f TCP enter https { ClientCounter = 15, SSLEmptyConnections = 7, SSLDataConnections = 3 }
 
-                        // signal chrome to cut it off?
+                        #region signal chrome to cut it off?
                         if (SSLEmptyConnections > 6)
                         {
                             // Z:\jsc.svn\examples\javascript\Test\TestSSLConnectionLimit\Application.cs
@@ -552,10 +565,14 @@ namespace ScriptCoreLib.Extensions
 
                             //return;
                         }
+                        #endregion
 
+
+                        // http://stackoverflow.com/questions/14523559/remotecertificatenotavailable-root-certificate-not-being-passed-during-authent
+                        // When asking for client authentication, this server sends a list of trusted certificate authorities to the client. The client uses this list to choose a client certificate that is trusted by the server. Currently, this server trusts so many certificate authorities that the list has grown too long. This list has thus been truncated. The administrator of this machine should review the certificate authorities trusted for client authentication and remove those that do not really need to be trusted.
 
                         //using (
-                        SslStream sslStream = new SslStream(
+                        SslStream xSslStream = new SslStream(
                            innerStream: xPeekableStream,
                            leaveInnerStreamOpen: false,
 
@@ -563,6 +580,20 @@ namespace ScriptCoreLib.Extensions
                                new LocalCertificateSelectionCallback(
                                    (object sender, string targetHost, X509CertificateCollection localCertificates, X509Certificate remoteCertificate, string[] acceptableIssuers) =>
                                    {
+                                       // examples/javascript/ubuntu/UbuntuDualSSLWebApplication/UbuntuDualSSLWebApplication/AcceptedIssuers/ESTEID-SK_2011.der.crt
+                                       // userCertificateSelectionCallback { targetHost = , remoteCertificate = , localCertificates = 1, acceptableIssuers = 0 }
+
+                                       // http://stackoverflow.com/questions/53824/how-to-specify-accepted-certificates-for-client-authentication-in-net-sslstream
+
+                                       // userCertificateSelectionCallback { targetHost = , remoteCertificate = , localCertificates = System.Security.Cryptography.X509Certificates.X509CertificateCollection }
+                                       Console.WriteLine("userCertificateSelectionCallback " + new
+                                       {
+                                           targetHost,
+                                           remoteCertificate,
+                                           localCertificates = localCertificates.Count,
+                                           acceptableIssuers = acceptableIssuers.Length
+                                       });
+
                                        return localCertificates[0];
                                    }
                                ),
@@ -570,6 +601,10 @@ namespace ScriptCoreLib.Extensions
                                new RemoteCertificateValidationCallback(
                                    (object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) =>
                                    {
+                                       // userCertificateValidationCallback { certificate = , sslPolicyErrors = RemoteCertificateNotAvailable }
+
+                                       Console.WriteLine("userCertificateValidationCallback " + new { certificate, sslPolicyErrors });
+
                                        // what if the app would also like to know
                                        // how did the client authenticate?
 
@@ -586,10 +621,23 @@ namespace ScriptCoreLib.Extensions
 
                                            //Console.Title = certificate.GetSerialNumberString();
                                            Console.Title = new { certificate }.ToString();
+
+                                           return true;
                                        }
 
                                        //RemoteCertificateValidationCallbackReplay[sender] =
                                        // y => y(sender, certificate, chain, sslPolicyErrors);
+
+
+
+                                       //#0a TCP enter https { ClientCounter = 10, SSLEmptyConnections = 0, SSLDataConnections = 4, RemoteEndPoint = 192.168.1.196:61922, isPeerProxy = False }
+                                       //AuthenticateAsServer { GetClientCertificate = True }
+                                       //userCertificateSelectionCallback { remoteCertificate =  }
+                                       //userCertificateValidationCallback { certificate =  }
+                                       //{ RemoteCertificate =  }
+
+                                       if (GetClientCertificate)
+                                           return false;
 
                                        return true;
                                    }
@@ -637,7 +685,7 @@ namespace ScriptCoreLib.Extensions
 
                                     CertificateFromCurrentUserByLocalEndPoint(
                                         new IPEndPoint(
-                                    //address: IPAddress.Parse(""),
+                                            //address: IPAddress.Parse(""),
 
                                             // how do we know our ip?
                                             address:
@@ -654,17 +702,29 @@ namespace ScriptCoreLib.Extensions
                                 //var upstream = "83.191.217.119";
 
 
+                                Console.WriteLine("AuthenticateAsServer " + new { GetClientCertificate }
+                                );
 
-
-                                sslStream.AuthenticateAsServer(
+                                // http://stackoverflow.com/questions/24150489/sslstream-authenticateasserver-certificate-fails-when-loaded-from-sql-but-works
+                                xSslStream.AuthenticateAsServer(
                                     serverCertificate: serverCertificate,
                                     //clientCertificateRequired: false,
                                     clientCertificateRequired: true,
                                     // Tls12 = 3072
                                     //enabledSslProtocols: System.Security.Authentication.SslProtocols.Tls12,
                                     enabledSslProtocols: enabledSslProtocols,
+
+
+                                    // http://stackoverflow.com/questions/26930398/sslstream-authenticateasserver-with-optional-clientcertificate
+                                    //checkCertificateRevocation: true
                                     checkCertificateRevocation: false
                                 );
+
+
+                                // http://www.codeproject.com/Articles/326574/An-Introduction-to-Mutual-SSL-Authentication
+
+                                Console.WriteLine(new { xSslStream.RemoteCertificate });
+
 
                             }
                             catch (Exception ex)
@@ -694,7 +754,11 @@ namespace ScriptCoreLib.Extensions
                             var y = new TcpClient();
                             y.Connect(new System.Net.IPEndPoint(IPAddress.Loopback, port));
 
-                            sslStream.BridgeStreamTo(y.GetStream(), ClientCounter, prefix: "#" + ClientCounter.ToString("x2") + " " + rx,
+                            xSslStream.BridgeStreamTo(
+                                y.GetStream(),
+                                ClientCounter,
+
+                                prefix: "#" + ClientCounter.ToString("x2") + " " + rx,
 
                                 firstByte: firstDataByte,
                                 exitBeforeFirstByte: exitBeforeFirstDataByte
@@ -716,7 +780,7 @@ namespace ScriptCoreLib.Extensions
 
 
 
-                                    y.GetStream().BridgeStreamTo(sslStream, ClientCounter, prefix: "#" + ClientCounter.ToString("x2") + " " + tx);
+                                    y.GetStream().BridgeStreamTo(xSslStream, ClientCounter, prefix: "#" + ClientCounter.ToString("x2") + " " + tx);
 
                                 }
                             );
@@ -756,7 +820,7 @@ namespace ScriptCoreLib.Extensions
 
 
             new Thread(
-               delegate()
+               delegate ()
                {
                    while (true)
                    {
