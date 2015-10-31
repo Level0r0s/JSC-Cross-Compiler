@@ -69,6 +69,8 @@ namespace UbuntuDualSSLWebApplication
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151031
+
         static Func<string, string> DecoratedString = x => x.Replace("-", "_").Replace("+", "_").Replace("<", "_").Replace(">", "_");
 
         // cuz state jumping wont restore in memory refs yet...
