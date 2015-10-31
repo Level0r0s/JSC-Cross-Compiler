@@ -679,6 +679,11 @@ namespace ScriptCoreLib.Extensions
 
 
 
+
+                                // for firefox we have to manually import our peer authority?
+                                // certmgr.msc
+                                // firefox is not using OS roots?
+                                // (Error code: sec_error_unknown_issuer)
                                 var serverCertificate =
 
                                 isPeerProxy ?
@@ -702,7 +707,7 @@ namespace ScriptCoreLib.Extensions
                                 //var upstream = "83.191.217.119";
 
 
-                                Console.WriteLine("AuthenticateAsServer " + new { GetClientCertificate }
+                                Console.WriteLine("AuthenticateAsServer " + new { GetClientCertificate, serverCertificate.Issuer }
                                 );
 
                                 // http://stackoverflow.com/questions/24150489/sslstream-authenticateasserver-certificate-fails-when-loaded-from-sql-but-works
