@@ -44,7 +44,9 @@ namespace ChromeHybridCaptureAE
             if (self_chrome_tabs != null)
             {
                 Console.WriteLine("running as extension " + new { typeof(Application).Assembly.GetName().Name });
-                // verify
+                //  verified.
+                // running as extension {{ Name = ChromeHybridCaptureAE.Application }}
+
 
                 return;
             }
@@ -59,11 +61,15 @@ namespace ChromeHybridCaptureAE
                     return;
                 }
 
+                // running as app {{ Name = ChromeHybridCaptureAE.Application }} now reenable extension..
                 Console.WriteLine("running as app " + new { typeof(Application).Assembly.GetName().Name } + " now reenable extension..");
 
+                // nuget chrome
                 chrome.app.runtime.Launched += async delegate
                 {
                     Console.WriteLine("app Launched");
+                    // verified.
+
                 };
 
 
