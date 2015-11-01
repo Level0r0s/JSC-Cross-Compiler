@@ -26,6 +26,7 @@ namespace ChromeHybridCapture
 {
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150824/webgliframebuffer
 
+    #region HopToChromeAppWindow
     public struct HopToChromeAppWindow : System.Runtime.CompilerServices.INotifyCompletion
     {
         public chrome.AppWindow window;
@@ -55,7 +56,12 @@ namespace ChromeHybridCapture
         public void GetResult() { }
 
     }
+    #endregion
 
+
+
+    #region HopToChromeApp
+    // Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
     public struct HopToChromeApp : System.Runtime.CompilerServices.INotifyCompletion
     {
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeapp
@@ -81,6 +87,8 @@ namespace ChromeHybridCapture
         public void GetResult() { }
 
     }
+    #endregion
+
 
     #region HopToChromeExtension
     // Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
@@ -341,6 +349,8 @@ namespace ChromeHybridCapture
                                                         return;
                                                     }
 
+
+                                                    #region IAsyncStateMachine
                                                     // casting from anonymous object.
                                                     var xShadowIAsyncStateMachine = (TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine)message;
 
@@ -403,6 +413,8 @@ namespace ChromeHybridCapture
                                                     #endregion
 
                                                     NewStateMachineI.MoveNext();
+                                                    #endregion
+
                                                 }
                                             )
                                         );
@@ -820,11 +832,9 @@ namespace ChromeHybridCapture
                                         return;
                                     }
 
+
+                                    #region IAsyncStateMachine
                                     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeapp
-
-
-
-
                                     // casting from anonymous object.
                                     var xShadowIAsyncStateMachine = (TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine)message;
 
@@ -911,6 +921,7 @@ namespace ChromeHybridCapture
                                     #endregion
 
                                     NewStateMachineI.MoveNext();
+                                    #endregion
                                 }
                             )
                         );
