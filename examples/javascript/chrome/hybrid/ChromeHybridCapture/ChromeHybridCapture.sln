@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeHybridCapture", "ChromeHybridCapture\ChromeHybridCapture.csproj", "{549D5E74-AE4D-4173-96B4-52F03695A096}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeHybridCapture", "ChromeHybridCapture\ChromeHybridCapture.csproj", "{95262275-0CB2-4B02-9338-159607037A3B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeWriteFiles", "..\..\apps\ChromeWriteFiles\ChromeWriteFiles\ChromeWriteFiles.csproj", "{CAAB91EF-8580-48AB-A516-48271371F0E4}"
 EndProject
@@ -33,12 +33,12 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{549D5E74-AE4D-4173-96B4-52F03695A096}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{549D5E74-AE4D-4173-96B4-52F03695A096}.Debug|x86.ActiveCfg = Debug|x86
-		{549D5E74-AE4D-4173-96B4-52F03695A096}.Debug|x86.Build.0 = Debug|x86
-		{549D5E74-AE4D-4173-96B4-52F03695A096}.Release|Any CPU.ActiveCfg = Release|x86
-		{549D5E74-AE4D-4173-96B4-52F03695A096}.Release|x86.ActiveCfg = Release|x86
-		{549D5E74-AE4D-4173-96B4-52F03695A096}.Release|x86.Build.0 = Release|x86
+		{95262275-0CB2-4B02-9338-159607037A3B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{95262275-0CB2-4B02-9338-159607037A3B}.Debug|x86.ActiveCfg = Debug|x86
+		{95262275-0CB2-4B02-9338-159607037A3B}.Debug|x86.Build.0 = Debug|x86
+		{95262275-0CB2-4B02-9338-159607037A3B}.Release|Any CPU.ActiveCfg = Release|x86
+		{95262275-0CB2-4B02-9338-159607037A3B}.Release|x86.ActiveCfg = Release|x86
+		{95262275-0CB2-4B02-9338-159607037A3B}.Release|x86.Build.0 = Release|x86
 		{CAAB91EF-8580-48AB-A516-48271371F0E4}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{CAAB91EF-8580-48AB-A516-48271371F0E4}.Debug|x86.ActiveCfg = Debug|x86
 		{CAAB91EF-8580-48AB-A516-48271371F0E4}.Debug|x86.Build.0 = Debug|x86
