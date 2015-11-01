@@ -82,7 +82,8 @@ namespace ChromeHybridCapture
 
     }
 
-
+    #region HopToChromeExtension
+    // Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
     public struct HopToChromeExtension : System.Runtime.CompilerServices.INotifyCompletion
     {
         public static Action<HopToChromeExtension, Action> VirtualOnCompleted;
@@ -106,6 +107,7 @@ namespace ChromeHybridCapture
         public void GetResult() { }
 
     }
+    #endregion
 
 
     #region HopToChromeTab

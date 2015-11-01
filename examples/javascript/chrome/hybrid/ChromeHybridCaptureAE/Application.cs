@@ -19,6 +19,35 @@ using ChromeHybridCaptureAE.HTML.Pages;
 
 namespace ChromeHybridCaptureAE
 {
+
+    #region HopToChromeExtension
+    // Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs
+    public struct HopToChromeExtension : System.Runtime.CompilerServices.INotifyCompletion
+    {
+        public static Action<HopToChromeExtension, Action> VirtualOnCompleted;
+        public void OnCompleted(Action continuation)
+        {
+
+            VirtualOnCompleted(this, continuation);
+        }
+
+        //Error   CS1929	'HopToChromeExtension' does not contain a definition for 'GetAwaiter' and the best extension method overload 'IXMLHttpRequestAsyncExtensions.GetAwaiter(IXMLHttpRequest)' requires a receiver of type 'IXMLHttpRequest'	ChromeHybridCapture Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs	404	IntelliSense
+
+        public HopToChromeExtension GetAwaiter() { return this; }
+
+
+
+        //Error   CS0117	'HopToChromeExtension' does not contain a definition for 'IsCompleted'	ChromeHybridCapture Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs	409	IntelliSense
+        public bool IsCompleted { get { return false; } }
+
+
+        //Error CS0117	'HopToChromeExtension' does not contain a definition for 'GetResult'	ChromeHybridCapture Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCapture\ChromeHybridCapture\Application.cs	414	IntelliSense
+        public void GetResult() { }
+
+    }
+    #endregion
+
+
     /// <summary>
     /// Your client side code running inside a web browser as JavaScript.
     /// </summary>
@@ -71,6 +100,8 @@ namespace ChromeHybridCaptureAE
                                     var m = default(chrome.PortMessageEvent);
                                     while (m = await port.async.onmessage)
                                     {
+                                        // verified.
+
                                         Console.WriteLine("extension  port.onMessage invoke "
                                             //+ new { xShadowIAsyncStateMachine.state, xShadowIAsyncStateMachine.TypeName }
                                             );
@@ -96,14 +127,7 @@ namespace ChromeHybridCaptureAE
                 // running as app {{ Name = ChromeHybridCaptureAE.Application }} now reenable extension..
                 Console.WriteLine("running as app " + new { typeof(Application).Assembly.GetName().Name } + " now reenable extension..");
 
-                // nuget chrome
-                chrome.app.runtime.Launched += async delegate
-                {
-                    Console.WriteLine("app Launched");
-                    // verified.
-
-                };
-
+                #region ConnectExternal
                 chrome.runtime.ConnectExternal += async port =>
                 {
                     // app chrome.runtime.ConnectExternal {{ id = jadmeogmbokffpkdfeiemjplohfgkidd }} now click launch!
@@ -122,6 +146,33 @@ namespace ChromeHybridCaptureAE
                     // can we have async thing here?
 
 
+                    #region HopToChromeExtension
+                    HopToChromeExtension.VirtualOnCompleted = async (that, continuation) =>
+                    {
+                        // state 0 ? or state -1 ?
+                        Console.WriteLine("app HopToChromeExtension VirtualOnCompleted enter ");
+
+                        // where is it defined?
+                        // z:\jsc.svn\examples\javascript\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\ShadowIAsyncStateMachine.cs
+
+                        // async dont like ref?
+                        TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableContinuation r = TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableFromContinuation(continuation);
+
+                        // 29035ms extension  port.onMessage {{ message = do HopToChromeExtension }}
+                        port.postMessage("do HopToChromeExtension " + new { r.shadowstate.TypeName, r.shadowstate.state });
+
+
+                        // now send the jump instruction... will it make it?
+                        port.postMessage(r.shadowstate);
+
+
+                        // how would we know to continue from current continuation?
+                        // or are we fine to rebuild the scope if we jump back?
+                    };
+                    #endregion
+
+
+
                     var m = default(chrome.PortMessageEvent);
                     while (m = await port.async.onmessage)
                     {
@@ -132,7 +183,28 @@ namespace ChromeHybridCaptureAE
                         );
                     }
                 };
+                #endregion
 
+
+
+
+                // nuget chrome
+                chrome.app.runtime.Launched += async delegate
+                {
+                    fixup: await Task.CompletedTask;
+
+
+
+                    Console.WriteLine("app Launched, will hop to extension");
+                    // verified.
+
+
+                    await default(HopToChromeExtension);
+
+                    Console.WriteLine("hop from app to extension");
+                    // verify
+
+                };
 
 
                 return;
