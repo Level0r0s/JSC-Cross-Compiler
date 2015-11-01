@@ -16,6 +16,8 @@ using System.Xml.Linq;
 using ChromeHybridCaptureAE;
 using ChromeHybridCaptureAE.Design;
 using ChromeHybridCaptureAE.HTML.Pages;
+using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 
 namespace ChromeHybridCaptureAE
 {
@@ -53,6 +55,10 @@ namespace ChromeHybridCaptureAE
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
+        static Func<string, string> DecoratedString =
+             x => x.Replace("-", "_").Replace("+", "_").Replace("<", "_").Replace(">", "_");
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>
@@ -95,16 +101,86 @@ namespace ChromeHybridCaptureAE
                                 {
                                     //Console.WriteLine("extension chrome.runtime.connect done " + new { port.name, port.sender.id });
                                     //Console.WriteLine("extension chrome.runtime.connect done " + new { port.name, port.sender });
-                                    Console.WriteLine("extension chrome.runtime.connect done");
+                                    Console.WriteLine("extension chrome.runtime.connect done, click launch");
 
+
+
+                                    // is async better than event += here?
                                     var m = default(chrome.PortMessageEvent);
                                     while (m = await port.async.onmessage)
                                     {
+                                        var message = m.data;
+
                                         // verified.
 
-                                        Console.WriteLine("extension  port.onMessage invoke "
-                                            //+ new { xShadowIAsyncStateMachine.state, xShadowIAsyncStateMachine.TypeName }
-                                            );
+                                        #region IAsyncStateMachine
+                                        // casting from anonymous object.
+                                        var xShadowIAsyncStateMachine = (TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine)message;
+
+                                        // 12961ms extension  port.onMessage {{ state = null, TypeName = null }}
+                                        // or constructor id?
+                                        Console.WriteLine("extension  port.onMessage " + new { xShadowIAsyncStateMachine.state, xShadowIAsyncStateMachine.TypeName });
+
+
+                                        // 12468ms extension  port.onMessage {{ message = do HopToChromeExtension {{ TypeName = <Namespace>.___ctor_b__4_9_d, state = 0 }}, expando_isstring = true, is_string = false, equals_typeofstring = false }}
+                                        //2015-08-22 15:49:45.729 view-source:53670 12471ms extension  port.onMessage {{ message = do HopToChromeExtension {{ TypeName = <Namespace>.___ctor_b__4_9_d, state = 0 }} }}
+                                        //2015-08-22 15:49:45.733 view-source:53670 12475ms extension  port.onMessage {{ message = [object Object], expando_isstring = false, is_string = false, equals_typeofstring = false }}
+                                        //2015-08-22 15:49:45.737 view-source:53670 12479ms extension  port.onMessage {{ state = 0, TypeName = <Namespace>.___ctor_b__4_9_d }}
+
+
+                                        #region xAsyncStateMachineType
+                                        var xAsyncStateMachineType = typeof(Application).Assembly.GetTypes().FirstOrDefault(
+                                            xAsyncStateMachineTypeCandidate =>
+                                            {
+                                                // safety check 1
+
+                                                //Console.WriteLine(new { sw.ElapsedMilliseconds, item.FullName });
+
+                                                var xisIAsyncStateMachine = typeof(IAsyncStateMachine).IsAssignableFrom(xAsyncStateMachineTypeCandidate);
+                                                if (xisIAsyncStateMachine)
+                                                {
+                                                    //Console.WriteLine(new { item.FullName, isIAsyncStateMachine });
+
+                                                    return xAsyncStateMachineTypeCandidate.FullName == xShadowIAsyncStateMachine.TypeName;
+                                                }
+
+                                                return false;
+                                            }
+                                        );
+                                        #endregion
+
+                                        Console.WriteLine(new { xAsyncStateMachineType });
+
+                                        var NewStateMachine = FormatterServices.GetUninitializedObject(xAsyncStateMachineType);
+                                        var isIAsyncStateMachine = NewStateMachine is IAsyncStateMachine;
+
+                                        var NewStateMachineI = (IAsyncStateMachine)NewStateMachine;
+
+                                        #region 1__state
+                                        xAsyncStateMachineType.GetFields(
+                                          System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance
+                                          ).WithEach(
+                                           AsyncStateMachineSourceField =>
+                                           {
+
+                                               //Console.WriteLine(new { AsyncStateMachineSourceField });
+
+                                               if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
+                                               {
+                                                   AsyncStateMachineSourceField.SetValue(
+                                                       NewStateMachineI,
+                                                       xShadowIAsyncStateMachine.state
+                                                    );
+                                               }
+
+
+                                           }
+                                      );
+                                        #endregion
+
+                                        NewStateMachineI.MoveNext();
+                                        #endregion
+
                                     }
                                 }
                           );
@@ -150,16 +226,13 @@ namespace ChromeHybridCaptureAE
                     HopToChromeExtension.VirtualOnCompleted = async (that, continuation) =>
                     {
                         // state 0 ? or state -1 ?
-                        Console.WriteLine("app HopToChromeExtension VirtualOnCompleted enter ");
+                        Console.WriteLine("app HopToChromeExtension enter ");
 
                         // where is it defined?
                         // z:\jsc.svn\examples\javascript\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\ShadowIAsyncStateMachine.cs
 
                         // async dont like ref?
                         TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableContinuation r = TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableFromContinuation(continuation);
-
-                        // 29035ms extension  port.onMessage {{ message = do HopToChromeExtension }}
-                        port.postMessage("do HopToChromeExtension " + new { r.shadowstate.TypeName, r.shadowstate.state });
 
 
                         // now send the jump instruction... will it make it?
