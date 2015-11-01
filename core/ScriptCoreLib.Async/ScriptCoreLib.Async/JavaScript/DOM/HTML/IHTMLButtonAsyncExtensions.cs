@@ -21,6 +21,11 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         }
 
 
+        // Error	80	Cannot implicitly convert type 'System.Runtime.CompilerServices.TaskAwaiter<ScriptCoreLib.JavaScript.DOM.IEvent>' to 
+        // 'System.Runtime.CompilerServices.TaskAwaiter<ScriptCoreLib.JavaScript.DOM.IEvent<ScriptCoreLib.JavaScript.DOM.HTML.IHTMLButton>>'	Z:\jsc.svn\core\ScriptCoreLib.Async\ScriptCoreLib.Async\JavaScript\DOM\HTML\IHTMLButtonAsyncExtensions.cs	20	20	ScriptCoreLib.Async
+
+
+
 
         public static IHTMLButton WhenClicked(this IHTMLButton e, Func<Task> h)
         {

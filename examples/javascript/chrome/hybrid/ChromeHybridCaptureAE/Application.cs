@@ -47,6 +47,38 @@ namespace ChromeHybridCaptureAE
                 //  verified.
                 // running as extension {{ Name = ChromeHybridCaptureAE.Application }}
 
+                new { }.With(
+                     async delegate
+                     {
+                         var app = (await chrome.management.getAll()).FirstOrDefault(item => item.name.StartsWith(typeof(Application).Assembly.GetName().Name));
+
+                         if (app == null)
+                         {
+                             Console.WriteLine("running as extension. app not found.");
+                             return;
+                         }
+
+                         // running as extension {{ shortName = ChromeHybridCaptureAE.Application.exe, launchType = OPEN_AS_WINDOW }}
+                         Console.WriteLine("running as extension " + new { app.shortName, app.launchType });
+
+                         chrome.runtime.connect(app.id).With(
+                                async (chrome.Port port) =>
+                                {
+                                    //Console.WriteLine("extension chrome.runtime.connect done " + new { port.name, port.sender.id });
+                                    //Console.WriteLine("extension chrome.runtime.connect done " + new { port.name, port.sender });
+                                    Console.WriteLine("extension chrome.runtime.connect done");
+
+                                    var m = default(chrome.PortMessageEvent);
+                                    while (m = await port.async.onmessage)
+                                    {
+                                        Console.WriteLine("extension  port.onMessage invoke "
+                                            //+ new { xShadowIAsyncStateMachine.state, xShadowIAsyncStateMachine.TypeName }
+                                            );
+                                    }
+                                }
+                          );
+                     }
+                );
 
                 return;
             }
@@ -70,6 +102,35 @@ namespace ChromeHybridCaptureAE
                     Console.WriteLine("app Launched");
                     // verified.
 
+                };
+
+                chrome.runtime.ConnectExternal += async port =>
+                {
+                    // app chrome.runtime.ConnectExternal {{ id = jadmeogmbokffpkdfeiemjplohfgkidd }} now click launch!
+                    Console.WriteLine("app chrome.runtime.ConnectExternal " + new { port.sender.id } + " now click launch!");
+
+                    new chrome.Notification(
+                        title: typeof(Application).Assembly.GetName().Name,
+                        message: "ready. click launch"
+                    ).Clicked += delegate
+                    {
+                        // https://developer.chrome.com/apps/app_runtime
+
+                        // management_api
+                    };
+
+                    // can we have async thing here?
+
+
+                    var m = default(chrome.PortMessageEvent);
+                    while (m = await port.async.onmessage)
+                    {
+                        //var m = await port.async.onmessage;
+
+                        Console.WriteLine("app  port.onMessage invoke "
+                        //+ new { xShadowIAsyncStateMachine.state, xShadowIAsyncStateMachine.TypeName }
+                        );
+                    }
                 };
 
 
