@@ -220,9 +220,6 @@
     <Compile Include="BCLImplementation\System\IO\MemoryStream.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BCLImplementation\System\IO\StreamReader.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="BCLImplementation\System\IO\StringReader.cs">
       <SubType>Code</SubType>
     </Compile>

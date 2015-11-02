@@ -6,14 +6,31 @@ using ScriptCoreLib;
 using System.IO;
 using ScriptCoreLib.Shared.BCLImplementation.System.IO;
 
-namespace ScriptCoreLibJava.BCLImplementation.System.IO
+namespace ScriptCoreLib.Shared.BCLImplementation.System.IO
+//namespace ScriptCoreLibJava.BCLImplementation.System.IO
 {
     // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/IO/StreamReader.cs
 
     [Script(Implements = typeof(global::System.IO.StreamReader))]
     internal class __StreamReader : __TextReader
     {
+        // Z:\jsc.svn\examples\javascript\io\DropLESTToDisplay\DropLESTToDisplay\Application.cs
         // X:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\System\IO\TextReader.cs
+
+        //        Revision: 1203
+        //Author: zproxy
+        //Date: 4. september 2008. a. 14:45:27
+        //Message:
+
+        //----
+        //Added : /core/ScriptCoreLib/ActionScript/BCLImplementation/System/IO/StreamReader.cs
+        //Added : /core/ScriptCoreLib/ActionScript/BCLImplementation/System/IO/StringReader.cs
+        //Added : /core/ScriptCoreLib/ActionScript/BCLImplementation/System/IO/TextReader.cs
+        //Modified : /core/ScriptCoreLib/ScriptCoreLib.csproj
+        //Modified : /core/ScriptCoreLib.Avalon/ScriptCoreLib.Avalon/Shared/Avalon/Extensions/AvalonExtensions.cs
+
+
+
 
         readonly Stream _BaseStream;
 

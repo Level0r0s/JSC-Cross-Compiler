@@ -39,6 +39,10 @@ namespace DropLESTToDisplay
             new { }.With(
                 async delegate
                 {
+
+
+                    //Native.document.documentElement.css.dragover
+
                     // while await ondrop ?
                     Native.document.documentElement.ondragover += ee =>
                     {
@@ -86,24 +90,35 @@ namespace DropLESTToDisplay
                         //var m = new MemoryStream(bytes);
                         //var r = new StreamReader(m);
 
-                        var xstring = Encoding.UTF8.GetString(bytes);
+                        //var xstring = Encoding.UTF8.GetString(bytes);
 
 
-                        //{ name = download.csv, size = 20851425 }
-                        //{ ElapsedMilliseconds = 104 }
-                        //{ ElapsedMilliseconds = 5351, R1C1 = ﻿Jkn }
-                        //{ ElapsedMilliseconds = 5390, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
+                        ////{ name = download.csv, size = 20851425 }
+                        ////{ ElapsedMilliseconds = 104 }
+                        ////{ ElapsedMilliseconds = 5351, R1C1 = ﻿Jkn }
+                        ////{ ElapsedMilliseconds = 5390, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
 
-                        new IHTMLPre { new { sw.ElapsedMilliseconds, R1C1 = xstring.TakeUntilOrEmpty(";") } }.AttachToDocument();
+                        //new IHTMLPre { new { sw.ElapsedMilliseconds, R1C1 = xstring.TakeUntilOrEmpty(";") } }.AttachToDocument();
 
 
-                        var r = new StringReader(xstring);
+                        //var r = new StringReader(xstring);
+
+                        var r = new StreamReader(new MemoryStream(bytes));
+
+                        //{ ElapsedMilliseconds = 167, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
+
 
                         var header = r.ReadLine();
 
                         new IHTMLPre { new { sw.ElapsedMilliseconds, header } }.AttachToDocument();
 
+
+                        var line1 = r.ReadLine();
+
+                        new IHTMLPre { new { sw.ElapsedMilliseconds, line1 } }.AttachToDocument();
+
                         // { ElapsedMilliseconds = 11929, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
+                        // { ElapsedMilliseconds = 162, line1 = 1;Lasteaia tänav;eesti;ametlik põhinimi;kehtiv;liikluspind;;Saare maakond, Kuressaare linn;6457819.16;410757.89; }
                     }
 
 
