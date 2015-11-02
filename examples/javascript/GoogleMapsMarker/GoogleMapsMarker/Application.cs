@@ -122,6 +122,48 @@ namespace google
                         return x.Task;
                     }
                 }
+
+                public Task onmouseover
+                {
+                    get
+                    {
+                        var x = new TaskCompletionSource<object>();
+
+                        that.onmouseover += delegate
+                        {
+
+                            if (x == null)
+                                return;
+
+
+                            x.SetResult(null);
+                            x = null;
+                        };
+
+                        return x.Task;
+                    }
+                }
+
+                public Task onmouseout
+                {
+                    get
+                    {
+                        var x = new TaskCompletionSource<object>();
+
+                        that.onmouseout += delegate
+                        {
+
+                            if (x == null)
+                                return;
+
+
+                            x.SetResult(null);
+                            x = null;
+                        };
+
+                        return x.Task;
+                    }
+                }
             }
 
 
@@ -137,6 +179,38 @@ namespace google
                 {
 
                     this.addListener("click", value);
+                }
+
+            }
+
+            public event Action onmouseover
+            {
+                [Script(DefineAsStatic = true)]
+                remove
+                { }
+
+
+                [Script(DefineAsStatic = true)]
+                add
+                {
+
+                    this.addListener("mouseover", value);
+                }
+
+            }
+
+            public event Action onmouseout
+            {
+                [Script(DefineAsStatic = true)]
+                remove
+                { }
+
+
+                [Script(DefineAsStatic = true)]
+                add
+                {
+
+                    this.addListener("mouseout", value);
                 }
 
             }

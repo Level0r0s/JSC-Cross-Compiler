@@ -681,6 +681,12 @@ namespace DropLESTToDisplay
 
                                                 // http://stackoverflow.com/questions/8198635/change-marker-icon-on-mouseover-google-maps-v3
                                                 AddZoomAwareMarker(map, marker, new markersmall().src, new markerxsmall().src);
+
+
+                                                await marker.async.onmouseover;
+
+                                                Console.Title = title1;
+
                                             }
                                         );
 
