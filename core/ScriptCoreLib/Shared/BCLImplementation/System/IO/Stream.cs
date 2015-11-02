@@ -54,11 +54,14 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.IO
 
         public virtual int ReadByte()
         {
+            // https://msdn.microsoft.com/en-us/library/system.io.stream.readbyte(v=vs.110).aspx
+            // Z:\jsc.svn\examples\javascript\io\test\TestMemoryStreamReadByte\TestMemoryStreamReadByte\Application.cs
+
             var buffer = new byte[1];
             var i = Read(buffer, 0, 1);
 
             if (i < 0)
-                return i;
+                return -1;
 
             return buffer[0];
         }

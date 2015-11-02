@@ -31,7 +31,7 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.IO
 
 
 
-
+        public virtual Stream BaseStream { get { return _BaseStream; } }
         readonly Stream _BaseStream;
 
 
@@ -55,23 +55,33 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.IO
                     r = false;
                 }
 
+                // Z:\jsc.svn\examples\javascript\io\test\TestMemoryStreamReadByte\TestMemoryStreamReadByte\Application.cs
+                // does memoryStream return -1 if end of stream?
                 var x = _BaseStream.ReadByte();
 
-                if (x == '\n')
+                if (x < 0)
                 {
-                    r = false;
-                }
-                else if (x == '\r')
-                {
-                    x = _BaseStream.ReadByte();
-
-                    // it better be '\n' or we have just swallowed it
-                    // needs more code here...
                     r = false;
                 }
                 else
                 {
-                    m.WriteByte((byte)x);
+
+                    if (x == '\n')
+                    {
+                        r = false;
+                    }
+                    else if (x == '\r')
+                    {
+                        x = _BaseStream.ReadByte();
+
+                        // it better be '\n' or we have just swallowed it
+                        // needs more code here...
+                        r = false;
+                    }
+                    else
+                    {
+                        m.WriteByte((byte)x);
+                    }
                 }
             }
 

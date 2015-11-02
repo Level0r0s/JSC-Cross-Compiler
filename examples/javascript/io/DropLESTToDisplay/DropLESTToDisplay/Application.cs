@@ -451,21 +451,38 @@ namespace DropLESTToDisplay
 
                         //var r = new StringReader(xstring);
 
-                        {
-                            var r = new StreamReader(new MemoryStream(bytes));
 
-                            //{ ElapsedMilliseconds = 167, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
+                        // script: error JSC1000: No implementation found for this native method, please implement [System.IO.StreamReader.get_BaseStream()]
 
+                        //{
+                        //    var r = new StreamReader(new MemoryStream(bytes));
 
-                            var header = r.ReadLine();
-
-                            new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds, header } }.AttachToDocument();
+                        //    //{ ElapsedMilliseconds = 167, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
 
 
-                            var line1 = r.ReadLine();
+                        //    var header = r.ReadLine();
 
-                            new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds, line1 } }.AttachToDocument();
-                        }
+                        //    new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds, header } }.AttachToDocument();
+
+
+                        //    for (int i = 0; i < 10; i++)
+                        //    {
+                        //        var line1 = r.ReadLine();
+                        //        var null1 = line1 == null;
+                        //        var empty1 = string.IsNullOrEmpty(line1);
+                        //        var length1 = -1;
+                        //        if (line1 != null)
+                        //            length1 = line1.Length;
+
+
+                        //        //{ empty1 = false, line1 = 153405;Pargimaja;eesti;ametlik põhinimi;kehtiv;maaüksus, krunt, talu;;Järva maakond, Albu vald, Kaalepi küla;6551431.62;596555.84;, Position = 1008, Length = 1008 }
+                        //        //{ empty1 = false, line1 = , Position = 1008, Length = 1008 }
+
+                        //        new IHTMLPre { new { null1, empty1, length1, line1, r.BaseStream.Position, r.BaseStream.Length } }.AttachToDocument();
+                        //    }
+
+
+                        //}
 
                         // { ElapsedMilliseconds = 11929, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
                         // { ElapsedMilliseconds = 162, line1 = 1;Lasteaia tänav;eesti;ametlik põhinimi;kehtiv;liikluspind;;Saare maakond, Kuressaare linn;6457819.16;410757.89; }
@@ -487,7 +504,7 @@ namespace DropLESTToDisplay
 
                                 // start the static line reader.
 
-                                WorkerReader = new StreamReader(new MemoryStream(bytes));
+                                WorkerReader = new StreamReader(new MemoryStream(bytes1));
 
                                 // now before we jump back to ui. lets start reading the lines...
 
@@ -518,7 +535,9 @@ namespace DropLESTToDisplay
 
                                 WorkerReaderLineCount = 0;
 
-                                while (!string.IsNullOrEmpty(line1))
+                                var HasLine = !string.IsNullOrEmpty(line1);
+
+                                while (HasLine)
                                 {
                                     WorkerReaderLineCount++;
 
@@ -527,20 +546,20 @@ namespace DropLESTToDisplay
                                     //Console.WriteLine(new { WorkerReaderLineCount });
 
 
-                                    if (WorkerReaderLineCount % 10 == 1)
+                                    if (WorkerReaderLineCount % 500 == 1)
                                     {
                                         Console.Title = WorkerReaderLineCount + " in " + sw1.ElapsedMilliseconds + "ms";
                                     }
 
 
-                                    if (WorkerReaderLineCount % 100 == 1)
+                                    if (WorkerReaderLineCount % 300 == 1)
                                     {
                                         new { }.With(
                                             async delegate
                                             {
                                                 { fixup: await Task.CompletedTask; }
 
-                                                var output = "working... " + WorkerReaderLineCount + " in " + sw1.ElapsedMilliseconds + "ms";
+                                                var output = "working... " + WorkerReaderLineCount + " in " + sw1.ElapsedMilliseconds + "ms " + new { HasLine } + ":" + line1;
                                                 await default(HopToUI);
                                                 WorkerUI.innerText = output;
                                             }
@@ -550,14 +569,17 @@ namespace DropLESTToDisplay
                                     //await Task.Delay(3);
 
                                     line1 = WorkerReader.ReadLine();
+                                    HasLine = !string.IsNullOrEmpty(line1);
                                 }
 
 
                                 {
 
-                                    var output = "done " + new { Thread.CurrentThread.ManagedThreadId, WorkerReaderLineCount };
+                                    var output = "done " + new { Thread.CurrentThread.ManagedThreadId, WorkerReaderLineCount, sw1.ElapsedMilliseconds };
                                     await default(HopToUI);
                                     WorkerUI.innerText = "done... " + new { Thread.CurrentThread.ManagedThreadId, output };
+
+                                    // done... { ManagedThreadId = 1, output = done { ManagedThreadId = 10, WorkerReaderLineCount = 153411 } }
                                 }
 
                             }

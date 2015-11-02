@@ -30,6 +30,7 @@ namespace GoogleMapsMarkerLEST97
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // Z:\jsc.svn\examples\javascript\io\DropLESTToDisplay\DropLESTToDisplay\Application.cs
             // http://xgis.maaamet.ee/xGIS/XGis?app_id=UU82&user_id=at&bbox=529464.185181536,6581178.67615528,549196.965601648,6593508.79911233&LANG=1
             // http://www.maaamet.ee/rr/geo-lest/files/geo-lest_function_vba.txt
 

@@ -9,19 +9,19 @@ using ScriptCoreLib.Shared.BCLImplementation.System.IO;
 
 namespace ScriptCoreLib.JavaScript.BCLImplementation.System.IO
 {
-	// http://referencesource.microsoft.com/#mscorlib/system/io/memorystream.cs
-	// https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/IO/MemoryStream.cs
-	// https://github.com/dotnet/corefx/blob/master/src/System.Reflection.Metadata/src/System/Reflection/Internal/Utilities/ImmutableMemoryStream.cs
-	// https://github.com/mono/mono/blob/master/mcs/class/corlib/System.IO/MemoryStream.cs
+    // http://referencesource.microsoft.com/#mscorlib/system/io/memorystream.cs
+    // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/IO/MemoryStream.cs
+    // https://github.com/dotnet/corefx/blob/master/src/System.Reflection.Metadata/src/System/Reflection/Internal/Utilities/ImmutableMemoryStream.cs
+    // https://github.com/mono/mono/blob/master/mcs/class/corlib/System.IO/MemoryStream.cs
 
-	// https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/IO/MemoryStream.cs
+    // https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/IO/MemoryStream.cs
 
-	// X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\IO\MemoryStream.cs
-	// X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\IO\MemoryStream.css
-	// X:\jsc.svn\core\ScriptCoreLib\ActionScript\BCLImplementation\System\IO\MemoryStream.cs
+    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\IO\MemoryStream.cs
+    // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\IO\MemoryStream.css
+    // X:\jsc.svn\core\ScriptCoreLib\ActionScript\BCLImplementation\System\IO\MemoryStream.cs
 
-	// why ist it in shared yet?
-	[Script(Implements = typeof(global::System.IO.MemoryStream))]
+    // why ist it in shared yet?
+    [Script(Implements = typeof(global::System.IO.MemoryStream))]
     internal class __MemoryStream : __Stream
     {
         // https://code.msdn.microsoft.com/windowshardware/RAMDisk-Storage-Driver-9ce5f699
@@ -29,33 +29,33 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.IO
         // RAMdisk
         // http://www.ltr-data.se/opencode.html/#ImDisk
 
-		// 20150401 
-		// could byte[] or MemoryStream be context switched yet?
-		// 20150410, byte[] can now be signaled to the worker and back
-		// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201504/20150401
+        // 20150401 
+        // could byte[] or MemoryStream be context switched yet?
+        // 20150410, byte[] can now be signaled to the worker and back
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201504/20150401
 
-		//20150119
-		// can async webethod send back a copy of memory stream just yet?
-		// X:\jsc.svn\examples\javascript\test\TestdecodeURIComponent\TestdecodeURIComponent\Application.cs
-
-
-		// X:\jsc.svn\examples\javascript\io\ZIPDecoderExperiment\ZIPDecoderExperiment\Application.cs
+        //20150119
+        // can async webethod send back a copy of memory stream just yet?
+        // X:\jsc.svn\examples\javascript\test\TestdecodeURIComponent\TestdecodeURIComponent\Application.cs
 
 
+        // X:\jsc.svn\examples\javascript\io\ZIPDecoderExperiment\ZIPDecoderExperiment\Application.cs
 
 
-		// X:\jsc.svn\examples\javascript\Test\TestMemoryStreamPerformance\TestMemoryStreamPerformance\Application.cs
-		// X:\jsc.svn\core\ScriptCoreLib.Async\ScriptCoreLib.Async\JavaScript\Experimental\X.cs
-		// X:\jsc.svn\examples\javascript\WebCamAvatarsExperiment\WebCamAvatarsExperiment\ApplicationWebService.cs
-		// X:\jsc.svn\core\ScriptCoreLib.Avalon\ScriptCoreLib.Avalon\JavaScript\UCLImplementation\AvalonExtensions.cs
 
 
-		// ByteArrayInputStream 
-		// http://www.koders.com/java/fid654B227C95A99C7C2ACA686E7BC6BA584491A6B7.aspx
+        // X:\jsc.svn\examples\javascript\Test\TestMemoryStreamPerformance\TestMemoryStreamPerformance\Application.cs
+        // X:\jsc.svn\core\ScriptCoreLib.Async\ScriptCoreLib.Async\JavaScript\Experimental\X.cs
+        // X:\jsc.svn\examples\javascript\WebCamAvatarsExperiment\WebCamAvatarsExperiment\ApplicationWebService.cs
+        // X:\jsc.svn\core\ScriptCoreLib.Avalon\ScriptCoreLib.Avalon\JavaScript\UCLImplementation\AvalonExtensions.cs
 
-		// InputStream
-		// http://www.koders.com/java/fidF990D954151F15A618183172871A1403F719D971.aspx
-		byte[] InternalBuffer = new byte[0];
+
+        // ByteArrayInputStream 
+        // http://www.koders.com/java/fid654B227C95A99C7C2ACA686E7BC6BA584491A6B7.aspx
+
+        // InputStream
+        // http://www.koders.com/java/fidF990D954151F15A618183172871A1403F719D971.aspx
+        byte[] InternalBuffer = new byte[0];
 
         long InternalPosition;
         long InternalLength;
@@ -65,11 +65,11 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.IO
         public override void Flush()
         {
             // ?
-			// sync to another thread?
+            // sync to another thread?
         }
 
 
-		// jsc rewriter need to be more agressive with the while loop detection?
+        // jsc rewriter need to be more agressive with the while loop detection?
         // X:\jsc.svn\examples\javascript\io\synergy\PNGEncoderExperiment\PNGEncoderExperiment\Application.cs
         public __MemoryStream(int capacity)
             : this(new byte[capacity])
@@ -109,14 +109,17 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.IO
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            var a = this.Length - this.InternalPosition;
+            //Console.WriteLine("enter Read " + new { this.Position, this.Length, count });
 
-            if (count > a)
+            var DataAvailable = this.Length - this.InternalPosition;
+
+            if (DataAvailable < count)
             {
-                if (a < 0)
+                // Z:\jsc.svn\examples\javascript\io\test\TestMemoryStreamReadByte\TestMemoryStreamReadByte\Application.cs
+                if (DataAvailable <= 0)
                     return -1;
 
-                count = (int)a;
+                count = (int)DataAvailable;
             }
 
             Array.Copy(this.InternalBuffer, (int)this.InternalPosition, buffer, offset, count);

@@ -8,11 +8,11 @@
     <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DropLESTToDisplay</RootNamespace>
-    <AssemblyName>DropLESTToDisplay</AssemblyName>
+    <RootNamespace>TestMemoryStreamReadByte</RootNamespace>
+    <AssemblyName>TestMemoryStreamReadByte</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>DropLESTToDisplay.Program</StartupObject>
+    <StartupObject>TestMemoryStreamReadByte.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -42,10 +42,6 @@
     <Reference Include="jsc.meta">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\jsc.meta.exe</HintPath>
-    </Reference>
-    <Reference Include="LEST97, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\LEST97.1.0.0.0\lib\LEST97.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="FSharp.Core">
@@ -120,14 +116,11 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="DropLESTToDisplay.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\DropLESTToDisplay.AssetsLibrary.dll</HintPath>
+    <Reference Include="TestMemoryStreamReadByte.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\TestMemoryStreamReadByte.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
-    </Reference>
-    <Reference Include="TestSwitchToServiceContextAsync.AssetsLibrary">
-      <HintPath>..\..\..\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\bin\staging.AssetsLibrary\TestSwitchToServiceContextAsync.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -141,12 +134,6 @@
     </Compile>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync.csproj">
-      <Project>{5a6a3b8c-35e2-49e4-9856-73956c94d149}</Project>
-      <Name>TestSwitchToServiceContextAsync</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
