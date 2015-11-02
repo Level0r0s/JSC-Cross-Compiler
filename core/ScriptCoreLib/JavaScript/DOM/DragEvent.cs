@@ -11,6 +11,8 @@ namespace ScriptCoreLib.JavaScript.DOM
         // "X:\jsc.svn\examples\javascript\Test\TestPackageAsApplication\TestPackageAsApplication.sln"
         // downloadURL no longer works?
 
+
+        // Z:\jsc.svn\core\ScriptCoreLib.Windows.Forms\ScriptCoreLib.Windows.Forms\JavaScript\BCLImplementation\System\Windows\Forms\Control\Control.AllowDrop.cs
         public readonly DataTransfer dataTransfer;
 
         public DragEvent(string type) { }

@@ -8,6 +8,8 @@ using ScriptCoreLib.Shared.BCLImplementation.System.IO;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.IO
 {
+    // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/IO/StreamReader.cs
+
     [Script(Implements = typeof(global::System.IO.StreamReader))]
     internal class __StreamReader : __TextReader
     {

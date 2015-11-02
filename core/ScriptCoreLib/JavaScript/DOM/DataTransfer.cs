@@ -14,9 +14,12 @@ namespace ScriptCoreLib.JavaScript.DOM
     public class DataTransfer
     {
         // tested by?
+        // Z:\jsc.svn\examples\javascript\io\DropLESTToDisplay\DropLESTToDisplay\Application.cs
 
         public string dropEffect;
         public string effectAllowed;
+
+        // Z:\jsc.svn\examples\javascript\io\DropFileForSHA1\DropFileForSHA1\Application.cs
         public readonly FileList files;
         public readonly DataTransferItemList items;
         public readonly string[] types;

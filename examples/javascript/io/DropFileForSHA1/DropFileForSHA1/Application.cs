@@ -25,6 +25,8 @@ namespace DropFileForSHA1
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/20151102/csv
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>

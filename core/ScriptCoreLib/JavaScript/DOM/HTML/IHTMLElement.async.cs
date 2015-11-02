@@ -36,6 +36,24 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             internal TElement that;
 
 
+
+
+            // Z:\jsc.svn\examples\javascript\io\DropLESTToDisplay\DropLESTToDisplay\Application.cs
+            public Task<DragEvent> ondrop
+            {
+                get
+                {
+                    var x = new TaskCompletionSource<DragEvent>();
+
+                    Native.document.documentElement.ondrop += e =>
+                    {
+                        x.SetResult(e);
+                    };
+
+                    return x.Task;
+                }
+            }
+
             public virtual Task<IEvent> onmutation
             {
                 [Script(DefineAsStatic = true)]

@@ -11,6 +11,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.IO
 	[Script(Implements = typeof(global::System.IO.StringReader))]
 	internal class __StringReader : __TextReader
 	{
+        // Z:\jsc.svn\examples\javascript\io\DropLESTToDisplay\DropLESTToDisplay\Application.cs
+
 		readonly string InputString;
 
 		public int Position;

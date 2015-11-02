@@ -961,6 +961,8 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         }
         #endregion
 
+
+        // tested by?
         #region event ondrop
         public event System.Action<DragEvent> ondrop
         {
@@ -976,6 +978,11 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             }
         }
         #endregion
+
+
+
+
+        // tested by?
         #region event ondragdrop
         public event System.Action<IEvent> ondragdrop
         {
@@ -1360,7 +1367,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             bool flag = false;
 
             System.Action<IEvent> _capture =
-                delegate (IEvent e)
+                delegate(IEvent e)
                 {
                     if (flag)
                         return;
