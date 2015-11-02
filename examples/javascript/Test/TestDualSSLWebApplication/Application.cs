@@ -37,6 +37,12 @@ namespace TestDualSSLWebApplication
                 {
                     // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151031
 
+                    if (base.ClientCertificate.Value != "n/a")
+                    {
+                        new IHTMLPre { "hello!" }.AttachToDocument();
+                        return;
+                    }
+
                     var hostname = Native.document.location.host.TakeUntilIfAny(":");
                     var hostport = Native.document.location.host.SkipUntilOrEmpty(":");
 

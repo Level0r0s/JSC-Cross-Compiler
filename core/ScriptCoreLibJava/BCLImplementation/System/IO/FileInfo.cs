@@ -14,6 +14,13 @@ namespace ScriptCoreLibJava.BCLImplementation.System.IO
     [Script(Implements = typeof(global::System.IO.FileInfo))]
     internal class __FileInfo : __FileSystemInfo
     {
+        public override string ToString()
+        {
+            // look more useful
+            return new { this.FullName, this.Exists }.ToString();
+        }
+
+
         readonly string InternalPath;
 
         public __FileInfo(string path)

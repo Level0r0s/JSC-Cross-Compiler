@@ -10,9 +10,15 @@ namespace ScriptCoreLib.Ultra.WebService
     /// This type is used to serve custom content from the web server.
     /// </summary>
 
+
+   
+
     [Obsolete("experimental")]
     public class WebServiceHandler
     {
+
+
+
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151022/httprequest
         // Z:\jsc.svn\examples\javascript\appengine\xml\AppEngineServerSideContent\Application.cs
         // X:\jsc.svn\examples\javascript\xml\ServerSideContent\ServerSideContent\ApplicationWebService.cs

@@ -8,6 +8,7 @@ namespace ScriptCoreLib.Ultra.WebService
 {
 	public abstract class InternalGlobal : HttpApplication
     {
+
         // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuSSLWebApplication\UbuntuSSLWebApplication\ApplicationWebService.cs
         public global::System.Security.Cryptography.X509Certificates.X509Certificate2 ClientCertificate;
 

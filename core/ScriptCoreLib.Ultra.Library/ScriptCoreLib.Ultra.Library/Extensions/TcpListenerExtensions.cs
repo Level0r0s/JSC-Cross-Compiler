@@ -30,7 +30,7 @@ namespace ScriptCoreLib.Extensions
             //Console.WriteLine("BridgeStreamTo x: " + x.GetType().AssemblyQualifiedName);
 
             new Thread(
-               delegate ()
+               delegate()
                {
                    var rereadonzerobyte = 64;
 
@@ -41,7 +41,7 @@ namespace ScriptCoreLib.Extensions
                        //
                        try
                        {
-                           retry:
+                       retry:
                            var c = x.Read(buffer, 0, buffer.Length);
 
                            // is chrome trying to be smart?
@@ -260,7 +260,7 @@ namespace ScriptCoreLib.Extensions
                         delegate
                         {
                             X509Store store = new X509Store(
-                                    //StoreName.Root,
+                                //StoreName.Root,
                                     StoreName.My,
                                 StoreLocation.CurrentUser);
                             // https://syfuhs.net/2011/05/12/making-the-x509store-more-friendly/
@@ -331,7 +331,7 @@ namespace ScriptCoreLib.Extensions
 
                         // chrome will fault on multiple CN
                         var args =
-                //" -eku 1.3.6.1.5.5.7.3.1 -a SHA1 -n \"CN=" + upstream + ",CN=" + host + "\"  -len 2048 -m 1 -sky exchange  -ss MY -sr currentuser -sk deviceSSLcontainer  -is Root -in \"" + rootCN + "\" -l \"" + link + "\"";
+                            //" -eku 1.3.6.1.5.5.7.3.1 -a SHA1 -n \"CN=" + upstream + ",CN=" + host + "\"  -len 2048 -m 1 -sky exchange  -ss MY -sr currentuser -sk deviceSSLcontainer  -is Root -in \"" + rootCN + "\" -l \"" + link + "\"";
                 " -eku 1.3.6.1.5.5.7.3.1 -a SHA1 -n \"CN=" + host + "\"  -len 2048 -m 1 -sky exchange  -ss MY -sr currentuser -sk deviceSSLcontainer  -is Root -in \"" + rootCN + "\" -l \"" + link + "\"";
 
                         Console.WriteLine(
@@ -457,7 +457,7 @@ namespace ScriptCoreLib.Extensions
                     var p = Process.Start(
                         new ProcessStartInfo(
                             makecert,
-                           // this cert is constant
+                        // this cert is constant
                            args
                         )
                         {
@@ -576,6 +576,9 @@ namespace ScriptCoreLib.Extensions
                            innerStream: xPeekableStream,
                            leaveInnerStreamOpen: false,
 
+
+                           // https://msdn.microsoft.com/en-us/library/system.net.security.localcertificateselectioncallback(v=vs.110).aspx
+
                            userCertificateSelectionCallback:
                                new LocalCertificateSelectionCallback(
                                    (object sender, string targetHost, X509CertificateCollection localCertificates, X509Certificate remoteCertificate, string[] acceptableIssuers) =>
@@ -586,13 +589,15 @@ namespace ScriptCoreLib.Extensions
                                        // http://stackoverflow.com/questions/53824/how-to-specify-accepted-certificates-for-client-authentication-in-net-sslstream
 
                                        // userCertificateSelectionCallback { targetHost = , remoteCertificate = , localCertificates = System.Security.Cryptography.X509Certificates.X509CertificateCollection }
-                                       Console.WriteLine("userCertificateSelectionCallback " + new
-                                       {
-                                           targetHost,
-                                           remoteCertificate,
-                                           localCertificates = localCertificates.Count,
-                                           acceptableIssuers = acceptableIssuers.Length
-                                       });
+                                       //Console.WriteLine("userCertificateSelectionCallback " + new
+                                       //{
+                                       //    targetHost,
+                                       //    remoteCertificate,
+                                       //    localCertificates = localCertificates.Count,
+                                       //    acceptableIssuers = acceptableIssuers.Length,
+
+                                       //    //Environment.StackTrace
+                                       //});
 
                                        return localCertificates[0];
                                    }
@@ -603,16 +608,24 @@ namespace ScriptCoreLib.Extensions
                                    {
                                        // userCertificateValidationCallback { certificate = , sslPolicyErrors = RemoteCertificateNotAvailable }
 
-                                       Console.WriteLine("userCertificateValidationCallback " + new { certificate, sslPolicyErrors });
 
                                        // what if the app would also like to know
                                        // how did the client authenticate?
 
                                        if (certificate != null)
                                        {
-                                           Console.WriteLine(
-                                               new { certificate, chain }
-                                               );
+                                           // http://stackoverflow.com/questions/2206961/sharing-data-between-appdomains
+
+                                           //ScriptCoreLib.Ultra.WebService.WebServiceHandler.AppDomainData = certificate.Subject;
+                                           //ScriptCoreLib.Ultra.WebService.WebServiceHandlerData.AppDomainData = certificate.Subject;
+
+                                           //AppDomain.CurrentDomain.
+
+                                           // AppDomain.set
+                                           //Console.WriteLine(
+                                           //    //new { certificate, chain }
+                                           //    new { certificate.Subject }
+                                           //    );
 
                                            //        SERIALNUMBER=47101010033, G=MARI-LIIS, SN=MÄNNIK, CN="MÄNNIK,MARI-LIIS,47101010033", OU=authentication, O=ESTEID, C=EE
 
@@ -620,13 +633,19 @@ namespace ScriptCoreLib.Extensions
 
 
                                            //Console.Title = certificate.GetSerialNumberString();
-                                           Console.Title = new { certificate }.ToString();
+                                           //Console.Title = new { certificate }.ToString();
+                                           //Console.Title = new { certificate.Subject }.ToString();
 
                                            return true;
                                        }
 
                                        //RemoteCertificateValidationCallbackReplay[sender] =
                                        // y => y(sender, certificate, chain, sslPolicyErrors);
+
+
+                                       //#08 TCP enter https { ClientCounter = 8, SSLEmptyConnections = 0, SSLDataConnections = 7, RemoteEndPoint = 192.168.1.196:60424, isPeerProxy = False }
+                                       // userCertificateValidationCallback { certificate = , sslPolicyErrors = RemoteCertificateNotAvailable, GetClientCertificate = False }
+
 
 
 
@@ -637,7 +656,10 @@ namespace ScriptCoreLib.Extensions
                                        //{ RemoteCertificate =  }
 
                                        if (GetClientCertificate)
+                                       {
+                                           Console.WriteLine("userCertificateValidationCallback " + new { certificate, sslPolicyErrors, GetClientCertificate });
                                            return false;
+                                       }
 
                                        return true;
                                    }
@@ -654,10 +676,14 @@ namespace ScriptCoreLib.Extensions
 
                                 var enabledSslProtocols = System.Security.Authentication.SslProtocols.Default;
 
+                                //Console.WriteLine(new { enabledSslProtocols });
                                 if (typeof(System.Security.Authentication.SslProtocols).GetField("Tls12") != null)
                                 {
                                     // even if we link as 4.0 running in 4.5 we have tls1.2
+
+
                                     enabledSslProtocols = (System.Security.Authentication.SslProtocols)3072;
+                                    //Console.WriteLine(new { enabledSslProtocols });
                                 }
 
                                 //Console.WriteLine(
@@ -690,7 +716,7 @@ namespace ScriptCoreLib.Extensions
 
                                     CertificateFromCurrentUserByLocalEndPoint(
                                         new IPEndPoint(
-                                            //address: IPAddress.Parse(""),
+                                    //address: IPAddress.Parse(""),
 
                                             // how do we know our ip?
                                             address:
@@ -707,35 +733,63 @@ namespace ScriptCoreLib.Extensions
                                 //var upstream = "83.191.217.119";
 
 
-                                Console.WriteLine("AuthenticateAsServer " + new { GetClientCertificate, serverCertificate.Issuer }
+                                // The following fatal alert was received: 48.
+
+                                //Console.WriteLine("AuthenticateAsServer " + new { GetClientCertificate, serverCertificate.Issuer } );
+
+                                //A temp fix was to create the Reg Key below and reboot the web server.
+                                // It stops the server from sending a root certificate to the client and prompts the client for any certificate. 
+                                // So long as the root certificate of the certificate provided by the client is in the server's trust root store 
+                                // the user will authenticate.
+
+                                // http://support.microsoft.com/kb/933430/EN-US
+
+                                //            HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL
+                                //            Value name:
+                                //            SendTrustedIssuerList
+                                //Value type:
+                                //            REG_DWORD
+                                //Value data:
+                                //            0(False)
+
+                                // http://blogs.msdn.com/b/kaushal/archive/2012/10/06/ssl-tls-alert-protocol-amp-the-alert-codes.aspx
+                                // firefox will fail.
+                                Microsoft.Win32.Registry.SetValue(
+                                      @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL",
+                                      "SendTrustedIssuerList",
+                                      0
                                 );
 
+
+                                // http://stackoverflow.com/questions/617109/sslstream-on-tcp-server-fails-to-validate-client-certificate-with-remotecertific
                                 // http://stackoverflow.com/questions/24150489/sslstream-authenticateasserver-certificate-fails-when-loaded-from-sql-but-works
                                 xSslStream.AuthenticateAsServer(
-                                    serverCertificate: serverCertificate,
+                                     serverCertificate: serverCertificate,
                                     //clientCertificateRequired: false,
-                                    clientCertificateRequired: true,
+                                     clientCertificateRequired: GetClientCertificate,
                                     // Tls12 = 3072
                                     //enabledSslProtocols: System.Security.Authentication.SslProtocols.Tls12,
-                                    enabledSslProtocols: enabledSslProtocols,
+                                     enabledSslProtocols: enabledSslProtocols,
 
 
-                                    // http://stackoverflow.com/questions/26930398/sslstream-authenticateasserver-with-optional-clientcertificate
+                                     // http://stackoverflow.com/questions/26930398/sslstream-authenticateasserver-with-optional-clientcertificate
                                     //checkCertificateRevocation: true
-                                    checkCertificateRevocation: false
-                                );
+                                     checkCertificateRevocation: false
+                                 );
 
 
                                 // http://www.codeproject.com/Articles/326574/An-Introduction-to-Mutual-SSL-Authentication
 
-                                Console.WriteLine(new { xSslStream.RemoteCertificate });
+                                //Console.WriteLine(new { xSslStream.RemoteCertificate });
 
 
                             }
                             catch (Exception ex)
                             {
+                                // Secure Connection Failed
+
                                 Console.WriteLine(
-                                    "#" + ClientCounter.ToString("x2") + " AuthenticateAsServer failed. " +
+                                    "#" + ClientCounter.ToString("x2") + " AuthenticateAsServer failed. firefox is that you? " +
                                     new { ex.Message, InnerException = ex.InnerException == null ? null : ex.InnerException.Message });
 
 
@@ -758,6 +812,10 @@ namespace ScriptCoreLib.Extensions
                             // are those greedy tcp connections from chrome?
                             var y = new TcpClient();
                             y.Connect(new System.Net.IPEndPoint(IPAddress.Loopback, port));
+
+                            //Console.WriteLine(new { y.Client.LocalEndPoint, xSslStream.RemoteCertificate.Subject });
+                            //Console.WriteLine(new { y.Client.LocalEndPoint });
+
 
                             xSslStream.BridgeStreamTo(
                                 y.GetStream(),
@@ -784,6 +842,22 @@ namespace ScriptCoreLib.Extensions
                                     SSLDataConnections++;
 
 
+                                    if (xSslStream.RemoteCertificate != null)
+                                    {
+                                        Console.WriteLine("about to pass RemoteCertificate to cassini"
+                                             + new { Environment.CurrentDirectory, typeof(ScriptCoreLib.Ultra.WebService.InternalCassiniClientCertificateLoader).Assembly.Location }
+
+                                            );
+
+                                        //about to pass RemoteCertificate to cassini{ CurrentDirectory = V:\staging.net.debug, Location = V:\staging.net.debug\TestDualSSLWebApplicationLauncher.exe }
+                                        //enter InternalCassiniClientCertificateLoader { CurrentDirectory = V:\staging.net.debug, Location = C:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\root\3ea1022a\80f01a9\assembly\dl3\6ebd91e5\3d706475_4215d101\ScriptCoreLib.Ultra.Library.dll }
+
+
+                                        File.WriteAllBytes("ClientCertificate.crt", xSslStream.RemoteCertificate.Export(X509ContentType.Cert));
+                                        //File.WriteAllBytes("ClientCertificate.crt", xSslStream.RemoteCertificate.Export(X509ContentType.Pkcs7));
+
+                                        // pause all other server clients to make sure this intercepted crt is read by the correct appdomain. until cassini is gone that is.
+                                    }
 
                                     y.GetStream().BridgeStreamTo(xSslStream, ClientCounter, prefix: "#" + ClientCounter.ToString("x2") + " " + tx);
 
@@ -825,7 +899,7 @@ namespace ScriptCoreLib.Extensions
 
 
             new Thread(
-               delegate ()
+               delegate()
                {
                    while (true)
                    {

@@ -15,10 +15,13 @@ namespace ScriptCoreLib.Ultra.WebService
 {
     public static partial class InternalGlobalExtensions
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/20151102
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151022/httprequest
 
         public static void InternalApplication_BeginRequest(InternalGlobal g)
         {
+            //Console.WriteLine("InternalApplication_BeginRequest " + new { Environment.StackTrace });
+
             // is it ROSLYN friendly? no?
             // need to compile it by 2012?
             //AppDomain.CurrentDomain.UnhandledException +=
