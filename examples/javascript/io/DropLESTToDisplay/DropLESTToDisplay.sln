@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMapsMarkerLEST97", ".
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "LEST97", "..\..\vb\LEST97\LEST97\LEST97.vbproj", "{3D66C881-9682-4FA7-A3A0-E27B7A303ADD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMapsMarker", "..\..\GoogleMapsMarker\GoogleMapsMarker\GoogleMapsMarker.csproj", "{76843B5B-EB0A-4E49-8B36-037969E0545F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,16 @@ Global
 		{3D66C881-9682-4FA7-A3A0-E27B7A303ADD}.Release|Mixed Platforms.Build.0 = Release|x86
 		{3D66C881-9682-4FA7-A3A0-E27B7A303ADD}.Release|x86.ActiveCfg = Release|x86
 		{3D66C881-9682-4FA7-A3A0-E27B7A303ADD}.Release|x86.Build.0 = Release|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Debug|x86.ActiveCfg = Debug|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Debug|x86.Build.0 = Debug|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Release|Any CPU.ActiveCfg = Release|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Release|Mixed Platforms.Build.0 = Release|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Release|x86.ActiveCfg = Release|x86
+		{76843B5B-EB0A-4E49-8B36-037969E0545F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

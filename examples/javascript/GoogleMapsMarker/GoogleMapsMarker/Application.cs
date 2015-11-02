@@ -73,12 +73,20 @@ namespace google
             }
         }
 
+
+
+        // https://developers.google.com/maps/documentation/javascript/markers
         [Script(HasNoPrototype = true, ExternalTarget = "google.maps.Marker")]
         public class Marker // : IEventTarget
         {
             public Marker(object options)
             {
 
+            }
+
+
+            public void setIcon(string e)
+            {
             }
 
             public Tasks async
@@ -201,9 +209,9 @@ namespace google
             // Latitude ranges between -90 and 90 degrees, inclusive
 
             // TypeError: this.map.getCenter(...).get_lat is not a function
-            public double lat {[method: Script(ExternalTarget = "lat")]get; private set; }
+            public double lat { [method: Script(ExternalTarget = "lat")]get; private set; }
 
-            public double lng {[method: Script(ExternalTarget = "lng")]get; private set; }
+            public double lng { [method: Script(ExternalTarget = "lng")]get; private set; }
             // LatLngLiteral 
             //public double lat;
 
@@ -232,12 +240,82 @@ namespace google
                 throw new NotImplementedException();
             }
 
+
+
+            public void setCenter(object v)
+            {
+                throw new NotImplementedException();
+            }
+
+
+
+            //public double zoom { [method: Script(ExternalTarget = "lng")]get; private set; }
+
             public void setZoom(double v)
             {
                 throw new NotImplementedException();
             }
 
-            public void setCenter(object v)
+            public double getZoom()
+            {
+                throw new NotImplementedException();
+            }
+
+
+
+            public Tasks async
+            {
+                [Script(DefineAsStatic = true)]
+                get
+                {
+                    return new Tasks { that = this };
+                }
+            }
+
+            public class Tasks
+            {
+                public Map that;
+
+                public Task onzoomchanged
+                {
+                    get
+                    {
+                        var x = new TaskCompletionSource<object>();
+
+                        that.onzoomchanged += delegate
+                        {
+
+                            if (x == null)
+                                return;
+
+
+                            x.SetResult(null);
+                            x = null;
+                        };
+
+                        return x.Task;
+                    }
+                }
+            }
+
+
+            public event Action onzoomchanged
+            {
+                [Script(DefineAsStatic = true)]
+                remove
+                { }
+
+
+                [Script(DefineAsStatic = true)]
+                add
+                {
+
+                    this.addListener("zoom_changed", value);
+                }
+
+            }
+
+            private void addListener(string v, Action value)
             {
                 throw new NotImplementedException();
             }
@@ -402,10 +480,10 @@ namespace GoogleMapsMarker
                      );
 
                     //marker.onclick += delegate
-                    //{
-                    //    map.setZoom(8.0);
-                    //    map.setCenter(marker.getPosition());
-                    //};
+                //{
+                //    map.setZoom(8.0);
+                //    map.setCenter(marker.getPosition());
+                //};
 
 
                     //while (await marker.async.onclick)

@@ -145,6 +145,7 @@
     </Compile>
     <Content Include="Icons\marker.png" />
     <Content Include="Icons\markersmall.png" />
+    <Content Include="Icons\markerxsmall.png" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

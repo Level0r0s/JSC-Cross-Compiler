@@ -539,6 +539,10 @@ namespace DropLESTToDisplay
                                     }
                                 );
 
+
+                                new IHTMLPre { () => new { zoom = map.getZoom() } }.AttachToDocument();
+
+
                                 var marker0 = new google.maps.Marker(
                                      new
                                      {
@@ -552,6 +556,7 @@ namespace DropLESTToDisplay
                                          map
                                      }
                                   );
+
 
 
                                 await new IHTMLButton { "go" }.AttachToDocument().async.onclick;
@@ -661,6 +666,8 @@ namespace DropLESTToDisplay
                                                          // https://developers.google.com/maps/documentation/javascript/examples/marker-symbol-predefined
                                                          // https://developers.google.com/maps/documentation/javascript/markers
                                                          //icon = new marker().src,
+
+                                                         // can we have two zoom levels?
                                                          icon = new markersmall().src,
 
                                                          position,
@@ -671,6 +678,9 @@ namespace DropLESTToDisplay
                                                          map
                                                      }
                                                   );
+
+                                                // http://stackoverflow.com/questions/8198635/change-marker-icon-on-mouseover-google-maps-v3
+                                                AddZoomAwareMarker(map, marker, new markersmall().src, new markerxsmall().src);
                                             }
                                         );
 
@@ -703,6 +713,26 @@ namespace DropLESTToDisplay
 
                 }
             );
+
+        }
+
+        static async void AddZoomAwareMarker(google.maps.Map map, google.maps.Marker marker, string small, string xsmall)
+        {
+
+            do
+            {
+                var z = map.getZoom();
+
+                if (z < 10.0)
+                    marker.setIcon(xsmall);
+                else
+                    marker.setIcon(small);
+
+
+                await map.async.onzoomchanged;
+
+            }
+            while (true);
 
         }
 
