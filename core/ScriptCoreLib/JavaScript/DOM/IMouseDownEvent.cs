@@ -33,7 +33,7 @@ namespace ScriptCoreLib.JavaScript.DOM
 			Element.onmouseup += __mouseup;
 
 			// no reason to keep default behaviour to select text
-			this.PreventDefault();
+			this.preventDefault();
 
 			StopCapture = Element.CaptureMouse();
 

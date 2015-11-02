@@ -1374,7 +1374,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
                     flag = true;
 
-                    e.StopPropagation();
+                    e.stopPropagation();
 
                     //IEvent _event = Native.Document.createEvent("MouseEvents");
 

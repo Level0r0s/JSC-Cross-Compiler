@@ -160,8 +160,8 @@ namespace ScriptCoreLib.JavaScript.Controls
             {
                 //mousehover.Stop();
 
-                ev.PreventDefault();
-                ev.StopPropagation();
+                ev.preventDefault();
+                ev.stopPropagation();
 
                 DragStartCursorPosition = ev.CursorPosition;
 

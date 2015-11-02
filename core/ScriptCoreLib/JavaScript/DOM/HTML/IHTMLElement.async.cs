@@ -45,9 +45,30 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
                 {
                     var x = new TaskCompletionSource<DragEvent>();
 
+                    Native.document.documentElement.ondragover += ee =>
+                    {
+                        if (x == null)
+                            return;
+
+
+                        ee.stopPropagation();
+                        ee.preventDefault();
+                        ee.dataTransfer.dropEffect = "copy"; // Explicitly show this is a copy.
+
+                        // await leave? unless ondrop?
+                    };
+
                     Native.document.documentElement.ondrop += e =>
                     {
+                        if (x == null)
+                            return;
+
+                        e.stopPropagation();
+                        e.preventDefault();
+
                         x.SetResult(e);
+
+                        x = null;
                     };
 
                     return x.Task;

@@ -260,7 +260,7 @@ namespace ScriptCoreLib.JavaScript.DOM
 
         [Script(DefineAsStatic = true)]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        [Obsolete("stopPropagation")]
+        [Obsolete("stopPropagation", true)]
         public void StopPropagation() { InternalStopPropagation(this); }
 
         [Script(OptimizedCode = @"
@@ -342,7 +342,7 @@ namespace ScriptCoreLib.JavaScript.DOM
         #region PreventDefault
         [Script(DefineAsStatic = true)]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        [Obsolete("preventDefault")]
+        [Obsolete("preventDefault", true)]
         public void PreventDefault() { InternalPreventDefault(this); }
 
         [Script(DefineAsStatic = true)]

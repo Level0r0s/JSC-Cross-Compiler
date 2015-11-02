@@ -18,6 +18,7 @@ using DropLESTToDisplay.Design;
 using DropLESTToDisplay.HTML.Pages;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 
 namespace DropLESTToDisplay
 {
@@ -40,25 +41,27 @@ namespace DropLESTToDisplay
                 async delegate
                 {
 
+                    Native.document.documentElement.css.hover.style.backgroundColor = "pink";
+
 
                     //Native.document.documentElement.css.dragover
 
                     // while await ondrop ?
                     Native.document.documentElement.ondragover += ee =>
                     {
-                        ee.stopPropagation();
-                        ee.preventDefault();
+                        //ee.stopPropagation();
+                        //ee.preventDefault();
 
-                        ee.dataTransfer.dropEffect = "copy"; // Explicitly show this is a copy.
+                        //ee.dataTransfer.dropEffect = "copy"; // Explicitly show this is a copy.
 
-                        Native.body.style.backgroundColor = "cyan";
+                        Native.document.documentElement.style.backgroundColor = "cyan";
 
                         // await leave? unless ondrop?
                     };
 
                     Native.document.documentElement.ondragleave += delegate
                     {
-                        Native.body.style.backgroundColor = "";
+                        Native.document.documentElement.style.backgroundColor = "";
                     };
 
 
@@ -70,21 +73,20 @@ namespace DropLESTToDisplay
                     //Native.document.documentElement.ondrop += e =>
                     var e = await Native.document.documentElement.async.ondrop;
 
-                    Native.body.style.backgroundColor = "yellow";
+                    Native.document.documentElement.style.backgroundColor = "yellow";
 
-                    e.stopPropagation();
-                    e.preventDefault();
+
 
                     foreach (var f in e.dataTransfer.files.AsEnumerable())
                     {
-                        new IHTMLPre { new { f.name, f.size } }.AttachToDocument();
+                        new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, f.name, f.size } }.AttachToDocument();
                         // { name = download.csv, size = 20851425 }
 
                         var sw = Stopwatch.StartNew();
 
                         var bytes = await f.readAsBytes();
 
-                        new IHTMLPre { new { sw.ElapsedMilliseconds } }.AttachToDocument();
+                        new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds } }.AttachToDocument();
                         // { ElapsedMilliseconds = 72 }
 
                         //var m = new MemoryStream(bytes);
@@ -110,15 +112,21 @@ namespace DropLESTToDisplay
 
                         var header = r.ReadLine();
 
-                        new IHTMLPre { new { sw.ElapsedMilliseconds, header } }.AttachToDocument();
+                        new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds, header } }.AttachToDocument();
 
 
                         var line1 = r.ReadLine();
 
-                        new IHTMLPre { new { sw.ElapsedMilliseconds, line1 } }.AttachToDocument();
+                        new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds, line1 } }.AttachToDocument();
 
                         // { ElapsedMilliseconds = 11929, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
                         // { ElapsedMilliseconds = 162, line1 = 1;Lasteaia tänav;eesti;ametlik põhinimi;kehtiv;liikluspind;;Saare maakond, Kuressaare linn;6457819.16;410757.89; }
+
+
+                        // are we to decode 20MB ?
+
+
+
                     }
 
 

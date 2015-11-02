@@ -17,6 +17,15 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Reflection
 	[Script(Implements = typeof(global::System.Reflection.FieldInfo))]
 	public class __FieldInfo : __MemberInfo
 	{
+        // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/IO/StreamReader.cs
+
+        // Access to instance fields of MarshalByRefObject-derived types requires special JIT helpers that check
+        // if the instance operated on is remote. This is optimised for fields on this but if a method is Async
+        // and is thus lifted to a state machine type, access will be slow.
+        // As a workaround, we either cache instance fields in locals or use properties to access such fields.
+
+
+
 		// what about anonymous types?
 		// we need baked versions of them to keep type info?
 

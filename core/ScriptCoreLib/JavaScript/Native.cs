@@ -86,8 +86,8 @@ namespace ScriptCoreLib.JavaScript
             {
                 return delegate (IEvent e)
                 {
-                    e.PreventDefault();
-                    e.StopPropagation();
+                    e.preventDefault();
+                    e.stopPropagation();
                 };
             }
         }
