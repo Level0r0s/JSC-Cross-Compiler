@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeHybridCaptureAE", "ChromeHybridCaptureAE.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{9D1150EE-111D-49A3-8764-1B2A1450B283}"
@@ -18,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSwitchToServiceContextAsync", "..\..\..\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync.csproj", "{5A6A3B8C-35E2-49E4-9856-73956C94D149}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeAppWindowFrameNoneExperiment", "..\..\apps\ChromeAppWindowFrameNoneExperiment\ChromeAppWindowFrameNoneExperiment\ChromeAppWindowFrameNoneExperiment.csproj", "{0EDDC8EE-B098-4C59-BDE4-9B27823D53A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncHopToUIFromWorker", "..\..\..\async\AsyncHopToUIFromWorker\AsyncHopToUIFromWorker\AsyncHopToUIFromWorker.csproj", "{F2E012CC-17C4-4DCA-A881-6477F05DE6DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,14 +45,19 @@ Global
 		{0EDDC8EE-B098-4C59-BDE4-9B27823D53A0}.Debug|x86.Build.0 = Debug|x86
 		{0EDDC8EE-B098-4C59-BDE4-9B27823D53A0}.Release|x86.ActiveCfg = Release|x86
 		{0EDDC8EE-B098-4C59-BDE4-9B27823D53A0}.Release|x86.Build.0 = Release|x86
+		{F2E012CC-17C4-4DCA-A881-6477F05DE6DA}.Debug|x86.ActiveCfg = Debug|x86
+		{F2E012CC-17C4-4DCA-A881-6477F05DE6DA}.Debug|x86.Build.0 = Debug|x86
+		{F2E012CC-17C4-4DCA-A881-6477F05DE6DA}.Release|x86.ActiveCfg = Release|x86
+		{F2E012CC-17C4-4DCA-A881-6477F05DE6DA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{95262275-0CB2-4B02-9338-159607037A3B} = {9D1150EE-111D-49A3-8764-1B2A1450B283}
+		{0EDDC8EE-B098-4C59-BDE4-9B27823D53A0} = {9D1150EE-111D-49A3-8764-1B2A1450B283}
+		{F2E012CC-17C4-4DCA-A881-6477F05DE6DA} = {9D1150EE-111D-49A3-8764-1B2A1450B283}
 		{6C8F3C29-10F3-432B-B0E4-14C8EA3C79D7} = {334568E3-B027-4224-9A83-6B80E80CD777}
 		{5A6A3B8C-35E2-49E4-9856-73956C94D149} = {CEC1725A-E892-4695-9093-A75DF0FF8131}
-		{0EDDC8EE-B098-4C59-BDE4-9B27823D53A0} = {9D1150EE-111D-49A3-8764-1B2A1450B283}
 	EndGlobalSection
 EndGlobal
