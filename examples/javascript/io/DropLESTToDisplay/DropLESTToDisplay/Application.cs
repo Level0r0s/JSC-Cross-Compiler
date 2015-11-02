@@ -387,24 +387,14 @@ namespace DropLESTToDisplay
             new { }.With(
                 async delegate
                 {
-
-
+                    { fixup: await Task.CompletedTask; }
 
                     Native.document.documentElement.css.hover.style.backgroundColor = "pink";
-
-
                     //Native.document.documentElement.css.dragover
-
                     // while await ondrop ?
                     Native.document.documentElement.ondragover += ee =>
                     {
-                        //ee.stopPropagation();
-                        //ee.preventDefault();
-
-                        //ee.dataTransfer.dropEffect = "copy"; // Explicitly show this is a copy.
-
                         Native.document.documentElement.style.backgroundColor = "cyan";
-
                         // await leave? unless ondrop?
                     };
 
@@ -413,308 +403,217 @@ namespace DropLESTToDisplay
                         Native.document.documentElement.style.backgroundColor = "";
                     };
 
-
-
                     new IHTMLPre { "drop a file" }.AttachToDocument();
 
-                    // { name = cncnet5.ini, size = 1985 }
-
                     //Native.document.documentElement.ondrop += e =>
-                    var e = await Native.document.documentElement.async.ondrop;
+                    //var e = await Native.document.documentElement.async.ondrop;
+                    var f = await Native.document.documentElement.async.ondropfile;
 
                     Native.document.documentElement.style.backgroundColor = "yellow";
 
+                    new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, f.name, f.size } }.AttachToDocument();
+                    // { name = download.csv, size = 20851425 }
 
+                    var sw = Stopwatch.StartNew();
+                    var bytes = await f.readAsBytes();
 
-                    foreach (var f in e.dataTransfer.files.AsEnumerable())
+                    new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds } }.AttachToDocument();
+                     
+                    // nuget google
+                    await google.maps.api;
+
+                    #region map
+                    var div = new IHTMLDiv
                     {
-                        new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, f.name, f.size } }.AttachToDocument();
-                        // { name = download.csv, size = 20851425 }
+                    }.AttachToDocument();
 
-                        var sw = Stopwatch.StartNew();
-
-                        var bytes = await f.readAsBytes();
-
-                        new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds } }.AttachToDocument();
-                        // { ElapsedMilliseconds = 72 }
-
-                        //var m = new MemoryStream(bytes);
-                        //var r = new StreamReader(m);
-
-                        //var xstring = Encoding.UTF8.GetString(bytes);
+                    div.style.border = "1px dashed red";
+                    div.style.height = "300px";
+                    div.style.left = "0px";
+                    div.style.right = "0px";
 
 
-                        ////{ name = download.csv, size = 20851425 }
-                        ////{ ElapsedMilliseconds = 104 }
-                        ////{ ElapsedMilliseconds = 5351, R1C1 = ﻿Jkn }
-                        ////{ ElapsedMilliseconds = 5390, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
 
-                        //new IHTMLPre { new { sw.ElapsedMilliseconds, R1C1 = xstring.TakeUntilOrEmpty(";") } }.AttachToDocument();
+                    // https://developers.google.com/maps/documentation/javascript/reference?csw=1#MapOptions
+                    map = new google.maps.Map(div,
+                        new
+                        {
+                            disableDefaultUI = true,
 
-
-                        //var r = new StringReader(xstring);
-
-
-                        //script: error JSC1000: No implementation found for this native method, please implement [System.IO.StreamReader.get_BaseStream()]
-
-                        //new { }.With(
-                        //    delegate
-                        //    {
-                        //        var r = new StreamReader(new MemoryStream(bytes));
-
-                        //        //{ ElapsedMilliseconds = 167, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
+                            center = new { lat = 59.4329527, lng = 24.7023564 },
+                            zoom = 6.0
+                        }
+                    );
 
 
-                        //        var header = r.ReadLine();
-                        //        var headerX = header.Split(';').TakeWhile(x => x != "X").Count();
-                        //        var headerY = header.Split(';').TakeWhile(x => x != "Y").Count();
-
-                        //        new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds, headerX, headerY, header } }.AttachToDocument();
+                    new IHTMLPre { () => new { zoom = map.getZoom() } }.AttachToDocument();
 
 
-                        //        for (int i = 0; i < 10; i++)
-                        //        {
-                        //            var line1 = r.ReadLine();
-                        //            //var null1 = line1 == null;
-                        //            //var empty1 = string.IsNullOrEmpty(line1);
-                        //            //var length1 = -1;
-                        //            //if (line1 != null)
-                        //            //    length1 = line1.Length;
+                    var marker0 = new google.maps.Marker(
+                         new
+                         {
+                             position = new
+                             {
+                                 lat = 59.4329527,
+                                 lng = 24.7023564
+                             },
+                             //label = "T",
+                             //title = "Tallinn",
+                             map
+                         }
+                      );
+
+                    #endregion
 
 
-                        //            //{ empty1 = false, line1 = 153405;Pargimaja;eesti;ametlik põhinimi;kehtiv;maaüksus, krunt, talu;;Järva maakond, Albu vald, Kaalepi küla;6551431.62;596555.84;, Position = 1008, Length = 1008 }
-                        //            //{ empty1 = false, line1 = , Position = 1008, Length = 1008 }
+                    await new IHTMLButton { "go" }.AttachToDocument().async.onclick;
+                    var bytes1 = bytes;
+                    await default(HopToWorker);
 
-                        //            //new IHTMLPre { new { null1, empty1, length1, line1, r.BaseStream.Position, r.BaseStream.Length } }.AttachToDocument();
+                    // start the static line reader.
 
-                        //            if (!string.IsNullOrEmpty(line1))
-                        //            {
-                        //                var line1x = line1.Split(';')[headerX];
-                        //                var line1y = line1.Split(';')[headerY];
+                    WorkerReader = new StreamReader(new MemoryStream(bytes1));
 
-                        //                new IHTMLPre { new { line1x, line1y, line1 } }.AttachToDocument();
-                        //            }
-                        //        }
+                    // now before we jump back to ui. lets start reading the lines...
+                    // working... { ManagedThreadId = 1, output = hello { ManagedThreadId = 11, Length = 20851425, WorkerReaderLineCount = 0 } }
+
+                    new { }.With(
+                        async delegate
+                        {
+                            { fixup: await Task.CompletedTask; }
+
+                            var output = "hello " + new { Thread.CurrentThread.ManagedThreadId };
+                            await default(HopToUI);
+                            WorkerUI = new IHTMLPre { "working... " + new { Thread.CurrentThread.ManagedThreadId, output } }.AttachToDocument();
+
+                            // cant jump back can we?
+                        }
+                    );
+
+                    var header = WorkerReader.ReadLine();
+
+                    #region rows
+                    // Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; 
+
+                    //var headerX = header.Split(';').TakeWhile(x => x != "X").Count();
+                    //var headerY = header.Split(';').TakeWhile(x => x != "Y").Count();
+
+                    var line1 = WorkerReader.ReadLine();
+
+                    var sw1 = Stopwatch.StartNew();
+
+                    WorkerReaderLineCount = 0;
+
+                    var HasLine = !string.IsNullOrEmpty(line1);
+
+                    while (HasLine)
+                    {
+                        WorkerReaderLineCount++;
+
+                        //await Task.Delay(33);
+
+                        //Console.WriteLine(new { WorkerReaderLineCount });
+
+                        var x = new CSVHeaderLookup { header = header, line = line1 }["X"];
+                        var y = new CSVHeaderLookup { header = header, line = line1 }["Y"];
+
+                        // hop supports strings for now..
+                        var lat = "" + (double)LEST97.lest_function_vba.lest_geo(x, y, 0);
+                        var lng = "" + (double)LEST97.lest_function_vba.lest_geo(x, y, 1);
+
+                        #region progress
+                        if (WorkerReaderLineCount % 500 == 1)
+                        {
+                            Console.Title = WorkerReaderLineCount + " in " + sw1.ElapsedMilliseconds + "ms";
+                        }
 
 
-                        //    }
-                        //);
-
-
-                        // { ElapsedMilliseconds = 11929, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
-                        // { ElapsedMilliseconds = 162, line1 = 1;Lasteaia tänav;eesti;ametlik põhinimi;kehtiv;liikluspind;;Saare maakond, Kuressaare linn;6457819.16;410757.89; }
-
-
-                        // are we to decode 20MB ?
-
-
-                        new { }.With(
-                            async delegate
-                            {
-                                // jsc switch rewriter should inclide it automatically to enable better hopping
-                                { fixup: await Task.CompletedTask; }
-
-                                // nuget google
-                                await google.maps.api;
-
-                                var div = new IHTMLDiv
+                        if (WorkerReaderLineCount % 300 == 1)
+                        {
+                            new { }.With(
+                                async delegate
                                 {
-                                }.AttachToDocument();
+                                    { fixup: await Task.CompletedTask; }
 
-                                div.style.border = "1px dashed red";
-                                div.style.height = "300px";
-                                div.style.left = "0px";
-                                div.style.right = "0px";
+                                    var lng1 = lng;
+                                    var lat1 = lat;
+                                    var title1 = line1;
 
-
-
-                                // https://developers.google.com/maps/documentation/javascript/reference?csw=1#MapOptions
-                                map = new google.maps.Map(div,
-                                    new
-                                    {
-                                        disableDefaultUI = true,
-
-                                        center = new { lat = 59.4329527, lng = 24.7023564 },
-                                        zoom = 6.0
-                                    }
-                                );
-
-
-                                new IHTMLPre { () => new { zoom = map.getZoom() } }.AttachToDocument();
-
-
-                                var marker0 = new google.maps.Marker(
-                                     new
-                                     {
-                                         position = new
-                                         {
-                                             lat = 59.4329527,
-                                             lng = 24.7023564
-                                         },
-                                         //label = "T",
-                                         //title = "Tallinn",
-                                         map
-                                     }
-                                  );
-
-
-
-                                await new IHTMLButton { "go" }.AttachToDocument().async.onclick;
-
-
-                                var bytes1 = bytes;
-
-                                await default(HopToWorker);
-
-
-                                // start the static line reader.
-
-                                WorkerReader = new StreamReader(new MemoryStream(bytes1));
-
-                                // now before we jump back to ui. lets start reading the lines...
-
-
-                                // working... { ManagedThreadId = 1, output = hello { ManagedThreadId = 11, Length = 20851425, WorkerReaderLineCount = 0 } }
-
-                                new { }.With(
-                                    async delegate
-                                    {
-                                        { fixup: await Task.CompletedTask; }
-
-                                        var output = "hello " + new { Thread.CurrentThread.ManagedThreadId };
-                                        await default(HopToUI);
-                                        WorkerUI = new IHTMLPre { "working... " + new { Thread.CurrentThread.ManagedThreadId, output } }.AttachToDocument();
-
-                                        // cant jump back can we?
-                                    }
-                                );
-
-
-
-
-                                var header = WorkerReader.ReadLine();
-
-
-                                ﻿// Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; 
-
-                                //var headerX = header.Split(';').TakeWhile(x => x != "X").Count();
-                                //var headerY = header.Split(';').TakeWhile(x => x != "Y").Count();
-
-                                var line1 = WorkerReader.ReadLine();
-
-                                var sw1 = Stopwatch.StartNew();
-
-                                WorkerReaderLineCount = 0;
-
-                                var HasLine = !string.IsNullOrEmpty(line1);
-
-                                while (HasLine)
-                                {
-                                    WorkerReaderLineCount++;
-
-                                    //await Task.Delay(33);
-
-                                    //Console.WriteLine(new { WorkerReaderLineCount });
-
-                                    var x = new CSVHeaderLookup { header = header, line = line1 }["X"];
-                                    var y = new CSVHeaderLookup { header = header, line = line1 }["Y"];
-
-                                    // hop supports strings for now..
-                                    var lat = "" + (double)LEST97.lest_function_vba.lest_geo(x, y, 0);
-                                    var lng = "" + (double)LEST97.lest_function_vba.lest_geo(x, y, 1);
-
-
-                                    if (WorkerReaderLineCount % 500 == 1)
-                                    {
-                                        Console.Title = WorkerReaderLineCount + " in " + sw1.ElapsedMilliseconds + "ms";
-                                    }
-
-
-                                    if (WorkerReaderLineCount % 300 == 1)
-                                    {
-                                        new { }.With(
-                                            async delegate
-                                            {
-                                                { fixup: await Task.CompletedTask; }
-
-                                                var lng1 = lng;
-                                                var lat1 = lat;
-                                                var title1 = line1;
-
-                                                var output = "working... " + WorkerReaderLineCount + " in " + sw1.ElapsedMilliseconds + "ms " + new { x, y, lat, lng };
-                                                await default(HopToUI);
-                                                WorkerUI.innerText = output;
-
-                                                Console.WriteLine(new { lng1, lat1 });
-
-                                                var position = new
-                                                         {
-                                                             // InvalidValueError: setPosition: not a LatLng or LatLngLiteral: in property lat: not a number
-
-                                                             lat = Convert.ToDouble(lat1),
-                                                             lng = Convert.ToDouble(lng1)
-                                                         };
-
-                                                Console.WriteLine(new { position });
-
-                                                // http://stackoverflow.com/questions/20044308/google-maps-api-3-show-hide-markers-depending-on-zoom-level
-                                                // http://stackoverflow.com/questions/19304574/center-set-zoom-of-map-to-cover-all-markers-visible-markers
-
-                                                var marker = new google.maps.Marker(
-                                                     new
-                                                     {
-                                                         // https://developers.google.com/maps/documentation/javascript/examples/marker-symbol-predefined
-                                                         // https://developers.google.com/maps/documentation/javascript/markers
-                                                         //icon = new marker().src,
-
-                                                         // can we have two zoom levels?
-                                                         icon = new markersmall().src,
-
-                                                         position,
-                                                         //label = "T",
-
-                                                         title = title1,
-
-                                                         map
-                                                     }
-                                                  );
-
-                                                // http://stackoverflow.com/questions/8198635/change-marker-icon-on-mouseover-google-maps-v3
-                                                AddZoomAwareMarker(map, marker, new markersmall().src, new markerxsmall().src);
-
-
-                                                await marker.async.onmouseover;
-
-                                                Console.Title = title1;
-
-                                            }
-                                        );
-
-
-                                        //await Task.Delay(300);
-                                    }
-
-                                    //await Task.Delay(3);
-
-                                    line1 = WorkerReader.ReadLine();
-                                    HasLine = !string.IsNullOrEmpty(line1);
-                                }
-
-
-                                // done... { ManagedThreadId = 1, output = done { ManagedThreadId = 10, WorkerReaderLineCount = 153411, ElapsedMilliseconds = 260865 } }
-                                {
-
-                                    var output = "done " + new { Thread.CurrentThread.ManagedThreadId, WorkerReaderLineCount, sw1.ElapsedMilliseconds };
+                                    var output = "working... " + WorkerReaderLineCount + " in " + sw1.ElapsedMilliseconds + "ms " + new { x, y, lat, lng };
                                     await default(HopToUI);
-                                    WorkerUI.innerText = "done... " + new { Thread.CurrentThread.ManagedThreadId, output };
+                                    WorkerUI.innerText = output;
 
-                                    // done... { ManagedThreadId = 1, output = done { ManagedThreadId = 10, WorkerReaderLineCount = 153411 } }
+                                    Console.WriteLine(new { lng1, lat1 });
+
+                                    var position = new
+                                             {
+                                                 // InvalidValueError: setPosition: not a LatLng or LatLngLiteral: in property lat: not a number
+
+                                                 lat = Convert.ToDouble(lat1),
+                                                 lng = Convert.ToDouble(lng1)
+                                             };
+
+                                    Console.WriteLine(new { position });
+
+                                    // http://stackoverflow.com/questions/20044308/google-maps-api-3-show-hide-markers-depending-on-zoom-level
+                                    // http://stackoverflow.com/questions/19304574/center-set-zoom-of-map-to-cover-all-markers-visible-markers
+
+                                    var marker = new google.maps.Marker(
+                                         new
+                                         {
+                                             // https://developers.google.com/maps/documentation/javascript/examples/marker-symbol-predefined
+                                             // https://developers.google.com/maps/documentation/javascript/markers
+                                             //icon = new marker().src,
+
+                                             // can we have two zoom levels?
+                                             icon = new markersmall().src,
+
+                                             position,
+                                             //label = "T",
+
+                                             title = title1,
+
+                                             map
+                                         }
+                                      );
+
+                                    // http://stackoverflow.com/questions/8198635/change-marker-icon-on-mouseover-google-maps-v3
+                                    AddZoomAwareMarker(map, marker, new markersmall().src, new markerxsmall().src);
+
+
+                                    await marker.async.onmouseover;
+
+                                    Console.Title = title1;
+
                                 }
+                            );
 
-                            }
-                        );
 
+
+                            //await Task.Delay(300);
+                        }
+                        #endregion
+
+                        //await Task.Delay(3);
+
+                        line1 = WorkerReader.ReadLine();
+                        HasLine = !string.IsNullOrEmpty(line1);
                     }
+                    #endregion
+
+
+                    // done... { ManagedThreadId = 1, output = done { ManagedThreadId = 10, WorkerReaderLineCount = 153411, ElapsedMilliseconds = 99979 } }
+                    // done... { ManagedThreadId = 1, output = done { ManagedThreadId = 10, WorkerReaderLineCount = 153411, ElapsedMilliseconds = 260865 } }
+                    {
+
+                        var output = "done " + new { Thread.CurrentThread.ManagedThreadId, WorkerReaderLineCount, sw1.ElapsedMilliseconds };
+                        await default(HopToUI);
+                        WorkerUI.innerText = "done... " + new { Thread.CurrentThread.ManagedThreadId, output };
+
+                        // done... { ManagedThreadId = 1, output = done { ManagedThreadId = 10, WorkerReaderLineCount = 153411 } }
+                    }
+
+
 
 
                 }

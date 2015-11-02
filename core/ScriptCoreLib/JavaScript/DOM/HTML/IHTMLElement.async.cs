@@ -36,6 +36,46 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             internal TElement that;
 
 
+            public Task<File> ondropfile
+            {
+                get
+                {
+                    var x = new TaskCompletionSource<File>();
+
+                    Native.document.documentElement.ondragover += ee =>
+                    {
+                        if (x == null)
+                            return;
+
+                        //if (ee.dataTransfer.files.length > 0)
+                        {
+                            ee.stopPropagation();
+                            ee.preventDefault();
+                            ee.dataTransfer.dropEffect = "copy"; // Explicitly show this is a copy.
+                        }
+
+                        // await leave? unless ondrop?
+                    };
+
+                    Native.document.documentElement.ondrop += e =>
+                    {
+                        if (x == null)
+                            return;
+
+                        if (e.dataTransfer.files.length > 0)
+                        {
+                            e.stopPropagation();
+                            e.preventDefault();
+
+                            x.SetResult(e.dataTransfer.files[0]);
+
+                            x = null;
+                        }
+                    };
+
+                    return x.Task;
+                }
+            }
 
 
             // Z:\jsc.svn\examples\javascript\io\DropLESTToDisplay\DropLESTToDisplay\Application.cs
