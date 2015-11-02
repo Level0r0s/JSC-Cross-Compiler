@@ -61,7 +61,7 @@ namespace GoogleMapsMarkerLEST97
                   div.style.left = "0px";
                   div.style.right = "0px";
 
-
+                  // Z:\jsc.svn\examples\javascript\io\DropLESTToDisplay\DropLESTToDisplay\Application.cs
                   var map = new google.maps.Map(div,
                       new
                       {

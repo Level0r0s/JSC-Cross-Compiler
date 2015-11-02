@@ -39,6 +39,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google Maps, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\Google.Maps.1.0.0.0\lib\Google Maps.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="jsc.meta">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\jsc.meta.exe</HintPath>
@@ -139,6 +143,8 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
+    <Content Include="Icons\marker.png" />
+    <Content Include="Icons\markersmall.png" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
