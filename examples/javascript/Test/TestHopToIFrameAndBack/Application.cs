@@ -91,6 +91,7 @@ namespace TestHopToIFrameAndBack
                       #region HopToParent
                       HopToParent.VirtualOnCompleted = async (that, continuation) =>
                       {
+                          // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151102/hoptoui
                           // the state is in a member variable?
 
                           var r = TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableFromContinuation(continuation);

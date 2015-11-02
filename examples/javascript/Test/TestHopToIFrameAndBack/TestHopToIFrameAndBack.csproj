@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
+    <ProjectGuid>{DC4695CE-4F23-40D2-872D-18DE5C2DAD23}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestHopToIFrameAndBack</RootNamespace>

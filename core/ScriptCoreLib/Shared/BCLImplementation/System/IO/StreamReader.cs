@@ -42,7 +42,7 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.IO
 
         public override string ReadLine()
         {
-            Console.WriteLine("enter ReadLine");
+            //Console.WriteLine("enter ReadLine");
 
             var m = new MemoryStream();
 

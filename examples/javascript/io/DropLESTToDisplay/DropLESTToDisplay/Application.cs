@@ -21,6 +21,8 @@ using System.IO;
 using System.Threading;
 using TestSwitchToServiceContextAsync;
 using ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 
 namespace DropLESTToDisplay
 {
@@ -63,6 +65,9 @@ namespace DropLESTToDisplay
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        static Func<string, string> DecoratedString = x => x.Replace("-", "_").Replace("+", "_").Replace("<", "_").Replace(">", "_");
+
+
         static Application()
         {
             #region document
@@ -99,7 +104,7 @@ namespace DropLESTToDisplay
                     var shadowstate = ShadowIAsyncStateMachine.FromContinuation(continuation, ref MoveNext0);
                     var MoveNext = MoveNext0;
 
-                    Console.WriteLine("enter HopToThreadPoolAwaitable.VirtualOnCompleted " + new { shadowstate.state });
+                    Console.WriteLine("enter HopToWorker " + new { shadowstate.state });
 
                     // post a message to the document 
                     var xx = new __Task.InternalTaskExtensionsScope { InternalTaskExtensionsScope_function = continuation };
@@ -124,6 +129,8 @@ namespace DropLESTToDisplay
 
                             var data = new
                             {
+                                vSetTitle = default(string),
+
                                 HopToUIAwaitable = new
                                 {
                                     // state to hop back
@@ -136,15 +143,23 @@ namespace DropLESTToDisplay
 
                             //if (data.HopToUIAwaitable )
 
+                            if (data.vSetTitle != null)
+                            {
+                                Console.Title = data.vSetTitle;
+                            }
+
                             if (data.HopToUIAwaitable == null)
                                 return;
 
 
                             // time to hop back on continuation?
 
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.WriteLine("enter HopToThreadPoolAwaitable yield HopToUIAwaitable, resume state? " + new { data.HopToUIAwaitable.shadowstate.state });
-                            Console.ForegroundColor = ConsoleColor.Black;
+                            var that = (TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine)data.HopToUIAwaitable.shadowstate;
+
+
+                            //Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine("work about to hop into ui " + new { that.state });
+                            //Console.ForegroundColor = ConsoleColor.Black;
 
 
                             //enter HopToThreadPoolAwaitable yield HopToUIAwaitable
@@ -154,7 +169,79 @@ namespace DropLESTToDisplay
                             // the worker should be in a suspended state, as we may want to jump back?
 
                             // 
-                            MoveNext(data.HopToUIAwaitable.shadowstate);
+                            //MoveNext(data.HopToUIAwaitable.shadowstate);
+
+
+
+                            #region xAsyncStateMachineType
+                            var xAsyncStateMachineType = typeof(Application).Assembly.GetTypes().FirstOrDefault(
+                                  item =>
+                                  {
+                                      // safety check 1
+
+                                      //Console.WriteLine(new { sw.ElapsedMilliseconds, item.FullName });
+
+                                      var xisIAsyncStateMachine = typeof(IAsyncStateMachine).IsAssignableFrom(item);
+                                      if (xisIAsyncStateMachine)
+                                      {
+                                          //Console.WriteLine(new { item.FullName, isIAsyncStateMachine });
+
+                                          return item.FullName == that.TypeName;
+                                      }
+
+                                      return false;
+                                  }
+                              );
+                            #endregion
+
+
+                            var NewStateMachine = FormatterServices.GetUninitializedObject(xAsyncStateMachineType);
+                            var isIAsyncStateMachine = NewStateMachine is IAsyncStateMachine;
+
+                            var NewStateMachineI = (IAsyncStateMachine)NewStateMachine;
+
+                            #region 1__state
+                            xAsyncStateMachineType.GetFields(
+                                        System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance
+                                    ).WithEach(
+                                     AsyncStateMachineSourceField =>
+                                     {
+
+                                         Console.WriteLine(new { AsyncStateMachineSourceField });
+
+                                         if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
+                                         {
+                                             AsyncStateMachineSourceField.SetValue(
+                                                 NewStateMachineI,
+                                                 that.state
+                                              );
+                                         }
+
+                                         var xStringField = that.StringFields.AsEnumerable().FirstOrDefault(
+                                             f => DecoratedString(f.FieldName) == DecoratedString(AsyncStateMachineSourceField.Name)
+                                         );
+
+                                         if (xStringField != null)
+                                         {
+                                             // once we are to go back to client. we need to reverse it?
+
+                                             AsyncStateMachineSourceField.SetValue(
+                                                 NewStateMachineI,
+                                                 xStringField.value
+                                              );
+                                             // next xml?
+                                             // before lets send our strings back with the new state!
+                                             // what about exceptions?
+                                         }
+                                     }
+                                );
+                            #endregion
+
+                            //new IHTMLPre {
+                            //            "inside iframe invoke state"
+                            //        }.AttachToDocument();
+
+                            NewStateMachineI.MoveNext();
 
                         }
                     );
@@ -173,14 +260,27 @@ namespace DropLESTToDisplay
             #region worker
             if (Native.worker != null)
             {
-                Console.WriteLine("about to enable HopToUIAwaitable...");
+                Console.WriteLine("about to enable HopToUI...");
+
 
                 Native.worker.onfirstmessage += e =>
                 {
                     Console.WriteLine("enter onfirstmessage");
 
+                    ScriptCoreLib.JavaScript.BCLImplementation.System.__Console.vSetTitle = value =>
+                    {
+                        e.postMessage(
+                          new
+                          {
+                              vSetTitle = value
+                          }
+                        );
+                    };
+
+
                     HopToUI.VirtualOnCompleted = continuation =>
                     {
+                        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151102/hoptoui
 
                         // first jump out?
                         InternalInlineWorker.InternalOverrideTaskOfT = new TaskCompletionSource<object>().Task;
@@ -190,12 +290,13 @@ namespace DropLESTToDisplay
                         // um. how can we signal that we are not done?
 
 
-                        Action<ShadowIAsyncStateMachine> MoveNext = null;
+                        //Action<ShadowIAsyncStateMachine> MoveNext = null;
 
                         // async dont like ref?
-                        var shadowstate = ShadowIAsyncStateMachine.FromContinuation(continuation, ref MoveNext);
+                        //var shadowstate = ShadowIAsyncStateMachine.FromContinuation(continuation, ref MoveNext);
+                        var r = TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableFromContinuation(continuation);
 
-                        Console.WriteLine("enter HopToUIAwaitable.VirtualOnCompleted, postMessage " + new { shadowstate.state });
+                        Console.WriteLine("enter HopToUI, postMessage " + new { r.shadowstate.state });
 
 
                         // postMessageAsync ? if ui wants to return, instead of restaring this thread?
@@ -206,7 +307,7 @@ namespace DropLESTToDisplay
                                 {
                                     // state to hop back
 
-                                    shadowstate
+                                    r.shadowstate
                                 }
                             }
                         );
@@ -245,6 +346,29 @@ namespace DropLESTToDisplay
                     await default(HopToWorker);
 
                     var output = "hello " + new { Thread.CurrentThread.ManagedThreadId, bytes = bytes.ToHexString() };
+
+                    Console.Title = "progress!";
+
+                    await Task.Delay(500);
+
+                    new { }.With(
+                        async delegate
+                        {
+                            { fixup: await Task.CompletedTask; }
+
+                            // is this supposed to work?
+                            var output2 = "hello " + new { Thread.CurrentThread.ManagedThreadId };
+                            await default(HopToUI);
+
+                            new IHTMLPre { "progress... " + new { Thread.CurrentThread.ManagedThreadId, output2 } }.AttachToDocument();
+                        }
+                    );
+
+
+
+                    await Task.Delay(500);
+
+
 
                     await default(HopToUI);
 
@@ -327,19 +451,21 @@ namespace DropLESTToDisplay
 
                         //var r = new StringReader(xstring);
 
-                        var r = new StreamReader(new MemoryStream(bytes));
+                        {
+                            var r = new StreamReader(new MemoryStream(bytes));
 
-                        //{ ElapsedMilliseconds = 167, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
-
-
-                        var header = r.ReadLine();
-
-                        new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds, header } }.AttachToDocument();
+                            //{ ElapsedMilliseconds = 167, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
 
 
-                        var line1 = r.ReadLine();
+                            var header = r.ReadLine();
 
-                        new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds, line1 } }.AttachToDocument();
+                            new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds, header } }.AttachToDocument();
+
+
+                            var line1 = r.ReadLine();
+
+                            new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds, line1 } }.AttachToDocument();
+                        }
 
                         // { ElapsedMilliseconds = 11929, header = ﻿Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; }
                         // { ElapsedMilliseconds = 162, line1 = 1;Lasteaia tänav;eesti;ametlik põhinimi;kehtiv;liikluspind;;Saare maakond, Kuressaare linn;6457819.16;410757.89; }
@@ -351,21 +477,89 @@ namespace DropLESTToDisplay
                         new { }.With(
                             async delegate
                             {
+                                // jsc switch rewriter should inclide it automatically to enable better hopping
                                 { fixup: await Task.CompletedTask; }
 
                                 var bytes1 = bytes;
 
                                 await default(HopToWorker);
 
-                                var output = "hello " + new { Thread.CurrentThread.ManagedThreadId, bytes1.Length };
 
                                 // start the static line reader.
 
-                                await default(HopToUI);
+                                WorkerReader = new StreamReader(new MemoryStream(bytes));
 
-                                new IHTMLPre { "ready " + new { Thread.CurrentThread.ManagedThreadId, output } }.AttachToDocument();
+                                // now before we jump back to ui. lets start reading the lines...
 
-                                // ready { ManagedThreadId = 1, output = hello { ManagedThreadId = 10, Length = 20851425 } }
+
+                                // working... { ManagedThreadId = 1, output = hello { ManagedThreadId = 11, Length = 20851425, WorkerReaderLineCount = 0 } }
+
+                                new { }.With(
+                                    async delegate
+                                    {
+                                        { fixup: await Task.CompletedTask; }
+
+                                        var output = "hello " + new { Thread.CurrentThread.ManagedThreadId };
+                                        await default(HopToUI);
+                                        WorkerUI = new IHTMLPre { "working... " + new { Thread.CurrentThread.ManagedThreadId, output } }.AttachToDocument();
+
+                                        // cant jump back can we?
+                                    }
+                                );
+
+
+
+
+                                var header = WorkerReader.ReadLine();
+
+                                var line1 = WorkerReader.ReadLine();
+
+                                var sw1 = Stopwatch.StartNew();
+
+                                WorkerReaderLineCount = 0;
+
+                                while (!string.IsNullOrEmpty(line1))
+                                {
+                                    WorkerReaderLineCount++;
+
+                                    //await Task.Delay(33);
+
+                                    //Console.WriteLine(new { WorkerReaderLineCount });
+
+
+                                    if (WorkerReaderLineCount % 10 == 1)
+                                    {
+                                        Console.Title = WorkerReaderLineCount + " in " + sw1.ElapsedMilliseconds + "ms";
+                                    }
+
+
+                                    if (WorkerReaderLineCount % 100 == 1)
+                                    {
+                                        new { }.With(
+                                            async delegate
+                                            {
+                                                { fixup: await Task.CompletedTask; }
+
+                                                var output = "working... " + WorkerReaderLineCount + " in " + sw1.ElapsedMilliseconds + "ms";
+                                                await default(HopToUI);
+                                                WorkerUI.innerText = output;
+                                            }
+                                        );
+                                    }
+
+                                    //await Task.Delay(3);
+
+                                    line1 = WorkerReader.ReadLine();
+                                }
+
+
+                                {
+
+                                    var output = "done " + new { Thread.CurrentThread.ManagedThreadId, WorkerReaderLineCount };
+                                    await default(HopToUI);
+                                    WorkerUI.innerText = "done... " + new { Thread.CurrentThread.ManagedThreadId, output };
+                                }
+
                             }
                         );
 
@@ -377,5 +571,10 @@ namespace DropLESTToDisplay
 
         }
 
+        static IHTMLPre WorkerUI;
+        static StreamReader WorkerReader;
+        static int WorkerReaderLineCount;
     }
+
+
 }
