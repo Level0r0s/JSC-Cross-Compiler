@@ -1,6 +1,7 @@
 using ScriptCoreLib;
 using ScriptCoreLib.Delegates;
 using ScriptCoreLib.Extensions;
+using ScriptCoreLib.Shared;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -69,33 +70,7 @@ namespace TestWebServiceRSA
 
     }
 
-    //public struct VerifiableString
-    public sealed class VerifiableString
-    {
-        public string value;
-
-        public byte[] signature;
-
-        public override string ToString()
-        {
-            return new { value, signature = signature.ToHexString() }.ToString();
-        }
-    }
-
-    public static class VerifiableStringExtensions
-    {
-        public static VerifiableString Sign(this VerifiableString e, RSAParameters rsa)
-        {
-            e.signature = new RSACryptoStream(NamedKeyPairs.Key1PrivateKey.RSAParameters).SignString(e.value);
-
-            return e;
-        }
-
-        public static bool Verify(this VerifiableString e, RSAParameters rsa)
-        {
-            return new RSACryptoStream(NamedKeyPairs.Key1PrivateKey.RSAParameters).VerifyString(e.value, e.signature);
-        }
-    }
+ 
 }
 
 //0200001f TestWebServiceRSA.Application+ctor>b__4>d__6+<MoveNext>0600002b

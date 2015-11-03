@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B1CCA96A-F493-485D-9E18-D9C3EFD00F23}</ProjectGuid>
+    <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestWebServiceRSA</RootNamespace>
-    <AssemblyName>TestWebServiceRSA</AssemblyName>
+    <RootNamespace>WebServiceAuthorityExperiment</RootNamespace>
+    <AssemblyName>WebServiceAuthorityExperiment</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>TestWebServiceRSA.Program</StartupObject>
+    <StartupObject>WebServiceAuthorityExperiment.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -116,8 +116,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="TestWebServiceRSA.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\TestWebServiceRSA.AssetsLibrary.dll</HintPath>
+    <Reference Include="WebServiceAuthorityExperiment.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\WebServiceAuthorityExperiment.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
@@ -132,9 +132,7 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -149,7 +147,7 @@ robocopy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\
  
 copy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe U:\
 		)</PostBuildEvent>
-    <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)"  /NamedKeyPairs:Key1
-		</PreBuildEvent>
+    <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
+		            </PreBuildEvent>
   </PropertyGroup>
 </Project>

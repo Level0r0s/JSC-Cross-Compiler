@@ -38,11 +38,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System
             // will ubuntu upstart restart the service?
 
             //      respawn
-              //A service or task with this stanza will be automatically started
-              //if  it  should  stop  abnormally.   All  reasons  for  a service
-              //stopping, except the  stop(8)  command  itself,  are  considered
-              //abnormal.   Tasks  may  exit  with a zero exit status to prevent
-              //being respawned.
+            //A service or task with this stanza will be automatically started
+            //if  it  should  stop  abnormally.   All  reasons  for  a service
+            //stopping, except the  stop(8)  command  itself,  are  considered
+            //abnormal.   Tasks  may  exit  with a zero exit status to prevent
+            //being respawned.
 
         }
 
@@ -101,6 +101,34 @@ namespace ScriptCoreLibJava.BCLImplementation.System
                 }
 
                 return c;
+            }
+        }
+
+        public static string StackTrace
+        {
+            get
+            {
+                // Z:\jsc.svn\examples\javascript\crypto\WebServiceAuthorityExperiment\WebServiceAuthorityExperiment\Application.cs
+                // X:\jsc.svn\examples\javascript\test\TestChromeStackFrames\TestChromeStackFrames\Application.cs
+                // X:\jsc.svn\examples\javascript\CodeTraceExperiment\CodeTraceExperiment\Application.cs
+                // X:\jsc.svn\examples\javascript\Test\TestDelegateInvokeDisplayName\TestDelegateInvokeDisplayName\Application.cs
+
+                // can we provide some good caller intel yet?
+                // for code patching?
+                var value = default(string);
+
+                try
+                {
+                    //--TypeError: Cannot read property 'stack' of null
+                    //throw null;
+                    throw new Exception();
+                }
+                catch (Exception err)
+                {
+                    value = err.StackTrace;
+                }
+
+                return value;
             }
         }
     }

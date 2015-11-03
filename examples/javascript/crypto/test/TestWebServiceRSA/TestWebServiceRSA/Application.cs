@@ -34,6 +34,8 @@ namespace TestWebServiceRSA
             new { }.With(
                 async delegate
                 {
+                    new IHTMLPre { "hello!" }.AttachToDocument();
+
                     new IHTMLPre { new { base.foo, verify = await base.Verify(base.foo) } }.AttachToDocument();
                     // { foo = { value = foo string, signature = 4cb21a833052c61bf39e1381ef1acb41b0dadfd7cd65d21391fe3f06fef841b4555be1661aa94491a549023fdf5758050c086cf49a3dde7fcc8816a551a6fa40 }, verify = true }
                     base.foo.value = base.foo.value.ToUpper();

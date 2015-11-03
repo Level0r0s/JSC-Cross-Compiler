@@ -126,6 +126,7 @@
     <Compile Include="Android\IntentFilterAttribute.cs" />
     <Compile Include="Android\Manifest\ApplicationMetaDataAttribute.cs" />
     <Compile Include="Android\RenderingContextView.cs" />
+    <Compile Include="Shared\VerifiableString.cs" />
     <Compile Include="Archive\ZIP\ZIPFileFromFile.cs" />
     <Compile Include="Archive\ZIP\ZIPFileWithXLinq.cs" />
     <Compile Include="Desktop\Avalon\Extensions\DesktopAvalonExtensions.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\IO\SmartStreamReader.cs" />
     <Compile Include="Shared\RemotingToken.cs" />
+    <Compile Include="Shared\RSACryptoStream.cs" />
     <Compile Include="Ultra\Library\CachedFileGenerator.cs" />
     <Compile Include="Ultra\Library\StringConversions.cs" />
     <Compile Include="Ultra\Library\StringConversions.StringArray.cs" />

@@ -513,7 +513,7 @@ namespace ScriptCoreLib.Ultra.WebService
             {
                 var cWebMethodMetadataToken = Context.Request.Form.AllKeys.Contains("WebMethodMetadataToken");
 
-                Console.WriteLine("POST is expected to include WebMethodMetadataToken " + new { cWebMethodMetadataToken });
+                //Console.WriteLine("POST is expected to include WebMethodMetadataToken " + new { cWebMethodMetadataToken });
                 // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Net\WebClient.cs
 
                 // who sets WebMethodMetadataToken ?
@@ -557,7 +557,7 @@ namespace ScriptCoreLib.Ultra.WebService
             if (Context.Request.HttpMethod == "POST")
             {
                 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/04-monese/2014/201401/20140101
-                Console.WriteLine("about to load params for " + new { handler.WebMethod });
+                //Console.WriteLine("about to load params for " + new { handler.WebMethod });
 
                 if (handler.WebMethod == null)
                 {
@@ -568,7 +568,7 @@ namespace ScriptCoreLib.Ultra.WebService
                     // is it also supposed to load the fields?
                     handler.WebMethod.LoadParameters(that.Context);
 
-                    Console.WriteLine("enter invoke " + new { handler.WebMethod });
+                    //Console.WriteLine("enter invoke " + new { handler.WebMethod });
 
                     //about to load params for { WebMethod = { IsConstructor = false, MetadataToken = 06000002, Name = Insert, TypeFullName = WebCamAvatarsExperiment.ApplicationWebService, Parameters = 1 } }
                     //about to invoke { WebMethod = { IsConstructor = false, MetadataToken = 06000002, Name = Insert, TypeFullName = WebCamAvatarsExperiment.ApplicationWebService, Parameters = 1 } }

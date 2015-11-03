@@ -11,7 +11,7 @@ namespace java.security.spec
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201503/20150323
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201408/20140829
 
-        public RSAPublicKeySpec(BigInteger modulus, BigInteger privateExponent)
+        public RSAPublicKeySpec(BigInteger modulus, BigInteger publicExponent)
         {
 
 

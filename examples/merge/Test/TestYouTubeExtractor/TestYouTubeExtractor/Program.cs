@@ -72,6 +72,10 @@ namespace TestYouTubeExtractor
             string link,
             IEnumerable<VideoInfo> videoInfos)
         {
+//Error	3	The type 'System.Windows.UIElement' is defined in an assembly that is not referenced. You must add a reference to assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'.	Z:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\Program.cs	75	13	TestYouTubeExtractor
+//Error	4	The type 'System.Windows.Forms.Control' is defined in an assembly that is not referenced. You must add a reference to assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.	Z:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\Program.cs	75	13	TestYouTubeExtractor
+            // Error	3	The type 'System.Windows.DependencyObject' is defined in an assembly that is not referenced. You must add a reference to assembly 'WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'.	Z:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\Program.cs	78	13	TestYouTubeExtractor
+
             var mp4 = videoInfos.Where(x => x.VideoType == VideoType.Mp4);
             var mp4video = mp4.Where(x => x.Resolution > 0).OrderBy(x => x.Resolution).ToArray();
             var mp4audio = mp4video.Where(x => x.AudioBitrate > 0).OrderBy(x => x.Resolution).ToArray();
@@ -727,7 +731,9 @@ namespace TestYouTubeExtractor
                     //$"http://consciousresonance.net/?page_id=1587&paged={p}",
                     //$"https://faustuscrow.wordpress.com/page/{p}/",
                     //$"https://hiddenlighthouse.wordpress.com/page/{p}/",
-                    $"https://zproxy.wordpress.com/page/{p}/"
+                    //$"https://zproxy.wordpress.com/page/{p}/"
+                    
+                    "https://zproxy.wordpress.com/page/" + p + "/"
 
                 })
                 {

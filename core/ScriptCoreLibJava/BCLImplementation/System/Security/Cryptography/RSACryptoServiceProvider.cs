@@ -30,13 +30,15 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
     [Script(Implements = typeof(global::System.Security.Cryptography.RSACryptoServiceProvider))]
     internal class __RSACryptoServiceProvider : __RSA
     {
+        // http://news.slashdot.org/story/15/11/03/0256231/internet-firms-to-be-banned-from-offering-unbreakable-encryption-under-new-uk-laws
+
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151103
         // http://www.drdobbs.com/windows/programming-public-key-cryptostreams-par/184416907
 
         // http://lukieb.blogspot.com/2014/01/rsa-public-key-encryption-between-net.html
 
 
-        public RSAPrivateKey InternalRSAPrivateKey;
+        public RSAPrivateCrtKey InternalRSAPrivateKey;
         public RSAPublicKey InternalRSAPublicKey;
 
         //  We only attempt to generate a random key on desktop runtimes because the CoreCLR
@@ -114,7 +116,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
                 //Decrypt
                 RSACipher.init(
                     Cipher.DECRYPT_MODE,
-                    this.InternalKeyPair.getPrivate()
+                    this.InternalRSAPrivateKey
                 );
 
                 value = (byte[])(object)RSACipher.doFinal((sbyte[])(object)rgb);
@@ -172,7 +174,6 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
             return RSACipher;
         }
 
-
         public override int KeySize
         {
             get
@@ -180,7 +181,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
                 //   GetKeyPair();
                 // what if it was imported key?
 
-                return dwKeySize;
+                // http://stackoverflow.com/questions/2922622/how-to-get-the-size-of-a-rsa-key-in-java
+
+                return this.InternalRSAPublicKey.getModulus().bitLength();
             }
         }
 
@@ -234,7 +237,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
 
                 this.InternalKeyPair = keyGen.generateKeyPair();
                 this.InternalRSAPublicKey = (RSAPublicKey)this.InternalKeyPair.getPublic();
-                this.InternalRSAPrivateKey = (RSAPrivateKey)this.InternalKeyPair.getPrivate();
+                this.InternalRSAPrivateKey = (RSAPrivateCrtKey)this.InternalKeyPair.getPrivate();
 
                 Console.WriteLine("RSACryptoServiceProvider after generateKeyPair " + new { sw.ElapsedMilliseconds });
 
@@ -259,6 +262,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
 
         public override RSAParameters ExportParameters(bool includePrivateParameters)
         {
+            Console.WriteLine("enter ExportParameters " + new { includePrivateParameters });
+
             // used by?
 
             // X:\jsc.svn\examples\java\hybrid\JVMCLRRSACryptoServiceProviderExport\JVMCLRRSACryptoServiceProviderExport\Program.cs
@@ -269,15 +274,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
             // did we generate the key, so we can export it?
             try
             {
-                PublicKey publicKey = this.InternalKeyPair.getPublic();
+                var rsaModulusBytes = (byte[])(object)InternalRSAPublicKey.getModulus().toByteArray();
 
-                RSAPublicKey rsapublicKey = publicKey as RSAPublicKey;
-
-
-                //x.Exponent = ?
-
-                var rsaModulusBytes = (byte[])(object)rsapublicKey.getModulus().toByteArray();
-                var rsaPublicExponent = (byte[])(object)rsapublicKey.getPublicExponent().toByteArray();
+                var rsaPublicExponent = (byte[])(object)InternalRSAPublicKey.getPublicExponent().toByteArray();
 
                 // {{ m = 257, ElapsedMilliseconds = 9381 }}
 
@@ -293,22 +292,6 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
 
                     //rsaModulusBytes = rsaModulusBytes.Skip(1).ToArray();
 
-                    //- javac
-                    //"C:\Program Files (x86)\Java\jdk1.7.0_45\bin\javac.exe" -classpath "Y:\staging\web\java";release -d release java\JVMCLRRSACryptoServiceProviderExport\Program.java
-                    //Y:\staging\web\java\ScriptCoreLibJava\BCLImplementation\System\Security\Cryptography\__RSACryptoServiceProvider.java:129: error: method Of in class __SZArrayEnumerator_1<T#2> cannot be applied to given types;
-                    //                byteArray2 = __60002f4_0052__generic_array_creation(__Enumerable.<Byte>ToArray(__Enumerable.<Byte>Skip(__SZArrayEnumerator_1.<Byte>Of(byteArray2), 1)));
-                    //                                                                                                                                            ^
-                    //  required: T#1[]
-                    //  found: byte[]
-                    //  reason: actual argument byte[] cannot be converted to Byte[] by method invocation conversion
-                    //  where T#1,T#2 are type-variables:
-                    //    T#1 extends Object declared in method <T#1>Of(T#1[])
-                    //    T#2 extends Object declared in class __SZArrayEnumerator_1
-                    //Y:\staging\web\java\ScriptCoreLibJava\BCLImplementation\System\Security\Cryptography\__RSACryptoServiceProvider.java:174: error: possible loss of precision
-                    //            x[i] = ((Short)e[i]).shortValue();
-                    //                                           ^
-                    //  required: byte
-                    //  found:    short
 
                     var old = rsaModulusBytes;
                     rsaModulusBytes = new byte[old.Length - 1];
@@ -325,12 +308,28 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
                 }
                 #endregion
 
+                // http://www.jensign.com/opensslkey/opensslkey.cs
 
                 this.InternalParameters = new RSAParameters
                 {
                     Exponent = rsaPublicExponent,
                     Modulus = rsaModulusBytes
                 };
+
+                Console.WriteLine("ExportParameters Exponent " + new { this.InternalParameters.Exponent.Length });
+
+                if (includePrivateParameters)
+                {
+                    Console.WriteLine("ExportParameters " + new { InternalRSAPrivateKey });
+
+                    this.InternalParameters.D = (byte[])(object)InternalRSAPrivateKey.getPrivateExponent().toByteArray();
+                    this.InternalParameters.InverseQ = (byte[])(object)InternalRSAPrivateKey.getCrtCoefficient().toByteArray();
+                    this.InternalParameters.P = (byte[])(object)InternalRSAPrivateKey.getPrimeP().toByteArray();
+                    this.InternalParameters.Q = (byte[])(object)InternalRSAPrivateKey.getPrimeQ().toByteArray();
+                    this.InternalParameters.DP = (byte[])(object)InternalRSAPrivateKey.getPrimeExponentP().toByteArray();
+                    this.InternalParameters.DQ = (byte[])(object)InternalRSAPrivateKey.getPrimeExponentQ().toByteArray();
+
+                }
             }
             catch
             {
@@ -375,6 +374,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
         {
             try
             {
+                //Console.WriteLine("enter ImportParameters " + new { parameters.Exponent, parameters.Modulus, parameters.D });
+
                 // http://developer.android.com/reference/java/security/KeyFactory.html
 
                 // X:\jsc.svn\core\ScriptCoreLibJava\java\security\interfaces\RSAPublicKey.cs
@@ -386,7 +387,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
                 // X:\jsc.svn\examples\javascript\Test\TestWebCryptoKeyExport\TestWebCryptoKeyExport\ApplicationWebService.cs
                 // tested by ?
 
-                var rsa = KeyFactory.getInstance("RSA");
+                var xKeyFactory = KeyFactory.getInstance("RSA");
 
 
                 var rsaModulusBytes = parameters.Modulus;
@@ -395,6 +396,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
                 var firstByte = rsaModulusBytes[0];
                 if (firstByte != 0)
                 {
+                    // http://stackoverflow.com/questions/3970684/rsa-encryption-in-net-decryption-in-java-java-throws-modulus-not-positive
                     // jvm likes a leading 0 ?
 
                     rsaModulusBytes = new byte[parameters.Modulus.Length + 1];
@@ -411,26 +413,55 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
                 }
                 #endregion
 
-                var Modulus = new BigInteger((sbyte[])(object)rsaModulusBytes);
 
                 // https://msdn.microsoft.com/en-us/library/system.security.cryptography.rsaparameters(v=vs.110).aspx
-                var publicExponent = new BigInteger((sbyte[])(object)parameters.Exponent);
-                var privateExponent = new BigInteger((sbyte[])(object)parameters.D);
 
-                //Console.WriteLine("RSACryptoServiceProvider.ImportParameters " + new { m = parameters.Modulus.Length, e = parameters.Exponent.Length });
+
+                //Console.WriteLine("RSACryptoServiceProvider.ImportParameters " + new
+                //{
+                //    rsaModulusBytes = rsaModulusBytes.Length,
+                //    rsaModulusBytes0 = rsaModulusBytes[0],
+                //    rsaModulusBytes1 = rsaModulusBytes[1],
+                //});
 
 
                 // https://docs.oracle.com/javase/7/docs/api/java/security/spec/RSAPrivateKeySpec.html
 
+                // http://www.herongyang.com/Cryptography/RSA-BigInteger-Convert-Byte-Sequences-to-Positive-Integers.html
+                // https://docs.oracle.com/javase/7/docs/api/java/math/BigInteger.html#BigInteger(int,%20byte[])
+                Func<byte[], BigInteger> f = bytes => new BigInteger(1, (sbyte[])(object)bytes);
+
+                var modulus = f(rsaModulusBytes);
 
 
-                var xRSAPrivateKeySpec = new RSAPrivateKeySpec(Modulus, privateExponent);
-                var xRSAPublicKeySpec = new RSAPublicKeySpec(Modulus, publicExponent);
+                // Z:\jsc.svn\examples\javascript\crypto\WebServiceAuthorityExperiment\WebServiceAuthorityExperiment\ApplicationWebService.cs
+                // https://community.oracle.com/thread/1531315?start=0&tstart=0
+                var xRSAPrivateKeySpec = new RSAPrivateCrtKeySpec(
+                    modulus: modulus,
 
-                this.InternalRSAPrivateKey = (RSAPrivateKey)rsa.generatePrivate(xRSAPrivateKeySpec);
-                this.InternalRSAPublicKey = (RSAPublicKey)rsa.generatePublic(xRSAPublicKeySpec);
+                    publicExponent: f(parameters.Exponent),
+                    privateExponent: f(parameters.D),
+
+                    primeP: f(parameters.P), // prime1
+                    primeQ: f(parameters.Q), // prime2
+                    primeExponentP: f(parameters.DP), // exponent1
+                    primeExponentQ: f(parameters.DQ), // exponent2
+                   crtCoefficient: f(parameters.InverseQ) // coefficient
+
+                );
+
+                var xRSAPublicKeySpec = new RSAPublicKeySpec(
+                    modulus: f(rsaModulusBytes),
+
+                    publicExponent: f(parameters.Exponent)
+                );
+
+                this.InternalRSAPrivateKey = (RSAPrivateCrtKey)xKeyFactory.generatePrivate(xRSAPrivateKeySpec);
+                this.InternalRSAPublicKey = (RSAPublicKey)xKeyFactory.generatePublic(xRSAPublicKeySpec);
 
                 this.InternalParameters = parameters;
+
+                //Console.WriteLine("ImportParameters " + new { this.KeySize });
             }
             catch
             {
@@ -476,6 +507,10 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
             return value;
         }
 
+        //public static readonly Func<int, int> MaxDataFromdwKeySize = (int dwKeySize) => (dwKeySize - 384) / 8 + 7;
+        public static int MaxDataFromdwKeySize(int dwKeySize) { return (dwKeySize - 384) / 8 + 7; }
+
+
         public byte[] SignData(byte[] buffer, object halg)
         {
             // http://stackoverflow.com/questions/22840322/how-to-make-messagedigest-sha-1-and-signature-nonewithrsa-equivalent-to-signa
@@ -487,10 +522,20 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
 
             Console.WriteLine("enter SignData " + new
             {
-                xSHA1CryptoServiceProvider,
+                //xSHA1CryptoServiceProvider,
                 algorithm,
-                //hash = hash.Length, 
-                this.InternalRSAPrivateKey
+
+                //hash = hash.Length,
+                //this.InternalRSAPrivateKey
+            });
+
+
+
+
+            Console.WriteLine("enter SignData " + new
+            {
+                // is hash bigger than max data?
+                MaxDataFromdwKeySize = MaxDataFromdwKeySize(this.KeySize),
             });
 
             // PKCS1.Sign_v15 
@@ -498,22 +543,39 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
             // http://stackoverflow.com/questions/3313698/rsa-pkcs1-compliant-signature
             // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Security/Cryptography/RSACryptoServiceProvider.cs
             // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Security/Cryptography/Utils.cs
-            var value = default(byte[]);
+            var signature = default(byte[]);
+            var verify = default(bool);
 
             try
             {
                 // https://community.qualys.com/thread/13760
 
-                var sig = java.security.Signature.getInstance(algorithm);
-                sig.initSign(this.InternalRSAPrivateKey);
-                //sig.update((sbyte[])(object)hash);
-                sig.update((sbyte[])(object)buffer);
-                value = (byte[])(object)sig.sign();
+                {
+                    var sig = java.security.Signature.getInstance(algorithm);
+                    sig.initSign(this.InternalRSAPrivateKey);
+                    ////sig.update((sbyte[])(object)hash);
+                    sig.update((sbyte[])(object)buffer);
+                    signature = (byte[])(object)sig.sign();
+
+
+
+                }
+
+                {
+
+                    var sig = java.security.Signature.getInstance(algorithm);
+                    sig.initVerify(this.InternalRSAPublicKey);
+                    //sig.update((sbyte[])(object)hash);
+                    sig.update((sbyte[])(object)buffer);
+                    verify = sig.verify((sbyte[])(object)signature);
+                }
+
+                // http://stackoverflow.com/questions/3151407/signature-verify-always-returns-false
             }
             catch { throw; }
 
-            Console.WriteLine("exit SignData " + new { value.Length });
-            return value;
+            Console.WriteLine("exit SignData " + new { signature = signature.Length, verify });
+            return signature;
         }
 
         public bool VerifyData(byte[] buffer, object halg, byte[] signature)
@@ -521,15 +583,16 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
             var xSHA1CryptoServiceProvider = halg as SHA1CryptoServiceProvider;
             //var hash = xSHA1CryptoServiceProvider.ComputeHash(buffer);
             var algorithm = "SHA1WithRSA";
-            var value = default(bool);
 
-            Console.WriteLine("enter VerifyData " + new
-            {
-                xSHA1CryptoServiceProvider,
-                algorithm,
-                //hash = hash.Length, 
-                this.InternalRSAPrivateKey
-            });
+            var verify = default(bool);
+
+            //Console.WriteLine("enter VerifyData " + new
+            //{
+            //    xSHA1CryptoServiceProvider,
+            //    algorithm,
+            //    //hash = hash.Length, 
+            //    this.InternalRSAPrivateKey
+            //});
 
             try
             {
@@ -539,11 +602,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
                 sig.initVerify(this.InternalRSAPublicKey);
                 //sig.update((sbyte[])(object)hash);
                 sig.update((sbyte[])(object)buffer);
-                value = sig.verify((sbyte[])(object)signature);
+                verify = sig.verify((sbyte[])(object)signature);
             }
             catch { throw; }
 
-            return value;
+            return verify;
         }
     }
 }
