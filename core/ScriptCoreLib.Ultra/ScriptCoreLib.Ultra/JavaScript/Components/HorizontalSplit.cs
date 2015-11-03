@@ -114,7 +114,8 @@ namespace ScriptCoreLib.JavaScript.Components
                     hsArea.Target.style.backgroundColor = SelectionColor;
                     dragmode = true;
 
-                    ee.PreventDefault();
+                    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151103
+                    ee.preventDefault();
                     hsArea.Abort.style.Opacity = SelectionBackgroundOpacity;
                 };
 

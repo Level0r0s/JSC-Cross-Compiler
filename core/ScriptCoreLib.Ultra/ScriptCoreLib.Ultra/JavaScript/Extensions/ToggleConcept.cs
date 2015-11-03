@@ -39,8 +39,8 @@ namespace ScriptCoreLib.JavaScript.Extensions
 				}
 			};
 
-			HideContent.onclick += eee => { eee.PreventDefault(); t.Hide(); };
-			ShowContent.onclick += eee => { eee.PreventDefault(); t.Show(); };
+			HideContent.onclick += eee => { eee.preventDefault(); t.Hide(); };
+			ShowContent.onclick += eee => { eee.preventDefault(); t.Show(); };
 
 			t.Show();
 

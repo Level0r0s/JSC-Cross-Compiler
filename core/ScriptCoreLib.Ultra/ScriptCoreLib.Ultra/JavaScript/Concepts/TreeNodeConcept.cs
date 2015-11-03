@@ -66,7 +66,8 @@ namespace ScriptCoreLib.JavaScript.Concepts
 			SelectionArea.ondblclick +=
 				e =>
 				{
-					e.PreventDefault();
+                    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151103
+					e.preventDefault();
 
 					IsExpanded = !IsExpanded;
 				};
@@ -104,7 +105,7 @@ namespace ScriptCoreLib.JavaScript.Concepts
 				{
 					SelectionArea.focus();
 
-					e.PreventDefault();
+					e.preventDefault();
 
 					if (this.Click != null)
 						this.Click();
@@ -118,7 +119,7 @@ namespace ScriptCoreLib.JavaScript.Concepts
 			ButtonArea.onclick +=
 				e =>
 				{
-					e.PreventDefault();
+					e.preventDefault();
 
 					IsExpanded = !IsExpanded;
 				};

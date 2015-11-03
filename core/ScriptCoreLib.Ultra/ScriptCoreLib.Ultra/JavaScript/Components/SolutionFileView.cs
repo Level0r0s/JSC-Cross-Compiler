@@ -282,7 +282,8 @@ namespace ScriptCoreLib.JavaScript.Components
 							a.onclick +=
 								e =>
 								{
-									e.PreventDefault();
+                                    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151103
+									e.preventDefault();
 
 									if (LinkCommentClick != null)
 										LinkCommentClick(Uri);

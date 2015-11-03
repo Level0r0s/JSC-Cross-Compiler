@@ -33,6 +33,7 @@ namespace TestWebCryptoAsync
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151103
 			// https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201503/20150323
 
 			// X:\jsc.svn\examples\javascript\Test\TestWebCrypto\TestWebCrypto\Application.cs
