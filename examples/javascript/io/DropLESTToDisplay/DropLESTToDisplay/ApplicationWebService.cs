@@ -17,6 +17,13 @@ namespace DropLESTToDisplay
     /// </summary>
     public class ApplicationWebService
     {
+
+        static ApplicationWebService()
+        { 
+            //DropLESTToDisplay.NamedKeyPairs.Key1PublicKey.PublicParameters
+        }
+
+
         /// <summary>
         /// This Method is a javascript callable method.
         /// </summary>

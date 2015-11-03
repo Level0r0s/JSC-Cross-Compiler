@@ -76,6 +76,7 @@ namespace TestWebCryptoAsync
             // The only public-key encryption and decryption algorithm in the spec now is RSA-OAEP. 
             // http://msdn.microsoft.com/en-us/library/ie/dn302338(v=vs.85).aspx
 
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151103
             new IHTMLButton { "generateKey in UI" }.AttachToDocument().onclick +=
                 async delegate
             {

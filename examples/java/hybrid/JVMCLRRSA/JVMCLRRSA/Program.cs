@@ -39,8 +39,8 @@ namespace System_Security_Cryptography_RSA
             Console.WriteLine("System_Security_Cryptography_RSA. Crosscompiled from C# to Java. ");
 
 
-
-            // will this work on chrome too?
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151103
+            // will this work on chrome too? CSP bytes?
             var x = new byte[]
             {
                   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
