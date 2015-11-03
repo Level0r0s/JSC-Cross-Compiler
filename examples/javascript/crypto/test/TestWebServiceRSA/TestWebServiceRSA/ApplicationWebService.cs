@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -23,6 +24,11 @@ namespace TestWebServiceRSA
         public string SpecialData;
         public byte[] SpecialDataSignature48;
 
+
+
+
+        public VerifiableString foo;
+
         public ApplicationWebService()
         {
             var sw = Stopwatch.StartNew();
@@ -32,7 +38,11 @@ namespace TestWebServiceRSA
 
 
             this.SpecialData = "hello world";
-            this.SpecialDataSignature48 = new RSACryptoStream(NamedKeyPairs.Key1PrivateKey.CSPBlob).SignString(this.SpecialData);
+            this.SpecialDataSignature48 = new RSACryptoStream(NamedKeyPairs.Key1PrivateKey.RSAParameters).SignString(this.SpecialData);
+
+            this.foo = new VerifiableString { value = "foo string" }.Sign(NamedKeyPairs.Key1PrivateKey.RSAParameters);
+            //this.foo.signature = new RSACryptoStream(NamedKeyPairs.Key1PrivateKey.RSAParameters).SignString(this.foo.value);
+
             Console.WriteLine("exit ApplicationWebService " + new { sw.ElapsedMilliseconds });
         }
 
@@ -40,9 +50,16 @@ namespace TestWebServiceRSA
         {
             var sw = Stopwatch.StartNew();
             Console.WriteLine("enter Verify");
-            var v = new RSACryptoStream(NamedKeyPairs.Key1PrivateKey.CSPBlob).VerifyString(this.SpecialData, this.SpecialDataSignature48);
+            var v = new RSACryptoStream(NamedKeyPairs.Key1PrivateKey.RSAParameters).VerifyString(this.SpecialData, this.SpecialDataSignature48);
             Console.WriteLine("exit Verify " + new { sw.ElapsedMilliseconds });
             return v;
+        }
+
+        public async Task<bool> Verify(VerifiableString v)
+        {
+            //var sw = Stopwatch.StartNew();
+            //var v = new RSACryptoStream(NamedKeyPairs.Key1PrivateKey.RSAParameters).VerifyString(this.foo.value, this.foo.signature);
+            return v.Verify(NamedKeyPairs.Key1PrivateKey.RSAParameters);
         }
 
         //{ SpecialData = hello world, sig = 41c4b11f1bdc0626b90696ebc86df6a839c4d5a0478bacbca292c97d9561c51912e1f7cb2e5161eaef47147eeee5f8a6, Verify = true }
@@ -50,6 +67,34 @@ namespace TestWebServiceRSA
         //{ SpecialData = hello world, sig = 41c4b11f1bdc0626b90696ebc86df6a839c4d5a0478bacbca292c97d9561c51912e1f7cb2e5161eaef47147eeee5f8a6, Verify = true }
         //{ SpecialData = hello world, sig = ccc4b11f1bdc0626b90696ebc86df6a839c4d5a0478bacbca292c97d9561c51912e1f7cb2e5161eaef47147eeee5f8a6, Verify = false }
 
+    }
+
+    //public struct VerifiableString
+    public sealed class VerifiableString
+    {
+        public string value;
+
+        public byte[] signature;
+
+        public override string ToString()
+        {
+            return new { value, signature = signature.ToHexString() }.ToString();
+        }
+    }
+
+    public static class VerifiableStringExtensions
+    {
+        public static VerifiableString Sign(this VerifiableString e, RSAParameters rsa)
+        {
+            e.signature = new RSACryptoStream(NamedKeyPairs.Key1PrivateKey.RSAParameters).SignString(e.value);
+
+            return e;
+        }
+
+        public static bool Verify(this VerifiableString e, RSAParameters rsa)
+        {
+            return new RSACryptoStream(NamedKeyPairs.Key1PrivateKey.RSAParameters).VerifyString(e.value, e.signature);
+        }
     }
 }
 
@@ -66,3 +111,6 @@ namespace TestWebServiceRSA
 
 
 
+//0d60:01:01 0034:0015 TestWebServiceRSA.Application create ScriptCoreLib.Ultra::ScriptCoreLib.Library.StringConversions
+//0d60:01:01:0f RewriteToAssembly error: System.NotImplementedException: { SourceType = TestWebServiceRSA.VerifiableString }
+//   at jsc.meta.Library.ILStringConversions.Prepare(Type SourceType, Func`2 FieldSelector) in x:\jsc.internal.git\compiler\jsc.meta\jsc.meta\Library\ILStringConversions.cs:line 1557

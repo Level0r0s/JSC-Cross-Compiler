@@ -8,13 +8,18 @@ namespace java.security
     [Script(IsNative = true)]
     public class KeyFactory
     {
+        public PrivateKey generatePrivate(KeySpec keySpec)
+        {
+            throw null;
+        }
+
         public PublicKey generatePublic(KeySpec keySpec)
         {
             return default(PublicKey);
         }
 
         public static KeyFactory getInstance(string algorithm)
-        { 
+        {
             return default(KeyFactory);
         }
 

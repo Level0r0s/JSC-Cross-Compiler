@@ -27,6 +27,11 @@ namespace TestWebServiceRSA
         {
             // Z:\jsc.svn\examples\javascript\android\Test\TestAndroidWebCryptoKeyImport\TestAndroidWebCryptoKeyImport\Application.cs
 
+
+            // jvm wants 512bits keys
+            // jvmMinKeySize = 23
+            var jvmMinKeySize = MaxDataFromdwKeySize(512);
+
             var keygensw = Stopwatch.StartNew();
 
             //var rsa = new RSACryptoServiceProvider(dwKeySize: dwKeySizeFromMaxData(4096));
@@ -119,7 +124,8 @@ namespace TestWebServiceRSA
 
             // +		InnerException	{"Common Language Runtime detected an invalid program."}	System.Exception {System.InvalidProgramException}
 
-            var rsa3 = new RSACryptoStream(NamedKeyPairs.Key1PrivateKey.CSPBlob);
+            //var rsa3 = new RSACryptoStream(NamedKeyPairs.Key1PrivateKey.CSPBlob);
+            var rsa3 = new RSACryptoStream(NamedKeyPairs.Key1PrivateKey.RSAParameters);
 
             Console.WriteLine(new { rsa3.KeySize, rsa3.EncryptedDataChunkSize });
 
@@ -195,11 +201,18 @@ namespace TestWebServiceRSA
 
         public readonly RSACryptoServiceProvider rsa;
 
-        public RSACryptoStream(byte[] CSPBlob)
+
+        public RSACryptoStream(RSAParameters p)
         {
             this.rsa = new RSACryptoServiceProvider();
-            this.rsa.ImportCspBlob(CSPBlob);
+            this.rsa.ImportParameters(p);
         }
+
+        //public RSACryptoStream(byte[] CSPBlob)
+        //{
+        //    this.rsa = new RSACryptoServiceProvider();
+        //    this.rsa.ImportCspBlob(CSPBlob);
+        //}
 
         public RSACryptoStream(RSACryptoServiceProvider rsa)
         {

@@ -19,6 +19,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
     // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Security/Cryptography/RSACryptoServiceProvider.cs
     // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Security\Cryptography\RSACryptoServiceProvider.cs
     // https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Security.Cryptography/RSACryptoServiceProvider.cs
+    // https://github.com/mono/mono/blob/master/mcs/class/Mono.Security/Mono.Security.Cryptography/CryptoConvert.cs
+
     // http://msdn.microsoft.com/en-us/library/5e9ft273(v=vs.110).aspx
 
     // http://msdn.microsoft.com/en-us/library/system.security.cryptography.rsacryptoserviceprovider.decrypt(v=vs.110).aspx
@@ -34,6 +36,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
         // http://lukieb.blogspot.com/2014/01/rsa-public-key-encryption-between-net.html
 
 
+        public RSAPrivateKey InternalRSAPrivateKey;
         public RSAPublicKey InternalRSAPublicKey;
 
         //  We only attempt to generate a random key on desktop runtimes because the CoreCLR
@@ -231,6 +234,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
 
                 this.InternalKeyPair = keyGen.generateKeyPair();
                 this.InternalRSAPublicKey = (RSAPublicKey)this.InternalKeyPair.getPublic();
+                this.InternalRSAPrivateKey = (RSAPrivateKey)this.InternalKeyPair.getPrivate();
 
                 Console.WriteLine("RSACryptoServiceProvider after generateKeyPair " + new { sw.ElapsedMilliseconds });
 
@@ -387,7 +391,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
 
                 var rsaModulusBytes = parameters.Modulus;
 
-                #region firstByte
+                #region firstByte Modulus
                 var firstByte = rsaModulusBytes[0];
                 if (firstByte != 0)
                 {
@@ -408,13 +412,24 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
                 #endregion
 
                 var Modulus = new BigInteger((sbyte[])(object)rsaModulusBytes);
-                var Exponent = new BigInteger((sbyte[])(object)parameters.Exponent);
+
+                // https://msdn.microsoft.com/en-us/library/system.security.cryptography.rsaparameters(v=vs.110).aspx
+                var publicExponent = new BigInteger((sbyte[])(object)parameters.Exponent);
+                var privateExponent = new BigInteger((sbyte[])(object)parameters.D);
 
                 //Console.WriteLine("RSACryptoServiceProvider.ImportParameters " + new { m = parameters.Modulus.Length, e = parameters.Exponent.Length });
 
-                var s = new RSAPublicKeySpec(Modulus, Exponent);
 
-                this.InternalRSAPublicKey = (RSAPublicKey)rsa.generatePublic(s);
+                // https://docs.oracle.com/javase/7/docs/api/java/security/spec/RSAPrivateKeySpec.html
+
+
+
+                var xRSAPrivateKeySpec = new RSAPrivateKeySpec(Modulus, privateExponent);
+                var xRSAPublicKeySpec = new RSAPublicKeySpec(Modulus, publicExponent);
+
+                this.InternalRSAPrivateKey = (RSAPrivateKey)rsa.generatePrivate(xRSAPrivateKeySpec);
+                this.InternalRSAPublicKey = (RSAPublicKey)rsa.generatePublic(xRSAPublicKeySpec);
+
                 this.InternalParameters = parameters;
             }
             catch
@@ -461,5 +476,80 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
             return value;
         }
 
+        public byte[] SignData(byte[] buffer, object halg)
+        {
+            // http://stackoverflow.com/questions/22840322/how-to-make-messagedigest-sha-1-and-signature-nonewithrsa-equivalent-to-signa
+
+            var xSHA1CryptoServiceProvider = halg as SHA1CryptoServiceProvider;
+            //var hash = xSHA1CryptoServiceProvider.ComputeHash(buffer);
+            var algorithm = "SHA1WithRSA";
+
+
+            Console.WriteLine("enter SignData " + new
+            {
+                xSHA1CryptoServiceProvider,
+                algorithm,
+                //hash = hash.Length, 
+                this.InternalRSAPrivateKey
+            });
+
+            // PKCS1.Sign_v15 
+
+            // http://stackoverflow.com/questions/3313698/rsa-pkcs1-compliant-signature
+            // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Security/Cryptography/RSACryptoServiceProvider.cs
+            // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Security/Cryptography/Utils.cs
+            var value = default(byte[]);
+
+            try
+            {
+                // https://community.qualys.com/thread/13760
+
+                var sig = java.security.Signature.getInstance(algorithm);
+                sig.initSign(this.InternalRSAPrivateKey);
+                //sig.update((sbyte[])(object)hash);
+                sig.update((sbyte[])(object)buffer);
+                value = (byte[])(object)sig.sign();
+            }
+            catch { throw; }
+
+            Console.WriteLine("exit SignData " + new { value.Length });
+            return value;
+        }
+
+        public bool VerifyData(byte[] buffer, object halg, byte[] signature)
+        {
+            var xSHA1CryptoServiceProvider = halg as SHA1CryptoServiceProvider;
+            //var hash = xSHA1CryptoServiceProvider.ComputeHash(buffer);
+            var algorithm = "SHA1WithRSA";
+            var value = default(bool);
+
+            Console.WriteLine("enter VerifyData " + new
+            {
+                xSHA1CryptoServiceProvider,
+                algorithm,
+                //hash = hash.Length, 
+                this.InternalRSAPrivateKey
+            });
+
+            try
+            {
+                // https://community.qualys.com/thread/13760
+
+                var sig = java.security.Signature.getInstance(algorithm);
+                sig.initVerify(this.InternalRSAPublicKey);
+                //sig.update((sbyte[])(object)hash);
+                sig.update((sbyte[])(object)buffer);
+                value = sig.verify((sbyte[])(object)signature);
+            }
+            catch { throw; }
+
+            return value;
+        }
     }
 }
+
+
+//{ ElapsedMilliseconds = 0, SpecialData = hello world, sig = 84e8f16ded6266cc091a708482b631499711d784091d8b7788ab81382f6470d2760d067e923cb67e9304c221e8093522a9101c12da261da3ff567b8283ce250c, Verify = true }
+//{ ElapsedMilliseconds = 86, SpecialData = HELLO WORLD, sig = 84e8f16ded6266cc091a708482b631499711d784091d8b7788ab81382f6470d2760d067e923cb67e9304c221e8093522a9101c12da261da3ff567b8283ce250c, Verify = false }
+//{ ElapsedMilliseconds = 247, SpecialData = hello world, sig = 84e8f16ded6266cc091a708482b631499711d784091d8b7788ab81382f6470d2760d067e923cb67e9304c221e8093522a9101c12da261da3ff567b8283ce250c, Verify = true }
+//{ ElapsedMilliseconds = 506, SpecialData = hello world, sig = cce8f16ded6266cc091a708482b631499711d784091d8b7788ab81382f6470d2760d067e923cb67e9304c221e8093522a9101c12da261da3ff567b8283ce250c, Verify = false }

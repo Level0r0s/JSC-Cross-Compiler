@@ -914,6 +914,9 @@
     <Compile Include="java\security\cert\X509Certificate.cs" />
     <Compile Include="java\security\CodeSource.cs" />
     <Compile Include="javax\crypto\Cipher.cs" />
+    <Compile Include="java\security\interfaces\RSAPrivateKey.cs" />
+    <Compile Include="java\security\SignatureSpi.cs" />
+    <Compile Include="java\security\Signature.cs" />
     <Compile Include="java\security\SecureRandom.cs" />
     <Compile Include="java\security\KeyFactory.cs" />
     <Compile Include="java\security\interfaces\RSAKey.cs" />
