@@ -69,7 +69,15 @@ namespace GearVR360VideoPush
                 //orderby ff.ToLower().Contains("Star Wars".ToLower()) descending, fff.LastWriteTime descending
                 //orderby ff.ToLower().Contains("1941".ToLower()) descending, fff.LastWriteTime descending
                 //orderby ff.ToLower().Contains("Eminem".ToLower()) descending, fff.LastWriteTime descending
-                orderby ff.ToLower().Contains("cockpit".ToLower()) descending, fff.LastWriteTime descending
+                //orderby ff.ToLower().Contains("cockpit".ToLower()) descending, fff.LastWriteTime descending
+                //orderby ff.ToLower().Contains("mars".ToLower()) descending, fff.LastWriteTime descending
+                //where ff.ToLower().Contains("mars".ToLower())
+                //where ff.ToLower().Contains("mirage".ToLower())
+                //where ff.ToLower().Contains("rover".ToLower())
+                //where ff.ToLower().Contains("milky".ToLower())
+                where ff.ToLower().Contains("night".ToLower())
+                    || ff.ToLower().Contains("lapse".ToLower()) 
+
                 //orderby fff.LastWriteTime descending
 
                 select fff
@@ -84,13 +92,17 @@ namespace GearVR360VideoPush
             Action mp4uploads = delegate { };
 
             //foreach (var path0 in forfiles0.Take(295))
-            foreach (var path0 in forfiles0.Take(1))
+            //foreach (var path0 in forfiles0.Take(1))
+            foreach (var path0 in forfiles0)
             {
                 var path = path0.FullName;
 
                 var apkfriendlytitle = new string(
                path0.Name.Select(x => x < 127 ? x : '_').ToArray()
                );
+
+
+                Console.Title = apkfriendlytitle;
 
                 var pathSize = path0.Length;
 

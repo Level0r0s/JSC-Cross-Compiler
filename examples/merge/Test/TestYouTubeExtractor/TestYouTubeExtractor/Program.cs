@@ -72,9 +72,8 @@ namespace TestYouTubeExtractor
             string link,
             IEnumerable<VideoInfo> videoInfos)
         {
-//Error	3	The type 'System.Windows.UIElement' is defined in an assembly that is not referenced. You must add a reference to assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'.	Z:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\Program.cs	75	13	TestYouTubeExtractor
-//Error	4	The type 'System.Windows.Forms.Control' is defined in an assembly that is not referenced. You must add a reference to assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.	Z:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\Program.cs	75	13	TestYouTubeExtractor
-            // Error	3	The type 'System.Windows.DependencyObject' is defined in an assembly that is not referenced. You must add a reference to assembly 'WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'.	Z:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\Program.cs	78	13	TestYouTubeExtractor
+            //Error	3	The type 'System.Windows.UIElement' is defined in an assembly that is not referenced. You must add a reference to assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'.	Z:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\Program.cs	75	13	TestYouTubeExtractor
+            //Error	4	The type 'System.Windows.Forms.Control' is defined in an assembly that is not referenced. You must add a reference to assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.	Z:\jsc.svn\examples\merge\Test\TestYouTubeExtractor\TestYouTubeExtractor\Program.cs	75	13	TestYouTubeExtractor
 
             var mp4 = videoInfos.Where(x => x.VideoType == VideoType.Mp4);
             var mp4video = mp4.Where(x => x.Resolution > 0).OrderBy(x => x.Resolution).ToArray();
@@ -161,14 +160,14 @@ namespace TestYouTubeExtractor
                 apkfriendlytitle_old + video.VideoExtension);
 
             var px_old2 = Path.Combine(
-          //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
           "x:/media",
 
           apkfriendlytitle_old2 + video.VideoExtension);
 
             // pxa_mp4 = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp4"
             var pxa_mp4 = Path.Combine(
-                 //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                  "x:/media",
 
                  apkfriendlytitle + video.VideoExtension);
@@ -231,7 +230,7 @@ namespace TestYouTubeExtractor
 
             if (!File.Exists(pxa_mp4))
             {
-                retry:;
+            retry: ;
 
                 try
                 {
@@ -323,10 +322,10 @@ namespace TestYouTubeExtractor
                     if (!File.Exists(pxa_mp4_mp4))
                     {
                         var upgradeTargets = new Stack<VideoInfo>(mp4video.ToList());
-                        // +		upgradeTargets.Peek()	{Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 2160p}	YoutubeExtractor.VideoInfo
-                        // +		upgradeTargets.Peek()	{Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 1440p}	YoutubeExtractor.VideoInfo
-                        // +		upgradeTargets.Peek()	{Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 1080p}	YoutubeExtractor.VideoInfo
-                        // +		upgradeTargets.Peek()	{Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 720p}	YoutubeExtractor.VideoInfo
+                    // +		upgradeTargets.Peek()	{Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 2160p}	YoutubeExtractor.VideoInfo
+                    // +		upgradeTargets.Peek()	{Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 1440p}	YoutubeExtractor.VideoInfo
+                    // +		upgradeTargets.Peek()	{Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 1080p}	YoutubeExtractor.VideoInfo
+                    // +		upgradeTargets.Peek()	{Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 720p}	YoutubeExtractor.VideoInfo
 
                         // video = {Full Title: Noa Neal ‘Graffiti’ 4K 360° Music Video Clip.mp4, Type: Mp4, Resolution: 720p}
 
@@ -467,7 +466,7 @@ namespace TestYouTubeExtractor
             }
 
             var px = Path.Combine(
-               //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                "x:/media",
 
              Title + video.VideoExtension);
@@ -669,6 +668,11 @@ namespace TestYouTubeExtractor
 
         static void Main(string[] args)
         {
+            DoVideo(
+
+                "https://www.youtube.com/watch?v=7zq4G9x72y8"
+                );
+
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150609/360
 
             //DoVideo(
@@ -931,6 +935,14 @@ namespace TestYouTubeExtractor
 
                 var videoUrl = link;
 
+                var prefix2 = "//www.youtube.com/watch?v=";
+
+
+                var prefix = "//www.youtube.com/embed/";
+                //var prefix = "https://www.youtube.com/embed/";
+                var embed = link.SkipUntilOrNull(prefix) ?? link.SkipUntilOrNull(prefix2);
+                var id = embed.TakeUntilIfAny("\"").TakeUntilIfAny("?");
+
                 bool isYoutubeUrl = DownloadUrlResolver.TryNormalizeYoutubeUrl(videoUrl, out videoUrl);
 
                 //Console.WriteLine(new { sw.ElapsedMilliseconds, px, videoUrl });
@@ -990,13 +1002,21 @@ namespace TestYouTubeExtractor
                 // Additional information: Bad JSON escape sequence: \5.Path 'args.afv_ad_tag_restricted_to_instream', line 1, position 3029.
 
 
+                var get_video_info = new WebClient().DownloadString("https://www.youtube.com/get_video_info?html5=1&video_id=" + id);
+
+                var statusfail = get_video_info.Contains("status=fail");
+
+                if (statusfail)
+                    return;
+
+                var Spherical = get_video_info.Contains("projection_type%3D2");
 
                 // jsc rewriter breaks it?
                 IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link);
                 // Additional information: The remote name could not be resolved: 'youtube.com'
 
                 //DownloadAudio(videoInfos);
-                DownloadVideo("_", false, link, videoInfos);
+                DownloadVideo(ch_name, Spherical, link, videoInfos);
 
                 //{
                 //    err = System.IO.IOException: Unable to read data from the transport connection: An established connection was aborted by the software in your host machine. --->System.Net.Sockets.SocketException: An established connection was aborted by the software in your host machine

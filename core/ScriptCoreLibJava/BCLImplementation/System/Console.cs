@@ -9,6 +9,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System
     [Script(Implements = typeof(global::System.Console))]
     internal class __Console
     {
+        // IMAGE_SUBSYSTEM_WINDOWS_CUI 
+        // http://blogs.msdn.com/b/oldnewthing/archive/2009/01/01/9259142.aspx
+
         // ubuntu!
         // Z:\jsc.svn\examples\java\hybrid\UbuntuHello\UbuntuHello\Program.cs
 

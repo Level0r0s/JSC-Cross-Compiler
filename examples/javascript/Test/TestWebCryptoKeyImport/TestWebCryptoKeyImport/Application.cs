@@ -25,6 +25,8 @@ namespace TestWebCryptoKeyImport
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151105
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>
@@ -33,7 +35,7 @@ namespace TestWebCryptoKeyImport
         {
             // X:\jsc.svn\examples\javascript\Test\TestWebCryptoSHA1\TestWebCryptoSHA1\Application.cs
 
-    
+
 
             var sw = Stopwatch.StartNew();
 
@@ -57,19 +59,46 @@ namespace TestWebCryptoKeyImport
             };
 
 
-            var p = Native.crypto.subtle.importKey(
-                format: "jwk",
-                keyData: new
+            var m64padding = Convert.ToBase64String(this.m);
+            var m64 = m64padding;
+
+
+            while (m64.EndsWith("=="))
+                m64 = m64.Substring(0, m64.Length - 2);
+
+
+            // make URL friendly:
+            //str = str.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
+
+            // http://stackoverflow.com/questions/4492426/remove-trailing-when-base64-encoding
+            m64 = m64.Replace("+", "-").Replace("/", "_").Replace("=+", "");
+
+
+            var keyData = new
             {
                 alg = "RSA-OAEP",
                 e = Convert.ToBase64String(this.e),
                 ext = false,
                 kty = "RSA",
-                n = Convert.ToBase64String(this.m)
-            },
+                n = m64
+            };
+
+            //   // Base64 padding was added to the "d" member (==).
+
+            new IHTMLPre { 
+                new{keyData}
+            }.AttachToDocument();
+
+            var p = Native.crypto.subtle.importKey(
+                format: "jwk",
+                keyData: keyData,
                 algorithm: algorithm,
                 extractable: false,
-                keyUsages: new[] { "encrypt" }
+                keyUsages: new[] { "encrypt", 
+                
+                    // onError { z = SyntaxError: Cannot create a key using the specified key usages. }
+                    "verify" 
+                }
             );
 
             p.then(
@@ -100,6 +129,8 @@ namespace TestWebCryptoKeyImport
             },
                 onError: z =>
             {
+                // onError { z = DataError: The JWK member "n" could not be base64url decoded or contained padding }
+
                 new IHTMLPre {
                     "onError " +
                 new {

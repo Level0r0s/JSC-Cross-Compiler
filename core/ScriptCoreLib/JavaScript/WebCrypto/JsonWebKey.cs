@@ -53,6 +53,8 @@ namespace ScriptCoreLib.JavaScript.WebCrypto
     [Script]
     public class JsonWebKey
     {
+        // Z:\jsc.svn\examples\javascript\Test\TestWebCryptoKeyImport\TestWebCryptoKeyImport\Application.cs
+
         // http://self-issued.info/docs/draft-ietf-jose-json-web-key.html
         // http://msdn.microsoft.com/en-us/library/system.identitymodel.tokens.tokenvalidationparameters%28v=vs.114%29.aspx
         // http://stackoverflow.com/questions/25372035/not-able-to-validate-json-web-token-with-net-key-to-short

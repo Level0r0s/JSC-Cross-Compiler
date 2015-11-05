@@ -19,6 +19,10 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
     [Script(Implements = typeof(global::System.Net.Sockets.TcpListener))]
     internal class __TcpListener
     {
+        // https://code.google.com/p/chromium/issues/detail?id=537538&q=status%3Aunconfirmed&sort=-id&colspec=ID%20Stars%20Area%20Feature%20Status%20Summary%20Modified%20OS
+        // https://letsencrypt.org/2015/10/29/phishing-and-malware.html
+        // http://brianreiter.org/2010/08/24/the-sad-history-of-the-microsoft-posix-subsystem/
+
         // https://freedom-to-tinker.com/blog/haldermanheninger/how-is-nsa-breaking-so-much-crypto/
 
         // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuWebApplication\ApplicationWebService.cs

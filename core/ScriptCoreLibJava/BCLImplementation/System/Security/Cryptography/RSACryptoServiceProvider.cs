@@ -30,6 +30,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
     [Script(Implements = typeof(global::System.Security.Cryptography.RSACryptoServiceProvider))]
     internal class __RSACryptoServiceProvider : __RSA
     {
+        // https://twitter.com/ncweaver/status/661930555215249408
+        // Z:\jsc.svn\examples\javascript\crypto\WebServiceAuthorityExperiment\WebServiceAuthorityExperiment\ApplicationWebService.cs
+
         // http://news.slashdot.org/story/15/11/03/0256231/internet-firms-to-be-banned-from-offering-unbreakable-encryption-under-new-uk-laws
 
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151103
@@ -433,6 +436,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
 
                 var modulus = f(rsaModulusBytes);
 
+                //  http://www.jensign.com/JavaScience/dotnet/RSAdotnet4/
+                //  in J#, the java.math.BigInteger constructor expects byte[] data to be in BIG-endian order, consistent with Java api usage
 
                 // Z:\jsc.svn\examples\javascript\crypto\WebServiceAuthorityExperiment\WebServiceAuthorityExperiment\ApplicationWebService.cs
                 // https://community.oracle.com/thread/1531315?start=0&tstart=0
