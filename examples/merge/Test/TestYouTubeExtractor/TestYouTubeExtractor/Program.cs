@@ -62,13 +62,21 @@ namespace TestYouTubeExtractor
         //OK
         //---------------------------
 
+
+        public enum projection
+        {
+            x2D,
+            x360,
+            x360TB
+        }
+
         // { err = System.IO.FileNotFoundException: Could not load file or assembly 'taglib-sharp,
         private static void DownloadVideo(
             string chname,
 
 
             // not detected via metadata?
-            bool Spherical,
+            projection Spherical,
             string link,
             IEnumerable<VideoInfo> videoInfos)
         {
@@ -110,6 +118,9 @@ namespace TestYouTubeExtractor
             // https://code.google.com/p/android/issues/detail?id=8185
             // http://stackoverflow.com/questions/18596245/in-c-how-can-i-detect-if-a-character-is-a-non-ascii-character
 
+
+            var apkfriendlytitle_old3 = default(string);
+
             var apkfriendlytitle = new string(
                 Title.Select(x => x < 127 ? x : '_').ToArray()
                 );
@@ -117,18 +128,27 @@ namespace TestYouTubeExtractor
             // apkfriendlytitle = "___360_ - __________find the truth 360 degree trick movie ."
 
             // prefix it, and loose the keyword later to be less redundant...
-            if (Spherical)
+            if (Spherical == projection.x360)
                 apkfriendlytitle = "360 " + (apkfriendlytitle.Replace("360", " ")).Trim();
+            else if (Spherical == projection.x360TB)
+            {
+                apkfriendlytitle_old3 = "360 " + (apkfriendlytitle.Replace("360", " ")).Trim();
+                apkfriendlytitle = "360 3D " + (apkfriendlytitle.Replace("360", " ")).Trim();
+            }
+
+            //apkfriendlytitle = "360 " + (apkfriendlytitle.Replace("360", " ")).Trim() + "_TB";
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151106
+
+
+            if (!string.IsNullOrEmpty(chname))
+                apkfriendlytitle_old3 += " by " + new string(chname.Select(x => x < 127 && char.IsLetterOrDigit(x) ? x : '_').ToArray());
 
             // remedy for bug run
             var apkfriendlytitle_old2 = apkfriendlytitle;
-
             if (!string.IsNullOrEmpty(chname))
                 apkfriendlytitle_old2 += " by " + (chname.Select(x => x < 127 && char.IsLetterOrDigit(x) ? x : '_').ToArray());
 
-
             var apkfriendlytitle_old = apkfriendlytitle;
-
             if (!string.IsNullOrEmpty(chname))
                 apkfriendlytitle_old += " by " + chname;
 
@@ -138,7 +158,8 @@ namespace TestYouTubeExtractor
             // pxa_mp4 = "x:/media\\HD Video 1080p - Time Lapse with Sunsets, Clouds, Stars by LoungeV studio : Relaxing Nature Videos.mp4"
             if (!string.IsNullOrEmpty(chname))
                 apkfriendlytitle += " by " + new string(chname.Select(x => x < 127 && char.IsLetterOrDigit(x) ? x : '_').ToArray());
-
+            //if (Spherical == projection.x360TB)
+            //    apkfriendlytitle += "_TB";
 
             // 
             //apkfriendlytitle = apkfriendlytitle.Replace("360", "_");
@@ -153,24 +174,15 @@ namespace TestYouTubeExtractor
 
 
             // px = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp4"
-            var px_old = Path.Combine(
-                //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "x:/media",
+            var px_old = Path.Combine("x:/media", apkfriendlytitle_old + video.VideoExtension);
+            var px_old2 = Path.Combine("x:/media", apkfriendlytitle_old2 + video.VideoExtension);
 
-                apkfriendlytitle_old + video.VideoExtension);
+            // "X:\media\360 What is VR Video by Jessica_Brillhart.mp3.mp4"
+            var px_old3 = Path.ChangeExtension(Path.Combine("x:/media", apkfriendlytitle_old3 + video.VideoExtension), ".mp3.mp4");
 
-            var px_old2 = Path.Combine(
-                //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-          "x:/media",
-
-          apkfriendlytitle_old2 + video.VideoExtension);
 
             // pxa_mp4 = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp4"
-            var pxa_mp4 = Path.Combine(
-                //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                 "x:/media",
-
-                 apkfriendlytitle + video.VideoExtension);
+            var pxa_mp4 = Path.Combine("x:/media", apkfriendlytitle + video.VideoExtension);
 
 
 
@@ -180,9 +192,27 @@ namespace TestYouTubeExtractor
             var pxa_mp4_mp4 = Path.ChangeExtension(pxa_mp4, ".mp4.mp4");
 
             // pxa_mp3_mp4 = "x:/media\\OVRMyCubeWorldNDK WASDC PointerLock.mp3.mp4"
-            var pxa_mp3_mp4 = Path.ChangeExtension(pxa_mp4, ".mp3.mp4");
+            var pxa_mp3_mp4 = Path.ChangeExtension(pxa_mp4,
+
+                (Spherical == projection.x360TB) ?
+
+                ".mp3._TB.mp4" :
+
+                ".mp3.mp4"
+            );
+
+            // "X:\media\360 3D What is VR Video by Jessica_Brillhart_TB.mp4"
             var pxa_old_mp3_mp4 = Path.ChangeExtension(px_old, ".mp3.mp4");
 
+
+
+            if (!File.Exists(pxa_mp4))
+                if (File.Exists(px_old3))
+                {
+                    Console.WriteLine("renamed " + new { pxa_mp3_mp4 });
+                    // upgrade old naming to apk friendly.
+                    File.Move(px_old3, pxa_mp3_mp4);
+                }
 
 
 
@@ -670,7 +700,7 @@ namespace TestYouTubeExtractor
         {
             DoVideo(
 
-                "https://www.youtube.com/watch?v=7zq4G9x72y8"
+                "https://www.youtube.com/watch?v=h-8UCEigYTI"
                 );
 
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150609/360
@@ -873,14 +903,46 @@ namespace TestYouTubeExtractor
 
                             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151022
 
-                            var get_video_info = new WebClient().DownloadString("https://www.youtube.com/get_video_info?html5=1&video_id=" + id);
+                            var ytconfig = c.SkipUntilOrEmpty("<script>var ytplayer = ytplayer || {};ytplayer.config =").TakeUntilOrEmpty(";ytplayer.load =");
 
-                            var statusfail = get_video_info.Contains("status=fail");
 
-                            if (statusfail)
-                                continue;
+                            dynamic ytconfigJSON = Newtonsoft.Json.JsonConvert.DeserializeObject(ytconfig);
+                            var ytconfigJSON_args = ytconfigJSON.args;
+                            string ytconfigJSON_args_adaptive_fmts = ytconfigJSON.args.adaptive_fmts;
+                            string adaptive_fmts = Uri.UnescapeDataString(ytconfigJSON_args_adaptive_fmts);
 
-                            var Spherical = get_video_info.Contains("projection_type%3D2");
+
+                            // projection_type=3
+
+
+                            // +		((dynamic)((Newtonsoft.Json.Linq.JObject)(ytconfigJSON))).args
+
+
+
+
+                            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151106/spherical3d
+                            var Spherical3D = adaptive_fmts.Contains("projection_type=3");
+                            var Spherical = adaptive_fmts.Contains("projection_type=2");
+
+
+                            if (!Spherical)
+                                if (!Spherical3D)
+                                {
+                                    var get_video_info0 = new WebClient().DownloadString("https://www.youtube.com/get_video_info?html5=1&video_id=" + id);
+                                    var get_video_info1 = Uri.UnescapeDataString(get_video_info0);
+
+                                    var statusfail = get_video_info1.Contains("status=fail");
+
+                                    if (statusfail)
+                                        continue;
+
+                                    Spherical3D = get_video_info1.Contains("projection_type=3");
+                                    Spherical = get_video_info1.Contains("projection_type=2");
+                                }
+
+                            // "yt:projectionType"), t = Ss(b, "yt:stereoLayout"), u = "equirectangular" == n, x, z;
+                            //u && "layout_top_bottom" ==
+                            //t ? x = 3 : u && !n ? x = 2 : "layout_left_right" ==
 
 
                             // jsc rewriter breaks it?
@@ -888,7 +950,13 @@ namespace TestYouTubeExtractor
                             // Additional information: The remote name could not be resolved: 'youtube.com'
 
                             //DownloadAudio(videoInfos);
-                            DownloadVideo(ch_name, Spherical, link, videoInfos);
+                            DownloadVideo(ch_name,
+
+                                Spherical3D ? projection.x360TB :
+                                Spherical ? projection.x360 :
+                                projection.x2D
+
+                                , link, videoInfos);
 
                             //{
                             //    err = System.IO.IOException: Unable to read data from the transport connection: An established connection was aborted by the software in your host machine. --->System.Net.Sockets.SocketException: An established connection was aborted by the software in your host machine
@@ -1002,21 +1070,55 @@ namespace TestYouTubeExtractor
                 // Additional information: Bad JSON escape sequence: \5.Path 'args.afv_ad_tag_restricted_to_instream', line 1, position 3029.
 
 
-                var get_video_info = new WebClient().DownloadString("https://www.youtube.com/get_video_info?html5=1&video_id=" + id);
 
-                var statusfail = get_video_info.Contains("status=fail");
+                //   <script>var ytplayer = ytplayer || {};ytplayer.config =
 
-                if (statusfail)
-                    return;
 
-                var Spherical = get_video_info.Contains("projection_type%3D2");
+                var ytconfig = c.SkipUntilOrEmpty("<script>var ytplayer = ytplayer || {};ytplayer.config =").TakeUntilOrEmpty(";ytplayer.load =");
+
+
+                dynamic ytconfigJSON = Newtonsoft.Json.JsonConvert.DeserializeObject(ytconfig);
+                var ytconfigJSON_args = ytconfigJSON.args;
+                string ytconfigJSON_args_adaptive_fmts = ytconfigJSON.args.adaptive_fmts;
+                string adaptive_fmts = Uri.UnescapeDataString(ytconfigJSON_args_adaptive_fmts);
+
+
+                // projection_type=3
+
+
+                // +		((dynamic)((Newtonsoft.Json.Linq.JObject)(ytconfigJSON))).args
+
+
+                //var get_video_info = new WebClient().DownloadString("https://www.youtube.com/get_video_info?html5=1&video_id=" + id);
+
+                //var statusfail = get_video_info.Contains("status=fail");
+
+                //if (statusfail)
+                //    return;
+
+
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151106/spherical3d
+                var Spherical3D = adaptive_fmts.Contains("projection_type=3");
+                var Spherical = adaptive_fmts.Contains("projection_type=2");
+
+                // "yt:projectionType"), t = Ss(b, "yt:stereoLayout"), u = "equirectangular" == n, x, z;
+                //u && "layout_top_bottom" ==
+                //t ? x = 3 : u && !n ? x = 2 : "layout_left_right" ==
 
                 // jsc rewriter breaks it?
                 IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link);
                 // Additional information: The remote name could not be resolved: 'youtube.com'
 
                 //DownloadAudio(videoInfos);
-                DownloadVideo(ch_name, Spherical, link, videoInfos);
+                DownloadVideo(ch_name,
+
+
+
+                                Spherical3D ? projection.x360TB :
+                                Spherical ? projection.x360 :
+                                projection.x2D
+
+                    , link, videoInfos);
 
                 //{
                 //    err = System.IO.IOException: Unable to read data from the transport connection: An established connection was aborted by the software in your host machine. --->System.Net.Sockets.SocketException: An established connection was aborted by the software in your host machine

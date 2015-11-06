@@ -272,7 +272,9 @@ namespace YoutubeExtractor
                 {
                     info = new VideoInfo(formatCode)
                     {
-                        DownloadUrl = extractionInfo.Uri.ToString()
+                        Title = videoTitle,
+                        DownloadUrl = extractionInfo.Uri.ToString(),
+                        RequiresDecryption = extractionInfo.RequiresDecryption
                     };
                 }
 

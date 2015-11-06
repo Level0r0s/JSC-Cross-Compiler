@@ -54,6 +54,14 @@ namespace YoutubeExtractor
             new VideoInfo(278, VideoType.WebM, 144, false, AudioType.Unknown, 0, AdaptiveType.Video),
 
 
+//formatCode = 249
+//formatCode = 250
+
+//formatCode = 251
+// opus audio
+            new VideoInfo(251, VideoType.Unknown, 0, false, AudioType.Unknown, 48, AdaptiveType.Audio),
+
+
             // 60
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150502/yt
             // no audio

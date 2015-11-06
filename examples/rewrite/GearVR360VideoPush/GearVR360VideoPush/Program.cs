@@ -75,8 +75,13 @@ namespace GearVR360VideoPush
                 //where ff.ToLower().Contains("mirage".ToLower())
                 //where ff.ToLower().Contains("rover".ToLower())
                 //where ff.ToLower().Contains("milky".ToLower())
-                where ff.ToLower().Contains("night".ToLower())
-                    || ff.ToLower().Contains("lapse".ToLower()) 
+
+
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151106/spherical3d
+                where ff.ToLower().Contains("_TB".ToLower())
+
+                //where ff.ToLower().Contains("night".ToLower())
+                //    || ff.ToLower().Contains("lapse".ToLower()) 
 
                 //orderby fff.LastWriteTime descending
 

@@ -49,7 +49,9 @@ namespace ExampleApplication
              */
             VideoInfo video = videoInfos
                 //.First(info => info.VideoType == VideoType.Mp4 && info.Resolution == 360);
-                .Where(info => info.VideoType == VideoType.Mp4).OrderBy(info => info.Resolution).Last();
+                //.Where(info => info.VideoType == VideoType.Mp4).OrderBy(info => info.Resolution).Last();
+                //.SingleOrDefault(x => x.FormatCode == 251);
+                .SingleOrDefault(x => x.FormatCode == 249);
 
 
             video.DecryptDownloadUrl();
@@ -62,8 +64,11 @@ namespace ExampleApplication
             var videoDownloader = new VideoDownloader(video,
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
 
+                // this.SavePath = "C:\\Users\\Administrator\\Documents\\What is VR Video?"
+
                 video.Title.Replace(":", "_")
-                        .Replace("*", "_") 
+                        .Replace("*", "_")
+                        .Replace("?", "_") 
                         .Replace("°", "_")
                         + video.VideoExtension));
 
@@ -87,7 +92,7 @@ namespace ExampleApplication
             // x:\jsc.svn\market\synergy\github\youtubeextractor\external\exampleapplication\program.cs
 
             // Our test youtube link
-            const string link = "https://www.youtube.com/embed/K_J8k43gUhY";
+            const string link = "https://www.youtube.com/watch?v=h-8UCEigYTI";
             Debugger.Break();
 
             // https://www.youtube.com/get_video_info?html5=1&video_id=K_J8k43gUhY&cpn=31lmcWsqKXH4uh4N&eurl&el=embedded&hl=en_US&sts=16623&lact=2&width=1920&height=376&authuser=0&pageid=115376870514737323384&ei=nT2mVcbNIJC7cIXOq4AL&iframe=1&c=WEB&cver=html5&cplayer=UNIPLAYER&cbr=Chrome&cbrver=43.0.2357.134&cos=Windows&cosver=6.3

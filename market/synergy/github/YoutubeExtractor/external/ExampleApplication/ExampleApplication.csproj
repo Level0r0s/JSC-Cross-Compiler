@@ -49,6 +49,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="ExampleApplication.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\ExampleApplication.AssetsLibrary.dll</HintPath>

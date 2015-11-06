@@ -98,6 +98,7 @@ namespace JVMCLRWSDLMID
 
     static class Program
     {
+        // Z:\jsc.svn\examples\javascript\crypto\VerifyIdentityAffinity\VerifyIdentityAffinity\Application.cs
 
         /// <summary>
         /// The main entry point for the application.

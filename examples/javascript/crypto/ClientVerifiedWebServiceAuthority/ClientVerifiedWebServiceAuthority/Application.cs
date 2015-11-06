@@ -25,6 +25,14 @@ namespace ClientVerifiedWebServiceAuthority
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        static Application()
+        {
+            // 1ms { currentScript = [object HTMLScriptElement] }
+
+            Console.WriteLine(
+                new { Native.document.currentScript }
+            );
+        }
 
         /// <summary>
         /// This is a javascript application.
@@ -35,7 +43,13 @@ namespace ClientVerifiedWebServiceAuthority
             new { }.With(
                 async delegate
                 {
+                    new IHTMLPre { new { Native.document.currentScript } }.AttachToDocument();
+
                     var x = await base.GetData();
+
+                    new IHTMLPre { new { Native.document.currentScript } }.AttachToDocument();
+
+                    // IPublicKey . VerifyAsync()
 
                     var verificationKey = await Native.crypto.subtle.importRSAPublicKeyForVerificationAsync(
                         this.PublicKeyModulus,

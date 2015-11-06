@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyIdentityAffinity", "VerifyIdentityAffinity\VerifyIdentityAffinity.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientVerifiedWebServiceAuthority", "..\ClientVerifiedWebServiceAuthority\ClientVerifiedWebServiceAuthority\ClientVerifiedWebServiceAuthority.csproj", "{1582DF03-2E9D-42F4-A7B4-83E4A757AFEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuDualSSLWebApplication", "..\..\ubuntu\UbuntuDualSSLWebApplication\UbuntuDualSSLWebApplication\UbuntuDualSSLWebApplication.csproj", "{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuTestMySQLInsert", "..\..\ubuntu\Test\UbuntuTestMySQLInsert\UbuntuTestMySQLInsert\UbuntuTestMySQLInsert.csproj", "{EE573E64-10FA-4788-A42C-88E208819430}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JVMCLRWSDLMID", "..\..\..\java\hybrid\JVMCLRWSDLMID\JVMCLRWSDLMID.csproj", "{DFA12B74-06FA-4360-AA69-0E36C76AF308}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.ActiveCfg = Debug|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.Build.0 = Debug|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.ActiveCfg = Release|x86
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.Build.0 = Release|x86
+		{1582DF03-2E9D-42F4-A7B4-83E4A757AFEC}.Debug|x86.ActiveCfg = Debug|x86
+		{1582DF03-2E9D-42F4-A7B4-83E4A757AFEC}.Debug|x86.Build.0 = Debug|x86
+		{1582DF03-2E9D-42F4-A7B4-83E4A757AFEC}.Release|x86.ActiveCfg = Release|x86
+		{1582DF03-2E9D-42F4-A7B4-83E4A757AFEC}.Release|x86.Build.0 = Release|x86
+		{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB}.Debug|x86.ActiveCfg = Debug|x86
+		{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB}.Debug|x86.Build.0 = Debug|x86
+		{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB}.Release|x86.ActiveCfg = Release|x86
+		{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB}.Release|x86.Build.0 = Release|x86
+		{EE573E64-10FA-4788-A42C-88E208819430}.Debug|x86.ActiveCfg = Debug|x86
+		{EE573E64-10FA-4788-A42C-88E208819430}.Debug|x86.Build.0 = Debug|x86
+		{EE573E64-10FA-4788-A42C-88E208819430}.Release|x86.ActiveCfg = Release|x86
+		{EE573E64-10FA-4788-A42C-88E208819430}.Release|x86.Build.0 = Release|x86
+		{DFA12B74-06FA-4360-AA69-0E36C76AF308}.Debug|x86.ActiveCfg = Debug|x86
+		{DFA12B74-06FA-4360-AA69-0E36C76AF308}.Debug|x86.Build.0 = Debug|x86
+		{DFA12B74-06FA-4360-AA69-0E36C76AF308}.Release|x86.ActiveCfg = Release|x86
+		{DFA12B74-06FA-4360-AA69-0E36C76AF308}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
