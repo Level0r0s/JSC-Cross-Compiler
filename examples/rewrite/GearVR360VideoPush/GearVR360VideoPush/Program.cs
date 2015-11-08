@@ -78,7 +78,9 @@ namespace GearVR360VideoPush
 
 
                 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151106/spherical3d
+                //where ff.ToLower().Contains("_TB".ToLower())
                 where ff.ToLower().Contains("_TB".ToLower())
+                && ff.ToLower().Contains("mine".ToLower())
 
                 //where ff.ToLower().Contains("night".ToLower())
                 //    || ff.ToLower().Contains("lapse".ToLower()) 

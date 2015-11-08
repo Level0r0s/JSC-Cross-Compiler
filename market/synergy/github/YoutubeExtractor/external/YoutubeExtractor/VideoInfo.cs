@@ -59,6 +59,8 @@ namespace YoutubeExtractor
 
 //formatCode = 251
 // opus audio
+            new VideoInfo(249, VideoType.Unknown, 0, false, AudioType.Unknown, 48, AdaptiveType.Audio),
+            new VideoInfo(250, VideoType.Unknown, 0, false, AudioType.Unknown, 48, AdaptiveType.Audio),
             new VideoInfo(251, VideoType.Unknown, 0, false, AudioType.Unknown, 48, AdaptiveType.Audio),
 
 
