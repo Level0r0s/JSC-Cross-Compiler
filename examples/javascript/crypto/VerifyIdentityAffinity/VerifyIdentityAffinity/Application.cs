@@ -39,9 +39,29 @@ namespace VerifyIdentityAffinity
 
                     //var s = new IHTMLPre { "n/a" }.AttachToDocument();
                     status = new IHTMLPre { "n/a" }.AttachToDocument();
-
+                    // signed by server?
 
                     await base.GetStatus();
+
+                    #region Verify
+                    new IHTMLButton { "Verify" }.AttachToDocument().With(
+                        async button =>
+                        {
+                            // have server check if browser changed ui data?
+                            while (await button)
+                            {
+                                Native.document.documentElement.style.borderLeft = "2px solid yellow";
+
+                                if (await Verify())
+                                    Native.document.documentElement.style.borderLeft = "2px solid green";
+                                else
+                                    Native.document.documentElement.style.borderLeft = "2px solid red";
+                            }
+                        }
+                    );
+                    #endregion
+
+
                     //await base.GetStatus(s.AsXElement());
 
                     new IHTMLButton { "log in EID" }.AttachToDocument();
@@ -49,7 +69,33 @@ namespace VerifyIdentityAffinity
                     // and have browser ask for pin
                     // get the claim signed by the webservice
 
-                    new IHTMLButton { "log in MID" }.AttachToDocument();
+                    new IHTMLButton { "log in MID" }.AttachToDocument().With(
+                        async MID =>
+                        {
+
+                            await MID;
+
+                            //Native.document.body.css.button.disabled = true;
+                            //Native.document.body.css.button.style.display = none;
+                            //Native.document.body.css.button.style.display = IStyle.DisplayEnum.none;
+
+                            MID.disabled = true;
+
+
+                            Native.document.documentElement.style.borderLeft = "2px solid yellow";
+
+                            if (await base.MobileAuthenticateAsync())
+                            {
+                                Native.document.documentElement.style.borderLeft = "2px solid green";
+                            }
+                            else
+                            {
+                                Native.document.documentElement.style.borderLeft = "2px solid red";
+                            }
+
+                        }
+                    );
+
                     // 
 
                     // by now we should have the identity

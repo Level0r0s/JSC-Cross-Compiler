@@ -17,6 +17,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
     [Script(ImplementsViaAssemblyQualifiedName = "System.ServiceModel.BasicHttpsBinding")]
     public class __BasicHttpsBinding
     {
+        // Z:\jsc.svn\examples\javascript\crypto\VerifyIdentityAffinity\VerifyIdentityAffinity\ApplicationWebService.cs
        
     }
 }

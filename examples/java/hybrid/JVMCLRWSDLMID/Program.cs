@@ -106,6 +106,8 @@ namespace JVMCLRWSDLMID
         [STAThread]
         public static void Main(string[] args)
         {
+            // Z:\jsc.svn\examples\javascript\crypto\VerifyIdentityAffinity\VerifyIdentityAffinity\ApplicationWebService.cs
+
             // https://tsp.demo.sk.ee/?wsdl 
 
             //sk.DigiDocServicePortTypeClient
