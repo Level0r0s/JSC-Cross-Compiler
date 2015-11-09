@@ -2,6 +2,7 @@
 
 class Program
 {
+    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151109/contains
     static void Main(string[] args)
     {
         var f = (

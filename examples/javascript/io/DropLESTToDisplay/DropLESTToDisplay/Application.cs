@@ -383,6 +383,8 @@ namespace DropLESTToDisplay
             #endregion
 
 
+            Native.css[IHTMLElement.HTMLElementEnum.head].style.display = IStyle.DisplayEnum.block;
+            Native.css[IHTMLElement.HTMLElementEnum.title].style.display = IStyle.DisplayEnum.block;
 
             new { }.With(
                 async delegate
@@ -415,10 +417,15 @@ namespace DropLESTToDisplay
                     // { name = download.csv, size = 20851425 }
 
                     var sw = Stopwatch.StartNew();
+                    // if the drop is from a network share it wil take a while..
+
+                    //{ ManagedThreadId = 1, name = data.csv, size = 110777754 }
+                    //{ ManagedThreadId = 1, ElapsedMilliseconds = 43418 }
+
                     var bytes = await f.readAsBytes();
 
                     new IHTMLPre { new { Thread.CurrentThread.ManagedThreadId, sw.ElapsedMilliseconds } }.AttachToDocument();
-                     
+
                     // nuget google
                     await google.maps.api;
 
@@ -495,6 +502,9 @@ namespace DropLESTToDisplay
                     #region rows
                     // Jkn;Kohanimi;Keel;Kohanime staatus;Kohanime olek;Nimeobjekti liik;Lisainfo;Maakond,omavalitsus,asustusüksus;X;Y; 
 
+                    //EIC;X;Y;ID;IK3MAX A;POSTOFFICE;ADDRESS
+                    //00117987-Y;6590203.66;534216.50;6250743;2916.98;Tallinn Harju maakond;Tallinn, Nooda tee, 7
+
                     //var headerX = header.Split(';').TakeWhile(x => x != "X").Count();
                     //var headerY = header.Split(';').TakeWhile(x => x != "Y").Count();
 
@@ -506,25 +516,31 @@ namespace DropLESTToDisplay
 
                     var HasLine = !string.IsNullOrEmpty(line1);
 
+                    // URI malformed at decodeURIComponent
+
                     while (HasLine)
                     {
                         WorkerReaderLineCount++;
 
                         //await Task.Delay(33);
 
-                        //Console.WriteLine(new { WorkerReaderLineCount });
+                        //Console.WriteLine("520 " + new { WorkerReaderLineCount });
 
                         var x = new CSVHeaderLookup { header = header, line = line1 }["X"];
                         var y = new CSVHeaderLookup { header = header, line = line1 }["Y"];
+
+                        //Console.WriteLine("525 " + new { WorkerReaderLineCount });
 
                         // hop supports strings for now..
                         var lat = "" + (double)LEST97.lest_function_vba.lest_geo(x, y, 0);
                         var lng = "" + (double)LEST97.lest_function_vba.lest_geo(x, y, 1);
 
+                        //Console.WriteLine("531 " + new { WorkerReaderLineCount });
+
                         #region progress
-                        if (WorkerReaderLineCount % 500 == 1)
+                        //if (WorkerReaderLineCount % 500 == 1)
                         {
-                            Console.Title = WorkerReaderLineCount + " in " + sw1.ElapsedMilliseconds + "ms";
+                            Console.Title = WorkerReaderLineCount + " in " + sw1.ElapsedMilliseconds + "ms " + new { WorkerReader.BaseStream.Position, WorkerReader.BaseStream.Length };
                         }
 
 
@@ -581,9 +597,11 @@ namespace DropLESTToDisplay
                                     AddZoomAwareMarker(map, marker, new markersmall().src, new markerxsmall().src);
 
 
-                                    await marker.async.onmouseover;
+                                    while (await marker.async.onmouseover)
+                                    {
 
-                                    Console.Title = title1;
+                                        Console.Title = title1;
+                                    }
 
                                 }
                             );
@@ -594,13 +612,18 @@ namespace DropLESTToDisplay
                         }
                         #endregion
 
+                        //Console.WriteLine("606 " + new { WorkerReaderLineCount });
+
                         //await Task.Delay(3);
 
                         line1 = WorkerReader.ReadLine();
                         HasLine = !string.IsNullOrEmpty(line1);
+
+                        //Console.WriteLine("611 " + new { WorkerReaderLineCount });
                     }
                     #endregion
 
+                    Console.WriteLine("done at " + new { WorkerReaderLineCount });
 
                     // done... { ManagedThreadId = 1, output = done { ManagedThreadId = 10, WorkerReaderLineCount = 153411, ElapsedMilliseconds = 99979 } }
                     // done... { ManagedThreadId = 1, output = done { ManagedThreadId = 10, WorkerReaderLineCount = 153411, ElapsedMilliseconds = 260865 } }
@@ -628,7 +651,8 @@ namespace DropLESTToDisplay
             {
                 var z = map.getZoom();
 
-                if (z < 10.0)
+                //if (z < 10.0)
+                if (z < 13.0)
                     marker.setIcon(xsmall);
                 else
                     marker.setIcon(small);

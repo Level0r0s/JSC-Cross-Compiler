@@ -19,6 +19,20 @@ using GoogleMapsMarker.HTML.Pages;
 
 namespace google
 {
+    public class AsyncEvent
+    {
+        // Z:\jsc.svn\examples\javascript\io\DropLESTToDisplay\DropLESTToDisplay\Application.cs
+        // x:\jsc.svn\examples\javascript\webgl\WebGLGodRay\WebGLGodRay\Application.cs
+        public static implicit operator bool(AsyncEvent e)
+        {
+            // future C# may allow if (obj)
+            // but for now booleans are needed
+
+            // enable 
+            // while (await Native.window.async.onresize);
+            return ((object)e != null);
+        }
+    }
 
     public static class maps
     {
@@ -102,11 +116,11 @@ namespace google
             {
                 public Marker that;
 
-                public Task onclick
+                public Task<AsyncEvent> onclick
                 {
                     get
                     {
-                        var x = new TaskCompletionSource<object>();
+                        var x = new TaskCompletionSource<AsyncEvent>();
 
                         that.onclick += delegate
                         {
@@ -115,7 +129,7 @@ namespace google
                                 return;
 
 
-                            x.SetResult(null);
+                            x.SetResult(new AsyncEvent { });
                             x = null;
                         };
 
@@ -123,11 +137,11 @@ namespace google
                     }
                 }
 
-                public Task onmouseover
+                public Task<AsyncEvent> onmouseover
                 {
                     get
                     {
-                        var x = new TaskCompletionSource<object>();
+                        var x = new TaskCompletionSource<AsyncEvent>();
 
                         that.onmouseover += delegate
                         {
@@ -136,7 +150,7 @@ namespace google
                                 return;
 
 
-                            x.SetResult(null);
+                            x.SetResult(new AsyncEvent { });
                             x = null;
                         };
 
@@ -148,7 +162,7 @@ namespace google
                 {
                     get
                     {
-                        var x = new TaskCompletionSource<object>();
+                        var x = new TaskCompletionSource<AsyncEvent>();
 
                         that.onmouseout += delegate
                         {
@@ -157,7 +171,7 @@ namespace google
                                 return;
 
 
-                            x.SetResult(null);
+                            x.SetResult(new AsyncEvent { });
                             x = null;
                         };
 

@@ -37,3 +37,6 @@ namespace DropLESTToDisplay
 
     }
 }
+
+//Error	25	Unable to open module file 'C:\Users\Administrator\AppData\Local\Temp\3\.NETFramework,Version=v4.6.AssemblyAttributes.vb': System Error &H80070002&	C:\Users\Administrator\AppData\Local\Temp\3\.NETFramework,Version=v4.6.AssemblyAttributes.vb	1	1	LEST97
+//Error	27	The type or namespace name 'Key1PublicKey' does not exist in the namespace 'DropLESTToDisplay.NamedKeyPairs' (are you missing an assembly reference?)	Z:\jsc.svn\examples\javascript\io\DropLESTToDisplay\DropLESTToDisplay\Program.cs	13	53	DropLESTToDisplay

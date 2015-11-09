@@ -10,7 +10,7 @@ namespace DropLESTToDisplay
     {
         public static void Main(string[] args)
         {
-            var p = DropLESTToDisplay.NamedKeyPairs.Key1PublicKey.PublicParameters;
+            //var p = DropLESTToDisplay.NamedKeyPairs.Key1PublicKey.PublicParameters;
 
             RewriteToUltraApplication.AsProgram.Launch(typeof(Application));
         }

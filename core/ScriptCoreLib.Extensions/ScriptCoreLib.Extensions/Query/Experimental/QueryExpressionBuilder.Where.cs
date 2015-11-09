@@ -27,6 +27,9 @@ namespace ScriptCoreLib.Query.Experimental
 
         }
 
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151109/contains
+
+
         // called by LINQ
         public static IQueryStrategy<TElement> Where<TElement>(this IQueryStrategy<TElement> source, Expression<Func<TElement, bool>> filter)
         {

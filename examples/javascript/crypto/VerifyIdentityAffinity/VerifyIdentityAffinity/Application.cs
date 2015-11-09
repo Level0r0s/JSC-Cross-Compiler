@@ -9,6 +9,7 @@ using ScriptCoreLib.JavaScript.Extensions;
 using ScriptCoreLib.JavaScript.Windows.Forms;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -95,6 +96,53 @@ namespace VerifyIdentityAffinity
 
                         }
                     );
+
+                    new IHTMLButton { "log in MID15" }.AttachToDocument().With(
+                      async MID =>
+                      {
+
+                          await MID;
+
+                          //Native.document.body.css.button.disabled = true;
+                          //Native.document.body.css.button.style.display = none;
+                          //Native.document.body.css.button.style.display = IStyle.DisplayEnum.none;
+
+                          MID.disabled = true;
+
+
+                          Native.document.documentElement.style.borderLeft = "2px solid yellow";
+
+                          await base.MobileAuthenticateAsync15();
+
+                          Native.document.documentElement.style.borderLeft = "2px solid cyan";
+
+                          var sw = Stopwatch.StartNew();
+
+                          //new IHTMLPre { base.MobileAuthenticateAsync15_ChallengeID, () => new { sw.ElapsedMilliseconds } }.AttachToDocument();
+                          //using (new IHTMLPre { () => new { sw.ElapsedMilliseconds } }.AttachToDocument())
+                          var u = (new IHTMLPre { () => new { sw.ElapsedMilliseconds } }.AttachToDocument());
+
+                          {
+                              await Task.Delay(15000);
+                              sw.Stop();
+                          }
+                          u.Dispose();
+
+
+                          Native.document.documentElement.style.borderLeft = "2px solid yellow";
+
+                          if (await base.MobileAuthenticateAsync15Continue())
+                          {
+                              Native.document.documentElement.style.borderLeft = "2px solid green";
+                          }
+                          else
+                          {
+                              Native.document.documentElement.style.borderLeft = "2px solid red";
+                          }
+
+                      }
+                  );
+
 
                     // 
 

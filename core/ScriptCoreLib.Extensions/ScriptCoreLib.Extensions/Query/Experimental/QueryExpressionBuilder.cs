@@ -318,8 +318,11 @@ namespace ScriptCoreLib.Query.Experimental
 
                 #endregion
 
+
+                // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151109/contains
                 // called by?
-                #region OBSOLETE WriteScalarExpression
+                // why obsolete?
+                #region WriteScalarExpression
                 var WriteScalarExpression = default(WriteScalarExpressionAction);
 
                 WriteScalarExpression =
@@ -570,6 +573,45 @@ namespace ScriptCoreLib.Query.Experimental
                         var xMethodCallExpression = asExpression as MethodCallExpression;
                         if (xMethodCallExpression != null)
                         {
+                            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151109/contains
+
+                            // xMethodCallExpression.Method.Name = "ToLower"
+
+                            #region refToLower
+                            var refToLower = new Func<string>("".ToLower).Method;
+                            if (refToLower.Name == xMethodCallExpression.Method.Name)
+                            {
+                                Write("lower(");
+
+                                var arg0 = xMethodCallExpression.Object;
+                                WriteScalarExpression(DiscardAlias, arg0);
+                                Write(")");
+                                return;
+                            }
+                            #endregion
+
+
+
+                            var refContains = new Func<string, bool>("".Contains).Method;
+                            if (refContains.Name == xMethodCallExpression.Method.Name)
+                            {
+                                var arg1 = xMethodCallExpression.Arguments[0];
+                                // arg1 = {"C"}
+                                var arg0 = xMethodCallExpression.Object;
+                                // arg0 = {x.path}
+
+                                Write("(replace(");
+                                WriteScalarExpression(DiscardAlias, arg0);
+                                Write(", ");
+                                WriteScalarExpression(DiscardAlias, arg1);
+                                Write(", '')<>");
+                                WriteScalarExpression(DiscardAlias, arg1);
+                                Write(")");
+                                return;
+                            }
+
+                            Debugger.Break();
+
                             // can we do a count in where yet?
                             // xMethodCallExpression = {new xTable().Where(zz => (zz.field1 < 33)).Count()}
                             WriteLine(1, xMethodCallExpression.Method.Name + "()");
@@ -1847,7 +1889,7 @@ namespace ScriptCoreLib.Query.Experimental
                 #region WriteProjection
 
                 WriteProjection =
-                      // do we need zsource?
+                    // do we need zsource?
                       (zsource, zExpression, Target) =>
                       {
                           //WriteCommentLine(1, "WriteProjection");
@@ -2589,7 +2631,7 @@ namespace ScriptCoreLib.Query.Experimental
                               zNewArrayExpression.Expressions.WithEachIndex(
                                    (SourceArgument, SourceArgumentIndex) =>
                                        WriteScalarExpression(
-                                        //zsource,
+                                       //zsource,
 
                                         true,
                                            SourceArgument
@@ -2615,13 +2657,13 @@ namespace ScriptCoreLib.Query.Experimental
                                             WriteScalarExpression(
 
                                                 true,
-                                                //zsource,
+                                            //zsource,
                                                 SourceArgument //,
-                                                               //Target.Concat(new[] { Tuple.Create(
-                                                               //                  default(MemberInfo) ,
-                                                               //                  SourceArgumentIndex
-                                                               //                  )
-                                                               //              }).ToArray()
+                                            //Target.Concat(new[] { Tuple.Create(
+                                            //                  default(MemberInfo) ,
+                                            //                  SourceArgumentIndex
+                                            //                  )
+                                            //              }).ToArray()
                                             )
                                     );
                                   return;
@@ -2631,13 +2673,13 @@ namespace ScriptCoreLib.Query.Experimental
                                   (SourceArgument, SourceArgumentIndex) =>
                                       WriteScalarExpression(
                                       true,
-                                          //zsource,
+                                      //zsource,
                                           SourceArgument //,
-                                                         //Target.Concat(new[] { Tuple.Create(
-                                                         //    zNewExpression.Members[SourceArgumentIndex],
-                                                         //    SourceArgumentIndex
-                                                         //    )
-                                                         //}).ToArray()
+                                      //Target.Concat(new[] { Tuple.Create(
+                                      //    zNewExpression.Members[SourceArgumentIndex],
+                                      //    SourceArgumentIndex
+                                      //    )
+                                      //}).ToArray()
                                       )
                               );
                               return;
@@ -3011,7 +3053,7 @@ namespace ScriptCoreLib.Query.Experimental
 
                                     WriteProjectionProxy(
                                        xGroupBy.source,
-                                   //aa,
+                                        //aa,
                                    __xGroupBy_source_inner_selector,
                                         new[] {
                                             new Tuple<MemberInfo, int>(xReferencesOfLong.LastReference.Method, 1)
@@ -3033,7 +3075,7 @@ namespace ScriptCoreLib.Query.Experimental
 
                                     WriteProjectionProxy(
                                         xGroupBy.source,
-                                    //aa,
+                                        //aa,
                                     __xGroupBy_source_outer_selector,
                                          new[] { new Tuple<MemberInfo, int>(xReferencesOfLong.LastReference.Method, 1)
                                             , new Tuple<MemberInfo, int>(a1.Member, 1)

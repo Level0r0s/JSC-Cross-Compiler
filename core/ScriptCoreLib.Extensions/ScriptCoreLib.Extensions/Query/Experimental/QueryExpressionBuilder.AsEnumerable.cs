@@ -335,6 +335,16 @@ namespace ScriptCoreLib.Query.Experimental
                                     __value = double.Parse((string)__value);
                             }
 
+
+                            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151109/contains
+                            // CLR MySQL is trying to be smart huh
+                            if (__value == DBNull.Value)
+                            {
+                                // let there be null
+                                __value = null;
+                            }
+
+
                             f.SetValue(xRow, __value);
                         }
                     );
