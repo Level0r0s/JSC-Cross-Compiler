@@ -1147,3 +1147,7 @@ namespace TestYouTubeExtractor
 
 //Severity Code    Description Project File Line
 //Error Error opening icon file r:\opensource\github\taglib-sharp\src -- Access to the path 'r:\opensource\github\taglib-sharp\src' is denied.taglib-sharp r:\opensource\github\taglib-sharp\src\CSC
+
+//Error	2	Assembly generation failed -- Referenced assembly 'ICSharpCode.SharpZipLib' does not have a strong name	x:\opensource\github\taglib-sharp\src\CSC	taglib-sharp
+// Error	6	Cryptographic failure while signing assembly 'x:\opensource\github\taglib-sharp\src\obj\Debug\taglib-sharp.dll' -- 'Error reading key file 'taglib-sharp.snk' -- The system cannot find the file specified. '	x:\opensource\github\taglib-sharp\src\CSC	taglib-sharp
+
