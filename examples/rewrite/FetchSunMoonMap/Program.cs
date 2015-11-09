@@ -66,22 +66,25 @@ namespace FetchSunMoonMap
 
             };
 
-            for (int day = 1; day <= 24; day++)
+            // 3456
+
+            for (int day = 1; day <= 27; day++)
                 for (int h = 0; h <= 23; h++)
-                //for (int m = 0; m <= 59; m += 1)
-                {
-                    var m = 0;
+                    //for (int m = 0; m <= 59; m += 10)
+                    for (int m = 0; m <= 59; m += 5)
+                    {
+                        //var m = 0;
 
-                    var dd = day.ToString("00");
-                    var hh = h.ToString("00");
-                    var mm = m.ToString("00");
+                        var dd = day.ToString("00");
+                        var hh = h.ToString("00");
+                        var mm = m.ToString("00");
 
-                    var iso = $"201510{dd}T{hh}{mm}";
+                        var iso = $"201510{dd}T{hh}{mm}";
 
-                    Console.WriteLine(new { iso });
-                    f(iso);
+                        Console.WriteLine(new { iso });
+                        f(iso);
 
-                }
+                    }
 
             // new WebClient().DownloadFile("http://www.timeanddate.com/scripts/sunmap.php?obj=moon&iso=20151016T1100", dir.FullName + "/20151016T1100.png");
 

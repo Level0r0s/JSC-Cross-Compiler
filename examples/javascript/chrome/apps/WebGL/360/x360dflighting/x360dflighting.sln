@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360dflighting", "x360dflighting.csproj", "{77234670-3487-477E-9F24-73AB75E6D82E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFLightingByTekF", "..\..\synergy\d\DFLightingByTekF\DFLightingByTekF\DFLightingByTekF.csproj", "{EEDF5720-4339-409E-B8EE-635B95E62CDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyDoomE1M1ByPMalin", "..\..\synergy\d\ChromeShaderToyDoomE1M1ByPMalin\ChromeShaderToyDoomE1M1ByPMalin\ChromeShaderToyDoomE1M1ByPMalin.csproj", "{0470FA25-E610-4CE9-B572-5723AD57FB57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyEiffieBallsByEiffie", "..\..\synergy\e\ChromeShaderToyEiffieBallsByEiffie\ChromeShaderToyEiffieBallsByEiffie\ChromeShaderToyEiffieBallsByEiffie.csproj", "{C9C2746A-B3D7-4E35-B168-8EFB1189ABCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquariumByDr2", "..\..\synergy\a\AquariumByDr2\AquariumByDr2.csproj", "{AA303CE2-04F8-4EA7-A88F-19986920E86B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.ActiveCfg = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.Build.0 = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.ActiveCfg = Release|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.Build.0 = Release|x86
+		{EEDF5720-4339-409E-B8EE-635B95E62CDD}.Debug|x86.ActiveCfg = Debug|x86
+		{EEDF5720-4339-409E-B8EE-635B95E62CDD}.Debug|x86.Build.0 = Debug|x86
+		{EEDF5720-4339-409E-B8EE-635B95E62CDD}.Release|x86.ActiveCfg = Release|x86
+		{EEDF5720-4339-409E-B8EE-635B95E62CDD}.Release|x86.Build.0 = Release|x86
+		{0470FA25-E610-4CE9-B572-5723AD57FB57}.Debug|x86.ActiveCfg = Debug|x86
+		{0470FA25-E610-4CE9-B572-5723AD57FB57}.Debug|x86.Build.0 = Debug|x86
+		{0470FA25-E610-4CE9-B572-5723AD57FB57}.Release|x86.ActiveCfg = Release|x86
+		{0470FA25-E610-4CE9-B572-5723AD57FB57}.Release|x86.Build.0 = Release|x86
+		{C9C2746A-B3D7-4E35-B168-8EFB1189ABCE}.Debug|x86.ActiveCfg = Debug|x86
+		{C9C2746A-B3D7-4E35-B168-8EFB1189ABCE}.Debug|x86.Build.0 = Debug|x86
+		{C9C2746A-B3D7-4E35-B168-8EFB1189ABCE}.Release|x86.ActiveCfg = Release|x86
+		{C9C2746A-B3D7-4E35-B168-8EFB1189ABCE}.Release|x86.Build.0 = Release|x86
+		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Debug|x86.ActiveCfg = Debug|x86
+		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Debug|x86.Build.0 = Debug|x86
+		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Release|x86.ActiveCfg = Release|x86
+		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

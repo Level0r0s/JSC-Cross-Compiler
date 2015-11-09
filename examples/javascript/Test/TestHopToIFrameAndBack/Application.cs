@@ -23,6 +23,9 @@ using TestSwitchToServiceContextAsync;
 
 namespace TestHopToIFrameAndBack
 {
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151101
+    // Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCaptureAE\Application.cs
+
     #region HopToParent
     // Z:\jsc.svn\examples\javascript\Test\TestHopToIFrameAndBack\Application.cs
     // Z:\jsc.svn\examples\javascript\Test\TestHopFromIFrame\TestHopFromIFrame\Application.cs

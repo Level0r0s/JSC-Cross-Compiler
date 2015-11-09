@@ -21,6 +21,8 @@ using System.Runtime.Serialization;
 
 namespace ChromeHybridCaptureAE
 {
+    using chrome;
+
     #region HopToChromeAppWindow
     public struct HopToChromeAppWindow : System.Runtime.CompilerServices.INotifyCompletion
     {
@@ -130,6 +132,17 @@ namespace ChromeHybridCaptureAE
         // lets have at least one window
         static chrome.AppWindow outputWindow;
 
+
+
+        static IHTMLInput frameID;
+        static IHTMLInput uri;
+        static IHTMLButton go;
+
+
+
+        static int index = 0;
+        static DirectoryEntry dir;
+
         public Application(IApp page)
         {
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151101
@@ -141,7 +154,7 @@ namespace ChromeHybridCaptureAE
 
 
 
-            #region self_chrome_tabs
+            #region self_chrome_tabs extension
             object self_chrome_tabs = self_chrome.tabs;
             if (self_chrome_tabs != null)
             {
@@ -256,7 +269,22 @@ namespace ChromeHybridCaptureAE
                                                 );
                                             }
 
+                                            var xStringField = TestSwitchToServiceContextAsync.ArrayListExtensions.AsEnumerable(xShadowIAsyncStateMachine.StringFields).FirstOrDefault(
+                                               f => DecoratedString(f.FieldName) == DecoratedString(AsyncStateMachineSourceField.Name)
+                                           );
 
+                                            if (xStringField != null)
+                                            {
+                                                // once we are to go back to client. we need to reverse it?
+
+                                                AsyncStateMachineSourceField.SetValue(
+                                                    NewStateMachineI,
+                                                    xStringField.value
+                                                 );
+                                                // next xml?
+                                                // before lets send our strings back with the new state!
+                                                // what about exceptions?
+                                            }
                                         }
                                     );
                                     #endregion
@@ -277,6 +305,7 @@ namespace ChromeHybridCaptureAE
             object self_chrome_socket = self_chrome.socket;
             if (self_chrome_socket != null)
             {
+                #region running as appwindow
                 if (!(Native.window.opener == null && Native.window.parent == Native.window.self))
                 {
                     Console.WriteLine("running as appwindow");
@@ -304,6 +333,8 @@ namespace ChromeHybridCaptureAE
                         //Console.WriteLine("app  port.onMessage " + new { message });
 
                         {
+                            // DataCloneError: Failed to execute 'postMessage' on 'Window': Port at index 0 is already neutered.
+
                             if (e.ports != null)
                                 foreach (var port in e.ports)
                                 {
@@ -416,6 +447,7 @@ namespace ChromeHybridCaptureAE
 
                         // state 0 ? or state -1 ?
                         Console.WriteLine("appwindow HopToChromeApp  enter " + new { appwindow_to_app2 });
+                        // appwindow HopToChromeApp  enter {{ appwindow_to_app2 = null }}
 
                         //// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
                         //// async dont like ref?
@@ -429,6 +461,8 @@ namespace ChromeHybridCaptureAE
 
                     return;
                 }
+                #endregion
+
 
                 // running as app {{ Name = ChromeHybridCaptureAE.Application }} now reenable extension..
                 Console.WriteLine("running as app " + new { typeof(Application).Assembly.GetName().Name } + " now reenable extension..");
@@ -519,7 +553,17 @@ namespace ChromeHybridCaptureAE
                 };
                 #endregion
 
+                var c = new MessageChannel();
+                var cneutered = c;
+                c.port1.onmessage += e =>
+                {
+                    Console.WriteLine("app HopToChromeAppWindow MessageChannel onmessage " + new { e.data });
 
+                    appwindow_to_app(e.data);
+                };
+
+                c.port1.start();
+                c.port2.start();
 
                 #region app:HopToChromeAppWindow
                 HopToChromeAppWindow.VirtualOnCompleted = async (that, continuation) =>
@@ -527,7 +571,7 @@ namespace ChromeHybridCaptureAE
                     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150824/webgliframebuffer
 
                     // state 0 ? or state -1 ?
-                    Console.WriteLine("app HopToChromeAppWindow VirtualOnCompleted enter ");
+                    Console.WriteLine("app HopToChromeAppWindow  enter ");
 
                     #region outputWindow
                     if (that.window == null)
@@ -568,25 +612,24 @@ namespace ChromeHybridCaptureAE
 
                     // Z:\jsc.svn\core\ScriptCoreLib\JavaScript\DOM\IWindow.postMessage.cs
                     // how do we use this thing?
-                    var c = new MessageChannel();
 
-                    c.port1.onmessage += e =>
-                    {
-                        Console.WriteLine("app HopToChromeAppWindow MessageChannel onmessage " + new { e.data });
-
-                        appwindow_to_app(e.data);
-                    };
-
-                    c.port1.start();
-                    c.port2.start();
 
 
                     //                    15ms appwindow    Native.window.onmessage: {{ ports = [object MessagePort] }}
                     //2015-08-22 20:50:18.019 view-source:53702 17ms appwindow    Native.window.onmessage: {{ port = [object MessagePort] }}
-                    that.window.contentWindow.postMessage("do HopToChromeAppWindow " + new { r.shadowstate.TypeName, r.shadowstate.state }, transfer: c.port2);
+                    //that.window.contentWindow.postMessage("do HopToChromeAppWindow " + new { r.shadowstate.TypeName, r.shadowstate.state }, transfer: c.port2);
 
                     // now send the jump instruction... will it make it?
-                    that.window.contentWindow.postMessage(r.shadowstate);
+                    if (cneutered != null)
+                    {
+                        that.window.contentWindow.postMessage(r.shadowstate, transfer: cneutered.port2);
+                        cneutered = null;
+                    }
+                    else
+                    {
+                        that.window.contentWindow.postMessage(r.shadowstate);
+
+                    }
                 };
                 #endregion
 
@@ -739,7 +782,7 @@ namespace ChromeHybridCaptureAE
                 // nuget chrome
                 chrome.app.runtime.Launched += async delegate
                 {
-                    fixup: await Task.CompletedTask;
+                    { fixup: await Task.CompletedTask; }
 
 
 
@@ -768,7 +811,8 @@ namespace ChromeHybridCaptureAE
                     await default(HopToChromeAppWindow);
 
 
-                    Native.body.style.overflow = IStyle.OverflowEnum.auto;
+                    Native.document.documentElement.style.overflow = IStyle.OverflowEnum.auto;
+                    //Native.body.style.overflow = IStyle.OverflowEnum.auto;
                     Native.body.Clear();
                     (Native.body.style as dynamic).webkitUserSelect = "text";
 
@@ -779,6 +823,175 @@ namespace ChromeHybridCaptureAE
                     new IHTMLPre { "now what?" }.AttachToDocument();
 
                     // lets have some ui to do a fullsceen tab capture?
+                    // http://earth.nullschool.net/#2015/10/31/1500Z/wind/surface/level/anim=off/overlay=temp/azimuthal_equidistant=24.64,98.15,169
+                    // http://earth.nullschool.net/#2015/10/31/2100Z/wind/surface/level/anim=off/overlay=temp/azimuthal_equidistant=24.64,98.15,169
+
+                    // TypeError: Cannot set property 'uri' of null
+                    // jsc statemachine hop doesnt like scopes yet. staic it is.
+                    uri = new IHTMLInput { value = "http://earth.nullschool.net/#2015/10/31/2100Z/wind/surface/level/anim=off/overlay=temp/azimuthal_equidistant=24.64,98.15,169" }.AttachToDocument();
+                    uri.style.width = "100%";
+
+                    Console.WriteLine("appwindow: " + new { uri });
+
+                    new IHTMLPre { () => new { index } }.AttachToDocument();
+
+                    frameID = new IHTMLInput
+                    {
+                        type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range,
+                        min = 0,
+                        //max = 3600,
+                        max = 240,
+                        valueAsNumber = 0
+                    }.AttachToDocument().With(
+                        async i =>
+                        {
+
+                            do
+                            {
+                                // http://earth.nullschool.net/#2015/10/01/0000Z/wind/surface/level/anim=off/overlay=temp/azimuthal_equidistant=24.64,98.15,169
+                                index = (int)i.valueAsNumber;
+
+                                var hh = 3 * index;
+                                var dd = 1 + Math.Floor(hh / 24.0);
+
+                                uri.value =
+                                    "http://earth.nullschool.net/#2015/10/"
+                                    + dd.ToString().PadLeft(2, '0')
+                                    + "/"
+                                    + (hh % 24).ToString().PadLeft(2, '0')
+                                    + "00Z/wind/surface/level/anim=off/overlay=temp/azimuthal_equidistant=24.64,98.15,169";
+
+                            }
+                            while (await i.async.onchange);
+                        }
+                    );
+
+                    go = new IHTMLButton { "go" }.AttachToDocument();
+
+                    Console.WriteLine("appwindow: " + new { go });
+
+                    go.onclick += async delegate
+                    {
+                        //Error CS0158  The label 'fixup' shadows another label by the same name in a contained scope ChromeHybridCaptureAE   Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCaptureAE\Application.cs   791
+                        { fixup: await Task.CompletedTask; }
+
+                        Native.body.style.backgroundColor = "yellow";
+
+                        var scope_uri = uri.value;
+
+                        #region  await default(HopToChromeExtension)
+                        await default(HopToChromeApp);
+
+                        Console.WriteLine("hop from appwindow to app! " + new { scope_uri });
+                        // verify
+
+
+                        await default(HopToChromeExtension);
+                        #endregion
+
+
+                        Console.WriteLine("hop from app to extension! " + new { scope_uri });
+
+                        //  hop from app to extension! {{ scope_uri = http://earth.nullschool.net/#2015/10/31/2100Z/wind/surface/level/anim=off/overlay=temp/azimuthal_equidistant=24.64,98.15,169 }}
+
+                        var tabwindow = await chrome.windows.create(new { state = "fullscreen", url = scope_uri });
+
+                        // um. unless we hop into it we wont know when its ready?
+                        //await Task.Delay(7000);
+                        await Task.Delay(5000);
+
+                        // Error: Invalid value for argument 2. Property 'format': Value must be one of: [jpeg, png]. at validate 
+                        var captureVisibleTab = await tabwindow.id.captureVisibleTab(options: new { format = "jpeg" });
+
+                        Console.WriteLine("extension captureVisibleTab " + new { captureVisibleTab.Length });
+
+                        await tabwindow.id.remove();
+
+
+                        #region await default(HopToChromeAppWindow)
+                        await default(HopToChromeApp);
+                        Console.WriteLine("app " + new { captureVisibleTab.Length });
+                        await default(HopToChromeAppWindow);
+                        Console.WriteLine("appwindow " + new { captureVisibleTab.Length });
+                        #endregion
+
+                        // appwindow {{ Length = 272711 }}
+
+                        var icaptureVisibleTabFull = await new IHTMLImage { src = captureVisibleTab }.async.oncomplete;
+
+                        // {{ width = 1920, height = 1080 }}
+                        new IHTMLPre { new { icaptureVisibleTabFull.width, icaptureVisibleTabFull.height } }
+                        ;
+                        //                        .AttachToDocument();
+
+
+                        var focus = new CanvasRenderingContext2D(icaptureVisibleTabFull.height, icaptureVisibleTabFull.height);
+                        focus.drawImage(icaptureVisibleTabFull, (icaptureVisibleTabFull.width - icaptureVisibleTabFull.height) / 2, 0, icaptureVisibleTabFull.height, icaptureVisibleTabFull.height, 0, 0, icaptureVisibleTabFull.height, icaptureVisibleTabFull.height);
+                        var icaptureVisibleTab = new IHTMLImage { src = focus.canvas.toDataURL() }.AttachToDocument();
+
+
+                        icaptureVisibleTab.style.width = "100%";
+                        icaptureVisibleTab.AttachToDocument();
+
+                        await new IHTMLButton { "save " }.AttachToDocument().async.onclick;
+
+                        if (dir == null)
+                            dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
+
+                        var file = index.ToString().PadLeft(5, '0') + ".jpg";
+
+                        await dir.WriteAllBytes(file, focus);
+
+                        //frameID.valueAsNumber++;
+
+                        await new IHTMLButton { "automate " + new { frameID = frameID.valueAsNumber } }.AttachToDocument().async.onclick;
+
+                        //new IHTMLPre { uri.value }.AttachToDocument();
+
+                        next:
+
+                        frameID.valueAsNumber++;
+                        await Native.window.async.onframe;
+                        await Native.window.async.onframe;
+
+                        //new IHTMLPre { uri.value }.AttachToDocument();
+
+                        // go?
+
+                        // TypeError: Cannot read property 'id' of null
+                        scope_uri = uri.value;
+
+                        #region  await default(HopToChromeExtension)
+                        await default(HopToChromeApp);
+
+                        Console.WriteLine("hop from appwindow to app! " + new { scope_uri });
+                        // verify
+
+
+                        await default(HopToChromeExtension);
+                        #endregion
+                        var tabwindow2 = await chrome.windows.create(new { state = "fullscreen", url = scope_uri });
+                        await Task.Delay(5000);
+                        var captureVisibleTab2 = await tabwindow2.id.captureVisibleTab(options: new { format = "jpeg" });
+                        await tabwindow2.id.remove();
+                        #region await default(HopToChromeAppWindow)
+                        await default(HopToChromeApp);
+                        Console.WriteLine("app " + new { captureVisibleTab.Length });
+                        await default(HopToChromeAppWindow);
+                        Console.WriteLine("appwindow " + new { captureVisibleTab.Length });
+                        #endregion
+                        var icaptureVisibleTabFull2 = await new IHTMLImage { src = captureVisibleTab2 }.async.oncomplete;
+                        var focus2 = new CanvasRenderingContext2D(icaptureVisibleTabFull2.height, icaptureVisibleTabFull2.height);
+                        focus2.drawImage(icaptureVisibleTabFull2, (icaptureVisibleTabFull2.width - icaptureVisibleTabFull2.height) / 2, 0, icaptureVisibleTabFull2.height, icaptureVisibleTabFull2.height, 0, 0, icaptureVisibleTabFull2.height, icaptureVisibleTabFull2.height);
+                        var icaptureVisibleTab2 = new IHTMLImage { src = focus2.canvas.toDataURL() };
+                        var file2 = index.ToString().PadLeft(5, '0') + ".jpg";
+                        await dir.WriteAllBytes(file2, focus2);
+
+                        // done?
+                        goto next;
+
+                    };
+
 
                     await default(HopToChromeApp);
 

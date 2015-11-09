@@ -143,7 +143,7 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <Content Include="Textures\20151001T0100.jpg" />
+    <Content Include="Shaders\20151001T0000.jpg" />
     <Content Include="Textures\BKlgO.jpg" />
     <Content Include="Textures\sunmap.png" />
     <None Include="app.config">

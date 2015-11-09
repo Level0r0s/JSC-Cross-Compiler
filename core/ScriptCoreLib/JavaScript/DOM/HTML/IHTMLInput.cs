@@ -11,7 +11,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
     /// http://www.w3.org/TR/REC-html40/interact/forms.html#adef-type-INPUT
     /// </summary>
     [Script(InternalConstructor = true)]
-    public class IHTMLInput : IHTMLElement
+    public class IHTMLInput : IHTMLElement<IHTMLInput>
     {
         // http://true-coder.ru/html/trackbar-html5-i-ego-ispolzovanie.html
         [System.Obsolete("available for [type=range], change type if used?")]
@@ -210,13 +210,13 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         public int selectionEnd;
 
 
-        public static implicit operator byte(IHTMLInput i)
+        public static implicit operator byte (IHTMLInput i)
         {
             return byte.Parse(i.value);
         }
 
 
-        public static implicit operator float(IHTMLInput i)
+        public static implicit operator float (IHTMLInput i)
         {
             // X:\jsc.svn\examples\javascript\WebGL\WebGLLesson07\WebGLLesson07\Application.cs
 
@@ -224,7 +224,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         }
 
 
-        public static implicit operator bool(IHTMLInput i)
+        public static implicit operator bool (IHTMLInput i)
         {
             if (i.type == HTMLInputTypeEnum.checkbox)
             {
@@ -261,7 +261,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             return System.DateTime.Now;
         }
 
-        public static implicit operator string(IHTMLInput i)
+        public static implicit operator string (IHTMLInput i)
         {
             // X:\jsc.svn\examples\javascript\css\Test\CSSSearchUserFeedback\CSSSearchUserFeedback\Application.cs
 
@@ -305,7 +305,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             [Script]
             public class TasksCheckedEvent
             {
-                public static implicit operator bool(TasksCheckedEvent e)
+                public static implicit operator bool (TasksCheckedEvent e)
                 {
                     // future C# may allow if (obj)
                     // but for now booleans are needed
@@ -317,6 +317,64 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             }
 
 
+
+
+            // Z:\jsc.svn\examples\javascript\chrome\hybrid\ChromeHybridCaptureAE\Application.cs
+            //public Task<IEvent<IHTMLInput>> onchange
+            public Task<TasksCheckedEvent> onchange
+            {
+                [Script(DefineAsStatic = true)]
+                get
+                {
+
+                    // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyPrograms\ChromeShaderToyPrograms\Application.cs
+                    var y = new TaskCompletionSource<TasksCheckedEvent>();
+
+                    // are we in a select?
+
+
+                    // Z:\jsc.svn\examples\javascript\Test\TestOptionSelect\TestOptionSelect\Application.cs
+                    // whatif a program changes the selection?
+
+                    // selectedIndex wont send us the event?
+                    // http://stackoverflow.com/questions/14550731/onchange-not-working-at-selectedindex
+
+                    var old = that.value;
+
+                    #region pseudo event
+                    new Runtime.Timer(
+                        t =>
+                        {
+                            if (y == null)
+                            {
+                                t.Stop();
+                                return;
+                            }
+
+                            if (old == that.value)
+                                return;
+
+                            y.SetResult(new TasksCheckedEvent { });
+                            y = null;
+                        }, 1, 1000 / 15);
+                    #endregion
+
+
+
+                    that.onchange +=
+                        e =>
+                        {
+                            if (y == null)
+                                return;
+
+                            y.SetResult(new TasksCheckedEvent { });
+                            //y.SetResult(e);
+                            y = null;
+                        };
+
+                    return y.Task;
+                }
+            }
 
 
             [System.Obsolete("should jsc expose events as async tasks until C# chooses to allow that?")]

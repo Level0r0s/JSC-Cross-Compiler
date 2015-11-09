@@ -116,6 +116,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         [Script]
         public new class Tasks : IHTMLElement.Tasks<IHTMLButton>
         {
+            // Z:\jsc.svn\core\ScriptCoreLib.Async\ScriptCoreLib.Async\JavaScript\DOM\HTML\IHTMLButtonAsyncExtensions.cs
 
             [System.Obsolete("should jsc expose events as async tasks until C# chooses to allow that?")]
             public Task<IEvent<IHTMLButton>> onclick

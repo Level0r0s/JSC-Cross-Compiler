@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquariumByDr2", "..\..\synergy\a\AquariumByDr2\AquariumByDr2.csproj", "{AA303CE2-04F8-4EA7-A88F-19986920E86B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByPackage", "ByPackage", "{79784676-7C18-486C-84CB-0E8E7AA899FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyColumns", "..\..\ChromeShaderToyColumns\ChromeShaderToyColumns\ChromeShaderToyColumns.csproj", "{7A012980-513C-4B88-AB7F-BA67F52A10D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -31,6 +35,10 @@ Global
 		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Debug|x86.Build.0 = Debug|x86
 		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Release|x86.ActiveCfg = Release|x86
 		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Release|x86.Build.0 = Release|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Debug|x86.ActiveCfg = Debug|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Debug|x86.Build.0 = Debug|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Release|x86.ActiveCfg = Release|x86
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,5 +46,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A61C1A16-3435-4B0F-9002-04A952924BE4} = {604A9D85-5E6C-4095-BE31-85E348B17DCA}
 		{AA303CE2-04F8-4EA7-A88F-19986920E86B} = {934EB3DE-88B2-4071-9121-415113A73F8D}
+		{7A012980-513C-4B88-AB7F-BA67F52A10D6} = {79784676-7C18-486C-84CB-0E8E7AA899FB}
 	EndGlobalSection
 EndGlobal

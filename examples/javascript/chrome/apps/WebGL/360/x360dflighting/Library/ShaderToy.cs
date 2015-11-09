@@ -13,18 +13,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using EquirectangularToAzimuthal;
-using EquirectangularToAzimuthal.Design;
-using EquirectangularToAzimuthal.HTML.Pages;
+using CubeToEquirectangular;
+//using CubeToEquirectangular.Design;
+//using CubeToEquirectangular.HTML.Pages;
 using ScriptCoreLib.JavaScript.WebGL;
 using ScriptCoreLib.JavaScript.WebAudio;
 
-namespace EquirectangularToAzimuthal.Library
+namespace CubeToEquirectangular.Library
 {
     using ScriptCoreLib.GLSL;
     using System.Diagnostics;
     using gl = WebGLRenderingContext;
-    using EquirectangularToAzimuthal.HTML.Images.FromAssets;
+
 
     public delegate void RefreshTexturThumbailDelegate(
         object myself,
@@ -45,7 +45,7 @@ namespace EquirectangularToAzimuthal.Library
         public static WebGLBuffer createQuadVBO(gl gl
 
         , float left = -1.0f
-        // y reversed?
+            // y reversed?
         , float bottom = -1.0f
         , float right = 1.0f
         , float top = 1.0f
@@ -110,10 +110,8 @@ namespace EquirectangularToAzimuthal.Library
             return vbo;
         }
 
-        public class sampler2D
+        public class samplerCube
         {
-
-            public Func<IHTMLImage, Task<IHTMLImage>> upload;
 
         }
 
@@ -289,6 +287,10 @@ namespace EquirectangularToAzimuthal.Library
 
             public CreateShaderResult xCreateShader;
 
+
+            public WebGLTexture tex;
+
+
             // X:\jsc.svn\examples\glsl\future\GLSLShaderToyPip\GLSLShaderToyPip\Application.cs
             public EffectPass(
                 AudioContext wa = null,
@@ -353,15 +355,11 @@ namespace EquirectangularToAzimuthal.Library
                         // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeShaderToyVRCardboardGrid\ChromeShaderToyVRCardboardGrid\Application.cs
 
                         //if (inp != null && inp.mInfo.mType == "cubemap")
-                        //if (inp is samplerCube)
-
-                        var xsampler2D = inp as sampler2D;
-
-                        if (xsampler2D != null)
+                        if (inp is samplerCube)
                         {
-                            //new IHTMLPre { "add MakeHeader_Image sampler2D" }.AttachToDocument();
+                            //new IHTMLPre { "add MakeHeader_Image samplerCube" }.AttachToDocument();
 
-                            var tex = new WebGLTexture(gl);
+                            this.tex = new WebGLTexture(gl);
 
                             // http://stackoverflow.com/questions/10079368/how-would-i-do-environment-reflection-in-webgl-without-using-a-library-like-thre
                             // view-source:https://www.shadertoy.com/js/effect.js
@@ -369,11 +367,11 @@ namespace EquirectangularToAzimuthal.Library
                             // um can there be only one samplerCube?
                             gl.activeTexture(gl.TEXTURE0);
                             //gl.enable(gl.TEXTURE_CUBE_MAP);
-                            gl.bindTexture(gl.TEXTURE_2D, tex);
+                            gl.bindTexture(gl.TEXTURE_CUBE_MAP, tex);
                             //gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_S, (int)gl.CLAMP_TO_EDGE);
                             //gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_T, (int)gl.CLAMP_TO_EDGE);
-                            //gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, (int)gl.LINEAR);
-                            //gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, (int)gl.LINEAR);
+                            gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, (int)gl.LINEAR);
+                            gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, (int)gl.LINEAR);
 
                             //var cube0 = new IHTMLImage[] {
                             //        new HTML.Images.FromAssets.cube02_0(),
@@ -391,41 +389,17 @@ namespace EquirectangularToAzimuthal.Library
                             //public const uint TEXTURE_CUBE_MAP_POSITIVE_Z = 34073;
                             //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074;
 
-                            //rawArrays: texture bound to texture unit 0 is not renderable.It maybe non - power - of - 2 and have incompatible texture filtering or is not 'texture complete'.
-
-
-                            //new IHTMLPre { "about to load TEXTURE_2D" }.AttachToDocument();
-
-
-                            xsampler2D.upload = async newimage =>
-                            {
-                                //new IHTMLPre { "upload MakeHeader_Image  TEXTURE_2D + " + new { newimage.src } }.AttachToDocument();
-                                await newimage.async.oncomplete;
-
-
-                                gl.bindTexture(gl.TEXTURE_2D, tex);
-
-                                //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
-
-
-                                //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
-                                //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
-                                //gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X + (uint)index, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-                                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, newimage);
-
-                                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, (int)gl.LINEAR);
-                                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, (int)gl.LINEAR);
-                                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, (int)gl.CLAMP_TO_EDGE);
-                                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, (int)gl.CLAMP_TO_EDGE);
-
-                                //new IHTMLPre { "upload MakeHeader_Image  TEXTURE_2D + " + new { newimage.src, newimage.width, newimage.height } + " done" }.AttachToDocument();
-
-                                return newimage;
-                            };
 
                             //var cube0 = new IHTMLImage[] {
-                            //    //new BKlgO(),
-                            //    new sunmap(),
+                            //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_px(),
+                            //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nx(),
+
+                            //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_py(),
+                            //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_ny(),
+
+
+                            //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_pz(),
+                            //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nz()
                             //};
 
                             //cube0.WithEachIndex(
@@ -434,33 +408,19 @@ namespace EquirectangularToAzimuthal.Library
                             //        pendingimg.InvokeOnComplete(
                             //            img =>
                             //            {
-                            //                new IHTMLPre { "add MakeHeader_Image  TEXTURE_2D + " + new { index, img.width, img.height } }.AttachToDocument();
-                            //                // add MakeHeader_Image  TEXTURE_2D + {{ index = 0, width = 1024, height = 512 }}
-
-
-                            //                gl.bindTexture(gl.TEXTURE_2D, tex);
-
-                            //                //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
-
-
+                            //                gl.bindTexture(gl.TEXTURE_CUBE_MAP, tex);
                             //                //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
-                            //                //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
-                            //                //gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X + (uint)index, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-                            //                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+                            //                gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
+                            //                gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X + (uint)index, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
 
-                            //                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, (int)gl.NEAREST);
-                            //                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, (int)gl.NEAREST);
+                            //                new IHTMLPre { "add MakeHeader_Image samplerCube TEXTURE_CUBE_MAP_POSITIVE_X + " + new { index } }.AttachToDocument();
 
+                            //                if (index == 5)
+                            //                {
+                            //                    new IHTMLPre { "add MakeHeader_Image samplerCube activeTexture  " }.AttachToDocument();
 
-                            //                // [.WebGLRenderingContext-010A1E28]RENDER WARNING: texture bound to texture unit 0 is not renderable. It maybe non-power-of-2 and have incompatible texture filtering.
-
-
-                            //                //if (index == 5)
-                            //                //{
-                            //                //    new IHTMLPre { "add MakeHeader_Image samplerCube activeTexture  " }.AttachToDocument();
-
-                            //                //    //  samplerCube iChannel0; = 0 = TEXTURE0
-                            //                //}
+                            //                    //  samplerCube iChannel0; = 0 = TEXTURE0
+                            //                }
 
                             //                // https://code.google.com/p/opengles-book-samples/source/browse/trunk/WebGL/Chapter_9/Simple_TextureCubemap/Simple_TextureCubemap.html?r=5
                             //                // http://stackoverflow.com/questions/31665132/gl-invalid-operation-caused-by-samplercube
@@ -473,7 +433,7 @@ namespace EquirectangularToAzimuthal.Library
                             //);
 
 
-                            header += "uniform sampler2D iChannel" + i + ";\n";
+                            header += "uniform samplerCube iChannel" + i + ";\n";
                         }
                         else
                         {
@@ -732,167 +692,167 @@ color.a = 1.0;
 
         }
 
-        public static async void AttachToDocument(FragmentShader vs)
-        {
-            Native.body.style.margin = "0px";
-            Native.body.style.backgroundColor = "blue";
+//        public static async void AttachToDocument(FragmentShader vs)
+//        {
+//            Native.body.style.margin = "0px";
+//            Native.body.style.backgroundColor = "blue";
 
 
-            var mAudioContext = new AudioContext();
-            var gl = new WebGLRenderingContext(alpha: true);
+//            var mAudioContext = new AudioContext();
+//            var gl = new WebGLRenderingContext(alpha: true);
 
-            if (gl == null)
-            {
+//            if (gl == null)
+//            {
 
-                new IHTMLPre {
-                    // https://code.google.com/p/chromium/issues/detail?id=294207
-                    "Rats! WebGL hit a snag. \n WebGL: Unavailable.\n GPU process was unable to boot. \n restart chrome.",
+//                new IHTMLPre {
+//                    // https://code.google.com/p/chromium/issues/detail?id=294207
+//                    "Rats! WebGL hit a snag. \n WebGL: Unavailable.\n GPU process was unable to boot. \n restart chrome.",
 
-                    // chrome sends us to about:blank?
-                    //new IHTMLAnchor {
+//                    // chrome sends us to about:blank?
+//                    //new IHTMLAnchor {
 
-                    //	target = "_blank",
+//                    //	target = "_blank",
 
-                    //	href = "about:gpu", innerText = "about:gpu",
+//                    //	href = "about:gpu", innerText = "about:gpu",
 
-                    //	// http://tirania.org/blog/archive/2009/Jul-27-1.html
-                    //	//onclick += de
-                    //}
-                    //.With(a => {  a.onclick += e => { e.preventDefault();  Native.window.open("about:gpu"); }; } )
-
-
-                }.AttachToDocument();
-                return;
-            }
-
-            var c = gl.canvas.AttachToDocument();
-
-            #region oncontextlost
-            gl.oncontextlost +=
-                e =>
-                {
-                    //[12144:10496:0311 / 120850:ERROR: gpu_watchdog_thread.cc(314)] : The GPU process hung. Terminating after 10000 ms.
-                    //   GpuProcessHostUIShim: The GPU process crashed!
-                    gl.canvas.Orphanize();
-
-                    new IHTMLPre {
-                        // https://code.google.com/p/chromium/issues/detail?id=294207
-                        @"Rats! WebGL hit a snag.
-oncontextlost.
-The GPU process hung. Terminating. 
-check chrome://gpu for log messages.  
-do we have a stack trace?
-
-" + new { e.statusMessage } ,
-
-                        // chrome sends us to about:blank?
-                        //new IHTMLAnchor {
-
-                        //	target = "_blank",
-
-                        //	href = "about:gpu", innerText = "about:gpu",
-
-                        //	// http://tirania.org/blog/archive/2009/Jul-27-1.html
-                        //	//onclick += de
-                        //}
-                        //.With(a => {  a.onclick += e => { e.preventDefault();  Native.window.open("about:gpu"); }; } )
+//                    //	// http://tirania.org/blog/archive/2009/Jul-27-1.html
+//                    //	//onclick += de
+//                    //}
+//                    //.With(a => {  a.onclick += e => { e.preventDefault();  Native.window.open("about:gpu"); }; } )
 
 
-                    }.AttachToDocument();
-                };
-            #endregion
+//                }.AttachToDocument();
+//                return;
+//            }
+
+//            var c = gl.canvas.AttachToDocument();
+
+//            #region oncontextlost
+//            gl.oncontextlost +=
+//                e =>
+//                {
+//                    //[12144:10496:0311 / 120850:ERROR: gpu_watchdog_thread.cc(314)] : The GPU process hung. Terminating after 10000 ms.
+//                    //   GpuProcessHostUIShim: The GPU process crashed!
+//                    gl.canvas.Orphanize();
+
+//                    new IHTMLPre {
+//                        // https://code.google.com/p/chromium/issues/detail?id=294207
+//                        @"Rats! WebGL hit a snag.
+//oncontextlost.
+//The GPU process hung. Terminating. 
+//check chrome://gpu for log messages.  
+//do we have a stack trace?
+//
+//" + new { e.statusMessage } ,
+
+//                        // chrome sends us to about:blank?
+//                        //new IHTMLAnchor {
+
+//                        //	target = "_blank",
+
+//                        //	href = "about:gpu", innerText = "about:gpu",
+
+//                        //	// http://tirania.org/blog/archive/2009/Jul-27-1.html
+//                        //	//onclick += de
+//                        //}
+//                        //.With(a => {  a.onclick += e => { e.preventDefault();  Native.window.open("about:gpu"); }; } )
 
 
-            #region onresize
-            new { }.With(
-                async delegate
-                {
-                    do
-                    {
-                        c.width = Native.window.Width;
-                        c.height = Native.window.Height;
-                        c.style.SetSize(c.width, c.height);
-                    }
-                    while (await Native.window.async.onresize);
-                }
-            );
-            #endregion
+//                    }.AttachToDocument();
+//                };
+//            #endregion
+
+
+//            #region onresize
+//            new { }.With(
+//                async delegate
+//                {
+//                    do
+//                    {
+//                        c.width = Native.window.Width;
+//                        c.height = Native.window.Height;
+//                        c.style.SetSize(c.width, c.height);
+//                    }
+//                    while (await Native.window.async.onresize);
+//                }
+//            );
+//            #endregion
 
 
 
 
-            #region CaptureMouse
-            var mMouseOriX = 0;
-            var mMouseOriY = 0;
-            var mMousePosX = 0;
-            var mMousePosY = 0;
+//            #region CaptureMouse
+//            var mMouseOriX = 0;
+//            var mMouseOriY = 0;
+//            var mMousePosX = 0;
+//            var mMousePosY = 0;
 
-            c.onmousedown += ev =>
-            {
-                mMouseOriX = ev.CursorX;
-                mMouseOriY = c.height - ev.CursorY;
-                mMousePosX = mMouseOriX;
-                mMousePosY = mMouseOriY;
+//            c.onmousedown += ev =>
+//            {
+//                mMouseOriX = ev.CursorX;
+//                mMouseOriY = c.height - ev.CursorY;
+//                mMousePosX = mMouseOriX;
+//                mMousePosY = mMouseOriY;
 
-                ev.CaptureMouse();
-            };
+//                ev.CaptureMouse();
+//            };
 
-            c.onmousemove += ev =>
-            {
-                if (ev.MouseButton == IEvent.MouseButtonEnum.Left)
-                {
-                    mMousePosX = ev.CursorX;
-                    // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\InputMouseByIq\InputMouseByIq\Shaders\Program.frag
-                    //mMousePosY = ev.CursorY;
-                    mMousePosY = c.height - ev.CursorY;
-                }
-            };
-
-
-            c.onmouseup += ev =>
-            {
-                mMouseOriX = -Math.Abs(mMouseOriX);
-                mMouseOriY = -Math.Abs(mMouseOriY);
-            };
-            #endregion
-
-            var mEffect = new EquirectangularToAzimuthal.Library.ShaderToy.Effect(
-                mAudioContext,
-                gl,
-
-                callback: delegate
-                {
-                    new IHTMLPre { "at callback" }.AttachToDocument();
-
-                },
-                obj: null,
-                forceMuted: false,
-                forcePaused: false
-            );
-
-            mEffect.mPasses[0].MakeHeader_Image();
-            mEffect.mPasses[0].NewShader_Image(vs);
-
-            var sw = Stopwatch.StartNew();
-            do
-            {
-                mEffect.mPasses[0].Paint_Image(
-                    sw.ElapsedMilliseconds / 1000.0f,
-
-                    mMouseOriX,
-                    mMouseOriY,
-                    mMousePosX,
-                    mMousePosY
+//            c.onmousemove += ev =>
+//            {
+//                if (ev.MouseButton == IEvent.MouseButtonEnum.Left)
+//                {
+//                    mMousePosX = ev.CursorX;
+//                    // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\InputMouseByIq\InputMouseByIq\Shaders\Program.frag
+//                    //mMousePosY = ev.CursorY;
+//                    mMousePosY = c.height - ev.CursorY;
+//                }
+//            };
 
 
-                );
+//            c.onmouseup += ev =>
+//            {
+//                mMouseOriX = -Math.Abs(mMouseOriX);
+//                mMouseOriY = -Math.Abs(mMouseOriY);
+//            };
+//            #endregion
 
-                // what does it do?
-                gl.flush();
+//            var mEffect = new CubeToEquirectangular.Library.ShaderToy.Effect(
+//                mAudioContext,
+//                gl,
 
-            }
-            while (await Native.window.async.onframe);
+//                callback: delegate
+//                {
+//                    new IHTMLPre { "at callback" }.AttachToDocument();
 
-        }
+//                },
+//                obj: null,
+//                forceMuted: false,
+//                forcePaused: false
+//            );
+
+//            mEffect.mPasses[0].MakeHeader_Image();
+//            mEffect.mPasses[0].NewShader_Image(vs);
+
+//            var sw = Stopwatch.StartNew();
+//            do
+//            {
+//                mEffect.mPasses[0].Paint_Image(
+//                    sw.ElapsedMilliseconds / 1000.0f,
+
+//                    mMouseOriX,
+//                    mMouseOriY,
+//                    mMousePosX,
+//                    mMousePosY
+
+
+//                );
+
+//                // what does it do?
+//                gl.flush();
+
+//            }
+//            while (await Native.window.async.onframe);
+
+//        }
     }
 }

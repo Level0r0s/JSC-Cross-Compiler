@@ -9,6 +9,8 @@ namespace ScriptCoreLib.Java
 {
     // Z:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Java\InternalX509ExtendedKeyManager.cs
 
+
+    // vs intellisense complains?
     public class xHandshakeCompletedListener : jvm::javax.net.ssl.HandshakeCompletedListener
     {
         public Action<jvm::javax.net.ssl.HandshakeCompletedEvent> yield;

@@ -30,12 +30,16 @@ namespace JVMCLRTCPMultiplex
         [STAThread]
         public static void Main(string[] args)
         {
+            // http://stackoverflow.com/questions/9726802/ssl-socket-between-net-and-java-with-client-authentication
+            // http://stackoverflow.com/questions/27203741/java-equivalent-to-net-sslstream
+
             // X:\jsc.svn\core\ScriptCoreLib.Ultra.Library\ScriptCoreLib.Ultra.Library\Extensions\TcpListenerExtensions.css
             // X:\jsc.svn\examples\javascript\Test\TestTCPMultiplex\TestTCPMultiplex\Application.cs
 
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201410/20141018-ssl
             // http://msdn.microsoft.com/en-us/library/ms733813.aspx
             // http://stackoverflow.com/questions/4095297/self-signed-certificates-performance-in-wcf-scenarios
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151009
 
             var CN = "device SSL authority for developers";
 

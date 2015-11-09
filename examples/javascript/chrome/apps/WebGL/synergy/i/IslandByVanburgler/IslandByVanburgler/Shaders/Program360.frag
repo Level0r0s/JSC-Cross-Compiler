@@ -1,6 +1,6 @@
 ﻿uniform vec3 uCameraTargetOffset;   
 //// High quality (Some browsers may freeze or crash)
-#define HIGHQUALITY
+//#define HIGHQUALITY
 
 //// Medium quality (Should be fine on all systems, works on Intel HD2000 on Win7 but quite slow)
 //#define MEDIUMQUALITY

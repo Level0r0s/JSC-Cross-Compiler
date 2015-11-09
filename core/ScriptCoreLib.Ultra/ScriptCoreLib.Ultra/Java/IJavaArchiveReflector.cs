@@ -384,6 +384,7 @@ namespace ScriptCoreLib.Java
 
             //Error	268	The call is ambiguous between the following methods or properties: 'java.lang.reflect.Method.getExceptionTypes()' and 'java.lang.reflect.Method.getExceptionTypes()'	X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\Java\IJavaArchiveReflector.cs	329	13	ScriptCoreLib.Ultra
 
+            // wtf?
             var c = (jvm::ScriptCoreLibJava.BCLImplementation.System.Reflection.__ConstructorInfo)(object)fi;
 
             var Method = c.InternalConstructor;

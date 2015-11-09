@@ -51,9 +51,15 @@ namespace chrome
                     new Action<object>(
                         (message) =>
                         {
+                            if (c == null)
+                                return;
+
+
                             c.SetResult(
                                 new PortMessageEvent { data = message }
                                 );
+
+                            c = null;
                         }
                     )
                 );

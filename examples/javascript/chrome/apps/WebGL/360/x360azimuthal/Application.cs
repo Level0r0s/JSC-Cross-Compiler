@@ -102,6 +102,20 @@ namespace x360azimuthal
         // subst b: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360azimuthal\bin\Debug\staging\x360azimuthal.Application\web
 
 
+        //        Enter the user name for '192.168.1.13': Administrator
+        //        Enter the password for 192.168.1.13:
+        //System error 53 has occurred.
+
+        //The network path was not found.
+
+
+        //C:\Users\Arvo>net use p: \\192.168.1.13\z$
+        //The command completed successfully.
+
+        // subst a: p:\jsc.svn\examples\javascript\chrome\apps\WebGL\360\x360azimuthal\bin\Debug\staging\x360azimuthal.Application\web
+        // net use g: \\192.168.1.13\x$
+
+
 
         // what if we want to do subst in another winstat or session?
 
@@ -228,8 +242,8 @@ namespace x360azimuthal
                                                 //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
                                                 //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
-            //if (Environment.ProcessorCount < 8)
-            //cubefacesize = 256; // 6 faces, ?
+            if (Environment.ProcessorCount < 8)
+                cubefacesize = 256; // 6 faces, ?
 
             // not responding aint good.
             //cubefacesize = 96; // 6 faces, ?
@@ -475,8 +489,11 @@ namespace x360azimuthal
 
                   var vs0 = new EquirectangularToAzimuthal.Shaders.ProgramFragmentShader();
 
-                  var gl0 = new WebGLRenderingContext(alpha: true);
+                  var gl0 = new WebGLRenderingContext(alpha: true, preserveDrawingBuffer: true);
                   shader1canvas = gl0.canvas;
+                  shader1canvas.title = "EquirectangularToAzimuthal";
+                  shader1canvas.style.border = "1px solid red";
+                  // can we see it?
 
                   var c0 = gl0.canvas.AttachToDocument();
 
@@ -535,7 +552,7 @@ namespace x360azimuthal
                   await xsampler2D.upload(
 
 
-                      new EquirectangularToAzimuthal.HTML.Images.FromAssets._20151016T0000 { }
+                      new EquirectangularToAzimuthal.HTML.Images.FromAssets._20151001T0000 { }
                   );
 
                   // rerender after upload
@@ -853,7 +870,8 @@ namespace x360azimuthal
 
 
             //var frame0 = new HTML.Images.FromAssets.tiles_regrid().AttachToDocument();
-            var frame0 = new HTML.Images.FromAssets._2massAllsky().AttachToDocument();
+            //var frame0 = new HTML.Images.FromAssets._2massAllsky().AttachToDocument();
+            var frame0 = new HTML.Images.FromAssets._2massAllskyGAMMA().AttachToDocument();
             //var frame0 = new HTML.Images.FromAssets.galaxy_starfield().AttachToDocument();
             //var frame0 = new HTML.Images.FromAssets.galaxy_starfield150FOV().AttachToDocument();
             //var xor = new HTML.Images.FromAssets.Orion360_test_image_8192x4096().AttachToDocument();
@@ -1136,7 +1154,8 @@ namespace x360azimuthal
 
                 applycameraoffset += delegate { tex0.needsUpdate = true; };
 
-                var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize * 4, cubefacesize * 4, 8, 8);
+                //var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize * 4, cubefacesize * 4, 8, 8);
+                var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize * 8, cubefacesize * 8, 32, 32);
                 var floor2 = new THREE.Mesh(planeGeometry0,
                     //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
                     //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
@@ -1148,7 +1167,7 @@ namespace x360azimuthal
                             transparent = true,
                             opacity = 1.0,
                             map = tex0,
-
+                            alphaTest = 0.5
 
                             //ambient = 0x00ff00,
                             //color = 0x00ff00
@@ -1158,7 +1177,9 @@ namespace x360azimuthal
                 //floor2.position.set(0, 0, -cubefacesize  * 0.55);
                 //floor2.position.set(-cubefacesize * 0.50, 0, 0);
                 //floor2.position.set(0, -cubefacesize * 0.5, 0);
-                floor2.position.set(0, -cubefacesize * 0.25, 0);
+                //floor2.position.set(0, -cubefacesize * 0.25, 0);
+                //floor2.position.set(0, -cubefacesize * 0.2, 0);
+                floor2.position.set(0, -cubefacesize * 0.5, 0);
                 //floor2.position.set(0, -cubefacesize * 0.125, 0);
                 floor2.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
                 floor2.AttachTo(scene);
@@ -1324,19 +1345,23 @@ namespace x360azimuthal
                                 // reset
                                 stars.rotation.set(0, 0, 0);
 
-                                stars.rotateOnAxis(new THREE.Vector3(0, -1, 0),
+                                // slow rotate in place
+                                stars.rotateOnAxis(new THREE.Vector3(1, 0, 0),
                                     frameIDslider.valueAsNumber / 3600.0 * Math.PI * 2
+                                );
+
+                                // follow the moon?
+                                stars.rotateOnAxis(new THREE.Vector3(0, -1, 0),
+                                    frameIDslider.valueAsNumber / (60 * 60 / 5.0) * Math.PI * 2
+                                );
+
+                                fcamerax = 90.2 * Math.Sin(Math.PI * (frameIDslider.valueAsNumber - (60 * 30 / 2f)) / (60 * 30 / 2f));
+                                fcameraz = 90.4 * Math.Cos(Math.PI * (frameIDslider.valueAsNumber - (60 * 30 / 2f)) / (60 * 30 / 2f));
 
 
+                                // up
+                                fcameray = 30.4 * Math.Cos(Math.PI * (frameIDslider.valueAsNumber - (60 * 30 / 2f)) / (60 * 30 / 2f));
 
-
-
-
-
-
-
-
-                                    );
 
                             }
                         };

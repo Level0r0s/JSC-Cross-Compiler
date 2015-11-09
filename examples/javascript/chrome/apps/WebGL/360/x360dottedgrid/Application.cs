@@ -1707,6 +1707,7 @@ namespace x360dottedgrid
 
                 var glsw = Stopwatch.StartNew();
                 dir.WriteAllBytes("0000.png", gl);
+                //dir.WriteAllBytes("0000.jpg", gl);
 
                 new IHTMLPre { new { glsw.ElapsedMilliseconds } }.AttachToDocument();
 
@@ -1758,7 +1759,7 @@ namespace x360dottedgrid
                 await_nextframe:
 
 
-                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(5, '0') + ".png";
+                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(5, '0') + ".jpg";
                 status = "rendering... " + new { filename };
 
 

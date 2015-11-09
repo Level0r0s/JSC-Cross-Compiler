@@ -258,7 +258,11 @@ namespace EquirectangularToAzimuthal
                     pass.NewShader_Image(vs);
 
                     //var all = new Textures2 { }.Images;
-                    var all = new[] { new _20151001T0100() };
+                    var all = new[] {
+                      new EquirectangularToAzimuthal.HTML.Images.FromAssets._20151001T0000 { }
+
+
+                    };
 
                     new { }.With(
                         async delegate

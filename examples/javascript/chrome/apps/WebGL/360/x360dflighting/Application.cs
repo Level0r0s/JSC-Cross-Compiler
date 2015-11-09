@@ -23,15 +23,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using x360island;
-using x360island.Design;
-using x360island.HTML.Pages;
+using x360dflighting;
+using x360dflighting.Design;
+using x360dflighting.HTML.Pages;
 using System.Diagnostics;
 using ScriptCoreLib.JavaScript.WebGL;
 
-namespace x360island
+namespace x360dflighting
 {
-    using x360island.HTML.Images.FromAssets;
+    //using x360dflighting.HTML.Images.FromAssets;
     using gl = WebGLRenderingContext;
 
     /// <summary>
@@ -49,7 +49,7 @@ namespace x360island
 
         // "X:\vr\tr.png"
         // R:\util\android-sdk-windows\platform-tools\adb.exe push "X:\vr\seascape.png" /sdcard/oculus/360photos/
-        // R:\util\android-sdk-windows\platform-tools\adb.exe push "P:\vr\x360island\00188.png" /sdcard/oculus/360photos/
+        // R:\util\android-sdk-windows\platform-tools\adb.exe push "P:\vr\x360dflighting\00188.png" /sdcard/oculus/360photos/
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150906/roomscanningeffectbyrosme
 
@@ -80,8 +80,6 @@ namespace x360island
 
         // 
         //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\light.png" "/sdcard/oculus/360photos/"
-        //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push    "X:\vr\palm.png" "/sdcard/oculus/360photos/"
-        //
 
         // could we udp our 360 image from webgl to vr yet?
 
@@ -100,12 +98,12 @@ namespace x360island
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150808/cubemapcamera
         // subst /D b:
-        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360island\x360island\bin\Debug\staging\x360island.Application\web
-        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360island\x360island\bin\Debug\staging\x360island.Application\web
-        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360island\x360island\bin\Debug\staging\x360island.Application\web
+        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360dflighting\x360dflighting\bin\Debug\staging\x360dflighting.Application\web
+        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360dflighting\x360dflighting\bin\Debug\staging\x360dflighting.Application\web
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360dflighting\x360dflighting\bin\Debug\staging\x360dflighting.Application\web
         // what if we want to do subst in another winstat or session?
 
-        // ColladaLoader: Empty or non-existing file (assets/x360island/S6Edge.dae)
+        // ColladaLoader: Empty or non-existing file (assets/x360dflighting/S6Edge.dae)
 
         /// <summary>
         /// This is a javascript application.
@@ -188,7 +186,7 @@ namespace x360island
                         // 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
                         Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
 
-                        new chrome.Notification(title: "x360island");
+                        new chrome.Notification(title: "x360dflighting");
 
                         // https://developer.chrome.com/apps/app_window#type-CreateWindowOptions
                         var xappwindow = await chrome.app.window.create(
@@ -236,25 +234,24 @@ namespace x360island
 
             // not responding...
             //int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
-            int cubefacesizeMAX = 2048; // 6 faces, ?
+            //int cubefacesizeMAX = 2048; // 6 faces, ?
+            int cubefacesizeMAX = 1024; // 6 faces, ?
             //int cubefacesizeMAX = 1024; // 6 faces, ?
-            //int cubefacesizeMAX = 1024; // 6 faces, ?
-
-            // crashed win g driver!
             int cubefacesize = cubefacesizeMAX; // 6 faces, ?
-                                                //int cubefacesize = 1024; // 6 faces, ?
-                                                // "X:\vr\tape1\0000x2048.png"
-                                                // for 60hz render we may want to use float camera percision, not available for ui.
-                                                //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
-                                                //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
+            //int cubefacesize = 1024; // 6 faces, ?
+            // "X:\vr\tape1\0000x2048.png"
+            // for 60hz render we may want to use float camera percision, not available for ui.
+            //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
+            //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
-            //if (Environment.ProcessorCount < 8)
-            //cubefacesize = 64; // 6 faces, ?
-            //cubefacesize = 256; // 6 faces, ?
+            if (Environment.ProcessorCount < 8)
+                //    //cubefacesize = 64; // 6 faces, ?
+                //    //cubefacesize = 256; // 6 faces, ?
 
-            // fast gif?
-            //cubefacesize = 128; // 6 faces, ?
-            //cubefacesize = 512; // 6 faces, ?
+                //    // fast gif?
+                //    //cubefacesize = 128; // 6 faces, ?
+                cubefacesize = 256; // 6 faces, ?
+
             //    [GroupMarkerNotSet(crbug.com / 242999)!:247F0809]
             //RENDER WARNING: texture bound to texture unit 0 is not renderable.It maybe non-power-of-2 and have incompatible texture filtering.
 
@@ -311,12 +308,11 @@ namespace x360island
             //const int size = 1024; // 6 faces, ?
             //const int cubefacesize = 1024; // 6 faces, ?
 
-            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360island/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
+            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360dflighting/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
 
 
             var far = 0xffffff;
 
-            new IHTMLPre { new { Environment.ProcessorCount, cubefacesize } }.AttachToDocument();
 
             //new IHTMLPre { "can we stream it into VR, shadertoy, youtube 360, youtube stereo yet?" }.AttachToDocument();
 
@@ -480,7 +476,7 @@ namespace x360island
 
 
 
-            var bottomRotate100 = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -314, max = 314, valueAsNumber = 0, title = "bottomRotate" }.AttachToDocument();
+            var bottomRotate100 = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -314, max = 314, valueAsNumber = 314, title = "bottomRotate" }.AttachToDocument();
 
 
             var maxfps = 60;
@@ -493,6 +489,8 @@ namespace x360island
             var frameIDslider = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0, max = maxframes, valueAsNumber = 137, title = "frameIDslider" }.AttachToDocument();
             frameIDslider.onchange += delegate { frameIDslider.title = "frameIDslider " + frameIDslider.valueAsNumber; };
 
+            // want to see the slider thing
+            new IHTMLPre { () => new { Environment.ProcessorCount, cubefacesize, frameIDslider.title } }.AttachToDocument();
 
 
 
@@ -501,8 +499,10 @@ namespace x360island
             //var vs0 = new ChromeShaderToySeascapeByTDM.Shaders.ProgramFragmentShader();
             //var vs0 = new ChromeShaderToySeascapeByTDM.Shaders.Program360FragmentShader();
             //var vs0 = new ShapeLightByBeyondTheStatic.Shaders.Program360FragmentShader();
-            //var vs0 = new MirrorBoxByPurton.Shaders.Program360FragmentShader();
-            var vs0 = new IslandByVanburgler.Shaders.Program360FragmentShader();
+            //var vs0 = new AquariumByDr2.Shaders.Program360FragmentShader();
+            //var vs0 = new DottedGridByMacint.Shaders.Program360FragmentShader();
+            //var vs0 = new ChromeShaderToyDoomE1M1ByPMalin.Shaders.Program360FragmentShader();
+            var vs0 = new DFLightingByTekF.Shaders.Program360FragmentShader();
 
 
 
@@ -585,7 +585,7 @@ namespace x360island
                     obj: null,
                     forceMuted: false,
                     forcePaused: false,
-                    //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
+                      //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
                     outputGainNode: null
                 );
                   pass0.MakeHeader_Image();
@@ -598,7 +598,8 @@ namespace x360island
                       // ldflda?
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, -1.0f, 0, 0.0f);
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, 1.0f);
-                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, -1.0f);
+                      //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, -1.0f);
+                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, 1.0f);
 
                       // left?
                       //forward=normalize(float3(0.0 , 0.0 ,1.0));
@@ -624,12 +625,12 @@ namespace x360island
                         mMouseOriY,
                         mMousePosX,
                         mMousePosY
-                    //,
+                          //,
 
                     // gl_FragCoord
-                    // cannot be scaled, and can be referenced directly.
-                    // need another way to scale
-                    //zoom: 0.3f
+                          // cannot be scaled, and can be referenced directly.
+                          // need another way to scale
+                          //zoom: 0.3f
                     );
 
                       // what does it do?
@@ -695,7 +696,7 @@ namespace x360island
                     obj: null,
                     forceMuted: false,
                     forcePaused: false,
-                    //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
+                      //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
                     outputGainNode: null
                 );
                   pass0.MakeHeader_Image();
@@ -740,12 +741,12 @@ namespace x360island
                         mMouseOriY,
                         mMousePosX,
                         mMousePosY
-                    //,
+                          //,
 
                     // gl_FragCoord
-                    // cannot be scaled, and can be referenced directly.
-                    // need another way to scale
-                    //zoom: 0.3f
+                          // cannot be scaled, and can be referenced directly.
+                          // need another way to scale
+                          //zoom: 0.3f
                     );
 
                       // what does it do?
@@ -807,7 +808,7 @@ namespace x360island
                     obj: null,
                     forceMuted: false,
                     forcePaused: false,
-                    //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
+                      //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
                     outputGainNode: null
                 );
                   pass0.MakeHeader_Image();
@@ -848,12 +849,12 @@ namespace x360island
                         mMouseOriY,
                         mMousePosX,
                         mMousePosY
-                    //,
+                          //,
 
                     // gl_FragCoord
-                    // cannot be scaled, and can be referenced directly.
-                    // need another way to scale
-                    //zoom: 0.3f
+                          // cannot be scaled, and can be referenced directly.
+                          // need another way to scale
+                          //zoom: 0.3f
                     );
 
                       // what does it do?
@@ -946,7 +947,7 @@ namespace x360island
                     obj: null,
                     forceMuted: false,
                     forcePaused: false,
-                    //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
+                      //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
                     outputGainNode: null
                 );
                   pass0.MakeHeader_Image();
@@ -959,7 +960,8 @@ namespace x360island
                       // ldflda?
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 1.0f, 0, 1.0f);
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, -1.0f);
-                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, 1.0f);
+                      //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, 1.0f);
+                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, -1.0f);
 
                       // right
                       //forward=normalize(float3(0.0 , 0.0 ,-1.0));
@@ -985,12 +987,12 @@ namespace x360island
                         mMouseOriY,
                         mMousePosX,
                         mMousePosY
-                    //,
+                          //,
 
                     // gl_FragCoord
-                    // cannot be scaled, and can be referenced directly.
-                    // need another way to scale
-                    //zoom: 0.3f
+                          // cannot be scaled, and can be referenced directly.
+                          // need another way to scale
+                          //zoom: 0.3f
                     );
 
                       // what does it do?
@@ -1089,7 +1091,7 @@ namespace x360island
                     obj: null,
                     forceMuted: false,
                     forcePaused: false,
-                    //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
+                      //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
                     outputGainNode: null
                 );
                   pass0.MakeHeader_Image();
@@ -1143,12 +1145,12 @@ namespace x360island
                         mMouseOriY,
                         mMousePosX,
                         mMousePosY
-                    //,
+                          //,
 
                     // gl_FragCoord
-                    // cannot be scaled, and can be referenced directly.
-                    // need another way to scale
-                    //zoom: 0.3f
+                          // cannot be scaled, and can be referenced directly.
+                          // need another way to scale
+                          //zoom: 0.3f
                     );
 
                       // what does it do?
@@ -1246,7 +1248,7 @@ namespace x360island
                     obj: null,
                     forceMuted: false,
                     forcePaused: false,
-                    //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
+                      //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
                     outputGainNode: null
                 );
                   pass0.MakeHeader_Image();
@@ -1304,12 +1306,12 @@ namespace x360island
                         mMouseOriY,
                         mMousePosX,
                         mMousePosY
-                    //,
+                          //,
 
                     // gl_FragCoord
-                    // cannot be scaled, and can be referenced directly.
-                    // need another way to scale
-                    //zoom: 0.3f
+                          // cannot be scaled, and can be referenced directly.
+                          // need another way to scale
+                          //zoom: 0.3f
                     );
 
                       // what does it do?
@@ -1380,21 +1382,21 @@ namespace x360island
 
 
                 cameraoffset = new THREE.Vector3(
-                  // left?
+                    // left?
                   1.0 * (camerax + fcamerax),
-                   // height?
-                   //0,
-                   //1600,
-                   //1024,
+                    // height?
+                    //0,
+                    //1600,
+                    //1024,
 
                    // if the camera is in the center, would we need to move the scene?
-                   // we have to move the camera. as we move the scene the lights are messed up
-                   //2014,
+                    // we have to move the camera. as we move the scene the lights are messed up
+                    //2014,
                    1.0 * (cy + fcameray),
 
                  //1200
                  1.0 * (cameraz + fcameraz)
-                   // can we hover top of the map?
+                    // can we hover top of the map?
                    );
             };
 
@@ -1416,7 +1418,7 @@ namespace x360island
             canvasNY.canvas.AttachToDocument();
             canvasNY.canvas.style.transformOrigin = "0 0";
             // roslyn!
-            canvasNY.canvas.style.transform = $"scale({uizoom})";
+            canvasNY.canvas.style.transform = "scale(" + uizoom + ")";
 
             var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             applycameraoffset += delegate
@@ -1431,7 +1433,7 @@ namespace x360island
             canvasPY.canvas.title = "PY";
             canvasPY.canvas.AttachToDocument();
             canvasPY.canvas.style.transformOrigin = "0 0";
-            canvasPY.canvas.style.transform = $"scale({uizoom})";
+            canvasPY.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
 
             // transpose xz?
@@ -1452,7 +1454,7 @@ namespace x360island
             canvasNX.canvas.title = "NX";
             canvasNX.canvas.AttachToDocument();
             canvasNX.canvas.style.transformOrigin = "0 0";
-            canvasNX.canvas.style.transform = $"scale({uizoom})";
+            canvasNX.canvas.style.transform = "scale(" + uizoom + ")";
 
             var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             applycameraoffset += delegate
@@ -1469,7 +1471,7 @@ namespace x360island
             canvasPX.canvas.title = "PX";
             canvasPX.canvas.AttachToDocument();
             canvasPX.canvas.style.transformOrigin = "0 0";
-            canvasPX.canvas.style.transform = $"scale({uizoom})";
+            canvasPX.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
 
 
@@ -1490,7 +1492,7 @@ namespace x360island
             canvasNZ.canvas.title = "NZ";
             canvasNZ.canvas.AttachToDocument();
             canvasNZ.canvas.style.transformOrigin = "0 0";
-            canvasNZ.canvas.style.transform = $"scale({uizoom})";
+            canvasNZ.canvas.style.transform = "scale(" + uizoom + ")";
 
             var cameraPZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             //cameraPZ.lookAt(new THREE.Vector3(1, 0, 0));
@@ -1507,7 +1509,7 @@ namespace x360island
             canvasPZ.canvas.title = "PZ";
             canvasPZ.canvas.AttachToDocument();
             canvasPZ.canvas.style.transformOrigin = "0 0";
-            canvasPZ.canvas.style.transform = $"scale({uizoom})";
+            canvasPZ.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
 
 
@@ -1595,7 +1597,8 @@ namespace x360island
             var suizoom = 480f / c.width;
 
             c.style.transformOrigin = "0 0";
-            c.style.transform = $"scale({suizoom})";
+            //c.style.transform = "scale(" + uizoom + ")";
+            c.style.transform = "scale(" + 0.125 + ")";
             //c.style.backgroundColor = "yellow";
             c.style.position = IStyle.PositionEnum.absolute;
 
@@ -1610,7 +1613,7 @@ namespace x360island
                        obj: null,
                        forceMuted: false,
                        forcePaused: false,
-                       //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
+                //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
                        outputGainNode: null
                    );
 
@@ -1629,11 +1632,13 @@ namespace x360island
 
 
             //var frame0 = new HTML.Images.FromAssets.tiles_regrid().AttachToDocument();
-            var frame0 = new HTML.Images.FromAssets.galaxy_starfield().AttachToDocument();
+            //var frame0 = new HTML.Images.FromAssets.galaxy_starfield().AttachToDocument();
             //var frame0 = new HTML.Images.FromAssets.galaxy_starfield150FOV().AttachToDocument();
             //var xor = new HTML.Images.FromAssets.Orion360_test_image_8192x4096().AttachToDocument();
             //var xor = new HTML.Images.FromAssets._2_no_clouds_4k().AttachToDocument();
             //var frame0 = new HTML.Images.FromAssets._2294472375_24a3b8ef46_o().AttachToDocument();
+
+            var frame0 = new IHTMLImage { }.AttachToDocument();
 
 
             // 270px
@@ -1648,24 +1653,10 @@ namespace x360island
 
             #region DirectoryEntry
             var dir = default(DirectoryEntry);
-            int files2count = 0;
 
             new IHTMLButton { "openDirectory" }.AttachToDocument().onclick += async delegate
             {
                 dir = (DirectoryEntry)await chrome.fileSystem.chooseEntry(new { type = "openDirectory" });
-
-
-                var dir2r = dir.createReader();
-
-                var files2 = await dir2r.readFileEntries();
-
-                files2count = files2.Count();
-
-                if (files2count > 0)
-                {
-                    new IHTMLPre { new { files2count } }.AttachToDocument();
-
-                }
             };
             frame0.style.cursor = IStyle.CursorEnum.pointer;
             frame0.title = "save frame";
@@ -1738,7 +1729,8 @@ namespace x360island
 
             #region render 60hz 30sec
             new IHTMLButton {
-                $"render {maxfps}hz {maxlengthseconds}sec"
+                //$"render {maxfps}hz {maxlengthseconds}sec"
+                "render " + maxfps + "hz " + maxlengthseconds + "sec"
             }.AttachToDocument().onclick += async e =>
             {
                 e.Element.disabled = true;
@@ -1764,8 +1756,7 @@ namespace x360island
                 status = "rendering... vsync";
 
                 //var frameid = 0;
-                //frameIDslider.valueAsNumber = -1;
-                frameIDslider.valueAsNumber = files2count - 1;
+                frameIDslider.valueAsNumber = -1;
 
                 goto beforeframe;
 
@@ -1775,7 +1766,7 @@ namespace x360island
                 await_nextframe:
 
 
-                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(5, '0') + ".jpg";
+                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(5, '0') + ".png";
                 status = "rendering... " + new { filename };
 
 
@@ -1810,7 +1801,7 @@ namespace x360island
 
 
 
-                beforeframe:
+            beforeframe:
 
                 // speed? S6 slow motion?
                 // this is really slow. if we do x4x2 =x8 
@@ -2108,8 +2099,10 @@ namespace x360island
                     //floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1), Math.PI);
                     floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1),
 
+                        0
                         //Math.PI / 2 +
-                        bottomRotate100 * 0.01f);
+                        //bottomRotate100 * 0.01f
+                        );
 
                 };
 
@@ -2166,7 +2159,13 @@ namespace x360island
                     //floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1), Math.PI / 2);
                     //floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1), Math.PI );
                     //floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1), Math.PI);
-                    floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1), bottomRotate100 * 0.01f);
+                    floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1),
+
+                        Math.PI
+
+
+                        //bottomRotate100 * 0.01f
+                        );
 
                 };
 
@@ -2181,55 +2180,55 @@ namespace x360island
             // hidden for alpha AppWindows
             //#if FBACKGROUND
 
-            #region galaxy_starfield
-            new THREE.Texture().With(
-                async s =>
-                {
-                    var i = new HTML.Images.FromAssets.galaxy_starfield();
-                    //var i = new HTML.Images.FromAssets.galaxy_starfield150FOV();
+            // #region galaxy_starfield
+            // new THREE.Texture().With(
+            //     async s =>
+            //     {
+            //         //var i = new HTML.Images.FromAssets.galaxy_starfield();
+            //         //var i = new HTML.Images.FromAssets.galaxy_starfield150FOV();
 
-                    var bytes = await i.async.bytes;
+            //         var bytes = await i.async.bytes;
 
-                    //for (int ii = 0; ii < bytes.Length; ii += 4)
-                    //{
+            //         //for (int ii = 0; ii < bytes.Length; ii += 4)
+            //         //{
 
-                    //    bytes[ii + 3] = (byte)(bytes[ii + 0]);
+            //         //    bytes[ii + 3] = (byte)(bytes[ii + 0]);
 
-                    //    bytes[ii + 0] = 0xff;
-                    //    bytes[ii + 1] = 0xff;
-                    //    bytes[ii + 2] = 0xff;
-                    //}
+            //         //    bytes[ii + 0] = 0xff;
+            //         //    bytes[ii + 1] = 0xff;
+            //         //    bytes[ii + 2] = 0xff;
+            //         //}
 
-                    var cc = new CanvasRenderingContext2D(i.width, i.height);
+            //         var cc = new CanvasRenderingContext2D(i.width, i.height);
 
-                    cc.bytes = bytes;
+            //         cc.bytes = bytes;
 
-                    s.image = cc;
-                    s.needsUpdate = true;
+            //         s.image = cc;
+            //         s.needsUpdate = true;
 
-                    var stars_material = new THREE.MeshBasicMaterial(
-                            new
-                            {
-                                //map = THREE.ImageUtils.loadTexture(new galaxy_starfield().src),
-                                map = s,
-                                side = THREE.BackSide,
-                                transparent = true
-                            });
-
-
-                    var stars = new THREE.Mesh(
-                            new THREE.SphereGeometry(far * 0.9, 64, 64),
-                           stars_material
-                        );
-
-                    // http://stackoverflow.com/questions/8502150/three-js-how-can-i-dynamically-change-objects-opacity
-                    //(stars_material as dynamic).opacity = 0.5;
+            //         var stars_material = new THREE.MeshBasicMaterial(
+            //                 new
+            //                 {
+            //                     //map = THREE.ImageUtils.loadTexture(new galaxy_starfield().src),
+            //                     map = s,
+            //                     side = THREE.BackSide,
+            //                     transparent = true
+            //                 });
 
 
-                    scene.add(stars);
-                }
-           );
-            #endregion
+            //         var stars = new THREE.Mesh(
+            //                 new THREE.SphereGeometry(far * 0.9, 64, 64),
+            //                stars_material
+            //             );
+
+            //         // http://stackoverflow.com/questions/8502150/three-js-how-can-i-dynamically-change-objects-opacity
+            //         //(stars_material as dynamic).opacity = 0.5;
+
+
+            //         scene.add(stars);
+            //     }
+            //);
+            // #endregion
 
 
 
@@ -2413,12 +2412,12 @@ namespace x360island
                                      0,
                                      0,
                                      0
-                                //,
+                                   //,
 
                                 // gl_FragCoord
-                                // cannot be scaled, and can be referenced directly.
-                                // need another way to scale
-                                //zoom: 0.3f
+                                   // cannot be scaled, and can be referenced directly.
+                                   // need another way to scale
+                                   //zoom: 0.3f
                                 );
 
                                //paintsw.Stop();
@@ -2449,21 +2448,13 @@ namespace x360island
 }
 
 
-//visualScene = parseScene();
-//scene = new THREE.Group();
-
-//		for ( var i = 0; i<visualScene.nodes.length; i ++ ) {
-
-//			scene.add( createSceneGraph(visualScene.nodes[i] ) );
-
-//		}
-
-//    <scene>
-//    <instance_visual_scene url = "#ID1" />
-//</ scene >
 
 
-//{ Message = Could not load file or assembly 'Chrome Web Store, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies. The system cannot find the file specified. }
-//1c48:02:01:14 after worker yield...
-
-//Unhandled Exception: System.IO.FileNotFoundException: Could not load file or assembly 'Chrome Web Server Styled Form, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies. The system cannot find the file specified.
+//020000f7 CubeToEquirectangular.Library.ShaderToy+<AttachToDocument>d__14+<MoveNext>06000034
+//script: error JSC1000: *** stack is empty, invalid pop?
+//script: error JSC1000: error at CubeToEquirectangular.Library.ShaderToy+<AttachToDocument>d__14+<MoveNext>06000034.<00a9> ldarg.0.try,
+// assembly: V:\x360dflighting.Application.exe
+// type: CubeToEquirectangular.Library.ShaderToy+<AttachToDocument>d__14+<MoveNext>06000034, x360dflighting.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// offset: 0x0154
+//  method:Int32 <00a9> ldarg.0.try(<MoveNext>06000034, <AttachToDocument>d__14 ByRef, System.Runtime.CompilerServices.TaskAwaiter`1[ScriptCoreLib.JavaScript.DOM.IWindow+FrameEvent] ByR
+//*** Compiler cannot continue... press enter to quit.
