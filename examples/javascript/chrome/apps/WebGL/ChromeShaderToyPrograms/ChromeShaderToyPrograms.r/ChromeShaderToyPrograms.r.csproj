@@ -241,6 +241,12 @@
     <Reference Include="RayMarchingPlayByHagerman.AssetsLibrary">
       <HintPath>..\..\synergy\r\RayMarchingPlayByHagerman\bin\staging.AssetsLibrary\RayMarchingPlayByHagerman.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="RaytracedRefractionByDemofox.AssetsLibrary">
+      <HintPath>..\..\synergy\r\RaytracedRefractionByDemofox\bin\staging.AssetsLibrary\RaytracedRefractionByDemofox.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="RectangularAreaLightTestByTsone.AssetsLibrary">
+      <HintPath>..\..\synergy\r\RectangularAreaLightTestByTsone\RectangularAreaLightTestByTsone\bin\staging.AssetsLibrary\RectangularAreaLightTestByTsone.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="r.cs" />
@@ -363,6 +369,10 @@
     <ProjectReference Include="..\..\synergy\r\RaytracedRefractionByDemofox\RaytracedRefractionByDemofox.csproj">
       <Project>{d031f58f-f3fc-4026-9244-91e0b148cf35}</Project>
       <Name>RaytracedRefractionByDemofox</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\r\RectangularAreaLightTestByTsone\RectangularAreaLightTestByTsone\RectangularAreaLightTestByTsone.csproj">
+      <Project>{f7f4bd75-c17c-4405-9160-d28e24b8941f}</Project>
+      <Name>RectangularAreaLightTestByTsone</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\r\RedCellsByPMalin\RedCellsByPMalin\RedCellsByPMalin.csproj">
       <Project>{520b7fff-e697-4f31-b79c-8acad35d91f1}</Project>
