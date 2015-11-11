@@ -8,11 +8,11 @@
     <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UbuntuTestUserHostAddress</RootNamespace>
-    <AssemblyName>UbuntuTestUserHostAddress</AssemblyName>
+    <RootNamespace>UbuntuUDPAdvertise</RootNamespace>
+    <AssemblyName>UbuntuUDPAdvertise</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>UbuntuTestUserHostAddress.Program</StartupObject>
+    <StartupObject>UbuntuUDPAdvertise.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -121,6 +121,9 @@
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="UbuntuUDPAdvertise.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\UbuntuUDPAdvertise.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

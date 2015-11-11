@@ -21,6 +21,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
     [Script(Implements = typeof(global::System.Net.Sockets.UdpClient))]
     internal class __UdpClient
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2013/20/20130720
         // http://www.nax.cz/2014/10/03/send-udp-packet/
         // echo -n "hello" >/dev/udp/localhost/8000
 
@@ -30,6 +31,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150630/udp
 
         // multicast tested?
+
+
+
+        public bool EnableBroadcast { get; set; }
+        public bool ExclusiveAddressUse { get; set; }
 
 
         // what comes after tcp?
@@ -43,59 +49,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
         // X:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\SystemHeaders\sys\socket.cs
 
-        #region try_new_DatagramSocket
-        static java.net.DatagramSocket try_new_DatagramSocket()
-        {
-            #region datagramSocket
-            var datagramSocket = default(java.net.DatagramSocket);
 
-            try
-            {
-                // http://developer.android.com/reference/java/net/DatagramSocket.html
-                // Constructs a UDP datagram socket which is bound to any available port on the localhost.
-                datagramSocket = new java.net.DatagramSocket();
-            }
-            catch
-            {
-                throw;
-            }
-            #endregion
-
-            return datagramSocket;
-        }
-
-        static java.net.DatagramSocket try_new_DatagramSocket(int port)
-        {
-            #region datagramSocket
-            var datagramSocket = default(java.net.DatagramSocket);
-
-            try
-            {
-                // http://developer.android.com/reference/java/net/DatagramSocket.html
-                // Constructs a UDP datagram socket which is bound to the specific port aPort on the localhost. Valid values for aPort are between 0 and 65535 inclusive.
-                datagramSocket = new java.net.DatagramSocket(port);
-            }
-            catch
-            {
-                throw;
-            }
-            #endregion
-
-            return datagramSocket;
-        }
-
-        static java.net.DatagramSocket try_new_DatagramSocket(IPEndPoint e)
-        {
-            // how do we listen on specific NIC?
-            return try_new_DatagramSocket(e.Port);
-        }
-
-        #endregion
 
         [Script]
         public class xConstructorArguments
         {
-            Func<java.net.DatagramSocket> vDatagramSocket;
+            public Func<java.net.DatagramSocket> vDatagramSocket;
             public java.net.DatagramSocket xDatagramSocket
             {
                 get
@@ -122,11 +81,30 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
                     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
                     vDatagramSocket = delegate
                     {
+                        // Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuUDPAdvertise\UbuntuUDPAdvertise\ApplicationWebService.cs
 
-                        throw new NotImplementedException();
+                        //if (xDatagramSocket != null)
+                        //    return xDatagramSocket;
+
+                        //var lport = new Random().Next(1024, 30000);
+
+                        //try
+                        //{
+                        //    Console.WriteLine("UdpClient " + new { lport });
+                        //    xDatagramSocket = new java.net.DatagramSocket(lport);
+                        //}
+                        //catch
+                        //{
+                        //    throw;
+                        //}
+
+
+                        // bind instead?
+                        return xDatagramSocket;
                     }
                 };
             }
+
             public static xConstructorArguments Of(IPEndPoint e)
             {
                 var xMulticastSocket = default(java.net.MulticastSocket);
@@ -372,8 +350,19 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
                            Console.WriteLine("before __UdpClient vBind " + new { v4a.InternalAddress, v4.Port });
 
-                           args.xDatagramSocket.bind(x);
+                           // Z:\jsc.svn\examples\java\android\vr\OVRWindWheelNDK\UDPWindWheel\Program.cs
+                           // is this the first bind?
 
+                           if (args.xDatagramSocket == null)
+                           {
+                               var xDatagramSocket = new java.net.DatagramSocket(v4.Port);
+
+                               args.vDatagramSocket = () => xDatagramSocket;
+                           }
+                           else
+                           {
+                               args.xDatagramSocket.bind(x);
+                           }
                        }
 
                    }

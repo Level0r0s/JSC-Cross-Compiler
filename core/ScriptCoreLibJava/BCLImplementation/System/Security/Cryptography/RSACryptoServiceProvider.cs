@@ -40,7 +40,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
 
         // http://lukieb.blogspot.com/2014/01/rsa-public-key-encryption-between-net.html
 
-
+        // Z:\jsc.svn\core\ScriptCoreLibJava\java\security\spec\RSAPrivateCrtKeySpec.cs
         public RSAPrivateCrtKey InternalRSAPrivateKey;
         public RSAPublicKey InternalRSAPublicKey;
 

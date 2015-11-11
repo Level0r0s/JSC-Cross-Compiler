@@ -51,7 +51,7 @@ namespace JVMCLRUDPSendAsync
             // X:\jsc.svn\examples\java\Test\TestNestedTypeImport\TestNestedTypeImport\Class1.cs
             Action goo = async delegate
             {
-                // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPSendAsync\ChromeUDPSendAsync\Application.cs
+                // z:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPSendAsync\ChromeUDPSendAsync\Application.cs
 
 
                 #region xml

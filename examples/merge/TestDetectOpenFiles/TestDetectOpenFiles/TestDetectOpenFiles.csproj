@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\opensource\googlecode\tracewin\TraceWin\TraceWin\DetectOpenFiles.cs">
+    <Compile Include="x:\opensource\googlecode\tracewin\TraceWin\TraceWin\DetectOpenFiles.cs">
       <Link>DetectOpenFiles.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />

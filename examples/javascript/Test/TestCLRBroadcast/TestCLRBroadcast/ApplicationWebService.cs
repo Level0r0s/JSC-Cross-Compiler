@@ -62,7 +62,10 @@ namespace TestCLRBroadcast
                 //{ HostUri = { Host = 192.168.43.252, Port = 20426 } }
 
 
+                // https://managedupnp.codeplex.com/
+                // http://www.fluxbytes.com/csharp/upnp-port-forwarding-the-easy-way/
 
+                // upnp ?
                 advertise = async delegate
                 {
                     var message =
@@ -98,7 +101,7 @@ namespace TestCLRBroadcast
 
                     var loc = new IPEndPoint(IPAddress.Any, port);
                     socket.Client.Bind(loc);
-
+                    // already bound
 
                     //socket.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), 30);
 

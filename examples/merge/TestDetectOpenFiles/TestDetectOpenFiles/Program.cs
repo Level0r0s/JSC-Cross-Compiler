@@ -207,6 +207,7 @@ namespace TestDetectOpenFiles
                 Console.WriteLine(new { message });
 
 
+                // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151111/udp
                 var port = new Random().Next(16000, 40000);
 
                 var socket = new UdpClient {

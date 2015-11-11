@@ -27,6 +27,12 @@ namespace ChromeUDPFloats
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151111/udp
+
+        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPFloats\ChromeUDPFloats\bin\Debug\staging\ChromeUDPFloats.Application\web
+
+
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>
@@ -85,62 +91,72 @@ namespace ChromeUDPFloats
             #endregion
 
 
+
+
+            new IHTMLButton { "update pending... update available. click to reload.." }.AttachToDocument().onclick += delegate
+            {
+                // can we get an udp signal from the compiler when the app is out of date, when the update is pending?
+                chrome.runtime.reload();
+            };
+
+
+            Action<chrome.NetworkInterface> listen = async nic =>
+            {
+                var status = new IHTMLPre { new { nic.address } }.AttachToDocument();
+                var buffer = new IHTMLPre { }.AttachToDocument();
+
+                // Z:\jsc.svn\examples\javascript\chrome\hybrid\HybridHopToUDPChromeApp\Application.cs
+                var uu = new UdpClient(40014);
+
+                //args.mouse = "awaiting vertexTransform at " + nic + " :40014";
+
+                // z:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
+                //uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
+                uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"));
+                while (true)
+                {
+                    var x = await uu.ReceiveAsync(); // did we jump to ui thread?
+                    //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
+                    //args.vertexTransform = x.Buffer;
+
+
+                    buffer.innerText = new { x.Buffer.Length }.ToString();
+
+                    // cam we get also some floats?
+
+                    // https://www.khronos.org/registry/typedarray/specs/latest/
+
+                    float[] f = new Float32Array(new Uint8ClampedArray(x.Buffer).buffer);
+
+                    if (f.Length >= 16)
+                        for (int i = 0; i < 16; i++)
+                        {
+                            var fi = f[i];
+
+                            new IHTMLDiv { new { i, fi } }.AttachTo(buffer);
+
+                        }
+                    //new Float32Array()
+                }
+            };
+
+
             new { }.With(
                 async delegate
                 {
-                    new IHTMLButton { "update pending... update available. click to reload.." }.AttachToDocument().onclick += delegate
-                    {
-                        // can we get an udp signal from the compiler when the app is out of date, when the update is pending?
-                        chrome.runtime.reload();
-                    };
+                    // 2012 wont like nested async methods..
 
                     var n = await chrome.socket.getNetworkList();
 
                     // Z:\jsc.svn\examples\javascript\chrome\hybrid\HybridHopToUDPChromeApp\Application.cs
-                    var n24 = n.Where(x => x.prefixLength == 24).ToArray();
+                    //var n24 = n.Where(x => x.prefixLength == 24).ToArray();
 
-                    n24.WithEach(
-                        async nic =>
-                        {
-                            var status = new IHTMLPre { new { nic.address } }.AttachToDocument();
-                            var buffer = new IHTMLPre { }.AttachToDocument();
-
-                            // Z:\jsc.svn\examples\javascript\chrome\hybrid\HybridHopToUDPChromeApp\Application.cs
-                            var uu = new UdpClient(40014);
-
-                            //args.mouse = "awaiting vertexTransform at " + nic + " :40014";
-
-                            // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
-                            // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
-                            //uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
-                            uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"));
-                            while (true)
-                            {
-                                var x = await uu.ReceiveAsync(); // did we jump to ui thread?
-                                                                 //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
-                                                                 //args.vertexTransform = x.Buffer;
-
-
-                                buffer.innerText = new { x.Buffer.Length }.ToString();
-
-                                // cam we get also some floats?
-
-                                // https://www.khronos.org/registry/typedarray/specs/latest/
-
-                                float[] f = new Float32Array(new Uint8ClampedArray(x.Buffer).buffer);
-
-                                if (f.Length >= 16)
-                                    for (int i = 0; i < 16; i++)
-                                    {
-                                        var fi = f[i];
-
-                                        new IHTMLDiv { new { i, fi } }.AttachTo(buffer);
-
-                                    }
-                                //new Float32Array()
-                            }
-                        }
-                    );
+                    foreach (var x in n)
+                    {
+                        if (x.prefixLength == 24)
+                            listen(x);
+                    }
 
                 }
              );
