@@ -16,7 +16,9 @@ namespace ScriptCoreLib.Ultra.WebService
     }
 
 
-	[Obsolete("service worker")]
+
+    
+    [Obsolete("service worker")]
     public static class WebApplicationCacheManifest
     {
         public const string ManifestContentType = "text/cache-manifest";
@@ -24,8 +26,18 @@ namespace ScriptCoreLib.Ultra.WebService
         //public const string ManifestName = "cache.manifest";
     }
 
+
+
+
     public class WebServiceScriptApplication
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151111
+
+        // set by?
+        // Z:\jsc.svn\examples\javascript\ubuntu\Test\TestApplicationTypeInfo\TestApplicationTypeInfo\Application.cs
+        // can we have typeof(Application) here?
+        public Type Type;
+
         public string TypeName;
         public string TypeFullName;
 
@@ -86,7 +98,7 @@ namespace ScriptCoreLib.Ultra.WebService
 
             // should we provde some statistics?
 
-                //this.References.
+            //this.References.
             WriteLine(@"<!doctype html>
 <!-- 
 
@@ -135,9 +147,9 @@ Visit http://my.jsc-solutions.net to gear up!
             //html.AddFirst(
             html.Add(
                 new XElement("script",
-                    // will jvm autoclose this element?
+                // will jvm autoclose this element?
                     new XAttribute("src",
-                        //global::ScriptCoreLib.j
+                //global::ScriptCoreLib.j
                         "view-source"), " "
                 )
             );

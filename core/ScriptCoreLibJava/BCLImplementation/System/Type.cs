@@ -894,5 +894,18 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
             return a.ToArray();
         }
+
+
+
+        public  global::System.Type[] GetNestedTypes(BindingFlags bindingAttr)
+        {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151111
+            // Z:\jsc.svn\examples\javascript\ubuntu\Test\TestApplicationTypeInfo\TestApplicationTypeInfo\Application.cs
+            // will we know the nested types in jvm?
+
+            // nested types could contain information about how to jump into them.
+
+            return new global::System.Type[0];
+        }
     }
 }

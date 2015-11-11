@@ -130,11 +130,23 @@ namespace TestApplicationTypeInfo
             // could we call the generic code from the client side, but on the server?
             // jsc should ofcourse nop out any UI related code
 
+
+
+            // do we know which application are we to be?
+            var thisGetType = this.GetType();
+            // service seems to be ApplicationWebService
+
+            // can we be abstract yet?
+            Console.WriteLine(new { thisGetType });
+
+
+
             var a = typeof(Application);
 
             // is the type still available? or did jsc remove it?
 
             Console.WriteLine(new { a });
+            Console.WriteLine(new { a.BaseType });
 
             // if the type is available
             // next we should be able to reflect upon it
@@ -201,12 +213,19 @@ namespace TestApplicationTypeInfo
 
 
             var SourceNestedTypes = a.GetNestedTypes(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public);
+            Console.WriteLine("a SourceNestedTypes " + SourceNestedTypes.Length);
 
             foreach (var SourceNestedType in SourceNestedTypes)
             {
-                Console.WriteLine(new { SourceNestedType });
+                var isIAsyncStateMachine = typeof(System.Runtime.CompilerServices.IAsyncStateMachine).IsAssignableFrom(SourceNestedType);
+
+                Console.WriteLine(new { SourceNestedType, isIAsyncStateMachine });
             }
 
+            // is it a statemachine?
+            // { SourceNestedType = TestApplicationTypeInfo.Application+<<.ctor>b__14>d__1b, isIAsyncStateMachine = True }
+            // if it is, it means, we could hop to its statemachine, if the code is available for us.
+            // but is it? or is jsc optimzing it away?
 
 
 
@@ -246,6 +265,21 @@ namespace TestApplicationTypeInfo
                 // the other option is to ask the client to reload and have the new code available for upload.
             }
 
+        }
+
+
+
+        public void Handler(ScriptCoreLib.Ultra.WebService.WebServiceHandler handler)
+        {
+            // here we have the compiled version of the Application as the first app
+
+            var app0 = handler.Applications[0];
+
+            Console.WriteLine(new { app0.TypeName });
+            Console.WriteLine(new { app0.TypeFullName });
+
+            // can we have a lookup here?
+            Console.WriteLine(new { app0.Type });
         }
     }
 }
