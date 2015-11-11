@@ -32,8 +32,6 @@ namespace ScriptCoreLib.Ultra.WebService
     public class WebServiceScriptApplication
     {
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151111
-
-        // set by?
         // Z:\jsc.svn\examples\javascript\ubuntu\Test\TestApplicationTypeInfo\TestApplicationTypeInfo\Application.cs
         // can we have typeof(Application) here?
         public Type Type;
