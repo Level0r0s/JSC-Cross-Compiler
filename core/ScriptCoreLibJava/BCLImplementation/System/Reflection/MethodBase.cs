@@ -88,5 +88,19 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Reflection
 
             return w.ToString();
         }
+
+
+
+        public virtual MethodBody GetMethodBody()
+        {
+            // Z:\jsc.svn\examples\javascript\ubuntu\Test\TestApplicationTypeInfo\TestApplicationTypeInfo\Application.cs
+            // ENC databinding?
+
+            // would we allow some methods to be defined in IL?
+            // would need runtime IL decompiler to run in webview then?
+            // run on worker thread, load async on demand, only if debuger attached to server?
+
+            return (MethodBody)(object)new __MethodBody { };
+        }
     }
 }

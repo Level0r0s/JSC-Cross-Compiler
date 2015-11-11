@@ -1,9 +1,11 @@
-﻿using System;
+﻿using ScriptCoreLib;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Reflection
+namespace ScriptCoreLibJava.BCLImplementation.System.Reflection
+//namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Reflection
 {
     // http://referencesource.microsoft.com/#mscorlib/system/reflection/MethodBody.cs
     // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Reflection/MethodBody.cs

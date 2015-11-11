@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -8,11 +8,11 @@
     <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestHopToIFrameAndBack</RootNamespace>
-    <AssemblyName>TestHopToIFrameAndBack</AssemblyName>
+    <RootNamespace>TestApplicationTypeInfo</RootNamespace>
+    <AssemblyName>TestApplicationTypeInfo</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>TestHopToIFrameAndBack.Program</StartupObject>
+    <StartupObject>TestApplicationTypeInfo.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -25,7 +25,6 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
-    <NoWarn>1998</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -117,14 +116,11 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="TestHopToIFrameAndBack.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\TestHopToIFrameAndBack.AssetsLibrary.dll</HintPath>
+    <Reference Include="TestApplicationTypeInfo.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\TestApplicationTypeInfo.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
-    </Reference>
-    <Reference Include="TestSwitchToServiceContextAsync.AssetsLibrary">
-      <HintPath>..\..\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\bin\staging.AssetsLibrary\TestSwitchToServiceContextAsync.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -139,17 +135,17 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync.csproj">
-      <Project>{5a6a3b8c-35e2-49e4-9856-73956c94d149}</Project>
-      <Name>TestSwitchToServiceContextAsync</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
 		if $(ConfigurationName)==Release (
-		rem start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /FilterTo:"$(SolutionDir)"
+		start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false   /DisableWebServiceUbuntu:false 
+
+
+
+robocopy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.assets u:\$(TargetName).ApplicationWebService.assets /E
+ 
+copy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe U:\
 		)</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
 		            </PreBuildEvent>

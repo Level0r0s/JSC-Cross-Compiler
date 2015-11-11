@@ -69,6 +69,8 @@ namespace TestHopToIFrameAndBack
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151111
+
         static Func<string, string> DecoratedString = x => x.Replace("-", "_").Replace("+", "_").Replace("<", "_").Replace(">", "_");
 
 

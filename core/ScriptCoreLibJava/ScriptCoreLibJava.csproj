@@ -119,6 +119,7 @@
     <Compile Include="BCLImplementation\System\Net\Security\AuthenticatedStream.cs" />
     <Compile Include="BCLImplementation\System\Net\Security\SslStream.cs" />
     <Compile Include="BCLImplementation\System\Net\Sockets\UdpClient.cs" />
+    <Compile Include="BCLImplementation\System\Reflection\MethodBody.cs" />
     <Compile Include="BCLImplementation\System\Reflection\PropertyInfo.cs" />
     <Compile Include="BCLImplementation\System\Runtime\CompilerServices\YieldAwaitable.cs" />
     <Compile Include="BCLImplementation\System\Security\Cryptography\CryptoStream.cs" />
