@@ -24,6 +24,8 @@ namespace TestHttpApplication
         [STAThread]
         public static void Main(string[] args)
         {
+            // if we are being ran on windows, can we hop into ubuntu mode?
+
             // http://stackoverflow.com/questions/11203483/run-a-java-application-as-a-service-on-linux
 
             // http://askubuntu.com/questions/99232/how-to-make-a-jar-file-run-on-startup-and-when-you-log-out
@@ -52,6 +54,8 @@ namespace TestHttpApplication
 
             // CLR not available? unless there was mono?
             //CLRProgram.CLRMain();
+
+            Console.ReadLine();
         }
 
 
