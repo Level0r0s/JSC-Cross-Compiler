@@ -21,7 +21,8 @@ using WebGLColladaExperiment.HTML.Pages;
 
 // roslyn?
 // Z:\jsc.svn\examples\javascript\WebGL\WebGLColladaExperiment\WebGLColladaExperiment\Application.cs
-using static THREE;
+// 2015 refuses to run. revert to 2012
+//using static THREE;
 
 namespace WebGLColladaExperiment
 {

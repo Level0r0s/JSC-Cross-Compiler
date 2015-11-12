@@ -79,7 +79,8 @@ namespace HeatZeekerRTSOrto
 
 
 
-
+            // this is not isometric.
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151112
 			var camera = new THREE.OrthographicCamera(
 				Native.window.Width / -2, Native.window.Width / 2,
 				Native.window.Height / 2, Native.window.Height / -2

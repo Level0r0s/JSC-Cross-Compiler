@@ -185,7 +185,8 @@ namespace Chrome360HZ
             //const int size = 720; // 6 faces, ?
             //const int size = 1024; // 6 faces, ?
             //const int size = 1024; // 6 faces, ?
-            const int cubefacesize = 2048; // 6 faces, ?
+            //const int cubefacesize = 2048; // 6 faces, ?
+            const int cubefacesize = 512; // 6 faces, ?
 
 
 
@@ -349,7 +350,7 @@ namespace Chrome360HZ
             canvasNY.canvas.title = "NY";
             canvasNY.canvas.AttachToDocument();
             canvasNY.canvas.style.transformOrigin = "0 0";
-            canvasNY.canvas.style.transform = $"scale({uizoom})";
+            canvasNY.canvas.style.transform = "scale(" + uizoom + ")";
 
             var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             cameraPY.lookAt(new THREE.Vector3(0, 1, 0));
@@ -360,7 +361,7 @@ namespace Chrome360HZ
             canvasPY.canvas.title = "PY";
             canvasPY.canvas.AttachToDocument();
             canvasPY.canvas.style.transformOrigin = "0 0";
-            canvasPY.canvas.style.transform = $"scale({uizoom})";
+            canvasPY.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
 
             // transpose xz?
@@ -377,7 +378,7 @@ namespace Chrome360HZ
             canvasNX.canvas.title = "NX";
             canvasNX.canvas.AttachToDocument();
             canvasNX.canvas.style.transformOrigin = "0 0";
-            canvasNX.canvas.style.transform = $"scale({uizoom})";
+            canvasNX.canvas.style.transform = "scale(" + uizoom + ")";
 
             var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             cameraPX.lookAt(new THREE.Vector3(0, 0, -1));
@@ -390,7 +391,7 @@ namespace Chrome360HZ
             canvasPX.canvas.title = "PX";
             canvasPX.canvas.AttachToDocument();
             canvasPX.canvas.style.transformOrigin = "0 0";
-            canvasPX.canvas.style.transform = $"scale({uizoom})";
+            canvasPX.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
 
 
@@ -407,7 +408,7 @@ namespace Chrome360HZ
             canvasNZ.canvas.title = "NZ";
             canvasNZ.canvas.AttachToDocument();
             canvasNZ.canvas.style.transformOrigin = "0 0";
-            canvasNZ.canvas.style.transform = $"scale({uizoom})";
+            canvasNZ.canvas.style.transform = "scale(" + uizoom + ")";
 
             var cameraPZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             //cameraPZ.lookAt(new THREE.Vector3(1, 0, 0));
@@ -420,7 +421,7 @@ namespace Chrome360HZ
             canvasPZ.canvas.title = "PZ";
             canvasPZ.canvas.AttachToDocument();
             canvasPZ.canvas.style.transformOrigin = "0 0";
-            canvasPZ.canvas.style.transform = $"scale({uizoom})";
+            canvasPZ.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
 
 
@@ -579,7 +580,7 @@ namespace Chrome360HZ
             var suizoom = 480f / c.width;
 
             c.style.transformOrigin = "0 0";
-            c.style.transform = $"scale({suizoom})";
+            c.style.transform = "scale(" + suizoom + ")";
             c.style.backgroundColor = "yellow";
             c.style.position = IStyle.PositionEnum.absolute;
 
@@ -594,7 +595,7 @@ namespace Chrome360HZ
                        obj: null,
                        forceMuted: false,
                        forcePaused: false,
-                       //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
+                //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
                        outputGainNode: null
                    );
 
@@ -631,8 +632,8 @@ namespace Chrome360HZ
            new THREE.MeshBasicMaterial(new
            {
                map = THREE.ImageUtils.loadTexture(
-                  //new HTML.Images.FromAssets._2294472375_24a3b8ef46_o().src
-                  //new HTML.Images.FromAssets._4008650304_7f837ccbb7_b().src
+                   //new HTML.Images.FromAssets._2294472375_24a3b8ef46_o().src
+                   //new HTML.Images.FromAssets._4008650304_7f837ccbb7_b().src
                   frame0.src
                    //new WebGLEquirectangularPanorama.HTML.Images.FromAssets.PANO_20130616_222058().src
                    //new WebGLEquirectangularPanorama.HTML.Images.FromAssets.PANO_20121225_210448().src
@@ -1295,12 +1296,12 @@ namespace Chrome360HZ
                                      0,
                                      0,
                                      0
-                                //,
+                                   //,
 
                                 // gl_FragCoord
-                                // cannot be scaled, and can be referenced directly.
-                                // need another way to scale
-                                //zoom: 0.3f
+                                   // cannot be scaled, and can be referenced directly.
+                                   // need another way to scale
+                                   //zoom: 0.3f
                                 );
 
                                //paintsw.Stop();

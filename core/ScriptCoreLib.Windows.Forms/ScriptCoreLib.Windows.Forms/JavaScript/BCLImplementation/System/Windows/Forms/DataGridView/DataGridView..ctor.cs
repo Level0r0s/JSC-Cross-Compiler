@@ -1175,8 +1175,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
                                   Action<__DataGridViewCell> Focus =
                                       Cell =>
                                       {
-                                          _ev.PreventDefault();
-                                          _ev.StopPropagation();
+                                          _ev.preventDefault();
+                                          _ev.stopPropagation();
 
                                           if (Cell != null)
                                           {
@@ -1335,7 +1335,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
                              if (!this.MultiSelect)
                              {
                                  MouseCaptureCell = SourceCell;
-                                 ev.PreventDefault();
+                                 ev.preventDefault();
                                  SourceCell.InternalTableColumn_div.focus();
                                  return;
                              }
@@ -1346,7 +1346,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
                                  if (!this.InternalSelectedCells.Contains(SourceCell))
                                      this.InternalSelectedCells.Add(SourceCell);
 
-                                 ev.PreventDefault();
+                                 ev.preventDefault();
                              }
                          };
                     #endregion
@@ -1391,8 +1391,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
                                   {
                                       // focus the cell on the right
 
-                                      ev.PreventDefault();
-                                      ev.StopPropagation();
+                                      ev.preventDefault();
+                                      ev.stopPropagation();
 
                                       var Cell = CellAtOffset(x, y);
                                       if (Cell != null)

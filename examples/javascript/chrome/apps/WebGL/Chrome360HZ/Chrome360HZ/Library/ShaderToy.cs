@@ -692,167 +692,167 @@ color.a = 1.0;
 
         }
 
-        public static async void AttachToDocument(FragmentShader vs)
-        {
-            Native.body.style.margin = "0px";
-            Native.body.style.backgroundColor = "blue";
+//        public static async void AttachToDocument(FragmentShader vs)
+//        {
+//            Native.body.style.margin = "0px";
+//            Native.body.style.backgroundColor = "blue";
 
 
-            var mAudioContext = new AudioContext();
-            var gl = new WebGLRenderingContext(alpha: true);
+//            var mAudioContext = new AudioContext();
+//            var gl = new WebGLRenderingContext(alpha: true);
 
-            if (gl == null)
-            {
+//            if (gl == null)
+//            {
 
-                new IHTMLPre {
-                    // https://code.google.com/p/chromium/issues/detail?id=294207
-                    "Rats! WebGL hit a snag. \n WebGL: Unavailable.\n GPU process was unable to boot. \n restart chrome.",
+//                new IHTMLPre {
+//                    // https://code.google.com/p/chromium/issues/detail?id=294207
+//                    "Rats! WebGL hit a snag. \n WebGL: Unavailable.\n GPU process was unable to boot. \n restart chrome.",
 
-                    // chrome sends us to about:blank?
-                    //new IHTMLAnchor {
+//                    // chrome sends us to about:blank?
+//                    //new IHTMLAnchor {
 
-                    //	target = "_blank",
+//                    //	target = "_blank",
 
-                    //	href = "about:gpu", innerText = "about:gpu",
+//                    //	href = "about:gpu", innerText = "about:gpu",
 
-                    //	// http://tirania.org/blog/archive/2009/Jul-27-1.html
-                    //	//onclick += de
-                    //}
-                    //.With(a => {  a.onclick += e => { e.preventDefault();  Native.window.open("about:gpu"); }; } )
-
-
-                }.AttachToDocument();
-                return;
-            }
-
-            var c = gl.canvas.AttachToDocument();
-
-            #region oncontextlost
-            gl.oncontextlost +=
-                e =>
-                {
-                    //[12144:10496:0311 / 120850:ERROR: gpu_watchdog_thread.cc(314)] : The GPU process hung. Terminating after 10000 ms.
-                    //   GpuProcessHostUIShim: The GPU process crashed!
-                    gl.canvas.Orphanize();
-
-                    new IHTMLPre {
-                        // https://code.google.com/p/chromium/issues/detail?id=294207
-                        @"Rats! WebGL hit a snag.
-oncontextlost.
-The GPU process hung. Terminating. 
-check chrome://gpu for log messages.  
-do we have a stack trace?
-
-" + new { e.statusMessage } ,
-
-                        // chrome sends us to about:blank?
-                        //new IHTMLAnchor {
-
-                        //	target = "_blank",
-
-                        //	href = "about:gpu", innerText = "about:gpu",
-
-                        //	// http://tirania.org/blog/archive/2009/Jul-27-1.html
-                        //	//onclick += de
-                        //}
-                        //.With(a => {  a.onclick += e => { e.preventDefault();  Native.window.open("about:gpu"); }; } )
+//                    //	// http://tirania.org/blog/archive/2009/Jul-27-1.html
+//                    //	//onclick += de
+//                    //}
+//                    //.With(a => {  a.onclick += e => { e.preventDefault();  Native.window.open("about:gpu"); }; } )
 
 
-                    }.AttachToDocument();
-                };
-            #endregion
+//                }.AttachToDocument();
+//                return;
+//            }
+
+//            var c = gl.canvas.AttachToDocument();
+
+//            #region oncontextlost
+//            gl.oncontextlost +=
+//                e =>
+//                {
+//                    //[12144:10496:0311 / 120850:ERROR: gpu_watchdog_thread.cc(314)] : The GPU process hung. Terminating after 10000 ms.
+//                    //   GpuProcessHostUIShim: The GPU process crashed!
+//                    gl.canvas.Orphanize();
+
+//                    new IHTMLPre {
+//                        // https://code.google.com/p/chromium/issues/detail?id=294207
+//                        @"Rats! WebGL hit a snag.
+//oncontextlost.
+//The GPU process hung. Terminating. 
+//check chrome://gpu for log messages.  
+//do we have a stack trace?
+//
+//" + new { e.statusMessage } ,
+
+//                        // chrome sends us to about:blank?
+//                        //new IHTMLAnchor {
+
+//                        //	target = "_blank",
+
+//                        //	href = "about:gpu", innerText = "about:gpu",
+
+//                        //	// http://tirania.org/blog/archive/2009/Jul-27-1.html
+//                        //	//onclick += de
+//                        //}
+//                        //.With(a => {  a.onclick += e => { e.preventDefault();  Native.window.open("about:gpu"); }; } )
 
 
-            #region onresize
-            new { }.With(
-                async delegate
-                {
-                    do
-                    {
-                        c.width = Native.window.Width;
-                        c.height = Native.window.Height;
-                        c.style.SetSize(c.width, c.height);
-                    }
-                    while (await Native.window.async.onresize);
-                }
-            );
-            #endregion
+//                    }.AttachToDocument();
+//                };
+//            #endregion
+
+
+//            #region onresize
+//            new { }.With(
+//                async delegate
+//                {
+//                    do
+//                    {
+//                        c.width = Native.window.Width;
+//                        c.height = Native.window.Height;
+//                        c.style.SetSize(c.width, c.height);
+//                    }
+//                    while (await Native.window.async.onresize);
+//                }
+//            );
+//            #endregion
 
 
 
 
-            #region CaptureMouse
-            var mMouseOriX = 0;
-            var mMouseOriY = 0;
-            var mMousePosX = 0;
-            var mMousePosY = 0;
+//            #region CaptureMouse
+//            var mMouseOriX = 0;
+//            var mMouseOriY = 0;
+//            var mMousePosX = 0;
+//            var mMousePosY = 0;
 
-            c.onmousedown += ev =>
-            {
-                mMouseOriX = ev.CursorX;
-                mMouseOriY = c.height - ev.CursorY;
-                mMousePosX = mMouseOriX;
-                mMousePosY = mMouseOriY;
+//            c.onmousedown += ev =>
+//            {
+//                mMouseOriX = ev.CursorX;
+//                mMouseOriY = c.height - ev.CursorY;
+//                mMousePosX = mMouseOriX;
+//                mMousePosY = mMouseOriY;
 
-                ev.CaptureMouse();
-            };
+//                ev.CaptureMouse();
+//            };
 
-            c.onmousemove += ev =>
-            {
-                if (ev.MouseButton == IEvent.MouseButtonEnum.Left)
-                {
-                    mMousePosX = ev.CursorX;
-                    // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\InputMouseByIq\InputMouseByIq\Shaders\Program.frag
-                    //mMousePosY = ev.CursorY;
-                    mMousePosY = c.height - ev.CursorY;
-                }
-            };
-
-
-            c.onmouseup += ev =>
-            {
-                mMouseOriX = -Math.Abs(mMouseOriX);
-                mMouseOriY = -Math.Abs(mMouseOriY);
-            };
-            #endregion
-
-            var mEffect = new CubeToEquirectangular.Library.ShaderToy.Effect(
-                mAudioContext,
-                gl,
-
-                callback: delegate
-                {
-                    new IHTMLPre { "at callback" }.AttachToDocument();
-
-                },
-                obj: null,
-                forceMuted: false,
-                forcePaused: false
-            );
-
-            mEffect.mPasses[0].MakeHeader_Image();
-            mEffect.mPasses[0].NewShader_Image(vs);
-
-            var sw = Stopwatch.StartNew();
-            do
-            {
-                mEffect.mPasses[0].Paint_Image(
-                    sw.ElapsedMilliseconds / 1000.0f,
-
-                    mMouseOriX,
-                    mMouseOriY,
-                    mMousePosX,
-                    mMousePosY
+//            c.onmousemove += ev =>
+//            {
+//                if (ev.MouseButton == IEvent.MouseButtonEnum.Left)
+//                {
+//                    mMousePosX = ev.CursorX;
+//                    // X:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\InputMouseByIq\InputMouseByIq\Shaders\Program.frag
+//                    //mMousePosY = ev.CursorY;
+//                    mMousePosY = c.height - ev.CursorY;
+//                }
+//            };
 
 
-                );
+//            c.onmouseup += ev =>
+//            {
+//                mMouseOriX = -Math.Abs(mMouseOriX);
+//                mMouseOriY = -Math.Abs(mMouseOriY);
+//            };
+//            #endregion
 
-                // what does it do?
-                gl.flush();
+//            var mEffect = new CubeToEquirectangular.Library.ShaderToy.Effect(
+//                mAudioContext,
+//                gl,
 
-            }
-            while (await Native.window.async.onframe);
+//                callback: delegate
+//                {
+//                    new IHTMLPre { "at callback" }.AttachToDocument();
 
-        }
+//                },
+//                obj: null,
+//                forceMuted: false,
+//                forcePaused: false
+//            );
+
+//            mEffect.mPasses[0].MakeHeader_Image();
+//            mEffect.mPasses[0].NewShader_Image(vs);
+
+//            var sw = Stopwatch.StartNew();
+//            do
+//            {
+//                mEffect.mPasses[0].Paint_Image(
+//                    sw.ElapsedMilliseconds / 1000.0f,
+
+//                    mMouseOriX,
+//                    mMouseOriY,
+//                    mMousePosX,
+//                    mMousePosY
+
+
+//                );
+
+//                // what does it do?
+//                gl.flush();
+
+//            }
+//            while (await Native.window.async.onframe);
+
+//        }
     }
 }

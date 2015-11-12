@@ -19,7 +19,7 @@ using WebGLGodRay.Design;
 using WebGLGodRay.HTML.Pages;
 using WebGLRah66Comanche;
 using WebGLRah66Comanche.Library;
-using static THREE;
+//using static THREE;
 
 namespace WebGLGodRay
 {
@@ -60,10 +60,12 @@ namespace WebGLGodRay
             var bgColor = 0x000511;
             var sunColor = 0xffee00;
 
-            var camera = new PerspectiveCamera(70, Native.window.aspect, 1, 3000);
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151112
+            var camera = new THREE.PerspectiveCamera(70, Native.window.aspect, 1, 3000);
             camera.position.z = 200;
 
-            var scene = new Scene();
+            var scene = new THREE.Scene();
 
             //
 
@@ -73,8 +75,8 @@ namespace WebGLGodRay
             #region tree
             // X:\jsc.svn\examples\javascript\WebGL\WebGLGodRay\WebGLGodRay\Application.cs
 
-            var materialScene = new MeshBasicMaterial(new { color = 0x000000, shading = THREE.FlatShading });
-            var loader = new JSONLoader();
+            var materialScene = new THREE.MeshBasicMaterial(new { color = 0x000000, shading = THREE.FlatShading });
+            var loader = new THREE.JSONLoader();
 
             // http://stackoverflow.com/questions/16539736/do-not-use-system-runtime-compilerservices-dynamicattribute-use-the-dynamic
             // https://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.dynamicattribute%28v=vs.110%29.aspx
@@ -84,7 +86,7 @@ namespace WebGLGodRay
 
                 new Models.tree().Content.src,
 
-                new Action<Geometry>(
+                new Action<THREE.Geometry>(
                 xgeometry =>
                 {
 

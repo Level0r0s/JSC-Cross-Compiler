@@ -31,7 +31,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
             this.HTMLTarget.onselectstart +=
                 e =>
                 {
-                    e.PreventDefault();
+                    e.preventDefault();
                 };
 
             Items = new __ObjectCollection { Owner = this };

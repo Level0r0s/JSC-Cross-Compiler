@@ -12,7 +12,7 @@ using ScriptCoreLib.CompilerServices;
 using System.Runtime.CompilerServices;
 using ScriptCoreLib.JavaScript.DOM;
 using System.Diagnostics;
-using static THREE;
+//using static THREE;
 
 namespace WebGLRah66Comanche.Library
 {

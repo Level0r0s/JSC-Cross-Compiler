@@ -520,7 +520,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
                 var h = InternalClick;
                 h.Event += value;
                 if (!h) return;
-                h.EventInternal = i => { i.StopPropagation(); i.PreventDefault(); h.Event(this, null); };
+                h.EventInternal = i => { i.stopPropagation(); i.preventDefault(); h.Event(this, null); };
 
                 this.HTMLTargetRef.onclick += h.EventInternal;
             }
@@ -978,7 +978,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
                         if (a.SuppressKeyPress)
                         {
                             // http://stackoverflow.com/questions/1404583/stop-keypress-event
-                            e.PreventDefault();
+                            e.preventDefault();
                         }
                     };
 

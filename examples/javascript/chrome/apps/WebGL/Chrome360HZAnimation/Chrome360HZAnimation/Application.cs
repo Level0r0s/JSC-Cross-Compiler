@@ -197,13 +197,13 @@ namespace Chrome360HZAnimation
 
             // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/Chrome360HZAnimation/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
             int cubefacesize = 2048; // 6 faces, ?
-                                     // "X:\vr\tape1\0000x2048.png"
-                                     // for 60hz render we may want to use float camera percision, not available for ui.
-                                     //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
-                                     //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
+            // "X:\vr\tape1\0000x2048.png"
+            // for 60hz render we may want to use float camera percision, not available for ui.
+            //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x2048.png" "/sdcard/oculus/360photos/"
+            //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
             if (Environment.ProcessorCount < 8)
-                cubefacesize = 64; // 6 faces, ?
+                cubefacesize = 512; // 6 faces, ?
 
             new IHTMLPre { new { Environment.ProcessorCount, cubefacesize } }.AttachToDocument();
 
@@ -268,7 +268,8 @@ namespace Chrome360HZAnimation
             // fly up?
             //sceneg.translateZ(-1024);
             // rotate the world, as the skybox then matches what we have on filesystem
-            scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
+            //scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
+            scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2);
             // yet for headtracking we shall rotate camera
 
 
@@ -449,21 +450,21 @@ namespace Chrome360HZAnimation
 
 
                 cameraoffset = new THREE.Vector3(
-                  // left?
+                    // left?
                   camerax + fcamerax,
-                   // height?
-                   //0,
-                   //1600,
-                   //1024,
+                    // height?
+                    //0,
+                    //1600,
+                    //1024,
 
                    // if the camera is in the center, would we need to move the scene?
-                   // we have to move the camera. as we move the scene the lights are messed up
-                   //2014,
+                    // we have to move the camera. as we move the scene the lights are messed up
+                    //2014,
                    cy + fcameray,
 
                    //1200
                    cameraz + fcameraz
-                   // can we hover top of the map?
+                    // can we hover top of the map?
                    );
             };
 
@@ -484,7 +485,7 @@ namespace Chrome360HZAnimation
             canvasNY.canvas.title = "NY";
             canvasNY.canvas.AttachToDocument();
             canvasNY.canvas.style.transformOrigin = "0 0";
-            canvasNY.canvas.style.transform = $"scale({uizoom})";
+            canvasNY.canvas.style.transform = "scale(" + uizoom + ")";
 
             var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             applycameraoffset += delegate
@@ -499,7 +500,7 @@ namespace Chrome360HZAnimation
             canvasPY.canvas.title = "PY";
             canvasPY.canvas.AttachToDocument();
             canvasPY.canvas.style.transformOrigin = "0 0";
-            canvasPY.canvas.style.transform = $"scale({uizoom})";
+            canvasPY.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
 
             // transpose xz?
@@ -520,7 +521,7 @@ namespace Chrome360HZAnimation
             canvasNX.canvas.title = "NX";
             canvasNX.canvas.AttachToDocument();
             canvasNX.canvas.style.transformOrigin = "0 0";
-            canvasNX.canvas.style.transform = $"scale({uizoom})";
+            canvasNX.canvas.style.transform = "scale(" + uizoom + ")";
 
             var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             applycameraoffset += delegate
@@ -537,7 +538,7 @@ namespace Chrome360HZAnimation
             canvasPX.canvas.title = "PX";
             canvasPX.canvas.AttachToDocument();
             canvasPX.canvas.style.transformOrigin = "0 0";
-            canvasPX.canvas.style.transform = $"scale({uizoom})";
+            canvasPX.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
 
 
@@ -558,7 +559,7 @@ namespace Chrome360HZAnimation
             canvasNZ.canvas.title = "NZ";
             canvasNZ.canvas.AttachToDocument();
             canvasNZ.canvas.style.transformOrigin = "0 0";
-            canvasNZ.canvas.style.transform = $"scale({uizoom})";
+            canvasNZ.canvas.style.transform = "scale(" + uizoom + ")";
 
             var cameraPZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             //cameraPZ.lookAt(new THREE.Vector3(1, 0, 0));
@@ -575,7 +576,7 @@ namespace Chrome360HZAnimation
             canvasPZ.canvas.title = "PZ";
             canvasPZ.canvas.AttachToDocument();
             canvasPZ.canvas.style.transformOrigin = "0 0";
-            canvasPZ.canvas.style.transform = $"scale({uizoom})";
+            canvasPZ.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
 
 
@@ -734,7 +735,7 @@ namespace Chrome360HZAnimation
             var suizoom = 480f / c.width;
 
             c.style.transformOrigin = "0 0";
-            c.style.transform = $"scale({suizoom})";
+            c.style.transform = "scale(" + suizoom + ")";
             //c.style.backgroundColor = "yellow";
             c.style.position = IStyle.PositionEnum.absolute;
 
@@ -749,7 +750,7 @@ namespace Chrome360HZAnimation
                        obj: null,
                        forceMuted: false,
                        forcePaused: false,
-                       //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
+                //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
                        outputGainNode: null
                    );
 
@@ -768,6 +769,7 @@ namespace Chrome360HZAnimation
 
 
             //var frame0 = new HTML.Images.FromAssets.tiles_regrid().AttachToDocument();
+            var frame2 = new HTML.Images.FromAssets.anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs().AttachToDocument();
             var frame0 = new HTML.Images.FromAssets.anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs().AttachToDocument();
             //var xor = new HTML.Images.FromAssets.Orion360_test_image_8192x4096().AttachToDocument();
             //var xor = new HTML.Images.FromAssets._2_no_clouds_4k().AttachToDocument();
@@ -782,6 +784,11 @@ namespace Chrome360HZAnimation
                 8 + (int)(uizoom * cubefacesize + 8) * 0 + 480 + 16, 8 + (int)(uizoom * cubefacesize + 8) * 3);
 
 
+            frame2.style.height = "270px";
+            frame2.style.width = "480px";
+            frame2.style.SetLocation(
+                8 + (int)(uizoom * cubefacesize + 8) * 0 + 480 * 2 + 16 * 2, 8 + (int)(uizoom * cubefacesize + 8) * 3);
+
 
             #region  skybox
             // what shall the skybox do if we reach upper altitude?
@@ -790,8 +797,8 @@ namespace Chrome360HZAnimation
            new THREE.MeshBasicMaterial(new
            {
                map = THREE.ImageUtils.loadTexture(
-                  //new HTML.Images.FromAssets._2294472375_24a3b8ef46_o().src
-                  //new HTML.Images.FromAssets._4008650304_7f837ccbb7_b().src
+                   //new HTML.Images.FromAssets._2294472375_24a3b8ef46_o().src
+                   //new HTML.Images.FromAssets._4008650304_7f837ccbb7_b().src
                   frame0.src
                    //new WebGLEquirectangularPanorama.HTML.Images.FromAssets.PANO_20130616_222058().src
                    //new WebGLEquirectangularPanorama.HTML.Images.FromAssets.PANO_20121225_210448().src
@@ -895,8 +902,59 @@ namespace Chrome360HZAnimation
 
             #endregion
 
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151112
+            new IHTMLButton { "make me a stere TB image " }.AttachToDocument().With(
+                async e =>
+                {
+                    // http://www.vrideo.com/watch/ALdE7mm
+                    // https://www.youtube.com/watch?v=S3iTPxMIlCI
+
+                    var onclick = e.async.onclick;
+
+                    while (await onclick)
+                    {
+                        var xIPD = 4.0;
+
+                        fcamerax = -xIPD;
+
+                        await Native.window.async.onframe;
+                        var f0 = new IHTMLImage { src = gl.canvas.toDataURL() };
+
+                        fcamerax = +xIPD;
+
+                        await Native.window.async.onframe;
+                        var f1 = new IHTMLImage { src = gl.canvas.toDataURL() };
+
+                        //await Native.window.async.onframe;
+                        await f1.async.oncomplete;
+
+                        var canvasTB = new CanvasRenderingContext2D(c.width, c.height);
+
+                        canvasTB.drawImage(f0, 0, 0, c.width, c.height, 0, 0, c.width, c.height / 2);
+                        canvasTB.drawImage(f1, 0, 0, c.width, c.height, 0, c.height / 2, c.width, c.height / 2);
+
+                        frame2.src = canvasTB.canvas.toDataURL();
+
+
+                        onclick = e.async.onclick;
+
+                        while (!onclick.IsCompleted)
+                        {
+                            await Task.Delay(1000 / 30);
+                            frame0.src = f0.src;
+                            await Task.Delay(1000 / 30);
+                            frame0.src = f1.src;
+                        }
+                    }
+                }
+            );
+
+
             var vsync = default(TaskCompletionSource<object>);
 
+
+            #region render
             new IHTMLButton {
                 "render 60hz 30sec"
             }.AttachToDocument().onclick += async e =>
@@ -926,7 +984,7 @@ namespace Chrome360HZAnimation
                 var frameid = -1;
 
                 goto beforeframe;
-                //fcamerax = -15.0;
+            //fcamerax = -15.0;
 
                 // parallax offset?
 
@@ -954,7 +1012,7 @@ namespace Chrome360HZAnimation
 
                 status = "WriteAllBytes... done " + new { fcamerax, filename, swcapture.ElapsedMilliseconds };
                 status = "rdy " + new { filename, fcamerax };
-                //await Native.window.async.onframe;
+            //await Native.window.async.onframe;
 
 
 
@@ -996,6 +1054,7 @@ namespace Chrome360HZAnimation
 
                 e.Element.disabled = false;
             };
+            #endregion
 
             // "Z:\jsc.svn\examples\javascript\WebGL\WebGLColladaExperiment\WebGLColladaExperiment\WebGLColladaExperiment.csproj"
 
@@ -1702,12 +1761,12 @@ namespace Chrome360HZAnimation
                                      0,
                                      0,
                                      0
-                                //,
+                                   //,
 
                                 // gl_FragCoord
-                                // cannot be scaled, and can be referenced directly.
-                                // need another way to scale
-                                //zoom: 0.3f
+                                   // cannot be scaled, and can be referenced directly.
+                                   // need another way to scale
+                                   //zoom: 0.3f
                                 );
 
                                //paintsw.Stop();

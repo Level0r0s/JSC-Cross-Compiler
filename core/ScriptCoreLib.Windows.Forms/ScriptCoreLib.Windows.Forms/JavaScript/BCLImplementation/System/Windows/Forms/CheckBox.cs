@@ -45,7 +45,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
             label.onmousedown +=
                 e =>
                 {
-                    e.PreventDefault();
+                    e.preventDefault();
                 };
 
             this.CheckStateChanged +=
