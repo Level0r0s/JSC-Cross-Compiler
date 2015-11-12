@@ -91,9 +91,18 @@ namespace TestYouTubeExtractor
             VideoInfo video = //videoInfos.FirstOrDefault(k => k.FormatCode == 299)
              mp4audio.OrderBy(info => info.Resolution).Last();
 
-            video.DecryptDownloadUrl();
 
+            //RequiresDecryption = false
+
+            
             Console.WriteLine(video.Title);
+
+            if (video.RequiresDecryption)
+            {
+                Console.WriteLine("cant");
+                return;
+                video.DecryptDownloadUrl();
+            }
 
             // old name
             var Title =

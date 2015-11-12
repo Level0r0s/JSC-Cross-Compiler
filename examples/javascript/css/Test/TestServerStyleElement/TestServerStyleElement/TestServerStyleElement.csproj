@@ -8,11 +8,11 @@
     <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClientVerifiedWebServiceAuthority</RootNamespace>
-    <AssemblyName>ClientVerifiedWebServiceAuthority</AssemblyName>
+    <RootNamespace>TestServerStyleElement</RootNamespace>
+    <AssemblyName>TestServerStyleElement</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>ClientVerifiedWebServiceAuthority.Program</StartupObject>
+    <StartupObject>TestServerStyleElement.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -116,8 +116,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="ClientVerifiedWebServiceAuthority.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\ClientVerifiedWebServiceAuthority.AssetsLibrary.dll</HintPath>
+    <Reference Include="TestServerStyleElement.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\TestServerStyleElement.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
@@ -126,7 +126,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Design\App.css" />
-    <Content Include="Design\App.htm" />
+    <Content Include="Design\App.htm">
+      <SubType>Designer</SubType>
+    </Content>
     <Compile Include="ApplicationWebService.cs" />
     <Compile Include="Application.cs" />
     <Compile Include="Program.cs">
@@ -139,13 +141,7 @@
   <PropertyGroup>
     <PostBuildEvent>
 		if $(ConfigurationName)==Release (
-		start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false   /DisableWebServiceUbuntu:false 
-
-
-
-robocopy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.assets u:\$(TargetName).ApplicationWebService.assets /E
- 
-copy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe U:\
+		rem start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /FilterTo:"$(SolutionDir)"
 		)</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
 		            </PreBuildEvent>

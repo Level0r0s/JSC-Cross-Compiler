@@ -91,13 +91,15 @@ namespace YoutubeExtractor
 
                 IEnumerable<ExtractionInfo> downloadUrls = ExtractDownloadUrls(json);
 
+                // ex = {"Result cannot be called on a failed Match."}
+
                 IEnumerable<VideoInfo> infos = GetVideoInfos(downloadUrls, videoTitle).ToList();
 
-                string htmlPlayerVersion = GetHtml5PlayerVersion(json);
+                //string htmlPlayerVersion = GetHtml5PlayerVersion(json);
 
                 foreach (VideoInfo info in infos)
                 {
-                    info.HtmlPlayerVersion = htmlPlayerVersion;
+                    //info.HtmlPlayerVersion = htmlPlayerVersion;
 
                     if (decryptSignature && info.RequiresDecryption)
                     {
