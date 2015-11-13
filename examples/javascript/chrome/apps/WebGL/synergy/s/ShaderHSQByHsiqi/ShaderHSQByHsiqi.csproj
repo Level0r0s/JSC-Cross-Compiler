@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A61C1A16-3435-4B0F-9002-04A952924BE4}</ProjectGuid>
+    <ProjectGuid>{9C9B1BF8-E685-4DC4-AAAA-897184823473}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ShaderHSQByHsiqi</RootNamespace>

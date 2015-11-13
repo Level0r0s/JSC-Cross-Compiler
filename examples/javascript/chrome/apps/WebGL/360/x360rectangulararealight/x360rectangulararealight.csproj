@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EB95C5BF-672A-4551-B206-2695E2EA6ED6}</ProjectGuid>
+    <ProjectGuid>{77234670-3487-477E-9F24-73AB75E6D82E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>x360dflighting</RootNamespace>
-    <AssemblyName>x360dflighting</AssemblyName>
+    <RootNamespace>x360rectangulararealight</RootNamespace>
+    <AssemblyName>x360rectangulararealight</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>x360dflighting.Program</StartupObject>
+    <StartupObject>x360rectangulararealight.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -136,14 +136,11 @@
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
     </Reference>
-    <Reference Include="x360doomE1M1.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\x360doomE1M1.AssetsLibrary.dll</HintPath>
+    <Reference Include="x360rectangulararealight.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\x360rectangulararealight.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="x360dflighting.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\x360dflighting.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="DFLightingByTekF.AssetsLibrary">
-      <HintPath>..\..\synergy\d\DFLightingByTekF\DFLightingByTekF\bin\staging.AssetsLibrary\DFLightingByTekF.AssetsLibrary.dll</HintPath>
+    <Reference Include="RectangularAreaLightTestByTsone.AssetsLibrary">
+      <HintPath>..\..\synergy\r\RectangularAreaLightTestByTsone\RectangularAreaLightTestByTsone\bin\staging.AssetsLibrary\RectangularAreaLightTestByTsone.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +164,9 @@
     <Folder Include="web\assets\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\synergy\d\DFLightingByTekF\DFLightingByTekF\DFLightingByTekF.csproj">
-      <Project>{eedf5720-4339-409e-b8ee-635b95e62cdd}</Project>
-      <Name>DFLightingByTekF</Name>
+    <ProjectReference Include="..\..\synergy\r\RectangularAreaLightTestByTsone\RectangularAreaLightTestByTsone\RectangularAreaLightTestByTsone.csproj">
+      <Project>{f7f4bd75-c17c-4405-9160-d28e24b8941f}</Project>
+      <Name>RectangularAreaLightTestByTsone</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

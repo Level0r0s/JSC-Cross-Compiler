@@ -340,6 +340,15 @@
     <Reference Include="StromboliByDr2.AssetsLibrary">
       <HintPath>..\..\synergy\s\StromboliByDr2\bin\staging.AssetsLibrary\StromboliByDr2.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="ShaderHSQByHsiqi.AssetsLibrary">
+      <HintPath>..\..\synergy\s\ShaderHSQByHsiqi\bin\staging.AssetsLibrary\ShaderHSQByHsiqi.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SmashEffectByDila.AssetsLibrary">
+      <HintPath>..\..\synergy\s\SmashEffectByDila\bin\staging.AssetsLibrary\SmashEffectByDila.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SpectaclesByCabbibo.AssetsLibrary">
+      <HintPath>..\..\synergy\s\SpectaclesByCabbibo\bin\staging.AssetsLibrary\SpectaclesByCabbibo.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="s.cs" />
@@ -446,6 +455,10 @@
     <ProjectReference Include="..\..\synergy\s\SelfPlayingInterferenceByFatumR\SelfPlayingInterferenceByFatumR\SelfPlayingInterferenceByFatumR.csproj">
       <Project>{fe185202-2017-4fed-afc2-b3e0f4506053}</Project>
       <Name>SelfPlayingInterferenceByFatumR</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\s\ShaderHSQByHsiqi\ShaderHSQByHsiqi.csproj">
+      <Project>{9c9b1bf8-e685-4dc4-aaaa-897184823473}</Project>
+      <Name>ShaderHSQByHsiqi</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\s\ShaderingChameleonByIapafoto\ShaderingChameleonByIapafoto\ShaderingChameleonByIapafoto.csproj">
       <Project>{146d895b-2a6f-48d5-8091-b099bf3c459e}</Project>
@@ -562,6 +575,10 @@
     <ProjectReference Include="..\..\synergy\s\SparseGridMarchingByNimitz\SparseGridMarchingByNimitz\SparseGridMarchingByNimitz.csproj">
       <Project>{d1fef5fe-1b9c-48ac-8ee9-f67f650657c5}</Project>
       <Name>SparseGridMarchingByNimitz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\s\SpectaclesByCabbibo\SpectaclesByCabbibo.csproj">
+      <Project>{7e2e2eb0-d1b1-4006-a7d5-f99ad2f1e03f}</Project>
+      <Name>SpectaclesByCabbibo</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\s\SpeedingInTheDarkByWilddev\SpeedingInTheDarkByWilddev\SpeedingInTheDarkByWilddev.csproj">
       <Project>{0de39a73-0732-40e2-aa0a-236fd8b4d173}</Project>

@@ -44,7 +44,8 @@ namespace SpheresByFelipevsfbr.Shaders
         // called by vec3 getTexture(HitInfo hitInfo)
 
         //#define pixProj(p) sqrt(dot(dFdx(p),dFdx(p)) + dot(dFdy(p),dFdy(p)))
-        float pixProj(vec3 p) => sqrt(dot(dFdx(p), dFdx(p)) + dot(dFdy(p), dFdy(p)));
+        //float pixProj(vec3 p) => sqrt(dot(dFdx(p), dFdx(p)) + dot(dFdy(p), dFdy(p)));
+        float pixProj(vec3 p) { return sqrt(dot(dFdx(p), dFdx(p)) + dot(dFdy(p), dFdy(p))); }
 
 
         // created by

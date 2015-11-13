@@ -23,100 +23,101 @@ namespace ChromeShaderToyPrograms.s
         {
             
 			// this is special
-			["ChromeShaderToySimpleLoadingScreenByNdel"] = () => new ChromeShaderToySimpleLoadingScreenByNdel.Shaders.ProgramFragmentShader(),
+			{"ChromeShaderToySimpleLoadingScreenByNdel", () => new ChromeShaderToySimpleLoadingScreenByNdel.Shaders.ProgramFragmentShader()},
 
 
             #region /s/
 
             
-            ["ShaderHSQByHsiqi"] = () => new ShaderHSQByHsiqi.Shaders.ProgramFragmentShader(),
-            ["SkylineByOtaviogood"] = () => new SkylineByOtaviogood.Shaders.ProgramFragmentShader(),
+            {"SpectaclesByCabbibo", () => new SpectaclesByCabbibo.Shaders.ProgramFragmentShader()},
+            {"ShaderHSQByHsiqi", () => new ShaderHSQByHsiqi.Shaders.ProgramFragmentShader()},
+            {"SkylineByOtaviogood", () => new SkylineByOtaviogood.Shaders.ProgramFragmentShader()},
 
-            ["ChromeShaderToySadRobotByGreen"] = () => new ChromeShaderToySadRobotByGreen.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToySandDunesByBoinx"] = () => new ChromeShaderToySandDunesByBoinx.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToySeascapeByTDM"] = () => new ChromeShaderToySeascapeByTDM.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToySeabirdsAtSunsetByDr2"] = () => new ChromeShaderToySeabirdsAtSunsetByDr2.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToyShadyBuildingByZtri"] = () => new ChromeShaderToyShadyBuildingByZtri.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToySomewhere1993ByNimitz"] = () => new ChromeShaderToySomewhere1993ByNimitz.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToySpaceRaceByKali"] = () => new ChromeShaderToySpaceRaceByKali.Shaders.ProgramFragmentShader(),
+            {"ChromeShaderToySadRobotByGreen", () => new ChromeShaderToySadRobotByGreen.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToySandDunesByBoinx", () => new ChromeShaderToySandDunesByBoinx.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToySeascapeByTDM", () => new ChromeShaderToySeascapeByTDM.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToySeabirdsAtSunsetByDr2", () => new ChromeShaderToySeabirdsAtSunsetByDr2.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToyShadyBuildingByZtri", () => new ChromeShaderToyShadyBuildingByZtri.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToySomewhere1993ByNimitz", () => new ChromeShaderToySomewhere1993ByNimitz.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToySpaceRaceByKali", () => new ChromeShaderToySpaceRaceByKali.Shaders.ProgramFragmentShader()},
 
-            ["ChromeShaderToySphereAndWalls"] = () => new ChromeShaderToySphereAndWalls.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToySphereProjectionByIq"] = () => new ChromeShaderToySphereProjectionByIq.Shaders.ProgramFragmentShader(),
+            {"ChromeShaderToySphereAndWalls", () => new ChromeShaderToySphereAndWalls.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToySphereProjectionByIq", () => new ChromeShaderToySphereProjectionByIq.Shaders.ProgramFragmentShader()},
 
-            ["ChromeShaderToySpitfirePursuitByDr2"] = () => new ChromeShaderToySpitfirePursuitByDr2.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToySymmetricOriginsByGood"] = () => new ChromeShaderToySymmetricOriginsByGood.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToySubmarinePillars"] = () => new ChromeShaderToySubmarinePillars.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToySuperMarioByHLorenzi"] = () => new ChromeShaderToySuperMarioByHLorenzi.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToySnowByUggway"] = () => new ChromeShaderToySnowByUggway.Shaders.ProgramFragmentShader(),
-            ["SakuraByFMSCat"] = () => new SakuraByFMSCat.Shaders.ProgramFragmentShader(),
-            ["SansNormalByEiffie"] = () => new SansNormalByEiffie.Shaders.ProgramFragmentShader(),
-            ["ScatterByGaz"] = () => new ScatterByGaz.Shaders.ProgramFragmentShader(),
-            ["SchroedingersCatByDr2"] = () => new SchroedingersCatByDr2.Shaders.ProgramFragmentShader(),
-            ["SDFCollisionCheckingByMattz"] = () => new SDFCollisionCheckingByMattz.Shaders.ProgramFragmentShader(),
-            ["SeagullByAvix"] = () => new SeagullByAvix.Shaders.ProgramFragmentShader(),
-            ["SelfPlayingInterferenceByFatumR"] = () => new SelfPlayingInterferenceByFatumR.Shaders.ProgramFragmentShader(),
-            ["SegmentByArthursw"] = () => new SegmentByArthursw.Shaders.ProgramFragmentShader(),
-            ["ShaderingChameleonByIapafoto"] = () => new ShaderingChameleonByIapafoto.Shaders.ProgramFragmentShader(),
-            ["ShadeyMcShadishByDcoombes"] = () => new ShadeyMcShadishByDcoombes.Shaders.ProgramFragmentShader(),
-            ["ShakespeareQuestByEiffie"] = () => new ShakespeareQuestByEiffie.Shaders.ProgramFragmentShader(),
-            ["ShapeshifterByMu6k"] = () => new ShapeshifterByMu6k.Shaders.ProgramFragmentShader(),
-            ["ShapeLightByBeyondTheStatic"] = () => new ShapeLightByBeyondTheStatic.Shaders.ProgramFragmentShader(),
+            {"ChromeShaderToySpitfirePursuitByDr2", () => new ChromeShaderToySpitfirePursuitByDr2.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToySymmetricOriginsByGood", () => new ChromeShaderToySymmetricOriginsByGood.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToySubmarinePillars", () => new ChromeShaderToySubmarinePillars.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToySuperMarioByHLorenzi", () => new ChromeShaderToySuperMarioByHLorenzi.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToySnowByUggway", () => new ChromeShaderToySnowByUggway.Shaders.ProgramFragmentShader()},
+            {"SakuraByFMSCat", () => new SakuraByFMSCat.Shaders.ProgramFragmentShader()},
+            {"SansNormalByEiffie", () => new SansNormalByEiffie.Shaders.ProgramFragmentShader()},
+            {"ScatterByGaz", () => new ScatterByGaz.Shaders.ProgramFragmentShader()},
+            {"SchroedingersCatByDr2", () => new SchroedingersCatByDr2.Shaders.ProgramFragmentShader()},
+            {"SDFCollisionCheckingByMattz", () => new SDFCollisionCheckingByMattz.Shaders.ProgramFragmentShader()},
+            {"SeagullByAvix", () => new SeagullByAvix.Shaders.ProgramFragmentShader()},
+            {"SelfPlayingInterferenceByFatumR", () => new SelfPlayingInterferenceByFatumR.Shaders.ProgramFragmentShader()},
+            {"SegmentByArthursw", () => new SegmentByArthursw.Shaders.ProgramFragmentShader()},
+            {"ShaderingChameleonByIapafoto", () => new ShaderingChameleonByIapafoto.Shaders.ProgramFragmentShader()},
+            {"ShadeyMcShadishByDcoombes", () => new ShadeyMcShadishByDcoombes.Shaders.ProgramFragmentShader()},
+            {"ShakespeareQuestByEiffie", () => new ShakespeareQuestByEiffie.Shaders.ProgramFragmentShader()},
+            {"ShapeshifterByMu6k", () => new ShapeshifterByMu6k.Shaders.ProgramFragmentShader()},
+            {"ShapeLightByBeyondTheStatic", () => new ShapeLightByBeyondTheStatic.Shaders.ProgramFragmentShader()},
 
-            ["SHVisualizerByIq"] = () => new SHVisualizerByIq.Shaders.ProgramFragmentShader(),
-            ["ShellByFMSCat"] = () => new ShellByFMSCat.Shaders.ProgramFragmentShader(),
-            ["SierpinskiByIq"] = () => new SierpinskiByIq.Shaders.ProgramFragmentShader(),
-            ["SiggraphLogoByIq"] = () => new SiggraphLogoByIq.Shaders.ProgramFragmentShader(),
-            ["Simlicity3DByRunouw"] = () => new Simlicity3DByRunouw.Shaders.ProgramFragmentShader(),
-            ["SimpleDigitalClockByMikeCAT"] = () => new SimpleDigitalClockByMikeCAT.Shaders.ProgramFragmentShader(),
-            ["SimpleVoxelsByElias"] = () => new SimpleVoxelsByElias.Shaders.ProgramFragmentShader(),
+            {"SHVisualizerByIq", () => new SHVisualizerByIq.Shaders.ProgramFragmentShader()},
+            {"ShellByFMSCat", () => new ShellByFMSCat.Shaders.ProgramFragmentShader()},
+            {"SierpinskiByIq", () => new SierpinskiByIq.Shaders.ProgramFragmentShader()},
+            {"SiggraphLogoByIq", () => new SiggraphLogoByIq.Shaders.ProgramFragmentShader()},
+            {"Simlicity3DByRunouw", () => new Simlicity3DByRunouw.Shaders.ProgramFragmentShader()},
+            {"SimpleDigitalClockByMikeCAT", () => new SimpleDigitalClockByMikeCAT.Shaders.ProgramFragmentShader()},
+            {"SimpleVoxelsByElias", () => new SimpleVoxelsByElias.Shaders.ProgramFragmentShader()},
 
-            ["SinMountainsByFred"] = () => new SinMountainsByFred.Shaders.ProgramFragmentShader(),
-            ["SkateboardByYasuo"] = () => new SkateboardByYasuo.Shaders.ProgramFragmentShader(),
-
-
-            ["SmashEffectByDila"] = () => new SmashEffectByDila.Shaders.ProgramFragmentShader(),
-            ["SminTestByHughsk"] = () => new SminTestByHughsk.Shaders.ProgramFragmentShader(),
-            ["SmoothedCSGByTekF"] = () => new SmoothedCSGByTekF.Shaders.ProgramFragmentShader(),
-            ["SnowBallByIapafoto"] = () => new SnowBallByIapafoto.Shaders.ProgramFragmentShader(),
-
-            ["SoftShadowTestByDila"] = () => new SoftShadowTestByDila.Shaders.ProgramFragmentShader(),
-            ["SoftSphereShadowsByBen"] = () => new SoftSphereShadowsByBen.Shaders.ProgramFragmentShader(),
-            ["SomedayByEiffie"] = () => new SomedayByEiffie.Shaders.ProgramFragmentShader(),
-            ["SomeSortOfGridByGermangb"] = () => new SomeSortOfGridByGermangb.Shaders.ProgramFragmentShader(),
-            ["SoundAcidJamBySrtuss"] = () => new SoundAcidJamBySrtuss.Shaders.ProgramFragmentShader(),
-
-            ["SpaceByReinder"] = () => new SpaceByReinder.Shaders.ProgramFragmentShader(),
-            ["SpaceEggByMattz"] = () => new SpaceEggByMattz.Shaders.ProgramFragmentShader(),
-            ["SpaceRingsByMu6k"] = () => new SpaceRingsByMu6k.Shaders.ProgramFragmentShader(),
-
-            ["SparksByVanburgler"] = () => new SparksByVanburgler.Shaders.ProgramFragmentShader(),
-            ["SparseGridMarchingByNimitz"] = () => new SparseGridMarchingByNimitz.Shaders.ProgramFragmentShader(),
-
-            ["SpeedingInTheDarkByWilddev"] = () => new SpeedingInTheDarkByWilddev.Shaders.ProgramFragmentShader(),
-            ["SphereMappingsByNimitz"] = () => new SphereMappingsByNimitz.Shaders.ProgramFragmentShader(),
-            ["SpheresByFelipevsfbr"] = () => new SpheresByFelipevsfbr.Shaders.ProgramFragmentShader(),
-            ["SphericalVoronoiByMattz"] = () => new SphericalVoronoiByMattz.Shaders.ProgramFragmentShader(),
-
-            ["SpiningRingsBySquid"] = () => new SpiningRingsBySquid.Shaders.ProgramFragmentShader(),
-            ["SpoutByPMalin"] = () => new SpoutByPMalin.Shaders.ProgramFragmentShader(),
-            ["SpriteEncodingByNikos"] = () => new SpriteEncodingByNikos.Shaders.ProgramFragmentShader(),
-            ["SpriteFontsByNikos"] = () => new SpriteFontsByNikos.Shaders.ProgramFragmentShader(),
+            {"SinMountainsByFred", () => new SinMountainsByFred.Shaders.ProgramFragmentShader()},
+            {"SkateboardByYasuo", () => new SkateboardByYasuo.Shaders.ProgramFragmentShader()},
 
 
-            ["StairsByDila"] = () => new StairsByDila.Shaders.ProgramFragmentShader(),
-            ["StairwayToHeavenByEiffie"] = () => new StairwayToHeavenByEiffie.Shaders.ProgramFragmentShader(),
-            ["StairwayToTheStarsByDr2"] = () => new StairwayToTheStarsByDr2.Shaders.ProgramFragmentShader(),
+            {"SmashEffectByDila", () => new SmashEffectByDila.Shaders.ProgramFragmentShader()},
+            {"SminTestByHughsk", () => new SminTestByHughsk.Shaders.ProgramFragmentShader()},
+            {"SmoothedCSGByTekF", () => new SmoothedCSGByTekF.Shaders.ProgramFragmentShader()},
+            {"SnowBallByIapafoto", () => new SnowBallByIapafoto.Shaders.ProgramFragmentShader()},
 
-            ["StarMapByMorgan"] = () => new StarMapByMorgan.Shaders.ProgramFragmentShader(),
-            ["StarwarsShipThingByAlleycatsphinx"] = () => new StarwarsShipThingByAlleycatsphinx.Shaders.ProgramFragmentShader(),
+            {"SoftShadowTestByDila", () => new SoftShadowTestByDila.Shaders.ProgramFragmentShader()},
+            {"SoftSphereShadowsByBen", () => new SoftSphereShadowsByBen.Shaders.ProgramFragmentShader()},
+            {"SomedayByEiffie", () => new SomedayByEiffie.Shaders.ProgramFragmentShader()},
+            {"SomeSortOfGridByGermangb", () => new SomeSortOfGridByGermangb.Shaders.ProgramFragmentShader()},
+            {"SoundAcidJamBySrtuss", () => new SoundAcidJamBySrtuss.Shaders.ProgramFragmentShader()},
 
-            ["SteamLogoByYakoudbz"] = () => new SteamLogoByYakoudbz.Shaders.ProgramFragmentShader(),
+            {"SpaceByReinder", () => new SpaceByReinder.Shaders.ProgramFragmentShader()},
+            {"SpaceEggByMattz", () => new SpaceEggByMattz.Shaders.ProgramFragmentShader()},
+            {"SpaceRingsByMu6k", () => new SpaceRingsByMu6k.Shaders.ProgramFragmentShader()},
 
-            ["StromboliByDr2"] = () => new StromboliByDr2.Shaders.ProgramFragmentShader(),
-            ["SubmergedByFizzer"] = () => new SubmergedByFizzer.Shaders.ProgramFragmentShader(),
-            ["SunsetCloudByKuvkar"] = () => new SunsetCloudByKuvkar.Shaders.ProgramFragmentShader(),
-            ["SunsetOnTheSeaByRiccardo"] = () => new SunsetOnTheSeaByRiccardo.Shaders.ProgramFragmentShader(),
-            ["SwirlingRingsByyJimmikaelkael"] = () => new SwirlingRingsByyJimmikaelkael.Shaders.ProgramFragmentShader(),
+            {"SparksByVanburgler", () => new SparksByVanburgler.Shaders.ProgramFragmentShader()},
+            {"SparseGridMarchingByNimitz", () => new SparseGridMarchingByNimitz.Shaders.ProgramFragmentShader()},
+
+            {"SpeedingInTheDarkByWilddev", () => new SpeedingInTheDarkByWilddev.Shaders.ProgramFragmentShader()},
+            {"SphereMappingsByNimitz", () => new SphereMappingsByNimitz.Shaders.ProgramFragmentShader()},
+            {"SpheresByFelipevsfbr", () => new SpheresByFelipevsfbr.Shaders.ProgramFragmentShader()},
+            {"SphericalVoronoiByMattz", () => new SphericalVoronoiByMattz.Shaders.ProgramFragmentShader()},
+
+            {"SpiningRingsBySquid", () => new SpiningRingsBySquid.Shaders.ProgramFragmentShader()},
+            {"SpoutByPMalin", () => new SpoutByPMalin.Shaders.ProgramFragmentShader()},
+            {"SpriteEncodingByNikos", () => new SpriteEncodingByNikos.Shaders.ProgramFragmentShader()},
+            {"SpriteFontsByNikos", () => new SpriteFontsByNikos.Shaders.ProgramFragmentShader()},
+
+
+            {"StairsByDila", () => new StairsByDila.Shaders.ProgramFragmentShader()},
+            {"StairwayToHeavenByEiffie", () => new StairwayToHeavenByEiffie.Shaders.ProgramFragmentShader()},
+            {"StairwayToTheStarsByDr2", () => new StairwayToTheStarsByDr2.Shaders.ProgramFragmentShader()},
+
+            {"StarMapByMorgan", () => new StarMapByMorgan.Shaders.ProgramFragmentShader()},
+            {"StarwarsShipThingByAlleycatsphinx", () => new StarwarsShipThingByAlleycatsphinx.Shaders.ProgramFragmentShader()},
+
+            {"SteamLogoByYakoudbz", () => new SteamLogoByYakoudbz.Shaders.ProgramFragmentShader()},
+
+            {"StromboliByDr2", () => new StromboliByDr2.Shaders.ProgramFragmentShader()},
+            {"SubmergedByFizzer", () => new SubmergedByFizzer.Shaders.ProgramFragmentShader()},
+            {"SunsetCloudByKuvkar", () => new SunsetCloudByKuvkar.Shaders.ProgramFragmentShader()},
+            {"SunsetOnTheSeaByRiccardo", () => new SunsetOnTheSeaByRiccardo.Shaders.ProgramFragmentShader()},
+            {"SwirlingRingsByyJimmikaelkael", () => new SwirlingRingsByyJimmikaelkael.Shaders.ProgramFragmentShader()},
             #endregion
 
 
