@@ -15,31 +15,32 @@ namespace ChromeShaderToyPrograms.a
 
         public static Dictionary<string, Func<FragmentShader>> programs = new Dictionary<string, Func<FragmentShader>>
         {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151113
 
 
             #region /a/
-            ["AbstractThings0BySquid"] = () => new AbstractThings0BySquid.Shaders.ProgramFragmentShader(),
-            ["ACloudByMu6k"] = () => new ACloudByMu6k.Shaders.ProgramFragmentShader(),
-            ["AkiyoshisSnakesIllusionByHoskins"] = () => new AkiyoshisSnakesIllusionByHoskins.Shaders.ProgramFragmentShader(),
-            ["AlienBeaconByOtavio"] = () => new AlienBeaconByOtavio.Shaders.ProgramFragmentShader(),
-            //["AlpineJetsByDr2"] = () => new AlpineJetsByDr2.Shaders.ProgramFragmentShader(),
-            ["AngelsByIq"] = () => new AngelsByIq.Shaders.ProgramFragmentShader(),
+            {"AbstractThings0BySquid",() => new AbstractThings0BySquid.Shaders.ProgramFragmentShader()},
+            {"ACloudByMu6k",() => new ACloudByMu6k.Shaders.ProgramFragmentShader()},
+            {"AkiyoshisSnakesIllusionByHoskins",() => new AkiyoshisSnakesIllusionByHoskins.Shaders.ProgramFragmentShader()},
+            {"AlienBeaconByOtavio",() => new AlienBeaconByOtavio.Shaders.ProgramFragmentShader()},
+            //{"AlpineJetsByDr2",() => new AlpineJetsByDr2.Shaders.ProgramFragmentShader()},
+            {"AngelsByIq",() => new AngelsByIq.Shaders.ProgramFragmentShader()},
 
-            ["ApollonianByIq"] = () => new ApollonianByIq.Shaders.ProgramFragmentShader(),
-            ["AquariumByDr2"] = () => new AquariumByDr2.Shaders.ProgramFragmentShader(),
-            ["AtlantisByDr2"] = () => new AtlantisByDr2.Shaders.ProgramFragmentShader(),
+            {"ApollonianByIq",() => new ApollonianByIq.Shaders.ProgramFragmentShader()},
+            {"AquariumByDr2",() => new AquariumByDr2.Shaders.ProgramFragmentShader()},
+            {"AtlantisByDr2",() => new AtlantisByDr2.Shaders.ProgramFragmentShader()},
 
-            ["AsteroidsByArchee"] = () => new AsteroidsByArchee.Shaders.ProgramFragmentShader(),
-            ["ATreeByGuil"] = () => new ATreeByGuil.Shaders.ProgramFragmentShader(),
-            ["AttackOfTheFuzziesByEiffie"] = () => new AttackOfTheFuzziesByEiffie.Shaders.ProgramFragmentShader(),
-            ["AtticByRobert"] = () => new AtticByRobert.Shaders.ProgramFragmentShader(),
-            ["AudioClayByTekF"] = () => new AudioClayByTekF.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToyAnalyticalMotionblurByIq"] = () => new ChromeShaderToyAnalyticalMotionblurByIq.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToyAlbertArchesByDr2"] = () => new ChromeShaderToyAlbertArchesByDr2.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToyAlpsByHoskins"] = () => new ChromeShaderToyAlpsByHoskins.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToyAndroidsByGreen"] = () => new ChromeShaderToyAndroidsByGreen.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToyAnimationByFlyguy"] = () => new ChromeShaderToyAnimationByFlyguy.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToyAssBlockByDila"] = () => new ChromeShaderToyAssBlockByDila.Shaders.ProgramFragmentShader(),
+            {"AsteroidsByArchee",() => new AsteroidsByArchee.Shaders.ProgramFragmentShader()},
+            {"ATreeByGuil",() => new ATreeByGuil.Shaders.ProgramFragmentShader()},
+            {"AttackOfTheFuzziesByEiffie",() => new AttackOfTheFuzziesByEiffie.Shaders.ProgramFragmentShader()},
+            {"AtticByRobert",() => new AtticByRobert.Shaders.ProgramFragmentShader()},
+            {"AudioClayByTekF",() => new AudioClayByTekF.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToyAnalyticalMotionblurByIq",() => new ChromeShaderToyAnalyticalMotionblurByIq.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToyAlbertArchesByDr2",() => new ChromeShaderToyAlbertArchesByDr2.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToyAlpsByHoskins",() => new ChromeShaderToyAlpsByHoskins.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToyAndroidsByGreen",() => new ChromeShaderToyAndroidsByGreen.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToyAnimationByFlyguy",() => new ChromeShaderToyAnimationByFlyguy.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToyAssBlockByDila",() => new ChromeShaderToyAssBlockByDila.Shaders.ProgramFragmentShader()},
             #endregion
 
 

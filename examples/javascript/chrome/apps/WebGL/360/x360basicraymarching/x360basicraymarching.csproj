@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{15C393F2-5CE1-45B1-99AE-3EBABE214FF4}</ProjectGuid>
+    <ProjectGuid>{77234670-3487-477E-9F24-73AB75E6D82E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>x360rectangulararealight</RootNamespace>
-    <AssemblyName>x360rectangulararealight</AssemblyName>
+    <RootNamespace>x360basicraymarching</RootNamespace>
+    <AssemblyName>x360basicraymarching</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>x360rectangulararealight.Program</StartupObject>
+    <StartupObject>x360basicraymarching.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -136,11 +136,11 @@
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
     </Reference>
-    <Reference Include="x360rectangulararealight.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\x360rectangulararealight.AssetsLibrary.dll</HintPath>
+    <Reference Include="x360basicraymarching.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\x360basicraymarching.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="RectangularAreaLightTestByTsone.AssetsLibrary">
-      <HintPath>..\..\synergy\r\RectangularAreaLightTestByTsone\RectangularAreaLightTestByTsone\bin\staging.AssetsLibrary\RectangularAreaLightTestByTsone.AssetsLibrary.dll</HintPath>
+    <Reference Include="BasicRayMarchingByQueenkong.AssetsLibrary">
+      <HintPath>..\..\synergy\b\BasicRayMarchingByQueenkong\bin\staging.AssetsLibrary\BasicRayMarchingByQueenkong.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +164,9 @@
     <Folder Include="web\assets\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\synergy\r\RectangularAreaLightTestByTsone\RectangularAreaLightTestByTsone\RectangularAreaLightTestByTsone.csproj">
-      <Project>{f7f4bd75-c17c-4405-9160-d28e24b8941f}</Project>
-      <Name>RectangularAreaLightTestByTsone</Name>
+    <ProjectReference Include="..\..\synergy\b\BasicRayMarchingByQueenkong\BasicRayMarchingByQueenkong.csproj">
+      <Project>{f4b656d0-0212-4b90-8194-be49109b7258}</Project>
+      <Name>BasicRayMarchingByQueenkong</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

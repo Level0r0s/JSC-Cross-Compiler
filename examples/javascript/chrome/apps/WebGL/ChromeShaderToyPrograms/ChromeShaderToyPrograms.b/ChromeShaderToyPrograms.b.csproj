@@ -169,6 +169,15 @@
     <Reference Include="ChromeShaderToyBokehBlurByKabuto.AssetsLibrary">
       <HintPath>..\..\synergy\b\ChromeShaderToyBokehBlurByKabuto\ChromeShaderToyBokehBlurByKabuto\bin\staging.AssetsLibrary\ChromeShaderToyBokehBlurByKabuto.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="BeenoxGoesBlackOps3ByFungos.AssetsLibrary">
+      <HintPath>..\..\synergy\b\BeenoxGoesBlackOps3ByFungos\bin\staging.AssetsLibrary\BeenoxGoesBlackOps3ByFungos.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="BobsledByDr2.AssetsLibrary">
+      <HintPath>..\..\synergy\b\BobsledByDr2\bin\staging.AssetsLibrary\BobsledByDr2.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicRayMarchingByQueenkong.AssetsLibrary">
+      <HintPath>..\..\synergy\b\BasicRayMarchingByQueenkong\bin\staging.AssetsLibrary\BasicRayMarchingByQueenkong.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="b.cs" />
@@ -184,6 +193,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\synergy\b\BasicRayMarchingByQueenkong\BasicRayMarchingByQueenkong.csproj">
+      <Project>{f4b656d0-0212-4b90-8194-be49109b7258}</Project>
+      <Name>BasicRayMarchingByQueenkong</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\synergy\b\BatmanLogoByIq\BatmanLogoByIq\BatmanLogoByIq.csproj">
       <Project>{1c267f82-926a-47a9-84c0-8f4c59b39589}</Project>
       <Name>BatmanLogoByIq</Name>

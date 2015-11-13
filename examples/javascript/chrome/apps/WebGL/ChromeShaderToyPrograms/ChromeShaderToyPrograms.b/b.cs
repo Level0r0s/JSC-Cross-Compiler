@@ -19,26 +19,26 @@ namespace ChromeShaderToyPrograms.b
             #region /b/
 
             
-            ["BasicRayMarchingByQueenkong"] = () => new BasicRayMarchingByQueenkong.Shaders.ProgramFragmentShader(),
-            ["BatmanLogoByIq"] = () => new BatmanLogoByIq.Shaders.ProgramFragmentShader(),
-            ["BatsByGaz"] = () => new BatsByGaz.Shaders.ProgramFragmentShader(),
-            ["BeautypiByIq"] = () => new BeautypiByIq.Shaders.ProgramFragmentShader(),
-            ["BeeHiveByMovax"] = () => new BeeHiveByMovax.Shaders.ProgramFragmentShader(),
-            ["BeenoxGoesBlackOps3ByFungos"] = () => new BeenoxGoesBlackOps3ByFungos.Shaders.ProgramFragmentShader(),
+            {"BasicRayMarchingByQueenkong",() => new BasicRayMarchingByQueenkong.Shaders.ProgramFragmentShader()},
+            {"BatmanLogoByIq",() => new BatmanLogoByIq.Shaders.ProgramFragmentShader()},
+            {"BatsByGaz",() => new BatsByGaz.Shaders.ProgramFragmentShader()},
+            {"BeautypiByIq",() => new BeautypiByIq.Shaders.ProgramFragmentShader()},
+            {"BeeHiveByMovax",() => new BeeHiveByMovax.Shaders.ProgramFragmentShader()},
+            {"BeenoxGoesBlackOps3ByFungos",() => new BeenoxGoesBlackOps3ByFungos.Shaders.ProgramFragmentShader()},
 
             
-            //["BiplanesInTheBadlandsByDr2"] = () => new BiplanesInTheBadlandsByDr2.Shaders.ProgramFragmentShader(),
-            ["BlankspaceByNBickford"] = () => new BlankspaceByNBickford.Shaders.ProgramFragmentShader(),
-            ["BlobsByPaulo"] = () => new BlobsByPaulo.Shaders.ProgramFragmentShader(),
-            ["BlueWallClockByC3d"] = () => new BlueWallClockByC3d.Shaders.ProgramFragmentShader(),
+            //{"BiplanesInTheBadlandsByDr2",() => new BiplanesInTheBadlandsByDr2.Shaders.ProgramFragmentShader()},
+            {"BlankspaceByNBickford",() => new BlankspaceByNBickford.Shaders.ProgramFragmentShader()},
+            {"BlobsByPaulo",() => new BlobsByPaulo.Shaders.ProgramFragmentShader()},
+            {"BlueWallClockByC3d",() => new BlueWallClockByC3d.Shaders.ProgramFragmentShader()},
 
-            ["BobsledByDr2"] = () => new BobsledByDr2.Shaders.ProgramFragmentShader(),
-            ["BoingBallByUnitZeroOne"] = () => new BoingBallByUnitZeroOne.Shaders.ProgramFragmentShader(),
+            {"BobsledByDr2",() => new BobsledByDr2.Shaders.ProgramFragmentShader()},
+            {"BoingBallByUnitZeroOne",() => new BoingBallByUnitZeroOne.Shaders.ProgramFragmentShader()},
 
-            ["BRDFsRUsByAntonalog"] = () => new BRDFsRUsByAntonalog.Shaders.ProgramFragmentShader(),
-            ["BokehBlurByKabuto"] = () => new ChromeShaderToyBokehBlurByKabuto.Shaders.ProgramFragmentShader(),
-            ["ButterfliesByFizzer"] = () => new ButterfliesByFizzer.Shaders.ProgramFragmentShader(),
-            ["ChromeShaderToyBenderByIq"] = () => new ChromeShaderToyBenderByIq.Shaders.ProgramFragmentShader(),
+            {"BRDFsRUsByAntonalog",() => new BRDFsRUsByAntonalog.Shaders.ProgramFragmentShader()},
+            {"BokehBlurByKabuto",() => new ChromeShaderToyBokehBlurByKabuto.Shaders.ProgramFragmentShader()},
+            {"ButterfliesByFizzer",() => new ButterfliesByFizzer.Shaders.ProgramFragmentShader()},
+            {"ChromeShaderToyBenderByIq",() => new ChromeShaderToyBenderByIq.Shaders.ProgramFragmentShader()},
             #endregion
 
 
