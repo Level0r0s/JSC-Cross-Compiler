@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BAF89824-4085-4B24-B3FB-A3E3C18E314C}</ProjectGuid>
+    <ProjectGuid>{77234670-3487-477E-9F24-73AB75E6D82E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>x360basicraymarching</RootNamespace>
-    <AssemblyName>x360basicraymarching</AssemblyName>
+    <RootNamespace>x360postcard</RootNamespace>
+    <AssemblyName>x360postcard</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>x360basicraymarching.Program</StartupObject>
+    <StartupObject>x360postcard.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -139,8 +139,11 @@
     <Reference Include="x360basicraymarching.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\x360basicraymarching.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="BasicRayMarchingByQueenkong.AssetsLibrary">
-      <HintPath>..\..\synergy\b\BasicRayMarchingByQueenkong\bin\staging.AssetsLibrary\BasicRayMarchingByQueenkong.AssetsLibrary.dll</HintPath>
+    <Reference Include="x360postcard.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\x360postcard.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="PostcardByNimitz.AssetsLibrary">
+      <HintPath>..\..\synergy\p\PostcardByNimitz\bin\staging.AssetsLibrary\PostcardByNimitz.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +167,9 @@
     <Folder Include="web\assets\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\synergy\b\BasicRayMarchingByQueenkong\BasicRayMarchingByQueenkong.csproj">
-      <Project>{f4b656d0-0212-4b90-8194-be49109b7258}</Project>
-      <Name>BasicRayMarchingByQueenkong</Name>
+    <ProjectReference Include="..\..\synergy\p\PostcardByNimitz\PostcardByNimitz.csproj">
+      <Project>{7e2e2eb0-d1b1-4006-a7d5-f99ad2f1e03f}</Project>
+      <Name>PostcardByNimitz</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

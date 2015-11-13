@@ -451,9 +451,9 @@
       <Project>{30aa2be2-d946-4d99-8e4f-9bae113535b7}</Project>
       <Name>ChromeShaderToyInfiniteRepetitionBySsdsa</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\synergy\i\IceLakeByXor\IceLakeByXor\IceLakeByXor.csproj">
+    <ProjectReference Include="..\..\synergy\p\PostcardByNimitz\PostcardByNimitz.csproj">
       <Project>{7e2e2eb0-d1b1-4006-a7d5-f99ad2f1e03f}</Project>
-      <Name>IceLakeByXor</Name>
+      <Name>PostcardByNimitz</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\i\IcyMoonByDr2\IcyMoonByDr2\IcyMoonByDr2.csproj">
       <Project>{6893d375-cfdb-4a26-af7a-593bc8f9662c}</Project>

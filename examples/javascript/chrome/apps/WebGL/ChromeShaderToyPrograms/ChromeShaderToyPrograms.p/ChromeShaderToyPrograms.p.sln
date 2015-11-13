@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyPrograms.p", "ChromeShaderToyPrograms.p.csproj", "{B8A8E6B9-D1A2-4DCF-A71F-9FC7C16DB5A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ByReference", "ByReference", "{B084EF83-1AF6-4B32-9456-E4F8B90CD172}"
@@ -54,6 +52,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreloaderByMattdesl", "..\..\synergy\p\PreloaderByMattdesl\PreloaderByMattdesl\PreloaderByMattdesl.csproj", "{CC711A84-381D-46EE-B87A-1DB03C846CEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PseudoArmillaryTestByRK", "..\..\synergy\p\PseudoArmillaryTestByRK\PseudoArmillaryTestByRK\PseudoArmillaryTestByRK.csproj", "{7F5A7E33-0725-4B6B-9EA1-E6B391B01361}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostcardByNimitz", "..\..\synergy\p\PostcardByNimitz\PostcardByNimitz.csproj", "{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,6 +161,10 @@ Global
 		{7F5A7E33-0725-4B6B-9EA1-E6B391B01361}.Debug|x86.Build.0 = Debug|x86
 		{7F5A7E33-0725-4B6B-9EA1-E6B391B01361}.Release|x86.ActiveCfg = Release|x86
 		{7F5A7E33-0725-4B6B-9EA1-E6B391B01361}.Release|x86.Build.0 = Release|x86
+		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Debug|x86.ActiveCfg = Debug|x86
+		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Debug|x86.Build.0 = Debug|x86
+		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Release|x86.ActiveCfg = Release|x86
+		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,5 +194,6 @@ Global
 		{192C90E8-40A3-46BE-B2BD-1CD20B5F6CF6} = {B084EF83-1AF6-4B32-9456-E4F8B90CD172}
 		{CC711A84-381D-46EE-B87A-1DB03C846CEA} = {B084EF83-1AF6-4B32-9456-E4F8B90CD172}
 		{7F5A7E33-0725-4B6B-9EA1-E6B391B01361} = {B084EF83-1AF6-4B32-9456-E4F8B90CD172}
+		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F} = {B084EF83-1AF6-4B32-9456-E4F8B90CD172}
 	EndGlobalSection
 EndGlobal
