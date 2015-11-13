@@ -235,8 +235,8 @@ namespace x360barsoomgate
             // not responding...
             //int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
             //int cubefacesizeMAX = 2048; // 6 faces, ?
-            int cubefacesizeMAX = 2048; // 6 faces, ?
-            //int cubefacesizeMAX = 1024; // 6 faces, ?
+            //int cubefacesizeMAX = 2048; // 6 faces, ?
+            int cubefacesizeMAX = 1024; // 6 faces, ?
             int cubefacesize = cubefacesizeMAX; // 6 faces, ?
             //int cubefacesize = 1024; // 6 faces, ?
             // "X:\vr\tape1\0000x2048.png"
