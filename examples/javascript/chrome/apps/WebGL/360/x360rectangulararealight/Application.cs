@@ -1767,7 +1767,8 @@ namespace x360rectangulararealight
                 await_nextframe:
 
 
-                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(5, '0') + ".png";
+                //var filename = frameIDslider.valueAsNumber.ToString().PadLeft(5, '0') + ".png";
+                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(5, '0') + ".jpg";
                 status = "rendering... " + new { filename };
 
 

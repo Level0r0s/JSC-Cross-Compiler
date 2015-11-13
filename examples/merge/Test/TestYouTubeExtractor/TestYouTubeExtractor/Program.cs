@@ -1116,7 +1116,7 @@ namespace TestYouTubeExtractor
                 //t ? x = 3 : u && !n ? x = 2 : "layout_left_right" ==
 
                 // jsc rewriter breaks it?
-                IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link);
+                IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link, decryptSignature: false);
                 // Additional information: The remote name could not be resolved: 'youtube.com'
 
                 //DownloadAudio(videoInfos);
