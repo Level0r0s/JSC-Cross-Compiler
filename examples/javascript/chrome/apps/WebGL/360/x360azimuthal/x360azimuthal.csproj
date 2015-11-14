@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}</ProjectGuid>
+    <ProjectGuid>{390C044B-FCA2-41F2-ADF1-31C8ADACA8B4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>x360azimuthal</RootNamespace>

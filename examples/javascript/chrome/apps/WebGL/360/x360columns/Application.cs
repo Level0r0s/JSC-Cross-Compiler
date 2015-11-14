@@ -606,7 +606,7 @@ namespace x360columns
             canvasNY.canvas.AttachToDocument();
             canvasNY.canvas.style.transformOrigin = "0 0";
             // roslyn!
-            canvasNY.canvas.style.transform = $"scale({uizoom})";
+            canvasNY.canvas.style.transform = "scale(" + uizoom + ")";
 
             var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             applycameraoffset += delegate
@@ -621,7 +621,7 @@ namespace x360columns
             canvasPY.canvas.title = "PY";
             canvasPY.canvas.AttachToDocument();
             canvasPY.canvas.style.transformOrigin = "0 0";
-            canvasPY.canvas.style.transform = $"scale({uizoom})";
+            canvasPY.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
 
             // transpose xz?
@@ -642,7 +642,7 @@ namespace x360columns
             canvasNX.canvas.title = "NX";
             canvasNX.canvas.AttachToDocument();
             canvasNX.canvas.style.transformOrigin = "0 0";
-            canvasNX.canvas.style.transform = $"scale({uizoom})";
+            canvasNX.canvas.style.transform =  "scale(" + uizoom + ")";
 
             var cameraPX = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             applycameraoffset += delegate
@@ -659,7 +659,7 @@ namespace x360columns
             canvasPX.canvas.title = "PX";
             canvasPX.canvas.AttachToDocument();
             canvasPX.canvas.style.transformOrigin = "0 0";
-            canvasPX.canvas.style.transform = $"scale({uizoom})";
+            canvasPX.canvas.style.transform =  "scale(" + uizoom + ")";
             #endregion
 
 
@@ -680,7 +680,7 @@ namespace x360columns
             canvasNZ.canvas.title = "NZ";
             canvasNZ.canvas.AttachToDocument();
             canvasNZ.canvas.style.transformOrigin = "0 0";
-            canvasNZ.canvas.style.transform = $"scale({uizoom})";
+            canvasNZ.canvas.style.transform =  "scale(" + uizoom + ")";
 
             var cameraPZ = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             //cameraPZ.lookAt(new THREE.Vector3(1, 0, 0));
@@ -697,7 +697,7 @@ namespace x360columns
             canvasPZ.canvas.title = "PZ";
             canvasPZ.canvas.AttachToDocument();
             canvasPZ.canvas.style.transformOrigin = "0 0";
-            canvasPZ.canvas.style.transform = $"scale({uizoom})";
+            canvasPZ.canvas.style.transform =  "scale(" + uizoom + ")";
             #endregion
 
 
@@ -785,7 +785,7 @@ namespace x360columns
             var suizoom = 480f / c.width;
 
             c.style.transformOrigin = "0 0";
-            c.style.transform = $"scale({suizoom})";
+            c.style.transform = "scale(" + suizoom + ")";
             //c.style.backgroundColor = "yellow";
             c.style.position = IStyle.PositionEnum.absolute;
 
