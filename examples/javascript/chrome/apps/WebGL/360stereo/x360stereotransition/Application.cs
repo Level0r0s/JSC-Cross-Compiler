@@ -227,7 +227,7 @@ namespace x360stereotransition
                 //cubefacesize = 64; // 6 faces, ?
 
                 // fast gif?
-                cubefacesize = cubefacesizeMAX / 16; // 6 faces, ?
+                cubefacesize = 2048; // 6 faces, ?
 
 
             // can we keep fast fps yet highp?
@@ -244,7 +244,7 @@ namespace x360stereotransition
             var uizoom = 128f / cubefacesize;
 
 
-            Native.css.style.backgroundColor = "blue";
+            Native.css.style.backgroundColor = "darkcyan";
             Native.css.style.overflow = IStyle.OverflowEnum.hidden;
 
             Native.body.Clear();
@@ -447,103 +447,30 @@ namespace x360stereotransition
 
 
 
-            #region shader1canvas
-            new { }.With(
-              async delegate
-              {
-                  Native.body.style.margin = "0px";
-                  (Native.body.style as dynamic).webkitUserSelect = "auto";
-
-                  var vs0 = new ChromeShaderToyColumns.Shaders.ProgramFragmentShader();
-
-                  var gl0 = new WebGLRenderingContext(alpha: true);
-                  shader1canvas = gl0.canvas;
-
-                  var c0 = gl0.canvas.AttachToDocument();
-
-                  //c0.style.SetSize(460, 237);
-                  //c0.width = 460;
-                  //c0.height = 237;
-
-                  c0.style.SetSize((int)uizoom * 3, (int)uizoom * 3);
-                  c0.width = cubefacesize;
-                  c0.height = cubefacesize;
-
-                  c0.style.SetLocation(720, 8);
-
-                  var mMouseOriX = 0;
-                  var mMouseOriY = 0;
-                  var mMousePosX = 0;
-                  var mMousePosY = 0;
-
-
-                  var pass0 = new ChromeShaderToyColumns.Library.ShaderToy.EffectPass(
-                    null,
-                    gl0,
-                    precission: ChromeShaderToyColumns.Library.ShaderToy.DetermineShaderPrecission(gl0),
-                    supportDerivatives: gl0.getExtension("OES_standard_derivatives") != null,
-                    callback: null,
-                    obj: null,
-                    forceMuted: false,
-                    forcePaused: false,
-                      //quadVBO: Library.ShaderToy.createQuadVBO(gl, right: 0, top: 0),
-                    outputGainNode: null
-                );
-                  pass0.MakeHeader_Image();
-                  pass0.NewShader_Image(vs0);
-
-                  var sw0 = Stopwatch.StartNew();
-
-                  do
-                  {
-                      // 1800 is 30sec is 30 000
-                      // frameIDslider?
-
-                      //var fps60 = frameIDslider * 1000 / 60.0f;
-                      var fps60 = frameIDslider * (1 / 60.0f);
-
-                      pass0.Paint_Image(
-                        fps60,
-
-                        mMouseOriX,
-                        mMouseOriY,
-                        mMousePosX,
-                        mMousePosY
-                          //,
-
-                    // gl_FragCoord
-                          // cannot be scaled, and can be referenced directly.
-                          // need another way to scale
-                          //zoom: 0.3f
-                    );
-
-                      // what does it do?
-                      // need redux build..
-                      gl0.flush();
-
-                      //await u.animate.async.@checked;
-                  }
-                  while (await Native.window.async.onframe);
-
-              }
-          );
-            #endregion
-
-
-
             new IHTMLHorizontalRule { }.AttachToDocument();
 
-            var camerax = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 0 + 2048 * 4, valueAsNumber = 0, title = "camerax" }.AttachToDocument();
+            var camerax = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -32, max = 32, valueAsNumber = 0, title = "camerax" }.AttachToDocument();
+            camerax.css.after.contentText = "x: ";
+            new IHTMLBreak { }.AttachToDocument();
+
+            //camerax.style.borderLeft = "1em solid red";
+
             // up. whats the most high a rocket can go 120km?
-            new IHTMLHorizontalRule { }.AttachToDocument();
-
+            //new IHTMLHorizontalRule { }.AttachToDocument();
 
             // how high is the bunker?
-            var cameray = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 2048 * 4, valueAsNumber = 0, title = "cameray" }.AttachToDocument();
+            var cameray = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -32, max = 32, valueAsNumber = 0, title = "cameray" }.AttachToDocument();
+            cameray.css.after.contentText = "y: ";
             new IHTMLBreak { }.AttachToDocument();
-            var camerayHigh = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = cameray.max, max = 1024 * 256, valueAsNumber = cameray.max, title = "cameray" }.AttachToDocument();
-            new IHTMLHorizontalRule { }.AttachToDocument();
-            var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 0 + 2048 * 4, valueAsNumber = 0, title = "cameraz" }.AttachToDocument();
+
+            // we wont be going to orbit
+            //new IHTMLBreak { }.AttachToDocument();
+            //var camerayHigh = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = cameray.max, max = 1024 * 256, valueAsNumber = cameray.max, title = "cameray" }.AttachToDocument();
+            //new IHTMLHorizontalRule { }.AttachToDocument();
+            //var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048 * 4, max = 0 + 2048 * 4, valueAsNumber = 0, title = "cameraz" }.AttachToDocument();
+            //var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -2048 / 2, max = 0 + 2048 / 2, valueAsNumber = 0, title = "cameraz" }.AttachToDocument();
+            var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -32, max = 32, valueAsNumber = 0, title = "cameraz" }.AttachToDocument();
+            cameraz.css.after.contentText = "z: ";
 
             // for render server
             var fcamerax = 0.0;
@@ -555,7 +482,8 @@ namespace x360stereotransition
 
 
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151114/stereo
-            var itemRotation = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0, max = 360, valueAsNumber = 0, title = "itemRotation" }.AttachToDocument();
+            //var itemRotation = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -180, max = 180, valueAsNumber = 0, title = "itemRotation" }.AttachToDocument();
+            var itemRotation = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -90, max = 90, valueAsNumber = 33, title = "itemRotation" }.AttachToDocument();
 
             //while (await camerax.async.onchange)
 
@@ -565,11 +493,11 @@ namespace x360stereotransition
             //        camerayHigh.valueAsNumber = camerayHigh.min;
             //};
 
-            camerayHigh.onmousedown += delegate
-            {
-                //if (camerayHigh.valueAsNumber > camerayHigh.min)
-                cameray.valueAsNumber = cameray.max;
-            };
+            //camerayHigh.onmousedown += delegate
+            //{
+            //    //if (camerayHigh.valueAsNumber > camerayHigh.min)
+            //    cameray.valueAsNumber = cameray.max;
+            //};
 
 
             Action applycameraoffset = delegate
@@ -578,14 +506,18 @@ namespace x360stereotransition
 
                 var cy = cameray;
 
-                if (cameray.valueAsNumber < cameray.max)
-                    camerayHigh.valueAsNumber = camerayHigh.min;
 
-                if (camerayHigh.valueAsNumber > camerayHigh.min)
-                    cameray.valueAsNumber = cameray.max;
 
-                if (cameray.valueAsNumber == cameray.max)
-                    cy = camerayHigh;
+                // we wont be going to orbit
+
+                //if (cameray.valueAsNumber < cameray.max)
+                //    camerayHigh.valueAsNumber = camerayHigh.min;
+
+                //if (camerayHigh.valueAsNumber > camerayHigh.min)
+                //    cameray.valueAsNumber = cameray.max;
+
+                //if (cameray.valueAsNumber == cameray.max)
+                //    cy = camerayHigh;
 
 
 
@@ -674,6 +606,7 @@ namespace x360stereotransition
             //cameraPX.lookAt(new THREE.Vector3(0, 0, 1));
             //cameraPX.lookAt(new THREE.Vector3(1, 0, 0));
             //cameraPX.lookAt(new THREE.Vector3(-1, 0, 0));
+
             var canvasPX = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
             canvasPX.canvas.style.SetLocation(cubecameraoffsetx + (int)(uizoom * cubefacesize + 8) * 0, 8 + (int)(uizoom * cubefacesize + 8) * 1);
             canvasPX.canvas.title = "PX";
@@ -681,6 +614,46 @@ namespace x360stereotransition
             canvasPX.canvas.style.transformOrigin = "0 0";
             canvasPX.canvas.style.transform = "scale(" + uizoom + ")";
             #endregion
+
+            var canvasPXitem = new CanvasRenderingContext2D(cubefacesize, cubefacesize);
+            canvasPXitem.canvas.style.SetLocation(cubecameraoffsetx + (int)(uizoom * cubefacesize + 8) * 0, 8 + (int)(uizoom * cubefacesize + 8) * 2);
+            canvasPXitem.canvas.title = "item";
+            canvasPXitem.canvas.AttachToDocument();
+            canvasPXitem.canvas.style.transformOrigin = "0 0";
+            canvasPXitem.canvas.style.transform = "scale(" + uizoom + ")";
+            canvasPXitem.canvas.style.border = "1px solid yellow";
+
+            //canvasPXitem.fillText("hello", 1, 1, cubefacesize);
+
+            //canvasPXitem.drawImage(
+            //    //new IHTMLPre { "hello" }
+            //    new IHTMLDiv { "hello world. can we draw html into 360 VR yet?" }, 0, 0, cubefacesize, cubefacesize
+            //);
+
+
+
+
+
+
+
+            // http://www.w3schools.com/tags/canvas_fillstyle.asp
+            canvasPXitem.fillStyle = "red";
+
+            // too big?
+            //canvasPXitem.fillRect(
+            //    x: cubefacesize / 3,
+            //    y: cubefacesize / 4,
+            //    w: cubefacesize / 3,
+            //    h: cubefacesize / 2
+            //);
+
+            canvasPXitem.fillRect(
+               x: (cubefacesize - cubefacesize / 6) / 2,
+               y: (cubefacesize - cubefacesize / 3) / 2,
+
+               w: cubefacesize / 6,
+               h: cubefacesize / 3
+           );
 
 
 
@@ -852,6 +825,15 @@ namespace x360stereotransition
             frame0.style.width = "480px";
             frame0.style.SetLocation(
                 8 + (int)(uizoom * cubefacesize + 8) * 0 + 480 + 16, 8 + (int)(uizoom * cubefacesize + 8) * 3);
+
+
+
+            var frame2 = new HTML.Images.FromAssets.galaxy_starfield().AttachToDocument();
+
+            frame2.style.height = "270px";
+            frame2.style.width = "480px";
+            frame2.style.SetLocation(
+                8 + (int)(uizoom * cubefacesize + 8) * 0 + 480 * 2 + 16 * 2, 8 + (int)(uizoom * cubefacesize + 8) * 3);
 
 
 
@@ -1101,44 +1083,50 @@ namespace x360stereotransition
             //    floor2.AttachTo(scene);
             //}
 
+            //var tex0 = new THREE.Texture { image = new moon(), needsUpdate = true };
+            //var tex0 = new THREE.Texture(new moon());
+            //var tex0 = new THREE.Texture(new moon()) { needsUpdate = true };
+            var tex0 = new THREE.Texture(
+
+                //shader1canvas
+
+                canvasPXitem.canvas
+
+                ) { needsUpdate = true };
+
+
+            var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize, cubefacesize, 8, 8);
+            var floor2 = new THREE.Mesh(planeGeometry0,
+                //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+                //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
+                //new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000, specular = 0xff0000 })
+                new THREE.MeshPhongMaterial(
+                    new
+                    {
+
+                        map = tex0,
+
+                        transparent = true,
+                        alphaTest = 0.5
+
+                        //ambient = 0x00ff00,
+                        //color = 0x00ff00
+                    })
+
+            );
+            //floor2.position.set(0, 0, -cubefacesize  * 0.55);
+
+            floor2.AttachTo(scene);
+
+            applycameraoffset += delegate
             {
-                //var tex0 = new THREE.Texture { image = new moon(), needsUpdate = true };
-                //var tex0 = new THREE.Texture(new moon());
-                //var tex0 = new THREE.Texture(new moon()) { needsUpdate = true };
-                var tex0 = new THREE.Texture(shader1canvas) { needsUpdate = true };
+                tex0.needsUpdate = true;
 
+                floor2.position.set(-cubefacesize * 0.5, 0, 0);
+                floor2.rotation.set(0, 0, 0);
+                floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2 + radians(itemRotation.valueAsNumber));
+            };
 
-                var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize, cubefacesize, 8, 8);
-                var floor2 = new THREE.Mesh(planeGeometry0,
-                    //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
-                    //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
-                    //new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000, specular = 0xff0000 })
-                    new THREE.MeshPhongMaterial(
-                        new
-                        {
-
-                            map = tex0,
-
-
-                            //ambient = 0x00ff00,
-                            //color = 0x00ff00
-                        })
-
-                );
-                //floor2.position.set(0, 0, -cubefacesize  * 0.55);
-
-                floor2.AttachTo(scene);
-
-                applycameraoffset += delegate
-                {
-                    tex0.needsUpdate = true;
-
-                    floor2.position.set(-cubefacesize * 0.5, 0, 0);
-                    floor2.rotation.set(0, 0, 0);
-                    floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2 + radians(itemRotation.valueAsNumber));
-                };
-
-            }
 
 
 
@@ -1149,6 +1137,74 @@ namespace x360stereotransition
             // hidden for alpha AppWindows
             //#if FBACKGROUND
 
+            new IHTMLBreak { }.AttachToDocument();
+
+
+            #region stero
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151114/stereo
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151112
+            new IHTMLButton { "make me a stero TB image " }.AttachToDocument().With(
+                async e =>
+                {
+                    // http://www.vrideo.com/watch/ALdE7mm
+                    // https://www.youtube.com/watch?v=S3iTPxMIlCI
+
+                    var onclick = e.async.onclick;
+
+                    while (await onclick)
+                    {
+                        var xIPD = 4.0;
+
+                        fcamerax = -xIPD;
+
+                        await Native.window.async.onframe;
+                        var f0 = new IHTMLImage { src = gl.canvas.toDataURL() };
+
+                        fcamerax = +xIPD;
+
+                        await Native.window.async.onframe;
+                        var f1 = new IHTMLImage { src = gl.canvas.toDataURL() };
+
+                        //await Native.window.async.onframe;
+                        await f1.async.oncomplete;
+
+                        // 8K fulldome is a resolution of 8192×8192 
+                        // 8K UHD is a resolution of 7680 × 4320 (33.2 megapixels) 
+                        // 8192×4320 t
+                        // Digital video formats with resolutions of 4K (3840×2160) and 8K (7680×4320)
+
+                        var canvasTB = new CanvasRenderingContext2D(c.width * 2, c.height * 2);
+
+                        //canvasTB.drawImage(f0, 0, 0, c.width, c.height, 0, 0, c.width, c.height / 2);
+                        //canvasTB.drawImage(f1, 0, 0, c.width, c.height, 0, c.height / 2, c.width, c.height / 2);
+
+                        canvasTB.drawImage(f0, 0, 0, c.width, c.height, 0, 0, c.width * 2, c.height);
+                        canvasTB.drawImage(f1, 0, 0, c.width, c.height, 0, c.height, c.width * 2, c.height);
+
+                        // https://www.reddit.com/r/GearVR/comments/2vrfyu/id_suggest_makers_of_360_videos_make_them_the/
+                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151114/stereo
+
+                        // gearVR will get a black screen
+                        // 
+                        frame2.src = canvasTB.canvas.toDataURL();
+
+
+                        onclick = e.async.onclick;
+
+                        //while (!onclick.IsCompleted)
+                        //{
+                        //    await Task.Delay(1000 / 30);
+                        //    frame0.src = f0.src;
+                        //    await Task.Delay(1000 / 30);
+                        //    frame0.src = f1.src;
+                        //}
+                    }
+                }
+            );
+            #endregion
+
+
+
             new { }.With(
                 async delegate
                 {
@@ -1156,7 +1212,8 @@ namespace x360stereotransition
 
                     await iskybox2.async.oncomplete;
 
-                    var iskybox1 = new HTML.Images.FromAssets.tiles_regrid();
+                    //var iskybox1 = new HTML.Images.FromAssets.tiles_regrid();
+                    var iskybox1 = new HTML.Images.FromAssets.anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs();
                     //var i = new HTML.Images.FromAssets.galaxy_starfield();
                     //var i = new HTML.Images.FromAssets.galaxy_starfield150FOV();
 
@@ -1190,8 +1247,14 @@ namespace x360stereotransition
 
 
                     var skybox1 = new THREE.Mesh(
-                            //new THREE.SphereGeometry(far * 0.92, 64, 64),
-                            new THREE.SphereGeometry(far * 0.90, 64, 64),
+                        //new THREE.SphereGeometry(far * 0.92, 64, 64),
+                        //new THREE.SphereGeometry(far * 0.80, 64, 64),
+
+                            // still zfighting
+                        //new THREE.SphereGeometry(far * 0.50, 64, 64),
+
+                            // the other option is to have a single bg and blend on tht. this is just a rotation visualization.
+                            new THREE.SphereGeometry(far * 0.30, 64, 64),
                            skybox1_material
                         );
 
@@ -1298,6 +1361,41 @@ namespace x360stereotransition
                             // and then rotate right?
 
                             // how can we render cubemap?
+
+
+                            // hide everything else
+
+
+                            // inversion effect?
+                            if (hideskybox1.@checked)
+                                skybox1.visible = true;
+                            else
+                                skybox1.visible = false;
+
+                            floor2.visible = false;
+                            renderer0.render(scene, cameraPX);
+                            //canvasPXitem.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
+                            canvasPXitem.drawImage(
+                                (IHTMLCanvas)renderer0.domElement,
+
+
+
+                               sx: (cubefacesize - cubefacesize / 6) / 2,
+                               sy: (cubefacesize - cubefacesize / 3) / 2,
+
+                               sw: cubefacesize / 6,
+                               sh: cubefacesize / 3,
+
+                               dx: (cubefacesize - cubefacesize / 6) / 2,
+                               dy: (cubefacesize - cubefacesize / 3) / 2,
+
+                               dw: cubefacesize / 6,
+                               dh: cubefacesize / 3
+                           );
+
+
+                            skybox1.visible = !hideskybox1.@checked;
+                            floor2.visible = true;
 
 
                             #region x

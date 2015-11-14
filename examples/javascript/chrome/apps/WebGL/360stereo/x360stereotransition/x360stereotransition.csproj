@@ -175,6 +175,7 @@
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
     <Content Include="Textures\2massAllskyGAMMA.jpg" />
+    <Content Include="Textures\anvil___spherical_hdri_panorama_skybox_by_macsix-d6vv4hs.jpg" />
     <Content Include="Textures\galaxy_starfield.png" />
     <Content Include="Textures\tiles_regrid.png" />
     <None Include="app.config" />

@@ -904,10 +904,10 @@ namespace Chrome360HZAnimation
 
 
 
-
+            #region stero
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151114/stereo
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151112
-            new IHTMLButton { "make me a stere TB image " }.AttachToDocument().With(
+            new IHTMLButton { "make me a stero TB image " }.AttachToDocument().With(
                 async e =>
                 {
                     // http://www.vrideo.com/watch/ALdE7mm
@@ -952,6 +952,7 @@ namespace Chrome360HZAnimation
                     }
                 }
             );
+            #endregion
 
 
             var vsync = default(TaskCompletionSource<object>);
