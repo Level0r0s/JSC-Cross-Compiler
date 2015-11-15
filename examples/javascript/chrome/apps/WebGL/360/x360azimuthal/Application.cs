@@ -1341,7 +1341,7 @@ namespace x360azimuthal
                                 URL.revokeObjectURL(url);
 
 
-
+                                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151114/stereo
                                 // reset
                                 stars.rotation.set(0, 0, 0);
 

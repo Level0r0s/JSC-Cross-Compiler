@@ -40,6 +40,10 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         public double lineWidth;
         public void lineTo(int x, int y) { }
 
+
+
+
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360stereo\x360stereotransition\Application.cs
         public string fillStyle;
         public void fillRect(int x, int y, int cx, int cy) { }
         public void clearRect( float x,  float y,  float w,  float h) {}

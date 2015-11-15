@@ -164,6 +164,8 @@ namespace ScriptCoreLib.JavaScript.DOM
             var data = canvas.toDataURL(quality: 1.0);
             //var data = canvas.toDataURL(quality: 0.1);
 
+            // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360stereo\x360stereotransition\Application.cs
+
             var prefix = "base64,";
 
 

@@ -215,7 +215,7 @@ namespace x360stereotransition
 
             // crash
             //int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
-            int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
+            int cubefacesizeMAX = 2048 ; // 6 faces, ?
             int cubefacesize = cubefacesizeMAX; // 6 faces, ?
             //int cubefacesize = 1024; // 6 faces, ?
             // "X:\vr\tape1\0000x2048.png"
@@ -442,7 +442,22 @@ namespace x360stereotransition
             //var cameraoffset = new THREE.Vector3(-1200, 800, 1200);
 
             // whatif we want more than 30sec video? 2min animation? more frames to render? 2gb disk?
-            var frameIDslider = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0, max = 1800, valueAsNumber = 1800 / 2, title = "frameIDslider" }.AttachToDocument();
+
+
+
+
+
+            var maxfps = 60;
+            //var maxlengthseconds = 60;
+            var maxlengthseconds = 120;
+
+            var maxframes = maxlengthseconds * maxfps;
+
+            var frameIDanimation = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox, title = "frameIDanimation", @checked = false }.AttachToDocument();
+
+            // whatif we want more than 30sec video? 2min animation? more frames to render? 2gb disk?
+            var frameIDslider = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0, max = maxframes, valueAsNumber = 0, title = "frameIDslider" }.AttachToDocument();
+            //var frameIDslider = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0, max = 1800, valueAsNumber = 1800 / 2, title = "frameIDslider" }.AttachToDocument();
 
 
 
@@ -482,8 +497,8 @@ namespace x360stereotransition
 
 
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151114/stereo
-            //var itemRotation = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -180, max = 180, valueAsNumber = 0, title = "itemRotation" }.AttachToDocument();
-            var itemRotation = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -90, max = 90, valueAsNumber = 33, title = "itemRotation" }.AttachToDocument();
+            var itemRotation = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -180, max = 180, valueAsNumber = 0, title = "itemRotation" }.AttachToDocument();
+            //var itemRotation = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -90, max = 90, valueAsNumber = 33, title = "itemRotation" }.AttachToDocument();
 
             //while (await camerax.async.onchange)
 
@@ -917,10 +932,14 @@ namespace x360stereotransition
 
             #region render 60hz 30sec
             new IHTMLButton {
-                "render 60hz 30sec"
+                //"render 60hz 30sec"
+                //$"render {maxfps}hz {maxlengthseconds}sec"
+                "render " + new {maxfps} + "hz " + new {maxlengthseconds} + "sec"
             }.AttachToDocument().onclick += async e =>
             {
                 e.Element.disabled = true;
+
+                var canvasTB = new CanvasRenderingContext2D(c.width * 2, c.height * 2);
 
 
                 var total = Stopwatch.StartNew();
@@ -943,7 +962,14 @@ namespace x360stereotransition
                 status = "rendering... vsync";
 
                 //var frameid = 0;
+                frameIDanimation.@checked = true;
                 frameIDslider.valueAsNumber = -1;
+
+                // allow the animation values to sink in
+                vsync = new TaskCompletionSource<object>();
+                await vsync.Task;
+
+
 
                 goto beforeframe;
 
@@ -953,12 +979,33 @@ namespace x360stereotransition
                 await_nextframe:
 
 
-                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(4, '0') + ".png";
+                var filename = frameIDslider.valueAsNumber.ToString().PadLeft(5, '0') + ".jpg";
                 status = "rendering... " + new { filename };
 
 
+
+                var xIPD = 4.0;
+
+
+                // left eye
+                fcamerax = -xIPD;
                 vsync = new TaskCompletionSource<object>();
                 await vsync.Task;
+                var f0 = new IHTMLImage { src = gl.canvas.toDataURL() };
+
+
+                // right eye
+                fcamerax = +xIPD;
+                vsync = new TaskCompletionSource<object>();
+                await vsync.Task;
+                var f1 = new IHTMLImage { src = gl.canvas.toDataURL() };
+                await f1.async.oncomplete;
+
+
+
+                canvasTB.drawImage(f0, 0, 0, c.width, c.height, 0, 0, c.width * 2, c.height);
+                canvasTB.drawImage(f1, 0, 0, c.width, c.height, 0, c.height, c.width * 2, c.height);
+
 
                 // frame0 has been rendered
 
@@ -967,8 +1014,15 @@ namespace x360stereotransition
                 //await Native.window.async.onframe;
 
                 // https://code.google.com/p/chromium/issues/detail?id=404301
-                if (dir != null)
-                    await dir.WriteAllBytes(filename, gl);
+                if (dir == null)
+                {
+                    frame2.src = canvasTB.canvas.toDataURL();
+
+                    await Task.Delay(500);
+                }
+                else
+                    await dir.WriteAllBytes(filename, canvasTB);
+                //await dir.WriteAllBytes(filename, gl);
                 //await dir.WriteAllBytes(filename, gl.canvas);
 
                 status = "WriteAllBytes... done " + new { fcamerax, filename, swcapture.ElapsedMilliseconds };
@@ -981,7 +1035,7 @@ namespace x360stereotransition
 
                 // design mode v render mode
                 if (cubefacesize < cubefacesizeMAX)
-                    frameIDslider.valueAsNumber += 15;
+                    frameIDslider.valueAsNumber += 60;
                 else
                     frameIDslider.valueAsNumber++;
 
@@ -1023,7 +1077,7 @@ namespace x360stereotransition
 
 
                 // 60hz 30sec
-                if (frameIDslider.valueAsNumber < 60 * 30)
+                if (frameIDslider.valueAsNumber < maxframes)
                 {
                     // Blob GC? either this helms or the that we made a Blob static. 
                     await Task.Delay(11);
@@ -1212,6 +1266,9 @@ namespace x360stereotransition
 
                     await iskybox2.async.oncomplete;
 
+
+
+
                     //var iskybox1 = new HTML.Images.FromAssets.tiles_regrid();
                     var iskybox1 = new HTML.Images.FromAssets.anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs();
                     //var i = new HTML.Images.FromAssets.galaxy_starfield();
@@ -1271,6 +1328,19 @@ namespace x360stereotransition
                     scene.add(skybox1);
 
 
+
+
+                    applycameraoffset += delegate
+                    {
+                        if (frameIDanimation.@checked)
+                        {
+                            itemRotation.valueAsNumber = (frameIDslider.valueAsNumber / 2) % 360 - 180;
+
+                            hideskybox1.@checked = (frameIDslider.valueAsNumber / 2 + 180) % 720 < 360;
+                        }
+                    };
+
+
                     // target bg
                     new THREE.Mesh(
                             new THREE.SphereGeometry(far * 0.95, 64, 64),
@@ -1283,8 +1353,35 @@ namespace x360stereotransition
                             })
                     )
 
-                    .AttachTo(scene)
-                    ;
+                    .AttachTo(scene).With(
+                        stars =>
+                        {
+                            applycameraoffset += delegate
+                              {
+
+                                  skybox1.rotation.set(0, 0, 0);
+                                  // spin
+                                  skybox1.rotateOnAxis(new THREE.Vector3(0, -1, 0),
+                                     frameIDslider.valueAsNumber / (60 * 60 / 5.0) * Math.PI * 2
+                                 );
+
+                                  // reset
+                                  stars.rotation.set(0, 0, 0);
+
+                                  // slow rotate in place
+                                  stars.rotateOnAxis(new THREE.Vector3(1, 0, 0),
+                                      frameIDslider.valueAsNumber / 3600.0 * Math.PI * 2
+                                  );
+
+                                  // follow the moon?
+                                  stars.rotateOnAxis(new THREE.Vector3(0, -1, 0),
+                                      frameIDslider.valueAsNumber / (60 * 60 / 5.0) * Math.PI * 2
+                                  );
+                              };
+                        }
+
+                    );
+
 
 
                     Console.WriteLine("skybox added");

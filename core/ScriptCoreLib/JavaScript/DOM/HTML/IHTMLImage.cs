@@ -103,6 +103,9 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             return new IHTMLImage { src = src };
         }
 
+
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360stereo\x360stereotransition\Application.cs
+
         public static implicit operator IHTMLImage(IHTMLDiv div)
         {
             System.Console.WriteLine("IHTMLImage <- IHTMLDiv");
