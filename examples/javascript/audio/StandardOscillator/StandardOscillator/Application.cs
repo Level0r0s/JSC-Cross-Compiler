@@ -25,6 +25,10 @@ namespace StandardOscillator
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // asus has 2015 that works?
+
+
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>
