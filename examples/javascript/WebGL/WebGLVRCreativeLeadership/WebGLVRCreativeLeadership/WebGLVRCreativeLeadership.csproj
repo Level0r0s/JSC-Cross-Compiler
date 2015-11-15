@@ -168,6 +168,15 @@
     <Reference Include="WebGLColladaExperiment.AssetsLibrary">
       <HintPath>..\..\WebGLColladaExperiment\WebGLColladaExperiment\bin\staging.AssetsLibrary\WebGLColladaExperiment.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="HeatZeekerRTSOrto.AssetsLibrary">
+      <HintPath>..\..\HeatZeekerRTSOrto\HeatZeekerRTSOrto\bin\staging.AssetsLibrary\HeatZeekerRTSOrto.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGLGodRay.AssetsLibrary">
+      <HintPath>..\..\WebGLGodRay\WebGLGodRay\bin\staging.AssetsLibrary\WebGLGodRay.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGLHZBlendCharacter.AssetsLibrary">
+      <HintPath>..\..\WebGLHZBlendCharacter\WebGLHZBlendCharacter\bin\staging.AssetsLibrary\WebGLHZBlendCharacter.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -194,9 +203,9 @@
       <Project>{c072d820-0808-40c8-af3a-b965b715bc81}</Project>
       <Name>WebGLNexus7</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\chrome\apps\WebGL\Chrome360GlobeAnimation\Chrome360GlobeAnimation\Chrome360GlobeAnimation.csproj">
+    <ProjectReference Include="..\..\WebGLSVGSprite\WebGLSVGSprite\WebGLSVGSprite.csproj">
       <Project>{426A9419-9287-4880-979F-29F29D3F2A22}</Project>
-      <Name>Chrome360GlobeAnimation</Name>
+      <Name>WebGLSVGSprite</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

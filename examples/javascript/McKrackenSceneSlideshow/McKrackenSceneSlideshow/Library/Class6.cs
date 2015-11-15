@@ -315,7 +315,7 @@ namespace NatureBoy.js
 
             img3.style.SetLocation(66, 4);
             img3.AttachTo(div2);
-            img3.onfocus += ev => ev.PreventDefault();
+            img3.onfocus += ev => ev.preventDefault();
 
             return div1;
         }

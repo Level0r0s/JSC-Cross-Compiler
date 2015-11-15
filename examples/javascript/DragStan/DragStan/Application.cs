@@ -28,7 +28,7 @@ namespace DragStan
         /// This is a javascript application.
         /// </summary>
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
-        public Application(IDefaultPage page)
+        public Application(IDefault page)
         {
             HoverManager m = new HoverManager();
 
@@ -204,8 +204,8 @@ namespace DragStan
                         if (bDead)
                             Fader.FadeAndRemove(Element);
 
-                        e.PreventDefault();
-                        e.StopPropagation();
+                        e.preventDefault();
+                        e.stopPropagation();
                     }
                 };
 
@@ -216,8 +216,8 @@ namespace DragStan
                     {
                         Element.SetCenteredLocation(e.CursorX, e.CursorY);
 
-                        e.PreventDefault();
-                        e.StopPropagation();
+                        e.preventDefault();
+                        e.stopPropagation();
 
 
                     }
@@ -226,7 +226,7 @@ namespace DragStan
             Element.oncontextmenu +=
                 delegate(IEvent e)
                 {
-                    e.PreventDefault();
+                    e.preventDefault();
                 };
 
             Element.onmouseover +=

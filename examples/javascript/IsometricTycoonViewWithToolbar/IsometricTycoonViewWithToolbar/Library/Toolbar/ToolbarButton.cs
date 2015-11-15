@@ -88,7 +88,7 @@ namespace Toolbar.JavaScript
             btn.Control.onmousedown +=
                 ev =>
                 {
-                    ev.StopPropagation();
+                    ev.stopPropagation();
 
                     btn.IsDown = true;
                     btn.Control.SetDialogColor(t.Color, false);
@@ -102,7 +102,7 @@ namespace Toolbar.JavaScript
                 {
                     if (btn.IsDown)
                     {
-                        ev.StopPropagation();
+                        ev.stopPropagation();
 
                         btn.IsDown = false;
                         btn.Control.SetDialogColor(t.Color, true);

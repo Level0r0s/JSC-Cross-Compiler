@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WebGLDoomByInt13h</RootNamespace>
     <AssemblyName>WebGLDoomByInt13h</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>WebGLDoomByInt13h.Program</StartupObject>
     <TargetFrameworkProfile />

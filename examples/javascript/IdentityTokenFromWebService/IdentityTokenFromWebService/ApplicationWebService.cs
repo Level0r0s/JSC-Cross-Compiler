@@ -18,6 +18,8 @@ namespace IdentityTokenFromWebService
     /// </summary>
     public class ApplicationWebService
     {
+        // we can now do NamedKey RSA!
+
         // GuardTime? :P
         public int IdentityToken;
         public int ContextIdentityToken;

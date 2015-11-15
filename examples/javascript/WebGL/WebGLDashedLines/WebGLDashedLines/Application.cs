@@ -20,7 +20,7 @@ using WebGLDashedLines.HTML.Pages;
 // manual rebuild?
 using WebGLRah66Comanche.Library;
 
-using static THREE;
+//using static THREE;
 
 namespace WebGLDashedLines
 {
@@ -57,12 +57,12 @@ namespace WebGLDashedLines
 
             scene.fog = new THREE.Fog(0x111111, 150, 200);
 
-            var root = new Object3D();
+            var root = new THREE.Object3D();
 
             var subdivisions = 6;
             var recursion = 1;
 
-            var points = hilbert3D(new Vector3(), 25.0, recursion, 0, 1, 2, 3, 4, 5, 6, 7);
+            var points = hilbert3D(new THREE.Vector3(), 25.0, recursion, 0, 1, 2, 3, 4, 5, 6, 7);
 
             Console.WriteLine(
                 new { points.Length }
@@ -112,11 +112,11 @@ namespace WebGLDashedLines
             }
 
             {
-                var geometry = new Geometry
+                var geometry = new THREE.Geometry
                 {
                     vertices = new[] {
-                        new Vector3(0, 0, 0),
-                        new Vector3(100, 0, 0)
+                        new THREE.Vector3(0, 0, 0),
+                        new THREE.Vector3(100, 0, 0)
                     }
                 };
 
@@ -130,7 +130,7 @@ namespace WebGLDashedLines
                 oline.AttachTo(scene);
             }
 
-            var renderer = new WebGLRenderer(new { antialias = true });
+            var renderer = new THREE.WebGLRenderer(new { antialias = true });
             renderer.setClearColor(0x111111);
             //renderer.setPixelRatio( window.devicePixelRatio );
             renderer.setSize(
@@ -171,20 +171,20 @@ namespace WebGLDashedLines
 
 
 
-            var ze = new ZeProperties
-            {
-                //() => renderer
-            };
+            //var ze = new ZeProperties
+            //{
+            //    //() => renderer
+            //};
 
-            ze.Show();
+            //ze.Show();
 
-            ze.treeView1.Nodes.Clear();
+            //ze.treeView1.Nodes.Clear();
 
-            ze.Add(() => renderer);
-            ze.Add(() => controls);
-            ze.Add(() => scene);
+            //ze.Add(() => renderer);
+            //ze.Add(() => controls);
+            //ze.Add(() => scene);
 
-            ze.Left = 0;
+            //ze.Left = 0;
 
         }
 

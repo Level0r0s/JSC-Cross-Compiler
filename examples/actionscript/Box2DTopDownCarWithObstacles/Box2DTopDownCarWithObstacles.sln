@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Box2DTopDownCarWithObstacles", "Box2DTopDownCarWithObstacles\Box2DTopDownCarWithObstacles.csproj", "{A7DC38D5-05C5-4449-A92C-BD651D67BDF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "box2dflash", "..\..\..\market\synergy\box2dflash\box2dflash\box2dflash.csproj", "{4E919D6B-0B3B-4B77-8F15-79B6E39C742C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{A7DC38D5-05C5-4449-A92C-BD651D67BDF2}.Debug|x86.Build.0 = Debug|x86
 		{A7DC38D5-05C5-4449-A92C-BD651D67BDF2}.Release|x86.ActiveCfg = Release|x86
 		{A7DC38D5-05C5-4449-A92C-BD651D67BDF2}.Release|x86.Build.0 = Release|x86
+		{4E919D6B-0B3B-4B77-8F15-79B6E39C742C}.Debug|x86.ActiveCfg = Debug|x86
+		{4E919D6B-0B3B-4B77-8F15-79B6E39C742C}.Debug|x86.Build.0 = Debug|x86
+		{4E919D6B-0B3B-4B77-8F15-79B6E39C742C}.Release|x86.ActiveCfg = Release|x86
+		{4E919D6B-0B3B-4B77-8F15-79B6E39C742C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

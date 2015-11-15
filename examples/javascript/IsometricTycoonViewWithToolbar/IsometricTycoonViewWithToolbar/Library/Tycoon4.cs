@@ -2082,7 +2082,7 @@ namespace ThreeDStuff.js
                             arena.Layers.User.oncontextmenu +=
                                 e =>
                                 {
-                                    e.PreventDefault();
+                                    e.preventDefault();
 
                                 };
                         });

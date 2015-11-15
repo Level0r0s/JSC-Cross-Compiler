@@ -10,10 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RayCaster6</RootNamespace>
     <AssemblyName>RayCaster6</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
+    <FileUpgradeFlags></FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <TargetFrameworkProfile />
@@ -74,6 +73,9 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="RayCaster6.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\RayCaster6.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionScript\Assets.cs" />
@@ -101,13 +103,10 @@
     </None>
     <None Include="tools\build.bat" />
     <EmbeddedResource Include="web\assets\RayCaster6\ammo.zip" />
-    <EmbeddedResource Include="web\assets\RayCaster6\dude5.zip">
-    </EmbeddedResource>
+    <EmbeddedResource Include="web\assets\RayCaster6\dude5.zip"></EmbeddedResource>
     <EmbeddedResource Include="web\assets\RayCaster6\gold.zip" />
-    <EmbeddedResource Include="web\assets\RayCaster6\sprites.zip">
-    </EmbeddedResource>
-    <EmbeddedResource Include="web\assets\RayCaster6\stuff.zip">
-    </EmbeddedResource>
+    <EmbeddedResource Include="web\assets\RayCaster6\sprites.zip"></EmbeddedResource>
+    <EmbeddedResource Include="web\assets\RayCaster6\stuff.zip"></EmbeddedResource>
     <EmbeddedResource Include="web\assets\RayCaster6\wolfer.zip" />
   </ItemGroup>
   <ItemGroup>
@@ -139,5 +138,9 @@
     <PostBuildEvent>pushd ..\..\tools\
 start /WAIT build.bat $(ProjectName) $(TargetFileName)  $(ConfigurationName)
 popd</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
+		</PreBuildEvent>
   </PropertyGroup>
 </Project>

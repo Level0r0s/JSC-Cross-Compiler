@@ -61,6 +61,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\ScriptCoreLib.dll</HintPath>
     </Reference>
+    <Reference Include="ScriptCoreLib.Async, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ScriptCoreLib.Avalon">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\ScriptCoreLib.Avalon.dll</HintPath>

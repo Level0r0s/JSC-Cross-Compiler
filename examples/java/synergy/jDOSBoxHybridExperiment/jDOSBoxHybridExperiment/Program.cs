@@ -59,7 +59,7 @@ namespace jDOSBoxHybridExperiment
 
             //ipx=false
 
-
+            // defined at?
             jdos.gui.MainFrame.main(args);
 
             CLRProgram.XML = new XElement("hello", "world");

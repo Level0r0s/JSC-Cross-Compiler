@@ -16,6 +16,12 @@ namespace DockMaster.source.js
 {
     public class DockMaster
     {
+        // can we do VR yet?
+
+        //        Revision: 4841
+        //Author: zproxy
+        //Date: 29. oktoober 2012. a. 23:12:11
+        //Message:
 
         internal class Kast
         {
@@ -83,7 +89,7 @@ namespace DockMaster.source.js
 
             void Document_onkeypress(IEvent e)
             {
-                e.PreventDefault();
+                e.preventDefault();
 
                 if (e.KeyCode == 39) // right
                 {

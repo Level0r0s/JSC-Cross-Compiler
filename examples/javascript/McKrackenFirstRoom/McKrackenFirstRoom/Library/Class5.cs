@@ -407,8 +407,8 @@ namespace NatureBoy.js
                     Action<IEvent> onclick =
                          ev =>
                          {
-                             ev.PreventDefault();
-                             ev.StopPropagation();
+                             ev.preventDefault();
+                             ev.stopPropagation();
 
                              Affirmative.play();
                              Affirmative = new Affirmative();
@@ -421,8 +421,8 @@ namespace NatureBoy.js
                     InputLayer.ontouchstart +=
                         ev =>
                         {
-                            ev.PreventDefault();
-                            ev.StopPropagation();
+                            ev.preventDefault();
+                            ev.stopPropagation();
                             InputLayer.onclick -= onclick;
 
                             Affirmative.play();
@@ -443,8 +443,8 @@ namespace NatureBoy.js
                     Native.Document.body.onselectstart +=
                         ev =>
                         {
-                            ev.PreventDefault();
-                            ev.StopPropagation();
+                            ev.preventDefault();
+                            ev.stopPropagation();
                         };
 
                     Native.Document.onkeydown +=

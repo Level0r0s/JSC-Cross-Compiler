@@ -15,6 +15,9 @@ namespace MP3PitchExample.ActionScript
    
     public class MP3PitchExample : Sprite
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151115/audio
+
+
         /// <summary>
         /// Default constructor
         /// </summary>

@@ -56,8 +56,10 @@ namespace Cloud9ACE
             {
                 new Design.ace().Content,
                 new Design.theme_dreamweaver().Content,
-                new Design.mode_csharp().Content,
-                new Design.mode_sql().Content,
+                new Design.mode_csharp().Content
+
+                // file missing?
+                //new Design.mode_sql().Content,
             }.ForEach(
                 (SourceScriptElement, i, MoveNext) =>
                 {
@@ -106,3 +108,19 @@ namespace Cloud9ACE
 
     }
 }
+
+
+//---------------------------
+//Asset Compiler
+//---------------------------
+//The Asset Compiler has found a few issues while preparing the assets! 
+
+//Could not find file 'Z:\jsc.svn\examples\javascript\synergy\Cloud9ACE\Cloud9ACE\Design\mode-sql.js'.
+
+//Please fix the issues and try again!
+//You may need to reconnect your external drive.
+
+//Z:\jsc.svn\examples\javascript\synergy\Cloud9ACE\Cloud9ACE\Cloud9ACE.csproj
+//---------------------------
+//OK   
+//---------------------------

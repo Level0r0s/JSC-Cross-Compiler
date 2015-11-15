@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ButterFlyWithInteractiveInt32Offset</RootNamespace>
     <AssemblyName>ButterFlyWithInteractiveInt32Offset</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>ButterFlyWithInteractiveInt32Offset.Program</StartupObject>
     <TargetFrameworkProfile />

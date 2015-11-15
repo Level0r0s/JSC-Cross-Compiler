@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DockMasterVideoGame</RootNamespace>
     <AssemblyName>DockMasterVideoGame</AssemblyName>
-    <TargetFrameworkVersion>v4.5.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>DockMasterVideoGame.Program</StartupObject>
     <TargetFrameworkProfile />

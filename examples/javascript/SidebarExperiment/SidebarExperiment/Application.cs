@@ -347,9 +347,9 @@ namespace SidebarExperiment
                     c.checkBox2.Enabled = false;
                     c.button3.Enabled = false;
 
-                    f.PopupInsteadOfClosing(
-                        HandleFormClosing: true
-                    );
+                    //f.PopupInsteadOfClosing(
+                    //    HandleFormClosing: true
+                    //);
                 };
 
             f.FormClosing +=
@@ -383,20 +383,20 @@ namespace SidebarExperiment
             //);
 
 
-            #region snippet http://my.jsc-solutions.net/#TestPackageAsApplication
+            //#region snippet http://my.jsc-solutions.net/#TestPackageAsApplication
 
-            new IHTMLAnchor { "drag me to my.jsc-solutions.net" }.AttachToDocument().With(
-                dragme =>
-                {
-                    dragme.style.position = IStyle.PositionEnum.@fixed;
-                    dragme.style.left = "1em";
-                    dragme.style.bottom = "1em";
+            //new IHTMLAnchor { "drag me to my.jsc-solutions.net" }.AttachToDocument().With(
+            //    dragme =>
+            //    {
+            //        dragme.style.position = IStyle.PositionEnum.@fixed;
+            //        dragme.style.left = "1em";
+            //        dragme.style.bottom = "1em";
 
-                    dragme.AllowToDragAsApplicationPackage();
-                }
-            );
+            //        dragme.AllowToDragAsApplicationPackage();
+            //    }
+            //);
 
-            #endregion
+            //#endregion
 
         }
 

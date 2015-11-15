@@ -164,6 +164,9 @@
     <Reference Include="Chrome360GlobeAnimation.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\Chrome360GlobeAnimation.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="ChromeCreativeLeadership.AssetsLibrary">
+      <HintPath>..\..\..\ChromeCreativeLeadership\ChromeCreativeLeadership\bin\staging.AssetsLibrary\ChromeCreativeLeadership.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\ShaderToy.cs" />

@@ -626,7 +626,7 @@ namespace NatureBoy.js
             Container.ontouchstart +=
                 ev =>
                 {
-                    ev.PreventDefault();
+                    ev.preventDefault();
 
                     System.Console.WriteLine(ev.CursorPosition);
 
@@ -650,7 +650,7 @@ namespace NatureBoy.js
             Container.onclick +=
                 ev =>
                 {
-                    ev.PreventDefault();
+                    ev.preventDefault();
 
                     if (ev.MouseButton == IEvent.MouseButtonEnum.Middle)
                     {

@@ -98,7 +98,8 @@ namespace WebGLGuidedByWebService
 
             }
 
-            return z.ToArray().ToTaskResult();
+            //return z.ToArray().ToTaskResult();
+            return z.ToArray().AsResult();
         }
     }
 }

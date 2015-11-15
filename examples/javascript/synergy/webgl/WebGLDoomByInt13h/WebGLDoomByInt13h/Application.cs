@@ -26,6 +26,8 @@ namespace WebGLDoomByInt13h
     /// </summary>
     public sealed class Application
     {
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151115/audio
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20140815/windstorm
 
         public readonly ApplicationWebService service = new ApplicationWebService();
@@ -37,7 +39,7 @@ namespace WebGLDoomByInt13h
         public Application(IApp page)
         {
             // ??
-
+            // files missing?
             { WebGLDoomByInt13h.Assets.he3d.Scripts ref0; }
             { WebGLDoomByInt13h.Assets.he3d.Shaders ref0; }
             { WebGLDoomByInt13h.Assets.webgldoom.Shaders ref1; }

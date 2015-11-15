@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FlashRayCaster4</RootNamespace>
     <AssemblyName>FlashRayCaster4</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>FlashRayCaster4.Program</StartupObject>
     <TargetFrameworkProfile />

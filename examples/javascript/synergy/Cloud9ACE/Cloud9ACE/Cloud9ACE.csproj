@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Cloud9ACE</RootNamespace>
     <AssemblyName>Cloud9ACE</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>Cloud9ACE.Program</StartupObject>
     <TargetFrameworkProfile />
@@ -148,7 +148,6 @@
     <Content Include="Design\mode-csharp.js" />
     <Content Include="Design\Preview.png" />
     <Content Include="Design\theme-dreamweaver.js" />
-    <Content Include="Design\mode-sql.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

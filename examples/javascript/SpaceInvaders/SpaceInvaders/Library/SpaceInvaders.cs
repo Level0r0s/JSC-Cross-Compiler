@@ -16,6 +16,19 @@ namespace SpaceInvadersTemplate.Library.Controls
 
     public class SpaceInvaders
     {
+
+        //Revision: 3636
+        //Author: zproxy
+        //Date: 22. aprill 2012. a. 11:16:53
+        //Message:
+
+        //----
+        //Added : /examples/java/OutRun4KTemplate
+        //Added : /examples/java/OutRun4KTemplate/OutRun4KTemplate
+
+
+
+
         // http://www.digitalinsane.com/archives/2007/01/21/space_invaders/
         public SpaceInvaders()
         {
@@ -616,7 +629,7 @@ namespace SpaceInvadersTemplate.Library.Controls
                 //        else
                 //            gamma = eventData.gamma;
 
-                       
+
                 //    };
 
                 new ScriptCoreLib.JavaScript.Runtime.Timer(
@@ -686,7 +699,7 @@ namespace SpaceInvadersTemplate.Library.Controls
                             gameovermenu.Visible = false;
 
                             // the animated gifs would stop after escape key
-                            ev.PreventDefault();
+                            ev.preventDefault();
 
                             GamePaused = false;
                         }
@@ -719,7 +732,7 @@ namespace SpaceInvadersTemplate.Library.Controls
                     else if (ev.IsSpaceOrEnterKey())
                     {
                         // the animated gifs would stop after escape key
-                        ev.PreventDefault();
+                        ev.preventDefault();
 
                         EgoShoot();
                     }

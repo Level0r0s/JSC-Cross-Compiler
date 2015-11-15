@@ -3,6 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovingMusicByBorismus", "MovingMusicByBorismus.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud9ACE", "..\..\..\synergy\Cloud9ACE\Cloud9ACE\Cloud9ACE.csproj", "{48A0B7BA-BD8F-49EC-858B-09774A8413B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeocoticQR", "..\..\..\..\..\market\synergy\NeocoticQR\NeocoticQR\NeocoticQR.csproj", "{B4988F57-432C-4FB8-9C17-1BE00F00B7A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopDownCarExampleByDomas", "..\..\..\synergy\TopDownCarExampleByDomas\TopDownCarExampleByDomas\TopDownCarExampleByDomas.csproj", "{4FFD0992-0097-4C06-9362-19846B399732}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jsgif", "..\..\..\synergy\jsgif\jsgif\jsgif.csproj", "{2B82F864-2565-470E-BE62-68C54825510F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +21,22 @@ Global
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|x86.Build.0 = Debug|x86
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.ActiveCfg = Release|x86
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Release|x86.Build.0 = Release|x86
+		{48A0B7BA-BD8F-49EC-858B-09774A8413B2}.Debug|x86.ActiveCfg = Debug|x86
+		{48A0B7BA-BD8F-49EC-858B-09774A8413B2}.Debug|x86.Build.0 = Debug|x86
+		{48A0B7BA-BD8F-49EC-858B-09774A8413B2}.Release|x86.ActiveCfg = Release|x86
+		{48A0B7BA-BD8F-49EC-858B-09774A8413B2}.Release|x86.Build.0 = Release|x86
+		{B4988F57-432C-4FB8-9C17-1BE00F00B7A2}.Debug|x86.ActiveCfg = Debug|x86
+		{B4988F57-432C-4FB8-9C17-1BE00F00B7A2}.Debug|x86.Build.0 = Debug|x86
+		{B4988F57-432C-4FB8-9C17-1BE00F00B7A2}.Release|x86.ActiveCfg = Release|x86
+		{B4988F57-432C-4FB8-9C17-1BE00F00B7A2}.Release|x86.Build.0 = Release|x86
+		{4FFD0992-0097-4C06-9362-19846B399732}.Debug|x86.ActiveCfg = Debug|x86
+		{4FFD0992-0097-4C06-9362-19846B399732}.Debug|x86.Build.0 = Debug|x86
+		{4FFD0992-0097-4C06-9362-19846B399732}.Release|x86.ActiveCfg = Release|x86
+		{4FFD0992-0097-4C06-9362-19846B399732}.Release|x86.Build.0 = Release|x86
+		{2B82F864-2565-470E-BE62-68C54825510F}.Debug|x86.ActiveCfg = Debug|x86
+		{2B82F864-2565-470E-BE62-68C54825510F}.Debug|x86.Build.0 = Debug|x86
+		{2B82F864-2565-470E-BE62-68C54825510F}.Release|x86.ActiveCfg = Release|x86
+		{2B82F864-2565-470E-BE62-68C54825510F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

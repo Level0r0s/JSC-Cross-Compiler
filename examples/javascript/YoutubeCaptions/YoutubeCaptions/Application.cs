@@ -17,6 +17,7 @@ namespace YoutubeCaptions
 
     public sealed partial class Application
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151115/audio
 
         public Application(IApp e)
         {
@@ -159,6 +160,7 @@ namespace YoutubeCaptions
 
             var ttsurl = Uri.UnescapeDataString(html.SkipUntilIfAny("\"ttsurl\":").SkipUntilIfAny("\"").TakeUntilIfAny("\""));
 
+            // 20151115 broken again?
             // 20131011 they changed it!
             ttsurl = ttsurl.Replace(@"\/", "/");
             // http://video.google.com/timedtext?

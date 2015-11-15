@@ -22,7 +22,7 @@ using WebGLEarthByBjorn.HTML.Pages;
 //using ScriptCoreLib.Lambda;
 //using WebGLRah66Comanche.Library;
 
-using static System.Threading.Tasks.Task;
+//using static System.Threading.Tasks.Task;
 
 namespace WebGLEarthByBjorn
 {
@@ -170,7 +170,7 @@ namespace WebGLEarthByBjorn
 										s.needsUpdate = true;
 										Console.WriteLine("event: water_4k_low done");
 
-										await Delay(20000);
+										await Task.Delay(20000);
 
 										Console.WriteLine("event: water_4k");
 										s.image = await new water_4k().async.oncomplete;
@@ -216,7 +216,7 @@ namespace WebGLEarthByBjorn
 									s.needsUpdate = true;
 									Console.WriteLine("event: fair_clouds_4k_low done");
 
-									await Delay(20000);
+                                    await Task.Delay(20000);
 
 									Console.WriteLine("event: fair_clouds_4k");
 									s.image = await new fair_clouds_4k().async.oncomplete;
