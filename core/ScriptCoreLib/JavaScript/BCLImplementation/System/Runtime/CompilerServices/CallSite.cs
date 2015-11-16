@@ -307,7 +307,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Runtime.CompilerServ
 					// ldc.i4                       InvokeMember(... flags: (CSharpBinderFlags) ResultDiscarded = 256 (0x00000100)
 					var IsReturnVoid = xInvokeMemberBinder.flags == global::Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultDiscarded;
 
-					Console.WriteLine(new { xInvokeMemberBinder.Name, xInvokeMemberBinder.ReturnType, IsReturnVoid, Count });
+                    //Console.WriteLine(new { xInvokeMemberBinder.Name, xInvokeMemberBinder.ReturnType, IsReturnVoid, Count });
 
 					//foreach (var item in xInvokeMemberBinder.argumentInfo)
 					//{
@@ -325,10 +325,11 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Runtime.CompilerServ
 							var r = new Action<__CallSite, object, object, object, object>(
 								 (site, target, arg1, arg2, arg3) =>
 								 {
+                                     // Z:\jsc.svn\examples\javascript\audio\synergy\MovingMusicByBorismus\Application.cs
 
-									 Console.WriteLine(
-										 new { target, xInvokeMemberBinder.Name, arg1, arg2, arg3 }
-										 );
+                                     //Console.WriteLine(
+                                     //    new { target, xInvokeMemberBinder.Name, arg1, arg2, arg3 }
+                                     //    );
 
 									 var __value = IFunction.Of(target, xInvokeMemberBinder.Name).apply(target,
 										 arg1, arg2, arg3
@@ -348,9 +349,9 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Runtime.CompilerServ
 								(site, target, arg1, arg2, arg3) =>
 								{
 
-									Console.WriteLine(
-										new { target, xInvokeMemberBinder.Name, arg1, arg2, arg3 }
-										);
+                                    //Console.WriteLine(
+                                    //    new { target, xInvokeMemberBinder.Name, arg1, arg2, arg3 }
+                                    //    );
 
 									var __value = IFunction.Of(target, xInvokeMemberBinder.Name).apply(target,
 										arg1, arg2, arg3
@@ -393,9 +394,9 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Runtime.CompilerServ
 							var r = new Action<__CallSite, object, object>(
 								(site, target, arg1) =>
 								{
-									Console.WriteLine(
-										 new { target, xInvokeMemberBinder.Name, arg1 }
-										 );
+                                    //Console.WriteLine(
+                                    //     new { target, xInvokeMemberBinder.Name, arg1 }
+                                    //     );
 
 									// PgAABOHIvzeIVHiwt04BEQ.Target.PSAABv_ap6j2DT0O2SaNyVw(PgAABOHIvzeIVHiwt04BEQ, c, 'hello world');
 									var __value = IFunction.Of(target, xInvokeMemberBinder.Name).apply(target,
@@ -413,9 +414,9 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Runtime.CompilerServ
 							var r = new Func<__CallSite, object, object, object>(
 						   (site, target, arg1) =>
 						   {
-							   Console.WriteLine(
-									new { target, xInvokeMemberBinder.Name, arg1 }
-									);
+                               //Console.WriteLine(
+                               //     new { target, xInvokeMemberBinder.Name, arg1 }
+                               //     );
 
 							   // PgAABOHIvzeIVHiwt04BEQ.Target.PSAABv_ap6j2DT0O2SaNyVw(PgAABOHIvzeIVHiwt04BEQ, c, 'hello world');
 							   var __value = IFunction.Of(target, xInvokeMemberBinder.Name).apply(target,
@@ -438,9 +439,9 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Runtime.CompilerServ
 								  (site, target) =>
 								  {
 
-									  Console.WriteLine(
-										  new { target, xInvokeMemberBinder.Name }
-										  );
+                                      //Console.WriteLine(
+                                      //    new { target, xInvokeMemberBinder.Name }
+                                      //    );
 
 									  var __value = IFunction.Of(target, xInvokeMemberBinder.Name).apply(target);
 
@@ -455,9 +456,9 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Runtime.CompilerServ
 								(site, target) =>
 								{
 
-									Console.WriteLine(
-										new { target, xInvokeMemberBinder.Name }
-										);
+                                    //Console.WriteLine(
+                                    //    new { target, xInvokeMemberBinder.Name }
+                                    //    );
 
 									var __value = IFunction.Of(target, xInvokeMemberBinder.Name).apply(target);
 
@@ -484,15 +485,15 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Runtime.CompilerServ
 					   (site, target) =>
 					   {
 
-						   Console.WriteLine(
-							   new
-							   {
-								   target,
-								   xUnaryOperationBinder.operation,
-								   xUnaryOperationBinder.flags
-								   //, xUnaryOperationBinder.argumentInfo.ToArray().Length 
-							   }
-							   );
+                           //Console.WriteLine(
+                           //    new
+                           //    {
+                           //        target,
+                           //        xUnaryOperationBinder.operation,
+                           //        xUnaryOperationBinder.flags
+                           //        //, xUnaryOperationBinder.argumentInfo.ToArray().Length 
+                           //    }
+                           //    );
 
 
 						   if (xUnaryOperationBinder.operation == global::System.Linq.Expressions.ExpressionType.IsTrue)
@@ -524,17 +525,17 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Runtime.CompilerServ
 					   (site, target, value) =>
 					   {
 
-						   Console.WriteLine(
-							   new
-							   {
-								   xBinaryOperationBinder.operation,
-								   xBinaryOperationBinder.flags,
+                           //Console.WriteLine(
+                           //    new
+                           //    {
+                           //        xBinaryOperationBinder.operation,
+                           //        xBinaryOperationBinder.flags,
 
-								   target,
-								   value
-								   //, xBinaryOperationBinder.argumentInfo.ToArray().Length 
-							   }
-							   );
+                           //        target,
+                           //        value
+                           //        //, xBinaryOperationBinder.argumentInfo.ToArray().Length 
+                           //    }
+                           //    );
 
 
 						   if (xBinaryOperationBinder.operation == global::System.Linq.Expressions.ExpressionType.Equal)

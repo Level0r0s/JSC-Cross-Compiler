@@ -18,8 +18,8 @@ using WebGLTurbanPhotosphere.Design;
 using WebGLTurbanPhotosphere.HTML.Pages;
 
 
-using static THREE;
-using static ScriptCoreLib.JavaScript.Native;
+//using static THREE;
+//using static ScriptCoreLib.JavaScript.Native;
 
 namespace WebGLTurbanPhotosphere
 {
@@ -34,13 +34,13 @@ namespace WebGLTurbanPhotosphere
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
-			// http://stackoverflow.com/questions/29048161/how-to-export-a-three-js-scene-into-a-360-texture-for-photosphere
+            // http://stackoverflow.com/questions/29048161/how-to-export-a-three-js-scene-into-a-360-texture-for-photosphere
 
-			body.style.background = "black";
+            Native.body.style.background = "black";
 
-            body.style.margin = "0px";
-            body.style.overflow = IStyle.OverflowEnum.hidden;
-            body.Clear();
+            Native.body.style.margin = "0px";
+            Native.body.style.overflow = IStyle.OverflowEnum.hidden;
+            Native.body.Clear();
 
 
 
@@ -55,9 +55,11 @@ namespace WebGLTurbanPhotosphere
             renderer.domElement.AttachToDocument();
 
 
-            var sphere = new Mesh(
-                new SphereGeometry(100, 20, 20),
-                new MeshBasicMaterial(
+            // Z:\jsc.svn\examples\javascript\audio\synergy\MovingMusicByBorismus\Application.cs
+
+            var sphere = new THREE.Mesh(
+                new THREE.SphereGeometry(100, 20, 20),
+                new THREE.MeshBasicMaterial(
                     new
                     {
                         //20150608_165300.jpg
@@ -69,7 +71,7 @@ namespace WebGLTurbanPhotosphere
             sphere.scale.x = -1;
             sphere.AttachTo(scene);
 
-            var camera = new PerspectiveCamera(75, window.aspect, 1, 1000);
+            var camera = new THREE.PerspectiveCamera(75, Native.window.aspect, 1, 1000);
             camera.position.x = 0.1;
 
             var controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -79,7 +81,7 @@ namespace WebGLTurbanPhotosphere
 
 
 
-            window.onframe +=
+            Native.window.onframe +=
                 delegate
                 {
                     controls.update();
@@ -92,13 +94,13 @@ namespace WebGLTurbanPhotosphere
 
 
 
-            window.onresize +=
+            Native.window.onresize +=
               delegate
               {
-                  camera.aspect = window.aspect;
+                  camera.aspect = Native.window.aspect;
                   camera.updateProjectionMatrix();
 
-                  renderer.setSize(window.Width, window.Height);
+                  renderer.setSize(Native.window.Width, Native.window.Height);
 
               };
 
