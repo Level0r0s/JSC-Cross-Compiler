@@ -134,6 +134,7 @@
     <Compile Include="JavaScript\WebAudio\AudioDestinationNode.cs" />
     <Compile Include="JavaScript\WebAudio\AudioParam.cs" />
     <Compile Include="JavaScript\WebAudio\AudioNode.cs" />
+    <Compile Include="JavaScript\WebAudio\PannerNode.cs" />
     <Compile Include="JavaScript\WebAudio\GainNode.cs" />
     <Compile Include="JavaScript\WebAudio\OscillatorNode.cs" />
     <Compile Include="JavaScript\WebAudio\AudioWorkerNode.cs" />

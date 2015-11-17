@@ -17,6 +17,8 @@ using MovingMusicByBorismus;
 using MovingMusicByBorismus.Design;
 using MovingMusicByBorismus.HTML.Pages;
 using System.Diagnostics;
+using ScriptCoreLib.JavaScript.Runtime;
+using ScriptCoreLib.JavaScript.WebAudio;
 
 namespace MovingMusicByBorismus
 {
@@ -134,7 +136,7 @@ namespace MovingMusicByBorismus
                                    );
                                    sphere.scale.x = -1;
 
-                                   Console.WriteLine("awaiting for main()... " + new { window.video.scene });
+                                   Console.WriteLine("addSkybox... " + new { window.video.scene });
 
                                    sphere.AttachTo((THREE.Scene)window.video.scene);
 
@@ -168,14 +170,18 @@ namespace MovingMusicByBorismus
                                     //2015-11-16 12:25:32.575 view-source:54442 29929ms window.Choreographer.prototype.getAudioFile { basename = Roth }
                                     //2015-11-16 12:25:32.576 view-source:54442 29930ms window.Choreographer.prototype.getAudioFile { basename = Russian }
 
-                                    if (basename == "Cats") return new HTML.Audio.FromAssets.loop_GallinagoDelicata { }.src;
-                                    if (basename == "Nimoy") return new HTML.Audio.FromAssets.sand_run { }.src;
-                                    //if (basename == "Roth") return new HTML.Audio.FromAssets.snd_jeepengine_start { }.src;
-                                    if (basename == "Roth") return new HTML.Audio.FromAssets.heartbeat3 { }.src;
+                                    if (basename == "Cats") return new HTML.Audio.FromAssets.Sweet_Dreams_My_Love_by_Alexander_J_Turner { }.src;
+                                    //if (basename == "Cats") return new HTML.Audio.FromAssets.loop_GallinagoDelicata { }.src;
+                                    //if (basename == "Nimoy") return new HTML.Audio.FromAssets.sand_run { }.src;
+                                    ////if (basename == "Roth") return new HTML.Audio.FromAssets.snd_jeepengine_start { }.src;
+                                    //if (basename == "Roth") return new HTML.Audio.FromAssets.heartbeat3 { }.src;
+
+                                    if (basename == "Nimoy") return null;
+                                    if (basename == "Roth") return null;
 
                                     // the green blob.
                                     //return new HTML.Audio.FromAssets.Russian { }.src;
-                                    return new HTML.Audio.FromAssets.crickets{ }.src;
+                                    return new HTML.Audio.FromAssets.crickets { }.src;
 
                                     // yellow is str track man
                                 }
@@ -187,6 +193,115 @@ namespace MovingMusicByBorismus
 
                         window.main();
                     };
+
+
+                    // cant reset the system. need to rewrite it .
+                    #region ondropfile
+                    var f = await Native.document.documentElement.async.ondropfile;
+                    IHTMLAudio a = f;
+                    await a.async.onloadeddata;
+
+                    // Uncaught TypeError: track.update is not a function
+                    window.isLoaded = false;
+                    Console.WriteLine(new { f.name, f.size, window.manager.trackCount, window.isLoaded });
+
+                    // :4822/view-source:54442 39610ms { name = Sweet Dreams My Love by Alexander_J_Turner.mp3, size = 29790804, trackCount = 4 }
+
+                    //for (int i = 0; i < window.manager.trackCount; i++)
+
+
+                    foreach (var id in Expando.InternalGetMemberNames((object)window.manager.tracks))
+                    {
+                        Console.WriteLine(new { id });
+
+                        //window.manager.tracs[item].setAmplitude(0);
+
+                        // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createPanner
+                        PannerNode panner = window.audio.panners[id];
+
+                        // Failed to set the 'buffer' property on 'AudioBufferSourceNode': The provided value is not of type 'AudioBuffer'.
+                        panner.disconnect();
+
+                        THREE.Object3D t = window.video.trackObjects[id];
+
+                        t.parent.remove(t);
+                    }
+
+
+
+
+                    window.manager.trackCount = 0;
+                    //window.manager.tracks = new { };
+                    window.manager.tracks = new object();
+
+                    // vsync
+                    await Native.window.async.onframe;
+
+                    var MovingTrack = new IFunction("url", "return  new MovingTrack({ src: url, color: 0x19414B});");
+
+
+
+
+                    dynamic track = MovingTrack.apply(null, a.src);
+
+
+                    Console.WriteLine("addTrack");
+                    window.manager.addTrack(track);
+
+
+
+                    Console.WriteLine("loadTrack_");
+                    window.audio.loadTrack_(track.id);
+
+
+                    Func<bool> isready = () => window.audio.ready[track.id];
+
+                    var ready = new TaskCompletionSource<object> { };
+
+                    new { }.With(
+                        async delegate
+                        {
+                            while (!ready.Task.IsCompleted)
+                            {
+                                await Task.Delay(300);
+
+                                bool xready = isready();
+
+                                Console.WriteLine(new { track.id, xready });
+
+                                if (xready)
+                                    ready.SetResult(null);
+                            }
+                        }
+                    );
+
+                    await ready.Task;
+
+
+                    Console.WriteLine("start");
+                    window.audio.start();
+
+                    window.isLoaded = true;
+
+                    //view-source:54481 28681ms { id = b674a511-0580-7000-24ba-02bca7b09197, xready = true }
+                    //2015-11-16 17:59:14.044 view-source:54481 28686ms start
+                    //2015-11-16 17:59:14.051 view-source:54481 28693ms addPointCloud
+
+                    {
+                        Console.WriteLine("addPointCloud " + new { window.choreographer, window.isLoaded });
+
+                        var t = window.video.addPointCloud(new { color = track.color });
+                        window.video.trackObjects[track.id] = t;
+                    }
+
+                    Console.WriteLine("setMode " + new { window.choreographer.mode_ });
+                    window.choreographer.setMode(window.choreographer.mode_);
+
+                    #endregion
+
+
+
+
                 }
             );
 

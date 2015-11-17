@@ -13,26 +13,30 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
     {
         // https://zproxy.wordpress.com/2015/09/20/transatlantic-trade-and-investment-partnership/
 
-        
 
-		// see: http://www.whatwg.org/specs/web-apps/current-work/#audio
-		// see: http://www.happyworm.com/jquery/jplayer/HTML5.Audio.Support/
-		// see: https://developer.mozilla.org/En/HTML/Element/Audio
+
+        // see: http://www.whatwg.org/specs/web-apps/current-work/#audio
+        // see: http://www.happyworm.com/jquery/jplayer/HTML5.Audio.Support/
+        // see: https://developer.mozilla.org/En/HTML/Element/Audio
 
         #region Constructor
 
-		public IHTMLAudio()
+        public IHTMLAudio()
         {
             // InternalConstructor
         }
 
-		static IHTMLAudio InternalConstructor()
+        static IHTMLAudio InternalConstructor()
         {
-			return (IHTMLAudio)IHTMLElement.InternalConstructor(HTMLElementEnum.audio);
+            return (IHTMLAudio)IHTMLElement.InternalConstructor(HTMLElementEnum.audio);
         }
 
         #endregion
 
 
+        public static implicit operator IHTMLAudio(File f)
+        {
+            return new IHTMLAudio { src = URL.createObjectURL(f) };
+        }
     }
 }

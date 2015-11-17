@@ -8,37 +8,37 @@ using System.Threading.Tasks;
 
 namespace ScriptCoreLib.JavaScript.DOM.HTML
 {
-	// http://mxr.mozilla.org/mozilla-central/source/dom/interfaces/html/nsIDOMHTMLMediaElement.idl
-	// http://src.chromium.org/viewvc/blink/trunk/Source/core/html/HTMLMediaElement.idl
-	// http://src.chromium.org/viewvc/blink/trunk/Source/modules/encryptedmedia/HTMLMediaElementEncryptedMedia.idl
+    // http://mxr.mozilla.org/mozilla-central/source/dom/interfaces/html/nsIDOMHTMLMediaElement.idl
+    // http://src.chromium.org/viewvc/blink/trunk/Source/core/html/HTMLMediaElement.idl
+    // http://src.chromium.org/viewvc/blink/trunk/Source/modules/encryptedmedia/HTMLMediaElementEncryptedMedia.idl
 
-	// https://chromium.googlesource.com/experimental/chromium/blink/+/refs/wip/bajones/webvr%5E%21/#F8
-	// https://chromium.googlesource.com/experimental/chromium/blink/+/refs/wip/bajones/webvr/Source/core/html/HTMLMediaElement.cpp
+    // https://chromium.googlesource.com/experimental/chromium/blink/+/refs/wip/bajones/webvr%5E%21/#F8
+    // https://chromium.googlesource.com/experimental/chromium/blink/+/refs/wip/bajones/webvr/Source/core/html/HTMLMediaElement.cpp
 
-	[Script(InternalConstructor = true)]
+    [Script(InternalConstructor = true)]
     public abstract class IHTMLMedia : IHTMLElement
     {
-		// X:\jsc.svn\examples\javascript\async\test\TestGetUserMedia\TestGetUserMedia\Application.cs
+        // X:\jsc.svn\examples\javascript\async\test\TestGetUserMedia\TestGetUserMedia\Application.cs
 
-		// http://www.free-track.net/fichiers/manuel21en.pdf
+        // http://www.free-track.net/fichiers/manuel21en.pdf
 
-		// https://riaconnection.wordpress.com/2011/11/03/testing-live-video-streaming-to-webgl-and-html5-video-tag/
+        // https://riaconnection.wordpress.com/2011/11/03/testing-live-video-streaming-to-webgl-and-html5-video-tag/
 
-		// https://github.com/vbence/stream-m
-		// X:\opensource\github\stream-m
+        // https://github.com/vbence/stream-m
+        // X:\opensource\github\stream-m
 
-		// http://www.w3.org/TR/media-source/
+        // http://www.w3.org/TR/media-source/
 
-		// X:\jsc.svn\examples\javascript\WebGL\WebGLTiltShift\WebGLTiltShift\Application.cs
+        // X:\jsc.svn\examples\javascript\WebGL\WebGLTiltShift\WebGLTiltShift\Application.cs
 
 
-		// compiler: generate from IDL at http://www.whatwg.org/specs/web-apps/current-work/#htmlmediaelement
-		// see: http://www.w3schools.com/html5/tag_audio.asp
-		// see: http://www.position-absolute.com/articles/introduction-to-the-html5-audio-tag-javascript-manipulation/
-		// see: https://developer.mozilla.org/En/Using_audio_and_video_in_Firefox
-		// see: https://developer.mozilla.org/En/nsIDOMHTMLMediaElement
+        // compiler: generate from IDL at http://www.whatwg.org/specs/web-apps/current-work/#htmlmediaelement
+        // see: http://www.w3schools.com/html5/tag_audio.asp
+        // see: http://www.position-absolute.com/articles/introduction-to-the-html5-audio-tag-javascript-manipulation/
+        // see: https://developer.mozilla.org/En/Using_audio_and_video_in_Firefox
+        // see: https://developer.mozilla.org/En/nsIDOMHTMLMediaElement
 
-		public string src;
+        public string src;
 
         public bool ended;
         public bool paused;
@@ -52,12 +52,12 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         public double volume;
 
 
-		// X:\jsc.svn\examples\javascript\chrome\apps\ChromeAudioPlaybackRate\ChromeAudioPlaybackRate\Application.cs
-		// https://developer.mozilla.org/en-US/Apps/Build/Audio_and_video_delivery/WebAudio_playbackRate_explained
-		public double playbackRate;
+        // X:\jsc.svn\examples\javascript\chrome\apps\ChromeAudioPlaybackRate\ChromeAudioPlaybackRate\Application.cs
+        // https://developer.mozilla.org/en-US/Apps/Build/Audio_and_video_delivery/WebAudio_playbackRate_explained
+        public double playbackRate;
 
-		// IE 9 will fault on this
-		public void load()
+        // IE 9 will fault on this
+        public void load()
         {
 
         }
@@ -70,6 +70,24 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         {
         }
 
+
+
+        // http://stackoverflow.com/questions/9696948/proper-onload-for-audio
+        public event Action<IEvent> onloadeddata
+        {
+            [Script(DefineAsStatic = true)]
+            add
+            {
+                // probably no IE support
+                base.InternalEvent(true, value, "loadeddata", "loadeddata");
+            }
+            [Script(DefineAsStatic = true)]
+            remove
+            {
+                // probably no IE support
+                base.InternalEvent(false, value, "loadeddata", "loadeddata");
+            }
+        }
 
         // event prefix on or at?
         public event Action<IEvent> onended
@@ -109,6 +127,24 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
                     var y = new TaskCompletionSource<IEvent>();
 
                     i.onended +=
+                        e =>
+                        {
+                            y.SetResult(e);
+                        };
+
+                    return y.Task;
+                }
+            }
+
+            public Task<IEvent> onloadeddata
+            {
+                [Script(DefineAsStatic = true)]
+                get
+                {
+                    var i = that;
+                    var y = new TaskCompletionSource<IEvent>();
+
+                    i.onloadeddata +=
                         e =>
                         {
                             y.SetResult(e);

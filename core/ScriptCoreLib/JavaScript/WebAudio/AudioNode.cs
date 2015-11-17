@@ -23,5 +23,9 @@ namespace ScriptCoreLib.JavaScript.WebAudio
         public void connect(AudioParam destination, uint output = 0)
         {
         }
+
+        public void disconnect()
+        {
+        }
     }
 }
