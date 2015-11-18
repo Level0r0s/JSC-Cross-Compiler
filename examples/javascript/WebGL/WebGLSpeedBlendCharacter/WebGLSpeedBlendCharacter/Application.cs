@@ -30,6 +30,11 @@ namespace WebGLSpeedBlendCharacter
 
         public Application(IApp page)
         {
+            //{ var ref0 = typeof(dirt_tx); }
+            { var ref0 = new dirt_tx { }; }
+            //{ var ref0 = typeof(MarineCv2_color); }
+            { var ref0 = new MarineCv2_color { }; }
+
             // http://www.realitymeltdown.com/WebGL3/character-controller.html
 
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201501/20150127
@@ -221,7 +226,7 @@ namespace WebGLSpeedBlendCharacter
 
                             (xgeometry, materials) =>
                             {
-
+                                // cannot see the ground?
                                 var ground = new THREE.Mesh(xgeometry, materials[0]);
                                 ground.scale.set(20, 20, 20);
                                 ground.receiveShadow = true;

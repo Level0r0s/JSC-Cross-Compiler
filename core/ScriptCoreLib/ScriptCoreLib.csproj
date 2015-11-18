@@ -153,6 +153,7 @@
     <Compile Include="JavaScript\DOM\FetchEvent.cs" />
     <Compile Include="JavaScript\Extensions\IPromiseExtensions.cs" />
     <Compile Include="JavaScript\Extensions\ServiceWorkerContainerExtensions.cs" />
+    <Compile Include="JavaScript\WebBluetooth\BluetoothDevice.cs" />
     <Compile Include="JavaScript\WebGL\WebGLDebugShaders.cs" />
     <Compile Include="JavaScript\WebGL\WebGLContextEvent.cs" />
     <Compile Include="JavaScript\WebGL\WebGLFramebuffer.cs" />
