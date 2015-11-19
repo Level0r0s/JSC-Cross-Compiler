@@ -23,13 +23,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Chrome360HZAnimation;
-using Chrome360HZAnimation.Design;
-using Chrome360HZAnimation.HTML.Pages;
+using x360stereohzrunaround;
+using x360stereohzrunaround.Design;
+using x360stereohzrunaround.HTML.Pages;
 using System.Diagnostics;
 using ScriptCoreLib.JavaScript.WebGL;
 
-namespace Chrome360HZAnimation
+namespace x360stereohzrunaround
 {
     using gl = WebGLRenderingContext;
 
@@ -66,12 +66,12 @@ namespace Chrome360HZAnimation
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150808/cubemapcamera
         // subst /D a:
-        // subst a: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\bin\Debug\staging\Chrome360HZAnimation.Application\web
-        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\bin\Debug\staging\Chrome360HZAnimation.Application\web
-        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\Chrome360HZAnimation\Chrome360HZAnimation\bin\Debug\staging\Chrome360HZAnimation.Application\web
+        // subst a: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360stereohzrunaround\x360stereohzrunaround\bin\Debug\staging\x360stereohzrunaround.Application\web
+        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360stereohzrunaround\x360stereohzrunaround\bin\Debug\staging\x360stereohzrunaround.Application\web
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360stereohzrunaround\x360stereohzrunaround\bin\Debug\staging\x360stereohzrunaround.Application\web
         // what if we want to do subst in another winstat or session?
 
-        // ColladaLoader: Empty or non-existing file (assets/Chrome360HZAnimation/S6Edge.dae)
+        // ColladaLoader: Empty or non-existing file (assets/x360stereohzrunaround/S6Edge.dae)
 
         /// <summary>
         /// This is a javascript application.
@@ -154,7 +154,7 @@ namespace Chrome360HZAnimation
                         // 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
                         Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
 
-                        new chrome.Notification(title: "Chrome360HZAnimation");
+                        new chrome.Notification(title: "x360stereohzrunaround");
 
                         // https://developer.chrome.com/apps/app_window#type-CreateWindowOptions
                         var xappwindow = await chrome.app.window.create(
@@ -195,7 +195,7 @@ namespace Chrome360HZAnimation
             //const int size = 1024; // 6 faces, ?
             //const int cubefacesize = 1024; // 6 faces, ?
 
-            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/Chrome360HZAnimation/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
+            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360stereohzrunaround/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
             int cubefacesize = 2048; // 6 faces, ?
             // "X:\vr\tape1\0000x2048.png"
             // for 60hz render we may want to use float camera percision, not available for ui.
@@ -222,7 +222,7 @@ namespace Chrome360HZAnimation
 
             var far = 0xffffff;
 
-            Native.css.style.backgroundColor = "blue";
+            Native.css.style.backgroundColor = "darkcyan";
             Native.css.style.overflow = IStyle.OverflowEnum.hidden;
 
             Native.body.Clear();
@@ -1559,236 +1559,184 @@ namespace Chrome360HZAnimation
             #endregion
 
 
-            new Models.ColladaS6Edge().Source.Task.ContinueWithResult(
-                   dae =>
-                   {
-                       // 90deg
-                       dae.rotation.x = -Math.Cos(Math.PI);
-
-                       //dae.scale.x = 30;
-                       //dae.scale.y = 30;
-                       //dae.scale.z = 30;
-                       dae.position.z = -(65 - 200);
 
 
 
 
-
-                       var scale = 0.9;
-
-                       // jsc, do we have ILObserver available yet?
-                       dae.scale.x = scale;
-                       dae.scale.y = scale;
-                       dae.scale.z = scale;
-
-
-                       #region onmousewheel
-                       Native.body.onmousewheel +=
-                           e =>
-                           {
-                               e.preventDefault();
-
-                               //camera.position.z = 1.5;
-
-                               // min max. shall adjust speed also!
-                               // max 4.0
-                               // min 0.6
-                               dae.position.z -= 10.0 * e.WheelDirection;
-
-                               //camera.position.z = 400;
-                               //dae.position.z = dae.position.z.Max(-200).Min(200);
-
-                               //Native.document.title = new { z }.ToString();
-
-                           };
-                       #endregion
+            // view-source:http://threejs.org/examples/webgl_multiple_canvases_circle.html
+            // https://threejsdoc.appspot.com/doc/three.js/src.source/extras/cameras/CubeCamera.js.html
+            Native.window.onframe +=
+                e =>
+                {
+                    // let render man know..
+                    if (vsync != null)
+                        if (vsync.Task.IsCompleted)
+                            return;
 
 
-                       //dae.position.y = -80;
-
-                       dae.AttachTo(sceneg);
-                       //scene.add(dae);
-                       oo.Add(dae);
+                    //if (pause) return;
+                    //if (pause.@checked)
+                    //    return;
 
 
+                    // can we float out of frame?
+                    // haha. a bit too flickery.
+                    //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.01) * 50.0;
+                    //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.001) * 190.0;
+                    //dae.position.x = Math.Sin(fcamerax * 0.001) * 190.0;
+                    //dae.position.y = Math.Cos(fcamerax * 0.001) * 90.0;
+                    // manual rebuild?
+                    // red compiler notifies laptop chrome of pending update
+                    // app reloads
+
+                    applycameraoffset();
+                    renderer0.clear();
+                    //rendererPY.clear();
+
+                    //cameraPX.aspect = canvasPX.aspect;
+                    //cameraPX.updateProjectionMatrix();
+
+                    // um what does this do?
+                    //cameraPX.position.z += (z - cameraPX.position.z) * e.delay.ElapsedMilliseconds / 200.0;
+                    // mousewheel allos the camera to move closer
+                    // once we see the frame in vr, can we udp sync vr tracking back to laptop?
 
 
-                       // view-source:http://threejs.org/examples/webgl_multiple_canvases_circle.html
-                       // https://threejsdoc.appspot.com/doc/three.js/src.source/extras/cameras/CubeCamera.js.html
-                       Native.window.onframe +=
-                           e =>
-                           {
-                               // let render man know..
-                               if (vsync != null)
-                                   if (vsync.Task.IsCompleted)
-                                       return;
+                    //this.targetPX.x += 1;
+                    //this.targetNX.x -= 1;
+
+                    //this.targetPY.y += 1;
+                    //this.targetNY.y -= 1;
+
+                    //this.targetPZ.z += 1;
+                    //this.targetNZ.z -= 1;
+
+                    // how does the 360 or shadertoy want our cubemaps?
 
 
-                               //if (pause) return;
-                               //if (pause.@checked)
-                               //    return;
+                    // and then rotate right?
+
+                    // how can we render cubemap?
 
 
-                               // can we float out of frame?
-                               // haha. a bit too flickery.
-                               //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.01) * 50.0;
-                               //dae.position.x = Math.Sin(e.delay.ElapsedMilliseconds * 0.001) * 190.0;
-                               dae.position.x = Math.Sin(fcamerax * 0.001) * 190.0;
-                               dae.position.y = Math.Cos(fcamerax * 0.001) * 90.0;
-                               // manual rebuild?
-                               // red compiler notifies laptop chrome of pending update
-                               // app reloads
+                    #region x
+                    // upside down?
+                    renderer0.render(scene, cameraPX);
+                    canvasPX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
 
-                               applycameraoffset();
-                               renderer0.clear();
-                               //rendererPY.clear();
+                    renderer0.render(scene, cameraNX);
+                    canvasNX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
+                    #endregion
 
-                               //cameraPX.aspect = canvasPX.aspect;
-                               //cameraPX.updateProjectionMatrix();
+                    #region z
+                    renderer0.render(scene, cameraPZ);
+                    canvasPZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
 
-                               // um what does this do?
-                               //cameraPX.position.z += (z - cameraPX.position.z) * e.delay.ElapsedMilliseconds / 200.0;
-                               // mousewheel allos the camera to move closer
-                               // once we see the frame in vr, can we udp sync vr tracking back to laptop?
-
-
-                               //this.targetPX.x += 1;
-                               //this.targetNX.x -= 1;
-
-                               //this.targetPY.y += 1;
-                               //this.targetNY.y -= 1;
-
-                               //this.targetPZ.z += 1;
-                               //this.targetNZ.z -= 1;
-
-                               // how does the 360 or shadertoy want our cubemaps?
-
-
-                               // and then rotate right?
-
-                               // how can we render cubemap?
-
-
-                               #region x
-                               // upside down?
-                               renderer0.render(scene, cameraPX);
-                               canvasPX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
-
-                               renderer0.render(scene, cameraNX);
-                               canvasNX.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
-                               #endregion
-
-                               #region z
-                               renderer0.render(scene, cameraPZ);
-                               canvasPZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
-
-                               renderer0.render(scene, cameraNZ);
-                               canvasNZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
-                               #endregion
+                    renderer0.render(scene, cameraNZ);
+                    canvasNZ.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
+                    #endregion
 
 
 
-                               #region y
-                               renderer0.render(scene, cameraPY);
+                    #region y
+                    renderer0.render(scene, cameraPY);
 
-                               //canvasPY.save();
-                               //canvasPY.translate(0, size);
-                               //canvasPY.rotate((float)(-Math.PI / 2));
-                               canvasPY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
-                               //canvasPY.restore();
-
-
-                               renderer0.render(scene, cameraNY);
-                               //canvasNY.save();
-                               //canvasNY.translate(size, 0);
-                               //canvasNY.rotate((float)(Math.PI / 2));
-                               canvasNY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
-                               //canvasNY.restore();
-                               // ?
-                               #endregion
+                    //canvasPY.save();
+                    //canvasPY.translate(0, size);
+                    //canvasPY.rotate((float)(-Math.PI / 2));
+                    canvasPY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
+                    //canvasPY.restore();
 
 
-                               //renderer0.render(scene, cameraPX);
+                    renderer0.render(scene, cameraNY);
+                    //canvasNY.save();
+                    //canvasNY.translate(size, 0);
+                    //canvasNY.rotate((float)(Math.PI / 2));
+                    canvasNY.drawImage((IHTMLCanvas)renderer0.domElement, 0, 0, cubefacesize, cubefacesize);
+                    //canvasNY.restore();
+                    // ?
+                    #endregion
 
 
-                               //rendererPY.render(scene, cameraPY);
-
-                               // at this point we should be able to render the sphere texture
-
-                               //public const uint TEXTURE_CUBE_MAP_POSITIVE_X = 34069;
-                               //public const uint TEXTURE_CUBE_MAP_NEGATIVE_X = 34070;
-                               //public const uint TEXTURE_CUBE_MAP_POSITIVE_Y = 34071;
-                               //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Y = 34072;
-                               //public const uint TEXTURE_CUBE_MAP_POSITIVE_Z = 34073;
-                               //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074;
+                    //renderer0.render(scene, cameraPX);
 
 
-                               //var cube0 = new IHTMLImage[] {
-                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_px(),
-                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nx(),
+                    //rendererPY.render(scene, cameraPY);
 
-                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_py(),
-                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_ny(),
+                    // at this point we should be able to render the sphere texture
+
+                    //public const uint TEXTURE_CUBE_MAP_POSITIVE_X = 34069;
+                    //public const uint TEXTURE_CUBE_MAP_NEGATIVE_X = 34070;
+                    //public const uint TEXTURE_CUBE_MAP_POSITIVE_Y = 34071;
+                    //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Y = 34072;
+                    //public const uint TEXTURE_CUBE_MAP_POSITIVE_Z = 34073;
+                    //public const uint TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074;
 
 
-                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_pz(),
-                               //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nz()
-                               //};
+                    //var cube0 = new IHTMLImage[] {
+                    //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_px(),
+                    //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nx(),
 
-                               new[] {
+                    //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_py(),
+                    //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_ny(),
+
+
+                    //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_pz(),
+                    //        new CSS3DPanoramaByHumus.HTML.Images.FromAssets.humus_nz()
+                    //};
+
+                    new[] {
                                    canvasPX, canvasNX,
                                    canvasPY, canvasNY,
                                    canvasPZ, canvasNZ
                                }.WithEachIndex(
-                                   (img, index) =>
-                                   {
-                                       gl.bindTexture(gl.TEXTURE_CUBE_MAP, pass.tex);
+                        (img, index) =>
+                        {
+                            gl.bindTexture(gl.TEXTURE_CUBE_MAP, pass.tex);
 
-                                       //gl.pixelStorei(gl.UNPACK_FLIP_X_WEBGL, false);
-                                       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+                            //gl.pixelStorei(gl.UNPACK_FLIP_X_WEBGL, false);
+                            gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
 
-                                       // http://stackoverflow.com/questions/15364517/pixelstoreigl-unpack-flip-y-webgl-true
+                            // http://stackoverflow.com/questions/15364517/pixelstoreigl-unpack-flip-y-webgl-true
 
-                                       // https://msdn.microsoft.com/en-us/library/dn302429(v=vs.85).aspx
-                                       //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
-                                       //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+                            // https://msdn.microsoft.com/en-us/library/dn302429(v=vs.85).aspx
+                            //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);
+                            //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
 
-                                       gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X + (uint)index, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img.canvas);
+                            gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X + (uint)index, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img.canvas);
 
-                                   }
-                                );
+                        }
+                     );
 
-                               // could do dynamic resolution- fog of war or fog of FOV. where up to 150deg field of vision is encouragedm, not 360
-                               pass.Paint_Image(
-                                     0,
+                    // could do dynamic resolution- fog of war or fog of FOV. where up to 150deg field of vision is encouragedm, not 360
+                    pass.Paint_Image(
+                          0,
 
-                                     0,
-                                     0,
-                                     0,
-                                     0
-                                   //,
+                          0,
+                          0,
+                          0,
+                          0
+                        //,
 
-                                // gl_FragCoord
-                                   // cannot be scaled, and can be referenced directly.
-                                   // need another way to scale
-                                   //zoom: 0.3f
-                                );
+                     // gl_FragCoord
+                        // cannot be scaled, and can be referenced directly.
+                        // need another way to scale
+                        //zoom: 0.3f
+                     );
 
-                               //paintsw.Stop();
-
-
-                               // what does it do?
-                               gl.flush();
-
-                               // let render man know..
-                               if (vsync != null)
-                                   if (!vsync.Task.IsCompleted)
-                                       vsync.SetResult(null);
-                           };
+                    //paintsw.Stop();
 
 
-                   }
-               );
+                    // what does it do?
+                    gl.flush();
+
+                    // let render man know..
+                    if (vsync != null)
+                        if (!vsync.Task.IsCompleted)
+                            vsync.SetResult(null);
+                };
+
+
 
 
 

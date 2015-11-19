@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9DCA2742-ADFE-4101-9D09-B773257A8D94}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>x360stereohzrunaround</RootNamespace>
+    <AssemblyName>x360stereohzrunaround</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>x360stereohzrunaround.Program</StartupObject>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Chrome Web Server Styled Form, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Chrome.Web.Server.StyledForm.1.0.0.0\lib\Chrome Web Server Styled Form.dll</HintPath>
+    </Reference>
+    <Reference Include="Chrome Web Server, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Chrome.Web.Server.1.0.0.0\lib\Chrome Web Server.dll</HintPath>
+    </Reference>
+    <Reference Include="Chrome Web Store">
+      <HintPath>..\packages\Chrome.Web.Store.1.0.0.0\lib\Chrome Web Store.dll</HintPath>
+    </Reference>
+    <Reference Include="jsc.meta">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\jsc.meta.exe</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="FSharp.Core">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="ScriptCoreLib">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Avalon">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Avalon.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Query">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Query.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Windows.Forms">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\util\jsc\bin\ScriptCoreLib.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Extensions">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\util\jsc\bin\ScriptCoreLib.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Ultra">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\util\jsc\bin\ScriptCoreLib.Ultra.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Ultra.Components">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Ultra.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Ultra.Library">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Ultra.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Ultra.VisualBasic">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLib.Ultra.VisualBasic.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLibA">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\util\jsc\bin\ScriptCoreLibA.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLibJava">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\util\jsc\bin\ScriptCoreLibJava.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="THREE">
+      <HintPath>..\packages\THREE.1.0.0.0\lib\THREE.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="ChromeGalaxyS6Edge.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeGalaxyS6Edge.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ScriptCoreLib.Async">
+      <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeCubeCameraExperiment.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeCubeCameraExperiment.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ChromeEquirectangularCameraExperiment.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeEquirectangularCameraExperiment.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Chrome360HZ.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\Chrome360HZ.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGLRah66Comanche.AssetsLibrary">
+      <HintPath>..\..\..\..\..\WebGL\collada\WebGLRah66Comanche\WebGLRah66Comanche\bin\staging.AssetsLibrary\WebGLRah66Comanche.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGLColladaExperiment.AssetsLibrary">
+      <HintPath>..\..\..\..\..\WebGL\WebGLColladaExperiment\WebGLColladaExperiment\bin\staging.AssetsLibrary\WebGLColladaExperiment.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="HeatZeekerRTSOrto.AssetsLibrary">
+      <HintPath>..\..\..\..\..\WebGL\HeatZeekerRTSOrto\HeatZeekerRTSOrto\bin\staging.AssetsLibrary\HeatZeekerRTSOrto.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGLGodRay.AssetsLibrary">
+      <HintPath>..\..\..\..\..\WebGL\WebGLGodRay\WebGLGodRay\bin\staging.AssetsLibrary\WebGLGodRay.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Chrome360HZAnimation.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\Chrome360HZAnimation.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGLHZBlendCharacter.AssetsLibrary">
+      <HintPath>..\..\..\..\..\WebGL\WebGLHZBlendCharacter\WebGLHZBlendCharacter\bin\staging.AssetsLibrary\WebGLHZBlendCharacter.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="x360stereohzrunaround.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\x360stereohzrunaround.AssetsLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Library\ShaderToy.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shaders\ProgramFragmentShader.cs" />
+    <Content Include="Design\App.css" />
+    <Content Include="Design\App.htm" />
+    <Compile Include="ApplicationWebService.cs" />
+    <Compile Include="Application.cs" />
+    <Compile Include="Program.cs">
+      <DependentUpon>Application.cs</DependentUpon>
+    </Compile>
+    <Content Include="Textures\anvil___spherical_hdri_panorama_skybox_by_macsix-d6vv4hs.jpg" />
+    <Content Include="Textures\tiles_regrid.png" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Shaders\Program.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\WebGL\collada\WebGLRah66Comanche\WebGLRah66Comanche\WebGLRah66Comanche.csproj">
+      <Project>{f6ee5d37-a30a-438f-af72-d571b0ab257c}</Project>
+      <Name>WebGLRah66Comanche</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\WebGL\HeatZeekerRTSOrto\HeatZeekerRTSOrto\HeatZeekerRTSOrto.csproj">
+      <Project>{29947aad-0b14-4fb0-a3c3-a51322be2eda}</Project>
+      <Name>HeatZeekerRTSOrto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\WebGL\WebGLColladaExperiment\WebGLColladaExperiment\WebGLColladaExperiment.csproj">
+      <Project>{5d093f42-02cc-4ed6-bd9f-3ac636479fb9}</Project>
+      <Name>WebGLColladaExperiment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\WebGL\WebGLGodRay\WebGLGodRay\WebGLGodRay.csproj">
+      <Project>{64f527cc-aa24-434a-b632-99aadd3b085a}</Project>
+      <Name>WebGLGodRay</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\WebGL\WebGLHZBlendCharacter\WebGLHZBlendCharacter\WebGLHZBlendCharacter.csproj">
+      <Project>{a5de484d-54a0-4418-ad41-84b77f5ae4e8}</Project>
+      <Name>WebGLHZBlendCharacter</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Diagnostics\" />
+    <Folder Include="web\assets\Chrome360HZAnimation\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /AssociateDriveForChrome:A /InferChromeAppManifest:true  /FilterTo:$(SolutionDir)
+
+		if $(ConfigurationName)==Release (
+		rem start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /FilterTo:"$(SolutionDir)"
+		)</PostBuildEvent>
+    <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
+		            </PreBuildEvent>
+  </PropertyGroup>
+</Project>

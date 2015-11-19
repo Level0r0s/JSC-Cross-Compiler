@@ -11,6 +11,8 @@ namespace ScriptCoreLib.JavaScript.WebGL
 	[Script(HasNoPrototype = true, InternalConstructor = true)]
     public class WebGLTexture
     {
+        // http://blog.tojicode.com/2011/12/protecting-webgl-content-and-why-you.html
+
 		// https://www.opengl.org/sdk/docs/man/html/glCreateTextures.xhtml
 
 		#region Constructor

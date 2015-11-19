@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using ScriptCoreLib.Shared.Lambda;
 using ScriptCoreLib.JavaScript.Runtime;
 
-using static THREE;
+//using static THREE;
 
 namespace WebGLCannonPhysicsEngine
 {
@@ -121,13 +121,13 @@ namespace WebGLCannonPhysicsEngine
 
             var camera = new THREE.PerspectiveCamera(75, Native.window.aspect, 0.1, 1000);
 
-            var scene = new Scene();
-            scene.fog = new Fog(0x000000, 0, 500);
+            var scene = new THREE.Scene();
+            scene.fog = new THREE.Fog(0x000000, 0, 500);
 
-            var ambient = new AmbientLight(0x111111);
+            var ambient = new THREE.AmbientLight(0x111111);
             scene.add(ambient);
 
-            var light = new SpotLight(0xffffff, 1.0);
+            var light = new THREE.SpotLight(0xffffff, 1.0);
             light.position.set(10, 30, 20);
             light.target.position.set(0, 0, 0);
             //    if(true){
@@ -169,7 +169,7 @@ namespace WebGLCannonPhysicsEngine
 
             //    
 
-            var mesh = new Mesh(geometry, material)
+            var mesh = new THREE.Mesh(geometry, material)
             {
                 castShadow = true,
                 receiveShadow = true

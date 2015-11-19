@@ -918,8 +918,14 @@ namespace TestYouTubeExtractor
 
                             dynamic ytconfigJSON = Newtonsoft.Json.JsonConvert.DeserializeObject(ytconfig);
                             var ytconfigJSON_args = ytconfigJSON.args;
+
+                            // not available for 8K 360 3D ?
                             string ytconfigJSON_args_adaptive_fmts = ytconfigJSON.args.adaptive_fmts;
-                            string adaptive_fmts = Uri.UnescapeDataString(ytconfigJSON_args_adaptive_fmts);
+
+                            //if (ytconfigJSON_args_adaptive_fmts == null)
+                            //    Debugger.Break();
+
+                            string adaptive_fmts = Uri.UnescapeDataString(ytconfigJSON_args_adaptive_fmts  ?? "");
 
 
                             // projection_type=3
@@ -945,7 +951,7 @@ namespace TestYouTubeExtractor
 
                                     if (statusfail)
                                         continue;
-
+                                    // url_encoded_fmt_stream_map=type=video
                                     Spherical3D = get_video_info1.Contains("projection_type=3");
                                     Spherical = get_video_info1.Contains("projection_type=2");
                                 }
@@ -1003,7 +1009,7 @@ namespace TestYouTubeExtractor
         // CALLED BY?
         public static void DoVideo(string link)
         {
-            Debugger.Break();
+            //Debugger.Break();
 
             try
             {

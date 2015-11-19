@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLCannonPhysicsEngine", "WebGLCannonPhysicsEngine\WebGLCannonPhysicsEngine.csproj", "{6AFA30D6-E490-4D20-ABEE-50E900779CF4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4FFD0992-0097-4C06-9362-19846B399732} = {4FFD0992-0097-4C06-9362-19846B399732}
@@ -24,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Windows.Forms
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Async", "..\..\..\..\core\ScriptCoreLib.Async\ScriptCoreLib.Async\ScriptCoreLib.Async.csproj", "{88C3C260-D1DA-4FB3-A53D-79462913E80C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeStereoLightAnimation", "..\..\chrome\apps\WebGL\ChromeStereoLightAnimation\ChromeStereoLightAnimation\ChromeStereoLightAnimation.csproj", "{426A9419-9287-4880-979F-29F29D3F2A22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeStereoLightAnimation", "..\..\chrome\apps\WebGL\ChromeStereoLightAnimation\ChromeStereoLightAnimation\ChromeStereoLightAnimation.csproj", "{A8DD7B4E-77FD-4419-BA99-ABECFFF016D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,12 +76,12 @@ Global
 		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Release|Any CPU.ActiveCfg = Release|x86
 		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Release|x86.ActiveCfg = Release|x86
 		{88C3C260-D1DA-4FB3-A53D-79462913E80C}.Release|x86.Build.0 = Release|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.ActiveCfg = Debug|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.Build.0 = Debug|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|Any CPU.ActiveCfg = Release|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.ActiveCfg = Release|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.Build.0 = Release|x86
+		{A8DD7B4E-77FD-4419-BA99-ABECFFF016D7}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A8DD7B4E-77FD-4419-BA99-ABECFFF016D7}.Debug|x86.ActiveCfg = Debug|x86
+		{A8DD7B4E-77FD-4419-BA99-ABECFFF016D7}.Debug|x86.Build.0 = Debug|x86
+		{A8DD7B4E-77FD-4419-BA99-ABECFFF016D7}.Release|Any CPU.ActiveCfg = Release|x86
+		{A8DD7B4E-77FD-4419-BA99-ABECFFF016D7}.Release|x86.ActiveCfg = Release|x86
+		{A8DD7B4E-77FD-4419-BA99-ABECFFF016D7}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +93,6 @@ Global
 		{F6EE5D37-A30A-438F-AF72-D571B0AB257C} = {CFE75AA3-C704-4AA2-BC58-30BB75E9A12C}
 		{B8D28279-57CD-4163-86F9-1DFDF540B58B} = {CFE75AA3-C704-4AA2-BC58-30BB75E9A12C}
 		{88C3C260-D1DA-4FB3-A53D-79462913E80C} = {CFE75AA3-C704-4AA2-BC58-30BB75E9A12C}
-		{426A9419-9287-4880-979F-29F29D3F2A22} = {CFE75AA3-C704-4AA2-BC58-30BB75E9A12C}
+		{A8DD7B4E-77FD-4419-BA99-ABECFFF016D7} = {CFE75AA3-C704-4AA2-BC58-30BB75E9A12C}
 	EndGlobalSection
 EndGlobal
