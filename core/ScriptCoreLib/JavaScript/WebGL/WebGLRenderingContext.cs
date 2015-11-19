@@ -34,7 +34,23 @@ namespace ScriptCoreLib.JavaScript.WebGL
     public partial class WebGLRenderingContext : INodeConvertible<IHTMLCanvas>
     // : WebGLRenderingContextBase
     {
+        public const uint UNSIGNED_BYTE = 5121;
+        public const uint RGBA = 6408;
 
+        public const uint TEXTURE_CUBE_MAP = 34067;
+        public const uint TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074;
+        public const uint TEXTURE_CUBE_MAP_NEGATIVE_X = 34070;
+        public const uint TEXTURE_CUBE_MAP_NEGATIVE_Y = 34072;
+        public const uint TEXTURE_CUBE_MAP_POSITIVE_Z = 34073;
+        public const uint TEXTURE_CUBE_MAP_POSITIVE_X = 34069;
+        public const uint TEXTURE_CUBE_MAP_POSITIVE_Y = 34071;
+        
+        public const uint UNPACK_FLIP_Y_WEBGL = 37440;
+
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\360stereo\x360stereohzrunaround\Application.cs
+        public void bindTexture(uint target, WebGLTexture texture) { }
+        public void texImage2D(uint target, int level, uint internalformat, uint format, uint type, IHTMLCanvas canvas) { }
+        public void flush() { }
 
         // https://github.com/kripken/webgl-worker/blob/master/webGLWorker.js
 

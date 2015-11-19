@@ -277,6 +277,71 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
 
 
+            // there can be only one UI mouse capture 
+            static Action oncapturedmousemove_release;
+
+            // Z:\jsc.svn\examples\javascript\async\Test\TestMouseCaptureWhileMove\Application.cs
+            public virtual Task<IEvent> oncapturedmousemove
+            {
+                [Script(DefineAsStatic = true)]
+                get
+                {
+                    // X:\jsc.svn\examples\javascript\chrome\apps\ChromeAppWindowUDPPointerLock\ChromeAppWindowUDPPointerLock\Application.cs
+
+                    if (oncapturedmousemove_release == null)
+                    {
+                        oncapturedmousemove_release = that.CaptureMouse();
+                    }
+
+                    var xx = new TaskCompletionSource<IEvent>();
+
+                    this.onmouseup.ContinueWith(
+                        x =>
+                        {
+                            // fires twice?
+                            if (oncapturedmousemove_release == null)
+                                return;
+
+                            x.Result.preventDefault();
+                            x.Result.stopPropagation();
+
+
+                            oncapturedmousemove_release();
+                            oncapturedmousemove_release = null;
+
+                            // yield null
+                        }
+                    );
+
+
+                    oncapturedmousemove_release += delegate
+                    {
+                        if (xx == null)
+                            return;
+
+                        xx.SetResult(null);
+                        xx = null;
+                    };
+
+                    this.onmousemove.ContinueWith(
+                        x =>
+                        {
+                            if (xx == null)
+                                return;
+
+                            // yield value
+                            x.Result.preventDefault();
+                            x.Result.stopPropagation();
+
+                            xx.SetResult(x.Result);
+                            xx = null;
+                        }
+                    );
+
+                    return xx.Task;
+                }
+            }
+
 
             public virtual Task<IEvent> onmouseup
             {
@@ -336,7 +401,9 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             #endregion
         }
 
-        [System.Obsolete("is this the best way to expose events as async?")]
+
+        // https://visualstudio.uservoice.com/forums/121579-visual-studio-2015/suggestions/5342192-awaitable-events
+        //[System.Obsolete("is this the best way to expose events as async?")]
         public new Tasks<IHTMLElement> async
         {
             [Script(DefineAsStatic = true)]

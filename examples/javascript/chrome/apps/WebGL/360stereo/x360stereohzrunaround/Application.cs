@@ -196,6 +196,11 @@ namespace x360stereohzrunaround
             //const int cubefacesize = 1024; // 6 faces, ?
 
             // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360stereohzrunaround/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
+
+            // https://support.oculus.com/hc/en-us/articles/204100086-Viewing-Your-Panoramic-Photos-in-Oculus-360-Photos
+            // Any JPEG photos with either an equirectangular projection (recommended 4096x2048) or a cube map (recommended 1536x1536 per cube side) will render in the application.
+
+
             int cubefacesize = 2048; // 6 faces, ?
             // "X:\vr\tape1\0000x2048.png"
             // for 60hz render we may want to use float camera percision, not available for ui.
@@ -203,7 +208,7 @@ namespace x360stereohzrunaround
             //  "x:\util\android-sdk-windows\platform-tools\adb.exe" push "X:\vr\tape1\0000x128.png" "/sdcard/oculus/360photos/"
 
             if (Environment.ProcessorCount < 8)
-                cubefacesize = 512; // 6 faces, ?
+                cubefacesize = 128; // 6 faces, ?
 
             new IHTMLPre { new { Environment.ProcessorCount, cubefacesize } }.AttachToDocument();
 
@@ -601,82 +606,107 @@ namespace x360stereohzrunaround
 
             //canvas0.css.active.style.cursor = IStyle.CursorEnum.move;
 
-            #region onmousedown
-            Native.body.onmousedown +=
-                async e =>
+
+
+
+
+            // need it? no
+            //canvasPZ.canvas.tabIndex = 77;
+
+            // Z:\jsc.svn\examples\javascript\async\Test\TestMouseCaptureWhileMove\Application.cs
+
+
+            // https://visualstudio.uservoice.com/forums/121579-visual-studio-2015/suggestions/10773216-while-var-u
+            // https://visualstudio.uservoice.com/forums/121579-visual-studio-2015/suggestions/5342192-awaitable-events
+
+            new { }.With(
+                async delegate
                 {
-                    if (e.Element.nodeName.ToLower() != "canvas")
-                        return;
-
-                    // movementX no longer works
-                    old = new
+                    canvasPZ.canvas.style.cursor = IStyle.CursorEnum.move;
+                    canvasPZ.canvas.css.style.border = "1px solid cyan";
+                    canvasPZ.canvas.css.hover.style.border = "1px solid yellow";
+                    canvasPZ.canvas.css.active.style.border = "1px solid red";
+                    var mousedown = default(IEvent);
+                    var mousemove = default(IEvent);
+                    while (mousedown = await canvasPZ.canvas.async.onmousedown)
                     {
+                        var xold = new { mousedown.CursorX, mousedown.CursorY };
+                        while (mousemove = await canvasPZ.canvas.async.oncapturedmousemove)
+                        {
+                            cameraz.valueAsNumber += 2 * (mousemove.CursorX - xold.CursorX);
+                            xold = new { mousedown.CursorX, mousedown.CursorY };
+                        }
+                    }
+                }
+            );
 
 
-                        e.CursorX,
-                        e.CursorY
-                    };
+
+            canvasNY.canvas.onmousewheel += e =>
+            {
+                // zoom in out
+                cameray.valueAsNumber += -24 * e.WheelDirection;
+
+            };
+
+            // floor
+            canvasNY.With(
+                 async cc =>
+                 {
+                     cc.canvas.style.cursor = IStyle.CursorEnum.move;
+                     cc.canvas.css.style.border = "1px solid cyan";
+                     cc.canvas.css.hover.style.border = "1px solid yellow";
+                     cc.canvas.css.active.style.border = "1px solid red";
+                     var mousedown = default(IEvent);
+                     var mousemove = default(IEvent);
+                     while (mousedown = await cc.canvas.async.onmousedown)
+                     {
+                         //mousedown.xy;
+                         var xold = new { mousedown.CursorX, mousedown.CursorY };
+                         while (mousemove = await cc.canvas.async.oncapturedmousemove)
+                         {
+                             // left right
+                             cameraz.valueAsNumber += 2 * (mousemove.CursorX - xold.CursorX);
+                             // up down
+                             camerax.valueAsNumber += -2 * (mousemove.CursorY - xold.CursorY);
+                             xold = new { mousedown.CursorX, mousedown.CursorY };
+                         }
+                     }
+                 }
+             );
 
 
-                    //e.CaptureMouse();
-                    var release = e.Element.CaptureMouse();
-                    await e.Element.async.onmouseup;
 
-                    release();
+            canvasNZ.With(
+               async cc =>
+               {
+                   cc.canvas.style.cursor = IStyle.CursorEnum.move;
+                   cc.canvas.css.style.border = "1px solid cyan";
+                   cc.canvas.css.hover.style.border = "1px solid yellow";
+                   cc.canvas.css.active.style.border = "1px solid red";
+                   var mousedown = default(IEvent);
+                   var mousemove = default(IEvent);
+                   while (mousedown = await cc.canvas.async.onmousedown)
+                   {
+                       //mousedown.xy;
+                       var xold = new { mousedown.CursorX, mousedown.CursorY };
+                       while (mousemove = await cc.canvas.async.oncapturedmousemove)
+                       {
+                           cameraz.valueAsNumber += -2 * (mousemove.CursorX - xold.CursorX);
+                           xold = new { mousedown.CursorX, mousedown.CursorY };
+                       }
+                   }
+               }
+           );
 
-
-                };
-            #endregion
 
 
 
             // X:\jsc.svn\examples\javascript\Test\TestMouseMovement\TestMouseMovement\Application.cs
-            #region onmousemove
-            Native.body.onmousemove +=
-                e =>
-                {
-                    if (e.Element.nodeName.ToLower() != "canvas")
-                    {
-                        Native.body.style.cursor = IStyle.CursorEnum.@default;
-                        return;
-                    }
+            // https://np.reddit.com/r/GearVR/comments/2typim/john_carmack_on_twitter_next_release_of_oculus/
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151119/x360stereohzrunaround
+            // PZ!
 
-                    e.preventDefault();
-                    e.stopPropagation();
-
-
-                    Native.body.style.cursor = IStyle.CursorEnum.move;
-
-                    var pointerLock = canvas0 == Native.document.pointerLockElement;
-
-
-                    //Console.WriteLine(new { e.MouseButton, pointerLock, e.movementX });
-
-                    if (e.MouseButton == IEvent.MouseButtonEnum.Left)
-                    {
-
-                        oo.WithEach(
-                            x =>
-                            {
-                                x.rotation.y += 0.006 * (e.CursorX - old.CursorX);
-                                x.rotation.x += 0.006 * (e.CursorY - old.CursorY);
-                            }
-                        );
-
-                        old = new
-                        {
-
-
-                            e.CursorX,
-                            e.CursorY
-                        };
-
-
-
-                    }
-
-                };
-            #endregion
 
             // THREE.WebGLProgram: gl.getProgramInfoLog() C:\fakepath(78,3-98): warning X3557: loop only executes for 1 iteration(s), forcing loop to unroll
             // THREE.WebGLProgram: gl.getProgramInfoLog() (79,3-98): warning X3557: loop only executes for 1 iteration(s), forcing loop to unroll
@@ -810,14 +840,7 @@ namespace x360stereohzrunaround
             #endregion
 
 
-            #region fixup rotation
 
-            //mesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI / 2);
-            //mesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
-
-            // dont need the fixup. unless we want to animate the sky rotate?
-            //mesh.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
-            #endregion
 
 
             // hide the sky to see camera lines?

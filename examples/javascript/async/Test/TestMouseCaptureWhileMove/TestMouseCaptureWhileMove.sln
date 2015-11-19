@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360stereohzrunaround", "x360stereohzrunaround.csproj", "{9DCA2742-ADFE-4101-9D09-B773257A8D94}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMouseCaptureWhileMove", "TestMouseCaptureWhileMove.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMouseCaptureWhileMove", "..\..\..\..\..\async\Test\TestMouseCaptureWhileMove\TestMouseCaptureWhileMove.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib", "..\..\..\..\..\..\..\core\ScriptCoreLib\ScriptCoreLib.csproj", "{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib", "..\..\..\..\..\core\ScriptCoreLib\ScriptCoreLib.csproj", "{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,16 +15,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9DCA2742-ADFE-4101-9D09-B773257A8D94}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{9DCA2742-ADFE-4101-9D09-B773257A8D94}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{9DCA2742-ADFE-4101-9D09-B773257A8D94}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{9DCA2742-ADFE-4101-9D09-B773257A8D94}.Debug|x86.ActiveCfg = Debug|x86
-		{9DCA2742-ADFE-4101-9D09-B773257A8D94}.Debug|x86.Build.0 = Debug|x86
-		{9DCA2742-ADFE-4101-9D09-B773257A8D94}.Release|Any CPU.ActiveCfg = Release|x86
-		{9DCA2742-ADFE-4101-9D09-B773257A8D94}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{9DCA2742-ADFE-4101-9D09-B773257A8D94}.Release|Mixed Platforms.Build.0 = Release|x86
-		{9DCA2742-ADFE-4101-9D09-B773257A8D94}.Release|x86.ActiveCfg = Release|x86
-		{9DCA2742-ADFE-4101-9D09-B773257A8D94}.Release|x86.Build.0 = Release|x86
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}.Debug|Mixed Platforms.Build.0 = Debug|x86
