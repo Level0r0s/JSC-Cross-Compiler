@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{61E213E5-3D3B-4DC5-B3EA-4792A78E3B8A}</ProjectGuid>
+    <ProjectGuid>{77234670-3487-477E-9F24-73AB75E6D82E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>x360barsoomgate</RootNamespace>
-    <AssemblyName>x360barsoomgate</AssemblyName>
+    <RootNamespace>x360chameleon</RootNamespace>
+    <AssemblyName>x360chameleon</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>x360barsoomgate.Program</StartupObject>
+    <StartupObject>x360chameleon.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -139,8 +139,11 @@
     <Reference Include="x360barsoomgate.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\x360barsoomgate.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="BarsoomGateByJimmikaelkael.AssetsLibrary">
-      <HintPath>..\..\synergy\b\BarsoomGateByJimmikaelkael\BarsoomGateByJimmikaelkael\bin\staging.AssetsLibrary\BarsoomGateByJimmikaelkael.AssetsLibrary.dll</HintPath>
+    <Reference Include="x360chameleon.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\x360chameleon.AssetsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ShaderingChameleonByIapafoto.AssetsLibrary">
+      <HintPath>..\..\synergy\s\ShaderingChameleonByIapafoto\ShaderingChameleonByIapafoto\bin\staging.AssetsLibrary\ShaderingChameleonByIapafoto.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +167,9 @@
     <Folder Include="web\assets\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\synergy\b\BarsoomGateByJimmikaelkael\BarsoomGateByJimmikaelkael\BarsoomGateByJimmikaelkael.csproj">
-      <Project>{7e2e2eb0-d1b1-4006-a7d5-f99ad2f1e03f}</Project>
-      <Name>BarsoomGateByJimmikaelkael</Name>
+    <ProjectReference Include="..\..\synergy\s\ShaderingChameleonByIapafoto\ShaderingChameleonByIapafoto\ShaderingChameleonByIapafoto.csproj">
+      <Project>{146d895b-2a6f-48d5-8091-b099bf3c459e}</Project>
+      <Name>ShaderingChameleonByIapafoto</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

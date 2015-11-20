@@ -3,7 +3,8 @@
 //-----------------------------------------------------
 
 // Change this to improve quality (3 is good) - Rq only applied on edge
-#define ANTIALIASING 3
+#define ANTIALIASING 4
+
 // decomment this to see where antialiasing is applied
 //#define SHOW_EDGES
 
@@ -13,26 +14,43 @@
 #define PI 3.14159279
 
 bool WithChameleon;
+
 float Anim;
 mat2 Rotanim, Rotanim2;
-
-float ca3 = cos(.28), sa3 = sin(.28);   
-mat2 Rot3 = mat2(ca3,-sa3,sa3,ca3);
+float ca3, sa3;   
+float closest;
+mat2 Rot3;
 
 // ----------------------------------------------------
 
 float hash( float n ) { return fract(sin(n)*43758.5453123); }
-float noise( in vec3 x ) {
-    vec3 p = floor(x);
-    vec3 f = fract(x);
-    f = f*f*(3.0-2.0*f);
-	
-    float n = p.x + p.y*157.0 + 113.0*p.z;
-    return mix(mix(mix( hash(n+  0.0), hash(n+  1.0),f.x),
-                   mix( hash(n+157.0), hash(n+158.0),f.x),f.y),
-               mix(mix( hash(n+113.0), hash(n+114.0),f.x),
-                   mix( hash(n+270.0), hash(n+271.0),f.x),f.y),f.z);
+
+
+#ifdef NOISE_SKIN
+// By Shane -----
+
+// Tri-Planar blending function. Based on an old Nvidia tutorial.
+vec3 tex3D( sampler2D tex, in vec3 p, in vec3 n ){
+    n = max((abs(n) - 0.2)*7., 0.001); // n = max(abs(n), 0.001), etc.
+    n /= (n.x + n.y + n.z );  
+    
+	return (texture2D(tex, p.yz)*n.x + texture2D(tex, p.zx)*n.y + texture2D(tex, p.xy)*n.z).xyz;
 }
+
+vec3 doBumpMap( sampler2D tex, in vec3 p, in vec3 nor, float bumpfactor){
+    const float eps = 0.001;
+    float ref = (tex3D(tex,  p , nor)).x;                 
+    vec3 grad = vec3( (tex3D(tex, vec3(p.x-eps, p.y, p.z), nor).x)-ref,
+                      (tex3D(tex, vec3(p.x, p.y-eps, p.z), nor).x)-ref,
+                      (tex3D(tex, vec3(p.x, p.y, p.z-eps), nor).x)-ref )/eps;
+             
+    grad -= nor*dot(nor, grad);          
+                      
+    return normalize( nor + grad*bumpfactor );
+}
+
+#endif
+
 
 // ----------------------------------------------------
 
@@ -85,7 +103,7 @@ vec2 spiralTail(in vec3 p) {
     r+=(.2-.2*(smoothstep(0.,.08, abs(p.z))));
 
     return vec2(
-        max(sqrt(d*d+p.z*p.z)-th*r, length(p.xy-vec2(.185,-.14))-1.05),
+        max(max(sqrt(d*d+p.z*p.z)-th*r, length(p.xy-vec2(.185,-.14))-1.05), -length(p.xy-vec2(.4,1.5))+.77),
         abs(30.*cos(10.*d)) + abs(20.*cos(a*10.)));
 }
 
@@ -146,13 +164,14 @@ vec2 head(in vec3 p) {
     
 vec2 support(vec3 p, vec2 c, float th) {
     p-=vec3(-2.5,-.7,0);
-    float d = length(max(abs(p-vec3(0,-2,.75))-vec3(.5,2.5,.1),0.))-.11; 
-    d = min(d, length(p-vec3(0,-6.5,0)) - 3.);          
+    float d1 = length(p-vec3(0,-6.5,0)) - 3.;          
+    float d = length(max(abs(p-vec3(0,-2,.75))-vec3(.5,2.5,.1),0.))-.11;     
     p.xy *= Rot3; 
     d = min(d, max(length(max(abs(p)-vec3(4,3,.1),0.))-.1,
                   -length(max(abs(p)-vec3(3.5,2.5,.5),0.))+.1));
-    return min2(vec2(d,-100.), 
-                vec2(length(max(abs(p-vec3(0,0,.2))-vec3(3.4,2.4,.01),0.))-.3, -103.));
+    return min2(vec2(d1,-105.),
+        min2(vec2(d,-100.), 
+                 vec2(length(max(abs(p-vec3(0,0,.2))-vec3(3.4,2.4,.01),0.))-.3, -103.)));
 }
 
 
@@ -178,9 +197,10 @@ vec2 map(in vec3 pos) {
         res = smin(res, min2(sdCapsule(pos, vec3(-.8+.06*Anim,2.5,.85),vec3(-1.25+.03*Anim,3.,.2), .16),
                              sdCapsule(pos, vec3(-.8+.06*Anim,2.5,.85), vec3(-1.25,2.1,.3),.16)),.15);
         res = min2(res, vec2(length(pos-vec3(-1.55,1.9,.1))- .3, 30.));
-    #ifdef NOISE_SKIN
-        res -= .005*abs(noise(pos*40.));
-	#endif
+        
+        if (res.x < closest) {
+            closest = abs(res.x);
+        }
         return min2(res, res1);
     }
     else {
@@ -193,6 +213,7 @@ vec2 map(in vec3 pos) {
 #define EDGE_WIDTH 0.1
 
 vec2 castRay(in vec3 ro, in vec3 rd, in float maxd, inout float hmin) {
+    closest = 9999.; // reset closest trap
 	float precis = .0006, h = EDGE_WIDTH+precis, t = 2., m = -1.;
     hmin = 0.;
     for( int i=0; i<RAY_STEP; i++) {
@@ -204,7 +225,7 @@ vec2 castRay(in vec3 ro, in vec3 rd, in float maxd, inout float hmin) {
 		}
         h = res.x;
 	    m = res.y;
-      
+        
     }
     
 	//if (hmin != h) hmin = 10.;
@@ -262,8 +283,8 @@ float calcAO( in vec3 pos, in vec3 nor) {
 }
 
 vec3 mandelbrot(in vec2 uv, vec3 col) {
-     uv.x += 1.5;
-    uv.x=-uv.x;
+    uv.x += 1.5;
+    uv.x = -uv.x;
 
     float a=.05*sqrt(abs(Anim)), ca = cos(a), sa = sin(a);
     mat2 rot = mat2(ca,-sa,sa,ca);
@@ -273,7 +294,7 @@ vec3 mandelbrot(in vec2 uv, vec3 col) {
 	uv.x-=(1.-k)*1.8;
     vec2 z = vec2(0);
     vec3 c = vec3(0);
-    for(int i=0;i<60;i++) {
+    for(int i=0;i<50;i++) {
         if(length(z) >= 4.0) break;
         z = vec2(z.x*z.x-z.y*z.y, 2.*z.y*z.x) + uv;
         if(length(z) >= 4.0) {
@@ -284,12 +305,32 @@ vec3 mandelbrot(in vec2 uv, vec3 col) {
     return clamp(mix(vec3(.1,.1,.2), clamp(col*kk*kk,0.,1.), .6+.4*Anim),0.,1.);
 }
 
+vec3 screen(in vec2 uv, vec3 scrCol) {
+    vec3 oricol = mandelbrot(vec2(uv.x,uv.y), scrCol);
+    vec3 col;
+	float colorShift = .2*cos(.5*iGlobalTime);
+    col.r = mandelbrot(vec2(uv.x,uv.y+colorShift), scrCol).x;
+    col.g = oricol.y;
+    col.b = mandelbrot(vec2(uv.x,uv.y-colorShift), scrCol).z;
+    
+	uv *= Rot3;	
+	col =(.5*scrCol+col)*(.5+.5*cos(iGlobalTime*5.))*cos(iGlobalTime*10.+40.*uv.y);  
+    return col*col;
+}
+
+
+float isGridLine(vec2 p, vec2 v) {
+    vec2 k = clamp(abs(mod(p+v*.5, v)-v*.5)/.05, 0.,1.);
+    return k.x * k.y;
+}
+
 vec3 render( in vec3 ro, in vec3 rd, inout float hmin) { 
     
-    WithChameleon = intersectSphere(ro,rd,vec3(-.5,1.65,0),2.95);
+    WithChameleon = intersectSphere(ro,rd,vec3(-.5,1.65,0),3.15); //2.95);
     
-    vec3 col = vec3(0.0);
+   
     vec2 res = castRay(ro,rd,60.0, hmin);
+    float distCham = abs(closest);
     
 #ifdef SHOW_EDGES
      if( res.y>-150.)  {
@@ -301,27 +342,47 @@ vec3 render( in vec3 ro, in vec3 rd, inout float hmin) {
     
     float t = res.x;
 	float m = res.y;
-    vec3 cscreen = vec3(sin(.1+2.*iGlobalTime), cos(.1+2.*iGlobalTime),.5);
+    vec3 cscreen = vec3(sin(.1+1.1*iGlobalTime), cos(.1+1.1*iGlobalTime),.5);
     cscreen *= cscreen;
-
+ 
+    vec3 col;
+	float dt;
+    float glow = 1.-smoothstep(Anim + cos(iGlobalTime),.9+1.15,2.2);
+    glow *= step(.3, hash(iGlobalTime)); //floor(.01+10.5*iGlobalTime)));
+    
     if( m>-150.)  {
         vec3 pos = ro + t*rd;
         vec3 nor = calcNormal(pos);
 
         if( m>0. ) {
 			col = vec3(.4) + .35*cscreen + .3*sin(1.57*.5*iGlobalTime + vec3(.05,.09,.1)*(m-1.) );
+#ifdef NOISE_SKIN
+            nor = doBumpMap(iChannel0, pos*.5, nor, 0.05);
+#endif            
+        } else if (m<-104.5) {
+            col = vec3(.92);
+            dt = dot(normalize(pos-vec3(-4,-4,0)), vec3(0,0,-1));
+            col += (dt>0.) ? (.75*glow+.3)*dt*cscreen: vec3(0); 
         } else if (m<-102.5) {
-          	col = (pos.z<0.) ? mandelbrot(pos.xy,cscreen) : vec3(.02);
+           	if (pos.z<0.) {
+            	col = screen(pos.xy,cscreen);
+                col += 20.*glow*col;
+            } else {
+                col = vec3(.92);
+            	distCham *= .25; // Hack for chameleon light on screen
+            }
         } else if (m<-101.5) {
-            col = .2+.5*cscreen;
-        } else if(m<-100.5) {
+            col = .2+3.5*cscreen;
+        } else if(m<-100.5) {  // Ground
             float f = mod( floor(2.*pos.z) + floor(2.*pos.x), 2.0);
-            col = 0.4 + 0.1*f*vec3(1.0);
-            float dt = dot(normalize(pos-vec3(-4,-4,0)), vec3(0,0,-1));
- 			col += (dt>0.) ? .2*dt*cscreen: vec3(0);
-    		col = clamp(col,0.,1.);
+            col = 0.4 + 0.1*f*vec3(1.);
+            col *= isGridLine(pos.xz, vec2(2.));
+            dt = dot(normalize(pos-vec3(-4,-4,0)), vec3(0,0,-1));
+ 			col += (dt>0.) ? (.75*glow+.3)*dt*cscreen: vec3(0);     
+    		//col = clamp(col,0.,1.);
         } else {
-            col = vec3(.02);
+            col = vec3(.92);
+            distCham *= .25; // Hack for chameleon light on screen
         }
 		
         float ao = calcAO( pos, nor );
@@ -347,11 +408,16 @@ vec3 render( in vec3 ro, in vec3 rd, inout float hmin) {
 		float spe = 1.2*sh*pow(pp,16.0);
 		float fre = ao*pow( clamp(1.0+dot(nor,rd),0.0,1.0), 2.0 );
 
-		col = col*brdf + vec3(1.0)*col*spe + 0.2*fre*(0.5+0.5*col);
+		col = col*brdf*(.5+.5*sh) + vec3(.25)*col*spe + 0.2*fre*(0.5+0.5*col);
+        
+        float rimMatch =  1. - max( 0. , dot( nor , -rd ) );
+        col += vec3((.1+cscreen*.1 )* pow( rimMatch, 10.));
 	}
 
 	col *= 2.5*exp( -0.01*t*t );
-
+    float BloomFalloff = 15000.; //mix(1000.,5000., Anim);
+ 	col += .5*glow*cscreen/(1.+distCham*distCham*distCham*BloomFalloff);
+    
 	return vec3( clamp(col,0.0,1.0) );
 #endif    
 }
@@ -360,6 +426,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     
     Anim = clamp(5.6*cos(iGlobalTime)*cos(4.*iGlobalTime),-2.5,1.2);
 
+    ca3 = cos(.275+.006*Anim); sa3 = sin(.275+.006*Anim);   
+	Rot3 = mat2(ca3,-sa3,sa3,ca3);
+    
     float a=.1+.05*Anim, ca = cos(a), sa = sin(a);
     Rotanim = mat2(ca,-sa,sa,ca);
     float b = mod(iGlobalTime,12.)>10.?cos(8.*iGlobalTime):.2*cos(4.*iGlobalTime), cb = cos(b), sb = sin(b);
@@ -412,6 +481,4 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 #endif
     fragColor = vec4(colorSum/float(nbSample), 1.);
 
-//	fragColor=vec4(colorSum, 1.);
-   // fragColor=vec4( col, 1.0 );
 }
