@@ -11,6 +11,10 @@ using android.widget;
 using ScriptCoreLib;
 using ScriptCoreLib.Android;
 using ScriptCoreLib.Android.Extensions;
+using System.Net.NetworkInformation;
+using System.Net;
+using System.Net.Sockets;
+using ScriptCoreLib.Extensions;
 
 namespace AndroidUDPClipboard.Activities
 {
@@ -71,6 +75,9 @@ namespace AndroidUDPClipboard.Activities
 
                 b.setText(value);
 
+                var vibrator = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(600);
+
                 android.content.ClipboardManager clipboard = (android.content.ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("label", value);
                 clipboard.setPrimaryClip(clip);
@@ -80,15 +87,66 @@ namespace AndroidUDPClipboard.Activities
             b.AtClick(
                 delegate
                 {
-                    var vibrator = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
-
-                    vibrator.vibrate(600);
-
                     SetClipboard("hello");
                 }
             );
 
             #region lets listen to incoming udp
+            // could we define our chrome app inline in here?
+            // or in a chrome app. could we define the android app inline?
+            #region ReceiveAsync
+            Action<IPAddress> f = async nic =>
+            {
+                b.setText("awaiting at " + nic);
+
+                // Z:\jsc.svn\examples\java\android\AndroidUDPClipboard\ApplicationActivity.cs
+                // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
+                var uu = new UdpClient(49814);
+                uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
+                while (true)
+                {
+                    var x = await uu.ReceiveAsync(); // did we jump to ui thread?
+                    //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
+                    var data = Encoding.UTF8.GetString(x.Buffer);
+
+
+
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/mousedown
+                    SetClipboard(data);
+                }
+            };
+
+            // WithEach defined at?
+            NetworkInterface.GetAllNetworkInterfaces().WithEach(
+                n =>
+                {
+                    // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
+
+                    var IPProperties = n.GetIPProperties();
+                    var PhysicalAddress = n.GetPhysicalAddress();
+
+
+
+                    foreach (var ip in IPProperties.UnicastAddresses)
+                    {
+                        // ipv4
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            if (!IPAddress.IsLoopback(ip.Address))
+                                if (n.SupportsMulticast)
+                                    f(ip.Address);
+                        }
+                    }
+
+
+
+
+                }
+            );
+            #endregion
 
 
             #endregion

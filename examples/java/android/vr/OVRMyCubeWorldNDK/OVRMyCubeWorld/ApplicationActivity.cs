@@ -221,7 +221,7 @@ namespace OVRMyCubeWorld.Activities
              {
                  args.mouse = "awaiting at " + nic;
 
-
+                 // Z:\jsc.svn\examples\java\android\AndroidUDPClipboard\ApplicationActivity.cs
                  // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
                  // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
                  var uu = new UdpClient(41814);
