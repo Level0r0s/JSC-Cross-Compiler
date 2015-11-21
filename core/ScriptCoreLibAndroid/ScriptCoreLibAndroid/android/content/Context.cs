@@ -23,6 +23,9 @@ namespace android.content
         // X:\jsc.svn\examples\javascript\android\com.abstractatech.battery\com.abstractatech.battery\ApplicationWebService.cs
         public abstract Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter);
 
+        // Z:\jsc.svn\examples\java\android\AndroidUDPClipboard\ApplicationActivity.cs
+        public static readonly string CLIPBOARD_SERVICE;
+
         public static readonly string SENSOR_SERVICE;
         public static readonly string ACTIVITY_SERVICE = "activity";
 
