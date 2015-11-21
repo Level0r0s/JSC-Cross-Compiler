@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360wolfenstein", "x360wolfenstein.csproj", "{77234670-3487-477E-9F24-73AB75E6D82E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyWolfensteinByReinder", "..\..\synergy\w\ChromeShaderToyWolfensteinByReinder\ChromeShaderToyWolfensteinByReinder\ChromeShaderToyWolfensteinByReinder.csproj", "{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaderingChameleonByIapafoto", "..\..\synergy\s\ShaderingChameleonByIapafoto\ShaderingChameleonByIapafoto\ShaderingChameleonByIapafoto.csproj", "{146D895B-2A6F-48D5-8091-B099BF3C459E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360chameleon", "..\x360chameleon\x360chameleon.csproj", "{4F75CB7C-E2BA-439D-8B9E-4793D006FD1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.ActiveCfg = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.Build.0 = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.ActiveCfg = Release|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.Build.0 = Release|x86
+		{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}.Debug|x86.ActiveCfg = Debug|x86
+		{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}.Debug|x86.Build.0 = Debug|x86
+		{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}.Release|x86.ActiveCfg = Release|x86
+		{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}.Release|x86.Build.0 = Release|x86
+		{146D895B-2A6F-48D5-8091-B099BF3C459E}.Debug|x86.ActiveCfg = Debug|x86
+		{146D895B-2A6F-48D5-8091-B099BF3C459E}.Debug|x86.Build.0 = Debug|x86
+		{146D895B-2A6F-48D5-8091-B099BF3C459E}.Release|x86.ActiveCfg = Release|x86
+		{146D895B-2A6F-48D5-8091-B099BF3C459E}.Release|x86.Build.0 = Release|x86
+		{4F75CB7C-E2BA-439D-8B9E-4793D006FD1E}.Debug|x86.ActiveCfg = Debug|x86
+		{4F75CB7C-E2BA-439D-8B9E-4793D006FD1E}.Debug|x86.Build.0 = Debug|x86
+		{4F75CB7C-E2BA-439D-8B9E-4793D006FD1E}.Release|x86.ActiveCfg = Release|x86
+		{4F75CB7C-E2BA-439D-8B9E-4793D006FD1E}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

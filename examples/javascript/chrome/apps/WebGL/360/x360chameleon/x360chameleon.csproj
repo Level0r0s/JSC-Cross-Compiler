@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{77234670-3487-477E-9F24-73AB75E6D82E}</ProjectGuid>
+    <ProjectGuid>{4F75CB7C-E2BA-439D-8B9E-4793D006FD1E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>x360chameleon</RootNamespace>

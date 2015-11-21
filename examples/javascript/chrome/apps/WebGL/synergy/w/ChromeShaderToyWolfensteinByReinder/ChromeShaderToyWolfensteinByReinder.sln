@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22609.0
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyWolfensteinByReinder", "ChromeShaderToyWolfensteinByReinder\ChromeShaderToyWolfensteinByReinder.csproj", "{426A9419-9287-4880-979F-29F29D3F2A22}"
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyWolfensteinByReinder", "ChromeShaderToyWolfensteinByReinder\ChromeShaderToyWolfensteinByReinder.csproj", "{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +9,10 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.ActiveCfg = Debug|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Debug|x86.Build.0 = Debug|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.ActiveCfg = Release|x86
-		{426A9419-9287-4880-979F-29F29D3F2A22}.Release|x86.Build.0 = Release|x86
+		{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}.Debug|x86.ActiveCfg = Debug|x86
+		{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}.Debug|x86.Build.0 = Debug|x86
+		{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}.Release|x86.ActiveCfg = Release|x86
+		{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
