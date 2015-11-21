@@ -16,6 +16,10 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 	[Script(InternalConstructor = true)]
 	public class IHTMLEmbedFlash : IHTMLEmbed
 	{
+        // https://www.youtube.com/watch?v=NSbFZaoVJ3c
+        // flash. are you a rock or sand?
+        // can we build upon you?
+
 		public string CallFunction(string e)
 		{
 			// IHTMLEmbed = flash10 ? :)

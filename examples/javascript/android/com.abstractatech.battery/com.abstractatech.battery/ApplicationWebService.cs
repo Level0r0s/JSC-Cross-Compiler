@@ -15,6 +15,9 @@ namespace com.abstractatech.battery
     /// </summary>
     public class ApplicationWebService
     {
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" shell am start -n "com.abstractatech.battery/.ApplicationWebServiceActivity"
+        // Z:\jsc.svn\examples\javascript\android\AndroidListApplications\AndroidListApplications\ApplicationWebService.cs
+
         //   I/System.Console( 8730): NewGlobalInvokeMethod load fields from client{ Name = batteryStatus }
         //I/System.Console( 8730): NewGlobalInvokeMethod load fields from client{ Name = isCharging }
         //I/System.Console( 8730): enter batteryStatus
@@ -57,7 +60,6 @@ namespace com.abstractatech.battery
 
         public async Task batteryStatusCheck()
         {
-            // script: error JSC1000: No implementation found for this native method, please implement [System.Text.StringBuilder.Append(System.Int16)]
 
             // http://developer.android.com/training/monitoring-device-state/battery-monitoring.html
             // http://stackoverflow.com/questions/20663403/android-batterymanager-not-reporting-correct-charging-status

@@ -16,6 +16,7 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Runtime.CompilerServices
     //"System.Runtime.CompilerServices.TaskAwaiter`1, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     public class __TaskAwaiter<TResult> : __INotifyCompletion
     {
+        // https://github.com/dotnet/corert/blob/master/src/System.Private.Threading/src/System/Runtime/CompilerServices/TaskAwaiter.cs
         // x:\jsc.svn\examples\javascript\Test\TestGetAwaiter\TestGetAwaiter\Class1.cs
 
         public Func<bool> InternalIsCompleted;

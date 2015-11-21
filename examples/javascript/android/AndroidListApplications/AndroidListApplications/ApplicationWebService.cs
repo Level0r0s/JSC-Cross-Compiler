@@ -30,15 +30,26 @@ namespace AndroidListApplications
     /// </summary>
     public sealed class ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150926
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151121
 
-        //       0001 0200001b ScriptCoreLib.Ultra.WebService.InternalGlobalExtensions+InternalWebMethodParameterInfoAction
+        //        connect s6 via usb .
+        // turn on wifi!
+        // kill adb
+
+        //"x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+        // restarting in TCP mode port: 5555
+
+        //13: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
+        //    inet 192.168.1.126/24 brd 192.168.1.255 scope global wlan0
+        //       valid_lft forever preferred_lft forever
+
+        // on red
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect  192.168.1.126:5555
+        // connected to 192.168.1.126:5555
 
 
-        //Implementation not found for type import :
-        //type: System.Collections.Generic.Dictionary`2+KeyCollection[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
-        //method: Enumerator GetEnumerator()
-        //Did you forget to add the [Script] attribute?
-        //Please double check the signature!
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" shell am start -n "AndroidListApplications.Activities/.ApplicationWebServiceActivity"
 
 
         /// <summary>

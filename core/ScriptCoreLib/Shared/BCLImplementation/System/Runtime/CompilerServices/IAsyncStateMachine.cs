@@ -15,6 +15,8 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Runtime.CompilerServices
 	[Script(ImplementsViaAssemblyQualifiedName = "System.Runtime.CompilerServices.IAsyncStateMachine")]
 	public interface __IAsyncStateMachine
 	{
+        // https://github.com/dotnet/corert/blob/master/src/System.Private.Threading/src/System/Runtime/CompilerServices/IAsyncStateMachine.cs
+
 		// types marked by this interface are special, jumpable,
 		// thus jsc should embed analysis intel in it to know what this type is about
 

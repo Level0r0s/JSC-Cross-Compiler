@@ -19,6 +19,8 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Runtime.CompilerServices
 	[Script(ImplementsViaAssemblyQualifiedName = "System.Runtime.CompilerServices.AsyncVoidMethodBuilder")]
     internal class __AsyncVoidMethodBuilder : __IAsyncMethodBuilder
     {
+        // https://github.com/dotnet/corert/blob/master/src/System.Private.Threading/src/System/Runtime/CompilerServices/AsyncMethodBuilder.cs
+
         // tested by
         // X:\jsc.svn\examples\actionscript\async\Test\TestAsync\TestAsync\ApplicationSprite.cs
         // X:\jsc.svn\examples\java\async\Test\JVMCLRAsync\JVMCLRAsync\Program.cs

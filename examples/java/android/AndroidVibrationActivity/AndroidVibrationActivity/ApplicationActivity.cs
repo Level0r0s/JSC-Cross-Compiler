@@ -28,6 +28,24 @@ namespace AndroidVibrationActivity.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
     public class ApplicationActivity : Activity
     {
+        //        connect s6 via usb .
+        // turn on wifi!
+        // kill adb
+
+        //"x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+        // restarting in TCP mode port: 5555
+
+        //13: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
+        //    inet 192.168.1.126/24 brd 192.168.1.255 scope global wlan0
+        //       valid_lft forever preferred_lft forever
+
+        // on red
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect  192.168.1.126:5555
+        // connected to 192.168.1.126:5555
+
+
+
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151121
         // http://stackoverflow.com/questions/17513502/support-for-multi-window-app-development
 
         protected override void onCreate(global::android.os.Bundle savedInstanceState)

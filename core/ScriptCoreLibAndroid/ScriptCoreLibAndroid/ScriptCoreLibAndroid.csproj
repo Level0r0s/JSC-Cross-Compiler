@@ -1096,6 +1096,8 @@
     <Compile Include="android\content\ComponentName.cs" />
     <Compile Include="android\content\ContentResolver.cs" />
     <Compile Include="android\content\ContentProvider.cs" />
+    <Compile Include="android\content\ClipboardManager.cs" />
+    <Compile Include="android\content\ClipData.cs" />
     <Compile Include="android\content\DialogInterface.cs" />
     <Compile Include="android\content\IntentFilter.cs" />
     <Compile Include="android\content\pm\ActivityInfo.cs" />

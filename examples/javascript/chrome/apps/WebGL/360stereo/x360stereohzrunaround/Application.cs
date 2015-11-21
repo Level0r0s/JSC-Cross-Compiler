@@ -274,7 +274,6 @@ namespace x360stereohzrunaround
             //sceneg.translateZ(-1024);
             // rotate the world, as the skybox then matches what we have on filesystem
             //scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
-            scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2);
             // yet for headtracking we shall rotate camera
 
 
@@ -416,6 +415,8 @@ namespace x360stereohzrunaround
             var camerayHigh = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = cameray.max, max = 1024 * 256, valueAsNumber = cameray.max, title = "cameray" }.AttachToDocument();
             new IHTMLHorizontalRule { }.AttachToDocument();
             var cameraz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048, max = 0 + 2048, valueAsNumber = 0, title = "cameraz" }.AttachToDocument();
+            new IHTMLHorizontalRule { }.AttachToDocument();
+            var camerarotz = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0 - 2048, max = 0 + 2048, valueAsNumber = 0, title = "camerarotz" }.AttachToDocument();
 
             // for render server
             var fcamerax = 0.0;
@@ -453,6 +454,8 @@ namespace x360stereohzrunaround
                     cy = camerayHigh;
 
 
+                scene.rotation.set(0, 0, 0);
+                scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), camerarotz.valueAsNumber * 0.01);
 
                 cameraoffset = new THREE.Vector3(
                     // left?
@@ -633,7 +636,8 @@ namespace x360stereohzrunaround
                         var xold = new { mousedown.CursorX, mousedown.CursorY };
                         while (mousemove = await canvasPZ.canvas.async.oncapturedmousemove)
                         {
-                            cameraz.valueAsNumber += 2 * (mousemove.CursorX - xold.CursorX);
+                            //cameraz.valueAsNumber += 2 * (mousemove.CursorX - xold.CursorX);
+                            camerarotz.valueAsNumber += 2 * (mousemove.CursorX - xold.CursorX);
                             xold = new { mousedown.CursorX, mousedown.CursorY };
                         }
                     }

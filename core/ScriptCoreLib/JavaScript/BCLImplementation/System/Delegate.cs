@@ -23,6 +23,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
 	[Script(Implements = typeof(global::System.Delegate))]
 	internal class __Delegate
 	{
+        // https://github.com/dotnet/corert/blob/master/src/ILCompiler.Compiler/src/Compiler/DelegateInfo.cs
+
 		// https://github.com/dotnet/coreclr/blob/master/Documentation/method-descriptor.md
 		// EEImpl
 

@@ -12,6 +12,8 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Security.Cryptography
     [Script(Implements = typeof(global::System.Security.Cryptography.RSAParameters))]
     public sealed class __RSAParameters
     {
+        // http://tech.slashdot.org/story/15/11/19/1332244/manhattan-da-pressures-google-and-apple-to-kill-zero-knowledge-encryption
+
         // Z:\jsc.svn\examples\javascript\crypto\ClientVerifiedWebServiceAuthority\ClientVerifiedWebServiceAuthority\Application.cs
 
         // https://weakdh.org/imperfect-forward-secrecy-ccs15.pdf

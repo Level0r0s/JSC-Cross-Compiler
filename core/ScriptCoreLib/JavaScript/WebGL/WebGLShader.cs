@@ -11,6 +11,8 @@ namespace ScriptCoreLib.JavaScript.WebGL
 	[Script(HasNoPrototype = true, InternalConstructor = true)]
 	public class WebGLShader
 	{
+        // https://onedrive.live.com/view.aspx?resid=EBE7DEDA70D06DA0!107&app=PowerPoint&authkey=!AD-O3oq3Ung7pzk
+
 		// http://www.saschawillems.de/?page_id=1822
 		// http://www.g-truc.net/post-0714.html#menu
 		// http://j2glsl.googlecode.com/svn/trunk/Java2GLSL/src/kr/co/iniline/j2glsl/

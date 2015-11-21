@@ -31,6 +31,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Runtime.CompilerServ
     [Script(ImplementsViaAssemblyQualifiedName = "System.Runtime.CompilerServices.YieldAwaitable+YieldAwaiter")]
     public class __YieldAwaiter
     {
+        // https://github.com/dotnet/corert/blob/master/src/System.Private.Threading/src/System/Runtime/CompilerServices/YieldAwaitable.cs
+
         // x:\jsc.svn\examples\javascript\async\asyncworkersourcesha1\asyncworkersourcesha1\application.cs
 
 

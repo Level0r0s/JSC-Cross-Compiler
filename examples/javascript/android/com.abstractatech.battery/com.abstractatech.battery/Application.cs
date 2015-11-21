@@ -148,8 +148,8 @@ namespace com.abstractatech.battery
 
                          set(batteryStatus, isCharging);
 
-                         //await Task.Delay(500 + new Random().Next(5000));
-                         await (500 + new Random().Next(5000));
+                         await Task.Delay(500 + new Random().Next(5000));
+                         //await (500 + new Random().Next(5000));
                      }
                  }
              ))();

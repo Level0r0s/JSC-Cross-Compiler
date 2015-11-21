@@ -31,6 +31,9 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
     [Script(Implements = typeof(global::System.Type))]
     public class __Type : __MemberInfo, __IReflect
     {
+        // https://github.com/dotnet/corert/blob/master/src/ILCompiler.Compiler/src/Compiler/NameMangler.cs
+        // https://github.com/dotnet/corert/blob/master/src/ILCompiler.Compiler/src/Compiler/RegisteredType.cs
+
         //  // System.Type is appdomain agile type. Appdomain agile types cannot have precise static constructors. Make
         // sure to never introduce one here!
 

@@ -17,6 +17,10 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading
     [Script(Implements = typeof(global::System.Threading.SemaphoreSlim))]
     public class __SemaphoreSlim
     {
+        // https://github.com/dotnet/corert/blob/master/src/System.Private.Threading/src/System/Threading/SemaphoreSlim.cs
+
+
+
         // set by thread manager, async scope manager
         public string Name;
 
