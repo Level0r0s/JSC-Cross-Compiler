@@ -16,5 +16,16 @@ namespace ScriptCoreLib.JavaScript.DOM
         public readonly DataTransfer dataTransfer;
 
         public DragEvent(string type) { }
+
+
+        public string text
+        {
+            [method: Script(DefineAsStatic = true)]
+            get
+            {
+                // Z:\jsc.svn\examples\javascript\Test\TestDropText\Application.cs
+                return this.dataTransfer.getData("Text");
+            }
+        }
     }
 }

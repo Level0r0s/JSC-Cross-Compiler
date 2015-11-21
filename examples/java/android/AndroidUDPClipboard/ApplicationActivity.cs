@@ -9,12 +9,15 @@ using android.provider;
 using android.webkit;
 using android.widget;
 using ScriptCoreLib;
+using ScriptCoreLibJava.Extensions;
 using ScriptCoreLib.Android;
 using ScriptCoreLib.Android.Extensions;
 using System.Net.NetworkInformation;
 using System.Net;
 using System.Net.Sockets;
 using ScriptCoreLib.Extensions;
+using android.net.wifi;
+using System.Diagnostics;
 
 namespace AndroidUDPClipboard.Activities
 {
@@ -68,19 +71,58 @@ namespace AndroidUDPClipboard.Activities
 
             b.setText("Vibrate!");
 
+            var sw = Stopwatch.StartNew();
 
             Action<string> SetClipboard = value =>
             {
                 Console.WriteLine("SetClipboard " + new { value });
 
-                b.setText(value);
+                this.runOnUiThread(
+                    delegate
+                    {
 
-                var vibrator = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
-                vibrator.vibrate(600);
+                        b.setText(value);
 
-                android.content.ClipboardManager clipboard = (android.content.ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("label", value);
-                clipboard.setPrimaryClip(clip);
+                        var nm = (NotificationManager)this.getSystemService(Activity.NOTIFICATION_SERVICE);
+
+
+                        // see http://developer.android.com/reference/android/app/Notification.html
+                        var notification = new Notification(
+                            //android.R.drawable.ic_dialog_alert,
+                            android.R.drawable.ic_menu_view,
+                            //tickerText: "not used?",
+                            tickerText: value,
+
+
+                            when: 0
+                            //java.lang.System.currentTimeMillis()
+                        );
+
+                        //notification.defaults |= Notification.DEFAULT_SOUND;
+
+                        var notificationIntent = new Intent(this, typeof(ApplicationActivity).ToClass());
+                        var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+
+                        notification.setLatestEventInfo(
+                            this,
+                            contentTitle: value,
+                            contentText: "",
+                            contentIntent: contentIntent);
+
+                        //notification.defaults |= Notification.DEFAULT_VIBRATE;
+                        //notification.defaults |= Notification.DEFAULT_LIGHTS;
+                        // http://androiddrawableexplorer.appspot.com/
+                        nm.notify((int)sw.ElapsedMilliseconds, notification);
+
+                        var vibrator = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
+                        vibrator.vibrate(600);
+
+                        android.content.ClipboardManager clipboard = (android.content.ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+                        ClipData clip = ClipData.newPlainText("label", value);
+                        clipboard.setPrimaryClip(clip);
+                    }
+                );
             };
 
 
@@ -99,6 +141,11 @@ namespace AndroidUDPClipboard.Activities
             {
                 b.setText("awaiting at " + nic);
 
+
+                WifiManager wifi = (WifiManager)this.getSystemService(Context.WIFI_SERVICE);
+                var lo = wifi.createMulticastLock("udp:49814");
+                lo.acquire();
+
                 // Z:\jsc.svn\examples\java\android\AndroidUDPClipboard\ApplicationActivity.cs
                 // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
                 // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
@@ -106,6 +153,7 @@ namespace AndroidUDPClipboard.Activities
                 uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
                 while (true)
                 {
+                    // cannot get data from RED?
                     var x = await uu.ReceiveAsync(); // did we jump to ui thread?
                     //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
                     var data = Encoding.UTF8.GetString(x.Buffer);

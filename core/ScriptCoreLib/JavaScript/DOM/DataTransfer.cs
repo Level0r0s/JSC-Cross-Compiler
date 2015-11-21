@@ -28,6 +28,8 @@ namespace ScriptCoreLib.JavaScript.DOM
 
         public void addElement(IHTMLElement element) { throw null; }
         public void clearData(string format) { throw null; }
+
+        // Z:\jsc.svn\examples\javascript\Test\TestDropText\Application.cs
         public string getData(string format) { throw null; }
 
         // did we test it in forms?
