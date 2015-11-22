@@ -51,6 +51,7 @@
     </Reference>
     <Reference Include="ScriptCoreLibJava">
       <HintPath>C:\util\jsc\bin\ScriptCoreLibJava.dll</HintPath>
+      <Aliases>global,jvm</Aliases>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -94,7 +95,9 @@
     <PostBuildEvent>if $(ConfigurationName)==Release (
 start  /WAIT  cmd /C C:\util\jsc\bin\jsc.meta.exe  RewriteToHybridJavaApplication /assembly:$(TargetPath) /xAttachDebugger:true /xDiagnosticsShowStagingFolder:true
 
-copy $(TargetPath) U:\
+rem copy $(TargetPath) U:\
+
+"X:\jsc.internal.git\keystore\red\pscp.xmikro.bat"  $(TargetPath) /home/xmikro/Desktop/staging/
 
 )
 

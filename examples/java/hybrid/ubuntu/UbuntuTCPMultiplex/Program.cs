@@ -1,3 +1,4 @@
+extern alias jvm;
 using java.util.zip;
 using ScriptCoreLib;
 using ScriptCoreLib.Delegates;
@@ -5,7 +6,9 @@ using ScriptCoreLib.Extensions;
 using ScriptCoreLibJava.BCLImplementation.System.Net.Sockets;
 using ScriptCoreLibJava.Extensions;
 using System;
+
 using System.Collections;
+
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -28,6 +31,26 @@ namespace UbuntuTCPMultiplex
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151023/ubuntuwebapplication
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151012
 
+
+        static async void IntegrityWatchdog(FileInfo f)
+        {
+            var user = jvm::java.lang.System.getProperty("user.name");
+            var snapshot = new { f.Length };
+
+
+            Console.WriteLine("hello. " + new { user, f.Name, snapshot.Length });
+
+            do
+            {
+                await Task.Delay(1000);
+            }
+            while (f.Length == snapshot.Length);
+
+            Console.WriteLine("module has been changed. " + new { user, f.Name, f.Length });
+
+            Environment.Exit(555);
+        }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -35,6 +58,8 @@ namespace UbuntuTCPMultiplex
 
         public static void Main(string[] args)
         {
+            //  ps aux | grep java
+
             // http://iak1973.blogspot.com.ee/2010/02/transfer-files-accross-machines-using.html
             //Console.WriteLine("hello");
 
@@ -50,44 +75,32 @@ namespace UbuntuTCPMultiplex
             //    // what about android? can we debug hop onto android?
             //    var me = new FileInfo(System.Reflection.MethodInfo.GetCurrentMethod().DeclaringType.Assembly.Location);
 
-            //    Console.WriteLine("hop to ubuntu from " + new { me.Name, me.Length });
 
-            //    //U:\>dir UbuntuTCP*
-            //    // Volume in drive U is staging
-            //    // Volume Serial Number is 76DF-E023
-
-            //    // Directory of U:\
-
-            //    //2015-11-22  17:35           317,309 UbuntuTCPMultiplex.exe
-            //    //               1 File(s)        317,309 bytes
 
 
             try
             {
+                IntegrityWatchdog(new FileInfo(typeof(Program2).Assembly.Location));
 
 
                 var me = new FileInfo(typeof(Program2).Assembly.Location);
-                var meAtUbuntu = new FileInfo("u:/" + me.Name);
 
-                if (meAtUbuntu.Exists)
-                    Console.WriteLine("will hop to ubuntu... " + new { meAtUbuntu.Exists, me.FullName });
+                // lets not depend on u:
+                //var meAtUbuntu = new FileInfo("u:/" + me.Name);
+
+                // already on ubuntu filesystem?
+                var meAtUbuntu = me.FullName.StartsWith("/");
+                if (!meAtUbuntu)
+                    Console.WriteLine("will hop to ubuntu... " + new { me.FullName });
                 else
-                    Console.WriteLine("hop to ubuntu done. " + new { meAtUbuntu.Exists, me.FullName });
+                    Console.WriteLine("hop to ubuntu done. " + new { me.FullName });
 
 
-                if (meAtUbuntu.Exists)
+                if (!meAtUbuntu)
                 {
                     // http://stackoverflow.com/questions/6223765/start-a-java-process-using-runtime-exec-processbuilder-start-with-low-priori
                     // http://stackoverflow.com/questions/13598996/putty-wont-cache-the-keys-to-access-a-server-when-run-script-in-hudson
                     // HKEY_USERS\.DEFAULT\Software\SimonTatham\PuTTY\SshHostkeys
-
-
-
-                    //var cargs = "-batch -ssh xmikro@192.168.1.189 -P 7022 -pw xmikro ls";
-                    //var cargs = @"/C start /WAIT X:\util\plink.exe -batch -ssh xmikro@192.168.1.189 -P 7022 -pw xmikro java -jar /home/xmikro/Desktop/staging/UbuntuTCPMultiplex.exe";
-                    //var cargs = @"/C call X:\util\plink.exe -batch -ssh xmikro@192.168.1.189 -P 7022 -pw xmikro java -jar /home/xmikro/Desktop/staging/UbuntuTCPMultiplex.exe";
-                    //var cmd = new FileInfo(@"X:\util\plink.exe");
-                    //var cmd = new FileInfo(@"cmd.exe");
 
                     //Console.WriteLine(new { cmd });
 
@@ -176,13 +189,14 @@ namespace UbuntuTCPMultiplex
 
                     //var l = new TcpListener(IPAddress.Any, 8080);
 
-                    var l = new TcpListener(IPAddress.Any, 8082);
+                    var port = 8083;
+                    var l = new TcpListener(IPAddress.Any, port);
 
                     l.Start();
 
 
                     var href =
-                        "http://127.0.0.1:8080";
+                        "http://127.0.0.1:" + port;
 
                     Console.WriteLine(
                         href
@@ -289,7 +303,7 @@ namespace UbuntuTCPMultiplex
                 Console.WriteLine(new { Thread.CurrentThread.ManagedThreadId, input });
 
                 var outputString = "HTTP/1.0 200 OK \r\nConnection: close\r\n\r\n"
-                + "hello world. jvm clr android async tcp? udp?" + new { Environment.ProcessorCount } + "\r\n";
+                + "hello world ! jvm clr android async tcp? udp?" + new { Environment.ProcessorCount } + "\r\n";
                 var obuffer = Encoding.UTF8.GetBytes(outputString);
 
                 await s.WriteAsync(obuffer, 0, obuffer.Length);
