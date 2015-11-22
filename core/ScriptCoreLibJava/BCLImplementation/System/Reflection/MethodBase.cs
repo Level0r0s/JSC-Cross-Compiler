@@ -102,5 +102,14 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Reflection
 
             return (MethodBody)(object)new __MethodBody { };
         }
+
+
+
+        // Z:\jsc.svn\examples\java\hybrid\ubuntu\UbuntuTCPMultiplex\Program.cs
+        // jsc meta should replace it to ldtoken ref?
+        public static MethodBase GetCurrentMethod()
+        {
+            throw null;
+        }
     }
 }
