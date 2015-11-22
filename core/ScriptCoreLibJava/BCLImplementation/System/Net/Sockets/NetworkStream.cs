@@ -235,7 +235,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             }
             catch
             {
-                Console.WriteLine("err Read ");
+                // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuInsecureOrigins\ApplicationWebService.cs
+
+                //Console.WriteLine("err Read ");
                 // bail
             }
 

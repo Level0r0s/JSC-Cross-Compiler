@@ -34,6 +34,7 @@ namespace UbuntuInsecureOrigins
 
             // https://www.chromium.org/Home/chromium-security/deprecating-powerful-features-on-insecure-origins
             // https://www.chromium.org/Home/chromium-security/marking-http-as-non-secure
+            // https://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features
 
             new IHTMLPre { new { Native.document.location.protocol, Native.document.location.host } }.AttachToDocument();
 
@@ -51,8 +52,19 @@ namespace UbuntuInsecureOrigins
             // https://w3c.github.io/webappsec-secure-contexts/
 
             dynamic window = Native.window;
+
             new IHTMLPre { new { window.isSecureContext } }.AttachToDocument();
             // { isSecureContext = true }
+
+            if ((bool)window.isSecureContext)
+                Native.document.body.style.backgroundColor = "darkcyan";
+            else
+                Native.document.body.style.backgroundColor = "yellow";
+
+            new IHTMLButton { "Update" }.AttachToDocument().onclick += async delegate
+            {
+                await base.Update();
+            };
         }
 
     }
