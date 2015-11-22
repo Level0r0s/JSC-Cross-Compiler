@@ -15,6 +15,7 @@ namespace ScriptCoreLib.Extensions
 {
     public static class TcpListenerExtensions
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151122/ubuntutcpmultiplex
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151029
 
 

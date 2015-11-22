@@ -16,7 +16,9 @@ namespace javax.net.ssl
 
 
         // android?
+        // Z:\jsc.svn\examples\java\hybrid\ubuntu\UbuntuTCPMultiplex\Program.cs
         public abstract Socket createSocket(Socket s, string host, int port, bool autoClose);
 
+      
     }
 }

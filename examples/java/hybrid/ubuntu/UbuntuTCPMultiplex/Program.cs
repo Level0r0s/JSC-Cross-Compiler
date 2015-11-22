@@ -146,92 +146,136 @@ namespace UbuntuTCPMultiplex
             );
 
 
-            // first are we able to run async?
+
+            var keystore0 = new FileInfo(
+              new FileInfo(typeof(Program2).Assembly.Location).Directory.FullName + "/.keystore"
+             );
 
 
-            var s = new SemaphoreSlim(0);
-
-            //java.lang.Object, rt
-            //enter async { ManagedThreadId = 1 }
-            //awaiting for SemaphoreSlim{ ManagedThreadId = 1 }
-            //after delay{ ManagedThreadId = 8 }
-            //http://127.0.0.1:8080
-            //{ fileName = http://127.0.0.1:8080 }
-            //enter catch { mname = <0032> nop.try } ClauseCatchLocal:
-            //{ Message = , StackTrace = java.lang.RuntimeException
-            //        at ScriptCoreLibJava.BCLImplementation.System.Net.Sockets.__TcpListener.AcceptTcpClientAsync(__TcpListener.java:131)
-
-            new { }.With(
-                async delegate
-                {
-                    //System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-                    //enter async { ManagedThreadId = 1 }
-                    //awaiting for SemaphoreSlim{ ManagedThreadId = 1 }
-                    //after delay{ ManagedThreadId = 4 }
-                    //http://127.0.0.1:8080
-                    //awaiting for SemaphoreSlim. done.{ ManagedThreadId = 1 }
-                    //--
-                    //accept { c = System.Net.Sockets.TcpClient, ManagedThreadId = 6 }
-                    //System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-                    //accept { c = System.Net.Sockets.TcpClient, ManagedThreadId = 8 }
-                    //{ ManagedThreadId = 6, input = GET / HTTP/1.1
+            // do we have the keys?
+            Console.WriteLine(new { keystore0 });
+            // { keystore0 = { FullName = /home/xmikro/Desktop/staging/.keystore, Exists = true } }
 
 
-                    Console.WriteLine("enter async " + new { Thread.CurrentThread.ManagedThreadId });
 
-                    // X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerAsync\ChromeTCPServerAsync\Application.cs
-                    await Task.Delay(100);
+            try
+            {
 
-                    Console.WriteLine("after delay" + new { Thread.CurrentThread.ManagedThreadId });
+                var xSSLContext = jvm::javax.net.ssl.SSLContext.getInstance("TLSv1.2");
+                var xTrustEveryoneManager = new[] { new ScriptCoreLib.Java.TrustEveryoneManager() };
+                var xKeyManager = new[] { new ScriptCoreLib.Java.localKeyManager(keystorepath: keystore0.FullName) };
 
-                    // Additional information: Only one usage of each socket address (protocol/network address/port) is normally permitted
-                    // close the other server!
+                //Console.WriteLine("SSLContext init...");
+                xSSLContext.init(
+                    // SunMSCAPI ?
+                    xKeyManager,
+                    xTrustEveryoneManager,
+                    new jvm::java.security.SecureRandom()
+                );
 
-                    //var l = new TcpListener(IPAddress.Any, 8080);
-
-                    var port = 8083;
-                    var l = new TcpListener(IPAddress.Any, port);
-
-                    l.Start();
-
-
-                    var href =
-                        "http://127.0.0.1:" + port;
-
-                    Console.WriteLine(
-                        href
-                    );
+                var xSSLSocketFactory = xSSLContext.getSocketFactory();
+                var xSSLServerSocketFactory = xSSLContext.getServerSocketFactory();
 
 
-                    // running on ubuntu?
 
-                    //Process.Start(
-                    //    href
-                    //);
+                // init once
+                UpgradeToSSL_server = xSSLServerSocketFactory.createServerSocket(UpgradeToSSL_serverport) as jvm::javax.net.ssl.SSLServerSocket;
 
 
-                    new { }.With(
-                        async delegate
-                        {
-                            while (true)
+
+
+                // first are we able to run async?
+
+
+                var s = new SemaphoreSlim(0);
+
+                //java.lang.Object, rt
+                //enter async { ManagedThreadId = 1 }
+                //awaiting for SemaphoreSlim{ ManagedThreadId = 1 }
+                //after delay{ ManagedThreadId = 8 }
+                //http://127.0.0.1:8080
+                //{ fileName = http://127.0.0.1:8080 }
+                //enter catch { mname = <0032> nop.try } ClauseCatchLocal:
+                //{ Message = , StackTrace = java.lang.RuntimeException
+                //        at ScriptCoreLibJava.BCLImplementation.System.Net.Sockets.__TcpListener.AcceptTcpClientAsync(__TcpListener.java:131)
+
+                new { }.With(
+                    async delegate
+                    {
+                        //System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+                        //enter async { ManagedThreadId = 1 }
+                        //awaiting for SemaphoreSlim{ ManagedThreadId = 1 }
+                        //after delay{ ManagedThreadId = 4 }
+                        //http://127.0.0.1:8080
+                        //awaiting for SemaphoreSlim. done.{ ManagedThreadId = 1 }
+                        //--
+                        //accept { c = System.Net.Sockets.TcpClient, ManagedThreadId = 6 }
+                        //System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+                        //accept { c = System.Net.Sockets.TcpClient, ManagedThreadId = 8 }
+                        //{ ManagedThreadId = 6, input = GET / HTTP/1.1
+
+
+                        Console.WriteLine("enter async " + new { Thread.CurrentThread.ManagedThreadId });
+
+                        // X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServerAsync\ChromeTCPServerAsync\Application.cs
+                        await Task.Delay(100);
+
+                        Console.WriteLine("after delay" + new { Thread.CurrentThread.ManagedThreadId });
+
+                        // Additional information: Only one usage of each socket address (protocol/network address/port) is normally permitted
+                        // close the other server!
+
+                        //var l = new TcpListener(IPAddress.Any, 8080);
+
+                        var port = 8083;
+                        var l = new TcpListener(IPAddress.Any, port);
+
+                        l.Start();
+
+
+                        var href =
+                            "http://127.0.0.1:" + port;
+
+                        Console.WriteLine(
+                            href
+                        );
+
+
+                        // running on ubuntu?
+
+                        //Process.Start(
+                        //    href
+                        //);
+
+
+                        new { }.With(
+                            async delegate
                             {
-                                var c = await l.AcceptTcpClientAsync();
+                                while (true)
+                                {
+                                    var c = await l.AcceptTcpClientAsync();
 
-                                Console.WriteLine("accept " + new { c, Thread.CurrentThread.ManagedThreadId });
+                                    Console.WriteLine("accept " + new { c, Thread.CurrentThread.ManagedThreadId });
 
-                                yield(c);
+                                    yield(c, xSSLServerSocketFactory);
+                                }
                             }
-                        }
-                    );
+                        );
 
-                    // jump back to main thread..
-                    s.Release();
-                }
-            );
+                        // jump back to main thread..
+                        s.Release();
+                    }
+                );
 
-            Console.WriteLine("awaiting for SemaphoreSlim" + new { Thread.CurrentThread.ManagedThreadId });
-            s.Wait();
-            Console.WriteLine("awaiting for SemaphoreSlim. done." + new { Thread.CurrentThread.ManagedThreadId });
+                Console.WriteLine("awaiting for SemaphoreSlim" + new { Thread.CurrentThread.ManagedThreadId });
+                s.Wait();
+                Console.WriteLine("awaiting for SemaphoreSlim. done." + new { Thread.CurrentThread.ManagedThreadId });
+
+            }
+            catch
+            {
+                throw;
+            }
 
             //System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces().WithEach(
             // n =>
@@ -284,7 +328,7 @@ namespace UbuntuTCPMultiplex
             //CLRProgram.CLRMain();
         }
 
-        static async void yield(TcpClient c)
+        static async void yield(TcpClient c, javax.net.ssl.SSLServerSocketFactory xSSLServerSocketFactory)
         {
             var s = c.GetStream();
 
@@ -297,13 +341,37 @@ namespace UbuntuTCPMultiplex
 
             if (count > 0)
             {
+                if (buffer[0] == 0x16)
+                {
+                    __Socket csocket = c.Client;
+
+                    // upgrade in lockstep
+                    //lock (xSSLServerSocketFactory)
+                    {
+                        Console.WriteLine("SSL? do we have a socket to upgrade? " + new { csocket.InternalSocket, csocket.InternalServerSocket });
+                        // SSL? do we have a socket to upgrade? { InternalSocket = Socket[addr=/192.168.1.196,port=56752,localport=8083], InternalServerSocket =  }
+
+                        // can we upgrade in place?
+                        // http://docs.oracle.com/javase/7/docs/api/javax/net/ssl/SSLSocketFactory.html
+
+                        // { Message = Received fatal alert: unexpected_message, StackTrace = java.lang.RuntimeException: Received fatal alert: unexpected_message
+                        // cannot peek if we upgrade?
+                        s = UpgradeToSSL(xSSLServerSocketFactory, c, count, buffer);
+
+                    }
+
+                    // reread after SSL
+                    buffer = new byte[1024];
+                    count = await s.ReadAsync(buffer, 0, buffer.Length);
+                }
+
                 var input = Encoding.UTF8.GetString(buffer, 0, count);
 
                 //new IHTMLPre { new { input } }.AttachToDocument();
                 Console.WriteLine(new { Thread.CurrentThread.ManagedThreadId, input });
 
                 var outputString = "HTTP/1.0 200 OK \r\nConnection: close\r\n\r\n"
-                + "hello world ! jvm clr android async tcp? udp?" + new { Environment.ProcessorCount } + "\r\n";
+                + "hello world ! <a href='https://.?foo'>https</a> jvm clr android async tcp? udp?" + new { Environment.ProcessorCount } + "\r\n";
                 var obuffer = Encoding.UTF8.GetBytes(outputString);
 
                 await s.WriteAsync(obuffer, 0, obuffer.Length);
@@ -312,6 +380,140 @@ namespace UbuntuTCPMultiplex
 
             c.Close();
         }
+
+
+
+
+        //static int UpgradeToSSL_serverport = 18999;
+        static int UpgradeToSSL_serverport = 18199;
+        static jvm::javax.net.ssl.SSLServerSocket UpgradeToSSL_server;
+
+
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized)]
+        private static NetworkStream UpgradeToSSL(javax.net.ssl.SSLServerSocketFactory xSSLServerSocketFactory, TcpClient c, int count, byte[] buffer)
+        {
+            NetworkStream s = null;
+
+            //lock (xSSLServerSocketFactory)
+            {
+                Console.WriteLine("UpgradeToSSL " + new { count });
+
+
+                // we cannot upgrade in place because byte 0x16 was already read.
+                // need to feed it all to the new serversocket?
+
+                try
+                {
+
+
+
+
+                    // need to bridge
+
+                    new Thread(
+                        delegate()
+                        {
+                            Console.WriteLine("new bridge");
+                            Thread.Sleep(1);
+                            // accept called yet?
+
+                            var cc = new TcpClient();
+                            cc.Connect("127.0.0.1", UpgradeToSSL_serverport);
+
+                            Console.WriteLine("new bridge connected");
+
+                            // first lets flush the buffer.
+
+                            cc.GetStream().Write(buffer, 0, count);
+
+                            // at the same time start reading server to reply to client
+
+                            new Thread(
+                                delegate()
+                                {
+                                    Console.WriteLine("new reply bridge");
+
+                                    var rx = new byte[2048];
+                                    var rxa = true;
+                                    while (rxa)
+                                    {
+                                        var rxc = cc.GetStream().Read(rx, 0, rx.Length);
+
+                                        if (rxc < 0)
+                                        {
+                                            rxa = false;
+                                        }
+                                        else
+                                        {
+                                            c.GetStream().Write(rx, 0, rxc);
+                                        }
+                                    }
+                                }
+                            ).Start();
+
+
+                            // keep reading client and writing to server...
+
+                            var tx = new byte[2048];
+                            var txa = true;
+
+                            while (txa)
+                            {
+                                var txc = c.GetStream().Read(tx, 0, tx.Length);
+
+                                if (txc < 0)
+                                {
+                                    txa = false;
+                                }
+                                else
+                                {
+                                    cc.GetStream().Write(tx, 0, txc);
+                                }
+                            }
+
+                        }
+                    ).Start();
+
+                    var xSSLSocket = UpgradeToSSL_server.accept() as jvm::javax.net.ssl.SSLSocket;
+
+                    // need to init our context!
+                    //var f = (javax.net.ssl.SSLSocketFactory)javax.net.ssl.SSLSocketFactory.getDefault();
+                    //var xSSLSocket = (javax.net.ssl.SSLSocket)xSSLSocketFactory.createSocket(csocket.InternalSocket,
+
+                    //    // why we need that?
+                    //    "127.0.0.1", 443,
+                    //    true);
+
+                    //// now what?
+                    //// ssl.startHandshake();
+                    //// xSslStream.AuthenticateAsServer(
+
+
+                    xSSLSocket.startHandshake();
+
+
+                    var xNetworkStream = new jvm::ScriptCoreLibJava.BCLImplementation.System.Net.Sockets.__NetworkStream
+                    {
+                        //InternalDiagnostics = true,
+
+
+                        InternalInputStream = xSSLSocket.getInputStream(),
+                        InternalOutputStream = xSSLSocket.getOutputStream()
+                    };
+
+                    s = xNetworkStream;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+
+            return s;
+        }
+
+
+        // http://stackoverflow.com/questions/13874387/create-app-with-sslsocket-java
     }
 
 
