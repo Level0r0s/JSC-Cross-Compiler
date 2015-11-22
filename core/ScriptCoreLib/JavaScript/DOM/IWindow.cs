@@ -328,6 +328,8 @@ namespace ScriptCoreLib.JavaScript.DOM
         }
 
         #region event onbeforeunload
+        // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuInsecureOrigins\Application.cs
+
         public event System.Action<Confirmation> onbeforeunload
         {
             [Script(DefineAsStatic = true)]

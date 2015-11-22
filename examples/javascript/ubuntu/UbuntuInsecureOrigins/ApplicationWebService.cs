@@ -29,6 +29,8 @@ namespace UbuntuInsecureOrigins
 
 
 
+
+        // wont be called if appwindow is closed, will be called if another page is loaded.
         public void Dispose()
         {
             // will chrome app let us know they closed?

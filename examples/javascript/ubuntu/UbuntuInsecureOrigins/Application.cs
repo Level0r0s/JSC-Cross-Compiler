@@ -65,6 +65,12 @@ namespace UbuntuInsecureOrigins
             {
                 await base.Update();
             };
+
+            //var xDisposable = base as IDisposable;
+            var xDisposable = this as IDisposable;
+
+            new IHTMLPre { new { xDisposable } }.AttachToDocument();
+
         }
 
     }
