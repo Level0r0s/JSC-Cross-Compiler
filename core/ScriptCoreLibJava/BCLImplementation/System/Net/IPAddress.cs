@@ -42,6 +42,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 
         public static IPAddress Parse(string ipString)
         {
+            // Z:\jsc.svn\examples\java\hybrid\ubuntu\UbuntuTCPMultiplex\Program.cs
+
             var sw = Stopwatch.StartNew();
             var a = new AutoResetEvent(false);
 
@@ -51,7 +53,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
             new Thread(
                delegate()
                {
-                   Console.WriteLine("enter __IPAddress Parse");
+                   //Console.WriteLine("enter __IPAddress Parse");
 
                    a.Set();
 
@@ -67,7 +69,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 
                        //throw;
                    }
-                   Console.WriteLine("exit __IPAddress Parse " + new { sw.ElapsedMilliseconds });
+                   //Console.WriteLine("exit __IPAddress Parse " + new { sw.ElapsedMilliseconds });
 
                }
            ).Start();
@@ -101,7 +103,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
             // X:\jsc.svn\examples\java\android\forms\InteractivePortForwarding\InteractivePortForwarding\UserControl1.cs
 
             var sw = Stopwatch.StartNew();
-            Console.WriteLine("enter __IPAddress");
+            //Console.WriteLine("enter __IPAddress");
 
             //I/System.Console( 7846): Caused by: android.os.NetworkOnMainThreadException
             //I/System.Console( 7846):        at android.os.StrictMode$AndroidBlockGuardPolicy.onNetwork(StrictMode.java:1133)
@@ -128,7 +130,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
             new Thread(
                  delegate()
                  {
-                     Console.WriteLine("enter __IPAddress worker");
+                     //Console.WriteLine("enter __IPAddress worker");
 
                      a.Set();
 
@@ -157,7 +159,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 
                          //throw;
                      }
-                     Console.WriteLine("exit __IPAddress worker " + new { sw.ElapsedMilliseconds });
+                     //Console.WriteLine("exit __IPAddress worker " + new { sw.ElapsedMilliseconds });
 
                  }
              ).Start();
@@ -171,7 +173,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
             a.WaitOne();
             Thread.Sleep(1);
 
-            Console.WriteLine("exit __IPAddress " + new { sw.ElapsedMilliseconds });
+            //Console.WriteLine("exit __IPAddress " + new { sw.ElapsedMilliseconds });
         }
 
 

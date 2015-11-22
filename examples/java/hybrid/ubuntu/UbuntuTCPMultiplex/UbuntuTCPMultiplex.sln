@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuTCPMultiplex", "UbuntuTCPMultiplex.csproj", "{43981F02-6ACC-4201-A347-04A2452A5633}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5F295F12-F93F-4347-B417-AA89990652A3} = {5F295F12-F93F-4347-B417-AA89990652A3}
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6} = {C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuSSLServerFromKeyStore", "..\UbuntuSSLServerFromKeyStore\UbuntuSSLServerFromKeyStore\UbuntuSSLServerFromKeyStore.csproj", "{A0A72609-60E7-42AE-920B-E2A84A340633}"
@@ -11,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibJava", "..\..\..\..\..\core\ScriptCoreLibJava\ScriptCoreLibJava.csproj", "{5F295F12-F93F-4347-B417-AA89990652A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuHello", "..\..\UbuntuHello\UbuntuHello\UbuntuHello.csproj", "{8944883D-EE2A-4549-B260-63A5CE68B3B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib", "..\..\..\..\..\core\ScriptCoreLib\ScriptCoreLib.csproj", "{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JVMCLRTCPMultiplex", "..\..\JVMCLRTCPMultiplex\JVMCLRTCPMultiplex\JVMCLRTCPMultiplex.csproj", "{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +67,26 @@ Global
 		{8944883D-EE2A-4549-B260-63A5CE68B3B2}.Release|Mixed Platforms.Build.0 = Release|x86
 		{8944883D-EE2A-4549-B260-63A5CE68B3B2}.Release|x86.ActiveCfg = Release|x86
 		{8944883D-EE2A-4549-B260-63A5CE68B3B2}.Release|x86.Build.0 = Release|x86
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6}.Release|x86.ActiveCfg = Release|Any CPU
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Debug|x86.ActiveCfg = Debug|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Debug|x86.Build.0 = Debug|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Release|Any CPU.ActiveCfg = Release|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Release|Mixed Platforms.Build.0 = Release|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Release|x86.ActiveCfg = Release|x86
+		{B05DD082-B655-49ED-BCA6-2E8D4CE509DD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -177,6 +177,7 @@
     <Compile Include="Shared\BCLImplementation\System\IObserver.cs" />
     <Compile Include="Shared\BCLImplementation\System\IObservable.cs" />
     <Compile Include="Shared\BCLImplementation\System\IO\StreamReader.cs" />
+    <Compile Include="Shared\BCLImplementation\System\IO\StreamWriter.cs" />
     <Compile Include="Shared\BCLImplementation\System\Net\EndPoint.cs" />
     <Compile Include="Shared\BCLImplementation\System\Net\Sockets\UdpReceiveResult.cs" />
     <Compile Include="Shared\BCLImplementation\System\Numerics\Matrix4x4.cs" />
@@ -902,7 +903,6 @@
     <Compile Include="JavaScript\BCLImplementation\System\IO\MemoryStream.cs" />
     <Compile Include="JavaScript\BCLImplementation\System\IO\StringReader.cs" />
     <Compile Include="ActionScript\BCLImplementation\System\IO\MemoryStream.cs" />
-    <Compile Include="ActionScript\BCLImplementation\System\IO\StreamWriter.cs" />
     <Compile Include="JavaScript\BCLImplementation\System\IO\StringWriter.cs" />
     <Compile Include="ActionScript\BCLImplementation\System\Double.cs" />
     <Compile Include="ActionScript\BCLImplementation\System\UInt32.cs" />

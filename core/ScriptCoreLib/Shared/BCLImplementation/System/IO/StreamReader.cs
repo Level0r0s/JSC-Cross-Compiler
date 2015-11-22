@@ -47,6 +47,7 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.IO
             var m = new MemoryStream();
 
             var r = true;
+            var any = false;
 
             while (r)
             {
@@ -65,6 +66,7 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.IO
                 }
                 else
                 {
+                    any = true;
 
                     if (x == '\n')
                     {
@@ -85,7 +87,13 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.IO
                 }
             }
 
-            return Encoding.UTF8.GetString(m.ToArray());
+            if (any)
+                return Encoding.UTF8.GetString(m.ToArray());
+
+
+
+            // Z:\jsc.svn\examples\java\hybrid\ubuntu\UbuntuTCPMultiplex\Program.cs
+            return null;
         }
 
         public override string ReadToEnd()

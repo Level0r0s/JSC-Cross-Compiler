@@ -2,6 +2,7 @@ using java.util.zip;
 using ScriptCoreLib;
 using ScriptCoreLib.Delegates;
 using ScriptCoreLib.Extensions;
+using ScriptCoreLibJava.BCLImplementation.System.Net.Sockets;
 using ScriptCoreLibJava.Extensions;
 using System;
 using System.Collections;
@@ -34,6 +35,10 @@ namespace UbuntuTCPMultiplex
 
         public static void Main(string[] args)
         {
+            // http://iak1973.blogspot.com.ee/2010/02/transfer-files-accross-machines-using.html
+            //Console.WriteLine("hello");
+
+
             // Z:\jsc.svn\examples\java\hybrid\ubuntu\UbuntuBootExperiment\UbuntuBootExperiment\Program.cs
 
             // if we run as clr in debugger.
@@ -63,7 +68,11 @@ namespace UbuntuTCPMultiplex
 
                 var me = new FileInfo(typeof(Program2).Assembly.Location);
                 var meAtUbuntu = new FileInfo("u:/" + me.Name);
-                Console.WriteLine("hop to ubuntu to " + new { meAtUbuntu.Exists, me.FullName });
+
+                if (meAtUbuntu.Exists)
+                    Console.WriteLine("will hop to ubuntu... " + new { meAtUbuntu.Exists, me.FullName });
+                else
+                    Console.WriteLine("hop to ubuntu done. " + new { meAtUbuntu.Exists, me.FullName });
 
 
                 if (meAtUbuntu.Exists)
@@ -72,24 +81,29 @@ namespace UbuntuTCPMultiplex
                     // http://stackoverflow.com/questions/13598996/putty-wont-cache-the-keys-to-access-a-server-when-run-script-in-hudson
                     // HKEY_USERS\.DEFAULT\Software\SimonTatham\PuTTY\SshHostkeys
 
-                    var cmd = new FileInfo(@"X:\util\plink.exe");
+
+
+                    //var cargs = "-batch -ssh xmikro@192.168.1.189 -P 7022 -pw xmikro ls";
+                    //var cargs = @"/C start /WAIT X:\util\plink.exe -batch -ssh xmikro@192.168.1.189 -P 7022 -pw xmikro java -jar /home/xmikro/Desktop/staging/UbuntuTCPMultiplex.exe";
+                    //var cargs = @"/C call X:\util\plink.exe -batch -ssh xmikro@192.168.1.189 -P 7022 -pw xmikro java -jar /home/xmikro/Desktop/staging/UbuntuTCPMultiplex.exe";
+                    //var cmd = new FileInfo(@"X:\util\plink.exe");
                     //var cmd = new FileInfo(@"cmd.exe");
 
-                    Console.WriteLine(new { cmd });
+                    //Console.WriteLine(new { cmd });
 
-                    // System.Diagnostics.Process Start(System.String, System.String)
-                    //Console.WriteLine("before Start");
+                    // http://stackoverflow.com/questions/17120782/running-bat-file-with-java-processbuilder
                     var p = Process.Start(
-                        cmd.FullName,
-
-                        // http://serverfault.com/questions/420526/auto-storing-server-host-key-in-cache-with-plink
-                        //" -auto_store_sshkey -batch -ssh xmikro@192.168.1.189 -P 7022 -pw xmikro ls"
-                        "-ssh xmikro@192.168.1.189 -P 7022 -pw xmikro ls"
-                        //""
+                        //cmd.FullName,
+                        "cmd.exe",
+                        @"/C call X:\jsc.internal.git\keystore\red\plink.xmikro.bat  java -jar /home/xmikro/Desktop/staging/UbuntuTCPMultiplex.exe"
                     );
-                    //Console.WriteLine("after Start");
 
-                    p.StandardInput.Write('y');
+                    //Thread.Sleep(500);
+
+                    ////p.StandardInput.Write('y');
+
+                    //Console.WriteLine("StandardInput.Write");
+                    //p.StandardInput.Write("y\n");
 
                     p.WaitForExit();
 
@@ -162,7 +176,7 @@ namespace UbuntuTCPMultiplex
 
                     //var l = new TcpListener(IPAddress.Any, 8080);
 
-                    var l = new TcpListener(IPAddress.Any, 8081);
+                    var l = new TcpListener(IPAddress.Any, 8082);
 
                     l.Start();
 

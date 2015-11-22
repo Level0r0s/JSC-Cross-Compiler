@@ -39,7 +39,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Diagnostics
         {
             // Z:\jsc.svn\examples\java\hybrid\ubuntu\UbuntuTCPMultiplex\Program.cs
 
-            Console.WriteLine("enter Start " + new { fileName, arguments });
+            //Console.WriteLine("enter Start " + new { fileName, arguments });
             var x = new __Process { };
 
             // http://stackoverflow.com/questions/19030625/redirecting-output-of-a-process-with-process-builder
@@ -69,7 +69,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Diagnostics
 
                 // http://stackoverflow.com/questions/26174975/fire-a-cmd-exe-command-through-processbuilder-with-visual-window
 
-
+                // can we send input?
                 x.StandardInput = new StreamWriter(
                     new __NetworkStream { InternalOutputStream = x.InternalProcess.getOutputStream() }
                 );
@@ -86,13 +86,19 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Diagnostics
                 new Thread(
                     delegate()
                     {
-                        var xx = sout.ReadLine();
-                        while (xx != null)
+                        try
                         {
-                            Console.WriteLine(xx);
+                            var xx = sout.ReadLine();
+                            while (xx != null)
+                            {
+                                Console.WriteLine(xx);
 
-                            xx = sout.ReadLine();
+                                xx = sout.ReadLine();
+                            }
                         }
+                        catch { }
+
+                        x.InternalConsoleReady.Set();
                     }
                 ).Start();
 
@@ -117,6 +123,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Diagnostics
 
         public int ExitCode { get; set; }
 
+        public AutoResetEvent InternalConsoleReady = new AutoResetEvent(false);
+
         public void WaitForExit()
         {
             //Console.WriteLine("enter WaitForExit ");
@@ -136,6 +144,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Diagnostics
                 throw new InvalidOperationException { };
             }
             //Console.WriteLine("exit WaitForExit " + new { x });
+
+            InternalConsoleReady.WaitOne();
         }
 
         public static implicit operator Process(__Process e)
