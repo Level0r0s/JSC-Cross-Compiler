@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9C2F6949-6277-4B2A-BEA3-5B22A5C62422}</ProjectGuid>
+    <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UbuntuWebApplication</RootNamespace>
-    <AssemblyName>UbuntuWebApplication</AssemblyName>
+    <RootNamespace>UbuntuInsecureOrigins</RootNamespace>
+    <AssemblyName>UbuntuInsecureOrigins</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>UbuntuWebApplication.Program</StartupObject>
+    <StartupObject>UbuntuInsecureOrigins.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -116,8 +116,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="UbuntuWebApplication.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\UbuntuWebApplication.AssetsLibrary.dll</HintPath>
+    <Reference Include="UbuntuInsecureOrigins.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\UbuntuInsecureOrigins.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
@@ -142,7 +142,17 @@
 		start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false   /DisableWebServiceUbuntu:false 
 
 
-copy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe U:\
+
+rem robocopy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.assets u:\$(TargetName).ApplicationWebService.assets /E
+ 
+rem copy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe U:\
+
+
+
+"X:\jsc.internal.git\keystore\red\pscp.xmikro.bat"  Z:\jsc.svn\examples\javascript\ubuntu\UbuntuInsecureOrigins\bin\Release\staging\UbuntuInsecureOrigins.ApplicationWebService\staging.ubuntu\UbuntuInsecureOrigins.ApplicationWebService.exe /home/xmikro/Desktop/staging/
+
+"X:\jsc.internal.git\keystore\red\pscpr.xmikro.bat" Z:\jsc.svn\examples\javascript\ubuntu\UbuntuInsecureOrigins\bin\Release\staging\UbuntuInsecureOrigins.ApplicationWebService\staging.ubuntu\UbuntuInsecureOrigins.ApplicationWebService.assets\ /home/xmikro/Desktop/staging/UbuntuInsecureOrigins.ApplicationWebService.assets
+
 		)</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
 		            </PreBuildEvent>

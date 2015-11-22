@@ -102,8 +102,6 @@
     <PostBuildEvent>if $(ConfigurationName)==Release (
 start  /WAIT  cmd /C C:\util\jsc\bin\jsc.meta.exe  RewriteToHybridJavaApplication /assembly:$(TargetPath) /xAttachDebugger:true /xDiagnosticsShowStagingFolder:true
 
-rem copy $(TargetPath) U:\
-
 "X:\jsc.internal.git\keystore\red\pscp.xmikro.bat"  $(TargetPath) /home/xmikro/Desktop/staging/
 
 )

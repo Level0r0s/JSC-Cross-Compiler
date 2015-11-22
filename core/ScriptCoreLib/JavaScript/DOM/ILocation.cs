@@ -16,6 +16,9 @@ namespace ScriptCoreLib.JavaScript.DOM
     [Script(HasNoPrototype = true)]
     public class ILocation
     {
+        // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuInsecureOrigins\Application.cs
+
+
         //Magnet link (trackerless):   magnet:?xt=urn%3Abtih%3A<SOMEHASH>
         //Browser link (trackerless):  bittorrent://<SOMEHASH>
         //Output torrent: /current/path/directory_name.torrent
