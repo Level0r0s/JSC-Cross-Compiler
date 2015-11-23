@@ -18,6 +18,7 @@ namespace TestVerifiableString
     /// </summary>
     public class ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/ubuntumidexperiment
 
         public async Task<bool> Verify(VerifiableString x)
         {

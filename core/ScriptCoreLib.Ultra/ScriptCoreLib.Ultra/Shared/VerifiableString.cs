@@ -32,6 +32,8 @@ namespace ScriptCoreLib.Shared
 
     public static class VerifiableStringExtensions
     {
+        // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuMIDExperiment\Application.cs
+
         public static VerifiableString Sign(this VerifiableString e, RSAParameters rsa)
         {
             e.signature = new RSACryptoStream(rsa).SignString(e.value);

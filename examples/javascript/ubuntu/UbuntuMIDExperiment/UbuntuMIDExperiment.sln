@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientVerifiedWebServiceAut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyIdentityAffinity", "..\..\crypto\VerifyIdentityAffinity\VerifyIdentityAffinity\VerifyIdentityAffinity.csproj", "{89A65DA0-15E3-4573-AB75-C3E7BF37F355}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuInsecureOrigins", "..\UbuntuInsecureOrigins\UbuntuInsecureOrigins.csproj", "{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Android|Any CPU = Android|Any CPU
@@ -371,6 +373,31 @@ Global
 		{89A65DA0-15E3-4573-AB75-C3E7BF37F355}.Release|Mixed Platforms.Build.0 = Release|x86
 		{89A65DA0-15E3-4573-AB75-C3E7BF37F355}.Release|x86.ActiveCfg = Release|x86
 		{89A65DA0-15E3-4573-AB75-C3E7BF37F355}.Release|x86.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|Any CPU.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|Mixed Platforms.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|Mixed Platforms.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|x86.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|x86.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|Any CPU.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|Mixed Platforms.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|Mixed Platforms.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|x86.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|x86.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|x86.ActiveCfg = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|x86.Build.0 = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|Any CPU.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|Mixed Platforms.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|Mixed Platforms.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|x86.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|x86.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|Any CPU.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|x86.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
