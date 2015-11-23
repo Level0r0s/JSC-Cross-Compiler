@@ -17,6 +17,7 @@ namespace UbuntuDualSSLWebApplication
     /// </summary>
     public class ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/ubuntumidexperiment
         // http://stackoverflow.com/questions/25553813/ssl-error-from-java-client-but-works-form-poster-in-firefox
 
         //public XElement status = new XElement("ready");

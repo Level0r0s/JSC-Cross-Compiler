@@ -24,6 +24,8 @@ namespace WebServiceAuthorityExperiment
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // Z:\jsc.svn\examples\javascript\crypto\WebServiceAuthorityExperiment\
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>

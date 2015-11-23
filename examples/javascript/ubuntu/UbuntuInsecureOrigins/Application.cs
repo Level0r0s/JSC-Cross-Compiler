@@ -9,6 +9,7 @@ using ScriptCoreLib.JavaScript.Extensions;
 using ScriptCoreLib.JavaScript.Windows.Forms;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,6 +71,19 @@ namespace UbuntuInsecureOrigins
             var xDisposable = this as IDisposable;
 
             new IHTMLPre { new { xDisposable } }.AttachToDocument();
+
+            var sw = Stopwatch.StartNew();
+
+            new IHTMLPre { () => new { sw.ElapsedMilliseconds } }.AttachToDocument();
+            new { }.With(
+                async delegate
+                {
+                    await Task.Delay(33000);
+
+                    Native.document.location.reload();
+                }
+            );
+
 
         }
 

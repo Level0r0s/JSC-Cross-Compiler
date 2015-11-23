@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuDualSSLWebApplication", "UbuntuDualSSLWebApplication\UbuntuDualSSLWebApplication.csproj", "{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHopToIFrameAndBack", "..\..\Test\TestHopToIFrameAndBack\TestHopToIFrameAndBack.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
@@ -24,6 +22,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLib.Ultra", "..\..\..\..\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra.csproj", "{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuInsecureOrigins", "..\UbuntuInsecureOrigins\UbuntuInsecureOrigins.csproj", "{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -302,12 +302,36 @@ Global
 		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Release|x86.ActiveCfg = Release|Any CPU
 		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}.Release|x86.Build.0 = Release|Any CPU
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|Any CPU.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|Mixed Platforms.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|Mixed Platforms.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|x86.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|x86.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|Any CPU.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|Mixed Platforms.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|Mixed Platforms.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|x86.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|x86.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|x86.ActiveCfg = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|x86.Build.0 = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|Any CPU.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|Mixed Platforms.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|Mixed Platforms.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|x86.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|x86.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|Any CPU.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|x86.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
 		{3C88197D-5E5D-4CC9-9901-A68642AFF0D3} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
 		{5A6A3B8C-35E2-49E4-9856-73956C94D149} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
 		{C9F431EB-5D35-4C7B-826B-A4E4CA913AA6} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
@@ -315,6 +339,8 @@ Global
 		{132EB43F-19B4-42AC-8025-3249B129867A} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
 		{94719DE7-1C09-4026-A948-D78EE589F1DC} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
 		{742A9BAF-2ADA-45F5-921A-84D72FCE56EE} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
+		{A5DE484D-54A0-4418-AD41-84B77F5AE4E8} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
 		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5} = {2DA67A44-8C1F-4748-A556-4AFCBFFFFA99}
 	EndGlobalSection
 EndGlobal

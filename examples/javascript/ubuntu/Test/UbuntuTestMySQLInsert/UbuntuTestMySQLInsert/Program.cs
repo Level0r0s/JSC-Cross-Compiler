@@ -10,7 +10,21 @@ namespace UbuntuTestMySQLInsert
     {
         public static void Main(string[] args)
         {
+
+#if DEBUG
             RewriteToUltraApplication.AsProgram.Launch(typeof(Application));
+#else
+
+            var p = System.Diagnostics.Process.Start(
+                //cmd.FullName,
+                 "cmd.exe",
+                 @"/C call X:\jsc.internal.git\keystore\red\plink.xmikro.bat  java -jar /home/xmikro/Desktop/staging/UbuntuTestMySQLInsert.ApplicationWebService.exe "
+             );
+
+          
+
+#endif
+
         }
 
     }

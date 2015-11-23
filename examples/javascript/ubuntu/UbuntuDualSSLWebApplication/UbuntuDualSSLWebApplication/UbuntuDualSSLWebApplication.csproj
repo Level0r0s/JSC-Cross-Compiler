@@ -162,6 +162,13 @@
 rem robocopy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.assets u:\$(TargetName).ApplicationWebService.assets /E
  
 rem copy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe U:\
+
+"X:\jsc.internal.git\keystore\red\pscp.xmikro.bat"  $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe /home/xmikro/Desktop/staging/
+
+subst a: /D
+subst a: $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu
+"X:\jsc.internal.git\keystore\red\pscpr.xmikro.bat" a:\$(TargetName).ApplicationWebService.assets\  /home/xmikro/Desktop/staging/$(TargetName).ApplicationWebService.assets
+
 		)</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
 		            </PreBuildEvent>

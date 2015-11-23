@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9C2F6949-6277-4B2A-BEA3-5B22A5C62422}</ProjectGuid>
+    <ProjectGuid>{7DA61298-9254-4199-B207-A54801CCDF03}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UbuntuWebApplication</RootNamespace>

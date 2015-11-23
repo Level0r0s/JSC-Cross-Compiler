@@ -1,7 +1,7 @@
 using jsc.meta.Commands.Rewrite.RewriteToUltraApplication;
 using System;
 
-namespace UbuntuDualSSLWebApplication
+namespace TestVerifiableString
 {
     /// <summary>
     /// You can debug your application by hitting F5.
@@ -17,12 +17,11 @@ namespace UbuntuDualSSLWebApplication
             var p = System.Diagnostics.Process.Start(
                 //cmd.FullName,
                  "cmd.exe",
-                 @"/C call X:\jsc.internal.git\keystore\red\plink.xmikro.bat  java -jar /home/xmikro/Desktop/staging/UbuntuDualSSLWebApplication.ApplicationWebService.exe "
+                 @"/C call X:\jsc.internal.git\keystore\red\plink.xmikro.bat  java -jar /home/xmikro/Desktop/staging/TestVerifiableString.ApplicationWebService.exe "
              );
-
-
-
 #endif
+
+
         }
 
     }

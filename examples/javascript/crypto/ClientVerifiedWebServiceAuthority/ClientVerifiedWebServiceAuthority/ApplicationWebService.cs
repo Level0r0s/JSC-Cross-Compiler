@@ -19,6 +19,8 @@ namespace ClientVerifiedWebServiceAuthority
     /// </summary>
     public class ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/ubuntumidexperiment
+
         // jsc does not yet support structs being passed to the client?
         //public RSAParameters PublicKey;
         public byte[] PublicKeyExponent;

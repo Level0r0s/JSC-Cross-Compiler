@@ -121,7 +121,10 @@ namespace ScriptCoreLibJava.BCLImplementation.System
                 {
                     //--TypeError: Cannot read property 'stack' of null
                     //throw null;
-                    throw new Exception();
+                    //throw new Exception();
+
+                    // Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuTestMySQLInsert\UbuntuTestMySQLInsert\ApplicationWebService.cs
+                    __ThrowIt();
                 }
                 catch (Exception err)
                 {
@@ -130,6 +133,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
                 return value;
             }
+        }
+
+        static void __ThrowIt()
+        {
+            throw new Exception();
         }
     }
 }

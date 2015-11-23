@@ -7,20 +7,17 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace WebServiceAuthorityExperiment
+namespace TestVerifiableString
 {
     /// <summary>
     /// Methods defined in this type can be used from JavaScript. The method calls will seamlessly be proxied to the server.
     /// </summary>
     public class ApplicationWebService
     {
-        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/ubuntumidexperiment
-
 
         public async Task<bool> Verify(VerifiableString x)
         {
@@ -71,9 +68,6 @@ claim signed by " + typeof(NamedKeyPairs.WebServiceAuthorityPrivateKey).Name + @
         }
 
 
-        //Additional information: Could not load file or assembly 'WebServiceAuthorityExperiment.AssetsLibrary, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies. The system cannot find the file specified.
 
     }
 }
-
-//{ isoriginal = false, o = 4568, t = 4609, verify = false }

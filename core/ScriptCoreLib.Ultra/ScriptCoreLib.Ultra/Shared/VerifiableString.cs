@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 
 namespace ScriptCoreLib.Shared
 {
+    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/ubuntumidexperiment
     // Z:\jsc.svn\examples\javascript\crypto\test\TestWebServiceRSA\TestWebServiceRSA\ApplicationWebService.cs
 
     //public struct VerifiableString

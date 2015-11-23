@@ -20,6 +20,8 @@ namespace VerifyIdentityAffinity
     /// </summary>
     public class ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/ubuntumidexperiment
+
         // the idea of this experiment is
         // to allow the https user to establish the client certificate
         // either by smartcard or by MID

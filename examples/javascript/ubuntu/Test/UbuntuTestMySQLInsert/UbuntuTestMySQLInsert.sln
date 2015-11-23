@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuTestMySQLInsert", "UbuntuTestMySQLInsert\UbuntuTestMySQLInsert.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUbuntuMySQLInsert", "..\..\..\LINQ\test\auto\TestSelect\TestUbuntuMySQLInsert\TestUbuntuMySQLInsert.csproj", "{63C46938-EE36-47CD-AB5A-054828B7CE66}"
@@ -18,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataRowKey", "..\..\..\data\test\TestDataRowKey\TestDataRowKey.csproj", "{8F2AB681-8490-4A89-BAB5-DE6BE4515F65}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{32042BCB-52EF-42AB-B539-E83599FD613C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuInsecureOrigins", "..\..\UbuntuInsecureOrigins\UbuntuInsecureOrigins.csproj", "{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibJava", "..\..\..\..\..\core\ScriptCoreLibJava\ScriptCoreLibJava.csproj", "{5F295F12-F93F-4347-B417-AA89990652A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -213,16 +215,68 @@ Global
 		{8F2AB681-8490-4A89-BAB5-DE6BE4515F65}.Release|Mixed Platforms.Build.0 = Release|x86
 		{8F2AB681-8490-4A89-BAB5-DE6BE4515F65}.Release|x86.ActiveCfg = Release|x86
 		{8F2AB681-8490-4A89-BAB5-DE6BE4515F65}.Release|x86.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|Any CPU.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|Mixed Platforms.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|Mixed Platforms.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|x86.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Android|x86.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|Any CPU.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|Mixed Platforms.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|Mixed Platforms.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|x86.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Assets|x86.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|x86.ActiveCfg = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Debug|x86.Build.0 = Debug|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|Any CPU.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|Mixed Platforms.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|Mixed Platforms.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|x86.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.PHP|x86.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|Any CPU.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|x86.ActiveCfg = Release|x86
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|x86.Build.0 = Release|x86
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Android|Any CPU.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Android|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Android|Mixed Platforms.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Android|x86.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Assets|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Assets|Mixed Platforms.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Assets|x86.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.PHP|Any CPU.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.PHP|Any CPU.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.PHP|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.PHP|Mixed Platforms.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.PHP|x86.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{63C46938-EE36-47CD-AB5A-054828B7CE66} = {32042BCB-52EF-42AB-B539-E83599FD613C}
 		{7DA61298-9254-4199-B207-A54801CCDF03} = {32042BCB-52EF-42AB-B539-E83599FD613C}
 		{653234A5-6ACD-46D2-AEA3-2C7C33EC2DA1} = {32042BCB-52EF-42AB-B539-E83599FD613C}
 		{132EB43F-19B4-42AC-8025-3249B129867A} = {32042BCB-52EF-42AB-B539-E83599FD613C}
 		{94719DE7-1C09-4026-A948-D78EE589F1DC} = {32042BCB-52EF-42AB-B539-E83599FD613C}
 		{8F2AB681-8490-4A89-BAB5-DE6BE4515F65} = {32042BCB-52EF-42AB-B539-E83599FD613C}
+		{63C46938-EE36-47CD-AB5A-054828B7CE66} = {32042BCB-52EF-42AB-B539-E83599FD613C}
+		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5} = {32042BCB-52EF-42AB-B539-E83599FD613C}
+		{5F295F12-F93F-4347-B417-AA89990652A3} = {32042BCB-52EF-42AB-B539-E83599FD613C}
 	EndGlobalSection
 EndGlobal

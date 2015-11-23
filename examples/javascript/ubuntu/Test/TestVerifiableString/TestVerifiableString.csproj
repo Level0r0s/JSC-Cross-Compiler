@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}</ProjectGuid>
+    <ProjectGuid>{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UbuntuInsecureOrigins</RootNamespace>
-    <AssemblyName>UbuntuInsecureOrigins</AssemblyName>
+    <RootNamespace>TestVerifiableString</RootNamespace>
+    <AssemblyName>TestVerifiableString</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>UbuntuInsecureOrigins.Program</StartupObject>
+    <StartupObject>TestVerifiableString.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -116,8 +116,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="UbuntuInsecureOrigins.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\UbuntuInsecureOrigins.AssetsLibrary.dll</HintPath>
+    <Reference Include="TestVerifiableString.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\TestVerifiableString.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
@@ -151,7 +151,9 @@ rem copy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\
 
 "X:\jsc.internal.git\keystore\red\pscp.xmikro.bat"  $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe /home/xmikro/Desktop/staging/
 
-"X:\jsc.internal.git\keystore\red\pscpr.xmikro.bat" $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.assets\  /home/xmikro/Desktop/staging/$(TargetName).ApplicationWebService.assets
+subst a: /D
+subst a: $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu
+"X:\jsc.internal.git\keystore\red\pscpr.xmikro.bat" a:\$(TargetName).ApplicationWebService.assets\  /home/xmikro/Desktop/staging/$(TargetName).ApplicationWebService.assets
 
 		)</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
