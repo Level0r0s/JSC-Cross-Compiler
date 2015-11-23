@@ -36,6 +36,8 @@ namespace UbuntuMIDExperiment
             // can we modify roslyn to compile comments into IL?
             new IHTMLPre { "guest, EID, MID. which are we?" }.AttachToDocument();
             new IHTMLPre { new { Native.document.location.protocol, Native.document.location.host } }.AttachToDocument();
+            // NFC ?
+            new IHTMLPre { new { Native.window.navigator.userAgent } }.AttachToDocument();
             new IHTMLPre { new { base.identity } }.AttachToDocument();
 
             // { identity = { value = guest, signature = 70d1638ccb1627209f7d5751b989dd5cc399ff17c72aff075f2e05ff1b3c9a1f474cf5813c6470b8e9ee77b5911316acee62c6bf3534b2bc4942bc9de4344fc9 } }
@@ -44,14 +46,22 @@ namespace UbuntuMIDExperiment
             // should we want to validate the identity on client?
             // can we? if we run on http we cant.
 
+
+
             new IHTMLButton { "EID" }.AttachToDocument().With(
                 async e =>
                 {
+                    // are we running nfc web browser?
+                    if (Native.window.navigator.userAgent.Contains("NFCDID"))
+                        e.innerText = "NFC DID";
+
+
+                    // NFC ?
                     await e.async.onclick;
 
                     Native.document.body.Clear();
 
-                    new IHTMLPre { "EID login..." }.AttachToDocument();
+                    new IHTMLPre { e.innerText + " login..." }.AttachToDocument();
 
                     // need hopping support.
                 }
