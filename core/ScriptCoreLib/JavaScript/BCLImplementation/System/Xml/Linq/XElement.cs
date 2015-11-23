@@ -17,7 +17,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
 	// X:\jsc.svn\core\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Xml\Linq\XElement.cs
 
 	[Script(Implements = typeof(XElement))]
-	internal class __XElement : __XContainer
+	public class __XElement : __XContainer
 	{
 		// Intel introduced specialized SIMD string processing instructions in the SSE 4.2 instruction set extension 
 		// http://www.balisage.net/Proceedings/vol10/html/Cameron01/BalisageVol10-Cameron01.html
@@ -263,7 +263,6 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
 		}
 
 
-		// script: error JSC1000: No implementation found for this native method, please implement [static System.Xml.Linq.XElement.op_Explicit(System.Xml.Linq.XElement)]
 		public static explicit operator string (__XElement element)
 		{
 			// X:\jsc.svn\examples\javascript\linq\VBWebSQLXElement\VBWebSQLXElement\Application.vb

@@ -74,6 +74,7 @@ namespace UbuntuDualSSLWebApplication
 
         static Func<string, string> DecoratedString = x => x.Replace("-", "_").Replace("+", "_").Replace("<", "_").Replace(">", "_");
 
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/ubuntumidexperiment
         // cuz state jumping wont restore in memory refs yet...
         static IHTMLIFrame iframe;
 

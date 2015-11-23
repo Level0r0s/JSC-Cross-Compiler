@@ -295,7 +295,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             }
             catch
             {
-                Console.WriteLine("err Write ");
+                //fault RuntimeException{ Message = Connection closed by remote host, StackTrace = java.lang.RuntimeException: Connec
+                //        at ScriptCoreLibJava.BCLImplementation.System.Net.Sockets.__NetworkStream.Write(__NetworkStream.java:279)
+                //        at UbuntuMIDExperiment.ApplicationWebServiceActivity.AtConnection(ApplicationWebServiceActivity.java:763)
+
+                //Console.WriteLine("err Write ");
 
                 throw;
             }

@@ -131,6 +131,7 @@ namespace ScriptCoreLib.Shared
 
         public byte[] ReadAllBytes(Stream stream)
         {
+            // tested by?
             Console.WriteLine("enter ReadAllBytes " + new { stream });
 
             var m = new MemoryStream();

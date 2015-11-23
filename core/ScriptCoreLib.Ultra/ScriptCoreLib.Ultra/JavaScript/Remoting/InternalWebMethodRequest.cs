@@ -20,6 +20,9 @@ namespace ScriptCoreLib.JavaScript.Remoting
     [Obsolete("this shall also work for AIR? what about web workers?")]
     public abstract class InternalWebMethodRequest
     {
+        // client side!
+
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/uploadvaluestaskasync
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201501/20150102
         // used by the compiler!
 
@@ -49,7 +52,8 @@ namespace ScriptCoreLib.JavaScript.Remoting
 
             var key = "_" + that.MetadataToken + "_" + name;
 
-            //Console.WriteLine("AddParameter " + new { key });
+            //Console.WriteLine("AddParameter " + new { key, value });
+            Console.WriteLine("InternalWebMethodRequest.AddParameter " + new { key, value });
 
             that.InternalUploadValues[key] = value.ToXMLString();
 
@@ -78,8 +82,10 @@ namespace ScriptCoreLib.JavaScript.Remoting
 
         public static void Invoke(InternalWebMethodRequest that)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/uploadvaluestaskasync
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/20150301
-            //Console.WriteLine("InternalWebMethodRequest.Invoke");
+
+            Console.WriteLine("InternalWebMethodRequest.Invoke " + new { that.Name });
 
 
             var w = new System.Net.WebClient();

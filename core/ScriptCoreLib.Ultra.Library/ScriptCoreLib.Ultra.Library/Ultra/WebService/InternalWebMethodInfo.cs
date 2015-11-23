@@ -38,7 +38,7 @@ namespace ScriptCoreLib.Ultra.WebService
 
         public Action<long> AtElapsedMilliseconds;
 
-        // called by?
+        // called by? WriteInternalFields ?
         public static void AddField(InternalWebMethodInfo that, string FieldName, string FieldValue)
         {
             if (that.InternalFields == null)
@@ -53,7 +53,7 @@ namespace ScriptCoreLib.Ultra.WebService
             // X:\jsc.svn\examples\javascript\Test\TestWebServiceTaskFields\TestWebServiceTaskFields\ApplicationWebService.cs
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2013/201310/20131011-fields
 
-            //Console.WriteLine("InternalWebMethodInfo.AddField " + new { FieldName, FieldValue });
+            Console.WriteLine("InternalWebMethodInfo.AddField " + new { FieldName, FieldValue });
 
             that.InternalFields[FieldName] = FieldValue;
         }
@@ -143,13 +143,17 @@ namespace ScriptCoreLib.Ultra.WebService
             return k;
         }
 
+
+
+        // called by?
         public static string GetParameterValue(InternalWebMethodInfo that, string name)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/uploadvaluestaskasync
             // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuSSLWebApplication\UbuntuSSLWebApplication\ApplicationWebService.cs
 
             var r = default(string);
 
-            //Console.WriteLine("GetParameterValue: " + new { name, that.Parameters.Length });
+            Console.WriteLine("InternalWebMethodInfo GetParameterValue: " + new { name, that.Parameters.Length });
 
 
             // do we support null parameters?

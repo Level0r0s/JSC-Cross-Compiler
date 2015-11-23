@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuMIDExperiment", "UbuntuMIDExperiment.csproj", "{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E1C195A9-73EB-458A-AFC4-F8C9995E0E4F} = {E1C195A9-73EB-458A-AFC4-F8C9995E0E4F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuDualSSLWebApplication", "..\UbuntuDualSSLWebApplication\UbuntuDualSSLWebApplication\UbuntuDualSSLWebApplication.csproj", "{4D1B8307-A2F9-4FD3-9CAC-DF66FE151EAB}"
 EndProject
@@ -30,6 +33,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuInsecureOrigins", "..\UbuntuInsecureOrigins\UbuntuInsecureOrigins.csproj", "{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibJava", "..\..\..\..\core\ScriptCoreLibJava\ScriptCoreLibJava.csproj", "{5F295F12-F93F-4347-B417-AA89990652A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSwitchToServiceContextAsync", "..\..\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync.csproj", "{5A6A3B8C-35E2-49E4-9856-73956C94D149}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -425,6 +430,31 @@ Global
 		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|x86.ActiveCfg = Release|Any CPU
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Android|Any CPU.ActiveCfg = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Android|Mixed Platforms.ActiveCfg = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Android|Mixed Platforms.Build.0 = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Android|x86.ActiveCfg = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Android|x86.Build.0 = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Assets|Any CPU.ActiveCfg = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Assets|Mixed Platforms.ActiveCfg = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Assets|Mixed Platforms.Build.0 = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Assets|x86.ActiveCfg = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Assets|x86.Build.0 = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Debug|x86.ActiveCfg = Debug|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Debug|x86.Build.0 = Debug|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.PHP|Any CPU.ActiveCfg = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.PHP|Mixed Platforms.ActiveCfg = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.PHP|Mixed Platforms.Build.0 = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.PHP|x86.ActiveCfg = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.PHP|x86.Build.0 = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Release|Any CPU.ActiveCfg = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Release|Mixed Platforms.Build.0 = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Release|x86.ActiveCfg = Release|x86
+		{5A6A3B8C-35E2-49E4-9856-73956C94D149}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

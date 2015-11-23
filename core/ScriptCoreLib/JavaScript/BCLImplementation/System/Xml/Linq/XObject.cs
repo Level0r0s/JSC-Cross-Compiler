@@ -11,7 +11,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
     // https://github.com/dotnet/corefx/blob/master/src/System.Xml.XDocument/System/Xml/Linq/XObject.cs
 
     [Script(Implements = typeof(XObject))]
-    internal class __XObject
+    public class __XObject
     {
         public virtual void InternalAddChanged(EventHandler<XObjectChangeEventArgs> e)
         {

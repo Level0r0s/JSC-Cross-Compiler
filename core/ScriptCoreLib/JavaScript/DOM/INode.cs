@@ -34,7 +34,9 @@ namespace ScriptCoreLib.JavaScript.DOM
         // add
 
         [Script(HasNoPrototype = true)]
-        class __INode_text : INode
+        class __INode_text 
+            // haha. took 6h to figure this out!
+            //: INode
         {
             public string text;
             public string textContent;
@@ -51,18 +53,31 @@ namespace ScriptCoreLib.JavaScript.DOM
             get
             {
                 // http://www.webmasterworld.com/forum26/119.htm
+                Console.WriteLine("enter get text");
 
-                var x = (__INode_text)this;
+                var x = (__INode_text)(object)this;
 
                 if (Expando.InternalIsMember(x, "text"))
+                {
+                    Console.WriteLine("return text");
+
                     return x.text;
+                }
 
                 if (Expando.InternalIsMember(x, "textContent"))
+                {
+                    Console.WriteLine("return textContent");
+
                     return x.textContent;
+                }
 
                 // why not only read this?
                 if (Expando.InternalIsMember(x, "nodeValue"))
+                {
+                    Console.WriteLine("return nodeValue");
+
                     return this.nodeValue;
+                }
 
                 throw new System.Exception(".text");
             }
@@ -89,7 +104,11 @@ namespace ScriptCoreLib.JavaScript.DOM
 
         public INode parentNode;
 
+
+        // Z:\jsc.svn\examples\javascript\test\TestIEXElement\Application.cs
+        [Obsolete("IE blows up?")]
         public INode firstChild;
+
         public INode lastChild;
 
         public INode previousSibling;

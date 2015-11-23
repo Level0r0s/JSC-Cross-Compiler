@@ -54,8 +54,13 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
 
         }
 
+
+        // called by?
         public Task<byte[]> UploadValuesTaskAsync(Uri address, NameValueCollection data)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/uploadvaluestaskasync
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/ubuntumidexperiment
+
             var r = new TaskCompletionSource<byte[]> { };
 
             // Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuTestUploadValues\Application.cs
@@ -216,11 +221,17 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
             return r.Task;
         }
 
+
+        // called by? UploadValuesTaskAsync
         public static string ToFormDataString(NameValueCollection data)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/ubuntumidexperiment
+
             // X:\jsc.svn\examples\javascript\Test\Test453ForEachStringArray\Test453ForEachStringArray\Class1.cs
             // X:\jsc.svn\examples\javascript\css\Test\TestLongWebMethod\TestLongWebMethod\Application.cs
-            //Console.WriteLine("enter WebClient.ToFormDataString " + new { data.Count });
+
+            // IE is misbehaving?
+            Console.WriteLine("enter WebClient.ToFormDataString " + new { data.Count });
 
             #region AllKeys
             var xx = "";
@@ -228,7 +239,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
             // for (e = 0; e; e++)
             foreach (var item in data.AllKeys)
             {
-                //Console.WriteLine("WebClient.ToFormDataString " + new { item });
+                Console.WriteLine("WebClient.ToFormDataString " + new { item });
 
 
                 if (xx != "")
@@ -236,10 +247,16 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
                     xx += "&";
                 }
 
+
+
+                var xdata = data[item];
+
+                Console.WriteLine("WebClient.ToFormDataString " + new { xdata });
+
                 // X:\jsc.svn\examples\javascript\async\AsyncComputeAndThenCallServer\AsyncComputeAndThenCallServer\Application.cs
                 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/escape
                 //var evalue = Native.window.escape(data[item]).Replace("+", "%" + ((byte)'+').ToString("x2"));
-                var evalue = Native.escape(data[item]).Replace("+", "%" + ((byte)'+').ToString("x2"));
+                var evalue = Native.escape(xdata).Replace("+", "%" + ((byte)'+').ToString("x2"));
                 xx += item + "=" + evalue;
             }
 

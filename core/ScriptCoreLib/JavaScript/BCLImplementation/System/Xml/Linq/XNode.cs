@@ -16,16 +16,17 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
     // https://github.com/dotnet/corefx/blob/master/src/System.Xml.XDocument/System/Xml/Linq/XNode.cs
 
     [Script(Implements = typeof(XNode))]
-    internal class __XNode : __XObject
+    public class __XNode : __XObject
     {
         // https://androidxmldotnet.codeplex.com/SourceControl/latest#AndroidXml/Res/ResXMLTree_node.cs
 
         [Obsolete("not available for web workers?")]
         internal INode InternalValue;
 
+        // virtual messed up after rewrite?
         public virtual void InternalValueInitialize()
         {
-
+            Console.WriteLine("__XNode virtual InternalValueInitialize");
         }
 
         // X:\jsc.svn\examples\javascript\GoogleMapsInfoWindow\GoogleMapsInfoWindow\Application.cs
@@ -34,7 +35,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
         {
             //X:\jsc.svn\examples\javascript\Test\TestXMLChangedEvent\TestXMLChangedEvent
             Console.WriteLine("Hello from internalAddChanged");
-           
+
             new MutationObserver(
               new MutationCallback(
                   (MutationRecord[] mutations, MutationObserver observer) =>
@@ -149,16 +150,53 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
         //}
 
 
-        internal static void InternalRebuildDocument(__XNode that, __XElement IncomingXElement)
+        public static void InternalRebuildDocument(__XNode that, __XElement IncomingXElement)
         {
-            if (IncomingXElement.InternalValue.ownerDocument == that.InternalValue.ownerDocument)
+            //Z:\jsc.svn\examples\javascript\test\TestIEXElement\Application.cs
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/uploadvaluestaskasync
+
+
+            IncomingXElement.InternalValueInitialize();
+            that.InternalValueInitialize();
+
+
+            var sameDocument = IncomingXElement.InternalValue.ownerDocument == that.InternalValue.ownerDocument;
+            Console.WriteLine("enter __XNode InternalRebuildDocument " + new { sameDocument });
+            Console.WriteLine("enter __XNode InternalRebuildDocument " + new { that });
+
+
+            // view-source:55048 44ms enter __XNode InternalRebuildDocument { IncomingXElementNode = bar }
+            // IncomingXElement cant be bar??
+            Console.WriteLine("enter __XNode InternalRebuildDocument " + new { IncomingXElement, GetType = IncomingXElement.GetType() });
+
+            if (sameDocument)
                 return;
+
+
             // due to IE!
             //Console.WriteLine(" ok, force import manually. swap documents");
 
+            //Console.WriteLine("enter __XNode InternalRebuildDocument " + new { IncomingXElement.InternalValue.text });
+            //Console.WriteLine("enter __XNode InternalRebuildDocument " + new { IncomingXElement.InternalValue.firstChild, IncomingXElement.InternalValue.text });
 
             var IncomingXElementAttributes = IncomingXElement.Attributes().Select(a => new { a.Name, a.Value }).ToArray();
             var IncomingXElementNodes = IncomingXElement.Nodes().ToArray();
+
+            foreach (var IncomingXElementNode in IncomingXElementNodes)
+            {
+                // howcom here we get to know its bar but not before?
+
+                var IncomingXElementNodeAsXText = IncomingXElementNode as XText;
+                if (IncomingXElementNodeAsXText != null)
+                {
+                    Console.WriteLine("enter __XNode IncomingXElementNodeAsXText " + new { IncomingXElementNodeAsXText });
+                    Console.WriteLine("enter __XNode IncomingXElementNodeAsXText " + new { IncomingXElementNodeAsXText.Value });
+                }
+                else
+                {
+                    Console.WriteLine("enter __XNode InternalRebuildDocument " + new { IncomingXElementNode });
+                }
+            }
 
             // first reset the underlying node
 
@@ -172,6 +210,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
                     new XAttribute(item.Name, item.Value)
                 );
             }
+
+            Console.WriteLine("enter __XNode InternalRebuildDocument Add " + new { IncomingXElementNodes.Length });
 
             IncomingXElement.Add(IncomingXElementNodes);
 
@@ -202,6 +242,14 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
                     );
                 }
             }
+        }
+
+
+
+
+        public static implicit operator __XNode(XNode x)
+        {
+            return (__XNode)(object)x;
         }
 
     }

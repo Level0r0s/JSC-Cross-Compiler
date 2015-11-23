@@ -518,6 +518,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
 
         public byte[] SignData(byte[] buffer, object halg)
         {
+            // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuMIDExperiment\Application.cs
             // http://stackoverflow.com/questions/22840322/how-to-make-messagedigest-sha-1-and-signature-nonewithrsa-equivalent-to-signa
 
             var xSHA1CryptoServiceProvider = halg as SHA1CryptoServiceProvider;
@@ -525,23 +526,23 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
             var algorithm = "SHA1WithRSA";
 
 
-            Console.WriteLine("enter SignData " + new
-            {
-                //xSHA1CryptoServiceProvider,
-                algorithm,
+            //Console.WriteLine("enter SignData " + new
+            //{
+            //    //xSHA1CryptoServiceProvider,
+            //    algorithm,
 
-                //hash = hash.Length,
-                //this.InternalRSAPrivateKey
-            });
-
-
+            //    //hash = hash.Length,
+            //    //this.InternalRSAPrivateKey
+            //});
 
 
-            Console.WriteLine("enter SignData " + new
-            {
-                // is hash bigger than max data?
-                MaxDataFromdwKeySize = MaxDataFromdwKeySize(this.KeySize),
-            });
+
+
+            //Console.WriteLine("enter SignData " + new
+            //{
+            //    // is hash bigger than max data?
+            //    MaxDataFromdwKeySize = MaxDataFromdwKeySize(this.KeySize),
+            //});
 
             // PKCS1.Sign_v15 
 
@@ -579,7 +580,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Security.Cryptography
             }
             catch { throw; }
 
-            Console.WriteLine("exit SignData " + new { signature = signature.Length, verify });
+            //Console.WriteLine("exit SignData " + new { signature = signature.Length, verify });
             return signature;
         }
 

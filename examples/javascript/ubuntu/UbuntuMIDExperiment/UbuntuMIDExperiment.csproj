@@ -124,6 +124,9 @@
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
     </Reference>
+    <Reference Include="TestSwitchToServiceContextAsync.AssetsLibrary">
+      <HintPath>..\..\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\bin\staging.AssetsLibrary\TestSwitchToServiceContextAsync.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -235,6 +238,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\sk\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\async\Test\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync\TestSwitchToServiceContextAsync.csproj">
+      <Project>{5a6a3b8c-35e2-49e4-9856-73956c94d149}</Project>
+      <Name>TestSwitchToServiceContextAsync</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

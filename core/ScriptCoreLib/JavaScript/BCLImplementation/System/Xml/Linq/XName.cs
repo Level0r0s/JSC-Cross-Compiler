@@ -10,7 +10,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
     // https://github.com/dotnet/corefx/blob/master/src/System.Xml.XDocument/System/Xml/Linq/XName.cs
 
     [Script(Implements = typeof(XName))]
-    internal class __XName
+    public class __XName
     {
         internal string InternalValue;
 

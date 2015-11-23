@@ -22,15 +22,355 @@ using UbuntuMIDExperiment.HTML.Pages;
 
 namespace UbuntuMIDExperiment
 {
-    /// <summary>
-    /// Your client side code running inside a web browser as JavaScript.
-    /// </summary>
+
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using TestSwitchToServiceContextAsync;
+
+
+    #region HopToParent
+    // Z:\jsc.svn\examples\javascript\Test\TestHopToIFrameAndBack\Application.cs
+    // Z:\jsc.svn\examples\javascript\Test\TestHopFromIFrame\TestHopFromIFrame\Application.cs
+    public struct HopToParent : System.Runtime.CompilerServices.INotifyCompletion
+    {
+        // basically we have to hibernate the current state to resume
+        public HopToParent GetAwaiter() { return this; }
+        public bool IsCompleted { get { return false; } }
+
+        public static Action<HopToParent, Action> VirtualOnCompleted;
+        public void OnCompleted(Action continuation) { VirtualOnCompleted(this, continuation); }
+
+        public void GetResult() { }
+    }
+    #endregion
+
+
+    #region HopToIFrame
+    // Z:\jsc.svn\examples\javascript\Test\TestHopFromIFrame\TestHopFromIFrame\Application.cs
+    public struct HopToIFrame : System.Runtime.CompilerServices.INotifyCompletion
+    {
+        // basically we have to hibernate the current state to resume
+        public HopToIFrame GetAwaiter() { return this; }
+        public bool IsCompleted { get { return false; } }
+
+        public static Action<HopToIFrame, Action> VirtualOnCompleted;
+        public void OnCompleted(Action continuation) { VirtualOnCompleted(this, continuation); }
+
+        public void GetResult() { }
+
+
+        public IHTMLIFrame frame;
+        public static explicit operator HopToIFrame(IHTMLIFrame frame)
+        {
+            return new HopToIFrame { frame = frame };
+        }
+    }
+    #endregion
+
     public sealed class Application : ApplicationWebService
     {
+        #region magic
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/ubuntumidexperiment
+
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151105
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151031
+
+        static Func<string, string> DecoratedString = x => x.Replace("-", "_").Replace("+", "_").Replace("<", "_").Replace(">", "_");
+
+        // cuz state jumping wont restore in memory refs yet...
+        static IHTMLIFrame iframe;
+        #endregion
+
+
+        static ApplicationWebService __base;
 
         public Application(IApp page)
         {
+            // per iframe there is one only.
+            // we should be respawning async state this pointer while jmping into iframe.
+            __base = this;
+
+            #region  magic
+            var isroot = Native.window.parent == Native.window.self;
+
+            //new IHTMLPre { new { isroot } }.AttachToDocument();
+
+            if (!isroot)
+            {
+                #region HopToParent
+                HopToParent.VirtualOnCompleted = async (that, continuation) =>
+                {
+                    // the state is in a member variable?
+
+                    var r = TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableFromContinuation(continuation);
+
+                    // should not be a zero state
+                    // or do we have statemachine name clash?
+
+                    //new IHTMLPre {
+                    //    "iframe about to jump to parent " + new { r.shadowstate.state }
+                    //}.AttachToDocument();
+
+                    Native.window.parent.postMessage(r.shadowstate);
+
+                    // we actually wont use the response yet..
+                };
+                #endregion
+
+
+                // start the handshake
+                // we gain intellisense, but the type is partal, likely not respawned, acivated, initialized 
+
+                //  new IHTMLPre {
+                //  "inside iframe awaiting state"
+                //}.AttachToDocument();
+
+
+
+
+                var c = new MessageChannel();
+
+                c.port1.onmessage +=
+                    m =>
+                    {
+                        var that = (TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine)m.data;
+
+                        //new IHTMLPre {
+                        //            "inside iframe got state " +
+                        //            new { that.state }
+                        //      }.AttachToDocument();
+
+                        // about to invoke
+
+                        #region xAsyncStateMachineType
+                        var xAsyncStateMachineType = typeof(Application).Assembly.GetTypes().FirstOrDefault(
+                              item =>
+                              {
+                                  // safety check 1
+
+                                  //Console.WriteLine(new { sw.ElapsedMilliseconds, item.FullName });
+
+                                  var xisIAsyncStateMachine = typeof(IAsyncStateMachine).IsAssignableFrom(item);
+                                  if (xisIAsyncStateMachine)
+                                  {
+                                      //Console.WriteLine(new { item.FullName, isIAsyncStateMachine });
+
+                                      return item.FullName == that.TypeName;
+                                  }
+
+                                  return false;
+                              }
+                          );
+                        #endregion
+
+
+                        var NewStateMachine = FormatterServices.GetUninitializedObject(xAsyncStateMachineType);
+                        var isIAsyncStateMachine = NewStateMachine is IAsyncStateMachine;
+
+                        var NewStateMachineI = (IAsyncStateMachine)NewStateMachine;
+
+                        #region 1__state
+                        xAsyncStateMachineType.GetFields(
+                                    System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance
+                                ).WithEach(
+                                 AsyncStateMachineSourceField =>
+                                 {
+
+                                     Console.WriteLine(new { AsyncStateMachineSourceField });
+
+                                     if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
+                                     {
+                                         AsyncStateMachineSourceField.SetValue(
+                                             NewStateMachineI,
+                                             that.state
+                                          );
+                                     }
+
+                                     var xStringField = that.StringFields.AsEnumerable().FirstOrDefault(
+                                         f => DecoratedString(f.FieldName) == DecoratedString(AsyncStateMachineSourceField.Name)
+                                     );
+
+                                     if (xStringField != null)
+                                     {
+                                         // once we are to go back to client. we need to reverse it?
+
+                                         AsyncStateMachineSourceField.SetValue(
+                                             NewStateMachineI,
+                                             xStringField.value
+                                          );
+                                         // next xml?
+                                         // before lets send our strings back with the new state!
+                                         // what about exceptions?
+                                     }
+                                 }
+                            );
+                        #endregion
+
+                        //new IHTMLPre {
+                        //        "inside iframe invoke state"
+                        //    }.AttachToDocument();
+
+                        NewStateMachineI.MoveNext();
+
+                        // we can now send one hop back?
+                    };
+
+                c.port1.start();
+                c.port2.start();
+
+                Native.window.parent.postMessage(null,
+                    "*",
+                    c.port2
+                );
+
+
+
+
+
+                return;
+            }
+
+            var lookup = new Dictionary<IHTMLIFrame, MessageEvent> { };
+
+            #region HopToIFrame
+            HopToIFrame.VirtualOnCompleted = async (that, continuation) =>
+            {
+                var m = default(MessageEvent);
+                var r = TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine.ResumeableFromContinuation(continuation);
+
+                if (lookup.ContainsKey(that.frame))
+                {
+                    //    new IHTMLPre {
+                    //    "parent already nows the iframe..."
+                    //}.AttachToDocument();
+
+                    m = lookup[that.frame];
+
+                }
+                else
+                {
+                    //    new IHTMLPre {
+                    //    "parent is awaiting handshake of the newly loaded iframe..."
+                    //}.AttachToDocument();
+
+
+                    // X:\jsc.svn\examples\javascript\Test\TestSwitchToIFrame\TestSwitchToIFrame\Application.cs
+                    //var m = await that.frame.contentWindow.async.onmessage;
+                    m = await that.frame.async.onmessage;
+
+                    lookup[that.frame] = m;
+
+
+
+                    #region onmessage
+                    that.frame.ownerDocument.defaultView.onmessage +=
+                        e =>
+                        {
+                            if (e.source != that.frame.contentWindow)
+                                return;
+
+                            var shadowstate = (TestSwitchToServiceContextAsync.ShadowIAsyncStateMachine)e.data;
+
+                            // are we jumping into a new statemachine?
+
+                            //      new IHTMLPre {
+                            //      "parent saw iframe instructions to jump back " + new { shadowstate.state }
+                            //}.AttachToDocument();
+
+                            // about to invoke
+
+                            #region xAsyncStateMachineType
+                            var xAsyncStateMachineType = typeof(Application).Assembly.GetTypes().FirstOrDefault(
+                                  item =>
+                                  {
+                                      // safety check 1
+
+                                      //Console.WriteLine(new { sw.ElapsedMilliseconds, item.FullName });
+
+                                      var xisIAsyncStateMachine = typeof(IAsyncStateMachine).IsAssignableFrom(item);
+                                      if (xisIAsyncStateMachine)
+                                      {
+                                          //Console.WriteLine(new { item.FullName, isIAsyncStateMachine });
+
+                                          return item.FullName == shadowstate.TypeName;
+                                      }
+
+                                      return false;
+                                  }
+                              );
+                            #endregion
+
+
+                            var NewStateMachine = FormatterServices.GetUninitializedObject(xAsyncStateMachineType);
+                            var isIAsyncStateMachine = NewStateMachine is IAsyncStateMachine;
+
+                            var NewStateMachineI = (IAsyncStateMachine)NewStateMachine;
+
+                            #region 1__state
+                            xAsyncStateMachineType.GetFields(
+                                        System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance
+                                    ).WithEach(
+                                     AsyncStateMachineSourceField =>
+                                     {
+
+                                         Console.WriteLine(new { AsyncStateMachineSourceField });
+
+                                         if (AsyncStateMachineSourceField.Name.EndsWith("1__state"))
+                                         {
+                                             AsyncStateMachineSourceField.SetValue(
+                                                 NewStateMachineI,
+                                                 shadowstate.state
+                                              );
+                                         }
+
+                                         var xStringField = shadowstate.StringFields.AsEnumerable().FirstOrDefault(
+                                               f => DecoratedString(f.FieldName) == DecoratedString(AsyncStateMachineSourceField.Name)
+                                           );
+
+                                         if (xStringField != null)
+                                         {
+                                             // once we are to go back to client. we need to reverse it?
+
+                                             AsyncStateMachineSourceField.SetValue(
+                                                 NewStateMachineI,
+                                                 xStringField.value
+                                              );
+                                             // next xml?
+                                             // before lets send our strings back with the new state!
+                                             // what about exceptions?
+                                         }
+                                     }
+                                );
+                            #endregion
+
+                            //      new IHTMLPre {
+                            //      "parent saw iframe instructions to jump back. invoking... "
+                            //}.AttachToDocument();
+
+                            NewStateMachineI.MoveNext();
+
+                        };
+                    #endregion
+
+                }
+
+
+
+
+                //new IHTMLPre {
+                //    "parent is sending state after handshake..."
+                //}.AttachToDocument();
+
+
+                m.postMessage(r.shadowstate);
+            };
+            #endregion
+
+
+            #endregion
+
+
+
             // can we log in via MID?
             // where is the last test?
             // Z:\jsc.svn\examples\javascript\crypto\VerifyIdentityAffinity\VerifyIdentityAffinity\Application.cs
@@ -40,7 +380,12 @@ namespace UbuntuMIDExperiment
             new IHTMLPre { new { Native.document.location.protocol, Native.document.location.host } }.AttachToDocument();
             // NFC ?
             new IHTMLPre { new { Native.window.navigator.userAgent } }.AttachToDocument();
-            new IHTMLPre { new { base.identity } }.AttachToDocument();
+
+            var hostname = Native.document.location.host.TakeUntilIfAny(":");
+            var hostport = Native.document.location.host.SkipUntilOrEmpty(":");
+
+
+            new IHTMLPre { new { base.identity, hostname, hostport } }.AttachToDocument();
 
             // { identity = { value = guest, signature = 70d1638ccb1627209f7d5751b989dd5cc399ff17c72aff075f2e05ff1b3c9a1f474cf5813c6470b8e9ee77b5911316acee62c6bf3534b2bc4942bc9de4344fc9 } }
 
@@ -53,6 +398,10 @@ namespace UbuntuMIDExperiment
             new IHTMLButton { "EID" }.AttachToDocument().With(
                 async e =>
                 {
+                    #region statemachine fixup?
+                    await Task.CompletedTask;
+                    #endregion
+
                     // are we running nfc web browser?
                     if (Native.window.navigator.userAgent.Contains("NFCDID"))
                         e.innerText = "NFC DID";
@@ -63,9 +412,70 @@ namespace UbuntuMIDExperiment
 
                     Native.document.body.Clear();
 
-                    new IHTMLPre { e.innerText + " login..." }.AttachToDocument();
+                    // https://technet.microsoft.com/en-us/library/dd979547(v=ws.10).aspx
+                    new IHTMLPre { e.innerText + " - Please insert smart card..." }.AttachToDocument();
 
                     // need hopping support.
+
+                    var hostport1 = Convert.ToInt32(hostport) + 1;
+                    var host1 = hostname + ":" + hostport1;
+                    var baseURI1 = "https://" + host1;
+
+                    iframe = new IHTMLIFrame { src = baseURI1, frameBorder = "0" }.AttachToDocument();
+
+                    // if the iframe is on another port, ssl client certificate may be prompted
+                    //await (HopTo)iframe;
+                    await (HopToIFrame)iframe;
+
+                    // ding ding ding.
+
+                    //new IHTMLPre { "hello __base?" }.AttachToDocument();
+
+
+
+                    //var xidenity_value = base.identity.value;
+                    //var xidenity_signature = base.identity.signature;
+
+                    var xidenity_value = __base.identity.value;
+                    //var xidenity_signature = __base.identity.signature;
+
+                    // jsc wont do byte array jumps yet?
+                    var xidenity_signature = Convert.ToBase64String(__base.identity.signature);
+
+
+                    await default(HopToParent);
+
+                    //new IHTMLPre { new { xidenity_value, xidenity_signature, base.identity } }.AttachToDocument();
+                    //new IHTMLPre { new { xidenity_value, xidenity_signature, __base.identity } }.AttachToDocument();
+
+
+                    __base.identity = new VerifiableString
+                    {
+                        value = xidenity_value,
+                        signature = Convert.FromBase64String(xidenity_signature)
+                    };
+
+                    __base.foo = "bar";
+
+                    Native.document.body.Clear();
+                    new IHTMLPre { new { __base.identity, __base.foo } }.AttachToDocument();
+
+                    // IE cant verify?
+
+                    // verify our new identity.
+
+                    await new IHTMLButton { "Verify" }.AttachToDocument().async.onclick;
+                    Native.document.body.style.backgroundColor = "yellow";
+                    if (await __base.Verify())
+                        Native.document.body.style.backgroundColor = "cyan";
+                    else
+                        Native.document.body.style.backgroundColor = "red";
+
+
+                    //await new IHTMLButton { "close" }.AttachToDocument().async.onclick;
+
+                    //// cant close?
+                    //Native.window.close();
                 }
             );
 
@@ -105,6 +515,13 @@ namespace UbuntuMIDExperiment
 
                   Native.document.body.Clear();
                   new IHTMLPre { new { base.identity } }.AttachToDocument();
+
+                  await new IHTMLButton { "Verify" }.AttachToDocument().async.onclick;
+                  Native.document.body.style.backgroundColor = "yellow";
+                  if (await __base.Verify())
+                      Native.document.body.style.backgroundColor = "cyan";
+                  else
+                      Native.document.body.style.backgroundColor = "red";
               }
           );
         }
@@ -113,9 +530,48 @@ namespace UbuntuMIDExperiment
 
     public class ApplicationWebService
     {
+        public string foo;
+
         public VerifiableString identity = new VerifiableString { value = "guest" }.Sign(NamedKeyPairs.WebServiceAuthorityPrivateKey.RSAParameters);
 
+        public async Task<bool> Verify()
+        {
+            Console.WriteLine("Verify " + new { identity });
 
+            var verify = identity.Verify(NamedKeyPairs.WebServiceAuthorityPrivateKey.RSAParameters);
+            return verify;
+        }
+
+
+        #region magic
+        public void Handler(ScriptCoreLib.Ultra.WebService.WebServiceHandler h)
+        {
+            // ssl handshake gives certificate to global, it gives it to the handler, we give it to UI
+
+            // Console.WriteLine("enter Handler " + new { h.ClientCertificate });
+
+            h.ClientCertificate.With(
+                c =>
+                {
+                    //this.id = new { c.Subject }.ToString();
+                    //this.status.Value = this.id;
+
+                    Console.WriteLine("WebServiceHandler " + new { h.ClientCertificate.Subject });
+
+
+                    var UserIDCode = c.Subject.SkipUntilOrEmpty("SERIALNUMBER=").TakeUntilOrEmpty(",");
+
+                    this.identity = new VerifiableString { value = UserIDCode }.Sign(NamedKeyPairs.WebServiceAuthorityPrivateKey.RSAParameters);
+                });
+
+        }
+        #endregion
+
+
+
+
+
+        #region MobileAuthenticateAsync15
         public sealed class MobileAuthenticateAsync15State
         {
             public VerifiableString MobileAuthenticateAsync15_Sesscode;
@@ -327,6 +783,9 @@ namespace UbuntuMIDExperiment
                 MobileAuthenticateAsync15Continue_Status = new VerifiableString { value = xGetMobileAuthenticateStatusResponse.Status }.Sign(NamedKeyPairs.WebServiceAuthorityPrivateKey.RSAParameters)
             };
         }
+
+
+        #endregion
     }
 }
 
