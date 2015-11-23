@@ -129,6 +129,7 @@
     <Compile Include="BCLImplementation\System\ServiceModel\Channels\Binding.cs" />
     <Compile Include="BCLImplementation\System\ServiceModel\ClientBase.cs" />
     <Compile Include="BCLImplementation\System\ServiceModel\BasicHttpsBinding.cs" />
+    <Compile Include="BCLImplementation\System\ServiceModel\HttpBindingBase.cs" />
     <Compile Include="BCLImplementation\System\ServiceModel\ServiceContractAttribute.cs" />
     <Compile Include="BCLImplementation\System\ServiceModel\MessageContractAttribute.cs" />
     <Compile Include="BCLImplementation\System\ServiceModel\EndpointAddress.cs" />

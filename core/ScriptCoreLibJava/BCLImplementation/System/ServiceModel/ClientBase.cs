@@ -362,6 +362,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
 
         public __ClientBase(__Binding binding, __EndpointAddress remoteAddress)
         {
+            // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuMIDExperiment\Application.cs
+
             // https://msdn.microsoft.com/en-us/library/ms574922(v=vs.110).aspx
 
             this.__remoteAddress = remoteAddress;

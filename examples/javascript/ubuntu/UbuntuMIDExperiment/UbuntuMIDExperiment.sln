@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyIdentityAffinity", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuInsecureOrigins", "..\UbuntuInsecureOrigins\UbuntuInsecureOrigins.csproj", "{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibJava", "..\..\..\..\core\ScriptCoreLibJava\ScriptCoreLibJava.csproj", "{5F295F12-F93F-4347-B417-AA89990652A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Android|Any CPU = Android|Any CPU
@@ -398,6 +400,31 @@ Global
 		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|Mixed Platforms.Build.0 = Release|x86
 		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|x86.ActiveCfg = Release|x86
 		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5}.Release|x86.Build.0 = Release|x86
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Android|Any CPU.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Android|Any CPU.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Android|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Android|Mixed Platforms.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Android|x86.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Assets|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Assets|Mixed Platforms.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Assets|x86.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.PHP|Any CPU.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.PHP|Any CPU.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.PHP|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.PHP|Mixed Platforms.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.PHP|x86.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

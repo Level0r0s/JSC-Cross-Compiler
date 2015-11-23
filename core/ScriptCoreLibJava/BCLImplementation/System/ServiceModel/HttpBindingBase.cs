@@ -7,7 +7,7 @@ using ScriptCoreLibJava.BCLImplementation.System.ServiceModel.Channels;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
 {
-    // https://msdn.microsoft.com/en-us/library/system.servicemodel.BasicHttpsBinding(v=vs.110).aspx
+    // https://msdn.microsoft.com/en-us/library/system.servicemodel.httpbindingbase(v=vs.110).aspx
 
   
 
@@ -15,8 +15,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
     // 
 
     //[Script(Implements = typeof(global::System.ServiceModel.ClientBase))]
-    [Script(ImplementsViaAssemblyQualifiedName = "System.ServiceModel.BasicHttpsBinding")]
-    public class __BasicHttpsBinding : __HttpBindingBase
+    [Script(ImplementsViaAssemblyQualifiedName = "System.ServiceModel.HttpBindingBase ")]
+    public class __HttpBindingBase : __Binding
     {
         // Z:\jsc.svn\examples\javascript\crypto\VerifyIdentityAffinity\VerifyIdentityAffinity\ApplicationWebService.cs
         // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuMIDExperiment\Application.cs
