@@ -1,0 +1,80 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360volumetric", "x360volumetric.csproj", "{77234670-3487-477E-9F24-73AB75E6D82E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolumetricIntegrationBySebH", "..\..\synergy\v\VolumetricIntegrationBySebH\VolumetricIntegrationBySebH.csproj", "{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyWolfensteinByReinder", "..\..\synergy\w\ChromeShaderToyWolfensteinByReinder\ChromeShaderToyWolfensteinByReinder\ChromeShaderToyWolfensteinByReinder.csproj", "{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360wolfenstein", "..\x360wolfenstein\x360wolfenstein.csproj", "{AAB1594B-46DB-4205-98C9-1F1C790853B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaderingChameleonByIapafoto", "..\..\synergy\s\ShaderingChameleonByIapafoto\ShaderingChameleonByIapafoto\ShaderingChameleonByIapafoto.csproj", "{146D895B-2A6F-48D5-8091-B099BF3C459E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarsoomGateByJimmikaelkael", "..\..\synergy\b\BarsoomGateByJimmikaelkael\BarsoomGateByJimmikaelkael\BarsoomGateByJimmikaelkael.csproj", "{169C3EAF-A2E1-479A-B93E-3566D2AE1A6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraceConeWithCRTByKlk", "..\..\synergy\t\TraceConeWithCRTByKlk\TraceConeWithCRTByKlk\TraceConeWithCRTByKlk.csproj", "{D6DF6318-CAA7-433F-A173-2D838130CA96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostcardByNimitz", "..\..\synergy\p\PostcardByNimitz\PostcardByNimitz.csproj", "{7857834D-25DF-460F-AA6B-90A7D6C286E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicRayMarchingByQueenkong", "..\..\synergy\b\BasicRayMarchingByQueenkong\BasicRayMarchingByQueenkong.csproj", "{F4B656D0-0212-4B90-8194-BE49109B7258}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquariumByDr2", "..\..\synergy\a\AquariumByDr2\AquariumByDr2.csproj", "{AA303CE2-04F8-4EA7-A88F-19986920E86B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeShaderToyDoomE1M1ByPMalin", "..\..\synergy\d\ChromeShaderToyDoomE1M1ByPMalin\ChromeShaderToyDoomE1M1ByPMalin\ChromeShaderToyDoomE1M1ByPMalin.csproj", "{0470FA25-E610-4CE9-B572-5723AD57FB57}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.ActiveCfg = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.Build.0 = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.ActiveCfg = Release|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.Build.0 = Release|x86
+		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Debug|x86.ActiveCfg = Debug|x86
+		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Debug|x86.Build.0 = Debug|x86
+		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Release|x86.ActiveCfg = Release|x86
+		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Release|x86.Build.0 = Release|x86
+		{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}.Debug|x86.ActiveCfg = Debug|x86
+		{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}.Debug|x86.Build.0 = Debug|x86
+		{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}.Release|x86.ActiveCfg = Release|x86
+		{E7C90B88-3C6E-479E-A32C-49FAB8DB76D2}.Release|x86.Build.0 = Release|x86
+		{AAB1594B-46DB-4205-98C9-1F1C790853B5}.Debug|x86.ActiveCfg = Debug|x86
+		{AAB1594B-46DB-4205-98C9-1F1C790853B5}.Debug|x86.Build.0 = Debug|x86
+		{AAB1594B-46DB-4205-98C9-1F1C790853B5}.Release|x86.ActiveCfg = Release|x86
+		{AAB1594B-46DB-4205-98C9-1F1C790853B5}.Release|x86.Build.0 = Release|x86
+		{146D895B-2A6F-48D5-8091-B099BF3C459E}.Debug|x86.ActiveCfg = Debug|x86
+		{146D895B-2A6F-48D5-8091-B099BF3C459E}.Debug|x86.Build.0 = Debug|x86
+		{146D895B-2A6F-48D5-8091-B099BF3C459E}.Release|x86.ActiveCfg = Release|x86
+		{146D895B-2A6F-48D5-8091-B099BF3C459E}.Release|x86.Build.0 = Release|x86
+		{169C3EAF-A2E1-479A-B93E-3566D2AE1A6B}.Debug|x86.ActiveCfg = Debug|x86
+		{169C3EAF-A2E1-479A-B93E-3566D2AE1A6B}.Debug|x86.Build.0 = Debug|x86
+		{169C3EAF-A2E1-479A-B93E-3566D2AE1A6B}.Release|x86.ActiveCfg = Release|x86
+		{169C3EAF-A2E1-479A-B93E-3566D2AE1A6B}.Release|x86.Build.0 = Release|x86
+		{D6DF6318-CAA7-433F-A173-2D838130CA96}.Debug|x86.ActiveCfg = Debug|x86
+		{D6DF6318-CAA7-433F-A173-2D838130CA96}.Debug|x86.Build.0 = Debug|x86
+		{D6DF6318-CAA7-433F-A173-2D838130CA96}.Release|x86.ActiveCfg = Release|x86
+		{D6DF6318-CAA7-433F-A173-2D838130CA96}.Release|x86.Build.0 = Release|x86
+		{7857834D-25DF-460F-AA6B-90A7D6C286E1}.Debug|x86.ActiveCfg = Debug|x86
+		{7857834D-25DF-460F-AA6B-90A7D6C286E1}.Debug|x86.Build.0 = Debug|x86
+		{7857834D-25DF-460F-AA6B-90A7D6C286E1}.Release|x86.ActiveCfg = Release|x86
+		{7857834D-25DF-460F-AA6B-90A7D6C286E1}.Release|x86.Build.0 = Release|x86
+		{F4B656D0-0212-4B90-8194-BE49109B7258}.Debug|x86.ActiveCfg = Debug|x86
+		{F4B656D0-0212-4B90-8194-BE49109B7258}.Debug|x86.Build.0 = Debug|x86
+		{F4B656D0-0212-4B90-8194-BE49109B7258}.Release|x86.ActiveCfg = Release|x86
+		{F4B656D0-0212-4B90-8194-BE49109B7258}.Release|x86.Build.0 = Release|x86
+		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Debug|x86.ActiveCfg = Debug|x86
+		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Debug|x86.Build.0 = Debug|x86
+		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Release|x86.ActiveCfg = Release|x86
+		{AA303CE2-04F8-4EA7-A88F-19986920E86B}.Release|x86.Build.0 = Release|x86
+		{0470FA25-E610-4CE9-B572-5723AD57FB57}.Debug|x86.ActiveCfg = Debug|x86
+		{0470FA25-E610-4CE9-B572-5723AD57FB57}.Debug|x86.Build.0 = Debug|x86
+		{0470FA25-E610-4CE9-B572-5723AD57FB57}.Release|x86.ActiveCfg = Release|x86
+		{0470FA25-E610-4CE9-B572-5723AD57FB57}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
