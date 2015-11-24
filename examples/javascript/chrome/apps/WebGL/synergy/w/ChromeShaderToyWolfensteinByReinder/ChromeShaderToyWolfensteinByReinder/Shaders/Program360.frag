@@ -366,7 +366,8 @@ bool getColorForPosition( const vec3 ro, const vec3 rd, const vec3 vos, const ve
 	}
 	if( isObject( vos.xz ) && !isWall( vos.xz+vec2(1.,0.) ) && !isWall( vos.xz+vec2(-1.,0.) )
 	    && !isWall( vos.xz+vec2(0.,-1.) ) && !isWall( vos.xz+vec2(0.,1.) ) &&
-	    intersectSprite( ro, rd, vos, rdcenter, uv ) ) {
+	    //intersectSprite( ro, rd, vos, rdcenter, uv ) ) {
+	    intersectSprite( ro, rd, vos, rd, uv ) ) {
 		return getObjectColor( 0, uv*64., col );
 	}
 	return false;

@@ -278,7 +278,8 @@ namespace ChromeShaderToyPrograms.v
 
 
             //new IHTMLOption { value = "", innerText = $"{References.programs.Count} shaders available" }.AttachTo(combo);
-            new IHTMLOption { value = "", innerText = $"{v.programs.Count} shaders available" }.AttachTo(combo);
+            //new IHTMLOption { value = "", innerText = $"{v.programs.Count} shaders available" }.AttachTo(combo);
+            new IHTMLOption { value = "", innerText = v.programs.Count + "  shaders available" }.AttachTo(combo);
 
 
             // should bind the selection to uri and reload if gpu crashes.
