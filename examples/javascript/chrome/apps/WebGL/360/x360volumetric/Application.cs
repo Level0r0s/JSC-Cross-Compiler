@@ -235,8 +235,8 @@ namespace x360volumetric
             // not responding...
             //int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
             //int cubefacesizeMAX = 2048; // 6 faces, ?
-            //int cubefacesizeMAX = 2048; // 6 faces, ?
-            int cubefacesizeMAX = 1024; // 6 faces, ?
+            int cubefacesizeMAX = 2048; // 6 faces, ?
+            //int cubefacesizeMAX = 1024; // 6 faces, ?
             int cubefacesize = cubefacesizeMAX; // 6 faces, ?
             //int cubefacesize = 1024; // 6 faces, ?
             // "X:\vr\tape1\0000x2048.png"
@@ -251,7 +251,8 @@ namespace x360volumetric
                 //    // fast gif?
                 //    //cubefacesize = 128; // 6 faces, ?
                 //cubefacesize = 512; // 6 faces, ?
-                cubefacesize = 64; // 6 faces, ?
+                //cubefacesize = 64; // 6 faces, ?
+                cubefacesize = 512; // 6 faces, ?
             //cubefacesize = 128; // 6 faces, ?
 
             //    [GroupMarkerNotSet(crbug.com / 242999)!:247F0809]
@@ -358,11 +359,11 @@ namespace x360volumetric
             // fly up?
             //sceneg.translateZ(-1024);
             // rotate the world, as the skybox then matches what we have on filesystem
-            //scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
+            scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
 
             // make the sun the center
             //scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2);
-            scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI);
+            //scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI);
 
 
             // yet for headtracking we shall rotate camera
@@ -2182,11 +2183,11 @@ namespace x360volumetric
 
 
 
-                        //0
+                        0
                         //Math.PI / 2
                         //-Math.PI / 2
                         //-Math.PI
-                        Math.PI
+                        //Math.PI
 
 
                         //bottomRotate100 * 0.01f
