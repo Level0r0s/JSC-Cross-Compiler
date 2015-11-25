@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuInsecureOrigins", "..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibJava", "..\..\..\..\..\core\ScriptCoreLibJava\ScriptCoreLibJava.csproj", "{5F295F12-F93F-4347-B417-AA89990652A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbuntuMIDExperiment", "..\..\UbuntuMIDExperiment\UbuntuMIDExperiment.csproj", "{D0CD29F8-6956-491F-8B9F-323DA9C01571}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestVerifiableString", "..\TestVerifiableString\TestVerifiableString.csproj", "{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Android|Any CPU = Android|Any CPU
@@ -265,6 +269,56 @@ Global
 		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5F295F12-F93F-4347-B417-AA89990652A3}.Release|x86.ActiveCfg = Release|Any CPU
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Android|Any CPU.ActiveCfg = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Android|Mixed Platforms.ActiveCfg = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Android|Mixed Platforms.Build.0 = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Android|x86.ActiveCfg = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Android|x86.Build.0 = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Assets|Any CPU.ActiveCfg = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Assets|Mixed Platforms.ActiveCfg = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Assets|Mixed Platforms.Build.0 = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Assets|x86.ActiveCfg = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Assets|x86.Build.0 = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Debug|x86.ActiveCfg = Debug|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Debug|x86.Build.0 = Debug|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.PHP|Any CPU.ActiveCfg = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.PHP|Mixed Platforms.ActiveCfg = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.PHP|Mixed Platforms.Build.0 = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.PHP|x86.ActiveCfg = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.PHP|x86.Build.0 = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Release|Any CPU.ActiveCfg = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Release|Mixed Platforms.Build.0 = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Release|x86.ActiveCfg = Release|x86
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571}.Release|x86.Build.0 = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Android|Any CPU.ActiveCfg = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Android|Mixed Platforms.ActiveCfg = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Android|Mixed Platforms.Build.0 = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Android|x86.ActiveCfg = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Android|x86.Build.0 = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Assets|Any CPU.ActiveCfg = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Assets|Mixed Platforms.ActiveCfg = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Assets|Mixed Platforms.Build.0 = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Assets|x86.ActiveCfg = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Assets|x86.Build.0 = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Debug|x86.ActiveCfg = Debug|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Debug|x86.Build.0 = Debug|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.PHP|Any CPU.ActiveCfg = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.PHP|Mixed Platforms.ActiveCfg = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.PHP|Mixed Platforms.Build.0 = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.PHP|x86.ActiveCfg = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.PHP|x86.Build.0 = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Release|Any CPU.ActiveCfg = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Release|Mixed Platforms.Build.0 = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Release|x86.ActiveCfg = Release|x86
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -278,5 +332,7 @@ Global
 		{63C46938-EE36-47CD-AB5A-054828B7CE66} = {32042BCB-52EF-42AB-B539-E83599FD613C}
 		{0FB07805-C5C0-4E00-A690-EDC70C41C3E5} = {32042BCB-52EF-42AB-B539-E83599FD613C}
 		{5F295F12-F93F-4347-B417-AA89990652A3} = {32042BCB-52EF-42AB-B539-E83599FD613C}
+		{D0CD29F8-6956-491F-8B9F-323DA9C01571} = {32042BCB-52EF-42AB-B539-E83599FD613C}
+		{672DC8EC-3E3D-4DF5-B787-4243F7CC5771} = {32042BCB-52EF-42AB-B539-E83599FD613C}
 	EndGlobalSection
 EndGlobal

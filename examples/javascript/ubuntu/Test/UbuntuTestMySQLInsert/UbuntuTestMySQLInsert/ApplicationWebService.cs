@@ -180,7 +180,7 @@ namespace UbuntuTestMySQLInsert
                     //EventTime = DateTime.Now.AddDays(-0),
 
                     // conversion done in Insert?
-                    z = new XElement("goo", value)
+                    z = new XElement("goo2", value)
                 }
             );
 

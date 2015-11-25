@@ -384,6 +384,9 @@ namespace UbuntuMIDExperiment
             var hostname = Native.document.location.host.TakeUntilIfAny(":");
             var hostport = Native.document.location.host.SkipUntilOrEmpty(":");
 
+            if (string.IsNullOrEmpty(hostport))
+                hostport = "443";
+
 
             new IHTMLPre { new { base.identity, hostname, hostport } }.AttachToDocument();
 

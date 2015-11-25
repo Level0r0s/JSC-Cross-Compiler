@@ -30,6 +30,10 @@ namespace UbuntuTestMySQLInsert
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            new IHTMLPre { new { Native.document.location.protocol, Native.document.location.host } }.AttachToDocument();
+            // NFC ?
+            new IHTMLPre { new { Native.window.navigator.userAgent } }.AttachToDocument();
+
             new { }.With(
                 async delegate
                 {
@@ -61,7 +65,11 @@ namespace UbuntuTestMySQLInsert
 
                     var AddAndCount = new IHTMLButton { "AddAndCount" }.AttachToDocument();
 
-                    var content = "world";
+                    var content = new { Native.document.location.protocol, Native.document.location.host, Native.window.navigator.userAgent }.ToString();
+
+                    // show it
+                    new IHTMLPre { () => new { content } }.AttachToDocument();
+
 
                     while (await AddAndCount.async.onclick)
                     {
@@ -70,7 +78,9 @@ namespace UbuntuTestMySQLInsert
                             new XElement("hello", content)
                         );
 
-                        content = "the one after " + new { count };
+
+                        // keep our data
+                        content = "the one after " + new { count, Native.document.location.protocol, Native.document.location.host, Native.window.navigator.userAgent };
 
                         new IHTMLPre { new { count } }.AttachToDocument();
                     }
