@@ -200,6 +200,7 @@ namespace ScriptCoreLib.Ultra.WebService
             var handler = new WebServiceHandler
             {
                 ClientCertificate = g.ClientCertificate,
+                ClientTrace = g.ClientTrace,
 
                 Context = that.Context,
 

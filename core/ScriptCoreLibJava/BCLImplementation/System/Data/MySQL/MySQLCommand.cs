@@ -89,7 +89,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
 
             var sql = this.InternalCommandText;
 
-            Console.WriteLine("enter InternalCreateStatement" + new { sql });
+            //Console.WriteLine("enter InternalCreateStatement" + new { sql });
             try
             {
                 // http://www.javaworld.com/javaworld/jw-04-2007/jw-04-jdbc.html
@@ -190,28 +190,28 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
                 throw;
             }
 
-            try
-            {
-                // Caused by: java.lang.RuntimeException: GetFieldType fault: { ColumnType = 3, ordinal = 0, CommandText = select sum(`Deposit`)
-                //        at ScriptCoreLib.Shared.Data.Diagnostics.QueryStrategyExtensions.Sum(QueryStrategyExtensions.java:124)
-                //from `Book18.Sheet2`
-                Console.WriteLine("\n__SQLiteCommand.InternalCreateStatement " + new
-                {
+            //try
+            //{
+            //    // Caused by: java.lang.RuntimeException: GetFieldType fault: { ColumnType = 3, ordinal = 0, CommandText = select sum(`Deposit`)
+            //    //        at ScriptCoreLib.Shared.Data.Diagnostics.QueryStrategyExtensions.Sum(QueryStrategyExtensions.java:124)
+            //    //from `Book18.Sheet2`
+            //    Console.WriteLine("\n__SQLiteCommand.InternalCreateStatement " + new
+            //    {
 
-                    //CurrentThreadID = Thread.CurrentThread.ManagedThreadId,
-                    //CurrentThreadHashCode = Thread.CurrentThread.GetHashCode(),
-                    sql,
-                    //isReadOnly = this.c.InternalConnection.isReadOnly(),
+            //        //CurrentThreadID = Thread.CurrentThread.ManagedThreadId,
+            //        //CurrentThreadHashCode = Thread.CurrentThread.GetHashCode(),
+            //        sql,
+            //        //isReadOnly = this.c.InternalConnection.isReadOnly(),
 
-                    //  If the timeout period expires before the operation completes, this method returns false. A value of 0 indicates a timeout is not applied to the database operation.
-                    //isValid = this.c.InternalConnection.isValid(0)
+            //        //  If the timeout period expires before the operation completes, this method returns false. A value of 0 indicates a timeout is not applied to the database operation.
+            //        //isValid = this.c.InternalConnection.isValid(0)
 
-                });
-            }
-            catch
-            {
+            //    });
+            //}
+            //catch
+            //{
 
-            }
+            //}
 
         }
 

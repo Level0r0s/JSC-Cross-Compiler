@@ -10,6 +10,8 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Data
     [Script(Implements = typeof(global::System.Data.DataColumnCollection))]
     public class __DataColumnCollection : __InternalDataCollectionBase
     {
+        // do we have .AsEnumerable?
+
         // X:\jsc.svn\core\ScriptCoreLib.Windows.Forms\ScriptCoreLib.Windows.Forms\JavaScript\BCLImplementation\System\Windows\Forms\DataGridView.cs
         // X:\jsc.svn\examples\javascript\forms\Test\TestDataTableToJavascript\TestDataTableToJavascript\ApplicationWebService.cs
         // X:\jsc.svn\examples\javascript\appengine\DataGridWithHeaders\DataGridWithHeaders\ApplicationWebService.cs

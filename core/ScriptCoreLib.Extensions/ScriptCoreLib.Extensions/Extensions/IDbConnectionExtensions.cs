@@ -14,7 +14,7 @@ namespace System.Data
         // called by?
         public static int GetLastInsertRowId(this IDbConnection c)
         {
-            Console.WriteLine("enter GetLastInsertRowId");
+            //Console.WriteLine("enter GetLastInsertRowId");
 
             // tested by
             // X:\jsc.svn\examples\javascript\LINQ\test\auto\TestSelect\TestAndroidInsert\ApplicationWebService.cs
@@ -31,7 +31,7 @@ namespace System.Data
             //#if FSQLiteConnection
             var xSQLiteConnection = c as SQLite.SQLiteConnection;
 
-            Console.WriteLine("enter GetLastInsertRowId " + new { xSQLiteConnection });
+            //Console.WriteLine("enter GetLastInsertRowId " + new { xSQLiteConnection });
 
             if (xSQLiteConnection != null)
             {

@@ -14,31 +14,31 @@ namespace ScriptCoreLib.Shared.BCLImplementation.Microsoft.VisualBasic.CompilerS
 
             // LINQ orderby?
             //return (double)Left == (double)Right;
-            return ((double)Left).CompareTo((double)Right) == 0;
+            return Convert.ToDouble(Left).CompareTo(Convert.ToDouble(Right)) == 0;
         }
 
         public static object AddObject(object Left, object Right)
         {
-            return (double)Left + (double)Right;
+            return Convert.ToDouble(Left) + Convert.ToDouble(Right);
         }
 
         public static object SubtractObject(object Left, object Right)
         {
-            return (double)Left - (double)Right;
+            return Convert.ToDouble(Left) - Convert.ToDouble(Right);
         }
 
         public static object DivideObject(object Left, object Right)
         {
             // Z:\jsc.svn\examples\javascript\vb\LEST97\LEST97\Library\lest_function_vba.vb
 
-            return (double)Left / (double)Right;
+            return Convert.ToDouble(Left) / Convert.ToDouble(Right);
         }
 
         public static object MultiplyObject(object Left, object Right)
         {
             // Z:\jsc.svn\examples\javascript\vb\LEST97\LEST97\Library\lest_function_vba.vb
 
-            return (double)Left * (double)Right;
+            return Convert.ToDouble(Left) * Convert.ToDouble(Right);
         }
 
         public static int CompareString(string Left, string Right, bool TextCompare)
@@ -81,7 +81,7 @@ namespace ScriptCoreLib.Shared.BCLImplementation.Microsoft.VisualBasic.CompilerS
 
         public static object ExponentObject(object Left, object Right)
         {
-            return Math.Pow((double)Left, (double)Right);
+            return Math.Pow(Convert.ToDouble(Left), Convert.ToDouble(Right));
 
         }
 

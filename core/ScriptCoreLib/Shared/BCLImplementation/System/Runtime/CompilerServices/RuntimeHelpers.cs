@@ -11,8 +11,10 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Runtime.CompilerServices
     // https://github.com/dot42/api/blob/master/System/Runtime/CompilerServices/RuntimeHelpers.cs
 
 	[Script(Implements = typeof(global::System.Runtime.CompilerServices.RuntimeHelpers))]
-	internal class __RuntimeHelpers
+	public class __RuntimeHelpers
 	{
+        // Z:\jsc.svn\examples\javascript\vb\LEST97\LEST97\Library\lest_function_vba.vb
+
 		// tested by?
         public static object GetObjectValue(object obj)
         {

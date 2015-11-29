@@ -6,11 +6,14 @@ using System.Web;
 
 namespace ScriptCoreLib.Ultra.WebService
 {
-	public abstract class InternalGlobal : HttpApplication
+    public abstract class InternalGlobal : HttpApplication
     {
 
         // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuSSLWebApplication\UbuntuSSLWebApplication\ApplicationWebService.cs
         public global::System.Security.Cryptography.X509Certificates.X509Certificate2 ClientCertificate;
+
+        // tracepath -n
+        public System.Threading.Tasks.Task<string> ClientTrace;
 
 
         public InternalGlobal()
@@ -20,42 +23,42 @@ namespace ScriptCoreLib.Ultra.WebService
 
         #region InternalApplication
         HttpApplication InternalApplicationOverride;
-		public HttpApplication InternalApplication
-		{
-			get
-			{
-				if (InternalApplicationOverride != null)
-					return InternalApplicationOverride;
+        public HttpApplication InternalApplication
+        {
+            get
+            {
+                if (InternalApplicationOverride != null)
+                    return InternalApplicationOverride;
 
-				return this;
-			}
-		}
+                return this;
+            }
+        }
 
-		public void SetApplication(HttpApplication value)
-		{
-			this.InternalApplicationOverride = value;
-		}
+        public void SetApplication(HttpApplication value)
+        {
+            this.InternalApplicationOverride = value;
+        }
         #endregion
 
 
 
         public bool FileExists()
-		{
-			return InternalGlobalExtensions.FileExists(this);
-		}
+        {
+            return InternalGlobalExtensions.FileExists(this);
+        }
 
-		public abstract InternalFileInfo[] GetFiles();
+        public abstract InternalFileInfo[] GetFiles();
 
-		public abstract InternalWebMethodInfo[] GetWebMethods();
+        public abstract InternalWebMethodInfo[] GetWebMethods();
 
 
 
-        
+
         public abstract void Invoke(InternalWebMethodInfo e);
 
-		public abstract WebServiceScriptApplication[] GetScriptApplications();
+        public abstract WebServiceScriptApplication[] GetScriptApplications();
 
-		public abstract void Serve(WebServiceHandler h);
-	}
+        public abstract void Serve(WebServiceHandler h);
+    }
 
 }

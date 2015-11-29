@@ -493,6 +493,12 @@ namespace UbuntuMIDExperiment
 
                   var state = await base.MobileAuthenticateAsync15();
 
+                  if (state == null)
+                  {
+                      new IHTMLPre { "fault" }.AttachToDocument();
+                      return;
+                  }
+
                   new IHTMLPre { new { state.MobileAuthenticateAsync15_UserIDCode } }.AttachToDocument();
                   new IHTMLPre { new { state.MobileAuthenticateAsync15_Sesscode } }.AttachToDocument();
                   new IHTMLPre { new { state.MobileAuthenticateAsync15_ChallengeID } }.AttachToDocument();
@@ -546,6 +552,17 @@ namespace UbuntuMIDExperiment
         }
 
 
+        const string serviceuri = "https://digidocservice.sk.ee:443";
+        //const string serviceuri = "https://tsp.demo.sk.ee:443";
+        //const string ServiceName = "Testimine";
+        const string ServiceName = "Estfeed_Mikro";
+
+
+
+        //ServiceName = "Testimine",
+        //ServiceName = "Estfeed001",
+
+
         #region magic
         public void Handler(ScriptCoreLib.Ultra.WebService.WebServiceHandler h)
         {
@@ -589,15 +606,19 @@ namespace UbuntuMIDExperiment
         {
             // Z:\jsc.svn\examples\java\hybrid\JVMCLRWSDLMID\Program.cs
 
+            var sw = Stopwatch.StartNew();
+            Console.WriteLine("invoke MobileAuthenticateAsync " + new { sw.ElapsedMilliseconds, serviceuri, ServiceName });
+
+
+
             // Add Service Reference
             // https://tsp.demo.sk.ee/?wsdl 
             //var c = new sk.DigiDocServicePortTypeClient("DigiDocService", "https://tsp.demo.sk.ee:443");
-            var c = new sk.DigiDocServicePortTypeClient(new BasicHttpsBinding(), new EndpointAddress("https://tsp.demo.sk.ee:443"));
+            //var c = new sk.DigiDocServicePortTypeClient(new BasicHttpsBinding(), new EndpointAddress("https://tsp.demo.sk.ee:443"));
+            var c = new sk.DigiDocServicePortTypeClient(new BasicHttpsBinding(), new EndpointAddress(serviceuri));
 
 
-            var sw = Stopwatch.StartNew();
 
-            Console.WriteLine("invoke MobileAuthenticateAsync " + new { sw.ElapsedMilliseconds });
 
             #region MobileAuthenticateRequest
             var xa = c.MobileAuthenticateAsync(new sk.MobileAuthenticateRequest
@@ -611,7 +632,9 @@ namespace UbuntuMIDExperiment
                 //soovitatav on kasutada mõlemat
                 //sisendparameetrit! Leedu Mobiil-ID kasutajate
                 //puhul on kohustuslikud IDCode ja PhoneNo
-                IDCode = "14212128025",
+
+
+                //IDCode = "14212128025",
 
                 // Isikukoodi välja andnud riik, kasutatakse ISO 3166 
                 // 2 tähelisi riigikoode (näiteks: EE)
@@ -644,7 +667,8 @@ namespace UbuntuMIDExperiment
                 //maksimaalne pikkus 20 tähemärki.
                 //Eelnevalt on vajalik kasutatava teenuse nimetuse
                 //kokkuleppimine teenuse pakkujaga
-                ServiceName = "Testimine",
+                //ServiceName = "Testimine",
+                ServiceName = ServiceName,
 
                 //Täiendav tekst, mis autentimise PIN-i küsimise
                 //eelselt lisaks teenuse nimetuse kasutaja telefonile
@@ -653,7 +677,8 @@ namespace UbuntuMIDExperiment
                 //pikkust teksti, aga näiteks kirillitsa teksti puhul
                 //võidakse tähti kodeerida 2 baidistena ja siis ei saa
                 //saata pikemat kui 20-sümbolilist teksti).
-                MessageToDisplay = "Testimine",
+                //MessageToDisplay = "Testimine",
+                MessageToDisplay = "minuenergia.ee",
 
                 //- Rakenduse pakkuja poolt genereeritud juhuslik 10
                 //baidine tekst, mis on osa (autentimise käigus)
@@ -716,6 +741,14 @@ namespace UbuntuMIDExperiment
 
             Console.WriteLine("after MobileAuthenticateAsync " + new { sw.ElapsedMilliseconds });
             sk.MobileAuthenticateResponse x = xa.Result;
+
+            if (x == null)
+            {
+                Console.WriteLine("after MobileAuthenticateAsync fault");
+
+                return null;
+            }
+
             Console.WriteLine("after MobileAuthenticateAsync done " + new { sw.ElapsedMilliseconds, x.Sesscode, x.ChallengeID, x.Status });
 
 
@@ -741,7 +774,8 @@ namespace UbuntuMIDExperiment
         {
             var sw = Stopwatch.StartNew();
 
-            var c = new sk.DigiDocServicePortTypeClient(new BasicHttpsBinding(), new EndpointAddress("https://tsp.demo.sk.ee:443"));
+            //var c = new sk.DigiDocServicePortTypeClient(new BasicHttpsBinding(), new EndpointAddress("https://tsp.demo.sk.ee:443"));
+            var c = new sk.DigiDocServicePortTypeClient(new BasicHttpsBinding(), new EndpointAddress(serviceuri));
 
             Console.WriteLine("before GetMobileAuthenticateStatusAsync  " + new { sw.ElapsedMilliseconds, args.MobileAuthenticateAsync15_Sesscode });
 

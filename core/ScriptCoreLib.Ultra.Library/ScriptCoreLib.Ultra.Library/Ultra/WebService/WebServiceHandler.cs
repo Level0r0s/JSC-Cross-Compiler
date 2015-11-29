@@ -11,7 +11,7 @@ namespace ScriptCoreLib.Ultra.WebService
     /// </summary>
 
 
-   
+
 
     [Obsolete("experimental")]
     public class WebServiceHandler
@@ -36,6 +36,10 @@ namespace ScriptCoreLib.Ultra.WebService
         // set by ssl port at login
         // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuSSLWebApplication\UbuntuSSLWebApplication\ApplicationWebService.cs
         public global::System.Security.Cryptography.X509Certificates.X509Certificate2 ClientCertificate;
+        public System.Threading.Tasks.Task<string> ClientTrace;
+
+
+
 
         public HttpContext Context;
 

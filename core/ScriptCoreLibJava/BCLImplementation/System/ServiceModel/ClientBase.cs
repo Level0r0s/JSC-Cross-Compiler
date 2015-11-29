@@ -205,12 +205,28 @@ namespace ScriptCoreLibJava.BCLImplementation.System.ServiceModel
                     xPOST.Headers["SOAPAction"] = "\"\"";
 
 
-                    var xPOSTresponse = xPOST.UploadStringTaskAsync(xClientBase.__remoteAddress.uri, "POST", data.ToString());
+                    var xPOSTresponse = xPOST.UploadStringTaskAsync(
+                        xClientBase.__remoteAddress.uri,
+                        "POST",
+                        data.ToString()
+                    );
 
 
                     xPOSTresponse.ContinueWith(
                         task =>
                         {
+                            if (string.IsNullOrEmpty(task.Result))
+                            {
+                                // fault?
+
+
+                                c.SetResult(
+                                  null
+                                );
+
+                                return;
+                            }
+
                             var Envelope = XElement.Parse(task.Result);
                             var Body = Envelope.Elements().Skip(1).FirstOrDefault();
                             var Response = Body.Elements().FirstOrDefault();

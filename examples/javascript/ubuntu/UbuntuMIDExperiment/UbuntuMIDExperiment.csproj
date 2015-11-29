@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D0CD29F8-6956-491F-8B9F-323DA9C01571}</ProjectGuid>
+    <ProjectGuid>{0DB1EFFF-ABA5-42A5-96F3-7896C6F399A8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UbuntuMIDExperiment</RootNamespace>
@@ -251,13 +251,7 @@
 		if $(ConfigurationName)==Release (
 		start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false   /DisableWebServiceUbuntu:false 
 
-
-
-rem robocopy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.assets u:\$(TargetName).ApplicationWebService.assets /E
  
-rem copy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe U:\
-
-
 
 "X:\jsc.internal.git\keystore\red\pscp.xmikro.bat"  $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe /home/xmikro/Desktop/staging/
 

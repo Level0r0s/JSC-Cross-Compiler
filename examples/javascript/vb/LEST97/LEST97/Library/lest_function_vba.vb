@@ -74,6 +74,15 @@
 
         If nr = 0 Then lest_geo = LAT Else lest_geo = LON
     End Function
+
+
+    'V:\staging\web\java\LEST97\lest_function_vba.java:59: error: cannot find symbol
+    '    object21 = __RuntimeHelpers.GetObjectValue(object5);
+
+    Function hint() As System.Type
+        hint = GetType(ScriptCoreLib.Shared.BCLImplementation.System.Runtime.CompilerServices.__RuntimeHelpers)
+    End Function
+
 End Module
 
 ' https://en.wikibooks.org/wiki/Visual_Basic_.NET/Visual_Basic_6_to_.NET_Function_Equivalents

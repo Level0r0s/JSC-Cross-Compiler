@@ -66,7 +66,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Data.SQLite
         {
             var key = new { DataSource, ReadOnly, InternalUser, InternalHost, InternalInstanceName }.ToString();
 
-            Console.WriteLine("InternalGetConnectionString " + new { key });
+            //Console.WriteLine("InternalGetConnectionString " + new { key });
 
             InterlockedInternalGetConnectionString(key, this);
 

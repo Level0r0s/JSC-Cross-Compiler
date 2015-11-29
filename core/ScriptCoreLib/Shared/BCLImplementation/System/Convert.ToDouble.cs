@@ -25,6 +25,9 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System
 
         public static double ToDouble(object value)
         {
+            // unless value already is double or int?
+            // Z:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\Microsoft\VisualBasic\CompilerServices\Operators.cs
+
             return double.Parse("" + value);
 
         }

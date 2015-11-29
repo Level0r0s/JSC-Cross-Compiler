@@ -26,6 +26,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
     [Script(Implements = typeof(global::System.Threading.Tasks.Task))]
     internal partial class __Task
     {
+
+        public override string ToString()
+        {
+            return "Task " + new { IsCompleted };
+        }
+
         // we have a set of context switch tests. where are they.
         // X:\jsc.svn\examples\java\android\AndroidVibrationActivity\AndroidVibrationActivity\ApplicationActivity.cs
 
@@ -79,7 +85,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
 
 
 
-     
+
 
         public AutoResetEvent WaitEvent = new AutoResetEvent(false);
 
@@ -118,7 +124,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading.Tasks
 
 
 
-  
+
 
 
 

@@ -11,6 +11,10 @@ namespace ScriptCoreLib.JavaScript.WebGL
 	[Script(HasNoPrototype = true, InternalConstructor = true)]
     public class WebGLTexture
     {
+        // iframe as webgl tex2d for VR?
+        // src\com\navigatevr\NaviWebViewSceneObject.java
+        // "X:\opensource\github\browser-vr\README.md"
+
         // http://blog.tojicode.com/2011/12/protecting-webgl-content-and-why-you.html
 
 		// https://www.opengl.org/sdk/docs/man/html/glCreateTextures.xhtml

@@ -25,12 +25,13 @@ namespace ScriptCoreLib.Java
     {
         public void checkClientTrusted(jvm::java.security.cert.X509Certificate[] arg0, string arg1)
         {
-            Console.WriteLine("X509TrustManager checkClientTrusted " + new { arg0.Length, arg1 });
-
+            //Console.WriteLine("X509TrustManager checkClientTrusted " + new { arg0.Length, arg1 });
         }
+
         public void checkServerTrusted(jvm::java.security.cert.X509Certificate[] arg0, string arg1) { }
         public jvm::java.security.cert.X509Certificate[] getAcceptedIssuers()
         {
+            // tested by ?
             var dir = new FileInfo(typeof(TrustEveryoneManager).Assembly.Location).Directory;
 
             // firefox needs a cert here?
@@ -67,7 +68,7 @@ namespace ScriptCoreLib.Java
 
             }
 
-            Console.WriteLine("X509TrustManager getAcceptedIssuers " + new { a.Count });
+            //Console.WriteLine("X509TrustManager getAcceptedIssuers " + new { a.Count });
             return a.ToArray();
         }
     }
@@ -224,12 +225,12 @@ namespace ScriptCoreLib.Java
 
             var c = this.InternalX509KeyManager.getCertificateChain(alias);
 
-            Console.WriteLine("getCertificateChain " + new { c.Length });
+            //Console.WriteLine("getCertificateChain " + new { c.Length });
 
             foreach (var item in c)
             {
                 //Console.WriteLine("getCertificateChain " + new { item });
-                Console.WriteLine("getCertificateChain " + new { SubjectDN = item.getSubjectDN() });
+                //Console.WriteLine("getCertificateChain " + new { SubjectDN = item.getSubjectDN() });
 
             }
 

@@ -12,6 +12,13 @@ namespace java.lang
     [Script(IsNative = true)]
     public class ProcessBuilder
     {
+
+        // http://docs.oracle.com/javase/7/docs/api/java/lang/ProcessBuilder.html#inheritIO()
+        public ProcessBuilder inheritIO()
+        {
+            throw null;
+        }
+
         public ProcessBuilder(string[] e)
         {
 

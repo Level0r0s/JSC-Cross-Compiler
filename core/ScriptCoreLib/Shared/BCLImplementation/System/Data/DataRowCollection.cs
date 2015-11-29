@@ -11,6 +11,9 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Data
     [Script(Implements = typeof(global::System.Data.DataRowCollection))]
     public class __DataRowCollection : __InternalDataCollectionBase
     {
+        // do we have .AsEnumerable?
+
+
         public __DataTable InternalDataTable;
 
         // X:\jsc.svn\core\ScriptCoreLib.Windows.Forms\ScriptCoreLib.Windows.Forms\JavaScript\BCLImplementation\System\Windows\Forms\DataGridView.cs

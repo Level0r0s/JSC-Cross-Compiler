@@ -24,6 +24,20 @@ namespace UbuntuHello
         [STAThread]
         public static void Main(string[] args)
         {
+            // "Z:\jsc.svn\examples\java\hybrid\UbuntuHello\UbuntuHello\bin\Release\UbuntuHello.exports"
+
+            //if (typeof(object).AssemblyQualifiedName != "java.lang.Object, rt")
+
+            //var CLRProgram_exports = new FileInfo(Path.ChangeExtension(new FileInfo(typeof(Program).Assembly.Location).FullName, ".exports"));
+            //if (CLRProgram_exports.Exists)
+            //{
+            //    // not on jvm/ubuntu?
+            //    // we get to use CLR...
+            //    CLRProgram.CLRMain(args);
+            //    return;
+            //}
+
+
             // http://stackoverflow.com/questions/11203483/run-a-java-application-as-a-service-on-linux
 
             // http://askubuntu.com/questions/99232/how-to-make-a-jar-file-run-on-startup-and-when-you-log-out
@@ -31,8 +45,10 @@ namespace UbuntuHello
             // "X:\torrent\ubuntu-14.04.3-server-amd64.iso"
             // http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
 
+            //  java.lang.Object, rt 
+            // System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
 
-            System.Console.WriteLine("hello ubuntu!! " + new
+            System.Console.WriteLine("hello !! ubuntu!! " + new
             {
                 typeof(object).AssemblyQualifiedName
             }
@@ -48,6 +64,7 @@ namespace UbuntuHello
 
             // CLR not available? unless there was mono?
             //CLRProgram.CLRMain();
+
         }
 
 
@@ -59,7 +76,7 @@ namespace UbuntuHello
     static class CLRProgram
     {
         [STAThread]
-        public static void CLRMain()
+        public static void CLRMain(string[] args)
         {
             System.Console.WriteLine(
                 typeof(object).AssemblyQualifiedName

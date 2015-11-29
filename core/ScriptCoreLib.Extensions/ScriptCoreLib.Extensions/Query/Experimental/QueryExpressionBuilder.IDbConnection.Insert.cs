@@ -219,7 +219,7 @@ namespace ScriptCoreLib.Query.Experimental
             // jsc makes all Keys of long, yet data layer seems to talk int?
             long LastInsertRowId = IDbConnectionExtensions.GetLastInsertRowId(cc);
 
-            Console.WriteLine("Insert " + new { LastInsertRowId });
+            //Console.WriteLine("Insert " + new { LastInsertRowId });
 
             // Additional information: Invalid cast from 'System.Int32' to 'TestSQLiteCLRInsert.PerformanceResourceTimingData2ApplicationPerformanceRow'.
             // Additional information: Specified cast is not valid.
