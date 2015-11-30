@@ -400,9 +400,18 @@ namespace ScriptCoreLibJava.BCLImplementation.System
         }
 
         [Script(ExternalTarget = "toLowerCase")]
-        public string ToLower()
+        public string toLowerCase()
         {
             return default(string);
+        }
+
+        //[Script(ExternalTarget = "toLowerCase")]
+        // can we keep it for LINQ ?
+        [Script(DefineAsStatic = true)]
+        public string ToLower()
+        {
+            // Z:\jsc.svn\examples\javascript\ubuntu\test\TestLINQToLower\Program.cs
+            return this.toLowerCase();
         }
 
         public static bool operator ==(__String a, __String b)
@@ -553,51 +562,51 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
 
 
-		//X:\jsc.svn\examples\javascript\forms\Test\TestSQLJoin\TestSQLJoin\ApplicationWebService.cs
+        //X:\jsc.svn\examples\javascript\forms\Test\TestSQLJoin\TestSQLJoin\ApplicationWebService.cs
 
-		// x:\jsc.svn\examples\javascript\webcamavatarsexperiment\webcamavatarsexperiment\application.cs
-
-
-		#region Format
-		public static string Format(string format, object a)
-		{
-			// fast solution 
-
-			return format.Replace("{0}", "" + a);
-		}
-
-		public static string Format(string format, object a, object b)
-		{
-			// fast solution 
-
-			return format
-				.Replace("{0}", "" + a)
-				.Replace("{1}", "" + b);
-		}
-
-		public static string Format(string format, params object[] b)
-		{
-			// X:\jsc.svn\examples\javascript\test\Test46AnonymousTypeToString\Test46AnonymousTypeToString\Class1.cs
-
-			// X:\jsc.svn\examples\javascript\Test\TestStringInterpolation\TestStringInterpolation\Application.cs
-
-			// X:\jsc.svn\examples\actionscript\async\Test\TestTaskDelay\TestTaskDelay\ApplicationSprite.cs
-			// X:\jsc.svn\examples\javascript\test\TestRoslynAnonymousType\TestRoslynAnonymousType\Class1.cs
-			// fast solution 
+        // x:\jsc.svn\examples\javascript\webcamavatarsexperiment\webcamavatarsexperiment\application.cs
 
 
-			var x = format;
+        #region Format
+        public static string Format(string format, object a)
+        {
+            // fast solution 
 
-			for (int i = 0; i < b.Length; i++)
-			{
-				var value = b[i];
+            return format.Replace("{0}", "" + a);
+        }
 
-				// what about {0:x2}
-				x = x.Replace("{" + i + "}", Convert.ToString(value));
-			}
+        public static string Format(string format, object a, object b)
+        {
+            // fast solution 
 
-			return x;
-		}
+            return format
+                .Replace("{0}", "" + a)
+                .Replace("{1}", "" + b);
+        }
+
+        public static string Format(string format, params object[] b)
+        {
+            // X:\jsc.svn\examples\javascript\test\Test46AnonymousTypeToString\Test46AnonymousTypeToString\Class1.cs
+
+            // X:\jsc.svn\examples\javascript\Test\TestStringInterpolation\TestStringInterpolation\Application.cs
+
+            // X:\jsc.svn\examples\actionscript\async\Test\TestTaskDelay\TestTaskDelay\ApplicationSprite.cs
+            // X:\jsc.svn\examples\javascript\test\TestRoslynAnonymousType\TestRoslynAnonymousType\Class1.cs
+            // fast solution 
+
+
+            var x = format;
+
+            for (int i = 0; i < b.Length; i++)
+            {
+                var value = b[i];
+
+                // what about {0:x2}
+                x = x.Replace("{" + i + "}", Convert.ToString(value));
+            }
+
+            return x;
+        }
 
 
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201503/20150323
@@ -614,16 +623,16 @@ namespace ScriptCoreLibJava.BCLImplementation.System
         }
 
 
-		//script: error JSC1000: No implementation found for this native method, please implement[static System.String.Format(System.String, System.Object, System.Object, System.Object)]
-		public static string Format(string format, object args0, object args1, object args2)
-		{
-			// X:\jsc.svn\examples\javascript\WebGL\collada\WebGLRah66Comanche\WebGLRah66Comanche\Library\ZeProperties.cs
-			// called by anonymous type tostring
-			return Format(format, new[] { args0, args1, args2 });
-		}
-		#endregion
+        //script: error JSC1000: No implementation found for this native method, please implement[static System.String.Format(System.String, System.Object, System.Object, System.Object)]
+        public static string Format(string format, object args0, object args1, object args2)
+        {
+            // X:\jsc.svn\examples\javascript\WebGL\collada\WebGLRah66Comanche\WebGLRah66Comanche\Library\ZeProperties.cs
+            // called by anonymous type tostring
+            return Format(format, new[] { args0, args1, args2 });
+        }
+        #endregion
 
 
-	}
+    }
 
 }

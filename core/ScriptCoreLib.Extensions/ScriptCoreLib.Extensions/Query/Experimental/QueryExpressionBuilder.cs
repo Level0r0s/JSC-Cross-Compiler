@@ -605,7 +605,8 @@ namespace ScriptCoreLib.Query.Experimental
                                 Write(", ");
                                 WriteScalarExpression(DiscardAlias, arg1);
                                 Write(", '')<>");
-                                WriteScalarExpression(DiscardAlias, arg1);
+                                //WriteScalarExpression(DiscardAlias, arg1);
+                                WriteScalarExpression(DiscardAlias, arg0);
                                 Write(")");
                                 return;
                             }

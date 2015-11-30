@@ -81,7 +81,10 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Reflection
         {
             return (MethodInfo)(object)m;
         }
-
+        public static implicit operator __MethodInfo(MethodInfo m)
+        {
+            return (__MethodInfo)(object)m;
+        }
 
         public override bool InternalIsStatic()
         {

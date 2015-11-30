@@ -130,25 +130,54 @@ namespace ScriptCoreLibJava.BCLImplementation.System
 
             try
             {
+                // Z:\jsc.svn\examples\javascript\ubuntu\test\TestLINQToLower\Program.cs
+
+
+                // error: { Target = class ScriptCoreLibJava.BCLImplementation.System.__String, MethodName = ToLower }
+                // Z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\String.cs
+
                 MethodToken = Target.getDeclaredMethod(MethodName, Parameters);
             }
             catch
             {
-                Console.WriteLine("error: " + new { Target, MethodName });
 
-                foreach (var Parameter in Parameters)
+            }
+
+            if (MethodToken == null)
+            {
+                // are we ok if we were to find the DefineAsStatic version?
+
+                var mDefineAsStatic = ScriptCoreLibJava.Extensions.BCLImplementationExtensions.ToType(Target).GetMethods().Where(x => x.Name == MethodName).Where(x => x.GetParameters().Length == Parameters.Length + 1).ToArray();
+
+                if (mDefineAsStatic.Length == 1)
                 {
-                    Console.WriteLine("error: " + new { Parameter });
-                }
+                    MethodToken = ((ScriptCoreLibJava.BCLImplementation.System.Reflection.__MethodInfo)mDefineAsStatic[0]).InternalMethod;
 
-                foreach (var Method in ScriptCoreLibJava.Extensions.BCLImplementationExtensions.ToType(Target).GetMethods())
+                    Console.WriteLine(new { mDefineAsStatic });
+                }
+                else
                 {
-                    Console.WriteLine("error: " + new { Method });
+
+                    Console.WriteLine("error: " + new { Target, MethodName });
+
+                    foreach (var Parameter in Parameters)
+                    {
+                        Console.WriteLine("error: " + new { Parameter });
+                    }
+
+
+
+
+
+                    foreach (var Method in ScriptCoreLibJava.Extensions.BCLImplementationExtensions.ToType(Target).GetMethods())
+                    {
+                        Console.WriteLine("error: " + new { Method });
+                    }
+
+                    Console.WriteLine();
+
+                    throw new InvalidOperationException();
                 }
-
-
-
-                throw;
             }
 
             return new __IntPtr { MethodToken = MethodToken };
