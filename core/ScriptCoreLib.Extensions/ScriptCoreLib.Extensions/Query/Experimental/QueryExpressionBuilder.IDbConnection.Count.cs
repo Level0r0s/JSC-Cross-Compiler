@@ -129,7 +129,7 @@ namespace ScriptCoreLib.Query.Experimental
             MethodInfo Operand
             )
         {
-            Console.WriteLine("enter GetScalarCommand " + new { cc });
+            //Console.WriteLine("enter GetScalarCommand " + new { cc });
 
             var nsource = new xScalar { source = source, Operand = Operand };
             var Command = default(DbCommand);

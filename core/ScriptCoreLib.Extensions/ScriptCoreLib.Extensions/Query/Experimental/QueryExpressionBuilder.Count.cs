@@ -35,7 +35,7 @@ namespace ScriptCoreLib.Query.Experimental
         // chrome needs CountAsync
         public static long Count<TElement>(this IQueryStrategy<TElement> source, IDbConnection cc)
         {
-            Console.WriteLine("enter Count " + new { cc });
+            //Console.WriteLine("enter Count " + new { cc });
 
             // X:\jsc.svn\examples\javascript\LINQ\test\auto\TestSelect\TestDeleteAll\Program.cs
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/20140705/20140705
@@ -53,7 +53,7 @@ namespace ScriptCoreLib.Query.Experimental
 
             if (xDbCommand != null)
             {
-                Console.WriteLine("before Count ExecuteScalar " + new { xDbCommand });
+                //Console.WriteLine("before Count ExecuteScalar " + new { xDbCommand });
 
                 //                I / System.Console(6607): Caused by: java.lang.ClassCastException: java.lang.String
                 //I / System.Console(6607):        at ScriptCoreLib.Query.Experimental.QueryExpressionBuilder.Count(QueryExpressionBuilder.java:233)
@@ -73,7 +73,7 @@ namespace ScriptCoreLib.Query.Experimental
                     x = (long)__value;
                 }
 
-                Console.WriteLine("after Count ExecuteScalar");
+                //Console.WriteLine("after Count ExecuteScalar");
             }
 
             return x;

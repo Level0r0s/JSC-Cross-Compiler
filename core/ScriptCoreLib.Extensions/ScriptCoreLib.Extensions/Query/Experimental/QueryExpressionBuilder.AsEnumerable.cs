@@ -93,7 +93,7 @@ namespace ScriptCoreLib.Query.Experimental
         public static IEnumerable<TElement> ReadToElements<TElement>(DbDataReader r, IQueryStrategy<TElement> source)
         {
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007/where
-            Console.WriteLine("enter QueryExpressionBuilder ReadToElements ");
+            //Console.WriteLine("enter QueryExpressionBuilder ReadToElements ");
 
             while (r.Read())
             {
@@ -102,14 +102,14 @@ namespace ScriptCoreLib.Query.Experimental
                 yield return ReadToElement<TElement>(r, source, new Tuple<MemberInfo, int>[0]);
             }
 
-            Console.WriteLine("exit QueryExpressionBuilder ReadToElements ");
+            //Console.WriteLine("exit QueryExpressionBuilder ReadToElements ");
             r.Dispose();
         }
 
         public static TElement ReadToElement<TElement>(DbDataReader r, IQueryStrategy source, Tuple<MemberInfo, int>[] Target)
         {
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007/where
-            Console.WriteLine("enter QueryExpressionBuilder ReadToElement " + new { source });
+            //Console.WriteLine("enter QueryExpressionBuilder ReadToElement " + new { source });
 
             // what if the one goes straight from where to toarray?
             #region xWhere
@@ -304,7 +304,7 @@ namespace ScriptCoreLib.Query.Experimental
                             }
 
                             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151025
-                            Console.WriteLine("ReadToElement :306 " + new { xMemberName, FieldType, __valueType, __value });
+                            //Console.WriteLine("ReadToElement :306 " + new { xMemberName, FieldType, __valueType, __value });
 
                             // X:\jsc.svn\examples\javascript\LINQ\test\auto\TestSelect\TestSelectMath\Program.cs
                             if (FieldType == typeof(XElement))
