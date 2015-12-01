@@ -615,8 +615,8 @@ namespace x360mazeexplorer
                       // ldflda?
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, -1.0f, 0, 0.0f);
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, 1.0f);
-                      //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, -1.0f);
-                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, 1.0f);
+                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, -1.0f);
+                      //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, 1.0f);
 
                       // left?
                       //forward=normalize(float3(0.0 , 0.0 ,1.0));
@@ -977,8 +977,8 @@ namespace x360mazeexplorer
                       // ldflda?
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 1.0f, 0, 1.0f);
                       //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, -1.0f);
-                      //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, 1.0f);
-                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, -1.0f);
+                      var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, 1.0f);
+                      //var l3 = gl0.getUniformLocation(mProgram, "uCameraTargetOffset"); if (l3 != null) gl0.uniform3f(l3, 0.0f, 0, -1.0f);
 
                       // right
                       //forward=normalize(float3(0.0 , 0.0 ,-1.0));
@@ -2117,9 +2117,9 @@ namespace x360mazeexplorer
                     //floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1), Math.PI);
                     floor2.rotateOnAxis(new THREE.Vector3(0, 0, 1),
 
-                        0
+                        //0
                         //Math.PI /2
-                        //Math.PI
+                        Math.PI
                         //-Math.PI / 2
                         //+
                         //bottomRotate100 * 0.01f

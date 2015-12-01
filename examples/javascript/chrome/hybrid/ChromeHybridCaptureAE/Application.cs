@@ -120,6 +120,7 @@ namespace ChromeHybridCaptureAE
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151126
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150822/hoptochromeappwindow
         static Func<string, string> DecoratedString =
              x => x.Replace("-", "_").Replace("+", "_").Replace("<", "_").Replace(">", "_");

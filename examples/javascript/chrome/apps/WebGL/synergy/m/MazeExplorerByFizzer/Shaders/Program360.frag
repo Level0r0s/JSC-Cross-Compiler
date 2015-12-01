@@ -85,12 +85,45 @@ mat3 rotationMatrix(vec3 axis, float angle)
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
-    vec2 c=vec2(fragCoord/iResolution.xy-.5)*2.;
-    c.x*=iResolution.x/iResolution.y;
-    float time2=time*.7;
-    float tsec=floor(time2/TL2);
+	//iGlobalTime
+    //iMouse
+    //iResolution
+    
+	vec2 uv = fragCoord.xy / iResolution.xy;
+	vec2 uv2 = 2.0*fragCoord.xy / iResolution.xy - 1.0;
+	
+	//uv2 *= 0.5;
+	//uv2 /= 0.5;
+	//uv2 *= .1 * 3600.0 / 60.0;
+	//uv2 /= 0.55;
+	//uv2 /= 0.01 * iGlobalTime ;
+	uv2 /= 0.01 * 3333.0 / 60.0;
+	// .55 ?
+
+	//uv2 /= 0.01 * 4500.0 / 60.0;
+	//uv2 /= 0.01 * 3600.0 / 60.0;
+	//uv2 /= 0.01 * 6000.0 / 60.0;
+
+    //vec2 c=vec2(fragCoord/iResolution.xy-.5)*2.;
+    
+	vec2 c=uv2;
+	
+	//vec2 c=vec2(fragCoord/iResolution.xy-.5)*1.;
+    //c.x*=iResolution.x/iResolution.y;
+	//c /= 0.25;
+
+
+
+    //float time2=time*.7;
+    float time2=time*1.0;
+    //float tsec=floor(time2/TL2);
+    float tsec=0.;
     vec2 bp=startPoint(tsec),pbp=bp;
-    vec2 bd=startDirection(tsec),pbd=bd;
+    //vec2 bd=startDirection(tsec),pbd=bd;
+    vec2 bd0=startDirection(tsec),pbd=bd0;
+	vec2 bd=bd0;
+
+    //vec2 bd=startDirection(0.0),pbd=bd;
 
     float st=mod(time2,TL2);
 
@@ -108,13 +141,16 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
                 bd=od;
         }
         else
+		{
+            //this wont help with the direction flip after the flight..
             bd=bd.yx*vec2(1,-1);
+		}
     }
 
     bp=mix(pbp,bp,fract(min(st,TL-1e-4)));
     bd=normalize(mix(pbd,bd,fract(min(st,TL-1e-4))));
     float ry=.5;
-
+	/* what does this do? nothing?? */
     if(floor(st)>=TL)
     {
         float t=(st-TL)/(TL2-TL);
@@ -123,23 +159,28 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         bd=vec2(cos(ba),sin(ba));
         ry+=1.*sin(t*acos(-1.));
     }
+	/* */
 
     vec3 up=vec3(0,1,0);
-    float p=-.3;
+    //float p=-.3;
+	float p=-.0; // keep horizon line
     vec2 yz=vec2(c.y,1.8)*mat2(cos(p),sin(p),-sin(p),cos(p));;
-        vec3 rd=normalize(yz.x*up+yz.y*vec3(bd.x,0,bd.y)-cross(up,vec3(bd.x,0,bd.y))*c.x);
-    vec3 ro=vec3(bp.x,ry,bp.y);
+    
+	//vec3 rd=normalize(yz.x*up+yz.y*vec3(bd.x,0,bd.y)-cross(up,vec3(bd.x,0,bd.y))*c.x);
+	vec3 rd=normalize(yz.x*up+yz.y*vec3(bd0.x,0,bd0.y)-cross(up,vec3(bd0.x,0,bd0.y))*c.x);
+    
+	vec3 ro=vec3(bp.x,ry,bp.y);
 
 
 		mat3 camRotate = 
 	
 		// bottom
-		(uCameraTargetOffset.y == -1.0) ? rotationMatrix(vec3(1., 0., 0.), radians(90.0)) 
+		(uCameraTargetOffset.y == -1.0) ? rotationMatrix(vec3(0., 0., 1.), radians(90.0)) 
 		 * rotationMatrix(vec3(0., 1., 0.), radians(90.0))
 		:
 
 		// top
-		(uCameraTargetOffset.y == 1.0) ? rotationMatrix(vec3(1., 0., 0.), radians(-90.0)) 
+		(uCameraTargetOffset.y == 1.0) ? rotationMatrix(vec3(0., 0., 1.), radians(-90.0)) 
 		* rotationMatrix(vec3(0., 1., 0.), radians(90.0))
 		:
 	
