@@ -23,15 +23,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using x360volumetric;
-using x360volumetric.Design;
-using x360volumetric.HTML.Pages;
+using x360mazeexplorer;
+using x360mazeexplorer.Design;
+using x360mazeexplorer.HTML.Pages;
 using System.Diagnostics;
 using ScriptCoreLib.JavaScript.WebGL;
 
-namespace x360volumetric
+namespace x360mazeexplorer
 {
-    //using x360volumetric.HTML.Images.FromAssets;
+    //using x360mazeexplorer.HTML.Images.FromAssets;
     using gl = WebGLRenderingContext;
 
     /// <summary>
@@ -49,7 +49,7 @@ namespace x360volumetric
 
         // "X:\vr\tr.png"
         // R:\util\android-sdk-windows\platform-tools\adb.exe push "X:\vr\seascape.png" /sdcard/oculus/360photos/
-        // R:\util\android-sdk-windows\platform-tools\adb.exe push "P:\vr\x360volumetric\00188.png" /sdcard/oculus/360photos/
+        // R:\util\android-sdk-windows\platform-tools\adb.exe push "P:\vr\x360mazeexplorer\00188.png" /sdcard/oculus/360photos/
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150906/roomscanningeffectbyrosme
 
@@ -98,12 +98,12 @@ namespace x360volumetric
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150808/cubemapcamera
         // subst /D b:
-        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360volumetric\x360volumetric\bin\Debug\staging\x360volumetric.Application\web
-        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360volumetric\x360volumetric\bin\Debug\staging\x360volumetric.Application\web
-        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360volumetric\x360volumetric\bin\Debug\staging\x360volumetric.Application\web
+        // subst b: s:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360mazeexplorer\x360mazeexplorer\bin\Debug\staging\x360mazeexplorer.Application\web
+        // subst a: z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360mazeexplorer\x360mazeexplorer\bin\Debug\staging\x360mazeexplorer.Application\web
+        // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\x360mazeexplorer\x360mazeexplorer\bin\Debug\staging\x360mazeexplorer.Application\web
         // what if we want to do subst in another winstat or session?
 
-        // ColladaLoader: Empty or non-existing file (assets/x360volumetric/S6Edge.dae)
+        // ColladaLoader: Empty or non-existing file (assets/x360mazeexplorer/S6Edge.dae)
 
         /// <summary>
         /// This is a javascript application.
@@ -186,7 +186,7 @@ namespace x360volumetric
                         // 0:12094ms chrome.app.window.create {{ href = chrome-extension://aemlnmcokphbneegoefdckonejmknohh/_generated_background_page.html }}
                         Console.WriteLine("chrome.app.window.create " + new { Native.document.location.href });
 
-                        new chrome.Notification(title: "x360volumetric");
+                        new chrome.Notification(title: "x360mazeexplorer");
 
                         // https://developer.chrome.com/apps/app_window#type-CreateWindowOptions
                         var xappwindow = await chrome.app.window.create(
@@ -311,7 +311,7 @@ namespace x360volumetric
             //const int size = 1024; // 6 faces, ?
             //const int cubefacesize = 1024; // 6 faces, ?
 
-            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360volumetric/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
+            // THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter is set to THREE.LinearFilter or THREE.NearestFilter. ( chrome-extension://aemlnmcokphbneegoefdckonejmknohh/assets/x360mazeexplorer/anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs.jpg )
 
 
             var far = 0xffffff;
@@ -518,7 +518,8 @@ namespace x360volumetric
             //var vs0 = new BarsoomGateByJimmikaelkael.Shaders.Program360FragmentShader();
             //var vs0 = new ShaderingChameleonByIapafoto.Shaders.Program360FragmentShader();
             //var vs0 = new ChromeShaderToyWolfensteinByReinder.Shaders.Program360FragmentShader();
-            var vs0 = new VolumetricIntegrationBySebH.Shaders.Program360FragmentShader();
+            //var vs0 = new VolumetricIntegrationBySebH.Shaders.Program360FragmentShader();
+            var vs0 = new MazeExplorerByFizzer.Shaders.Program360FragmentShader();
 
 
 
@@ -2479,8 +2480,8 @@ namespace x360volumetric
 //020000f7 CubeToEquirectangular.Library.ShaderToy+<AttachToDocument>d__14+<MoveNext>06000034
 //script: error JSC1000: *** stack is empty, invalid pop?
 //script: error JSC1000: error at CubeToEquirectangular.Library.ShaderToy+<AttachToDocument>d__14+<MoveNext>06000034.<00a9> ldarg.0.try,
-// assembly: V:\x360volumetric.Application.exe
-// type: CubeToEquirectangular.Library.ShaderToy+<AttachToDocument>d__14+<MoveNext>06000034, x360volumetric.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// assembly: V:\x360mazeexplorer.Application.exe
+// type: CubeToEquirectangular.Library.ShaderToy+<AttachToDocument>d__14+<MoveNext>06000034, x360mazeexplorer.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // offset: 0x0154
 //  method:Int32 <00a9> ldarg.0.try(<MoveNext>06000034, <AttachToDocument>d__14 ByRef, System.Runtime.CompilerServices.TaskAwaiter`1[ScriptCoreLib.JavaScript.DOM.IWindow+FrameEvent] ByR
 //*** Compiler cannot continue... press enter to quit.

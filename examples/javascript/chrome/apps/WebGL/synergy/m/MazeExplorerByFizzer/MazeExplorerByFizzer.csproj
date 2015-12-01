@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{684EDB28-29E2-4959-A229-02EA7B19BB36}</ProjectGuid>
+    <ProjectGuid>{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MegaWaveByAiekick</RootNamespace>
-    <AssemblyName>MegaWaveByAiekick</AssemblyName>
+    <RootNamespace>MazeExplorerByFizzer</RootNamespace>
+    <AssemblyName>MazeExplorerByFizzer</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>MegaWaveByAiekick.Program</StartupObject>
+    <StartupObject>MazeExplorerByFizzer.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -126,19 +126,17 @@
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
     </Reference>
-    <Reference Include="WobblyThingByAvix.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\WobblyThingByAvix.AssetsLibrary.dll</HintPath>
+    <Reference Include="ChromeShaderToyInfiniteRepetitionBySsdsa.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeShaderToyInfiniteRepetitionBySsdsa.AssetsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="OblivionByHoskins.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\OblivionByHoskins.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="MegaWaveByAiekick.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\MegaWaveByAiekick.AssetsLibrary.dll</HintPath>
+    <Reference Include="MazeExplorerByFizzer.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\MazeExplorerByFizzer.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="app.config" />
+    <None Include="Shaders\Program360.frag" />
     <None Include="Shaders\Program.frag" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />

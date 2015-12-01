@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360mazeexplorer", "x360mazeexplorer.csproj", "{77234670-3487-477E-9F24-73AB75E6D82E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeExplorerByFizzer", "..\..\synergy\m\MazeExplorerByFizzer\MazeExplorerByFizzer.csproj", "{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolumetricIntegrationBySebH", "..\..\synergy\v\VolumetricIntegrationBySebH\VolumetricIntegrationBySebH.csproj", "{FBFCB056-6AF5-4648-949B-EA361BA9CE13}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.ActiveCfg = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Debug|x86.Build.0 = Debug|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.ActiveCfg = Release|x86
+		{77234670-3487-477E-9F24-73AB75E6D82E}.Release|x86.Build.0 = Release|x86
+		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Debug|x86.ActiveCfg = Debug|x86
+		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Debug|x86.Build.0 = Debug|x86
+		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Release|x86.ActiveCfg = Release|x86
+		{7E2E2EB0-D1B1-4006-A7D5-F99AD2F1E03F}.Release|x86.Build.0 = Release|x86
+		{FBFCB056-6AF5-4648-949B-EA361BA9CE13}.Debug|x86.ActiveCfg = Debug|x86
+		{FBFCB056-6AF5-4648-949B-EA361BA9CE13}.Debug|x86.Build.0 = Debug|x86
+		{FBFCB056-6AF5-4648-949B-EA361BA9CE13}.Release|x86.ActiveCfg = Release|x86
+		{FBFCB056-6AF5-4648-949B-EA361BA9CE13}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
