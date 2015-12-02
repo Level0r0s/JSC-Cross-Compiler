@@ -289,6 +289,9 @@
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\EndpointAddress.cs">
       <Link>BCLImplementation\System\ServiceModel\EndpointAddress.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\HttpBindingBase.cs">
+      <Link>BCLImplementation\System\ServiceModel\HttpBindingBase.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\ServiceModel\MessageContractAttribute.cs">
       <Link>BCLImplementation\System\ServiceModel\MessageContractAttribute.cs</Link>
     </Compile>

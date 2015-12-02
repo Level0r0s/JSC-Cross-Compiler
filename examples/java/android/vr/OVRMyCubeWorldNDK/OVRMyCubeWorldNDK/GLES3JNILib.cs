@@ -1,4 +1,7 @@
-﻿using ScriptCoreLib;
+﻿// Z:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorldNDK\GLES3JNILib.cs
+// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151201/samsungbrowser
+
+using ScriptCoreLib;
 
 using System;
 using System.Collections.Generic;

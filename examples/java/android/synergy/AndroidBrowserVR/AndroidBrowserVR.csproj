@@ -89,15 +89,22 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
-
   <ItemGroup>
-
+    <Content Include="X:\opensource\github\GearVRf\GVRf\Framework\src\**\*.*">
+      <Link>opensource/github/GearVRf/%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </Content>
+    <Content Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrApi\Libs\Android\VrApi.jar">
+      <Link>References\VrApi.jar</Link>
+    </Content>
+    <Content Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppFramework\Libs\Android\VrAppFramework.jar">
+      <Link>References\VrAppFramework.jar</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="x:\opensource\github\browser-vr\src\**\*.*">
       <Link>opensource/github/browser-vr/%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
   </ItemGroup>
-  
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
@@ -105,9 +112,7 @@
     <Content Include="Design\Images.htm" />
     <Content Include="Design\jsc.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="opensource\github\browser-vr\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

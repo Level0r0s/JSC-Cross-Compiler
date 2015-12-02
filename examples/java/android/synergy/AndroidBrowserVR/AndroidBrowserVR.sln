@@ -5,6 +5,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidBrowserVR", "Android
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticDroidActivity", "..\ElasticDroidActivity\ElasticDroidActivity\ElasticDroidActivity.csproj", "{385CE7A0-169B-4255-8A5A-DF2628FCEF2E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRMyCubeWorldNDK", "..\..\vr\OVRMyCubeWorldNDK\OVRMyCubeWorldNDK\OVRMyCubeWorldNDK.csproj", "{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRMyCubeWorld", "..\..\vr\OVRMyCubeWorldNDK\OVRMyCubeWorld\OVRMyCubeWorld.csproj", "{C54BCD92-0CBA-4B68-A93D-3CB30A94D024}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibAndroid", "..\..\..\..\..\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\ScriptCoreLibAndroid.csproj", "{1CE7D22F-52C8-4164-8955-CD89609E48A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +25,18 @@ Global
 		{385CE7A0-169B-4255-8A5A-DF2628FCEF2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{385CE7A0-169B-4255-8A5A-DF2628FCEF2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{385CE7A0-169B-4255-8A5A-DF2628FCEF2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C54BCD92-0CBA-4B68-A93D-3CB30A94D024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C54BCD92-0CBA-4B68-A93D-3CB30A94D024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C54BCD92-0CBA-4B68-A93D-3CB30A94D024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C54BCD92-0CBA-4B68-A93D-3CB30A94D024}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
