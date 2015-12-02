@@ -19,6 +19,8 @@ namespace ScriptCoreLib.JavaScript.DOM
 	[Script(InternalConstructor = true)]
     public class WebSocket
     {
+        // can jsc server upgrade to websockets yet?
+
         // http://www.websocket.org/quantum.html
         // http://stackoverflow.com/questions/14703627/websockets-protocol-vs-http
 

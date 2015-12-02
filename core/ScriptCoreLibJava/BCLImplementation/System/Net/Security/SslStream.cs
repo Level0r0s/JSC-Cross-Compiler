@@ -16,6 +16,13 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Security
     [Script(Implements = typeof(global::System.Net.Security.SslStream))]
     public class __SslStream : __AuthenticatedStream
     {
+        // http://yro.slashdot.org/story/15/12/01/0335225/sued-for-using-https-companies-in-crypto-patent-fight
+        // http://www.google.com/patents/US8386350
+        // http://www.google.com/patents/US20080270152
+
+
+
+
         //  if (ServicePointManager.DisableStrongCrypto) ??
 
         //if (issuers == null)

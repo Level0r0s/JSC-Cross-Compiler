@@ -23,6 +23,9 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Threading
     [Script(Implements = typeof(global::System.Threading.Thread))]
     public class __Thread
     {
+        // http://hothardware.com/news/sony-unlocks-playstation-4s-previously-reserved-seventh-cpu-core-for-devs
+        //  7th core ?
+
         // http://miss-cache.blogspot.com/2013/01/android-running-native-code-on-multiple.html
         // http://stackoverflow.com/questions/7467848/is-it-possible-to-set-affinity-with-sched-setaffinity-in-android
         // https://github.com/OpenHFT/Java-Thread-Affinity

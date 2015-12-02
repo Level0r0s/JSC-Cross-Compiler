@@ -14,7 +14,11 @@ namespace ScriptCoreLib.JavaScript.WebAudio
     [Script(HasNoPrototype = true, ExternalTarget = "AudioContext")]
     public class AudioContext
     {
-        // 
+        // https://www.shadertoy.com/view/XtSGWy
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151201/soundcloud
+        // can we stream from soundcloud?
+        // https://www.shadertoy.com/view/ldcGRN
 
         // https://msdn.microsoft.com/en-us/library/windows/hardware/ff560842(v=vs.85).aspx
 

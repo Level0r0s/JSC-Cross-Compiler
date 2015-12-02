@@ -30,6 +30,8 @@ namespace WebGLSpadeWarrior
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // samsung gearvr browser doesnt have webgl enabled yet
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151201/samsungbrowser
         // https://zproxy.wordpress.com/2015/07/04/gearvr-ovrmycubeworldndk/
 
 

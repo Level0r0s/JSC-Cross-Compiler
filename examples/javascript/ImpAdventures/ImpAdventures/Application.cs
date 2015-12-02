@@ -21,6 +21,8 @@ namespace ImpAdventures
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // gearVR browser?
+
         // would a service worker be of use
         // to download
         // unpack and cache all assets?
