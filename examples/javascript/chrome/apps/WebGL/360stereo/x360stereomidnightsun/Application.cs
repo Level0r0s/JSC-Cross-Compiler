@@ -497,8 +497,14 @@ namespace x360stereomidnightsun
             new IHTMLHorizontalRule { }.AttachToDocument();
 
 
+
+
+
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151114/stereo
+
+            // not used for this example tho...
             var itemRotation = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -180, max = 180, valueAsNumber = 0, title = "itemRotation" }.AttachToDocument();
+            var spriteOffset = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = 0, max = 11, valueAsNumber = 0, title = "spriteOffset" }.AttachToDocument();
             //var itemRotation = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.range, min = -90, max = 90, valueAsNumber = 33, title = "itemRotation" }.AttachToDocument();
 
             //while (await camerax.async.onchange)
@@ -666,13 +672,15 @@ namespace x360stereomidnightsun
             //    h: cubefacesize / 2
             //);
 
-            canvasPXitem.fillRect(
-               x: (cubefacesize - cubefacesize / 6) / 2,
-               y: (cubefacesize - cubefacesize / 3) / 2,
 
-               w: cubefacesize / 6,
-               h: cubefacesize / 3
-           );
+
+            // canvasPXitem.fillRect(
+            //    x: (cubefacesize - cubefacesize / 6) / 2,
+            //    y: (cubefacesize - cubefacesize / 3) / 2,
+
+            //    w: cubefacesize / 6,
+            //    h: cubefacesize / 3
+            //);
 
 
 
@@ -934,6 +942,280 @@ namespace x360stereomidnightsun
 
             var vsync = default(TaskCompletionSource<object>);
 
+
+            // "Z:\jsc.svn\examples\javascript\WebGL\WebGLColladaExperiment\WebGLColladaExperiment\WebGLColladaExperiment.csproj"
+
+
+
+
+
+
+            // asus will hang
+            // https://3dwarehouse.sketchup.com/model.html?id=fb7a0448d940e575edc01389f336fb0a
+            // can we get one frame into vr?
+
+            // cube: mesh to cast shadows
+
+
+
+            //{
+            //    var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize, cubefacesize, 8, 8);
+            //    var floor2 = new THREE.Mesh(planeGeometry0,
+            //        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+            //        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
+            //        //new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000, specular = 0xff0000 })
+            //        new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000 })
+
+            //    );
+            //    floor2.position.set(0, 0, -cubefacesize / 2);
+            //    floor2.AttachTo(scene);
+            //}
+            //{
+            //    var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize, cubefacesize, 8, 8);
+            //    var floor2 = new THREE.Mesh(planeGeometry0,
+            //        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+            //        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
+            //        //new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000, specular = 0xff0000 })
+            //        new THREE.MeshPhongMaterial(new { ambient = 0x0000ff, color = 0x0000ff })
+
+            //    );
+            //    floor2.position.set(-cubefacesize / 2, 0, 0);
+            //    floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2);
+
+            //    floor2.AttachTo(scene);
+            //}
+
+            //var tex0 = new THREE.Texture { image = new moon(), needsUpdate = true };
+            //var tex0 = new THREE.Texture(new moon());
+            //var tex0 = new THREE.Texture(new moon()) { needsUpdate = true };
+            var texPXitem = new THREE.Texture(
+
+                //shader1canvas
+
+                canvasPXitem.canvas
+
+                ) { needsUpdate = true };
+
+
+            var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize, cubefacesize, 8, 8);
+            var floor2 = new THREE.Mesh(planeGeometry0,
+                //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
+                //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
+                //new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000, specular = 0xff0000 })
+                new THREE.MeshPhongMaterial(
+                    new
+                    {
+
+                        map = texPXitem,
+
+                        transparent = true,
+                        alphaTest = 0.5
+
+                        //ambient = 0x00ff00,
+                        //color = 0x00ff00
+                    })
+
+            );
+            //floor2.position.set(0, 0, -cubefacesize  * 0.55);
+
+            floor2.AttachTo(scene);
+
+            applycameraoffset += delegate
+            {
+                texPXitem.needsUpdate = true;
+
+                //floor2.position.set(-cubefacesize * 0.5, 0, 0);
+                //floor2.position.set(-cubefacesize * 0.33, 0, 0);
+                // floor2.position.set(-cubefacesize * 0.25, 0, 0);
+
+                //floor2.position.set(-cubefacesize * 0.225, 0, 0);
+                floor2.position.set(-cubefacesize * 0.23, 0, 0);
+
+                // too close!
+                //floor2.position.set(-cubefacesize * 0.20, 0, 0);
+
+                floor2.rotation.set(0, 0, 0);
+                floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2 + radians(itemRotation.valueAsNumber));
+            };
+
+
+
+
+
+
+            // X:\jsc.svn\examples\javascript\chrome\apps\ChromeEarth\ChromeEarth\Application.cs
+            // X:\jsc.svn\examples\javascript\canvas\ConvertBlackToAlpha\ConvertBlackToAlpha\Application.cs
+            // hidden for alpha AppWindows
+            //#if FBACKGROUND
+
+            new IHTMLBreak { }.AttachToDocument();
+
+            var iskybox2 = new HTML.Images.FromAssets._2massAllskyGAMMA();
+            var iskybox1 = new HTML.Images.FromAssets.anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs();
+
+            var hideskybox1 = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox, title = "hide skybox1", @checked = true }.AttachToDocument();
+            var hideskybox2 = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox, title = "hide skybox2", @checked = false }.AttachToDocument();
+
+            #region drawStereoFrame
+            Func<CanvasRenderingContext2D, Task> drawStereoFrame = async canvasTB =>
+            {
+                //var xIPD = 4.0;
+                var xIPD = 6.0;
+
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151203/x360stereomidnightsun
+
+                // fake skybox?
+                canvasTB.fillStyle = "darkcyan";
+                canvasTB.fillRect(0, 0, c.width, c.height);
+
+                //canvasTB.drawImage(stereoT, 0, 0, c.width, c.height, 0, 0, c.width, c.height / 2);
+                //canvasTB.drawImage(stereoB, 0, 0, c.width, c.height, 0, c.height / 2, c.width, c.height / 2);
+
+                // 12 frames in total. lets add em all
+                // can we add a secondary stereo frame ? at 45deg?
+
+                var offsetrotation = 360 / 12;
+
+                hideskybox1.@checked = true;
+                hideskybox2.@checked = false;
+
+                // mono bg!
+                floor2.visible = false;
+                fcamerax = 0;
+                await Native.window.async.onframe;
+                await Native.window.async.onframe;
+
+                canvasTB.drawImage(gl.canvas, 0, 0, c.width, c.height, 0, 0, c.width, c.height / 2);
+                canvasTB.drawImage(gl.canvas, 0, 0, c.width, c.height, 0, c.height / 2, c.width, c.height / 2);
+
+                // keep only bg. hide stereo sprite
+                floor2.visible = true;
+
+                //await Native.window.async.onframe;
+
+
+                // we need our stereo item frame thanks. no bg.
+                hideskybox1.@checked = true;
+                hideskybox2.@checked = true;
+
+                await Native.window.async.onframe;
+
+
+
+
+
+
+                //fcamerax = -xIPD;
+                //await Native.window.async.onframe;
+                //var stereoT = new IHTMLImage { src = gl.canvas.toDataURL() };
+
+                //fcamerax = +xIPD;
+
+                //await Native.window.async.onframe;
+                //var stereoB = new IHTMLImage { src = gl.canvas.toDataURL() };
+
+                ////await Native.window.async.onframe;
+                //await stereoB.async.oncomplete;
+
+
+                // we now have a stereo sprite.
+                // can we rotate it on top of the background?
+
+
+                // 8K fulldome is a resolution of 8192×8192 
+                // 8K UHD is a resolution of 7680 × 4320 (33.2 megapixels) 
+                // 8192×4320 t
+                // Digital video formats with resolutions of 4K (3840×2160) and 8K (7680×4320)
+
+
+                // WebGL: CONTEXT_LOST_WEBGL: loseContext: context lost ?
+                for (int stereoframei = 0; stereoframei < 12; stereoframei++)
+                {
+                    spriteOffset.valueAsNumber = stereoframei;
+
+                    Console.WriteLine(new { stereoframei });
+                    var ioffsetdeg = offsetrotation * stereoframei;
+
+
+                    ioffsetdeg += (int)(degrees(frameIDslider.valueAsNumber / (60 * 60 / 5.0) * Math.PI * 2));
+
+
+                    // follow the moon?
+                    //stars.rotateOnAxis(new THREE.Vector3(0, -1, 0),
+                    //    frameIDslider.valueAsNumber / (60 * 60 / 5.0) * Math.PI * 2
+                    //);
+
+                    ioffsetdeg = ioffsetdeg % 360;
+
+                    fcamerax = -xIPD;
+                    await Native.window.async.onframe;
+                    var stereoT = gl.canvas;
+                    canvasTB.drawImage(stereoT, 0, 0, c.width, c.height, c.width * ioffsetdeg / 360, 0, c.width, c.height / 2);
+                    canvasTB.drawImage(stereoT, 0, 0, c.width, c.height, -c.width + c.width * ioffsetdeg / 360, 0, c.width, c.height / 2);
+
+                    fcamerax = +xIPD;
+                    await Native.window.async.onframe;
+                    var stereoB = gl.canvas;
+                    canvasTB.drawImage(stereoB, 0, 0, c.width, c.height, c.width * ioffsetdeg / 360, c.height / 2, c.width, c.height / 2);
+                    canvasTB.drawImage(stereoB, 0, 0, c.width, c.height, -c.width + c.width * ioffsetdeg / 360, c.height / 2, c.width, c.height / 2);
+                }
+
+
+                //var canvasTB8K = new CanvasRenderingContext2D(c.width * 2, c.height * 2);
+                //canvasTB8K.drawImage(f0, 0, 0, c.width, c.height, 0, 0, c.width * 2, c.height);
+                //canvasTB8K.drawImage(f1, 0, 0, c.width, c.height, 0, c.height, c.width * 2, c.height);
+
+                // https://www.reddit.com/r/GearVR/comments/2vrfyu/id_suggest_makers_of_360_videos_make_them_the/
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151114/stereo
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151203
+                // can we actually watch stereo _TB images on gearVR?
+
+            };
+            #endregion
+
+            #region stero
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151114/stereo
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151112
+            new IHTMLButton { "make me a stero TB image " }.AttachToDocument().With(
+                async e =>
+                {
+                    // http://www.vrideo.com/watch/ALdE7mm
+                    // https://www.youtube.com/watch?v=S3iTPxMIlCI
+
+                    var onclick = e.async.onclick;
+
+                    while (await onclick)
+                    {
+
+
+
+
+                        // keep it 4K, as hw, yt is not ready for 60fps 8K!
+                        var canvasTB = new CanvasRenderingContext2D(c.width, c.height);
+
+                        drawStereoFrame(canvasTB);
+
+                        // gearVR will get a black screen
+                        // 
+                        //frame2.src = canvasTB8K.canvas.toDataURL();
+                        frame2.src = canvasTB.canvas.toDataURL();
+
+
+                        onclick = e.async.onclick;
+
+                        //while (!onclick.IsCompleted)
+                        //{
+                        //    await Task.Delay(1000 / 30);
+                        //    frame0.src = f0.src;
+                        //    await Task.Delay(1000 / 30);
+                        //    frame0.src = f1.src;
+                        //}
+                    }
+                }
+            );
+            #endregion
+
+
             #region render 60hz 30sec
             new IHTMLButton {
                 //"render 60hz 30sec"
@@ -943,7 +1225,8 @@ namespace x360stereomidnightsun
             {
                 e.Element.disabled = true;
 
-                var canvasTB = new CanvasRenderingContext2D(c.width * 2, c.height * 2);
+                //var canvasTB = new CanvasRenderingContext2D(c.width * 2, c.height * 2);
+                var canvasTB = new CanvasRenderingContext2D(c.width, c.height);
 
 
                 var total = Stopwatch.StartNew();
@@ -986,29 +1269,30 @@ namespace x360stereomidnightsun
                 var filename = frameIDslider.valueAsNumber.ToString().PadLeft(5, '0') + ".jpg";
                 status = "rendering... " + new { filename };
 
+                await drawStereoFrame(canvasTB);
 
 
-                var xIPD = 4.0;
+                //var xIPD = 4.0;
 
 
-                // left eye
-                fcamerax = -xIPD;
-                vsync = new TaskCompletionSource<object>();
-                await vsync.Task;
-                var f0 = new IHTMLImage { src = gl.canvas.toDataURL() };
+                //// left eye
+                //fcamerax = -xIPD;
+                //vsync = new TaskCompletionSource<object>();
+                //await vsync.Task;
+                //var f0 = new IHTMLImage { src = gl.canvas.toDataURL() };
 
 
-                // right eye
-                fcamerax = +xIPD;
-                vsync = new TaskCompletionSource<object>();
-                await vsync.Task;
-                var f1 = new IHTMLImage { src = gl.canvas.toDataURL() };
-                await f1.async.oncomplete;
+                //// right eye
+                //fcamerax = +xIPD;
+                //vsync = new TaskCompletionSource<object>();
+                //await vsync.Task;
+                //var f1 = new IHTMLImage { src = gl.canvas.toDataURL() };
+                //await f1.async.oncomplete;
 
 
 
-                canvasTB.drawImage(f0, 0, 0, c.width, c.height, 0, 0, c.width * 2, c.height);
-                canvasTB.drawImage(f1, 0, 0, c.width, c.height, 0, c.height, c.width * 2, c.height);
+                //canvasTB.drawImage(f0, 0, 0, c.width, c.height, 0, 0, c.width * 2, c.height);
+                //canvasTB.drawImage(f1, 0, 0, c.width, c.height, 0, c.height, c.width * 2, c.height);
 
 
                 // frame0 has been rendered
@@ -1099,182 +1383,6 @@ namespace x360stereomidnightsun
             #endregion
 
 
-            // "Z:\jsc.svn\examples\javascript\WebGL\WebGLColladaExperiment\WebGLColladaExperiment\WebGLColladaExperiment.csproj"
-
-
-
-
-
-
-            // asus will hang
-            // https://3dwarehouse.sketchup.com/model.html?id=fb7a0448d940e575edc01389f336fb0a
-            // can we get one frame into vr?
-
-            // cube: mesh to cast shadows
-
-
-
-            //{
-            //    var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize, cubefacesize, 8, 8);
-            //    var floor2 = new THREE.Mesh(planeGeometry0,
-            //        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
-            //        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
-            //        //new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000, specular = 0xff0000 })
-            //        new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000 })
-
-            //    );
-            //    floor2.position.set(0, 0, -cubefacesize / 2);
-            //    floor2.AttachTo(scene);
-            //}
-            //{
-            //    var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize, cubefacesize, 8, 8);
-            //    var floor2 = new THREE.Mesh(planeGeometry0,
-            //        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
-            //        //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
-            //        //new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000, specular = 0xff0000 })
-            //        new THREE.MeshPhongMaterial(new { ambient = 0x0000ff, color = 0x0000ff })
-
-            //    );
-            //    floor2.position.set(-cubefacesize / 2, 0, 0);
-            //    floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2);
-
-            //    floor2.AttachTo(scene);
-            //}
-
-            //var tex0 = new THREE.Texture { image = new moon(), needsUpdate = true };
-            //var tex0 = new THREE.Texture(new moon());
-            //var tex0 = new THREE.Texture(new moon()) { needsUpdate = true };
-            var tex0 = new THREE.Texture(
-
-                //shader1canvas
-
-                canvasPXitem.canvas
-
-                ) { needsUpdate = true };
-
-
-            var planeGeometry0 = new THREE.PlaneGeometry(cubefacesize, cubefacesize, 8, 8);
-            var floor2 = new THREE.Mesh(planeGeometry0,
-                //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xA26D41, specular = 0xA26D41, shininess = 1 })
-                //new THREE.MeshPhongMaterial(new { ambient = 0x101010, color = 0xff0000, specular = 0xA26D41, shininess = 1 })
-                //new THREE.MeshPhongMaterial(new { ambient = 0xff0000, color = 0xff0000, specular = 0xff0000 })
-                new THREE.MeshPhongMaterial(
-                    new
-                    {
-
-                        map = tex0,
-
-                        transparent = true,
-                        alphaTest = 0.5
-
-                        //ambient = 0x00ff00,
-                        //color = 0x00ff00
-                    })
-
-            );
-            //floor2.position.set(0, 0, -cubefacesize  * 0.55);
-
-            floor2.AttachTo(scene);
-
-            applycameraoffset += delegate
-            {
-                tex0.needsUpdate = true;
-
-                floor2.position.set(-cubefacesize * 0.5, 0, 0);
-                floor2.rotation.set(0, 0, 0);
-                floor2.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2 + radians(itemRotation.valueAsNumber));
-            };
-
-
-
-
-
-
-            // X:\jsc.svn\examples\javascript\chrome\apps\ChromeEarth\ChromeEarth\Application.cs
-            // X:\jsc.svn\examples\javascript\canvas\ConvertBlackToAlpha\ConvertBlackToAlpha\Application.cs
-            // hidden for alpha AppWindows
-            //#if FBACKGROUND
-
-            new IHTMLBreak { }.AttachToDocument();
-
-
-            #region stero
-            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151114/stereo
-            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151112
-            new IHTMLButton { "make me a stero TB image " }.AttachToDocument().With(
-                async e =>
-                {
-                    // http://www.vrideo.com/watch/ALdE7mm
-                    // https://www.youtube.com/watch?v=S3iTPxMIlCI
-
-                    var onclick = e.async.onclick;
-
-                    while (await onclick)
-                    {
-
-                        var xIPD = 4.0;
-
-                        fcamerax = -xIPD;
-
-                        await Native.window.async.onframe;
-                        var f0 = new IHTMLImage { src = gl.canvas.toDataURL() };
-
-                        fcamerax = +xIPD;
-
-                        await Native.window.async.onframe;
-                        var f1 = new IHTMLImage { src = gl.canvas.toDataURL() };
-
-                        //await Native.window.async.onframe;
-                        await f1.async.oncomplete;
-
-
-                        // we now have a stereo sprite.
-                        // can we rotate it on top of the background?
-
-
-                        // 8K fulldome is a resolution of 8192×8192 
-                        // 8K UHD is a resolution of 7680 × 4320 (33.2 megapixels) 
-                        // 8192×4320 t
-                        // Digital video formats with resolutions of 4K (3840×2160) and 8K (7680×4320)
-
-                        // keep it 4K, as hw, yt is not ready for 60fps 8K!
-                        var canvasTB = new CanvasRenderingContext2D(c.width, c.height);
-                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151203/x360stereomidnightsun
-
-                        canvasTB.drawImage(f0, 0, 0, c.width, c.height, 0, 0, c.width, c.height / 2);
-                        canvasTB.drawImage(f1, 0, 0, c.width, c.height, 0, c.height / 2, c.width, c.height / 2);
-
-                        //var canvasTB8K = new CanvasRenderingContext2D(c.width * 2, c.height * 2);
-                        //canvasTB8K.drawImage(f0, 0, 0, c.width, c.height, 0, 0, c.width * 2, c.height);
-                        //canvasTB8K.drawImage(f1, 0, 0, c.width, c.height, 0, c.height, c.width * 2, c.height);
-
-                        // https://www.reddit.com/r/GearVR/comments/2vrfyu/id_suggest_makers_of_360_videos_make_them_the/
-                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151114/stereo
-                        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151203
-                        // can we actually watch stereo _TB images on gearVR?
-
-
-                        // gearVR will get a black screen
-                        // 
-                        //frame2.src = canvasTB8K.canvas.toDataURL();
-                        frame2.src = canvasTB.canvas.toDataURL();
-
-
-                        onclick = e.async.onclick;
-
-                        //while (!onclick.IsCompleted)
-                        //{
-                        //    await Task.Delay(1000 / 30);
-                        //    frame0.src = f0.src;
-                        //    await Task.Delay(1000 / 30);
-                        //    frame0.src = f1.src;
-                        //}
-                    }
-                }
-            );
-            #endregion
-
-
 
             new { }.With(
                 async delegate
@@ -1284,7 +1392,9 @@ namespace x360stereomidnightsun
 
                     await tex1.async.oncomplete;
 
-                    var tex1w = 124;
+                    // first one is 124, while others is 123?
+                    var tex1w = 123;
+                    //var tex1w = 120;
                     var tex1h = 626;
 
                     //canvasPXitem.drawImage(
@@ -1293,15 +1403,6 @@ namespace x360stereomidnightsun
 
 
                     // how long until jsc can upstream small updates to code?
-                    canvasPXitem.drawImage(
-                               tex1, 2, 2, tex1w, tex1h,
-
-                               // dest
-                               (cubefacesize - tex1w) / 2,
-                               (cubefacesize - tex1h) / 2,
-
-                               tex1w, tex1h
-                           );
 
 
 
@@ -1326,17 +1427,8 @@ namespace x360stereomidnightsun
 
 
 
-                    var iskybox2 = new HTML.Images.FromAssets._2massAllskyGAMMA();
 
                     await iskybox2.async.oncomplete;
-
-
-
-
-                    //var iskybox1 = new HTML.Images.FromAssets.tiles_regrid();
-                    var iskybox1 = new HTML.Images.FromAssets.anvil___spherical_hdri_panorama_skybox_by_macsix_d6vv4hs();
-                    //var i = new HTML.Images.FromAssets.galaxy_starfield();
-                    //var i = new HTML.Images.FromAssets.galaxy_starfield150FOV();
 
                     var bytes1 = await iskybox1.async.bytes;
 
@@ -1383,7 +1475,6 @@ namespace x360stereomidnightsun
                     //(stars_material as dynamic).opacity = 0.5;
 
 
-                    var hideskybox1 = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox, title = "hide skybox1", @checked = true }.AttachToDocument();
                     hideskybox1.onchange += delegate
                     {
                         skybox1.visible = !hideskybox1.@checked;
@@ -1417,13 +1508,18 @@ namespace x360stereomidnightsun
                                 side = THREE.BackSide,
                                 transparent = true
                             })
-                    )
+                    );
 
-                    .AttachTo(scene).With(
+
+                    skybox2.AttachTo(scene).With(
                         stars =>
                         {
                             applycameraoffset += delegate
                               {
+
+                                  skybox2.visible = !hideskybox2.@checked;
+
+
 
                                   skybox1.rotation.set(0, 0, 0);
                                   // spin
@@ -1451,12 +1547,11 @@ namespace x360stereomidnightsun
                     // can we get our stereo sprite this way?
                     // do we get clean tiles with transparency?
                     // on x83 on frame0 we were able to hide skybox. how?
-                    var hideskybox2 = new IHTMLInput { type = ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox, title = "hide skybox2", @checked = false }.AttachToDocument();
-                    hideskybox2.onchange += delegate
-                    {
-                        skybox2.visible = !hideskybox2.@checked;
-                    };
-                    skybox2.visible = !hideskybox2.@checked;
+                    //hideskybox2.onchange += delegate
+                    //{
+                    //    skybox2.visible = !hideskybox2.@checked;
+                    //};
+                    //skybox2.visible = !hideskybox2.@checked;
 
 
 
@@ -1508,6 +1603,30 @@ namespace x360stereomidnightsun
 
                             applycameraoffset();
                             renderer0.clear();
+
+
+
+
+
+                            // spriteOffset
+                            canvasPXitem.drawImage(
+                                       tex1,
+
+                                       //2px black border!
+                                //((tex1w + 4) * spriteOffset.valueAsNumber) + 2,
+                                       ((tex1w + 2) * spriteOffset.valueAsNumber) + 3,
+
+                                       2, tex1w, tex1h,
+
+                                       // dest
+                                       (cubefacesize - tex1w) / 2,
+                                       (cubefacesize - tex1h) / 2,
+
+                                       tex1w, tex1h
+                                   );
+
+
+
                             //rendererPY.clear();
 
                             //cameraPX.aspect = canvasPX.aspect;
