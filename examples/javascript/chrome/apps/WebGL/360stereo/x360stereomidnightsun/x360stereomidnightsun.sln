@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360stereomidnightsun", "x360stereomidnightsun.csproj", "{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360x83", "..\..\360\x360x83\x360x83.csproj", "{9D9E8255-8352-49D4-8EB3-22851F76EDDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +15,10 @@ Global
 		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.Build.0 = Debug|x86
 		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.ActiveCfg = Release|x86
 		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.Build.0 = Release|x86
+		{9D9E8255-8352-49D4-8EB3-22851F76EDDA}.Debug|x86.ActiveCfg = Debug|x86
+		{9D9E8255-8352-49D4-8EB3-22851F76EDDA}.Debug|x86.Build.0 = Debug|x86
+		{9D9E8255-8352-49D4-8EB3-22851F76EDDA}.Release|x86.ActiveCfg = Release|x86
+		{9D9E8255-8352-49D4-8EB3-22851F76EDDA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
