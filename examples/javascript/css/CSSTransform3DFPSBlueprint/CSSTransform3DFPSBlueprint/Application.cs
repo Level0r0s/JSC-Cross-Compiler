@@ -436,7 +436,7 @@ namespace CSSTransform3DFPSBlueprint
                     if (nolock)
                         return;
 
-                    e.PreventDefault();
+                    e.preventDefault();
                     Native.Document.body.focus();
                     Native.Document.body.requestPointerLock();
                 };
@@ -483,14 +483,13 @@ namespace CSSTransform3DFPSBlueprint
                  touchx = e.touches[0].pageX;
                  touchy = e.touches[0].pageY;
 
-                 // to be lowercased
-                 e.PreventDefault();
+                 e.preventDefault();
              };
 
             Native.Document.body.ontouchmove +=
               e =>
               {
-                  e.PreventDefault();
+                  e.preventDefault();
 
                   var ztouchx = e.touches[0].pageX;
                   var ztouchy = e.touches[0].pageY;

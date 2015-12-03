@@ -13,6 +13,9 @@ namespace ScriptCoreLib.JavaScript.DOM
     [Script(HasNoPrototype = true, ExternalTarget = "RTCPeerConnection")]
     public class RTCPeerConnection : IEventTarget
     {
+        // gearvr browser?
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151202/rtc
+
         // https://tech.appear.in/2015/05/25/Introduction-to-WebRTC-on-Android/
         // https://blog.mozilla.org/futurereleases/2014/12/04/ericsson-interops-openwebrtc-with-firefox/
 

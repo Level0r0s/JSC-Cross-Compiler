@@ -26,6 +26,9 @@ namespace RTCICELobby
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151202/rtc
+        // https://diafygi.github.io/webrtc-ips/
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>
@@ -83,6 +86,8 @@ namespace RTCICELobby
                         remotePeerConnection.ondatachannel = new Action<RTCDataChannelEvent>(
                             (RTCDataChannelEvent e) =>
                             {
+                                // gearvr never gets here?
+
                                 var mcounter = 0;
                                 var data = default(XElement);
                                 new IHTMLPre { () => "enter  remotePeerConnection.ondatachannel " + new { e.channel.label, mcounter, data } }.AttachToDocument();
@@ -95,8 +100,10 @@ namespace RTCICELobby
                                     mcounter++;
                                     data = XElement.Parse("" + ee.data);
 
-                                    var CursorX = (int)data.Attribute(nameof(IEvent.CursorX));
-                                    var CursorY = (int)data.Attribute(nameof(IEvent.CursorY));
+                                    var CursorX = (int)data.Attribute("CursorX");
+                                    var CursorY = (int)data.Attribute("CursorY");
+                                    //var CursorX = (int)data.Attribute(nameof(IEvent.CursorX));
+                                    //var CursorY = (int)data.Attribute(nameof(IEvent.CursorY));
 
                                     cur.style.SetLocation(
                                         CursorX,
@@ -132,8 +139,12 @@ namespace RTCICELobby
 
                         await base.Anwser();
 
-                        new IHTMLPre { "Anwser... done. await ondatachannel?" }.AttachToDocument();
+                        // gearvr never gets past this?
+                        new IHTMLPre { "Anwser... done. await ondatachannel? gearvr stops here?" }.AttachToDocument();
 
+                        // enter  remotePeerConnection.ondatachannel { label = sendDataChannel, mcounter = 335
+
+                        // this will never return.
                         await new TaskCompletionSource<object>().Task;
                     }
                     #endregion
@@ -188,9 +199,13 @@ namespace RTCICELobby
 
                                         sendChannel.send(
                                             new XElement("sendDataChannel",
-                                                new XAttribute(nameof(mmcounter), mmcounter),
-                                                new XAttribute(nameof(IEvent.CursorX), "" + n.clientX),
-                                                new XAttribute(nameof(IEvent.CursorY), "" + n.clientY)
+                                                new XAttribute("mmcounter", mmcounter),
+                                                new XAttribute("CursorX", "" + n.clientX),
+                                                new XAttribute("CursorY", "" + n.clientY)
+
+                                                //    new XAttribute(nameof(mmcounter), mmcounter),
+                                            //new XAttribute(nameof(IEvent.CursorX), "" + n.clientX),
+                                            //new XAttribute(nameof(IEvent.CursorY), "" + n.clientY)
                                             ).ToString()
                                         );
 
@@ -205,9 +220,13 @@ namespace RTCICELobby
 
                                     sendChannel.send(
                                         new XElement("sendDataChannel",
-                                            new XAttribute(nameof(mmcounter), mmcounter),
-                                            new XAttribute(nameof(IEvent.CursorX), "" + e.CursorX),
-                                            new XAttribute(nameof(IEvent.CursorY), "" + e.CursorY)
+                                        //new XAttribute(nameof(mmcounter), mmcounter),
+                                        //new XAttribute(nameof(IEvent.CursorX), "" + e.CursorX),
+                                        //new XAttribute(nameof(IEvent.CursorY), "" + e.CursorY)
+
+                                              new XAttribute("mmcounter", mmcounter),
+                                            new XAttribute("CursorX", "" + e.CursorX),
+                                            new XAttribute("CursorY", "" + e.CursorY)
                                         ).ToString()
 
                                     //new { mmcounter, e.CursorX, e.CursorY }.ToString()
@@ -236,7 +255,7 @@ namespace RTCICELobby
 
                     await base.Offer();
 
-                    new IHTMLPre { "letting the server know we made a new offer... done. open a new tab! even on android?" }.AttachToDocument();
+                    new IHTMLPre { "letting the server know we made a new offer... done. open a new tab! even on android, gearvr?" }.AttachToDocument();
 
 
                     var sw = Stopwatch.StartNew();

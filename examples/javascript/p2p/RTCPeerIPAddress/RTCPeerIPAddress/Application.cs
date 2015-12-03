@@ -24,6 +24,8 @@ namespace RTCPeerIPAddress
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151202/rtc
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>

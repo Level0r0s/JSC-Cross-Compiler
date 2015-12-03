@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SharedBrowserSessionExperiment</RootNamespace>
     <AssemblyName>SharedBrowserSessionExperiment</AssemblyName>
-    <TargetFrameworkVersion>v4.5.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>SharedBrowserSessionExperiment.Program</StartupObject>
     <TargetFrameworkProfile />
