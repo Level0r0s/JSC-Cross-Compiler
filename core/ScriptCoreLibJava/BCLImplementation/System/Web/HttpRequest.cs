@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -84,6 +85,12 @@ namespace ScriptCoreLib.Android.BCLImplementation.System.Web
         // X:\jsc.smokescreen.svn\core\javascript\com.abstractatech.analytics\com.abstractatech.analytics\ApplicationWebService.cs
         // http://stackoverflow.com/questions/4780474/appengine-howto-see-content-from-a-post-request
 
+        // Z:\jsc.svn\examples\javascript\test\TestMultipartRelated\Application.cs
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201512/20151204
+        //public Stream InputStream { get; internal set; }
+        public Stream InputStream { get; set; }
+
+        public int ContentLength { get; set; }
 
     }
 }

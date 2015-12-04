@@ -126,6 +126,7 @@
     <Compile Include="Android\IntentFilterAttribute.cs" />
     <Compile Include="Android\Manifest\ApplicationMetaDataAttribute.cs" />
     <Compile Include="Android\RenderingContextView.cs" />
+    <Compile Include="Shared\IO\LengthLimitedStream.cs" />
     <Compile Include="Shared\VerifiableString.cs" />
     <Compile Include="Archive\ZIP\ZIPFileFromFile.cs" />
     <Compile Include="Archive\ZIP\ZIPFileWithXLinq.cs" />

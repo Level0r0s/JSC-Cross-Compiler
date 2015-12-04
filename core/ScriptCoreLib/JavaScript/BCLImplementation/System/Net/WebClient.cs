@@ -21,6 +21,11 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
     [Script(Implements = typeof(global::System.Net.WebClient))]
     public class __WebClient
     {
+        // . Many MIME user agents do not recognize multipart/related and treat these messages as multipart/mixed. 
+        // To allow for this, some UAs will include the technically unnecessary Content-Disposition header in multipart/related body parts. Content-Location and Content-Base headers are defined to resolve URL references to other body parts. Both headers are valid in any message or body part
+
+        // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201512/20151204
+
         // http://tech.slashdot.org/story/15/10/10/0158202/bbc-optimizing-uhd-video-streaming-over-ip
         // http://www.bbc.co.uk/rd/blog/2015/10/streaming-video-on-10-gigabit-ethernet-and-beyond
 

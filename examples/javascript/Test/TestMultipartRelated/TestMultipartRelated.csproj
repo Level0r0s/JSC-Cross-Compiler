@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{25F8084E-FC3E-40F4-9BDE-BE65ED190479}</ProjectGuid>
+    <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UbuntuUDPAdvertise</RootNamespace>
-    <AssemblyName>UbuntuUDPAdvertise</AssemblyName>
+    <RootNamespace>TestMultipartRelated</RootNamespace>
+    <AssemblyName>TestMultipartRelated</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>UbuntuUDPAdvertise.Program</StartupObject>
+    <StartupObject>TestMultipartRelated.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -116,22 +116,17 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="UbuntuTestUserHostAddress.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\UbuntuTestUserHostAddress.AssetsLibrary.dll</HintPath>
+    <Reference Include="TestMultipartRelated.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\TestMultipartRelated.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
-    </Reference>
-    <Reference Include="UbuntuUDPAdvertise.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\UbuntuUDPAdvertise.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Design\App.css" />
-    <Content Include="Design\App.htm">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Design\App.htm" />
     <Compile Include="ApplicationWebService.cs" />
     <Compile Include="Application.cs" />
     <Compile Include="Program.cs">
@@ -148,9 +143,16 @@
 
 
 
-robocopy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.assets u:\$(TargetName).ApplicationWebService.assets /E
+rem robocopy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.assets u:\$(TargetName).ApplicationWebService.assets /E
  
-copy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe U:\
+rem copy $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe U:\
+
+
+
+"X:\jsc.internal.git\keystore\red\pscp.xmikro.bat"  $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.exe /home/xmikro/Desktop/staging/
+
+"X:\jsc.internal.git\keystore\red\pscpr.xmikro.bat" $(TargetDir)staging\$(TargetName).ApplicationWebService\staging.ubuntu\$(TargetName).ApplicationWebService.assets\  /home/xmikro/Desktop/staging/$(TargetName).ApplicationWebService.assets
+
 		)</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
 		            </PreBuildEvent>

@@ -210,6 +210,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
         public override int Read(byte[] buffer, int offset, int count)
         {
+            //Console.WriteLine("enter NetworkStream Read " + new { count, this.InternalInputStream });
             var i = -1;
 
             //E/AndroidRuntime( 6564): Caused by: java.net.SocketException: Socket closed
@@ -236,6 +237,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             catch
             {
                 // Z:\jsc.svn\examples\javascript\ubuntu\UbuntuInsecureOrigins\ApplicationWebService.cs
+                // Z:\jsc.svn\examples\javascript\test\TestMultipartRelated\Application.cs
 
                 //Console.WriteLine("err Read ");
                 // bail

@@ -13,6 +13,8 @@ namespace ScriptCoreLib.JavaScript.DOM
     [Script(HasNoPrototype = true, ExternalTarget = "Response")]
     public class Response : Body
     {
+        // tested by?
+
         // typedef (Blob or BufferSource or FormData or URLSearchParams or USVString) BodyInit;
         public Response(object BodyInit)
         {

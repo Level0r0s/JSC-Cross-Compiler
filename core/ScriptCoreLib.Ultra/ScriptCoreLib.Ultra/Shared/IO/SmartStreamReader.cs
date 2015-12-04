@@ -37,6 +37,7 @@ namespace ScriptCoreLib.Shared.IO
     /// </summary>
     public class SmartStreamReader : Stream
     {
+        // Z:\jsc.svn\examples\javascript\test\TestMultipartRelated\Application.cs
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151022/httprequest
 
         // review: Y:\jsc.internal.svn\compiler\jsc.meta\jsc.meta\Library\Web\SmartStreamReader.cs
@@ -113,6 +114,9 @@ namespace ScriptCoreLib.Shared.IO
 
         public override int Read(byte[] buffer, int offset, int count)
         {
+            //Console.WriteLine("enter SmartStreamReader Read " + new { count });
+
+
             // buffer + stream
             var value = 0;
 
@@ -140,6 +144,7 @@ namespace ScriptCoreLib.Shared.IO
 
             while (count > 0)
             {
+                //Console.WriteLine("enter SmartStreamReader Read invoke BaseStream.Read " + new { this.BaseStream });
                 var i = this.BaseStream.Read(buffer, offset, count);
 
                 if (i > 0)
@@ -255,22 +260,40 @@ namespace ScriptCoreLib.Shared.IO
 
         public string ReadToEnd()
         {
-            var a = new StringBuilder();
+            // Z:\jsc.svn\examples\javascript\test\TestMultipartRelated\Application.cs
+            //Console.WriteLine("enter ReadToEnd " + new { InternalBufferCount });
+            //var a = new StringBuilder();
+            var m = new MemoryStream();
+
 
             var flag = true;
             while (flag)
             {
-                for (int i = 0; i < this.InternalBufferCount; i++)
-                {
-                    a.Append((char)this.InternalBuffer[i]);
-                }
+
+
+                // any pending input and new input!
+
+                m.Write(this.InternalBuffer, 0, this.InternalBufferCount);
+                //for (int i = 0; i < this.InternalBufferCount; i++)
+                //{
+                //    // 
+                //    //a.Append((char)this.InternalBuffer[i]);
+                //    // char3 = (short)(this.InternalBuffer[num2] & 0xff);
+                //    //var ichar = (char)this.InternalBuffer[i];
+                //    a.Append(ichar);
+                //}
+
+                //Console.WriteLine("ReadToEnd invoke BaseStream.Read");
 
                 this.InternalBufferCount = this.BaseStream.Read(this.InternalBuffer, 0, InternalBufferCapacity);
+
+                //Console.WriteLine("ReadToEnd " + new { InternalBufferCount });
 
                 flag = (this.InternalBufferCount > 0);
             }
 
-            return a.ToString();
+            //Console.WriteLine("exit ReadToEnd");
+            return Encoding.UTF8.GetString(m.ToArray());
         }
 
 
@@ -326,12 +349,13 @@ namespace ScriptCoreLib.Shared.IO
                 //this.InternalBufferCount = this.BaseStream.Read(this.InternalBuffer, 0, InternalBufferCapacity);
                 var len = InternalBufferCapacity - this.InternalBufferCount;
 
-                this.InternalBufferCount += this.BaseStream.Read(
+
+                var read0 = this.BaseStream.Read(
                     this.InternalBuffer, this.InternalBufferCount, len
+                );
 
-                    );
-
-                flag = (this.InternalBufferCount > 0);
+                flag = (read0 > 0);
+                this.InternalBufferCount += read0;
             }
             return a.ToString();
 
