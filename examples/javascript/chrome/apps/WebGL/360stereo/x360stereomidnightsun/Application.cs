@@ -215,7 +215,7 @@ namespace x360stereomidnightsun
 
             // crash
             //int cubefacesizeMAX = 2048 * 2; // 6 faces, ?
-            int cubefacesizeMAX = 2048; // 6 faces, ?
+            int cubefacesizeMAX = 1024; // 6 faces, ?
             int cubefacesize = cubefacesizeMAX; // 6 faces, ?
             //int cubefacesize = 1024; // 6 faces, ?
             // "X:\vr\tape1\0000x2048.png"
@@ -1134,10 +1134,10 @@ namespace x360stereomidnightsun
                     spriteOffset.valueAsNumber = stereoframei;
 
                     Console.WriteLine(new { stereoframei });
-                    var ioffsetdeg = offsetrotation * stereoframei;
+                    double ioffsetdeg = offsetrotation * stereoframei;
 
 
-                    ioffsetdeg += (int)(degrees(frameIDslider.valueAsNumber / (60 * 60 / 5.0) * Math.PI * 2));
+                    ioffsetdeg += (degrees(frameIDslider.valueAsNumber / (60 * 60 / 5.0) * Math.PI * 2));
 
 
                     // follow the moon?
@@ -1145,19 +1145,22 @@ namespace x360stereomidnightsun
                     //    frameIDslider.valueAsNumber / (60 * 60 / 5.0) * Math.PI * 2
                     //);
 
-                    ioffsetdeg = ioffsetdeg % 360;
+
+                    var ipxoffset = (int)Math.Floor(c.width * ioffsetdeg / 360);
+
+                    ipxoffset = ipxoffset % c.width;
 
                     fcamerax = -xIPD;
                     await Native.window.async.onframe;
                     var stereoT = gl.canvas;
-                    canvasTB.drawImage(stereoT, 0, 0, c.width, c.height, c.width * ioffsetdeg / 360, 0, c.width, c.height / 2);
-                    canvasTB.drawImage(stereoT, 0, 0, c.width, c.height, -c.width + c.width * ioffsetdeg / 360, 0, c.width, c.height / 2);
+                    canvasTB.drawImage(stereoT, 0, 0, c.width, c.height, ipxoffset, 0, c.width, c.height / 2);
+                    canvasTB.drawImage(stereoT, 0, 0, c.width, c.height, -c.width + ipxoffset, 0, c.width, c.height / 2);
 
                     fcamerax = +xIPD;
                     await Native.window.async.onframe;
                     var stereoB = gl.canvas;
-                    canvasTB.drawImage(stereoB, 0, 0, c.width, c.height, c.width * ioffsetdeg / 360, c.height / 2, c.width, c.height / 2);
-                    canvasTB.drawImage(stereoB, 0, 0, c.width, c.height, -c.width + c.width * ioffsetdeg / 360, c.height / 2, c.width, c.height / 2);
+                    canvasTB.drawImage(stereoB, 0, 0, c.width, c.height, ipxoffset, c.height / 2, c.width, c.height / 2);
+                    canvasTB.drawImage(stereoB, 0, 0, c.width, c.height, -c.width + ipxoffset, c.height / 2, c.width, c.height / 2);
                 }
 
 
@@ -1243,18 +1246,18 @@ namespace x360stereomidnightsun
 
 
 
-                vsync = new TaskCompletionSource<object>();
-                await vsync.Task;
+                //vsync = new TaskCompletionSource<object>();
+                //await vsync.Task;
 
                 status = "rendering... vsync";
 
                 //var frameid = 0;
-                frameIDanimation.@checked = true;
+                //frameIDanimation.@checked = true;
                 frameIDslider.valueAsNumber = -1;
 
                 // allow the animation values to sink in
-                vsync = new TaskCompletionSource<object>();
-                await vsync.Task;
+                //vsync = new TaskCompletionSource<object>();
+                //await vsync.Task;
 
 
 
@@ -1270,7 +1273,6 @@ namespace x360stereomidnightsun
                 status = "rendering... " + new { filename };
 
                 await drawStereoFrame(canvasTB);
-
 
                 //var xIPD = 4.0;
 
