@@ -33,6 +33,27 @@ namespace TestMultipartRelated
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            new IHTMLButton { "check" }.AttachToDocument().onclick += async delegate
+            {
+                var lastupload = await base.getlastupload();
+
+                lastupload.WithEachIndex(
+                     (x, index) =>
+                     {
+                         foreach (var header in x.Headers)
+                         {
+                             //Console.WriteLine(new { index, header });
+                             new IHTMLPre { new { index, header } }.AttachToDocument();
+
+                         }
+
+                         //Console.WriteLine(new { index, x.Content });
+                         new IHTMLPre { new { index, x.Content } }.AttachToDocument();
+
+                     }
+                 );
+            };
+
             new { }.With(
                 async delegate
                 {
@@ -101,14 +122,16 @@ e-y: pp
 
     }
 
+    // for 3rd party comptability
+    public class HTTPHeadersWithXElement
+    {
+        public string[] Headers;
+        public XElement Content;
+    }
+
     public partial class ApplicationWebService
     {
-        // for 3rd party comptability
-        class HTTPHeadersWithXElement
-        {
-            public string[] Headers;
-            public XElement Content;
-        }
+     
 
         static HTTPHeadersWithXElement[] InputStreamToXElements(string boundary, Stream InputStream)
         {
@@ -183,6 +206,12 @@ e-y: pp
             return a.ToArray();
         }
 
+        // whatif clientside were to be allowed to async read server statics?
+        static HTTPHeadersWithXElement[] lastupload;
+
+        public async Task<HTTPHeadersWithXElement[]> getlastupload() { return lastupload; }
+
+
         public void Handler(WebServiceHandler h)
         {
             if (h.Context.Request.Path == "/upload")
@@ -211,7 +240,10 @@ e-y: pp
 
                     Console.WriteLine(new { boundary });
 
-                    InputStreamToXElements(boundary, h.Context.Request.InputStream).WithEachIndex(
+                    // testing gearvr?
+                    lastupload = InputStreamToXElements(boundary, h.Context.Request.InputStream);
+
+                    lastupload.WithEachIndex(
                         (x, index) =>
                         {
                             foreach (var header in x.Headers)
