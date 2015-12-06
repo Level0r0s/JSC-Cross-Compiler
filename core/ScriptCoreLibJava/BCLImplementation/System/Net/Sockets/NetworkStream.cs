@@ -38,6 +38,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
         public __NetworkStream()
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201512/20151206
             this.ReadTimeout = 8000;
         }
 
@@ -175,6 +176,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         // called by?
         public override global::System.Threading.Tasks.Task<int> ReadAsync(byte[] buffer, int offset, int count)
         {
+
             //Console.WriteLine("enter ReadAsync");
             var c = new TaskCompletionSource<int>();
 
@@ -210,7 +212,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
 
         public override int Read(byte[] buffer, int offset, int count)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201512/20151206
+
+            // http://stackoverflow.com/questions/804951/is-it-possible-to-read-from-a-inputstream-with-a-timeout
             //Console.WriteLine("enter NetworkStream Read " + new { count, this.InternalInputStream });
+
             var i = -1;
 
             //E/AndroidRuntime( 6564): Caused by: java.net.SocketException: Socket closed

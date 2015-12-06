@@ -7,6 +7,7 @@ using ScriptCoreLib.JavaScript.DOM;
 using ScriptCoreLib.JavaScript.DOM.HTML;
 using ScriptCoreLib.JavaScript.Extensions;
 using ScriptCoreLib.JavaScript.Windows.Forms;
+using ScriptCoreLib.Shared.IO;
 using ScriptCoreLib.Ultra.WebService;
 using System;
 using System.Collections.Generic;
@@ -131,7 +132,7 @@ e-y: pp
 
     public partial class ApplicationWebService
     {
-     
+
 
         static HTTPHeadersWithXElement[] InputStreamToXElements(string boundary, Stream InputStream)
         {
@@ -226,7 +227,10 @@ e-y: pp
 
                 // http://stackoverflow.com/questions/12189338/java-socket-inputstream-hangs-blocks-on-both-client-and-server
                 var ContentLength = h.Context.Request.ContentLength;
+                // h.Context.Request.ContentLength = 189
 
+                // chrome seems to always just send the le per data
+                // need a tool to not send it?
 
 
                 // { ContentType = multipart/related; boundary=12345678901234567890, multipart_related_boundary =  }
@@ -239,6 +243,52 @@ e-y: pp
                     var boundary = multipart_related_boundary;
 
                     Console.WriteLine(new { boundary });
+
+                    // cassini wont allow to read input bytes if thee is no content length?
+
+                    //h.Context.Request.InputStream.bas
+
+                    //public Stream GetBufferlessInputStream();
+                    //public Stream GetBufferlessInputStream(bool disableMaxRequestLength);
+
+                    //var BufferlessInputStream = h.Context.Request.GetBufferlessInputStream(disableMaxRequestLength: true);
+
+
+                    //var byte0 = h.Context.Request.InputStream.ReadByte();
+                    // byte0 = -1
+
+
+                    //upload { InputStream = TestMultipartRelated.ApplicationWebService__i__d.Internal.Shared.IO.LengthLimitedStream@2a0e7630 }
+                    //{ byte0 = 0 }
+
+
+
+                    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201512/20151206
+                    // why do we see byte 0?
+                    Console.WriteLine("upload " + new { h.Context.Request.InputStream });
+                    //var byte0 = BufferlessInputStream.ReadByte();
+                    // byte0 = -1
+
+                    //var byte0 = h.Context.Request.InputStream.ReadByte();
+                    //Console.WriteLine(new { byte0 });
+
+                    //var byte1 = h.Context.Request.InputStream.ReadByte();
+                    //Console.WriteLine(new { byte1 });
+
+
+                    //var a = new SmartStreamReader(h.Context.Request.InputStream);
+
+                    //var all = a.ReadToEnd();
+
+                    ////var all = h.Context.Request.InputStream.ReadToEnd();
+
+
+                    //h.Context.Response.StatusCode = 204;
+                    //h.CompleteRequest();
+                    //Console.WriteLine("upload discarded. " + new { all.Length });
+
+                    //return;
+
 
                     // testing gearvr?
                     lastupload = InputStreamToXElements(boundary, h.Context.Request.InputStream);

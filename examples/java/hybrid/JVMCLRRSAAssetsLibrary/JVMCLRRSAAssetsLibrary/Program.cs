@@ -77,7 +77,8 @@ namespace JVMCLRRSAAssetsLibrary
             //var x = NamedKeyPairs.JVMToCLR.PrivateKey;
 
             // public static $ArrayType$2 PublicParameters;
-            NamedKeyPairs.CLRToJVMPublicKey.PublicParameters
+            //NamedKeyPairs.CLRToJVMPublicKey.PublicParameters
+           // NamedKeyPairs.CLRToJVMPrivateKey.PublicParameters
 
             //new NamedKeyPairs.CLRToJVMPublicKey().AsyncEncrypt()
             //new NamedKeyPairs.CLRToJVMPublicKey { "hello" }

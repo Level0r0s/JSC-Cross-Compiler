@@ -125,6 +125,25 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         #endregion
 
 
+        public int ReceiveTimeout
+        {
+            get
+            {
+                return 0;
+            }
+            set
+            {
+
+                try
+                {
+                    InternalSocket.setSoTimeout(value);
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
 
         NetworkStream CachedGetStream;
         public NetworkStream GetStream()
@@ -140,6 +159,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
             try
             {
                 // http://stackoverflow.com/questions/7297173/android-outputstreamwriter-didnt-send-the-data-after-flush-socket
+                // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201512/20151206
+
 
 
 

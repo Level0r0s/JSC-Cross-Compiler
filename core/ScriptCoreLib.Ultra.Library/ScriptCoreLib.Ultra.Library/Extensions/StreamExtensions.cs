@@ -10,6 +10,7 @@ namespace ScriptCoreLib.Extensions
 	{
         public static byte[] ReadToEnd(this Stream s)
         {
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201512/20151206
             var x = new byte[s.Length - s.Position];
 
             s.Read(x, 0, x.Length);

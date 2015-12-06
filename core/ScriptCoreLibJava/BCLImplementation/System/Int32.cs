@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ScriptCoreLib;
+using System.Globalization;
 
 namespace ScriptCoreLibJava.BCLImplementation.System
 {
@@ -11,6 +12,18 @@ namespace ScriptCoreLibJava.BCLImplementation.System
         )]
     internal class __Int32
     {
+        public static int Parse(string s, NumberStyles style)
+        {
+            // first time to decode hex string? 2015?
+
+            // http://stackoverflow.com/questions/11194513/convert-hex-string-to-int
+
+            if (style == NumberStyles.HexNumber)
+                return java.lang.Integer.parseInt(s, 16);
+
+            return Parse(s);
+        }
+
         [Script(ExternalTarget = "parseInt")]
         public static int Parse(string e)
         {

@@ -28,6 +28,10 @@ namespace com.abstractatech.dcimgalleryapp
 	/// </summary>
 	public sealed class Application : ApplicationWebService
 	{
+        // when can our DCIM app do google lens blur?
+        // http://depthy.me/#/
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151205/xmp
+
 		//com.abstractatech.dcimgalleryapp.Assets.Publish ref0;
 
 		static Application()

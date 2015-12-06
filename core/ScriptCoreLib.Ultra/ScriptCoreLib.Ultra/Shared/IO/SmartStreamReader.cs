@@ -112,9 +112,19 @@ namespace ScriptCoreLib.Shared.IO
         byte[] InternalBuffer = new byte[InternalBufferCapacity];
         public int InternalBufferCount = 0;
 
+
+
+        // called by?
         public override int Read(byte[] buffer, int offset, int count)
         {
-            //Console.WriteLine("enter SmartStreamReader Read " + new { count });
+            // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201512/20151206
+            //Console.WriteLine("enter SmartStreamReader Read " + new { count, InternalBufferCount, BaseStream });
+
+
+            // if count is 0 always return 0 ?
+            // could jsc do a static early optimization for such cases?
+
+
 
 
             // buffer + stream
@@ -144,6 +154,8 @@ namespace ScriptCoreLib.Shared.IO
 
             while (count > 0)
             {
+
+                // this will hang forever?
                 //Console.WriteLine("enter SmartStreamReader Read invoke BaseStream.Read " + new { this.BaseStream });
                 var i = this.BaseStream.Read(buffer, offset, count);
 
@@ -159,6 +171,10 @@ namespace ScriptCoreLib.Shared.IO
                 {
                     // no more data, we must return
                     count = 0;
+
+
+                    // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201512/20151206
+                    // retuning 0 means ReadByte will return -1
                 }
 
             }
@@ -188,14 +204,21 @@ namespace ScriptCoreLib.Shared.IO
                     // any pending input?
                     //Console.WriteLine("ReadToMemoryStream before Write " + new { this.InternalBufferCount, xNetworkStream });
                     //Console.WriteLine("ReadToMemoryStream any pending input? " + new { this.InternalBufferCount });
-                    target.Write(this.InternalBuffer, 0, this.InternalBufferCount);
-                    this.InternalBufferCount = 0;
+
+
+                    var missingbytes = Math.Min(this.InternalBufferCount, ContentLength - (int)target.Length);
+
+                    target.Write(this.InternalBuffer, 0, missingbytes);
+                    //this.InternalBufferCount = 0;
+
+                    DiscardBuffer(missingbytes);
                 }
 
 
                 if (target.Length == ContentLength)
                 {
                     // done!
+                    flag = false;
                 }
                 else
                 {
@@ -243,18 +266,25 @@ namespace ScriptCoreLib.Shared.IO
                     //}
                     //else
                     {
-                        this.InternalBufferCount = this.BaseStream.Read(this.InternalBuffer, 0, InternalBufferCapacity);
+
+                        var missingbytes = ContentLength - (int)target.Length;
+
+                        //this.InternalBufferCount = this.BaseStream.Read(this.InternalBuffer, 0, InternalBufferCapacity);
+
+                        this.InternalBufferCount = this.BaseStream.Read(this.InternalBuffer, 0, missingbytes);
+
+                        //Console.WriteLine("ReadToMemoryStream, continue? " + new { this.InternalBufferCount });
+                        flag = (this.InternalBufferCount > 0);
                     }
 
                 }
 
-                //Console.WriteLine("ReadToMemoryStream, continue? " + new { this.InternalBufferCount });
-                flag = (this.InternalBufferCount > 0);
+
             }
 
             //Console.WriteLine("exit ReadToMemoryStream " + new { target.Length });
 
-            this.InternalBufferCount = 0;
+            //this.InternalBufferCount = 0;
             return target;
         }
 
@@ -384,6 +414,11 @@ namespace ScriptCoreLib.Shared.IO
 
         public MemoryStream ReadToBoundary(byte[] BoundaryBytes)
         {
+            //Console.WriteLine("enter ReadToBoundary");
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151205/xmp
+            // Z:\jsc.svn\examples\java\synergy\JVMCLRXMP\Program.cs
+
             var m = new MemoryStream();
 
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2013/20130401/20130405-file-upload
@@ -401,7 +436,8 @@ namespace ScriptCoreLib.Shared.IO
                 {
                     // we now have enough data to look at
 
-                    int i = 0;
+                    //int i = 0;
+                    int i = 1;
 
                     // how much of the buffer can we accept?
                     for (; i < this.InternalBufferCount - BoundaryBytes.Length + 1; i++)
@@ -426,12 +462,15 @@ namespace ScriptCoreLib.Shared.IO
                 {
                     var len = InternalBufferCapacity - this.InternalBufferCount;
 
-                    this.InternalBufferCount += this.BaseStream.Read(
+
+
+
+                    var read0 = this.BaseStream.Read(
                         this.InternalBuffer, this.InternalBufferCount, len
+                    );
 
-                        );
-
-                    flag = (this.InternalBufferCount > 0);
+                    this.InternalBufferCount += read0;
+                    flag = (read0 > 0);
                 }
             }
 
