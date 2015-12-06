@@ -404,15 +404,15 @@ namespace ScriptCoreLib.Shared.IO
 
 
 
-        public MemoryStream ReadToBoundary(string e)
+        public MemoryStream ReadToBoundary(string e, bool StopIfAlreadyAtBoundary = false)
         {
             var BoundaryBytes = Encoding.UTF8.GetBytes(e);
 
 
-            return ReadToBoundary(BoundaryBytes);
+            return ReadToBoundary(BoundaryBytes, StopIfAlreadyAtBoundary);
         }
 
-        public MemoryStream ReadToBoundary(byte[] BoundaryBytes)
+        public MemoryStream ReadToBoundary(byte[] BoundaryBytes, bool StopIfAlreadyAtBoundary = false)
         {
             //Console.WriteLine("enter ReadToBoundary");
 
@@ -438,6 +438,9 @@ namespace ScriptCoreLib.Shared.IO
 
                     //int i = 0;
                     int i = 1;
+
+                    if (StopIfAlreadyAtBoundary)
+                        i = 0;
 
                     // how much of the buffer can we accept?
                     for (; i < this.InternalBufferCount - BoundaryBytes.Length + 1; i++)
