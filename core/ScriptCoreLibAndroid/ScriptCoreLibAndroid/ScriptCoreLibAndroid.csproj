@@ -526,6 +526,9 @@
     <Compile Include="..\..\ScriptCoreLibJava\javax\xml\transform\ErrorListener.cs">
       <Link>javax\xml\transform\ErrorListener.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLibJava\javax\xml\transform\OutputKeys.cs">
+      <Link>javax\xml\transform\OutputKeys.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibJava\javax\xml\transform\Result.cs">
       <Link>javax\xml\transform\Result.cs</Link>
     </Compile>

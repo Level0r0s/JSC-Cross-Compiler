@@ -35,6 +35,8 @@ namespace AndroidUDPClipboard.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
     public class ApplicationActivity : Activity
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151212/androidudpclipboard
+
         //        connect s6 via usb .
         // turn on wifi!
         // kill adb

@@ -23,6 +23,8 @@ namespace CardboardForEdgeExperiment.Activities
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class XApplicationActivity :
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151212/androidcardboardexperiment
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150430
          com.google.vrtoolkit.cardboard.CardboardActivity,
         com.google.vrtoolkit.cardboard.CardboardView.StereoRenderer

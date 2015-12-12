@@ -26,6 +26,10 @@ namespace ChromeUDPClipboard
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151212/androidudpclipboard
+
+        // from red to asus
+        // net use
         // subst a: s:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPClipboard\bin\Debug\staging\ChromeUDPClipboard.Application\web
 
         /// <summary>

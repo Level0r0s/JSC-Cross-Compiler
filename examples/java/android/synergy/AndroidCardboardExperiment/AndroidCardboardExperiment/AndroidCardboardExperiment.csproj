@@ -109,7 +109,7 @@
     <Content Include="Design\Images.htm" />
     <Content Include="Design\jsc.png" />
     <Content Include="References\cardboard.jar" />
-    <Content Include="References\libprotobuf-java-2.3-nano.jar" />
+    <Content Include="References\libprotobuf-java-2.6-nano.jar" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tools\" />
