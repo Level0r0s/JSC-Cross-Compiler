@@ -123,8 +123,15 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Xml.Linq
                 var w = new StringWriter();
                 var r = new StreamResult(w);
                 var f = TransformerFactory.newInstance();
+                var transformer =  f.newTransformer();
 
-                f.newTransformer().transform(s, r);
+                // http://stackoverflow.com/questions/15592025/transformer-setoutputpropertyoutputkeys-encoding-utf-8-is-not-working
+                transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+
+                // meses up fields as cookie headers?
+                //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+                transformer.transform(s, r);
 
                 value = w.getBuffer().toString();
 

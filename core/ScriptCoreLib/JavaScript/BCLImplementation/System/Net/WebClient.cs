@@ -71,7 +71,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
             // Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuTestUploadValues\Application.cs
             //  "Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuTestUserHostAddress\UbuntuTestUserHostAddress.sln"
 
-            Console.WriteLine("enter WebClient.UploadValuesTaskAsync! " + new { address });
+            //Console.WriteLine("enter WebClient.UploadValuesTaskAsync! " + new { address });
 
             // called by
             // X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\JavaScript\Remoting\InternalWebMethodRequest.cs
@@ -219,7 +219,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
 
 
             // is IE actually sending it? or is our server decoding it wrong?
-            Console.WriteLine("WebClient.UploadValuesAsync IXMLHttpRequest " + new { xFormDataString });
+            //Console.WriteLine("WebClient.UploadValuesAsync IXMLHttpRequest " + new { xFormDataString });
             x.send(xFormDataString);
 
 
@@ -236,7 +236,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
             // X:\jsc.svn\examples\javascript\css\Test\TestLongWebMethod\TestLongWebMethod\Application.cs
 
             // IE is misbehaving?
-            Console.WriteLine("enter WebClient.ToFormDataString " + new { data.Count });
+            //Console.WriteLine("enter WebClient.ToFormDataString " + new { data.Count });
 
             #region AllKeys
             var xx = "";
@@ -244,7 +244,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
             // for (e = 0; e; e++)
             foreach (var item in data.AllKeys)
             {
-                Console.WriteLine("WebClient.ToFormDataString " + new { item });
+                //Console.WriteLine("WebClient.ToFormDataString " + new { item });
 
 
                 if (xx != "")
@@ -256,7 +256,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
 
                 var xdata = data[item];
 
-                Console.WriteLine("WebClient.ToFormDataString " + new { xdata });
+                //Console.WriteLine("WebClient.ToFormDataString " + new { xdata });
 
                 // X:\jsc.svn\examples\javascript\async\AsyncComputeAndThenCallServer\AsyncComputeAndThenCallServer\Application.cs
                 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/escape

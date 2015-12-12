@@ -33,7 +33,8 @@ namespace TestBackgroundBlu
 
             var rgb = new { r = 0x74, g = 0x7d, b = 0x9c };
             // check for invisible utf8 chars if copied from web!
-            var background = "rgba(\{rgb.r}, \{rgb.g}, \{rgb.b}, 1.0)";
+            //var background = "rgba(\{rgb.r}, \{rgb.g}, \{rgb.b}, 1.0)";
+            var background = "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", 1.0)";
 
             new IHTMLPre { new { background } }.AttachToDocument();
 

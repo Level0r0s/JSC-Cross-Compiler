@@ -563,6 +563,7 @@
     <Compile Include="javax\swing\UIDefaults.cs" />
     <Compile Include="javax\swing\UIManager.cs" />
     <Compile Include="javax\swing\undo\UndoableEdit.cs" />
+    <Compile Include="javax\xml\transform\OutputKeys.cs" />
     <Compile Include="javax\xml\transform\dom\DOMSource.cs" />
     <Compile Include="javax\xml\transform\ErrorListener.cs" />
     <Compile Include="javax\xml\transform\Result.cs" />

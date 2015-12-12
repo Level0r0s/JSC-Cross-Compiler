@@ -41,20 +41,20 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
         {
             // Z:\jsc.svn\examples\javascript\test\TestIEXElement\Application.cs
 
-            Console.WriteLine("enter XContainer Add " + new { content });
+            //Console.WriteLine("enter XContainer Add " + new { content });
 
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/uploadvaluestaskasync
             InternalAdd(content);
 
-            Console.WriteLine("exit XContainer Add = " + this.ToString());
+            //Console.WriteLine("exit XContainer Add = " + this.ToString());
 
             //Console.WriteLine("exit XContainer Add = " + new { this.InternalValue.firstChild });
-            Console.WriteLine("exit XContainer Add = " + new { childNodes = this.InternalValue.childNodes.Length });
+            //Console.WriteLine("exit XContainer Add = " + new { childNodes = this.InternalValue.childNodes.Length });
 
 
             var firstNode = this.Nodes().FirstOrDefault();
 
-            Console.WriteLine(new { firstNode });
+            //Console.WriteLine(new { firstNode });
 
 
         }
@@ -106,7 +106,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
                     }
                     else
                     {
-                        Console.WriteLine("XContainer Add string " + new { xstring });
+                        //Console.WriteLine("XContainer Add string " + new { xstring });
 
                         var n = this.InternalValue.ownerDocument.createTextNode(xstring);
 
@@ -136,7 +136,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
                     {
                         // no value?
 
-                        Console.WriteLine("XContainer Add XText. " + new { e.Value });
+                        //Console.WriteLine("XContainer Add XText. " + new { e.Value });
 
                         this.InternalValue.appendChild(
                             this.InternalValue.ownerDocument.createTextNode(e.Value)
@@ -180,7 +180,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
                 var e = (__XAttribute)(object)(content as XAttribute);
                 if (e != null)
                 {
-                    Console.WriteLine("XContainer Add XAttribute");
+                    //Console.WriteLine("XContainer Add XAttribute");
 
                     if (this.InternalValue == null)
                     {
@@ -228,7 +228,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
                             // missing content?
                         }
 
-                        Console.WriteLine("XContainer Add XElement " + new { IncomingXElement });
+                        //Console.WriteLine("XContainer Add XElement " + new { IncomingXElement });
 
                         // http://stackoverflow.com/questions/1811116/ie-support-for-dom-importnode
                         // The solution to all of my problems was to not use a DOM method after all, and instead use my own implementation. Here, in all of its glory, is my final solution to the importNode() problem coded in a cross-browser compliant way: (Line wraps marked » —Ed.)
@@ -259,7 +259,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
         public override void InternalValueInitialize()
         {
             // bugcheck
-            Console.WriteLine("XContainer InternalValueInitialize");
+            //Console.WriteLine("XContainer InternalValueInitialize");
 
             if (this.InternalValue == null)
             {
@@ -307,7 +307,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
                         //var InternalStringValue2 = ((ScriptCoreLib.JavaScript.DOM.ITextNode)this.InternalValue).nodeValue;
 
                         //Console.WriteLine("XContainer Nodes __XText " + new { InternalStringValue, InternalStringValue2 });
-                        Console.WriteLine("XContainer Nodes __XText " + new { InternalStringValue });
+                        //Console.WriteLine("XContainer Nodes __XText " + new { InternalStringValue });
 
                         return (XNode)(object)new __XText { InternalValue = item, InternalStringValue = InternalStringValue };
                     }

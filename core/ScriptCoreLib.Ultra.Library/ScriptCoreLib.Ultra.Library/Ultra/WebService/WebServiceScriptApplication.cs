@@ -17,7 +17,7 @@ namespace ScriptCoreLib.Ultra.WebService
 
 
 
-    
+
     [Obsolete("service worker")]
     public static class WebApplicationCacheManifest
     {
@@ -113,6 +113,8 @@ Visit http://my.jsc-solutions.net to gear up!
 ");
 
 
+
+            //Console.WriteLine("WebServiceScriptAppliction WriteTo " + new { this.PageSource });
             // if XElement
             var html = XElement.Parse(this.PageSource);
 
@@ -152,7 +154,14 @@ Visit http://my.jsc-solutions.net to gear up!
                 )
             );
 
-            WriteLine(html.ToString());
+
+
+
+            var htmlString = html.ToString();
+
+            //Console.WriteLine("WebServiceScriptAppliction WriteTo " + new { htmlString });
+
+            WriteLine(htmlString);
             return;
 
 

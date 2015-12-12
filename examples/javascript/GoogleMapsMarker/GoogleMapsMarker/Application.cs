@@ -36,12 +36,20 @@ namespace google
 
     public static class maps
     {
+        static TaskCompletionSource<object> __api;
+
         // enable nested .ctors 
         static public Task api
         {
             get
             {
+                // You have included the Google Maps API multiple times on this page. This may cause unexpected errors.
+                if (__api != null)
+                    return __api.Task;
+
                 var x = new TaskCompletionSource<object>();
+
+                __api = x;
 
                 var api = new IHTMLScript
                 {

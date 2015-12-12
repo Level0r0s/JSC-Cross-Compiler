@@ -443,11 +443,14 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 
         public string UploadString(Uri u, string method, string data)
         {
-            //Console.WriteLine("enter UploadString " + new { u, method });
+            // http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/tip/src/share/classes/sun/net/www/protocol/http/HttpURLConnection.java
+            // fails on openJDK why?
+
+            Console.WriteLine("enter UploadString " + new { u, method });
 
             var w = new StringBuilder();
 
-            HttpURLConnection conn = null;
+            HttpURLConnection xHttpURLConnection = null;
 
             try
             {
@@ -472,11 +475,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 
                 var url = new java.net.URL(u.ToString());
 
-                conn = (HttpURLConnection)url.openConnection();
+                xHttpURLConnection = (HttpURLConnection)url.openConnection();
 
 
 
-                var https = conn as HttpsURLConnection;
+                var https = xHttpURLConnection as HttpsURLConnection;
                 if (https != null)
                 {
                     //Console.WriteLine(new { https });
@@ -487,12 +490,12 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 
                 //conn.setHostnameVerifier(new localHostnameVerifier { });
 
-                conn.setDoOutput(true);
-                conn.setDoInput(true);
-                conn.setInstanceFollowRedirects(false);
+                xHttpURLConnection.setDoOutput(true);
+                xHttpURLConnection.setDoInput(true);
+                xHttpURLConnection.setInstanceFollowRedirects(false);
                 //conn.setInstanceFollowRedirects(true);
 
-                conn.setRequestMethod(method);
+                xHttpURLConnection.setRequestMethod(method);
 
 
                 var xContentType = default(string);
@@ -511,7 +514,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
                             }
 
 
-                            conn.addRequestProperty(key, Headers[key]);
+                            xHttpURLConnection.addRequestProperty(key, Headers[key]);
                         }
                     }
                 }
@@ -522,17 +525,18 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 
                 if (xContentType == null)
                 {
-                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                    conn.setRequestProperty("charset", "utf-8");
+                    xHttpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                    xHttpURLConnection.setRequestProperty("charset", "utf-8");
                 }
 
-                conn.setRequestProperty("content-length", "" + data.Length);
+                //conn.setRequestProperty("content-length", "" + data.Length);
+                xHttpURLConnection.setRequestProperty("Content-Length", "" + data.Length);
 
-                conn.setUseCaches(false);
+                xHttpURLConnection.setUseCaches(false);
 
 
                 //Console.WriteLine("UploadString getOutputStream");
-                var o = conn.getOutputStream();
+                var o = xHttpURLConnection.getOutputStream();
 
                 //Console.WriteLine("UploadString writeBytes");
 
@@ -548,7 +552,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
                 //Console.WriteLine("UploadString readLine");
 
                 //var i = new java.io.InputStreamReader(url.openStream(), "UTF-8");
-                var i = new java.io.InputStreamReader(conn.getInputStream(), "UTF-8");
+                var i = new java.io.InputStreamReader(xHttpURLConnection.getInputStream(), "UTF-8");
                 var reader = new java.io.BufferedReader(i);
 
                 // can't we just read to the end?
@@ -563,6 +567,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
             }
             catch (Exception err)
             {
+                // 500 ?
+
                 // = java.net.ProtocolException: Invalid HTTP method:
 
                 // oops
@@ -571,8 +577,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
 
             //Console.WriteLine("exit UploadString " + new { conn });
 
-            if (conn != null)
-                conn.disconnect();
+            if (xHttpURLConnection != null)
+                xHttpURLConnection.disconnect();
 
             return w.ToString();
         }

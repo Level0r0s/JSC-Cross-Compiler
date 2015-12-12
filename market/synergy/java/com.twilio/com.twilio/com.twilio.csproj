@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A0A72609-60E7-42AE-920B-E2A84A340633}</ProjectGuid>
+    <ProjectGuid>{D1025CB5-56B0-4A42-9D25-0D0DB03186E4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>com.twilio</RootNamespace>

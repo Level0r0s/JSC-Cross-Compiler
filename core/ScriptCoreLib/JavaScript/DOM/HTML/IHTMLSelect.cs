@@ -17,7 +17,7 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         public bool @readOnly;
         public int size;
 
-		public int selectedIndex;
+        public int selectedIndex;
 
         public bool disabled;
         public bool multiple;
@@ -91,6 +91,13 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             {
                 Add(v);
             }
+        }
+
+
+        public static implicit operator string(IHTMLSelect x)
+        {
+            // Z:\jsc.svn\examples\javascript\Test\TestSelectImplictToString\Application.cs
+            return x[x.selectedIndex].value;
         }
     }
 }

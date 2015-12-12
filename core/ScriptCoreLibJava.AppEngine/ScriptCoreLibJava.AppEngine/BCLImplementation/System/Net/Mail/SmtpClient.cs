@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ScriptCoreLibJava.AppEngine.BCLImplementation.System.Net.Mail
 {
+#if xxx
     // why not move to ScriptCoreLibJava?
     [Script(Implements = typeof(global::System.Net.Mail.SmtpClient))]
     public class __SmtpClient : IDisposable
@@ -68,4 +69,6 @@ namespace ScriptCoreLibJava.AppEngine.BCLImplementation.System.Net.Mail
         {
         }
     }
+#endif
+
 }

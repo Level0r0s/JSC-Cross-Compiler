@@ -28,6 +28,7 @@ namespace SendMailExperiment
 
         public Task SendEMail()
         {
+            // Z:\jsc.svn\examples\java\hybrid\ubuntu\UbuntuCommonsEmail\Program.cs
             // https://developers.google.com/appengine/docs/java/mail/usingjavamail
 
             Properties props = new Properties();

@@ -59,6 +59,10 @@ namespace ScriptCoreLib.Shared
             if (e.value == null)
                 return false;
 
+
+            if (e.signature == null)
+                return false;
+
             return new RSACryptoStream(rsa).VerifyString(e.value, e.signature);
         }
     }

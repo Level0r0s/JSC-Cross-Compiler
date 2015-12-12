@@ -98,6 +98,7 @@ namespace JVMCLRWSDLMID
 
     static class Program
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151212
         // Z:\jsc.svn\examples\javascript\crypto\VerifyIdentityAffinity\VerifyIdentityAffinity\Application.cs
 
         /// <summary>
@@ -106,6 +107,10 @@ namespace JVMCLRWSDLMID
         [STAThread]
         public static void Main(string[] args)
         {
+            // only works on partial core?
+            Console.WriteLine(typeof(object).AssemblyQualifiedName);
+
+
             // Z:\jsc.svn\examples\javascript\crypto\VerifyIdentityAffinity\VerifyIdentityAffinity\ApplicationWebService.cs
 
             // https://tsp.demo.sk.ee/?wsdl 
@@ -143,6 +148,9 @@ namespace JVMCLRWSDLMID
 
             // http://stackoverflow.com/questions/2131245/c-webclient-assigning-chunk-size-when-using-asyncuploaddata
 
+
+            // tested on ubuntu/openjdk
+#if TESTINGWEBCLIENT
             #region oldschool SOAP
             try
             {
@@ -167,10 +175,12 @@ namespace JVMCLRWSDLMID
                 // webclient chunks if data is more than
                 // Content-Length: 1023
                 var data = @"<s:Envelope xmlns:s=""http://schemas.xmlsoap.org/soap/envelope/""><s:Body s:encodingStyle=""http://schemas.xmlsoap.org/soap/encoding/"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema""><q1:MobileAuthenticate xmlns:q1=""http://www.sk.ee/DigiDocService/DigiDocService_2_3.wsdl""><IDCode xsi:type=""xsd:string"">14212128025</IDCode><CountryCode xsi:type=""xsd:string"">EE</CountryCode><PhoneNo xsi:type=""xsd:string"">37200007</PhoneNo><Language xsi:type=""xsd:string"">EST</Language><ServiceName xsi:type=""xsd:string"">Testimine</ServiceName><MessageToDisplay xsi:type=""xsd:string"">Testimine</MessageToDisplay><SPChallenge xsi:type=""xsd:string"">03010400000000000000</SPChallenge><MessagingMode xsi:type=""xsd:string"">asynchClientServer</MessagingMode><AsyncConfiguration xsi:type=""xsd:int"">0</AsyncConfiguration><ReturnCertData xsi:type=""xsd:boolean"">true</ReturnCertData><ReturnRevocationData xsi:type=""xsd:boolean"">false</ReturnRevocationData></q1:MobileAuthenticate></s:Body></s:Envelope>".Trim();
+               
 
                 // { xPOSTresponse =  }
                 //var xPOSTresponse = xPOST.UploadString("https://tsp.demo.sk.ee/", "POST", data);
                 var xPOSTresponse = xPOST.UploadString("https://tsp.demo.sk.ee:443/", "POST", data);
+                //var xPOSTresponse = xPOST.UploadString("https://digidocservice.sk.ee:443/", "POST", data);
 
                 //xPOST.UploadStringTaskAsync
                 //UploadString { err = javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target }
@@ -219,6 +229,12 @@ namespace JVMCLRWSDLMID
             }
             #endregion
 
+            Console.WriteLine("done");
+            Console.ReadLine();
+            return;
+#endif
+
+
             try
             {
             // http://www.microsoft.com/en-us/download/details.aspx?id=44226
@@ -233,7 +249,8 @@ namespace JVMCLRWSDLMID
 
                 //System.ServiceModel.OperationContext.Current.
                 //var c = new sk.DigiDocServicePortTypeClient();
-                var c = new sk.DigiDocServicePortTypeClient("DigiDocService", "https://tsp.demo.sk.ee:443");
+                //var c = new sk.DigiDocServicePortTypeClient("DigiDocService", "https://tsp.demo.sk.ee:443");
+                var c = new sk.DigiDocServicePortTypeClient("DigiDocService", "https://digidocservice.sk.ee:443");
 
                 //var requestInterceptor = new InspectorBehavior();
 
@@ -315,7 +332,8 @@ namespace JVMCLRWSDLMID
                     //soovitatav on kasutada mılemat
                     //sisendparameetrit! Leedu Mobiil-ID kasutajate
                     //puhul on kohustuslikud IDCode ja PhoneNo
-                    IDCode = "14212128025",
+                    //IDCode = "14212128025",
+                    IDCode = "",
 
                     // Isikukoodi v‰lja andnud riik, kasutatakse ISO 3166 
                     // 2 t‰helisi riigikoode (n‰iteks: EE)
@@ -336,8 +354,7 @@ namespace JVMCLRWSDLMID
                     //on m‰‰ratud, siis teenuse siseselt l‰htutakse
                     //prefiksis m‰‰ratud riigi tunnusest (sıltumata
                     //elemendi "CountryCode" v‰‰rtusest)
-                    //PhoneNo = "+37200007"
-                    PhoneNo = "37200007",
+                    PhoneNo = "+37200007",
 
                     // Telefonile kuvatavate teadete keel. Kasutatakse: 3-
                     // t‰helisi koode suurt‰htedes.Vıimalikud variandid:
@@ -674,6 +691,7 @@ namespace JVMCLRWSDLMID
 
             //CLRProgram.CLRMain();
 
+            Console.WriteLine("done");
             Console.ReadLine();
 
         }

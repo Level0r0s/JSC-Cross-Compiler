@@ -397,7 +397,7 @@ namespace UbuntuMIDExperiment
             // can we? if we run on http we cant.
 
 
-
+            #region EID
             new IHTMLButton { "EID" }.AttachToDocument().With(
                 async e =>
                 {
@@ -481,6 +481,7 @@ namespace UbuntuMIDExperiment
                     //Native.window.close();
                 }
             );
+#endregion
 
             new IHTMLButton { "MID" }.AttachToDocument().With(
               async e =>
@@ -545,6 +546,17 @@ namespace UbuntuMIDExperiment
 
         public async Task<bool> Verify()
         {
+            //-		InnerException	{"An error occurred while loading attribute 'ServiceContractAttribute' on type 'DigiDocServicePortType'.  Please see InnerException for more details."}	System.Exception {System.InvalidOperationException}
+            //+		InnerException	{"Could not load file or assembly 'ScriptCoreLibA, Version=4.6.0.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies. The system cannot find the file specified.":"ScriptCoreLibA, Version=4.6.0.0, Culture=neutral, PublicKeyToken=null"}	System.Exception {System.IO.FileNotFoundException}
+
+
+#if DEBUG
+            // make cassini happy
+            { var __ref = typeof(ScriptAttribute); }
+            { var __ref = typeof(NamedKeyPairs.WebServiceAuthorityPrivateKey); }
+#endif
+
+
             Console.WriteLine("Verify " + new { identity });
 
             var verify = identity.Verify(NamedKeyPairs.WebServiceAuthorityPrivateKey.RSAParameters);
@@ -552,15 +564,7 @@ namespace UbuntuMIDExperiment
         }
 
 
-        const string serviceuri = "https://digidocservice.sk.ee:443";
-        //const string serviceuri = "https://tsp.demo.sk.ee:443";
-        //const string ServiceName = "Testimine";
-        const string ServiceName = "Estfeed_Mikro";
-
-
-
-        //ServiceName = "Testimine",
-        //ServiceName = "Estfeed001",
+    
 
 
         #region magic
@@ -590,8 +594,18 @@ namespace UbuntuMIDExperiment
 
 
 
-
         #region MobileAuthenticateAsync15
+
+
+        const string serviceuri = "https://digidocservice.sk.ee:443";
+        //const string serviceuri = "https://tsp.demo.sk.ee:443";
+        const string ServiceName = "Testimine";
+
+
+
+        //ServiceName = "Testimine",
+        //ServiceName = "Estfeed001",
+
         public sealed class MobileAuthenticateAsync15State
         {
             public VerifiableString MobileAuthenticateAsync15_Sesscode;
@@ -678,7 +692,7 @@ namespace UbuntuMIDExperiment
                 //võidakse tähti kodeerida 2 baidistena ja siis ei saa
                 //saata pikemat kui 20-sümbolilist teksti).
                 //MessageToDisplay = "Testimine",
-                MessageToDisplay = "minuenergia.ee",
+                MessageToDisplay = ServiceName,
 
                 //- Rakenduse pakkuja poolt genereeritud juhuslik 10
                 //baidine tekst, mis on osa (autentimise käigus)
@@ -809,6 +823,10 @@ namespace UbuntuMIDExperiment
             //NB! Enne esimese staatuse päringu saatmist on soovitatav oodata vähemalt 15
             //sekundit kuna autentimise protsess ei saa tehniliste ja inimlike piirangute tõttu
             //kiiremini lõppeda. Mobiil-ID toimingud aeguvad hiljemalt 4 minuti jooksul.
+
+            // no pin entered?
+
+            // xGetMobileAuthenticateStatusResponse.Status = "USER_CANCEL"
 
             if (xGetMobileAuthenticateStatusResponse.Status == "USER_AUTHENTICATED")
             {

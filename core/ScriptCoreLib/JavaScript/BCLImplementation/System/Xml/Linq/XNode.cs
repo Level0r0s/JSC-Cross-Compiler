@@ -26,7 +26,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
         // virtual messed up after rewrite?
         public virtual void InternalValueInitialize()
         {
-            Console.WriteLine("__XNode virtual InternalValueInitialize");
+            //Console.WriteLine("__XNode virtual InternalValueInitialize");
         }
 
         // X:\jsc.svn\examples\javascript\GoogleMapsInfoWindow\GoogleMapsInfoWindow\Application.cs
@@ -161,13 +161,13 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
 
 
             var sameDocument = IncomingXElement.InternalValue.ownerDocument == that.InternalValue.ownerDocument;
-            Console.WriteLine("enter __XNode InternalRebuildDocument " + new { sameDocument });
-            Console.WriteLine("enter __XNode InternalRebuildDocument " + new { that });
+            //Console.WriteLine("enter __XNode InternalRebuildDocument " + new { sameDocument });
+            //Console.WriteLine("enter __XNode InternalRebuildDocument " + new { that });
 
 
             // view-source:55048 44ms enter __XNode InternalRebuildDocument { IncomingXElementNode = bar }
             // IncomingXElement cant be bar??
-            Console.WriteLine("enter __XNode InternalRebuildDocument " + new { IncomingXElement, GetType = IncomingXElement.GetType() });
+            //Console.WriteLine("enter __XNode InternalRebuildDocument " + new { IncomingXElement, GetType = IncomingXElement.GetType() });
 
             if (sameDocument)
                 return;
@@ -189,12 +189,12 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
                 var IncomingXElementNodeAsXText = IncomingXElementNode as XText;
                 if (IncomingXElementNodeAsXText != null)
                 {
-                    Console.WriteLine("enter __XNode IncomingXElementNodeAsXText " + new { IncomingXElementNodeAsXText });
-                    Console.WriteLine("enter __XNode IncomingXElementNodeAsXText " + new { IncomingXElementNodeAsXText.Value });
+                    //Console.WriteLine("enter __XNode IncomingXElementNodeAsXText " + new { IncomingXElementNodeAsXText });
+                    //Console.WriteLine("enter __XNode IncomingXElementNodeAsXText " + new { IncomingXElementNodeAsXText.Value });
                 }
                 else
                 {
-                    Console.WriteLine("enter __XNode InternalRebuildDocument " + new { IncomingXElementNode });
+                    //Console.WriteLine("enter __XNode InternalRebuildDocument " + new { IncomingXElementNode });
                 }
             }
 
@@ -211,7 +211,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
                 );
             }
 
-            Console.WriteLine("enter __XNode InternalRebuildDocument Add " + new { IncomingXElementNodes.Length });
+            //Console.WriteLine("enter __XNode InternalRebuildDocument Add " + new { IncomingXElementNodes.Length });
 
             IncomingXElement.Add(IncomingXElementNodes);
 

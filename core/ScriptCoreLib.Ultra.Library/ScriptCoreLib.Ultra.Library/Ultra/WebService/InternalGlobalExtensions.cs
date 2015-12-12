@@ -132,7 +132,7 @@ namespace ScriptCoreLib.Ultra.WebService
 
 
 
-		[Obsolete]
+        [Obsolete]
         private static void WriteCacheManifest(InternalGlobal g, System.Web.HttpApplication that, StringAction WriteLine)
         {
             // should the app be able to control manifest on its own?
@@ -534,6 +534,8 @@ namespace ScriptCoreLib.Ultra.WebService
                 //I/Web Console( 3988): %c0:312066ms InternalWebMethodRequest.Complete { Name = Gravatar, Length = 0 } at http://192.168.43.1:14691/view-source:37081
                 //I/Web Console( 3988): 0:312076ms { Name = Gravatar, MetadataToken = 06000001, ETag = d41d8cd98f00b204e9800998ecf8427e, ElapsedMilliseconds = 5 } at http://192.168.43.1:14691/view-source:37040
 
+
+#if ETagTestedForIE11
                 if (clientETag == newETag)
                 {
                     //Console.WriteLine("Client already has the answer, sending 304");
@@ -546,6 +548,8 @@ namespace ScriptCoreLib.Ultra.WebService
                     that.CompleteRequest();
                     return;
                 }
+#endif
+
 
             }
 

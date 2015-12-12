@@ -53,7 +53,7 @@ namespace ScriptCoreLib.Ultra.WebService
             // X:\jsc.svn\examples\javascript\Test\TestWebServiceTaskFields\TestWebServiceTaskFields\ApplicationWebService.cs
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2013/201310/20131011-fields
 
-            Console.WriteLine("InternalWebMethodInfo.AddField " + new { FieldName, FieldValue });
+            //Console.WriteLine("InternalWebMethodInfo.AddField " + new { FieldName, FieldValue });
 
             that.InternalFields[FieldName] = FieldValue;
         }

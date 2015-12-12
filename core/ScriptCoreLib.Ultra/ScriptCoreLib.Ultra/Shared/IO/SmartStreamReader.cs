@@ -273,7 +273,8 @@ namespace ScriptCoreLib.Shared.IO
 
                         this.InternalBufferCount = this.BaseStream.Read(this.InternalBuffer, 0, missingbytes);
 
-                        //Console.WriteLine("ReadToMemoryStream, continue? " + new { this.InternalBufferCount });
+                        //Console.WriteLine("ReadToMemoryStream BaseStream.Read " + new { missingbytes, this.InternalBufferCount });
+
                         flag = (this.InternalBufferCount > 0);
                     }
 
