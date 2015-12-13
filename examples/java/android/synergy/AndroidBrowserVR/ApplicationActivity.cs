@@ -21,6 +21,128 @@ using System.Diagnostics;
 
 namespace AndroidBrowserVR.Activities
 {
+
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/ovroculus360photoshud
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150613/record
+    // "x:\util\android-sdk-windows\platform-tools\adb.exe" shell am start -n OVROculus360PhotosHUD.Activities/OVROculus360PhotosHUD.Activities.ApplicationActivity
+
+
+
+    // "X:\opensource\ovr_mobile_sdk_0.6.0\VrSamples\Native\Oculus360PhotosSDK\src\com\oculus\oculus360photossdk\MainActivity.java"
+
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "10")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
+
+    // https://forums.oculus.com/viewtopic.php?t=21409
+    // vr_dual wont run on gearvr for now...
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "dual")]
+    // for dual we could switch to chrome view activity
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
+
+    // vr_only means we wont see our activity ui
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_only")]
+    //<meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_only"/>
+    public class LocalApplication : Application
+    {
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" devices
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell netcfg
+
+        // should jsc remember last connected device and reconnect if disconnected?
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
+        // restart helps.
+
+
+        public override void onCreate()
+        {
+            base.onCreate();
+
+            Console.WriteLine("enter AndroidBrowserVR LocalApplication onCreate, first time?");
+
+            //Func<string> futureinline_stringFromJNI = delegate
+            //{
+            //    // env.NewStringUTF
+            //    // there should be a .h parser somewhere. via which we can generate the natives for so?
+            //    // jsc could generate a linker code to allow us to use c exports from java..
+            //    return global::OVRVrCubeWorldSurfaceViewNDK.VrApi_h.vrapi_GetVersionString();
+            //};
+
+            var x = default(string);
+
+            // X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android
+            // X:\jsc.svn\examples\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar'
+
+
+            //1cb8:01:04:0e CreateToJARImportNatives Cache { FileNameString = X:\jsc.svn\examples\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar, Input = X:\jsc.svn\examples\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar }
+            //System.IO.DirectoryNotFoundException: Could not find a part of the path 'X:\jsc.svn\examples\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar'.
+            //   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+            //   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boole
+            //   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+            //   at System.IO.File.OpenRead(String path)
+            //   at jsc.meta.Library.CreateToJARImportNatives.<>c__DisplayClassf.<InternalWithCache>b__e(SHA1CryptoServiceProvider h) in x:\jsc.internal.git\compiler\jsc.internal\jsc.internal\meta\Library\CreateToJARImportNatives.cs:line 251
+            //var api = typeof(com.oculus.vrapi.VrApi);
+            // where is the source for it?
+            // X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\src\com\oculusvr\vrlib\VrLib.java
+            // X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\jni\VrApi\VrApi.cpp
+
+
+            //try
+            //{
+            //    x = futureinline_stringFromJNI();
+            //}
+            //catch
+            {
+                //x = "xMarshal " + OVROculus360Photos.Activities.xMarshal.stringFromJNI();
+            }
+            //finally
+            {
+                //                [javac] W:\src\__AnonymousTypes__OVRVrCubeWorldNativeActivity_AndroidActivity\__f__AnonymousType_97_0_1.java:34: error: reference to Format is ambiguous, both method Format(String,Object,Object) in __String and method Format(__IFormatProvider,String,Object[]) in __String match
+                //[javac]         return __String.Format(null, "{{ api = {0} }}", objectArray2);
+                //[javac]                        ^
+                //[javac] Note: W:\src\ScriptCoreLibJava\BCLImplementation\System\Threading\__Thread.java uses or overrides a deprecated API.
+
+                // https://stackoverflow.com/questions/7686482/when-does-applications-oncreate-method-is-called-on-android
+                //Toast.makeText(this, "OVRVrCubeWorldNative " + x + new { api }, Toast.LENGTH_LONG).show();
+
+            }
+
+            //I/VrApi   (  401):              "Message":      "Thread priority security exception. Make sure the APK is signed."
+
+        }
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150607-1/vrcubeworld
+        /** Load jni .so on initialization */
+        static LocalApplication()
+        {
+            //Log.d( TAG, "LoadLibrary" );
+            Console.WriteLine("enter AndroidBrowserVR LocalApplication cctor");
+
+
+            // "X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so"
+
+            // did csproj copy it where it needs to be?
+
+            // do we need it?
+            java.lang.System.loadLibrary("vrapi");
+
+            java.lang.System.loadLibrary("assimp");
+
+            //<!-- Tell NativeActivity the name of the .so -->
+            //<meta-data android:name="android.app.lib_name" android:value="vrcubeworld" />
+            // why bother?
+
+            //java.lang.System.loadLibrary("vrcubeworld");
+
+            // need to link it!
+            // "X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldNativeActivity\OVRVrCubeWorldNative\bin\Debug\staging\libs\armeabi-v7a\libOVRVrCubeWorldNative.so"
+
+            // incline android c would automate this step.
+            //java.lang.System.loadLibrary("OVRVrCubeWorldNative");
+            //java.lang.System.loadLibrary("main");
+        }
+    }
+
+
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "21")]
 
     // http://swagos.blogspot.com/2012/12/various-themes-available-in-android_28.html
@@ -33,7 +155,10 @@ namespace AndroidBrowserVR.Activities
 
     // works for 2.4 too
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
-    public class ApplicationActivity : Activity
+    public class ApplicationActivity :
+
+        //Activity
+        com.navigatevr.MainActivity
     {
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151201/samsungbrowser
 
@@ -61,156 +186,157 @@ namespace AndroidBrowserVR.Activities
         {
             // http://www.dreamincode.net/forums/topic/130521-android-part-iii-dynamic-layouts/
 
+            Console.WriteLine("enter ApplicationActivity onCreate");
             base.onCreate(savedInstanceState);
 
-            var sv = new ScrollView(this);
-            var ll = new LinearLayout(this);
+            //var sv = new ScrollView(this);
+            //var ll = new LinearLayout(this);
 
-            ll.setOrientation(LinearLayout.VERTICAL);
-            sv.addView(ll);
+            //ll.setOrientation(LinearLayout.VERTICAL);
+            //sv.addView(ll);
 
-            var b = new Button(this);
+            //var b = new Button(this);
 
-            b.setText("Vibrate!");
+            //b.setText("Vibrate!");
 
-            var sw = Stopwatch.StartNew();
+            //var sw = Stopwatch.StartNew();
 
-            Action<string> SetClipboard = value =>
-            {
-                Console.WriteLine("SetClipboard " + new { value });
+            //Action<string> SetClipboard = value =>
+            //{
+            //    Console.WriteLine("SetClipboard " + new { value });
 
-                this.runOnUiThread(
-                    delegate
-                    {
+            //    this.runOnUiThread(
+            //        delegate
+            //        {
 
-                        b.setText(value);
+            //            b.setText(value);
 
-                        var nm = (NotificationManager)this.getSystemService(Activity.NOTIFICATION_SERVICE);
-
-
-                        // see http://developer.android.com/reference/android/app/Notification.html
-                        var notification = new Notification(
-                            //android.R.drawable.ic_dialog_alert,
-                            android.R.drawable.ic_menu_view,
-                            //tickerText: "not used?",
-                            tickerText: value,
+            //            var nm = (NotificationManager)this.getSystemService(Activity.NOTIFICATION_SERVICE);
 
 
-                            when: 0
-                            //java.lang.System.currentTimeMillis()
-                        );
-
-                        //notification.defaults |= Notification.DEFAULT_SOUND;
-
-                        var notificationIntent = new Intent(this, typeof(ApplicationActivity).ToClass());
-                        var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+            //            // see http://developer.android.com/reference/android/app/Notification.html
+            //            var notification = new Notification(
+            //                //android.R.drawable.ic_dialog_alert,
+            //                android.R.drawable.ic_menu_view,
+            //                //tickerText: "not used?",
+            //                tickerText: value,
 
 
-                        notification.setLatestEventInfo(
-                            this,
-                            contentTitle: value,
-                            contentText: "",
-                            contentIntent: contentIntent);
+            //                when: 0
+            //                //java.lang.System.currentTimeMillis()
+            //            );
 
-                        //notification.defaults |= Notification.DEFAULT_VIBRATE;
-                        //notification.defaults |= Notification.DEFAULT_LIGHTS;
-                        // http://androiddrawableexplorer.appspot.com/
-                        nm.notify((int)sw.ElapsedMilliseconds, notification);
+            //            //notification.defaults |= Notification.DEFAULT_SOUND;
 
-                        var vibrator = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
-                        vibrator.vibrate(600);
-
-                        android.content.ClipboardManager clipboard = (android.content.ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
-                        ClipData clip = ClipData.newPlainText("label", value);
-                        clipboard.setPrimaryClip(clip);
-                    }
-                );
-            };
+            //            var notificationIntent = new Intent(this, typeof(ApplicationActivity).ToClass());
+            //            var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
 
-            b.AtClick(
-                delegate
-                {
-                    SetClipboard("hello");
-                }
-            );
+            //            notification.setLatestEventInfo(
+            //                this,
+            //                contentTitle: value,
+            //                contentText: "",
+            //                contentIntent: contentIntent);
 
-            #region lets listen to incoming udp
-            // could we define our chrome app inline in here?
-            // or in a chrome app. could we define the android app inline?
-            #region ReceiveAsync
-            Action<IPAddress> f = async nic =>
-            {
-                b.setText("awaiting at " + nic);
+            //            //notification.defaults |= Notification.DEFAULT_VIBRATE;
+            //            //notification.defaults |= Notification.DEFAULT_LIGHTS;
+            //            // http://androiddrawableexplorer.appspot.com/
+            //            nm.notify((int)sw.ElapsedMilliseconds, notification);
 
+            //            var vibrator = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
+            //            vibrator.vibrate(600);
 
-                WifiManager wifi = (WifiManager)this.getSystemService(Context.WIFI_SERVICE);
-                var lo = wifi.createMulticastLock("udp:49814");
-                lo.acquire();
-
-                // Z:\jsc.svn\examples\java\android\AndroidBrowserVR\ApplicationActivity.cs
-                // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
-                // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
-                var uu = new UdpClient(49814);
-                uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
-                while (true)
-                {
-                    // cannot get data from RED?
-                    var x = await uu.ReceiveAsync(); // did we jump to ui thread?
-                    //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
-                    var data = Encoding.UTF8.GetString(x.Buffer);
+            //            android.content.ClipboardManager clipboard = (android.content.ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+            //            ClipData clip = ClipData.newPlainText("label", value);
+            //            clipboard.setPrimaryClip(clip);
+            //        }
+            //    );
+            //};
 
 
+            //b.AtClick(
+            //    delegate
+            //    {
+            //        SetClipboard("hello");
+            //    }
+            //);
 
-                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
-                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/mousedown
-                    SetClipboard(data);
-                }
-            };
+            //#region lets listen to incoming udp
+            //// could we define our chrome app inline in here?
+            //// or in a chrome app. could we define the android app inline?
+            //#region ReceiveAsync
+            //Action<IPAddress> f = async nic =>
+            //{
+            //    b.setText("awaiting at " + nic);
 
-            // WithEach defined at?
-            NetworkInterface.GetAllNetworkInterfaces().WithEach(
-                n =>
-                {
-                    // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
-                    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
 
-                    var IPProperties = n.GetIPProperties();
-                    var PhysicalAddress = n.GetPhysicalAddress();
+            //    WifiManager wifi = (WifiManager)this.getSystemService(Context.WIFI_SERVICE);
+            //    var lo = wifi.createMulticastLock("udp:49814");
+            //    lo.acquire();
+
+            //    // Z:\jsc.svn\examples\java\android\AndroidBrowserVR\ApplicationActivity.cs
+            //    // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+            //    // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
+            //    var uu = new UdpClient(49814);
+            //    uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
+            //    while (true)
+            //    {
+            //        // cannot get data from RED?
+            //        var x = await uu.ReceiveAsync(); // did we jump to ui thread?
+            //        //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
+            //        var data = Encoding.UTF8.GetString(x.Buffer);
 
 
 
-                    foreach (var ip in IPProperties.UnicastAddresses)
-                    {
-                        // ipv4
-                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                        {
-                            if (!IPAddress.IsLoopback(ip.Address))
-                                if (n.SupportsMulticast)
-                                    f(ip.Address);
-                        }
-                    }
+            //        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+            //        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/mousedown
+            //        SetClipboard(data);
+            //    }
+            //};
+
+            //// WithEach defined at?
+            //NetworkInterface.GetAllNetworkInterfaces().WithEach(
+            //    n =>
+            //    {
+            //        // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+            //        // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
+
+            //        var IPProperties = n.GetIPProperties();
+            //        var PhysicalAddress = n.GetPhysicalAddress();
+
+
+
+            //        foreach (var ip in IPProperties.UnicastAddresses)
+            //        {
+            //            // ipv4
+            //            if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            //            {
+            //                if (!IPAddress.IsLoopback(ip.Address))
+            //                    if (n.SupportsMulticast)
+            //                        f(ip.Address);
+            //            }
+            //        }
 
 
 
 
-                }
-            );
-            #endregion
+            //    }
+            //);
+            //#endregion
 
 
-            #endregion
+            //#endregion
 
-            // jsc could pass this ptr to ctor for context..
-            var t = new EditText(this) { };
+            //// jsc could pass this ptr to ctor for context..
+            //var t = new EditText(this) { };
 
-            t.AttachTo(ll);
+            //t.AttachTo(ll);
 
-            ll.addView(b);
+            //ll.addView(b);
 
 
 
-            this.setContentView(sv);
+            //this.setContentView(sv);
 
 
             //this.ShowLongToast("http://my.jsc-solutions.net x");

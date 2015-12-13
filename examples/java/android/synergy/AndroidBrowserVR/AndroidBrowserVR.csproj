@@ -80,6 +80,9 @@
     <Reference Include="AndroidUDPClipboard.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\AndroidUDPClipboard.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="AndroidBrowserVR.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\AndroidBrowserVR.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationActivity.cs">
@@ -90,6 +93,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="References\commons-math3-3.5.jar" />
     <Content Include="X:\opensource\github\GearVRf\GVRf\Framework\src\**\*.*">
       <Link>opensource/github/GearVRf/%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
@@ -104,6 +108,32 @@
     <Content Include="x:\opensource\github\browser-vr\src\**\*.*">
       <Link>opensource/github/browser-vr/%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="z:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosNDK\bin\Debug\staging\libs\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\apk\libs\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\libs\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\apk\libs\armeabi-v7a\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="X:\opensource\github\browser-vr\res\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\apk\res-com.navigatevr.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\res\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\apk\res-org.gearvrf.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+    <!--<None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrAppFramework\Projects\Android\res\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\apk\res-com.oculus.vrappframework.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>-->
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -125,7 +155,7 @@ start /WAIT /MIN c:\util\jsc\bin\jsc.meta.exe SkipRewriteToMVSProjectTemplate /P
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
-start /MIN /WAIT C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true
+start /MIN /WAIT C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true /xAttachDebugger:true
 
 </PreBuildEvent>
   </PropertyGroup>

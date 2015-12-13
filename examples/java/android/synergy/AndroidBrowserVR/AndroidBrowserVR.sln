@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVRMyCubeWorld", "..\..\vr\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptCoreLibAndroid", "..\..\..\..\..\core\ScriptCoreLibAndroid\ScriptCoreLibAndroid\ScriptCoreLibAndroid.csproj", "{1CE7D22F-52C8-4164-8955-CD89609E48A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVROculus360PhotosHUD", "..\OVROculus360PhotosNDK\OVROculus360PhotosHUD\OVROculus360PhotosHUD.csproj", "{FC4FA0EA-F76F-4932-863E-3980F7587C34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CE7D22F-52C8-4164-8955-CD89609E48A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC4FA0EA-F76F-4932-863E-3980F7587C34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC4FA0EA-F76F-4932-863E-3980F7587C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC4FA0EA-F76F-4932-863E-3980F7587C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC4FA0EA-F76F-4932-863E-3980F7587C34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
