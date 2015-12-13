@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{44F8F2CD-9873-410B-90D4-BD9D8CA03D83}</ProjectGuid>
+    <ProjectGuid>{964DAB6F-1D9C-4F37-8E11-90219898F53C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OVRWindWheelNDK</RootNamespace>
