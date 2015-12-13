@@ -55,6 +55,103 @@
 
 
 
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\1stParty\OpenGL_Loader\Include\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\OpenGL_Loader\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\1stParty\OpenGL_Loader\Src\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\OpenGL_Loader\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+  
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\3rdParty\stb\src\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\stb\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\3rdParty\minizip\src\ioapi.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\minizip\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\3rdParty\minizip\src\unzip.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\minizip\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\VrApi\Include\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrApi\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\LibOVRKernel\Include\**\*.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\LibOVR\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\LibOVRKernel\Src\Android\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\LibOVR\Src\Android\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\LibOVRKernel\Src\Capture\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\LibOVR\Src\Capture\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\LibOVRKernel\Src\Kernel\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\LibOVR\Src\Kernel\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\VrAppFramework\Include\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrAppFramework\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\VrAppFramework\Src\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrAppFramework\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\VrAppSupport\VrModel\Src\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrAppSupport\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
+  
+
 
   <ItemGroup>
     <None Include="X:\opensource\github\GearVRf\GVRf\Framework\libs\libassimp.so">
@@ -80,7 +177,7 @@
   
   
   <ItemGroup>
-    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0.1\VrApi\Libs\Android\armeabi-v7a\libvrapi.so">
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so">
       <Link>staging\jni\armeabi-v7a\libvrapi.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -119,8 +216,67 @@
       <Link>staging\jni\eglextension\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
+
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\jni\shaders\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\shaders\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
   
 
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\jni\gl\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\gl\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\jni\objects\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\objects\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+  
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\jni\engine\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\engine\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\jni\oculus\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\oculus\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\jni\monoscopic\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\monoscopic\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\jni\sensor\ksensor\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\sensor\ksensor\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
+  
+  
   <ItemGroup>
     <Content Include="staging\AndroidManifest.xml">
       <SubType>Designer</SubType>

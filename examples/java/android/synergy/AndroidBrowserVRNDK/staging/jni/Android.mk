@@ -31,11 +31,52 @@ LOCAL_LDLIBS += -ljnigraphics
 
 LOCAL_STATIC_LIBRARIES := android_native_app_glue  
 
-LOCAL_CFLAGS	:= -DANDROID_NDK 
+LOCAL_CFLAGS	:= -DANDROID_NDK -DGL_EXT_texture_sRGB_decode -DGL_EXT_sRGB_write_control
+
+# Component&&
+LOCAL_CPPFLAGS += -fexceptions -std=c++11 -D__GXX_EXPERIMENTAL_CXX0X__
 
 LOCAL_C_INCLUDES :=
 
 LOCAL_SRC_FILES :=
+
+
+
+
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/stb
+LOCAL_SRC_FILES :=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./stb/*.c))
+
+
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/minizip
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./minizip/*.c))
+
+
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Src 
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppFramework/Src 
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppSupport/Src 
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Include 
+
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Src/Capture/include 
+
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrApi/Include 
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/OpenGL_Loader/Include 
+
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./OpenGL_Loader/Src/*.cpp))
+
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Kernel/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Android/*.cpp))
+#LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Capture/src/*.cpp))
+
+
+# since ovr_mobile_sdk_0.6.1.0
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppFramework/Include 
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppFramework/Src/VRMenu/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppFramework/Src/*.cpp))
+
+# SceneView.h
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppSupport/Src/*.cpp))
 
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/contrib/assimp
 LOCAL_C_INCLUDES +=	$(LOCAL_PATH)/contrib/assimp/include
@@ -53,10 +94,41 @@ LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/glm/gtx/*.cpp))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/glm/virtrev/*.cpp))
 
-#LOCAL_C_INCLUDES += $(LOCAL_PATH)/contrib
+
 
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./eglextension/msaa/*.cpp))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./eglextension/tiledrendering/*.cpp))
+
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./util/*.cpp))
+
+
+LOCAL_C_INCLUDES +=	$(LOCAL_PATH)/contrib/libpng
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./objects/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./objects/components/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./objects/textures/*.cpp))
+
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./shaders/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./shaders/material/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./shaders/posteffect/*.cpp))
+
+
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./engine/importer/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./engine/picker/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./engine/renderer/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./engine/memory/*.cpp))
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./sensor/ksensor/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./sensor/ksensor/math/*.cpp))
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./monoscopic/*.cpp))
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./oculus/*.cpp))
+
+
 
 LOCAL_SRC_FILES +=  AndroidBrowserVRNDK.dll.c
 

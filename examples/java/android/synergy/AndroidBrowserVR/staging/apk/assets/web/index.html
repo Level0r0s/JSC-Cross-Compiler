@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="vr-background" content="#ff0000,#0000ff">
+  <title>index</title>
+<style>
+body { font-family: sans-serif; }
+h1 { font-size: 64px; margin: 0px; text-align: center; }
+.bg { width: 200px; height: 200px; margin: 10px; float: left; color: white; padding: 10px; text-align: center; font-size: 32px; }
+textarea { width: 600px; font-size: 24px; border: 3px solid black; padding: 10px; }
+</style>
+</head>
+<body>
+
+<h1>hello world</h1>
+
+<div class="bg" style="background-color: red">RED</div>
+<div class="bg" style="background-color: green">GREEN</div>
+<div class="bg" style="background-color: blue">BLUE</div>
+
+<textarea id="textarea"></textarea>
+
+<img src="gearvr_logo.jpg" width="500px" height="455px">
+
+<script src="navi.js"></script>
+<script>
+
+var frame = 0;
+var time = Date.now();
+var dt = 0;
+
+var scene = new NAVI.Scene('main');
+
+var earth;
+
+document.addEventListener("click", function(event) {
+  NAVI.showToast("clicked pg @ "+ event.pageX +","+ event.pageY);
+}, false);
+
+document.addEventListener("keydown", function(event) {
+  var code = event.keyCode || event.which;
+  NAVI.showToast("keydown " + code);
+});
+
+var bgButtons = document.getElementsByClassName("bg");
+
+for (var i = 0; i < bgButtons.length; i++) {
+  bgButtons[i].addEventListener("click", function(event) {
+    NAVI.setBackground( event.target.style.backgroundColor );
+    event.stopPropagation();
+  });
+}
+
+setTimeout(function(){
+
+  NAVI.setValue("rate", "3");
+
+  earth = new NAVI.Box("earth");
+
+}, 5*1000);
+
+setTimeout(function(){
+
+  scene.add(earth);
+
+  step();
+
+}, 10*1000);
+
+var angle = 0.0;
+var axis = [0,1,0];
+
+var radius = 3;
+var x = 0;
+var y = 0;
+function step() {
+  requestAnimationFrame(step);
+
+  if (frame++ % 2) // 30fps
+    return;
+
+  earth.rotate(angle, axis[0], axis[1], axis[2]);
+
+  angle += parseFloat( NAVI.getValue("rate") );
+
+  earth.setPosition(x, 0, y);
+  x = Math.cos(frame/60) * radius;
+  y = Math.sin(frame/60) * radius;
+
+
+  dt = Date.now() - time;
+  time = Date.now();
+}
+
+</script>
+
+</body>
+</html>

@@ -149,6 +149,7 @@ namespace AndroidBrowserVR.Activities
 
             // do we need it?
             java.lang.System.loadLibrary("vrapi");
+            java.lang.System.loadLibrary("assimp");
 
             //java.lang.System.loadLibrary("assimp");
 
@@ -177,7 +178,7 @@ namespace AndroidBrowserVR.Activities
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:screenOrientation", value = "landscape")]
 
 
-  
+
 
     // http://swagos.blogspot.com/2012/12/various-themes-available-in-android_28.html
     // Theme.Holo.Dialog.Alert
@@ -191,8 +192,10 @@ namespace AndroidBrowserVR.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
     public class ApplicationActivity :
 
-        Activity
-    //com.navigatevr.MainActivity
+        // Error	5	The type 'com.oculus.vrappframework.VrActivity' is defined in an assembly that is not referenced. You must add a reference to assembly 'VrAppFramework, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.	Z:\jsc.svn\examples\java\android\synergy\AndroidBrowserVR\ApplicationActivity.cs	193	18	AndroidBrowserVR
+
+        //Activity
+    com.navigatevr.MainActivity
     {
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151201/samsungbrowser
 
@@ -216,7 +219,8 @@ namespace AndroidBrowserVR.Activities
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151121
         // http://stackoverflow.com/questions/17513502/support-for-multi-window-app-development
 
-        protected override void onCreate(global::android.os.Bundle savedInstanceState)
+        //protected override void onCreate(global::android.os.Bundle savedInstanceState)
+        public override void onCreate(global::android.os.Bundle savedInstanceState)
         {
             // http://www.dreamincode.net/forums/topic/130521-android-part-iii-dynamic-layouts/
 

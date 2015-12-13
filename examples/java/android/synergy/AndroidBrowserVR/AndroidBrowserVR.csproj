@@ -94,15 +94,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="References\commons-math3-3.5.jar" />
+    <Content Include="staging\apk\assets\web\gearvr_logo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="staging\apk\assets\web\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="staging\apk\assets\web\navi.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="X:\opensource\github\GearVRf\GVRf\Framework\src\**\*.*">
       <Link>opensource/github/GearVRf/%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
-    <Content Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrApi\Libs\Android\VrApi.jar">
+    <Content Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\VrApi\Libs\Android\VrApi.jar">
       <Link>References\VrApi.jar</Link>
     </Content>
-    <Content Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppFramework\Libs\Android\VrAppFramework.jar">
+    <Content Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\VrAppFramework\Libs\Android\VrAppFramework.jar">
       <Link>References\VrAppFramework.jar</Link>
     </Content>
+    <!--<Content Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\VrAppFramework\Projects\Android\src\**\*.*">
+      <Link>opensource/VrAppFramework/%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </Content>-->
   </ItemGroup>
   <ItemGroup>
     <Content Include="x:\opensource\github\browser-vr\src\**\*.*">
@@ -114,7 +126,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\libs\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>-->
-
+    <None Include="staging\apk\assets\oculussig_02157df2d5d4e70b">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Z:\jsc.svn\examples\java\android\synergy\AndroidBrowserVRNDK\bin\Debug\staging\libs\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\libs\%(RecursiveDir)%(FileName)%(Extension)</Link>
@@ -135,7 +149,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\res-org.gearvrf.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
-    <!--<None Include="X:\opensource\ovr_mobile_sdk_0.6.0\VrAppFramework\Projects\Android\res\**\*.*">
+    <!--<None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\VrAppFramework\res\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\res-com.oculus.vrappframework.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>-->
