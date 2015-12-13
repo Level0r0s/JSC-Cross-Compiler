@@ -8,12 +8,14 @@
 
 LOCAL_PATH := $(call my-dir)
 
-
-
-
 include $(CLEAR_VARS)
 LOCAL_MODULE := vrapi
 LOCAL_SRC_FILES := $(TARGET_ARCH_ABI)/libvrapi.so 
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := assimp
+LOCAL_SRC_FILES := $(TARGET_ARCH_ABI)/libassimp.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 
@@ -38,7 +40,9 @@ LOCAL_SRC_FILES +=  AndroidBrowserVRNDK.dll.c
 
 
 
-LOCAL_SHARED_LIBRARIES	:= vrapi 
+LOCAL_SHARED_LIBRARIES	:= 
+LOCAL_SHARED_LIBRARIES	+= vrapi 
+LOCAL_SHARED_LIBRARIES	+= assimp 
 
 
 include $(BUILD_SHARED_LIBRARY)

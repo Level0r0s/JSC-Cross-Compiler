@@ -120,12 +120,12 @@
       <Link>staging\apk\libs\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-  <ItemGroup>
+  <!--<ItemGroup>
     <None Include="X:\opensource\github\GearVRf\GVRf\Framework\libs\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\libs\armeabi-v7a\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
-  </ItemGroup>
+  </ItemGroup>-->
   <ItemGroup>
     <None Include="X:\opensource\github\browser-vr\res\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
