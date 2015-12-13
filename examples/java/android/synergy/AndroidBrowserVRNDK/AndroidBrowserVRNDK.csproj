@@ -62,6 +62,22 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\jni\contrib\assimp\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\contrib\assimp\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\jni\contrib\jassimp2\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\contrib\jassimp2\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
   
   <ItemGroup>
     <None Include="X:\opensource\ovr_mobile_sdk_0.6.0.1\VrApi\Libs\Android\armeabi-v7a\libvrapi.so">

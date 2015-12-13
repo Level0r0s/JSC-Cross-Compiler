@@ -3,6 +3,11 @@
 # http://stackoverflow.com/questions/19447817/android-ndk-what-should-i-set-in-application-mk-for-app-abi
 # s6 edge ?
 APP_ABI := armeabi-v7a
+
+
+#  #include <string>
+APP_STL := gnustl_static
+
 # Check that jni/arm64-v8a/libvrapi.so  exists  or that its path is correct
 #APP_ABI := arm64-v8a
 #APP_PLATFORM := android-21

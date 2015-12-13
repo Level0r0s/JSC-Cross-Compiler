@@ -21,24 +21,25 @@ include $(PREBUILT_SHARED_LIBRARY)
 
 
 include $(CLEAR_VARS)
-
+LOCAL_MODULE    := main
 LOCAL_ARM_MODE  := arm					# full speed arm instead of thumb
 LOCAL_ARM_NEON  := true					# compile with neon support enabled
-
-
-LOCAL_MODULE    := main
-
-
 
 LOCAL_LDLIBS    := -llog -landroid -lEGL   -lGLESv3 -lz 
 LOCAL_STATIC_LIBRARIES := android_native_app_glue  
 
+LOCAL_CFLAGS	:= -DANDROID_NDK 
 
+LOCAL_C_INCLUDES :=
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/contrib/assimp
+LOCAL_C_INCLUDES +=	$(LOCAL_PATH)/contrib/assimp/include
+LOCAL_C_INCLUDES +=	$(LOCAL_PATH)/contrib/assimp/include/Compiler
 
 LOCAL_SRC_FILES :=
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/jassimp2/*.cpp))
+
 LOCAL_SRC_FILES +=  AndroidBrowserVRNDK.dll.c
-
-
 
 LOCAL_SHARED_LIBRARIES	:= 
 LOCAL_SHARED_LIBRARIES	+= vrapi 
