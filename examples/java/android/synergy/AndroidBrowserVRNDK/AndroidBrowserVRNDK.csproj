@@ -85,6 +85,17 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\jni\contrib\libpng\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\contrib\libpng\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
   
   <ItemGroup>
     <Content Include="staging\AndroidManifest.xml">

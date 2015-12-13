@@ -38,6 +38,8 @@ LOCAL_C_INCLUDES +=	$(LOCAL_PATH)/contrib/assimp/include/Compiler
 LOCAL_SRC_FILES :=
 
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/jassimp2/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/libpng/*.c))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/libpng/*.s))
 
 LOCAL_SRC_FILES +=  AndroidBrowserVRNDK.dll.c
 
