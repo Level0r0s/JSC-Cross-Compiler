@@ -52,6 +52,15 @@
   <ItemGroup>
     <None Include="tools\build.bat" />
   </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_mobile_sdk_0.6.0.1\VrApi\Libs\Android\armeabi-v7a\libvrapi.so">
+      <Link>staging\jni\armeabi-v7a\libvrapi.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
   <ItemGroup>
     <Content Include="staging\AndroidManifest.xml">
       <SubType>Designer</SubType>

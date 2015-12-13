@@ -1,9 +1,22 @@
 # Android.mk 
 # because why keep it simple if we can have a special build scripts all over the place.
 # https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151213/androidbrowserndk
+# https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150612/ovroculus360photoshud
 # do we know what needs to be done?
 
+
+
 LOCAL_PATH := $(call my-dir)
+
+
+
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := vrapi
+LOCAL_SRC_FILES := $(TARGET_ARCH_ABI)/libvrapi.so 
+include $(PREBUILT_SHARED_LIBRARY)
+
+
 
 include $(CLEAR_VARS)
 
@@ -18,6 +31,14 @@ LOCAL_MODULE    := main
 LOCAL_LDLIBS    := -llog -landroid -lEGL   -lGLESv3 -lz 
 LOCAL_STATIC_LIBRARIES := android_native_app_glue  
 
+
+
+LOCAL_SRC_FILES :=
+LOCAL_SRC_FILES +=  AndroidBrowserVRNDK.dll.c
+
+
+
+LOCAL_SHARED_LIBRARIES	:= vrapi 
 
 
 include $(BUILD_SHARED_LIBRARY)

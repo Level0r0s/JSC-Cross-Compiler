@@ -22,6 +22,26 @@ using System.Diagnostics;
 namespace AndroidBrowserVR.Activities
 {
 
+    static class xMarshal
+    {
+        // called by?
+
+        [Script(IsPInvoke = true)]
+        //private long find(string lib, string fname) { return default(long); }
+        public static string stringFromJNI(object args = null) { return default(string); }
+
+        //[Script(IsPInvoke = true)]
+        //public static long nativeSetAppInterface(
+        //    //com.oculusvr.vrlib.VrActivity act,
+        //    object act,
+
+        //    string fromPackageNameString,
+        //    string commandString,
+        //    string uriString)
+        //{ return default(long); }
+    }
+
+
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/ovroculus360photoshud
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150613/record
     // "x:\util\android-sdk-windows\platform-tools\adb.exe" shell am start -n OVROculus360PhotosHUD.Activities/OVROculus360PhotosHUD.Activities.ApplicationActivity
@@ -31,8 +51,8 @@ namespace AndroidBrowserVR.Activities
     // "X:\opensource\ovr_mobile_sdk_0.6.0\VrSamples\Native\Oculus360PhotosSDK\src\com\oculus\oculus360photossdk\MainActivity.java"
 
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "10")]
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
-
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "21")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_only")]
     // https://forums.oculus.com/viewtopic.php?t=21409
     // vr_dual wont run on gearvr for now...
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "dual")]
@@ -40,7 +60,6 @@ namespace AndroidBrowserVR.Activities
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
 
     // vr_only means we wont see our activity ui
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_only")]
     //<meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_only"/>
     public class LocalApplication : Application
     {
@@ -51,6 +70,12 @@ namespace AndroidBrowserVR.Activities
         // should jsc remember last connected device and reconnect if disconnected?
         // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
         // restart helps.
+
+
+        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop AndroidBrowserVR.Activities
+        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n AndroidBrowserVR.Activities/AndroidBrowserVR.Activities.ApplicationActivity
+
+        // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity" "AndroidRuntime"
 
 
         public override void onCreate()
@@ -125,7 +150,7 @@ namespace AndroidBrowserVR.Activities
             // do we need it?
             java.lang.System.loadLibrary("vrapi");
 
-            java.lang.System.loadLibrary("assimp");
+            //java.lang.System.loadLibrary("assimp");
 
             //<!-- Tell NativeActivity the name of the .so -->
             //<meta-data android:name="android.app.lib_name" android:value="vrcubeworld" />
@@ -138,17 +163,26 @@ namespace AndroidBrowserVR.Activities
 
             // incline android c would automate this step.
             //java.lang.System.loadLibrary("OVRVrCubeWorldNative");
-            //java.lang.System.loadLibrary("main");
+            java.lang.System.loadLibrary("main");
+
+
+            var stringFromJNI = xMarshal.stringFromJNI();
+
+            Console.WriteLine(new { stringFromJNI });
         }
     }
 
 
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "21")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Black.NoTitleBar.Fullscreen")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:screenOrientation", value = "landscape")]
+
+
+  
 
     // http://swagos.blogspot.com/2012/12/various-themes-available-in-android_28.html
     // Theme.Holo.Dialog.Alert
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Light.Dialog")]
+    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Light.Dialog")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.DeviceDefault.Light")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.DeviceDefault.Dialog")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.DeviceDefault.Light.Dialog")]
@@ -157,8 +191,8 @@ namespace AndroidBrowserVR.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
     public class ApplicationActivity :
 
-        //Activity
-        com.navigatevr.MainActivity
+        Activity
+    //com.navigatevr.MainActivity
     {
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151201/samsungbrowser
 
