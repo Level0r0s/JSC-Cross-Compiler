@@ -105,6 +105,22 @@
   </ItemGroup>
 
 
+
+  <ItemGroup>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\jni\util\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\util\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="X:\opensource\github\GearVRf\GVRf\Framework\jni\eglextension\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\eglextension\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
+
   <ItemGroup>
     <Content Include="staging\AndroidManifest.xml">
       <SubType>Designer</SubType>

@@ -13,4 +13,4 @@ APP_STL := gnustl_static
 #APP_PLATFORM := android-21
 # https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150611/ovroculus360photosndk
 # Target id 'android-19' is not valid
-APP_PLATFORM := android-22
+APP_PLATFORM := android-23

@@ -25,7 +25,10 @@ LOCAL_MODULE    := main
 LOCAL_ARM_MODE  := arm					# full speed arm instead of thumb
 LOCAL_ARM_NEON  := true					# compile with neon support enabled
 
+
 LOCAL_LDLIBS    := -llog -landroid -lEGL   -lGLESv3 -lz 
+LOCAL_LDLIBS += -ljnigraphics 
+
 LOCAL_STATIC_LIBRARIES := android_native_app_glue  
 
 LOCAL_CFLAGS	:= -DANDROID_NDK 
@@ -49,6 +52,11 @@ LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/glm/gtc/*.cpp))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/glm/gtx/*.cpp))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/glm/virtrev/*.cpp))
+
+#LOCAL_C_INCLUDES += $(LOCAL_PATH)/contrib
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./eglextension/msaa/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./eglextension/tiledrendering/*.cpp))
 
 LOCAL_SRC_FILES +=  AndroidBrowserVRNDK.dll.c
 
