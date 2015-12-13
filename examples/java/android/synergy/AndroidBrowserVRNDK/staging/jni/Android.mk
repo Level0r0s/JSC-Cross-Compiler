@@ -31,15 +31,24 @@ LOCAL_STATIC_LIBRARIES := android_native_app_glue
 LOCAL_CFLAGS	:= -DANDROID_NDK 
 
 LOCAL_C_INCLUDES :=
+
+LOCAL_SRC_FILES :=
+
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/contrib/assimp
 LOCAL_C_INCLUDES +=	$(LOCAL_PATH)/contrib/assimp/include
 LOCAL_C_INCLUDES +=	$(LOCAL_PATH)/contrib/assimp/include/Compiler
 
-LOCAL_SRC_FILES :=
-
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/jassimp2/*.cpp))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/libpng/*.c))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/libpng/*.s))
+
+
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/contrib
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/glm/detail/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/glm/gtc/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/glm/gtx/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./contrib/glm/virtrev/*.cpp))
 
 LOCAL_SRC_FILES +=  AndroidBrowserVRNDK.dll.c
 
