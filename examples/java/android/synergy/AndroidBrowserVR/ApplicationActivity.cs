@@ -227,6 +227,9 @@ namespace AndroidBrowserVR.Activities
             Console.WriteLine("enter ApplicationActivity onCreate");
             base.onCreate(savedInstanceState);
 
+
+            //base.load
+
             //var sv = new ScrollView(this);
             //var ll = new LinearLayout(this);
 
@@ -237,59 +240,61 @@ namespace AndroidBrowserVR.Activities
 
             //b.setText("Vibrate!");
 
-            //var sw = Stopwatch.StartNew();
+            var sw = Stopwatch.StartNew();
 
-            //Action<string> SetClipboard = value =>
-            //{
-            //    Console.WriteLine("SetClipboard " + new { value });
+            Action<string> SetClipboard = value =>
+            {
+                Console.WriteLine("SetClipboard " + new { value });
 
-            //    this.runOnUiThread(
-            //        delegate
-            //        {
-
-            //            b.setText(value);
-
-            //            var nm = (NotificationManager)this.getSystemService(Activity.NOTIFICATION_SERVICE);
+                this.runOnUiThread(
+                    delegate
+                    {
 
 
-            //            // see http://developer.android.com/reference/android/app/Notification.html
-            //            var notification = new Notification(
-            //                //android.R.drawable.ic_dialog_alert,
-            //                android.R.drawable.ic_menu_view,
-            //                //tickerText: "not used?",
-            //                tickerText: value,
+                        var nm = (NotificationManager)this.getSystemService(Activity.NOTIFICATION_SERVICE);
 
 
-            //                when: 0
-            //                //java.lang.System.currentTimeMillis()
-            //            );
-
-            //            //notification.defaults |= Notification.DEFAULT_SOUND;
-
-            //            var notificationIntent = new Intent(this, typeof(ApplicationActivity).ToClass());
-            //            var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+                        // see http://developer.android.com/reference/android/app/Notification.html
+                        var notification = new Notification(
+                            //android.R.drawable.ic_dialog_alert,
+                            android.R.drawable.ic_menu_view,
+                            //tickerText: "not used?",
+                            tickerText: value,
 
 
-            //            notification.setLatestEventInfo(
-            //                this,
-            //                contentTitle: value,
-            //                contentText: "",
-            //                contentIntent: contentIntent);
+                            when: 0
+                            //java.lang.System.currentTimeMillis()
+                        );
 
-            //            //notification.defaults |= Notification.DEFAULT_VIBRATE;
-            //            //notification.defaults |= Notification.DEFAULT_LIGHTS;
-            //            // http://androiddrawableexplorer.appspot.com/
-            //            nm.notify((int)sw.ElapsedMilliseconds, notification);
+                        //notification.defaults |= Notification.DEFAULT_SOUND;
 
-            //            var vibrator = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
-            //            vibrator.vibrate(600);
+                        var notificationIntent = new Intent(this, typeof(ApplicationActivity).ToClass());
+                        var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
-            //            android.content.ClipboardManager clipboard = (android.content.ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
-            //            ClipData clip = ClipData.newPlainText("label", value);
-            //            clipboard.setPrimaryClip(clip);
-            //        }
-            //    );
-            //};
+
+                        notification.setLatestEventInfo(
+                            this,
+                            contentTitle: value,
+                            contentText: "",
+                            contentIntent: contentIntent);
+
+                        //notification.defaults |= Notification.DEFAULT_VIBRATE;
+                        //notification.defaults |= Notification.DEFAULT_LIGHTS;
+                        // http://androiddrawableexplorer.appspot.com/
+                        nm.notify((int)sw.ElapsedMilliseconds, notification);
+
+                        var vibrator = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
+                        vibrator.vibrate(600);
+
+                        android.content.ClipboardManager clipboard = (android.content.ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+                        ClipData clip = ClipData.newPlainText("label", value);
+                        clipboard.setPrimaryClip(clip);
+
+                        base.getWebView().loadUrl(value);
+
+                    }
+                );
+            };
 
 
             //b.AtClick(
@@ -299,71 +304,71 @@ namespace AndroidBrowserVR.Activities
             //    }
             //);
 
-            //#region lets listen to incoming udp
-            //// could we define our chrome app inline in here?
-            //// or in a chrome app. could we define the android app inline?
-            //#region ReceiveAsync
-            //Action<IPAddress> f = async nic =>
-            //{
-            //    b.setText("awaiting at " + nic);
+            #region lets listen to incoming udp
+            // could we define our chrome app inline in here?
+            // or in a chrome app. could we define the android app inline?
+            #region ReceiveAsync
+            Action<IPAddress> f = async nic =>
+            {
+                //b.setText("awaiting at " + nic);
 
 
-            //    WifiManager wifi = (WifiManager)this.getSystemService(Context.WIFI_SERVICE);
-            //    var lo = wifi.createMulticastLock("udp:49814");
-            //    lo.acquire();
+                WifiManager wifi = (WifiManager)this.getSystemService(Context.WIFI_SERVICE);
+                var lo = wifi.createMulticastLock("udp:49814");
+                lo.acquire();
 
-            //    // Z:\jsc.svn\examples\java\android\AndroidBrowserVR\ApplicationActivity.cs
-            //    // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
-            //    // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
-            //    var uu = new UdpClient(49814);
-            //    uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
-            //    while (true)
-            //    {
-            //        // cannot get data from RED?
-            //        var x = await uu.ReceiveAsync(); // did we jump to ui thread?
-            //        //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
-            //        var data = Encoding.UTF8.GetString(x.Buffer);
-
-
-
-            //        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
-            //        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/mousedown
-            //        SetClipboard(data);
-            //    }
-            //};
-
-            //// WithEach defined at?
-            //NetworkInterface.GetAllNetworkInterfaces().WithEach(
-            //    n =>
-            //    {
-            //        // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
-            //        // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
-
-            //        var IPProperties = n.GetIPProperties();
-            //        var PhysicalAddress = n.GetPhysicalAddress();
+                // Z:\jsc.svn\examples\java\android\AndroidBrowserVR\ApplicationActivity.cs
+                // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
+                var uu = new UdpClient(49814);
+                uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
+                while (true)
+                {
+                    // cannot get data from RED?
+                    var x = await uu.ReceiveAsync(); // did we jump to ui thread?
+                    //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
+                    var data = Encoding.UTF8.GetString(x.Buffer);
 
 
 
-            //        foreach (var ip in IPProperties.UnicastAddresses)
-            //        {
-            //            // ipv4
-            //            if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-            //            {
-            //                if (!IPAddress.IsLoopback(ip.Address))
-            //                    if (n.SupportsMulticast)
-            //                        f(ip.Address);
-            //            }
-            //        }
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/mousedown
+                    SetClipboard(data);
+                }
+            };
+
+            // WithEach defined at?
+            NetworkInterface.GetAllNetworkInterfaces().WithEach(
+                n =>
+                {
+                    // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
+
+                    var IPProperties = n.GetIPProperties();
+                    var PhysicalAddress = n.GetPhysicalAddress();
+
+
+
+                    foreach (var ip in IPProperties.UnicastAddresses)
+                    {
+                        // ipv4
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            if (!IPAddress.IsLoopback(ip.Address))
+                                if (n.SupportsMulticast)
+                                    f(ip.Address);
+                        }
+                    }
 
 
 
 
-            //    }
-            //);
-            //#endregion
+                }
+            );
+            #endregion
 
 
-            //#endregion
+            #endregion
 
             //// jsc could pass this ptr to ctor for context..
             //var t = new EditText(this) { };
