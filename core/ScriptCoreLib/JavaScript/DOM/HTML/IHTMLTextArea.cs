@@ -18,6 +18,16 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             }
         }
 
+
+        // Z:\jsc.svn\examples\javascript\Test\TestTextAreaToString\Application.cs
+        public static implicit operator string(IHTMLTextArea e)
+        {
+            if (e == null)
+                return null;
+
+            return e.value;
+        }
+
         public string value;
 
         public event System.Action onvaluechanged
