@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTFSymbolFontExperiment", "TTFSymbolFontExperiment\TTFSymbolFontExperiment.csproj", "{4DF27B22-A416-4BF8-BCB7-2C5982DE621A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSSDiabloFontExperiment", "..\..\CSSDiabloFontExperiment\CSSDiabloFontExperiment\CSSDiabloFontExperiment.csproj", "{C19470A8-F1E8-4211-85F6-CA49FB33B1BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSSFontFaceExperiment", "..\..\CSSFontFaceExperiment\CSSFontFaceExperiment\CSSFontFaceExperiment.csproj", "{25F67FEE-3581-43FB-AADE-73969269B146}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,14 @@ Global
 		{4DF27B22-A416-4BF8-BCB7-2C5982DE621A}.Debug|x86.Build.0 = Debug|x86
 		{4DF27B22-A416-4BF8-BCB7-2C5982DE621A}.Release|x86.ActiveCfg = Release|x86
 		{4DF27B22-A416-4BF8-BCB7-2C5982DE621A}.Release|x86.Build.0 = Release|x86
+		{C19470A8-F1E8-4211-85F6-CA49FB33B1BF}.Debug|x86.ActiveCfg = Debug|x86
+		{C19470A8-F1E8-4211-85F6-CA49FB33B1BF}.Debug|x86.Build.0 = Debug|x86
+		{C19470A8-F1E8-4211-85F6-CA49FB33B1BF}.Release|x86.ActiveCfg = Release|x86
+		{C19470A8-F1E8-4211-85F6-CA49FB33B1BF}.Release|x86.Build.0 = Release|x86
+		{25F67FEE-3581-43FB-AADE-73969269B146}.Debug|x86.ActiveCfg = Debug|x86
+		{25F67FEE-3581-43FB-AADE-73969269B146}.Debug|x86.Build.0 = Debug|x86
+		{25F67FEE-3581-43FB-AADE-73969269B146}.Release|x86.ActiveCfg = Release|x86
+		{25F67FEE-3581-43FB-AADE-73969269B146}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

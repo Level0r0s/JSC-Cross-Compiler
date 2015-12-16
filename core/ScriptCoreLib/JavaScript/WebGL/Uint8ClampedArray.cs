@@ -96,6 +96,13 @@ namespace ScriptCoreLib.JavaScript
 				// x:\jsc.svn\examples\javascript\test\testwebcryptokeyexport\testwebcryptokeyexport\application.cs
 				return (byte[])(object)e;
 			}
+
+
+            public byte this[uint i]
+            {
+                get { return 0; }
+                set { }
+            }
 		}
 
 

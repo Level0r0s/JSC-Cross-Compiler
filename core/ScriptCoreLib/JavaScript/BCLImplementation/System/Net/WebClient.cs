@@ -351,6 +351,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
         // NET 4.5
         public Task<byte[]> DownloadDataTaskAsync(string address)
         {
+            // Z:\jsc.svn\examples\javascript\audio\StereoChannelVisualization\Application.cs
+
             var x = new IXMLHttpRequest();
             x.open(Shared.HTTPMethodEnum.GET, address);
             // X:\jsc.svn\core\ScriptCoreLib\JavaScript\DOM\IXMLHttpRequest.cs

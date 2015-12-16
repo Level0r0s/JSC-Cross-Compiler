@@ -14,6 +14,9 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 	[Script(InternalConstructor = true)]
 	public class IHTMLVideo : IHTMLMedia
 	{
+        // video regulations?
+        // http://www.lexology.com/library/detail.aspx?g=13ccd6ed-4a11-4ca5-b3df-01574a997e3e
+
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151006/360
         // https://code.google.com/p/chromium/issues/detail?id=25573
         // https://code.google.com/p/chromium/issues/detail?id=109652#c2

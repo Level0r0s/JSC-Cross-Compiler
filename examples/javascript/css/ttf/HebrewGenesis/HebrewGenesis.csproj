@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A07AA8BE-7108-404F-A7E6-95563565E2A5}</ProjectGuid>
+    <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AARPMartialLawLoop</RootNamespace>
-    <AssemblyName>AARPMartialLawLoop</AssemblyName>
+    <RootNamespace>HebrewGenesis</RootNamespace>
+    <AssemblyName>HebrewGenesis</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>AARPMartialLawLoop.Program</StartupObject>
+    <StartupObject>HebrewGenesis.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -116,8 +116,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="AARPMartialLawLoop.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\AARPMartialLawLoop.AssetsLibrary.dll</HintPath>
+    <Reference Include="HebrewGenesis.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\HebrewGenesis.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
@@ -125,7 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Audio\loop.wav" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />
     <Compile Include="ApplicationWebService.cs" />
@@ -134,6 +133,15 @@
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
     <None Include="app.config" />
+    <None Include="Fonts\Bsthebre.ttf" />
+    <None Include="Fonts\bwhebb.ttf" />
+    <None Include="Fonts\bwhebl.ttf" />
+    <None Include="Fonts\cabin.regular.ttf" />
+    <None Include="Fonts\Exocet1.ttf" />
+    <None Include="Fonts\HEBREW.ttf" />
+    <None Include="Fonts\SBL_Hbrw.ttf" />
+    <None Include="Fonts\SHALOOLD.ttf" />
+    <None Include="Fonts\SILEZRA_.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

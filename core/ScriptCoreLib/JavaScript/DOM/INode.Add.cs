@@ -16,7 +16,8 @@ namespace ScriptCoreLib.JavaScript.DOM
 	public partial class INode
 	{
 		// will roslyn allow Add extensions?
-
+        // some of the methods should be part of 
+        // Z:\jsc.svn\core\ScriptCoreLib\JavaScript\DOM\HTML\IHTMLElement.cs ?
 
 
 

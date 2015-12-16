@@ -203,6 +203,33 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
 
 
+
+        // a special field initializer?
+        [Script(DefineAsStatic = true)]
+        public virtual void Add(ScriptCoreLib.JavaScript.DOM.IStyle.FontFamilyEnum fontFamily)
+        {
+            // Z:\jsc.svn\examples\javascript\css\ttf\HebrewGenesis\Application.cs
+
+            // Implementing Collection Initializers
+            // http://msdn.microsoft.com/en-us/library/bb384062.aspx
+
+            //this.appendChild(new ITextNode(e));
+
+            this.style.fontFamily = fontFamily;
+        }
+
+
+        // a special field initializer?
+        [Script(DefineAsStatic = true)]
+        public virtual void Add(XAttribute a)
+        {
+            // Z:\jsc.svn\examples\javascript\css\ttf\HebrewGenesis\Application.cs
+
+
+            this.setAttribute(a.Name.LocalName, a.Value);
+        }
+
+
         // element is like exception. its a base class. not ot be created. not to be thrown.
 
         public string id;
@@ -348,6 +375,11 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
             // must keep it empty?
             //throw new System.NotImplementedException();
         }
+        public IHTMLElement(string tag, string innerText)
+        {
+            // must keep it empty?
+            //throw new System.NotImplementedException();
+        }
         public IHTMLElement(HTMLElementEnum tag) { }
         public IHTMLElement(HTMLElementEnum tag, IHTMLDocument doc) { }
         public IHTMLElement(HTMLElementEnum tag, string text) { }
@@ -363,6 +395,15 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
         {
             return Native.Document.createElement(tag);
         }
+
+        internal static IHTMLElement InternalConstructor(string tag, string innerText)
+        {
+            // Z:\jsc.svn\examples\javascript\css\ttf\HebrewGenesis\Application.cs
+            var x = Native.Document.createElement(tag);
+            x.innerText = innerText;
+            return x;
+        }
+
 
         internal static IHTMLElement InternalConstructor(HTMLElementEnum tag)
         {

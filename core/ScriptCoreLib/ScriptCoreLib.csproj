@@ -134,6 +134,12 @@
     <Compile Include="JavaScript\WebAudio\AudioDestinationNode.cs" />
     <Compile Include="JavaScript\WebAudio\AudioParam.cs" />
     <Compile Include="JavaScript\WebAudio\AudioNode.cs" />
+    <Compile Include="JavaScript\WebAudio\AnalyserNode.cs" />
+    <Compile Include="JavaScript\WebAudio\AudioBufferSourceNode.cs" />
+    <Compile Include="JavaScript\WebAudio\ChannelSplitterNode.cs" />
+    <Compile Include="JavaScript\WebAudio\AudioSourceNode.cs" />
+    <Compile Include="JavaScript\WebAudio\AudioBuffer.cs" />
+    <Compile Include="JavaScript\WebAudio\ScriptProcessorNode.cs" />
     <Compile Include="JavaScript\WebAudio\PannerNode.cs" />
     <Compile Include="JavaScript\WebAudio\GainNode.cs" />
     <Compile Include="JavaScript\WebAudio\OscillatorNode.cs" />
