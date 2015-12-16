@@ -19,6 +19,7 @@ using StereoChannelVisualization.HTML.Pages;
 using ScriptCoreLib.JavaScript.WebAudio;
 using System.Net;
 using ScriptCoreLib.JavaScript.WebGL;
+using System.Diagnostics;
 
 namespace StereoChannelVisualization
 {
@@ -108,6 +109,25 @@ namespace StereoChannelVisualization
                     );
 
 
+
+                    var xleft = new List<int> { };
+                    // 302 elements for  11 sec is 27fps
+                    var xaverage = 0;
+
+                    sourceNode.onended = IFunction.Of(
+                        delegate
+                        {
+                            // { min = 0, max = 63, Count = 264 }
+                            // { min = 0, max = 60, Count = 264 }
+
+                            var min = xleft.Min();
+                            var max = xleft.Max();
+
+                            new IHTMLPre { new { min, max, xleft.Count } }.AttachToDocument();
+
+                        }
+                    );
+
                     // await ?
                     context.decodeAudioData(new Uint8ClampedArray(buffer).buffer,
                         xbuffer =>
@@ -115,7 +135,7 @@ namespace StereoChannelVisualization
                             // when the audio is decoded play the sound
                             sourceNode.buffer = xbuffer;
                             sourceNode.start(0);
-                            sourceNode.loop = true;
+                            //sourceNode.loop = true;
 
                         }
                      );
@@ -141,7 +161,13 @@ namespace StereoChannelVisualization
                     };
 
 
+                    var aMilliseconds = 0L;
+                    var asw = new Stopwatch();
 
+                    // 40ms per frame is trice for 60hz
+
+                    // { xleft = 397, xaverage = 37, aMilliseconds = 40 }
+                    new IHTMLPre { () => new { xleft = xleft.Count, xaverage, aMilliseconds } }.AttachToDocument();
 
 
                     // when the javascript node is called
@@ -150,11 +176,17 @@ namespace StereoChannelVisualization
                     javascriptNode.onaudioprocess = IFunction.Of(
                         delegate
                         {
+                            aMilliseconds = asw.ElapsedMilliseconds;
+
 
                             // get the average for the first channel
                             var array = new Uint8Array(new byte[analyser.frequencyBinCount]);
+                            // jsc could have all byte[] shadowed by bytebuffers for implict conversions...
                             analyser.getByteFrequencyData(array);
-                            var average = (int)getAverageVolume(array);
+                            xaverage = (int)getAverageVolume(array);
+
+                            xleft.Add(xaverage);
+
 
                             // get the average for the second channel
                             var array2 = new Uint8Array(new byte[analyser2.frequencyBinCount]);
@@ -167,9 +199,12 @@ namespace StereoChannelVisualization
                             // set the fill style
                             ctx.fillStyle = "red";
 
+
                             // create the meters
-                            ctx.fillRect(0, 130 - average, 25, 130);
+                            ctx.fillRect(0, 130 - xaverage, 25, 130);
                             ctx.fillRect(30, 130 - average2, 25, 130);
+
+                            asw.Restart();
                         }
                     );
 
