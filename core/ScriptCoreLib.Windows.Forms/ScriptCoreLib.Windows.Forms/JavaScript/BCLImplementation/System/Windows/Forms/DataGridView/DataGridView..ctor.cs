@@ -1416,6 +1416,10 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
                                     if (SourceRow == InternalNewRow)
                                         return;
 
+                                    if (!this.InternalAllowUserToDeleteRows)
+                                        return;
+
+
                                     // tested by
                                     // X:\jsc.svn\examples\javascript\forms\FormsDataGridViewDeleteRow\FormsDataGridViewDeleteRow\ApplicationControl.cs
 

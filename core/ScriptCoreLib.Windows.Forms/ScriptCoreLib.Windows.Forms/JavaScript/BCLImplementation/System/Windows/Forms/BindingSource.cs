@@ -158,6 +158,10 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
 
         //script: error JSC1000: No implementation found for this native method, please implement [System.Windows.Forms.BindingSource.RemoveAt(System.Int32)]
 
+        public virtual void RemoveCurrent()
+        {
+            RemoveAt(this.Position);
+        }
 
         // called by Z:\jsc.svn\core\ScriptCoreLib.Windows.Forms\ScriptCoreLib.Windows.Forms\JavaScript\BCLImplementation\System\Windows\Forms\BindingNavigator.cs
         public virtual void RemoveAt(int index)

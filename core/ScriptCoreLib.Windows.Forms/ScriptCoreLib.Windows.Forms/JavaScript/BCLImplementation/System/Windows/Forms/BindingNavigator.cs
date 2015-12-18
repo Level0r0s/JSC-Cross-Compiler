@@ -130,20 +130,22 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
             {
                 InternalDeleteItem = value;
 
-                InternalDeleteItem.Click +=
-                    delegate
-                    {
-                        Console.WriteLine("BindingNavigator Delete " + new { this.BindingSource.Position });
 
-                        this.BindingSource.RemoveAt(
-                            this.BindingSource.Position
-                        );
+                if (InternalDeleteItem != null)
+                    InternalDeleteItem.Click +=
+                        delegate
+                        {
+                            Console.WriteLine("BindingNavigator Delete " + new { this.BindingSource.Position });
 
-                        //this.BindingSource.Position =
-                        //    (this.BindingSource.Position + 1) % this.BindingSource.Count
-                        //    ;
+                            this.BindingSource.RemoveAt(
+                                this.BindingSource.Position
+                            );
 
-                    };
+                            //this.BindingSource.Position =
+                            //    (this.BindingSource.Position + 1) % this.BindingSource.Count
+                            //    ;
+
+                        };
             }
         }
         #endregion

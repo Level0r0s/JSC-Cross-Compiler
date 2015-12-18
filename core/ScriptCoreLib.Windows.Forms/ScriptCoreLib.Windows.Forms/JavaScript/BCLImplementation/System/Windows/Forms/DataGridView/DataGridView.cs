@@ -27,6 +27,28 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
 
 
 
+
+        #region AllowUserToDeleteRows
+        public event EventHandler AllowUserToDeleteRowsChanged;
+        bool InternalAllowUserToDeleteRows = true;
+        public bool AllowUserToDeleteRows
+        {
+            get
+            {
+                return InternalAllowUserToDeleteRows;
+            }
+            set
+            {
+
+                InternalAllowUserToDeleteRows = value;
+                if (AllowUserToDeleteRowsChanged != null)
+                    AllowUserToDeleteRowsChanged(this, new EventArgs());
+
+            }
+        }
+        #endregion
+
+
         #region AllowUserToAddRows
         public event EventHandler AllowUserToAddRowsChanged;
         bool InternalAllowUserToAddRows;

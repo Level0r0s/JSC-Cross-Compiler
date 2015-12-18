@@ -27,6 +27,20 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
         IHTMLInput InternalInputElement;
         IHTMLLabel label;
 
+        // http://stackoverflow.com/questions/12267242/how-can-i-make-a-checkbox-readonly-not-disabled
+
+        public bool AutoCheck
+        {
+            // this dont work?
+
+            // Z:\jsc.svn\examples\javascript\forms\AutoCheck\ApplicationControl.cs
+
+            get { return !this.InternalInputElement.readOnly; }
+            set
+            {
+                this.InternalInputElement.readOnly = !value;
+            }
+        }
 
 
         public __CheckBox()
