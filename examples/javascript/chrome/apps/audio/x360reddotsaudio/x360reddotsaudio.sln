@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360reddotsaudio", "x360reddotsaudio.csproj", "{FABEBD4F-4C61-4EFF-9D5E-7DD111104238}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360stereomidnightsun", "..\..\WebGL\360stereo\x360stereomidnightsun\x360stereomidnightsun.csproj", "{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FABEBD4F-4C61-4EFF-9D5E-7DD111104238}.Debug|x86.ActiveCfg = Debug|x86
+		{FABEBD4F-4C61-4EFF-9D5E-7DD111104238}.Debug|x86.Build.0 = Debug|x86
+		{FABEBD4F-4C61-4EFF-9D5E-7DD111104238}.Release|x86.ActiveCfg = Release|x86
+		{FABEBD4F-4C61-4EFF-9D5E-7DD111104238}.Release|x86.Build.0 = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.ActiveCfg = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Debug|x86.Build.0 = Debug|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.ActiveCfg = Release|x86
+		{976D8704-8D1B-4EA2-ABA0-B6B2CD8F51AD}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

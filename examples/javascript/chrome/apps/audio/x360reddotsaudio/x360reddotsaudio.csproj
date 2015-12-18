@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
+    <ProjectGuid>{FABEBD4F-4C61-4EFF-9D5E-7DD111104238}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StereoChannelVisualization</RootNamespace>
-    <AssemblyName>StereoChannelVisualization</AssemblyName>
+    <RootNamespace>x360reddotsaudio</RootNamespace>
+    <AssemblyName>x360reddotsaudio</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>StereoChannelVisualization.Program</StartupObject>
+    <StartupObject>x360reddotsaudio.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -39,6 +39,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Chrome Web Store, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>packages\Chrome.Web.Store.1.0.0.0\lib\Chrome Web Store.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="jsc.meta">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\util\jsc\bin\jsc.meta.exe</HintPath>
@@ -116,17 +120,14 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="StereoChannelVisualization.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\StereoChannelVisualization.AssetsLibrary.dll</HintPath>
+    <Reference Include="ChromeUDPClipboard.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\ChromeUDPClipboard.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
     </Reference>
-    <Reference Include="RoosterAudioExample.AssetsLibrary">
-      <HintPath>..\RoosterAudioExample\RoosterAudioExample\bin\staging.AssetsLibrary\RoosterAudioExample.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="AARPMartialLawLoop.AssetsLibrary">
-      <HintPath>..\AARPMartialLawLoop\AARPMartialLawLoop\bin\staging.AssetsLibrary\AARPMartialLawLoop.AssetsLibrary.dll</HintPath>
+    <Reference Include="x360reddotsaudio.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\x360reddotsaudio.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -138,28 +139,13 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
+    <Content Include="Textures\reddots.jpg" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AARPMartialLawLoop\AARPMartialLawLoop\AARPMartialLawLoop.csproj">
-      <Project>{a07aa8be-7108-404f-a7e6-95563565e2a5}</Project>
-      <Name>AARPMartialLawLoop</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RoosterAudioExample\RoosterAudioExample\RoosterAudioExample.csproj">
-      <Project>{895271ba-faa8-4763-a1fb-1e9c7525d130}</Project>
-      <Name>RoosterAudioExample</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Audio\" />
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-		if $(ConfigurationName)==Release (
-		rem start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /FilterTo:"$(SolutionDir)"
-		)</PostBuildEvent>
+    <PostBuildEvent>start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /xAttachDebugger:true  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:true /DisableWebServiceChrome:true /AssociateDriveForChrome:A /InferChromeAppManifest:true</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
 		            </PreBuildEvent>
   </PropertyGroup>

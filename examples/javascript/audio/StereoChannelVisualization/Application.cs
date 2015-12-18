@@ -103,30 +103,18 @@ namespace StereoChannelVisualization
                     sourceNode.connect(context.destination);
                     // load the specified sound
 
+
+                    // jsc doesnt like audio assets on root?
+                    //{ src_value0 = /RookConfirmCommandStefanWeDontLiveOnAPlanet.mp3 }
+                    //13d4:02:01:1c RewriteToAssembly error: System.InvalidOperationException: Referenced asset not found in the project. Did you forget to include it? - /RookConfirmCommandStefanWeDontLiveOnAPlanet.mp3
+
                     var buffer = await new WebClient().DownloadDataTaskAsync(
                         //new RoosterAudioExample.HTML.Audio.FromAssets.rooster { }.src
-                        new AARPMartialLawLoop.HTML.Audio.FromAssets.loop { }.src
+                        //new AARPMartialLawLoop.HTML.Audio.FromAssets.loop { }.src
+                        new HTML.Audio.FromAssets.RookConfirmCommandStefanWeDontLiveOnAPlanet { }.src
                     );
 
 
-
-                    var xleft = new List<int> { };
-                    // 302 elements for  11 sec is 27fps
-                    var xaverage = 0;
-
-                    sourceNode.onended = IFunction.Of(
-                        delegate
-                        {
-                            // { min = 0, max = 63, Count = 264 }
-                            // { min = 0, max = 60, Count = 264 }
-
-                            var min = xleft.Min();
-                            var max = xleft.Max();
-
-                            new IHTMLPre { new { min, max, xleft.Count } }.AttachToDocument();
-
-                        }
-                    );
 
                     // await ?
                     context.decodeAudioData(new Uint8ClampedArray(buffer).buffer,
@@ -134,6 +122,108 @@ namespace StereoChannelVisualization
                         {
                             // when the audio is decoded play the sound
                             sourceNode.buffer = xbuffer;
+
+
+
+                            var sw = Stopwatch.StartNew();
+
+                            var log = new StringBuilder();
+
+
+
+                            var xleft = new List<int> { };
+                            // 302 elements for  11 sec is 27fps
+                            var xaverage = 0;
+
+                            sourceNode.onended = IFunction.Of(
+                                delegate
+                                {
+                                    // { min = 0, max = 63, Count = 264 }
+                                    // { min = 0, max = 60, Count = 264 }
+
+                                    var min = xleft.Min();
+                                    var max = xleft.Max();
+
+                                    new IHTMLPre { new { min, max, xleft.Count } }.AttachToDocument();
+
+
+
+
+                                    new IHTMLTextArea { value = log.ToString() }.AttachToDocument();
+                                }
+                            );
+
+                            Func<Uint8Array, double> getAverageVolume = (array) =>
+                            {
+                                var values = 0;
+                                var average = 0.0;
+
+                                var length = array.buffer.byteLength;
+
+                                // get all the frequency amplitudes
+                                for (var i = 0u; i < length; i++)
+                                {
+                                    values += array[i];
+                                }
+
+                                average = values / length;
+                                return average;
+                            };
+
+
+                            var aMilliseconds = 0L;
+                            var asw = new Stopwatch();
+
+                            // 40ms per frame is trice for 60hz
+
+                            // { xleft = 397, xaverage = 37, aMilliseconds = 40 }
+                            new IHTMLPre { () => new { xleft = xleft.Count, xaverage, aMilliseconds } }.AttachToDocument();
+
+
+                            // when the javascript node is called
+                            // we use information from the analyzer node
+                            // to draw the volume
+                            javascriptNode.onaudioprocess = IFunction.Of(
+                                delegate
+                                {
+                                    aMilliseconds = asw.ElapsedMilliseconds;
+
+
+                                    // get the average for the first channel
+                                    var array = new Uint8Array(new byte[analyser.frequencyBinCount]);
+                                    // jsc could have all byte[] shadowed by bytebuffers for implict conversions...
+                                    analyser.getByteFrequencyData(array);
+                                    xaverage = (int)getAverageVolume(array);
+
+                                    xleft.Add(xaverage);
+
+
+                                    // get the average for the second channel
+                                    var array2 = new Uint8Array(new byte[analyser2.frequencyBinCount]);
+                                    analyser2.getByteFrequencyData(array2);
+                                    var average2 = (int)getAverageVolume(array2);
+
+                                    // clear the current state
+                                    ctx.clearRect(0, 0, 60, 130);
+
+                                    // set the fill style
+                                    ctx.fillStyle = "red";
+
+
+                                    // create the meters
+                                    ctx.fillRect(0, 130 - xaverage, 25, 130);
+                                    ctx.fillRect(30, 130 - average2, 25, 130);
+
+                                    asw.Restart();
+
+                                    log.AppendLine("new { ms = " + sw.ElapsedMilliseconds + ", x = " + xaverage + "},");
+
+                                }
+                            );
+
+
+
+
                             sourceNode.start(0);
                             //sourceNode.loop = true;
 
@@ -143,70 +233,6 @@ namespace StereoChannelVisualization
 
 
 
-                    Func<Uint8Array, double> getAverageVolume = (array) =>
-                    {
-                        var values = 0;
-                        var average = 0.0;
-
-                        var length = array.buffer.byteLength;
-
-                        // get all the frequency amplitudes
-                        for (var i = 0u; i < length; i++)
-                        {
-                            values += array[i];
-                        }
-
-                        average = values / length;
-                        return average;
-                    };
-
-
-                    var aMilliseconds = 0L;
-                    var asw = new Stopwatch();
-
-                    // 40ms per frame is trice for 60hz
-
-                    // { xleft = 397, xaverage = 37, aMilliseconds = 40 }
-                    new IHTMLPre { () => new { xleft = xleft.Count, xaverage, aMilliseconds } }.AttachToDocument();
-
-
-                    // when the javascript node is called
-                    // we use information from the analyzer node
-                    // to draw the volume
-                    javascriptNode.onaudioprocess = IFunction.Of(
-                        delegate
-                        {
-                            aMilliseconds = asw.ElapsedMilliseconds;
-
-
-                            // get the average for the first channel
-                            var array = new Uint8Array(new byte[analyser.frequencyBinCount]);
-                            // jsc could have all byte[] shadowed by bytebuffers for implict conversions...
-                            analyser.getByteFrequencyData(array);
-                            xaverage = (int)getAverageVolume(array);
-
-                            xleft.Add(xaverage);
-
-
-                            // get the average for the second channel
-                            var array2 = new Uint8Array(new byte[analyser2.frequencyBinCount]);
-                            analyser2.getByteFrequencyData(array2);
-                            var average2 = (int)getAverageVolume(array2);
-
-                            // clear the current state
-                            ctx.clearRect(0, 0, 60, 130);
-
-                            // set the fill style
-                            ctx.fillStyle = "red";
-
-
-                            // create the meters
-                            ctx.fillRect(0, 130 - xaverage, 25, 130);
-                            ctx.fillRect(30, 130 - average2, 25, 130);
-
-                            asw.Restart();
-                        }
-                    );
 
 
                 }

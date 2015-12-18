@@ -2732,13 +2732,29 @@ namespace ScriptCoreLib.Query.Experimental
                     // Z:\jsc.svn\examples\javascript\data\GoogleMapsTracker\Program.cs
                     if (xxSelect == null)
                     {
-
-                        var xxWhere = xScalar.source as xWhere;
-                        if (xxWhere != null)
+                        var xxxOrderBy = xScalar.source as xOrderBy;
+                        if (xxxOrderBy != null)
                         {
                             // implict identity select?
 
-                            xxSelect = xxWhere.source as xSelect;
+                            var xxWhere = xxxOrderBy.source as xWhere;
+                            if (xxWhere != null)
+                            {
+                                // implict identity select?
+
+                                xxSelect = xxWhere.source as xSelect;
+                            }
+
+                        }
+
+                        {
+                            var xxWhere = xScalar.source as xWhere;
+                            if (xxWhere != null)
+                            {
+                                // implict identity select?
+
+                                xxSelect = xxWhere.source as xSelect;
+                            }
                         }
 
 

@@ -10,9 +10,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FormsNICWithDataSource</RootNamespace>
     <AssemblyName>FormsNICWithDataSource</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>FormsNICWithDataSource.Program</StartupObject>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -130,19 +131,17 @@
     <Compile Include="ApplicationControl.Designer.cs">
       <DependentUpon>ApplicationControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ApplicationWebService.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="ApplicationWebService.cs" />
     <Compile Include="ApplicationWebService.Designer.cs">
       <DependentUpon>ApplicationWebService.cs</DependentUpon>
     </Compile>
     <Compile Include="Application.cs">
       <DependentUpon>ApplicationControl.cs</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs">
       <DependentUpon>ApplicationControl.cs</DependentUpon>
     </Compile>
+    <None Include="app.config" />
     <None Include="Data\NICData.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\NICDataGetInterfacesBindingSource.datasource" />
@@ -156,7 +155,7 @@
   <PropertyGroup>
     <PostBuildEvent>
 		if $(ConfigurationName)==Release (
-		start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false  /DisableWebServiceJava:true /DisableWebServicePHP:true /DisableWebServiceAndroid:false /DisableWebServiceChrome:true /xFilterTo:"$(SolutionDir)"
+		start /MIN /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false  /DisableWebServiceJava:true /DisableWebServicePHP:true /xDisableWebServiceAndroid:false /DisableWebServiceChrome:true /xFilterTo:"$(SolutionDir)"
 		)</PostBuildEvent>
     <PreBuildEvent>start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /RestorePackagesFrom:http://my.jsc-solutions.net/nuget
 		            </PreBuildEvent>

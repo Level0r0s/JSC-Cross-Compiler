@@ -153,7 +153,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System
                 {
                     MethodToken = ((ScriptCoreLibJava.BCLImplementation.System.Reflection.__MethodInfo)mDefineAsStatic[0]).InternalMethod;
 
-                    Console.WriteLine(new { mDefineAsStatic });
+                    //Console.WriteLine(new { mDefineAsStatic });
                 }
                 else
                 {

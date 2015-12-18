@@ -14,9 +14,7 @@ using System.Xml.Linq;
 
 namespace FormsNICWithDataSource
 {
-    /// <summary>
-    /// Methods defined in this type can be used from JavaScript. The method calls will seamlessly be proxied to the server.
-    /// </summary>
+    [System.ComponentModel.DesignerCategory("code")]
     public partial class ApplicationWebService : Component
     {
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201404/20140423

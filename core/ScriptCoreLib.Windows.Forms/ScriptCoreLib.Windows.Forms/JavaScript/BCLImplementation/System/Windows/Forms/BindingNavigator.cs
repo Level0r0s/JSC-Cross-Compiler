@@ -75,18 +75,19 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
             {
                 InternalAddNewItem = value;
 
-                InternalAddNewItem.Click +=
-                    delegate
-                    {
-                        // X:\jsc.svn\examples\javascript\forms\FormsNICWithDataSource\FormsNICWithDataSource\ApplicationControl.cs
-                        if (!this.BindingSource.AllowNew)
-                            return;
+                if (InternalAddNewItem != null)
+                    InternalAddNewItem.Click +=
+                        delegate
+                        {
+                            // X:\jsc.svn\examples\javascript\forms\FormsNICWithDataSource\FormsNICWithDataSource\ApplicationControl.cs
+                            if (!this.BindingSource.AllowNew)
+                                return;
 
-                        // X:\jsc.svn\examples\javascript\forms\FormsHistoricBindingSourcePosition\FormsHistoricBindingSourcePosition\ApplicationControl.cs
+                            // X:\jsc.svn\examples\javascript\forms\FormsHistoricBindingSourcePosition\FormsHistoricBindingSourcePosition\ApplicationControl.cs
 
-                        this.BindingSource.AddNew();
-                        this.BindingSource.Position = this.BindingSource.Count - 1;
-                    };
+                            this.BindingSource.AddNew();
+                            this.BindingSource.Position = this.BindingSource.Count - 1;
+                        };
             }
         }
         #endregion
@@ -119,7 +120,36 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
 
 
         public ToolStripItem CountItem { get; set; }
-        public ToolStripItem DeleteItem { get; set; }
+
+        #region DeleteItem
+        public ToolStripItem InternalDeleteItem;
+        public ToolStripItem DeleteItem
+        {
+            get { return InternalDeleteItem; }
+            set
+            {
+                InternalDeleteItem = value;
+
+                InternalDeleteItem.Click +=
+                    delegate
+                    {
+                        Console.WriteLine("BindingNavigator Delete " + new { this.BindingSource.Position });
+
+                        this.BindingSource.RemoveAt(
+                            this.BindingSource.Position
+                        );
+
+                        //this.BindingSource.Position =
+                        //    (this.BindingSource.Position + 1) % this.BindingSource.Count
+                        //    ;
+
+                    };
+            }
+        }
+        #endregion
+
+
+
         public ToolStripItem MoveFirstItem { get; set; }
         public ToolStripItem MoveLastItem { get; set; }
 
