@@ -843,12 +843,25 @@ namespace ScriptCoreLib.JavaScript.Controls
 
         private void InternalSetInnerHTML(string value)
         {
+            if (InternalDocument == null)
+            {
+                Console.WriteLine("InternalDocument bailed");
+                return;
+            }
+
             if (InternalDocument.body == null)
             {
                 Native.window.setTimeout(IFunction.OfDelegate(
                     new System.Action(
                         delegate
                         {
+                            if (InternalDocument == null)
+                            {
+                                Console.WriteLine("InternalDocument bailed");
+                                return;
+                            }
+
+
                             InternalDocument.body.innerHTML = value;
                         }
                 )), 1);
@@ -861,6 +874,9 @@ namespace ScriptCoreLib.JavaScript.Controls
         {
             // Entity 'nbsp' not defined
             //var xml = InternalDocument.body.AsXElement();
+
+            if (InternalDocument == null)
+                return null;
 
             var value = InternalDocument.body.innerHTML;
 

@@ -201,7 +201,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
 
                                      InternalUpdateZIndex(HTMLTarget);
 
-                                     Console.WriteLine("InternalRaiseShown");
+                                     //Console.WriteLine("InternalRaiseShown");
                                      InternalRaiseShown();
 
                                      // let child controls know

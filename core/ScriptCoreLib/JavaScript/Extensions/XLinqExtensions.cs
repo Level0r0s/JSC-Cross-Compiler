@@ -15,6 +15,9 @@ namespace ScriptCoreLib.JavaScript.Extensions
     {
         public static IHTMLElement AsHTMLElement(this XElement value)
         {
+            // Z:\jsc.svn\examples\javascript\Test\TestParallelConstruction\Application.cs
+
+            //Console.WriteLine("enter AsHTMLElement");
             // X:\jsc.svn\examples\javascript\Test\TestXElementAdd\TestXElementAdd\Application.cs
 
             if (value == null)
@@ -31,7 +34,11 @@ namespace ScriptCoreLib.JavaScript.Extensions
             //Console.WriteLine("AsHTMLElement " + new { xml });
             c.innerHTML = xml;
 
+            //Console.WriteLine("AsHTMLElement " + new { c.innerHTML });
+
             var firstChild = ((IHTMLElement)c.firstChild);
+
+            //Console.WriteLine("AsHTMLElement " + new { firstChild });
 
             __XElement.InternalValue = firstChild;
 
