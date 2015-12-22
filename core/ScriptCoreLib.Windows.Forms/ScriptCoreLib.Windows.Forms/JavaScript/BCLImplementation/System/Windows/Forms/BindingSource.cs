@@ -143,7 +143,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
 
         public void EndInit()
         {
-            Console.WriteLine("__BindingSource.EndInit ");
+            //Console.WriteLine("__BindingSource.EndInit ");
 
             // X:\jsc.svn\core\ScriptCoreLib.Windows.Forms\ScriptCoreLib.Windows.Forms\JavaScript\BCLImplementation\System\Windows\Forms\Control\ControlBindingsCollection.cs
             // two way binding to be activated now?

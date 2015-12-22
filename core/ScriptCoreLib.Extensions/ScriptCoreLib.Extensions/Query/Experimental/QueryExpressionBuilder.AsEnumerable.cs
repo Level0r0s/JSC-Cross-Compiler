@@ -109,7 +109,9 @@ namespace ScriptCoreLib.Query.Experimental
         public static TElement ReadToElement<TElement>(DbDataReader r, IQueryStrategy source, Tuple<MemberInfo, int>[] Target)
         {
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201510/20151007/where
-            //Console.WriteLine("enter QueryExpressionBuilder ReadToElement " + new { source });
+            //Console.WriteLine("enter QueryExpressionBuilder ReadToElement " + new { source, r.FieldCount, FieldNames = string.Join(";", r.FieldNames()) });
+
+
 
             // what if the one goes straight from where to toarray?
             #region xWhere

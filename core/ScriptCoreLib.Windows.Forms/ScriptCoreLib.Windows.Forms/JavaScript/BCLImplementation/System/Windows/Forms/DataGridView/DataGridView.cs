@@ -267,11 +267,11 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
 
             // 1628ms { Name = dataGridView1 } exit AutoResizeColumn { ElapsedMilliseconds = 1106, columnIndex = 0 } 
 
-            Console.WriteLine(
-                new { Name }
-                + " exit AutoResizeColumn "
-                + new { AutoResizeColumnStopwatch.ElapsedMilliseconds, columnIndex }
-                );
+            //Console.WriteLine(
+            //    new { Name }
+            //    + " exit AutoResizeColumn "
+            //    + new { AutoResizeColumnStopwatch.ElapsedMilliseconds, columnIndex }
+            //    );
         }
         #endregion
 

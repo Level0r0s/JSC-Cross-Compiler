@@ -34,6 +34,7 @@ namespace StereoChannelVisualization
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151219/audio
             // http://www.smartjava.org/examples/webaudio/example2.html
 
 
@@ -110,8 +111,8 @@ namespace StereoChannelVisualization
 
                     var buffer = await new WebClient().DownloadDataTaskAsync(
                         //new RoosterAudioExample.HTML.Audio.FromAssets.rooster { }.src
-                        //new AARPMartialLawLoop.HTML.Audio.FromAssets.loop { }.src
-                        new HTML.Audio.FromAssets.RookConfirmCommandStefanWeDontLiveOnAPlanet { }.src
+                        new AARPMartialLawLoop.HTML.Audio.FromAssets.loop { }.src
+                        //new HTML.Audio.FromAssets.RookConfirmCommandStefanWeDontLiveOnAPlanet { }.src
                     );
 
 

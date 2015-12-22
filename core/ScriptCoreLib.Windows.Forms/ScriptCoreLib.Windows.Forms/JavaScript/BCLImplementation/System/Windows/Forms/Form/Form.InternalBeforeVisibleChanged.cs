@@ -166,7 +166,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
                     }
                     #endregion
 
-                    Console.WriteLine("about to call InternalRaiseShown");
+                    //Console.WriteLine("about to call InternalRaiseShown");
                     // what if it is never called? no. background window wont call it..
 
 

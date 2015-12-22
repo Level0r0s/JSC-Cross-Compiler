@@ -35,12 +35,12 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
         }
         public void Add(__Binding binding)
         {
-            Console.WriteLine("__ControlBindingsCollection.Add " + new
-            {
-                binding.PropertyName,
-                binding.DataSource,
-                binding.DataMember
-            });
+            //Console.WriteLine("__ControlBindingsCollection.Add " + new
+            //{
+            //    binding.PropertyName,
+            //    binding.DataSource,
+            //    binding.DataMember
+            //});
 
             if (binding.DataSource == null)
                 return;
@@ -90,12 +90,12 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
                         //      }
                         //  );
 
-                        Console.WriteLine("await newBindingSource.InternalAfterEndInit");
+                        //Console.WriteLine("await newBindingSource.InternalAfterEndInit");
                         // is this called?
                         newBindingSource.InternalInvokeAfterEndInit(
                             delegate
                             {
-                                Console.WriteLine("await newBindingSource.InternalAfterEndInit done");
+                                //Console.WriteLine("await newBindingSource.InternalAfterEndInit done");
 
 
                                 #region AtPosition
@@ -129,12 +129,12 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
                                     if (binding.PropertyName == "Text")
                                     {
 
-                                        Console.WriteLine("data source to Text " + new
-                                        {
-                                            asBindingSource.Position,
-                                            binding.DataMember,
-                                            value
-                                        });
+                                        //Console.WriteLine("data source to Text " + new
+                                        //{
+                                        //    asBindingSource.Position,
+                                        //    binding.DataMember,
+                                        //    value
+                                        //});
 
                                         asControl.Text = (string)value;
                                         return;
@@ -189,12 +189,12 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
 
                                             var asRow = asDataTable.Rows[asBindingSource.Position];
 
-                                            Console.WriteLine("Text to data source " + new
-                                            {
-                                                asBindingSource.Position,
-                                                binding.DataMember,
-                                                asControl.Text
-                                            });
+                                            //Console.WriteLine("Text to data source " + new
+                                            //{
+                                            //    asBindingSource.Position,
+                                            //    binding.DataMember,
+                                            //    asControl.Text
+                                            //});
 
                                             // X:\jsc.svn\examples\javascript\forms\Test\TestWebBrowserOneWayDataBinding\TestWebBrowserOneWayDataBinding\ApplicationControl.cs
                                             asRow[binding.DataMember] = asControl.Text;

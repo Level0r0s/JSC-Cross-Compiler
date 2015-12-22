@@ -707,11 +707,11 @@ namespace TestYouTubeExtractor
 
         static void Main(string[] args)
         {
-            DoVideo(
+            //DoVideo(
 
-                "https://www.youtube.com/watch?v=SgQwBSHJNp0"
-                //"https://www.youtube.com/watch?v=h-8UCEigYTI"
-                );
+            //    "https://www.youtube.com/watch?v=SgQwBSHJNp0"
+            //    //"https://www.youtube.com/watch?v=h-8UCEigYTI"
+            //    );
 
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150609/360
 
@@ -950,10 +950,14 @@ namespace TestYouTubeExtractor
                                     var statusfail = get_video_info1.Contains("status=fail");
 
                                     if (statusfail)
-                                        continue;
-                                    // url_encoded_fmt_stream_map=type=video
-                                    Spherical3D = get_video_info1.Contains("projection_type=3");
-                                    Spherical = get_video_info1.Contains("projection_type=2");
+                                    {
+                                    }
+                                    else
+                                    {
+                                        // url_encoded_fmt_stream_map=type=video
+                                        Spherical3D = get_video_info1.Contains("projection_type=3");
+                                        Spherical = get_video_info1.Contains("projection_type=2");
+                                    }
                                 }
 
                             // "yt:projectionType"), t = Ss(b, "yt:stereoLayout"), u = "equirectangular" == n, x, z;

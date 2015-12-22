@@ -58,6 +58,10 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
         {
             (this.InternalElement.style.display as dynamic).display = "table-cell";
 
+            //InternalElement.style.width = "auto";
+            InternalElement.style.padding = "2px";
+
+
             var InternalElementSpan = new IHTMLSpan().AttachTo(InternalElement);
             //InternalElementSpan.style.verticalAlign = "baseline";
 

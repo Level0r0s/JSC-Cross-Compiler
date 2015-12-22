@@ -601,6 +601,7 @@ namespace ScriptCoreLib.JavaScript.Controls
             var redo = AddButton("assets/Abstractatech.JavaScript.TextEditor/redo.gif", "redo");
 
             var fontfamily = CreateButton("assets/Abstractatech.JavaScript.TextEditor/icon_font.gif");
+            this.FontFamilyButton = fontfamily;
 
             var FontList = new[] {
                 new StringPair("consolas, courier new, courier", "Courier"),
@@ -664,7 +665,7 @@ namespace ScriptCoreLib.JavaScript.Controls
 
             forecolor_popup.AttachTo(forecolor, () => this.IsFadeEnabled);
             forecolor_popup.Changed =
-                delegate (Color c)
+                delegate(Color c)
                 {
                     DoCommand("ForeColor", c.ToString());
                 };
@@ -675,7 +676,7 @@ namespace ScriptCoreLib.JavaScript.Controls
 
             hilitecolor_popup.AttachTo(hilitecolor, () => this.IsFadeEnabled);
             hilitecolor_popup.Changed =
-                delegate (Color c)
+                delegate(Color c)
                 {
                     try
                     {
@@ -827,6 +828,7 @@ namespace ScriptCoreLib.JavaScript.Controls
             private set;
         }
 
+        // async.onchange?
         public string InnerHTML
         {
             get
@@ -932,6 +934,7 @@ namespace ScriptCoreLib.JavaScript.Controls
         static IHTMLImage HotButton = new Abstractatech.JavaScript.TextEditor.HTML.Images.FromAssets.hot_bg();
 
         IHTMLImage Separator = "assets/Abstractatech.JavaScript.TextEditor/separator.horizontal.gif";
+        public ToolbarButton FontFamilyButton;
 
 
 
@@ -972,7 +975,9 @@ namespace ScriptCoreLib.JavaScript.Controls
         ToolbarButton CreateButton()
         {
             var u = new IHTMLButton();
+            u.style.margin = "0";
             u.style.padding = "0";
+            u.style.color = "black";
             u.style.backgroundColor = Color.Transparent;
 
             //u.style.height = "24px";

@@ -51,10 +51,12 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
             InternalInputElement = new IHTMLInput(ScriptCoreLib.Shared.HTMLInputTypeEnum.checkbox, "");
             InternalInputElement.style.margin = "0";
             InternalInputElement.style.verticalAlign = "middle";
+            InternalInputElement.style.width = "auto";
 
             label = new IHTMLLabel("", InternalInputElement);
             label.style.verticalAlign = "middle";
             label.style.marginLeft = "0.5em";
+            label.style.display = DOM.IStyle.DisplayEnum.inline;
 
             label.onmousedown +=
                 e =>

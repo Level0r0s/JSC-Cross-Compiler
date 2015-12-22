@@ -649,7 +649,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
 
                         var RowIndex = SourceDataTable.Rows.IndexOf(x.Row);
 
-                        Console.WriteLine("SourceDataTable.ColumnChanged " + new { RowIndex, xColumnIndex });
+                        //Console.WriteLine("SourceDataTable.ColumnChanged " + new { RowIndex, xColumnIndex });
 
                         var c = this[xColumnIndex, RowIndex];
 
@@ -676,14 +676,14 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
 
                         // who changed it?
 
-                        Console.WriteLine(
-                            "DataSource at CellValueChanged " + new
-                            {
-                                _e.RowIndex,
-                                NewRow,
-                                SourceDataTable.Rows.Count
-                            }
-                        );
+                        //Console.WriteLine(
+                        //    "DataSource at CellValueChanged " + new
+                        //    {
+                        //        _e.RowIndex,
+                        //        NewRow,
+                        //        SourceDataTable.Rows.Count
+                        //    }
+                        //);
 
 
                         // X:\jsc.svn\examples\javascript\forms\Test\TestDataTableNewRow\TestDataTableNewRow\ApplicationWebService.cs
