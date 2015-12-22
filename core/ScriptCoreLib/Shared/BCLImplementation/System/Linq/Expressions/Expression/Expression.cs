@@ -91,6 +91,9 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Linq.Expressions
                 (UnaryExpression)(object)
                 new __UnaryExpression
                 {
+                    // how did it ever work before?
+                    NodeType = ExpressionType.Convert,
+
                     Type = type,
                     Operand = expression,
                     Method = m
@@ -256,7 +259,7 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Linq.Expressions
 
 
 
-      
+
     }
 
     [Script(Implements = typeof(global::System.Linq.Expressions.Expression<>))]

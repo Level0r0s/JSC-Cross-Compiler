@@ -40,6 +40,9 @@ namespace ScriptCoreLib.Query.Experimental
         // should be exposing IQueryStrategy instead of xSelect
         public static void Delete<TElement, TKey>(this xSelect<TKey, TElement> source, TKey key)
         {
+            //Console.WriteLine("enter Delete " + new { key });
+
+
             //source.keySelector
             // will this work for chrome too?
             // do we have enough type information available now?
@@ -53,17 +56,20 @@ namespace ScriptCoreLib.Query.Experimental
             var xFieldInfo = xMemberInitExpression.Bindings[0].Member as FieldInfo;
 
             var p = Expression.Parameter(
-                 // xrow
+                // xrow
                  xMemberInitExpression.Type, "x"
              );
 
             //Additional information: Field 'TestXMySQL.PerformanceResourceTimingData2ApplicationPerformanceRow.Key' is not defined for type 'System.Object'
 
+            // UnaryExpression 
             var BodyLeft = Expression.Convert(
                 Expression.Field(p, xFieldInfo), // FieldExpression
                 typeof(long),
                 null
             );
+
+            //Console.WriteLine(new { BodyLeft });
 
             var BodyRight = Expression.Convert(
                 Expression.Constant(key),

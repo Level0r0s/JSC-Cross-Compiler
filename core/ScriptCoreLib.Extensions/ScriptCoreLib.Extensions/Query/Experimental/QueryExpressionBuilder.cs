@@ -328,6 +328,8 @@ namespace ScriptCoreLib.Query.Experimental
                 WriteScalarExpression =
                     (DiscardAlias, asExpression) =>
                     {
+                        //Console.WriteLine("enter WriteScalarExpression " + new { asExpression });
+
                         // zExpression = {zz => (Convert(zz.Key) == 77)}
 
                         #region WriteScalarExpression:asBinaryExpression
@@ -372,7 +374,10 @@ namespace ScriptCoreLib.Query.Experimental
                                     WriteLineWithColor(1, " / ", ConsoleColor.White);
 
                                 else
+                                {
+                                    Console.WriteLine("unknown node " + new { asBinaryExpression.NodeType });
                                     Debugger.Break();
+                                }
                                 #endregion
 
                                 WriteScalarExpression(true, asBinaryExpression.Right);
@@ -406,7 +411,13 @@ namespace ScriptCoreLib.Query.Experimental
                                 WriteLineWithColor(1, ")", ConsoleColor.White);
                                 return;
                             }
-                            else Debugger.Break();
+                            else
+                            {
+                                // Add = 0,
+
+                                Console.WriteLine("unknown asUnaryExpression NodeType " + new { asUnaryExpression.NodeType });
+                                Debugger.Break();
+                            }
 
                             return;
                         }
@@ -620,6 +631,7 @@ namespace ScriptCoreLib.Query.Experimental
                         }
                         #endregion
 
+                        Console.WriteLine("WriteScalarExpression unknown expression " + new { asExpression });
 
                         Debugger.Break();
                     };

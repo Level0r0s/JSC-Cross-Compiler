@@ -819,10 +819,10 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
 
                         var RowIndex = SourceDataTable.Rows.IndexOf(e.Row);
 
-                        Console.WriteLine(
-                            "RowDeleted " +
-                            new { RowIndex }
-                            );
+                        //Console.WriteLine(
+                        //    "RowDeleted " +
+                        //    new { RowIndex }
+                        //    );
 
                         this.InternalDataSourceSync = null;
 

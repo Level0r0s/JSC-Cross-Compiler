@@ -2029,7 +2029,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
                             // 1737ms event: Reposition { Index = 0, ElapsedMilliseconds = 447 } 
 
                             // report slow. 60 is the new slow
-                            if (RepositionStopwatch.ElapsedMilliseconds > 10)
+                            //if (RepositionStopwatch.ElapsedMilliseconds > 10)
+                            if (RepositionStopwatch.ElapsedMilliseconds > 60)
                                 Console.WriteLine("reposition " + new { SourceColumn.Index, RepositionStopwatch.ElapsedMilliseconds });
                         };
 
@@ -2648,7 +2649,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Windows.Forms
                           if (!InternalDataSourceBusy)
                               if (this.AutoSizeColumnsMode != DataGridViewAutoSizeColumnsMode.None)
                               {
-                                  Console.WriteLine("a new row was added, auto resize?");
+                                  //Console.WriteLine("a new row was added, auto resize?");
                                   t.Stop();
                                   t.Start();
                               }

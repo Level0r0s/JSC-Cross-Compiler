@@ -53,7 +53,7 @@ namespace ScriptCoreLib.JavaScript.Remoting
             var key = "_" + that.MetadataToken + "_" + name;
 
             //Console.WriteLine("AddParameter " + new { key, value });
-            Console.WriteLine("InternalWebMethodRequest.AddParameter " + new { key, value });
+            //Console.WriteLine("InternalWebMethodRequest.AddParameter " + new { key, value });
 
             that.InternalUploadValues[key] = value.ToXMLString();
 
@@ -85,7 +85,7 @@ namespace ScriptCoreLib.JavaScript.Remoting
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/uploadvaluestaskasync
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/20150301
 
-            Console.WriteLine("InternalWebMethodRequest.Invoke " + new { that.Name });
+            //Console.WriteLine("InternalWebMethodRequest.Invoke " + new { that.Name });
 
 
             var w = new System.Net.WebClient();
