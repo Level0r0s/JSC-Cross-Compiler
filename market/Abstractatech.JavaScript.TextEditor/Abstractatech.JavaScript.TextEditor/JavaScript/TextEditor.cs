@@ -491,6 +491,20 @@ namespace ScriptCoreLib.JavaScript.Controls
             Console.WriteLine("DesignMode switched on... for now..");
 
 
+            // Native.document.documentElement.style.fontFamily = IStyle.FontFamilyEnum.Courier;
+            // 
+
+            var xfontFamily = (string)(object)Native.document.documentElement.style.fontFamily;
+
+            Console.WriteLine(new { xfontFamily });
+
+
+
+            if (!string.IsNullOrEmpty(xfontFamily))
+            {
+                InternalDocument.documentElement.style.fontFamily = Native.document.documentElement.style.fontFamily;
+            }
+
             #region iframe is in a different scope. need to copy styles
             if (fonts != null)
             {
@@ -553,7 +567,9 @@ namespace ScriptCoreLib.JavaScript.Controls
             //    //};
 
             // http://fontawesome.io/cheatsheet/
-            var FontAwesome = new Abstractatech.JavaScript.TextEditor.Fonts.fontawesome_webfont();
+
+            // revert.
+            //var FontAwesome = new Abstractatech.JavaScript.TextEditor.Fonts.fontawesome_webfont();
 
             Func<string, string, string, ToolbarButton> AddTTFButton = (uri, entity, cmd) =>
                 {
@@ -563,8 +579,8 @@ namespace ScriptCoreLib.JavaScript.Controls
                     // should we test when the font is actually available?
                     // what about non ttf devices?
                     // or should the control let the dev decide?
-                    x.Button.style.fontFamily = FontAwesome;
-                    x.Button.innerHTML = entity;
+                    //x.Button.style.fontFamily = FontAwesome;
+                    //x.Button.innerHTML = entity;
 
                     return x;
                 };
@@ -593,6 +609,18 @@ namespace ScriptCoreLib.JavaScript.Controls
             var sub = AddTTFButton("assets/Abstractatech.JavaScript.TextEditor/sub.gif", "&#xf12c;", "Subscript");
 
             var removeformat = AddTTFButton("assets/Abstractatech.JavaScript.TextEditor/removeformat.gif", "&#xf12d;", "Removeformat");
+
+            var createlink = AddButton(
+                new Abstractatech.JavaScript.TextEditor.HTML.Images.FromAssets.createlink(), delegate
+                {
+                    var url = Native.window.prompt("createlink", "http://", "createlink");
+
+                    if (string.IsNullOrEmpty(url))
+                        return;
+
+                    this.DoCommand("createlink", url);
+                }
+            );
 
             var insertorderedlist = AddTTFButton("assets/Abstractatech.JavaScript.TextEditor/numberedlist.gif", "&#xf0cb;", "InsertOrderedList");
             var insertunorderedlist = AddTTFButton("assets/Abstractatech.JavaScript.TextEditor/bulletedlist.gif", "&#xf0ca;", "InsertUnorderedList");
@@ -639,6 +667,7 @@ namespace ScriptCoreLib.JavaScript.Controls
 
 
 
+            #region fontsize
             var fontsize = CreateButton("assets/Abstractatech.JavaScript.TextEditor/icon_size.gif");
 
             var fontsize_popup = new PopupMenu(
@@ -656,9 +685,11 @@ namespace ScriptCoreLib.JavaScript.Controls
             };
 
             fontsize_popup.AttachTo(fontsize, () => this.IsFadeEnabled).Changed = size => DoCommand("fontsize", size);
+            #endregion
 
 
 
+            #region forecolor
             var forecolor = CreateButton("assets/Abstractatech.JavaScript.TextEditor/forecolor.gif");
 
             var forecolor_popup = new ColorPopup();
@@ -669,7 +700,10 @@ namespace ScriptCoreLib.JavaScript.Controls
                 {
                     DoCommand("ForeColor", c.ToString());
                 };
+            #endregion
 
+
+            #region hilitecolor
             var hilitecolor = CreateButton("assets/Abstractatech.JavaScript.TextEditor/hilitecolor.gif");
 
             var hilitecolor_popup = new ColorPopup();
@@ -688,8 +722,11 @@ namespace ScriptCoreLib.JavaScript.Controls
                     }
 
                 };
+            #endregion
 
 
+
+            // https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
 
             ToolbarButton[] tbuttons =
                 {
@@ -702,6 +739,10 @@ namespace ScriptCoreLib.JavaScript.Controls
 
                 justifyleft, justifycenter, justifyright, justifyfull, // Separator.cloneNode(false),
                     indent, outdent, //Separator.cloneNode(false),
+
+
+                    createlink,
+
                      insertorderedlist, insertunorderedlist,
                     sup, sub, //Separator.cloneNode(false),
                               //incsize, decsize,
@@ -711,12 +752,9 @@ namespace ScriptCoreLib.JavaScript.Controls
                     undo, redo
                 };
 
-            var customize = CreateButton("assets/Abstractatech.JavaScript.TextEditor/customize.gif");
-
-            customize.Control.style.Float = IStyle.FloatEnum.right;
-
-
-            TopToolbar.appendChild(customize);
+            //var customize = CreateButton("assets/Abstractatech.JavaScript.TextEditor/customize.gif");
+            //customize.Control.style.Float = IStyle.FloatEnum.right;
+            //TopToolbar.appendChild(customize);
 
             foreach (ToolbarButton v in tbuttons)
             {

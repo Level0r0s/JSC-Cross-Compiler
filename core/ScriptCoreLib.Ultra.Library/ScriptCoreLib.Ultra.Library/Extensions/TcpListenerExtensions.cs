@@ -675,10 +675,27 @@ namespace ScriptCoreLib.Extensions
                                 // AuthenticateAsServer
                                 // can this hang? if we use the wrong stream!
 
-                                var enabledSslProtocols = System.Security.Authentication.SslProtocols.Default;
+                                // An error occurred during a connection to 192.168.1.12:15606. Peer using unsupported version of security protocol. (Error code: ssl_error_unsupported_version) 
+                                //var enabledSslProtocols = System.Security.Authentication.SslProtocols.Default;
+                                var enabledSslProtocols = System.Security.Authentication.SslProtocols.Tls;
 
                                 //Console.WriteLine(new { enabledSslProtocols });
-                                if (typeof(System.Security.Authentication.SslProtocols).GetField("Tls12") != null)
+
+                                #region ssl_error_unsupported_version
+                                var Tls11 = typeof(System.Security.Authentication.SslProtocols).GetField("Tls11");
+                                if (Tls11 != null)
+                                {
+
+                                    enabledSslProtocols = (System.Security.Authentication.SslProtocols)768;
+                                    //Console.WriteLine(new { enabledSslProtocols });
+                                }
+                                #endregion
+
+                                // http://stackoverflow.com/questions/28286086/default-securityprotocol-in-net-4-5
+
+                                var Tls12 = typeof(System.Security.Authentication.SslProtocols).GetField("Tls12");
+
+                                if (Tls12 != null)
                                 {
                                     // even if we link as 4.0 running in 4.5 we have tls1.2
 
@@ -686,6 +703,7 @@ namespace ScriptCoreLib.Extensions
                                     enabledSslProtocols = (System.Security.Authentication.SslProtocols)3072;
                                     //Console.WriteLine(new { enabledSslProtocols });
                                 }
+
 
                                 //Console.WriteLine(
                                 //    new { enabledSslProtocols }
@@ -760,6 +778,9 @@ namespace ScriptCoreLib.Extensions
                                       "SendTrustedIssuerList",
                                       0
                                 );
+
+
+                                // https://bugzilla.xamarin.com/show_bug.cgi?id=16974
 
 
                                 // http://stackoverflow.com/questions/617109/sslstream-on-tcp-server-fails-to-validate-client-certificate-with-remotecertific

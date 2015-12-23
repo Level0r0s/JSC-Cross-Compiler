@@ -25,6 +25,7 @@ namespace UbuntuInsecureOrigins
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // java -jar  /home/xmikro/Desktop/staging/UbuntuInsecureOrigins.ApplicationWebService.exe
         /// <summary>
         /// This is a javascript application.
         /// </summary>
@@ -49,6 +50,10 @@ namespace UbuntuInsecureOrigins
             new IHTMLHorizontalRule { }.AttachToDocument();
             new IHTMLAnchor { href = "https://" + Native.document.location.host, innerText = "https" }.AttachToDocument();
 
+            var hostname = Native.document.location.host.TakeUntilIfAny(":");
+            var hostport = Convert.ToInt32(Native.document.location.host.SkipUntilOrEmpty(":"));
+
+            new IHTMLAnchor { href = "https://" + hostname + ":" + (hostport + 1), innerText = "https client certificate" }.AttachToDocument();
 
             // https://w3c.github.io/webappsec-secure-contexts/
 
