@@ -669,6 +669,7 @@ namespace ScriptCoreLib.JavaScript.Controls
 
             #region fontsize
             var fontsize = CreateButton("assets/Abstractatech.JavaScript.TextEditor/icon_size.gif");
+            this.FontSizeButton = fontsize;
 
             var fontsize_popup = new PopupMenu(
                 new StringPair("1", "Smallest"),
@@ -989,6 +990,7 @@ namespace ScriptCoreLib.JavaScript.Controls
 
         IHTMLImage Separator = "assets/Abstractatech.JavaScript.TextEditor/separator.horizontal.gif";
         public ToolbarButton FontFamilyButton;
+        public ToolbarButton FontSizeButton;
 
 
 
