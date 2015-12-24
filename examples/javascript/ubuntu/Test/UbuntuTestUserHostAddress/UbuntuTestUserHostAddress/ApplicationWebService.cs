@@ -83,6 +83,9 @@ hello world! will prerender janusVR scene, as API wont enable all of the feature
             );
 
 
+            // does IE send the Form headers?
+            // can we see the non javascript post form values on ubuntu?
+
             // { key = formtext1, index = 0, Form = hello }
             h.Context.Request.Form.AllKeys.WithEachIndex(
                 (key, index) =>

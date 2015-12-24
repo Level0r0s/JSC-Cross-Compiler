@@ -24,6 +24,8 @@ namespace BinauralAudioExperiment
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // #09 AuthenticateAsServer failed. firefox is that you? { Message = Access to the registry key 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL' is denied., InnerException =  }
+
         /// <summary>
         /// This is a javascript application.
         /// </summary>
@@ -33,6 +35,10 @@ namespace BinauralAudioExperiment
             // can we run this on a  VR HUD within a VR app??
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150609
             // http://www.theverge.com/2015/2/12/8021733/3d-audio-3dio-binaural-immersive-vr-sound-times-square-new-york
+
+            // https://code.google.com/p/chromium/issues/detail?id=547480
+            // https://hacks.mozilla.org/2013/10/songs-of-diridum-pushing-the-web-audio-api-to-its-limits/
+            // http://borismus.github.io/moving-music/?mode=2
 
             new IStyle(IHTMLElement.HTMLElementEnum.button)
             {
