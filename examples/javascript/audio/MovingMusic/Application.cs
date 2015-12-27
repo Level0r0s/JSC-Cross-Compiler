@@ -17,6 +17,7 @@ using MovingMusic;
 using MovingMusic.Design;
 using MovingMusic.HTML.Pages;
 using System.Diagnostics;
+using MovingMusic.Library;
 
 namespace MovingMusic
 {
@@ -175,6 +176,32 @@ namespace MovingMusic
                     // defined at 
                     #region X:\opensource\github\moving-music\js\main.js
                     //window.main();
+                    //  start();
+
+                    //  var set = Util.getParameterByName('set');
+                    //var mode = Util.getParameterByName('mode');
+                    // Create the world.
+                    var choreographer = new Choreographer();
+                    //manager = choreographer.manager;
+                    ////choreographer.on('modechanged', onModeChanged);
+
+                    //// Create a video renderer.
+                    //video = new VideoRenderer({selector: 'body', overview: false});
+                    //video.setManager(manager);
+                    //video.addLight();
+                    //video.addSkybox();
+
+                    // Create the audio renderer.
+                    var audio = new AudioRenderer();
+                    //audio.setManager(manager);
+                    //audio.on('ready', onAudioLoaded);
+
+
+
+                    // After a little while, if we're not loaded yet, start updating progress.
+
+
+
                     #endregion
 
 
