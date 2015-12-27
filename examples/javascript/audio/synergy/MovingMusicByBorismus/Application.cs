@@ -27,6 +27,8 @@ namespace MovingMusicByBorismus
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151227/x360stereomoon
+
         // chrome cannot copy url to clipboard! 
 
         /// <summary>
@@ -35,8 +37,9 @@ namespace MovingMusicByBorismus
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
+
             // THREE.WebGLRenderer 72dev
-            Console.WriteLine(new { THREE.REVISION });
+            Console.WriteLine(new { THREE.REVISION } + " back screen until everithing loads!");
 
 
             // http://smus.com/ultrasonic-networking/
@@ -122,9 +125,17 @@ namespace MovingMusicByBorismus
                            new Func<object>(
                                () =>
                                {
+                                   // black screen??
+                                   //var far = 0x9999;
+
+                                   var far = 0x999;
+
+
+
+
 
                                    var sphere = new THREE.Mesh(
-                                       new THREE.SphereGeometry(100, 20, 20),
+                                       new THREE.SphereGeometry(far, 20, 20),
                                        new THREE.MeshBasicMaterial(
                                            new
                                            {
@@ -135,6 +146,10 @@ namespace MovingMusicByBorismus
                                        )
                                    );
                                    sphere.scale.x = -1;
+
+                                   // wont help us.
+                                   //sphere.material.opacity = 0.5;
+
 
                                    Console.WriteLine("addSkybox... " + new { window.video.scene });
 

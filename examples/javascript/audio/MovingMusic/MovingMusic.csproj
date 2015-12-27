@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{87F68299-3FED-4118-AA11-CBE151760BC2}</ProjectGuid>
+    <ProjectGuid>{A5DE484D-54A0-4418-AD41-84B77F5AE4E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MovingMusicByBorismus</RootNamespace>
-    <AssemblyName>MovingMusicByBorismus</AssemblyName>
+    <RootNamespace>MovingMusic</RootNamespace>
+    <AssemblyName>MovingMusic</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>MovingMusicByBorismus.Program</StartupObject>
+    <StartupObject>MovingMusic.Program</StartupObject>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -120,8 +120,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="MovingMusicByBorismus.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\MovingMusicByBorismus.AssetsLibrary.dll</HintPath>
+    <Reference Include="MovingMusic.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\MovingMusic.AssetsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCoreLib.Async">
       <HintPath>..\packages\ScriptCoreLib.Async.1.0.0.0\lib\ScriptCoreLib.Async.dll</HintPath>
@@ -130,10 +130,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Audio\crickets.mp3" />
-    <Content Include="Audio\heartbeat3.mp3" />
-    <Content Include="Audio\loop_GallinagoDelicata.mp3" />
-    <Content Include="Audio\sand_run.mp3" />
-    <Content Include="Audio\snd_jeepengine_start.mp3" />
     <Content Include="Design\App.css" />
     <Content Include="Design\App.htm" />
     <Compile Include="ApplicationWebService.cs" />
@@ -141,58 +137,10 @@
     <Compile Include="Program.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
-    <Content Include="opensource\github\References.htm" />
     <Content Include="Textures\20150608_165300.jpg" />
-    <Content Include="Textures\particle.png" />
-    <Content Include="X:\opensource\github\moving-music\js\audio-renderer.js">
-      <Link>opensource\github\moving-music\audio-renderer.js</Link>
-    </Content>
-    <Content Include="X:\opensource\github\moving-music\js\choreographer.js">
-      <Link>opensource\github\moving-music\choreographer.js</Link>
-    </Content>
-    <Content Include="X:\opensource\github\moving-music\js\deps\VRControls.js">
-      <Link>opensource\github\moving-music\deps\VRControls.js</Link>
-    </Content>
-    <Content Include="X:\opensource\github\moving-music\js\deps\VREffect.js">
-      <Link>opensource\github\moving-music\deps\VREffect.js</Link>
-    </Content>
-    <Content Include="X:\opensource\github\moving-music\js\deps\webvr-manager.js">
-      <Link>opensource\github\moving-music\deps\webvr-manager.js</Link>
-    </Content>
-    <Content Include="X:\opensource\github\moving-music\js\deps\webvr-polyfill.js">
-      <Link>opensource\github\moving-music\deps\webvr-polyfill.js</Link>
-    </Content>
-    <Content Include="X:\opensource\github\moving-music\js\dwell-detector.js">
-      <Link>opensource\github\moving-music\dwell-detector.js</Link>
-    </Content>
-    <Content Include="X:\opensource\github\moving-music\js\main.js">
-      <Link>opensource\github\moving-music\main.js</Link>
-    </Content>
-    <Content Include="X:\opensource\github\moving-music\js\moving-track.js">
-      <Link>opensource\github\moving-music\moving-track.js</Link>
-    </Content>
-    <Content Include="X:\opensource\github\moving-music\js\track-manager.js">
-      <Link>opensource\github\moving-music\track-manager.js</Link>
-    </Content>
-    <Content Include="X:\opensource\github\moving-music\js\trajectory.js">
-      <Link>opensource\github\moving-music\trajectory.js</Link>
-    </Content>
-    <Content Include="X:\opensource\github\moving-music\js\util.js">
-      <Link>opensource\github\moving-music\util.js</Link>
-    </Content>
-    <Content Include="X:\opensource\github\moving-music\js\video-renderer.js">
-      <Link>opensource\github\moving-music\video-renderer.js</Link>
-    </Content>
-    <Content Include="X:\opensource\github\moving-music\snd\forest_impulse_response.wav">
-      <Link>Audio\forest_impulse_response.wav</Link>
-    </Content>
-    <Content Include="X:\vr\Sweet Dreams My Love by Alexander_J_Turner.mp3">
-      <Link>Audio\Sweet Dreams My Love by Alexander_J_Turner.mp3</Link>
-    </Content>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
