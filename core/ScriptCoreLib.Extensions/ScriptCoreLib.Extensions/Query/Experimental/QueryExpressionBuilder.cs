@@ -134,7 +134,9 @@ namespace ScriptCoreLib.Query.Experimental
                         if (Command != null)
                             Command.CommandText += text;
 
-                        Console.Write(text);
+
+                        // less logs if its working.
+                        //Console.Write(text);
                     };
 
 

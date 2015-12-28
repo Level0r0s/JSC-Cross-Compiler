@@ -348,6 +348,26 @@ namespace ioxor
                                                     r.Position = Position0;
 
                                                     r.Write(data, 0, c0);
+
+                                                    // is it possible we crashed but dont know it?
+
+
+                                                    r.Flush();
+
+                                                    //                                                0 written in 0
+                                                    //5242879 written in 0
+                                                    //10485758 written in 0
+                                                    //15728637 written in 0
+                                                    //18342170 written in 1
+
+                                                    //Console.WriteLine("critical writeback " + new { Position0 });
+
+                                                    Console.Title = (int)(100 * ((double)Position0 / (double)Length)) + "%";
+                                                    Console.WriteLine(r.Position + " written in " + sw.ElapsedMilliseconds);
+
+
+                                                    // if we crash we should fast forward to thisone?
+                                                    File.WriteAllText("LastWriteback", "" + Position0);
                                                 }
                                                 catch (Exception err)
                                                 {
@@ -370,22 +390,7 @@ namespace ioxor
                                                     }
 
                                                 }
-                                                r.Flush();
-
-                                                //                                                0 written in 0
-                                                //5242879 written in 0
-                                                //10485758 written in 0
-                                                //15728637 written in 0
-                                                //18342170 written in 1
-
-                                                //Console.WriteLine("critical writeback " + new { Position0 });
-
-                                                Console.Title = (int)(100 * ((double)r.Position / (double)Length)) + "%";
-                                                Console.WriteLine(r.Position + " written in " + sw.ElapsedMilliseconds);
-
-
-                                                // if we crash we should fast forward to thisone?
-                                                File.WriteAllText("LastWriteback", "" + Position0);
+                                           
                                             };
                                             #endregion
 

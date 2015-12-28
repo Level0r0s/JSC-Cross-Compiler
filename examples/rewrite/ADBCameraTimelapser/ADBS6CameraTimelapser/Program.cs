@@ -12,13 +12,16 @@ namespace ADBS6CameraTimelapser
 {
     class Program
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151227/rotator
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150727
 
         static void Main(string[] args)
         {
-            restart:;
+        restart: ;
+            int pendingimages = 0;
 
-            //  prep for channel jump
+            Console.WriteLine("prep for channel jump?");
+
 
 
             //netsh wlan show hostednetwork
@@ -50,9 +53,12 @@ namespace ADBS6CameraTimelapser
             // restart network?
             // this will kick android away
 
-            //System.Diagnostics.Process.Start(
-            //new System.Diagnostics.ProcessStartInfo("netsh", "wlan start hostednetwork") { UseShellExecute = false }
-            // ).WaitForExit();
+            // System.Diagnostics.Process.Start(
+            // new System.Diagnostics.ProcessStartInfo("netsh", "wlan start hostednetwork") { UseShellExecute = false }
+            //  ).WaitForExit();
+
+            // //            The hosted network couldn't be started.
+            // //The group or resource is not in the correct state to perform the requested operation.
 
             // Thread.Sleep(500);
 
@@ -62,18 +68,36 @@ namespace ADBS6CameraTimelapser
 
             Console.WriteLine("android device should now have been connected tto our network with a static address of 192.168.173.5");
 
+            // wait for the device?
+            // any device?
 
-            // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+
+
+            // System.Diagnostics.Process.Start(
+            //     //new System.Diagnostics.ProcessStartInfo("netsh", "wlan show hostednetwork setting=security") { UseShellExecute = false }
+            //    new System.Diagnostics.ProcessStartInfo("netsh", "wlan show hostednetwork ") { UseShellExecute = false }
+            //).WaitForExit();
+
+
+
+
+
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151227/rotator
+            // get device , on lapop turn on wifi
+
+            // r
 
 
             // http://blogs.msdn.com/b/rds/archive/2009/03/03/top-10-rdp-protocol-misconceptions-part-1.aspx
             // if i am a remoteapp in one network
             // what if i want to become a tsclient running on tsclient cpu on another network?
 
-            //var device = "192.168.1.126:5555";
+            //var device = "192.168.43.1:5555";
+            var device = "192.168.1.126:5555";
             //var device = "192.168.173.5:5555";
-            var device = "02157df2d5d4e70b";
-            var storage = "x:/vr/tape9moon77a";
+            //var device = "02157df2d5d4e70b";
+            var storage = "x:/vr/tape28";
 
             if (args.Length == 2)
             {
@@ -135,11 +159,11 @@ namespace ADBS6CameraTimelapser
                 Console.WriteLine("> " + a);
 
 
-                System.Diagnostics.Process.Start(
+                var f = System.Diagnostics.Process.Start(
                                    new System.Diagnostics.ProcessStartInfo(adb, a) { UseShellExecute = false }
-                                   ).WaitForExit();
+                                   ).WaitForExit(45000);
 
-                Console.WriteLine("< " + a);
+                Console.WriteLine("< " + new { f, a });
 
             };
 
@@ -170,6 +194,7 @@ namespace ADBS6CameraTimelapser
 
             var roundtrip = Stopwatch.StartNew();
 
+            // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
 
             do_adb("kill-server");
             do_adb("devices");
@@ -191,19 +216,39 @@ namespace ADBS6CameraTimelapser
             //    new System.Diagnostics.ProcessStartInfo("ping ", device.TakeUntilIfAny(":")) { UseShellExecute = false }
             //).WaitForExit();
 
-            //// fuck you adb. be reliable
-            //var connected = get_adb("connect " + device);
+            //// fuck you adb. be reliable. kill adb?
+            var connected = get_adb("connect " + device);
 
-            //Console.WriteLine(new { connected });
+            //List of devices attached
+            //192.168.1.126:5555      offline
+
+            //< devices
+            //> -s 192.168.1.126:5555 shell dumpsys battery
+            //error: device unauthorized.
+            //This adb server's $ADB_VENDOR_KEYS is not set
+            //Try 'adb kill-server' if that seems wrong.
+            //Otherwise check for a confirmation dialog on your device.
+            //< -s 192.168.1.126:5555 shell dumpsys battery
+            //check camera.
+            //> -s 192.168.1.126:5555 disconnect
+            //disconnected everything
+            //< -s 192.168.1.126:5555 disconnect
+
+
+            Console.WriteLine(new { connected });
 
             //// wtf?
-            //if (!connected.Contains("connected to"))
-            //{
-            //    Console.WriteLine("device lost...");
-            //    Thread.Sleep(15000);
+            if (!connected.Contains("connected to"))
+            {
+                Debugger.Break();
 
-            //    goto restart;
-            //}
+                // 192.168.1.126:5555      offline
+
+                Console.WriteLine("device lost...");
+                Thread.Sleep(15000);
+
+                goto restart;
+            }
 
             // connected = "connected to 192.168.173.5:5555\r\n"
 
@@ -227,16 +272,16 @@ namespace ADBS6CameraTimelapser
             Thread.Sleep(1300);
             do_adb("-s " + device + " shell \"am start -n com.sec.android.app.camera/.Camera\" ");
             Thread.Sleep(4300);
-            noreset:;
+        noreset: ;
 
             //            < devices
-            //> connect 192.168.1.126:5555
-            //unable to connect to :5555
-            // error: device offline
-            // error: device offline
-            // error: device not found
-            //do_adb("disconnect " + device);
-            retry:
+        //> connect 192.168.1.126:5555
+        //unable to connect to :5555
+        // error: device offline
+        // error: device offline
+        // error: device not found
+        //do_adb("disconnect " + device);
+        retry:
             // did the wifi got disconnected?
 
             // restart adb or s6?
@@ -402,10 +447,10 @@ namespace ADBS6CameraTimelapser
             // focus
 
             //do_adb("-s " + device + " shell \"input tap 2200 900\" ");
-            do_adb("-s " + device + " shell \"input tap 1200 900\" ");
+            //do_adb("-s " + device + " shell \"input tap 1200 900\" ");
 
-            Thread.Sleep(300);
-            do_adb("-s " + device + " shell \"input tap 1200 900\" ");
+            //Thread.Sleep(300);
+            //do_adb("-s " + device + " shell \"input tap 1200 900\" ");
 
             Thread.Sleep(300);
             //do_adb("-s " + device + " shell \"input tap 1400 300\" ");
@@ -419,8 +464,22 @@ namespace ADBS6CameraTimelapser
             //Thread.Sleep(800);
 
 
-            do_adb("-s " + device + " shell \"input tap 2300 700\" ");
+            //do_adb("-s " + device + " shell \"input tap 2300 700\" ");
+
+
+
+            //shell@zerolte:/sdcard/DCIM/CardboardCamera $ ls
+            //ls
+            //IMG_20151204_000246.vr.jpg
+
+
+            // are we portrait?
+            //do_adb("-s " + device + " shell \"input tap 700 2300\" ");
+            do_adb("-s " + device + " shell \"input tap 1300 2300\" ");
             //do_adb("-s " + device + " shell \"input tap 100 700\" ");
+            Thread.Sleep(600);
+            do_adb("-s " + device + " shell \"input tap 700 2300\" ");
+            pendingimages++;
 
             goto collect;
 
@@ -431,30 +490,30 @@ namespace ADBS6CameraTimelapser
             //    //do_adb("-s 192.168.1.126:5555 shell \"am start -a android.media.action.IMAGE_CAPTURE\" ");
 
             //    // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVRWindWheelActivity.Activities
-            //    // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVRWindWheelActivity.Activities/OVRWindWheelActivity.Activities.ApplicationActivity
+        //    // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVRWindWheelActivity.Activities/OVRWindWheelActivity.Activities.ApplicationActivity
 
             //    // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVRWindWheelActivity.Activities
 
             //    do_adb("-s 192.168.1.126:5555 shell \"am force-stop com.sec.android.app.camera\" ");
-            //    Thread.Sleep(1300);
-            //    do_adb("-s 192.168.1.126:5555 shell \"am start -n com.sec.android.app.camera/.Camera\" ");
-            //    Thread.Sleep(4300);
+        //    Thread.Sleep(1300);
+        //    do_adb("-s 192.168.1.126:5555 shell \"am start -n com.sec.android.app.camera/.Camera\" ");
+        //    Thread.Sleep(4300);
 
             //    do_adb("-s 192.168.1.126:5555 shell \"input tap 2300 1300\" ");
-            //    Thread.Sleep(3300);
-            //    do_adb("-s 192.168.1.126:5555 shell \"input tap 1200 400\" ");
+        //    Thread.Sleep(3300);
+        //    do_adb("-s 192.168.1.126:5555 shell \"input tap 1200 400\" ");
 
             //    Thread.Sleep(500);
 
             //    //if you know the exact position to touch for focusing the camera, you can use  adb shell input tap <x><y>
 
             //    // focus ´damnet
-            //    //do_adb("-s 192.168.1.126:5555 shell \"input tap 700 400\" ");
-            //    //Thread.Sleep(600);
-            //    //do_adb("-s 192.168.1.126:5555 shell \"input tap 700 400\" ");
-            //    //Thread.Sleep(600);
-            //    //do_adb("-s 192.168.1.126:5555 shell \"input tap 700 400\" ");
-            //    //Thread.Sleep(1600);
+        //    //do_adb("-s 192.168.1.126:5555 shell \"input tap 700 400\" ");
+        //    //Thread.Sleep(600);
+        //    //do_adb("-s 192.168.1.126:5555 shell \"input tap 700 400\" ");
+        //    //Thread.Sleep(600);
+        //    //do_adb("-s 192.168.1.126:5555 shell \"input tap 700 400\" ");
+        //    //Thread.Sleep(1600);
 
 
             //    do_adb("-s 192.168.1.126:5555 shell \"input keyevent 27\" ");
@@ -464,21 +523,28 @@ namespace ADBS6CameraTimelapser
             //    //Thread.Sleep(1000);
 
             //    //do_adb("-s 192.168.1.126:5555 shell input keyevent 22");
-            ////Thread.Sleep(1200);
-            ////do_adb("-s 192.168.1.126:5555 shell input keyevent 66");
+        ////Thread.Sleep(1200);
+        ////do_adb("-s 192.168.1.126:5555 shell input keyevent 66");
 
-            collect:;
+            collect: ;
 
             // how long will it take?
             //Thread.Sleep(600);
 
             // at night we need more time
-            Thread.Sleep(1900);
+            Console.WriteLine("rotating...");
+            Thread.Sleep(15900);
+
+
+            //shell@zerolte:/sdcard/DCIM/CardboardCamera $ ls
+            //ls
+            //IMG_20151204_000246.vr.jpg
 
             // /sdcard/DCIM/Camera/20150727_211544.jpg
             {
                 //var a = "-s 192.168.1.126:5555 shell ls -l \"/sdcard/DCIM/Camera/20150727*.jpg\"";
-                var a = "-s " + device + " shell ls -l \"/sdcard/DCIM/Camera/201508" + DateTime.Now.Day.ToString("00") + "*.jpg\"";
+                //var a = "-s " + device + " shell ls -l \"/sdcard/DCIM/Camera/2015" + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") + "*.jpg\"";
+                var a = "-s " + device + " shell ls -l \"/sdcard/DCIM/CardboardCamera/IMG_2015" + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") + "*.jpg\"";
 
                 var p = System.Diagnostics.Process.Start(
                     new System.Diagnostics.ProcessStartInfo(adb, a)
@@ -519,6 +585,9 @@ namespace ADBS6CameraTimelapser
 
                     Console.WriteLine(filename);
 
+                    // is the file ready?
+                    Thread.Sleep(700);
+
                     ;
 
                     var i = Directory.GetFiles(storage).Count();
@@ -526,7 +595,7 @@ namespace ADBS6CameraTimelapser
                     var iNNNN = i.ToString("00000");
 
                     //    var args = "shell dumpsys battery";
-                    recheck:;
+                recheck: ;
                     var shell_dumpsys_battery = get_adb("-s " + device + " shell dumpsys battery");
 
                     //Unhandled Exception: System.FormatException: Input string was not in a correct format.
@@ -560,11 +629,16 @@ namespace ADBS6CameraTimelapser
 
                     // http://forum.xda-developers.com/showthread.php?t=1941201
                     // 58KBps??
-                    do_adb("-s " + device + " pull -p \"/sdcard/DCIM/Camera/" + filename + "\" \"" + storage + "/" + iNNNN + ".jpg" + "\"");
+                    //do_adb("-s " + device + " pull -p \"/sdcard/DCIM/Camera/" + filename + "\" \"" + storage + "/" + iNNNN + ".jpg" + "\"");
+                    do_adb("-s " + device + " pull -p \"/sdcard/DCIM/CardboardCamera/" + filename + "\" \"" + storage + "/" + iNNNN + ".jpg" + "\"");
                     ;
                     // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularCameraExperiment\ChromeEquirectangularCameraExperiment\Application.cs
 
-                    do_adb("-s " + device + " shell rm \"/sdcard/DCIM/Camera/" + filename + "\"");
+                    do_adb("-s " + device + " shell rm \"/sdcard/DCIM/CardboardCamera/" + filename + "\"");
+                    //do_adb("-s " + device + " shell rm \"/sdcard/DCIM/Camera/" + filename + "\"");
+                    pendingimages--;
+                    if (pendingimages < 0)
+                        pendingimages = 0;
 
                     beep = false;
                 }
@@ -584,65 +658,82 @@ namespace ADBS6CameraTimelapser
 
                 // error: closed
 
-                #region check camera
-                if (beep)
+                if (pendingimages > 0)
                 {
-                    // http://community.spiceworks.com/topic/163415-we-want-the-beep-sound-from-remote-desktop-server
-                    Console.WriteLine("check camera.");
-                    Console.Beep();
-
-                    recheck:;
-                    var shell_dumpsys_battery = get_adb("-s " + device + " shell dumpsys battery");
-
-                    //Unhandled Exception: System.FormatException: Input string was not in a correct format.
-                    //   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
-                    //   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
-                    //   at System.Int32.Parse(String s)
-                    //   at ADBS6CameraTimelapser.Program.Main(String[] args) in x:\jsc.svn\examples\rewrite\ADBCameraTimelapser\ADBS6CameraTimelapser\Program.cs:line 301
-
-                    // 		shell_dumpsys_battery	Internal error in the expression evaluator.	
-
-
-                    //temperature: 405
-                    // temperature/10+"C" 
-                    var xtemperature = shell_dumpsys_battery.SkipUntilIfAny("temperature: ").TakeUntilOrEmpty("\r");
-                    if (string.IsNullOrEmpty(xtemperature))
-                    {
-                        Console.WriteLine(" adb failed? 3:34?");
-                        Thread.Sleep(10000);
-                        goto restart;
-                    }
-
-
-                    var itemperature = int.Parse(xtemperature) / 10.0;
-                    var temperature = itemperature + "C";
-                    var level = int.Parse(shell_dumpsys_battery.SkipUntilIfAny("level: ").TakeUntilOrEmpty("\r")) + "%";
-                    var AC = shell_dumpsys_battery.Contains("AC powered: true");
-
-                    if (itemperature > 45)
-                    {
-                        // "x:\util\android-sdk-windows\platform-tools\adb.exe" shell sendevent /dev/input/event4 1 116 1
-                        // "x:\util\android-sdk-windows\platform-tools\adb.exe" shell sendevent /dev/input/event4 1 116 0
-
-                        do_adb("-s " + device + " shell input keyevent 26");
-
-                        Console.WriteLine("device too hot");
-                        Console.ReadKey();
-                        goto recheck;
-                    }
-
-                    Console.Title = "S6" + new { temperature, level, AC }.ToString();
-
-                    if (!Debugger.IsAttached)
-                        Thread.Sleep(15000);
-
-                    // compensation?
-
-                    do_adb("-s " + device + " shell \"am force-stop com.sec.android.app.camera\" ");
-                    Thread.Sleep(1300);
-                    do_adb("-s " + device + " shell \"am start -n com.sec.android.app.camera/.Camera\" ");
-                    Thread.Sleep(4300);
+                    Console.WriteLine("rendering?...");
+                    Thread.Sleep(20000);
                 }
+
+                if (pendingimages > 1)
+                {
+                    // we are behind. let the device render
+                    Console.WriteLine("rendering?......");
+                    Thread.Sleep(20000);
+
+                }
+
+
+
+                #region check camera
+                if (false)
+                    if (beep)
+                    {
+                        // http://community.spiceworks.com/topic/163415-we-want-the-beep-sound-from-remote-desktop-server
+                        Console.WriteLine("check camera.");
+                        Console.Beep();
+
+                    recheck: ;
+                        var shell_dumpsys_battery = get_adb("-s " + device + " shell dumpsys battery");
+
+                        //Unhandled Exception: System.FormatException: Input string was not in a correct format.
+                        //   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+                        //   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+                        //   at System.Int32.Parse(String s)
+                        //   at ADBS6CameraTimelapser.Program.Main(String[] args) in x:\jsc.svn\examples\rewrite\ADBCameraTimelapser\ADBS6CameraTimelapser\Program.cs:line 301
+
+                        // 		shell_dumpsys_battery	Internal error in the expression evaluator.	
+
+
+                        //temperature: 405
+                        // temperature/10+"C" 
+                        var xtemperature = shell_dumpsys_battery.SkipUntilIfAny("temperature: ").TakeUntilOrEmpty("\r");
+                        if (string.IsNullOrEmpty(xtemperature))
+                        {
+                            Console.WriteLine(" adb failed? 3:34?");
+                            Thread.Sleep(10000);
+                            goto restart;
+                        }
+
+
+                        var itemperature = int.Parse(xtemperature) / 10.0;
+                        var temperature = itemperature + "C";
+                        var level = int.Parse(shell_dumpsys_battery.SkipUntilIfAny("level: ").TakeUntilOrEmpty("\r")) + "%";
+                        var AC = shell_dumpsys_battery.Contains("AC powered: true");
+
+                        if (itemperature > 45)
+                        {
+                            // "x:\util\android-sdk-windows\platform-tools\adb.exe" shell sendevent /dev/input/event4 1 116 1
+                            // "x:\util\android-sdk-windows\platform-tools\adb.exe" shell sendevent /dev/input/event4 1 116 0
+
+                            do_adb("-s " + device + " shell input keyevent 26");
+
+                            Console.WriteLine("device too hot");
+                            Console.ReadKey();
+                            goto recheck;
+                        }
+
+                        Console.Title = "S6" + new { temperature, level, AC }.ToString();
+
+                        if (!Debugger.IsAttached)
+                            Thread.Sleep(15000);
+
+                        // compensation?
+
+                        do_adb("-s " + device + " shell \"am force-stop com.sec.android.app.camera\" ");
+                        Thread.Sleep(1300);
+                        do_adb("-s " + device + " shell \"am start -n com.sec.android.app.camera/.Camera\" ");
+                        Thread.Sleep(4300);
+                    }
                 #endregion
 
 

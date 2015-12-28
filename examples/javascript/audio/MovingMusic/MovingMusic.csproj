@@ -130,6 +130,8 @@
   <ItemGroup>
     <Compile Include="Library\AudioRenderer.cs" />
     <Compile Include="Library\Choreographer.cs" />
+    <Compile Include="Library\DwellDetector.cs" />
+    <Compile Include="Library\TrackManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Audio\crickets.mp3" />
     <Content Include="Design\App.css" />
