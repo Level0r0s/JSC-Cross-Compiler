@@ -280,6 +280,9 @@ namespace OVRWindWheelActivity.Activities
 
             Action<android.graphics.Canvas> HUDStylus = canvas =>
             {
+                // video?
+                // https://www.youtube.com/watch?v=JaTH_hoLDxc
+
                 // so cool. we get to use pen in vr!s
                 while (HUDStylusList.Count > 1024)
                     HUDStylusList.RemoveAt(0);

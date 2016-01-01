@@ -17,13 +17,15 @@ using System;
 
 namespace AndroidWebViewActivity.Activities
 {
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "22")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "23")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.DeviceDefault")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.DeviceDefault.Light")]
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
     public class AndroidWebViewActivity : Activity
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160101/webview
+
         public WebView webview;
         //public ProgressDialog progressBar;
         //public AlertDialog alertDialog;
@@ -143,26 +145,18 @@ namespace AndroidWebViewActivity.Activities
             vConfigurationChanged(value);
         }
 
+
+
+        // called by?
         public int getScreenOrientation()
         {//http://stackoverflow.com/questions/3663665/how-can-i-get-the-current-screen-orientation
             Display getOrient = this.getWindowManager().getDefaultDisplay();
-            int orientation = Configuration.ORIENTATION_UNDEFINED;
-            if (getOrient.getWidth() == getOrient.getHeight())
+
+            if (getOrient.getWidth() < getOrient.getHeight())
             {
-                orientation = Configuration.ORIENTATION_SQUARE;
+                return Configuration.ORIENTATION_PORTRAIT;
             }
-            else
-            {
-                if (getOrient.getWidth() < getOrient.getHeight())
-                {
-                    orientation = Configuration.ORIENTATION_PORTRAIT;
-                }
-                else
-                {
-                    orientation = Configuration.ORIENTATION_LANDSCAPE;
-                }
-            }
-            return orientation;
+            return Configuration.ORIENTATION_LANDSCAPE;
         }
 
         // This snippet hides the system bars.

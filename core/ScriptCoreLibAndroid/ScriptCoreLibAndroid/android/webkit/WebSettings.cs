@@ -13,6 +13,8 @@ namespace android.webkit
     [Script(IsNative = true)]
     public abstract class WebSettings
     {
+        // Z:\jsc.svn\examples\java\android\AndroidWebViewActivity\AndroidWebViewActivity\ApplicationActivity.cs
+
         // https://developer.android.com/guide/webapps/migrating.html
 
         public static readonly int LOAD_NO_CACHE = 0x00000002;
@@ -27,5 +29,9 @@ namespace android.webkit
         public virtual void setJavaScriptEnabled(bool value)
         {
         }
+
+
+        public virtual void setBuiltInZoomControls(bool enabled)
+        { }
     }
 }

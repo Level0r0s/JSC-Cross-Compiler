@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CCD535AF-EBE8-4281-80D7-1E68F4994872}</ProjectGuid>
+    <ProjectGuid>{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AndroidBrowserVR</RootNamespace>

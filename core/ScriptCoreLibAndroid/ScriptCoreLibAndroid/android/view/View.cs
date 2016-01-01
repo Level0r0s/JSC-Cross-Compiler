@@ -13,6 +13,8 @@ namespace android.view
     [Script(IsNative = true)]
     public class View
     {
+        public static readonly int SYSTEM_UI_FLAG_LAYOUT_STABLE;
+
         public const int SYSTEM_UI_FLAG_HIDE_NAVIGATION = 0x00000002;
 
         public const int SYSTEM_UI_FLAG_FULLSCREEN = 0x00000004;
@@ -25,6 +27,12 @@ namespace android.view
 
         // X:\jsc.svn\examples\java\android\vr\OVRMyCubeWorldNDK\OVRMyCubeWorld\ApplicationActivity.cs
         public void postInvalidate() { }
+
+        // Z:\jsc.svn\examples\java\android\AndroidWebViewActivity\AndroidWebViewActivity\ApplicationActivity.cs
+        public int getSystemUiVisibility()
+        {
+            throw null;
+        }
 
         protected virtual void onDraw(Canvas canvas)
         {

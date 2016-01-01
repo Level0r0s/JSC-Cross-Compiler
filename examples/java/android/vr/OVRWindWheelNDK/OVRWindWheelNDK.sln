@@ -44,6 +44,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidUDPClipboard", "..\.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeUDPClipboard", "..\..\..\..\javascript\chrome\apps\ChromeUDPClipboard\ChromeUDPClipboard.csproj", "{FABEBD4F-4C61-4EFF-9D5E-7DD111104238}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidBrowserVRNDK", "..\..\synergy\AndroidBrowserVRNDK\AndroidBrowserVRNDK.csproj", "{3EED14FB-0960-45C3-9090-38CCE968CEA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidBrowserVR", "..\..\synergy\AndroidBrowserVR\AndroidBrowserVR.csproj", "{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Assets|Any CPU = Assets|Any CPU
@@ -358,6 +362,36 @@ Global
 		{FABEBD4F-4C61-4EFF-9D5E-7DD111104238}.Release|Mixed Platforms.Build.0 = Release|x86
 		{FABEBD4F-4C61-4EFF-9D5E-7DD111104238}.Release|x86.ActiveCfg = Release|x86
 		{FABEBD4F-4C61-4EFF-9D5E-7DD111104238}.Release|x86.Build.0 = Release|x86
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Assets|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Assets|Mixed Platforms.Build.0 = Release|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Assets|x86.ActiveCfg = Release|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3EED14FB-0960-45C3-9090-38CCE968CEA8}.Release|x86.ActiveCfg = Release|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Assets|Any CPU.ActiveCfg = Release|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Assets|Any CPU.Build.0 = Release|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Assets|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Assets|Mixed Platforms.Build.0 = Release|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Assets|x86.ActiveCfg = Release|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{12D70DD5-2DF7-4C32-AE3A-3EEF8B5C7114}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

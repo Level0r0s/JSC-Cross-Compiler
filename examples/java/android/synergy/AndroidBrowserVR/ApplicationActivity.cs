@@ -41,7 +41,7 @@ namespace AndroidBrowserVR.Activities
         //{ return default(long); }
     }
 
-
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160101/ovrwindwheelndk
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/ovroculus360photoshud
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150613/record
     // "x:\util\android-sdk-windows\platform-tools\adb.exe" shell am start -n OVROculus360PhotosHUD.Activities/OVROculus360PhotosHUD.Activities.ApplicationActivity

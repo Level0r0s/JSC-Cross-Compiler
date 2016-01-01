@@ -19,5 +19,9 @@ namespace android.content.res
         // members and types are to be extended by jsc at release build
 
         public Locale locale;
+
+
+        public static readonly int ORIENTATION_LANDSCAPE;
+        public static readonly int ORIENTATION_PORTRAIT;
     }
 }
