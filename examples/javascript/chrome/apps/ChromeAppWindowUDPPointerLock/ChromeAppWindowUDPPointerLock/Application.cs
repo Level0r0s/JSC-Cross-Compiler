@@ -27,8 +27,10 @@ namespace ChromeAppWindowUDPPointerLock
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160101/ovrwindwheelndk
+
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151001/udppenpressure
-        
+
 
         // net use
         // OK           R:        \\192.168.1.12\x$         Microsoft Windows Network
@@ -144,6 +146,87 @@ namespace ChromeAppWindowUDPPointerLock
             // what about property window
             // back in the vb days we made one.
             // time to do one?
+
+
+
+            #region UDPClipboardSend
+            Action<string> UDPClipboardSend = async message =>
+            {
+                var n = await chrome.socket.getNetworkList();
+
+                new IHTMLPre { new { n.Length } }.AttachToDocument();
+
+                // LINQ and async wont mix for 2012?
+
+                //foreach (var item in n.Where(x => x.prefixLength == 24))
+                foreach (var item in n) if (item.prefixLength == 24)
+                    {
+                        new IHTMLPre { new { item.prefixLength, item.name, item.address } }.AttachToDocument();
+
+                        //{ prefixLength = 64, name = {AE3B881D-488F-4C3A-93F8-7DA0D65B9300}, address = fe80::fc45:cae9:46ca:7b0f }
+                        //about to bind... { port = 29129 }
+                        //about to send... { Length = 0 }
+                        //sent: -2
+                        //{ prefixLength = 24, name = {AE3B881D-488F-4C3A-93F8-7DA0D65B9300}, address = 192.168.1.12 }
+                        //about to bind... { port = 25162 }
+                        //about to send... { Length = 0 }
+                        //sent: 0
+
+
+                        // X:\jsc.svn\examples\merge\TestDetectOpenFiles\TestDetectOpenFiles\Program.cs
+                        // X:\jsc.svn\examples\javascript\chrome\apps\MulticastListenExperiment\MulticastListenExperiment\Application.cs
+
+                        // https://code.google.com/p/chromium/issues/detail?id=455352
+
+                        // X:\jsc.svn\examples\merge\TestDetectOpenFiles\TestDetectOpenFiles\Program.cs
+
+                        // bind?
+
+                        var data = Encoding.UTF8.GetBytes(message);	   //creates a variable b of type byte
+
+                        // http://stackoverflow.com/questions/13691119/chrome-packaged-app-udp-sockets-not-working
+                        // http://www.chinabtp.com/how-to-do-udp-broadcast-using-chrome-sockets-udp-api/
+
+                        // chrome likes 0 too.
+                        var port = new Random().Next(16000, 40000);
+                        //var port = 0;
+                        // 
+                        //new IHTMLPre { "about to bind... " + new { port } }.AttachToDocument();
+
+                        // where is bind async?
+                        var socket = new UdpClient();
+                        socket.Client.Bind(
+
+                            //new IPEndPoint(IPAddress.Any, port: 40000)
+                            new IPEndPoint(IPAddress.Parse(item.address), port)
+                        );
+
+
+                        //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
+
+                        // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
+                        var s = await socket.SendAsync(
+                            data,
+                            data.Length,
+                            hostname: "239.1.2.3",
+                            port: 49814
+                        );
+
+                        //new IHTMLPre { "sent: " + s }.AttachToDocument();
+
+
+                        //socket.ReceiveAsync
+                        //socket.Close();
+
+                        //new IHTMLPre { $"sent: {s}" }.AttachToDocument();
+
+                        // android cannot see it. why? because it needs to know which NIC to use.
+
+                    }
+            };
+            #endregion
+
+
 
             new IHTMLButton { "ready1" }.AttachToDocument().onclick +=
                 //async
@@ -366,6 +449,9 @@ namespace ChromeAppWindowUDPPointerLock
                                               // experimental until ref count 33?
                                               await refresh.async.onmousedown;
 
+                                              UDPClipboardSend("mousedown...");
+
+
                                               refresh.disabled = true;
 
                                               var port = new Random().Next(16000, 40000);
@@ -389,12 +475,14 @@ namespace ChromeAppWindowUDPPointerLock
                                                       // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
                                                       var nmessage = x + ":" + y + ":" + keys_ad + ":" + keys_ws + ":" + keys_c + ":" + mousebutton + ":" + mousewheel;
 
+                                                      UDPClipboardSend(nmessage);
 
                                                       var data = Encoding.UTF8.GetBytes(nmessage);	   //creates a variable b of type byte
 
 
 
                                                       //new IHTMLPre { "about to send... " + new { data.Length } }.AttachToDocument();
+
 
                                                       // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
                                                       socket.Send(
@@ -403,6 +491,11 @@ namespace ChromeAppWindowUDPPointerLock
                                                           hostname: "239.1.2.3",
                                                           port: 41814
                                                       );
+
+                                                      // android doesnt get it?
+                                                      // restart router?
+                                                      // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160101/ovrwindwheelndkg
+                                                      // why wont it make it?
                                                   };
 
                                               return;

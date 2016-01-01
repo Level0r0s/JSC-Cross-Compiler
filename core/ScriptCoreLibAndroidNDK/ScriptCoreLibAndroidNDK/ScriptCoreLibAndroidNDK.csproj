@@ -71,6 +71,9 @@
     <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\System\Action.cs">
       <Link>BCLImplementation\System\Action.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\System\Security\Cryptography\RSAParameters.cs">
+      <Link>BCLImplementation\System\Security\Cryptography\RSAParameters.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\System\Threading\ThreadStart.cs">
       <Link>BCLImplementation\System\Threading\ThreadStart.cs</Link>
     </Compile>

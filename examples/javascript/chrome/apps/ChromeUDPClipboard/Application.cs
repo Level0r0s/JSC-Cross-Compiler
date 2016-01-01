@@ -27,6 +27,7 @@ namespace ChromeUDPClipboard
     public sealed class Application : ApplicationWebService
     {
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151212/androidudpclipboard
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160101/ovrwindwheelndk
 
         // from red to asus
         // net use
@@ -114,7 +115,8 @@ namespace ChromeUDPClipboard
             new IHTMLHorizontalRule { }.AttachToDocument();
 
 
-            Action<string> UDPSend = async message =>
+            #region UDPClipboardSend
+            Action<string> UDPClipboardSend = async message =>
             {
                 var n = await chrome.socket.getNetworkList();
 
@@ -188,6 +190,10 @@ namespace ChromeUDPClipboard
 
                     }
             };
+            #endregion
+
+
+
 
             new { }.With(
                 async delegate
@@ -198,7 +204,7 @@ namespace ChromeUDPClipboard
 
                         i.value = v;
 
-                        UDPSend(v);
+                        UDPClipboardSend(v);
                     }
                     while (true);
                 }
@@ -206,7 +212,7 @@ namespace ChromeUDPClipboard
 
             new IHTMLButton { () => "send to '" + i.value + "' android" }.AttachToDocument().onclick += async delegate
             {
-                UDPSend(i.value);
+                UDPClipboardSend(i.value);
 
             };
         }

@@ -135,7 +135,7 @@ popd</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
-start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true /IsScriptLibrary:true /IsScriptTypeFilterC:true
+start /MIN /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true /IsScriptLibrary:true /IsScriptTypeFilterC:true /DisableWebServiceAuthority:true
 
 </PreBuildEvent>
   </PropertyGroup>

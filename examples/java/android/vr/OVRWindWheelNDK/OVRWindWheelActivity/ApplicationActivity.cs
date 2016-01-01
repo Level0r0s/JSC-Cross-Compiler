@@ -18,6 +18,8 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using android.hardware;
 using System.IO;
+using android.net.wifi;
+using android.content;
 
 namespace OVRWindWheelActivity.Activities
 {
@@ -34,6 +36,8 @@ namespace OVRWindWheelActivity.Activities
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/pui_global_menu
     public class LocalApplication : Application
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160101/ovrwindwheelndk
+
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151002/udppenpressure
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151001/udppenpressure
 
@@ -255,6 +259,15 @@ namespace OVRWindWheelActivity.Activities
 
             var ActivityPaused = true;
 
+
+
+
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160101/ovrwindwheelndk
+            WifiManager wifi = (WifiManager)this.getSystemService(Context.WIFI_SERVICE);
+            var lo = wifi.createMulticastLock("vrudp");
+            lo.acquire();
+
             #region ReceiveAsync
             // https://www.youtube.com/watch?v=GpmKq_qg3Tk
 
@@ -451,11 +464,12 @@ namespace OVRWindWheelActivity.Activities
             #endregion
 
             #region fWASDC
+            var fWASDCport = 41814;
             Action<IPAddress> fWASDC = async nic =>
              {
-                 var uu = new UdpClient(41814);
+                 var uu = new UdpClient(fWASDCport);
 
-                 args.mouse = "awaiting WASDC at " + nic + " :41814";
+                 args.mouse = "awaiting mouse and WASDC at " + nic + ":" + fWASDCport;
 
                  // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
                  // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs

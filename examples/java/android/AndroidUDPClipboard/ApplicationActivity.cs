@@ -36,6 +36,7 @@ namespace AndroidUDPClipboard.Activities
     public class ApplicationActivity : Activity
     {
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151212/androidudpclipboard
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160101/ovrwindwheelndk
 
         //        connect s6 via usb .
         // turn on wifi!
@@ -75,6 +76,14 @@ namespace AndroidUDPClipboard.Activities
 
             var sw = Stopwatch.StartNew();
 
+
+
+            Action cleanup = delegate { };
+
+            Notification reuse = null;
+            var notificationIntent = new Intent(this, typeof(ApplicationActivity).ToClass());
+            var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
             Action<string> SetClipboard = value =>
             {
                 Console.WriteLine("SetClipboard " + new { value });
@@ -82,14 +91,28 @@ namespace AndroidUDPClipboard.Activities
                 this.runOnUiThread(
                     delegate
                     {
+                        cleanup();
 
                         b.setText(value);
 
-                        var nm = (NotificationManager)this.getSystemService(Activity.NOTIFICATION_SERVICE);
 
+
+
+                        if (reuse != null)
+                        {
+                            reuse.setLatestEventInfo(
+                                 this,
+                                 contentTitle: value,
+                                 contentText: "",
+                                 contentIntent: contentIntent);
+
+                            return;
+                        }
+
+                        var xNotificationManager = (NotificationManager)this.getSystemService(Activity.NOTIFICATION_SERVICE);
 
                         // see http://developer.android.com/reference/android/app/Notification.html
-                        var notification = new Notification(
+                        var xNotification = new Notification(
                             //android.R.drawable.ic_dialog_alert,
                             android.R.drawable.ic_menu_view,
                             //tickerText: "not used?",
@@ -102,11 +125,15 @@ namespace AndroidUDPClipboard.Activities
 
                         //notification.defaults |= Notification.DEFAULT_SOUND;
 
-                        var notificationIntent = new Intent(this, typeof(ApplicationActivity).ToClass());
-                        var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
 
-                        notification.setLatestEventInfo(
+                        // flags = Notification.FLAG_ONGOING_EVENT 
+
+                        var FLAG_ONGOING_EVENT = 0x00000002;
+                        //notification.flags |= Notification.FLAG_ONGOING_EVENT;
+                        //xNotification.flags |= FLAG_ONGOING_EVENT;
+
+                        xNotification.setLatestEventInfo(
                             this,
                             contentTitle: value,
                             contentText: "",
@@ -115,14 +142,34 @@ namespace AndroidUDPClipboard.Activities
                         //notification.defaults |= Notification.DEFAULT_VIBRATE;
                         //notification.defaults |= Notification.DEFAULT_LIGHTS;
                         // http://androiddrawableexplorer.appspot.com/
-                        nm.notify((int)sw.ElapsedMilliseconds, notification);
 
-                        var vibrator = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
-                        vibrator.vibrate(600);
+                        var id = (int)sw.ElapsedMilliseconds;
 
+                        xNotificationManager.notify(id, xNotification);
+
+                        var xVibrator = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
+                        xVibrator.vibrate(600);
+
+
+
+                        #region setPrimaryClip
                         android.content.ClipboardManager clipboard = (android.content.ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
                         ClipData clip = ClipData.newPlainText("label", value);
                         clipboard.setPrimaryClip(clip);
+                        #endregion
+
+                        reuse = xNotification;
+
+
+                        cleanup += delegate
+                        {
+                            // https://developer.android.com/reference/android/app/Notification.html
+
+                            if (xNotification == null)
+                                return;
+
+                            xNotificationManager.cancel(id);
+                        };
                     }
                 );
             };

@@ -60,6 +60,7 @@ namespace com.oculus.gles3jni
     unsafe static class GLES3JNILib
     {
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150716/ovrwindwheelactivity
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160101/ovrwindwheelndk
 
         //public const int safemodeMemoryLimitMB = 200;
         //public const int safemodeMemoryLimitMB = 16;
