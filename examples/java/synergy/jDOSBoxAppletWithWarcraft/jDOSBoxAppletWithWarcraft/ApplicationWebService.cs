@@ -13,7 +13,7 @@ namespace jDOSBoxAppletWithWarcraft
     /// </summary>
     public sealed partial class ApplicationWebService
     {
-
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151231/tdjdosboxe
 
 
 

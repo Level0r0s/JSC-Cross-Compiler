@@ -79,8 +79,11 @@ namespace GearVR360VideoPush
 
                 // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151106/spherical3d
                 //where ff.ToLower().Contains("_TB".ToLower())
-                where ff.ToLower().Contains("_TB".ToLower())
-                && ff.ToLower().Contains("mine".ToLower())
+
+                orderby fff.LastWriteTime descending
+                orderby ff.ToLower().Contains("_TB".ToLower()) descending
+
+                //&& ff.ToLower().Contains("mine".ToLower())
 
                 //where ff.ToLower().Contains("night".ToLower())
                 //    || ff.ToLower().Contains("lapse".ToLower()) 
@@ -213,7 +216,7 @@ namespace GearVR360VideoPush
 
                 #region mp4
                 // all images uploaded?
-                mp4uploads += delegate
+                //mp4uploads += delegate
                 {
                     // http://stackoverflow.com/questions/26788998/adb-push-p-bad-file-descriptor
 

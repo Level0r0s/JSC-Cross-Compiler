@@ -59,6 +59,7 @@ namespace jDOSBoxHybridExperiment
 
             //ipx=false
 
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151231/tdjdosboxe
             // defined at?
             jdos.gui.MainFrame.main(args);
 

@@ -248,7 +248,8 @@ namespace ScriptCoreLib.JavaScript.Remoting
                 c.ResponseHeaders.AllKeys.WithEach(
                     k =>
                     {
-                        var FieldName = k.SkipUntilOrEmpty(".field ");
+                        // Z:\jsc.svn\examples\javascript\Test\TestFirefoxWebServiceField\ApplicationWebService.cs
+                        var FieldName = k.SkipUntilOrEmpty(".field-");
 
                         if (string.IsNullOrEmpty(FieldName))
                             return;

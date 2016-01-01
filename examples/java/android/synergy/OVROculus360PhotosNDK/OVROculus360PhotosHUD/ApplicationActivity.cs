@@ -68,6 +68,7 @@ namespace OVROculus360PhotosHUD.Activities
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "dual")]
     // for dual we could switch to chrome view activity
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160101/ovroculus360photosndk
 
     // vr_only means we wont see our activity ui
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_only")]

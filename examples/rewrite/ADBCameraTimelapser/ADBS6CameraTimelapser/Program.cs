@@ -97,7 +97,7 @@ namespace ADBS6CameraTimelapser
             var device = "192.168.1.126:5555";
             //var device = "192.168.173.5:5555";
             //var device = "02157df2d5d4e70b";
-            var storage = "x:/vr/tape28";
+            var storage = "x:/vr/tape30";
 
             if (args.Length == 2)
             {
@@ -161,7 +161,7 @@ namespace ADBS6CameraTimelapser
 
                 var f = System.Diagnostics.Process.Start(
                                    new System.Diagnostics.ProcessStartInfo(adb, a) { UseShellExecute = false }
-                                   ).WaitForExit(45000);
+                                   ).WaitForExit(18000);
 
                 Console.WriteLine("< " + new { f, a });
 
@@ -194,9 +194,10 @@ namespace ADBS6CameraTimelapser
 
             var roundtrip = Stopwatch.StartNew();
 
-            // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+            // c
 
             do_adb("kill-server");
+            do_adb("start-server");
             do_adb("devices");
 
             //            Pinging 192.168.173.5 with 32 bytes of data:
@@ -217,6 +218,7 @@ namespace ADBS6CameraTimelapser
             //).WaitForExit();
 
             //// fuck you adb. be reliable. kill adb?
+            //  "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
             var connected = get_adb("connect " + device);
 
             //List of devices attached
@@ -266,6 +268,10 @@ namespace ADBS6CameraTimelapser
 
 
             do_adb("devices");
+
+            //> devices
+            //List of devices attached
+            //192.168.1.126:5555      offline
 
             goto noreset;
             do_adb("-s " + device + " shell \"am force-stop com.sec.android.app.camera\" ");
@@ -406,6 +412,8 @@ namespace ADBS6CameraTimelapser
                 Console.WriteLine("check camera.");
                 Console.Beep();
 
+                Debugger.Break();
+
                 do_adb("-s " + device + " disconnect");
 
                 Thread.Sleep(15000);
@@ -533,7 +541,10 @@ namespace ADBS6CameraTimelapser
 
             // at night we need more time
             Console.WriteLine("rotating...");
-            Thread.Sleep(15900);
+            //Thread.Sleep(35900);
+
+            // EXTRA SLOW ROTATE?
+            Thread.Sleep(60000);
 
 
             //shell@zerolte:/sdcard/DCIM/CardboardCamera $ ls
@@ -667,8 +678,8 @@ namespace ADBS6CameraTimelapser
                 if (pendingimages > 1)
                 {
                     // we are behind. let the device render
-                    Console.WriteLine("rendering?......");
-                    Thread.Sleep(20000);
+                    Console.WriteLine("rendering?...... backlog? battery save mode? " + new { pendingimages });
+                    Thread.Sleep(10000 * pendingimages);
 
                 }
 

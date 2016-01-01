@@ -163,8 +163,11 @@ namespace ScriptCoreLib.Ultra.WebService
                             {
                                 // GetParameterValue: { key = _0600000e_field_elapsed }
 
+                                // if we write her. where are they read?
+                                // Z:\jsc.svn\examples\javascript\Test\TestFirefoxWebServiceField\ApplicationWebService.cs
+                                // firefox filters out spaces?
                                 that.Context.Response.AddHeader(
-                                    ".field " + InternalFieldName,
+                                    ".field-" + InternalFieldName,
                                     value
                                 );
                             }
