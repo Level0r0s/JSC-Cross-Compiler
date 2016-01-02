@@ -20,5 +20,6 @@ namespace x360videoNDK
     {
         // Z:\jsc.svn\examples\java\android\synergy\AndroidBrowserVRNDK\xNativeActivity.cs
 
+        // add tools, staging
     }
 }

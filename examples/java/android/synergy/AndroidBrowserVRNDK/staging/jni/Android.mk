@@ -2,6 +2,7 @@
 # because why keep it simple if we can have a special build scripts all over the place.
 # https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151213/androidbrowserndk
 # https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150612/ovroculus360photoshud
+# https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160102/x360videos
 # do we know what needs to be done?
 
 
