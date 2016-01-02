@@ -97,6 +97,9 @@
       <Link>staging\apk\libs\armeabi-v7a\libmain.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\x360videoNDK\bin\Debug\staging\libs\armeabi-v7a\libvrapi.so">
+      <Link>staging\apk\libs\armeabi-v7a\libvrapi.so</Link>
+    </None>
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>

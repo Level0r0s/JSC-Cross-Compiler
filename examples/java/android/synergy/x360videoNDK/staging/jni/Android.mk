@@ -19,6 +19,35 @@
 LOCAL_PATH := $(call my-dir)
 
 
+
+# used by jni/Oculus360VideosSDK/OVR_TurboJpeg.cpp:37
+include $(CLEAR_VARS)					# clean everything up to prepare for a module
+LOCAL_ARM_MODE  := arm					# full speed arm instead of thumb
+LOCAL_ARM_NEON  := true					# compile with neon support enabled
+LOCAL_MODULE := jpeg
+LOCAL_SRC_FILES := jpeg/libjpeg.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+
+
+
+# used by jni/VrAppFramework/Src/App.cpp:1622:
+# "X:\opensource\ovr_sdk_mobile_1.0.0.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so"
+include $(CLEAR_VARS)
+LOCAL_MODULE := vrapi
+LOCAL_SRC_FILES := $(TARGET_ARCH_ABI)/libvrapi.so 
+include $(PREBUILT_SHARED_LIBRARY)
+
+
+# "X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\SystemUtils\Libs\Android\armeabi-v7a\libsystemutils.a"
+include $(CLEAR_VARS)
+LOCAL_MODULE := systemutils
+LOCAL_SRC_FILES := $(TARGET_ARCH_ABI)/libsystemutils.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+
+
+
 include $(CLEAR_VARS)
 LOCAL_MODULE    := main
 LOCAL_ARM_MODE  := arm					# full speed arm instead of thumb
@@ -29,6 +58,8 @@ LOCAL_LDLIBS    := -llog -landroid -lEGL   -lGLESv3 -lz
 LOCAL_LDLIBS += -ljnigraphics 
 
 LOCAL_STATIC_LIBRARIES := android_native_app_glue  
+LOCAL_STATIC_LIBRARIES += jpeg
+LOCAL_STATIC_LIBRARIES += systemutils
 
 LOCAL_CFLAGS	:= -DANDROID_NDK -DGL_EXT_texture_sRGB_decode -DGL_EXT_sRGB_write_control
 
@@ -124,7 +155,7 @@ $(info add  x360videoNDK.dll.c)
 LOCAL_SRC_FILES +=  x360videoNDK.dll.c
 
 LOCAL_SHARED_LIBRARIES	:= 
-#LOCAL_SHARED_LIBRARIES	+= vrapi 
+LOCAL_SHARED_LIBRARIES	+= vrapi 
 #LOCAL_SHARED_LIBRARIES	+= assimp 
 
 

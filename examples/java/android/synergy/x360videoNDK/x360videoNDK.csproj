@@ -49,33 +49,24 @@
   <ItemGroup>
     <None Include="tools\build.bat" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrApi\Include\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\VrApi\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\1stParty\OpenGL_Loader\Include\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\OpenGL_Loader\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\1stParty\OpenGL_Loader\Src\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\OpenGL_Loader\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
-  
-
-
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\LibOVRKernel\Include\**\*.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -100,30 +91,32 @@
       <Link>staging\jni\LibOVR\Src\Kernel\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
   <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so">
+      <Link>staging\jni\armeabi-v7a\libvrapi.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\SystemUtils\Include\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\VrAppSupport\SystemUtils\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
-
   <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\SystemUtils\Libs\Android\armeabi-v7a\libsystemutils.a">
+      <Link>staging\jni\armeabi-v7a\libsystemutils.a</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrGUI\Src\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\VrAppSupport\VrGUI\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrModel\Src\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\VrAppSupport\VrModel\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrSound\Include\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -136,25 +129,18 @@
       <Link>staging\jni\VrAppSupport\VrSound\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
-
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrLocale\Src\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\VrAppSupport\VrLocale\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\3rdParty\stb\src\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\stb\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
-
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\3rdParty\minizip\src\ioapi.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -167,26 +153,23 @@
       <Link>staging\jni\minizip\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-  
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppFramework\Include\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\VrAppFramework\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppFramework\Src\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\VrAppFramework\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
-
-
   <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrSamples\Native\Oculus360VideosSDK\Projects\Android\jni\libjpeg.a">
+      <Link>staging\jni\jpeg\libjpeg.a</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrSamples\Native\Oculus360VideosSDK\Src\*.cpp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\jni\Oculus360VideosSDK\%(RecursiveDir)%(FileName)%(Extension)</Link>
