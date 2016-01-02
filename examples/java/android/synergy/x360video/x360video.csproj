@@ -80,10 +80,12 @@
     <Reference Include="AndroidUDPClipboard.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\AndroidUDPClipboard.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="x360video.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\x360video.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationActivity.cs">
-    </Compile>
+    <Compile Include="ApplicationActivity.cs"></Compile>
     <Compile Include="Program.cs">
       <DependentUpon>ApplicationActivity.cs</DependentUpon>
     </Compile>
@@ -95,7 +97,14 @@
   <ItemGroup>
     <Content Include="Design\Images.htm" />
     <Content Include="Design\jsc.png" />
+    <Content Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrApi\Libs\Android\VrApi.jar">
+      <Link>References\VrApi.jar</Link>
+    </Content>
+    <Content Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppFramework\Libs\Android\VrAppFramework.jar">
+      <Link>References\VrAppFramework.jar</Link>
+    </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -17,6 +17,7 @@ namespace AndroidBrowserVRNDK
     [Script]
     public class xNativeActivity
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160102/x360videos
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150607-1/vrcubeworld
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201505/20150525
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151213/androidbrowserndk

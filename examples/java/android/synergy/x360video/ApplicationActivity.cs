@@ -33,7 +33,11 @@ namespace x360video.Activities
 
     // works for 2.4 too
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
-    public class ApplicationActivity : Activity
+    public class ApplicationActivity 
+        // : Activity
+
+        // defined at?
+        : com.oculus.vrappframework.VrActivity 
     {
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160102/x360videos
 

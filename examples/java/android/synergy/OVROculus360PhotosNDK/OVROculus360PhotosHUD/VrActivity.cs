@@ -28,6 +28,8 @@ namespace com.oculus.vrappframework
 
         AudioManager.OnAudioFocusChangeListener
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160102/x360videos
+
         // https://answers.oculus.com/questions/3824/what-is-the-ideal-triangle-count-and-draw-calls-li.html
         // https://answers.oculus.com/questions/4436/how-do-i-modify-the-clipping-planes-in-c.html
 
