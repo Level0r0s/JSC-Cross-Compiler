@@ -42,8 +42,13 @@ LOCAL_SRC_FILES :=
 
 
 # http://stackoverflow.com/questions/11775733/how-can-i-print-message-in-makefile
-$(info add  x360videoNDK.dll.c)
 
+
+
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./Oculus360VideosSDK/*.cpp))
+
+$(info add  x360videoNDK.dll.c)
 LOCAL_SRC_FILES +=  x360videoNDK.dll.c
 
 LOCAL_SHARED_LIBRARIES	:= 

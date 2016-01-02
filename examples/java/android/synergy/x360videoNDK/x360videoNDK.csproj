@@ -49,6 +49,15 @@
   <ItemGroup>
     <None Include="tools\build.bat" />
   </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrSamples\Native\Oculus360VideosSDK\Src\*.cpp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\Oculus360VideosSDK\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  
   <ItemGroup>
     <Content Include="staging\AndroidManifest.xml">
       <SubType>Designer</SubType>
@@ -61,6 +70,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK.csproj">
       <Project>{e9a0e839-8bec-4b5c-b967-2e55a2078a77}</Project>
