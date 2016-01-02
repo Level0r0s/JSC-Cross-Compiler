@@ -53,10 +53,12 @@ LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./OpenGL_
 
 
 
-# usedby jni/VrAppFramework/Include/App.h:21:30
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Include 
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Src 
+# used by jni/VrAppFramework/Src/App.cpp:12:0:
+## "X:\opensource\ovr_sdk_mobile_1.0.0.0\LibOVRKernel\Src\Kernel\OVR_Types.h"
 
+# usedby jni/VrAppFramework/Include/App.h:21:30
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Src 
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Include 
 
 
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Kernel/*.cpp))
@@ -70,11 +72,32 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrApi/Include
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppSupport/SystemUtils/Include 
 
 
+# used by  jni/VrAppFramework/Src/App.cpp:28:23
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/stb
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./stb/*.c))
+
+
+
+# usedby jni/VrAppFramework/Src/PackageFiles.cpp:18:19
+
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/minizip
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./minizip/*.c))
+
+
+
 # usedby jni/Oculus360VideosSDK/Oculus360Videos.cpp:20:19:
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppFramework/Include 
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppFramework/Src/VRMenu/*.cpp))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppFramework/Src/*.cpp))
 
+
+# used by jni/VrAppSupport/VrGUI/Src/UI/UIButton.cpp:12:25:
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppSupport/VrGUI/Src
+
+
+# used by jni/Oculus360VideosSDK/Oculus360Videos.cpp:31:24: 
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppSupport/VrGUI/Src/UI/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppSupport/VrGUI/Src/*.cpp))
 
 
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./Oculus360VideosSDK/*.cpp))

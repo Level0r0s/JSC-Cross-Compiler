@@ -108,6 +108,38 @@
     </None>
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrGUI\Src\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrAppSupport\VrGUI\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\3rdParty\stb\src\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\stb\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\3rdParty\minizip\src\ioapi.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\minizip\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\3rdParty\minizip\src\unzip.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\minizip\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
   
 
   <ItemGroup>
