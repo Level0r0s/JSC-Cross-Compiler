@@ -18,6 +18,29 @@ using System.Net.Sockets;
 using ScriptCoreLib.Extensions;
 using android.net.wifi;
 using System.Diagnostics;
+using android.media;
+using android.graphics;
+using android.view;
+
+namespace com.oculus.oculus360videossdk
+{
+    static class MainActivity
+    {
+        // defined at 
+        // X:\opensource\ovr_sdk_mobile_1.0.0.0\VrSamples\Native\Oculus360VideosSDK\Src\Oculus360Videos.cpp
+
+        [Script(IsPInvoke = true)]
+        public static void nativeSetVideoSize(long appPtr, int width, int height);
+        [Script(IsPInvoke = true)]
+        public static SurfaceTexture nativePrepareNewVideo(long appPtr);
+        [Script(IsPInvoke = true)]
+        public static void nativeFrameAvailable(long appPtr);
+        [Script(IsPInvoke = true)]
+        public static void nativeVideoCompletion(long appPtr);
+        [Script(IsPInvoke = true)]
+        public static long nativeSetAppInterface(Activity act, string fromPackageNameString, string commandString, string uriString);
+    }
+}
 
 namespace x360video.Activities
 {
@@ -67,89 +90,15 @@ namespace x360video.Activities
             base.onCreate();
 
             Console.WriteLine("enter x360video LocalApplication onCreate, first time?");
-
-            //Func<string> futureinline_stringFromJNI = delegate
-            //{
-            //    // env.NewStringUTF
-            //    // there should be a .h parser somewhere. via which we can generate the natives for so?
-            //    // jsc could generate a linker code to allow us to use c exports from java..
-            //    return global::OVRVrCubeWorldSurfaceViewNDK.VrApi_h.vrapi_GetVersionString();
-            //};
-
-            var x = default(string);
-
-            // X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android
-            // X:\jsc.svn\examples\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar'
-
-
-            //1cb8:01:04:0e CreateToJARImportNatives Cache { FileNameString = X:\jsc.svn\examples\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar, Input = X:\jsc.svn\examples\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar }
-            //System.IO.DirectoryNotFoundException: Could not find a part of the path 'X:\jsc.svn\examples\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar'.
-            //   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
-            //   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boole
-            //   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
-            //   at System.IO.File.OpenRead(String path)
-            //   at jsc.meta.Library.CreateToJARImportNatives.<>c__DisplayClassf.<InternalWithCache>b__e(SHA1CryptoServiceProvider h) in x:\jsc.internal.git\compiler\jsc.internal\jsc.internal\meta\Library\CreateToJARImportNatives.cs:line 251
-            //var api = typeof(com.oculus.vrapi.VrApi);
-            // where is the source for it?
-            // X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\src\com\oculusvr\vrlib\VrLib.java
-            // X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\jni\VrApi\VrApi.cpp
-
-
-            //try
-            //{
-            //    x = futureinline_stringFromJNI();
-            //}
-            //catch
-            {
-                //x = "xMarshal " + OVROculus360Photos.Activities.xMarshal.stringFromJNI();
-            }
-            //finally
-            {
-                //                [javac] W:\src\__AnonymousTypes__OVRVrCubeWorldNativeActivity_AndroidActivity\__f__AnonymousType_97_0_1.java:34: error: reference to Format is ambiguous, both method Format(String,Object,Object) in __String and method Format(__IFormatProvider,String,Object[]) in __String match
-                //[javac]         return __String.Format(null, "{{ api = {0} }}", objectArray2);
-                //[javac]                        ^
-                //[javac] Note: W:\src\ScriptCoreLibJava\BCLImplementation\System\Threading\__Thread.java uses or overrides a deprecated API.
-
-                // https://stackoverflow.com/questions/7686482/when-does-applications-oncreate-method-is-called-on-android
-                //Toast.makeText(this, "OVRVrCubeWorldNative " + x + new { api }, Toast.LENGTH_LONG).show();
-
-            }
-
-            //I/VrApi   (  401):              "Message":      "Thread priority security exception. Make sure the APK is signed."
-
         }
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150607-1/vrcubeworld
         /** Load jni .so on initialization */
         static LocalApplication()
         {
-            //Log.d( TAG, "LoadLibrary" );
             Console.WriteLine("enter x360video LocalApplication cctor");
-
-
-            // "X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so"
-
-            // did csproj copy it where it needs to be?
-
-            // do we need it?
-            //java.lang.System.loadLibrary("vrapi");
-            //java.lang.System.loadLibrary("assimp");
-
-            //java.lang.System.loadLibrary("assimp");
-
-            //<!-- Tell NativeActivity the name of the .so -->
-            //<meta-data android:name="android.app.lib_name" android:value="vrcubeworld" />
-            // why bother?
-
-            //java.lang.System.loadLibrary("vrcubeworld");
-
-            // need to link it!
-            // "X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldNativeActivity\OVRVrCubeWorldNative\bin\Debug\staging\libs\armeabi-v7a\libOVRVrCubeWorldNative.so"
-
-            // incline android c would automate this step.
-            //java.lang.System.loadLibrary("OVRVrCubeWorldNative");
+            java.lang.System.loadLibrary("vrapi");
             java.lang.System.loadLibrary("main");
-
 
             var stringFromJNI = xMarshal.stringFromJNI();
 
@@ -174,10 +123,17 @@ namespace x360video.Activities
     // works for 2.4 too
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
     public class ApplicationActivity
-        : Activity
+        //: Activity,
+         : com.oculus.vrappframework.VrActivity,
+
+
+        android.graphics.SurfaceTexture.OnFrameAvailableListener,
+        MediaPlayer.OnVideoSizeChangedListener,
+        MediaPlayer.OnCompletionListener,
+        MediaPlayer.OnErrorListener,
+        AudioManager.OnAudioFocusChangeListener
 
         // defined at?
-    // : com.oculus.vrappframework.VrActivity 
     {
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160102/x360videos
 
@@ -203,6 +159,30 @@ namespace x360video.Activities
 
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151121
         // http://stackoverflow.com/questions/17513502/support-for-multi-window-app-development
+
+
+        void requestAudioFocus()
+        {
+            // Request audio focus
+            int result = audioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC,
+                AudioManager.AUDIOFOCUS_GAIN);
+            if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED)
+            {
+                //Log.d(TAG, "startMovie(): GRANTED audio focus");
+            }
+            else if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED)
+            {
+                //Log.d(TAG, "startMovie(): FAILED to gain audio focus");
+            }
+        }
+
+        void releaseAudioFocus()
+        {
+            audioManager.abandonAudioFocus(this);
+        }
+
+
+
 
         protected override void onCreate(global::android.os.Bundle savedInstanceState)
         {
@@ -413,5 +393,139 @@ namespace x360video.Activities
         }
 
 
+
+
+
+        SurfaceTexture movieTexture = null;
+        Surface movieSurface = null;
+        MediaPlayer mediaPlayer = null;
+        AudioManager audioManager = null;
+
+
+        public void onFrameAvailable(SurfaceTexture value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void onVideoSizeChanged(MediaPlayer arg0, int arg1, int arg2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void onCompletion(MediaPlayer value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool onError(MediaPlayer arg0, int arg1, int arg2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void onAudioFocusChange(int value)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+
+
+        //public virtual 
+
+        public long base_getAppPtr()
+        {
+            return (this as dynamic).getAppPtr();
+        }
+
+        public void startMovie(String pathName)
+        {
+            //Log.v(TAG, "startMovie " + pathName);
+
+            //synchronized (this) 
+            {
+                // Request audio focus
+                requestAudioFocus();
+
+                // Have native code pause any playing movie,
+                // allocate a new external texture,
+                // and create a surfaceTexture with it.
+                movieTexture = com.oculus.oculus360videossdk.MainActivity.nativePrepareNewVideo(base_getAppPtr());
+                movieTexture.setOnFrameAvailableListener(this);
+                movieSurface = new Surface(movieTexture);
+
+                if (mediaPlayer != null)
+                {
+                    mediaPlayer.release();
+                }
+
+                //Log.v(TAG, "MediaPlayer.create");
+
+                //synchronized (this) {
+                mediaPlayer = new MediaPlayer();
+                //}
+
+
+                mediaPlayer.setOnVideoSizeChangedListener(this);
+                mediaPlayer.setOnCompletionListener(this);
+                mediaPlayer.setSurface(movieSurface);
+
+                try
+                {
+                    //Log.v(TAG, "mediaPlayer.setDataSource()");
+                    mediaPlayer.setDataSource(pathName);
+                }
+                catch //(IOException t) 
+                {
+                    //Log.e(TAG, "mediaPlayer.setDataSource failed");
+                }
+
+                try
+                {
+                    //Log.v(TAG, "mediaPlayer.prepare");
+                    mediaPlayer.prepare();
+                }
+                catch //(IOException t) 
+                {
+                    //Log.e(TAG, "mediaPlayer.prepare failed:" + t.getMessage());
+                }
+                //Log.v(TAG, "mediaPlayer.start");
+
+                // If this movie has a saved position, seek there before starting
+                // This seems to make movie switching crashier.
+                int seekPos = getPreferences(MODE_PRIVATE).getInt(pathName + "_pos", 0);
+                if (seekPos > 0)
+                {
+                    try
+                    {
+                        mediaPlayer.seekTo(seekPos);
+                    }
+                    catch //( IllegalStateException ise ) 
+                    {
+                        //Log.d( TAG, "mediaPlayer.seekTo(): Caught illegalStateException: " + ise.toString() );
+                    }
+                }
+
+                mediaPlayer.setLooping(false);
+
+                try
+                {
+                    mediaPlayer.start();
+                }
+                catch //( IllegalStateException ise ) 
+                {
+                    //Log.d( TAG, "mediaPlayer.start(): Caught illegalStateException: " + ise.toString() );
+                }
+
+                mediaPlayer.setVolume(1.0f, 1.0f);
+
+                // Save the current movie now that it was successfully started
+                var edit = getPreferences(MODE_PRIVATE).edit();
+                edit.putString("currentMovie", pathName);
+                edit.commit();
+            }
+
+            //Log.v(TAG, "returning");
+        }
     }
 }
