@@ -129,7 +129,7 @@ namespace x360video.Activities
             java.lang.System.loadLibrary("vrapi");
             java.lang.System.loadLibrary("main");
 
-           
+
         }
     }
 
@@ -538,11 +538,13 @@ namespace x360video.Activities
         }
 
 
-        public void startMovie(String pathName)
+        public void startMovie(string pathName)
         {
-            //Log.v(TAG, "startMovie " + pathName);
 
-            //synchronized (this) 
+            // let zmovies know we started a video. could we stream it to chrome?
+            Console.WriteLine("startMovie " + new { pathName });
+
+
             {
                 // Request audio focus
                 requestAudioFocus();
@@ -568,6 +570,8 @@ namespace x360video.Activities
 
                 mediaPlayer.setOnVideoSizeChangedListener(this);
                 mediaPlayer.setOnCompletionListener(this);
+
+                // if only webview had setSurface method?
                 mediaPlayer.setSurface(movieSurface);
 
                 try

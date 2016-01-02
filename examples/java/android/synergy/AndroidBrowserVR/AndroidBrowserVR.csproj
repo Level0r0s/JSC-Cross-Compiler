@@ -149,10 +149,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\res-org.gearvrf.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
-    <!--<None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\VrAppFramework\res\**\*.*">
+    <None Include="X:\opensource\ovr_sdk_mobile_0.6.2.0\VrAppFramework\res\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\res-com.oculus.vrappframework.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
-    </None>-->
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

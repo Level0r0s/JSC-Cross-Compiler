@@ -34,13 +34,13 @@ namespace x360videoNDK
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity" "AndroidRuntime" "Oculus360Photos"
 
 
-        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVROculus360PhotosHUD.Activities
-        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVROculus360PhotosHUD.Activities/OVROculus360PhotosHUD.Activities.ApplicationActivity
+        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop x360video.Activities
+        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n x360video.Activities/x360video.Activities.ApplicationActivity
         // Warning: Activity not started, its current task has been brought to the front
 
 
 
-        // x:\util\android-sdk-windows\platform-tools\adb.exe  shell dumpsys meminfo OVRWindWheelActivity.Activities
+        // x:\util\android-sdk-windows\platform-tools\adb.exe  shell dumpsys meminfo x360video.Activities
 
 
         // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell screenrecord --bit-rate 6000000 "/sdcard/oculus/Movies/My Videos/3D/OVRMyCubeWorldNDK-WASDC-mousewheel.mp4"
