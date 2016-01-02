@@ -12,6 +12,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Xml.Linq
     [Script(Implements = typeof(global::System.Xml.Linq.XElement))]
     internal class __XElement : __XContainer
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160102/x360videos
+        // "X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrLocale\Src\tinyxml2.h"
 
         public __XElement()
             : this(null)

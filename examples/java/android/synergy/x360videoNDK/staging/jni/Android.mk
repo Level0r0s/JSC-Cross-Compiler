@@ -99,6 +99,24 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppSupport/VrGUI/Src
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppSupport/VrGUI/Src/UI/*.cpp))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppSupport/VrGUI/Src/*.cpp))
 
+# used by jni/Oculus360VideosSDK/Oculus360Videos.h:21:23:
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppSupport/VrModel/Src
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppSupport/VrModel/Src/*.cpp))
+
+
+
+
+# used by jni/Oculus360VideosSDK/Oculus360Videos.h:22:32:
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppSupport/VrSound/Include
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppSupport/VrSound/Src/*.cpp))
+
+
+# used by jni/Oculus360VideosSDK/Oculus360Videos.cpp:44:24:
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppSupport/VrLocale/Src
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppSupport/VrLocale/Src/*.cpp))
+
+
+
 
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./Oculus360VideosSDK/*.cpp))
 

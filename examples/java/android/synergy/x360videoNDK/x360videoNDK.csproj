@@ -117,7 +117,34 @@
   </ItemGroup>
 
 
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrModel\Src\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrAppSupport\VrModel\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
 
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrSound\Include\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrAppSupport\VrSound\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrSound\Src\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrAppSupport\VrSound\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrLocale\Src\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrAppSupport\VrLocale\Src\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\3rdParty\stb\src\**\*.*">
