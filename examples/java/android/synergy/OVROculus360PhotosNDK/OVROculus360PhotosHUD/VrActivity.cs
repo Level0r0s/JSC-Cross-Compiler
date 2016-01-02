@@ -170,6 +170,7 @@ namespace com.oculus.vrappframework
 
         protected override void onCreate(android.os.Bundle savedInstanceState)
         {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160102/x360videos
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151006
             base.onCreate(savedInstanceState);
 

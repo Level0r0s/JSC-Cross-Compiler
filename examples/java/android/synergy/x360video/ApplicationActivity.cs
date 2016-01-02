@@ -21,6 +21,33 @@ using System.Diagnostics;
 using android.media;
 using android.graphics;
 using android.view;
+using System.IO;
+
+namespace com.oculus.vrgui
+{
+    class xVolumeReceiver
+    {
+        public xVolumeReceiver()
+        {
+            var x = typeof(global::com.oculus.vrgui.VolumeReceiver);
+
+        }
+    }
+
+}
+
+namespace com.oculus.sound
+{
+    class xSoundPooler
+    {
+        public xSoundPooler()
+        {
+            var refSoundPooler = typeof(global::com.oculus.sound.SoundPooler);
+
+            Console.WriteLine("xSoundPooler " + new { refSoundPooler });
+        }
+    }
+}
 
 namespace com.oculus.oculus360videossdk
 {
@@ -30,15 +57,15 @@ namespace com.oculus.oculus360videossdk
         // X:\opensource\ovr_sdk_mobile_1.0.0.0\VrSamples\Native\Oculus360VideosSDK\Src\Oculus360Videos.cpp
 
         [Script(IsPInvoke = true)]
-        public static void nativeSetVideoSize(long appPtr, int width, int height);
+        public static void nativeSetVideoSize(long appPtr, int width, int height) { throw null; }
         [Script(IsPInvoke = true)]
-        public static SurfaceTexture nativePrepareNewVideo(long appPtr);
+        public static SurfaceTexture nativePrepareNewVideo(long appPtr) { throw null; }
         [Script(IsPInvoke = true)]
-        public static void nativeFrameAvailable(long appPtr);
+        public static void nativeFrameAvailable(long appPtr) { throw null; }
         [Script(IsPInvoke = true)]
-        public static void nativeVideoCompletion(long appPtr);
+        public static void nativeVideoCompletion(long appPtr) { throw null; }
         [Script(IsPInvoke = true)]
-        public static long nativeSetAppInterface(Activity act, string fromPackageNameString, string commandString, string uriString);
+        public static long nativeSetAppInterface(Activity act, string fromPackageNameString, string commandString, string uriString) { throw null; }
     }
 }
 
@@ -65,7 +92,9 @@ namespace x360video.Activities
 
 
 
-
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:minSdkVersion", value = "10")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "21")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "com.samsung.android.vr.application.mode", value = "vr_only")]
     public class LocalApplication : Application
     {
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160102/x360videos
@@ -109,21 +138,14 @@ namespace x360video.Activities
 
 
 
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Black.NoTitleBar.Fullscreen")]
+    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:screenOrientation", value = "landscape")]
 
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "21")]
-
-    // http://swagos.blogspot.com/2012/12/various-themes-available-in-android_28.html
-    // Theme.Holo.Dialog.Alert
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Dialog")]
-    [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Holo.Light.Dialog")]
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.DeviceDefault.Light")]
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.DeviceDefault.Dialog")]
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.DeviceDefault.Light.Dialog")]
-
-    // works for 2.4 too
-    //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
     public class ApplicationActivity
-        //: Activity,
+
+
+        // defined at?
+        // "X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppFramework\Libs\Android\VrAppFramework.jar"
          : com.oculus.vrappframework.VrActivity,
 
 
@@ -187,213 +209,86 @@ namespace x360video.Activities
         protected override void onCreate(global::android.os.Bundle savedInstanceState)
         {
             // http://www.dreamincode.net/forums/topic/130521-android-part-iii-dynamic-layouts/
+            // https://forums.oculus.com/viewtopic.php?f=67&t=27999
+
+
+
+            //var refSystemActivities = typeof(global::com.oculus.systemutils.Ev);
+
+
+            // loaded by
+            // X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrSound\Src\SoundPool.cpp
+
+
+            // "X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrSound\Projects\Android\src\com\oculus\sound\SoundPooler.java"
+
+            //var refSoundPooler = typeof(global::com.oculus.sound.SoundPooler);
+            //var refSoundPooler = typeof(global::com.oculus.sound.xSoundPooler);
+
+
+            // static const char * videosDirectory = "Oculus/360Videos/";
+
+
+            var mp4 =
+              from pf in new DirectoryInfo("/sdcard/oculus/360Videos/").GetFiles()
+              where pf.Extension.ToLower() == ".mp4"
+              //where pf.Length == 0
+              select pf;
+
+            var mp4count = mp4.Count();
+
+            Console.WriteLine(new { mp4count });
+
+            foreach (var item in mp4)
+            {
+                Console.WriteLine(item.FullName);
+            }
+
+            var refVolumeReceiver = new com.oculus.vrgui.xVolumeReceiver { };
+            var refSoundPooler = new com.oculus.sound.xSoundPooler { };
+            var refVrLocale = typeof(global::com.oculus.vrlocale.VrLocale);
+            //var refVolumeReceiver = typeof(global::com.oculus.vrgui.VolumeReceiver);
+
+            //[javac] W:\src\x360video\Activities\ApplicationActivity.java:21: error: SoundPooler is not public in com.oculus.sound; cannot be accessed from outside package
+            //[javac] import com.oculus.sound.SoundPooler;
+            //[javac]                        ^
+
+            var refSystemActivities = typeof(global::com.oculus.systemutils.SystemActivities);
+            Console.WriteLine("enter onCreate " + new { refSystemActivities, refSoundPooler, refVrLocale, refVolumeReceiver });
+
+
 
             base.onCreate(savedInstanceState);
 
-            var sv = new ScrollView(this);
-            var ll = new LinearLayout(this);
+            Intent intent = getIntent();
 
-            ll.setOrientation(LinearLayout.VERTICAL);
-            sv.addView(ll);
+            String commandString = com.oculus.vrappframework.VrActivity.getCommandStringFromIntent(intent);
+            String fromPackageNameString = com.oculus.vrappframework.VrActivity.getPackageStringFromIntent(intent);
+            String uriString = com.oculus.vrappframework.VrActivity.getUriStringFromIntent(intent);
 
-            var b = new Button(this);
 
-            b.setText("Vibrate!");
+            Console.WriteLine("onCreate " + new { fromPackageNameString, commandString, uriString });
 
-            var sw = Stopwatch.StartNew();
+            var p = com.oculus.oculus360videossdk.MainActivity.nativeSetAppInterface(this, fromPackageNameString, commandString, uriString);
 
+            base_setAppPtr(p);
 
-
-            Action cleanup = delegate { };
-
-            Notification reuse = null;
-            var notificationIntent = new Intent(this, typeof(ApplicationActivity).ToClass());
-            var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-
-            Action<string> SetClipboard = value =>
-            {
-                Console.WriteLine("SetClipboard " + new { value });
-
-                this.runOnUiThread(
-                    delegate
-                    {
-                        cleanup();
-
-                        b.setText(value);
-
-
-
-
-                        if (reuse != null)
-                        {
-                            reuse.setLatestEventInfo(
-                                 this,
-                                 contentTitle: value,
-                                 contentText: "",
-                                 contentIntent: contentIntent);
-
-                            return;
-                        }
-
-                        var xNotificationManager = (NotificationManager)this.getSystemService(Activity.NOTIFICATION_SERVICE);
-
-                        // see http://developer.android.com/reference/android/app/Notification.html
-                        var xNotification = new Notification(
-                            //android.R.drawable.ic_dialog_alert,
-                            android.R.drawable.ic_menu_view,
-                            //tickerText: "not used?",
-                            tickerText: value,
-
-
-                            when: 0
-                            //java.lang.System.currentTimeMillis()
-                        );
-
-                        //notification.defaults |= Notification.DEFAULT_SOUND;
-
-
-
-                        // flags = Notification.FLAG_ONGOING_EVENT 
-
-                        var FLAG_ONGOING_EVENT = 0x00000002;
-                        //notification.flags |= Notification.FLAG_ONGOING_EVENT;
-                        //xNotification.flags |= FLAG_ONGOING_EVENT;
-
-                        xNotification.setLatestEventInfo(
-                            this,
-                            contentTitle: value,
-                            contentText: "",
-                            contentIntent: contentIntent);
-
-                        //notification.defaults |= Notification.DEFAULT_VIBRATE;
-                        //notification.defaults |= Notification.DEFAULT_LIGHTS;
-                        // http://androiddrawableexplorer.appspot.com/
-
-                        var id = (int)sw.ElapsedMilliseconds;
-
-                        xNotificationManager.notify(id, xNotification);
-
-                        var xVibrator = (Vibrator)this.getSystemService(Context.VIBRATOR_SERVICE);
-                        xVibrator.vibrate(600);
-
-
-
-                        #region setPrimaryClip
-                        android.content.ClipboardManager clipboard = (android.content.ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
-                        ClipData clip = ClipData.newPlainText("label", value);
-                        clipboard.setPrimaryClip(clip);
-                        #endregion
-
-                        reuse = xNotification;
-
-
-                        cleanup += delegate
-                        {
-                            // https://developer.android.com/reference/android/app/Notification.html
-
-                            if (xNotification == null)
-                                return;
-
-                            xNotificationManager.cancel(id);
-                        };
-                    }
-                );
-            };
-
-
-            //b.AtClick(
-            //    delegate
-            //    {
-            //        // CLRMainn hybrid like?
-            //        SetClipboard(xMarshal.stringFromJNI());
-            //    }
-            //);
-
-            SetClipboard(xMarshal.stringFromJNI());
-
-            #region lets listen to incoming udp
-            // could we define our chrome app inline in here?
-            // or in a chrome app. could we define the android app inline?
-            #region ReceiveAsync
-            Action<IPAddress> f = async nic =>
-            {
-                b.setText("awaiting at " + nic);
-
-
-                WifiManager wifi = (WifiManager)this.getSystemService(Context.WIFI_SERVICE);
-                var lo = wifi.createMulticastLock("udp:49814");
-                lo.acquire();
-
-                // Z:\jsc.svn\examples\java\android\x360video\ApplicationActivity.cs
-                // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
-                // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
-                var uu = new UdpClient(49814);
-                uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
-                while (true)
-                {
-                    // cannot get data from RED?
-                    var x = await uu.ReceiveAsync(); // did we jump to ui thread?
-                    //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
-                    var data = Encoding.UTF8.GetString(x.Buffer);
-
-
-
-                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
-                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/mousedown
-                    SetClipboard(data);
-                }
-            };
-
-            // WithEach defined at?
-            NetworkInterface.GetAllNetworkInterfaces().WithEach(
-                n =>
-                {
-                    // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
-                    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
-
-                    var IPProperties = n.GetIPProperties();
-                    var PhysicalAddress = n.GetPhysicalAddress();
-
-
-
-                    foreach (var ip in IPProperties.UnicastAddresses)
-                    {
-                        // ipv4
-                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                        {
-                            if (!IPAddress.IsLoopback(ip.Address))
-                                if (n.SupportsMulticast)
-                                    f(ip.Address);
-                        }
-                    }
-
-
-
-
-                }
-            );
-            #endregion
-
-
-            #endregion
-
-            // jsc could pass this ptr to ctor for context..
-            var t = new EditText(this) { };
-
-            t.AttachTo(ll);
-
-            ll.addView(b);
-
-
-
-            this.setContentView(sv);
-
-
-            //this.ShowLongToast("http://my.jsc-solutions.net x");
+            audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
         }
 
+        protected override void onResume()
+        {
+            Console.WriteLine("enter onResume ");
 
+            base.onResume();
+        }
 
+        protected override void onDestroy()
+        {
+            releaseAudioFocus();
+
+            base.onDestroy();
+        }
 
 
         SurfaceTexture movieTexture = null;
@@ -404,27 +299,55 @@ namespace x360video.Activities
 
         public void onFrameAvailable(SurfaceTexture value)
         {
-            throw new NotImplementedException();
+            com.oculus.oculus360videossdk.MainActivity.nativeFrameAvailable(base_getAppPtr());
         }
 
-        public void onVideoSizeChanged(MediaPlayer arg0, int arg1, int arg2)
+        public void onVideoSizeChanged(MediaPlayer arg0, int width, int height)
         {
-            throw new NotImplementedException();
+            //Log.v(TAG, String.format("onVideoSizeChanged: %dx%d", width, height));
+            if (width == 0 || height == 0)
+            {
+                //Log.e(TAG, "The video size is 0. Could be because there was no video, no display surface was set, or the value was not determined yet.");
+            }
+            else
+            {
+                com.oculus.oculus360videossdk.MainActivity.nativeSetVideoSize(base_getAppPtr(), width, height);
+            }
         }
 
         public void onCompletion(MediaPlayer value)
         {
-            throw new NotImplementedException();
+            com.oculus.oculus360videossdk.MainActivity.nativeVideoCompletion(base_getAppPtr());
         }
 
         public bool onError(MediaPlayer arg0, int arg1, int arg2)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public void onAudioFocusChange(int value)
         {
-            throw new NotImplementedException();
+            //switch (focusChange)
+            //{
+            //    case AudioManager.AUDIOFOCUS_GAIN:
+            //        // resume() if coming back from transient loss, raise stream volume if duck applied
+            //        Log.d(TAG, "onAudioFocusChangedListener: AUDIOFOCUS_GAIN");
+            //        break;
+            //    case AudioManager.AUDIOFOCUS_LOSS:				// focus lost permanently
+            //        // stop() if isPlaying
+            //        Log.d(TAG, "onAudioFocusChangedListener: AUDIOFOCUS_LOSS");
+            //        break;
+            //    case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:	// focus lost temporarily
+            //        // pause() if isPlaying
+            //        Log.d(TAG, "onAudioFocusChangedListener: AUDIOFOCUS_LOSS_TRANSIENT");
+            //        break;
+            //    case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:	// focus lost temporarily
+            //        // lower stream volume
+            //        Log.d(TAG, "onAudioFocusChangedListener: AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK");
+            //        break;
+            //    default:
+            //}
+
         }
 
 
@@ -432,11 +355,183 @@ namespace x360video.Activities
 
 
         //public virtual 
+        long __ptr;
 
         public long base_getAppPtr()
         {
-            return (this as dynamic).getAppPtr();
+            Console.WriteLine("base_getAppPtr ");
+
+            //return (this as dynamic).getAppPtr();
+
+
+            return __ptr;
         }
+
+
+        public void base_setAppPtr(long ptr)
+        {
+            // https://developer.oculus.com/documentation/mobilesdk/latest/concepts/mobile-native-migration/
+
+            //appPtr is no longer directly exposed on VrActivity. Replace any references to appPtr with the appropriate accessor call:
+
+            //      long getAppPtr();
+            //      void setAppPtr(long appPtr);
+
+
+            // wtf?
+
+
+            // protected void setAppPtr(long);
+
+            //var setAppPtr = typeof(com.oculus.vrappframework.VrActivity).GetMethod("setAppPtr", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var setAppPtr = typeof(com.oculus.vrappframework.VrActivity).GetMethods(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).FirstOrDefault(x => x.Name == "setAppPtr");
+
+
+            //0c64:0001 base_setAppPtr { ptr = -189489152, setAppPtr = void setAppPtr(long) }
+
+
+            Console.WriteLine("base_setAppPtr " + new { ptr, setAppPtr });
+
+            setAppPtr.Invoke(this, new object[] { ptr });
+
+
+            __ptr = ptr;
+
+
+            //I/System.Console(32068): 7d44:0001 base_setAppPtr { ptr = -189493248 }
+
+            //(this as dynamic).c(ptr);
+        }
+
+
+
+
+
+
+
+
+
+        public void stopMovie()
+        {
+            //Log.d(TAG, "stopMovie()");
+
+            if (mediaPlayer != null)
+            {
+                //Log.d(TAG, "movie stopped");
+                mediaPlayer.stop();
+            }
+
+            releaseAudioFocus();
+        }
+
+
+
+        // called by?
+        public bool isPlaying()
+        {
+            //try
+            //{
+            if (mediaPlayer != null)
+            {
+                var playing = mediaPlayer.isPlaying();
+                if (playing)
+                {
+                    //Log.d(TAG, "isPlaying() = true");
+                }
+                else
+                {
+                    //Log.d(TAG, "isPlaying() = false");
+                }
+                return playing;
+            }
+            //Log.d(TAG, "isPlaying() - NO MEDIA PLAYER");
+            //}
+            //catch  //(IllegalStateException ise)
+            //{
+            //    //Log.d(TAG, "isPlaying(): Caught illegalStateException: " + ise.toString());
+            //}
+            return false;
+        }
+
+
+
+
+        public void pauseMovie()
+        {
+            //Log.d(TAG, "pauseMovie()");
+            try
+            {
+                if (mediaPlayer != null)
+                {
+                    //Log.d(TAG, "movie paused");
+                    mediaPlayer.pause();
+                }
+            }
+            catch //(IllegalStateException ise)
+            {
+                //Log.d(TAG, "pauseMovie(): Caught illegalStateException: " + ise.toString());
+            }
+        }
+
+
+        public void resumeMovie()
+        {
+            //Log.d(TAG, "resumeMovie()");
+            try
+            {
+                if (mediaPlayer != null)
+                {
+                    //Log.d(TAG, "movie started");
+                    mediaPlayer.start();
+                    mediaPlayer.setVolume(1.0f, 1.0f);
+                }
+            }
+            catch //(IllegalStateException ise)
+            {
+                //Log.d(TAG, "resumeMovie(): Caught illegalStateException: " + ise.toString());
+            }
+        }
+
+
+
+
+
+        // can we hop to jvm from ndk?
+        public void seekToFromNative(int seekPos)
+        {
+            //Log.d( TAG, "seekToFromNative to " + seekPos );
+            try
+            {
+                if (mediaPlayer != null)
+                {
+                    mediaPlayer.seekTo(seekPos);
+                }
+            }
+            catch //( IllegalStateException ise ) 
+            {
+                //Log.d( TAG, "seekToFromNative(): Caught illegalStateException: " + ise.toString() );
+            }
+        }
+
+
+
+
+        // void Oculus360Videos::StartVideo( const double nowTime )
+        // X:\opensource\ovr_sdk_mobile_1.0.0.0\VrSamples\Native\Oculus360VideosSDK\Src\Oculus360Videos.cpp
+        // 		jmethodID startMovieMethodId = app->GetJava()->Env->GetMethodID( MainActivityClass,
+        //	"startMovieFromNative", "(Ljava/lang/String;)V" );
+        public void startMovieFromNative(string pathName)
+        {
+            //Log.d( TAG, "startMovieFromNative" );
+            this.runOnUiThread(
+                delegate
+                {
+                    //Log.d( TAG, "startMovieFromNative" );
+                    startMovie(pathName);
+                }
+            );
+        }
+
 
         public void startMovie(String pathName)
         {

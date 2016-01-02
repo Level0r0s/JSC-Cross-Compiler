@@ -99,8 +99,12 @@
     </None>
     <None Include="..\x360videoNDK\bin\Debug\staging\libs\armeabi-v7a\libvrapi.so">
       <Link>staging\apk\libs\armeabi-v7a\libvrapi.so</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.config" />
+    <None Include="staging\apk\assets\oculussig_02157df2d5d4e70b">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Design\Images.htm" />
@@ -111,21 +115,60 @@
     <Content Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppFramework\Libs\Android\VrAppFramework.jar">
       <Link>References\VrAppFramework.jar</Link>
     </Content>
+    <Content Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\SystemUtils\Libs\Android\SystemUtils.jar">
+      <Link>References\SystemUtils.jar</Link>
+    </Content>
+    <Content Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrGUI\Libs\Android\VrGUI.jar">
+      <Link>References\VrGUI.jar</Link>
+    </Content>
+    <Content Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrLocale\Libs\Android\VrLocale.jar">
+      <Link>References\VrLocale.jar</Link>
+    </Content>
+    <Content Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrSound\Libs\Android\VrSound.jar">
+      <Link>References\VrSound.jar</Link>
+    </Content>
   </ItemGroup>
-  <ItemGroup />
+
+
+
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrSamples\Native\Oculus360VideosSDK\assets\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\apk\assets\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+
+
+
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrSamples\Native\Oculus360VideosSDK\Projects\Android\res\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\apk\res-com.oculus.oculus360videossdk.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+    <!--
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppFramework\res\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\apk\res-com.oculus.vrappframework.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+    -->
+
+
+  </ItemGroup>
+
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-start /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
+      start /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
 
 
-</PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
-start /MIN /WAIT C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true
+      start /MIN /WAIT C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true
 
-</PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
