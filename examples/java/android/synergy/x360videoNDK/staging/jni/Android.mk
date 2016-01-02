@@ -62,6 +62,13 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Src
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Kernel/*.cpp))
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Android/*.cpp))
 
+# usedby jni/VrAppFramework/Src/App.cpp:12:0:
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrApi/Include 
+
+
+# used by jni/VrAppFramework/Include/Input.h:16:30
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppSupport/SystemUtils/Include 
+
 
 # usedby jni/Oculus360VideosSDK/Oculus360Videos.cpp:20:19:
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppFramework/Include 

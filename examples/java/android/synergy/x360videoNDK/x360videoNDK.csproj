@@ -50,7 +50,12 @@
     <None Include="tools\build.bat" />
   </ItemGroup>
 
-
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrApi\Include\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrApi\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
 
 
   <ItemGroup>
@@ -96,9 +101,14 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\SystemUtils\Include\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\jni\VrAppSupport\SystemUtils\Include\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
+  </ItemGroup>
 
-
-
+  
 
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppFramework\Include\**\*.*">
