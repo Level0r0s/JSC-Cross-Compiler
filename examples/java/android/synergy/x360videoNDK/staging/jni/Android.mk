@@ -46,6 +46,30 @@ LOCAL_SRC_FILES :=
 
 
 
+# usedby jni/LibOVR/Src/Kernel/OVR_GlUtils.h:26:32:
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/OpenGL_Loader/Include 
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./OpenGL_Loader/Src/*.cpp))
+
+
+
+
+# usedby jni/VrAppFramework/Include/App.h:21:30
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Include 
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/LibOVR/Src 
+
+
+
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Kernel/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./LibOVR/Src/Android/*.cpp))
+
+
+# usedby jni/Oculus360VideosSDK/Oculus360Videos.cpp:20:19:
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/VrAppFramework/Include 
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppFramework/Src/VRMenu/*.cpp))
+LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppFramework/Src/*.cpp))
+
+
+
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./Oculus360VideosSDK/*.cpp))
 
 $(info add  x360videoNDK.dll.c)
