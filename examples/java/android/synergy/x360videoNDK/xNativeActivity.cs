@@ -30,7 +30,7 @@ namespace x360videoNDK
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG"
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity"
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity" "AndroidRuntime" "OVR" "VrApi" "Oculus360Photos"
-        
+
         // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity" "AndroidRuntime" "Oculus360Photos"
 
 
@@ -39,7 +39,7 @@ namespace x360videoNDK
         // Warning: Activity not started, its current task has been brought to the front
 
 
-        
+
         // x:\util\android-sdk-windows\platform-tools\adb.exe  shell dumpsys meminfo OVRWindWheelActivity.Activities
 
 
@@ -59,11 +59,31 @@ namespace x360videoNDK
 
 
 
+
+
+
+        //var stringFromJNI = xMarshal.stringFromJNI(this);
+        //Console.WriteLine(new { stringFromJNI });
+
+
         [Script(NoDecoration = true)]
         // JVM load the .so and calls this native function
         static jstring Java_x360video_Activities_xMarshal_stringFromJNI(JNIEnv env, jobject thiz, jobject args)
         {
             ConsoleExtensions.trace("enter Java_x360video_Activities_xMarshal_stringFromJNI");
+
+
+
+            if (args != null)
+            {
+                var type = env.GetObjectClass(env, args);
+
+                var startMovieFromNative = env.GetMethodID(env, type, "startMovieFromNative", "(Ljava/lang/String;)V");
+
+                ConsoleExtensions.tracei64("startMovieFromNative: ", (int)(object)startMovieFromNative);
+
+
+            }
 
             // do we have a console yet?
             //Console.WriteLine("enter Java_AndroidBrowserVRNDK_Activities_xMarshal_stringFromJNI");

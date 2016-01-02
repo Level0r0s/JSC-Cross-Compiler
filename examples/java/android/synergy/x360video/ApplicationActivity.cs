@@ -129,9 +129,7 @@ namespace x360video.Activities
             java.lang.System.loadLibrary("vrapi");
             java.lang.System.loadLibrary("main");
 
-            var stringFromJNI = xMarshal.stringFromJNI();
-
-            Console.WriteLine(new { stringFromJNI });
+           
         }
     }
 
@@ -210,6 +208,13 @@ namespace x360video.Activities
         {
             // http://www.dreamincode.net/forums/topic/130521-android-part-iii-dynamic-layouts/
             // https://forums.oculus.com/viewtopic.php?f=67&t=27999
+
+
+
+
+            var stringFromJNI = xMarshal.stringFromJNI(this);
+            Console.WriteLine(new { stringFromJNI });
+
 
 
 
@@ -359,7 +364,7 @@ namespace x360video.Activities
 
         public long base_getAppPtr()
         {
-            Console.WriteLine("base_getAppPtr ");
+            //Console.WriteLine("base_getAppPtr ");
 
             //return (this as dynamic).getAppPtr();
 

@@ -84,6 +84,13 @@ namespace ScriptCoreLibNative.SystemHeaders
     }
 
 
+    [Script(IsNative = true, PointerName = "jmethodID")]
+    public class jmethodID
+    {
+
+    }
+
+
     [Script(IsNative = true, PointerName = "jlong")]
     public unsafe class jlong : jni_h
     {
@@ -181,6 +188,18 @@ namespace ScriptCoreLibNative.SystemHeaders
 
 
 
+        // Z:\jsc.svn\examples\java\android\synergy\x360videoNDK\xNativeActivity.cs
+        #region jmethodID   (*GetMethodID)(JNIEnv*, jclass, const char*, const char*);
+
+        [Script(IsNative = true)]
+        public delegate jmethodID GetMethodIDDelegate(JNIEnv env, jclass value, string n, string t);
+
+        public GetMethodIDDelegate GetMethodID;
+
+        
+        #endregion
+        
+        
         #region   jfieldID    (*GetFieldID)(JNIEnv*, jclass, const char*, const char*);
 
         [Script(IsNative = true)]

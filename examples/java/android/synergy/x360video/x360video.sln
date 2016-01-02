@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidBrowserVRNDK", "..\A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360videoNDK", "..\x360videoNDK\x360videoNDK.csproj", "{5084A069-F72E-4934-8F4D-E23263E72AE8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADBS6CameraTimelapser", "..\..\..\..\rewrite\ADBCameraTimelapser\ADBS6CameraTimelapser\ADBS6CameraTimelapser.csproj", "{98E62449-D28A-476F-B702-487804080EDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDKHybridMockup", "..\..\future\NDKHybridMockup\NDKHybridMockup\NDKHybridMockup.csproj", "{B08838C1-07FB-44DB-8107-D9AD09250E6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,14 @@ Global
 		{5084A069-F72E-4934-8F4D-E23263E72AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5084A069-F72E-4934-8F4D-E23263E72AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5084A069-F72E-4934-8F4D-E23263E72AE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98E62449-D28A-476F-B702-487804080EDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98E62449-D28A-476F-B702-487804080EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98E62449-D28A-476F-B702-487804080EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98E62449-D28A-476F-B702-487804080EDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B08838C1-07FB-44DB-8107-D9AD09250E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B08838C1-07FB-44DB-8107-D9AD09250E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B08838C1-07FB-44DB-8107-D9AD09250E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B08838C1-07FB-44DB-8107-D9AD09250E6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

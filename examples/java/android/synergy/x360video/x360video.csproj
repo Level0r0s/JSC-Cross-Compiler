@@ -74,12 +74,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="AndroidVibrationActivity.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\AndroidVibrationActivity.AssetsLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="AndroidUDPClipboard.AssetsLibrary">
-      <HintPath>bin\staging.AssetsLibrary\AndroidUDPClipboard.AssetsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="x360video.AssetsLibrary">
       <HintPath>bin\staging.AssetsLibrary\x360video.AssetsLibrary.dll</HintPath>
     </Reference>
@@ -128,47 +122,38 @@
       <Link>References\VrSound.jar</Link>
     </Content>
   </ItemGroup>
-
-
-
   <ItemGroup>
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrSamples\Native\Oculus360VideosSDK\assets\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\assets\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
   </ItemGroup>
-
   <ItemGroup>
-
-
-
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrSamples\Native\Oculus360VideosSDK\Projects\Android\res\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\res-com.oculus.oculus360videossdk.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
-    <!--
     <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppFramework\res\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>staging\apk\res-com.oculus.vrappframework.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </None>
-    -->
-
-
+    <None Include="X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrGUI\res\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>staging\apk\res-com.oculus.vrgui.R\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </None>
   </ItemGroup>
-
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-      start /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
+start /WAIT cmd /C c:\util\jsc\bin\jsc.meta.exe RewriteToAndroidActivity /EntryPointAssembly:$(TargetPath)
 
 
-    </PostBuildEvent>
+</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>
-      start /MIN /WAIT C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true
+    <PreBuildEvent>start /WAIT cmd /C C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true /TargetAndroidRuntime:true
 
-    </PreBuildEvent>
+</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
