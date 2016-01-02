@@ -21,6 +21,146 @@ using System.Diagnostics;
 
 namespace x360video.Activities
 {
+
+    static class xMarshal
+    {
+        // called by?
+
+        [Script(IsPInvoke = true)]
+        public static string stringFromJNI(object args = null) { return default(string); }
+
+        //[Script(IsPInvoke = true)]
+        //public static long nativeSetAppInterface(
+        //    //com.oculusvr.vrlib.VrActivity act,
+        //    object act,
+
+        //    string fromPackageNameString,
+        //    string commandString,
+        //    string uriString)
+        //{ return default(long); }
+    }
+
+
+
+
+    public class LocalApplication : Application
+    {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160102/x360videos
+
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" devices
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  shell netcfg
+
+        // should jsc remember last connected device and reconnect if disconnected?
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect 192.168.1.126:5555
+        // restart helps.
+
+
+        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop AndroidBrowserVR.Activities
+        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n AndroidBrowserVR.Activities/AndroidBrowserVR.Activities.ApplicationActivity
+
+        // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity" "AndroidRuntime"
+
+
+        public override void onCreate()
+        {
+            base.onCreate();
+
+            Console.WriteLine("enter x360video LocalApplication onCreate, first time?");
+
+            //Func<string> futureinline_stringFromJNI = delegate
+            //{
+            //    // env.NewStringUTF
+            //    // there should be a .h parser somewhere. via which we can generate the natives for so?
+            //    // jsc could generate a linker code to allow us to use c exports from java..
+            //    return global::OVRVrCubeWorldSurfaceViewNDK.VrApi_h.vrapi_GetVersionString();
+            //};
+
+            var x = default(string);
+
+            // X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android
+            // X:\jsc.svn\examples\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar'
+
+
+            //1cb8:01:04:0e CreateToJARImportNatives Cache { FileNameString = X:\jsc.svn\examples\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar, Input = X:\jsc.svn\examples\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar }
+            //System.IO.DirectoryNotFoundException: Could not find a part of the path 'X:\jsc.svn\examples\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\VrApi.jar'.
+            //   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+            //   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boole
+            //   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+            //   at System.IO.File.OpenRead(String path)
+            //   at jsc.meta.Library.CreateToJARImportNatives.<>c__DisplayClassf.<InternalWithCache>b__e(SHA1CryptoServiceProvider h) in x:\jsc.internal.git\compiler\jsc.internal\jsc.internal\meta\Library\CreateToJARImportNatives.cs:line 251
+            //var api = typeof(com.oculus.vrapi.VrApi);
+            // where is the source for it?
+            // X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\src\com\oculusvr\vrlib\VrLib.java
+            // X:\opensource\ovr_mobile_sdk_0.5.1\VRLib\jni\VrApi\VrApi.cpp
+
+
+            //try
+            //{
+            //    x = futureinline_stringFromJNI();
+            //}
+            //catch
+            {
+                //x = "xMarshal " + OVROculus360Photos.Activities.xMarshal.stringFromJNI();
+            }
+            //finally
+            {
+                //                [javac] W:\src\__AnonymousTypes__OVRVrCubeWorldNativeActivity_AndroidActivity\__f__AnonymousType_97_0_1.java:34: error: reference to Format is ambiguous, both method Format(String,Object,Object) in __String and method Format(__IFormatProvider,String,Object[]) in __String match
+                //[javac]         return __String.Format(null, "{{ api = {0} }}", objectArray2);
+                //[javac]                        ^
+                //[javac] Note: W:\src\ScriptCoreLibJava\BCLImplementation\System\Threading\__Thread.java uses or overrides a deprecated API.
+
+                // https://stackoverflow.com/questions/7686482/when-does-applications-oncreate-method-is-called-on-android
+                //Toast.makeText(this, "OVRVrCubeWorldNative " + x + new { api }, Toast.LENGTH_LONG).show();
+
+            }
+
+            //I/VrApi   (  401):              "Message":      "Thread priority security exception. Make sure the APK is signed."
+
+        }
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150607-1/vrcubeworld
+        /** Load jni .so on initialization */
+        static LocalApplication()
+        {
+            //Log.d( TAG, "LoadLibrary" );
+            Console.WriteLine("enter x360video LocalApplication cctor");
+
+
+            // "X:\opensource\ovr_mobile_sdk_0.6.0\VrApi\Libs\Android\armeabi-v7a\libvrapi.so"
+
+            // did csproj copy it where it needs to be?
+
+            // do we need it?
+            //java.lang.System.loadLibrary("vrapi");
+            //java.lang.System.loadLibrary("assimp");
+
+            //java.lang.System.loadLibrary("assimp");
+
+            //<!-- Tell NativeActivity the name of the .so -->
+            //<meta-data android:name="android.app.lib_name" android:value="vrcubeworld" />
+            // why bother?
+
+            //java.lang.System.loadLibrary("vrcubeworld");
+
+            // need to link it!
+            // "X:\jsc.svn\examples\java\android\synergy\OVRVrCubeWorldNativeActivity\OVRVrCubeWorldNative\bin\Debug\staging\libs\armeabi-v7a\libOVRVrCubeWorldNative.so"
+
+            // incline android c would automate this step.
+            //java.lang.System.loadLibrary("OVRVrCubeWorldNative");
+            java.lang.System.loadLibrary("main");
+
+
+            var stringFromJNI = xMarshal.stringFromJNI();
+
+            Console.WriteLine(new { stringFromJNI });
+        }
+    }
+
+
+
+
+
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:targetSdkVersion", value = "21")]
 
     // http://swagos.blogspot.com/2012/12/various-themes-available-in-android_28.html
@@ -33,11 +173,11 @@ namespace x360video.Activities
 
     // works for 2.4 too
     //[ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Translucent")]
-    public class ApplicationActivity 
-        // : Activity
+    public class ApplicationActivity
+        : Activity
 
         // defined at?
-        : com.oculus.vrappframework.VrActivity 
+    // : com.oculus.vrappframework.VrActivity 
     {
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160102/x360videos
 
@@ -181,12 +321,15 @@ namespace x360video.Activities
             };
 
 
-            b.AtClick(
-                delegate
-                {
-                    SetClipboard("hello");
-                }
-            );
+            //b.AtClick(
+            //    delegate
+            //    {
+            //        // CLRMainn hybrid like?
+            //        SetClipboard(xMarshal.stringFromJNI());
+            //    }
+            //);
+
+            SetClipboard(xMarshal.stringFromJNI());
 
             #region lets listen to incoming udp
             // could we define our chrome app inline in here?
