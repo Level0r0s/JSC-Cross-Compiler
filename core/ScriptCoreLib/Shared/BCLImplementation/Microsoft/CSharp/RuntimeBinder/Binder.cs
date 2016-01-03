@@ -190,6 +190,7 @@ namespace ScriptCoreLib.Shared.BCLImplementation.Microsoft.CSharp
             IEnumerable<CSharpArgumentInfo> argumentInfo
             )
         {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/ndktype
             return (CallSiteBinder)(object)new __InvokeMemberBinder
             {
                 Name = name,

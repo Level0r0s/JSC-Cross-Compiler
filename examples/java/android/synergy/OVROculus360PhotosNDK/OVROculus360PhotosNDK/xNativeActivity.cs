@@ -177,7 +177,12 @@ namespace OVROculus360PhotosNDK
             // ConfigurationCreateNuGetPackage.cs
         }
 
-
+#if future
+        static void future(dynamic activity)
+        {
+            activity.setDefaultLocale();
+        }
+#endif
 
 
         [Script(NoDecoration = true)]
@@ -215,7 +220,8 @@ namespace OVROculus360PhotosNDK
 
             var typeof_this = new __Type { arg0_env = env, arg1_type = gtype };
 
-            var setDefaultLocale = typeof_this.GetMethodID("setDefaultLocale", "()V");
+            //var setDefaultLocale = typeof_this.GetMethodID("setDefaultLocale", "()V");
+            var setDefaultLocale = typeof_this.GetMethod("setDefaultLocale", "()V");
 
             //var setDefaultLocale = env.GetMethodID(env, loctype, "setDefaultLocale", "()V");
 
@@ -234,8 +240,9 @@ namespace OVROculus360PhotosNDK
 
 
             //  error: undefined reference to '__new_jvalue'
-            env.CallVoidMethodA(env, activity, setDefaultLocale, args: default(jvalue[]));
+            // env.CallVoidMethodA(env, activity, setDefaultLocale, args: default(jvalue[]));
 
+            setDefaultLocale.Invoke(activity);
 
             return Oculus360Photos_h.Java_com_oculus_oculus360photossdk_MainActivity_nativeSetAppInterface(
                  env,

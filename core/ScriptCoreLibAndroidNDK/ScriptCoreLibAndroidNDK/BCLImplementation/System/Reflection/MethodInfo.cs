@@ -1,11 +1,13 @@
-﻿using System;
+﻿using ScriptCoreLib;
+using ScriptCoreLibNative.SystemHeaders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using ScriptCoreLib;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ScriptCoreLibNative.BCLImplementation.System.Reflection
+namespace ScriptCoreLibAndroidNDK.BCLImplementation.System.Reflection
 {
     // http://referencesource.microsoft.com/#mscorlib/system/reflection/methodinfo.cs
     // https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Reflection/MethodInfo.cs
@@ -17,11 +19,11 @@ namespace ScriptCoreLibNative.BCLImplementation.System.Reflection
     [Script(Implements = typeof(global::System.Reflection.MethodInfo))]
     public class __MethodInfo
     {
-        //public __Type InternalDeclaringType;
+        public __Type InternalDeclaringType;
 
-        //public string methodName;
-        //public string methodSignature;
-        //public jmethodID methodID;
+        public string methodName;
+        public string methodSignature;
+        public jmethodID methodID;
 
 
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/ndktype
@@ -40,13 +42,13 @@ namespace ScriptCoreLibNative.BCLImplementation.System.Reflection
             return (__MethodInfo)(object)e;
         }
 
-        //public void Invoke(jobject that)
-        //{
-        //    //Z:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosNDK\xNativeActivity.cs
+        public void Invoke(jobject that)
+        {
+            //Z:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosNDK\xNativeActivity.cs
 
-        //    InternalDeclaringType.arg0_env.CallVoidMethodA(
-        //        InternalDeclaringType.arg0_env, that, this.methodID, args: default(jvalue[])
-        //    );
-        //}
+            InternalDeclaringType.arg0_env.CallVoidMethodA(
+                InternalDeclaringType.arg0_env, that, this.methodID, args: default(jvalue[])
+            );
+        }
     }
 }

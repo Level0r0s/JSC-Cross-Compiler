@@ -47,20 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Delegate.cs">
-      <Link>BCLImplementation\System\Delegate.cs</Link>
-    </Compile>
     <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\IntPtr.cs">
       <Link>BCLImplementation\System\IntPtr.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Math.cs">
       <Link>BCLImplementation\System\Math.cs</Link>
-    </Compile>
-    <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\MulticastDelegate.cs">
-      <Link>BCLImplementation\System\MulticastDelegate.cs</Link>
-    </Compile>
-    <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Reflection\MethodInfo.cs">
-      <Link>BCLImplementation\System\Reflection\MethodInfo.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\SystemHeaders\math.cs">
       <Link>SystemHeaders\math.cs</Link>
@@ -68,8 +59,14 @@
     <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\SystemHeaders\stdlib_h.cs">
       <Link>SystemHeaders\stdlib_h.cs</Link>
     </Compile>
+    <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\Microsoft\CSharp\RuntimeBinder\CSharpArgumentInfo.cs">
+      <Link>BCLImplementation\Microsoft\CSharp\RuntimeBinder\CSharpArgumentInfo.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\System\Action.cs">
       <Link>BCLImplementation\System\Action.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\System\Runtime\CompilerServices\CallSiteBinder.cs">
+      <Link>BCLImplementation\System\Runtime\CompilerServices\CallSiteBinder.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\System\Security\Cryptography\RSAParameters.cs">
       <Link>BCLImplementation\System\Security\Cryptography\RSAParameters.cs</Link>
@@ -77,7 +74,14 @@
     <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\System\Threading\ThreadStart.cs">
       <Link>BCLImplementation\System\Threading\ThreadStart.cs</Link>
     </Compile>
+    <Compile Include="BCLImplementation\Microsoft\CSharp\RuntimeBinder\Binder.cs" />
     <Compile Include="BCLImplementation\System\Attribute.cs" />
+    <Compile Include="BCLImplementation\System\Collections\Generic\IEnumerable.cs" />
+    <Compile Include="BCLImplementation\System\MulticastDelegate.cs" />
+    <Compile Include="BCLImplementation\System\Delegate.cs" />
+    <Compile Include="BCLImplementation\System\Reflection\MethodInfo.cs" />
+    <Compile Include="BCLImplementation\System\RuntimeTypeHandle.cs" />
+    <Compile Include="BCLImplementation\System\Runtime\CompilerServices\CallSite.cs" />
     <Compile Include="BCLImplementation\System\Type.cs" />
     <Compile Include="BCLImplementation\System\Threading\Thread.cs" />
     <Compile Include="IAssemblyReferenceToken.cs" />

@@ -1,4 +1,5 @@
 ﻿using ScriptCoreLib;
+using ScriptCoreLibAndroidNDK.BCLImplementation.System.Reflection;
 using ScriptCoreLibNative.SystemHeaders;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,37 @@ namespace ScriptCoreLibAndroidNDK.BCLImplementation.System
 
         public jmethodID GetMethodID(string name, string sig)
         {
-            return arg0_env.GetMethodID(arg0_env, arg1_type, name, sig); ;
+            return arg0_env.GetMethodID(arg0_env, arg1_type, name, sig);
         }
+
+        public __MethodInfo GetMethod(string name, string sig)
+        {
+            // no gc. remember.
+
+            return new __MethodInfo
+            {
+                InternalDeclaringType = this,
+
+                methodName = name,
+                methodSignature = sig,
+
+                methodID = arg0_env.GetMethodID(arg0_env, arg1_type, name, sig)
+            };
+        }
+
+
+
+        public static global::System.Type GetTypeFromHandle(RuntimeTypeHandle TypeHandle)
+        {
+            //var e = new __Type
+            //{
+            //    _TypeHandle = TypeHandle
+            //};
+
+            //return (global::System.Type)(object)e;
+
+            return null;
+        }
+
     }
 }

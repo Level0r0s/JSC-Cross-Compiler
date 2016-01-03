@@ -16,15 +16,18 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Runtime.CompilerServices
     // https://github.com/mono/mono/blob/master/mcs/tools/cil-strip/Mono.Cecil/CallSite.cs
     // https://github.com/mono/mono/blob/master/mcs/class/dlr/Runtime/Microsoft.Scripting.Core/Actions/CallSiteOps.cs
 
-    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Runtime\CompilerServices\CallSite.cs
-    // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Runtime\CompilerServices\CallSite.cs
-    // X:\jsc.svn\core\ScriptCoreLib\ActionScript\BCLImplementation\System\Runtime\CompilerServices\CallSite.cs
+    // z:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\BCLImplementation\System\Runtime\CompilerServices\CallSite.cs
+    // z:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Runtime\CompilerServices\CallSite.cs
+    // z:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Runtime\CompilerServices\CallSite.cs
+    // z:\jsc.svn\core\ScriptCoreLib\ActionScript\BCLImplementation\System\Runtime\CompilerServices\CallSite.cs
 
 
     [Obsolete("can we move it into Shared just yet?")]
     [Script(Implements = typeof(global::System.Runtime.CompilerServices.CallSite))]
     internal class __CallSite
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/ndktype
+
         public CallSiteBinder Binder { get; set; }
     }
 

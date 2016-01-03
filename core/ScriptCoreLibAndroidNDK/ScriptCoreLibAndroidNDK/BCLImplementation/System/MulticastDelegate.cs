@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ScriptCoreLib;
 using System.Reflection;
-//using ScriptCoreLibNative.BCLImplementation.System.Reflection;
+using ScriptCoreLib;
+using ScriptCoreLibAndroidNDK.BCLImplementation.System.Reflection;
 
-namespace ScriptCoreLibNative.BCLImplementation.System
+//namespace ScriptCoreLib.Shared.BCLImplementation.System
+//namespace ScriptCoreLibNative.BCLImplementation.System
+namespace ScriptCoreLibAndroidNDK.BCLImplementation.System
 {
     // http://referencesource.microsoft.com/#mscorlib/system/multicastdelegate.cs
     // https://github.com/mono/mono/blob/master/mcs/class/corlib/System/MulticastDelegate.cs

@@ -21,7 +21,12 @@ namespace ScriptCoreLib.Shared.BCLImplementation.Microsoft.CSharp
 
         public override string ToString()
         {
-            return "CSharpArgumentInfo " + new { name };
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/ndktype
+
+            //return "CSharpArgumentInfo " + new { name };
+            
+            // ndk!
+            return "CSharpArgumentInfo ";
         }
     }
 }

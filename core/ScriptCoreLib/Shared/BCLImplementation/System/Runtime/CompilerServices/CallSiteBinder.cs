@@ -6,6 +6,7 @@ using System.Text;
 
 namespace ScriptCoreLib.Shared.BCLImplementation.System.Runtime.CompilerServices
 {
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/ndktype
     // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/20140705/20140714
     // X:\opensource\github\WootzJs\WootzJs.Runtime\Runtime\CompilerServices\CallSiteBinder.cs
     // http://referencesource.microsoft.com/#System.Core/Microsoft/Scripting/Actions/CallSiteBinder.cs
