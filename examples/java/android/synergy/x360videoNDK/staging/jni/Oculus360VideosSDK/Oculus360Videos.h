@@ -16,6 +16,19 @@ of patent rights can be found in the PATENTS file in the same directory.
 #ifndef OVR_Oculus360Videos_h
 #define OVR_Oculus360Videos_h
 
+#include "jni.h"
+#ifndef __cplusplus
+
+// define jsc callable methods here
+
+//extern "C" {
+long foo(JNIEnv *jni);
+//}
+
+
+#else
+
+
 #include "App.h"
 #include "Fader.h"
 #include "SceneView.h"
@@ -148,4 +161,5 @@ private:
 
 } // namespace OVR
 
-#endif	// OVR_Oculus360Videos_h
+#endif	// __cplusplus
+#endif // OVR_Oculus360Videos_h

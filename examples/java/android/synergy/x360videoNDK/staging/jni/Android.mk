@@ -151,7 +151,8 @@ LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./VrAppSu
 
 LOCAL_SRC_FILES +=  $(subst $(LOCAL_PATH)/./,,$(wildcard $(LOCAL_PATH)/./Oculus360VideosSDK/*.cpp))
 
-$(info add  x360videoNDK.dll.c)
+
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/Oculus360VideosSDK
 LOCAL_SRC_FILES +=  x360videoNDK.dll.c
 
 LOCAL_SHARED_LIBRARIES	:= 

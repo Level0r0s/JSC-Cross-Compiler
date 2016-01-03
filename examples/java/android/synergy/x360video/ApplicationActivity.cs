@@ -22,6 +22,8 @@ using android.media;
 using android.graphics;
 using android.view;
 using System.IO;
+using ScriptCoreLib.Extensions;
+
 
 namespace com.oculus.vrgui
 {
@@ -71,6 +73,12 @@ namespace com.oculus.oculus360videossdk
 
 namespace x360video.Activities
 {
+    public sealed class startMovieFromUDPArguments
+    {
+        public long __ptr;
+        public string pathName; 
+    
+    }
 
     static class xMarshal
     {
@@ -78,6 +86,11 @@ namespace x360video.Activities
 
         [Script(IsPInvoke = true)]
         public static string stringFromJNI(object args = null) { return default(string); }
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/x360videoui
+        [Script(IsPInvoke = true)]
+        public static void startMovieFromUDP(startMovieFromUDPArguments args = null) { }
+
 
         //[Script(IsPInvoke = true)]
         //public static long nativeSetAppInterface(
@@ -139,7 +152,7 @@ namespace x360video.Activities
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:theme", value = "@android:style/Theme.Black.NoTitleBar.Fullscreen")]
     [ScriptCoreLib.Android.Manifest.ApplicationMetaData(name = "android:screenOrientation", value = "landscape")]
 
-    public class ApplicationActivity
+    public partial class ApplicationActivity
 
 
         // defined at?
@@ -216,7 +229,7 @@ namespace x360video.Activities
             Console.WriteLine(new { stringFromJNI });
 
 
-            
+
 
             //var refSystemActivities = typeof(global::com.oculus.systemutils.Ev);
 
@@ -279,6 +292,89 @@ namespace x360video.Activities
             base_setAppPtr(p);
 
             audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+
+
+            #region lets listen to incoming udp
+            // could we define our chrome app inline in here?
+            // or in a chrome app. could we define the android app inline?
+            #region ReceiveAsync
+            Action<IPAddress> f = async nic =>
+            {
+                //b.setText("awaiting at " + nic);
+
+
+                WifiManager wifi = (WifiManager)this.getSystemService(Context.WIFI_SERVICE);
+                var lo = wifi.createMulticastLock("udp:39814");
+                lo.acquire();
+
+                // Z:\jsc.svn\examples\java\android\AndroidUDPClipboard\ApplicationActivity.cs
+                // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                // X:\jsc.svn\examples\java\android\LANBroadcastListener\LANBroadcastListener\ApplicationActivity.cs
+                var uu = new UdpClient(39814);
+                uu.JoinMulticastGroup(IPAddress.Parse("239.1.2.3"), nic);
+                while (true)
+                {
+                    // cannot get data from RED?
+                    var x = await uu.ReceiveAsync(); // did we jump to ui thread?
+                    //Console.WriteLine("ReceiveAsync done " + Encoding.UTF8.GetString(x.Buffer));
+                    //var data = Encoding.UTF8.GetString(x.Buffer);
+
+
+
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/mousedown
+                    //SetClipboard(data);
+
+
+                    var md5string = x.Buffer.ToHexString();
+                    var lookup = startMovieLookup.ContainsKey(md5string);
+
+
+                    Console.WriteLine(new { md5string, lookup });
+                    if (lookup)
+                    {
+                        // this wont work if we are paused.
+
+                        this.startMovieFromUDP(
+                            startMovieLookup[md5string]
+                        );
+                    }
+                }
+            };
+
+            // WithEach defined at?
+            NetworkInterface.GetAllNetworkInterfaces().WithEach(
+                n =>
+                {
+                    // X:\jsc.svn\examples\java\android\forms\FormsUDPJoinGroup\FormsUDPJoinGroup\ApplicationControl.cs
+                    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\NetworkInformation\NetworkInterface.cs
+
+                    var IPProperties = n.GetIPProperties();
+                    var PhysicalAddress = n.GetPhysicalAddress();
+
+
+
+                    foreach (var ip in IPProperties.UnicastAddresses)
+                    {
+                        // ipv4
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            if (!IPAddress.IsLoopback(ip.Address))
+                                if (n.SupportsMulticast)
+                                    f(ip.Address);
+                        }
+                    }
+
+
+
+
+                }
+            );
+            #endregion
+
+
+            #endregion
+
         }
 
         protected override void onResume()
@@ -296,7 +392,6 @@ namespace x360video.Activities
         }
 
 
-        SurfaceTexture movieTexture = null;
         Surface movieSurface = null;
         MediaPlayer mediaPlayer = null;
         AudioManager audioManager = null;
@@ -521,115 +616,6 @@ namespace x360video.Activities
 
 
 
-        // void Oculus360Videos::StartVideo( const double nowTime )
-        // X:\opensource\ovr_sdk_mobile_1.0.0.0\VrSamples\Native\Oculus360VideosSDK\Src\Oculus360Videos.cpp
-        // 		jmethodID startMovieMethodId = app->GetJava()->Env->GetMethodID( MainActivityClass,
-        //	"startMovieFromNative", "(Ljava/lang/String;)V" );
-        public void startMovieFromNative(string pathName)
-        {
-            //Log.d( TAG, "startMovieFromNative" );
-            this.runOnUiThread(
-                delegate
-                {
-                    //Log.d( TAG, "startMovieFromNative" );
-                    startMovie(pathName);
-                }
-            );
-        }
 
-
-        public void startMovie(string pathName)
-        {
-
-            // let zmovies know we started a video. could we stream it to chrome?
-            Console.WriteLine("startMovie " + new { pathName });
-
-
-            {
-                // Request audio focus
-                requestAudioFocus();
-
-                // Have native code pause any playing movie,
-                // allocate a new external texture,
-                // and create a surfaceTexture with it.
-                movieTexture = com.oculus.oculus360videossdk.MainActivity.nativePrepareNewVideo(base_getAppPtr());
-                movieTexture.setOnFrameAvailableListener(this);
-                movieSurface = new Surface(movieTexture);
-
-                if (mediaPlayer != null)
-                {
-                    mediaPlayer.release();
-                }
-
-                //Log.v(TAG, "MediaPlayer.create");
-
-                //synchronized (this) {
-                mediaPlayer = new MediaPlayer();
-                //}
-
-
-                mediaPlayer.setOnVideoSizeChangedListener(this);
-                mediaPlayer.setOnCompletionListener(this);
-
-                // if only webview had setSurface method?
-                mediaPlayer.setSurface(movieSurface);
-
-                try
-                {
-                    //Log.v(TAG, "mediaPlayer.setDataSource()");
-                    mediaPlayer.setDataSource(pathName);
-                }
-                catch //(IOException t) 
-                {
-                    //Log.e(TAG, "mediaPlayer.setDataSource failed");
-                }
-
-                try
-                {
-                    //Log.v(TAG, "mediaPlayer.prepare");
-                    mediaPlayer.prepare();
-                }
-                catch //(IOException t) 
-                {
-                    //Log.e(TAG, "mediaPlayer.prepare failed:" + t.getMessage());
-                }
-                //Log.v(TAG, "mediaPlayer.start");
-
-                // If this movie has a saved position, seek there before starting
-                // This seems to make movie switching crashier.
-                int seekPos = getPreferences(MODE_PRIVATE).getInt(pathName + "_pos", 0);
-                if (seekPos > 0)
-                {
-                    try
-                    {
-                        mediaPlayer.seekTo(seekPos);
-                    }
-                    catch //( IllegalStateException ise ) 
-                    {
-                        //Log.d( TAG, "mediaPlayer.seekTo(): Caught illegalStateException: " + ise.toString() );
-                    }
-                }
-
-                mediaPlayer.setLooping(false);
-
-                try
-                {
-                    mediaPlayer.start();
-                }
-                catch //( IllegalStateException ise ) 
-                {
-                    //Log.d( TAG, "mediaPlayer.start(): Caught illegalStateException: " + ise.toString() );
-                }
-
-                mediaPlayer.setVolume(1.0f, 1.0f);
-
-                // Save the current movie now that it was successfully started
-                var edit = getPreferences(MODE_PRIVATE).edit();
-                edit.putString("currentMovie", pathName);
-                edit.commit();
-            }
-
-            //Log.v(TAG, "returning");
-        }
     }
 }

@@ -116,6 +116,8 @@ namespace ChromeUDPClipboard
 
 
             #region UDPClipboardSend
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/x360videoui
+            // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularPanorama\ChromeEquirectangularPanorama\Application.cs
             Action<string> UDPClipboardSend = async message =>
             {
                 var n = await chrome.socket.getNetworkList();

@@ -214,7 +214,7 @@ namespace ScriptCoreLibNative.SystemHeaders
         #region  void        (*CallVoidMethod)(JNIEnv*, jobject, jmethodID, ...);
 
         [Script(IsNative = true)]
-        public delegate void CallVoidMethodADelegate(JNIEnv env, jobject that, jmethodID method, params jvalue[] args );
+        public delegate void CallVoidMethodADelegate(JNIEnv env, jobject that, jmethodID method, params jvalue[] args);
 
         public CallVoidMethodADelegate CallVoidMethodA;
 
@@ -330,6 +330,17 @@ namespace ScriptCoreLibNative.SystemHeaders
         [Script(IsNative = true)]
         public delegate jobject NewGlobalRefDelegate(JNIEnv env, jobject value);
         public NewGlobalRefDelegate NewGlobalRef;
+
+
+
+
+        #region const char* (*GetStringUTFChars)(JNIEnv*, jstring, jboolean*);
+        [Script(IsNative = true)]
+        public delegate string GetStringUTFCharsDelegate(JNIEnv env, jstring s, out bool isCopy);
+        //jint        (*GetJavaVM)(JNIEnv*, JavaVM**);
+        public GetStringUTFCharsDelegate GetStringUTFChars;
+        #endregion
+
     }
 
     //typedef const struct JNIInvokeInterface* JavaVM;

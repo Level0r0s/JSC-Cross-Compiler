@@ -96,6 +96,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.config" />
+    <Compile Include="ApplicationActivity.startMovie.cs" />
     <None Include="staging\apk\assets\oculussig_02157df2d5d4e70b">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -216,6 +216,7 @@ namespace OVROculus360PhotosHUD.Activities
 
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am force-stop OVROculus360PhotosHUD.Activities
         // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n OVROculus360PhotosHUD.Activities/OVROculus360PhotosHUD.Activities.ApplicationActivity
+        
         // Warning: Activity not started, its current task has been brought to the front
 
 

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CCD535AF-EBE8-4281-80D7-1E68F4994872}</ProjectGuid>
+    <ProjectGuid>{0ECDF5E5-74D5-4E65-A1EC-FE68FC82C786}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AndroidUDPClipboard</RootNamespace>

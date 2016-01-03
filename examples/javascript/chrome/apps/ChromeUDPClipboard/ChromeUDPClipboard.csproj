@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FABEBD4F-4C61-4EFF-9D5E-7DD111104238}</ProjectGuid>
+    <ProjectGuid>{951B550F-A7B7-42CA-A316-19A72177F32B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ChromeUDPClipboard</RootNamespace>

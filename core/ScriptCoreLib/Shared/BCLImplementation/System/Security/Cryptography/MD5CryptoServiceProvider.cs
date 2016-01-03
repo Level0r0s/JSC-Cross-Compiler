@@ -15,6 +15,8 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Security.Cryptography
     [Script(Implements = typeof(global::System.Security.Cryptography.MD5CryptoServiceProvider))]
     internal class __MD5CryptoServiceProvider : __MD5
     {
+        // Z:\jsc.svn\examples\java\android\synergy\x360video\ApplicationActivity.startMovie.cs
+
         public override byte[] InternalComputeHash(byte[] buffer)
         {
             //var value = default(byte[]);

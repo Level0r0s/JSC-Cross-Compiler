@@ -22,7 +22,7 @@ namespace GearVR360VideoPush
 
         static void Main(string[] args)
         {
-            // 
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/x360videoui
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150718/360
 
             // because .bat files cannot do it.

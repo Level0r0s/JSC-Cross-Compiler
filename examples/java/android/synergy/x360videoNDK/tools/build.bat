@@ -46,7 +46,7 @@ call x:\util\android-ndk-r10e\ndk-build.cmd
 
 echo ERRORLEVEL: %ERRORLEVEL%
 
-pause
+::pause
 
 if  %ERRORLEVEL%==0 exit 0
 pause

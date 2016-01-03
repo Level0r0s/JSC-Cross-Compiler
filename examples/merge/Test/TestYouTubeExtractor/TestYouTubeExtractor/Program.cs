@@ -66,6 +66,11 @@ namespace TestYouTubeExtractor
         public enum projection
         {
             x2D,
+
+            // Z:\jsc.svn\examples\java\android\synergy\x360video\ApplicationActivity.startMovie.cs
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/x360videoui
+            // Z:\jsc.svn\examples\rewrite\GearVR360VideoPush\GearVR360VideoPush\Program.cs
+
             x360,
             x360TB
         }

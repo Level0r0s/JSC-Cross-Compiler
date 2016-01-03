@@ -1,4 +1,5 @@
 ﻿using ScriptCoreLib;
+using ScriptCoreLibAndroidNDK.BCLImplementation.System;
 using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibNative.SystemHeaders;
 using System;
@@ -101,5 +102,80 @@ namespace x360videoNDK
             return v;
             // ConfigurationCreateNuGetPackage.cs
         }
+
+
+
+        // called by 
+        // xMarshal.startMovieFromUDP(new { this.__ptr, pathName });
+        [Script(NoDecoration = true)]
+        // JVM load the .so and calls this native function
+        static void Java_x360video_Activities_xMarshal_startMovieFromUDP(JNIEnv env, jobject thiz, jobject args)
+        {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/x360videoui
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/startmoviefromudp
+
+            // this needs to be done so that we get to play movie from paused state.
+            ConsoleExtensions.trace("enter Java_x360video_Activities_xMarshal_startMovieFromUDP");
+
+            // list all menu items.
+            // if one has the filename we need. activate it?
+
+            //var menu = this.menuitems[0];
+
+
+            //var __ptr = args.__ptr;
+            //var pathName = args.pathName;
+
+            var t = new __Type { arg0_env = env, arg1_type = (jclass)env.NewGlobalRef(env, env.GetObjectClass(env, args)) };
+
+            //sage: 'sart/runtime/check_jni.cc:65] JNI DETECTED ERROR IN APPLICATION: JNI GetFieldID called with pending exception 
+            // 'java.lang.NoSuchFieldError' thrown in void x360video.Activities.xMarshal.startMovieFromUDP(java.lang.Obje
+
+
+            var field__ptr = env.GetFieldID(env, t.arg1_type, "__ptr", "J");
+
+            ConsoleExtensions.tracei64("field__ptr", (long)(object)field__ptr);
+
+            ///xNativeActivity(16201): [14349792] \xNativeActivity.cs:138 fieldpathName -2012062200
+            ///xNativeActivity(16201): [14349792] \xNativeActivity.cs:139 field__ptr -2012062232
+
+            // http://journals.ecs.soton.ac.uk/java/tutorial/native1.1/implementing/example-1.1/FieldAccess.c
+
+
+            var fieldpathName = env.GetFieldID(env, t.arg1_type, "pathName", "Ljava/lang/String;");
+            ConsoleExtensions.tracei64("fieldpathName", (long)(object)fieldpathName);
+            var jstr = (jstring)env.GetObjectField(env, args, fieldpathName);
+
+            var isCopy = default(bool);
+            var str = env.GetStringUTFChars(env, jstr, out isCopy);
+            ConsoleExtensions.traces("pathName: ", str);
+
+
+            //I/xNativeActivity(19611): [13566168] \xNativeActivity.cs:118 enter Java_x360video_Activities_xMarshal_startMovieFromUDP
+            //I/xNativeActivity(19611): [13566168] \xNativeActivity.cs:138 fieldpathName -2012064080
+            //I/xNativeActivity(19611): [13566168] \xNativeActivity.cs:139 field__ptr -2012064112
+            //I/xNativeActivity(19611): \xNativeActivity.cs:153 pathName:  /storage/emulated/0/Oculus/360Videos/360 3D 3D  VR Timelapse Hanriver TB by ___________________.mp3._TB.mp4
+
+            // looky. 
+            // we jumped from UI to NDK. and we have the string.
+
+
+
+
+        }
+    }
+
+
+
+    [Script(IsNative = true
+
+    // thats a c++ header, wont help us. unless we fix it
+     , Header = "Oculus360Videos.h"
+    )]
+    public class Oculus360Videos_h
+    {
+
+
+
     }
 }
