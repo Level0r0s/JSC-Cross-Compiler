@@ -76,9 +76,13 @@ namespace x360videoNDK
 
             if (args != null)
             {
-                var type = env.GetObjectClass(env, args);
+                var loctype = env.GetObjectClass(env, args);
+                var gtype = env.NewGlobalRef(env, loctype);
 
-                var startMovieFromNative = env.GetMethodID(env, type, "startMovieFromNative", "(Ljava/lang/String;)V");
+                //GlobalActivityClass = (jclass)jni->NewGlobalRef(jni->GetObjectClass(activity));
+
+                // 
+                var startMovieFromNative = env.GetMethodID(env, loctype, "startMovieFromNative", "(Ljava/lang/String;)V");
 
                 ConsoleExtensions.tracei64("startMovieFromNative: ", (int)(object)startMovieFromNative);
 

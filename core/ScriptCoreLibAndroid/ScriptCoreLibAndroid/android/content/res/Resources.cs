@@ -9,6 +9,7 @@ using android.util;
 
 namespace android.content.res
 {
+    // https://github.com/android/platform_frameworks_base/blob/master/core/java/android/content/res/Resources.java
     // http://developer.android.com/reference/android/content/res/Resources.html
     [Script(IsNative = true)]
     public class Resources
@@ -51,6 +52,9 @@ namespace android.content.res
             return default(AssetManager);
         }
 
-        public string getText(int id) { throw null; }
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/oculus360photossdk
+        //public virtual string getText(int id) { throw null; }
+        public virtual java.lang.CharSequence getText(int id) { throw null; }
     }
 }

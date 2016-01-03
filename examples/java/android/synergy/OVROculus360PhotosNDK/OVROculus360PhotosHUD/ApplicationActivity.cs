@@ -373,6 +373,8 @@ namespace OVROculus360PhotosHUD.Activities
 
             // D/CrashAnrDetector( 3472):     #00 pc 00092ac0  /data/app/OVROculus360Photos.Activities-1/lib/arm/libmain.so (OVR::ovrMessageQueue::PostMessage(char const*, bool, bool)+8)
 
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/oculus360photossdk
             this.appPtr = OVROculus360Photos.Activities.xMarshal.nativeSetAppInterface(
                 this,
                 fromPackageNameString,

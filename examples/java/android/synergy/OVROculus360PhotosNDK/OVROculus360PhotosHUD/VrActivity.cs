@@ -993,27 +993,62 @@ namespace com.oculus.vrappframework
             Log.d(TAG, "setLocale: locale set to " + localeName);
         }
 
-        private void setDefaultLocale()
+
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/oculus360photossdk
+        public virtual void setDefaultLocale()
         {
+            System.Console.WriteLine("setDefaultLocale");
+
             setLocale("en");
         }
 
         public string getLocalizedString(string name)
         {
-            //Log.v("VrLocale", "getLocalizedString for " + name );
+            // where is value efigs.fnt stored????
+
+//Console( 4824): 12d8:035f getLocalizedString { name = font_name }
+//Console( 4824): 12d8:035f getLocalizedString { outString = efigs.fnt }
+
             string outString = "";
-            int id = getResources().getIdentifier(name, "string", getPackageName());
-            if (id == 0)
+
+            try
             {
-                // 0 is not a valid resource id
-                Log.v("VrLocale", name + " is not a valid resource id!!");
-                return outString;
+                System.Console.WriteLine("getLocalizedString " + new { name });
+
+                //Log.v("VrLocale", "getLocalizedString for " + name );
+                int id = getResources().getIdentifier(name, "string", getPackageName());
+                if (id == 0)
+                {
+                    // 0 is not a valid resource id
+                    Log.v("VrLocale", name + " is not a valid resource id!!");
+                }
+                if (id != 0)
+                {
+                    outString = name;
+
+                    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/oculus360photossdk
+                    //outString = getResources().getText(id).ToString();
+
+                    ////dynamic xResources = getResources();
+
+                    ////// https://developer.android.com/reference/android/content/res/Resources.html
+                    ////java.lang.CharSequence text = xResources.getText(id);
+                    java.lang.CharSequence text = getResources().getText(id);
+                    //outString = getResources().getText(id).ToString();
+                    outString = text.ToString();
+                    //outString = text.ToString();
+                    System.Console.WriteLine("getLocalizedString " + new { outString });
+
+                    //Log.v("VrLocale", "getLocalizedString resolved " + name + " to " + outString);
+                    //Log.v("VrLocale", "getLocalizedString resolved " + name + " to " + outString);
+                }
             }
-            if (id != 0)
+            catch (System.Exception err)
             {
-                outString = getResources().getText(id).ToString();
-                //Log.v("VrLocale", "getLocalizedString resolved " + name + " to " + outString);
+                System.Console.WriteLine("getLocalizedString " + new { err.Message, err.StackTrace });
             }
+
             return outString;
         }
 

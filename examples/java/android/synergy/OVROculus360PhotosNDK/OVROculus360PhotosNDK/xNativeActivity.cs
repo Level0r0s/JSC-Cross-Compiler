@@ -1,5 +1,7 @@
 ﻿using OVRWindWheelNDK;
 using ScriptCoreLib;
+using ScriptCoreLibAndroidNDK.BCLImplementation.System;
+using ScriptCoreLibAndroidNDK.Library;
 using ScriptCoreLibAndroidNDK.Library.Reflection;
 using ScriptCoreLibNative.SystemHeaders;
 using ScriptCoreLibNative.SystemHeaders.android;
@@ -18,6 +20,8 @@ namespace OVROculus360PhotosNDK
     [Script]
     unsafe partial class xNativeActivity
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/oculus360photossdk
+
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160102/x360videos
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
 
@@ -181,6 +185,9 @@ namespace OVROculus360PhotosNDK
         static long Java_OVROculus360Photos_Activities_xMarshal_nativeSetAppInterface(
              JNIEnv env,
             jclass clazz,
+
+
+            // ApplicationActivity : com.oculus.vrappframework.VrActivity
             jobject activity,
 
             jstring fromPackageNameString,
@@ -188,6 +195,8 @@ namespace OVROculus360PhotosNDK
             jstring uriString
             )
         {
+            // can we do typeof() yet and have our env from there?
+
             // Error	3	No overload for method '__android_log_print' takes 3 arguments	X:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosNDK\xNativeActivity.cs	39	13	OVROculus360PhotosNDK
 
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150721/ovroculus360photoshud
@@ -200,9 +209,38 @@ namespace OVROculus360PhotosNDK
             //xNativeAtStartBackgroundPanoLoad("not yet loaded", null);
 
 
+            var loctype = env.GetObjectClass(env, activity);
+            var gtype = (jclass)env.NewGlobalRef(env, loctype);
+            //var gtype = (jclass)env.NewGlobalRef<jclass>(env, loctype);
+
+            var typeof_this = new __Type { arg0_env = env, arg1_type = gtype };
+
+            var setDefaultLocale = typeof_this.GetMethodID("setDefaultLocale", "()V");
+
+            //var setDefaultLocale = env.GetMethodID(env, loctype, "setDefaultLocale", "()V");
+
+            //Type.GetMethod();
+
+
+
+            ConsoleExtensions.tracei64("setDefaultLocale: ", (int)(object)setDefaultLocale);
+
+
+            //            I/xNativeActivity(24350): [3194400] \xNativeActivity.cs:202 enter Java_OVROculus360Photos_Activities_xMarshal_nativeSetAppInterface
+            //I/xNativeActivity(24350): [3194400] \xNativeActivity.cs:222 setDefaultLocale:  -2012160456
+
+            //  public virtual void setDefaultLocale()
+            //env.NewStringUTF(env, "en");
+
+
+            //  error: undefined reference to '__new_jvalue'
+            env.CallVoidMethodA(env, activity, setDefaultLocale, args: default(jvalue[]));
+
+
             return Oculus360Photos_h.Java_com_oculus_oculus360photossdk_MainActivity_nativeSetAppInterface(
                  env,
-                clazz,
+                //clazz,
+                gtype,
                 activity,
                 fromPackageNameString,
                 commandString,

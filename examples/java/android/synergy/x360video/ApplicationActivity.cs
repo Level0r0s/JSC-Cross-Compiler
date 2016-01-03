@@ -216,7 +216,7 @@ namespace x360video.Activities
             Console.WriteLine(new { stringFromJNI });
 
 
-
+            
 
             //var refSystemActivities = typeof(global::com.oculus.systemutils.Ev);
 

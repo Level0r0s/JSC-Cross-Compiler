@@ -24,7 +24,12 @@ namespace android.content.pm
         public abstract Intent getLaunchIntentForPackage(string packageName);
         public abstract PackageInfo getPackageInfo(string packageName, int flags);
 
-        public abstract java.util.List<ApplicationInfo> getInstalledApplications(int flags);
+
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/oculus360photossdk
+        // jsc java natives merge wont yet alllow to hint generic types... 
+        public abstract java.util.List  getInstalledApplications(int flags);
+        //public abstract java.util.List<ApplicationInfo> getInstalledApplications(int flags);
 
 
         public abstract ApplicationInfo getApplicationInfo(string packageName, int flags);

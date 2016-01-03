@@ -59,6 +59,14 @@ namespace ScriptCoreLibNative.SystemHeaders
         // the name already is the pointer?
     }
 
+
+    // union!
+    [Script(IsNative = true, PointerName = "jvalue")]
+    public class jvalue : jni_h
+    {
+    }
+
+
     [Script(IsNative = true, PointerName = "jstring")]
     public class jstring : jobject
     {
@@ -196,10 +204,25 @@ namespace ScriptCoreLibNative.SystemHeaders
 
         public GetMethodIDDelegate GetMethodID;
 
-        
+
         #endregion
-        
-        
+
+
+
+        // http://stackoverflow.com/questions/10361369/marshal-va-list-in-c-sharp-delegate
+        // http://stackoverflow.com/questions/6694612/c-sharp-p-invoke-varargs-delegate-callback
+        #region  void        (*CallVoidMethod)(JNIEnv*, jobject, jmethodID, ...);
+
+        [Script(IsNative = true)]
+        public delegate void CallVoidMethodADelegate(JNIEnv env, jobject that, jmethodID method, params jvalue[] args );
+
+        public CallVoidMethodADelegate CallVoidMethodA;
+
+        #endregion
+
+
+
+
         #region   jfieldID    (*GetFieldID)(JNIEnv*, jclass, const char*, const char*);
 
         [Script(IsNative = true)]

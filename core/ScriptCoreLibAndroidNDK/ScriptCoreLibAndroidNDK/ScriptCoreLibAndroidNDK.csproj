@@ -78,6 +78,7 @@
       <Link>BCLImplementation\System\Threading\ThreadStart.cs</Link>
     </Compile>
     <Compile Include="BCLImplementation\System\Attribute.cs" />
+    <Compile Include="BCLImplementation\System\Type.cs" />
     <Compile Include="BCLImplementation\System\Threading\Thread.cs" />
     <Compile Include="IAssemblyReferenceToken.cs" />
     <Compile Include="Library\ConsoleExtensions.cs" />

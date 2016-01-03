@@ -53,6 +53,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Runtime.CompilerServices
             #region (arg1)
             if (argumentInfoCount == 2)
             {
+                #region IsReturnVoid
                 if (IsReturnVoid)
                 {
                     r = new Action<__CallSite, object, object>(
@@ -97,6 +98,8 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Runtime.CompilerServices
 
                     return r;
                 }
+                #endregion
+
 
                 r = new Func<__CallSite, object, object, object>(
                  (site, subject, arg1) =>
@@ -119,7 +122,11 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Runtime.CompilerServices
 
                      Console.WriteLine("__CallSite __InvokeMemberBinder arg1 " + new { subject, arg1 });
 
+                     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/oculus360photossdk
+                     //dynamic xResources = getResources();
 
+                     //// https://developer.android.com/reference/android/content/res/Resources.html
+                     //java.lang.CharSequence text = xResources.getText(id);
 
                      throw new NotImplementedException("__CallSite __InvokeMemberBinder");
                  }
