@@ -56,6 +56,8 @@ namespace x360video.Activities
 
         public void startMovieFromUDP(string pathName)
         {
+            // http://blog.endpoint.com/2011/03/api-gaps-android-mediaplayer-example.html
+
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/startmoviefromudp
             Console.WriteLine("startMovieFromUDP " + new { pathName });
 
@@ -66,6 +68,9 @@ namespace x360video.Activities
             //xMarshal.startMovieFromUDP(new { this.__ptr, pathName });
 
             // java anonymous types should use plain fields like we do in js...
+
+            // hop to 
+            //Matrix4f Oculus360Videos::Frame( const VrFrame & vrFrame )
             xMarshal.startMovieFromUDP(new startMovieFromUDPArguments { __ptr = this.__ptr, pathName = pathName });
         }
 
@@ -82,7 +87,7 @@ namespace x360video.Activities
                 delegate
                 {
                     //Log.d( TAG, "startMovieFromNative" );
-                    startMovie(pathName);
+                    __startMovie(pathName);
                 }
             );
         }
@@ -95,7 +100,7 @@ namespace x360video.Activities
 
         static Dictionary<string, string> startMovieLookup = new Dictionary<string, string> { };
 
-        public void startMovie(string pathName)
+        public void __startMovie(string pathName)
         {
             var f = new FileInfo(pathName);
 
@@ -364,6 +369,28 @@ namespace x360video.Activities
             edit.commit();
 
             //Log.v(TAG, "returning");
+
+
+
+            Console.WriteLine("getTrackInfo");
+            var tracks = mediaPlayer.getTrackInfo();
+
+            Console.WriteLine("getTrackInfo " + new { tracks.Length });
+            // https://groups.google.com/forum/#!topic/android-platform/lvR6InJf6J0
+            foreach (var track in tracks)
+            {
+                var TrackType = track.getTrackType();
+
+                Console.WriteLine("getTrackInfo " + new { TrackType });
+            }
+
+            // do we have any multitrack videos?
+
+            // http://stackoverflow.com/questions/15911135/android-select-audio-track-in-video
+            //I/System.Console(11033): 2b19:0001 getTrackInfo
+            //I/System.Console(11033): 2b19:0001 getTrackInfo { Length = 2 }
+            //I/System.Console(11033): 2b19:0001 getTrackInfo { TrackType = 1 }
+            //I/System.Console(11033): 2b19:0001 getTrackInfo { TrackType = 2 }
         }
     }
 }

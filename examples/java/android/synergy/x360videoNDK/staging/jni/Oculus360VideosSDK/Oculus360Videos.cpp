@@ -1046,6 +1046,7 @@ Matrix4f Oculus360Videos::Frame( const VrFrame & vrFrame )
 		free( (void *)msg );
 	}
 
+	// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/startmoviefromudp
 	if (startMovieFromUDP_yield != NULL)
 	{
 		LOG( "startMovieFromUDP_yield");
