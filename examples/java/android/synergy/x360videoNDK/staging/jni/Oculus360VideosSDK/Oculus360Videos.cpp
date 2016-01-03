@@ -45,6 +45,7 @@ of patent rights can be found in the PATENTS file in the same directory.
 #include "PathUtils.h"
 
 #include "VideosMetaData.h"
+//Z:\jsc.svn\examples\java\android\synergy\x360videoNDK\staging\jni\Oculus360VideosSDK\VideosMetaData.h
 
 static bool	RetailMode = false;
 
@@ -53,16 +54,19 @@ static const char * videosLabel = "@string/app_name";
 static const float	FadeOutTime = 0.25f;
 static const float	FadeOverTime = 1.0f;
 
+OVR::OvrMetaDatum * startMovieFromUDP_yield;
+
 extern "C" {
 
 void startMovieFromUDP(JNIEnv *jni, void* interfacePtr, const char* pathName)
 {
-	LOG( "OVR_Oculus360Videos_h startMovieFromUDP c++");
+	LOG( "enter startMovieFromUDP");
 
 	// can we print out the menu we have in c++. its been a while we did c++...
 	// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/startmoviefromudp
 	OVR::Oculus360Videos * videos = static_cast< OVR::Oculus360Videos * >( ( ( OVR::App * )interfacePtr )->GetAppInterface() );
 
+	LOG( "enter startMovieFromUDP. got videos");
 
 	//VideoBrowser *		Browser;
 	//OvrVideoMenu *		VideoMenu;
@@ -71,6 +75,105 @@ void startMovieFromUDP(JNIEnv *jni, void* interfacePtr, const char* pathName)
 //// Called when a panel is activated
 //	virtual void OnPanelActivated( OvrGuiSys & guiSys, const OvrMetaDatum * panelData );
 
+
+
+	// how can we inspect the menu?
+
+	//void OvrMetaData::InitFromDirectory( const char * relativePath, const Array< String > & searchPaths, const OvrMetaDataFileExtensions & fileExtensions )
+	// MetaData->InitFromDirectory( videosDirectory, SearchPaths, fileExtensions );
+	// X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrGUI\Src\MetaDataManager.cpp
+
+	// OvrMetaDatum * datum = CreateMetaDatum( fileBase.ToCStr() );
+
+	//MetaData.PushBack( datum );
+	//LOG( "OvrMetaData adding datum %s with index %d to %s", datum->Url.ToCStr(), dataIndex, currentCategory.CategoryTag.ToCStr() );
+
+	// all cool. PushBack adds the menu.
+	// X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrGUI\Src\MetaDataManager.h
+
+//jni/Oculus360VideosSDK/Oculus360Videos.cpp:97:2: error: 'OvrVideosMetaData' was not declared in this scope
+//  OvrVideosMetaData * this_MetaData = videos->MetaData;
+//  ^
+
+//error: 'OVR::OvrVideosMetaData* OVR::Oculus360Videos::MetaData' is private
+// class OvrVideosMetaData : public OvrMetaData
+	// const Array< OvrMetaDatum * > &		GetMetaData() const 							{ return MetaData; }
+
+	// lets use that getter?
+
+	// 'class OVR::Oculus360Videos' has no member named 'GetMetaData'
+	//OVR::OvrVideosMetaData * this_MetaData = videos->GetMetaData();
+
+	//LOG( "startMovieFromUDP. videos->MetaData");
+	OVR::OvrVideosMetaData * this_MetaData = videos->MetaData;
+
+//jni/VrAppSupport/VrGUI/Src/MetaDataManager.h:129:28: error: 'OVR::Array<OVR::OvrMetaDatum*>& OVR::OvrMetaData::GetMetaData()' is protected
+//  Array< OvrMetaDatum * > & GetMetaData()            { return MetaData; }
+//                            ^
+
+
+	 //Array< OvrMetaDatum * >	this_MetaData_MetaData = this_MetaData->GetMetaData();
+	 OVR::Array< OVR::OvrMetaDatum * >	this_MetaData_MetaData = this_MetaData->MetaData;
+
+	//LOG( "startMovieFromUDP. before");
+
+	// how to iterate??
+
+	for ( int i = 0; i < this_MetaData_MetaData.GetSizeI(); i++ )
+	{
+		//LOG( "startMovieFromUDP. datum #%i", i);
+
+		OVR::OvrMetaDatum *  datum = this_MetaData_MetaData[i];
+
+		// error: request for member 'Url' in 'datum', which is of pointer type 'OVR::OvrMetaDatum*' (maybe you meant to use '->' ?)
+
+
+		// how to compare strings??
+		// bool        operator == (const char* str) const
+
+		if (datum->Url == pathName)
+		{
+			LOG( "startMovieFromUDP #%i OvrMetaData  { url = %s }", i, datum->Url.ToCStr() );
+			startMovieFromUDP_yield = datum;
+
+			// X:\opensource\ovr_sdk_mobile_1.0.0.0\VrAppSupport\VrGUI\Src\VRMenuEventHandler.cpp
+			// VRMenuEvent event( VRMENU_EVENT_TOUCH_UP, EVENT_DISPATCH_FOCUS, FocusedHandle, Vector3f( vrFrame.Input.touchRelative, 0.0f ), result );
+			// events.PushBack( event );
+
+			// wrong thread.
+			// videos->OnVideoActivated( datum );
+
+			// how can we activate that menu???
+
+			// done..
+			break;
+		}
+		else
+		{
+		LOG( "startMovieFromUDP #%i skip OvrMetaData  { url = %s }", i, datum->Url.ToCStr() );
+		}
+
+//struct OvrMetaDatum
+//{
+//	mutable int				FolderIndex;	// index of the folder this meta data appears in (not serialized!)
+//	mutable int				PanelId;		// panel id associated with this meta data (not serialized!)
+//	int						Id;				// index into the array read from the JSON (not serialized!)
+//	Array< String >			Tags;
+//	String					Url;
+//
+//protected:
+//	OvrMetaDatum() {}
+//};
+
+
+		// call?
+		//	virtual void OnPanelActivated( OvrGuiSys & guiSys, const OvrMetaDatum * panelData );
+
+
+
+	}
+
+	LOG( "exit startMovieFromUDP.");
 }
 
 static jclass GlobalActivityClass;
@@ -941,6 +1044,15 @@ Matrix4f Oculus360Videos::Frame( const VrFrame & vrFrame )
 		}
 		Command( msg );
 		free( (void *)msg );
+	}
+
+	if (startMovieFromUDP_yield != NULL)
+	{
+		LOG( "startMovieFromUDP_yield");
+
+		this->OnVideoActivated( startMovieFromUDP_yield );
+		
+		startMovieFromUDP_yield = NULL;
 	}
 
 	// Disallow player foot movement, but we still want the head model

@@ -233,6 +233,15 @@ namespace ScriptCoreLibNative.SystemHeaders
         #endregion
 
 
+        //jlong       (*GetLongField)(JNIEnv*, jobject, jfieldID);
+
+        #region jlong       (*GetLongField)(JNIEnv*, jobject, jfieldID);
+        [Script(IsNative = true)]
+        public delegate long GetLongFieldDelegate(JNIEnv env, jobject value, jfieldID i);
+
+        public GetLongFieldDelegate GetLongField;
+        #endregion
+
 
         #region jint        (*GetIntField)(JNIEnv*, jobject, jfieldID);
         [Script(IsNative = true)]

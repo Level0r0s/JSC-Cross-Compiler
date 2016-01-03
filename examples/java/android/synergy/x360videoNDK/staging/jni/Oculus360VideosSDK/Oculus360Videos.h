@@ -58,6 +58,8 @@ enum Action
 class Oculus360Videos : public OVR::VrAppInterface
 {
 public:
+	// https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/startmoviefromudp
+	OvrVideosMetaData *	MetaData;
 
 	enum OvrMenuState
 	{
@@ -129,7 +131,7 @@ private:
 	GlProgram			SingleColorTextureProgram;
 
 	Array< String > 	SearchPaths;
-	OvrVideosMetaData *	MetaData;
+	//OvrVideosMetaData *	MetaData;
 	VideoBrowser *		Browser;
 	OvrVideoMenu *		VideoMenu;
 	const OvrMetaDatum * ActiveVideo;

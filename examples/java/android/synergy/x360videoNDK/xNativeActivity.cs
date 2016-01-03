@@ -133,8 +133,9 @@ namespace x360videoNDK
 
 
             var field__ptr = env.GetFieldID(env, t.arg1_type, "__ptr", "J");
+            var __ptr = env.GetLongField(env, args, field__ptr);
 
-            ConsoleExtensions.tracei64("field__ptr", (long)(object)field__ptr);
+            ConsoleExtensions.tracei64("__ptr", __ptr);
 
             ///xNativeActivity(16201): [14349792] \xNativeActivity.cs:138 fieldpathName -2012062200
             ///xNativeActivity(16201): [14349792] \xNativeActivity.cs:139 field__ptr -2012062232
@@ -162,7 +163,11 @@ namespace x360videoNDK
             // now we need to jump into C++
 
             // C:\Windows\system32>x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity" "Oculus360Videos"
-            Oculus360Videos_h.startMovieFromUDP(env, (object)field__ptr, str);
+
+            // Matrix4f Oculus360Videos::Frame( const VrFrame & vrFrame ) ??
+            Oculus360Videos_h.startMovieFromUDP(env, __ptr, str);
+
+
 
             ConsoleExtensions.trace("exit Java_x360video_Activities_xMarshal_startMovieFromUDP");
         }
