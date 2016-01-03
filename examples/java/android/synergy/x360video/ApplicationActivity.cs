@@ -377,6 +377,12 @@ namespace x360video.Activities
 
         }
 
+
+        protected override void onPause()
+        {
+            Console.WriteLine("enter onPause ");
+            base.onPause();
+        }
         protected override void onResume()
         {
             Console.WriteLine("enter onResume ");

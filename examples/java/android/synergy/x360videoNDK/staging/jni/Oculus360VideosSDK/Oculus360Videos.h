@@ -20,14 +20,15 @@ of patent rights can be found in the PATENTS file in the same directory.
 #ifndef __cplusplus
 
 // define jsc callable methods here
-
-//extern "C" {
-long foo(JNIEnv *jni);
-//}
+void startMovieFromUDP(JNIEnv *jni, void* interfacePtr, const char* pathName);
 
 
 #else
 
+extern "C" {
+	// expected 'char *' but argument is of type 'const char *'
+void startMovieFromUDP(JNIEnv *jni, void* interfacePtr, const char* pathName);
+}
 
 #include "App.h"
 #include "Fader.h"

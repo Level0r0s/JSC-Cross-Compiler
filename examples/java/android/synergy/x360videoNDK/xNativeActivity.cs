@@ -159,9 +159,12 @@ namespace x360videoNDK
             // looky. 
             // we jumped from UI to NDK. and we have the string.
 
+            // now we need to jump into C++
 
+            // C:\Windows\system32>x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity" "Oculus360Videos"
+            Oculus360Videos_h.startMovieFromUDP(env, (object)field__ptr, str);
 
-
+            ConsoleExtensions.trace("exit Java_x360video_Activities_xMarshal_startMovieFromUDP");
         }
     }
 
@@ -175,6 +178,7 @@ namespace x360videoNDK
     public class Oculus360Videos_h
     {
 
+        public static void startMovieFromUDP(JNIEnv jni, object interfacePtr, string pathName) { }
 
 
     }
