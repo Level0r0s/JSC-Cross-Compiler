@@ -41,6 +41,8 @@ namespace AndroidBrowserVR.Activities
         //{ return default(long); }
     }
 
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160101/webview
+    // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150103/androidbrowservr
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160101/ovrwindwheelndk
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150704/ovroculus360photoshud
     // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150613/record
@@ -213,6 +215,9 @@ namespace AndroidBrowserVR.Activities
         // on red
         // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect  192.168.1.126:5555
         // connected to 192.168.1.126:5555
+
+
+        //  x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG" "PlatformActivity"
 
 
 

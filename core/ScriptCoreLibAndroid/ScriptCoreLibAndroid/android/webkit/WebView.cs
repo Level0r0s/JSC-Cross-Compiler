@@ -9,6 +9,8 @@ using android.widget;
 namespace android.webkit
 {
     // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/webkit/WebView.java
+    // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/webkit/WebViewFactory.java
+    // https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/webkit/WebViewFactoryProvider.java
 
     // http://src.chromium.org/viewvc/chrome/trunk/src/chrome/android/java/src/org/chromium/chrome/browser/PKCS11AuthenticationManager.java
     // https://github.com/android/platform_frameworks_base/blob/master/core/java/android/webkit/WebViewFragment.java
@@ -23,6 +25,17 @@ namespace android.webkit
     [Script(IsNative = true)]
     public class WebView : AbsoluteLayout
     {
+
+        // com.android.webview.chromium.WebViewChromiumFactoryProvider
+        // return getChromiumProviderClass();
+        // return WebViewFactory.getProvider();
+        //  mProvider = getFactory().createWebView(this, new PrivateAccess());
+
+        //    @SystemApi
+        //public WebViewProvider getWebViewProvider() {
+
+
+
         // how does this relate to the floating layout we have for android?
 
 
@@ -37,7 +50,7 @@ namespace android.webkit
         public static int SCROLLBARS_OUTSIDE_OVERLAY;
 
         public void freeMemory()
-        { 
+        {
         }
 
         public override void setScrollBarStyle(int style)
