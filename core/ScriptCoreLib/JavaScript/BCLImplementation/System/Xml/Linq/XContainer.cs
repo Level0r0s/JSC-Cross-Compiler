@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using ScriptCoreLib.JavaScript.DOM.XML;
 using System.Diagnostics;
+using System.Collections;
 
 namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
 {
@@ -65,6 +66,12 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
 
             InternalValueInitialize();
 
+            if (content == null)
+            {
+                Console.WriteLine("XContainer Add null?");
+
+                return;
+            }
 
             #region int
             // X:\jsc.svn\examples\javascript\LINQ\test\vb\TestXMLSelect\TestXMLSelect\Application.vb
@@ -96,6 +103,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
                 // Z:\jsc.svn\examples\javascript\Test\TestObjectIsString\TestObjectIsString\Application.cs
                 var xstring = content as string;
 
+                Console.WriteLine("XContainer Add " + new { xstring });
+
                 if (xstring != null)
                 {
 
@@ -110,9 +119,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
 
                         var n = this.InternalValue.ownerDocument.createTextNode(xstring);
 
-                        this.InternalValue.appendChild(
-                            n
-                        );
+                        this.InternalValue.appendChild(n);
                     }
 
                     return;
@@ -122,10 +129,12 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
 
             #region XText
             {
-                var e = content as XText;
+                var xText = content as XText;
 
-                if (e != null)
+                if (xText != null)
                 {
+                    Console.WriteLine("XContainer Add " + new { xText });
+
 
                     if (this.InternalValue == null)
                     {
@@ -138,9 +147,11 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
 
                         //Console.WriteLine("XContainer Add XText. " + new { e.Value });
 
-                        this.InternalValue.appendChild(
-                            this.InternalValue.ownerDocument.createTextNode(e.Value)
-                        );
+                        //Console.WriteLine("XContainer Add XText " + new { xText.Value });
+
+                        var n = this.InternalValue.ownerDocument.createTextNode(xText.ToString());
+
+                        this.InternalValue.appendChild(n);
                     }
 
                     return;
@@ -206,6 +217,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
                 var IncomingXElement = (__XElement)(object)(content as XElement);
                 if (IncomingXElement != null)
                 {
+                    Console.WriteLine("XContainer Add " + new { IncomingXElement });
 
 
                     if (this.InternalValue == null)
@@ -248,6 +260,33 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Xml.Linq
                 }
             }
             #endregion
+
+
+            //Console.WriteLine("XContainer Add ? " + new { content });
+
+            var isIEnumerable = content is IEnumerable;
+
+            //var xIEnumerable = content as IEnumerable;
+            //var xIEnumerable = content as ScriptCoreLib.Shared.BCLImplementation.System.Collections.__IEnumerable;
+            if (isIEnumerable)
+            {
+                // Z:\jsc.svn\examples\javascript\Test\TestTextEditorImage\Application.cs
+
+                Console.WriteLine("XContainer Add xIEnumerable");
+
+                //                j = ( function () { var c$682 = b; return (( function () { var c$682 = c$682.constructor; return 'Interfaces' in c$682 ? ('XdM4uNkn_ajiG35OTd3tiGw' in c$682.Interfaces) : false; } )() ? c$682 : null); } )();
+                //l = (j == null);
+
+                var xIEnumerable = (IEnumerable)content;
+
+                foreach (var item in xIEnumerable)
+                {
+                    //Console.WriteLine("XContainer Add xIEnumerable Add " + new { item });
+                    InternalAdd(item);
+                }
+
+                return;
+            }
 
             Console.WriteLine("XContainer Add fault?");
 

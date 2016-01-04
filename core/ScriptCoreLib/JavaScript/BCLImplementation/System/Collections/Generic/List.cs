@@ -13,321 +13,326 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Collections.Generic
 {
 
 
-	// http://referencesource.microsoft.com/#mscorlib/system/collections/generic/list.cs
-	// https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Collections/Generic/List.cs
-	// X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Collections\Generic\List.cs
-	// X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Collections\Generic\List.cs
+    // http://referencesource.microsoft.com/#mscorlib/system/collections/generic/list.cs
+    // https://github.com/dotnet/coreclr/blob/master/src/mscorlib/src/System/Collections/Generic/List.cs
+    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Collections\Generic\List.cs
+    // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Collections\Generic\List.cs
 
-	// https://github.com/erik-kallen/SaltarelleCompiler/blob/develop/Runtime/CoreLib/Collections/Generic/List.cs
-	// https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/Collections/Generic/List%601.cs
-	// https://github.com/kswoll/WootzJs/blob/master/WootzJs.Runtime/Collections/Generic/List.cs
-	// https://github.com/bridgedotnet/Bridge/blob/master/Bridge/System/Collections/Generic/List.cs
+    // https://github.com/erik-kallen/SaltarelleCompiler/blob/develop/Runtime/CoreLib/Collections/Generic/List.cs
+    // https://github.com/Reactive-Extensions/IL2JS/blob/master/mscorlib/System/Collections/Generic/List%601.cs
+    // https://github.com/kswoll/WootzJs/blob/master/WootzJs.Runtime/Collections/Generic/List.cs
+    // https://github.com/bridgedotnet/Bridge/blob/master/Bridge/System/Collections/Generic/List.cs
 
-	[Script(Implements = typeof(global::System.Collections.Generic.List<>))]
-	internal class __List<T> : IList<T>
-	{
-		IArray<T> _items = new IArray<T>();
+    [Script(Implements = typeof(global::System.Collections.Generic.List<>))]
+    internal class __List<T> : IList<T>
+    {
+        IArray<T> _items = new IArray<T>();
 
-		public __List()
-		{
+        public __List()
+        {
 
-		}
+        }
 
-		public __List(IEnumerable<T> collection)
-		{
-			if (collection == null)
-				throw new ArgumentNullException("collection");
+        public __List(IEnumerable<T> collection)
+        {
+            if (collection == null)
+                throw new ArgumentNullException("collection");
 
 
-			this.AddRange(collection);
-		}
+            this.AddRange(collection);
+        }
 
 
-		private T[] ArrayReferenceCloned
-		{
-			get
-			{
-				return (T[])(object)this._items.slice(0);
-			}
-		}
+        private T[] ArrayReferenceCloned
+        {
+            get
+            {
+                return (T[])(object)this._items.slice(0);
+            }
+        }
 
 
 
-		// called by LINQ ToArray
-		public T[] ToArray()
-		{
-			// X:\jsc.svn\examples\javascript\test\TestLINQSelectByteArray0\TestLINQSelectByteArray0\Class1.cs
-			// X:\jsc.svn\examples\javascript\test\TestLINQSelectByteArray\TestLINQSelectByteArray\Application.cs
-			// X:\jsc.svn\examples\java\hybrid\JVMCLRLINQSelectByteArray\JVMCLRLINQSelectByteArray\Program.cs
-			// jsc needs to do special detection for byte[] to enable device/thread hopping
+        // called by LINQ ToArray
+        public T[] ToArray()
+        {
+            // X:\jsc.svn\examples\javascript\test\TestLINQSelectByteArray0\TestLINQSelectByteArray0\Class1.cs
+            // X:\jsc.svn\examples\javascript\test\TestLINQSelectByteArray\TestLINQSelectByteArray\Application.cs
+            // X:\jsc.svn\examples\java\hybrid\JVMCLRLINQSelectByteArray\JVMCLRLINQSelectByteArray\Program.cs
+            // jsc needs to do special detection for byte[] to enable device/thread hopping
 
-			// testme: should return a new array
+            // testme: should return a new array
 
-			return ArrayReferenceCloned;
-		}
+            return ArrayReferenceCloned;
+        }
 
 
-		[Script(Implements = typeof(global::System.Collections.Generic.List<>.Enumerator))]
-		public class __Enumerator : IEnumerator<T>, IDisposable, IEnumerator
-		{
-			IEnumerator<T> value;
+        [Script(Implements = typeof(global::System.Collections.Generic.List<>.Enumerator))]
+        public class __Enumerator : IEnumerator<T>, IDisposable, IEnumerator
+        {
+            IEnumerator<T> value;
 
-			internal __Enumerator()
-				: this(null)
-			{
+            internal __Enumerator()
+                : this(null)
+            {
 
-			}
+            }
 
-			internal __Enumerator(__List<T> list)
-			{
-				if (list == null)
-					return;
+            internal __Enumerator(__List<T> list)
+            {
+                if (list == null)
+                    return;
 
-				value = __Enumerable_AsEnumerable.AsEnumerable(list.ToArray()).GetEnumerator();
+                value = __Enumerable_AsEnumerable.AsEnumerable(list.ToArray()).GetEnumerator();
 
 
-			}
+            }
 
 
-			#region IEnumerator<T> Members
+            #region IEnumerator<T> Members
 
-			public T Current
-			{
-				get { return value.Current; }
-			}
+            public T Current
+            {
+                get { return value.Current; }
+            }
 
-			#endregion
+            #endregion
 
-			#region IDisposable Members
+            #region IDisposable Members
 
-			public void Dispose()
-			{
-				value.Dispose();
-			}
+            public void Dispose()
+            {
+                value.Dispose();
+            }
 
-			#endregion
+            #endregion
 
-			#region IEnumerator Members
+            #region IEnumerator Members
 
-			object IEnumerator.Current
-			{
-				get { return value.Current; }
-			}
+            object IEnumerator.Current
+            {
+                get { return value.Current; }
+            }
 
-			public bool MoveNext()
-			{
-				return value.MoveNext();
-			}
-
-			public void Reset()
-			{
-				value.Reset();
-			}
-
-			#endregion
-		}
-
-
-
-
-
-
-		#region IList<T> Members
-
-		public int IndexOf(T item)
-		{
-			var j = -1;
-
-			for (int i = 0; i < Count; i++)
-			{
-				if (Expando.ReferenceEquals(this[i], item))
-				{
-					j = i;
-					break;
-				}
-			}
-
-			return j;
-		}
-
-		public void Insert(int index, T item)
-		{
-			this._items.splice(index, 0, item);
-		}
-
-		public void RemoveAt(int index)
-		{
-			if (index >= this.Count)
-			{
-				throw new Exception("ArgumentOutOfRangeException");
-			}
-
-			_items.splice(index, 1);
-		}
-
-
-		public T this[int index]
-		{
-			get
-			{
-				if (index >= this.Count)
-				{
-					throw new Exception("ArgumentOutOfRangeException");
-				}
-				return this._items[index];
-			}
-			set
-			{
-				if (index >= this.Count)
-				{
-					throw new Exception("ArgumentOutOfRangeException");
-				}
-				this._items[index] = value;
-			}
-		}
-
-		#endregion
-
-		public void ForEach(Action<T> action)
-		{
-			if (action == null)
-			{
-				throw new Exception("ArgumentOutOfRangeException");
-			}
-			for (int i = 0; i < this.Count; i++)
-			{
-				action(this._items[i]);
-			}
-		}
+            public bool MoveNext()
+            {
+                return value.MoveNext();
+            }
+
+            public void Reset()
+            {
+                value.Reset();
+            }
+
+            #endregion
+        }
+
+
+
+
+
+
+        #region IList<T> Members
+
+        public int IndexOf(T item)
+        {
+            var j = -1;
+
+            for (int i = 0; i < Count; i++)
+            {
+                if (Expando.ReferenceEquals(this[i], item))
+                {
+                    j = i;
+                    break;
+                }
+            }
+
+            return j;
+        }
+
+        public void Insert(int index, T item)
+        {
+            this._items.splice(index, 0, item);
+        }
+
+        public void RemoveAt(int index)
+        {
+            if (index >= this.Count)
+            {
+                throw new Exception("ArgumentOutOfRangeException");
+            }
+
+            _items.splice(index, 1);
+        }
+
+
+        public T this[int index]
+        {
+            get
+            {
+                if (index >= this.Count)
+                {
+                    throw new Exception("ArgumentOutOfRangeException");
+                }
+                return this._items[index];
+            }
+            set
+            {
+                if (index >= this.Count)
+                {
+                    throw new Exception("ArgumentOutOfRangeException");
+                }
+                this._items[index] = value;
+            }
+        }
+
+        #endregion
+
+        public void ForEach(Action<T> action)
+        {
+            if (action == null)
+            {
+                throw new Exception("ArgumentOutOfRangeException");
+            }
+            for (int i = 0; i < this.Count; i++)
+            {
+                action(this._items[i]);
+            }
+        }
 
 
 
 
-		#region ICollection<T> Members
+        #region ICollection<T> Members
 
-		public void Add(T item)
-		{
-			_items.push(item);
-		}
+        public void Add(T item)
+        {
+            _items.push(item);
+        }
 
-		public void AddRange(IEnumerable<T> collection)
-		{
-			foreach (T v in __Enumerable_AsEnumerable.AsEnumerable(collection))
-			{
-				this.Add(v);
-			}
-		}
+        public void AddRange(IEnumerable<T> collection)
+        {
+            foreach (T v in __Enumerable_AsEnumerable.AsEnumerable(collection))
+            {
+                this.Add(v);
+            }
+        }
 
-		public void Clear()
-		{
-			_items.splice(0, Count);
-		}
+        public void Clear()
+        {
+            _items.splice(0, Count);
+        }
 
-		public bool Contains(T item)
-		{
-			bool j = false;
+        public bool Contains(T item)
+        {
+            bool j = false;
 
-			for (int i = 0; i < Count; i++)
-			{
-				if (Expando.ReferenceEquals(this[i], item))
-				{
-					j = true;
-					break;
-				}
-			}
+            for (int i = 0; i < Count; i++)
+            {
+                if (Expando.ReferenceEquals(this[i], item))
+                {
+                    j = true;
+                    break;
+                }
+            }
 
-			return j;
-		}
+            return j;
+        }
 
-		public void CopyTo(T[] array, int arrayIndex)
-		{
-			throw new Exception("The method or operation is not implemented.");
-		}
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
 
-		public int Count
-		{
-			get { return _items.length; }
-		}
+        public int Count
+        {
+            get { return _items.length; }
+        }
 
-		public bool IsReadOnly
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
+        public bool IsReadOnly
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
 
-		public bool Remove(T item)
-		{
-			var i = IndexOf(item);
+        public bool Remove(T item)
+        {
+            var i = IndexOf(item);
 
-			if (i == -1)
-				return false;
-			RemoveAt(i);
+            if (i == -1)
+                return false;
+            RemoveAt(i);
 
-			return true;
-		}
+            return true;
+        }
 
 
-		public int RemoveAll(global::System.Predicate<T> a)
-		{
-			var x = 0;
+        public int RemoveAll(global::System.Predicate<T> a)
+        {
+            var x = 0;
 
-			for (int i = 0; i < Count; i++)
-			{
-				if (a(this[i]))
-				{
-					RemoveAt(x);
+            for (int i = 0; i < Count; i++)
+            {
+                if (a(this[i]))
+                {
+                    RemoveAt(x);
 
-					x--;
-				}
+                    x--;
+                }
 
-				x++;
-			}
+                x++;
+            }
 
-			return x;
-		}
+            return x;
+        }
 
-		#endregion
+        #endregion
 
-		public __Enumerator GetEnumerator()
-		{
-			return new __Enumerator(this);
-		}
+        public __Enumerator GetEnumerator()
+        {
+            return new __Enumerator(this);
+        }
 
 
 
 
 
 
-		#region IEnumerable<T> Members
+        #region IEnumerable<T> Members
 
-		IEnumerator<T> IEnumerable<T>.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
 
-		#endregion
+        #endregion
 
-		#region IEnumerable Members
+        #region IEnumerable Members
 
 
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
 
-		#endregion
+        #endregion
 
 
-		public void Reverse()
-		{
-			var clone = this.ToArray();
+        public void Reverse()
+        {
+            var clone = this.ToArray();
 
-			for (int i = 0; i < clone.Length; i++)
-			{
-				this[clone.Length - 1 - i] = clone[i];
-			}
+            for (int i = 0; i < clone.Length; i++)
+            {
+                this[clone.Length - 1 - i] = clone[i];
+            }
 
 
-		}
-	}
+        }
+
+        public override string ToString()
+        {
+            return "List<>";
+        }
+    }
 
 }

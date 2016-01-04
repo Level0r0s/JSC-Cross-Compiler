@@ -107,6 +107,9 @@ namespace ScriptCoreLib.JavaScript.DOM.HTML
 
         // Z:\jsc.svn\examples\javascript\WebGL\WebGLIFrameBuffer\Application.cs
 
+
+        // https://code.google.com/p/chromium/issues/detail?id=365457
+
 		#region event onload
 		public event System.Action<IEvent> onload
 		{

@@ -479,6 +479,12 @@ namespace ScriptCoreLib.JavaScript.Controls
             _IsDesignMode = true;
 
 
+
+
+            // Z:\jsc.svn\examples\javascript\Test\TestTextEditorImage\Application.cs
+
+
+            //InternalDocument.write("<!DOCTYPE html><html><body style='height: auto; border: 0; overflow: auto; background-color:transparent;'>");
             InternalDocument.write("<html><body style='height: auto; border: 0; overflow: auto; background-color:transparent;'>");
             InternalDocument.write("</body></html>");
             InternalDocument.close();
