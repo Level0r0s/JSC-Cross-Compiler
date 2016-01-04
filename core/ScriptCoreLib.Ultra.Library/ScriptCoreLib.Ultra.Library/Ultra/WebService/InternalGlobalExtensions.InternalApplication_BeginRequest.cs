@@ -170,6 +170,11 @@ namespace ScriptCoreLib.Ultra.WebService
                                     ".field-" + InternalFieldName,
                                     value
                                 );
+
+                                // .field-field_foo:<_02000013>%0d%0a  <_04000021>Z3Vlc3Q=</_04000021>%0d%0a</_02000013>
+                                // Z:\jsc.svn\examples\javascript\Test\TestAfterInvokeResponseHeaders\ApplicationWebService.cs
+
+                                // 204 No Content ?
                             }
                             else
                             {

@@ -60,9 +60,14 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
         }
 
 
-        // called by?
+        // called by
+        // X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\JavaScript\Remoting\InternalWebMethodRequest.cs
         public Task<byte[]> UploadValuesTaskAsync(Uri address, NameValueCollection data)
         {
+            //Console.WriteLine("enter WebClient.UploadValuesTaskAsync! " + new { address });
+            // Z:\jsc.svn\examples\javascript\Test\TestAfterInvokeResponseHeaders\ApplicationWebService.cs
+
+
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/uploadvaluestaskasync
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/ubuntumidexperiment
 
@@ -71,10 +76,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
             // Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuTestUploadValues\Application.cs
             //  "Z:\jsc.svn\examples\javascript\ubuntu\Test\UbuntuTestUserHostAddress\UbuntuTestUserHostAddress.sln"
 
-            //Console.WriteLine("enter WebClient.UploadValuesTaskAsync! " + new { address });
 
-            // called by
-            // X:\jsc.svn\core\ScriptCoreLib.Ultra\ScriptCoreLib.Ultra\JavaScript\Remoting\InternalWebMethodRequest.cs
 
             // http://stackoverflow.com/questions/9713058/sending-post-data-with-a-xmlhttprequest
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201401/20140119
@@ -103,6 +105,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
             x.InvokeOnComplete(
                 delegate
                 {
+                    //Console.WriteLine("after WebClient.UploadValuesTaskAsync! " + new { address });
+
                     #region complete
                     var response = new byte[0];
 
@@ -149,7 +153,7 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
                             //I/chromium(30556): [INFO:CONSOLE(37861)] "%c92:28290ms responseText failed. thanks webview devs. { status = 204 }", source: http://192.168.43.7:4394/view-source (37861)
 
                             // X:\jsc.svn\examples\javascript\p2p\SharedBrowserSessionExperiment\SharedBrowserSessionExperiment\ApplicationWebService.cs
-                            Console.WriteLine("responseText failed. thanks webview devs. " + new { x.status });
+                            Console.WriteLine("responseText failed? " + new { x.status });
                         }
                     }
                     else
@@ -177,6 +181,10 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
                     //this.ResponseHeaders.Clear();
 
                     var ResponseHeaders = x.getAllResponseHeaders();
+
+                    // Z:\jsc.svn\examples\javascript\Test\TestAfterInvokeResponseHeaders\ApplicationWebService.cs
+                    //Console.WriteLine("after WebClient.UploadValuesTaskAsync! " + new { ResponseHeaders });
+
                     //0:8209ms { ResponseHeaders = Date: Sat, 15 Mar 2014 12:25:45 GMT
                     //Server: ASP.NET Development Server/11.0.0.0
                     //X-AspNet-Version: 4.0.30319
@@ -191,11 +199,15 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
                     foreach (var item in ResponseHeaders.Split('\n'))
                     {
                         var u = item.IndexOf(":");
+                        if (u > 0)
+                        {
+                            var ukey = item.Substring(0, u);
+                            var uvalue = item.Substring(u + 1).Trim();
 
-                        var ukey = item.Substring(0, u);
-                        var uvalue = item.Substring(u + 1).Trim();
+                            //Console.WriteLine(new { ukey, uvalue });
 
-                        this.ResponseHeaders[ukey] = uvalue;
+                            this.ResponseHeaders[ukey] = uvalue;
+                        }
                     }
                     #endregion
 
@@ -358,6 +370,13 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Net
             // X:\jsc.svn\core\ScriptCoreLib\JavaScript\DOM\IXMLHttpRequest.cs
 
             return x.bytes;
+        }
+
+
+
+        public static implicit operator WebClient(__WebClient e)
+        {
+            return (WebClient)(object)e;
         }
     }
 }

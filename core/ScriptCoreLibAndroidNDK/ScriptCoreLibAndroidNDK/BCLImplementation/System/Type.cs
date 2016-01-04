@@ -18,7 +18,7 @@ namespace ScriptCoreLibAndroidNDK.BCLImplementation.System
     [Script(Implements = typeof(global::System.Type))]
     public class __Type //: __MemberInfo, __IReflect
     {
-
+        // Z:\jsc.svn\examples\java\android\future\NDKHybridMockup\NDKHybridMockup\ApplicationActivity.cs
         // Z:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosNDK\xNativeActivity.cs
 
         // jsc should automatically make typeof(this) available

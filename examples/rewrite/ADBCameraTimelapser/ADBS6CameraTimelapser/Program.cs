@@ -97,7 +97,8 @@ namespace ADBS6CameraTimelapser
             var device = "192.168.1.126:5555";
             //var device = "192.168.173.5:5555";
             //var device = "02157df2d5d4e70b";
-            var storage = "x:/vr/tape30";
+            //var storage = "x:/vr/tape/20150104";
+            var storage = "x:/vr/tape/IMG_2016" + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") ;
 
             if (args.Length == 2)
             {
@@ -252,6 +253,10 @@ namespace ADBS6CameraTimelapser
                 goto restart;
             }
 
+
+            Thread.Sleep(1000);
+
+
             // connected = "connected to 192.168.173.5:5555\r\n"
 
 
@@ -405,12 +410,15 @@ namespace ADBS6CameraTimelapser
 
             if (string.IsNullOrEmpty(shell_dumpsys_power))
             {
+                // error: device '192.168.1.126:5555' not found
                 do_adb("-s " + device + " shell dumpsys battery");
 
                 // error: closed
 
-                Console.WriteLine("check camera.");
+                Console.WriteLine("check camera. recharge now.");
                 Console.Beep();
+
+                // recharce now. 10:50 
 
                 Debugger.Break();
 
@@ -544,7 +552,8 @@ namespace ADBS6CameraTimelapser
             //Thread.Sleep(35900);
 
             // EXTRA SLOW ROTATE?
-            Thread.Sleep(60000);
+            //Thread.Sleep(60000);
+            Thread.Sleep(10000);
 
 
             //shell@zerolte:/sdcard/DCIM/CardboardCamera $ ls
@@ -555,7 +564,7 @@ namespace ADBS6CameraTimelapser
             {
                 //var a = "-s 192.168.1.126:5555 shell ls -l \"/sdcard/DCIM/Camera/20150727*.jpg\"";
                 //var a = "-s " + device + " shell ls -l \"/sdcard/DCIM/Camera/2015" + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") + "*.jpg\"";
-                var a = "-s " + device + " shell ls -l \"/sdcard/DCIM/CardboardCamera/IMG_2015" + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") + "*.jpg\"";
+                var a = "-s " + device + " shell ls -l \"/sdcard/DCIM/CardboardCamera/IMG_2016" + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") + "*.jpg\"";
 
                 var p = System.Diagnostics.Process.Start(
                     new System.Diagnostics.ProcessStartInfo(adb, a)

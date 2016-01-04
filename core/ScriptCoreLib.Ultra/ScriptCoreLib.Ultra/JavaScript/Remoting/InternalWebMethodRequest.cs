@@ -14,6 +14,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Xml.Linq;
+using ScriptCoreLib.JavaScript.BCLImplementation.System.Net;
 
 namespace ScriptCoreLib.JavaScript.Remoting
 {
@@ -85,28 +86,11 @@ namespace ScriptCoreLib.JavaScript.Remoting
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151123/uploadvaluestaskasync
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/20150301
 
+
+            // Z:\jsc.svn\examples\javascript\Test\TestAfterInvokeResponseHeaders\ApplicationWebService.cs
             //Console.WriteLine("InternalWebMethodRequest.Invoke " + new { that.Name });
 
 
-            var w = new System.Net.WebClient();
-
-            w.UploadValuesCompleted +=
-                (sender, args) =>
-                {
-                    //if (args.Error != null)
-                    //{
-                    //    //t.text = "UploadValuesCompleted error " + new { args.Error }.ToString();
-
-                    //    return;
-                    //}
-
-                    // DownloadStringAsync { Length = 2822 }
-
-                    //var data = Encoding.UTF8.GetString(args.Result);
-
-                    // does this work in android webview?
-                    that.Complete(args.Result, w);
-                };
 
             //var x = new IXMLHttpRequest();
 
@@ -157,10 +141,38 @@ namespace ScriptCoreLib.JavaScript.Remoting
             //Console.WriteLine("InternalWebMethodRequest.Invoke WebClient UploadValuesAsync");
 
 
-            w.UploadValuesAsync(
+
+
+
+            var w = new __WebClient();
+
+            // can we use await here?
+            w.UploadValuesTaskAsync(
                 new Uri(Target, UriKind.Relative),
                 that.InternalUploadValues
+            ).ContinueWith(
+                t =>
+                {
+
+                    //Console.WriteLine("InternalWebMethodRequest.Invoke complete " + new { that.Name });
+
+                    //if (args.Error != null)
+                    //{
+                    //    //t.text = "UploadValuesCompleted error " + new { args.Error }.ToString();
+
+                    //    return;
+                    //}
+
+                    // DownloadStringAsync { Length = 2822 }
+
+                    //var data = Encoding.UTF8.GetString(args.Result);
+
+                    // does this work in android webview?
+                    that.Complete(t.Result, w);
+
+                }
             );
+
 
 
         }
@@ -232,8 +244,9 @@ namespace ScriptCoreLib.JavaScript.Remoting
 
         // called by
         // returns to
-        public static NameValueCollection GetInternalFields(object r = null, WebClient c = null)
+        public static NameValueCollection GetInternalFields(object r = null, WebClient xWebClient = null)
         {
+            // Z:\jsc.svn\examples\javascript\Test\TestAfterInvokeResponseHeaders\ApplicationWebService.cs
             //Console.WriteLine("enter GetInternalFields");
 
             // X:\jsc.svn\examples\javascript\test\TestNullObjectFromWebService\TestNullObjectFromWebService\Application.cs
@@ -241,11 +254,11 @@ namespace ScriptCoreLib.JavaScript.Remoting
 
             //.field field_elapsed:<Stopwatch ElapsedMilliseconds="1204" IsRunning="True" />
 
-            if (c != null)
+            if (xWebClient != null)
             {
                 var value = new NameValueCollection();
 
-                c.ResponseHeaders.AllKeys.WithEach(
+                xWebClient.ResponseHeaders.AllKeys.WithEach(
                     k =>
                     {
                         // Z:\jsc.svn\examples\javascript\Test\TestFirefoxWebServiceField\ApplicationWebService.cs
@@ -254,7 +267,7 @@ namespace ScriptCoreLib.JavaScript.Remoting
                         if (string.IsNullOrEmpty(FieldName))
                             return;
 
-                        var FieldValue = c.ResponseHeaders[k];
+                        var FieldValue = xWebClient.ResponseHeaders[k];
 
                         //Console.WriteLine("GetInternalFields " + new { FieldName, FieldValue });
 
@@ -327,6 +340,12 @@ namespace ScriptCoreLib.JavaScript.Remoting
         // called by Invoke
         public void Complete(byte[] r, WebClient c)
         {
+            // Z:\jsc.svn\examples\javascript\Test\TestAfterInvokeResponseHeaders\ApplicationWebService.cs
+            //Console.WriteLine("enter InternalWebMethodRequest.Complete");
+
+
+
+
             // X:\jsc.svn\examples\rewrite\Test\Test453If\Test453If\Program.cs
             // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201501/20150102
             // fails for roslyn? or is the rewriter doing something it should not?
@@ -416,6 +435,9 @@ namespace ScriptCoreLib.JavaScript.Remoting
             //if (r.status == IXMLHttpRequest.HTTPStatusCodes.NoContent)
             if (r.Length == 0)
             {
+                //Console.WriteLine("enter InternalWebMethodRequest.Complete zero bytes");
+
+
                 // we should be told we either expect 204 or a value?
                 InvokeCallback("TaskComplete",
                     // we have to send somethng, otheriwse

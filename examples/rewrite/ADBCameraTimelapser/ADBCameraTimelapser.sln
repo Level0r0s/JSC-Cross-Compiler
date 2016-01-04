@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADBCameraTimelapser", "ADBCameraTimelapser\ADBCameraTimelapser.csproj", "{C5BB3881-7981-4DBC-8614-9006217BFD99}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADBS6CameraTimelapser", "ADBS6CameraTimelapser\ADBS6CameraTimelapser.csproj", "{98E62449-D28A-476F-B702-487804080EDB}"
@@ -16,6 +14,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFMPEGInputReindex", "FFMPEGInputReindex\FFMPEGInputReindex.csproj", "{CBF00FEF-8C0C-4AF3-9B6D-E4E41BFC0B76}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ioxor", "..\..\merge\ioxor\ioxor\ioxor.csproj", "{D10AA16C-6BEB-4369-993D-F0D611555124}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360videoNDK", "..\..\java\android\synergy\x360videoNDK\x360videoNDK.csproj", "{5084A069-F72E-4934-8F4D-E23263E72AE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "x360video", "..\..\java\android\synergy\x360video\x360video.csproj", "{CCD535AF-EBE8-4281-80D7-1E68F4994872}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,26 @@ Global
 		{D10AA16C-6BEB-4369-993D-F0D611555124}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D10AA16C-6BEB-4369-993D-F0D611555124}.Release|x86.ActiveCfg = Release|Any CPU
 		{D10AA16C-6BEB-4369-993D-F0D611555124}.Release|x86.Build.0 = Release|Any CPU
+		{5084A069-F72E-4934-8F4D-E23263E72AE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5084A069-F72E-4934-8F4D-E23263E72AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5084A069-F72E-4934-8F4D-E23263E72AE8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5084A069-F72E-4934-8F4D-E23263E72AE8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5084A069-F72E-4934-8F4D-E23263E72AE8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5084A069-F72E-4934-8F4D-E23263E72AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5084A069-F72E-4934-8F4D-E23263E72AE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5084A069-F72E-4934-8F4D-E23263E72AE8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5084A069-F72E-4934-8F4D-E23263E72AE8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5084A069-F72E-4934-8F4D-E23263E72AE8}.Release|x86.ActiveCfg = Release|Any CPU
+		{CCD535AF-EBE8-4281-80D7-1E68F4994872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCD535AF-EBE8-4281-80D7-1E68F4994872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCD535AF-EBE8-4281-80D7-1E68F4994872}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CCD535AF-EBE8-4281-80D7-1E68F4994872}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CCD535AF-EBE8-4281-80D7-1E68F4994872}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CCD535AF-EBE8-4281-80D7-1E68F4994872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCD535AF-EBE8-4281-80D7-1E68F4994872}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCD535AF-EBE8-4281-80D7-1E68F4994872}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CCD535AF-EBE8-4281-80D7-1E68F4994872}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CCD535AF-EBE8-4281-80D7-1E68F4994872}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -22,6 +22,8 @@ namespace GearVR360VideoPush
 
         static void Main(string[] args)
         {
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/gearvr360videopush
+
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160103/x360videoui
             // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150718/360
 
@@ -129,9 +131,11 @@ namespace GearVR360VideoPush
 
                 Directory.CreateDirectory(@"x:\vr\media\");
 
+                // this is the full frame we can sync from android to chrome
                 var jpg = @"x:\vr\media\" + Path.ChangeExtension(apkfriendlytitle, ".jpg");
                 var r10 = 25 + new Random().Next(1, 10);
 
+                var thm256x160 = @"x:\vr\media\" + Path.ChangeExtension(apkfriendlytitle, ".thm");
 
                 // "X:\util\ffmpeg-20150609-git-7c9fcdf-win64-static\ffmpeg-20150609-git-7c9fcdf-win64-static\bin\ffmpeg.exe\"
                 // -ss 00:00:30 -t 1   -i x:\media\@file -vf \"scale=512:256, crop=256:256\" -f mjpeg X:\vr\@fname.thm"
@@ -139,9 +143,17 @@ namespace GearVR360VideoPush
 
                 {
                     // x:\vr\media\360 1941 Battle   _ Reenactment by World_of_Tanks.mp3.jpg: No such file or directory
+                    // http://stackoverflow.com/questions/33378548/ffmpeg-crop-a-video-without-loosing-the-quality
+                    // http://stackoverflow.com/questions/17621513/how-to-use-crop-filter-twice-in-ffmpeg
 
                     var cmd = @"X:\util\ffmpeg-20150609-git-7c9fcdf-win64-static\ffmpeg-20150609-git-7c9fcdf-win64-static\bin\ffmpeg.exe";
                     var a = "-ss 00:00:" + r10 + " -t 1   -i \"" + path + "\" -y -f mjpeg \"" + jpg + "\" ";
+
+
+                    if (path0.Name.EndsWith("_TB.mp4"))
+                    {
+                        a = "-ss 00:00:" + r10 + " -t 1   -i \"" + path + "\" -vf \"crop=in_w:in_h/2:0:0\" -y -f mjpeg \"" + jpg + "\" ";
+                    }
 
                     System.Diagnostics.Process.Start(
                         new System.Diagnostics.ProcessStartInfo(cmd, a) { UseShellExecute = false }
@@ -168,7 +180,6 @@ namespace GearVR360VideoPush
                 // 256 x 160  Pixels (1.60)
                 // X:\opensource\ovr_sdk_mobile_0.6.2.0\sdcard_SDK\oculus\360Photos
 
-                var thm256x160 = @"x:\vr\media\" + Path.ChangeExtension(apkfriendlytitle, ".thm");
 
                 // is video360 in need for 256x256? can handle both
                 //var thm = @"x:\vr\media\" + Path.ChangeExtension(apkfriendlytitle, ".thm");
@@ -176,9 +187,18 @@ namespace GearVR360VideoPush
                 Console.WriteLine(new { thm256x160 });
 
                 {
+                    // could we use a stereo thumbnail?
+                    // animated?
 
                     var cmd = @"X:\util\ffmpeg-20150609-git-7c9fcdf-win64-static\ffmpeg-20150609-git-7c9fcdf-win64-static\bin\ffmpeg.exe";
                     var a = "-ss 00:00:" + r10 + " -t 1   -i \"" + path + "\" -vf \"scale=512:256, crop=256:160\" -y -f mjpeg \"" + thm256x160 + "\" ";
+
+                    if (path0.Name.EndsWith("_TB.mp4"))
+                    {
+                        a = "-ss 00:00:" + r10 + " -t 1   -i \"" + path + "\" -vf \"scale=640:320, crop=256:160:160:0\" -y -f mjpeg \"" + thm256x160 + "\" ";
+
+                        //a = "-ss 00:00:" + r10 + " -t 1   -i \"" + path + "\" -vf \"crop=in_w:in_h/2:0:0\" -y -f mjpeg \"" + jpg + "\" ";
+                    }
 
                     System.Diagnostics.Process.Start(
                         new System.Diagnostics.ProcessStartInfo(cmd, a) { UseShellExecute = false }
@@ -218,6 +238,10 @@ namespace GearVR360VideoPush
                 // all images uploaded?
                 //mp4uploads += delegate
                 {
+                    // are we already running?
+                    // if so. can we stream upload and display?
+                    // Z:\jsc.svn\examples\java\android\synergy\x360video\ApplicationActivity.startMovie.cs
+
                     // http://stackoverflow.com/questions/26788998/adb-push-p-bad-file-descriptor
 
                     var cmd = @"x:\util\android-sdk-windows\platform-tools\adb.exe";
@@ -230,7 +254,7 @@ namespace GearVR360VideoPush
                             while (true)
                             {
                                 Thread.Sleep(1000 / 15);
-                                Console.Title = new { sw.ElapsedMilliseconds }.ToString();
+                                Console.Title = new { sw.ElapsedMilliseconds, pathSize }.ToString();
                             }
                         }
                     );
