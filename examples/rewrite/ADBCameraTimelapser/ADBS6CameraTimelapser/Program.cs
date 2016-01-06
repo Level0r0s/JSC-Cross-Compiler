@@ -98,7 +98,7 @@ namespace ADBS6CameraTimelapser
             //var device = "192.168.173.5:5555";
             //var device = "02157df2d5d4e70b";
             //var storage = "x:/vr/tape/20150104";
-            var storage = "x:/vr/tape/IMG_2016" + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") ;
+            var storage = "x:/vr/tape/IMG_2016" + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00");
 
             if (args.Length == 2)
             {
@@ -154,6 +154,20 @@ namespace ADBS6CameraTimelapser
 
 
             var adb = @"x:\util\android-sdk-windows\platform-tools\adb.exe";
+
+
+            Action<string> do_adb_notimeout = a =>
+            {
+                Console.WriteLine("> " + a);
+
+
+                 System.Diagnostics.Process.Start(
+                                   new System.Diagnostics.ProcessStartInfo(adb, a) { UseShellExecute = false }
+                                   ).WaitForExit();
+
+                Console.WriteLine("< " + new {  a });
+
+            };
 
             Action<string> do_adb = a =>
             {
@@ -256,6 +270,7 @@ namespace ADBS6CameraTimelapser
 
             Thread.Sleep(1000);
 
+            do_adb("shell settings put system screen_brightness  5");
 
             // connected = "connected to 192.168.173.5:5555\r\n"
 
@@ -410,6 +425,8 @@ namespace ADBS6CameraTimelapser
 
             if (string.IsNullOrEmpty(shell_dumpsys_power))
             {
+                // -1C is too low to recharge batteries.
+
                 // error: device '192.168.1.126:5555' not found
                 do_adb("-s " + device + " shell dumpsys battery");
 
@@ -650,15 +667,23 @@ namespace ADBS6CameraTimelapser
                     // http://forum.xda-developers.com/showthread.php?t=1941201
                     // 58KBps??
                     //do_adb("-s " + device + " pull -p \"/sdcard/DCIM/Camera/" + filename + "\" \"" + storage + "/" + iNNNN + ".jpg" + "\"");
-                    do_adb("-s " + device + " pull -p \"/sdcard/DCIM/CardboardCamera/" + filename + "\" \"" + storage + "/" + iNNNN + ".jpg" + "\"");
+
+
+                    var local0 = storage + "_" + iNNNN + ".jpg.pull";
+                    var local1 = storage + "/" + iNNNN + ".jpg";
+
+                    do_adb_notimeout("-s " + device + " pull -p \"/sdcard/DCIM/CardboardCamera/" + filename + "\" \"" + local0 + "\"");
                     ;
+
+                    File.Move(local0, local1);
+
                     // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularCameraExperiment\ChromeEquirectangularCameraExperiment\Application.cs
 
                     do_adb("-s " + device + " shell rm \"/sdcard/DCIM/CardboardCamera/" + filename + "\"");
                     //do_adb("-s " + device + " shell rm \"/sdcard/DCIM/Camera/" + filename + "\"");
                     pendingimages--;
-                    if (pendingimages < 0)
-                        pendingimages = 0;
+                    //if (pendingimages < 0)
+                    pendingimages = 0;
 
                     beep = false;
                 }

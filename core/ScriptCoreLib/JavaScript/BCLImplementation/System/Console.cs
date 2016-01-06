@@ -30,6 +30,8 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System
     [Script(Implements = typeof(global::System.Console))]
     public class __Console
     {
+        // http://www.howtogeek.com/howto/4996/what-is-conhost.exe-and-why-is-it-running/
+
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2014/201412/20141223
 
         //console: WorkerConsole
