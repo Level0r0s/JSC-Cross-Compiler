@@ -13,11 +13,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using RayMarchingPlayByHagerman;
-using RayMarchingPlayByHagerman.Design;
-using RayMarchingPlayByHagerman.HTML.Pages;
+using RetroFuturistcThingByFlyguy;
+using RetroFuturistcThingByFlyguy.Design;
+using RetroFuturistcThingByFlyguy.HTML.Pages;
 
-namespace RayMarchingPlayByHagerman
+namespace RetroFuturistcThingByFlyguy
 {
     /// <summary>
     /// Your client side code running inside a web browser as JavaScript.
@@ -42,7 +42,7 @@ namespace RayMarchingPlayByHagerman
         /// <param name="page">HTML document rendered by the web server which can now be enhanced.</param>
         public Application(IApp page)
         {
-            // https://www.shadertoy.com/view/XtlSDj
+            // https://www.shadertoy.com/view/4dt3RX#
 
 
             #region += Launched chrome.app.window
@@ -104,13 +104,13 @@ namespace RayMarchingPlayByHagerman
 }
 
 //..................{ Location =
-// assembly: Y:\RayMarchingPlayByHagerman.Application\WebGL ShaderToy.dll
+// assembly: Y:\RetroFuturistcThingByFlyguy.Application\WebGL ShaderToy.dll
 // type: ChromeShaderToyColumns.Library.ShaderToy, WebGL ShaderToy, Version= 0.0.0.0, Culture= neutral, PublicKeyToken= null
 // offset: 0x004d
 //  method:ScriptCoreLib.JavaScript.WebGL.WebGLBuffer createQuadVBO(ScriptCoreLib.JavaScript.WebGL.WebGLRenderingContext, Single, Single, Single, Single) }
 
 //{ trace = X:\jsc.internal.svn\compiler\jsc\Languages\IL\ILTranslationExtensions.EmitToArguments.cs, TargetMethod = Void AttachToDocument(ScriptCoreLib.GLSL.FragmentShader), DeclaringType = ChromeShaderToyColumns.Library.ShaderToy, Location =
-// assembly: Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\RayMarchingPlayByHagerman\RayMarchingPlayByHagerman\bin\Debug\RayMarchingPlayByHagerman.exe
-// type: RayMarchingPlayByHagerman.Application, RayMarchingPlayByHagerman, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// assembly: Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\synergy\RetroFuturistcThingByFlyguy\RetroFuturistcThingByFlyguy\bin\Debug\RetroFuturistcThingByFlyguy.exe
+// type: RetroFuturistcThingByFlyguy.Application, RetroFuturistcThingByFlyguy, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // offset: 0x0146
-//  method:Void.ctor(RayMarchingPlayByHagerman.HTML.Pages.IApp), ex = System.MissingMethodException: Method not found: 'Void ScriptCoreLib.JavaScript.WebGL.WebGLRenderingContext.bindBuffer(UInt32, ScriptCoreLib.JavaScript.WebGL.WebGLBuffer)'.
+//  method:Void.ctor(RetroFuturistcThingByFlyguy.HTML.Pages.IApp), ex = System.MissingMethodException: Method not found: 'Void ScriptCoreLib.JavaScript.WebGL.WebGLRenderingContext.bindBuffer(UInt32, ScriptCoreLib.JavaScript.WebGL.WebGLBuffer)'.

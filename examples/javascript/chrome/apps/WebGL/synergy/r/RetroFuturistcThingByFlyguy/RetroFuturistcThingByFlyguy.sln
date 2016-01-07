@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayMarchingPlayByHagerman", "RayMarchingPlayByHagerman.csproj", "{5BB93E61-9160-4A11-8CD9-BC5D02EAA821}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroFuturistcThingByFlyguy", "RetroFuturistcThingByFlyguy.csproj", "{5BB93E61-9160-4A11-8CD9-BC5D02EAA821}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

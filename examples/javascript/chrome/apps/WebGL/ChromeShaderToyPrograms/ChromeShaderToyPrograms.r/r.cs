@@ -9,6 +9,8 @@ namespace ChromeShaderToyPrograms.r
 {
     class r
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160107/shadertoy
+
         // https://www.youtube.com/watch?v=WkUzHQB0kcA
 
         // when can we get autodetection of subcomponents available?
@@ -43,6 +45,7 @@ namespace ChromeShaderToyPrograms.r
             {"RaymarchingTweaksByLanza", () => new RaymarchingTweaksByLanza.Shaders.ProgramFragmentShader()},
             {"RaytracedRefractionByDemofox", () => new RaytracedRefractionByDemofox.Shaders.ProgramFragmentShader()},
             {"RedCellsByPMalin", () => new RedCellsByPMalin.Shaders.ProgramFragmentShader()},
+            {"RetroFuturistcThingByFlyguy", () => new RetroFuturistcThingByFlyguy.Shaders.ProgramFragmentShader()},
 
 
             {"RectangularAreaLightTestByTsone", () => new RectangularAreaLightTestByTsone.Shaders.ProgramFragmentShader()},

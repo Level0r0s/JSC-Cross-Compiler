@@ -39,6 +39,8 @@ namespace x360dottedgrid
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151227/x360stereomoon
+
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150916/x360clouds
 
 
@@ -1412,7 +1414,7 @@ namespace x360dottedgrid
             canvasNY.canvas.AttachToDocument();
             canvasNY.canvas.style.transformOrigin = "0 0";
             // roslyn!
-            canvasNY.canvas.style.transform = $"scale({uizoom})";
+            canvasNY.canvas.style.transform = "scale(" + uizoom + ")";
 
             var cameraPY = new THREE.PerspectiveCamera(fov: 90, aspect: 1.0, near: 1, far: far);
             applycameraoffset += delegate

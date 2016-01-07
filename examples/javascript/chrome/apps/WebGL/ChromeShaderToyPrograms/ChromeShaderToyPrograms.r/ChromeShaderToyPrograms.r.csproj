@@ -247,6 +247,9 @@
     <Reference Include="RectangularAreaLightTestByTsone.AssetsLibrary">
       <HintPath>..\..\synergy\r\RectangularAreaLightTestByTsone\RectangularAreaLightTestByTsone\bin\staging.AssetsLibrary\RectangularAreaLightTestByTsone.AssetsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="RetroFuturistcThingByFlyguy.AssetsLibrary">
+      <HintPath>..\..\synergy\r\RetroFuturistcThingByFlyguy\bin\staging.AssetsLibrary\RetroFuturistcThingByFlyguy.AssetsLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="r.cs" />
@@ -389,6 +392,10 @@
     <ProjectReference Include="..\..\synergy\r\RelativisticLatticeByMakc\RelativisticLatticeByMakc.csproj">
       <Project>{18d81eab-6b23-45bf-9f7d-8460d9f637f2}</Project>
       <Name>RelativisticLatticeByMakc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\synergy\r\RetroFuturistcThingByFlyguy\RetroFuturistcThingByFlyguy.csproj">
+      <Project>{e0e157c7-57cc-4125-80f2-bcb46dca7223}</Project>
+      <Name>RetroFuturistcThingByFlyguy</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\synergy\r\RhumbLineByBeyondTheStatic\RhumbLineByBeyondTheStatic.csproj">
       <Project>{9279c89f-763d-4808-b5ec-9567bba87097}</Project>
