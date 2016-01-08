@@ -161,7 +161,11 @@ namespace com.abstractatech.adminshell
                     h.Context.Request.Path,
                 }.ToString());
 
-            var a = h.Applications.FirstOrDefault(k => k.TypeName == "a");
+
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+            //var a = h.Applications.FirstOrDefault(k => k.TypeName == "a");
+            var a = h.Applications.FirstOrDefault(k => k.TypeName == "Applicationa");
 
             var Application = h.Context.Request.Headers["X-Application"];
 

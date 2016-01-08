@@ -22,6 +22,7 @@ namespace com.abstractatech.scholar
         Abstractatech.JavaScript.FileStorage.IApplicationWebServiceX
     {
         // jsc does not yet look deep enough
+        //Type ref0 = typeof(System.Data.SQLite.SQLiteCommand);
         Type ref0 = typeof(System.Data.SQLite.SQLiteCommand);
         Type ref1 = typeof(ScriptCoreLib.Shared.Data.DynamicDataReader);
 
@@ -95,7 +96,7 @@ namespace com.abstractatech.scholar
             //                };
             //#endif
 
-            DownloadSDKFunction.DownloadSDK(h);
+            //DownloadSDKFunction.DownloadSDK(h);
 
         }
 

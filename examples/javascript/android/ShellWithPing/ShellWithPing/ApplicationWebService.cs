@@ -17,6 +17,9 @@ namespace ShellWithPing
     [System.ComponentModel.DesignerCategory("code")]
     public sealed partial class ApplicationWebService : Component, PING
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+        // 20160108 
+        // shall we upgrade to Task<>
 
         // jsc cannot see explicit interfaces just yet.
         public void PING_InvokeAsync(string host, Action<string> y)

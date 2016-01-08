@@ -17,6 +17,7 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
     // https://github.com/mono/mono/blob/master/mcs/class/System/System.Net.Sockets/UdpClient.cs
     // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\Sockets\UdpClient.cs
     // X:\jsc.svn\market\synergy\javascript\chrome\chrome\BCLImplementation\System\Net\Sockets\UdpClient.cs
+    // Z:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\BCLImplementation\System\Net\Sockets\UdpClient.cs
 
     [Script(Implements = typeof(global::System.Net.Sockets.UdpClient))]
     internal class __UdpClient
@@ -508,6 +509,10 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net.Sockets
         // X:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\System\Net\Sockets\UdpReceiveResult.cs
         public Func<Task<__UdpReceiveResult>> vReceiveAsync;
         public Task<__UdpReceiveResult> ReceiveAsync() { return vReceiveAsync(); }
+        // there is no regular receive anymore?
+        // Z:\jsc.svn\examples\c\android\NDKUdpClient\xNativeActivity.cs
+
+
 
 
 

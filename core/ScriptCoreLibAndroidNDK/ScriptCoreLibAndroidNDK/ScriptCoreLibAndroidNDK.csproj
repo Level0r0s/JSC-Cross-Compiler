@@ -47,11 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\ScriptCoreLibJava\BCLImplementation\System\Net\IPEndPoint.cs">
+      <Link>BCLImplementation\System\Net\IPEndPoint.cs</Link>
+    </Compile>
     <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\IntPtr.cs">
       <Link>BCLImplementation\System\IntPtr.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Math.cs">
       <Link>BCLImplementation\System\Math.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Threading\Tasks\Task\Task.cs">
+      <Link>BCLImplementation\System\Threading\Tasks\Task\Task.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\BCLImplementation\System\Threading\Tasks\Task\Task.Run.cs">
+      <Link>BCLImplementation\System\Threading\Tasks\Task\Task.Run.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLibNative\ScriptCoreLibNative\SystemHeaders\math.cs">
       <Link>SystemHeaders\math.cs</Link>
@@ -64,6 +73,12 @@
     </Compile>
     <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\System\Action.cs">
       <Link>BCLImplementation\System\Action.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\System\Net\EndPoint.cs">
+      <Link>BCLImplementation\System\Net\EndPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\System\Net\Sockets\UdpReceiveResult.cs">
+      <Link>BCLImplementation\System\Net\Sockets\UdpReceiveResult.cs</Link>
     </Compile>
     <Compile Include="..\..\ScriptCoreLib\Shared\BCLImplementation\System\Runtime\CompilerServices\CallSiteBinder.cs">
       <Link>BCLImplementation\System\Runtime\CompilerServices\CallSiteBinder.cs</Link>
@@ -79,6 +94,8 @@
     <Compile Include="BCLImplementation\System\Collections\Generic\IEnumerable.cs" />
     <Compile Include="BCLImplementation\System\MulticastDelegate.cs" />
     <Compile Include="BCLImplementation\System\Delegate.cs" />
+    <Compile Include="BCLImplementation\System\Net\IPAddress.cs" />
+    <Compile Include="BCLImplementation\System\Net\Sockets\UdpClient.cs" />
     <Compile Include="BCLImplementation\System\Reflection\MethodInfo.cs" />
     <Compile Include="BCLImplementation\System\RuntimeTypeHandle.cs" />
     <Compile Include="BCLImplementation\System\Runtime\CompilerServices\CallSite.cs" />

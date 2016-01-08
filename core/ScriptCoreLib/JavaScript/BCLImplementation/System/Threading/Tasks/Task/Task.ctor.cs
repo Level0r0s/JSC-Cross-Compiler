@@ -577,6 +577,13 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
             #region CreateWorker
             Action<string> CreateWorker = uri =>
             {
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+
+
+                Console.WriteLine("enter CreateWorker");
+
+
+
                 // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201504/20150401
                 // since we can start scope sharing, static sync may be turned off?
 
@@ -645,8 +652,14 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
                 int responseCounter = 0;
 
                 #region postMessage
-                worker.postMessage(
-                    new
+
+                Console.WriteLine("before CreateWorker postMessage");
+
+                // tested by
+                // Z:\jsc.svn\examples\javascript\android\com.abstractatech.adminshell\com.abstractatech.adminshell\Application.cs
+
+
+                var message = new
                     {
                         InternalThreadCounter,
 
@@ -683,7 +696,13 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
                         //IsTuple2_Item1_IsIProgress,
 
                         __string = (object)xdata___string
-                    }
+                    };
+
+
+                Console.WriteLine("before CreateWorker postMessage \n\n" + new { message });
+
+                worker.postMessage(
+                   message
                     ,
                      e =>
                      {
@@ -914,6 +933,9 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
             this.InternalStart = delegate
             {
                 // X:\jsc.svn\examples\javascript\Test\TestRedirectWebWorker\TestRedirectWebWorker\Application.cs
+
+                // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+                Console.WriteLine("enter InternalStart");
 
 
 

@@ -23,6 +23,10 @@ namespace jsgif
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // dont we have our own encoder now??
+
+
+
         // X:\jsc.svn\core\ScriptCoreLib\Shared\BCLImplementation\System\Tuple.cs
 
         //no implementation for System.Tuple b6efdcc2-6386-375e-84aa-6732b6518b3f
@@ -265,7 +269,7 @@ namespace jsgif
                  }
              );
 
-            new IHTMLButton { innerText = "encode via GIFEncoderAsync" }.AttachToDocument().WhenClicked(
+            new IHTMLButton { innerText = "encode via GIFEncoderAsync. works!" }.AttachToDocument().WhenClicked(
                 btn =>
                 {
                     btn.disabled = true;
@@ -325,7 +329,7 @@ namespace jsgif
             );
 
 
-            new IHTMLButton { innerText = "encode via GIFEncoderWorker" }.AttachToDocument().WhenClicked(
+            new IHTMLButton { innerText = "encode via GIFEncoderWorker. crashes the system? why?" }.AttachToDocument().WhenClicked(
                 async btn =>
                 {
                     Console.WriteLine("encoding!");

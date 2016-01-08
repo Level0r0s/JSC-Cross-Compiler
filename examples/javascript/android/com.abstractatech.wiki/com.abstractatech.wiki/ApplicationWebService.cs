@@ -16,18 +16,9 @@ namespace com.abstractatech.wiki
     /// </summary>
     public sealed class ApplicationWebService
     {
-        /// <summary>
-        /// This Method is a javascript callable method.
-        /// </summary>
-        /// <param name="e">A parameter from javascript.</param>
-        /// <param name="y">A callback to javascript.</param>
-        public void WebMethod2(string e, Action<string> y)
-        {
-            // Send it back to the caller.
-            y(e);
-        }
 
-        const string DataSource = "MY_DATABASE2.sqlite";
+        //const string DataSource = "MY_DATABASE2.sqlite";
+        const string DataSource = "file://MY_DATABASE2.sqlite";
 
         public void CountItems(string Key, Action<string> y)
         {
@@ -65,7 +56,9 @@ namespace com.abstractatech.wiki
            {
                DataSource = DataSource,
                Version = 3,
-               ReadOnly = true,
+
+               // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+               //ReadOnly = true,
 
            }.ConnectionString
            );
@@ -103,6 +96,12 @@ namespace com.abstractatech.wiki
 
         public void AddItem(string Key, string e, Action<string> y)
         {
+            //wtf??
+            // Additional information: Invalid connection string: invalid URI
+
+
+
+
             //Console.WriteLine("AddItem enter");
             using (var c = new SQLiteConnection(
 
@@ -180,7 +179,8 @@ namespace com.abstractatech.wiki
 
 
 
-            xml.Element("div").Element("div").Element("h1").Value = Key;
+            xml.Element("body").Element("div").Element("div").Element("h1").Value = Key;
+            //xml.Element("div").Element("div").Element("h1").Value = Key;
             //xml.Element("div").Value = "Hello world";
 
             var Revision = @"
@@ -207,9 +207,9 @@ namespace com.abstractatech.wiki
                     //xml.Element("div").ReplaceWith(XElement.Parse(Content));
                 }
             );
-            xml.Element("div").Element("div").Element("h4").Value = "Revision " + RevisionNumber;
+            xml.Element("body").Element("div").Element("div").Element("h4").Value = "Revision " + RevisionNumber;
 
-            xml.Element("div").Element("output").Add(XElement.Parse(Revision));
+            xml.Element("body").Element("div").Element("output").Add(XElement.Parse(Revision));
 
             //xml.Element("h3").Value = h.Context.Request.UserAgent;
             //xml.Element("h3").Value = h.Context.Request.Headers["User-Agent"];

@@ -188,6 +188,8 @@ namespace x360video.Activities
         // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect  192.168.1.126:5555
         // connected to 192.168.1.126:5555
 
+        // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG"
+
 
 
         // https://sites.google.com/a/jsc-solutions.net/backlog/knowledge-base/2015/201511/20151121

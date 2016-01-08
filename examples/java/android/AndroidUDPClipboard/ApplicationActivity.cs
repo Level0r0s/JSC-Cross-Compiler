@@ -182,6 +182,10 @@ namespace AndroidUDPClipboard.Activities
                 }
             );
 
+
+
+            // Z:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs
+
             #region lets listen to incoming udp
             // could we define our chrome app inline in here?
             // or in a chrome app. could we define the android app inline?

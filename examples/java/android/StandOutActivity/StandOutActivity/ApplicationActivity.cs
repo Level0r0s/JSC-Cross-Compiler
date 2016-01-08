@@ -22,6 +22,11 @@ namespace wei.mark.example
         //StandOutExampleActivity
     Activity
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160106
+        // can we use this for HMDUI?
+
+
+
         // U:\bin\AndroidManifest.xml:5: error: Error: No resource found that matches the given name (at 'label' with value '@string/app_name').
 
         ScriptCoreLib.Android.IAssemblyReferenceToken ref1;

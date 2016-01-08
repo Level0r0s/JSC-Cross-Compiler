@@ -31,6 +31,7 @@ namespace com.abstractatech.adminshell
     /// </summary>
     public sealed class Application
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
 
 
 
@@ -114,7 +115,11 @@ namespace com.abstractatech.adminshell
                     button.style.Opacity = 0.5;
 
                     Console.WriteLine("loading a...");
-                    var source = await typeof(a);
+
+
+                    // ScriptCoreLib.JavaScript.Experimental
+                    //typeof(Applicationa).GetAwaiter()
+                    var source = await typeof(Applicationa);
                     Console.WriteLine("loading a... done");
 
                     Native.window.history.pushState(source, go);
@@ -131,67 +136,76 @@ namespace com.abstractatech.adminshell
         }
 
 
-        //[Obsolete("jsc should rewrite nested secondary apps, by referencing the primary, to reduce any duplicate code, or both")]
-        public sealed class a
+    }
+
+
+
+
+
+    //[Obsolete("jsc should rewrite nested secondary apps, by referencing the primary, to reduce any duplicate code, or both")]
+    public sealed class Applicationa
+    {
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+
+
+
+        public readonly ApplicationWebService service = new ApplicationWebService();
+
+        static Applicationa()
         {
+            // this should not be visible for the default app
+            Console.WriteLine("typeof(a) is now available");
+        }
 
+        public Applicationa(IApp e)
+        {
+            //yield(new { hello = "secondary app loaded and running!" }.ToString());
 
-            public readonly ApplicationWebService service = new ApplicationWebService();
-
-            static a()
+            var c = new ShellWithPing.Library.ConsoleWindow
             {
-                // this should not be visible for the default app
-                Console.WriteLine("typeof(a) is now available");
-            }
+                Text = "Remote Web Shell",
+                //Text = "Remote Web Shell (Logged in as " + new Cookie("foo").Value + ")",
+                Color = Color.Red,
+                BackColor = Color.Black
+            };
 
-            public a(IApp e)
-            {
-                //yield(new { hello = "secondary app loaded and running!" }.ToString());
-
-                var c = new ShellWithPing.Library.ConsoleWindow
-                {
-                    Text = "Remote Web Shell",
-                    //Text = "Remote Web Shell (Logged in as " + new Cookie("foo").Value + ")",
-                    Color = Color.Red,
-                    BackColor = Color.Black
-                };
-
-                c.AppendLine(
-    @" *** WARNING *** be careful!
+            c.AppendLine(
+@" *** WARNING *** be careful!
 example:
  am start -a android.intent.action.CALL tel:254007
 ");
 
-                // if we will popup, wil we have a frame?
-                c.AppendLine(new { FormAsPopupExtensionsForConsoleFormPackageMediator.InternalPopupHasFrame }.ToString());
+            // if we will popup, wil we have a frame?
+            c.AppendLine(new { FormAsPopupExtensionsForConsoleFormPackageMediator.InternalPopupHasFrame }.ToString());
 
 
 
-                c.Show();
+            c.Show();
 
 
-                global::CSSMinimizeFormToSidebar.ApplicationExtension.InitializeSidebarBehaviour(
-                    c, HandleClosed: false
-                );
+            global::CSSMinimizeFormToSidebar.ApplicationExtension.InitializeSidebarBehaviour(
+                c, HandleClosed: false
+            );
 
 
-                Native.document.body.style.overflow = IStyle.OverflowEnum.hidden;
+            Native.document.body.style.overflow = IStyle.OverflowEnum.hidden;
 
-                if (Native.window.parent != Native.window.self)
-                {
-                    Native.document.body.style.backgroundColor = JSColor.Transparent;
-                }
-                else
-                {
-                    Native.document.body.style.backgroundColor = "#185D7B";
-                }
-
-                c.PopupInsteadOfClosing();
-
-                c.AtCommand += service.ShellAsync;
+            if (Native.window.parent != Native.window.self)
+            {
+                Native.document.body.style.backgroundColor = JSColor.Transparent;
             }
+            else
+            {
+                Native.document.body.style.backgroundColor = "#185D7B";
+            }
+
+            c.PopupInsteadOfClosing();
+
+            c.AtCommand += service.ShellAsync;
         }
     }
+
 
     //interface IApplication
     //{ 

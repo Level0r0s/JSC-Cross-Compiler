@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9CC1F2EC-11D5-46D7-9088-113FD67EF952}</ProjectGuid>
+    <ProjectGuid>{AEBB10ED-4B70-4F58-B662-4E41787A423E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestNDKUDP</RootNamespace>

@@ -54,7 +54,10 @@ namespace ScriptCoreLib.JavaScript.BCLImplementation.System.Threading.Tasks
                 Debugger.Break();
             }
 
-            //Console.WriteLine("__TaskFactory<TResult>.StartNew");
+
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+            Console.WriteLine("enter __TaskFactory<TResult>.StartNew");
 
             var x = new __Task<TResult>(function, state);
 

@@ -114,6 +114,8 @@ namespace ScriptCoreLib.JavaScript.Experimental
     [Obsolete("This wont work when rewritten. Why? Workaround is to link it in as source.")]
     public static class X
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+
         // X:\jsc.svn\examples\javascript\android\com.abstractatech.appmanager\com.abstractatech.appmanager\Application.cs
 
         // tested by
@@ -132,7 +134,7 @@ namespace ScriptCoreLib.JavaScript.Experimental
         // .NET 4.5!!!
         public static TaskAwaiter<InternalScriptApplicationSource> GetAwaiter(this Type __e)
         {
-            //Console.WriteLine(new { __e.Name });
+            Console.WriteLine("enter ScriptCoreLib.JavaScript.Experimental " + new { __e.Name });
 
             // http://stackoverflow.com/questions/9713058/sending-post-data-with-a-xmlhttprequest
 
@@ -174,8 +176,9 @@ namespace ScriptCoreLib.JavaScript.Experimental
             (bar.style as dynamic).webkitTransitionProperty = "top, width";
 
 
-            Task.Factory.StartNewWithProgress(
-                new
+
+
+            var state = new
                 {
                     __e.Name,
 
@@ -189,7 +192,14 @@ namespace ScriptCoreLib.JavaScript.Experimental
 
 
                     references = new InternalScriptApplicationReference[0]
-                },
+                };
+
+            Console.WriteLine("call Task.Factory.StartNewWithProgress");
+
+            // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+
+            Task.Factory.StartNewWithProgress(
+                state,
 
                 progress: x =>
                 {

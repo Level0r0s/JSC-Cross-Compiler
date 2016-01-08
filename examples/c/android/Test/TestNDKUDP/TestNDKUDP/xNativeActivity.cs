@@ -7,16 +7,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static ScriptCoreLibNative.SystemHeaders.sys.socket_h;
+//using static ScriptCoreLibNative.SystemHeaders.sys.socket_h;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using ScriptCoreLibAndroidNDK.Library;
 
 [assembly: Obfuscation(Feature = "script")]
 
-namespace TestNDKUDP
+namespace TestNDKUDP.Activities
 {
     public class xNativeActivity : ScriptCoreLibAndroidNDK.IAssemblyReferenceToken
     {
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+        // restarting in TCP mode port: 5555
+
+        
+        // on red
+        // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect  192.168.1.126:5555
+        // connected to 192.168.1.126:5555
+
+        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n TestNDKUDP.Activities/TestNDKUDP.Activities.xNativeActivity
+        // x:\util\android-sdk-windows\platform-tools\adb.exe shell am start -n TestNDKUDP.Activities/android.app.NativeActivity
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108/udp
+
+
+
+        // x:\util\android-sdk-windows\platform-tools\adb.exe logcat -s "xNativeActivity" "System.Console" "DEBUG"
+
+
+
         // double click on exe./metro?
         // and have it run on android?
 
@@ -24,64 +44,66 @@ namespace TestNDKUDP
 
 
         // https://msdn.microsoft.com/en-us/library/hh534540.aspx
-        static void trace(
-            string message = "",
-            [CallerFilePath] string sourceFilePath = "",
-            [CallerLineNumber] int sourceLineNumber = 0)
+        //static void trace(
+        //    string message = "",
+        //    [CallerFilePath] string sourceFilePath = "",
+        //    [CallerLineNumber] int sourceLineNumber = 0)
 
-            // ?
-            => log.__android_log_print(
-                log.android_LogPriority.ANDROID_LOG_INFO,
-                "xNativeActivity",
-                //"line %i file %s",
-                "%s:%i %s",
-                __arglist(
-                    sourceFilePath,
-                    sourceLineNumber,
-                    message
-                )
-            );
+        //    // ?
+        //    => log.__android_log_print(
+        //        log.android_LogPriority.ANDROID_LOG_INFO,
+        //        "xNativeActivity",
+        //        //"line %i file %s",
+        //        "%s:%i %s",
+        //        __arglist(
+        //            sourceFilePath,
+        //            sourceLineNumber,
+        //            message
+        //        )
+        //    );
 
 
         unsafe static void trace(
     byte* message,
     [CallerFilePath] string sourceFilePath = "",
     [CallerLineNumber] int sourceLineNumber = 0)
-    => log.__android_log_print(
-        log.android_LogPriority.ANDROID_LOG_INFO,
-        "xNativeActivity",
-        //"line %i file %s",
-        "%s:%i %s",
-        __arglist(
-            sourceFilePath,
-            sourceLineNumber,
-            message
-        )
-    );
+        {
+            log.__android_log_print(
+                log.android_LogPriority.ANDROID_LOG_INFO,
+                "xNativeActivity",
+                //"line %i file %s",
+                "%s:%i %s",
+                __arglist(
+              sourceFilePath,
+              sourceLineNumber,
+              message
+                )
+                );
+        }
 
 
-        unsafe static void tracei(
-    string message = "",
-    int value = 0,
-    [CallerFilePath] string sourceFilePath = "",
-    [CallerLineNumber] int sourceLineNumber = 0)
-    => log.__android_log_print(
-        log.android_LogPriority.ANDROID_LOG_INFO,
-        "xNativeActivity",
-        //"line %i file %s",
-        "%s:%i %s %i errno: %i %s",
-        __arglist(
-            sourceFilePath,
-            sourceLineNumber,
-            message,
-            value,
+        //    unsafe static void tracei(
+        //string message = "",
+        //int value = 0,
+        //[CallerFilePath] string sourceFilePath = "",
+        //[CallerLineNumber] int sourceLineNumber = 0)
+        //=> log.__android_log_print(
+        //    log.android_LogPriority.ANDROID_LOG_INFO,
+        //    "xNativeActivity",
+        //    //"line %i file %s",
+        //    "%s:%i %s %i errno: %i %s",
+        //    __arglist(
+        //        sourceFilePath,
+        //        sourceLineNumber,
+        //        message,
+        //        value,
 
-                *errno_h.__errno(),
+        //            *errno_h.__errno(),
 
-                errno_h.strerror(*errno_h.__errno())
+        //            errno_h.strerror(*errno_h.__errno())
 
-        )
-    );
+        //    )
+        //);
 
 
         // http://stackoverflow.com/questions/24581245/send-broadcast-from-c-code
@@ -100,7 +122,7 @@ namespace TestNDKUDP
             android_native_app_glue.app_dummy();
             //Action<
 
-            trace("enter TestNDKUDP");
+            ConsoleExtensions.trace("enter TestNDKUDP");
 
             // listen to sockets.
             // X:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPNotification\ChromeUDPNotification\Application.cs
@@ -109,9 +131,9 @@ namespace TestNDKUDP
             // https://msdn.microsoft.com/en-us/library/windows/hardware/ff543744(v=vs.85).aspx
             // http://stackoverflow.com/questions/6033581/using-socket-in-android-ndk
             // can we load apk from udp? and reload on update?
-            var s = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+            var s = socket_h.socket(socket_h.AF_INET, socket_h.SOCK_DGRAM, socket_h.IPPROTO_UDP);
 
-            tracei("socket ", (int)s);
+            ConsoleExtensions.tracei("socket ", (int)s);
 
 
 
@@ -126,17 +148,17 @@ namespace TestNDKUDP
             //setsockopt(s, IPPROTO_IP, IP_MULTICAST_TTL, &hopLimit, sizeof(byte));
 
             // http://www.tldp.org/HOWTO/Multicast-HOWTO-6.html
-            var localAddr = new in_addr();
+            var localAddr = new socket_h.in_addr();
 
-            localAddr.s_addr = INADDR_ANY;
+            localAddr.s_addr = socket_h.INADDR_ANY;
 
 
             // For multicast sending use an IP_MULTICAST_IF flag with the setsockopt() call. This specifies the interface to be used.
             {
-                var status = s.setsockopt(IPPROTO_IP, IP_MULTICAST_IF, &localAddr, sizeof(in_addr));
+                var status = s.setsockopt(socket_h.IPPROTO_IP, socket_h.IP_MULTICAST_IF, &localAddr, sizeof(socket_h.in_addr));
 
                 // anonymous types like linq expressions?
-                tracei("setsockopt IP_MULTICAST_IF: ", status);
+                ConsoleExtensions.tracei("setsockopt IP_MULTICAST_IF: ", status);
             }
 
             // http://www.phonesdevelopers.com/1817807/
@@ -144,15 +166,15 @@ namespace TestNDKUDP
             // http://www.infres.enst.fr/~dax/polys/multicast/api_en.html
 
             //ip_mreq mreq;
-            var mreq = new ip_mreq();
+            var mreq = new socket_h.ip_mreq();
 
             // "239.1.2.3"
             // ip_mreq3->imr_multiaddr.s_addr = inet_addr((char*)"239.1.2.3");
             mreq.imr_multiaddr.s_addr = "239.1.2.3".inet_addr();
 
             {
-                var status = s.setsockopt(IPPROTO_IP, IP_ADD_MEMBERSHIP, &mreq, sizeof(ip_mreq));
-                tracei("setsockopt IP_ADD_MEMBERSHIP: ", status);
+                var status = s.setsockopt(socket_h.IPPROTO_IP, socket_h.IP_ADD_MEMBERSHIP, &mreq, sizeof(socket_h.ip_mreq));
+                ConsoleExtensions.tracei("setsockopt IP_ADD_MEMBERSHIP: ", status);
             }
 
 
@@ -165,19 +187,22 @@ namespace TestNDKUDP
             //}
 
             // Create the local endpoint
-            sockaddr_in localEndPoint;
-            ushort gport = 40804;
+            socket_h.sockaddr_in localEndPoint;
+            //ushort gport = 40804;
 
-            localEndPoint.sin_family = AF_INET;
-            localEndPoint.sin_addr.s_addr = INADDR_ANY.htonl();
+            // Z:\jsc.svn\examples\javascript\chrome\apps\ChromeUDPClipboard\Application.cs
+            ushort gport = 49814;
+
+            localEndPoint.sin_family = socket_h.AF_INET;
+            localEndPoint.sin_addr.s_addr = socket_h.INADDR_ANY.htonl();
             localEndPoint.sin_port = gport.htons();
 
 
             // Bind the socket to the port
             {
-                int bindret = s.bind((sockaddr*)&localEndPoint, sizeof(sockaddr_in));
+                int bindret = s.bind((socket_h.sockaddr*)&localEndPoint, sizeof(socket_h.sockaddr_in));
 
-                tracei("bind: ", bindret);
+                ConsoleExtensions.tracei("bind: ", bindret);
             }
 
             var ok = true;
@@ -188,19 +213,19 @@ namespace TestNDKUDP
 
                 var buff = stackalloc byte[0xfff];
 
-                sockaddr_in sender;
-                var sizeof_sender = sizeof(sockaddr_in);
+                socket_h.sockaddr_in sender;
+                var sizeof_sender = sizeof(socket_h.sockaddr_in);
 
-                trace("before recvfrom");
+                ConsoleExtensions.trace("before recvfrom");
 
                 // http://pubs.opengroup.org/onlinepubs/009695399/functions/recvfrom.html
                 // Upon successful completion, recvfrom() shall return the length of the message in bytes. 
-                var recvfromret = s.recvfrom(buff, 0xfff, 0, (sockaddr*)&sender, &sizeof_sender);
+                var recvfromret = s.recvfrom(buff, 0xfff, 0, (socket_h.sockaddr*)&sender, &sizeof_sender);
                 // sent by?
 
                 //I/xNativeActivity(24024): X:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs:167 recvfrom:  116 errno: 22 Invalid argument
                 //I/xNativeActivity(24024): X:\jsc.svn\examples\c\android\Test\TestNDKUDP\TestNDKUDP\xNativeActivity.cs:168 SenderAddrSize:  16 errno: 22 Invalid argument
-                tracei("recvfrom: ", recvfromret);
+                ConsoleExtensions.tracei("recvfrom: ", recvfromret);
                 //tracei("sockaddr_in: ", sizeof_sender);
 
                 buff[recvfromret] = 0;

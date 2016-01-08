@@ -15,6 +15,9 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Net.Sockets
 	[Script(ImplementsViaAssemblyQualifiedName = "System.Net.Sockets.UdpReceiveResult")]
 	public class __UdpReceiveResult
 	{
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108/udp
+        // Z:\jsc.svn\examples\c\android\NDKUdpClient\xNativeActivity.cs
+
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150630/jvmclrudpreceiveasync
 		// X:\jsc.svn\market\synergy\javascript\chrome\chrome\BCLImplementation\System\Net\Sockets\UdpClient.cs
 

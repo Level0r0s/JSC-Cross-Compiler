@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JellyworldExperiment", "JellyworldExperiment\JellyworldExperiment.csproj", "{B9E6DAF1-240A-48FA-9435-A03621CBD235}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JellyworldExperiment.HardwareDetection", "JellyworldExperiment.HardwareDetection\JellyworldExperiment.HardwareDetection.csproj", "{E81FCEF4-AF71-4969-BEAC-C8C5197F4091}"
@@ -102,13 +102,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoodsXmasByRobert", "..\..\synergy\webgl\WoodsXmasByRobert\WoodsXmasByRobert\WoodsXmasByRobert.csproj", "{FA825F4A-F9F2-40EB-A63F-C54E9B34FC7D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpiderModel", "..\..\ArduinoSpiderControlCenter\SpiderModel\SpiderModel.csproj", "{3DE096E7-B756-452A-B853-BF732ACABD70}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8D300B19-45D8-422C-8430-7B8570B06B29}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1117,6 +1110,7 @@ Global
 		{91D7BE5A-6AF7-4EBA-8F39-9C69AF7A85C7} = {65593BCE-68C4-4719-8EA8-C489DC605F1C}
 		{E3A7E201-1524-4528-A7B1-78714D6DF561} = {65593BCE-68C4-4719-8EA8-C489DC605F1C}
 		{946F52AB-5B2B-43FC-A899-6C063AF9C14F} = {65593BCE-68C4-4719-8EA8-C489DC605F1C}
+		{359BF739-2E7B-453E-A110-748D793F030D} = {946F52AB-5B2B-43FC-A899-6C063AF9C14F}
 		{4D221D4E-654D-4AE4-89AA-98D35EB70778} = {946F52AB-5B2B-43FC-A899-6C063AF9C14F}
 		{A2DC1F34-0057-4359-BA70-B574E3267762} = {946F52AB-5B2B-43FC-A899-6C063AF9C14F}
 		{9B68EA42-8C55-4481-9B26-54AF1A5292D9} = {946F52AB-5B2B-43FC-A899-6C063AF9C14F}
@@ -1159,6 +1153,5 @@ Global
 		{6AFA30D6-E490-4D20-ABEE-50E900779CF4} = {946F52AB-5B2B-43FC-A899-6C063AF9C14F}
 		{FA825F4A-F9F2-40EB-A63F-C54E9B34FC7D} = {946F52AB-5B2B-43FC-A899-6C063AF9C14F}
 		{3DE096E7-B756-452A-B853-BF732ACABD70} = {946F52AB-5B2B-43FC-A899-6C063AF9C14F}
-		{359BF739-2E7B-453E-A110-748D793F030D} = {946F52AB-5B2B-43FC-A899-6C063AF9C14F}
 	EndGlobalSection
 EndGlobal

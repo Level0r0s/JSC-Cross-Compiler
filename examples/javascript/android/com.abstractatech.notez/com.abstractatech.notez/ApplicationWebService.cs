@@ -19,6 +19,8 @@ namespace com.abstractatech.wiki
     /// </summary>
     public sealed class ApplicationWebService :
         // can we do explicit implementations too?
+
+// defined ?
         Abstractatech.JavaScript.FileStorage.IApplicationWebServiceX
     {
         // jsc does not yet look deep enough

@@ -9,7 +9,7 @@ using WebGLClouds.Shaders;
 
 namespace WebGLClouds
 {
-    using WebGLRah66Comanche.Library;
+    //using WebGLRah66Comanche.Library;
     using f = System.Single;
     using gl = ScriptCoreLib.JavaScript.WebGL.WebGLRenderingContext;
 
@@ -19,6 +19,8 @@ namespace WebGLClouds
     /// </summary>
     public sealed class Application : ApplicationWebService
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+
         /* Source: view-source:http://mrdoob.com/lab/javascript/webgl/clouds/
          */
 
@@ -243,14 +245,14 @@ namespace WebGLClouds
 
 
 
-            var ze = new ZeProperties();
+            //var ze = new ZeProperties();
 
-            ze.Show();
+            //ze.Show();
 
 
-            ze.Add(() => renderer);
-            //ze.Add(() => controls);
-            ze.Add(() => scene);
+            //ze.Add(() => renderer);
+            ////ze.Add(() => controls);
+            //ze.Add(() => scene);
 
         }
         public Action Dispose;

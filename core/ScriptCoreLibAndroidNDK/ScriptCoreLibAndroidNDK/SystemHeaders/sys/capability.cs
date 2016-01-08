@@ -13,6 +13,8 @@ namespace ScriptCoreLibNative.SystemHeaders.sys
     [Script(IsNative = true, Header = "sys/capability.h", IsSystemHeader = true)]
     public static class capability_h
     {
+        // used by?
+
         //extern int capget(cap_user_header_t hdrp, cap_user_data_t datap);
         //extern int capset(cap_user_header_t hdrp, const cap_user_data_t datap);
     }

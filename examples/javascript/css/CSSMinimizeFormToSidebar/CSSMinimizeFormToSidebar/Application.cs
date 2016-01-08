@@ -318,7 +318,7 @@ namespace CSSMinimizeFormToSidebar
             Native.window.onscroll +=
                 e =>
                 {
-                    e.PreventDefault();
+                    e.preventDefault();
                     e.stopPropagation();
 
                     //Console.WriteLine("Window onscroll ");

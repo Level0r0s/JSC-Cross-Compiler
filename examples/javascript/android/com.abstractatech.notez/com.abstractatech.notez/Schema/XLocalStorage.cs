@@ -43,6 +43,7 @@ namespace com.abstractatech.notez.Schema
 
         public XLocalStorage()
         {
+            // defined at??
             this.WithConnection = csb.xAsWithConnection();
 
             WithConnection(

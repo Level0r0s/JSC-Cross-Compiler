@@ -12,6 +12,8 @@ namespace ADBS6CameraTimelapser
 {
     class Program
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160107/skyradar
+
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20151227/rotator
         // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20150727
 
@@ -112,6 +114,12 @@ namespace ADBS6CameraTimelapser
             Console.WriteLine(new { device });
             Console.WriteLine(new { storage });
 
+            // if we are a remoteapp
+            // we need to monitor what is happening with the session.
+            // win2008r2 needs a reboot if a session gets stuck!!
+            Console.WriteLine(new { System.Windows.Forms.SystemInformation.TerminalServerSession });
+            
+
             // < -s 192.168.1.126:5555 pull -p "/sdcard/DCIM/Camera/20150729_131851.jpg" "x:/vr/tape6/2400.jpg"
 
             Console.WriteLine("hi");
@@ -161,11 +169,11 @@ namespace ADBS6CameraTimelapser
                 Console.WriteLine("> " + a);
 
 
-                 System.Diagnostics.Process.Start(
-                                   new System.Diagnostics.ProcessStartInfo(adb, a) { UseShellExecute = false }
-                                   ).WaitForExit();
+                System.Diagnostics.Process.Start(
+                                  new System.Diagnostics.ProcessStartInfo(adb, a) { UseShellExecute = false }
+                                  ).WaitForExit();
 
-                Console.WriteLine("< " + new {  a });
+                Console.WriteLine("< " + new { a });
 
             };
 
@@ -196,6 +204,7 @@ namespace ADBS6CameraTimelapser
                 );
 
                 var output = p.StandardOutput.ReadToEnd();
+                // output = "unable to connect to 192.168.1.126:5555: cannot connect to 192.168.1.126:5555: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to re...
 
                 return output;
             };
@@ -232,6 +241,18 @@ namespace ADBS6CameraTimelapser
             //    new System.Diagnostics.ProcessStartInfo("ping ", device.TakeUntilIfAny(":")) { UseShellExecute = false }
             //).WaitForExit();
 
+
+
+            //"x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
+            // restarting in TCP mode port: 5555
+
+            //13: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
+            //    inet 192.168.1.126/24 brd 192.168.1.255 scope global wlan0
+            //       valid_lft forever preferred_lft forever
+
+            // on red
+            // "x:\util\android-sdk-windows\platform-tools\adb.exe" connect  192.168.1.126:5555
+
             //// fuck you adb. be reliable. kill adb?
             //  "x:\util\android-sdk-windows\platform-tools\adb.exe"  tcpip 5555
             var connected = get_adb("connect " + device);
@@ -251,6 +272,7 @@ namespace ADBS6CameraTimelapser
             //disconnected everything
             //< -s 192.168.1.126:5555 disconnect
 
+            // us6 in wrong wifi???
 
             Console.WriteLine(new { connected });
 
@@ -272,6 +294,7 @@ namespace ADBS6CameraTimelapser
 
             do_adb("shell settings put system screen_brightness  5");
 
+
             // connected = "connected to 192.168.173.5:5555\r\n"
 
 
@@ -289,15 +312,41 @@ namespace ADBS6CameraTimelapser
 
             do_adb("devices");
 
+            {
+                var shell_dumpsys_battery = get_adb("-s " + device + " shell dumpsys battery");
+
+                //Unhandled Exception: System.FormatException: Input string was not in a correct format.
+                //   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+                //   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+                //   at System.Int32.Parse(String s)
+                //   at ADBS6CameraTimelapser.Program.Main(String[] args) in x:\jsc.svn\examples\rewrite\ADBCameraTimelapser\ADBS6CameraTimelapser\Program.cs:line 301
+
+                //temperature: 405
+                // temperature/10+"C" 
+                var itemperature = int.Parse(shell_dumpsys_battery.SkipUntilIfAny("temperature: ").TakeUntilOrEmpty("\r")) / 10.0;
+                var temperature = itemperature + "C";
+                var level = int.Parse(shell_dumpsys_battery.SkipUntilIfAny("level: ").TakeUntilOrEmpty("\r")) + "%";
+            }
+
+
             //> devices
             //List of devices attached
             //192.168.1.126:5555      offline
 
-            goto noreset;
-            do_adb("-s " + device + " shell \"am force-stop com.sec.android.app.camera\" ");
-            Thread.Sleep(1300);
-            do_adb("-s " + device + " shell \"am start -n com.sec.android.app.camera/.Camera\" ");
+            //goto noreset;
+
+            //var appid = "com.sec.android.app.camera";
+
+            //do_adb("-s " + device + " shell \"am force-stop com.sec.android.app.camera\" ");
+            //do_adb("-s " + device + " shell \"am force-stop com.google.vr.cyclops\" ");
+            //Thread.Sleep(1300);
+            //do_adb("-s " + device + " shell \"am start -n com.sec.android.app.camera/.Camera\" ");
+            do_adb("-s " + device + " shell \"am start -n com.google.vr.cyclops/com.google.android.apps.cyclops.MainActivity\" ");
+
+            Console.WriteLine("ready to rotate. start the engines! engine frozen?");
             Thread.Sleep(4300);
+            Console.WriteLine("are we rotating yet? fast enough? ");
+            Thread.Sleep(14300);
         noreset: ;
 
             //            < devices
@@ -425,7 +474,24 @@ namespace ADBS6CameraTimelapser
 
             if (string.IsNullOrEmpty(shell_dumpsys_power))
             {
+                // if above 50%.
+
+                // od if below 50% assume cold got the battery and shut down the device. 
+                // cllect and recharge.
+                // reconnect may report 37% but device shut down anyways.
+
+
+
+                // adb fkd up. kill it and reconnect?
+
+
                 // -1C is too low to recharge batteries.
+
+                // Pinging 192.168.1.126 with 32 bytes of data:
+                //Reply from 192.168.1.126: bytes=32 time=50ms TTL=64
+
+                // router fucked up?
+                // retry?
 
                 // error: device '192.168.1.126:5555' not found
                 do_adb("-s " + device + " shell dumpsys battery");
@@ -607,6 +673,10 @@ namespace ADBS6CameraTimelapser
                 {
                     // -rwxrwxr-x system   sdcard_rw  1621879 2015-07-25 11:43 2015-07-25 11.43.09.jpg
 
+
+                    // -rwxrwx--- root     sdcard_r   727116 2016-01-08 13:08 IMG_20160108_130752.vr.jpg"
+
+
                     var filename = file.Trim().SkipUntilOrEmpty(":").SkipUntilOrEmpty(" ");
 
                     if (string.IsNullOrEmpty(filename))
@@ -617,6 +687,14 @@ namespace ADBS6CameraTimelapser
                         Console.Beep();
                         continue;
                     }
+
+                    var filetime = file.Trim().TakeUntilLastOrEmpty(" ").SkipUntilLastOrEmpty(" ");
+                    var filetime_hh = Convert.ToInt32(filetime.TakeUntilOrEmpty(":"));
+                    var filetime_mm = Convert.ToInt32(filetime.SkipUntilOrEmpty(":"));
+
+
+                 
+               
 
                     // filename = "20150430_183825.mp4"
 
@@ -672,11 +750,44 @@ namespace ADBS6CameraTimelapser
                     var local0 = storage + "_" + iNNNN + ".jpg.pull";
                     var local1 = storage + "/" + iNNNN + ".jpg";
 
+                    // if it takes too long. reset router.
+
+                    var sw = Stopwatch.StartNew();
+
                     do_adb_notimeout("-s " + device + " pull -p \"/sdcard/DCIM/CardboardCamera/" + filename + "\" \"" + local0 + "\"");
                     ;
 
-                    File.Move(local0, local1);
+                    //                    390 KB/s (2125247 bytes in 5.309s)
+                    //< { a = -s 192.168.1.126:5555 pull -p
+                    //> -s 192.168.1.126:5555 shell rm "/sd
+                    //< { f = True, a = -s 192.168.1.126:55
+                    //IMG_20160108_100207.vr.jpg
+                    //> -s 192.168.1.126:5555 pull -p "/sdc
+                    //Transferring: 2058380/2058380 (100%)
+                    //3 KB/s (2058380 bytes in 518.135s)
 
+                    // http://stackoverflow.com/questions/10655715/fileinfo-length-is-not-giving-me-the-correct-file-size-always
+
+                    Console.WriteLine(new { sw.ElapsedMilliseconds });
+
+                    if (new FileInfo(local0).Length < 1055528)
+                    {
+                        Console.WriteLine(" partial image?");
+
+
+                        File.Delete(local0);
+                    }
+                    else
+                    {
+                        var now0 = DateTime.Now;
+                        var now1 = new DateTime(now0.Year, now0.Month, now0.Day, filetime_hh, filetime_mm, now0.Second);
+
+
+                        File.SetCreationTime(local0, now1);
+
+
+                        File.Move(local0, local1);
+                    }
                     // Z:\jsc.svn\examples\javascript\chrome\apps\WebGL\ChromeEquirectangularCameraExperiment\ChromeEquirectangularCameraExperiment\Application.cs
 
                     do_adb("-s " + device + " shell rm \"/sdcard/DCIM/CardboardCamera/" + filename + "\"");

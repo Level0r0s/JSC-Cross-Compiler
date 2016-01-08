@@ -25,6 +25,10 @@ namespace System.Threading.Tasks
 
     public static class TaskAsyncIProgressExtensions
     {
+        // Z:\jsc.svn\core\ScriptCoreLib.Async\ScriptCoreLib.Async\Extensions\TaskAsyncExtensions.cs
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+
+
 
         // defined only for 4.5
         // X:\jsc.svn\examples\javascript\chrome\apps\ChromeTCPServer\ChromeTCPServer\Application.cs
@@ -37,6 +41,8 @@ namespace System.Threading.Tasks
 
             ) where TSource : class
         {
+            Console.WriteLine("enter TaskAsyncIProgressExtensions.StartNewWithProgress");
+
             if (progress == null)
                 throw new InvalidOperationException("StartNewWithProgress progress null");
 

@@ -51,6 +51,11 @@ namespace System.Threading.Tasks
         //}
 
 
+
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+        // called by
+        // Z:\jsc.svn\core\ScriptCoreLib.Async\ScriptCoreLib.Async\Extensions\TaskAsyncExtensions.cs
+
         public static Task<TResult> StartNew<TSource, TResult>(this TaskFactory that,
             TSource state,
             Func<TSource, TResult> function

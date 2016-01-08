@@ -8,28 +8,33 @@ using ScriptCoreLib.Shared.BCLImplementation.System.Net;
 
 namespace ScriptCoreLibJava.BCLImplementation.System.Net
 {
-	// https://github.com/mono/mono/blob/master/mcs/class/System/System.Net/IPEndPoint.cs
-	// X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Net\IPEndPoint.cs
-	// X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\IPEndPoint.cs
+    // https://github.com/mono/mono/blob/master/mcs/class/System/System.Net/IPEndPoint.cs
+    // X:\jsc.svn\core\ScriptCoreLib\JavaScript\BCLImplementation\System\Net\IPEndPoint.cs
+    // X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\IPEndPoint.cs
 
 
     // shared?
-	[Script(Implements = typeof(global::System.Net.IPEndPoint))]
-	internal class __IPEndPoint : __EndPoint
-	{
-		public __IPEndPoint(IPAddress address, int port)
-		{
-			this.Address = address;
-			this.Port = port;
-		}
+    [Script(Implements = typeof(global::System.Net.IPEndPoint))]
+    internal class __IPEndPoint : __EndPoint
+    {
+        // Z:\jsc.svn\examples\c\android\NDKUdpClient\xNativeActivity.cs
 
-		public IPAddress Address { get; set; }
-		public int Port { get; set; }
+        public __IPEndPoint(IPAddress address, int port)
+        {
+            this.Address = address;
+            this.Port = port;
+        }
 
-		public override string ToString()
-		{
-			return this.Address + ":" + this.Port;
-		}
+        public IPAddress Address { get; set; }
+        public int Port { get; set; }
+
+        public override string ToString()
+        {
+            //return this.Address + ":" + this.Port;
+
+            // NDK dont know yet about strings...
+            return "__IPEndPoint";
+        }
 
         public static implicit operator global::System.Net.IPEndPoint(__IPEndPoint i)
         {
@@ -40,5 +45,5 @@ namespace ScriptCoreLibJava.BCLImplementation.System.Net
         {
             return (__IPEndPoint)(object)i;
         }
-	}
+    }
 }

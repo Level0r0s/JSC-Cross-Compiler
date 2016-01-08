@@ -13,6 +13,9 @@ namespace ScriptCoreLib.Shared.BCLImplementation.System.Net
 	[Script(Implements = typeof(global::System.Net.EndPoint))]
 	public abstract class __EndPoint
 	{
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108/udp
+        // Z:\jsc.svn\examples\c\android\NDKUdpClient\xNativeActivity.cs
+
 		// X:\jsc.svn\core\ScriptCoreLibJava\BCLImplementation\System\Net\IPEndPoint.cs
 	}
 }

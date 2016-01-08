@@ -16,8 +16,13 @@ namespace ScriptCoreLibNative.SystemHeaders
     [Script(IsNative = true, Header = "stdlib.h", IsSystemHeader = true)]
     public unsafe static class stdlib_h
     {
+        // Z:\jsc.svn\examples\c\Test\TestPointerOffset\Class1.cs
+        // Z:\jsc.svn\core\ScriptCoreLibAndroidNDK\ScriptCoreLibAndroidNDK\BCLImplementation\System\Net\Sockets\UdpClient.cs
+        //public const int malloc_bytearray_paddingleft = 4;
+
         // http://www.cplusplus.com/reference/cstdlib/malloc/
 
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108/udp
         public unsafe static void* malloc(int size)
         {
             return default(void*);

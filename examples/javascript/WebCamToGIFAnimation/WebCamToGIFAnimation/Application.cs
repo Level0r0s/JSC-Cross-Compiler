@@ -25,6 +25,8 @@ namespace WebCamToGIFAnimation
     /// </summary>
     public sealed class Application
     {
+        // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+
         public readonly ApplicationWebService service = new ApplicationWebService();
 
         /// <summary>
@@ -37,9 +39,12 @@ namespace WebCamToGIFAnimation
             // https://groups.google.com/forum/#!topic/discuss-webrtc/xLBdsLz_Mbw
             // http://stackoverflow.com/questions/15322622/using-multiple-usb-cameras-with-web-rtc
 
+            // dont we have async available?
             Native.window.navigator.getUserMedia(
                 stream =>
                 {
+                    // getUserMedia error { code = , message = , name = DevicesNotFoundError }
+
 
                     var v = new IHTMLVideo { src = stream.ToObjectURL() };
 
@@ -81,7 +86,16 @@ namespace WebCamToGIFAnimation
                            btn.innerText = "rec " + new { frames.Count }.ToString();
                            //while (frames.Count < 60)
 
-                           while (frames.Count < 20)
+                           //while (frames.Count < 20)
+                           while (frames.Count < 2)
+
+                               // works with two frames.
+                               // are we logging too much data?
+
+                               // cant we hop to another thread in bytes instead yet?
+                           // https://sites.google.com/a/jsc-solutions.net/work/knowledge-base/15-dualvr/20160108
+                               // are we encoding grame bytes as base64?
+
                            {
                                await Task.Delay(1000 / 5);
 
@@ -105,6 +119,8 @@ namespace WebCamToGIFAnimation
                            var e = new Stopwatch();
                            e.Start();
 
+
+                           // crashes the browser why???
                            var src = await new GIFEncoderWorker(
                                x,
                                y,
@@ -145,12 +161,6 @@ namespace WebCamToGIFAnimation
                 }
             );
 
-            @"Hello world".ToDocumentTitle();
-            // Send data from JavaScript to the server tier
-            service.WebMethod2(
-                @"A string from JavaScript.",
-                value => value.ToDocumentTitle()
-            );
         }
 
     }
