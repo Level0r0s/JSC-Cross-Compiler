@@ -18,6 +18,12 @@ namespace ScriptCoreLibAndroidNDK.BCLImplementation.System
     [Script(Implements = typeof(global::System.Type))]
     public class __Type //: __MemberInfo, __IReflect
     {
+        // jsc owned NDK process mallocs bytearrays as le+bytes
+        // this enables the use of ldlen
+        // Z:\jsc.svn\examples\c\android\NDKUdpClient\xNativeActivity.cs
+
+
+
         // Z:\jsc.svn\examples\java\android\future\NDKHybridMockup\NDKHybridMockup\ApplicationActivity.cs
         // Z:\jsc.svn\examples\java\android\synergy\OVROculus360PhotosNDK\OVROculus360PhotosNDK\xNativeActivity.cs
 
@@ -36,6 +42,7 @@ namespace ScriptCoreLibAndroidNDK.BCLImplementation.System
         {
             // no gc. remember.
 
+            // process end, gc collects
             return new __MethodInfo
             {
                 InternalDeclaringType = this,
